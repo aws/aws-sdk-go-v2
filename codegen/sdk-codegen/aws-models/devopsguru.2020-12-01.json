@@ -1,0 +1,2543 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.devopsguru#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.devopsguru#AddNotificationChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#AddNotificationChannelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#AddNotificationChannelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/channels",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#AddNotificationChannelRequest": {
+            "type": "structure",
+            "members": {
+                "Config": {
+                    "target": "com.amazonaws.devopsguru#NotificationChannelConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#AddNotificationChannelResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#AnomalySeverity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LOW",
+                        "name": "LOW"
+                    },
+                    {
+                        "value": "MEDIUM",
+                        "name": "MEDIUM"
+                    },
+                    {
+                        "value": "HIGH",
+                        "name": "HIGH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#AnomalySourceDetails": {
+            "type": "structure",
+            "members": {
+                "CloudWatchMetrics": {
+                    "target": "com.amazonaws.devopsguru#__listOfCloudWatchMetricsDetail"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#AnomalyStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ONGOING",
+                        "name": "ONGOING"
+                    },
+                    {
+                        "value": "CLOSED",
+                        "name": "CLOSED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#AnomalyTimeRange": {
+            "type": "structure",
+            "members": {
+                "EndTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#CloudFormationCollection": {
+            "type": "structure",
+            "members": {
+                "StackNames": {
+                    "target": "com.amazonaws.devopsguru#__listOf__stringMin1Max128PatternAZAZAZAZ09"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#CloudFormationCollectionFilter": {
+            "type": "structure",
+            "members": {
+                "StackNames": {
+                    "target": "com.amazonaws.devopsguru#__listOf__stringMin1Max128PatternAZAZAZAZ09"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#CloudFormationHealth": {
+            "type": "structure",
+            "members": {
+                "Insight": {
+                    "target": "com.amazonaws.devopsguru#InsightHealth"
+                },
+                "StackName": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max128PatternAZAZAZAZ09"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#CloudWatchMetricsDetail": {
+            "type": "structure",
+            "members": {
+                "Dimensions": {
+                    "target": "com.amazonaws.devopsguru#__listOfCloudWatchMetricsDimension"
+                },
+                "MetricName": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                },
+                "Period": {
+                    "target": "com.amazonaws.devopsguru#__integer"
+                },
+                "Stat": {
+                    "target": "com.amazonaws.devopsguru#CloudWatchMetricsStat"
+                },
+                "Unit": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#CloudWatchMetricsDimension": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                },
+                "Value": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#CloudWatchMetricsStat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Sum",
+                        "name": "Sum"
+                    },
+                    {
+                        "value": "Average",
+                        "name": "Average"
+                    },
+                    {
+                        "value": "SampleCount",
+                        "name": "SampleCount"
+                    },
+                    {
+                        "value": "Minimum",
+                        "name": "Minimum"
+                    },
+                    {
+                        "value": "Maximum",
+                        "name": "Maximum"
+                    },
+                    {
+                        "value": "p99",
+                        "name": "p99"
+                    },
+                    {
+                        "value": "p90",
+                        "name": "p90"
+                    },
+                    {
+                        "value": "p50",
+                        "name": "p50"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAccountHealth": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#DescribeAccountHealthRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#DescribeAccountHealthResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/health",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAccountHealthRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.devopsguru#DescribeAccountHealthResponse": {
+            "type": "structure",
+            "members": {
+                "MetricsAnalyzed": {
+                    "target": "com.amazonaws.devopsguru#__integer"
+                },
+                "OpenProactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#__integer"
+                },
+                "OpenReactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#__integer"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAccountOverview": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#DescribeAccountOverviewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#DescribeAccountOverviewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/overview",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAccountOverviewRequest": {
+            "type": "structure",
+            "members": {
+                "FromTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ToTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAccountOverviewResponse": {
+            "type": "structure",
+            "members": {
+                "MeanTimeToRecoverInMilliseconds": {
+                    "target": "com.amazonaws.devopsguru#__long"
+                },
+                "ProactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#__integer"
+                },
+                "ReactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#__integer"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAnomaly": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#DescribeAnomalyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#DescribeAnomalyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/anomalies/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAnomalyRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAnomalyResponse": {
+            "type": "structure",
+            "members": {
+                "ProactiveAnomaly": {
+                    "target": "com.amazonaws.devopsguru#ProactiveAnomaly"
+                },
+                "ReactiveAnomaly": {
+                    "target": "com.amazonaws.devopsguru#ReactiveAnomaly"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeInsight": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#DescribeInsightRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#DescribeInsightResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/insights/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeInsightRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeInsightResponse": {
+            "type": "structure",
+            "members": {
+                "ProactiveInsight": {
+                    "target": "com.amazonaws.devopsguru#ProactiveInsight"
+                },
+                "ReactiveInsight": {
+                    "target": "com.amazonaws.devopsguru#ReactiveInsight"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeResourceCollectionHealth": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#DescribeResourceCollectionHealthRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#DescribeResourceCollectionHealthResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/health/resource-collection/{ResourceCollectionType}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeResourceCollectionHealthRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "ResourceCollectionType": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeResourceCollectionHealthResponse": {
+            "type": "structure",
+            "members": {
+                "CloudFormation": {
+                    "target": "com.amazonaws.devopsguru#__listOfCloudFormationHealth"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeServiceIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#DescribeServiceIntegrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#DescribeServiceIntegrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/service-integrations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeServiceIntegrationRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.devopsguru#DescribeServiceIntegrationResponse": {
+            "type": "structure",
+            "members": {
+                "ServiceIntegration": {
+                    "target": "com.amazonaws.devopsguru#ServiceIntegrationConfig"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DevOpsGuru": {
+            "type": "service",
+            "version": "2020-12-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.devopsguru#AddNotificationChannel"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#DescribeAccountHealth"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#DescribeAccountOverview"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#DescribeAnomaly"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#DescribeInsight"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#DescribeResourceCollectionHealth"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#DescribeServiceIntegration"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#GetResourceCollection"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ListAnomaliesForInsight"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ListEvents"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ListInsights"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ListNotificationChannels"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ListRecommendations"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#PutFeedback"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#RemoveNotificationChannel"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#SearchInsights"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#UpdateResourceCollection"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#UpdateServiceIntegration"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "DevOps Guru",
+                    "arnNamespace": "devops-guru",
+                    "cloudFormationName": "DevOpsGuru",
+                    "cloudTrailEventSource": "devopsguru.amazonaws.com",
+                    "endpointPrefix": "devops-guru"
+                },
+                "aws.auth#sigv4": {
+                    "name": "devops-guru"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#title": "Amazon DevOps Guru"
+            }
+        },
+        "com.amazonaws.devopsguru#EndTimeRange": {
+            "type": "structure",
+            "members": {
+                "FromTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                },
+                "ToTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#Event": {
+            "type": "structure",
+            "members": {
+                "DataSource": {
+                    "target": "com.amazonaws.devopsguru#EventDataSource"
+                },
+                "EventClass": {
+                    "target": "com.amazonaws.devopsguru#EventClass"
+                },
+                "EventSource": {
+                    "target": "com.amazonaws.devopsguru#__stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents"
+                },
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                },
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#__stringMin0Max50"
+                },
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#ResourceCollection"
+                },
+                "Resources": {
+                    "target": "com.amazonaws.devopsguru#__listOfEventResource"
+                },
+                "Time": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#EventClass": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "INFRASTRUCTURE",
+                        "name": "INFRASTRUCTURE"
+                    },
+                    {
+                        "value": "DEPLOYMENT",
+                        "name": "DEPLOYMENT"
+                    },
+                    {
+                        "value": "SECURITY_CHANGE",
+                        "name": "SECURITY_CHANGE"
+                    },
+                    {
+                        "value": "CONFIG_CHANGE",
+                        "name": "CONFIG_CHANGE"
+                    },
+                    {
+                        "value": "SCHEMA_CHANGE",
+                        "name": "SCHEMA_CHANGE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#EventDataSource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWS_CLOUD_TRAIL",
+                        "name": "AWS_CLOUD_TRAIL"
+                    },
+                    {
+                        "value": "AWS_CODE_DEPLOY",
+                        "name": "AWS_CODE_DEPLOY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#EventResource": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max2048PatternArnAwsAZAZ09AZ09D12"
+                },
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#__stringMin0Max2048Pattern"
+                },
+                "Type": {
+                    "target": "com.amazonaws.devopsguru#__stringMin0Max2048Pattern"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#EventTimeRange": {
+            "type": "structure",
+            "members": {
+                "FromTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ToTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#GetResourceCollection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#GetResourceCollectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#GetResourceCollectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/resource-collections/{ResourceCollectionType}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#GetResourceCollectionRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "ResourceCollectionType": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#GetResourceCollectionResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                },
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#ResourceCollectionFilter"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#InsightFeedback": {
+            "type": "structure",
+            "members": {
+                "Feedback": {
+                    "target": "com.amazonaws.devopsguru#InsightFeedbackOption"
+                },
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#InsightFeedbackOption": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VALID_COLLECTION",
+                        "name": "VALID_COLLECTION"
+                    },
+                    {
+                        "value": "RECOMMENDATION_USEFUL",
+                        "name": "RECOMMENDATION_USEFUL"
+                    },
+                    {
+                        "value": "ALERT_TOO_SENSITIVE",
+                        "name": "ALERT_TOO_SENSITIVE"
+                    },
+                    {
+                        "value": "DATA_NOISY_ANOMALY",
+                        "name": "DATA_NOISY_ANOMALY"
+                    },
+                    {
+                        "value": "DATA_INCORRECT",
+                        "name": "DATA_INCORRECT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#InsightHealth": {
+            "type": "structure",
+            "members": {
+                "MeanTimeToRecoverInMilliseconds": {
+                    "target": "com.amazonaws.devopsguru#__long"
+                },
+                "OpenProactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#__integer"
+                },
+                "OpenReactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#__integer"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#InsightSeverity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LOW",
+                        "name": "LOW"
+                    },
+                    {
+                        "value": "MEDIUM",
+                        "name": "MEDIUM"
+                    },
+                    {
+                        "value": "HIGH",
+                        "name": "HIGH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#InsightStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ONGOING",
+                        "name": "ONGOING"
+                    },
+                    {
+                        "value": "CLOSED",
+                        "name": "CLOSED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#InsightTimeRange": {
+            "type": "structure",
+            "members": {
+                "EndTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#InsightType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "REACTIVE",
+                        "name": "REACTIVE"
+                    },
+                    {
+                        "value": "PROACTIVE",
+                        "name": "PROACTIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.devopsguru#ListAnomaliesForInsight": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#ListAnomaliesForInsightRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#ListAnomaliesForInsightResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/anomalies/insight/{InsightId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListAnomaliesForInsightRequest": {
+            "type": "structure",
+            "members": {
+                "InsightId": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.devopsguru#__integerMin1Max500"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                },
+                "StartTimeRange": {
+                    "target": "com.amazonaws.devopsguru#StartTimeRange"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListAnomaliesForInsightResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                },
+                "ProactiveAnomalies": {
+                    "target": "com.amazonaws.devopsguru#__listOfProactiveAnomalySummary"
+                },
+                "ReactiveAnomalies": {
+                    "target": "com.amazonaws.devopsguru#__listOfReactiveAnomalySummary"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListEvents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#ListEventsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#ListEventsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/events",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Events",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListEventsFilters": {
+            "type": "structure",
+            "members": {
+                "DataSource": {
+                    "target": "com.amazonaws.devopsguru#EventDataSource"
+                },
+                "EventClass": {
+                    "target": "com.amazonaws.devopsguru#EventClass"
+                },
+                "EventSource": {
+                    "target": "com.amazonaws.devopsguru#__stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents"
+                },
+                "EventTimeRange": {
+                    "target": "com.amazonaws.devopsguru#EventTimeRange"
+                },
+                "InsightId": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                },
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#ResourceCollection"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListEventsRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.devopsguru#ListEventsFilters",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.devopsguru#__integerMin1Max200"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListEventsResponse": {
+            "type": "structure",
+            "members": {
+                "Events": {
+                    "target": "com.amazonaws.devopsguru#__listOfEvent"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListInsights": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#ListInsightsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#ListInsightsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/insights",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListInsightsAnyStatusFilter": {
+            "type": "structure",
+            "members": {
+                "StartTimeRange": {
+                    "target": "com.amazonaws.devopsguru#StartTimeRange",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.devopsguru#InsightType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListInsightsClosedStatusFilter": {
+            "type": "structure",
+            "members": {
+                "EndTimeRange": {
+                    "target": "com.amazonaws.devopsguru#EndTimeRange",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.devopsguru#InsightType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListInsightsOngoingStatusFilter": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.devopsguru#InsightType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListInsightsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.devopsguru#__integerMin1Max100"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                },
+                "StatusFilter": {
+                    "target": "com.amazonaws.devopsguru#ListInsightsStatusFilter",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListInsightsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                },
+                "ProactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#__listOfProactiveInsightSummary"
+                },
+                "ReactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#__listOfReactiveInsightSummary"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListInsightsStatusFilter": {
+            "type": "structure",
+            "members": {
+                "Any": {
+                    "target": "com.amazonaws.devopsguru#ListInsightsAnyStatusFilter"
+                },
+                "Closed": {
+                    "target": "com.amazonaws.devopsguru#ListInsightsClosedStatusFilter"
+                },
+                "Ongoing": {
+                    "target": "com.amazonaws.devopsguru#ListInsightsOngoingStatusFilter"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListNotificationChannels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#ListNotificationChannelsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#ListNotificationChannelsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/channels",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Channels"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListNotificationChannelsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListNotificationChannelsResponse": {
+            "type": "structure",
+            "members": {
+                "Channels": {
+                    "target": "com.amazonaws.devopsguru#__listOfNotificationChannel"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#ListRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#ListRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/recommendations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Recommendations"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "InsightId": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ListRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                },
+                "Recommendations": {
+                    "target": "com.amazonaws.devopsguru#__listOfRecommendation"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#NotificationChannel": {
+            "type": "structure",
+            "members": {
+                "Config": {
+                    "target": "com.amazonaws.devopsguru#NotificationChannelConfig"
+                },
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#NotificationChannelConfig": {
+            "type": "structure",
+            "members": {
+                "Sns": {
+                    "target": "com.amazonaws.devopsguru#SnsChannelConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#OpsCenterIntegration": {
+            "type": "structure",
+            "members": {
+                "OptInStatus": {
+                    "target": "com.amazonaws.devopsguru#OptInStatus"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#OpsCenterIntegrationConfig": {
+            "type": "structure",
+            "members": {
+                "OptInStatus": {
+                    "target": "com.amazonaws.devopsguru#OptInStatus"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#OptInStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#PredictionTimeRange": {
+            "type": "structure",
+            "members": {
+                "EndTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ProactiveAnomaly": {
+            "type": "structure",
+            "members": {
+                "AnomalyTimeRange": {
+                    "target": "com.amazonaws.devopsguru#AnomalyTimeRange"
+                },
+                "AssociatedInsightId": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                },
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                },
+                "Limit": {
+                    "target": "com.amazonaws.devopsguru#__double"
+                },
+                "PredictionTimeRange": {
+                    "target": "com.amazonaws.devopsguru#PredictionTimeRange"
+                },
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#ResourceCollection"
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#AnomalySeverity"
+                },
+                "SourceDetails": {
+                    "target": "com.amazonaws.devopsguru#AnomalySourceDetails"
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#AnomalyStatus"
+                },
+                "UpdateTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ProactiveAnomalySummary": {
+            "type": "structure",
+            "members": {
+                "AnomalyTimeRange": {
+                    "target": "com.amazonaws.devopsguru#AnomalyTimeRange"
+                },
+                "AssociatedInsightId": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                },
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                },
+                "Limit": {
+                    "target": "com.amazonaws.devopsguru#__double"
+                },
+                "PredictionTimeRange": {
+                    "target": "com.amazonaws.devopsguru#PredictionTimeRange"
+                },
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#ResourceCollection"
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#AnomalySeverity"
+                },
+                "SourceDetails": {
+                    "target": "com.amazonaws.devopsguru#AnomalySourceDetails"
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#AnomalyStatus"
+                },
+                "UpdateTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ProactiveInsight": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                },
+                "InsightTimeRange": {
+                    "target": "com.amazonaws.devopsguru#InsightTimeRange"
+                },
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max530PatternSS"
+                },
+                "PredictionTimeRange": {
+                    "target": "com.amazonaws.devopsguru#PredictionTimeRange"
+                },
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#ResourceCollection"
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#InsightSeverity"
+                },
+                "SsmOpsItemId": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100Pattern"
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#InsightStatus"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ProactiveInsightSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                },
+                "InsightTimeRange": {
+                    "target": "com.amazonaws.devopsguru#InsightTimeRange"
+                },
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max530PatternSS"
+                },
+                "PredictionTimeRange": {
+                    "target": "com.amazonaws.devopsguru#PredictionTimeRange"
+                },
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#ResourceCollection"
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#InsightSeverity"
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#InsightStatus"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#PutFeedback": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#PutFeedbackRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#PutFeedbackResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/feedback",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#PutFeedbackRequest": {
+            "type": "structure",
+            "members": {
+                "InsightFeedback": {
+                    "target": "com.amazonaws.devopsguru#InsightFeedback"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#PutFeedbackResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.devopsguru#ReactiveAnomaly": {
+            "type": "structure",
+            "members": {
+                "AnomalyTimeRange": {
+                    "target": "com.amazonaws.devopsguru#AnomalyTimeRange"
+                },
+                "AssociatedInsightId": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                },
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                },
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#ResourceCollection"
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#AnomalySeverity"
+                },
+                "SourceDetails": {
+                    "target": "com.amazonaws.devopsguru#AnomalySourceDetails"
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#AnomalyStatus"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ReactiveAnomalySummary": {
+            "type": "structure",
+            "members": {
+                "AnomalyTimeRange": {
+                    "target": "com.amazonaws.devopsguru#AnomalyTimeRange"
+                },
+                "AssociatedInsightId": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                },
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                },
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#ResourceCollection"
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#AnomalySeverity"
+                },
+                "SourceDetails": {
+                    "target": "com.amazonaws.devopsguru#AnomalySourceDetails"
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#AnomalyStatus"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ReactiveInsight": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                },
+                "InsightTimeRange": {
+                    "target": "com.amazonaws.devopsguru#InsightTimeRange"
+                },
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max530PatternSS"
+                },
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#ResourceCollection"
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#InsightSeverity"
+                },
+                "SsmOpsItemId": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100Pattern"
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#InsightStatus"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ReactiveInsightSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                },
+                "InsightTimeRange": {
+                    "target": "com.amazonaws.devopsguru#InsightTimeRange"
+                },
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#__stringMin1Max530PatternSS"
+                },
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#ResourceCollection"
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#InsightSeverity"
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#InsightStatus"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#Recommendation": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                },
+                "Link": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                },
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                },
+                "Reason": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                },
+                "RelatedAnomalies": {
+                    "target": "com.amazonaws.devopsguru#__listOfRecommendationRelatedAnomaly"
+                },
+                "RelatedEvents": {
+                    "target": "com.amazonaws.devopsguru#__listOfRecommendationRelatedEvent"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedAnomaly": {
+            "type": "structure",
+            "members": {
+                "Resources": {
+                    "target": "com.amazonaws.devopsguru#__listOfRecommendationRelatedAnomalyResource"
+                },
+                "SourceDetails": {
+                    "target": "com.amazonaws.devopsguru#__listOfRecommendationRelatedAnomalySourceDetail"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedAnomalyResource": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                },
+                "Type": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedAnomalySourceDetail": {
+            "type": "structure",
+            "members": {
+                "CloudWatchMetrics": {
+                    "target": "com.amazonaws.devopsguru#__listOfRecommendationRelatedCloudWatchMetricsSourceDetail"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedCloudWatchMetricsSourceDetail": {
+            "type": "structure",
+            "members": {
+                "MetricName": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedEvent": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                },
+                "Resources": {
+                    "target": "com.amazonaws.devopsguru#__listOfRecommendationRelatedEventResource"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedEventResource": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                },
+                "Type": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#RemoveNotificationChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#RemoveNotificationChannelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#RemoveNotificationChannelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/channels/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#RemoveNotificationChannelRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#RemoveNotificationChannelResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.devopsguru#ResourceCollection": {
+            "type": "structure",
+            "members": {
+                "CloudFormation": {
+                    "target": "com.amazonaws.devopsguru#CloudFormationCollection"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ResourceCollectionFilter": {
+            "type": "structure",
+            "members": {
+                "CloudFormation": {
+                    "target": "com.amazonaws.devopsguru#CloudFormationCollectionFilter"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.devopsguru#SearchInsights": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#SearchInsightsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#SearchInsightsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/insights/search",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#SearchInsightsFilters": {
+            "type": "structure",
+            "members": {
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#ResourceCollection"
+                },
+                "Severities": {
+                    "target": "com.amazonaws.devopsguru#__listOfInsightSeverity"
+                },
+                "Statuses": {
+                    "target": "com.amazonaws.devopsguru#__listOfInsightStatus"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#SearchInsightsRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.devopsguru#SearchInsightsFilters"
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.devopsguru#__integerMin1Max100"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                },
+                "StartTimeRange": {
+                    "target": "com.amazonaws.devopsguru#StartTimeRange",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.devopsguru#InsightType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#SearchInsightsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                },
+                "ProactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#__listOfProactiveInsightSummary"
+                },
+                "ReactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#__listOfReactiveInsightSummary"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ServiceIntegrationConfig": {
+            "type": "structure",
+            "members": {
+                "OpsCenter": {
+                    "target": "com.amazonaws.devopsguru#OpsCenterIntegration"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                }
+            },
+            "traits": {
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.devopsguru#SnsChannelConfig": {
+            "type": "structure",
+            "members": {
+                "TopicArn": {
+                    "target": "com.amazonaws.devopsguru#__stringMin36Max1024PatternArnAwsAZ09SnsAZ09D12"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#StartTimeRange": {
+            "type": "structure",
+            "members": {
+                "FromTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                },
+                "ToTime": {
+                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuotaCode": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                },
+                "ServiceCode": {
+                    "target": "com.amazonaws.devopsguru#__string"
+                }
+            },
+            "traits": {
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.devopsguru#UpdateCloudFormationCollectionFilter": {
+            "type": "structure",
+            "members": {
+                "StackNames": {
+                    "target": "com.amazonaws.devopsguru#__listOf__stringMin1Max128PatternAZAZAZAZ09"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#UpdateResourceCollection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#UpdateResourceCollectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#UpdateResourceCollectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/resource-collections",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#UpdateResourceCollectionAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ADD",
+                        "name": "ADD"
+                    },
+                    {
+                        "value": "REMOVE",
+                        "name": "REMOVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#UpdateResourceCollectionFilter": {
+            "type": "structure",
+            "members": {
+                "CloudFormation": {
+                    "target": "com.amazonaws.devopsguru#UpdateCloudFormationCollectionFilter"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#UpdateResourceCollectionRequest": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.devopsguru#UpdateResourceCollectionAction",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#UpdateResourceCollectionFilter",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#UpdateResourceCollectionResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.devopsguru#UpdateServiceIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#UpdateServiceIntegrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#UpdateServiceIntegrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/service-integrations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#UpdateServiceIntegrationConfig": {
+            "type": "structure",
+            "members": {
+                "OpsCenter": {
+                    "target": "com.amazonaws.devopsguru#OpsCenterIntegrationConfig"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#UpdateServiceIntegrationRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceIntegration": {
+                    "target": "com.amazonaws.devopsguru#UpdateServiceIntegrationConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#UpdateServiceIntegrationResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.devopsguru#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Fields": {
+                    "target": "com.amazonaws.devopsguru#__listOfValidationExceptionField"
+                },
+                "Message": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.devopsguru#ValidationExceptionReason"
+                }
+            },
+            "traits": {
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.devopsguru#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#__string",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#ValidationExceptionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UNKNOWN_OPERATION",
+                        "name": "UNKNOWN_OPERATION"
+                    },
+                    {
+                        "value": "CANNOT_PARSE",
+                        "name": "CANNOT_PARSE"
+                    },
+                    {
+                        "value": "FIELD_VALIDATION_FAILED",
+                        "name": "FIELD_VALIDATION_FAILED"
+                    },
+                    {
+                        "value": "OTHER",
+                        "name": "OTHER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#__double": {
+            "type": "double"
+        },
+        "com.amazonaws.devopsguru#__integer": {
+            "type": "integer"
+        },
+        "com.amazonaws.devopsguru#__integerMin1Max100": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#__integerMin1Max200": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#__integerMin1Max500": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfCloudFormationHealth": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#CloudFormationHealth"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfCloudWatchMetricsDetail": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#CloudWatchMetricsDetail"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfCloudWatchMetricsDimension": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#CloudWatchMetricsDimension"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfEvent": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#Event"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfEventResource": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#EventResource"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfInsightSeverity": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#InsightSeverity"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfInsightStatus": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#InsightStatus"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfNotificationChannel": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#NotificationChannel"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfProactiveAnomalySummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#ProactiveAnomalySummary"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfProactiveInsightSummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#ProactiveInsightSummary"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfReactiveAnomalySummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#ReactiveAnomalySummary"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfReactiveInsightSummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#ReactiveInsightSummary"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfRecommendation": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#Recommendation"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfRecommendationRelatedAnomaly": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#RecommendationRelatedAnomaly"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfRecommendationRelatedAnomalyResource": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#RecommendationRelatedAnomalyResource"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfRecommendationRelatedAnomalySourceDetail": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#RecommendationRelatedAnomalySourceDetail"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfRecommendationRelatedCloudWatchMetricsSourceDetail": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#RecommendationRelatedCloudWatchMetricsSourceDetail"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfRecommendationRelatedEvent": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#RecommendationRelatedEvent"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfRecommendationRelatedEventResource": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#RecommendationRelatedEventResource"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOfValidationExceptionField": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.devopsguru#__listOf__stringMin1Max128PatternAZAZAZAZ09": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#__stringMin1Max128PatternAZAZAZAZ09"
+            }
+        },
+        "com.amazonaws.devopsguru#__long": {
+            "type": "long"
+        },
+        "com.amazonaws.devopsguru#__string": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#__stringMin0Max2048Pattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.devopsguru#__stringMin0Max50": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#__stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[a-z]+[a-z0-9]*\\.amazonaws\\.com|aws\\.events$"
+            }
+        },
+        "com.amazonaws.devopsguru#__stringMin1Max100Pattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.devopsguru#__stringMin1Max100PatternW": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[\\w-]*$"
+            }
+        },
+        "com.amazonaws.devopsguru#__stringMin1Max128PatternAZAZAZAZ09": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z*]+[a-zA-Z0-9-]*$"
+            }
+        },
+        "com.amazonaws.devopsguru#__stringMin1Max530PatternSS": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 530
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.devopsguru#__stringMin36Max1024PatternArnAwsAZ09SnsAZ09D12": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\\d{12}:[^:]+$"
+            }
+        },
+        "com.amazonaws.devopsguru#__stringMin36Max2048PatternArnAwsAZAZ09AZ09D12": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z]*:[a-z0-9-]*:[a-z0-9-]*:\\d{12}:.*$"
+            }
+        },
+        "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.devopsguru#__timestampUnix": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "epoch-seconds"
+            }
+        }
+    }
+}

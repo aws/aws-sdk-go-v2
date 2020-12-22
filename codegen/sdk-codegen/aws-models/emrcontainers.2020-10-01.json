@@ -1,0 +1,2230 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.emrcontainers#ACMCertArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 44,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):acm:.+:(\\d{12}):certificate/.+$"
+            }
+        },
+        "com.amazonaws.emrcontainers#AwsChicagoWebService": {
+            "type": "service",
+            "version": "2020-10-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.emrcontainers#CancelJobRun"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#CreateManagedEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#CreateVirtualCluster"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#DeleteManagedEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#DeleteVirtualCluster"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#DescribeJobRun"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#DescribeManagedEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#DescribeVirtualCluster"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ListJobRuns"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ListManagedEndpoints"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ListVirtualClusters"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#StartJobRun"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#UntagResource"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "EMR containers",
+                    "arnNamespace": "emr-containers",
+                    "cloudFormationName": "EMRcontainers",
+                    "cloudTrailEventSource": "emrcontainers.amazonaws.com",
+                    "endpointPrefix": "emr-containers"
+                },
+                "aws.auth#sigv4": {
+                    "name": "emr-containers"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon EMR on EKS provides a deployment option for Amazon EMR that allows you to run\n         open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS). With\n         this deployment option, you can focus on running analytics workloads while Amazon EMR on\n         EKS builds, configures, and manages containers for open-source applications. For more\n         information about Amazon EMR on EKS concepts and tasks, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html\">What is Amazon EMR on EKS</a>.</p>\n         <p>\n            <i>Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The\n            <code>emr-containers</code> prefix is used in the following scenarios: </p>\n         <ul>\n            <li>\n               <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example, <code>aws\n                  emr-containers start-job-run</code>.</p>\n            </li>\n            <li>\n               <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For example, <code>\"Action\": [\n            \"emr-containers:StartJobRun\"]</code>. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions\">Policy actions for Amazon EMR on EKS</a>.</p>\n            </li>\n            <li>\n               <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example, <code>emr-containers.us-east-2.amazonaws.com</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints\">Amazon EMR on EKS Service Endpoints</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "Amazon EMR Containers"
+            }
+        },
+        "com.amazonaws.emrcontainers#CancelJobRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#CancelJobRunRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#CancelJobRunResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/virtualclusters/{virtualClusterId}/jobruns/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#CancelJobRunRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job run to cancel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "virtualClusterId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the virtual cluster for which the job run will be canceled.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#CancelJobRunResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output contains the ID of the cancelled job run.</p>"
+                    }
+                },
+                "virtualClusterId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output contains the virtual cluster ID for which the job run is cancelled.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.emrcontainers#CloudWatchMonitoringConfiguration": {
+            "type": "structure",
+            "members": {
+                "logGroupName": {
+                    "target": "com.amazonaws.emrcontainers#LogGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the log group for log publishing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "logStreamNamePrefix": {
+                    "target": "com.amazonaws.emrcontainers#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified name prefix for log streams.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A configuration for CloudWatch monitoring. You can configure your jobs to send log information to CloudWatch Logs.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#Configuration": {
+            "type": "structure",
+            "members": {
+                "classification": {
+                    "target": "com.amazonaws.emrcontainers#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The classification within a configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "properties": {
+                    "target": "com.amazonaws.emrcontainers#SensitivePropertiesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of properties specified within a configuration classification.</p>"
+                    }
+                },
+                "configurations": {
+                    "target": "com.amazonaws.emrcontainers#ConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of additional configurations to apply within a configuration object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A configuration specification to be used when provisioning virtual clusters, which can include configurations for applications and software bundled with Amazon EMR on EKS. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#ConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emrcontainers#Configuration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ConfigurationOverrides": {
+            "type": "structure",
+            "members": {
+                "applicationConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#ConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configurations for the application running by the job run. </p>"
+                    }
+                },
+                "monitoringConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#MonitoringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configurations for monitoring.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A configuration specification to be used to override existing configurations.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#ContainerInfo": {
+            "type": "union",
+            "members": {
+                "eksInfo": {
+                    "target": "com.amazonaws.emrcontainers#EksInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information about the EKS cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information about the container used for a job run or a managed endpoint.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#ContainerProvider": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.emrcontainers#ContainerProviderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the container provider. EKS is the only supported type as of now.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the container cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "info": {
+                    "target": "com.amazonaws.emrcontainers#ContainerInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information about the container cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information about the container provider.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#ContainerProviderType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EKS",
+                        "name": "EKS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.emrcontainers#CreateManagedEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#CreateManagedEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#CreateManagedEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/virtualclusters/{virtualClusterId}/endpoints",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#CreateManagedEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the managed endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "virtualClusterId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the virtual cluster for which a managed endpoint is created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.emrcontainers#EndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the managed endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "releaseLabel": {
+                    "target": "com.amazonaws.emrcontainers#ReleaseLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EMR release version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "executionRoleArn": {
+                    "target": "com.amazonaws.emrcontainers#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the execution role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "certificateArn": {
+                    "target": "com.amazonaws.emrcontainers#ACMCertArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate ARN of the managed endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configurationOverrides": {
+                    "target": "com.amazonaws.emrcontainers#ConfigurationOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings that will be used to override existing configurations.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.emrcontainers#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client idempotency token for this create call.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.emrcontainers#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags of the managed endpoint.\n      </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#CreateManagedEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output contains the ID of the managed endpoint.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output contains the name of the managed endpoint.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.emrcontainers#EndpointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output contains the ARN of the managed endpoint.</p>"
+                    }
+                },
+                "virtualClusterId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output contains the ID of the virtual cluster.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#CreateVirtualCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#CreateVirtualClusterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#CreateVirtualClusterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/virtualclusters",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#CreateVirtualClusterRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified name of the virtual cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "containerProvider": {
+                    "target": "com.amazonaws.emrcontainers#ContainerProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container provider of the virtual cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.emrcontainers#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token of the virtual cluster.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.emrcontainers#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the virtual cluster.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#CreateVirtualClusterResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output contains the virtual cluster ID.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output contains the name of the virtual cluster.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.emrcontainers#VirtualClusterArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output contains the ARN of virtual cluster.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#Date": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.emrcontainers#DeleteManagedEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#DeleteManagedEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#DeleteManagedEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/virtualclusters/{virtualClusterId}/endpoints/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DeleteManagedEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the managed endpoint.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "virtualClusterId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the endpoint's virtual cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DeleteManagedEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output displays the ID of the managed endpoint.</p>"
+                    }
+                },
+                "virtualClusterId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output displays the ID of the endpoint's virtual cluster.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DeleteVirtualCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#DeleteVirtualClusterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#DeleteVirtualClusterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/virtualclusters/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DeleteVirtualClusterRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the virtual cluster that will be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DeleteVirtualClusterResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output contains the ID of the virtual cluster that will be deleted. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DescribeJobRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#DescribeJobRunRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#DescribeJobRunResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Displays detailed information about a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/virtualclusters/{virtualClusterId}/jobruns/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DescribeJobRunRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job run request. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "virtualClusterId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the virtual cluster for which the job run is submitted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DescribeJobRunResponse": {
+            "type": "structure",
+            "members": {
+                "jobRun": {
+                    "target": "com.amazonaws.emrcontainers#JobRun",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output displays information about a job run.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DescribeManagedEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#DescribeManagedEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#DescribeManagedEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Displays detailed information about a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/virtualclusters/{virtualClusterId}/endpoints/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DescribeManagedEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output displays ID of the managed endpoint.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "virtualClusterId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the endpoint's virtual cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DescribeManagedEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "endpoint": {
+                    "target": "com.amazonaws.emrcontainers#Endpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output displays information about a managed endpoint.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DescribeVirtualCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#DescribeVirtualClusterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#DescribeVirtualClusterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Displays detailed information about a specified virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/virtualclusters/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DescribeVirtualClusterRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the virtual cluster that will be described.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DescribeVirtualClusterResponse": {
+            "type": "structure",
+            "members": {
+                "virtualCluster": {
+                    "target": "com.amazonaws.emrcontainers#VirtualCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output displays information about the specified virtual cluster.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#EksInfo": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "com.amazonaws.emrcontainers#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespaces of the EKS cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information about the EKS cluster.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#Endpoint": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the endpoint.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the endpoint.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.emrcontainers#EndpointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the endpoint.</p>"
+                    }
+                },
+                "virtualClusterId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the endpoint's virtual cluster.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.emrcontainers#EndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the endpoint.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.emrcontainers#EndpointState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the endpoint.</p>"
+                    }
+                },
+                "releaseLabel": {
+                    "target": "com.amazonaws.emrcontainers#ReleaseLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EMR release version to be used for the endpoint.</p>"
+                    }
+                },
+                "executionRoleArn": {
+                    "target": "com.amazonaws.emrcontainers#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution role ARN of the endpoint.</p>"
+                    }
+                },
+                "certificateArn": {
+                    "target": "com.amazonaws.emrcontainers#ACMCertArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate ARN of the endpoint.</p>"
+                    }
+                },
+                "configurationOverrides": {
+                    "target": "com.amazonaws.emrcontainers#ConfigurationOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings that are used to override existing configurations for endpoints.</p>"
+                    }
+                },
+                "serverUrl": {
+                    "target": "com.amazonaws.emrcontainers#UriString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The server URL of the endpoint.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the endpoint was created.</p>"
+                    }
+                },
+                "securityGroup": {
+                    "target": "com.amazonaws.emrcontainers#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security group configuration of the endpoint. \n      </p>"
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.emrcontainers#SubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subnet IDs of the endpoint.\n      </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.emrcontainers#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags of the endpoint. \n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This entity represents the endpoint that is managed by Amazon EMR on EKS.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#EndpointArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 60,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\\d{12}):\\/virtualclusters\\/[0-9a-zA-Z]+\\/endpoints\\/[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.emrcontainers#EndpointState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "TERMINATING",
+                        "name": "TERMINATING"
+                    },
+                    {
+                        "value": "TERMINATED",
+                        "name": "TERMINATED"
+                    },
+                    {
+                        "value": "TERMINATED_WITH_ERRORS",
+                        "name": "TERMINATED_WITH_ERRORS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.emrcontainers#EndpointStates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emrcontainers#EndpointState"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#EndpointType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.emrcontainers#EndpointTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emrcontainers#EndpointType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#Endpoints": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emrcontainers#Endpoint"
+            }
+        },
+        "com.amazonaws.emrcontainers#EntryPointArgument": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10280
+                },
+                "smithy.api#pattern": "(?!\\s*$)(^[^';|\\u0026\\u003C\\u003E*?`$(){}\\[\\]!#\\\\]*$)",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.emrcontainers#EntryPointArguments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emrcontainers#EntryPointArgument"
+            }
+        },
+        "com.amazonaws.emrcontainers#EntryPointPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "(?!\\s*$)(^[^';|\\u0026\\u003C\\u003E*?`$(){}\\[\\]!#\\\\]*$)",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.emrcontainers#FailureReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "INTERNAL_ERROR",
+                        "name": "INTERNAL_ERROR"
+                    },
+                    {
+                        "value": "USER_ERROR",
+                        "name": "USER_ERROR"
+                    },
+                    {
+                        "value": "VALIDATION_ERROR",
+                        "name": "VALIDATION_ERROR"
+                    },
+                    {
+                        "value": "CLUSTER_UNAVAILABLE",
+                        "name": "CLUSTER_UNAVAILABLE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.emrcontainers#IAMRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):iam::(\\d{12})?:(role((\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F))[\\w+=,.@-]+)$"
+            }
+        },
+        "com.amazonaws.emrcontainers#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.emrcontainers#String1024"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This is an internal server exception.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.emrcontainers#JavaInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.emrcontainers#JobArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 60,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\\d{12}):\\/virtualclusters\\/[0-9a-zA-Z]+\\/jobruns\\/[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.emrcontainers#JobDriver": {
+            "type": "structure",
+            "members": {
+                "sparkSubmitJobDriver": {
+                    "target": "com.amazonaws.emrcontainers#SparkSubmitJobDriver",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job driver parameters specified for spark submit.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specify the driver that the job runs on.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#JobRun": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job run.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the job run.</p>"
+                    }
+                },
+                "virtualClusterId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job run's virtual cluster.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.emrcontainers#JobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of job run.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.emrcontainers#JobRunState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the job run. </p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.emrcontainers#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token used to start a job run.</p>"
+                    }
+                },
+                "executionRoleArn": {
+                    "target": "com.amazonaws.emrcontainers#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution role ARN of the job run.</p>"
+                    }
+                },
+                "releaseLabel": {
+                    "target": "com.amazonaws.emrcontainers#ReleaseLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The release version of Amazon EMR.</p>"
+                    }
+                },
+                "configurationOverrides": {
+                    "target": "com.amazonaws.emrcontainers#ConfigurationOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings that are used to override default configuration.</p>"
+                    }
+                },
+                "jobDriver": {
+                    "target": "com.amazonaws.emrcontainers#JobDriver",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters of job driver for the job run.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the job run was created.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.emrcontainers#RequestIdentityUserArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the job run.</p>"
+                    }
+                },
+                "finishedAt": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the job run has finished.</p>"
+                    }
+                },
+                "stateDetails": {
+                    "target": "com.amazonaws.emrcontainers#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional details of the job run state.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.emrcontainers#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reasons why the job run has failed.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.emrcontainers#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The assigned tags of the job run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This entity describes a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS. </p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#JobRunState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "SUBMITTED",
+                        "name": "SUBMITTED"
+                    },
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "CANCELLED",
+                        "name": "CANCELLED"
+                    },
+                    {
+                        "value": "CANCEL_PENDING",
+                        "name": "CANCEL_PENDING"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.emrcontainers#JobRunStates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emrcontainers#JobRunState"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#JobRuns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emrcontainers#JobRun"
+            }
+        },
+        "com.amazonaws.emrcontainers#ListJobRuns": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#ListJobRunsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#ListJobRunsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists job runs based on a set of parameters. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/virtualclusters/{virtualClusterId}/jobruns",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ListJobRunsRequest": {
+            "type": "structure",
+            "members": {
+                "virtualClusterId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the virtual cluster for which to list the job run. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdBefore": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time before which the job runs were submitted.</p>",
+                        "smithy.api#httpQuery": "createdBefore"
+                    }
+                },
+                "createdAfter": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time after which the job runs were submitted.</p>",
+                        "smithy.api#httpQuery": "createdAfter"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the job run.</p>",
+                        "smithy.api#httpQuery": "name"
+                    }
+                },
+                "states": {
+                    "target": "com.amazonaws.emrcontainers#JobRunStates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The states of the job run.</p>",
+                        "smithy.api#httpQuery": "states"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.emrcontainers#JavaInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of job runs that can be listed.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.emrcontainers#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of job runs to return.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ListJobRunsResponse": {
+            "type": "structure",
+            "members": {
+                "jobRuns": {
+                    "target": "com.amazonaws.emrcontainers#JobRuns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output lists information about the specified job runs.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.emrcontainers#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output displays the token for the next set of job runs.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ListManagedEndpoints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#ListManagedEndpointsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#ListManagedEndpointsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/virtualclusters/{virtualClusterId}/endpoints",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ListManagedEndpointsRequest": {
+            "type": "structure",
+            "members": {
+                "virtualClusterId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the virtual cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdBefore": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time before which the endpoints are created.</p>",
+                        "smithy.api#httpQuery": "createdBefore"
+                    }
+                },
+                "createdAfter": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The date and time after which the endpoints are created.</p>",
+                        "smithy.api#httpQuery": "createdAfter"
+                    }
+                },
+                "types": {
+                    "target": "com.amazonaws.emrcontainers#EndpointTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of the managed endpoints.</p>",
+                        "smithy.api#httpQuery": "types"
+                    }
+                },
+                "states": {
+                    "target": "com.amazonaws.emrcontainers#EndpointStates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The states of the managed endpoints.</p>",
+                        "smithy.api#httpQuery": "states"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.emrcontainers#JavaInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of managed endpoints that can be listed.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.emrcontainers#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The token for the next set of managed endpoints to return. </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ListManagedEndpointsResponse": {
+            "type": "structure",
+            "members": {
+                "endpoints": {
+                    "target": "com.amazonaws.emrcontainers#Endpoints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The managed endpoints to be listed.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.emrcontainers#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The token for the next set of endpoints to return. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags assigned to the resources.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.emrcontainers#RsiArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of tagged resources.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.emrcontainers#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to resources.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ListVirtualClusters": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#ListVirtualClustersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#ListVirtualClustersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists information about the specified virtual cluster. Virtual cluster is a managed entity on Amazon EMR on EKS. You can create, describe, list and delete virtual clusters. They do not consume any additional resource in your system. A single virtual cluster maps to a single Kubernetes namespace. Given this relationship, you can model virtual clusters the same way you model Kubernetes namespaces to meet your requirements.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/virtualclusters",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ListVirtualClustersRequest": {
+            "type": "structure",
+            "members": {
+                "containerProviderId": {
+                    "target": "com.amazonaws.emrcontainers#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container provider ID of the virtual cluster.</p>",
+                        "smithy.api#httpQuery": "containerProviderId"
+                    }
+                },
+                "containerProviderType": {
+                    "target": "com.amazonaws.emrcontainers#ContainerProviderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container provider type of the virtual cluster. EKS is the only supported type as of now.</p>",
+                        "smithy.api#httpQuery": "containerProviderType"
+                    }
+                },
+                "createdAfter": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time after which the virtual clusters are created.</p>",
+                        "smithy.api#httpQuery": "createdAfter"
+                    }
+                },
+                "createdBefore": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time before which the virtual clusters are created.</p>",
+                        "smithy.api#httpQuery": "createdBefore"
+                    }
+                },
+                "states": {
+                    "target": "com.amazonaws.emrcontainers#VirtualClusterStates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The states of the requested virtual clusters.</p>",
+                        "smithy.api#httpQuery": "states"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.emrcontainers#JavaInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of virtual clusters that can be listed.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.emrcontainers#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of virtual clusters to return. </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ListVirtualClustersResponse": {
+            "type": "structure",
+            "members": {
+                "virtualClusters": {
+                    "target": "com.amazonaws.emrcontainers#VirtualClusters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output lists the specified virtual clusters.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.emrcontainers#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output displays the token for the next set of virtual clusters.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#LogGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "[\\.\\-_/#A-Za-z0-9]+"
+            }
+        },
+        "com.amazonaws.emrcontainers#MonitoringConfiguration": {
+            "type": "structure",
+            "members": {
+                "persistentAppUI": {
+                    "target": "com.amazonaws.emrcontainers#PersistentAppUI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Monitoring configurations for the persistent application UI. </p>"
+                    }
+                },
+                "cloudWatchMonitoringConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#CloudWatchMonitoringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Monitoring configurations for CloudWatch.</p>"
+                    }
+                },
+                "s3MonitoringConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#S3MonitoringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon S3 configuration for monitoring log publishing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration setting for monitoring.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.emrcontainers#PersistentAppUI": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.emrcontainers#ReleaseLabel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "[\\.\\-_/A-Za-z0-9]+"
+            }
+        },
+        "com.amazonaws.emrcontainers#RequestIdentityUserArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):(iam|sts)::(\\d{12})?:[\\w/+=,.@-]+$"
+            }
+        },
+        "com.amazonaws.emrcontainers#ResourceIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "[0-9a-z]+"
+            }
+        },
+        "com.amazonaws.emrcontainers#ResourceNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "[\\.\\-_/#A-Za-z0-9]+"
+            }
+        },
+        "com.amazonaws.emrcontainers#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.emrcontainers#String1024"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.emrcontainers#RsiArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 60,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\\d{12}):/virtualclusters/.+$"
+            }
+        },
+        "com.amazonaws.emrcontainers#S3MonitoringConfiguration": {
+            "type": "structure",
+            "members": {
+                "logUri": {
+                    "target": "com.amazonaws.emrcontainers#UriString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon S3 destination URI for log publishing.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Amazon S3 configuration for monitoring log publishing. You can configure your jobs to send log information to Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#SensitivePropertiesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.emrcontainers#String1024"
+            },
+            "value": {
+                "target": "com.amazonaws.emrcontainers#String1024"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.emrcontainers#SparkSubmitJobDriver": {
+            "type": "structure",
+            "members": {
+                "entryPoint": {
+                    "target": "com.amazonaws.emrcontainers#EntryPointPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entry point of job application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entryPointArguments": {
+                    "target": "com.amazonaws.emrcontainers#EntryPointArguments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arguments for job application.</p>"
+                    }
+                },
+                "sparkSubmitParameters": {
+                    "target": "com.amazonaws.emrcontainers#SparkSubmitParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Spark submit parameters that are used for job runs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information about job driver for Spark submit.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#SparkSubmitParameters": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "(?!\\s*$)(^[^';|\\u0026\\u003C\\u003E*?`$(){}\\[\\]!#\\\\]*$)",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.emrcontainers#StartJobRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#StartJobRunRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#StartJobRunResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a job run. A job run is a unit of work, such as a Spark jar, PySpark script, or SparkSQL query, that you submit to Amazon EMR on EKS.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/virtualclusters/{virtualClusterId}/jobruns",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#StartJobRunRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the job run.</p>"
+                    }
+                },
+                "virtualClusterId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The virtual cluster ID for which the job run request is submitted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.emrcontainers#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client idempotency token of the job run request. </p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "executionRoleArn": {
+                    "target": "com.amazonaws.emrcontainers#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution role ARN for the job run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "releaseLabel": {
+                    "target": "com.amazonaws.emrcontainers#ReleaseLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EMR release version to use for the job run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobDriver": {
+                    "target": "com.amazonaws.emrcontainers#JobDriver",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job driver for the job run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configurationOverrides": {
+                    "target": "com.amazonaws.emrcontainers#ConfigurationOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration overrides for the job run.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.emrcontainers#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to job runs.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#StartJobRunResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output displays the started job run ID.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output displays the name of the started job run.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.emrcontainers#JobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output lists the ARN of job run.</p>"
+                    }
+                },
+                "virtualClusterId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output displays the virtual cluster ID for which the job run was submitted.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#String1024": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.emrcontainers#String128": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.emrcontainers#String256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.emrcontainers#StringEmpty256": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.emrcontainers#SubnetIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emrcontainers#String256"
+            }
+        },
+        "com.amazonaws.emrcontainers#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emrcontainers#String128"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.emrcontainers#String128"
+            },
+            "value": {
+                "target": "com.amazonaws.emrcontainers#StringEmpty256"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Assigns tags to resources. A tag is a label that you assign to an AWS resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your AWS resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. For example, you can define a set of tags for your Amazon EMR on EKS clusters to help you track each cluster's owner and stack level. We recommend that you devise a consistent set of tag keys for each resource type. You can then search and filter the resources based on the tags that you add.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.emrcontainers#RsiArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of resources.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.emrcontainers#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.emrcontainers#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes tags from resources.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.emrcontainers#RsiArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of resources.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.emrcontainers#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys of the resources.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.emrcontainers#UriString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10280
+                },
+                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\r\\n\\t]*"
+            }
+        },
+        "com.amazonaws.emrcontainers#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.emrcontainers#String1024"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There are invalid parameters in the client request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.emrcontainers#VirtualCluster": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the virtual cluster.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the virtual cluster.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.emrcontainers#VirtualClusterArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the virtual cluster.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.emrcontainers#VirtualClusterState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the virtual cluster.</p>"
+                    }
+                },
+                "containerProvider": {
+                    "target": "com.amazonaws.emrcontainers#ContainerProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container provider of the virtual cluster.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the virtual cluster is created.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.emrcontainers#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The assigned tags of the virtual cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This entity describes a virtual cluster. A virtual cluster is a Kubernetes namespace that Amazon EMR is registered with. Amazon EMR uses virtual clusters to run jobs and host endpoints. Multiple virtual clusters can be backed by the same physical cluster. However, each virtual cluster maps to one namespace on an EKS cluster. Virtual clusters do not create any active resources that contribute to your bill or that require lifecycle management outside the service.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#VirtualClusterArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 60,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\\d{12}):\\/virtualclusters\\/[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.emrcontainers#VirtualClusterState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "TERMINATING",
+                        "name": "TERMINATING"
+                    },
+                    {
+                        "value": "TERMINATED",
+                        "name": "TERMINATED"
+                    },
+                    {
+                        "value": "ARRESTED",
+                        "name": "ARRESTED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.emrcontainers#VirtualClusterStates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emrcontainers#VirtualClusterState"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#VirtualClusters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emrcontainers#VirtualCluster"
+            }
+        }
+    }
+}

@@ -1,0 +1,330 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.marketplaceentitlementservice#AWSMPEntitlementService": {
+            "type": "service",
+            "version": "2017-01-11",
+            "operations": [
+                {
+                    "target": "com.amazonaws.marketplaceentitlementservice#GetEntitlements"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Marketplace Entitlement Service",
+                    "arnNamespace": "aws-marketplace",
+                    "cloudFormationName": "MarketplaceEntitlementService",
+                    "cloudTrailEventSource": "marketplaceentitlementservice.amazonaws.com",
+                    "endpointPrefix": "entitlement.marketplace"
+                },
+                "aws.auth#sigv4": {
+                    "name": "aws-marketplace"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>AWS Marketplace Entitlement Service</fullname>\n         <p>This reference provides descriptions of the AWS Marketplace Entitlement Service\n   API.</p>\n         <p>AWS Marketplace Entitlement Service is used to determine the entitlement of a customer to\n      a given product. An entitlement represents capacity in a product owned by the customer. For\n      example, a customer might own some number of users or seats in an SaaS application or some\n      amount of data capacity in a multi-tenant database.</p>\n         <p>\n            <b>Getting Entitlement Records</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <i>GetEntitlements</i>- Gets the entitlements for a Marketplace\n     product.</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "AWS Marketplace Entitlement Service"
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#Boolean": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#Double": {
+            "type": "double",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#Entitlement": {
+            "type": "structure",
+            "members": {
+                "ProductCode": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#ProductCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product code for which the given entitlement applies. Product codes are provided by\n   AWS Marketplace when the product listing is created.</p>"
+                    }
+                },
+                "Dimension": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimension for which the given entitlement applies. Dimensions represent categories of\n      capacity in a product and are specified when the product is listed in AWS\n      Marketplace.</p>"
+                    }
+                },
+                "CustomerIdentifier": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer identifier is a handle to each unique customer in an application. Customer\n   identifiers are obtained through the ResolveCustomer operation in AWS Marketplace Metering\n   Service.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#EntitlementValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EntitlementValue represents the amount of capacity that the customer is entitled to\n   for the product.</p>"
+                    }
+                },
+                "ExpirationDate": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration date represents the minimum date through which this entitlement is\n   expected to remain valid. For contractual products listed on AWS Marketplace, the expiration date\n   is the date at which the customer will renew or cancel their contract. Customers who are opting\n   to renew their contract will still have entitlements with an expiration date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An entitlement represents capacity in a product owned by the customer. For example, a\n      customer might own some number of users or seats in an SaaS application or  some amount of\n      data capacity in a multi-tenant database.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#EntitlementList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceentitlementservice#Entitlement"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#EntitlementValue": {
+            "type": "union",
+            "members": {
+                "IntegerValue": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IntegerValue field will be populated with an integer value when the entitlement is an\n   integer type. Otherwise, the field will not be set.</p>"
+                    }
+                },
+                "DoubleValue": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DoubleValue field will be populated with a double value when the entitlement is a\n   double type. Otherwise, the field will not be set.</p>"
+                    }
+                },
+                "BooleanValue": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The BooleanValue field will be populated with a boolean value when the entitlement is a\n      boolean type. Otherwise, the field will not be set.</p>"
+                    }
+                },
+                "StringValue": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The StringValue field will be populated with a string value when the entitlement is a\n   string type. Otherwise, the field will not be set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The EntitlementValue represents the amount of capacity that the customer is entitled to\n   for the product.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.marketplaceentitlementservice#FilterValue": {
+            "type": "string"
+        },
+        "com.amazonaws.marketplaceentitlementservice#FilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceentitlementservice#FilterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#GetEntitlementFilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CUSTOMER_IDENTIFIER",
+                        "name": "CUSTOMER_IDENTIFIER"
+                    },
+                    {
+                        "value": "DIMENSION",
+                        "name": "DIMENSION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#GetEntitlementFilters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.marketplaceentitlementservice#GetEntitlementFilterName"
+            },
+            "value": {
+                "target": "com.amazonaws.marketplaceentitlementservice#FilterValueList"
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#GetEntitlements": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplaceentitlementservice#GetEntitlementsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplaceentitlementservice#GetEntitlementsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplaceentitlementservice#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceentitlementservice#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.marketplaceentitlementservice#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>GetEntitlements retrieves entitlement values for a given product. The results can be\n      filtered based on customer identifier or product dimensions.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#GetEntitlementsRequest": {
+            "type": "structure",
+            "members": {
+                "ProductCode": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#ProductCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Product code is used to uniquely identify a product in AWS Marketplace. The product code\n   will be provided by AWS Marketplace when the product listing is created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#GetEntitlementFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter is used to return entitlements for a specific customer or for a specific\n      dimension. Filters are described as keys mapped to a lists of values. Filtered requests are\n        <i>unioned</i> for each value in the value list, and then\n        <i>intersected</i> for each filter key.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For paginated calls to GetEntitlements, pass the NextToken from the previous\n   GetEntitlementsResult.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to retrieve from the GetEntitlements operation. For\n   pagination, use the NextToken field in subsequent calls to GetEntitlements.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The GetEntitlementsRequest contains parameters for the GetEntitlements\n   operation.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#GetEntitlementsResult": {
+            "type": "structure",
+            "members": {
+                "Entitlements": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#EntitlementList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The set of entitlements found through the GetEntitlements operation. If the result\n      contains an empty set of entitlements, NextToken might still be present and should be\n      used.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For paginated results, use NextToken in subsequent calls to GetEntitlements. If the\n      result contains an empty set of entitlements, NextToken might still be present and should be\n      used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The GetEntitlementsRequest contains results from the GetEntitlements operation.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#Integer": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#InternalServiceErrorException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal error has occurred. Retry your request. If the problem persists, post a\n   message with details on the AWS forums.</p>",
+                "smithy.api#error": "server"
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#InvalidParameterException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One or more parameters in your request was invalid.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#NonEmptyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "\\S+"
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#ProductCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#String": {
+            "type": "string"
+        },
+        "com.amazonaws.marketplaceentitlementservice#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.marketplaceentitlementservice#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The calls to the GetEntitlements API are throttled.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.marketplaceentitlementservice#Timestamp": {
+            "type": "timestamp"
+        }
+    }
+}

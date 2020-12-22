@@ -1,0 +1,2432 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.cognitoidentity#ARNString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#AWSCognitoIdentityService": {
+            "type": "service",
+            "version": "2014-06-30",
+            "operations": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#CreateIdentityPool"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#DeleteIdentities"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#DeleteIdentityPool"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#DescribeIdentity"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#DescribeIdentityPool"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#GetCredentialsForIdentity"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#GetId"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#GetIdentityPoolRoles"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#GetOpenIdToken"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#GetOpenIdTokenForDeveloperIdentity"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ListIdentities"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ListIdentityPools"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#LookupDeveloperIdentity"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#MergeDeveloperIdentities"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#SetIdentityPoolRoles"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#UnlinkDeveloperIdentity"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#UnlinkIdentity"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#UpdateIdentityPool"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Cognito Identity",
+                    "arnNamespace": "cognito-identity",
+                    "cloudFormationName": "Cognito",
+                    "cloudTrailEventSource": "cognitoidentity.amazonaws.com",
+                    "endpointPrefix": "cognito-identity"
+                },
+                "aws.auth#sigv4": {
+                    "name": "cognito-identity"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>Amazon Cognito Federated Identities</fullname>\n         <p>Amazon Cognito Federated Identities is a web service that delivers scoped temporary\n         credentials to mobile devices and other untrusted environments. It uniquely identifies a\n         device and supplies the user with a consistent identity over the lifetime of an\n         application.</p>\n         <p>Using Amazon Cognito Federated Identities, you can enable authentication with one or\n         more third-party identity providers (Facebook, Google, or Login with Amazon) or an Amazon\n         Cognito user pool, and you can also choose to support unauthenticated access from your app.\n         Cognito delivers a unique identifier for each user and acts as an OpenID token provider\n         trusted by AWS Security Token Service (STS) to access temporary, limited-privilege AWS\n         credentials.</p>\n         <p>For a description of the authentication flow from the Amazon Cognito Developer Guide\n         see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html\">Authentication Flow</a>.</p>\n         <p>For more information see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html\">Amazon Cognito Federated Identities</a>.</p>",
+                "smithy.api#title": "Amazon Cognito Identity",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://cognito-identity.amazonaws.com/doc/2014-06-30/"
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#AccessKeyString": {
+            "type": "string"
+        },
+        "com.amazonaws.cognitoidentity#AccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 15
+                },
+                "smithy.api#pattern": "\\d+"
+            }
+        },
+        "com.amazonaws.cognitoidentity#AmbiguousRoleResolutionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AuthenticatedRole",
+                        "name": "AUTHENTICATED_ROLE"
+                    },
+                    {
+                        "value": "Deny",
+                        "name": "DENY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cognitoidentity#ClaimName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+"
+            }
+        },
+        "com.amazonaws.cognitoidentity#ClaimValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#ClassicFlow": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.cognitoidentity#CognitoIdentityProvider": {
+            "type": "structure",
+            "members": {
+                "ProviderName": {
+                    "target": "com.amazonaws.cognitoidentity#CognitoIdentityProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider name for an Amazon Cognito user pool. For example,\n            <code>cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789</code>.</p>"
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.cognitoidentity#CognitoIdentityProviderClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client ID for the Amazon Cognito user pool.</p>"
+                    }
+                },
+                "ServerSideTokenCheck": {
+                    "target": "com.amazonaws.cognitoidentity#CognitoIdentityProviderTokenCheck",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>TRUE if server-side token validation is enabled for the identity provider’s\n         token.</p>\n         <p>Once you set <code>ServerSideTokenCheck</code> to TRUE for an identity pool, that\n         identity pool will check with the integrated user pools to make sure that the user has not\n         been globally signed out or deleted before the identity pool provides an OIDC token or AWS\n         credentials for the user.</p>\n         <p>If the user is signed out or deleted, the identity pool will return a 400 Not\n         Authorized error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A provider representing an Amazon Cognito user pool and its client ID.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#CognitoIdentityProviderClientId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "[\\w_]+"
+            }
+        },
+        "com.amazonaws.cognitoidentity#CognitoIdentityProviderList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentity#CognitoIdentityProvider"
+            }
+        },
+        "com.amazonaws.cognitoidentity#CognitoIdentityProviderName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "[\\w._:/-]+"
+            }
+        },
+        "com.amazonaws.cognitoidentity#CognitoIdentityProviderTokenCheck": {
+            "type": "boolean"
+        },
+        "com.amazonaws.cognitoidentity#ConcurrentModificationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentity#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message returned by a ConcurrentModificationException.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Thrown if there are parallel requests to modify a resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cognitoidentity#CreateIdentityPool": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#CreateIdentityPoolInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#IdentityPool"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new identity pool. The identity pool is a store of user identity\n         information that is specific to your AWS account. The keys for <code>SupportedLoginProviders</code> are as follows:</p>\n\n         <ul>\n            <li>\n               <p>Facebook: <code>graph.facebook.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Google: <code>accounts.google.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon: <code>www.amazon.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Twitter: <code>api.twitter.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Digits: <code>www.digits.com</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>You must use AWS Developer credentials to call this API.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#CreateIdentityPoolInput": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolName": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that you provide.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllowUnauthenticatedIdentities": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolUnauthenticated",
+                    "traits": {
+                        "smithy.api#documentation": "<p>TRUE if the identity pool supports unauthenticated logins.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllowClassicFlow": {
+                    "target": "com.amazonaws.cognitoidentity#ClassicFlow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables or disables the Basic (Classic) authentication flow. For more information, see\n      <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html\">Identity Pools (Federated Identities) Authentication Flow</a> in the <i>Amazon Cognito Developer Guide</i>.</p>"
+                    }
+                },
+                "SupportedLoginProviders": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityProviders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional key:value pairs mapping provider names to provider app IDs.</p>"
+                    }
+                },
+                "DeveloperProviderName": {
+                    "target": "com.amazonaws.cognitoidentity#DeveloperProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The \"domain\" by which Cognito will refer to your users. This name acts as a\n         placeholder that allows your backend and the Cognito service to communicate about the\n         developer provider. For the <code>DeveloperProviderName</code>, you can use letters as well\n         as period (<code>.</code>), underscore (<code>_</code>), and dash\n         (<code>-</code>).</p>\n         <p>Once you have set a developer provider name, you cannot change it. Please take care\n         in setting this parameter.</p>"
+                    }
+                },
+                "OpenIdConnectProviderARNs": {
+                    "target": "com.amazonaws.cognitoidentity#OIDCProviderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of OpendID Connect provider ARNs.</p>"
+                    }
+                },
+                "CognitoIdentityProviders": {
+                    "target": "com.amazonaws.cognitoidentity#CognitoIdentityProviderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of Amazon Cognito user pools and their client IDs.</p>"
+                    }
+                },
+                "SamlProviderARNs": {
+                    "target": "com.amazonaws.cognitoidentity#SAMLProviderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of Amazon Resource Names (ARNs) of the SAML provider for your identity\n         pool.</p>"
+                    }
+                },
+                "IdentityPoolTags": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolTagsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to the identity pool. A tag is a label that you can apply to identity\n         pools to categorize and manage them in different ways, such as by purpose, owner,\n         environment, or other criteria.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the CreateIdentityPool action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#Credentials": {
+            "type": "structure",
+            "members": {
+                "AccessKeyId": {
+                    "target": "com.amazonaws.cognitoidentity#AccessKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Access Key portion of the credentials.</p>"
+                    }
+                },
+                "SecretKey": {
+                    "target": "com.amazonaws.cognitoidentity#SecretKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Secret Access Key portion of the credentials</p>"
+                    }
+                },
+                "SessionToken": {
+                    "target": "com.amazonaws.cognitoidentity#SessionTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Session Token portion of the credentials</p>"
+                    }
+                },
+                "Expiration": {
+                    "target": "com.amazonaws.cognitoidentity#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date at which these credentials will expire.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Credentials for the provided identity ID.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#DateType": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.cognitoidentity#DeleteIdentities": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#DeleteIdentitiesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#DeleteIdentitiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes identities from an identity pool. You can specify a list of 1-60 identities\n         that you want to delete.</p>\n         <p>You must use AWS Developer credentials to call this API.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#DeleteIdentitiesInput": {
+            "type": "structure",
+            "members": {
+                "IdentityIdsToDelete": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of 1-60 identities that you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the <code>DeleteIdentities</code> action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#DeleteIdentitiesResponse": {
+            "type": "structure",
+            "members": {
+                "UnprocessedIdentityIds": {
+                    "target": "com.amazonaws.cognitoidentity#UnprocessedIdentityIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of UnprocessedIdentityId objects, each of which contains an ErrorCode and\n         IdentityId.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returned in response to a successful <code>DeleteIdentities</code>\n         operation.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#DeleteIdentityPool": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#DeleteIdentityPoolInput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an identity pool. Once a pool is deleted, users will not be able to\n         authenticate with the pool.</p>\n         <p>You must use AWS Developer credentials to call this API.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#DeleteIdentityPoolInput": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identity pool ID in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the DeleteIdentityPool action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#DescribeIdentity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#DescribeIdentityInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#IdentityDescription"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns metadata related to the given identity, including when the identity was\n         created and any associated linked logins.</p>\n         <p>You must use AWS Developer credentials to call this API.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#DescribeIdentityInput": {
+            "type": "structure",
+            "members": {
+                "IdentityId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the <code>DescribeIdentity</code> action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#DescribeIdentityPool": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#DescribeIdentityPoolInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#IdentityPool"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets details about a particular identity pool, including the pool name, ID\n         description, creation date, and current number of users.</p>\n         <p>You must use AWS Developer credentials to call this API.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#DescribeIdentityPoolInput": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identity pool ID in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the DescribeIdentityPool action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#DeveloperProviderName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "[\\w._-]+"
+            }
+        },
+        "com.amazonaws.cognitoidentity#DeveloperUserAlreadyRegisteredException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentity#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This developer user identifier is already registered with Cognito.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The provided developer user identifier is already registered with Cognito under a\n         different identity ID.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cognitoidentity#DeveloperUserIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#DeveloperUserIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentity#DeveloperUserIdentifier"
+            }
+        },
+        "com.amazonaws.cognitoidentity#ErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AccessDenied",
+                        "name": "ACCESS_DENIED"
+                    },
+                    {
+                        "value": "InternalServerError",
+                        "name": "INTERNAL_SERVER_ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cognitoidentity#ExternalServiceException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentity#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message returned by an ExternalServiceException</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An exception thrown when a dependent service such as Facebook or Twitter is not\n         responding</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetCredentialsForIdentity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#GetCredentialsForIdentityInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#GetCredentialsForIdentityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#ExternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidIdentityPoolConfigurationException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#auth": [],
+                "smithy.api#documentation": "<p>Returns credentials for the provided identity ID. Any provided logins will be\n         validated against supported login providers. If the token is for\n         cognito-identity.amazonaws.com, it will be passed through to AWS Security Token Service\n         with the appropriate role for the token.</p>\n         <p>This is a public API. You do not need any credentials to call this API.</p>",
+                "smithy.api#optionalAuth": {}
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetCredentialsForIdentityInput": {
+            "type": "structure",
+            "members": {
+                "IdentityId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Logins": {
+                    "target": "com.amazonaws.cognitoidentity#LoginsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of optional name-value pairs that map provider names to provider tokens. The\n         name-value pair will follow the syntax \"provider_name\":\n         \"provider_user_identifier\".</p>\n         <p>Logins should not be specified when trying to get credentials for an unauthenticated\n         identity.</p>\n         <p>The Logins parameter is required when using identities associated with external\n         identity providers such as FaceBook. For examples of <code>Logins</code> maps, see the code\n         examples in the <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html\">External Identity Providers</a> section of the Amazon Cognito Developer\n         Guide.</p>"
+                    }
+                },
+                "CustomRoleArn": {
+                    "target": "com.amazonaws.cognitoidentity#ARNString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role to be assumed when multiple roles were\n         received in the token from the identity provider. For example, a SAML-based identity\n         provider. This parameter is optional for identity providers that do not support role\n         customization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the <code>GetCredentialsForIdentity</code> action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetCredentialsForIdentityResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier in the format REGION:GUID.</p>"
+                    }
+                },
+                "Credentials": {
+                    "target": "com.amazonaws.cognitoidentity#Credentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Credentials for the provided identity ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returned in response to a successful <code>GetCredentialsForIdentity</code>\n         operation.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetId": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#GetIdInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#GetIdResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#ExternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#auth": [],
+                "smithy.api#documentation": "<p>Generates (or retrieves) a Cognito ID. Supplying multiple logins will create an\n         implicit linked account.</p>\n         <p>This is a public API. You do not need any credentials to call this API.</p>",
+                "smithy.api#optionalAuth": {}
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetIdInput": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.cognitoidentity#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A standard AWS account ID (9+ digits).</p>"
+                    }
+                },
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identity pool ID in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Logins": {
+                    "target": "com.amazonaws.cognitoidentity#LoginsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of optional name-value pairs that map provider names to provider tokens. The\n         available provider names for <code>Logins</code> are as follows:</p>\n         <ul>\n            <li>\n               <p>Facebook: <code>graph.facebook.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Cognito user pool:\n                  <code>cognito-idp.<region>.amazonaws.com/<YOUR_USER_POOL_ID></code>,\n               for example, <code>cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789</code>.\n            </p>\n            </li>\n            <li>\n               <p>Google: <code>accounts.google.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon: <code>www.amazon.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Twitter: <code>api.twitter.com</code>\n               </p>\n            </li>\n            <li>\n               <p>Digits: <code>www.digits.com</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the GetId action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetIdResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier in the format REGION:GUID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returned in response to a GetId request.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetIdentityPoolRoles": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#GetIdentityPoolRolesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#GetIdentityPoolRolesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the roles for an identity pool.</p>\n         <p>You must use AWS Developer credentials to call this API.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetIdentityPoolRolesInput": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identity pool ID in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the <code>GetIdentityPoolRoles</code> action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetIdentityPoolRolesResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identity pool ID in the format REGION:GUID.</p>"
+                    }
+                },
+                "Roles": {
+                    "target": "com.amazonaws.cognitoidentity#RolesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The map of roles associated with this pool. Currently only authenticated and\n         unauthenticated roles are supported.</p>"
+                    }
+                },
+                "RoleMappings": {
+                    "target": "com.amazonaws.cognitoidentity#RoleMappingMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How users for a specific identity provider are to mapped to roles. This is a\n            String-to-<a>RoleMapping</a> object map. The string identifies the identity\n         provider, for example, \"graph.facebook.com\" or\n         \"cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id\".</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returned in response to a successful <code>GetIdentityPoolRoles</code>\n         operation.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetOpenIdToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#GetOpenIdTokenInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#GetOpenIdTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#ExternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#auth": [],
+                "smithy.api#documentation": "<p>Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by\n            <a>GetId</a>. You can optionally add additional logins for the identity.\n         Supplying multiple logins creates an implicit link.</p>\n         <p>The OpenId token is valid for 10 minutes.</p>\n         <p>This is a public API. You do not need any credentials to call this API.</p>",
+                "smithy.api#optionalAuth": {}
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetOpenIdTokenForDeveloperIdentity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#GetOpenIdTokenForDeveloperIdentityInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#GetOpenIdTokenForDeveloperIdentityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#DeveloperUserAlreadyRegisteredException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Registers (or retrieves) a Cognito <code>IdentityId</code> and an OpenID Connect\n         token for a user authenticated by your backend authentication process. Supplying multiple\n         logins will create an implicit linked account. You can only specify one developer provider\n         as part of the <code>Logins</code> map, which is linked to the identity pool. The developer\n         provider is the \"domain\" by which Cognito will refer to your users.</p>\n         <p>You can use <code>GetOpenIdTokenForDeveloperIdentity</code> to create a new identity\n         and to link new logins (that is, user credentials issued by a public provider or developer\n         provider) to an existing identity. When you want to create a new identity, the\n            <code>IdentityId</code> should be null. When you want to associate a new login with an\n         existing authenticated/unauthenticated identity, you can do so by providing the existing\n            <code>IdentityId</code>. This API will create the identity in the specified\n            <code>IdentityPoolId</code>.</p>\n         <p>You must use AWS Developer credentials to call this API.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetOpenIdTokenForDeveloperIdentityInput": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identity pool ID in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier in the format REGION:GUID.</p>"
+                    }
+                },
+                "Logins": {
+                    "target": "com.amazonaws.cognitoidentity#LoginsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of optional name-value pairs that map provider names to provider tokens. Each\n         name-value pair represents a user from a public provider or developer provider. If the user\n         is from a developer provider, the name-value pair will follow the syntax\n            <code>\"developer_provider_name\": \"developer_user_identifier\"</code>. The developer\n         provider is the \"domain\" by which Cognito will refer to your users; you provided this\n         domain while creating/updating the identity pool. The developer user identifier is an\n         identifier from your backend that uniquely identifies a user. When you create an identity\n         pool, you can specify the supported logins.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TokenDuration": {
+                    "target": "com.amazonaws.cognitoidentity#TokenDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration time of the token, in seconds. You can specify a custom expiration\n         time for the token so that you can cache it. If you don't provide an expiration time, the\n         token is valid for 15 minutes. You can exchange the token with Amazon STS for temporary AWS\n         credentials, which are valid for a maximum of one hour. The maximum token duration you can\n         set is 24 hours. You should take care in setting the expiration time for a token, as there\n         are significant security implications: an attacker could use a leaked token to access your\n         AWS resources for the token's duration.</p>\n         <note>\n            <p>Please provide for a small grace period, usually no more than 5 minutes, to account for clock skew.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the <code>GetOpenIdTokenForDeveloperIdentity</code> action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetOpenIdTokenForDeveloperIdentityResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier in the format REGION:GUID.</p>"
+                    }
+                },
+                "Token": {
+                    "target": "com.amazonaws.cognitoidentity#OIDCToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An OpenID token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returned in response to a successful <code>GetOpenIdTokenForDeveloperIdentity</code>\n         request.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetOpenIdTokenInput": {
+            "type": "structure",
+            "members": {
+                "IdentityId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Logins": {
+                    "target": "com.amazonaws.cognitoidentity#LoginsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of optional name-value pairs that map provider names to provider tokens. When\n         using graph.facebook.com and www.amazon.com, supply the access_token returned from the\n         provider's authflow. For accounts.google.com, an Amazon Cognito user pool provider, or any\n         other OpenId Connect provider, always include the <code>id_token</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the GetOpenIdToken action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetOpenIdTokenResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier in the format REGION:GUID. Note that the IdentityId returned may\n         not match the one passed on input.</p>"
+                    }
+                },
+                "Token": {
+                    "target": "com.amazonaws.cognitoidentity#OIDCToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An OpenID token, valid for 10 minutes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returned in response to a successful GetOpenIdToken request.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#HideDisabled": {
+            "type": "boolean"
+        },
+        "com.amazonaws.cognitoidentity#IdentitiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentity#IdentityDescription"
+            }
+        },
+        "com.amazonaws.cognitoidentity#IdentityDescription": {
+            "type": "structure",
+            "members": {
+                "IdentityId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier in the format REGION:GUID.</p>"
+                    }
+                },
+                "Logins": {
+                    "target": "com.amazonaws.cognitoidentity#LoginsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider names.</p>"
+                    }
+                },
+                "CreationDate": {
+                    "target": "com.amazonaws.cognitoidentity#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date on which the identity was created.</p>"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "com.amazonaws.cognitoidentity#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date on which the identity was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A description of the identity.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#IdentityId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 55
+                },
+                "smithy.api#pattern": "[\\w-]+:[0-9a-f-]+"
+            }
+        },
+        "com.amazonaws.cognitoidentity#IdentityIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentity#IdentityId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 60
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#IdentityPool": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identity pool ID in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityPoolName": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that you provide.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllowUnauthenticatedIdentities": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolUnauthenticated",
+                    "traits": {
+                        "smithy.api#documentation": "<p>TRUE if the identity pool supports unauthenticated logins.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllowClassicFlow": {
+                    "target": "com.amazonaws.cognitoidentity#ClassicFlow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables or disables the Basic (Classic) authentication flow. For more information, see\n      <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html\">Identity Pools (Federated Identities) Authentication Flow</a> in the <i>Amazon Cognito Developer Guide</i>.</p>"
+                    }
+                },
+                "SupportedLoginProviders": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityProviders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional key:value pairs mapping provider names to provider app IDs.</p>"
+                    }
+                },
+                "DeveloperProviderName": {
+                    "target": "com.amazonaws.cognitoidentity#DeveloperProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The \"domain\" by which Cognito will refer to your users.</p>"
+                    }
+                },
+                "OpenIdConnectProviderARNs": {
+                    "target": "com.amazonaws.cognitoidentity#OIDCProviderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of OpendID Connect provider ARNs.</p>"
+                    }
+                },
+                "CognitoIdentityProviders": {
+                    "target": "com.amazonaws.cognitoidentity#CognitoIdentityProviderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list representing an Amazon Cognito user pool and its client ID.</p>"
+                    }
+                },
+                "SamlProviderARNs": {
+                    "target": "com.amazonaws.cognitoidentity#SAMLProviderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of Amazon Resource Names (ARNs) of the SAML provider for your identity\n         pool.</p>"
+                    }
+                },
+                "IdentityPoolTags": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolTagsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that are assigned to the identity pool. A tag is a label that you can apply to\n         identity pools to categorize and manage them in different ways, such as by purpose, owner,\n         environment, or other criteria.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing an Amazon Cognito identity pool.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#IdentityPoolId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 55
+                },
+                "smithy.api#pattern": "[\\w-]+:[0-9a-f-]+"
+            }
+        },
+        "com.amazonaws.cognitoidentity#IdentityPoolName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "[\\w\\s+=,.@-]+"
+            }
+        },
+        "com.amazonaws.cognitoidentity#IdentityPoolShortDescription": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identity pool ID in the format REGION:GUID.</p>"
+                    }
+                },
+                "IdentityPoolName": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that you provide.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A description of the identity pool.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#IdentityPoolTagsListType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentity#TagKeysType"
+            }
+        },
+        "com.amazonaws.cognitoidentity#IdentityPoolTagsType": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cognitoidentity#TagKeysType"
+            },
+            "value": {
+                "target": "com.amazonaws.cognitoidentity#TagValueType"
+            }
+        },
+        "com.amazonaws.cognitoidentity#IdentityPoolUnauthenticated": {
+            "type": "boolean"
+        },
+        "com.amazonaws.cognitoidentity#IdentityPoolsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentity#IdentityPoolShortDescription"
+            }
+        },
+        "com.amazonaws.cognitoidentity#IdentityProviderId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "[\\w.;_/-]+"
+            }
+        },
+        "com.amazonaws.cognitoidentity#IdentityProviderName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#IdentityProviderToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50000
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#IdentityProviders": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cognitoidentity#IdentityProviderName"
+            },
+            "value": {
+                "target": "com.amazonaws.cognitoidentity#IdentityProviderId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#InternalErrorException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentity#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message returned by an InternalErrorException.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Thrown when the service encounters an error during processing the request.</p>",
+                "smithy.api#error": "server"
+            }
+        },
+        "com.amazonaws.cognitoidentity#InvalidIdentityPoolConfigurationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentity#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message returned for an <code>InvalidIdentityPoolConfigurationException</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Thrown if the identity pool has no role associated for the given auth type\n         (auth/unauth) or if the AssumeRole fails.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cognitoidentity#InvalidParameterException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentity#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message returned by an InvalidParameterException.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Thrown for missing or bad input parameter(s).</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cognitoidentity#LimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentity#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message returned by a LimitExceededException.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Thrown when the total number of user pools has exceeded a preset limit.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cognitoidentity#ListIdentities": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#ListIdentitiesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#ListIdentitiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the identities in an identity pool.</p>\n         <p>You must use AWS Developer credentials to call this API.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#ListIdentitiesInput": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identity pool ID in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.cognitoidentity#QueryLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of identities to return.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cognitoidentity#PaginationKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token.</p>"
+                    }
+                },
+                "HideDisabled": {
+                    "target": "com.amazonaws.cognitoidentity#HideDisabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional boolean parameter that allows you to hide disabled identities. If\n         omitted, the ListIdentities API will include disabled identities in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the ListIdentities action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#ListIdentitiesResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identity pool ID in the format REGION:GUID.</p>"
+                    }
+                },
+                "Identities": {
+                    "target": "com.amazonaws.cognitoidentity#IdentitiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing a set of identities and associated mappings.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cognitoidentity#PaginationKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response to a ListIdentities request.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#ListIdentityPools": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#ListIdentityPoolsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#ListIdentityPoolsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all of the Cognito identity pools registered for your account.</p>\n         <p>You must use AWS Developer credentials to call this API.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "IdentityPools",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#ListIdentityPoolsInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.cognitoidentity#QueryLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of identities to return.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cognitoidentity#PaginationKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the ListIdentityPools action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#ListIdentityPoolsResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityPools": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity pools returned by the ListIdentityPools action.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cognitoidentity#PaginationKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a successful ListIdentityPools action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#ListTagsForResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags that are assigned to an Amazon Cognito identity pool.</p>\n         <p>A tag is a label that you can apply to identity pools to categorize and manage them in\n         different ways, such as by purpose, owner, environment, or other criteria.</p>\n         <p>You can use this action up to 10 times per second, per account.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#ListTagsForResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.cognitoidentity#ARNString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the identity pool that the tags are assigned\n         to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolTagsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that are assigned to the identity pool.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#LoginsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentity#IdentityProviderName"
+            }
+        },
+        "com.amazonaws.cognitoidentity#LoginsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cognitoidentity#IdentityProviderName"
+            },
+            "value": {
+                "target": "com.amazonaws.cognitoidentity#IdentityProviderToken"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#LookupDeveloperIdentity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#LookupDeveloperIdentityInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#LookupDeveloperIdentityResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the <code>IdentityID</code> associated with a\n            <code>DeveloperUserIdentifier</code> or the list of <code>DeveloperUserIdentifier</code>\n         values associated with an <code>IdentityId</code> for an existing identity. Either\n            <code>IdentityID</code> or <code>DeveloperUserIdentifier</code> must not be null. If you\n         supply only one of these values, the other value will be searched in the database and\n         returned as a part of the response. If you supply both,\n            <code>DeveloperUserIdentifier</code> will be matched against <code>IdentityID</code>. If\n         the values are verified against the database, the response returns both values and is the\n         same as the request. Otherwise a <code>ResourceConflictException</code> is\n         thrown.</p>\n         <p>\n            <code>LookupDeveloperIdentity</code> is intended for low-throughput control plane\n         operations: for example, to enable customer service to locate an identity ID by username.\n         If you are using it for higher-volume operations such as user authentication, your requests\n         are likely to be throttled. <a>GetOpenIdTokenForDeveloperIdentity</a> is a\n         better option for higher-volume operations for user authentication.</p>\n         <p>You must use AWS Developer credentials to call this API.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#LookupDeveloperIdentityInput": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identity pool ID in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier in the format REGION:GUID.</p>"
+                    }
+                },
+                "DeveloperUserIdentifier": {
+                    "target": "com.amazonaws.cognitoidentity#DeveloperUserIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID used by your backend authentication process to identify a user.\n         Typically, a developer identity provider would issue many developer user identifiers, in\n         keeping with the number of users.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.cognitoidentity#QueryLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of identities to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cognitoidentity#PaginationKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token. The first call you make will have <code>NextToken</code> set to\n         null. After that the service will return <code>NextToken</code> values as needed. For\n         example, let's say you make a request with <code>MaxResults</code> set to 10, and there are\n         20 matches in the database. The service will return a pagination token as a part of the\n         response. This token can be used to call the API again and get results starting from the\n         11th match.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the <code>LookupDeveloperIdentityInput</code> action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#LookupDeveloperIdentityResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier in the format REGION:GUID.</p>"
+                    }
+                },
+                "DeveloperUserIdentifierList": {
+                    "target": "com.amazonaws.cognitoidentity#DeveloperUserIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the list of developer user identifiers associated with an identity ID.\n         Cognito supports the association of multiple developer user identifiers with an identity\n         ID.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cognitoidentity#PaginationKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token. The first call you make will have <code>NextToken</code> set to\n         null. After that the service will return <code>NextToken</code> values as needed. For\n         example, let's say you make a request with <code>MaxResults</code> set to 10, and there are\n         20 matches in the database. The service will return a pagination token as a part of the\n         response. This token can be used to call the API again and get results starting from the\n         11th match.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returned in response to a successful <code>LookupDeveloperIdentity</code>\n         action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#MappingRule": {
+            "type": "structure",
+            "members": {
+                "Claim": {
+                    "target": "com.amazonaws.cognitoidentity#ClaimName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The claim name that must be present in the token, for example, \"isAdmin\" or\n         \"paid\".</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MatchType": {
+                    "target": "com.amazonaws.cognitoidentity#MappingRuleMatchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The match condition that specifies how closely the claim value in the IdP token must\n         match <code>Value</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.cognitoidentity#ClaimValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief string that the claim must match, for example, \"paid\" or \"yes\".</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleARN": {
+                    "target": "com.amazonaws.cognitoidentity#ARNString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A rule that maps a claim name, a claim value, and a match type to a role\n         ARN.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#MappingRuleMatchType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Equals",
+                        "name": "EQUALS"
+                    },
+                    {
+                        "value": "Contains",
+                        "name": "CONTAINS"
+                    },
+                    {
+                        "value": "StartsWith",
+                        "name": "STARTS_WITH"
+                    },
+                    {
+                        "value": "NotEqual",
+                        "name": "NOT_EQUAL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cognitoidentity#MappingRulesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentity#MappingRule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 400
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#MergeDeveloperIdentities": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#MergeDeveloperIdentitiesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#MergeDeveloperIdentitiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Merges two users having different <code>IdentityId</code>s, existing in the same\n         identity pool, and identified by the same developer provider. You can use this action to\n         request that discrete users be merged and identified as a single user in the Cognito\n         environment. Cognito associates the given source user (<code>SourceUserIdentifier</code>)\n         with the <code>IdentityId</code> of the <code>DestinationUserIdentifier</code>. Only\n         developer-authenticated users can be merged. If the users to be merged are associated with\n         the same public provider, but as two different users, an exception will be\n         thrown.</p>\n         <p>The number of linked logins is limited to 20. So, the number of linked logins for the\n         source user, <code>SourceUserIdentifier</code>, and the destination user,\n         <code>DestinationUserIdentifier</code>, together should not be larger than 20.\n         Otherwise, an exception will be thrown.</p>\n         <p>You must use AWS Developer credentials to call this API.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#MergeDeveloperIdentitiesInput": {
+            "type": "structure",
+            "members": {
+                "SourceUserIdentifier": {
+                    "target": "com.amazonaws.cognitoidentity#DeveloperUserIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User identifier for the source user. The value should be a\n            <code>DeveloperUserIdentifier</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationUserIdentifier": {
+                    "target": "com.amazonaws.cognitoidentity#DeveloperUserIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User identifier for the destination user. The value should be a\n            <code>DeveloperUserIdentifier</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeveloperProviderName": {
+                    "target": "com.amazonaws.cognitoidentity#DeveloperProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The \"domain\" by which Cognito will refer to your users. This is a (pseudo) domain\n         name that you provide while creating an identity pool. This name acts as a placeholder that\n         allows your backend and the Cognito service to communicate about the developer provider.\n         For the <code>DeveloperProviderName</code>, you can use letters as well as period (.),\n         underscore (_), and dash (-).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identity pool ID in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the <code>MergeDeveloperIdentities</code> action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#MergeDeveloperIdentitiesResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier in the format REGION:GUID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returned in response to a successful <code>MergeDeveloperIdentities</code>\n         action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#NotAuthorizedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentity#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message returned by a NotAuthorizedException</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Thrown when a user is not authorized to access the requested resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.cognitoidentity#OIDCProviderList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentity#ARNString"
+            }
+        },
+        "com.amazonaws.cognitoidentity#OIDCToken": {
+            "type": "string"
+        },
+        "com.amazonaws.cognitoidentity#PaginationKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 65535
+                },
+                "smithy.api#pattern": "[\\S]+"
+            }
+        },
+        "com.amazonaws.cognitoidentity#QueryLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 60
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#ResourceConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentity#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message returned by a ResourceConflictException.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Thrown when a user tries to use a login which is already linked to another\n         account.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.cognitoidentity#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentity#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message returned by a ResourceNotFoundException.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Thrown when the requested resource (for example, a dataset or record) does not\n         exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.cognitoidentity#RoleMapping": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.cognitoidentity#RoleMappingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role mapping type. Token will use <code>cognito:roles</code> and\n            <code>cognito:preferred_role</code> claims from the Cognito identity provider token to\n         map groups to roles. Rules will attempt to match claims from the token to map to a\n         role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AmbiguousRoleResolution": {
+                    "target": "com.amazonaws.cognitoidentity#AmbiguousRoleResolutionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you specify Token or Rules as the <code>Type</code>,\n            <code>AmbiguousRoleResolution</code> is required.</p>\n         <p>Specifies the action to be taken if either no rules match the claim value for the\n            <code>Rules</code> type, or there is no <code>cognito:preferred_role</code> claim and\n         there are multiple <code>cognito:roles</code> matches for the <code>Token</code>\n         type.</p>"
+                    }
+                },
+                "RulesConfiguration": {
+                    "target": "com.amazonaws.cognitoidentity#RulesConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rules to be used for mapping users to roles.</p>\n         <p>If you specify Rules as the role mapping type, <code>RulesConfiguration</code> is\n         required.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A role mapping.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#RoleMappingMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cognitoidentity#IdentityProviderName"
+            },
+            "value": {
+                "target": "com.amazonaws.cognitoidentity#RoleMapping"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#RoleMappingType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Token",
+                        "name": "TOKEN"
+                    },
+                    {
+                        "value": "Rules",
+                        "name": "RULES"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cognitoidentity#RoleType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "(un)?authenticated"
+            }
+        },
+        "com.amazonaws.cognitoidentity#RolesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cognitoidentity#RoleType"
+            },
+            "value": {
+                "target": "com.amazonaws.cognitoidentity#ARNString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#RulesConfigurationType": {
+            "type": "structure",
+            "members": {
+                "Rules": {
+                    "target": "com.amazonaws.cognitoidentity#MappingRulesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of rules. You can specify up to 25 rules per identity provider.</p>\n         <p>Rules are evaluated in order. The first one to match specifies the role.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container for rules.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#SAMLProviderList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentity#ARNString"
+            }
+        },
+        "com.amazonaws.cognitoidentity#SecretKeyString": {
+            "type": "string"
+        },
+        "com.amazonaws.cognitoidentity#SessionTokenString": {
+            "type": "string"
+        },
+        "com.amazonaws.cognitoidentity#SetIdentityPoolRoles": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#SetIdentityPoolRolesInput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the roles for an identity pool. These roles are used when making calls to <a>GetCredentialsForIdentity</a> action.</p>\n         <p>You must use AWS Developer credentials to call this API.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#SetIdentityPoolRolesInput": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identity pool ID in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Roles": {
+                    "target": "com.amazonaws.cognitoidentity#RolesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The map of roles associated with this pool. For a given role, the key will be either\n         \"authenticated\" or \"unauthenticated\" and the value will be the Role ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleMappings": {
+                    "target": "com.amazonaws.cognitoidentity#RoleMappingMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How users for a specific identity provider are to mapped to roles. This is a string\n         to <a>RoleMapping</a> object map. The string identifies the identity provider,\n         for example, \"graph.facebook.com\" or\n         \"cognito-idp-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id\".</p>\n         <p>Up to 25 rules can be specified per identity provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the <code>SetIdentityPoolRoles</code> action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#String": {
+            "type": "string"
+        },
+        "com.amazonaws.cognitoidentity#TagKeysType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#TagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Assigns a set of tags to an Amazon Cognito identity pool. A tag is a label that you can\n         use to categorize and manage identity pools in different ways, such as by purpose, owner,\n         environment, or other criteria.</p>\n         <p>Each tag consists of a key and value, both of which you define. A key is a general\n         category for more specific values. For example, if you have two versions of an identity\n         pool, one for testing and another for production, you might assign an\n            <code>Environment</code> tag key to both identity pools. The value of this key might be\n            <code>Test</code> for one identity pool and <code>Production</code> for the\n         other.</p>\n         <p>Tags are useful for cost tracking and access control. You can activate your tags so that\n         they appear on the Billing and Cost Management console, where you can track the costs\n         associated with your identity pools. In an IAM policy, you can constrain permissions for\n         identity pools based on specific tags or tag values.</p>\n         <p>You can use this action up to 5 times per second, per account. An identity pool can have\n         as many as 50 tags.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#TagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.cognitoidentity#ARNString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the identity pool to assign the tags to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolTagsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to assign to the identity pool.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.cognitoidentity#TagValueType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#TokenDuration": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 86400
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#TooManyRequestsException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.cognitoidentity#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Message returned by a TooManyRequestsException</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Thrown when a request is throttled.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.cognitoidentity#UnlinkDeveloperIdentity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#UnlinkDeveloperIdentityInput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Unlinks a <code>DeveloperUserIdentifier</code> from an existing identity. Unlinked\n         developer users will be considered new identities next time they are seen. If, for a given\n         Cognito identity, you remove all federated identities as well as the developer user\n         identifier, the Cognito identity becomes inaccessible.</p>\n         <p>You must use AWS Developer credentials to call this API.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#UnlinkDeveloperIdentityInput": {
+            "type": "structure",
+            "members": {
+                "IdentityId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identity pool ID in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeveloperProviderName": {
+                    "target": "com.amazonaws.cognitoidentity#DeveloperProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The \"domain\" by which Cognito will refer to your users.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeveloperUserIdentifier": {
+                    "target": "com.amazonaws.cognitoidentity#DeveloperUserIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID used by your backend authentication process to identify a user.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the <code>UnlinkDeveloperIdentity</code> action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#UnlinkIdentity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#UnlinkIdentityInput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#ExternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#auth": [],
+                "smithy.api#documentation": "<p>Unlinks a federated identity from an existing account. Unlinked logins will be\n         considered new identities next time they are seen. Removing the last linked login will make\n         this identity inaccessible.</p>\n         <p>This is a public API. You do not need any credentials to call this API.</p>",
+                "smithy.api#optionalAuth": {}
+            }
+        },
+        "com.amazonaws.cognitoidentity#UnlinkIdentityInput": {
+            "type": "structure",
+            "members": {
+                "IdentityId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier in the format REGION:GUID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Logins": {
+                    "target": "com.amazonaws.cognitoidentity#LoginsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of optional name-value pairs that map provider names to provider\n         tokens.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LoginsToRemove": {
+                    "target": "com.amazonaws.cognitoidentity#LoginsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provider names to unlink from this identity.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the UnlinkIdentity action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#UnprocessedIdentityId": {
+            "type": "structure",
+            "members": {
+                "IdentityId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier in the format REGION:GUID.</p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.cognitoidentity#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code indicating the type of error that occurred.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of UnprocessedIdentityId objects, each of which contains an ErrorCode and\n         IdentityId.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#UnprocessedIdentityIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cognitoidentity#UnprocessedIdentityId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 60
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#UntagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the specified tags from an Amazon Cognito identity pool. You can use this action\n         up to 5 times per second, per account</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#UntagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.cognitoidentity#ARNString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the identity pool that the tags are assigned\n         to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolTagsListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The keys of the tags to remove from the user pool.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.cognitoidentity#UpdateIdentityPool": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#IdentityPool"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#IdentityPool"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an identity pool.</p>\n         <p>You must use AWS Developer credentials to call this API.</p>"
+            }
+        }
+    }
+}

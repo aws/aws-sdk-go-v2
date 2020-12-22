@@ -1,515 +1,516 @@
 {
-  "smithy": "1.0",
-  "metadata": {
-    "suppressions": [
-      {
-        "id": "HttpMethodSemantics",
-        "namespace": "*"
-      },
-      {
-        "id": "HttpResponseCodeSemantics",
-        "namespace": "*"
-      },
-      {
-        "id": "PaginatedTrait",
-        "namespace": "*"
-      },
-      {
-        "id": "HttpHeaderTrait",
-        "namespace": "*"
-      },
-      {
-        "id": "HttpUriConflict",
-        "namespace": "*"
-      },
-      {
-        "id": "Service",
-        "namespace": "*"
-      }
-    ]
-  },
-  "shapes": {
-    "com.amazonaws.pricing#AWSPriceListService": {
-      "type": "service",
-      "version": "2017-10-15",
-      "operations": [
-        {
-          "target": "com.amazonaws.pricing#DescribeServices"
-        },
-        {
-          "target": "com.amazonaws.pricing#GetAttributeValues"
-        },
-        {
-          "target": "com.amazonaws.pricing#GetProducts"
-        }
-      ],
-      "traits": {
-        "aws.api#service": {
-          "sdkId": "Pricing",
-          "arnNamespace": "pricing",
-          "cloudFormationName": "Pricing",
-          "cloudTrailEventSource": "pricing.amazonaws.com"
-        },
-        "aws.auth#sigv4": {
-          "name": "pricing"
-        },
-        "aws.protocols#awsJson1_1": {},
-        "smithy.api#documentation": "<p>AWS Price List Service API (AWS Price List Service) is a centralized and convenient way to\n         programmatically query Amazon Web Services for services, products, and pricing information. The AWS Price List Service\n         uses standardized product attributes such as <code>Location</code>, <code>Storage\n            Class</code>, and <code>Operating System</code>, and provides prices at the SKU\n         level. You can use the AWS Price List Service to build cost control and scenario planning tools, reconcile\n         billing data, forecast future spend for budgeting purposes, and provide cost benefit\n         analysis that compare your internal workloads with AWS.</p>\n         <p>Use <code>GetServices</code> without a service code to retrieve the service codes for all AWS services, then \n         <code>GetServices</code> with a service code to retreive the attribute names for \n         that service. After you have the service code and attribute names, you can use <code>GetAttributeValues</code>\n         to see what values are available for an attribute. With the service code and an attribute name and value, \n         you can use <code>GetProducts</code> to find specific products that you're interested in, such as \n         an <code>AmazonEC2</code> instance, with a <code>Provisioned IOPS</code> \n            <code>volumeType</code>.</p>\n         <p>Service Endpoint</p>\n         <p>AWS Price List Service API provides the following two endpoints:</p>\n         <ul>\n            <li>\n               <p>https://api.pricing.us-east-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>https://api.pricing.ap-south-1.amazonaws.com</p>\n            </li>\n         </ul>",
-        "smithy.api#title": "AWS Price List Service"
-      }
-    },
-    "com.amazonaws.pricing#AttributeNameList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.pricing#String"
-      }
-    },
-    "com.amazonaws.pricing#AttributeValue": {
-      "type": "structure",
-      "members": {
-        "Value": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The specific value of an <code>attributeName</code>.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The values of a given attribute, such as <code>Throughput Optimized HDD</code> or <code>Provisioned\n          IOPS</code> for the <code>Amazon EC2</code> \n            <code>volumeType</code> attribute.</p>"
-      }
-    },
-    "com.amazonaws.pricing#AttributeValueList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.pricing#AttributeValue"
-      }
-    },
-    "com.amazonaws.pricing#BoxedInteger": {
-      "type": "integer",
-      "traits": {
-        "smithy.api#range": {
-          "min": 1,
-          "max": 100
-        }
-      }
-    },
-    "com.amazonaws.pricing#DescribeServices": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.pricing#DescribeServicesRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.pricing#DescribeServicesResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.pricing#ExpiredNextTokenException"
-        },
-        {
-          "target": "com.amazonaws.pricing#InternalErrorException"
-        },
-        {
-          "target": "com.amazonaws.pricing#InvalidNextTokenException"
-        },
-        {
-          "target": "com.amazonaws.pricing#InvalidParameterException"
-        },
-        {
-          "target": "com.amazonaws.pricing#NotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Returns the metadata for one service or a list of the metadata for all services. Use\n         this without a service code to get the service codes for all services.\n         Use it with a service code, such as <code>AmazonEC2</code>, to get information specific to \n         that service, such as the attribute \n         names available for that service. For example, some of the attribute names available for EC2 are \n         <code>volumeType</code>, <code>maxIopsVolume</code>, <code>operation</code>,\n         <code>locationType</code>, and <code>instanceCapacity10xlarge</code>.</p>",
-        "smithy.api#paginated": {
-          "inputToken": "NextToken",
-          "outputToken": "NextToken",
-          "pageSize": "MaxResults"
-        }
-      }
-    },
-    "com.amazonaws.pricing#DescribeServicesRequest": {
-      "type": "structure",
-      "members": {
-        "FormatVersion": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The format version that you want the response to be in.</p>\n         <p>Valid values are: <code>aws_v1</code>\n         </p>"
-          }
-        },
-        "ServiceCode": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The code for the service whose information you want to retrieve, such as <code>AmazonEC2</code>.\n          You can use \n         the <code>ServiceCode</code> to filter the results in a <code>GetProducts</code> call.\n      To retrieve a list of all services, leave this blank.</p>"
-          }
-        },
-        "MaxResults": {
-          "target": "com.amazonaws.pricing#BoxedInteger",
-          "traits": {
-            "smithy.api#box": {},
-            "smithy.api#documentation": "<p>The maximum number of results that you want returned in the response.</p>"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination token that indicates the next set of results that you want to retrieve.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.pricing#DescribeServicesResponse": {
-      "type": "structure",
-      "members": {
-        "NextToken": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination token for the next set of retreivable results.</p>"
-          }
-        },
-        "FormatVersion": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The format version of the response. For example, <code>aws_v1</code>.</p>"
-          }
-        },
-        "Services": {
-          "target": "com.amazonaws.pricing#ServiceList",
-          "traits": {
-            "smithy.api#documentation": "<p>The service metadata for the service or services in the response.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.pricing#ExpiredNextTokenException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.pricing#errorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The pagination token expired. Try again without a pagination token.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.pricing#Filter": {
-      "type": "structure",
-      "members": {
-        "Value": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The service code or attribute value that you want to filter by. If you are filtering by \n         service code this is the actual service code, such as <code>AmazonEC2</code>. If you are \n         filtering by attribute name, this is the attribute value that you want the returned products\n         to match, such as a <code>Provisioned IOPS</code> volume.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Field": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The product metadata field that you want to filter on. You can filter by just the \n         service code to see all products for a specific service, filter \n         by just the attribute name to see a specific attribute for multiple services, or use both a service code\n         and an attribute name to retrieve only products that match both fields.</p>\n         <p>Valid values include: <code>ServiceCode</code>, and all attribute names</p>\n         \n         <p>For example, you can filter by the <code>AmazonEC2</code> service code and the \n         <code>volumeType</code> attribute name to get the prices for only Amazon EC2 volumes.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Type": {
-          "target": "com.amazonaws.pricing#FilterType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of filter that you want to use.</p>\n         <p>Valid values are: <code>TERM_MATCH</code>. <code>TERM_MATCH</code> returns only \n         products that match both the given filter field and the given value.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The constraints that you want all returned products to match.</p>"
-      }
-    },
-    "com.amazonaws.pricing#FilterType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "TERM_MATCH",
-            "name": "TERM_MATCH"
-          }
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
         ]
-      }
     },
-    "com.amazonaws.pricing#Filters": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.pricing#Filter"
-      }
-    },
-    "com.amazonaws.pricing#GetAttributeValues": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.pricing#GetAttributeValuesRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.pricing#GetAttributeValuesResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.pricing#ExpiredNextTokenException"
+    "shapes": {
+        "com.amazonaws.pricing#AWSPriceListService": {
+            "type": "service",
+            "version": "2017-10-15",
+            "operations": [
+                {
+                    "target": "com.amazonaws.pricing#DescribeServices"
+                },
+                {
+                    "target": "com.amazonaws.pricing#GetAttributeValues"
+                },
+                {
+                    "target": "com.amazonaws.pricing#GetProducts"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Pricing",
+                    "arnNamespace": "pricing",
+                    "cloudFormationName": "Pricing",
+                    "cloudTrailEventSource": "pricing.amazonaws.com",
+                    "endpointPrefix": "api.pricing"
+                },
+                "aws.auth#sigv4": {
+                    "name": "pricing"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>AWS Price List Service API (AWS Price List Service) is a centralized and convenient way to\n         programmatically query Amazon Web Services for services, products, and pricing information. The AWS Price List Service\n         uses standardized product attributes such as <code>Location</code>, <code>Storage\n            Class</code>, and <code>Operating System</code>, and provides prices at the SKU\n         level. You can use the AWS Price List Service to build cost control and scenario planning tools, reconcile\n         billing data, forecast future spend for budgeting purposes, and provide cost benefit\n         analysis that compare your internal workloads with AWS.</p>\n         <p>Use <code>GetServices</code> without a service code to retrieve the service codes for all AWS services, then \n         <code>GetServices</code> with a service code to retreive the attribute names for \n         that service. After you have the service code and attribute names, you can use <code>GetAttributeValues</code>\n         to see what values are available for an attribute. With the service code and an attribute name and value, \n         you can use <code>GetProducts</code> to find specific products that you're interested in, such as \n         an <code>AmazonEC2</code> instance, with a <code>Provisioned IOPS</code> \n            <code>volumeType</code>.</p>\n         <p>Service Endpoint</p>\n         <p>AWS Price List Service API provides the following two endpoints:</p>\n         <ul>\n            <li>\n               <p>https://api.pricing.us-east-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>https://api.pricing.ap-south-1.amazonaws.com</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "AWS Price List Service"
+            }
         },
-        {
-          "target": "com.amazonaws.pricing#InternalErrorException"
+        "com.amazonaws.pricing#AttributeNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pricing#String"
+            }
         },
-        {
-          "target": "com.amazonaws.pricing#InvalidNextTokenException"
+        "com.amazonaws.pricing#AttributeValue": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific value of an <code>attributeName</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The values of a given attribute, such as <code>Throughput Optimized HDD</code> or <code>Provisioned\n          IOPS</code> for the <code>Amazon EC2</code> \n            <code>volumeType</code> attribute.</p>"
+            }
         },
-        {
-          "target": "com.amazonaws.pricing#InvalidParameterException"
+        "com.amazonaws.pricing#AttributeValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pricing#AttributeValue"
+            }
         },
-        {
-          "target": "com.amazonaws.pricing#NotFoundException"
+        "com.amazonaws.pricing#BoxedInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.pricing#DescribeServices": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pricing#DescribeServicesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pricing#DescribeServicesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pricing#ExpiredNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.pricing#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.pricing#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.pricing#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.pricing#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the metadata for one service or a list of the metadata for all services. Use\n         this without a service code to get the service codes for all services.\n         Use it with a service code, such as <code>AmazonEC2</code>, to get information specific to \n         that service, such as the attribute \n         names available for that service. For example, some of the attribute names available for EC2 are \n         <code>volumeType</code>, <code>maxIopsVolume</code>, <code>operation</code>,\n         <code>locationType</code>, and <code>instanceCapacity10xlarge</code>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.pricing#DescribeServicesRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceCode": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for the service whose information you want to retrieve, such as <code>AmazonEC2</code>.\n          You can use \n         the <code>ServiceCode</code> to filter the results in a <code>GetProducts</code> call.\n      To retrieve a list of all services, leave this blank.</p>"
+                    }
+                },
+                "FormatVersion": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format version that you want the response to be in.</p>\n         <p>Valid values are: <code>aws_v1</code>\n         </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results that you want to retrieve.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.pricing#BoxedInteger",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results that you want returned in the response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pricing#DescribeServicesResponse": {
+            "type": "structure",
+            "members": {
+                "Services": {
+                    "target": "com.amazonaws.pricing#ServiceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service metadata for the service or services in the response.</p>"
+                    }
+                },
+                "FormatVersion": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format version of the response. For example, <code>aws_v1</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token for the next set of retreivable results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pricing#ExpiredNextTokenException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.pricing#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The pagination token expired. Try again without a pagination token.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.pricing#Filter": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.pricing#FilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of filter that you want to use.</p>\n         <p>Valid values are: <code>TERM_MATCH</code>. <code>TERM_MATCH</code> returns only \n         products that match both the given filter field and the given value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Field": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product metadata field that you want to filter on. You can filter by just the \n         service code to see all products for a specific service, filter \n         by just the attribute name to see a specific attribute for multiple services, or use both a service code\n         and an attribute name to retrieve only products that match both fields.</p>\n         <p>Valid values include: <code>ServiceCode</code>, and all attribute names</p>\n         \n         <p>For example, you can filter by the <code>AmazonEC2</code> service code and the \n         <code>volumeType</code> attribute name to get the prices for only Amazon EC2 volumes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service code or attribute value that you want to filter by. If you are filtering by \n         service code this is the actual service code, such as <code>AmazonEC2</code>. If you are \n         filtering by attribute name, this is the attribute value that you want the returned products\n         to match, such as a <code>Provisioned IOPS</code> volume.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The constraints that you want all returned products to match.</p>"
+            }
+        },
+        "com.amazonaws.pricing#FilterType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TERM_MATCH",
+                        "name": "TERM_MATCH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pricing#Filters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pricing#Filter"
+            }
+        },
+        "com.amazonaws.pricing#GetAttributeValues": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pricing#GetAttributeValuesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pricing#GetAttributeValuesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pricing#ExpiredNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.pricing#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.pricing#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.pricing#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.pricing#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of attribute values. Attibutes are similar to the details \n          in a Price List API offer file. For a list of available attributes, see \n         <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs\">Offer File Definitions</a>\n         in the <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html\">AWS Billing and Cost Management User Guide</a>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.pricing#GetAttributeValuesRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceCode": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service code for the service whose attributes you want to retrieve. For example, if you want \n          the retrieve an EC2 attribute, use <code>AmazonEC2</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttributeName": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attribute that you want to retrieve the values for, such as <code>volumeType</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results that you want to retrieve.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.pricing#BoxedInteger",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to return in response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pricing#GetAttributeValuesResponse": {
+            "type": "structure",
+            "members": {
+                "AttributeValues": {
+                    "target": "com.amazonaws.pricing#AttributeValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of values for an attribute. For example, <code>Throughput Optimized HDD</code> and \n      <code>Provisioned IOPS</code> are two available values for the <code>AmazonEC2</code> \n            <code>volumeType</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pricing#GetProducts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pricing#GetProductsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pricing#GetProductsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pricing#ExpiredNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.pricing#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.pricing#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.pricing#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.pricing#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all products that match the filter criteria.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.pricing#GetProductsRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceCode": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for the service whose products you want to retrieve. </p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.pricing#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of filters that limit the returned products. only products that match all filters\n         are returned.</p>"
+                    }
+                },
+                "FormatVersion": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format version that you want the response to be in.</p>\n         <p>Valid values are: <code>aws_v1</code>\n         </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results that you want to retrieve.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.pricing#BoxedInteger",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pricing#GetProductsResponse": {
+            "type": "structure",
+            "members": {
+                "FormatVersion": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format version of the response. For example, aws_v1.</p>"
+                    }
+                },
+                "PriceList": {
+                    "target": "com.amazonaws.pricing#PriceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of products that match your filters. The list contains both the product metadata and \n         the price information.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pricing#InternalErrorException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.pricing#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error on the server occurred during the processing of your request. Try again later.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.pricing#InvalidNextTokenException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.pricing#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The pagination token is invalid. Try again without a pagination token.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.pricing#InvalidParameterException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.pricing#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One or more parameters had an invalid value.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.pricing#NotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.pricing#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested resource can't be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.pricing#PriceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pricing#SynthesizedJsonPriceListItemJSON"
+            }
+        },
+        "com.amazonaws.pricing#Service": {
+            "type": "structure",
+            "members": {
+                "ServiceCode": {
+                    "target": "com.amazonaws.pricing#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code for the AWS service.</p>"
+                    }
+                },
+                "AttributeNames": {
+                    "target": "com.amazonaws.pricing#AttributeNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes that are available for this service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata for a service, such as the service code and available attribute names.</p>"
+            }
+        },
+        "com.amazonaws.pricing#ServiceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pricing#Service"
+            }
+        },
+        "com.amazonaws.pricing#String": {
+            "type": "string"
+        },
+        "com.amazonaws.pricing#SynthesizedJsonPriceListItemJSON": {
+            "type": "string",
+            "traits": {
+                "smithy.api#mediaType": "application/json"
+            }
+        },
+        "com.amazonaws.pricing#errorMessage": {
+            "type": "string"
         }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Returns a list of attribute values. Attibutes are similar to the details \n          in a Price List API offer file. For a list of available attributes, see \n         <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs\">Offer File Definitions</a>\n         in the <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html\">AWS Billing and Cost Management User Guide</a>.</p>",
-        "smithy.api#paginated": {
-          "inputToken": "NextToken",
-          "outputToken": "NextToken",
-          "pageSize": "MaxResults"
-        }
-      }
-    },
-    "com.amazonaws.pricing#GetAttributeValuesRequest": {
-      "type": "structure",
-      "members": {
-        "AttributeName": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the attribute that you want to retrieve the values for, such as <code>volumeType</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ServiceCode": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The service code for the service whose attributes you want to retrieve. For example, if you want \n          the retrieve an EC2 attribute, use <code>AmazonEC2</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "MaxResults": {
-          "target": "com.amazonaws.pricing#BoxedInteger",
-          "traits": {
-            "smithy.api#box": {},
-            "smithy.api#documentation": "<p>The maximum number of results to return in response.</p>"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination token that indicates the next set of results that you want to retrieve.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.pricing#GetAttributeValuesResponse": {
-      "type": "structure",
-      "members": {
-        "NextToken": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
-          }
-        },
-        "AttributeValues": {
-          "target": "com.amazonaws.pricing#AttributeValueList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of values for an attribute. For example, <code>Throughput Optimized HDD</code> and \n      <code>Provisioned IOPS</code> are two available values for the <code>AmazonEC2</code> \n            <code>volumeType</code>.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.pricing#GetProducts": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.pricing#GetProductsRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.pricing#GetProductsResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.pricing#ExpiredNextTokenException"
-        },
-        {
-          "target": "com.amazonaws.pricing#InternalErrorException"
-        },
-        {
-          "target": "com.amazonaws.pricing#InvalidNextTokenException"
-        },
-        {
-          "target": "com.amazonaws.pricing#InvalidParameterException"
-        },
-        {
-          "target": "com.amazonaws.pricing#NotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Returns a list of all products that match the filter criteria.</p>",
-        "smithy.api#paginated": {
-          "inputToken": "NextToken",
-          "outputToken": "NextToken",
-          "pageSize": "MaxResults"
-        }
-      }
-    },
-    "com.amazonaws.pricing#GetProductsRequest": {
-      "type": "structure",
-      "members": {
-        "NextToken": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination token that indicates the next set of results that you want to retrieve.</p>"
-          }
-        },
-        "FormatVersion": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The format version that you want the response to be in.</p>\n         <p>Valid values are: <code>aws_v1</code>\n         </p>"
-          }
-        },
-        "Filters": {
-          "target": "com.amazonaws.pricing#Filters",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of filters that limit the returned products. only products that match all filters\n         are returned.</p>"
-          }
-        },
-        "ServiceCode": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The code for the service whose products you want to retrieve. </p>"
-          }
-        },
-        "MaxResults": {
-          "target": "com.amazonaws.pricing#BoxedInteger",
-          "traits": {
-            "smithy.api#box": {},
-            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.pricing#GetProductsResponse": {
-      "type": "structure",
-      "members": {
-        "PriceList": {
-          "target": "com.amazonaws.pricing#PriceList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of products that match your filters. The list contains both the product metadata and \n         the price information.</p>"
-          }
-        },
-        "FormatVersion": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The format version of the response. For example, aws_v1.</p>"
-          }
-        },
-        "NextToken": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.pricing#InternalErrorException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.pricing#errorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>An error on the server occurred during the processing of your request. Try again later.</p>",
-        "smithy.api#error": "server",
-        "smithy.api#httpError": 500
-      }
-    },
-    "com.amazonaws.pricing#InvalidNextTokenException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.pricing#errorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The pagination token is invalid. Try again without a pagination token.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.pricing#InvalidParameterException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.pricing#errorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>One or more parameters had an invalid value.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.pricing#NotFoundException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.pricing#errorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The requested resource can't be found.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.pricing#PriceList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.pricing#SynthesizedJsonPriceListItemJSON"
-      }
-    },
-    "com.amazonaws.pricing#Service": {
-      "type": "structure",
-      "members": {
-        "ServiceCode": {
-          "target": "com.amazonaws.pricing#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The code for the AWS service.</p>"
-          }
-        },
-        "AttributeNames": {
-          "target": "com.amazonaws.pricing#AttributeNameList",
-          "traits": {
-            "smithy.api#documentation": "<p>The attributes that are available for this service.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The metadata for a service, such as the service code and available attribute names.</p>"
-      }
-    },
-    "com.amazonaws.pricing#ServiceList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.pricing#Service"
-      }
-    },
-    "com.amazonaws.pricing#String": {
-      "type": "string"
-    },
-    "com.amazonaws.pricing#SynthesizedJsonPriceListItemJSON": {
-      "type": "string",
-      "traits": {
-        "smithy.api#mediaType": "application/json"
-      }
-    },
-    "com.amazonaws.pricing#errorMessage": {
-      "type": "string"
     }
-  }
 }

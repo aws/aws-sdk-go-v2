@@ -1,0 +1,2457 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.lookoutvision#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lookoutvision#ExceptionString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You are not authorized to perform the action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.lookoutvision#AnomalyClassFilter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#pattern": "(normal|anomaly)"
+            }
+        },
+        "com.amazonaws.lookoutvision#Boolean": {
+            "type": "boolean"
+        },
+        "com.amazonaws.lookoutvision#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.lookoutvision#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lookoutvision#ExceptionString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.lookoutvision#ExceptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.lookoutvision#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The update or deletion of a resource caused an inconsistent state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.lookoutvision#ContentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.lookoutvision#CreateDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#CreateDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#CreateDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new dataset  in an Amazon Lookout for Vision project. <code>CreateDataset</code> can create a \n      training or a test dataset from a valid dataset source (<code>DatasetSource</code>).</p>\n         <p>If you want a single dataset project, specify <code>train</code> for the value of \n         <code>DatasetType</code>.</p>\n        <p>To have a project with separate training and test datasets, call <code>CreateDataset</code> twice.\n           On the first call, specify <code>train</code> for the value of \n           <code>DatasetType</code>. On the second call, specify <code>test</code> for the value of \n           <code>DatasetType</code>.\n           \n         of dataset with </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-11-20/projects/{ProjectName}/datasets",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#CreateDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project in which you want to create a dataset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatasetType": {
+                    "target": "com.amazonaws.lookoutvision#DatasetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the dataset. Specify <code>train</code> for a training dataset.\n      Specify <code>test</code> for a test dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatasetSource": {
+                    "target": "com.amazonaws.lookoutvision#DatasetSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the manifest file that Amazon Lookout for Vision uses to create the dataset.</p>\n         <p>If you don't specify <code>DatasetSource</code>, an empty dataset is created and the operation \n      synchronously returns. Later, you can add JSON Lines by calling <a>UpdateDatasetEntries</a>.\n     </p>\n         <p>If you specify a value for <code>DataSource</code>, the manifest at the S3 location\n     is validated and used to create the dataset. The call to <code>CreateDataset</code> is asynchronous\n     and might take a while to complete. To find out the current status, Check the value of <code>Status</code>\n     returned in a call to <a>DescribeDataset</a>.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutvision#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>CreateDataset</code>\n      completes only once.  You choose the value to pass. For example, An issue, \n      such as an network outage, might prevent you from getting a response from <code>CreateDataset</code>.\n      In this case, safely retry your call\n       to <code>CreateDataset</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n       if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>CreateDataset</code>. An idempotency\n       token is active for 8 hours.\n    </p>",
+                        "smithy.api#httpHeader": "X-Amzn-Client-Token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#CreateDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "DatasetMetadata": {
+                    "target": "com.amazonaws.lookoutvision#DatasetMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the dataset.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#CreateModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#CreateModelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#CreateModelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new version of a model within an an Amazon Lookout for Vision project. \n      <code>CreateModel</code> is an asynchronous operation in which Amazon Lookout for Vision trains, tests,\n       and evaluates a new version of a model. </p>\n         <p>To get the current status, check the <code>Status</code> field returned\n      in the response from <a>DescribeModel</a>.</p>\n         <p>If the project has a single dataset, Amazon Lookout for Vision internally splits the dataset\n       to create a training and a test dataset.  \n       If the project has a training and a test dataset, Lookout for Vision uses the respective datasets to train and test \n       the model. </p>\n         <p>After training completes, the evaluation metrics are stored at the location specified in\n        <code>OutputConfig</code>.  </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-11-20/projects/{ProjectName}/models",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#CreateModelRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project in which you want to create a model version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.lookoutvision#ModelDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the version of the model.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutvision#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>CreateModel</code>\n      completes only once.  You choose the value to pass. For example, An issue, \n      such as an network outage, might prevent you from getting a response from <code>CreateModel</code>.\n      In this case, safely retry your call\n       to <code>CreateModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n       if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>CreateModel</code>. An idempotency\n       token is active for 8 hours.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Client-Token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "OutputConfig": {
+                    "target": "com.amazonaws.lookoutvision#OutputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location where Amazon Lookout for Vision saves the training results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.lookoutvision#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK)\n       to use for encypting the model. If this parameter is not specified, the\n       model is encrypted by a key that AWS owns and manages.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#CreateModelResponse": {
+            "type": "structure",
+            "members": {
+                "ModelMetadata": {
+                    "target": "com.amazonaws.lookoutvision#ModelMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The response from a call to <code>CreateModel</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#CreateProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#CreateProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#CreateProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an empty Amazon Lookout for Vision project. After you create the project, add a dataset by calling\n         <a>CreateDataset</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-11-20/projects",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#CreateProjectRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>S nsme for the project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutvision#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>CreateProject</code>\n      completes only once.  You choose the value to pass. For example, An issue, \n      such as an network outage, might prevent you from getting a response from <code>CreateProject</code>.\n      In this case, safely retry your call\n       to <code>CreateProject</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n       if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>CreateProject</code>. An idempotency\n       token is active for 8 hours.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Client-Token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#CreateProjectResponse": {
+            "type": "structure",
+            "members": {
+                "ProjectMetadata": {
+                    "target": "com.amazonaws.lookoutvision#ProjectMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the project.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DatasetChanges": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10485760
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DatasetDescription": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project that contains the dataset.</p>"
+                    }
+                },
+                "DatasetType": {
+                    "target": "com.amazonaws.lookoutvision#DatasetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the dataset. The value <code>train</code> represents a training dataset or single dataset project.\n      The value <code>test</code> represents a test dataset.</p>"
+                    }
+                },
+                "CreationTimestamp": {
+                    "target": "com.amazonaws.lookoutvision#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the time and date that the dataset was created.</p>"
+                    }
+                },
+                "LastUpdatedTimestamp": {
+                    "target": "com.amazonaws.lookoutvision#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the date and time that the dataset was last updated.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutvision#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the dataset.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.lookoutvision#DatasetStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message for the dataset. </p>"
+                    }
+                },
+                "ImageStats": {
+                    "target": "com.amazonaws.lookoutvision#DatasetImageStats",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The description for a dataset. For more information, see <a>DescribeDataset</a>.</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#DatasetEntry": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 8192
+                },
+                "smithy.api#pattern": "^\\{.*\\}$"
+            }
+        },
+        "com.amazonaws.lookoutvision#DatasetEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutvision#DatasetEntry"
+            }
+        },
+        "com.amazonaws.lookoutvision#DatasetGroundTruthManifest": {
+            "type": "structure",
+            "members": {
+                "S3Object": {
+                    "target": "com.amazonaws.lookoutvision#InputS3Object",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket location for the manifest file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Location information about a manifest file. You can use a manifest file to\n      create a dataset.</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#DatasetImageStats": {
+            "type": "structure",
+            "members": {
+                "Total": {
+                    "target": "com.amazonaws.lookoutvision#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of images in the dataset.</p>"
+                    }
+                },
+                "Labeled": {
+                    "target": "com.amazonaws.lookoutvision#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of labeled images.</p>"
+                    }
+                },
+                "Normal": {
+                    "target": "com.amazonaws.lookoutvision#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of images labeled as normal.</p>"
+                    }
+                },
+                "Anomaly": {
+                    "target": "com.amazonaws.lookoutvision#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>the total number of images labeled as an anomaly.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Statistics about the images in a dataset.</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#DatasetMetadata": {
+            "type": "structure",
+            "members": {
+                "DatasetType": {
+                    "target": "com.amazonaws.lookoutvision#DatasetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the dataset.</p>"
+                    }
+                },
+                "CreationTimestamp": {
+                    "target": "com.amazonaws.lookoutvision#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Unix timestamp for the date and time that the dataset was created. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutvision#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status for the dataset.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.lookoutvision#DatasetStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message for the dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Sumary information for an Amazon Lookout for Vision dataset.</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#DatasetMetadataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutvision#DatasetMetadata"
+            }
+        },
+        "com.amazonaws.lookoutvision#DatasetSource": {
+            "type": "structure",
+            "members": {
+                "GroundTruthManifest": {
+                    "target": "com.amazonaws.lookoutvision#DatasetGroundTruthManifest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Location information for the manifest file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the location of a manifest file that Amazon Lookout for Vision uses to to create a dataset.</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#DatasetStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATE_IN_PROGRESS",
+                        "name": "CREATE_IN_PROGRESS"
+                    },
+                    {
+                        "value": "CREATE_COMPLETE",
+                        "name": "CREATE_COMPLETE"
+                    },
+                    {
+                        "value": "CREATE_FAILED",
+                        "name": "CREATE_FAILED"
+                    },
+                    {
+                        "value": "UPDATE_IN_PROGRESS",
+                        "name": "UPDATE_IN_PROGRESS"
+                    },
+                    {
+                        "value": "UPDATE_COMPLETE",
+                        "name": "UPDATE_COMPLETE"
+                    },
+                    {
+                        "value": "UPDATE_FAILED_ROLLBACK_IN_PROGRESS",
+                        "name": "UPDATE_FAILED_ROLLBACK_IN_PROGRESS"
+                    },
+                    {
+                        "value": "UPDATE_FAILED_ROLLBACK_COMPLETE",
+                        "name": "UPDATE_FAILED_ROLLBACK_COMPLETE"
+                    },
+                    {
+                        "value": "DELETE_IN_PROGRESS",
+                        "name": "DELETE_IN_PROGRESS"
+                    },
+                    {
+                        "value": "DELETE_COMPLETE",
+                        "name": "DELETE_COMPLETE"
+                    },
+                    {
+                        "value": "DELETE_FAILED",
+                        "name": "DELETE_FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutvision#DatasetStatusMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.lookoutvision#DatasetType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#pattern": "train|test"
+            }
+        },
+        "com.amazonaws.lookoutvision#DateTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.lookoutvision#DeleteDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#DeleteDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#DeleteDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing Amazon Lookout for Vision <code>dataset</code>. </p>\n         <p>If your the project has a single\n      dataset, you must create a new dataset before you can create a model.</p>\n         <p>If you project has a training dataset and a test dataset consider the following. </p>\n         <ul>\n            <li>\n               <p>If you delete the test dataset, your project reverts to a single dataset project. If you then\n      train the model, Amazon Lookout for Vision internally splits the remaining dataset into a training and test dataset.</p>\n            </li>\n            <li>\n               <p>If you delete the training dataset, you must create a training dataset before you can create a model.</p>\n            </li>\n         </ul>\n         <p>It might take a while to delete the dataset. To check the current status, check the <code>Status</code> field\n      in the response from a call to <a>DescribeDataset</a>. </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2020-11-20/projects/{ProjectName}/datasets/{DatasetType}",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DeleteDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project that contains the dataset that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatasetType": {
+                    "target": "com.amazonaws.lookoutvision#DatasetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the dataset to delete. Specify <code>train</code> to delete the training dataset.\n      Specify <code>test</code> to delete the test dataset. To delete the dataset in a single dataset project, \n         specify <code>train</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutvision#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>DeleteDataset</code>\n      completes only once.  You choose the value to pass. For example, An issue, \n      such as an network outage, might prevent you from getting a response from <code>DeleteDataset</code>.\n      In this case, safely retry your call\n       to <code>DeleteDataset</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n       if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>DeleteDataset</code>. An idempotency\n       token is active for 8 hours.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Client-Token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DeleteDatasetResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.lookoutvision#DeleteModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#DeleteModelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#DeleteModelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Amazon Lookout for Vision model. You can't delete a running model. To stop a running model,\n      use the <a>StopModel</a> operation.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2020-11-20/projects/{ProjectName}/models/{ModelVersion}",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DeleteModelRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project that contains the model that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutvision#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the model that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutvision#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>DeleteModel</code>\n      completes only once.  You choose the value to pass. For example, An issue, \n      such as an network outage, might prevent you from getting a response from <code>DeleteModel</code>.\n      In this case, safely retry your call\n       to <code>DeleteModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n       if the other input parameters are not the same as in the first request. Using a different  \n       value for <code>ClientToken</code> is considered a new call to <code>DeleteModel</code>. An idempotency\n       token is active for 8 hours.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Client-Token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DeleteModelResponse": {
+            "type": "structure",
+            "members": {
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutvision#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model that was deleted.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DeleteProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#DeleteProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#DeleteProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Amazon Lookout for Vision project.</p>\n         <p>To delete a project, you must first delete each version of the model associated with \n         the project. To delete a model use the <a>DeleteModel</a> operation.</p>\n         <p>The training and test datasets are deleted automatically for you. \n         The images referenced by the training and test datasets aren't deleted. </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2020-11-20/projects/{ProjectName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DeleteProjectRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutvision#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>DeleteProject</code>\n         completes only once.  You choose the value to pass. For example, An issue, \n         such as an network outage, might prevent you from getting a response from <code>DeleteProject</code>.\n         In this case, safely retry your call\n         to <code>DeleteProject</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n         if the other input parameters are not the same as in the first request. Using a different  \n         value for <code>ClientToken</code> is considered a new call to <code>DeleteProject</code>. An idempotency\n         token is active for 8 hours.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Client-Token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DeleteProjectResponse": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.lookoutvision#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project that was deleted.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DescribeDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#DescribeDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#DescribeDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describe an Amazon Lookout for Vision dataset.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-11-20/projects/{ProjectName}/datasets/{DatasetType}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DescribeDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project that contains the dataset that you want to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatasetType": {
+                    "target": "com.amazonaws.lookoutvision#DatasetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the dataset to describe. Specify <code>train</code> to describe the \n      training dataset. Specify <code>test</code> to describe the test dataset.\n      If you have a single dataset project, specify <code>train</code>\n         </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DescribeDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "DatasetDescription": {
+                    "target": "com.amazonaws.lookoutvision#DatasetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the requested dataset. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DescribeModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#DescribeModelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#DescribeModelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a version of an Amazon Lookout for Vision model.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-11-20/projects/{ProjectName}/models/{ModelVersion}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DescribeModelRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project that contains the version of a model that you want to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutvision#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the model that you want to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DescribeModelResponse": {
+            "type": "structure",
+            "members": {
+                "ModelDescription": {
+                    "target": "com.amazonaws.lookoutvision#ModelDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the description of the model.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DescribeProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#DescribeProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#DescribeProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Amazon Lookout for Vision project.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-11-20/projects/{ProjectName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DescribeProjectRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project that you want to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DescribeProjectResponse": {
+            "type": "structure",
+            "members": {
+                "ProjectDescription": {
+                    "target": "com.amazonaws.lookoutvision#ProjectDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the project.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DetectAnomalies": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#DetectAnomaliesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#DetectAnomaliesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Detects anomalies in an image that you supply. </p>\n         <p>The response from <code>DetectAnomalies</code> includes a boolean prediction\n         that the image contains one or more anomalies and a confidence value for the prediction.</p>\n         <note>\n            <p>Before calling <code>DetectAnomalies</code>, you must first start your model with the <a>StartModel</a> operation.\n         You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your\n         model uses. If you are not using a model, use the <a>StopModel</a> operation to stop your model. </p> \n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-11-20/projects/{ProjectName}/models/{ModelVersion}/detect",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DetectAnomaliesRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project that contains the model version that you want to use.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutvision#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the model that you want to use.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.lookoutvision#Stream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unencrypted image bytes that you want to analyze. </p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.lookoutvision#ContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the image passed in <code>Body</code>.\n         Valid values are <code>image/png</code> (PNG format images) and <code>image/jpeg</code> (JPG format images). </p>",
+                        "smithy.api#httpHeader": "content-type",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DetectAnomaliesResponse": {
+            "type": "structure",
+            "members": {
+                "DetectAnomalyResult": {
+                    "target": "com.amazonaws.lookoutvision#DetectAnomalyResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of the <code>DetectAnomalies</code> operation.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#DetectAnomalyResult": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.lookoutvision#ImageSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the image that was analyzed. <code>direct</code> means that the\n      images was supplied from the local computer. No other values are supported.</p>"
+                    }
+                },
+                "IsAnomalous": {
+                    "target": "com.amazonaws.lookoutvision#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>True if the image contains an anomaly, otherwise false.</p>"
+                    }
+                },
+                "Confidence": {
+                    "target": "com.amazonaws.lookoutvision#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence that Amazon Lookout for Vision has in the accuracy of the prediction.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The prediction results from a call to <a>DetectAnomalies</a>.</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#ExceptionString": {
+            "type": "string"
+        },
+        "com.amazonaws.lookoutvision#Float": {
+            "type": "float",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.lookoutvision#ImageSource": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.lookoutvision#ImageSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source for an image.</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#ImageSourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "direct"
+            }
+        },
+        "com.amazonaws.lookoutvision#InferenceUnits": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#InputS3Object": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.lookoutvision#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket that contains the manifest.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.lookoutvision#S3ObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name and location of the manifest file withiin the bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.lookoutvision#S3ObjectVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID of the bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Amazon S3 Location information for an input manifest file. </p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#Integer": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.lookoutvision#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lookoutvision#ExceptionString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "RetryAfterSeconds": {
+                    "target": "com.amazonaws.lookoutvision#RetryAfterSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The period of time, in seconds, before the operation can be retried.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Amazon Lookout for Vision experienced a service issue. Try your call again.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.lookoutvision#IsLabeled": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.lookoutvision#KmsKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$"
+            }
+        },
+        "com.amazonaws.lookoutvision#ListDatasetEntries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#ListDatasetEntriesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#ListDatasetEntriesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the JSON Lines within a dataset. An Amazon Lookout for Vision JSON Line contains the anomaly\n      information for a single image, including the image location and the assigned label.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-11-20/projects/{ProjectName}/datasets/{DatasetType}/entries",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#ListDatasetEntriesRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project that contains the dataset that you want to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatasetType": {
+                    "target": "com.amazonaws.lookoutvision#DatasetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the dataset that you want to list.  Specify <code>train</code> to list \n         the training dataset. Specify <code>test</code> to list the test dataset. If you have a single dataset\n      project, specify <code>train</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Labeled": {
+                    "target": "com.amazonaws.lookoutvision#IsLabeled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify <code>true</code> to include labeled entries, otherwise specify <code>false</code>. If you\n      don't specify a value, Lookout for Vision returns all entries.</p>",
+                        "smithy.api#httpQuery": "labeled"
+                    }
+                },
+                "AnomalyClass": {
+                    "target": "com.amazonaws.lookoutvision#AnomalyClassFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify <code>normal</code> to include only normal images. Specify <code>anomaly</code> to only include\n         anomalous entries. If you don't specify a value, Amazon Lookout for Vision returns normal and anomalous images.</p>",
+                        "smithy.api#httpQuery": "anomalyClass"
+                    }
+                },
+                "BeforeCreationDate": {
+                    "target": "com.amazonaws.lookoutvision#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Only includes entries before the specified date in the response. For example, <code>2020-06-23T00:00:00</code>.</p>",
+                        "smithy.api#httpQuery": "createdBefore"
+                    }
+                },
+                "AfterCreationDate": {
+                    "target": "com.amazonaws.lookoutvision#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Only includes entries after the specified date in the response. For example, <code>2020-06-23T00:00:00</code>.</p>",
+                        "smithy.api#httpQuery": "createdAfter"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutvision#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more data to retrieve),\n         Amazon Lookout for Vision returns a pagination token in the response. You can use this pagination token to\n         retrieve the next set of dataset entries.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lookoutvision#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per paginated call. The largest value you can specify is 100. \n         If you specify a value greater than 100, a ValidationException\n         error occurs. The default value is 100.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "SourceRefContains": {
+                    "target": "com.amazonaws.lookoutvision#QueryString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Perform a \"contains\" search on the  values of the <code>source-ref</code> key within the dataset. \n         For example a value of \"IMG_17\"  returns all JSON Lines where the <code>source-ref</code> key value matches <i>*IMG_17*</i>.</p>",
+                        "smithy.api#httpQuery": "sourceRefContains"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#ListDatasetEntriesResponse": {
+            "type": "structure",
+            "members": {
+                "DatasetEntries": {
+                    "target": "com.amazonaws.lookoutvision#DatasetEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the entries (JSON Lines) within the dataset.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutvision#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Lookout for Vision returns this token\n         that you can use in the subsequent request to retrieve the next set ofdataset entries.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#ListModels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#ListModelsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#ListModelsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the versions of a model in an Amazon Lookout for Vision project.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-11-20/projects/{ProjectName}/models",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#ListModelsRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project that contains the model versions that you want to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutvision#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more data to retrieve),\n         Amazon Lookout for Vision returns a pagination token in the response. You can use this pagination token to\n         retrieve the next set of models.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lookoutvision#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per paginated call. The largest value you can specify is 100. \n         If you specify a value greater than 100, a ValidationException\n         error occurs. The default value is 100.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#ListModelsResponse": {
+            "type": "structure",
+            "members": {
+                "Models": {
+                    "target": "com.amazonaws.lookoutvision#ModelMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of model versions in the specified project. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutvision#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Lookout for Vision returns this token\n         that you can use in the subsequent request to retrieve the next set of models. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#ListProjects": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#ListProjectsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#ListProjectsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the Amazon Lookout for Vision projects in your AWS account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-11-20/projects",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#ListProjectsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutvision#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more data to retrieve),\n         Amazon Lookout for Vision returns a pagination token in the response. You can use this pagination token to\n         retrieve the next set of projects.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lookoutvision#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per paginated call. The largest value you can specify is 100. \n         If you specify a value greater than 100, a ValidationException\n         error occurs. The default value is 100.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#ListProjectsResponse": {
+            "type": "structure",
+            "members": {
+                "Projects": {
+                    "target": "com.amazonaws.lookoutvision#ProjectMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of projects in your AWS account.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutvision#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Lookout for Vision returns this token\n         that you can use in the subsequent request to retrieve the next set of projects.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#LookoutVisionService": {
+            "type": "service",
+            "version": "2020-11-20",
+            "operations": [
+                {
+                    "target": "com.amazonaws.lookoutvision#CreateDataset"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#CreateModel"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#CreateProject"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#DeleteDataset"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#DeleteModel"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#DeleteProject"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#DescribeDataset"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#DescribeModel"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#DescribeProject"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#DetectAnomalies"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ListDatasetEntries"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ListModels"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ListProjects"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#StartModel"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#StopModel"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#UpdateDatasetEntries"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "LookoutVision",
+                    "arnNamespace": "lookoutvision",
+                    "cloudFormationName": "LookoutVision",
+                    "cloudTrailEventSource": "lookoutvision.amazonaws.com",
+                    "endpointPrefix": "lookoutvision"
+                },
+                "aws.auth#sigv4": {
+                    "name": "lookoutvision"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>This is the Amazon Lookout for Vision API Reference. It provides descriptions of actions, \n      data types, common parameters, and common errors.</p>\n         <p>Amazon Lookout for Vision enables you to find visual defects in industrial products,\n         accurately and at scale. It uses computer vision to identify missing components in an industrial product,\n         damage to vehicles or structures, irregularities in production lines, and even minuscule defects in\n         silicon wafers — or any other physical item where quality is important such as a missing capacitor\n         on printed circuit boards.</p>",
+                "smithy.api#title": "Amazon Lookout for Vision"
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelArn": {
+            "type": "string"
+        },
+        "com.amazonaws.lookoutvision#ModelDescription": {
+            "type": "structure",
+            "members": {
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutvision#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the model</p>"
+                    }
+                },
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutvision#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model.</p>"
+                    }
+                },
+                "CreationTimestamp": {
+                    "target": "com.amazonaws.lookoutvision#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unix timestamp for the date and time that the model was created. </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.lookoutvision#ModelDescriptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the model.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutvision#ModelStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the model.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.lookoutvision#ModelStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message for the model.</p>"
+                    }
+                },
+                "Performance": {
+                    "target": "com.amazonaws.lookoutvision#ModelPerformance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Performance metrics for the model. Created during training.</p>"
+                    }
+                },
+                "OutputConfig": {
+                    "target": "com.amazonaws.lookoutvision#OutputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location where Amazon Lookout for Vision saves model training files.</p>"
+                    }
+                },
+                "EvaluationManifest": {
+                    "target": "com.amazonaws.lookoutvision#OutputS3Object",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location where Amazon Lookout for Vision saves the manifest file\n         that was used to test the trained model and generate the performance scores.</p>"
+                    }
+                },
+                "EvaluationResult": {
+                    "target": "com.amazonaws.lookoutvision#OutputS3Object",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location where Amazon Lookout for Vision saves the performance metrics.</p>"
+                    }
+                },
+                "EvaluationEndTimestamp": {
+                    "target": "com.amazonaws.lookoutvision#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unix timestamp for the date and time that the evaluation ended. </p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.lookoutvision#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifer for the AWS Key Management Service (AWS KMS) key that was used to encrypt the model\n         during training.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Amazon Lookout for Vision model.</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelDescriptionMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                },
+                "smithy.api#pattern": "[0-9A-Za-z\\.\\-_]*"
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelHostingStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "STARTING",
+                        "name": "STARTING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelMetadata": {
+            "type": "structure",
+            "members": {
+                "CreationTimestamp": {
+                    "target": "com.amazonaws.lookoutvision#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unix timestamp for the date and time that the model was created. </p>"
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutvision#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the model.</p>"
+                    }
+                },
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutvision#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.lookoutvision#ModelDescriptionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the model.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutvision#ModelStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the model.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.lookoutvision#ModelStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message for the model.</p>"
+                    }
+                },
+                "Performance": {
+                    "target": "com.amazonaws.lookoutvision#ModelPerformance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Performance metrics for the model. Created during training.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Amazon Lookout for Vision model.</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelMetadataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutvision#ModelMetadata"
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelPerformance": {
+            "type": "structure",
+            "members": {
+                "F1Score": {
+                    "target": "com.amazonaws.lookoutvision#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The overall F1 score metric for the trained model.</p>"
+                    }
+                },
+                "Recall": {
+                    "target": "com.amazonaws.lookoutvision#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The overall recall metric value for the trained model. </p>"
+                    }
+                },
+                "Precision": {
+                    "target": "com.amazonaws.lookoutvision#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The overall precision metric value for the trained model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the evaluation performance of a trained model. </p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TRAINING",
+                        "name": "TRAINING"
+                    },
+                    {
+                        "value": "TRAINED",
+                        "name": "TRAINED"
+                    },
+                    {
+                        "value": "TRAINING_FAILED",
+                        "name": "TRAINING_FAILED"
+                    },
+                    {
+                        "value": "STARTING_HOSTING",
+                        "name": "STARTING_HOSTING"
+                    },
+                    {
+                        "value": "HOSTED",
+                        "name": "HOSTED"
+                    },
+                    {
+                        "value": "HOSTING_FAILED",
+                        "name": "HOSTING_FAILED"
+                    },
+                    {
+                        "value": "STOPPING_HOSTING",
+                        "name": "STOPPING_HOSTING"
+                    },
+                    {
+                        "value": "SYSTEM_UPDATING",
+                        "name": "SYSTEM_UPDATING"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutvision#ModelStatusMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.lookoutvision#ModelVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#pattern": "([1-9][0-9]*|latest)"
+            }
+        },
+        "com.amazonaws.lookoutvision#OutputConfig": {
+            "type": "structure",
+            "members": {
+                "S3Location": {
+                    "target": "com.amazonaws.lookoutvision#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location for the output.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The S3 location where Amazon Lookout for Vision saves model training files.</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#OutputS3Object": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.lookoutvision#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bucket that contains the training output.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.lookoutvision#S3ObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the training output in the bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The S3 location where Amazon Lookout for Vision saves training output.</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#PageSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#PaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\/\\+\\=]{0,2048}$"
+            }
+        },
+        "com.amazonaws.lookoutvision#ProjectArn": {
+            "type": "string"
+        },
+        "com.amazonaws.lookoutvision#ProjectDescription": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.lookoutvision#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project.</p>"
+                    }
+                },
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project.</p>"
+                    }
+                },
+                "CreationTimestamp": {
+                    "target": "com.amazonaws.lookoutvision#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unix timestamp for the date and time that the project was created. </p>"
+                    }
+                },
+                "Datasets": {
+                    "target": "com.amazonaws.lookoutvision#DatasetMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of datasets in the project.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describe an Amazon Lookout for Vision project. For more information, see <a>DescribeProject</a>.</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#ProjectMetadata": {
+            "type": "structure",
+            "members": {
+                "ProjectArn": {
+                    "target": "com.amazonaws.lookoutvision#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project.</p>"
+                    }
+                },
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project.</p>"
+                    }
+                },
+                "CreationTimestamp": {
+                    "target": "com.amazonaws.lookoutvision#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unix timestamp for the date and time that the project was created. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata about an Amazon Lookout for Vision project.</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#ProjectMetadataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutvision#ProjectMetadata"
+            }
+        },
+        "com.amazonaws.lookoutvision#ProjectName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_\\-]*"
+            }
+        },
+        "com.amazonaws.lookoutvision#QueryString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.lookoutvision#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lookoutvision#ExceptionString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.lookoutvision#ExceptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.lookoutvision#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource could not be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.lookoutvision#ResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PROJECT",
+                        "name": "PROJECT"
+                    },
+                    {
+                        "value": "DATASET",
+                        "name": "DATASET"
+                    },
+                    {
+                        "value": "MODEL",
+                        "name": "MODEL"
+                    },
+                    {
+                        "value": "TRIAL",
+                        "name": "TRIAL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutvision#RetryAfterSeconds": {
+            "type": "integer"
+        },
+        "com.amazonaws.lookoutvision#S3BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "[0-9A-Za-z\\.\\-_]*"
+            }
+        },
+        "com.amazonaws.lookoutvision#S3KeyPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9!_.*'()-][/a-zA-Z0-9!_.*'()-]*)?$"
+            }
+        },
+        "com.amazonaws.lookoutvision#S3Location": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.lookoutvision#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket that contain the manifest file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Prefix": {
+                    "target": "com.amazonaws.lookoutvision#S3KeyPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path and name of the manifest file with the S3 bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the location of a manifest file.</p>"
+            }
+        },
+        "com.amazonaws.lookoutvision#S3ObjectKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9!_.*'()-][/a-zA-Z0-9!_.*'()-]*)?$"
+            }
+        },
+        "com.amazonaws.lookoutvision#S3ObjectVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.lookoutvision#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lookoutvision#ExceptionString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.lookoutvision#ExceptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.lookoutvision#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource.</p>"
+                    }
+                },
+                "QuotaCode": {
+                    "target": "com.amazonaws.lookoutvision#ExceptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota code. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceCode": {
+                    "target": "com.amazonaws.lookoutvision#ExceptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service code. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A service quota was exceeded the allowed limit. For more information, see\n        Limits in Amazon Lookout for Vision in the Amazon Lookout for Vision Developer Guide. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.lookoutvision#StartModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#StartModelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#StartModelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts the running of the version of an Amazon Lookout for Vision model. Starting a model takes a while\n         to complete. To check the current state of the model, use <a>DescribeModel</a>.</p>\n         <p>Once the model is running, you can detect custom labels in new images by calling \n         <a>DetectAnomalies</a>.</p>\n         <note>\n            <p>You are charged for the amount of time that the model is running. To stop a running\n         model, call <a>StopModel</a>.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-11-20/projects/{ProjectName}/models/{ModelVersion}/start",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#StartModelRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project that contains the model that you want to start.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutvision#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the model that you want to start.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MinInferenceUnits": {
+                    "target": "com.amazonaws.lookoutvision#InferenceUnits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of inference units to use. A single\n         inference unit represents 1 hour of processing and can support up to 5 Transaction Pers Second (TPS).\n         Use a higher number to increase the TPS throughput of your model. You are charged for the number\n         of inference units that you use.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutvision#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>StartModel</code>\n         completes only once.  You choose the value to pass. For example, An issue, \n         such as an network outage, might prevent you from getting a response from <code>StartModel</code>.\n         In this case, safely retry your call\n         to <code>StartModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n         if the other input parameters are not the same as in the first request. Using a different  \n         value for <code>ClientToken</code> is considered a new call to <code>StartModel</code>. An idempotency\n         token is active for 8 hours.\n      </p>",
+                        "smithy.api#httpHeader": "X-Amzn-Client-Token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#StartModelResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.lookoutvision#ModelHostingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current running status of the model.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#StopModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#StopModelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#StopModelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a running model. The operation might take a while to complete. To\n         check the current status, call <a>DescribeModel</a>. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-11-20/projects/{ProjectName}/models/{ModelVersion}/stop",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#StopModelRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project that contains the model that you want to stop.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.lookoutvision#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the model that you want to stop.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutvision#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>StopModel</code>\n         completes only once.  You choose the value to pass. For example, An issue, \n         such as an network outage, might prevent you from getting a response from <code>StopModel</code>.\n         In this case, safely retry your call\n         to <code>StopModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n         if the other input parameters are not the same as in the first request. Using a different  \n         value for <code>ClientToken</code> is considered a new call to <code>StopModel</code>. An idempotency\n         token is active for 8 hours.\n         \n        \n      </p>",
+                        "smithy.api#httpHeader": "X-Amzn-Client-Token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#StopModelResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.lookoutvision#ModelHostingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the model.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#Stream": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#requiresLength": {},
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.lookoutvision#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lookoutvision#ExceptionString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuotaCode": {
+                    "target": "com.amazonaws.lookoutvision#ExceptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quota code. </p>"
+                    }
+                },
+                "ServiceCode": {
+                    "target": "com.amazonaws.lookoutvision#ExceptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service code. </p>"
+                    }
+                },
+                "RetryAfterSeconds": {
+                    "target": "com.amazonaws.lookoutvision#RetryAfterSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The period of time, in seconds, before the operation can be retried. </p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Amazon Lookout for Vision is temporarily unable to process the request. Try your call again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.lookoutvision#UpdateDatasetEntries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutvision#UpdateDatasetEntriesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutvision#UpdateDatasetEntriesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutvision#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutvision#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds one or more JSON Line entries to a dataset. A JSON Line includes information about an image\n         used for training or testing an Amazon Lookout for Vision model. The following is an example JSON Line.</p>\n \n        \n         <p>Updating a dataset might take a while to complete. To check the current status, call <a>DescribeDataset</a> and\n         check the <code>Status</code> field in the response.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/2020-11-20/projects/{ProjectName}/datasets/{DatasetType}/entries",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#UpdateDatasetEntriesRequest": {
+            "type": "structure",
+            "members": {
+                "ProjectName": {
+                    "target": "com.amazonaws.lookoutvision#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project that contains the dataset that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatasetType": {
+                    "target": "com.amazonaws.lookoutvision#DatasetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the dataset that you want to update. Specify <code>train</code> to update\n      the training dataset. Specify <code>test</code> to update the test dataset. If you\n       have a single dataset project, specify <code>train</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Changes": {
+                    "target": "com.amazonaws.lookoutvision#DatasetChanges",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entries to add to the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutvision#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ClientToken is an idempotency token that ensures a call to <code>UpdateDatasetEntries</code>\n         completes only once.  You choose the value to pass. For example, An issue, \n         such as an network outage, might prevent you from getting a response from <code>UpdateDatasetEntries</code>.\n         In this case, safely retry your call\n         to <code>UpdateDatasetEntries</code> by using the same <code>ClientToken</code> parameter value. An error occurs\n         if the other input parameters are not the same as in the first request. Using a different  \n         value for <code>ClientToken</code> is considered a new call to <code>UpdateDatasetEntries</code>. An idempotency\n         token is active for 8 hours.\n      </p>",
+                        "smithy.api#httpHeader": "X-Amzn-Client-Token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#UpdateDatasetEntriesResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.lookoutvision#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the dataset update.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutvision#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lookoutvision#ExceptionString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An input validation error occured. For example, invalid characters in a project name,\n      or if a pagination token is invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

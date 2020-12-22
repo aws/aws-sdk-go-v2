@@ -1,0 +1,2629 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.computeoptimizer#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.computeoptimizer#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.computeoptimizer#AccountId": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#AccountIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#AccountId"
+            }
+        },
+        "com.amazonaws.computeoptimizer#AutoScalingGroupArn": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#AutoScalingGroupArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#AutoScalingGroupArn"
+            }
+        },
+        "com.amazonaws.computeoptimizer#AutoScalingGroupConfiguration": {
+            "type": "structure",
+            "members": {
+                "desiredCapacity": {
+                    "target": "com.amazonaws.computeoptimizer#DesiredCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired capacity, or number of instances, for the Auto Scaling group.</p>"
+                    }
+                },
+                "minSize": {
+                    "target": "com.amazonaws.computeoptimizer#MinSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum size, or minimum number of instances, for the Auto Scaling group.</p>"
+                    }
+                },
+                "maxSize": {
+                    "target": "com.amazonaws.computeoptimizer#MaxSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size, or maximum number of instances, for the Auto Scaling group.</p>"
+                    }
+                },
+                "instanceType": {
+                    "target": "com.amazonaws.computeoptimizer#InstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type for the Auto Scaling group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration of an Auto Scaling group.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#AutoScalingGroupName": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#AutoScalingGroupRecommendation": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.computeoptimizer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the Auto Scaling group.</p>"
+                    }
+                },
+                "autoScalingGroupArn": {
+                    "target": "com.amazonaws.computeoptimizer#AutoScalingGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Auto Scaling group.</p>"
+                    }
+                },
+                "autoScalingGroupName": {
+                    "target": "com.amazonaws.computeoptimizer#AutoScalingGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Auto Scaling group.</p>"
+                    }
+                },
+                "finding": {
+                    "target": "com.amazonaws.computeoptimizer#Finding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding classification for the Auto Scaling group.</p>\n        <p>Findings for Auto Scaling groups include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>NotOptimized</code>\n                  </b>—An Auto Scaling group is\n                    considered not optimized when AWS Compute Optimizer identifies a recommendation that can\n                    provide better performance for your workload.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b>—An Auto Scaling group is\n                    considered optimized when Compute Optimizer determines that the group is correctly\n                    provisioned to run your workload based on the chosen instance type. For\n                    optimized resources, Compute Optimizer might recommend a new generation instance type.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "utilizationMetrics": {
+                    "target": "com.amazonaws.computeoptimizer#UtilizationMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the utilization metrics of the Auto Scaling group.</p>"
+                    }
+                },
+                "lookBackPeriodInDays": {
+                    "target": "com.amazonaws.computeoptimizer#LookBackPeriodInDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days for which utilization metrics were analyzed for the Auto Scaling\n            group.</p>"
+                    }
+                },
+                "currentConfiguration": {
+                    "target": "com.amazonaws.computeoptimizer#AutoScalingGroupConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the current configuration of the Auto Scaling group.</p>"
+                    }
+                },
+                "recommendationOptions": {
+                    "target": "com.amazonaws.computeoptimizer#AutoScalingGroupRecommendationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the recommendation options for the Auto Scaling\n            group.</p>"
+                    }
+                },
+                "lastRefreshTimestamp": {
+                    "target": "com.amazonaws.computeoptimizer#LastRefreshTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp of when the Auto Scaling group recommendation was last refreshed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Auto Scaling group recommendation.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#AutoScalingGroupRecommendationOption": {
+            "type": "structure",
+            "members": {
+                "configuration": {
+                    "target": "com.amazonaws.computeoptimizer#AutoScalingGroupConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe an Auto Scaling group configuration.</p>"
+                    }
+                },
+                "projectedUtilizationMetrics": {
+                    "target": "com.amazonaws.computeoptimizer#ProjectedUtilizationMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the projected utilization metrics of the Auto Scaling group\n            recommendation option.</p>\n\n        <note>\n            <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected\n                utilization metrics returned. Additionally, the <code>Memory</code> metric is\n                returned only for resources that have the unified CloudWatch agent installed on them. For\n                more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                    Utilization with the CloudWatch Agent</a>.</p>\n        </note>"
+                    }
+                },
+                "performanceRisk": {
+                    "target": "com.amazonaws.computeoptimizer#PerformanceRisk",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The performance risk of the Auto Scaling group configuration recommendation.</p>\n        <p>Performance risk is the likelihood of the recommended instance type not meeting the\n            performance requirement of your workload.</p>\n        <p>The lowest performance risk is categorized as <code>0</code>, and the highest as\n                <code>5</code>.</p>"
+                    }
+                },
+                "rank": {
+                    "target": "com.amazonaws.computeoptimizer#Rank",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rank of the Auto Scaling group recommendation option.</p>\n        <p>The top recommendation option is ranked as <code>1</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a recommendation option for an Auto Scaling group.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#AutoScalingGroupRecommendationOptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#AutoScalingGroupRecommendationOption"
+            }
+        },
+        "com.amazonaws.computeoptimizer#AutoScalingGroupRecommendations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#AutoScalingGroupRecommendation"
+            }
+        },
+        "com.amazonaws.computeoptimizer#Code": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#ComputeOptimizerService": {
+            "type": "service",
+            "version": "2019-11-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#DescribeRecommendationExportJobs"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ExportAutoScalingGroupRecommendations"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ExportEC2InstanceRecommendations"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#GetAutoScalingGroupRecommendations"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#GetEBSVolumeRecommendations"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#GetEC2InstanceRecommendations"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#GetEC2RecommendationProjectedMetrics"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#GetEnrollmentStatus"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#GetRecommendationSummaries"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#UpdateEnrollmentStatus"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Compute Optimizer",
+                    "arnNamespace": "compute-optimizer",
+                    "cloudFormationName": "ComputeOptimizer",
+                    "cloudTrailEventSource": "computeoptimizer.amazonaws.com",
+                    "endpointPrefix": "compute-optimizer"
+                },
+                "aws.auth#sigv4": {
+                    "name": "compute-optimizer"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>AWS Compute Optimizer is a service that analyzes the configuration and utilization metrics of your\n            AWS compute resources, such as EC2 instances, Auto Scaling groups, and Amazon EBS volumes. It\n            reports whether your resources are optimal, and generates optimization recommendations\n            to reduce the cost and improve the performance of your workloads. Compute Optimizer also provides\n            recent utilization metric data, as well as projected utilization metric data for the\n            recommendations, which you can use to evaluate which recommendation provides the best\n            price-performance trade-off. The analysis of your usage patterns can help you decide\n            when to move or resize your running resources, and still meet your performance and\n            capacity requirements. For more information about Compute Optimizer, including the required\n            permissions to use the service, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/\">AWS Compute Optimizer User Guide</a>.</p>",
+                "smithy.api#title": "AWS Compute Optimizer"
+            }
+        },
+        "com.amazonaws.computeoptimizer#CreationTimestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.computeoptimizer#CurrentInstanceType": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#DescribeRecommendationExportJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#DescribeRecommendationExportJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#DescribeRecommendationExportJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes recommendation export jobs created in the last seven days.</p>\n\n        <p>Use the <code>ExportAutoScalingGroupRecommendations</code> or\n                <code>ExportEC2InstanceRecommendations</code> actions to request an export of your\n            recommendations. Then use the <code>DescribeRecommendationExportJobs</code> action to\n            view your export jobs.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#DescribeRecommendationExportJobsRequest": {
+            "type": "structure",
+            "members": {
+                "jobIds": {
+                    "target": "com.amazonaws.computeoptimizer#JobIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identification numbers of the export jobs to return.</p>\n\n        <p>An export job ID is returned when you create an export using the\n                <code>ExportAutoScalingGroupRecommendations</code> or\n                <code>ExportEC2InstanceRecommendations</code> actions.</p>\n\n        <p>All export jobs created in the last seven days are returned if this parameter is\n            omitted.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.computeoptimizer#JobFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe a filter to return a more specific list of export\n            jobs.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to advance to the next page of export jobs.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.computeoptimizer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of export jobs to return with a single request.</p>\n        <p>To retrieve the remaining results, make another request with the returned\n                <code>NextToken</code> value.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#DescribeRecommendationExportJobsResponse": {
+            "type": "structure",
+            "members": {
+                "recommendationExportJobs": {
+                    "target": "com.amazonaws.computeoptimizer#RecommendationExportJobs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe recommendation export jobs.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to advance to the next page of export jobs.</p>\n        <p>This value is null when there are no more pages of export jobs to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#DesiredCapacity": {
+            "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#DestinationBucket": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#DestinationKey": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#DestinationKeyPrefix": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#EBSFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#EBSFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter.</p>\n\n        <p>Specify <code>Finding</code> to return recommendations with a specific finding\n            classification (e.g., <code>Optimized</code>).</p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.computeoptimizer#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the filter.</p>\n\n        <p>The valid values are <code>Optimized</code>, or <code>NotOptimized</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of Amazon Elastic Block Store (Amazon EBS) volume\n            recommendations.</p>\n\n        <p>This filter is used with the <code>GetEBSVolumeRecommendations</code> action.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#EBSFilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Finding",
+                        "name": "FINDING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#EBSFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#EBSFilter"
+            }
+        },
+        "com.amazonaws.computeoptimizer#EBSFinding": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Optimized",
+                        "name": "OPTIMIZED"
+                    },
+                    {
+                        "value": "NotOptimized",
+                        "name": "NOT_OPTIMIZED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#EBSMetricName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VolumeReadOpsPerSecond",
+                        "name": "VOLUME_READ_OPS_PER_SECOND"
+                    },
+                    {
+                        "value": "VolumeWriteOpsPerSecond",
+                        "name": "VOLUME_WRITE_OPS_PER_SECOND"
+                    },
+                    {
+                        "value": "VolumeReadBytesPerSecond",
+                        "name": "VOLUME_READ_BYTES_PER_SECOND"
+                    },
+                    {
+                        "value": "VolumeWriteBytesPerSecond",
+                        "name": "VOLUME_WRITE_BYTES_PER_SECOND"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#EBSUtilizationMetric": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#EBSMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the utilization metric.</p>\n        <p>The following utilization metrics are available:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VolumeReadOpsPerSecond</code> - The completed read operations per second\n                    from the volume in a specified period of time.</p>\n                <p>Unit: Count</p>\n            </li>\n            <li>\n                <p>\n                  <code>VolumeWriteOpsPerSecond</code> - The completed write operations per\n                    second to the volume in a specified period of time.</p>\n                <p>Unit: Count</p>\n            </li>\n            <li>\n                <p>\n                  <code>VolumeReadBytesPerSecond</code> - The bytes read per second from the\n                    volume in a specified period of time.</p>\n                <p>Unit: Bytes</p>\n            </li>\n            <li>\n                <p>\n                  <code>VolumeWriteBytesPerSecond</code> - The bytes written to the volume in a\n                    specified period of time.</p>\n                <p>Unit: Bytes</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "statistic": {
+                    "target": "com.amazonaws.computeoptimizer#MetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statistic of the utilization metric.</p>\n        <p>The following statistics are available:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Average</code> - This is the value of Sum / SampleCount during the\n                    specified period, or the average value observed during the specified\n                    period.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Maximum</code> - The highest value observed during the specified period.\n                    Use this value to determine high volumes of activity for your\n                    application.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.computeoptimizer#MetricValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the utilization metric.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a utilization metric of an Amazon Elastic Block Store (Amazon EBS) volume.</p>\n\n        <p>Compare the utilization metric data of your resource against its projected utilization\n            metric data to determine the performance difference between your current resource and\n            the recommended option.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#EBSUtilizationMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#EBSUtilizationMetric"
+            }
+        },
+        "com.amazonaws.computeoptimizer#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#ExportAutoScalingGroupRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#ExportAutoScalingGroupRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#ExportAutoScalingGroupRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Exports optimization recommendations for Auto Scaling groups.</p>\n\n        <p>Recommendations are exported in a comma-separated values (.csv) file, and its metadata\n            in a JavaScript Object Notation (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that\n            you specify. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html\">Exporting\n                Recommendations</a> in the <i>Compute Optimizer User Guide</i>.</p>\n\n        <p>You can have only one Auto Scaling group export job in progress per AWS Region.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportAutoScalingGroupRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.computeoptimizer#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the AWS accounts for which to export Auto Scaling group recommendations.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member accounts for which you want to export recommendations.</p>\n        <p>This parameter cannot be specified together with the include member accounts\n            parameter. The parameters are mutually exclusive.</p>\n        <p>Recommendations for member accounts are not included in the export if this parameter,\n            or the include member accounts parameter, is omitted.</p>\n        <p>You can specify multiple account IDs per request.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.computeoptimizer#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe a filter to export a more specific set of Auto Scaling group\n            recommendations.</p>"
+                    }
+                },
+                "fieldsToExport": {
+                    "target": "com.amazonaws.computeoptimizer#ExportableAutoScalingGroupFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendations data to include in the export file. For more information about the\n            fields that can be exported, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files\">Exported files</a> in the <i>Compute Optimizer User Guide</i>.</p>"
+                    }
+                },
+                "s3DestinationConfig": {
+                    "target": "com.amazonaws.computeoptimizer#S3DestinationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for\n            the export job.</p>\n        <p>You must create the destination Amazon S3 bucket for your recommendations export before you\n            create the export job. Compute Optimizer does not create the S3 bucket for you. After you create the\n            S3 bucket, ensure that it has the required permission policy to allow Compute Optimizer to write the\n            export file to it. If you plan to specify an object prefix when you create the export\n            job, you must include the object prefix in the policy that you add to the S3 bucket. For\n            more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html\">Amazon S3 Bucket Policy for Compute Optimizer</a> in the <i>Compute Optimizer user\n            guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fileFormat": {
+                    "target": "com.amazonaws.computeoptimizer#FileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the export file.</p>\n        <p>The only export file format currently supported is <code>Csv</code>.</p>"
+                    }
+                },
+                "includeMemberAccounts": {
+                    "target": "com.amazonaws.computeoptimizer#IncludeMemberAccounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to include recommendations for resources in all member accounts of\n            the organization if your account is the management account of an organization.</p>\n        <p>The member accounts must also be opted in to Compute Optimizer.</p>\n        <p>Recommendations for member accounts of the organization are not included in the export\n            file if this parameter is omitted.</p>\n        <p>This parameter cannot be specified together with the account IDs parameter. The\n            parameters are mutually exclusive.</p>\n        <p>Recommendations for member accounts are not included in the export if this parameter,\n            or the account IDs parameter, is omitted.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportAutoScalingGroupRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.computeoptimizer#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identification number of the export job.</p>\n        <p>Use the <code>DescribeRecommendationExportJobs</code> action, and specify the job ID\n            to view the status of an export job.</p>"
+                    }
+                },
+                "s3Destination": {
+                    "target": "com.amazonaws.computeoptimizer#S3Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the destination Amazon S3 bucket of a recommendations export\n            file.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportDestination": {
+            "type": "structure",
+            "members": {
+                "s3": {
+                    "target": "com.amazonaws.computeoptimizer#S3Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and object keys\n            of a recommendations export file, and its associated metadata file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the destination of the recommendations export and metadata files.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportEC2InstanceRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#ExportEC2InstanceRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#ExportEC2InstanceRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Exports optimization recommendations for Amazon EC2 instances.</p>\n\n        <p>Recommendations are exported in a comma-separated values (.csv) file, and its metadata\n            in a JavaScript Object Notation (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that\n            you specify. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html\">Exporting\n                Recommendations</a> in the <i>Compute Optimizer User Guide</i>.</p>\n\n        <p>You can have only one Amazon EC2 instance export job in progress per AWS Region.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportEC2InstanceRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.computeoptimizer#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the AWS accounts for which to export instance recommendations.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member accounts for which you want to export recommendations.</p>\n        <p>This parameter cannot be specified together with the include member accounts\n            parameter. The parameters are mutually exclusive.</p>\n        <p>Recommendations for member accounts are not included in the export if this parameter,\n            or the include member accounts parameter, is omitted.</p>\n        <p>You can specify multiple account IDs per request.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.computeoptimizer#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe a filter to export a more specific set of instance\n            recommendations.</p>"
+                    }
+                },
+                "fieldsToExport": {
+                    "target": "com.amazonaws.computeoptimizer#ExportableInstanceFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendations data to include in the export file. For more information about the\n            fields that can be exported, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files\">Exported files</a> in the <i>Compute Optimizer User Guide</i>.</p>"
+                    }
+                },
+                "s3DestinationConfig": {
+                    "target": "com.amazonaws.computeoptimizer#S3DestinationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for\n            the export job.</p>\n        <p>You must create the destination Amazon S3 bucket for your recommendations export before you\n            create the export job. Compute Optimizer does not create the S3 bucket for you. After you create the\n            S3 bucket, ensure that it has the required permission policy to allow Compute Optimizer to write the\n            export file to it. If you plan to specify an object prefix when you create the export\n            job, you must include the object prefix in the policy that you add to the S3 bucket. For\n            more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html\">Amazon S3 Bucket Policy for Compute Optimizer</a> in the <i>Compute Optimizer user\n            guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fileFormat": {
+                    "target": "com.amazonaws.computeoptimizer#FileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the export file.</p>\n        <p>The only export file format currently supported is <code>Csv</code>.</p>"
+                    }
+                },
+                "includeMemberAccounts": {
+                    "target": "com.amazonaws.computeoptimizer#IncludeMemberAccounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to include recommendations for resources in all member accounts of\n            the organization if your account is the management account of an organization.</p>\n        <p>The member accounts must also be opted in to Compute Optimizer.</p>\n        <p>Recommendations for member accounts of the organization are not included in the export\n            file if this parameter is omitted.</p>\n        <p>Recommendations for member accounts are not included in the export if this parameter,\n            or the account IDs parameter, is omitted.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportEC2InstanceRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.computeoptimizer#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identification number of the export job.</p>\n        <p>Use the <code>DescribeRecommendationExportJobs</code> action, and specify the job ID\n            to view the status of an export job.</p>"
+                    }
+                },
+                "s3Destination": {
+                    "target": "com.amazonaws.computeoptimizer#S3Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the destination Amazon S3 bucket of a recommendations export\n            file.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportableAutoScalingGroupField": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AccountId",
+                        "name": "ACCOUNT_ID"
+                    },
+                    {
+                        "value": "AutoScalingGroupArn",
+                        "name": "AUTO_SCALING_GROUP_ARN"
+                    },
+                    {
+                        "value": "AutoScalingGroupName",
+                        "name": "AUTO_SCALING_GROUP_NAME"
+                    },
+                    {
+                        "value": "Finding",
+                        "name": "FINDING"
+                    },
+                    {
+                        "value": "UtilizationMetricsCpuMaximum",
+                        "name": "UTILIZATION_METRICS_CPU_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsMemoryMaximum",
+                        "name": "UTILIZATION_METRICS_MEMORY_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsEbsReadOpsPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_EBS_READ_OPS_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsEbsWriteOpsPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_EBS_WRITE_OPS_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsEbsReadBytesPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_EBS_READ_BYTES_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsEbsWriteBytesPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "LookbackPeriodInDays",
+                        "name": "LOOKBACK_PERIOD_IN_DAYS"
+                    },
+                    {
+                        "value": "CurrentConfigurationInstanceType",
+                        "name": "CURRENT_CONFIGURATION_INSTANCE_TYPE"
+                    },
+                    {
+                        "value": "CurrentConfigurationDesiredCapacity",
+                        "name": "CURRENT_CONFIGURATION_DESIRED_CAPACITY"
+                    },
+                    {
+                        "value": "CurrentConfigurationMinSize",
+                        "name": "CURRENT_CONFIGURATION_MIN_SIZE"
+                    },
+                    {
+                        "value": "CurrentConfigurationMaxSize",
+                        "name": "CURRENT_CONFIGURATION_MAX_SIZE"
+                    },
+                    {
+                        "value": "CurrentOnDemandPrice",
+                        "name": "CURRENT_ON_DEMAND_PRICE"
+                    },
+                    {
+                        "value": "CurrentStandardOneYearNoUpfrontReservedPrice",
+                        "name": "CURRENT_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE"
+                    },
+                    {
+                        "value": "CurrentStandardThreeYearNoUpfrontReservedPrice",
+                        "name": "CURRENT_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE"
+                    },
+                    {
+                        "value": "CurrentVCpus",
+                        "name": "CURRENT_VCPUS"
+                    },
+                    {
+                        "value": "CurrentMemory",
+                        "name": "CURRENT_MEMORY"
+                    },
+                    {
+                        "value": "CurrentStorage",
+                        "name": "CURRENT_STORAGE"
+                    },
+                    {
+                        "value": "CurrentNetwork",
+                        "name": "CURRENT_NETWORK"
+                    },
+                    {
+                        "value": "RecommendationOptionsConfigurationInstanceType",
+                        "name": "RECOMMENDATION_OPTIONS_CONFIGURATION_INSTANCE_TYPE"
+                    },
+                    {
+                        "value": "RecommendationOptionsConfigurationDesiredCapacity",
+                        "name": "RECOMMENDATION_OPTIONS_CONFIGURATION_DESIRED_CAPACITY"
+                    },
+                    {
+                        "value": "RecommendationOptionsConfigurationMinSize",
+                        "name": "RECOMMENDATION_OPTIONS_CONFIGURATION_MIN_SIZE"
+                    },
+                    {
+                        "value": "RecommendationOptionsConfigurationMaxSize",
+                        "name": "RECOMMENDATION_OPTIONS_CONFIGURATION_MAX_SIZE"
+                    },
+                    {
+                        "value": "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum",
+                        "name": "RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM"
+                    },
+                    {
+                        "value": "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum",
+                        "name": "RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM"
+                    },
+                    {
+                        "value": "RecommendationOptionsPerformanceRisk",
+                        "name": "RECOMMENDATION_OPTIONS_PERFORMANCE_RISK"
+                    },
+                    {
+                        "value": "RecommendationOptionsOnDemandPrice",
+                        "name": "RECOMMENDATION_OPTIONS_ON_DEMAND_PRICE"
+                    },
+                    {
+                        "value": "RecommendationOptionsStandardOneYearNoUpfrontReservedPrice",
+                        "name": "RECOMMENDATION_OPTIONS_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE"
+                    },
+                    {
+                        "value": "RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice",
+                        "name": "RECOMMENDATION_OPTIONS_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE"
+                    },
+                    {
+                        "value": "RecommendationOptionsVcpus",
+                        "name": "RECOMMENDATION_OPTIONS_VCPUS"
+                    },
+                    {
+                        "value": "RecommendationOptionsMemory",
+                        "name": "RECOMMENDATION_OPTIONS_MEMORY"
+                    },
+                    {
+                        "value": "RecommendationOptionsStorage",
+                        "name": "RECOMMENDATION_OPTIONS_STORAGE"
+                    },
+                    {
+                        "value": "RecommendationOptionsNetwork",
+                        "name": "RECOMMENDATION_OPTIONS_NETWORK"
+                    },
+                    {
+                        "value": "LastRefreshTimestamp",
+                        "name": "LAST_REFRESH_TIMESTAMP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportableAutoScalingGroupFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#ExportableAutoScalingGroupField"
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportableInstanceField": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AccountId",
+                        "name": "ACCOUNT_ID"
+                    },
+                    {
+                        "value": "InstanceArn",
+                        "name": "INSTANCE_ARN"
+                    },
+                    {
+                        "value": "InstanceName",
+                        "name": "INSTANCE_NAME"
+                    },
+                    {
+                        "value": "Finding",
+                        "name": "FINDING"
+                    },
+                    {
+                        "value": "LookbackPeriodInDays",
+                        "name": "LOOKBACK_PERIOD_IN_DAYS"
+                    },
+                    {
+                        "value": "CurrentInstanceType",
+                        "name": "CURRENT_INSTANCE_TYPE"
+                    },
+                    {
+                        "value": "UtilizationMetricsCpuMaximum",
+                        "name": "UTILIZATION_METRICS_CPU_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsMemoryMaximum",
+                        "name": "UTILIZATION_METRICS_MEMORY_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsEbsReadOpsPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_EBS_READ_OPS_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsEbsWriteOpsPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_EBS_WRITE_OPS_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsEbsReadBytesPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_EBS_READ_BYTES_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsEbsWriteBytesPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "CurrentOnDemandPrice",
+                        "name": "CURRENT_ON_DEMAND_PRICE"
+                    },
+                    {
+                        "value": "CurrentStandardOneYearNoUpfrontReservedPrice",
+                        "name": "CURRENT_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE"
+                    },
+                    {
+                        "value": "CurrentStandardThreeYearNoUpfrontReservedPrice",
+                        "name": "CURRENT_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE"
+                    },
+                    {
+                        "value": "CurrentVCpus",
+                        "name": "CURRENT_VCPUS"
+                    },
+                    {
+                        "value": "CurrentMemory",
+                        "name": "CURRENT_MEMORY"
+                    },
+                    {
+                        "value": "CurrentStorage",
+                        "name": "CURRENT_STORAGE"
+                    },
+                    {
+                        "value": "CurrentNetwork",
+                        "name": "CURRENT_NETWORK"
+                    },
+                    {
+                        "value": "RecommendationOptionsInstanceType",
+                        "name": "RECOMMENDATION_OPTIONS_INSTANCE_TYPE"
+                    },
+                    {
+                        "value": "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum",
+                        "name": "RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_CPU_MAXIMUM"
+                    },
+                    {
+                        "value": "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum",
+                        "name": "RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM"
+                    },
+                    {
+                        "value": "RecommendationOptionsPerformanceRisk",
+                        "name": "RECOMMENDATION_OPTIONS_PERFORMANCE_RISK"
+                    },
+                    {
+                        "value": "RecommendationOptionsVcpus",
+                        "name": "RECOMMENDATION_OPTIONS_VCPUS"
+                    },
+                    {
+                        "value": "RecommendationOptionsMemory",
+                        "name": "RECOMMENDATION_OPTIONS_MEMORY"
+                    },
+                    {
+                        "value": "RecommendationOptionsStorage",
+                        "name": "RECOMMENDATION_OPTIONS_STORAGE"
+                    },
+                    {
+                        "value": "RecommendationOptionsNetwork",
+                        "name": "RECOMMENDATION_OPTIONS_NETWORK"
+                    },
+                    {
+                        "value": "RecommendationOptionsOnDemandPrice",
+                        "name": "RECOMMENDATION_OPTIONS_ON_DEMAND_PRICE"
+                    },
+                    {
+                        "value": "RecommendationOptionsStandardOneYearNoUpfrontReservedPrice",
+                        "name": "RECOMMENDATION_OPTIONS_STANDARD_ONE_YEAR_NO_UPFRONT_RESERVED_PRICE"
+                    },
+                    {
+                        "value": "RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice",
+                        "name": "RECOMMENDATION_OPTIONS_STANDARD_THREE_YEAR_NO_UPFRONT_RESERVED_PRICE"
+                    },
+                    {
+                        "value": "RecommendationsSourcesRecommendationSourceArn",
+                        "name": "RECOMMENDATIONS_SOURCES_RECOMMENDATION_SOURCE_ARN"
+                    },
+                    {
+                        "value": "RecommendationsSourcesRecommendationSourceType",
+                        "name": "RECOMMENDATIONS_SOURCES_RECOMMENDATION_SOURCE_TYPE"
+                    },
+                    {
+                        "value": "LastRefreshTimestamp",
+                        "name": "LAST_REFRESH_TIMESTAMP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExportableInstanceFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#ExportableInstanceField"
+            }
+        },
+        "com.amazonaws.computeoptimizer#FailureReason": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#FileFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Csv",
+                        "name": "CSV"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#Filter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#FilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter.</p>\n\n        <p>Specify <code>Finding</code> to return recommendations with a specific finding\n            classification (e.g., <code>Overprovisioned</code>).</p>\n\n        <p>Specify <code>RecommendationSourceType</code> to return recommendations of a specific\n            resource type (e.g., <code>AutoScalingGroup</code>).</p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.computeoptimizer#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the filter.</p>\n\n        <p>The valid values for this parameter are as follows, depending on what you specify for\n            the <code>name</code> parameter and the resource type that you wish to filter results\n            for:</p>\n\n        <ul>\n            <li>\n                <p>Specify <code>Optimized</code> or <code>NotOptimized</code> if you specified\n                    the <code>name</code> parameter as <code>Finding</code> and you want to filter\n                    results for Auto Scaling groups.</p>\n            </li>\n            <li>\n                <p>Specify <code>Underprovisioned</code>, <code>Overprovisioned</code>, or\n                        <code>Optimized</code> if you specified the <code>name</code> parameter as\n                        <code>Finding</code> and you want to filter results for EC2\n                    instances.</p>\n            </li>\n            <li>\n                <p>Specify <code>Ec2Instance</code> or <code>AutoScalingGroup</code> if you\n                    specified the <code>name</code> parameter as\n                        <code>RecommendationSourceType</code>.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of recommendations.</p>\n\n        <p>This filter is used with the <code>GetAutoScalingGroupRecommendations</code> and\n                <code>GetEC2InstanceRecommendations</code> actions.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#FilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Finding",
+                        "name": "FINDING"
+                    },
+                    {
+                        "value": "RecommendationSourceType",
+                        "name": "RECOMMENDATION_SOURCE_TYPE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#FilterValue": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#FilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#FilterValue"
+            }
+        },
+        "com.amazonaws.computeoptimizer#Filters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#Filter"
+            }
+        },
+        "com.amazonaws.computeoptimizer#Finding": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Underprovisioned",
+                        "name": "UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "Overprovisioned",
+                        "name": "OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "Optimized",
+                        "name": "OPTIMIZED"
+                    },
+                    {
+                        "value": "NotOptimized",
+                        "name": "NOT_OPTIMIZED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetAutoScalingGroupRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#GetAutoScalingGroupRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#GetAutoScalingGroupRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns Auto Scaling group recommendations.</p>\n\n        <p>AWS Compute Optimizer generates recommendations for Amazon EC2 Auto Scaling groups that meet a specific set of\n            requirements. For more information, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Supported resources and\n                requirements</a> in the <i>AWS Compute Optimizer User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetAutoScalingGroupRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.computeoptimizer#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the AWS accounts for which to return Auto Scaling group recommendations.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member accounts for which you want to return Auto Scaling group\n            recommendations.</p>\n        <p>Only one account ID can be specified per request.</p>"
+                    }
+                },
+                "autoScalingGroupArns": {
+                    "target": "com.amazonaws.computeoptimizer#AutoScalingGroupArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Auto Scaling groups for which to return\n            recommendations.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to advance to the next page of Auto Scaling group recommendations.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.computeoptimizer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of Auto Scaling group recommendations to return with a single\n            request.</p>\n        <p>To retrieve the remaining results, make another request with the returned\n                <code>NextToken</code> value.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.computeoptimizer#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe a filter that returns a more specific list of Auto Scaling\n            group recommendations.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetAutoScalingGroupRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to advance to the next page of Auto Scaling group recommendations.</p>\n        <p>This value is null when there are no more pages of Auto Scaling group recommendations to\n            return.</p>"
+                    }
+                },
+                "autoScalingGroupRecommendations": {
+                    "target": "com.amazonaws.computeoptimizer#AutoScalingGroupRecommendations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe Auto Scaling group recommendations.</p>"
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.computeoptimizer#GetRecommendationErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe errors of the request.</p>\n        <p>For example, an error is returned if you request recommendations for an unsupported\n            Auto Scaling group.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetEBSVolumeRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#GetEBSVolumeRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#GetEBSVolumeRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns Amazon Elastic Block Store (Amazon EBS) volume recommendations.</p>\n\n        <p>AWS Compute Optimizer generates recommendations for Amazon EBS volumes that meet a specific set of\n            requirements. For more information, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Supported resources and\n                requirements</a> in the <i>AWS Compute Optimizer User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetEBSVolumeRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "volumeArns": {
+                    "target": "com.amazonaws.computeoptimizer#VolumeArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the volumes for which to return\n            recommendations.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to advance to the next page of volume recommendations.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.computeoptimizer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of volume recommendations to return with a single request.</p>\n        <p>To retrieve the remaining results, make another request with the returned\n                <code>NextToken</code> value.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.computeoptimizer#EBSFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe a filter that returns a more specific list of volume\n            recommendations.</p>"
+                    }
+                },
+                "accountIds": {
+                    "target": "com.amazonaws.computeoptimizer#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the AWS accounts for which to return volume recommendations.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member accounts for which you want to return volume recommendations.</p>\n        <p>Only one account ID can be specified per request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetEBSVolumeRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to advance to the next page of volume recommendations.</p>\n        <p>This value is null when there are no more pages of volume recommendations to\n            return.</p>"
+                    }
+                },
+                "volumeRecommendations": {
+                    "target": "com.amazonaws.computeoptimizer#VolumeRecommendations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe volume recommendations.</p>"
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.computeoptimizer#GetRecommendationErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe errors of the request.</p>\n        <p>For example, an error is returned if you request recommendations for an unsupported\n            volume.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetEC2InstanceRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#GetEC2InstanceRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#GetEC2InstanceRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns Amazon EC2 instance recommendations.</p>\n\n        <p>AWS Compute Optimizer generates recommendations for Amazon Elastic Compute Cloud (Amazon EC2) instances that meet a\n            specific set of requirements. For more information, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Supported resources and\n                requirements</a> in the <i>AWS Compute Optimizer User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetEC2InstanceRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "instanceArns": {
+                    "target": "com.amazonaws.computeoptimizer#InstanceArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the instances for which to return\n            recommendations.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to advance to the next page of instance recommendations.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.computeoptimizer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of instance recommendations to return with a single request.</p>\n        <p>To retrieve the remaining results, make another request with the returned\n                <code>NextToken</code> value.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.computeoptimizer#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe a filter that returns a more specific list of\n            instance recommendations.</p>"
+                    }
+                },
+                "accountIds": {
+                    "target": "com.amazonaws.computeoptimizer#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the AWS accounts for which to return instance recommendations.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member accounts for which you want to return instance\n            recommendations.</p>\n        <p>Only one account ID can be specified per request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetEC2InstanceRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to advance to the next page of instance recommendations.</p>\n        <p>This value is null when there are no more pages of instance recommendations to\n            return.</p>"
+                    }
+                },
+                "instanceRecommendations": {
+                    "target": "com.amazonaws.computeoptimizer#InstanceRecommendations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe instance recommendations.</p>"
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.computeoptimizer#GetRecommendationErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe errors of the request.</p>\n        <p>For example, an error is returned if you request recommendations for an instance of an\n            unsupported instance family.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetEC2RecommendationProjectedMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#GetEC2RecommendationProjectedMetricsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#GetEC2RecommendationProjectedMetricsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the projected utilization metrics of Amazon EC2 instance recommendations.</p>\n\n        <note>\n            <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected\n                utilization metrics returned when you run this action. Additionally, the\n                    <code>Memory</code> metric is returned only for resources that have the unified\n                CloudWatch agent installed on them. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                    Utilization with the CloudWatch Agent</a>.</p>\n        </note>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetEC2RecommendationProjectedMetricsRequest": {
+            "type": "structure",
+            "members": {
+                "instanceArn": {
+                    "target": "com.amazonaws.computeoptimizer#InstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the instances for which to return recommendation\n            projected metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stat": {
+                    "target": "com.amazonaws.computeoptimizer#MetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statistic of the projected metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "period": {
+                    "target": "com.amazonaws.computeoptimizer#Period",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The granularity, in seconds, of the projected metrics data points.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.computeoptimizer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp of the first projected metrics data point to return.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.computeoptimizer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp of the last projected metrics data point to return.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetEC2RecommendationProjectedMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "recommendedOptionProjectedMetrics": {
+                    "target": "com.amazonaws.computeoptimizer#RecommendedOptionProjectedMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe a projected metrics.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetEnrollmentStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#GetEnrollmentStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#GetEnrollmentStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p>\n        <p>If the account is the management account of an organization, this action also confirms\n            the enrollment status of member accounts within the organization.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetEnrollmentStatusRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.computeoptimizer#GetEnrollmentStatusResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.computeoptimizer#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enrollment status of the account.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.computeoptimizer#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the enrollment status of the account.</p>\n        <p>For example, an account might show a status of <code>Pending</code> because member\n            accounts of an organization require more time to be enrolled in the service.</p>"
+                    }
+                },
+                "memberAccountsEnrolled": {
+                    "target": "com.amazonaws.computeoptimizer#MemberAccountsEnrolled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Confirms the enrollment status of member accounts within the organization, if the\n            account is a management account of an organization.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetRecommendationError": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.computeoptimizer#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the error.</p>"
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.computeoptimizer#Code",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.computeoptimizer#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message, or reason, for the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an error experienced when getting recommendations.</p>\n        <p>For example, an error is returned if you request recommendations for an unsupported\n            Auto Scaling group, or if you request recommendations for an instance of an unsupported instance\n            family.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetRecommendationErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#GetRecommendationError"
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetRecommendationSummaries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#GetRecommendationSummariesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#GetRecommendationSummariesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the optimization findings for an account.</p>\n        <p>For example, it returns the number of Amazon EC2 instances in an account that are\n            under-provisioned, over-provisioned, or optimized. It also returns the number of Auto Scaling\n            groups in an account that are not optimized, or optimized.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetRecommendationSummariesRequest": {
+            "type": "structure",
+            "members": {
+                "accountIds": {
+                    "target": "com.amazonaws.computeoptimizer#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the AWS accounts for which to return recommendation summaries.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member accounts for which you want to return recommendation\n            summaries.</p>\n        <p>Only one account ID can be specified per request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to advance to the next page of recommendation summaries.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.computeoptimizer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of recommendation summaries to return with a single request.</p>\n        <p>To retrieve the remaining results, make another request with the returned\n                <code>NextToken</code> value.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetRecommendationSummariesResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to advance to the next page of recommendation summaries.</p>\n        <p>This value is null when there are no more pages of recommendation summaries to\n            return.</p>"
+                    }
+                },
+                "recommendationSummaries": {
+                    "target": "com.amazonaws.computeoptimizer#RecommendationSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that summarize a recommendation.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#Identifier": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#IncludeMemberAccounts": {
+            "type": "boolean"
+        },
+        "com.amazonaws.computeoptimizer#InstanceArn": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#InstanceArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#InstanceArn"
+            }
+        },
+        "com.amazonaws.computeoptimizer#InstanceName": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#InstanceRecommendation": {
+            "type": "structure",
+            "members": {
+                "instanceArn": {
+                    "target": "com.amazonaws.computeoptimizer#InstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the current instance.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.computeoptimizer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the instance.</p>"
+                    }
+                },
+                "instanceName": {
+                    "target": "com.amazonaws.computeoptimizer#InstanceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the current instance.</p>"
+                    }
+                },
+                "currentInstanceType": {
+                    "target": "com.amazonaws.computeoptimizer#CurrentInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type of the current instance.</p>"
+                    }
+                },
+                "finding": {
+                    "target": "com.amazonaws.computeoptimizer#Finding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding classification for the instance.</p>\n        <p>Findings for instances include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>Underprovisioned</code>\n                  </b>—An instance is\n                    considered under-provisioned when at least one specification of your instance,\n                    such as CPU, memory, or network, does not meet the performance requirements of\n                    your workload. Under-provisioned instances may lead to poor application\n                    performance.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Overprovisioned</code>\n                  </b>—An instance is\n                    considered over-provisioned when at least one specification of your instance,\n                    such as CPU, memory, or network, can be sized down while still meeting the\n                    performance requirements of your workload, and no specification is\n                    under-provisioned. Over-provisioned instances may lead to unnecessary\n                    infrastructure cost.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b>—An instance is\n                    considered optimized when all specifications of your instance, such as CPU,\n                    memory, and network, meet the performance requirements of your workload and is\n                    not over provisioned. An optimized instance runs your workloads with optimal\n                    performance and infrastructure cost. For optimized resources, AWS Compute Optimizer might\n                    recommend a new generation instance type.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "utilizationMetrics": {
+                    "target": "com.amazonaws.computeoptimizer#UtilizationMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the utilization metrics of the instance.</p>"
+                    }
+                },
+                "lookBackPeriodInDays": {
+                    "target": "com.amazonaws.computeoptimizer#LookBackPeriodInDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days for which utilization metrics were analyzed for the\n            instance.</p>"
+                    }
+                },
+                "recommendationOptions": {
+                    "target": "com.amazonaws.computeoptimizer#RecommendationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the recommendation options for the instance.</p>"
+                    }
+                },
+                "recommendationSources": {
+                    "target": "com.amazonaws.computeoptimizer#RecommendationSources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the source resource of the recommendation.</p>"
+                    }
+                },
+                "lastRefreshTimestamp": {
+                    "target": "com.amazonaws.computeoptimizer#LastRefreshTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp of when the instance recommendation was last refreshed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Amazon EC2 instance recommendation.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#InstanceRecommendationOption": {
+            "type": "structure",
+            "members": {
+                "instanceType": {
+                    "target": "com.amazonaws.computeoptimizer#InstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type of the instance recommendation.</p>"
+                    }
+                },
+                "projectedUtilizationMetrics": {
+                    "target": "com.amazonaws.computeoptimizer#ProjectedUtilizationMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the projected utilization metrics of the instance\n            recommendation option.</p>\n\n        <note>\n            <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected\n                utilization metrics returned. Additionally, the <code>Memory</code> metric is\n                returned only for resources that have the unified CloudWatch agent installed on them. For\n                more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                    Utilization with the CloudWatch Agent</a>.</p>\n        </note>"
+                    }
+                },
+                "performanceRisk": {
+                    "target": "com.amazonaws.computeoptimizer#PerformanceRisk",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The performance risk of the instance recommendation option.</p>\n        <p>Performance risk is the likelihood of the recommended instance type not meeting the\n            performance requirement of your workload.</p>\n        <p>The lowest performance risk is categorized as <code>0</code>, and the highest as\n                <code>5</code>.</p>"
+                    }
+                },
+                "rank": {
+                    "target": "com.amazonaws.computeoptimizer#Rank",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rank of the instance recommendation option.</p>\n        <p>The top recommendation option is ranked as <code>1</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a recommendation option for an Amazon EC2 instance.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#InstanceRecommendations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#InstanceRecommendation"
+            }
+        },
+        "com.amazonaws.computeoptimizer#InstanceType": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.computeoptimizer#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal error has occurred. Try your call again.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.computeoptimizer#InvalidParameterValueException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.computeoptimizer#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An invalid or out-of-range value was supplied for the input parameter.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.computeoptimizer#JobFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#JobFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter.</p>\n\n        <p>Specify <code>ResourceType</code> to return export jobs of a specific resource type\n            (e.g., <code>Ec2Instance</code>).</p>\n\n        <p>Specify <code>JobStatus</code> to return export jobs with a specific status (e.g,\n                <code>Complete</code>).</p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.computeoptimizer#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the filter.</p>\n\n        <p>The valid values for this parameter are as follows, depending on what you specify for\n            the <code>name</code> parameter:</p>\n\n        <ul>\n            <li>\n                <p>Specify <code>Ec2Instance</code> or <code>AutoScalingGroup</code> if you\n                    specified the <code>name</code> parameter as <code>ResourceType</code>. There is\n                    no filter for EBS volumes because volume recommendations cannot be exported at\n                    this time.</p>\n            </li>\n            <li>\n                <p>Specify <code>Queued</code>, <code>InProgress</code>, <code>Complete</code>,\n                    or <code>Failed</code> if you specified the <code>name</code> parameter as\n                        <code>JobStatus</code>.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of recommendation export\n            jobs.</p>\n\n        <p>This filter is used with the <code>DescribeRecommendationExportJobs</code>\n            action.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#JobFilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ResourceType",
+                        "name": "RESOURCE_TYPE"
+                    },
+                    {
+                        "value": "JobStatus",
+                        "name": "JOB_STATUS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#JobFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#JobFilter"
+            }
+        },
+        "com.amazonaws.computeoptimizer#JobId": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#JobIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#JobId"
+            }
+        },
+        "com.amazonaws.computeoptimizer#JobStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Queued",
+                        "name": "QUEUED"
+                    },
+                    {
+                        "value": "InProgress",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "Complete",
+                        "name": "COMPLETE"
+                    },
+                    {
+                        "value": "Failed",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#LastRefreshTimestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.computeoptimizer#LastUpdatedTimestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.computeoptimizer#LimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.computeoptimizer#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request exceeds a limit of the service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.computeoptimizer#LookBackPeriodInDays": {
+            "type": "double"
+        },
+        "com.amazonaws.computeoptimizer#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.computeoptimizer#MaxSize": {
+            "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#MemberAccountsEnrolled": {
+            "type": "boolean"
+        },
+        "com.amazonaws.computeoptimizer#Message": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#MetadataKey": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#MetricName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Cpu",
+                        "name": "CPU"
+                    },
+                    {
+                        "value": "Memory",
+                        "name": "MEMORY"
+                    },
+                    {
+                        "value": "EBS_READ_OPS_PER_SECOND",
+                        "name": "EBS_READ_OPS_PER_SECOND"
+                    },
+                    {
+                        "value": "EBS_WRITE_OPS_PER_SECOND",
+                        "name": "EBS_WRITE_OPS_PER_SECOND"
+                    },
+                    {
+                        "value": "EBS_READ_BYTES_PER_SECOND",
+                        "name": "EBS_READ_BYTES_PER_SECOND"
+                    },
+                    {
+                        "value": "EBS_WRITE_BYTES_PER_SECOND",
+                        "name": "EBS_WRITE_BYTES_PER_SECOND"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#MetricStatistic": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Maximum",
+                        "name": "MAXIMUM"
+                    },
+                    {
+                        "value": "Average",
+                        "name": "AVERAGE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#MetricValue": {
+            "type": "double"
+        },
+        "com.amazonaws.computeoptimizer#MetricValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#MetricValue"
+            }
+        },
+        "com.amazonaws.computeoptimizer#MinSize": {
+            "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#MissingAuthenticationToken": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.computeoptimizer#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request must contain either a valid (registered) AWS access key ID or X.509\n            certificate.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.computeoptimizer#NextToken": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#OptInRequiredException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.computeoptimizer#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The account is not opted in to AWS Compute Optimizer.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.computeoptimizer#PerformanceRisk": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#Period": {
+            "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#ProjectedMetric": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#MetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the projected utilization metric.</p>\n        <p>The following projected utilization metrics are returned:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Cpu</code> - The projected percentage of allocated EC2 compute units\n                    that would be in use on the recommendation option had you used that resource\n                    during the analyzed period. This metric identifies the processing power required\n                    to run an application on the recommendation option.</p>\n                <p>Depending on the instance type, tools in your operating system can show a\n                    lower percentage than CloudWatch when the instance is not allocated a full\n                    processor core.</p>\n                <p>Units: Percent</p>\n            </li>\n            <li>\n                <p>\n                  <code>Memory</code> - The percentage of memory that would be in use on the\n                    recommendation option had you used that resource during the analyzed period.\n                    This metric identifies the amount of memory required to run an application on\n                    the recommendation option.</p>\n                <p>Units: Percent</p>\n                <note>\n                    <p>The <code>Memory</code> metric is returned only for resources that have\n                        the unified CloudWatch agent installed on them. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                            Utilization with the CloudWatch Agent</a>.</p>\n                </note>\n            </li>\n         </ul>"
+                    }
+                },
+                "timestamps": {
+                    "target": "com.amazonaws.computeoptimizer#Timestamps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamps of the projected utilization metric.</p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.computeoptimizer#MetricValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values of the projected utilization metrics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a projected utilization metric of a recommendation option, such as an Amazon EC2\n            instance. This represents the projected utilization of a recommendation option had you\n            used that resource during the analyzed period.</p>\n\n        <p>Compare the utilization metric data of your resource against its projected utilization\n            metric data to determine the performance difference between your current resource and\n            the recommended option.</p>\n\n        <note>\n            <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected\n                utilization metrics returned when you run the\n                    <code>GetEC2RecommendationProjectedMetrics</code> action. Additionally, the\n                    <code>Memory</code> metric is returned only for resources that have the unified\n                CloudWatch agent installed on them. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                    Utilization with the CloudWatch Agent</a>.</p>\n        </note>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#ProjectedMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#ProjectedMetric"
+            }
+        },
+        "com.amazonaws.computeoptimizer#ProjectedUtilizationMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#UtilizationMetric"
+            }
+        },
+        "com.amazonaws.computeoptimizer#Rank": {
+            "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#RecommendationExportJob": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.computeoptimizer#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identification number of the export job.</p>"
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.computeoptimizer#ExportDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the destination of the export file.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.computeoptimizer#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type of the exported recommendations.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.computeoptimizer#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the export job.</p>"
+                    }
+                },
+                "creationTimestamp": {
+                    "target": "com.amazonaws.computeoptimizer#CreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the export job was created.</p>"
+                    }
+                },
+                "lastUpdatedTimestamp": {
+                    "target": "com.amazonaws.computeoptimizer#LastUpdatedTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the export job was last updated.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.computeoptimizer#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for an export job failure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a recommendation export job.</p>\n\n\n        <p>Use the <code>DescribeRecommendationExportJobs</code> action to view your\n            recommendation export jobs.</p>\n\n\n        <p>Use the <code>ExportAutoScalingGroupRecommendations</code> or\n                <code>ExportEC2InstanceRecommendations</code> actions to request an export of your\n            recommendations.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RecommendationExportJobs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#RecommendationExportJob"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RecommendationOptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#InstanceRecommendationOption"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RecommendationSource": {
+            "type": "structure",
+            "members": {
+                "recommendationSourceArn": {
+                    "target": "com.amazonaws.computeoptimizer#RecommendationSourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommendation source.</p>"
+                    }
+                },
+                "recommendationSourceType": {
+                    "target": "com.amazonaws.computeoptimizer#RecommendationSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type of the recommendation source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the source of a recommendation, such as an Amazon EC2 instance or Auto Scaling\n            group.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RecommendationSourceArn": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#RecommendationSourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Ec2Instance",
+                        "name": "EC2_INSTANCE"
+                    },
+                    {
+                        "value": "AutoScalingGroup",
+                        "name": "AUTO_SCALING_GROUP"
+                    },
+                    {
+                        "value": "EbsVolume",
+                        "name": "EBS_VOLUME"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#RecommendationSources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#RecommendationSource"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RecommendationSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#RecommendationSummary"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RecommendationSummary": {
+            "type": "structure",
+            "members": {
+                "summaries": {
+                    "target": "com.amazonaws.computeoptimizer#Summaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe a recommendation summary.</p>"
+                    }
+                },
+                "recommendationResourceType": {
+                    "target": "com.amazonaws.computeoptimizer#RecommendationSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type of the recommendation.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.computeoptimizer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the recommendation summary.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a recommendation.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RecommendedInstanceType": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#RecommendedOptionProjectedMetric": {
+            "type": "structure",
+            "members": {
+                "recommendedInstanceType": {
+                    "target": "com.amazonaws.computeoptimizer#RecommendedInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended instance type.</p>"
+                    }
+                },
+                "rank": {
+                    "target": "com.amazonaws.computeoptimizer#Rank",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rank of the recommendation option projected metric.</p>\n        <p>The top recommendation option is ranked as <code>1</code>.</p>\n        <p>The projected metric rank correlates to the recommendation option rank. For example,\n            the projected metric ranked as <code>1</code> is related to the recommendation option\n            that is also ranked as <code>1</code> in the same response.</p>"
+                    }
+                },
+                "projectedMetrics": {
+                    "target": "com.amazonaws.computeoptimizer#ProjectedMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe a projected utilization metric.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a projected utilization metric of a recommendation option.</p>\n\n        <note>\n            <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected\n                utilization metrics returned when you run the\n                    <code>GetEC2RecommendationProjectedMetrics</code> action. Additionally, the\n                    <code>Memory</code> metric is returned only for resources that have the unified\n                CloudWatch agent installed on them. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                    Utilization with the CloudWatch Agent</a>.</p>\n        </note>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#RecommendedOptionProjectedMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#RecommendedOptionProjectedMetric"
+            }
+        },
+        "com.amazonaws.computeoptimizer#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.computeoptimizer#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource that is required for the action doesn't exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.computeoptimizer#ResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Ec2Instance",
+                        "name": "EC2_INSTANCE"
+                    },
+                    {
+                        "value": "AutoScalingGroup",
+                        "name": "AUTO_SCALING_GROUP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#S3Destination": {
+            "type": "structure",
+            "members": {
+                "bucket": {
+                    "target": "com.amazonaws.computeoptimizer#DestinationBucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket used as the destination of an export file.</p>"
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.computeoptimizer#DestinationKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket key of an export file.</p>\n        <p>The key uniquely identifies the object, or export file, in the S3 bucket.</p>"
+                    }
+                },
+                "metadataKey": {
+                    "target": "com.amazonaws.computeoptimizer#MetadataKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket key of a metadata file.</p>\n        <p>The key uniquely identifies the object, or metadata file, in the S3 bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and object keys of a\n            recommendations export file, and its associated metadata file.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#S3DestinationConfig": {
+            "type": "structure",
+            "members": {
+                "bucket": {
+                    "target": "com.amazonaws.computeoptimizer#DestinationBucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket to use as the destination for an export job.</p>"
+                    }
+                },
+                "keyPrefix": {
+                    "target": "com.amazonaws.computeoptimizer#DestinationKeyPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket prefix for an export job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for a\n            recommendations export job.</p>\n        <p>You must create the destination Amazon S3 bucket for your recommendations export before you\n            create the export job. Compute Optimizer does not create the S3 bucket for you. After you create the\n            S3 bucket, ensure that it has the required permission policy to allow Compute Optimizer to write the\n            export file to it. If you plan to specify an object prefix when you create the export\n            job, you must include the object prefix in the policy that you add to the S3 bucket. For\n            more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html\">Amazon S3 Bucket Policy for Compute Optimizer</a> in the <i>Compute Optimizer user\n            guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.computeoptimizer#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request has failed due to a temporary failure of the server.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.computeoptimizer#Status": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Active",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "Inactive",
+                        "name": "INACTIVE"
+                    },
+                    {
+                        "value": "Pending",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "Failed",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#StatusReason": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#Summaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#Summary"
+            }
+        },
+        "com.amazonaws.computeoptimizer#Summary": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#Finding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding classification of the recommendation.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.computeoptimizer#SummaryValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the recommendation summary.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of a recommendation.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#SummaryValue": {
+            "type": "double"
+        },
+        "com.amazonaws.computeoptimizer#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.computeoptimizer#ErrorMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.computeoptimizer#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.computeoptimizer#Timestamps": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#Timestamp"
+            }
+        },
+        "com.amazonaws.computeoptimizer#UpdateEnrollmentStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#UpdateEnrollmentStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#UpdateEnrollmentStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p>\n        <p>If the account is a management account of an organization, this action can also be used\n            to enroll member accounts within the organization.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#UpdateEnrollmentStatusRequest": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.computeoptimizer#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new enrollment status of the account.</p>\n        <p>Accepted options are <code>Active</code> or <code>Inactive</code>. You will get an\n            error if <code>Pending</code> or <code>Failed</code> are specified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "includeMemberAccounts": {
+                    "target": "com.amazonaws.computeoptimizer#IncludeMemberAccounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to enroll member accounts of the organization if the your account is\n            the management account of an organization.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#UpdateEnrollmentStatusResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.computeoptimizer#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enrollment status of the account.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.computeoptimizer#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the enrollment status of the account. For example, an account might\n            show a status of <code>Pending</code> because member accounts of an organization require\n            more time to be enrolled in the service.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#UtilizationMetric": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#MetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the utilization metric.</p>\n        <p>The following utilization metrics are available:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Cpu</code> - The percentage of allocated EC2 compute units that are\n                    currently in use on the instance. This metric identifies the processing power\n                    required to run an application on the instance.</p>\n                <p>Depending on the instance type, tools in your operating system can show a\n                    lower percentage than CloudWatch when the instance is not allocated a full\n                    processor core.</p>\n                <p>Units: Percent</p>\n            </li>\n            <li>\n                <p>\n                  <code>Memory</code> - The percentage of memory that is currently in use on the\n                    instance. This metric identifies the amount of memory required to run an\n                    application on the instance.</p>\n                <p>Units: Percent</p>\n                <note>\n                    <p>The <code>Memory</code> metric is returned only for resources that have\n                        the unified CloudWatch agent installed on them. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                            Utilization with the CloudWatch Agent</a>.</p>\n                </note>\n            </li>\n            <li>\n                <p>\n                  <code>EBS_READ_OPS_PER_SECOND</code> - The completed read operations from all\n                    EBS volumes attached to the instance in a specified period of time.</p>\n                <p>Unit: Count</p>\n            </li>\n            <li>\n                <p>\n                  <code>EBS_WRITE_OPS_PER_SECOND</code> - The completed write operations to all\n                    EBS volumes attached to the instance in a specified period of time.</p>\n                <p>Unit: Count</p>\n            </li>\n            <li>\n                <p>\n                  <code>EBS_READ_BYTES_PER_SECOND</code> - The bytes read from all EBS volumes\n                    attached to the instance in a specified period of time.</p>\n                <p>Unit: Bytes</p>\n            </li>\n            <li>\n                <p>\n                  <code>EBS_WRITE_BYTES_PER_SECOND</code> - The bytes written to all EBS volumes\n                    attached to the instance in a specified period of time.</p>\n                <p>Unit: Bytes</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "statistic": {
+                    "target": "com.amazonaws.computeoptimizer#MetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statistic of the utilization metric.</p>\n        <p>The following statistics are available:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Average</code> - This is the value of Sum / SampleCount during the\n                    specified period, or the average value observed during the specified\n                    period.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Maximum</code> - The highest value observed during the specified period.\n                    Use this value to determine high volumes of activity for your\n                    application.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.computeoptimizer#MetricValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the utilization metric.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a utilization metric of a resource, such as an Amazon EC2 instance.</p>\n\n        <p>Compare the utilization metric data of your resource against its projected utilization\n            metric data to determine the performance difference between your current resource and\n            the recommended option.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#UtilizationMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#UtilizationMetric"
+            }
+        },
+        "com.amazonaws.computeoptimizer#VolumeArn": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#VolumeArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#VolumeArn"
+            }
+        },
+        "com.amazonaws.computeoptimizer#VolumeBaselineIOPS": {
+            "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#VolumeBaselineThroughput": {
+            "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#VolumeBurstIOPS": {
+            "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#VolumeBurstThroughput": {
+            "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#VolumeConfiguration": {
+            "type": "structure",
+            "members": {
+                "volumeType": {
+                    "target": "com.amazonaws.computeoptimizer#VolumeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The volume type.</p>\n        <p>This can be <code>gp2</code> for General Purpose SSD, <code>io1</code> or\n                <code>io2</code> for Provisioned IOPS SSD, <code>st1</code> for Throughput Optimized\n            HDD, <code>sc1</code> for Cold HDD, or <code>standard</code> for Magnetic\n            volumes.</p>"
+                    }
+                },
+                "volumeSize": {
+                    "target": "com.amazonaws.computeoptimizer#VolumeSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the volume, in GiB.</p>"
+                    }
+                },
+                "volumeBaselineIOPS": {
+                    "target": "com.amazonaws.computeoptimizer#VolumeBaselineIOPS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The baseline IOPS of the volume.</p>"
+                    }
+                },
+                "volumeBurstIOPS": {
+                    "target": "com.amazonaws.computeoptimizer#VolumeBurstIOPS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The burst IOPS of the volume.</p>"
+                    }
+                },
+                "volumeBaselineThroughput": {
+                    "target": "com.amazonaws.computeoptimizer#VolumeBaselineThroughput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The baseline throughput of the volume.</p>"
+                    }
+                },
+                "volumeBurstThroughput": {
+                    "target": "com.amazonaws.computeoptimizer#VolumeBurstThroughput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The burst throughput of the volume.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration of an Amazon Elastic Block Store (Amazon EBS) volume.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#VolumeRecommendation": {
+            "type": "structure",
+            "members": {
+                "volumeArn": {
+                    "target": "com.amazonaws.computeoptimizer#VolumeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the current volume.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.computeoptimizer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the volume.</p>"
+                    }
+                },
+                "currentConfiguration": {
+                    "target": "com.amazonaws.computeoptimizer#VolumeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the current configuration of the volume.</p>"
+                    }
+                },
+                "finding": {
+                    "target": "com.amazonaws.computeoptimizer#EBSFinding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding classification for the volume.</p>\n        <p>Findings for volumes include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>NotOptimized</code>\n                  </b>—A volume is\n                    considered not optimized when AWS Compute Optimizer identifies a recommendation that can\n                    provide better performance for your workload.</p>\n                \n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b>—An volume is\n                    considered optimized when Compute Optimizer determines that the volume is correctly\n                    provisioned to run your workload based on the chosen volume type. For optimized\n                    resources, Compute Optimizer might recommend a new generation volume type.</p>\n                \n            </li>\n         </ul>"
+                    }
+                },
+                "utilizationMetrics": {
+                    "target": "com.amazonaws.computeoptimizer#EBSUtilizationMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the utilization metrics of the volume.</p>"
+                    }
+                },
+                "lookBackPeriodInDays": {
+                    "target": "com.amazonaws.computeoptimizer#LookBackPeriodInDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days for which utilization metrics were analyzed for the volume.</p>"
+                    }
+                },
+                "volumeRecommendationOptions": {
+                    "target": "com.amazonaws.computeoptimizer#VolumeRecommendationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the recommendation options for the volume.</p>"
+                    }
+                },
+                "lastRefreshTimestamp": {
+                    "target": "com.amazonaws.computeoptimizer#LastRefreshTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp of when the volume recommendation was last refreshed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Amazon Elastic Block Store (Amazon EBS) volume recommendation.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#VolumeRecommendationOption": {
+            "type": "structure",
+            "members": {
+                "configuration": {
+                    "target": "com.amazonaws.computeoptimizer#VolumeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe a volume configuration.</p>"
+                    }
+                },
+                "performanceRisk": {
+                    "target": "com.amazonaws.computeoptimizer#PerformanceRisk",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The performance risk of the volume recommendation option.</p>\n        <p>Performance risk is the likelihood of the recommended volume type not meeting the\n            performance requirement of your workload.</p>\n        <p>The lowest performance risk is categorized as <code>0</code>, and the highest as\n                <code>5</code>.</p>"
+                    }
+                },
+                "rank": {
+                    "target": "com.amazonaws.computeoptimizer#Rank",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rank of the volume recommendation option.</p>\n        <p>The top recommendation option is ranked as <code>1</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a recommendation option for an Amazon Elastic Block Store (Amazon EBS) instance.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#VolumeRecommendationOptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#VolumeRecommendationOption"
+            }
+        },
+        "com.amazonaws.computeoptimizer#VolumeRecommendations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#VolumeRecommendation"
+            }
+        },
+        "com.amazonaws.computeoptimizer#VolumeSize": {
+            "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#VolumeType": {
+            "type": "string"
+        }
+    }
+}

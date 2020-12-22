@@ -1,0 +1,974 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.healthlake#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.healthlake#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Access is denied. Your account is not authorized to perform this operation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.healthlake#BoundedLengthString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5000
+                },
+                "smithy.api#pattern": "[\\P{M}\\p{M}]{1,5000}"
+            }
+        },
+        "com.amazonaws.healthlake#ClientTokenString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.healthlake#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.healthlake#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The datastore is in a transition state and the user requested action can not be performed.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.healthlake#CreateFHIRDatastore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.healthlake#CreateFHIRDatastoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.healthlake#CreateFHIRDatastoreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.healthlake#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a datastore that can ingest and export FHIR data.</p>"
+            }
+        },
+        "com.amazonaws.healthlake#CreateFHIRDatastoreRequest": {
+            "type": "structure",
+            "members": {
+                "DatastoreName": {
+                    "target": "com.amazonaws.healthlake#DatastoreName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user generated name for the datastore.</p>"
+                    }
+                },
+                "DatastoreTypeVersion": {
+                    "target": "com.amazonaws.healthlake#FHIRVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The FHIR version of the datastore. The only supported version is R4.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PreloadDataConfig": {
+                    "target": "com.amazonaws.healthlake#PreloadDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional parameter to preload data upon creation of the datastore. Currently, the only\n         supported preloaded data is synthetic data generated from Synthea.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.healthlake#ClientTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional user provided token used for ensuring idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.healthlake#CreateFHIRDatastoreResponse": {
+            "type": "structure",
+            "members": {
+                "DatastoreId": {
+                    "target": "com.amazonaws.healthlake#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS-generated datastore id. This id is in the output from the initial datastore\n         creation call.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatastoreArn": {
+                    "target": "com.amazonaws.healthlake#DatastoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The datastore ARN is generated during the creation of the datastore and can be found in\n         the output from the initial datastore creation call.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatastoreStatus": {
+                    "target": "com.amazonaws.healthlake#DatastoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the FHIR datastore. Possible statuses are ‘CREATING’, ‘ACTIVE’, ‘DELETING’,\n         ‘DELETED’.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatastoreEndpoint": {
+                    "target": "com.amazonaws.healthlake#BoundedLengthString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS endpoint for the created datastore. For preview, only US-east-1 endpoints are\n         supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.healthlake#DatastoreArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-zA-Z0-9-]+:[0-9]{12}:datastore/.+?"
+            }
+        },
+        "com.amazonaws.healthlake#DatastoreFilter": {
+            "type": "structure",
+            "members": {
+                "DatastoreName": {
+                    "target": "com.amazonaws.healthlake#DatastoreName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows the user to filter datastore results by name.</p>"
+                    }
+                },
+                "DatastoreStatus": {
+                    "target": "com.amazonaws.healthlake#DatastoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows the user to filter datastore results by status.</p>"
+                    }
+                },
+                "CreatedBefore": {
+                    "target": "com.amazonaws.healthlake#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that allows the user to set cutoff dates for records. All datastores created\n         before the specified date will be included in the results. </p>"
+                    }
+                },
+                "CreatedAfter": {
+                    "target": "com.amazonaws.healthlake#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that allows the user to set cutoff dates for records. All datastores created\n         after the specified date will be included in the results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filters applied to datastore query.</p>"
+            }
+        },
+        "com.amazonaws.healthlake#DatastoreId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+            }
+        },
+        "com.amazonaws.healthlake#DatastoreName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+            }
+        },
+        "com.amazonaws.healthlake#DatastoreProperties": {
+            "type": "structure",
+            "members": {
+                "DatastoreId": {
+                    "target": "com.amazonaws.healthlake#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS-generated ID number for the datastore.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatastoreArn": {
+                    "target": "com.amazonaws.healthlake#DatastoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name used in the creation of the datastore.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatastoreName": {
+                    "target": "com.amazonaws.healthlake#DatastoreName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-generated name for the datastore.</p>"
+                    }
+                },
+                "DatastoreStatus": {
+                    "target": "com.amazonaws.healthlake#DatastoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the datastore. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.healthlake#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that a datastore was created. </p>"
+                    }
+                },
+                "DatastoreTypeVersion": {
+                    "target": "com.amazonaws.healthlake#FHIRVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The FHIR version. Only R4 version data is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatastoreEndpoint": {
+                    "target": "com.amazonaws.healthlake#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS endpoint for the datastore. Each datastore will have it's own endpoint with datastore ID in the endpoint URL.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PreloadDataConfig": {
+                    "target": "com.amazonaws.healthlake#PreloadDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preloaded data configuration for the datastore. Only data preloaded from Synthea is supported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Displays the properties of the datastore, including the ID, Arn, name, and the status of the datastore.</p>"
+            }
+        },
+        "com.amazonaws.healthlake#DatastorePropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.healthlake#DatastoreProperties"
+            }
+        },
+        "com.amazonaws.healthlake#DatastoreStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.healthlake#DeleteFHIRDatastore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.healthlake#DeleteFHIRDatastoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.healthlake#DeleteFHIRDatastoreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.healthlake#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a datastore. </p>"
+            }
+        },
+        "com.amazonaws.healthlake#DeleteFHIRDatastoreRequest": {
+            "type": "structure",
+            "members": {
+                "DatastoreId": {
+                    "target": "com.amazonaws.healthlake#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The AWS-generated ID for the datastore to be deleted.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.healthlake#DeleteFHIRDatastoreResponse": {
+            "type": "structure",
+            "members": {
+                "DatastoreId": {
+                    "target": "com.amazonaws.healthlake#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS-generated ID for the datastore to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatastoreArn": {
+                    "target": "com.amazonaws.healthlake#DatastoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that gives Amazon HealthLake access permission.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatastoreStatus": {
+                    "target": "com.amazonaws.healthlake#DatastoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the datastore that the user has requested to be deleted. \n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatastoreEndpoint": {
+                    "target": "com.amazonaws.healthlake#BoundedLengthString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS endpoint for the datastore the user has requested to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.healthlake#DescribeFHIRDatastore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.healthlake#DescribeFHIRDatastoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.healthlake#DescribeFHIRDatastoreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.healthlake#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the properties associated with the FHIR datastore, including the datastore ID,\n         datastore ARN, datastore name, datastore status, created at, datastore type version, and\n         datastore endpoint.</p>"
+            }
+        },
+        "com.amazonaws.healthlake#DescribeFHIRDatastoreRequest": {
+            "type": "structure",
+            "members": {
+                "DatastoreId": {
+                    "target": "com.amazonaws.healthlake#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS-generated datastore id. This is part of the ‘CreateFHIRDatastore’ output.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.healthlake#DescribeFHIRDatastoreResponse": {
+            "type": "structure",
+            "members": {
+                "DatastoreProperties": {
+                    "target": "com.amazonaws.healthlake#DatastoreProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All properties associated with a datastore, including the datastore ID, datastore ARN,\n         datastore name, datastore status, created at, datastore type version, and datastore\n         endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.healthlake#DescribeFHIRImportJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.healthlake#DescribeFHIRImportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.healthlake#DescribeFHIRImportJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.healthlake#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the datastore.</p>"
+            }
+        },
+        "com.amazonaws.healthlake#DescribeFHIRImportJobRequest": {
+            "type": "structure",
+            "members": {
+                "DatastoreId": {
+                    "target": "com.amazonaws.healthlake#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS-generated ID of the datastore.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.healthlake#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS-generated job ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.healthlake#DescribeFHIRImportJobResponse": {
+            "type": "structure",
+            "members": {
+                "ImportJobProperties": {
+                    "target": "com.amazonaws.healthlake#ImportJobProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of the Import job request, including the ID, ARN, name, and the status of the datastore.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.healthlake#FHIRVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "R4",
+                        "name": "R4"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.healthlake#HealthLake": {
+            "type": "service",
+            "version": "2017-07-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.healthlake#CreateFHIRDatastore"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#DeleteFHIRDatastore"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#DescribeFHIRDatastore"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#DescribeFHIRImportJob"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ListFHIRDatastores"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#StartFHIRImportJob"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "HealthLake",
+                    "arnNamespace": "healthlake",
+                    "cloudFormationName": "HealthLake",
+                    "cloudTrailEventSource": "healthlake.amazonaws.com",
+                    "endpointPrefix": "healthlake"
+                },
+                "aws.auth#sigv4": {
+                    "name": "healthlake"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>Amazon HealthLake is a HIPAA eligibile service that allows customers to store,\n         transform, query, and analyze their data in a consistent fashion in the cloud.</p>",
+                "smithy.api#title": "Amazon HealthLake"
+            }
+        },
+        "com.amazonaws.healthlake#IamRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+"
+            }
+        },
+        "com.amazonaws.healthlake#ImportJobProperties": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.healthlake#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS-generated id number for the Import job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobName": {
+                    "target": "com.amazonaws.healthlake#JobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-generated name for an Import job.</p>"
+                    }
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.healthlake#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job status for an Import job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, FAILED.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SubmitTime": {
+                    "target": "com.amazonaws.healthlake#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the Import job was submitted for processing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.healthlake#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the Import job was completed.</p>"
+                    }
+                },
+                "DatastoreId": {
+                    "target": "com.amazonaws.healthlake#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The datastore id used when the Import job was created. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InputDataConfig": {
+                    "target": "com.amazonaws.healthlake#InputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input data configuration that was supplied when  the Import job was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataAccessRoleArn": {
+                    "target": "com.amazonaws.healthlake#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that gives Amazon HealthLake access to your input data.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.healthlake#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An explanation of any errors that may have occurred during the FHIR import job. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Displays the properties of the import job, including the ID, Arn, Name, and the status of the datastore.</p>"
+            }
+        },
+        "com.amazonaws.healthlake#InputDataConfig": {
+            "type": "union",
+            "members": {
+                "S3Uri": {
+                    "target": "com.amazonaws.healthlake#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The input properties for an import job.</p>"
+            }
+        },
+        "com.amazonaws.healthlake#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.healthlake#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Unknown error occurs in the service.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.healthlake#JobId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+            }
+        },
+        "com.amazonaws.healthlake#JobName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+            }
+        },
+        "com.amazonaws.healthlake#JobStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SUBMITTED",
+                        "name": "SUBMITTED"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.healthlake#ListFHIRDatastores": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.healthlake#ListFHIRDatastoresRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.healthlake#ListFHIRDatastoresResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.healthlake#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all FHIR datastores that are in the user’s account, regardless of datastore\n         status.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.healthlake#ListFHIRDatastoresRequest": {
+            "type": "structure",
+            "members": {
+                "Filter": {
+                    "target": "com.amazonaws.healthlake#DatastoreFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists all filters associated with a FHIR datastore request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.healthlake#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Fetches the next page of datastores when results are paginated.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.healthlake#MaxResultsInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of datastores returned in a single page of a\n         ListFHIRDatastoresRequest call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.healthlake#ListFHIRDatastoresResponse": {
+            "type": "structure",
+            "members": {
+                "DatastorePropertiesList": {
+                    "target": "com.amazonaws.healthlake#DatastorePropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All properties associated with the listed datastores.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.healthlake#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pagination token that can be used to retrieve the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.healthlake#MaxResultsInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.healthlake#Message": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+            }
+        },
+        "com.amazonaws.healthlake#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 8192
+                },
+                "smithy.api#pattern": "\\p{ASCII}{0,8192}"
+            }
+        },
+        "com.amazonaws.healthlake#PreloadDataConfig": {
+            "type": "structure",
+            "members": {
+                "PreloadDataType": {
+                    "target": "com.amazonaws.healthlake#PreloadDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of preloaded data. Only Synthea preloaded data is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The input properties for the preloaded datastore. Only data preloaded from Synthea is supported.</p>"
+            }
+        },
+        "com.amazonaws.healthlake#PreloadDataType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SYNTHEA",
+                        "name": "SYNTHEA"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.healthlake#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.healthlake#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The requested datastore was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.healthlake#S3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?"
+            }
+        },
+        "com.amazonaws.healthlake#StartFHIRImportJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.healthlake#StartFHIRImportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.healthlake#StartFHIRImportJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.healthlake#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.healthlake#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Begins a FHIR Import job.</p>"
+            }
+        },
+        "com.amazonaws.healthlake#StartFHIRImportJobRequest": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.healthlake#JobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the FHIR Import job in the StartFHIRImport job request.</p>"
+                    }
+                },
+                "InputDataConfig": {
+                    "target": "com.amazonaws.healthlake#InputDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input properties of the FHIR Import job in the StartFHIRImport job request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatastoreId": {
+                    "target": "com.amazonaws.healthlake#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS-generated datastore ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataAccessRoleArn": {
+                    "target": "com.amazonaws.healthlake#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that gives Amazon HealthLake access permission.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.healthlake#ClientTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional user provided token used for ensuring idempotency.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.healthlake#StartFHIRImportJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.healthlake#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS-generated job ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.healthlake#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of an import job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatastoreId": {
+                    "target": "com.amazonaws.healthlake#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS-generated datastore ID.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.healthlake#String": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10000
+                },
+                "smithy.api#pattern": "[\\P{M}\\p{M}]{0,10000}"
+            }
+        },
+        "com.amazonaws.healthlake#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.healthlake#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The user has exceeded their maximum number of allowed calls to the given API. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.healthlake#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.healthlake#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.healthlake#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The user input parameter was invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

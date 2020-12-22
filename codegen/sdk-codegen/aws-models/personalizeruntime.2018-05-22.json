@@ -1,0 +1,414 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.personalizeruntime#AmazonPersonalizeRuntime": {
+            "type": "service",
+            "version": "2018-05-22",
+            "operations": [
+                {
+                    "target": "com.amazonaws.personalizeruntime#GetPersonalizedRanking"
+                },
+                {
+                    "target": "com.amazonaws.personalizeruntime#GetRecommendations"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Personalize Runtime",
+                    "arnNamespace": "personalize",
+                    "cloudFormationName": "PersonalizeRuntime",
+                    "cloudTrailEventSource": "personalizeruntime.amazonaws.com",
+                    "endpointPrefix": "personalize-runtime"
+                },
+                "aws.auth#sigv4": {
+                    "name": "personalize"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#title": "Amazon Personalize Runtime"
+            }
+        },
+        "com.amazonaws.personalizeruntime#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+"
+            }
+        },
+        "com.amazonaws.personalizeruntime#AttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 150
+                },
+                "smithy.api#pattern": "[A-Za-z\\d_]+"
+            }
+        },
+        "com.amazonaws.personalizeruntime#AttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.personalizeruntime#Context": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.personalizeruntime#AttributeName"
+            },
+            "value": {
+                "target": "com.amazonaws.personalizeruntime#AttributeValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 150
+                }
+            }
+        },
+        "com.amazonaws.personalizeruntime#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.personalizeruntime#FilterAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#pattern": "[A-Za-z0-9]+"
+            }
+        },
+        "com.amazonaws.personalizeruntime#FilterAttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.personalizeruntime#FilterValues": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.personalizeruntime#FilterAttributeName"
+            },
+            "value": {
+                "target": "com.amazonaws.personalizeruntime#FilterAttributeValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.personalizeruntime#GetPersonalizedRanking": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalizeruntime#GetPersonalizedRankingRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalizeruntime#GetPersonalizedRankingResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalizeruntime#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalizeruntime#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Re-ranks a list of recommended items for the given user. The first item in the list is\n      deemed the most likely item to be of interest to the user.</p>\n         <note>\n            <p>The solution backing the campaign must have been created using a recipe of type\n        PERSONALIZED_RANKING.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/personalize-ranking",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalizeruntime#GetPersonalizedRankingRequest": {
+            "type": "structure",
+            "members": {
+                "campaignArn": {
+                    "target": "com.amazonaws.personalizeruntime#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the campaign to use for generating the personalized\n      ranking.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inputList": {
+                    "target": "com.amazonaws.personalizeruntime#InputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of items (by <code>itemId</code>) to rank. If an item was not included in the training dataset,\n      the item is appended to the end of the reranked list. The maximum is 500.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.personalizeruntime#UserID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user for which you want the campaign to provide a personalized ranking.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "context": {
+                    "target": "com.amazonaws.personalizeruntime#Context",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contextual metadata to use when getting recommendations. Contextual metadata includes\n      any interaction information that might be relevant when getting a user's recommendations, such\n      as the user's current location or device type.</p>"
+                    }
+                },
+                "filterArn": {
+                    "target": "com.amazonaws.personalizeruntime#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a filter you created to include items or exclude items from recommendations for a given user. \n      For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filter.html\">Filtering Recommendations</a>.</p>"
+                    }
+                },
+                "filterValues": {
+                    "target": "com.amazonaws.personalizeruntime#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case)\n      as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.\n    </p> \n         <p>For filter expressions that use an <code>INCLUDE</code> element to include items,\n      you must provide values for all parameters that are defined in the expression. For\n      filters with expressions that use an <code>EXCLUDE</code> element to exclude items, you\n      can omit the <code>filter-values</code>.In this case, Amazon Personalize doesn't use that portion of\n      the expression to filter recommendations.</p>\n         <p>For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filter.html\">Filtering Recommendations</a>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalizeruntime#GetPersonalizedRankingResponse": {
+            "type": "structure",
+            "members": {
+                "personalizedRanking": {
+                    "target": "com.amazonaws.personalizeruntime#ItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of items in order of most likely interest to the user. The maximum is 500.</p>"
+                    }
+                },
+                "recommendationId": {
+                    "target": "com.amazonaws.personalizeruntime#RecommendationID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the recommendation.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalizeruntime#GetRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalizeruntime#GetRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalizeruntime#GetRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalizeruntime#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalizeruntime#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of recommended items. The required input depends on the recipe type used to\n      create the solution backing the campaign, as follows:</p>\n         <ul>\n            <li>\n               <p>RELATED_ITEMS - <code>itemId</code> required, <code>userId</code> not used</p>\n            </li>\n            <li>\n               <p>USER_PERSONALIZATION - <code>itemId</code> optional, <code>userId</code>\n          required</p>\n            </li>\n         </ul>\n         <note>\n            <p>Campaigns that are backed by a solution created using a recipe of type\n        PERSONALIZED_RANKING use the  API.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/recommendations",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalizeruntime#GetRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "campaignArn": {
+                    "target": "com.amazonaws.personalizeruntime#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the campaign to use for getting recommendations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "itemId": {
+                    "target": "com.amazonaws.personalizeruntime#ItemID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The item ID to provide recommendations for.</p>\n         <p>Required for <code>RELATED_ITEMS</code> recipe type.</p>"
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.personalizeruntime#UserID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user ID to provide recommendations for.</p>\n         <p>Required for <code>USER_PERSONALIZATION</code> recipe type.</p>"
+                    }
+                },
+                "numResults": {
+                    "target": "com.amazonaws.personalizeruntime#NumResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of results to return. The default is 25. The maximum is 500.</p>"
+                    }
+                },
+                "context": {
+                    "target": "com.amazonaws.personalizeruntime#Context",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contextual metadata to use when getting recommendations. Contextual metadata includes\n      any interaction information that might be relevant when getting a user's recommendations, such\n      as the user's current location or device type.</p>"
+                    }
+                },
+                "filterArn": {
+                    "target": "com.amazonaws.personalizeruntime#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the filter to apply to the returned recommendations. For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filter.html\">Filtering Recommendations</a>.</p>\n         <p>When using this parameter, be sure the filter resource is <code>ACTIVE</code>.</p>"
+                    }
+                },
+                "filterValues": {
+                    "target": "com.amazonaws.personalizeruntime#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case)\n      as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.\n    </p> \n         <p>For filter expressions that use an <code>INCLUDE</code> element to include items,\n    you must provide values for all parameters that are defined in the expression. For\n    filters with expressions that use an <code>EXCLUDE</code> element to exclude items, you\n      can omit the <code>filter-values</code>.In this case, Amazon Personalize doesn't use that portion of\n    the expression to filter recommendations.</p>\n         <p>For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filter.html\">Filtering Recommendations</a>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalizeruntime#GetRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "itemList": {
+                    "target": "com.amazonaws.personalizeruntime#ItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of recommendations sorted in ascending order by prediction score. There can be a\n      maximum of 500 items in the list.</p>"
+                    }
+                },
+                "recommendationId": {
+                    "target": "com.amazonaws.personalizeruntime#RecommendationID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the recommendation.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalizeruntime#InputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalizeruntime#ItemID"
+            }
+        },
+        "com.amazonaws.personalizeruntime#InvalidInputException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.personalizeruntime#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provide a valid value for the field or parameter.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.personalizeruntime#ItemID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.personalizeruntime#ItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalizeruntime#PredictedItem"
+            }
+        },
+        "com.amazonaws.personalizeruntime#NumResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.personalizeruntime#PredictedItem": {
+            "type": "structure",
+            "members": {
+                "itemId": {
+                    "target": "com.amazonaws.personalizeruntime#ItemID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended item ID.</p>"
+                    }
+                },
+                "score": {
+                    "target": "com.amazonaws.personalizeruntime#Score",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A numeric representation of the model's certainty that the item will be the next user\n      selection. For more information on scoring logic, see <a>how-scores-work</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that identifies an item.</p>\n         <p>The  and  APIs return a list of\n      <code>PredictedItem</code>s.</p>"
+            }
+        },
+        "com.amazonaws.personalizeruntime#RecommendationID": {
+            "type": "string"
+        },
+        "com.amazonaws.personalizeruntime#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.personalizeruntime#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.personalizeruntime#Score": {
+            "type": "double",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.personalizeruntime#UserID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        }
+    }
+}

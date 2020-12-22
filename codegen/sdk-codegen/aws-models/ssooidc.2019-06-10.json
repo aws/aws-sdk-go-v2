@@ -1,0 +1,666 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.ssooidc#AWSSSOOIDCService": {
+            "type": "service",
+            "version": "2019-06-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.ssooidc#CreateToken"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#RegisterClient"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#StartDeviceAuthorization"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SSO OIDC",
+                    "arnNamespace": "awsssooidc",
+                    "cloudFormationName": "SSOOIDC",
+                    "cloudTrailEventSource": "ssooidc.amazonaws.com",
+                    "endpointPrefix": "oidc"
+                },
+                "aws.auth#sigv4": {
+                    "name": "awsssooidc"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>AWS Single Sign-On (SSO) OpenID Connect (OIDC) is a web service that enables a client\n      (such as AWS CLI or a native application) to register with AWS SSO. The service also\n      enables the client to fetch the user’s access token upon successful authentication and\n      authorization with AWS SSO. This service conforms with the OAuth 2.0 based implementation of\n      the device authorization grant standard (<a href=\"https://tools.ietf.org/html/rfc8628\">https://tools.ietf.org/html/rfc8628</a>).</p>\n    \n         <p>For general information about AWS SSO, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">What is AWS\n        Single Sign-On?</a> in the <i>AWS SSO User Guide</i>.</p>\n    \n         <p>This API reference guide describes the AWS SSO OIDC operations that you can call\n      programatically and includes detailed information on data types and errors.</p>\n    \n         <note>\n            <p>AWS provides SDKs that consist of libraries and sample code for various programming\n        languages and platforms such as Java, Ruby, .Net, iOS, and Android. The SDKs provide a\n        convenient way to create programmatic access to AWS SSO and other AWS services. For more\n        information about the AWS SDKs, including how to download and install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p>\n         </note>",
+                "smithy.api#title": "AWS SSO OIDC"
+            }
+        },
+        "com.amazonaws.ssooidc#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.ssooidc#Error"
+                },
+                "error_description": {
+                    "target": "com.amazonaws.ssooidc#ErrorDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ssooidc#AccessToken": {
+            "type": "string"
+        },
+        "com.amazonaws.ssooidc#AuthCode": {
+            "type": "string"
+        },
+        "com.amazonaws.ssooidc#AuthorizationPendingException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.ssooidc#Error"
+                },
+                "error_description": {
+                    "target": "com.amazonaws.ssooidc#ErrorDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that a request to authorize a client with an access user session token is pending.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ssooidc#ClientId": {
+            "type": "string"
+        },
+        "com.amazonaws.ssooidc#ClientName": {
+            "type": "string"
+        },
+        "com.amazonaws.ssooidc#ClientSecret": {
+            "type": "string"
+        },
+        "com.amazonaws.ssooidc#ClientType": {
+            "type": "string"
+        },
+        "com.amazonaws.ssooidc#CreateToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssooidc#CreateTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssooidc#CreateTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssooidc#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#AuthorizationPendingException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#ExpiredTokenException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#InvalidClientException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#InvalidGrantException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#InvalidScopeException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#SlowDownException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#UnauthorizedClientException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#UnsupportedGrantTypeException"
+                }
+            ],
+            "traits": {
+                "smithy.api#auth": [],
+                "smithy.api#documentation": "<p>Creates and returns an access token for the authorized client. The access token issued\n      will be used to fetch short-term credentials for the assigned roles in the AWS\n      account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/token",
+                    "code": 200
+                },
+                "smithy.api#optionalAuth": {}
+            }
+        },
+        "com.amazonaws.ssooidc#CreateTokenRequest": {
+            "type": "structure",
+            "members": {
+                "clientId": {
+                    "target": "com.amazonaws.ssooidc#ClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier string for each client. This value should come from the persisted result of the <a>RegisterClient</a> API.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientSecret": {
+                    "target": "com.amazonaws.ssooidc#ClientSecret",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A secret string generated for the client. This value should come from the persisted result of the <a>RegisterClient</a> API.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "grantType": {
+                    "target": "com.amazonaws.ssooidc#GrantType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Supports grant types for authorization code, refresh token, and device code request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deviceCode": {
+                    "target": "com.amazonaws.ssooidc#DeviceCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used only when calling this API for the device code grant type. This short-term code is\n      used to identify this authentication attempt. This should come from an in-memory reference to\n      the result of the <a>StartDeviceAuthorization</a> API.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.ssooidc#AuthCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization code received from the authorization service. This parameter is required to perform an authorization grant request to get access to a token.</p>"
+                    }
+                },
+                "refreshToken": {
+                    "target": "com.amazonaws.ssooidc#RefreshToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used to obtain an access token in the event that the access token is invalid or expired. This token is not issued by the service.</p>"
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.ssooidc#Scopes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scopes that is defined by the client. Upon authorization, this list is used to\n      restrict permissions when granting an access token.</p>"
+                    }
+                },
+                "redirectUri": {
+                    "target": "com.amazonaws.ssooidc#URI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the application that will receive the authorization code. Users authorize\n      the service to send the request to this location.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssooidc#CreateTokenResponse": {
+            "type": "structure",
+            "members": {
+                "accessToken": {
+                    "target": "com.amazonaws.ssooidc#AccessToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An opaque token to access AWS SSO resources assigned to a user.</p>"
+                    }
+                },
+                "tokenType": {
+                    "target": "com.amazonaws.ssooidc#TokenType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to notify the client that the returned token is an access token. The supported type\n      is <code>BearerToken</code>.</p>"
+                    }
+                },
+                "expiresIn": {
+                    "target": "com.amazonaws.ssooidc#ExpirationInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the time in seconds when an access token will expire.</p>"
+                    }
+                },
+                "refreshToken": {
+                    "target": "com.amazonaws.ssooidc#RefreshToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that, if present, can be used to refresh a previously issued access token that\n      might have expired.</p>"
+                    }
+                },
+                "idToken": {
+                    "target": "com.amazonaws.ssooidc#IdToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user that associated with the access token, if present.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssooidc#DeviceCode": {
+            "type": "string"
+        },
+        "com.amazonaws.ssooidc#Error": {
+            "type": "string"
+        },
+        "com.amazonaws.ssooidc#ErrorDescription": {
+            "type": "string"
+        },
+        "com.amazonaws.ssooidc#ExpirationInSeconds": {
+            "type": "integer"
+        },
+        "com.amazonaws.ssooidc#ExpiredTokenException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.ssooidc#Error"
+                },
+                "error_description": {
+                    "target": "com.amazonaws.ssooidc#ErrorDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that the token issued by the service is expired and is no longer valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ssooidc#GrantType": {
+            "type": "string"
+        },
+        "com.amazonaws.ssooidc#IdToken": {
+            "type": "string"
+        },
+        "com.amazonaws.ssooidc#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.ssooidc#Error"
+                },
+                "error_description": {
+                    "target": "com.amazonaws.ssooidc#ErrorDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that an error from the service occurred while trying to process a request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.ssooidc#IntervalInSeconds": {
+            "type": "integer"
+        },
+        "com.amazonaws.ssooidc#InvalidClientException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.ssooidc#Error"
+                },
+                "error_description": {
+                    "target": "com.amazonaws.ssooidc#ErrorDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that the <code>clientId</code> or <code>clientSecret</code> in the request is\n      invalid. For example, this can occur when a client sends an incorrect <code>clientId</code> or\n      an expired <code>clientSecret</code>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 401
+            }
+        },
+        "com.amazonaws.ssooidc#InvalidClientMetadataException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.ssooidc#Error"
+                },
+                "error_description": {
+                    "target": "com.amazonaws.ssooidc#ErrorDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that the client information sent in the request during registration is invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ssooidc#InvalidGrantException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.ssooidc#Error"
+                },
+                "error_description": {
+                    "target": "com.amazonaws.ssooidc#ErrorDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that a request contains an invalid grant. This can occur if a client makes a <a>CreateToken</a> request with an invalid grant type.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ssooidc#InvalidRequestException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.ssooidc#Error"
+                },
+                "error_description": {
+                    "target": "com.amazonaws.ssooidc#ErrorDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that something is wrong with the input to the request. For example, a required\n      parameter might be missing or out of range.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ssooidc#InvalidScopeException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.ssooidc#Error"
+                },
+                "error_description": {
+                    "target": "com.amazonaws.ssooidc#ErrorDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that the scope provided in the request is invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ssooidc#LongTimeStampType": {
+            "type": "long"
+        },
+        "com.amazonaws.ssooidc#RefreshToken": {
+            "type": "string"
+        },
+        "com.amazonaws.ssooidc#RegisterClient": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssooidc#RegisterClientRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssooidc#RegisterClientResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssooidc#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#InvalidClientMetadataException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#InvalidScopeException"
+                }
+            ],
+            "traits": {
+                "smithy.api#auth": [],
+                "smithy.api#documentation": "<p>Registers a client with AWS SSO. This allows clients to initiate device authorization.\n      The output should be persisted for reuse through many authentication requests.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/client/register",
+                    "code": 200
+                },
+                "smithy.api#optionalAuth": {}
+            }
+        },
+        "com.amazonaws.ssooidc#RegisterClientRequest": {
+            "type": "structure",
+            "members": {
+                "clientName": {
+                    "target": "com.amazonaws.ssooidc#ClientName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The friendly name of the client.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientType": {
+                    "target": "com.amazonaws.ssooidc#ClientType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of client. The service supports only <code>public</code> as a client type. Anything other than public will be rejected by the service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scopes": {
+                    "target": "com.amazonaws.ssooidc#Scopes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of scopes that are defined by the client. Upon authorization, this list is used\n      to restrict permissions when granting an access token.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssooidc#RegisterClientResponse": {
+            "type": "structure",
+            "members": {
+                "clientId": {
+                    "target": "com.amazonaws.ssooidc#ClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier string for each client. This client uses this identifier to get\n      authenticated by the service in subsequent calls.</p>"
+                    }
+                },
+                "clientSecret": {
+                    "target": "com.amazonaws.ssooidc#ClientSecret",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A secret string generated for the client. The client will use this string to get\n      authenticated by the service in subsequent calls.</p>"
+                    }
+                },
+                "clientIdIssuedAt": {
+                    "target": "com.amazonaws.ssooidc#LongTimeStampType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the time at which the <code>clientId</code> and <code>clientSecret</code> were issued.</p>"
+                    }
+                },
+                "clientSecretExpiresAt": {
+                    "target": "com.amazonaws.ssooidc#LongTimeStampType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the time at which the <code>clientId</code> and <code>clientSecret</code> will become invalid.</p>"
+                    }
+                },
+                "authorizationEndpoint": {
+                    "target": "com.amazonaws.ssooidc#URI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint where the client can request authorization.</p>"
+                    }
+                },
+                "tokenEndpoint": {
+                    "target": "com.amazonaws.ssooidc#URI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint where the client can get an access token.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssooidc#Scope": {
+            "type": "string"
+        },
+        "com.amazonaws.ssooidc#Scopes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssooidc#Scope"
+            }
+        },
+        "com.amazonaws.ssooidc#SlowDownException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.ssooidc#Error"
+                },
+                "error_description": {
+                    "target": "com.amazonaws.ssooidc#ErrorDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that the client is making the request too frequently and is more than the service can handle. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ssooidc#StartDeviceAuthorization": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssooidc#StartDeviceAuthorizationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssooidc#StartDeviceAuthorizationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssooidc#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#InvalidClientException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#SlowDownException"
+                },
+                {
+                    "target": "com.amazonaws.ssooidc#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#auth": [],
+                "smithy.api#documentation": "<p>Initiates device authorization by requesting a pair of verification codes from the authorization service.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/device_authorization",
+                    "code": 200
+                },
+                "smithy.api#optionalAuth": {}
+            }
+        },
+        "com.amazonaws.ssooidc#StartDeviceAuthorizationRequest": {
+            "type": "structure",
+            "members": {
+                "clientId": {
+                    "target": "com.amazonaws.ssooidc#ClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier string for the client that is registered with AWS SSO. This value\n      should come from the persisted result of the <a>RegisterClient</a> API\n      operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientSecret": {
+                    "target": "com.amazonaws.ssooidc#ClientSecret",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A secret string that is generated for the client. This value should come from the\n      persisted result of the <a>RegisterClient</a> API operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startUrl": {
+                    "target": "com.amazonaws.ssooidc#URI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for the AWS SSO user portal. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/using-the-portal.html\">Using\n        the User Portal</a> in the <i>AWS Single Sign-On User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssooidc#StartDeviceAuthorizationResponse": {
+            "type": "structure",
+            "members": {
+                "deviceCode": {
+                    "target": "com.amazonaws.ssooidc#DeviceCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short-lived code that is used by the device when polling for a session token.</p>"
+                    }
+                },
+                "userCode": {
+                    "target": "com.amazonaws.ssooidc#UserCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A one-time user verification code. This is needed to authorize an in-use device.</p>"
+                    }
+                },
+                "verificationUri": {
+                    "target": "com.amazonaws.ssooidc#URI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the verification page that takes the <code>userCode</code> to authorize the device.</p>"
+                    }
+                },
+                "verificationUriComplete": {
+                    "target": "com.amazonaws.ssooidc#URI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alternate URL that the client can use to automatically launch a browser. This process\n      skips the manual step in which the user visits the verification page and enters their\n      code.</p>"
+                    }
+                },
+                "expiresIn": {
+                    "target": "com.amazonaws.ssooidc#ExpirationInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the number of seconds in which the verification code will become invalid.</p>"
+                    }
+                },
+                "interval": {
+                    "target": "com.amazonaws.ssooidc#IntervalInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the number of seconds the client must wait between attempts when polling for a session.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssooidc#TokenType": {
+            "type": "string"
+        },
+        "com.amazonaws.ssooidc#URI": {
+            "type": "string"
+        },
+        "com.amazonaws.ssooidc#UnauthorizedClientException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.ssooidc#Error"
+                },
+                "error_description": {
+                    "target": "com.amazonaws.ssooidc#ErrorDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that the client is not currently authorized to make the request. This can happen\n      when a <code>clientId</code> is not issued for a public client.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ssooidc#UnsupportedGrantTypeException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.ssooidc#Error"
+                },
+                "error_description": {
+                    "target": "com.amazonaws.ssooidc#ErrorDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that the grant type in the request is not supported by the service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ssooidc#UserCode": {
+            "type": "string"
+        }
+    }
+}

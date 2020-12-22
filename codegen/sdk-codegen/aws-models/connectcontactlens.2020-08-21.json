@@ -1,0 +1,584 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.connectcontactlens#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.connectcontactlens#Message",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.connectcontactlens#AmazonConnectContactLens": {
+            "type": "service",
+            "version": "2020-08-21",
+            "operations": [
+                {
+                    "target": "com.amazonaws.connectcontactlens#ListRealtimeContactAnalysisSegments"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Connect Contact Lens",
+                    "arnNamespace": "connect",
+                    "cloudFormationName": "ConnectContactLens",
+                    "cloudTrailEventSource": "connectcontactlens.amazonaws.com",
+                    "endpointPrefix": "contact-lens"
+                },
+                "aws.auth#sigv4": {
+                    "name": "connect"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Contact Lens for Amazon Connect enables you to analyze conversations between customer and agents,\n      by using speech transcription, natural language processing, and intelligent search\n      capabilities. It performs sentiment analysis, detects issues, and enables you to automatically\n      categorize contacts.</p>\n         <p>Contact Lens for Amazon Connect provides both real-time and post-call analytics of customer-agent\n      conversations. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/analyze-conversations.html\">Analyze conversations using\n        Contact Lens</a> in the <i>Amazon Connect Administrator Guide</i>. </p>",
+                "smithy.api#title": "Amazon Connect Contact Lens"
+            }
+        },
+        "com.amazonaws.connectcontactlens#Categories": {
+            "type": "structure",
+            "members": {
+                "MatchedCategories": {
+                    "target": "com.amazonaws.connectcontactlens#MatchedCategories",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category rules that have been matched in the analyzed segment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MatchedDetails": {
+                    "target": "com.amazonaws.connectcontactlens#MatchedDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category rule that was matched and when it occurred in the transcript.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the category rules that are used to automatically categorize contacts based on\n      uttered keywords and phrases.</p>"
+            }
+        },
+        "com.amazonaws.connectcontactlens#CategoryDetails": {
+            "type": "structure",
+            "members": {
+                "PointsOfInterest": {
+                    "target": "com.amazonaws.connectcontactlens#PointsOfInterest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The section of audio where the category rule was detected.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the category rule that was matched.</p>"
+            }
+        },
+        "com.amazonaws.connectcontactlens#CategoryName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.connectcontactlens#CharacterOffset": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#CharacterOffsets": {
+            "type": "structure",
+            "members": {
+                "BeginOffsetChar": {
+                    "target": "com.amazonaws.connectcontactlens#CharacterOffset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The beginning of the issue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndOffsetChar": {
+                    "target": "com.amazonaws.connectcontactlens#CharacterOffset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the issue.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>For characters that were detected as issues, where they occur in the transcript.</p>"
+            }
+        },
+        "com.amazonaws.connectcontactlens#ContactId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.connectcontactlens#InstanceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.connectcontactlens#InternalServiceException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.connectcontactlens#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request processing failed due to an error or failure with the service.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.connectcontactlens#InvalidRequestException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.connectcontactlens#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request is not valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.connectcontactlens#IssueDetected": {
+            "type": "structure",
+            "members": {
+                "CharacterOffsets": {
+                    "target": "com.amazonaws.connectcontactlens#CharacterOffsets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The offset for when the issue was detected in the segment.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Potential issues that are detected based on an artificial intelligence analysis of each\n      turn in the conversation.</p>"
+            }
+        },
+        "com.amazonaws.connectcontactlens#IssuesDetected": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcontactlens#IssueDetected"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#ListRealtimeContactAnalysisSegments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcontactlens#ListRealtimeContactAnalysisSegmentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcontactlens#ListRealtimeContactAnalysisSegmentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcontactlens#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcontactlens#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connectcontactlens#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connectcontactlens#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcontactlens#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a list of analysis segments for a real-time analysis session.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/realtime-contact-analysis/analysis-segments",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#ListRealtimeContactAnalysisSegmentsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connectcontactlens#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactId": {
+                    "target": "com.amazonaws.connectcontactlens#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connectcontactlens#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximimum number of results to return per page.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connectcontactlens#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#ListRealtimeContactAnalysisSegmentsResponse": {
+            "type": "structure",
+            "members": {
+                "Segments": {
+                    "target": "com.amazonaws.connectcontactlens#RealtimeContactAnalysisSegments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An analyzed transcript or category.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connectcontactlens#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results. If response includes <code>nextToken</code> there are two possible scenarios:</p>\n         <ul>\n            <li>\n               <p>There are more segments so another call is required to get them.</p>\n            </li>\n            <li>\n               <p>There are no more segments at this time, but more may be available later (real-time\n          analysis is in progress) so the client should call the operation again to get new\n          segments.</p>\n            </li>\n         </ul>\n         <p>If response does not include <code>nextToken</code>, the analysis is completed (successfully or failed) and there are no more segments to retrieve.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#MatchedCategories": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcontactlens#CategoryName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 150
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#MatchedDetails": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connectcontactlens#CategoryName"
+            },
+            "value": {
+                "target": "com.amazonaws.connectcontactlens#CategoryDetails"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 150
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#Message": {
+            "type": "string"
+        },
+        "com.amazonaws.connectcontactlens#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 131070
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.connectcontactlens#OffsetMillis": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#ParticipantId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.connectcontactlens#ParticipantRole": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.connectcontactlens#PointOfInterest": {
+            "type": "structure",
+            "members": {
+                "BeginOffsetMillis": {
+                    "target": "com.amazonaws.connectcontactlens#OffsetMillis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The beginning offset in milliseconds where the category rule was detected.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndOffsetMillis": {
+                    "target": "com.amazonaws.connectcontactlens#OffsetMillis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ending offset in milliseconds where the category rule was detected.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The section of the contact audio where that category rule was detected.</p>"
+            }
+        },
+        "com.amazonaws.connectcontactlens#PointsOfInterest": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcontactlens#PointOfInterest"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#RealtimeContactAnalysisSegment": {
+            "type": "structure",
+            "members": {
+                "Transcript": {
+                    "target": "com.amazonaws.connectcontactlens#Transcript",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analyzed transcript.</p>"
+                    }
+                },
+                "Categories": {
+                    "target": "com.amazonaws.connectcontactlens#Categories",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The matched category rules.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An analyzed segment for a real-time analysis session.</p>"
+            }
+        },
+        "com.amazonaws.connectcontactlens#RealtimeContactAnalysisSegments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcontactlens#RealtimeContactAnalysisSegment"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.connectcontactlens#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.connectcontactlens#SentimentValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "POSITIVE",
+                        "name": "POSITIVE"
+                    },
+                    {
+                        "value": "NEUTRAL",
+                        "name": "NEUTRAL"
+                    },
+                    {
+                        "value": "NEGATIVE",
+                        "name": "NEGATIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcontactlens#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.connectcontactlens#Message",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The throttling limit has been exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.connectcontactlens#Transcript": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connectcontactlens#TranscriptId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the transcript.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ParticipantId": {
+                    "target": "com.amazonaws.connectcontactlens#ParticipantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the participant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ParticipantRole": {
+                    "target": "com.amazonaws.connectcontactlens#ParticipantRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of participant. For example, is it a customer, agent, or system.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.connectcontactlens#TranscriptContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the transcript.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BeginOffsetMillis": {
+                    "target": "com.amazonaws.connectcontactlens#OffsetMillis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The beginning offset in the contact for this transcript.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndOffsetMillis": {
+                    "target": "com.amazonaws.connectcontactlens#OffsetMillis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end offset in the contact for this transcript.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Sentiment": {
+                    "target": "com.amazonaws.connectcontactlens#SentimentValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sentiment of the detected for this piece of transcript.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IssuesDetected": {
+                    "target": "com.amazonaws.connectcontactlens#IssuesDetected",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of positions where issues were detected on the transcript.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of messages in the session.</p>"
+            }
+        },
+        "com.amazonaws.connectcontactlens#TranscriptContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.connectcontactlens#TranscriptId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        }
+    }
+}

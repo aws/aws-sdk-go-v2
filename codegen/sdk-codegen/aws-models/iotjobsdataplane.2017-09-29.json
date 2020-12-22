@@ -1,0 +1,823 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.iotjobsdataplane#ApproximateSecondsBeforeTimedOut": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#BinaryBlob": {
+            "type": "blob"
+        },
+        "com.amazonaws.iotjobsdataplane#CertificateValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotjobsdataplane#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The certificate is invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#DescribeJobExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotjobsdataplane#DescribeJobExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotjobsdataplane#DescribeJobExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#CertificateValidationException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#TerminalStateException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets details of a job execution.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/things/{thingName}/jobs/{jobId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#DescribeJobExecutionJobId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "[a-zA-Z0-9_-]+|^\\$next"
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#DescribeJobExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.iotjobsdataplane#DescribeJobExecutionJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier assigned to this job when it was created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "thingName": {
+                    "target": "com.amazonaws.iotjobsdataplane#ThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The thing name associated with the device the job execution is running on.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "includeJobDocument": {
+                    "target": "com.amazonaws.iotjobsdataplane#IncludeJobDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. When set to true, the response contains the job document. The default is false.</p>",
+                        "smithy.api#httpQuery": "includeJobDocument"
+                    }
+                },
+                "executionNumber": {
+                    "target": "com.amazonaws.iotjobsdataplane#ExecutionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. A number that identifies a particular job execution on a particular device. If not specified,\n         the latest job execution is returned.</p>",
+                        "smithy.api#httpQuery": "executionNumber"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#DescribeJobExecutionResponse": {
+            "type": "structure",
+            "members": {
+                "execution": {
+                    "target": "com.amazonaws.iotjobsdataplane#JobExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains data about a job execution.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#DetailsKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#DetailsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iotjobsdataplane#DetailsKey"
+            },
+            "value": {
+                "target": "com.amazonaws.iotjobsdataplane#DetailsValue"
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#DetailsValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "[^\\p{C}]*+"
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#ExecutionNumber": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#ExpectedVersion": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#GetPendingJobExecutions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotjobsdataplane#GetPendingJobExecutionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotjobsdataplane#GetPendingJobExecutionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#CertificateValidationException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the list of all jobs for a thing that are not in a terminal status.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/things/{thingName}/jobs",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#GetPendingJobExecutionsRequest": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.iotjobsdataplane#ThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the thing that is executing the job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#GetPendingJobExecutionsResponse": {
+            "type": "structure",
+            "members": {
+                "inProgressJobs": {
+                    "target": "com.amazonaws.iotjobsdataplane#JobExecutionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of JobExecutionSummary objects with status IN_PROGRESS.</p>"
+                    }
+                },
+                "queuedJobs": {
+                    "target": "com.amazonaws.iotjobsdataplane#JobExecutionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of JobExecutionSummary objects with status QUEUED.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#IncludeExecutionState": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#IncludeJobDocument": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#InvalidRequestException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotjobsdataplane#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The contents of the request were invalid. For example, this code is returned when an UpdateJobExecution request contains invalid status details. The message contains details about the error.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#InvalidStateTransitionException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotjobsdataplane#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An update attempted to change the job execution to a state that is invalid because of the job execution's\n         current state (for example, an attempt to change a request in state SUCCESS to state IN_PROGRESS). In this\n         case, the body of the error message also contains the executionState field.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#IotLaserThingJobManagerExternalService": {
+            "type": "service",
+            "version": "2017-09-29",
+            "operations": [
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#DescribeJobExecution"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#GetPendingJobExecutions"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#StartNextPendingJobExecution"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#UpdateJobExecution"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "IoT Jobs Data Plane",
+                    "arnNamespace": "iot-jobs-data",
+                    "cloudFormationName": "IoTJobsDataPlane",
+                    "cloudTrailEventSource": "iotjobsdataplane.amazonaws.com",
+                    "endpointPrefix": "data.jobs.iot"
+                },
+                "aws.auth#sigv4": {
+                    "name": "iot-jobs-data"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>AWS IoT Jobs is a service that allows you to define a set of jobs — remote operations that are sent to\n         and executed on one or more devices connected to AWS IoT. For example, you can define a job that instructs a\n         set of devices to download and install application or firmware updates, reboot, rotate certificates, or perform\n         remote troubleshooting operations.</p>\n         <p> To create a job, you make a job document which is a description of the remote operations to be\n         performed, and you specify a list of targets that should perform the operations. The targets can be individual\n         things, thing groups or both.</p>\n         <p> AWS IoT Jobs sends a message to inform the targets that a job is available. The target starts the\n         execution of the job by downloading the job document, performing the operations it specifies, and reporting its\n         progress to AWS IoT. The Jobs service provides commands to track the progress of a job on a specific target and\n         for all the targets of the job</p>",
+                "smithy.api#title": "AWS IoT Jobs Data Plane"
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#JobDocument": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 32768
+                }
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#JobExecution": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.iotjobsdataplane#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier you assigned to this job when it was created.</p>"
+                    }
+                },
+                "thingName": {
+                    "target": "com.amazonaws.iotjobsdataplane#ThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the thing that is executing the job.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iotjobsdataplane#JobExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the job execution. Can be one of: \"QUEUED\", \"IN_PROGRESS\", \"FAILED\", \"SUCCESS\", \"CANCELED\",\n         \"REJECTED\", or \"REMOVED\".</p>"
+                    }
+                },
+                "statusDetails": {
+                    "target": "com.amazonaws.iotjobsdataplane#DetailsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of name/value pairs that describe the status of the job execution.</p>"
+                    }
+                },
+                "queuedAt": {
+                    "target": "com.amazonaws.iotjobsdataplane#QueuedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the job execution was enqueued.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.iotjobsdataplane#StartedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the job execution was started.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.iotjobsdataplane#LastUpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the job execution was last updated. </p>"
+                    }
+                },
+                "approximateSecondsBeforeTimedOut": {
+                    "target": "com.amazonaws.iotjobsdataplane#ApproximateSecondsBeforeTimedOut",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated number of seconds that remain before the job execution status will be\n           changed to <code>TIMED_OUT</code>.</p>"
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.iotjobsdataplane#VersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the job execution. Job execution versions are incremented each time they are updated by a\n         device.</p>"
+                    }
+                },
+                "executionNumber": {
+                    "target": "com.amazonaws.iotjobsdataplane#ExecutionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A number that identifies a particular job execution on a particular device. It can be used later in\n         commands that return or update job execution information.</p>"
+                    }
+                },
+                "jobDocument": {
+                    "target": "com.amazonaws.iotjobsdataplane#JobDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the job document.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains data about a job execution.</p>"
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#JobExecutionState": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.iotjobsdataplane#JobExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the job execution. Can be one of: \"QUEUED\", \"IN_PROGRESS\", \"FAILED\", \"SUCCESS\", \"CANCELED\",\n         \"REJECTED\", or \"REMOVED\".</p>"
+                    }
+                },
+                "statusDetails": {
+                    "target": "com.amazonaws.iotjobsdataplane#DetailsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of name/value pairs that describe the status of the job execution.</p>"
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.iotjobsdataplane#VersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the job execution. Job execution versions are incremented each time they are updated by a\n         device.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains data about the state of a job execution.</p>"
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#JobExecutionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "QUEUED",
+                        "name": "QUEUED"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "TIMED_OUT",
+                        "name": "TIMED_OUT"
+                    },
+                    {
+                        "value": "REJECTED",
+                        "name": "REJECTED"
+                    },
+                    {
+                        "value": "REMOVED",
+                        "name": "REMOVED"
+                    },
+                    {
+                        "value": "CANCELED",
+                        "name": "CANCELED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#JobExecutionSummary": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.iotjobsdataplane#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier you assigned to this job when it was created.</p>"
+                    }
+                },
+                "queuedAt": {
+                    "target": "com.amazonaws.iotjobsdataplane#QueuedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the job execution was enqueued.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.iotjobsdataplane#StartedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the job execution started.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.iotjobsdataplane#LastUpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the job execution was last updated.</p>"
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.iotjobsdataplane#VersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the job execution. Job execution versions are incremented each time AWS IoT Jobs receives\n         an update from a device.</p>"
+                    }
+                },
+                "executionNumber": {
+                    "target": "com.amazonaws.iotjobsdataplane#ExecutionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A number that identifies a particular job execution on a particular device.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a subset of information about a job execution.</p>"
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#JobExecutionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotjobsdataplane#JobExecutionSummary"
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#JobId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9_-]+"
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#LastUpdatedAt": {
+            "type": "long"
+        },
+        "com.amazonaws.iotjobsdataplane#QueuedAt": {
+            "type": "long"
+        },
+        "com.amazonaws.iotjobsdataplane#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotjobsdataplane#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotjobsdataplane#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service is temporarily unavailable.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#StartNextPendingJobExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotjobsdataplane#StartNextPendingJobExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotjobsdataplane#StartNextPendingJobExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#CertificateValidationException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets and starts the next pending (status IN_PROGRESS or QUEUED) job execution for a thing.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/things/{thingName}/jobs/$next",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#StartNextPendingJobExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.iotjobsdataplane#ThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the thing associated with the device.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusDetails": {
+                    "target": "com.amazonaws.iotjobsdataplane#DetailsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of name/value pairs that describe the status of the job execution. If not specified, the\n         statusDetails are unchanged.</p>"
+                    }
+                },
+                "stepTimeoutInMinutes": {
+                    "target": "com.amazonaws.iotjobsdataplane#StepTimeoutInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the amount of time this device has to finish execution of this job. If the job \n           execution status is not set to a terminal state before this timer expires, or before the \n           timer is reset (by calling <code>UpdateJobExecution</code>, setting the status to\n           <code>IN_PROGRESS</code> and specifying a new timeout value in field <code>stepTimeoutInMinutes</code>) \n           the job execution status will be automatically set to <code>TIMED_OUT</code>.  Note that setting \n           this timeout has no effect on that job execution timeout which may have been specified when \n           the job was created (<code>CreateJob</code> using field <code>timeoutConfig</code>).</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#StartNextPendingJobExecutionResponse": {
+            "type": "structure",
+            "members": {
+                "execution": {
+                    "target": "com.amazonaws.iotjobsdataplane#JobExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JobExecution object.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#StartedAt": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#StepTimeoutInMinutes": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#TerminalStateException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotjobsdataplane#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The job is in a terminal state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 410
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#ThingName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotjobsdataplane#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message associated with the exception.</p>"
+                    }
+                },
+                "payload": {
+                    "target": "com.amazonaws.iotjobsdataplane#BinaryBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payload associated with the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The rate exceeds the limit.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#UpdateJobExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotjobsdataplane#UpdateJobExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotjobsdataplane#UpdateJobExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#CertificateValidationException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#InvalidStateTransitionException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotjobsdataplane#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the status of a job execution.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/things/{thingName}/jobs/{jobId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#UpdateJobExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.iotjobsdataplane#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier assigned to this job when it was created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "thingName": {
+                    "target": "com.amazonaws.iotjobsdataplane#ThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the thing associated with the device.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iotjobsdataplane#JobExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new status for the job execution (IN_PROGRESS, FAILED, SUCCESS, or REJECTED). This must be specified\n         on every update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusDetails": {
+                    "target": "com.amazonaws.iotjobsdataplane#DetailsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Optional. A collection of name/value pairs that describe the status of the job execution. If not\n         specified, the statusDetails are unchanged.</p>"
+                    }
+                },
+                "stepTimeoutInMinutes": {
+                    "target": "com.amazonaws.iotjobsdataplane#StepTimeoutInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the amount of time this device has to finish execution of this job. If the job \n           execution status is not set to a terminal state before this timer expires, or before the \n           timer is reset (by again calling <code>UpdateJobExecution</code>, setting the status to\n           <code>IN_PROGRESS</code> and specifying a new timeout value in this field) the job execution\n           status will be automatically set to <code>TIMED_OUT</code>.  Note that setting or resetting \n           this timeout has no effect on that job execution timeout which may have been specified when \n           the job was created (<code>CreateJob</code> using field <code>timeoutConfig</code>).</p>"
+                    }
+                },
+                "expectedVersion": {
+                    "target": "com.amazonaws.iotjobsdataplane#ExpectedVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. The expected current version of the job execution. Each time you update the job execution, its\n         version is incremented. If the version of the job execution stored in Jobs does not match, the update is\n         rejected with a VersionMismatch error, and an ErrorResponse that contains the current job execution status data\n         is returned. (This makes it unnecessary to perform a separate DescribeJobExecution request in order to obtain\n         the job execution status data.)</p>"
+                    }
+                },
+                "includeJobExecutionState": {
+                    "target": "com.amazonaws.iotjobsdataplane#IncludeExecutionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. When included and set to true, the response contains the JobExecutionState data. The default is\n         false.</p>"
+                    }
+                },
+                "includeJobDocument": {
+                    "target": "com.amazonaws.iotjobsdataplane#IncludeJobDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. When set to true, the response contains the job document. The default is false.</p>"
+                    }
+                },
+                "executionNumber": {
+                    "target": "com.amazonaws.iotjobsdataplane#ExecutionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. A number that identifies a particular job execution on a particular device.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#UpdateJobExecutionResponse": {
+            "type": "structure",
+            "members": {
+                "executionState": {
+                    "target": "com.amazonaws.iotjobsdataplane#JobExecutionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JobExecutionState object.</p>"
+                    }
+                },
+                "jobDocument": {
+                    "target": "com.amazonaws.iotjobsdataplane#JobDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contents of the Job Documents.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotjobsdataplane#VersionNumber": {
+            "type": "long"
+        },
+        "com.amazonaws.iotjobsdataplane#errorMessage": {
+            "type": "string"
+        }
+    }
+}

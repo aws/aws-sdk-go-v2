@@ -1,0 +1,695 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.iotdataplane#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotdataplane#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified version does not match the version of the document.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.iotdataplane#DeleteThingShadow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotdataplane#DeleteThingShadowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotdataplane#DeleteThingShadowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotdataplane#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#UnsupportedDocumentEncodingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the shadow for the specified thing.</p>\n         <p>For more information, see <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html\">DeleteThingShadow</a> in the AWS IoT Developer Guide.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/things/{thingName}/shadow",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotdataplane#DeleteThingShadowRequest": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.iotdataplane#ThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the thing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "shadowName": {
+                    "target": "com.amazonaws.iotdataplane#ShadowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the shadow.</p>",
+                        "smithy.api#httpQuery": "name"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input for the DeleteThingShadow operation.</p>"
+            }
+        },
+        "com.amazonaws.iotdataplane#DeleteThingShadowResponse": {
+            "type": "structure",
+            "members": {
+                "payload": {
+                    "target": "com.amazonaws.iotdataplane#JsonDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state information, in JSON format.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output from the DeleteThingShadow operation.</p>"
+            }
+        },
+        "com.amazonaws.iotdataplane#GetThingShadow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotdataplane#GetThingShadowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotdataplane#GetThingShadowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotdataplane#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#UnsupportedDocumentEncodingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the shadow for the specified thing.</p>\n         <p>For more information, see <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html\">GetThingShadow</a> in the\n        AWS IoT Developer Guide.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/things/{thingName}/shadow",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotdataplane#GetThingShadowRequest": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.iotdataplane#ThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the thing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "shadowName": {
+                    "target": "com.amazonaws.iotdataplane#ShadowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the shadow.</p>",
+                        "smithy.api#httpQuery": "name"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input for the GetThingShadow operation.</p>"
+            }
+        },
+        "com.amazonaws.iotdataplane#GetThingShadowResponse": {
+            "type": "structure",
+            "members": {
+                "payload": {
+                    "target": "com.amazonaws.iotdataplane#JsonDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state information, in JSON format.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output from the GetThingShadow operation.</p>"
+            }
+        },
+        "com.amazonaws.iotdataplane#InternalFailureException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotdataplane#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An unexpected error has occurred.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.iotdataplane#InvalidRequestException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotdataplane#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request is not valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.iotdataplane#IotMoonrakerService": {
+            "type": "service",
+            "version": "2015-05-28",
+            "operations": [
+                {
+                    "target": "com.amazonaws.iotdataplane#DeleteThingShadow"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#GetThingShadow"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#ListNamedShadowsForThing"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#Publish"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#UpdateThingShadow"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "IoT Data Plane",
+                    "arnNamespace": "iotdata",
+                    "cloudFormationName": "IoTDataPlane",
+                    "cloudTrailEventSource": "iotdataplane.amazonaws.com",
+                    "endpointPrefix": "data.iot"
+                },
+                "aws.auth#sigv4": {
+                    "name": "iotdata"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>AWS IoT</fullname>\n         <p>AWS IoT-Data enables secure, bi-directional communication between Internet-connected things (such as sensors,\n      actuators, embedded devices, or smart appliances) and the AWS cloud. It implements a broker for applications and\n      things to publish messages over HTTP (Publish) and retrieve, update, and delete shadows. A shadow is a\n      persistent representation of your things and their state in the AWS cloud.</p>\n         <p>Find the endpoint address for actions in the AWS IoT data plane by running this CLI command:</p>\n         <p>\n            <code>aws iot describe-endpoint --endpoint-type iot:Data-ATS</code>\n         </p>\n         <p>The service name used by <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">AWS Signature Version 4</a>\n      to sign requests is: <i>iotdevicegateway</i>.</p>",
+                "smithy.api#title": "AWS IoT Data Plane"
+            }
+        },
+        "com.amazonaws.iotdataplane#JsonDocument": {
+            "type": "blob"
+        },
+        "com.amazonaws.iotdataplane#ListNamedShadowsForThing": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotdataplane#ListNamedShadowsForThingRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotdataplane#ListNamedShadowsForThingResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotdataplane#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the shadows for the specified thing.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/api/things/shadow/ListNamedShadowsForThing/{thingName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotdataplane#ListNamedShadowsForThingRequest": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.iotdataplane#ThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the thing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotdataplane#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "pageSize": {
+                    "target": "com.amazonaws.iotdataplane#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result page size.</p>",
+                        "smithy.api#httpQuery": "pageSize"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotdataplane#ListNamedShadowsForThingResponse": {
+            "type": "structure",
+            "members": {
+                "results": {
+                    "target": "com.amazonaws.iotdataplane#NamedShadowList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of shadows for the specified thing.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotdataplane#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no additional results.</p>"
+                    }
+                },
+                "timestamp": {
+                    "target": "com.amazonaws.iotdataplane#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Epoch date and time the response was generated by AWS IoT.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotdataplane#MethodNotAllowedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotdataplane#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified combination of HTTP verb and URI is not supported.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 405
+            }
+        },
+        "com.amazonaws.iotdataplane#NamedShadowList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotdataplane#ShadowName"
+            }
+        },
+        "com.amazonaws.iotdataplane#NextToken": {
+            "type": "string"
+        },
+        "com.amazonaws.iotdataplane#PageSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.iotdataplane#Payload": {
+            "type": "blob"
+        },
+        "com.amazonaws.iotdataplane#Publish": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotdataplane#PublishRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotdataplane#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Publishes state information.</p>\n         <p>For more information, see <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/protocols.html#http\">HTTP Protocol</a> in the\n       AWS IoT Developer Guide.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/topics/{topic}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotdataplane#PublishRequest": {
+            "type": "structure",
+            "members": {
+                "topic": {
+                    "target": "com.amazonaws.iotdataplane#Topic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the MQTT topic.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "qos": {
+                    "target": "com.amazonaws.iotdataplane#Qos",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Quality of Service (QoS) level.</p>",
+                        "smithy.api#httpQuery": "qos"
+                    }
+                },
+                "payload": {
+                    "target": "com.amazonaws.iotdataplane#Payload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state information, in JSON format.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input for the Publish operation.</p>"
+            }
+        },
+        "com.amazonaws.iotdataplane#Qos": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.iotdataplane#RequestEntityTooLargeException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotdataplane#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The payload exceeds the maximum size allowed.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 413
+            }
+        },
+        "com.amazonaws.iotdataplane#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotdataplane#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.iotdataplane#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotdataplane#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service is temporarily unavailable.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.iotdataplane#ShadowName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
+            }
+        },
+        "com.amazonaws.iotdataplane#ThingName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
+            }
+        },
+        "com.amazonaws.iotdataplane#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotdataplane#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The rate exceeds the limit.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.iotdataplane#Timestamp": {
+            "type": "long"
+        },
+        "com.amazonaws.iotdataplane#Topic": {
+            "type": "string"
+        },
+        "com.amazonaws.iotdataplane#UnauthorizedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotdataplane#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You are not authorized to perform this operation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 401
+            }
+        },
+        "com.amazonaws.iotdataplane#UnsupportedDocumentEncodingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotdataplane#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The document encoding is not supported.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 415
+            }
+        },
+        "com.amazonaws.iotdataplane#UpdateThingShadow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotdataplane#UpdateThingShadowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotdataplane#UpdateThingShadowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotdataplane#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#RequestEntityTooLargeException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.iotdataplane#UnsupportedDocumentEncodingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the shadow for the specified thing.</p>\n         <p>For more information, see <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html\">UpdateThingShadow</a> in the\n        AWS IoT Developer Guide.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/things/{thingName}/shadow",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotdataplane#UpdateThingShadowRequest": {
+            "type": "structure",
+            "members": {
+                "thingName": {
+                    "target": "com.amazonaws.iotdataplane#ThingName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the thing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "shadowName": {
+                    "target": "com.amazonaws.iotdataplane#ShadowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the shadow.</p>",
+                        "smithy.api#httpQuery": "name"
+                    }
+                },
+                "payload": {
+                    "target": "com.amazonaws.iotdataplane#JsonDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state information, in JSON format.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input for the UpdateThingShadow operation.</p>"
+            }
+        },
+        "com.amazonaws.iotdataplane#UpdateThingShadowResponse": {
+            "type": "structure",
+            "members": {
+                "payload": {
+                    "target": "com.amazonaws.iotdataplane#JsonDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state information, in JSON format.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output from the UpdateThingShadow operation.</p>"
+            }
+        },
+        "com.amazonaws.iotdataplane#errorMessage": {
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,419 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.kinesisvideosignaling#AWSAcuitySignalingService": {
+            "type": "service",
+            "version": "2019-12-04",
+            "operations": [
+                {
+                    "target": "com.amazonaws.kinesisvideosignaling#GetIceServerConfig"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideosignaling#SendAlexaOfferToMaster"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Kinesis Video Signaling",
+                    "arnNamespace": "kinesisvideo",
+                    "cloudFormationName": "KinesisVideoSignaling",
+                    "cloudTrailEventSource": "kinesisvideosignaling.amazonaws.com",
+                    "endpointPrefix": "kinesisvideo"
+                },
+                "aws.auth#sigv4": {
+                    "name": "kinesisvideo"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Kinesis Video Streams Signaling Service is a intermediate service that establishes a\n            communication channel for discovering peers, transmitting offers and answers in order to\n            establish peer-to-peer connection in webRTC technology.</p>",
+                "smithy.api#title": "Amazon Kinesis Video Signaling Channels"
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#Answer": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10000
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#ClientId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#ClientLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.kinesisvideosignaling#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Your request was throttled because you have exceeded the limit of allowed client\n            calls. Try making the call later.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.kinesisvideosignaling#GetIceServerConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisvideosignaling#GetIceServerConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisvideosignaling#GetIceServerConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisvideosignaling#ClientLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideosignaling#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideosignaling#InvalidClientException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideosignaling#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideosignaling#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideosignaling#SessionExpiredException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the Interactive Connectivity Establishment (ICE) server configuration\n            information, including URIs, username, and password which can be used to configure the\n            WebRTC connection. The ICE component uses this configuration information to setup the\n            WebRTC connection, including authenticating with the Traversal Using Relays around NAT\n            (TURN) relay server. </p>\n        <p>TURN is a protocol that is used to improve the connectivity of peer-to-peer\n            applications. By providing a cloud-based relay service, TURN ensures that a connection\n            can be established even when one or more peers are incapable of a direct peer-to-peer\n            connection. For more information, see <a href=\"https://tools.ietf.org/html/draft-uberti-rtcweb-turn-rest-00\">A REST API For\n                Access To TURN Services</a>.</p>\n        <p> You can invoke this API to establish a fallback mechanism in case either of the peers\n            is unable to establish a direct peer-to-peer connection over a signaling channel. You\n            must specify either a signaling channel ARN or the client ID in order to invoke this\n            API.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/get-ice-server-config",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#GetIceServerConfigRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelARN": {
+                    "target": "com.amazonaws.kinesisvideosignaling#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the signaling channel to be used for the peer-to-peer connection between\n            configured peers. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.kinesisvideosignaling#ClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the viewer. Must be unique within the signaling channel.</p>"
+                    }
+                },
+                "Service": {
+                    "target": "com.amazonaws.kinesisvideosignaling#Service",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the desired service. Currently, <code>TURN</code> is the only valid\n            value.</p>"
+                    }
+                },
+                "Username": {
+                    "target": "com.amazonaws.kinesisvideosignaling#Username",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional user ID to be associated with the credentials.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#GetIceServerConfigResponse": {
+            "type": "structure",
+            "members": {
+                "IceServerList": {
+                    "target": "com.amazonaws.kinesisvideosignaling#IceServerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of ICE server information objects.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#IceServer": {
+            "type": "structure",
+            "members": {
+                "Uris": {
+                    "target": "com.amazonaws.kinesisvideosignaling#Uris",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of URIs, in the form specified in the <a href=\"https://tools.ietf.org/html/draft-petithuguenin-behave-turn-uris-03\">I-D.petithuguenin-behave-turn-uris</a> spec. These URIs provide the different\n            addresses and/or protocols that can be used to reach the TURN server.</p>"
+                    }
+                },
+                "Username": {
+                    "target": "com.amazonaws.kinesisvideosignaling#Username",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A username to login to the ICE server.</p>"
+                    }
+                },
+                "Password": {
+                    "target": "com.amazonaws.kinesisvideosignaling#Password",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A password to login to the ICE server.</p>"
+                    }
+                },
+                "Ttl": {
+                    "target": "com.amazonaws.kinesisvideosignaling#Ttl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The period of time, in seconds, during which the username and password are\n            valid.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure for the ICE server connection data.</p>"
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#IceServerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kinesisvideosignaling#IceServer"
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#InvalidArgumentException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.kinesisvideosignaling#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The value for this input parameter is invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#InvalidClientException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.kinesisvideosignaling#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified client is invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#MessagePayload": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10000
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9+/=]+"
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#NotAuthorizedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.kinesisvideosignaling#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The caller is not authorized to perform this operation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 401
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#Password": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#ResourceARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+"
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.kinesisvideosignaling#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource is not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#SendAlexaOfferToMaster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisvideosignaling#SendAlexaOfferToMasterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisvideosignaling#SendAlexaOfferToMasterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisvideosignaling#ClientLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideosignaling#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideosignaling#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideosignaling#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API allows you to connect WebRTC-enabled devices with Alexa display devices. When\n            invoked, it sends the Alexa Session Description Protocol (SDP) offer to the master peer.\n            The offer is delivered as soon as the master is connected to the specified signaling\n            channel. This API returns the SDP answer from the connected master. If the master is not\n            connected to the signaling channel, redelivery requests are made until the message\n            expires.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/send-alexa-offer-to-master",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#SendAlexaOfferToMasterRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelARN": {
+                    "target": "com.amazonaws.kinesisvideosignaling#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the signaling channel by which Alexa and the master peer\n            communicate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SenderClientId": {
+                    "target": "com.amazonaws.kinesisvideosignaling#ClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the sender client.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MessagePayload": {
+                    "target": "com.amazonaws.kinesisvideosignaling#MessagePayload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base64-encoded SDP offer content.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#SendAlexaOfferToMasterResponse": {
+            "type": "structure",
+            "members": {
+                "Answer": {
+                    "target": "com.amazonaws.kinesisvideosignaling#Answer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base64-encoded SDP answer content.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#Service": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TURN",
+                        "name": "TURN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#SessionExpiredException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.kinesisvideosignaling#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>If the client session is expired. Once the client is connected, the session is valid\n            for 45 minutes. Client should reconnect to the channel to continue sending/receiving\n            messages.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#Ttl": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 30,
+                    "max": 86400
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#Uris": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kinesisvideosignaling#Uri"
+            }
+        },
+        "com.amazonaws.kinesisvideosignaling#Username": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+            }
+        }
+    }
+}

@@ -1,0 +1,389 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.sagemakerfeaturestoreruntime#AccessForbidden": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have permission to perform an action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#AmazonSageMakerFeatureStoreRuntime": {
+            "type": "service",
+            "version": "2020-07-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#DeleteRecord"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#GetRecord"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#PutRecord"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SageMaker FeatureStore Runtime",
+                    "arnNamespace": "sagemaker",
+                    "cloudFormationName": "SageMakerFeatureStoreRuntime",
+                    "cloudTrailEventSource": "sagemakerfeaturestoreruntime.amazonaws.com",
+                    "endpointPrefix": "featurestore-runtime.sagemaker"
+                },
+                "aws.auth#sigv4": {
+                    "name": "sagemaker"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Contains all data plane API operations and data types for the Amazon SageMaker Feature\n         Store. Use this API to put, delete, and retrieve (get) features from a feature\n         store.</p>\n         <p>Use the following operations to configure your <code>OnlineStore</code> and\n            <code>OfflineStore</code> features, and to create and manage feature groups:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateFeatureGroup.html\">CreateFeatureGroup</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteFeatureGroup.html\">DeleteFeatureGroup</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeFeatureGroup.html\">DescribeFeatureGroup</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListFeatureGroups.html\">ListFeatureGroups</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#title": "Amazon SageMaker Feature Store Runtime"
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#DeleteRecord": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakerfeaturestoreruntime#DeleteRecordRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#AccessForbidden"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#InternalFailure"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ServiceUnavailable"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ValidationError"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a <code>Record</code> from a <code>FeatureGroup</code>. A new record will show\n         up in the <code>OfflineStore</code> when the <code>DeleteRecord</code> API is called. This\n         record will have a value of <code>True</code> in the <code>is_deleted</code> column.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/FeatureGroup/{FeatureGroupName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#DeleteRecordRequest": {
+            "type": "structure",
+            "members": {
+                "FeatureGroupName": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the feature group to delete the record from. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecordIdentifierValueAsString": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ValueAsString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value for the <code>RecordIdentifier</code> that uniquely identifies the record, in\n         string format. </p>",
+                        "smithy.api#httpQuery": "RecordIdentifierValueAsString",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventTime": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ValueAsString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp indicating when the deletion event occurred. <code>EventTime</code> can be\n         used to query data at a certain point in time.</p>",
+                        "smithy.api#httpQuery": "EventTime",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#FeatureGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#FeatureName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]([-_]*[a-zA-Z0-9])*"
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#FeatureNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#FeatureValue": {
+            "type": "structure",
+            "members": {
+                "FeatureName": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a feature that a feature value corresponds to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ValueAsString": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ValueAsString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value associated with a feature, in string format. Note that features types can be\n         String, Integral, or Fractional. This value represents all three types as a string.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The value associated with a feature.</p>"
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#GetRecord": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakerfeaturestoreruntime#GetRecordRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakerfeaturestoreruntime#GetRecordResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#AccessForbidden"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#InternalFailure"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ResourceNotFound"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ServiceUnavailable"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ValidationError"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use for <code>OnlineStore</code> serving from a <code>FeatureStore</code>. Only the\n         latest records stored in the <code>OnlineStore</code> can be retrieved. If no Record with\n            <code>RecordIdentifierValue</code> is found, then an empty result is returned. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/FeatureGroup/{FeatureGroupName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#GetRecordRequest": {
+            "type": "structure",
+            "members": {
+                "FeatureGroupName": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the feature group in which you want to put the records.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecordIdentifierValueAsString": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ValueAsString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that corresponds to <code>RecordIdentifier</code> type and uniquely identifies\n         the record in the <code>FeatureGroup</code>. </p>",
+                        "smithy.api#httpQuery": "RecordIdentifierValueAsString",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FeatureNames": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of names of Features to be retrieved. If not specified, the latest value for all\n         the Features are returned.</p>",
+                        "smithy.api#httpQuery": "FeatureName"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#GetRecordResponse": {
+            "type": "structure",
+            "members": {
+                "Record": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#Record",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The record you requested. A list of <code>FeatureValues</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#InternalFailure": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal failure occurred. Try your request again. If the problem \n      persists, contact AWS customer support.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#Message": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#PutRecord": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakerfeaturestoreruntime#PutRecordRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#AccessForbidden"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#InternalFailure"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ServiceUnavailable"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#ValidationError"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Used for data ingestion into the <code>FeatureStore</code>. The <code>PutRecord</code>\n         API writes to both the <code>OnlineStore</code> and <code>OfflineStore</code>. If the\n         record is the latest record for the <code>recordIdentifier</code>, the record is written to\n         both the <code>OnlineStore</code> and <code>OfflineStore</code>. If the record is a\n         historic record, it is written only to the <code>OfflineStore</code>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/FeatureGroup/{FeatureGroupName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#PutRecordRequest": {
+            "type": "structure",
+            "members": {
+                "FeatureGroupName": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the feature group that you want to insert the record into.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Record": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#Record",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of FeatureValues to be inserted. This will be a full over-write. If you only want\n         to update few of the feature values, do the following:</p>\n         <ul>\n            <li>\n               <p>Use <code>GetRecord</code> to retrieve the latest record.</p>\n            </li>\n            <li>\n               <p>Update the record returned from <code>GetRecord</code>. </p>\n            </li>\n            <li>\n               <p>Use <code>PutRecord</code> to update feature values.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#Record": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#ResourceNotFound": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource that is required to perform an action was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#ServiceUnavailable": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service is currently unavailable.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#ValidationError": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There was an error validating your request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.sagemakerfeaturestoreruntime#ValueAsString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 358400
+                },
+                "smithy.api#pattern": ".*"
+            }
+        }
+    }
+}

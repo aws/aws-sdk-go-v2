@@ -1,0 +1,1210 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.resourcegroupstaggingapi#AmazonResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[\\s\\S]*"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ComplianceDetails": {
+            "type": "structure",
+            "members": {
+                "NoncompliantKeys": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>These tag keys on the resource are noncompliant with the effective tag policy.</p>"
+                    }
+                },
+                "KeysWithNoncompliantValues": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>These are keys defined in the effective policy that are on the resource with either\n            incorrect case treatment or noncompliant values. </p>"
+                    }
+                },
+                "ComplianceStatus": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ComplianceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether a resource is compliant with the effective tag policy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information that shows whether a resource is compliant with the effective tag policy,\n            including details on any noncompliant tag keys.</p>"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ComplianceStatus": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ConcurrentModificationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The target of the operation is currently being modified by a different request. Try\n            again later.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ConstraintViolationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied because performing this operation violates a constraint. </p>\n        <p>Some of the reasons in the following list might not apply to this specific\n            operation.</p>\n        <ul>\n            <li>\n                <p>You must meet the prerequisites for using tag policies. For information, see\n                        <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html\">Prerequisites and Permissions for Using Tag Policies</a> in the\n                        <i>AWS Organizations User Guide.</i>\n               </p>\n            </li>\n            <li>\n                <p>You must enable the tag policies service principal\n                        (<code>tagpolicies.tag.amazonaws.com</code>) to integrate with AWS Organizations For\n                    information, see <a href=\"http://docs.aws.amazon.com/organizations/latest/APIReference/API_EnableAWSServiceAccess.html\">EnableAWSServiceAccess</a>.</p>\n            </li>\n            <li>\n                <p>You must have a tag policy attached to the organization root, an OU, or an\n                    account.</p>\n            </li>\n         </ul>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#DescribeReportCreation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#DescribeReportCreationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#DescribeReportCreationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ConstraintViolationException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the status of the <code>StartReportCreation</code> operation. </p>\n        <p>You can call this operation only from the organization's master account and from the us-east-1 Region.</p>"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#DescribeReportCreationInput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.resourcegroupstaggingapi#DescribeReportCreationOutput": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reports the status of the operation.</p>\n        <p>The operation status can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>RUNNING</code> - Report creation is in progress.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SUCCEEDED</code> - Report creation is complete. You can open the report\n                    from the Amazon S3 bucket that you specified when you ran\n                        <code>StartReportCreation</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FAILED</code> - Report creation timed out or the Amazon S3 bucket is not\n                    accessible. </p>\n            </li>\n            <li>\n                <p>\n                  <code>NO REPORT</code> - No report was generated in the last 90 days.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "S3Location": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the Amazon S3 bucket where the report was stored on creation.</p>"
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#StartDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the report was started. </p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the common errors that all operations return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "InternalServiceException",
+                        "name": "INTERNAL_SERVICE_EXCEPTION"
+                    },
+                    {
+                        "value": "InvalidParameterException",
+                        "name": "INVALID_PARAMETER_EXCEPTION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ExceptionMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ExcludeCompliantResources": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#FailedResourcesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#ResourceARN"
+            },
+            "value": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#FailureInfo"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#FailureInfo": {
+            "type": "structure",
+            "members": {
+                "StatusCode": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#StatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status code of the common error.</p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code of the common error. Valid values include\n                <code>InternalServiceException</code>, <code>InvalidParameterException</code>, and\n            any valid error code returned by the AWS service that hosts the resource that you want\n            to tag.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message of the common error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the errors that are returned for each failed resource. This\n            information can include <code>InternalServiceException</code> and\n                <code>InvalidParameterException</code> errors. It can also include any valid error\n            code returned by the AWS service that hosts the resource that the ARN key\n            represents.</p>\n        <p>The following are common error codes that you might receive from other AWS\n            services:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>InternalServiceException</b> – This can\n                    mean that the Resource Groups Tagging API didn't receive a response from another\n                    AWS service. It can also mean the the resource type in the request is not\n                    supported by the Resource Groups Tagging API. In these cases, it's safe to retry\n                    the request and then call <a href=\"http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html\">GetResources</a> to verify the changes.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AccessDeniedException</b> – This can mean\n                    that you need permission to calling tagging operations in the AWS service that\n                    contains the resource. For example, to use the Resource Groups Tagging API to\n                    tag a CloudWatch alarm resource, you need permission to call <a href=\"http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html\">\n                     <code>TagResources</code>\n                  </a>\n                    <i>and</i>\n                    <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html\">\n                     <code>TagResource</code>\n                  </a> in the CloudWatch API. </p>\n            </li>\n         </ul>\n        <p>For more information on errors that are generated from other AWS services, see the\n            documentation for that service. </p>"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#GetComplianceSummary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#GetComplianceSummaryInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#GetComplianceSummaryOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ConstraintViolationException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a table that shows counts of resources that are noncompliant with their tag\n            policies.</p>\n        <p>For more information on tag policies, see <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">Tag Policies</a> in\n            the <i>AWS Organizations User Guide.</i>\n         </p>\n        <p>You can call this operation only from the organization's master account and from the us-east-1 Region.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "PaginationToken",
+                    "outputToken": "PaginationToken",
+                    "items": "SummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#GetComplianceSummaryInput": {
+            "type": "structure",
+            "members": {
+                "TargetIdFilters": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TargetIdFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target identifiers (usually, specific account IDs) to limit the output by. If you\n            use this parameter, the count of returned noncompliant resources includes only resources\n            with the specified target IDs.</p>"
+                    }
+                },
+                "RegionFilters": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#RegionFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Regions to limit the output by. If you use this parameter, the count of\n            returned noncompliant resources includes only resources in the specified Regions.</p>"
+                    }
+                },
+                "ResourceTypeFilters": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ResourceTypeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The constraints on the resources that you want returned. The format of each resource\n            type is <code>service[:resourceType]</code>. For example, specifying a resource type of\n                <code>ec2</code> returns all Amazon EC2 resources (which includes EC2 instances).\n            Specifying a resource type of <code>ec2:instance</code> returns only EC2 instances. </p>\n        <p>The string for each service name and resource type is the same as that embedded in a\n            resource's Amazon Resource Name (ARN). Consult the <i>AWS General\n                Reference</i> for the following:</p>\n        <ul>\n            <li>\n                <p>For a list of service name strings, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces\">AWS Service Namespaces</a>.</p>\n            </li>\n            <li>\n                <p>For resource type strings, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax\">Example ARNs</a>.</p>\n            </li>\n            <li>\n                <p>For more information about ARNs, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n                        Resource Names (ARNs) and AWS Service Namespaces</a>.</p>\n            </li>\n         </ul>\n        <p>You can specify multiple resource types by using an array. The array can include up to\n            100 items. Note that the length constraint requirement applies to each resource type\n            filter. </p>"
+                    }
+                },
+                "TagKeyFilters": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagKeyFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag keys to limit the output by. If you use this parameter, the count of\n            returned noncompliant resources includes only resources that have the specified tag\n            keys.</p>"
+                    }
+                },
+                "GroupBy": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#GroupBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of attributes to group the counts of noncompliant resources by. If supplied,\n            the counts are sorted by those attributes.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#MaxResultsGetComplianceSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A limit that restricts the number of results that are returned per page.</p>"
+                    }
+                },
+                "PaginationToken": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that indicates that additional data is available. Leave this value empty for\n            your initial request. If the response includes a <code>PaginationToken</code>, use that\n            string for this value to request an additional page of data.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#GetComplianceSummaryOutput": {
+            "type": "structure",
+            "members": {
+                "SummaryList": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#SummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A table that shows counts of noncompliant resources.</p>"
+                    }
+                },
+                "PaginationToken": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that indicates that the response contains more data than can be returned in a\n            single response. To receive additional data, specify this string for the\n                <code>PaginationToken</code> value in a subsequent request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#GetResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#GetResourcesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#GetResourcesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#PaginationTokenExpiredException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns all the tagged or previously tagged resources that are located in the\n            specified Region for the AWS account.</p>\n        <p>Depending on what information you want returned, you can also specify the\n            following:</p>\n        <ul>\n            <li>\n                <p>\n                  <i>Filters</i> that specify what tags and resource types you\n                    want returned. The response includes all tags that are associated with the\n                    requested resources.</p>\n            </li>\n            <li>\n                <p>Information about compliance with the account's effective tag policy. For more\n                    information on tag policies, see <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">Tag\n                        Policies</a> in the <i>AWS Organizations User Guide.</i>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <p>You can check the <code>PaginationToken</code> response parameter to determine if\n                a query is complete. Queries occasionally return fewer results on a page than\n                allowed. The <code>PaginationToken</code> response parameter value is\n                    <code>null</code>\n                <i>only</i> when there are no more results to display. </p>\n        </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "PaginationToken",
+                    "outputToken": "PaginationToken",
+                    "items": "ResourceTagMappingList",
+                    "pageSize": "ResourcesPerPage"
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#GetResourcesInput": {
+            "type": "structure",
+            "members": {
+                "PaginationToken": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that indicates that additional data is available. Leave this value empty for\n            your initial request. If the response includes a <code>PaginationToken</code>, use that\n            string for this value to request an additional page of data.</p>"
+                    }
+                },
+                "TagFilters": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of TagFilters (keys and values). Each TagFilter specified must contain a key\n            with values as optional. A request can include up to 50 keys, and each key can include\n            up to 20 values. </p>\n        <p>Note the following when deciding how to use TagFilters:</p>\n        <ul>\n            <li>\n                <p>If you <i>do</i> specify a TagFilter, the response returns only\n                    those resources that are currently associated with the specified tag. </p>\n            </li>\n            <li>\n                <p>If you <i>don't</i> specify a TagFilter, the response includes\n                    all resources that were ever associated with tags. Resources that currently\n                    don't have associated tags are shown with an empty tag set, like this:\n                        <code>\"Tags\": []</code>.</p>\n            </li>\n            <li>\n                <p>If you specify more than one filter in a single request, the response returns\n                    only those resources that satisfy all specified filters.</p>\n            </li>\n            <li>\n                <p>If you specify a filter that contains more than one value for a key, the\n                    response returns resources that match any of the specified values for that\n                    key.</p>\n            </li>\n            <li>\n                <p>If you don't specify any values for a key, the response returns resources that\n                    are tagged with that key irrespective of the value.</p>\n                <p>For example, for filters: filter1 = {key1, {value1}}, filter2 = {key2,\n                    {value2,value3,value4}} , filter3 = {key3}:</p>\n                <ul>\n                  <li>\n                        <p>GetResources( {filter1} ) returns resources tagged with\n                            key1=value1</p>\n                    </li>\n                  <li>\n                        <p>GetResources( {filter2} ) returns resources tagged with key2=value2 or\n                            key2=value3 or key2=value4</p>\n                    </li>\n                  <li>\n                        <p>GetResources( {filter3} ) returns resources tagged with any tag\n                            containing key3 as its tag key, irrespective of its value</p>\n                    </li>\n                  <li>\n                        <p>GetResources( {filter1,filter2,filter3} ) returns resources tagged\n                            with ( key1=value1) and ( key2=value2 or key2=value3 or key2=value4) and\n                            (key3, irrespective of the value)</p>\n                    </li>\n               </ul>\n            </li>\n         </ul>"
+                    }
+                },
+                "ResourcesPerPage": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ResourcesPerPage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A limit that restricts the number of resources returned by GetResources in paginated\n            output. You can set ResourcesPerPage to a minimum of 1 item and the maximum of 100\n            items. </p>"
+                    }
+                },
+                "TagsPerPage": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagsPerPage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AWS recommends using <code>ResourcesPerPage</code> instead of this parameter.</p>\n        <p>A limit that restricts the number of tags (key and value pairs) returned by\n            GetResources in paginated output. A resource with no tags is counted as having one tag\n            (one key and value pair).</p>\n        <p>\n            <code>GetResources</code> does not split a resource and its associated tags across\n            pages. If the specified <code>TagsPerPage</code> would cause such a break, a\n                <code>PaginationToken</code> is returned in place of the affected resource and its\n            tags. Use that token in another request to get the remaining data. For example, if you\n            specify a <code>TagsPerPage</code> of <code>100</code> and the account has 22 resources\n            with 10 tags each (meaning that each resource has 10 key and value pairs), the output\n            will consist of three pages. The first page displays the first 10 resources, each with\n            its 10 tags. The second page displays the next 10 resources, each with its 10 tags. The\n            third page displays the remaining 2 resources, each with its 10 tags.</p>\n        <p>You can set <code>TagsPerPage</code> to a minimum of 100 items and the maximum of 500\n            items.</p>"
+                    }
+                },
+                "ResourceTypeFilters": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ResourceTypeFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The constraints on the resources that you want returned. The format of each resource\n            type is <code>service[:resourceType]</code>. For example, specifying a resource type of\n                <code>ec2</code> returns all Amazon EC2 resources (which includes EC2 instances).\n            Specifying a resource type of <code>ec2:instance</code> returns only EC2 instances. </p>\n        <p>The string for each service name and resource type is the same as that embedded in a\n            resource's Amazon Resource Name (ARN). Consult the <i>AWS General\n                Reference</i> for the following:</p>\n        <ul>\n            <li>\n                <p>For a list of service name strings, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces\">AWS Service Namespaces</a>.</p>\n            </li>\n            <li>\n                <p>For resource type strings, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax\">Example ARNs</a>.</p>\n            </li>\n            <li>\n                <p>For more information about ARNs, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n                        Resource Names (ARNs) and AWS Service Namespaces</a>.</p>\n            </li>\n         </ul>\n        <p>You can specify multiple resource types by using an array. The array can include up to\n            100 items. Note that the length constraint requirement applies to each resource type\n            filter. </p>"
+                    }
+                },
+                "IncludeComplianceDetails": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#IncludeComplianceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to include details regarding the compliance with the effective tag\n            policy. Set this to <code>true</code> to determine whether resources are compliant with\n            the tag policy and to get details.</p>"
+                    }
+                },
+                "ExcludeCompliantResources": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ExcludeCompliantResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to exclude resources that are compliant with the tag policy. Set\n            this to <code>true</code> if you are interested in retrieving information on\n            noncompliant resources only.</p>\n        <p>You can use this parameter only if the <code>IncludeComplianceDetails</code> parameter\n            is also set to <code>true</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#GetResourcesOutput": {
+            "type": "structure",
+            "members": {
+                "PaginationToken": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that indicates that the response contains more data than can be returned in a\n            single response. To receive additional data, specify this string for the\n                <code>PaginationToken</code> value in a subsequent request.</p>"
+                    }
+                },
+                "ResourceTagMappingList": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ResourceTagMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of resource ARNs and the tags (keys and values) associated with each.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#GetTagKeys": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#GetTagKeysInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#GetTagKeysOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#PaginationTokenExpiredException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns all tag keys in the specified Region for the AWS account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "PaginationToken",
+                    "outputToken": "PaginationToken",
+                    "items": "TagKeys"
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#GetTagKeysInput": {
+            "type": "structure",
+            "members": {
+                "PaginationToken": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that indicates that additional data is available. Leave this value empty for\n            your initial request. If the response includes a <code>PaginationToken</code>, use that\n            string for this value to request an additional page of data.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#MaxResultTagsDS1"
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#GetTagKeysOutput": {
+            "type": "structure",
+            "members": {
+                "PaginationToken": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that indicates that the response contains more data than can be returned in a\n            single response. To receive additional data, specify this string for the\n                <code>PaginationToken</code> value in a subsequent request.</p>"
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all tag keys in the AWS account.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#GetTagValues": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#GetTagValuesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#GetTagValuesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#PaginationTokenExpiredException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns all tag values for the specified key in the specified Region for the AWS\n            account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "PaginationToken",
+                    "outputToken": "PaginationToken",
+                    "items": "TagValues"
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#GetTagValuesInput": {
+            "type": "structure",
+            "members": {
+                "PaginationToken": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that indicates that additional data is available. Leave this value empty for\n            your initial request. If the response includes a <code>PaginationToken</code>, use that\n            string for this value to request an additional page of data.</p>"
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key for which you want to list all existing values in the specified Region for the\n            AWS account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#MaxResultTagsDS1"
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#GetTagValuesOutput": {
+            "type": "structure",
+            "members": {
+                "PaginationToken": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that indicates that the response contains more data than can be returned in a\n            single response. To receive additional data, specify this string for the\n                <code>PaginationToken</code> value in a subsequent request.</p>"
+                    }
+                },
+                "TagValues": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagValuesOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all tag values for the specified key in the AWS account.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#GroupBy": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#GroupByAttribute"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#GroupByAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TARGET_ID",
+                        "name": "TARGET_ID"
+                    },
+                    {
+                        "value": "REGION",
+                        "name": "REGION"
+                    },
+                    {
+                        "value": "RESOURCE_TYPE",
+                        "name": "RESOURCE_TYPE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#IncludeComplianceDetails": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#InternalServiceException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request processing failed because of an unknown error, exception, or failure. You\n            can retry the request.</p>",
+                "smithy.api#error": "server"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#InvalidParameterException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This error indicates one of the following:</p>\n        <ul>\n            <li>\n                <p>A parameter is missing.</p>\n            </li>\n            <li>\n                <p>A malformed string was supplied for the request parameter.</p>\n            </li>\n            <li>\n                <p>An out-of-range value was supplied for the request parameter.</p>\n            </li>\n            <li>\n                <p>The target ID is invalid, unsupported, or doesn't exist.</p>\n            </li>\n            <li>\n                <p>You can't access the Amazon S3 bucket for report storage. For more information, see\n                        <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html#bucket-policies-org-report\">Additional Requirements for Organization-wide Tag Compliance\n                        Reports</a> in the <i>AWS Organizations User Guide.</i>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#LastUpdated": {
+            "type": "string"
+        },
+        "com.amazonaws.resourcegroupstaggingapi#MaxResultTagsDS1": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#MaxResultsGetComplianceSummary": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#NonCompliantResources": {
+            "type": "long"
+        },
+        "com.amazonaws.resourcegroupstaggingapi#PaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "[\\s\\S]*"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#PaginationTokenExpiredException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A <code>PaginationToken</code> is valid for a maximum of 15 minutes. Your request was\n            denied because the specified <code>PaginationToken</code> has expired.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#Region": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[\\s\\S]*"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#RegionFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#Region"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ResourceARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "[\\s\\S]*"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ResourceARNList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#ResourceARN"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ResourceGroupsTaggingAPI_20170126": {
+            "type": "service",
+            "version": "2017-01-26",
+            "operations": [
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#DescribeReportCreation"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#GetComplianceSummary"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#GetResources"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#GetTagKeys"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#GetTagValues"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#StartReportCreation"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagResources"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#UntagResources"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Resource Groups Tagging API",
+                    "arnNamespace": "tagging",
+                    "cloudFormationName": "ResourceGroupsTaggingAPI",
+                    "cloudTrailEventSource": "resourcegroupstaggingapi.amazonaws.com",
+                    "endpointPrefix": "tagging"
+                },
+                "aws.auth#sigv4": {
+                    "name": "tagging"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>Resource Groups Tagging API</fullname>\n        <p>This guide describes the API operations for the resource groups tagging.</p>\n        <p>A tag is a label that you assign to an AWS resource. A tag consists of a key and a\n            value, both of which you define. For example, if you have two Amazon EC2 instances, you might\n            assign both a tag key of \"Stack.\" But the value of \"Stack\" might be \"Testing\" for one\n            and \"Production\" for the other.</p>\n        <important>\n            <p>Do not store personally identifiable information (PII) or other confidential or\n                sensitive information in tags. We use tags to provide you with billing and\n                administration services. Tags are not intended to be used for private or sensitive\n                data.</p>\n        </important>\n        <p>Tagging can help you organize your resources and enables you to simplify resource\n            management, access management and cost allocation. </p>\n        <p>You can use the resource groups tagging API operations to complete the following\n            tasks:</p>\n        <ul>\n            <li>\n                <p>Tag and untag supported resources located in the specified Region for the\n                    AWS account.</p>\n            </li>\n            <li>\n                <p>Use tag-based filters to search for resources located in the specified Region\n                    for the AWS account.</p>\n            </li>\n            <li>\n                <p>List all existing tag keys in the specified Region for the AWS\n                    account.</p>\n            </li>\n            <li>\n                <p>List all existing values for the specified key in the specified Region for the\n                    AWS account.</p>\n            </li>\n         </ul>\n        <p>To use resource groups tagging API operations, you must add the following permissions\n            to your IAM policy:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>tag:GetResources</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:TagResources</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:UntagResources</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:GetTagKeys</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>tag:GetTagValues</code>\n               </p>\n            </li>\n         </ul>\n        <p>You'll also need permissions to access the resources of individual services so that\n            you can tag and untag those resources.</p>\n        <p>For more information on IAM policies, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html\">Managing IAM\n                Policies</a> in the <i>IAM User Guide</i>.</p>\n        <p>\n            <i>\n               <b>Services that support the Resource Groups Tagging\n                    API</b>\n            </i>\n         </p>\n        <p>You can use the Resource Groups Tagging API to tag resources for the following AWS\n            services.</p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/a4b\">Alexa for Business (a4b)</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/apigateway\">API Gateway</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/appstream2\">Amazon AppStream</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/appsync\">AWS AppSync</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/app-mesh\">AWS App Mesh</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/athena\">Amazon Athena</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide\">Amazon\n                        Aurora</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/aws-backup\">AWS Backup</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/acm\">AWS Certificate Manager</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/acm\">AWS Certificate Manager Private\n                        CA</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/clouddirectory\">Amazon Cloud\n                        Directory</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloud-map\">AWS Cloud Map</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudformation\">AWS\n                    CloudFormation</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudfront\">Amazon CloudFront</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudhsm\">AWS CloudHSM</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudtrail\">AWS CloudTrail</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudwatch\">Amazon CloudWatch (alarms\n                        only)</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudwatch/?id=docs_gateway#amazon-cloudwatch-events\">Amazon CloudWatch\n                        Events</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudwatch/?id=docs_gateway#amazon-cloudwatch-logs\">Amazon CloudWatch\n                        Logs</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cloudwatch\">Amazon Cloudwatch\n                        Synthetics</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codebuild\">AWS CodeBuild</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codecommit\">AWS CodeCommit</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codeguru/latest/profiler-ug/\">AWS CodeGuru\n                        Profiler</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codepipeline\">AWS\n                    CodePipeline</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codestar\">AWS CodeStar</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codestar-connections/latest/APIReference/\">AWS CodeStar Connections</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cognito\">Amazon Cognito\n                    Identity</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cognito\">Amazon Cognito User\n                    Pools</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/comprehend\">Amazon Comprehend</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/config\">AWS Config</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"http://aws.amazon.com/connect/resources/?whats-new-cards#Documentation\">Amazon Connect</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/data-exchange\">AWS Data\n                    Exchange</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/data-pipeline\">AWS Data\n                    Pipeline</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/dms\">AWS Database Migration\n                    Service</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/datasync\">AWS DataSync</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/devicefarm\">AWS Device Farm</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/directconnect\">AWS Direct\n                    Connect</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/directory-service\">AWS Directory\n                        Service</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/dynamodb\">Amazon DynamoDB</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ebs\">Amazon EBS</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ec2\">Amazon EC2</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/imagebuilder\">EC2 Image\n                    Builder</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ecr\">Amazon ECR</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ecs\">Amazon ECS</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/eks\">Amazon EKS</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/elastic-beanstalk\">AWS Elastic\n                        Beanstalk</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/efs\">Amazon Elastic File\n                    System</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/elasticloadbalancing\">Elastic Load\n                        Balancing</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/elastic-inference\">Amazon Elastic\n                        Inference</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/elasticache\">Amazon\n                    ElastiCache</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/elasticsearch-service\">Amazon Elasticsearch\n                        Service</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/medialive\">AWS Elemental\n                    MediaLive</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/mediapackage\">AWS Elemental\n                        MediaPackage</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/mediapackage\">AWS Elemental MediaPackage\n                        VoD</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/mediatailor\">AWS Elemental\n                        MediaTailor</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/emr\">Amazon EMR</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/eventbridge\">Amazon EventBridge\n                        Schema</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/firewall-manager\">AWS Firewall\n                        Manager</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/forecast\">Amazon Forecast</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/frauddetector\">Amazon Fraud\n                    Detector</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/fsx\">Amazon FSx</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/s3/?id=docs_gateway#amazon-s3-glacier\">Amazon\n                        S3 Glacier</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/global-accelerator\">AWS Global\n                        Accelerator</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ground-station\">AWS Ground\n                    Station</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/glue\">AWS Glue</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/guardduty\">Amazon GuardDuty</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/inspector\">Amazon Inspector</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ivs\">Amazon Interactive Video Service</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/iotanalytics\">AWS IoT\n                    Analytics</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/iot\">AWS IoT Core</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/iot-device-defender\">AWS IoT Device\n                        Defender</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/iot-device-management\">AWS IoT Device\n                        Management</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/iotevents\">AWS IoT Events</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/greengrass\">AWS IoT\n                    Greengrass</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/iot-1-click\">AWS IoT 1-Click</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/iot-sitewise\">AWS IoT\n                    Sitewise</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/thingsgraph\">AWS IoT Things\n                    Graph</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/kendra\">Amazon Kendra</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/kms\">AWS Key Management\n                    Service</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/kinesis\">Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/kinesis/?id=docs_gateway#amazon-kinesis-data-analytics\">Amazon Kinesis\n                        Data Analytics</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/kinesis/?id=docs_gateway#amazon-kinesis-data-firehose\">Amazon Kinesis\n                        Data Firehose</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda\">AWS Lambda</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/lex\">Amazon Lex</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/license-manager\">AWS License\n                        Manager</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/lightsail\">Amazon Lightsail</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/macie\">Amazon Macie</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/machine-learning\">Amazon Machine\n                        Learning</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/amazon-mq\">Amazon MQ</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/msk\">Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/msk\">Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/neptune\">Amazon Neptune</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/what-is-network-manager.html\">AWS Network Manager</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/opsworks\">AWS OpsWorks</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/opsworks\">AWS OpsWorks CM</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/organizations\">AWS\n                    Organizations</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/pinpoint\">Amazon Pinpoint</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/qldb\">Amazon Quantum Ledger Database\n                        (QLDB)</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/rds\">Amazon RDS</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/redshift\">Amazon Redshift</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ram\">AWS Resource Access\n                    Manager</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ARG\">AWS Resource Groups</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/robomaker\">AWS RoboMaker</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/route53\">Amazon Route 53</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/route53\">Amazon Route 53\n                    Resolver</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/s3\">Amazon S3 (buckets only)</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker\">Amazon SageMaker</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/savingsplans\">Savings Plans</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/secretsmanager\">AWS Secrets\n                    Manager</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/securityhub\">AWS Security\n                    Hub</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/servicecatalog\">AWS Service\n                    Catalog</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ses\">Amazon Simple Email Service\n                        (SES)</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/sns\">Amazon Simple Notification Service\n                        (SNS)</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/sqs\">Amazon Simple Queue Service\n                        (SQS)</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/swf\">Amazon Simple Workflow\n                    Service</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/step-functions\">AWS Step\n                    Functions</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/storagegateway\">AWS Storage\n                    Gateway</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager\">AWS Systems\n                        Manager</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/transfer\">AWS Transfer for\n                    SFTP</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/vpc\">Amazon VPC</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/waf\">AWS WAF</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/waf\">AWS WAF Regional</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/worklink\">Amazon WorkLink</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/workspaces\">Amazon WorkSpaces</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#title": "AWS Resource Groups Tagging API"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ResourceTagMapping": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that have been applied to one or more AWS resources.</p>"
+                    }
+                },
+                "ComplianceDetails": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ComplianceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information that shows whether a resource is compliant with the effective tag policy,\n            including details on any noncompliant tag keys.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of resource ARNs and the tags (keys and values) that are associated with\n            each.</p>"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ResourceTagMappingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#ResourceTagMapping"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ResourceTypeFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#AmazonResourceType"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ResourcesPerPage": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#S3Bucket": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "[a-z0-9.-]*"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#S3Location": {
+            "type": "string"
+        },
+        "com.amazonaws.resourcegroupstaggingapi#StartDate": {
+            "type": "string"
+        },
+        "com.amazonaws.resourcegroupstaggingapi#StartReportCreation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#StartReportCreationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#StartReportCreationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ConstraintViolationException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Generates a report that lists all tagged resources in accounts across your\n            organization and tells whether each resource is compliant with the effective tag policy.\n            Compliance data is refreshed daily. </p>\n        <p>The generated report is saved to the following location:</p>\n        <p>\n            <code>s3://example-bucket/AwsTagPolicies/o-exampleorgid/YYYY-MM-ddTHH:mm:ssZ/report.csv</code>\n         </p>\n        <p>You can call this operation only from the organization's master account and from the us-east-1 Region.</p>"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#StartReportCreationInput": {
+            "type": "structure",
+            "members": {
+                "S3Bucket": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket where the report will be stored; for example:</p>\n        <p>\n            <code>awsexamplebucket</code>\n         </p>\n        <p>For more information on S3 bucket requirements, including an example bucket policy,\n            see the example S3 bucket policy on this page.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#StartReportCreationOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.resourcegroupstaggingapi#Status": {
+            "type": "string"
+        },
+        "com.amazonaws.resourcegroupstaggingapi#StatusCode": {
+            "type": "integer"
+        },
+        "com.amazonaws.resourcegroupstaggingapi#Summary": {
+            "type": "structure",
+            "members": {
+                "LastUpdated": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#LastUpdated",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that shows when this summary was generated in this Region. </p>"
+                    }
+                },
+                "TargetId": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TargetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account identifier or the root identifier of the organization. If you don't know\n            the root ID, you can call the AWS Organizations <a href=\"http://docs.aws.amazon.com/organizations/latest/APIReference/API_ListRoots.html\">ListRoots</a> API.</p>"
+                    }
+                },
+                "TargetIdType": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TargetIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the target is an account, an OU, or the organization root.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Region that the summary applies to.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#AmazonResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS resource type.</p>"
+                    }
+                },
+                "NonCompliantResources": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#NonCompliantResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The count of noncompliant resources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A count of noncompliant resources.</p>"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#SummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#Summary"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One part of a key-value pair that makes up a tag. A key is a general label that acts like a category for more specific tag values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key). The value can be empty or null.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata that you apply to AWS resources to help you categorize and organize\n            them. Each tag consists of a key and a value, both of which you define. For more\n            information, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n                Resources</a> in the <i>AWS General Reference</i>.</p>"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TagFilter": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One part of a key-value pair that makes up a tag. A key is a general label that acts like a category for more specific tag values.</p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key). The value can be empty or null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of tags (keys and values) that are used to specify the associated\n            resources.</p>"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TagFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#TagFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "[\\s\\S]*"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TagKeyFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#TagKey"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TagKeyListForUntag": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#Tag"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TagResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#TagResourcesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#TagResourcesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Applies one or more tags to the specified resources. Note the following:</p>\n        <ul>\n            <li>\n                <p>Not all resources can have tags. For a list of services that support tagging,\n                    see <a href=\"http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html\">this list</a>.</p>\n            </li>\n            <li>\n                <p>Each resource can have up to 50 tags. For other limits, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions\">Tag Naming and Usage\n                        Conventions</a> in the <i>AWS General\n                    Reference.</i>\n               </p>\n            </li>\n            <li>\n                <p>You can only tag resources that are located in the specified Region for the\n                    AWS account.</p>\n            </li>\n            <li>\n                <p>To add tags to a resource, you need the necessary permissions for the service\n                    that the resource belongs to as well as permissions for adding tags. For more\n                    information, see <a href=\"http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html\">this list</a>.</p>\n            </li>\n         </ul>\n        <important>\n            <p>Do not store personally identifiable information (PII) or other confidential or\n                sensitive information in tags. We use tags to provide you with billing and\n                administration services. Tags are not intended to be used for private or sensitive\n                data.</p>\n        </important>"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TagResourcesInput": {
+            "type": "structure",
+            "members": {
+                "ResourceARNList": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ResourceARNList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource. For more\n            information, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\n                Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General\n                Reference</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that you want to add to the specified resources. A tag consists of a key and\n            a value that you define.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TagResourcesOutput": {
+            "type": "structure",
+            "members": {
+                "FailedResourcesMap": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#FailedResourcesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map containing a key-value pair for each failed item that couldn't be tagged. The\n            key is the ARN of the failed resource. The value is a <code>FailureInfo</code> object\n            that contains an error code, a status code, and an error message. If there are no\n            errors, the <code>FailedResourcesMap</code> is empty.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[\\s\\S]*"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TagValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TagValuesOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#TagValue"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TagsPerPage": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TargetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 6,
+                    "max": 68
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9-]*"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TargetIdFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#TargetId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#TargetIdType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACCOUNT",
+                        "name": "ACCOUNT"
+                    },
+                    {
+                        "value": "OU",
+                        "name": "OU"
+                    },
+                    {
+                        "value": "ROOT",
+                        "name": "ROOT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#ThrottledException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied to limit the frequency of submitted requests.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#UntagResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#UntagResourcesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourcegroupstaggingapi#UntagResourcesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ThrottledException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the specified tags from the specified resources. When you specify a tag key,\n            the action removes both that key and its associated value. The operation succeeds even\n            if you attempt to remove tags from a resource that were already removed. Note the\n            following:</p>\n        <ul>\n            <li>\n                <p>To remove tags from a resource, you need the necessary permissions for the\n                    service that the resource belongs to as well as permissions for removing tags.\n                    For more information, see <a href=\"http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html\">this list</a>.</p>\n            </li>\n            <li>\n                <p>You can only tag resources that are located in the specified Region for the\n                    AWS account.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#UntagResourcesInput": {
+            "type": "structure",
+            "members": {
+                "ResourceARNList": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#ResourceARNList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource. For more\n            information, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\n                Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General\n                Reference</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#TagKeyListForUntag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the tag keys that you want to remove from the specified resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroupstaggingapi#UntagResourcesOutput": {
+            "type": "structure",
+            "members": {
+                "FailedResourcesMap": {
+                    "target": "com.amazonaws.resourcegroupstaggingapi#FailedResourcesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of resources that could not be untagged. An error code, status code, and error\n            message are returned for each failed item. </p>"
+                    }
+                }
+            }
+        }
+    }
+}
