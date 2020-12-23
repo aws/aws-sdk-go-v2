@@ -1027,31 +1027,40 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ordering"
+                        "value": "ordering",
+                        "name": "ordering"
                     },
                     {
-                        "value": "requested"
+                        "value": "requested",
+                        "name": "requested"
                     },
                     {
-                        "value": "pending"
+                        "value": "pending",
+                        "name": "pending"
                     },
                     {
-                        "value": "available"
+                        "value": "available",
+                        "name": "available"
                     },
                     {
-                        "value": "down"
+                        "value": "down",
+                        "name": "down"
                     },
                     {
-                        "value": "deleting"
+                        "value": "deleting",
+                        "name": "deleting"
                     },
                     {
-                        "value": "deleted"
+                        "value": "deleted",
+                        "name": "deleted"
                     },
                     {
-                        "value": "rejected"
+                        "value": "rejected",
+                        "name": "rejected"
                     },
                     {
-                        "value": "unknown"
+                        "value": "unknown",
+                        "name": "unknown"
                     }
                 ]
             }
@@ -2917,13 +2926,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "requested"
+                        "value": "requested",
+                        "name": "requested"
                     },
                     {
-                        "value": "accepted"
+                        "value": "accepted",
+                        "name": "accepted"
                     },
                     {
-                        "value": "deleted"
+                        "value": "deleted",
+                        "name": "deleted"
                     }
                 ]
             }
@@ -2933,19 +2945,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "associating"
+                        "value": "associating",
+                        "name": "associating"
                     },
                     {
-                        "value": "associated"
+                        "value": "associated",
+                        "name": "associated"
                     },
                     {
-                        "value": "disassociating"
+                        "value": "disassociating",
+                        "name": "disassociating"
                     },
                     {
-                        "value": "disassociated"
+                        "value": "disassociated",
+                        "name": "disassociated"
                     },
                     {
-                        "value": "updating"
+                        "value": "updating",
+                        "name": "updating"
                     }
                 ]
             }
@@ -3011,16 +3028,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "attaching"
+                        "value": "attaching",
+                        "name": "attaching"
                     },
                     {
-                        "value": "attached"
+                        "value": "attached",
+                        "name": "attached"
                     },
                     {
-                        "value": "detaching"
+                        "value": "detaching",
+                        "name": "detaching"
                     },
                     {
-                        "value": "detached"
+                        "value": "detached",
+                        "name": "detached"
                     }
                 ]
             }
@@ -3030,10 +3051,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "TransitVirtualInterface"
+                        "value": "TransitVirtualInterface",
+                        "name": "TransitVirtualInterface"
                     },
                     {
-                        "value": "PrivateVirtualInterface"
+                        "value": "PrivateVirtualInterface",
+                        "name": "PrivateVirtualInterface"
                     }
                 ]
             }
@@ -3055,16 +3078,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "pending"
+                        "value": "pending",
+                        "name": "pending"
                     },
                     {
-                        "value": "available"
+                        "value": "available",
+                        "name": "available"
                     },
                     {
-                        "value": "deleting"
+                        "value": "deleting",
+                        "name": "deleting"
                     },
                     {
-                        "value": "deleted"
+                        "value": "deleted",
+                        "name": "deleted"
                     }
                 ]
             }
@@ -3290,25 +3317,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "requested"
+                        "value": "requested",
+                        "name": "requested"
                     },
                     {
-                        "value": "pending"
+                        "value": "pending",
+                        "name": "pending"
                     },
                     {
-                        "value": "available"
+                        "value": "available",
+                        "name": "available"
                     },
                     {
-                        "value": "down"
+                        "value": "down",
+                        "name": "down"
                     },
                     {
-                        "value": "deleting"
+                        "value": "deleting",
+                        "name": "deleting"
                     },
                     {
-                        "value": "deleted"
+                        "value": "deleted",
+                        "name": "deleted"
                     },
                     {
-                        "value": "unknown"
+                        "value": "unknown",
+                        "name": "unknown"
                     }
                 ]
             }
@@ -3457,25 +3491,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "requested"
+                        "value": "requested",
+                        "name": "requested"
                     },
                     {
-                        "value": "pending"
+                        "value": "pending",
+                        "name": "pending"
                     },
                     {
-                        "value": "available"
+                        "value": "available",
+                        "name": "available"
                     },
                     {
-                        "value": "down"
+                        "value": "down",
+                        "name": "down"
                     },
                     {
-                        "value": "deleting"
+                        "value": "deleting",
+                        "name": "deleting"
                     },
                     {
-                        "value": "deleted"
+                        "value": "deleted",
+                        "name": "deleted"
                     },
                     {
-                        "value": "unknown"
+                        "value": "unknown",
+                        "name": "unknown"
                     }
                 ]
             }
@@ -5031,31 +5072,40 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "confirming"
+                        "value": "confirming",
+                        "name": "confirming"
                     },
                     {
-                        "value": "verifying"
+                        "value": "verifying",
+                        "name": "verifying"
                     },
                     {
-                        "value": "pending"
+                        "value": "pending",
+                        "name": "pending"
                     },
                     {
-                        "value": "available"
+                        "value": "available",
+                        "name": "available"
                     },
                     {
-                        "value": "down"
+                        "value": "down",
+                        "name": "down"
                     },
                     {
-                        "value": "deleting"
+                        "value": "deleting",
+                        "name": "deleting"
                     },
                     {
-                        "value": "deleted"
+                        "value": "deleted",
+                        "name": "deleted"
                     },
                     {
-                        "value": "rejected"
+                        "value": "rejected",
+                        "name": "rejected"
                     },
                     {
-                        "value": "unknown"
+                        "value": "unknown",
+                        "name": "unknown"
                     }
                 ]
             }

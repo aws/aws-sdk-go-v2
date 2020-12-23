@@ -2477,19 +2477,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ASSOCIATING"
+                        "value": "ASSOCIATING",
+                        "name": "ASSOCIATING"
                     },
                     {
-                        "value": "ASSOCIATED"
+                        "value": "ASSOCIATED",
+                        "name": "ASSOCIATED"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     },
                     {
-                        "value": "DISASSOCIATING"
+                        "value": "DISASSOCIATING",
+                        "name": "DISASSOCIATING"
                     },
                     {
-                        "value": "DISASSOCIATED"
+                        "value": "DISASSOCIATED",
+                        "name": "DISASSOCIATED"
                     }
                 ]
             }
@@ -2499,10 +2504,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PRINCIPAL"
+                        "value": "PRINCIPAL",
+                        "name": "PRINCIPAL"
                     },
                     {
-                        "value": "RESOURCE"
+                        "value": "RESOURCE",
+                        "name": "RESOURCE"
                     }
                 ]
             }
@@ -2512,13 +2519,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CREATED_FROM_POLICY"
+                        "value": "CREATED_FROM_POLICY",
+                        "name": "CREATED_FROM_POLICY"
                     },
                     {
-                        "value": "PROMOTING_TO_STANDARD"
+                        "value": "PROMOTING_TO_STANDARD",
+                        "name": "PROMOTING_TO_STANDARD"
                     },
                     {
-                        "value": "STANDARD"
+                        "value": "STANDARD",
+                        "name": "STANDARD"
                     }
                 ]
             }
@@ -2669,16 +2679,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PENDING"
+                        "value": "PENDING",
+                        "name": "PENDING"
                     },
                     {
-                        "value": "ACCEPTED"
+                        "value": "ACCEPTED",
+                        "name": "ACCEPTED"
                     },
                     {
-                        "value": "REJECTED"
+                        "value": "REJECTED",
+                        "name": "REJECTED"
                     },
                     {
-                        "value": "EXPIRED"
+                        "value": "EXPIRED",
+                        "name": "EXPIRED"
                     }
                 ]
             }
@@ -2834,19 +2848,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PENDING"
+                        "value": "PENDING",
+                        "name": "PENDING"
                     },
                     {
-                        "value": "ACTIVE"
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     },
                     {
-                        "value": "DELETING"
+                        "value": "DELETING",
+                        "name": "DELETING"
                     },
                     {
-                        "value": "DELETED"
+                        "value": "DELETED",
+                        "name": "DELETED"
                     }
                 ]
             }
@@ -2856,19 +2875,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "AVAILABLE"
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
                     },
                     {
-                        "value": "ZONAL_RESOURCE_INACCESSIBLE"
+                        "value": "ZONAL_RESOURCE_INACCESSIBLE",
+                        "name": "ZONAL_RESOURCE_INACCESSIBLE"
                     },
                     {
-                        "value": "LIMIT_EXCEEDED"
+                        "value": "LIMIT_EXCEEDED",
+                        "name": "LIMIT_EXCEEDED"
                     },
                     {
-                        "value": "UNAVAILABLE"
+                        "value": "UNAVAILABLE",
+                        "name": "UNAVAILABLE"
                     },
                     {
-                        "value": "PENDING"
+                        "value": "PENDING",
+                        "name": "PENDING"
                     }
                 ]
             }

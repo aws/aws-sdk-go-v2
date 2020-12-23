@@ -111,7 +111,7 @@
                     "min": 0,
                     "max": 50
                 },
-                "smithy.api#pattern": "[A-Za-z0-9]+"
+                "smithy.api#pattern": "[A-Za-z0-9_]+"
             }
         },
         "com.amazonaws.personalizeruntime#FilterAttributeValue": {

@@ -1167,19 +1167,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "RUNNING"
+                        "value": "RUNNING",
+                        "name": "RUNNING"
                     },
                     {
-                        "value": "SUCCEEDED"
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     },
                     {
-                        "value": "TIMED_OUT"
+                        "value": "TIMED_OUT",
+                        "name": "TIMED_OUT"
                     },
                     {
-                        "value": "ABORTED"
+                        "value": "ABORTED",
+                        "name": "ABORTED"
                     }
                 ]
             }
@@ -1572,169 +1577,224 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ActivityFailed"
+                        "value": "ActivityFailed",
+                        "name": "ActivityFailed"
                     },
                     {
-                        "value": "ActivityScheduled"
+                        "value": "ActivityScheduled",
+                        "name": "ActivityScheduled"
                     },
                     {
-                        "value": "ActivityScheduleFailed"
+                        "value": "ActivityScheduleFailed",
+                        "name": "ActivityScheduleFailed"
                     },
                     {
-                        "value": "ActivityStarted"
+                        "value": "ActivityStarted",
+                        "name": "ActivityStarted"
                     },
                     {
-                        "value": "ActivitySucceeded"
+                        "value": "ActivitySucceeded",
+                        "name": "ActivitySucceeded"
                     },
                     {
-                        "value": "ActivityTimedOut"
+                        "value": "ActivityTimedOut",
+                        "name": "ActivityTimedOut"
                     },
                     {
-                        "value": "ChoiceStateEntered"
+                        "value": "ChoiceStateEntered",
+                        "name": "ChoiceStateEntered"
                     },
                     {
-                        "value": "ChoiceStateExited"
+                        "value": "ChoiceStateExited",
+                        "name": "ChoiceStateExited"
                     },
                     {
-                        "value": "ExecutionAborted"
+                        "value": "ExecutionAborted",
+                        "name": "ExecutionAborted"
                     },
                     {
-                        "value": "ExecutionFailed"
+                        "value": "ExecutionFailed",
+                        "name": "ExecutionFailed"
                     },
                     {
-                        "value": "ExecutionStarted"
+                        "value": "ExecutionStarted",
+                        "name": "ExecutionStarted"
                     },
                     {
-                        "value": "ExecutionSucceeded"
+                        "value": "ExecutionSucceeded",
+                        "name": "ExecutionSucceeded"
                     },
                     {
-                        "value": "ExecutionTimedOut"
+                        "value": "ExecutionTimedOut",
+                        "name": "ExecutionTimedOut"
                     },
                     {
-                        "value": "FailStateEntered"
+                        "value": "FailStateEntered",
+                        "name": "FailStateEntered"
                     },
                     {
-                        "value": "LambdaFunctionFailed"
+                        "value": "LambdaFunctionFailed",
+                        "name": "LambdaFunctionFailed"
                     },
                     {
-                        "value": "LambdaFunctionScheduled"
+                        "value": "LambdaFunctionScheduled",
+                        "name": "LambdaFunctionScheduled"
                     },
                     {
-                        "value": "LambdaFunctionScheduleFailed"
+                        "value": "LambdaFunctionScheduleFailed",
+                        "name": "LambdaFunctionScheduleFailed"
                     },
                     {
-                        "value": "LambdaFunctionStarted"
+                        "value": "LambdaFunctionStarted",
+                        "name": "LambdaFunctionStarted"
                     },
                     {
-                        "value": "LambdaFunctionStartFailed"
+                        "value": "LambdaFunctionStartFailed",
+                        "name": "LambdaFunctionStartFailed"
                     },
                     {
-                        "value": "LambdaFunctionSucceeded"
+                        "value": "LambdaFunctionSucceeded",
+                        "name": "LambdaFunctionSucceeded"
                     },
                     {
-                        "value": "LambdaFunctionTimedOut"
+                        "value": "LambdaFunctionTimedOut",
+                        "name": "LambdaFunctionTimedOut"
                     },
                     {
-                        "value": "MapIterationAborted"
+                        "value": "MapIterationAborted",
+                        "name": "MapIterationAborted"
                     },
                     {
-                        "value": "MapIterationFailed"
+                        "value": "MapIterationFailed",
+                        "name": "MapIterationFailed"
                     },
                     {
-                        "value": "MapIterationStarted"
+                        "value": "MapIterationStarted",
+                        "name": "MapIterationStarted"
                     },
                     {
-                        "value": "MapIterationSucceeded"
+                        "value": "MapIterationSucceeded",
+                        "name": "MapIterationSucceeded"
                     },
                     {
-                        "value": "MapStateAborted"
+                        "value": "MapStateAborted",
+                        "name": "MapStateAborted"
                     },
                     {
-                        "value": "MapStateEntered"
+                        "value": "MapStateEntered",
+                        "name": "MapStateEntered"
                     },
                     {
-                        "value": "MapStateExited"
+                        "value": "MapStateExited",
+                        "name": "MapStateExited"
                     },
                     {
-                        "value": "MapStateFailed"
+                        "value": "MapStateFailed",
+                        "name": "MapStateFailed"
                     },
                     {
-                        "value": "MapStateStarted"
+                        "value": "MapStateStarted",
+                        "name": "MapStateStarted"
                     },
                     {
-                        "value": "MapStateSucceeded"
+                        "value": "MapStateSucceeded",
+                        "name": "MapStateSucceeded"
                     },
                     {
-                        "value": "ParallelStateAborted"
+                        "value": "ParallelStateAborted",
+                        "name": "ParallelStateAborted"
                     },
                     {
-                        "value": "ParallelStateEntered"
+                        "value": "ParallelStateEntered",
+                        "name": "ParallelStateEntered"
                     },
                     {
-                        "value": "ParallelStateExited"
+                        "value": "ParallelStateExited",
+                        "name": "ParallelStateExited"
                     },
                     {
-                        "value": "ParallelStateFailed"
+                        "value": "ParallelStateFailed",
+                        "name": "ParallelStateFailed"
                     },
                     {
-                        "value": "ParallelStateStarted"
+                        "value": "ParallelStateStarted",
+                        "name": "ParallelStateStarted"
                     },
                     {
-                        "value": "ParallelStateSucceeded"
+                        "value": "ParallelStateSucceeded",
+                        "name": "ParallelStateSucceeded"
                     },
                     {
-                        "value": "PassStateEntered"
+                        "value": "PassStateEntered",
+                        "name": "PassStateEntered"
                     },
                     {
-                        "value": "PassStateExited"
+                        "value": "PassStateExited",
+                        "name": "PassStateExited"
                     },
                     {
-                        "value": "SucceedStateEntered"
+                        "value": "SucceedStateEntered",
+                        "name": "SucceedStateEntered"
                     },
                     {
-                        "value": "SucceedStateExited"
+                        "value": "SucceedStateExited",
+                        "name": "SucceedStateExited"
                     },
                     {
-                        "value": "TaskFailed"
+                        "value": "TaskFailed",
+                        "name": "TaskFailed"
                     },
                     {
-                        "value": "TaskScheduled"
+                        "value": "TaskScheduled",
+                        "name": "TaskScheduled"
                     },
                     {
-                        "value": "TaskStarted"
+                        "value": "TaskStarted",
+                        "name": "TaskStarted"
                     },
                     {
-                        "value": "TaskStartFailed"
+                        "value": "TaskStartFailed",
+                        "name": "TaskStartFailed"
                     },
                     {
-                        "value": "TaskStateAborted"
+                        "value": "TaskStateAborted",
+                        "name": "TaskStateAborted"
                     },
                     {
-                        "value": "TaskStateEntered"
+                        "value": "TaskStateEntered",
+                        "name": "TaskStateEntered"
                     },
                     {
-                        "value": "TaskStateExited"
+                        "value": "TaskStateExited",
+                        "name": "TaskStateExited"
                     },
                     {
-                        "value": "TaskSubmitFailed"
+                        "value": "TaskSubmitFailed",
+                        "name": "TaskSubmitFailed"
                     },
                     {
-                        "value": "TaskSubmitted"
+                        "value": "TaskSubmitted",
+                        "name": "TaskSubmitted"
                     },
                     {
-                        "value": "TaskSucceeded"
+                        "value": "TaskSucceeded",
+                        "name": "TaskSucceeded"
                     },
                     {
-                        "value": "TaskTimedOut"
+                        "value": "TaskTimedOut",
+                        "name": "TaskTimedOut"
                     },
                     {
-                        "value": "WaitStateAborted"
+                        "value": "WaitStateAborted",
+                        "name": "WaitStateAborted"
                     },
                     {
-                        "value": "WaitStateEntered"
+                        "value": "WaitStateEntered",
+                        "name": "WaitStateEntered"
                     },
                     {
-                        "value": "WaitStateExited"
+                        "value": "WaitStateExited",
+                        "name": "WaitStateExited"
                     }
                 ]
             }
@@ -2259,16 +2319,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ALL"
+                        "value": "ALL",
+                        "name": "ALL"
                     },
                     {
-                        "value": "ERROR"
+                        "value": "ERROR",
+                        "name": "ERROR"
                     },
                     {
-                        "value": "FATAL"
+                        "value": "FATAL",
+                        "name": "FATAL"
                     },
                     {
-                        "value": "OFF"
+                        "value": "OFF",
+                        "name": "OFF"
                     }
                 ]
             }
@@ -2956,10 +3020,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ACTIVE"
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
                     },
                     {
-                        "value": "DELETING"
+                        "value": "DELETING",
+                        "name": "DELETING"
                     }
                 ]
             }
@@ -2969,10 +3035,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "STANDARD"
+                        "value": "STANDARD",
+                        "name": "STANDARD"
                     },
                     {
-                        "value": "EXPRESS"
+                        "value": "EXPRESS",
+                        "name": "EXPRESS"
                     }
                 ]
             }
@@ -3050,13 +3118,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SUCCEEDED"
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     },
                     {
-                        "value": "TIMED_OUT"
+                        "value": "TIMED_OUT",
+                        "name": "TIMED_OUT"
                     }
                 ]
             }

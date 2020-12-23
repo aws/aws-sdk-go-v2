@@ -203,10 +203,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Female"
+                        "value": "Female",
+                        "name": "Female"
                     },
                     {
-                        "value": "Male"
+                        "value": "Male",
+                        "name": "Male"
                     }
                 ]
             }
@@ -430,91 +432,120 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "arb"
+                        "value": "arb",
+                        "name": "arb"
                     },
                     {
-                        "value": "cmn-CN"
+                        "value": "cmn-CN",
+                        "name": "cmn_CN"
                     },
                     {
-                        "value": "cy-GB"
+                        "value": "cy-GB",
+                        "name": "cy_GB"
                     },
                     {
-                        "value": "da-DK"
+                        "value": "da-DK",
+                        "name": "da_DK"
                     },
                     {
-                        "value": "de-DE"
+                        "value": "de-DE",
+                        "name": "de_DE"
                     },
                     {
-                        "value": "en-AU"
+                        "value": "en-AU",
+                        "name": "en_AU"
                     },
                     {
-                        "value": "en-GB"
+                        "value": "en-GB",
+                        "name": "en_GB"
                     },
                     {
-                        "value": "en-GB-WLS"
+                        "value": "en-GB-WLS",
+                        "name": "en_GB_WLS"
                     },
                     {
-                        "value": "en-IN"
+                        "value": "en-IN",
+                        "name": "en_IN"
                     },
                     {
-                        "value": "en-US"
+                        "value": "en-US",
+                        "name": "en_US"
                     },
                     {
-                        "value": "es-ES"
+                        "value": "es-ES",
+                        "name": "es_ES"
                     },
                     {
-                        "value": "es-MX"
+                        "value": "es-MX",
+                        "name": "es_MX"
                     },
                     {
-                        "value": "es-US"
+                        "value": "es-US",
+                        "name": "es_US"
                     },
                     {
-                        "value": "fr-CA"
+                        "value": "fr-CA",
+                        "name": "fr_CA"
                     },
                     {
-                        "value": "fr-FR"
+                        "value": "fr-FR",
+                        "name": "fr_FR"
                     },
                     {
-                        "value": "is-IS"
+                        "value": "is-IS",
+                        "name": "is_IS"
                     },
                     {
-                        "value": "it-IT"
+                        "value": "it-IT",
+                        "name": "it_IT"
                     },
                     {
-                        "value": "ja-JP"
+                        "value": "ja-JP",
+                        "name": "ja_JP"
                     },
                     {
-                        "value": "hi-IN"
+                        "value": "hi-IN",
+                        "name": "hi_IN"
                     },
                     {
-                        "value": "ko-KR"
+                        "value": "ko-KR",
+                        "name": "ko_KR"
                     },
                     {
-                        "value": "nb-NO"
+                        "value": "nb-NO",
+                        "name": "nb_NO"
                     },
                     {
-                        "value": "nl-NL"
+                        "value": "nl-NL",
+                        "name": "nl_NL"
                     },
                     {
-                        "value": "pl-PL"
+                        "value": "pl-PL",
+                        "name": "pl_PL"
                     },
                     {
-                        "value": "pt-BR"
+                        "value": "pt-BR",
+                        "name": "pt_BR"
                     },
                     {
-                        "value": "pt-PT"
+                        "value": "pt-PT",
+                        "name": "pt_PT"
                     },
                     {
-                        "value": "ro-RO"
+                        "value": "ro-RO",
+                        "name": "ro_RO"
                     },
                     {
-                        "value": "ru-RU"
+                        "value": "ru-RU",
+                        "name": "ru_RU"
                     },
                     {
-                        "value": "sv-SE"
+                        "value": "sv-SE",
+                        "name": "sv_SE"
                     },
                     {
-                        "value": "tr-TR"
+                        "value": "tr-TR",
+                        "name": "tr_TR"
                     }
                 ]
             }
@@ -1646,190 +1677,252 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Aditi"
+                        "value": "Aditi",
+                        "name": "Aditi"
                     },
                     {
-                        "value": "Amy"
+                        "value": "Amy",
+                        "name": "Amy"
                     },
                     {
-                        "value": "Astrid"
+                        "value": "Astrid",
+                        "name": "Astrid"
                     },
                     {
-                        "value": "Bianca"
+                        "value": "Bianca",
+                        "name": "Bianca"
                     },
                     {
-                        "value": "Brian"
+                        "value": "Brian",
+                        "name": "Brian"
                     },
                     {
-                        "value": "Camila"
+                        "value": "Camila",
+                        "name": "Camila"
                     },
                     {
-                        "value": "Carla"
+                        "value": "Carla",
+                        "name": "Carla"
                     },
                     {
-                        "value": "Carmen"
+                        "value": "Carmen",
+                        "name": "Carmen"
                     },
                     {
-                        "value": "Celine"
+                        "value": "Celine",
+                        "name": "Celine"
                     },
                     {
-                        "value": "Chantal"
+                        "value": "Chantal",
+                        "name": "Chantal"
                     },
                     {
-                        "value": "Conchita"
+                        "value": "Conchita",
+                        "name": "Conchita"
                     },
                     {
-                        "value": "Cristiano"
+                        "value": "Cristiano",
+                        "name": "Cristiano"
                     },
                     {
-                        "value": "Dora"
+                        "value": "Dora",
+                        "name": "Dora"
                     },
                     {
-                        "value": "Emma"
+                        "value": "Emma",
+                        "name": "Emma"
                     },
                     {
-                        "value": "Enrique"
+                        "value": "Enrique",
+                        "name": "Enrique"
                     },
                     {
-                        "value": "Ewa"
+                        "value": "Ewa",
+                        "name": "Ewa"
                     },
                     {
-                        "value": "Filiz"
+                        "value": "Filiz",
+                        "name": "Filiz"
                     },
                     {
-                        "value": "Geraint"
+                        "value": "Geraint",
+                        "name": "Geraint"
                     },
                     {
-                        "value": "Giorgio"
+                        "value": "Giorgio",
+                        "name": "Giorgio"
                     },
                     {
-                        "value": "Gwyneth"
+                        "value": "Gwyneth",
+                        "name": "Gwyneth"
                     },
                     {
-                        "value": "Hans"
+                        "value": "Hans",
+                        "name": "Hans"
                     },
                     {
-                        "value": "Ines"
+                        "value": "Ines",
+                        "name": "Ines"
                     },
                     {
-                        "value": "Ivy"
+                        "value": "Ivy",
+                        "name": "Ivy"
                     },
                     {
-                        "value": "Jacek"
+                        "value": "Jacek",
+                        "name": "Jacek"
                     },
                     {
-                        "value": "Jan"
+                        "value": "Jan",
+                        "name": "Jan"
                     },
                     {
-                        "value": "Joanna"
+                        "value": "Joanna",
+                        "name": "Joanna"
                     },
                     {
-                        "value": "Joey"
+                        "value": "Joey",
+                        "name": "Joey"
                     },
                     {
-                        "value": "Justin"
+                        "value": "Justin",
+                        "name": "Justin"
                     },
                     {
-                        "value": "Karl"
+                        "value": "Karl",
+                        "name": "Karl"
                     },
                     {
-                        "value": "Kendra"
+                        "value": "Kendra",
+                        "name": "Kendra"
                     },
                     {
-                        "value": "Kevin"
+                        "value": "Kevin",
+                        "name": "Kevin"
                     },
                     {
-                        "value": "Kimberly"
+                        "value": "Kimberly",
+                        "name": "Kimberly"
                     },
                     {
-                        "value": "Lea"
+                        "value": "Lea",
+                        "name": "Lea"
                     },
                     {
-                        "value": "Liv"
+                        "value": "Liv",
+                        "name": "Liv"
                     },
                     {
-                        "value": "Lotte"
+                        "value": "Lotte",
+                        "name": "Lotte"
                     },
                     {
-                        "value": "Lucia"
+                        "value": "Lucia",
+                        "name": "Lucia"
                     },
                     {
-                        "value": "Lupe"
+                        "value": "Lupe",
+                        "name": "Lupe"
                     },
                     {
-                        "value": "Mads"
+                        "value": "Mads",
+                        "name": "Mads"
                     },
                     {
-                        "value": "Maja"
+                        "value": "Maja",
+                        "name": "Maja"
                     },
                     {
-                        "value": "Marlene"
+                        "value": "Marlene",
+                        "name": "Marlene"
                     },
                     {
-                        "value": "Mathieu"
+                        "value": "Mathieu",
+                        "name": "Mathieu"
                     },
                     {
-                        "value": "Matthew"
+                        "value": "Matthew",
+                        "name": "Matthew"
                     },
                     {
-                        "value": "Maxim"
+                        "value": "Maxim",
+                        "name": "Maxim"
                     },
                     {
-                        "value": "Mia"
+                        "value": "Mia",
+                        "name": "Mia"
                     },
                     {
-                        "value": "Miguel"
+                        "value": "Miguel",
+                        "name": "Miguel"
                     },
                     {
-                        "value": "Mizuki"
+                        "value": "Mizuki",
+                        "name": "Mizuki"
                     },
                     {
-                        "value": "Naja"
+                        "value": "Naja",
+                        "name": "Naja"
                     },
                     {
-                        "value": "Nicole"
+                        "value": "Nicole",
+                        "name": "Nicole"
                     },
                     {
-                        "value": "Olivia"
+                        "value": "Olivia",
+                        "name": "Olivia"
                     },
                     {
-                        "value": "Penelope"
+                        "value": "Penelope",
+                        "name": "Penelope"
                     },
                     {
-                        "value": "Raveena"
+                        "value": "Raveena",
+                        "name": "Raveena"
                     },
                     {
-                        "value": "Ricardo"
+                        "value": "Ricardo",
+                        "name": "Ricardo"
                     },
                     {
-                        "value": "Ruben"
+                        "value": "Ruben",
+                        "name": "Ruben"
                     },
                     {
-                        "value": "Russell"
+                        "value": "Russell",
+                        "name": "Russell"
                     },
                     {
-                        "value": "Salli"
+                        "value": "Salli",
+                        "name": "Salli"
                     },
                     {
-                        "value": "Seoyeon"
+                        "value": "Seoyeon",
+                        "name": "Seoyeon"
                     },
                     {
-                        "value": "Takumi"
+                        "value": "Takumi",
+                        "name": "Takumi"
                     },
                     {
-                        "value": "Tatyana"
+                        "value": "Tatyana",
+                        "name": "Tatyana"
                     },
                     {
-                        "value": "Vicki"
+                        "value": "Vicki",
+                        "name": "Vicki"
                     },
                     {
-                        "value": "Vitoria"
+                        "value": "Vitoria",
+                        "name": "Vitoria"
                     },
                     {
-                        "value": "Zeina"
+                        "value": "Zeina",
+                        "name": "Zeina"
                     },
                     {
-                        "value": "Zhiyu"
+                        "value": "Zhiyu",
+                        "name": "Zhiyu"
                     }
                 ]
             }

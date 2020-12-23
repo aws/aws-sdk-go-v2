@@ -242,13 +242,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Completed"
+                        "value": "Completed",
+                        "name": "Completed"
                     },
                     {
-                        "value": "Failed"
+                        "value": "Failed",
+                        "name": "Failed"
                     },
                     {
-                        "value": "Unknown"
+                        "value": "Unknown",
+                        "name": "Unknown"
                     }
                 ]
             }
@@ -258,16 +261,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Scheduled"
+                        "value": "Scheduled",
+                        "name": "Scheduled"
                     },
                     {
-                        "value": "Pending"
+                        "value": "Pending",
+                        "name": "Pending"
                     },
                     {
-                        "value": "Running"
+                        "value": "Running",
+                        "name": "Running"
                     },
                     {
-                        "value": "Unknown"
+                        "value": "Unknown",
+                        "name": "Unknown"
                     }
                 ]
             }
@@ -277,13 +284,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "InstanceRefresh"
+                        "value": "InstanceRefresh",
+                        "name": "InstanceRefresh"
                     },
                     {
-                        "value": "PlatformUpdate"
+                        "value": "PlatformUpdate",
+                        "name": "PlatformUpdate"
                     },
                     {
-                        "value": "Unknown"
+                        "value": "Unknown",
+                        "name": "Unknown"
                     }
                 ]
             }
@@ -607,19 +617,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Processed"
+                        "value": "Processed",
+                        "name": "Processed"
                     },
                     {
-                        "value": "Unprocessed"
+                        "value": "Unprocessed",
+                        "name": "Unprocessed"
                     },
                     {
-                        "value": "Failed"
+                        "value": "Failed",
+                        "name": "Failed"
                     },
                     {
-                        "value": "Processing"
+                        "value": "Processing",
+                        "name": "Processing"
                     },
                     {
-                        "value": "Building"
+                        "value": "Building",
+                        "name": "Building"
                     }
                 ]
             }
@@ -1059,13 +1074,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "deployed"
+                        "value": "deployed",
+                        "name": "deployed"
                     },
                     {
-                        "value": "pending"
+                        "value": "pending",
+                        "name": "pending"
                     },
                     {
-                        "value": "failed"
+                        "value": "failed",
+                        "name": "failed"
                     }
                 ]
             }
@@ -1214,10 +1232,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Scalar"
+                        "value": "Scalar",
+                        "name": "Scalar"
                     },
                     {
-                        "value": "List"
+                        "value": "List",
+                        "name": "List"
                     }
                 ]
             }
@@ -3179,16 +3199,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Green"
+                        "value": "Green",
+                        "name": "Green"
                     },
                     {
-                        "value": "Yellow"
+                        "value": "Yellow",
+                        "name": "Yellow"
                     },
                     {
-                        "value": "Red"
+                        "value": "Red",
+                        "name": "Red"
                     },
                     {
-                        "value": "Grey"
+                        "value": "Grey",
+                        "name": "Grey"
                     }
                 ]
             }
@@ -3243,31 +3267,40 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "NoData"
+                        "value": "NoData",
+                        "name": "NoData"
                     },
                     {
-                        "value": "Unknown"
+                        "value": "Unknown",
+                        "name": "Unknown"
                     },
                     {
-                        "value": "Pending"
+                        "value": "Pending",
+                        "name": "Pending"
                     },
                     {
-                        "value": "Ok"
+                        "value": "Ok",
+                        "name": "Ok"
                     },
                     {
-                        "value": "Info"
+                        "value": "Info",
+                        "name": "Info"
                     },
                     {
-                        "value": "Warning"
+                        "value": "Warning",
+                        "name": "Warning"
                     },
                     {
-                        "value": "Degraded"
+                        "value": "Degraded",
+                        "name": "Degraded"
                     },
                     {
-                        "value": "Severe"
+                        "value": "Severe",
+                        "name": "Severe"
                     },
                     {
-                        "value": "Suspended"
+                        "value": "Suspended",
+                        "name": "Suspended"
                     }
                 ]
             }
@@ -3324,10 +3357,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "tail"
+                        "value": "tail",
+                        "name": "tail"
                     },
                     {
-                        "value": "bundle"
+                        "value": "bundle",
+                        "name": "bundle"
                     }
                 ]
             }
@@ -3462,28 +3497,36 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Aborting"
+                        "value": "Aborting",
+                        "name": "Aborting"
                     },
                     {
-                        "value": "Launching"
+                        "value": "Launching",
+                        "name": "Launching"
                     },
                     {
-                        "value": "Updating"
+                        "value": "Updating",
+                        "name": "Updating"
                     },
                     {
-                        "value": "LinkingFrom"
+                        "value": "LinkingFrom",
+                        "name": "LinkingFrom"
                     },
                     {
-                        "value": "LinkingTo"
+                        "value": "LinkingTo",
+                        "name": "LinkingTo"
                     },
                     {
-                        "value": "Ready"
+                        "value": "Ready",
+                        "name": "Ready"
                     },
                     {
-                        "value": "Terminating"
+                        "value": "Terminating",
+                        "name": "Terminating"
                     },
                     {
-                        "value": "Terminated"
+                        "value": "Terminated",
+                        "name": "Terminated"
                     }
                 ]
             }
@@ -3613,22 +3656,28 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "TRACE"
+                        "value": "TRACE",
+                        "name": "TRACE"
                     },
                     {
-                        "value": "DEBUG"
+                        "value": "DEBUG",
+                        "name": "DEBUG"
                     },
                     {
-                        "value": "INFO"
+                        "value": "INFO",
+                        "name": "INFO"
                     },
                     {
-                        "value": "WARN"
+                        "value": "WARN",
+                        "name": "WARN"
                     },
                     {
-                        "value": "ERROR"
+                        "value": "ERROR",
+                        "name": "ERROR"
                     },
                     {
-                        "value": "FATAL"
+                        "value": "FATAL",
+                        "name": "FATAL"
                     }
                 ]
             }
@@ -3641,25 +3690,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "UpdateCancelled"
+                        "value": "UpdateCancelled",
+                        "name": "UpdateCancelled"
                     },
                     {
-                        "value": "CancellationFailed"
+                        "value": "CancellationFailed",
+                        "name": "CancellationFailed"
                     },
                     {
-                        "value": "RollbackFailed"
+                        "value": "RollbackFailed",
+                        "name": "RollbackFailed"
                     },
                     {
-                        "value": "RollbackSuccessful"
+                        "value": "RollbackSuccessful",
+                        "name": "RollbackSuccessful"
                     },
                     {
-                        "value": "InternalFailure"
+                        "value": "InternalFailure",
+                        "name": "InternalFailure"
                     },
                     {
-                        "value": "InvalidEnvironmentState"
+                        "value": "InvalidEnvironmentState",
+                        "name": "InvalidEnvironmentState"
                     },
                     {
-                        "value": "PermissionsError"
+                        "value": "PermissionsError",
+                        "name": "PermissionsError"
                     }
                 ]
             }
@@ -4919,19 +4975,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Creating"
+                        "value": "Creating",
+                        "name": "Creating"
                     },
                     {
-                        "value": "Failed"
+                        "value": "Failed",
+                        "name": "Failed"
                     },
                     {
-                        "value": "Ready"
+                        "value": "Ready",
+                        "name": "Ready"
                     },
                     {
-                        "value": "Deleting"
+                        "value": "Deleting",
+                        "name": "Deleting"
                     },
                     {
-                        "value": "Deleted"
+                        "value": "Deleted",
+                        "name": "Deleted"
                     }
                 ]
             }
@@ -5647,10 +5708,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CodeCommit"
+                        "value": "CodeCommit",
+                        "name": "CodeCommit"
                     },
                     {
-                        "value": "S3"
+                        "value": "S3",
+                        "name": "S3"
                     }
                 ]
             }
@@ -5660,10 +5723,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Git"
+                        "value": "Git",
+                        "name": "Git"
                     },
                     {
-                        "value": "Zip"
+                        "value": "Zip",
+                        "name": "Zip"
                     }
                 ]
             }
@@ -6470,10 +6535,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "error"
+                        "value": "error",
+                        "name": "error"
                     },
                     {
-                        "value": "warning"
+                        "value": "warning",
+                        "name": "warning"
                     }
                 ]
             }

@@ -334,16 +334,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "private"
+                        "value": "private",
+                        "name": "private"
                     },
                     {
-                        "value": "public-read"
+                        "value": "public-read",
+                        "name": "public_read"
                     },
                     {
-                        "value": "public-read-write"
+                        "value": "public-read-write",
+                        "name": "public_read_write"
                     },
                     {
-                        "value": "authenticated-read"
+                        "value": "authenticated-read",
+                        "name": "authenticated_read"
                     }
                 ]
             }
@@ -373,37 +377,48 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "EU"
+                        "value": "EU",
+                        "name": "EU"
                     },
                     {
-                        "value": "eu-west-1"
+                        "value": "eu-west-1",
+                        "name": "eu_west_1"
                     },
                     {
-                        "value": "us-west-1"
+                        "value": "us-west-1",
+                        "name": "us_west_1"
                     },
                     {
-                        "value": "us-west-2"
+                        "value": "us-west-2",
+                        "name": "us_west_2"
                     },
                     {
-                        "value": "ap-south-1"
+                        "value": "ap-south-1",
+                        "name": "ap_south_1"
                     },
                     {
-                        "value": "ap-southeast-1"
+                        "value": "ap-southeast-1",
+                        "name": "ap_southeast_1"
                     },
                     {
-                        "value": "ap-southeast-2"
+                        "value": "ap-southeast-2",
+                        "name": "ap_southeast_2"
                     },
                     {
-                        "value": "ap-northeast-1"
+                        "value": "ap-northeast-1",
+                        "name": "ap_northeast_1"
                     },
                     {
-                        "value": "sa-east-1"
+                        "value": "sa-east-1",
+                        "name": "sa_east_1"
                     },
                     {
-                        "value": "cn-north-1"
+                        "value": "cn-north-1",
+                        "name": "cn_north_1"
                     },
                     {
-                        "value": "eu-central-1"
+                        "value": "eu-central-1",
+                        "name": "eu_central_1"
                     }
                 ]
             }
@@ -1290,10 +1305,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Enabled"
+                        "value": "Enabled",
+                        "name": "Enabled"
                     },
                     {
-                        "value": "Disabled"
+                        "value": "Disabled",
+                        "name": "Disabled"
                     }
                 ]
             }
@@ -1306,10 +1323,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CSV"
+                        "value": "CSV",
+                        "name": "CSV"
                     },
                     {
-                        "value": "Parquet"
+                        "value": "Parquet",
+                        "name": "Parquet"
                     }
                 ]
             }
@@ -3378,7 +3397,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "V_1"
+                        "value": "V_1",
+                        "name": "V_1"
                     }
                 ]
             }
@@ -5101,19 +5121,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "GLACIER"
+                        "value": "GLACIER",
+                        "name": "GLACIER"
                     },
                     {
-                        "value": "STANDARD_IA"
+                        "value": "STANDARD_IA",
+                        "name": "STANDARD_IA"
                     },
                     {
-                        "value": "ONEZONE_IA"
+                        "value": "ONEZONE_IA",
+                        "name": "ONEZONE_IA"
                     },
                     {
-                        "value": "INTELLIGENT_TIERING"
+                        "value": "INTELLIGENT_TIERING",
+                        "name": "INTELLIGENT_TIERING"
                     },
                     {
-                        "value": "DEEP_ARCHIVE"
+                        "value": "DEEP_ARCHIVE",
+                        "name": "DEEP_ARCHIVE"
                     }
                 ]
             }

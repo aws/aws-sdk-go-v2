@@ -6609,10 +6609,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "HOST_COUNT"
+                        "value": "HOST_COUNT",
+                        "name": "HOST_COUNT"
                     },
                     {
-                        "value": "FLEET_PERCENT"
+                        "value": "FLEET_PERCENT",
+                        "name": "FLEET_PERCENT"
                     }
                 ]
             }

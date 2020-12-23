@@ -3413,25 +3413,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "HTTP"
+                        "value": "HTTP",
+                        "name": "HTTP"
                     },
                     {
-                        "value": "HTTPS"
+                        "value": "HTTPS",
+                        "name": "HTTPS"
                     },
                     {
-                        "value": "TCP"
+                        "value": "TCP",
+                        "name": "TCP"
                     },
                     {
-                        "value": "TLS"
+                        "value": "TLS",
+                        "name": "TLS"
                     },
                     {
-                        "value": "UDP"
+                        "value": "UDP",
+                        "name": "UDP"
                     },
                     {
-                        "value": "TCP_UDP"
+                        "value": "TCP_UDP",
+                        "name": "TCP_UDP"
                     },
                     {
-                        "value": "GENEVE"
+                        "value": "GENEVE",
+                        "name": "GENEVE"
                     }
                 ]
             }

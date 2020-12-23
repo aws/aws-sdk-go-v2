@@ -1,0 +1,4024 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.wellarchitected#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.wellarchitected#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>User does not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.wellarchitected#Answer": {
+            "type": "structure",
+            "members": {
+                "QuestionId": {
+                    "target": "com.amazonaws.wellarchitected#QuestionId"
+                },
+                "PillarId": {
+                    "target": "com.amazonaws.wellarchitected#PillarId"
+                },
+                "QuestionTitle": {
+                    "target": "com.amazonaws.wellarchitected#QuestionTitle"
+                },
+                "QuestionDescription": {
+                    "target": "com.amazonaws.wellarchitected#QuestionDescription"
+                },
+                "ImprovementPlanUrl": {
+                    "target": "com.amazonaws.wellarchitected#ImprovementPlanUrl"
+                },
+                "HelpfulResourceUrl": {
+                    "target": "com.amazonaws.wellarchitected#HelpfulResourceUrl"
+                },
+                "Choices": {
+                    "target": "com.amazonaws.wellarchitected#Choices"
+                },
+                "SelectedChoices": {
+                    "target": "com.amazonaws.wellarchitected#SelectedChoices"
+                },
+                "IsApplicable": {
+                    "target": "com.amazonaws.wellarchitected#IsApplicable"
+                },
+                "Risk": {
+                    "target": "com.amazonaws.wellarchitected#Risk"
+                },
+                "Notes": {
+                    "target": "com.amazonaws.wellarchitected#Notes"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An answer of the question.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#AnswerSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#AnswerSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of answer summaries of lens review in a workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#AnswerSummary": {
+            "type": "structure",
+            "members": {
+                "QuestionId": {
+                    "target": "com.amazonaws.wellarchitected#QuestionId"
+                },
+                "PillarId": {
+                    "target": "com.amazonaws.wellarchitected#PillarId"
+                },
+                "QuestionTitle": {
+                    "target": "com.amazonaws.wellarchitected#QuestionTitle"
+                },
+                "Choices": {
+                    "target": "com.amazonaws.wellarchitected#Choices"
+                },
+                "SelectedChoices": {
+                    "target": "com.amazonaws.wellarchitected#SelectedChoices"
+                },
+                "IsApplicable": {
+                    "target": "com.amazonaws.wellarchitected#IsApplicable"
+                },
+                "Risk": {
+                    "target": "com.amazonaws.wellarchitected#Risk"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An answer summary of a lens review in a workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#AssociateLenses": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#AssociateLensesInput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associate a lens to a workload.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/workloads/{WorkloadId}/associateLenses",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#AssociateLensesInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensAliases": {
+                    "target": "com.amazonaws.wellarchitected#LensAliases",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to associate lens reviews.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#AwsAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An AWS account ID.</p>",
+                "smithy.api#pattern": "[0-9]{12}"
+            }
+        },
+        "com.amazonaws.wellarchitected#AwsRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An AWS Region, for example, <code>us-west-2</code> or\n            <code>ap-northeast-1</code>.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#Base64String": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The Base64-encoded string representation of a lens review report.</p>\n        <p>This data can be used to create a PDF file.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#Choice": {
+            "type": "structure",
+            "members": {
+                "ChoiceId": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceId"
+                },
+                "Title": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceTitle"
+                },
+                "Description": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A choice available to answer question.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ChoiceDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The description of a choice.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ChoiceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ID of a choice.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ChoiceTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The title of a choice.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#Choices": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#Choice"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of choices available for a question.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ClientRequestToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A unique case-sensitive string used to ensure that this request is idempotent\n            (executes only once).</p>\n        <p>You should not reuse the same token for other requests. If you retry a request with\n            the same client request token and the same parameters after it has completed\n            successfully, the result of the original request is returned. </p>\n        <important>\n            <p>This token is listed as required, however, if you do not specify it, the AWS SDKs\n                automatically generate one for you. If you are not using the AWS SDK or the AWS CLI,\n                you must provide this token or the request will fail.</p>\n        </important>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.wellarchitected#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.wellarchitected#ExceptionResourceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.wellarchitected#ExceptionResourceType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource already exists.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.wellarchitected#Count": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "<p>A non-negative integer that denotes how many.</p>",
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateMilestone": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#CreateMilestoneInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#CreateMilestoneOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a milestone for an existing workload.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workloads/{WorkloadId}/milestones",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateMilestoneInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MilestoneName": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for milestone creation.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateMilestoneOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of a create milestone call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateWorkload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#CreateWorkloadInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#CreateWorkloadOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a new workload.</p>\n        <p>The owner of a workload can share the workload with other AWS accounts and IAM users\n            in the same AWS Region. Only the owner of a workload can delete it.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html\">Defining a Workload</a> in the\n                <i>AWS Well-Architected Tool User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workloads",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateWorkloadInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadName": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadDescription",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Environment": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadEnvironment",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountIds": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadAccountIds"
+                },
+                "AwsRegions": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadAwsRegions"
+                },
+                "NonAwsRegions": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadNonAwsRegions"
+                },
+                "PillarPriorities": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadPillarPriorities"
+                },
+                "ArchitecturalDesign": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadArchitecturalDesign"
+                },
+                "ReviewOwner": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadReviewOwner",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "IndustryType": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadIndustryType"
+                },
+                "Industry": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadIndustry"
+                },
+                "Lenses": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadLenses",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Notes": {
+                    "target": "com.amazonaws.wellarchitected#Notes"
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for workload creation.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateWorkloadOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "WorkloadArn": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadArn"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of a create workload call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateWorkloadShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#CreateWorkloadShareInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#CreateWorkloadShareOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a workload share.</p>\n        <p>The owner of a workload can share it with other AWS accounts and IAM users in the same\n            AWS Region. Shared access to a workload is not removed until the workload invitation is\n            deleted.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html\">Sharing a Workload</a> in the\n                <i>AWS Well-Architected Tool User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workloads/{WorkloadId}/shares",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateWorkloadShareInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SharedWith": {
+                    "target": "com.amazonaws.wellarchitected#SharedWith",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "PermissionType": {
+                    "target": "com.amazonaws.wellarchitected#PermissionType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for Create Workload Share</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateWorkloadShareOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "ShareId": {
+                    "target": "com.amazonaws.wellarchitected#ShareId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for Create Workload Share</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#DeleteWorkload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#DeleteWorkloadInput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an existing workload.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/workloads/{WorkloadId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#DeleteWorkloadInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "ClientRequestToken",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for workload deletion.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#DeleteWorkloadShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#DeleteWorkloadShareInput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a workload share.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/workloads/{WorkloadId}/shares/{ShareId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#DeleteWorkloadShareInput": {
+            "type": "structure",
+            "members": {
+                "ShareId": {
+                    "target": "com.amazonaws.wellarchitected#ShareId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "ClientRequestToken",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for Delete Workload Share</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#DifferenceStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UPDATED",
+                        "name": "UPDATED"
+                    },
+                    {
+                        "value": "NEW",
+                        "name": "NEW"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wellarchitected#DisassociateLenses": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#DisassociateLensesInput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociate a lens from a workload.</p>\n        <note>\n            <p>The AWS Well-Architected Framework lens (<code>wellarchitected</code>) cannot be\n                removed from a workload.</p>\n        </note>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/workloads/{WorkloadId}/disassociateLenses",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#DisassociateLensesInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensAliases": {
+                    "target": "com.amazonaws.wellarchitected#LensAliases",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to disassociate lens reviews.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ExceptionMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Description of the error.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ExceptionResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Identifier of the resource affected.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ExceptionResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Type of the resource affected.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#GetAnswer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#GetAnswerInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#GetAnswerOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get lens review.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers/{QuestionId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#GetAnswerInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuestionId": {
+                    "target": "com.amazonaws.wellarchitected#QuestionId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#httpQuery": "MilestoneNumber"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to get answer.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#GetAnswerOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                },
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "Answer": {
+                    "target": "com.amazonaws.wellarchitected#Answer"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of a get answer call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#GetLensReview": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#GetLensReviewInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#GetLensReviewOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get lens review.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/workloads/{WorkloadId}/lensReviews/{LensAlias}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#GetLensReviewInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#httpQuery": "MilestoneNumber"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to get lens review.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#GetLensReviewOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                },
+                "LensReview": {
+                    "target": "com.amazonaws.wellarchitected#LensReview"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of a get lens review call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#GetLensReviewReport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#GetLensReviewReportInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#GetLensReviewReportOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get lens review report.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/workloads/{WorkloadId}/lensReviews/{LensAlias}/report",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#GetLensReviewReportInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#httpQuery": "MilestoneNumber"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to get lens review report.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#GetLensReviewReportOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                },
+                "LensReviewReport": {
+                    "target": "com.amazonaws.wellarchitected#LensReviewReport"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of a get lens review report call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#GetLensVersionDifference": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#GetLensVersionDifferenceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#GetLensVersionDifferenceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get lens version differences.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/lenses/{LensAlias}/versionDifference",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#GetLensVersionDifferenceInput": {
+            "type": "structure",
+            "members": {
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BaseLensVersion": {
+                    "target": "com.amazonaws.wellarchitected#LensVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base version of the lens.</p>",
+                        "smithy.api#httpQuery": "BaseLensVersion",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#GetLensVersionDifferenceOutput": {
+            "type": "structure",
+            "members": {
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "BaseLensVersion": {
+                    "target": "com.amazonaws.wellarchitected#LensVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base version of the lens.</p>"
+                    }
+                },
+                "LatestLensVersion": {
+                    "target": "com.amazonaws.wellarchitected#LensVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest version of the lens.</p>"
+                    }
+                },
+                "VersionDifferences": {
+                    "target": "com.amazonaws.wellarchitected#VersionDifferences"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#GetMilestone": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#GetMilestoneInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#GetMilestoneOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get a milestone for an existing workload.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/workloads/{WorkloadId}/milestones/{MilestoneNumber}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#GetMilestoneInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to get a milestone.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#GetMilestoneOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "Milestone": {
+                    "target": "com.amazonaws.wellarchitected#Milestone"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of a get milestone call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#GetWorkload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#GetWorkloadInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#GetWorkloadOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get an existing workload.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/workloads/{WorkloadId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#GetWorkloadInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to get a workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#GetWorkloadOutput": {
+            "type": "structure",
+            "members": {
+                "Workload": {
+                    "target": "com.amazonaws.wellarchitected#Workload"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of a get workload call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#HelpfulResourceUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The helpful resource URL for a question.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ImprovementPlanUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The improvement plan URL for a question.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ImprovementSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ImprovementSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of improvement summaries of lens review in a workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ImprovementSummary": {
+            "type": "structure",
+            "members": {
+                "QuestionId": {
+                    "target": "com.amazonaws.wellarchitected#QuestionId"
+                },
+                "PillarId": {
+                    "target": "com.amazonaws.wellarchitected#PillarId"
+                },
+                "QuestionTitle": {
+                    "target": "com.amazonaws.wellarchitected#QuestionTitle"
+                },
+                "Risk": {
+                    "target": "com.amazonaws.wellarchitected#Risk"
+                },
+                "ImprovementPlanUrl": {
+                    "target": "com.amazonaws.wellarchitected#ImprovementPlanUrl"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An improvement summary of a lens review in a workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.wellarchitected#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There is a problem with the AWS Well-Architected Tool API service.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.wellarchitected#IsApplicable": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#documentation": "<p>Defines whether this question is applicable to a lens review.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#IsReviewOwnerUpdateAcknowledged": {
+            "type": "boolean"
+        },
+        "com.amazonaws.wellarchitected#LensAlias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The alias of the lens, for example, <code>serverless</code>.</p>\n        <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#LensAliases": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#LensAlias"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of lens aliases to associate or disassociate with a workload.</p>\n        <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>",
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#LensDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The description of the lens.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#LensName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The full name of the lens.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#LensReview": {
+            "type": "structure",
+            "members": {
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "LensVersion": {
+                    "target": "com.amazonaws.wellarchitected#LensVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the lens.</p>"
+                    }
+                },
+                "LensName": {
+                    "target": "com.amazonaws.wellarchitected#LensName"
+                },
+                "LensStatus": {
+                    "target": "com.amazonaws.wellarchitected#LensStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the lens.</p>"
+                    }
+                },
+                "PillarReviewSummaries": {
+                    "target": "com.amazonaws.wellarchitected#PillarReviewSummaries"
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                },
+                "Notes": {
+                    "target": "com.amazonaws.wellarchitected#Notes"
+                },
+                "RiskCounts": {
+                    "target": "com.amazonaws.wellarchitected#RiskCounts"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A lens review of a question.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#LensReviewReport": {
+            "type": "structure",
+            "members": {
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "Base64String": {
+                    "target": "com.amazonaws.wellarchitected#Base64String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A report of a lens review.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#LensReviewSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#LensReviewSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of lens summaries of lens reviews of a workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#LensReviewSummary": {
+            "type": "structure",
+            "members": {
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "LensVersion": {
+                    "target": "com.amazonaws.wellarchitected#LensVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the lens.</p>"
+                    }
+                },
+                "LensName": {
+                    "target": "com.amazonaws.wellarchitected#LensName"
+                },
+                "LensStatus": {
+                    "target": "com.amazonaws.wellarchitected#LensStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the lens.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                },
+                "RiskCounts": {
+                    "target": "com.amazonaws.wellarchitected#RiskCounts"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A lens review summary of a workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#LensStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CURRENT",
+                        "name": "CURRENT"
+                    },
+                    {
+                        "value": "NOT_CURRENT",
+                        "name": "NOT_CURRENT"
+                    },
+                    {
+                        "value": "DEPRECATED",
+                        "name": "DEPRECATED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wellarchitected#LensSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#LensSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of lens summaries of available lenses.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#LensSummary": {
+            "type": "structure",
+            "members": {
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "LensVersion": {
+                    "target": "com.amazonaws.wellarchitected#LensVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the lens.</p>"
+                    }
+                },
+                "LensName": {
+                    "target": "com.amazonaws.wellarchitected#LensName"
+                },
+                "Description": {
+                    "target": "com.amazonaws.wellarchitected#LensDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A lens summary of a lens.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#LensUpgradeSummary": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "WorkloadName": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadName"
+                },
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "CurrentLensVersion": {
+                    "target": "com.amazonaws.wellarchitected#LensVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the lens.</p>"
+                    }
+                },
+                "LatestLensVersion": {
+                    "target": "com.amazonaws.wellarchitected#LensVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest version of the lens.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lens upgrade summary return object.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#LensVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListAnswers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListAnswersInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListAnswersOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List of answers.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListAnswersInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PillarId": {
+                    "target": "com.amazonaws.wellarchitected#PillarId",
+                    "traits": {
+                        "smithy.api#httpQuery": "PillarId"
+                    }
+                },
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#httpQuery": "MilestoneNumber"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#ListAnswersMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to list answers.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListAnswersMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListAnswersOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                },
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "AnswerSummaries": {
+                    "target": "com.amazonaws.wellarchitected#AnswerSummaries"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of a list answers call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListLensReviewImprovements": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListLensReviewImprovementsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListLensReviewImprovementsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List lens review improvements.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/workloads/{WorkloadId}/lensReviews/{LensAlias}/improvements",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListLensReviewImprovementsInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PillarId": {
+                    "target": "com.amazonaws.wellarchitected#PillarId",
+                    "traits": {
+                        "smithy.api#httpQuery": "PillarId"
+                    }
+                },
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#httpQuery": "MilestoneNumber"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#ListLensReviewImprovementsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to list lens review improvements.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListLensReviewImprovementsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListLensReviewImprovementsOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                },
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "ImprovementSummaries": {
+                    "target": "com.amazonaws.wellarchitected#ImprovementSummaries"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of a list lens review improvements call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListLensReviews": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListLensReviewsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListLensReviewsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List lens reviews.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/workloads/{WorkloadId}/lensReviews",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListLensReviewsInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#httpQuery": "MilestoneNumber"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#MaxResults",
+                    "traits": {
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to list lens reviews.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListLensReviewsOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                },
+                "LensReviewSummaries": {
+                    "target": "com.amazonaws.wellarchitected#LensReviewSummaries"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of a list lens reviews call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListLenses": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListLensesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListLensesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the available lenses.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/lenses",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListLensesInput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#MaxResults",
+                    "traits": {
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to list lenses.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListLensesOutput": {
+            "type": "structure",
+            "members": {
+                "LensSummaries": {
+                    "target": "com.amazonaws.wellarchitected#LensSummaries"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of a list lenses call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListMilestones": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListMilestonesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListMilestonesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all milestones for an existing workload.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workloads/{WorkloadId}/milestonesSummaries",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListMilestonesInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#MaxResults"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to list all milestones for a workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListMilestonesOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "MilestoneSummaries": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneSummaries"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of a list milestones call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListNotifications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListNotificationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListNotificationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List lens notifications.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/notifications",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListNotificationsInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#ListNotificationsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListNotificationsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListNotificationsOutput": {
+            "type": "structure",
+            "members": {
+                "NotificationSummaries": {
+                    "target": "com.amazonaws.wellarchitected#NotificationSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of lens notification summaries in a workload.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListShareInvitations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListShareInvitationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListShareInvitationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List  the workload invitations.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/shareInvitations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListShareInvitationsInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadNamePrefix": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadNamePrefix",
+                    "traits": {
+                        "smithy.api#httpQuery": "WorkloadNamePrefix"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#ListShareInvitationsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for List Share Invitations</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListShareInvitationsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListShareInvitationsOutput": {
+            "type": "structure",
+            "members": {
+                "ShareInvitationSummaries": {
+                    "target": "com.amazonaws.wellarchitected#ShareInvitationSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of share invitation summaries in a workload.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for List Share Invitations</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListWorkloadShares": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListWorkloadSharesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListWorkloadSharesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the workload shares associated with the workload.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/workloads/{WorkloadId}/shares",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListWorkloadSharesInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SharedWithPrefix": {
+                    "target": "com.amazonaws.wellarchitected#SharedWithPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID or IAM role with which the workload is shared.</p>",
+                        "smithy.api#httpQuery": "SharedWithPrefix"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#ListWorkloadSharesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for List Workload Share</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListWorkloadSharesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListWorkloadSharesOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "WorkloadShareSummaries": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadShareSummaries"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for List Workload Share</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListWorkloads": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListWorkloadsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListWorkloadsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List workloads. Paginated.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workloadsSummaries",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListWorkloadsInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadNamePrefix": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadNamePrefix"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#ListWorkloadsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to list all workloads.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListWorkloadsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListWorkloadsOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadSummaries": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadSummaries"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of a list workloads call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#Milestone": {
+            "type": "structure",
+            "members": {
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                },
+                "MilestoneName": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneName"
+                },
+                "RecordedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                },
+                "Workload": {
+                    "target": "com.amazonaws.wellarchitected#Workload"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A milestone return object.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#MilestoneName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of the milestone in a workload.</p>\n        <p>Milestone names must be unique within a workload.</p>",
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#MilestoneNumber": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "<p>The milestone number.</p>\n        <p>A workload can have a maximum of 100 milestones.</p>",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#MilestoneSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#MilestoneSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of milestone summaries.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#MilestoneSummary": {
+            "type": "structure",
+            "members": {
+                "MilestoneNumber": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                },
+                "MilestoneName": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneName"
+                },
+                "RecordedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                },
+                "WorkloadSummary": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadSummary"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A milestone summary return object.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The token to use to retrieve the next set of results.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#Notes": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The notes associated with the workload.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2084
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#NotificationSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#NotificationSummary"
+            }
+        },
+        "com.amazonaws.wellarchitected#NotificationSummary": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.wellarchitected#NotificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of notification.</p>"
+                    }
+                },
+                "LensUpgradeSummary": {
+                    "target": "com.amazonaws.wellarchitected#LensUpgradeSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary of lens upgrade.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A notification summary return object.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#NotificationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LENS_VERSION_UPGRADED",
+                        "name": "LENS_VERSION_UPGRADED"
+                    },
+                    {
+                        "value": "LENS_VERSION_DEPRECATED",
+                        "name": "LENS_VERSION_DEPRECATED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wellarchitected#PermissionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Permission granted on a workload share.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "READONLY",
+                        "name": "READONLY"
+                    },
+                    {
+                        "value": "CONTRIBUTOR",
+                        "name": "CONTRIBUTOR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wellarchitected#PillarDifference": {
+            "type": "structure",
+            "members": {
+                "PillarId": {
+                    "target": "com.amazonaws.wellarchitected#PillarId"
+                },
+                "DifferenceStatus": {
+                    "target": "com.amazonaws.wellarchitected#DifferenceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of change to the pillar.</p>"
+                    }
+                },
+                "QuestionDifferences": {
+                    "target": "com.amazonaws.wellarchitected#QuestionDifferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of question differences.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A pillar difference return object.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#PillarDifferences": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#PillarDifference"
+            }
+        },
+        "com.amazonaws.wellarchitected#PillarId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ID used to identify a pillar, for example, <code>security</code>.</p>\n        <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#PillarName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of the pillar.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#PillarNotes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.wellarchitected#PillarId"
+            },
+            "value": {
+                "target": "com.amazonaws.wellarchitected#Notes"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of pillar notes of a lens review in a workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#PillarReviewSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#PillarReviewSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of pillar review summaries of lens review in a workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#PillarReviewSummary": {
+            "type": "structure",
+            "members": {
+                "PillarId": {
+                    "target": "com.amazonaws.wellarchitected#PillarId"
+                },
+                "PillarName": {
+                    "target": "com.amazonaws.wellarchitected#PillarName"
+                },
+                "Notes": {
+                    "target": "com.amazonaws.wellarchitected#Notes"
+                },
+                "RiskCounts": {
+                    "target": "com.amazonaws.wellarchitected#RiskCounts"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A pillar review summary of a lens review.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#QuestionDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The description of the question.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#QuestionDifference": {
+            "type": "structure",
+            "members": {
+                "QuestionId": {
+                    "target": "com.amazonaws.wellarchitected#QuestionId"
+                },
+                "QuestionTitle": {
+                    "target": "com.amazonaws.wellarchitected#QuestionTitle"
+                },
+                "DifferenceStatus": {
+                    "target": "com.amazonaws.wellarchitected#DifferenceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of change to the question.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A question difference return object.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#QuestionDifferences": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#QuestionDifference"
+            }
+        },
+        "com.amazonaws.wellarchitected#QuestionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ID of the question.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#QuestionTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The title of the question.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#QuotaCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Service Quotas requirement to identify originating quota.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.wellarchitected#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.wellarchitected#ExceptionResourceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.wellarchitected#ExceptionResourceType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested resource was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.wellarchitected#Risk": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The risk for a given workload, lens review, pillar, or question.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "UNANSWERED",
+                        "name": "UNANSWERED"
+                    },
+                    {
+                        "value": "HIGH",
+                        "name": "HIGH"
+                    },
+                    {
+                        "value": "MEDIUM",
+                        "name": "MEDIUM"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "NOT_APPLICABLE",
+                        "name": "NOT_APPLICABLE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wellarchitected#RiskCounts": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.wellarchitected#Risk"
+            },
+            "value": {
+                "target": "com.amazonaws.wellarchitected#Count"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A map from risk names to the count of how questions have that rating.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#SelectedChoices": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ChoiceId"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of selected choice IDs in a question answer.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ServiceCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Service Quotas requirement to identify originating service.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.wellarchitected#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.wellarchitected#ExceptionResourceId"
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.wellarchitected#ExceptionResourceType"
+                },
+                "QuotaCode": {
+                    "target": "com.amazonaws.wellarchitected#QuotaCode",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceCode": {
+                    "target": "com.amazonaws.wellarchitected#ServiceCode",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The user has reached their resource quota.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.wellarchitected#ShareId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ID associated with the workload share.</p>",
+                "smithy.api#pattern": "[0-9a-f]{32}"
+            }
+        },
+        "com.amazonaws.wellarchitected#ShareInvitation": {
+            "type": "structure",
+            "members": {
+                "ShareInvitationId": {
+                    "target": "com.amazonaws.wellarchitected#ShareInvitationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID assigned to the share invitation.</p>"
+                    }
+                },
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The share invitation.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ShareInvitationAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Share invitation action taken by contributor.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ACCEPT",
+                        "name": "ACCEPT"
+                    },
+                    {
+                        "value": "REJECT",
+                        "name": "REJECT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wellarchitected#ShareInvitationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "[0-9a-f]{32}"
+            }
+        },
+        "com.amazonaws.wellarchitected#ShareInvitationSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ShareInvitationSummary"
+            }
+        },
+        "com.amazonaws.wellarchitected#ShareInvitationSummary": {
+            "type": "structure",
+            "members": {
+                "ShareInvitationId": {
+                    "target": "com.amazonaws.wellarchitected#ShareInvitationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID assigned to the share invitation.</p>"
+                    }
+                },
+                "SharedBy": {
+                    "target": "com.amazonaws.wellarchitected#AwsAccountId"
+                },
+                "SharedWith": {
+                    "target": "com.amazonaws.wellarchitected#SharedWith"
+                },
+                "PermissionType": {
+                    "target": "com.amazonaws.wellarchitected#PermissionType"
+                },
+                "WorkloadName": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadName"
+                },
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A share invitation summary return object.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ShareStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a workload share.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ACCEPTED",
+                        "name": "ACCEPTED"
+                    },
+                    {
+                        "value": "REJECTED",
+                        "name": "REJECTED"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "REVOKED",
+                        "name": "REVOKED"
+                    },
+                    {
+                        "value": "EXPIRED",
+                        "name": "EXPIRED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wellarchitected#SharedWith": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The AWS account ID or IAM role with which the workload is shared.</p>",
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#SharedWithPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.wellarchitected#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuotaCode": {
+                    "target": "com.amazonaws.wellarchitected#QuotaCode"
+                },
+                "ServiceCode": {
+                    "target": "com.amazonaws.wellarchitected#ServiceCode"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.wellarchitected#Timestamp": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#documentation": "<p>The date and time recorded.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateAnswer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#UpdateAnswerInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#UpdateAnswerOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the answer.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers/{QuestionId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateAnswerInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuestionId": {
+                    "target": "com.amazonaws.wellarchitected#QuestionId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SelectedChoices": {
+                    "target": "com.amazonaws.wellarchitected#SelectedChoices"
+                },
+                "Notes": {
+                    "target": "com.amazonaws.wellarchitected#Notes"
+                },
+                "IsApplicable": {
+                    "target": "com.amazonaws.wellarchitected#IsApplicable"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to update answer.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateAnswerOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias"
+                },
+                "Answer": {
+                    "target": "com.amazonaws.wellarchitected#Answer"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of a update answer call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateLensReview": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#UpdateLensReviewInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#UpdateLensReviewOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update lens review.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/workloads/{WorkloadId}/lensReviews/{LensAlias}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateLensReviewInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensNotes": {
+                    "target": "com.amazonaws.wellarchitected#Notes"
+                },
+                "PillarNotes": {
+                    "target": "com.amazonaws.wellarchitected#PillarNotes"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for update lens review.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateLensReviewOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "LensReview": {
+                    "target": "com.amazonaws.wellarchitected#LensReview"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of a update lens review call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateShareInvitation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#UpdateShareInvitationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#UpdateShareInvitationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update a workload invitation.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/shareInvitations/{ShareInvitationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateShareInvitationInput": {
+            "type": "structure",
+            "members": {
+                "ShareInvitationId": {
+                    "target": "com.amazonaws.wellarchitected#ShareInvitationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID assigned to the share invitation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ShareInvitationAction": {
+                    "target": "com.amazonaws.wellarchitected#ShareInvitationAction",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for Update Share Invitation</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateShareInvitationOutput": {
+            "type": "structure",
+            "members": {
+                "ShareInvitation": {
+                    "target": "com.amazonaws.wellarchitected#ShareInvitation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated workload share invitation.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateWorkload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#UpdateWorkloadInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#UpdateWorkloadOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update an existing workload.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/workloads/{WorkloadId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateWorkloadInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkloadName": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadName"
+                },
+                "Description": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadDescription"
+                },
+                "Environment": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadEnvironment"
+                },
+                "AccountIds": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadAccountIds"
+                },
+                "AwsRegions": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadAwsRegions"
+                },
+                "NonAwsRegions": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadNonAwsRegions"
+                },
+                "PillarPriorities": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadPillarPriorities"
+                },
+                "ArchitecturalDesign": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadArchitecturalDesign"
+                },
+                "ReviewOwner": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadReviewOwner"
+                },
+                "IsReviewOwnerUpdateAcknowledged": {
+                    "target": "com.amazonaws.wellarchitected#IsReviewOwnerUpdateAcknowledged",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Flag indicating whether the workload owner has acknowledged that the <i>Review\n                owner</i> field is required.</p>\n        <p>If a <b>Review owner</b> is not added to the workload within\n            60 days of acknowledgement, access to the workload is restricted until an owner is\n            added.</p>"
+                    }
+                },
+                "IndustryType": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadIndustryType"
+                },
+                "Industry": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadIndustry"
+                },
+                "Notes": {
+                    "target": "com.amazonaws.wellarchitected#Notes"
+                },
+                "ImprovementStatus": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadImprovementStatus"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to update a workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateWorkloadOutput": {
+            "type": "structure",
+            "members": {
+                "Workload": {
+                    "target": "com.amazonaws.wellarchitected#Workload"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of an update workload call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateWorkloadShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#UpdateWorkloadShareInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#UpdateWorkloadShareOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update a workload share.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/workloads/{WorkloadId}/shares/{ShareId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateWorkloadShareInput": {
+            "type": "structure",
+            "members": {
+                "ShareId": {
+                    "target": "com.amazonaws.wellarchitected#ShareId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PermissionType": {
+                    "target": "com.amazonaws.wellarchitected#PermissionType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for Update Workload Share</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateWorkloadShareOutput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "WorkloadShare": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadShare"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for Update Workload Share</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#UpgradeLensReview": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#UpgradeLensReviewInput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Upgrade lens review.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/workloads/{WorkloadId}/lensReviews/{LensAlias}/upgrade",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#UpgradeLensReviewInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LensAlias": {
+                    "target": "com.amazonaws.wellarchitected#LensAlias",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MilestoneName": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.wellarchitected#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.wellarchitected#ValidationExceptionReason"
+                },
+                "Fields": {
+                    "target": "com.amazonaws.wellarchitected#ValidationExceptionFieldList"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The user input is not valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.wellarchitected#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.wellarchitected#ValidationExceptionFieldName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.wellarchitected#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stores information about a field passed inside a request that resulted in an exception.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ValidationExceptionField"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The fields that caused the error, if applicable.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ValidationExceptionFieldName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The field name for which validation failed.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ValidationExceptionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The reason why the request failed validation.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "UNKNOWN_OPERATION",
+                        "name": "UNKNOWN_OPERATION"
+                    },
+                    {
+                        "value": "CANNOT_PARSE",
+                        "name": "CANNOT_PARSE"
+                    },
+                    {
+                        "value": "FIELD_VALIDATION_FAILED",
+                        "name": "FIELD_VALIDATION_FAILED"
+                    },
+                    {
+                        "value": "OTHER",
+                        "name": "OTHER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wellarchitected#VersionDifferences": {
+            "type": "structure",
+            "members": {
+                "PillarDifferences": {
+                    "target": "com.amazonaws.wellarchitected#PillarDifferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The differences between the base and latest versions of the lens.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The differences between the base and latest versions of the lens.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#WellArchitectedApiServiceLambda": {
+            "type": "service",
+            "version": "2020-03-31",
+            "operations": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AssociateLenses"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#CreateMilestone"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#CreateWorkload"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#CreateWorkloadShare"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#DeleteWorkload"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#DeleteWorkloadShare"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#DisassociateLenses"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#GetAnswer"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#GetLensReview"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#GetLensReviewReport"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#GetLensVersionDifference"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#GetMilestone"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#GetWorkload"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ListAnswers"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ListLenses"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ListLensReviewImprovements"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ListLensReviews"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ListMilestones"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ListNotifications"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ListShareInvitations"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ListWorkloads"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ListWorkloadShares"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#UpdateAnswer"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#UpdateLensReview"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#UpdateShareInvitation"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#UpdateWorkload"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#UpdateWorkloadShare"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#UpgradeLensReview"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "WellArchitected",
+                    "arnNamespace": "wellarchitected",
+                    "cloudFormationName": "WellArchitected",
+                    "cloudTrailEventSource": "wellarchitected.amazonaws.com",
+                    "endpointPrefix": "wellarchitected"
+                },
+                "aws.auth#sigv4": {
+                    "name": "wellarchitected"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>AWS Well-Architected Tool</fullname>\n         <p>This is the <i>AWS Well-Architected Tool API Reference</i>.</p>\n        \n        <p>The AWS Well-Architected Tool API provides programmatic access to the <a href=\"http://aws.amazon.com/well-architected-tool\">AWS Well-Architected Tool</a> in the <a href=\"https://console.aws.amazon.com/wellarchitected\">AWS Management Console</a>.</p>\n        <p>\n            <b>Managing workloads:</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                  <a>CreateWorkload</a>: Define a new workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>ListWorkloads</a>: List workloads.</p>\n            </li>\n            <li>\n                <p>\n                  <a>GetWorkload</a>: Get the properties of a workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>UpdateWorkload</a>: Update the properties of a workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>DeleteWorkload</a>: Delete a workload.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Managing milestones:</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                  <a>CreateMilestone</a>: Create a milestone.</p>\n            </li>\n            <li>\n                <p>\n                  <a>ListMilestones</a>: List milestones.</p>\n            </li>\n            <li>\n                <p>\n                  <a>GetMilestone</a>: Get the properties of a milestone.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Managing lenses:</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                  <a>ListLenses</a>: List the available lenses.</p>\n            </li>\n            <li>\n                <p>\n                  <a>AssociateLenses</a>: Add one or more lenses to a\n                    workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>DisassociateLenses</a>: Remove one or more lenses from a\n                    workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>ListNotifications</a>: List lens notifications for a workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>GetLensVersionDifference</a>: Get the differences between the version of a lens used\n                    in a workload and the latest version.</p>\n            </li>\n            <li>\n                <p>\n                  <a>UpgradeLensReview</a>: Upgrade a workload to use the latest version of a lens.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Managing reviews:</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                  <a>ListLensReviews</a>: List reviews associated with a\n                    workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>GetLensReview</a>: Get pillar and risk data associated with a\n                    workload review.</p>\n            </li>\n            <li>\n                <p>\n                  <a>GetLensReviewReport</a>: Get the report associated with a\n                    workload review.</p>\n            </li>\n            <li>\n                <p>\n                  <a>UpdateLensReview</a>: Update the notes associated with a\n                    workload review.</p>\n            </li>\n            <li>\n                <p>\n                  <a>ListAnswers</a>: List the questions and answers in a workload\n                    review.</p>\n            </li>\n            <li>\n                <p>\n                  <a>UpdateAnswer</a>: Update the answer to a specific question in a\n                    workload review.</p>\n            </li>\n            <li>\n                <p>\n                  <a>ListLensReviewImprovements</a>: List the improvement plan\n                    associated with a workload review.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Managing workload shares:</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                  <a>ListWorkloadShares</a>: List the workload shares associated with\n                    a workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>CreateWorkloadShare</a>: Create a workload share.</p>\n            </li>\n            <li>\n                <p>\n                  <a>UpdateWorkloadShare</a>: Update a workload share.</p>\n            </li>\n            <li>\n                <p>\n                  <a>DeleteWorkloadShare</a>: Delete a workload share.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Managing workload share invitations:</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                  <a>ListShareInvitations</a>: List workload share\n                    invitations.</p>\n            </li>\n            <li>\n                <p>\n                  <a>UpdateShareInvitation</a>: Update a workload share\n                    invitation.</p>\n            </li>\n         </ul>\n        <p>For information about the AWS Well-Architected Tool, see the <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html\">AWS Well-Architected Tool User Guide</a>.</p>",
+                "smithy.api#title": "AWS Well-Architected Tool"
+            }
+        },
+        "com.amazonaws.wellarchitected#Workload": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "WorkloadArn": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadArn"
+                },
+                "WorkloadName": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadName"
+                },
+                "Description": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadDescription"
+                },
+                "Environment": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadEnvironment"
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                },
+                "AccountIds": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadAccountIds"
+                },
+                "AwsRegions": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadAwsRegions"
+                },
+                "NonAwsRegions": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadNonAwsRegions"
+                },
+                "ArchitecturalDesign": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadArchitecturalDesign"
+                },
+                "ReviewOwner": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadReviewOwner"
+                },
+                "ReviewRestrictionDate": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                },
+                "IsReviewOwnerUpdateAcknowledged": {
+                    "target": "com.amazonaws.wellarchitected#IsReviewOwnerUpdateAcknowledged",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Flag indicating whether the workload owner has acknowledged that the <i>Review\n                owner</i> field is required.</p>\n        <p>If a <b>Review owner</b> is not added to the workload within\n            60 days of acknowledgement, access to the workload is restricted until an owner is\n            added.</p>"
+                    }
+                },
+                "IndustryType": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadIndustryType"
+                },
+                "Industry": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadIndustry"
+                },
+                "Notes": {
+                    "target": "com.amazonaws.wellarchitected#Notes"
+                },
+                "ImprovementStatus": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadImprovementStatus"
+                },
+                "RiskCounts": {
+                    "target": "com.amazonaws.wellarchitected#RiskCounts"
+                },
+                "PillarPriorities": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadPillarPriorities"
+                },
+                "Lenses": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadLenses"
+                },
+                "Owner": {
+                    "target": "com.amazonaws.wellarchitected#AwsAccountId"
+                },
+                "ShareInvitationId": {
+                    "target": "com.amazonaws.wellarchitected#ShareInvitationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID assigned to the share invitation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A workload return object.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadAccountIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#AwsAccountId"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of AWS account IDs associated with the workload.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadArchitecturalDesign": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The URL of the architectural design for the workload.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ARN for the workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadAwsRegions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#AwsRegion"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of AWS Regions associated with the workload, for example,\n                <code>us-east-2</code>, or <code>ca-central-1</code>.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The description for the workload.</p>",
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadEnvironment": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The environment for the workload.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "PRODUCTION",
+                        "name": "PRODUCTION"
+                    },
+                    {
+                        "value": "PREPRODUCTION",
+                        "name": "PREPRODUCTION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ID assigned to the workload. This ID is unique within an AWS Region.</p>",
+                "smithy.api#pattern": "[0-9a-f]{32}"
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadImprovementStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The improvement status for a workload.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "NOT_APPLICABLE",
+                        "name": "NOT_APPLICABLE"
+                    },
+                    {
+                        "value": "NOT_STARTED",
+                        "name": "NOT_STARTED"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "COMPLETE",
+                        "name": "COMPLETE"
+                    },
+                    {
+                        "value": "RISK_ACKNOWLEDGED",
+                        "name": "RISK_ACKNOWLEDGED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadIndustry": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The industry for the workload.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadIndustryType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The industry type for the workload.</p>\n        <p>If specified, must be one of the following:</p>  \n        <ul>\n            <li>\n                <p>\n                  <code>Agriculture</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Automobile</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Defense</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Design and Engineering</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Digital Advertising</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Education</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Environmental Protection</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Financial Services</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Gaming</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>General Public Services</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Healthcare</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Hospitality</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>InfoTech</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Justice and Public Safety</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Life Sciences</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Manufacturing</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Media & Entertainment</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Mining & Resources</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Oil & Gas</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Power & Utilities</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Professional Services</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Real Estate & Construction</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Retail & Wholesale</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Social Protection</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Telecommunications</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Travel, Transportation & Logistics</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>Other</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadLenses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#LensAlias"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of lenses associated with the workload. Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of the workload.</p>\n        <p>The name must be unique within an account within a Region. Spaces and capitalization\n            are ignored when checking for uniqueness.</p>",
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadNamePrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An optional string added to the beginning of each workload name returned in the\n            results.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadNonAwsRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadNonAwsRegions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#WorkloadNonAwsRegion"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The list of non-AWS Regions associated with the workload.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadPillarPriorities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#PillarId"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The priorities of the pillars, which are used to order items in the improvement plan.\n            Each pillar is represented by its <a>PillarReviewSummary$PillarId</a>.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadReviewOwner": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The review owner of the workload. The name, email address, or identifier for the\n            primary group or individual that owns the workload review process.</p>",
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadShare": {
+            "type": "structure",
+            "members": {
+                "ShareId": {
+                    "target": "com.amazonaws.wellarchitected#ShareId"
+                },
+                "SharedBy": {
+                    "target": "com.amazonaws.wellarchitected#AwsAccountId"
+                },
+                "SharedWith": {
+                    "target": "com.amazonaws.wellarchitected#SharedWith"
+                },
+                "PermissionType": {
+                    "target": "com.amazonaws.wellarchitected#PermissionType"
+                },
+                "Status": {
+                    "target": "com.amazonaws.wellarchitected#ShareStatus"
+                },
+                "WorkloadName": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadName"
+                },
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A workload share return object.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadShareSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#WorkloadShareSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of workload share summaries.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadShareSummary": {
+            "type": "structure",
+            "members": {
+                "ShareId": {
+                    "target": "com.amazonaws.wellarchitected#ShareId"
+                },
+                "SharedWith": {
+                    "target": "com.amazonaws.wellarchitected#SharedWith"
+                },
+                "PermissionType": {
+                    "target": "com.amazonaws.wellarchitected#PermissionType"
+                },
+                "Status": {
+                    "target": "com.amazonaws.wellarchitected#ShareStatus"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A workload share summary return object.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#WorkloadSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of workload summaries.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadSummary": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "WorkloadArn": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadArn"
+                },
+                "WorkloadName": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadName"
+                },
+                "Owner": {
+                    "target": "com.amazonaws.wellarchitected#AwsAccountId"
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                },
+                "Lenses": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadLenses"
+                },
+                "RiskCounts": {
+                    "target": "com.amazonaws.wellarchitected#RiskCounts"
+                },
+                "ImprovementStatus": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadImprovementStatus"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A workload summary return object.</p>"
+            }
+        }
+    }
+}

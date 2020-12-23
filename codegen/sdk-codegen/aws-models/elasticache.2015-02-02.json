@@ -365,10 +365,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SETTING"
+                        "value": "SETTING",
+                        "name": "SETTING"
                     },
                     {
-                        "value": "ROTATING"
+                        "value": "ROTATING",
+                        "name": "ROTATING"
                     }
                 ]
             }
@@ -378,13 +380,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SET"
+                        "value": "SET",
+                        "name": "SET"
                     },
                     {
-                        "value": "ROTATE"
+                        "value": "ROTATE",
+                        "name": "ROTATE"
                     },
                     {
-                        "value": "DELETE"
+                        "value": "DELETE",
+                        "name": "DELETE"
                     }
                 ]
             }
@@ -1661,10 +1666,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "immediate"
+                        "value": "immediate",
+                        "name": "immediate"
                     },
                     {
-                        "value": "requires-reboot"
+                        "value": "requires-reboot",
+                        "name": "requires_reboot"
                     }
                 ]
             }
@@ -2291,7 +2298,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Global Datastore for Redis offers fully managed, fast, \n            reliable and secure cross-region replication.\n            Using Global Datastore for Redis, you can create cross-region\n            read replica clusters for ElastiCache for Redis to enable low-latency reads\n            and disaster recovery across regions. For more information,\n            see <a href=\"/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters.html\">Replication Across Regions Using Global Datastore</a>. </p>\n         <ul>\n            <li>\n               <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global Datastore.</p>\n            </li>\n            <li>\n               <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Global Datastore for Redis offers fully managed, fast, \n            reliable and secure cross-region replication.\n            Using Global Datastore for Redis, you can create cross-region\n            read replica clusters for ElastiCache for Redis to enable low-latency reads\n            and disaster recovery across regions. For more information,\n            see <a href=\"/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores.html\">Replication Across Regions Using Global Datastore</a>. </p>\n         <ul>\n            <li>\n               <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global Datastore.</p>\n            </li>\n            <li>\n               <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.elasticache#CreateGlobalReplicationGroupMessage": {
@@ -2300,7 +2307,7 @@
                 "GlobalReplicationGroupIdSuffix": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The suffix name of a Global Datastore. Amazon ElastiCache automatically applies a prefix \n            to the Global Datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global Datastore ID created in the US-West-1 region will begin with \"dsdfu\" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global Datastore name across multiple regions.  </p>\n        <p>For a full list of AWS Regions and their respective Global Datastore iD prefixes, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters-CLI.html\">Using the AWS CLI with Global Datastores </a>.</p>",
+                        "smithy.api#documentation": "<p>The suffix name of a Global Datastore. Amazon ElastiCache automatically applies a prefix \n            to the Global Datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global Datastore ID created in the US-West-1 region will begin with \"dsdfu\" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global Datastore name across multiple regions.  </p>\n        <p>For a full list of AWS Regions and their respective Global Datastore iD prefixes, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html\">Using the AWS CLI with Global Datastores </a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8829,25 +8836,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "cache-cluster"
+                        "value": "cache-cluster",
+                        "name": "cache_cluster"
                     },
                     {
-                        "value": "cache-parameter-group"
+                        "value": "cache-parameter-group",
+                        "name": "cache_parameter_group"
                     },
                     {
-                        "value": "cache-security-group"
+                        "value": "cache-security-group",
+                        "name": "cache_security_group"
                     },
                     {
-                        "value": "cache-subnet-group"
+                        "value": "cache-subnet-group",
+                        "name": "cache_subnet_group"
                     },
                     {
-                        "value": "replication-group"
+                        "value": "replication-group",
+                        "name": "replication_group"
                     },
                     {
-                        "value": "user"
+                        "value": "user",
+                        "name": "user"
                     },
                     {
-                        "value": "user-group"
+                        "value": "user-group",
+                        "name": "user_group"
                     }
                 ]
             }

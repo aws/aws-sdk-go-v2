@@ -130,10 +130,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "IMMEDIATE"
+                        "value": "IMMEDIATE",
+                        "name": "IMMEDIATE"
                     },
                     {
-                        "value": "REQUIRES_REBOOT"
+                        "value": "REQUIRES_REBOOT",
+                        "name": "REQUIRES_REBOOT"
                     }
                 ]
             }
@@ -1468,13 +1470,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "TRUE"
+                        "value": "TRUE",
+                        "name": "TRUE"
                     },
                     {
-                        "value": "FALSE"
+                        "value": "FALSE",
+                        "name": "FALSE"
                     },
                     {
-                        "value": "CONDITIONAL"
+                        "value": "CONDITIONAL",
+                        "name": "CONDITIONAL"
                     }
                 ]
             }
@@ -1895,10 +1900,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "DEFAULT"
+                        "value": "DEFAULT",
+                        "name": "DEFAULT"
                     },
                     {
-                        "value": "NODE_TYPE_SPECIFIC"
+                        "value": "NODE_TYPE_SPECIFIC",
+                        "name": "NODE_TYPE_SPECIFIC"
                     }
                 ]
             }
@@ -2005,16 +2012,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ENABLING"
+                        "value": "ENABLING",
+                        "name": "ENABLING"
                     },
                     {
-                        "value": "ENABLED"
+                        "value": "ENABLED",
+                        "name": "ENABLED"
                     },
                     {
-                        "value": "DISABLING"
+                        "value": "DISABLING",
+                        "name": "DISABLING"
                     },
                     {
-                        "value": "DISABLED"
+                        "value": "DISABLED",
+                        "name": "DISABLED"
                     }
                 ]
             }
@@ -2069,13 +2080,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CLUSTER"
+                        "value": "CLUSTER",
+                        "name": "CLUSTER"
                     },
                     {
-                        "value": "PARAMETER_GROUP"
+                        "value": "PARAMETER_GROUP",
+                        "name": "PARAMETER_GROUP"
                     },
                     {
-                        "value": "SUBNET_GROUP"
+                        "value": "SUBNET_GROUP",
+                        "name": "SUBNET_GROUP"
                     }
                 ]
             }

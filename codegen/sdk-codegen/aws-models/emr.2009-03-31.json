@@ -3726,13 +3726,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "MASTER"
+                        "value": "MASTER",
+                        "name": "MASTER"
                     },
                     {
-                        "value": "CORE"
+                        "value": "CORE",
+                        "name": "CORE"
                     },
                     {
-                        "value": "TASK"
+                        "value": "TASK",
+                        "name": "TASK"
                     }
                 ]
             }
@@ -6626,10 +6629,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SWITCH_TO_ON_DEMAND"
+                        "value": "SWITCH_TO_ON_DEMAND",
+                        "name": "SWITCH_TO_ON_DEMAND"
                     },
                     {
-                        "value": "TERMINATE_CLUSTER"
+                        "value": "TERMINATE_CLUSTER",
+                        "name": "TERMINATE_CLUSTER"
                     }
                 ]
             }
@@ -6792,10 +6797,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SEND_INTERRUPT"
+                        "value": "SEND_INTERRUPT",
+                        "name": "SEND_INTERRUPT"
                     },
                     {
-                        "value": "TERMINATE_PROCESS"
+                        "value": "TERMINATE_PROCESS",
+                        "name": "TERMINATE_PROCESS"
                     }
                 ]
             }
@@ -6867,25 +6874,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PENDING"
+                        "value": "PENDING",
+                        "name": "PENDING"
                     },
                     {
-                        "value": "RUNNING"
+                        "value": "RUNNING",
+                        "name": "RUNNING"
                     },
                     {
-                        "value": "CONTINUE"
+                        "value": "CONTINUE",
+                        "name": "CONTINUE"
                     },
                     {
-                        "value": "COMPLETED"
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
                     },
                     {
-                        "value": "CANCELLED"
+                        "value": "CANCELLED",
+                        "name": "CANCELLED"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     },
                     {
-                        "value": "INTERRUPTED"
+                        "value": "INTERRUPTED",
+                        "name": "INTERRUPTED"
                     }
                 ]
             }
@@ -6999,7 +7013,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "NONE"
+                        "value": "NONE",
+                        "name": "NONE"
                     }
                 ]
             }

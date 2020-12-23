@@ -454,16 +454,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "none"
+                        "value": "none",
+                        "name": "none"
                     },
                     {
-                        "value": "whitelist"
+                        "value": "whitelist",
+                        "name": "whitelist"
                     },
                     {
-                        "value": "allExcept"
+                        "value": "allExcept",
+                        "name": "allExcept"
                     },
                     {
-                        "value": "all"
+                        "value": "all",
+                        "name": "all"
                     }
                 ]
             }
@@ -491,10 +495,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "none"
+                        "value": "none",
+                        "name": "none"
                     },
                     {
-                        "value": "whitelist"
+                        "value": "whitelist",
+                        "name": "whitelist"
                     }
                 ]
             }
@@ -569,16 +575,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "none"
+                        "value": "none",
+                        "name": "none"
                     },
                     {
-                        "value": "whitelist"
+                        "value": "whitelist",
+                        "name": "whitelist"
                     },
                     {
-                        "value": "allExcept"
+                        "value": "allExcept",
+                        "name": "allExcept"
                     },
                     {
-                        "value": "all"
+                        "value": "all",
+                        "name": "all"
                     }
                 ]
             }
@@ -640,10 +650,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "managed"
+                        "value": "managed",
+                        "name": "managed"
                     },
                     {
-                        "value": "custom"
+                        "value": "custom",
+                        "name": "custom"
                     }
                 ]
             }
@@ -688,13 +700,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "cloudfront"
+                        "value": "cloudfront",
+                        "name": "cloudfront"
                     },
                     {
-                        "value": "iam"
+                        "value": "iam",
+                        "name": "iam"
                     },
                     {
-                        "value": "acm"
+                        "value": "acm",
+                        "name": "acm"
                     }
                 ]
             }
@@ -4040,16 +4055,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "viewer-request"
+                        "value": "viewer-request",
+                        "name": "viewer_request"
                     },
                     {
-                        "value": "viewer-response"
+                        "value": "viewer-response",
+                        "name": "viewer_response"
                     },
                     {
-                        "value": "origin-request"
+                        "value": "origin-request",
+                        "name": "origin_request"
                     },
                     {
-                        "value": "origin-response"
+                        "value": "origin-response",
+                        "name": "origin_response"
                     }
                 ]
             }
@@ -4457,7 +4476,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "URLEncoded"
+                        "value": "URLEncoded",
+                        "name": "URLEncoded"
                     }
                 ]
             }
@@ -4529,13 +4549,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "blacklist"
+                        "value": "blacklist",
+                        "name": "blacklist"
                     },
                     {
-                        "value": "whitelist"
+                        "value": "whitelist",
+                        "name": "whitelist"
                     },
                     {
-                        "value": "none"
+                        "value": "none",
+                        "name": "none"
                     }
                 ]
             }
@@ -5858,10 +5881,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "http1.1"
+                        "value": "http1.1",
+                        "name": "http1_1"
                     },
                     {
-                        "value": "http2"
+                        "value": "http2",
+                        "name": "http2"
                     }
                 ]
             }
@@ -5871,13 +5896,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "APPROVED"
+                        "value": "APPROVED",
+                        "name": "APPROVED"
                     },
                     {
-                        "value": "SUSPENDED"
+                        "value": "SUSPENDED",
+                        "name": "SUSPENDED"
                     },
                     {
-                        "value": "PENDING"
+                        "value": "PENDING",
+                        "name": "PENDING"
                     }
                 ]
             }
@@ -6382,13 +6410,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "none"
+                        "value": "none",
+                        "name": "none"
                     },
                     {
-                        "value": "whitelist"
+                        "value": "whitelist",
+                        "name": "whitelist"
                     },
                     {
-                        "value": "all"
+                        "value": "all",
+                        "name": "all"
                     }
                 ]
             }
@@ -7779,25 +7810,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "GET"
+                        "value": "GET",
+                        "name": "GET"
                     },
                     {
-                        "value": "HEAD"
+                        "value": "HEAD",
+                        "name": "HEAD"
                     },
                     {
-                        "value": "POST"
+                        "value": "POST",
+                        "name": "POST"
                     },
                     {
-                        "value": "PUT"
+                        "value": "PUT",
+                        "name": "PUT"
                     },
                     {
-                        "value": "PATCH"
+                        "value": "PATCH",
+                        "name": "PATCH"
                     },
                     {
-                        "value": "OPTIONS"
+                        "value": "OPTIONS",
+                        "name": "OPTIONS"
                     },
                     {
-                        "value": "DELETE"
+                        "value": "DELETE",
+                        "name": "DELETE"
                     }
                 ]
             }
@@ -7816,22 +7854,28 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SSLv3"
+                        "value": "SSLv3",
+                        "name": "SSLv3"
                     },
                     {
-                        "value": "TLSv1"
+                        "value": "TLSv1",
+                        "name": "TLSv1"
                     },
                     {
-                        "value": "TLSv1_2016"
+                        "value": "TLSv1_2016",
+                        "name": "TLSv1_2016"
                     },
                     {
-                        "value": "TLSv1.1_2016"
+                        "value": "TLSv1.1_2016",
+                        "name": "TLSv1_1_2016"
                     },
                     {
-                        "value": "TLSv1.2_2018"
+                        "value": "TLSv1.2_2018",
+                        "name": "TLSv1_2_2018"
                     },
                     {
-                        "value": "TLSv1.2_2019"
+                        "value": "TLSv1.2_2019",
+                        "name": "TLSv1_2_2019"
                     }
                 ]
             }
@@ -8263,13 +8307,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "http-only"
+                        "value": "http-only",
+                        "name": "http_only"
                     },
                     {
-                        "value": "match-viewer"
+                        "value": "match-viewer",
+                        "name": "match_viewer"
                     },
                     {
-                        "value": "https-only"
+                        "value": "https-only",
+                        "name": "https_only"
                     }
                 ]
             }
@@ -8363,13 +8410,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "none"
+                        "value": "none",
+                        "name": "none"
                     },
                     {
-                        "value": "whitelist"
+                        "value": "whitelist",
+                        "name": "whitelist"
                     },
                     {
-                        "value": "all"
+                        "value": "all",
+                        "name": "all"
                     }
                 ]
             }
@@ -8397,16 +8447,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "none"
+                        "value": "none",
+                        "name": "none"
                     },
                     {
-                        "value": "whitelist"
+                        "value": "whitelist",
+                        "name": "whitelist"
                     },
                     {
-                        "value": "allViewer"
+                        "value": "allViewer",
+                        "name": "allViewer"
                     },
                     {
-                        "value": "allViewerAndWhitelistCloudFront"
+                        "value": "allViewerAndWhitelistCloudFront",
+                        "name": "allViewerAndWhitelistCloudFront"
                     }
                 ]
             }
@@ -8481,13 +8535,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "none"
+                        "value": "none",
+                        "name": "none"
                     },
                     {
-                        "value": "whitelist"
+                        "value": "whitelist",
+                        "name": "whitelist"
                     },
                     {
-                        "value": "all"
+                        "value": "all",
+                        "name": "all"
                     }
                 ]
             }
@@ -8549,10 +8606,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "managed"
+                        "value": "managed",
+                        "name": "managed"
                     },
                     {
-                        "value": "custom"
+                        "value": "custom",
+                        "name": "custom"
                     }
                 ]
             }
@@ -8722,13 +8781,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PriceClass_100"
+                        "value": "PriceClass_100",
+                        "name": "PriceClass_100"
                     },
                     {
-                        "value": "PriceClass_200"
+                        "value": "PriceClass_200",
+                        "name": "PriceClass_200"
                     },
                     {
-                        "value": "PriceClass_All"
+                        "value": "PriceClass_All",
+                        "name": "PriceClass_All"
                     }
                 ]
             }
@@ -9285,13 +9347,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "sni-only"
+                        "value": "sni-only",
+                        "name": "sni_only"
                     },
                     {
-                        "value": "vip"
+                        "value": "vip",
+                        "name": "vip"
                     },
                     {
-                        "value": "static-ip"
+                        "value": "static-ip",
+                        "name": "static_ip"
                     }
                 ]
             }
@@ -9330,16 +9395,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SSLv3"
+                        "value": "SSLv3",
+                        "name": "SSLv3"
                     },
                     {
-                        "value": "TLSv1"
+                        "value": "TLSv1",
+                        "name": "TLSv1"
                     },
                     {
-                        "value": "TLSv1.1"
+                        "value": "TLSv1.1",
+                        "name": "TLSv1_1"
                     },
                     {
-                        "value": "TLSv1.2"
+                        "value": "TLSv1.2",
+                        "name": "TLSv1_2"
                     }
                 ]
             }
@@ -11678,13 +11747,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "allow-all"
+                        "value": "allow-all",
+                        "name": "allow_all"
                     },
                     {
-                        "value": "https-only"
+                        "value": "https-only",
+                        "name": "https_only"
                     },
                     {
-                        "value": "redirect-to-https"
+                        "value": "redirect-to-https",
+                        "name": "redirect_to_https"
                     }
                 ]
             }

@@ -735,10 +735,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "DirectPut"
+                        "value": "DirectPut",
+                        "name": "DirectPut"
                     },
                     {
-                        "value": "KinesisStreamAsSource"
+                        "value": "KinesisStreamAsSource",
+                        "name": "KinesisStreamAsSource"
                     }
                 ]
             }
@@ -1227,19 +1229,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "NoRotation"
+                        "value": "NoRotation",
+                        "name": "NoRotation"
                     },
                     {
-                        "value": "OneHour"
+                        "value": "OneHour",
+                        "name": "OneHour"
                     },
                     {
-                        "value": "OneDay"
+                        "value": "OneDay",
+                        "name": "OneDay"
                     },
                     {
-                        "value": "OneWeek"
+                        "value": "OneWeek",
+                        "name": "OneWeek"
                     },
                     {
-                        "value": "OneMonth"
+                        "value": "OneMonth",
+                        "name": "OneMonth"
                     }
                 ]
             }
@@ -1273,10 +1280,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "FailedDocumentsOnly"
+                        "value": "FailedDocumentsOnly",
+                        "name": "FailedDocumentsOnly"
                     },
                     {
-                        "value": "AllDocuments"
+                        "value": "AllDocuments",
+                        "name": "AllDocuments"
                     }
                 ]
             }
@@ -1681,10 +1690,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Raw"
+                        "value": "Raw",
+                        "name": "Raw"
                     },
                     {
-                        "value": "Event"
+                        "value": "Event",
+                        "name": "Event"
                     }
                 ]
             }
@@ -2089,10 +2100,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "FailedDataOnly"
+                        "value": "FailedDataOnly",
+                        "name": "FailedDataOnly"
                     },
                     {
-                        "value": "AllData"
+                        "value": "AllData",
+                        "name": "AllData"
                     }
                 ]
             }
@@ -2454,7 +2467,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "NoEncryption"
+                        "value": "NoEncryption",
+                        "name": "NoEncryption"
                     }
                 ]
             }
@@ -2873,7 +2887,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Lambda"
+                        "value": "Lambda",
+                        "name": "Lambda"
                     }
                 ]
             }
@@ -3350,10 +3365,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Disabled"
+                        "value": "Disabled",
+                        "name": "Disabled"
                     },
                     {
-                        "value": "Enabled"
+                        "value": "Enabled",
+                        "name": "Enabled"
                     }
                 ]
             }
@@ -3403,10 +3420,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Disabled"
+                        "value": "Disabled",
+                        "name": "Disabled"
                     },
                     {
-                        "value": "Enabled"
+                        "value": "Enabled",
+                        "name": "Enabled"
                     }
                 ]
             }
@@ -3921,10 +3940,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "FailedEventsOnly"
+                        "value": "FailedEventsOnly",
+                        "name": "FailedEventsOnly"
                     },
                     {
-                        "value": "AllEvents"
+                        "value": "AllEvents",
+                        "name": "AllEvents"
                     }
                 ]
             }

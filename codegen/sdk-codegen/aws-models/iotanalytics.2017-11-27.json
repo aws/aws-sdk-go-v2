@@ -184,7 +184,7 @@
                 "attributes": {
                     "target": "com.amazonaws.iotanalytics#AttributeNameMapping",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of 1-50 <code>AttributeNameMapping</code> objects that map an existing attribute\n      to a new attribute.</p>\n         <note>\n            <p>The existing attributes remain in the message, so if you want to remove the originals, use\n          <code>RemoveAttributeActivity</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A list of 1-50 <code>AttributeNameMapping</code> objects that map an existing attribute to\n      a new attribute.</p>\n         <note>\n            <p>The existing attributes remain in the message, so if you want to remove the originals,\n        use <code>RemoveAttributeActivity</code>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -458,12 +458,12 @@
                 "lastMessageArrivalTime": {
                     "target": "com.amazonaws.iotanalytics#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time when a new message arrived in the channel.</p>\n         <p>AWS IoT Analytics updates this value at most once per minute for one channel. \n      Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> \n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+                        "smithy.api#documentation": "<p>The last time when a new message arrived in the channel.</p>\n         <p>AWS IoT Analytics updates this value at most once per minute for one channel. \n  Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> \n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of data from an MQTT topic.\n        Channels archive the raw, unprocessed messages before publishing the data to a pipeline.</p>"
+                "smithy.api#documentation": "<p>A collection of data from an MQTT topic. Channels archive the raw, unprocessed messages\n      before publishing the data to a pipeline.</p>"
             }
         },
         "com.amazonaws.iotanalytics#ChannelActivity": {
@@ -496,6 +496,20 @@
         },
         "com.amazonaws.iotanalytics#ChannelArn": {
             "type": "string"
+        },
+        "com.amazonaws.iotanalytics#ChannelMessages": {
+            "type": "structure",
+            "members": {
+                "s3Paths": {
+                    "target": "com.amazonaws.iotanalytics#S3PathChannelMessages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies one or more keys that identify the Amazon Simple Storage Service (Amazon S3) objects that save your\n      channel messages.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies one or more sets of channel messages.</p>"
+            }
         },
         "com.amazonaws.iotanalytics#ChannelName": {
             "type": "string",
@@ -622,12 +636,60 @@
                 "lastMessageArrivalTime": {
                     "target": "com.amazonaws.iotanalytics#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time when a new message arrived in the channel.</p>\n         <p>AWS IoT Analytics updates this value at most once per minute for one channel. \n      Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> \n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+                        "smithy.api#documentation": "<p>The last time when a new message arrived in the channel.</p>\n         <p>AWS IoT Analytics updates this value at most once per minute for one channel. \n  Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> \n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A summary of information about a channel.</p>"
+            }
+        },
+        "com.amazonaws.iotanalytics#Column": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.iotanalytics#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.iotanalytics#ColumnDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of data. For more information about the supported data types, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html\">Common data types</a>\n      in the <i>AWS Glue Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a column that stores your data.</p>"
+            }
+        },
+        "com.amazonaws.iotanalytics#ColumnDataType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 131072
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
+            }
+        },
+        "com.amazonaws.iotanalytics#ColumnName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$"
+            }
+        },
+        "com.amazonaws.iotanalytics#Columns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotanalytics#Column"
             }
         },
         "com.amazonaws.iotanalytics#ComputeType": {
@@ -709,7 +771,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a channel. A channel collects data from an MQTT topic and archives the\n          raw, unprocessed messages before publishing the data to a pipeline.</p>",
+                "smithy.api#documentation": "<p>Creates a channel. A channel collects data from an MQTT topic and archives the raw,\n      unprocessed messages before publishing the data to a pipeline.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/channels",
@@ -833,7 +895,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates the content of a data set by applying a <code>queryAction</code> (a SQL query)\n      or a <code>containerAction</code> (executing a containerized application).</p>",
+                "smithy.api#documentation": "<p>Creates the content of a data set by applying a <code>queryAction</code> (a SQL query) or\n      a <code>containerAction</code> (executing a containerized application).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/datasets/{datasetName}/content",
@@ -891,7 +953,7 @@
                 "triggers": {
                     "target": "com.amazonaws.iotanalytics#DatasetTriggers",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of triggers. A trigger causes data set contents to be populated at a specified\n      time interval or when another data set's contents are created. The list of triggers can be\n      empty or contain up to five <code>DataSetTrigger</code> objects.</p>"
+                        "smithy.api#documentation": "<p>A list of triggers. A trigger causes data set contents to be populated at a specified time\n      interval or when another data set's contents are created. The list of triggers can be empty or\n      contain up to five <code>DataSetTrigger</code> objects.</p>"
                     }
                 },
                 "contentDeliveryRules": {
@@ -903,13 +965,13 @@
                 "retentionPeriod": {
                     "target": "com.amazonaws.iotanalytics#RetentionPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional. How long, in days, versions of dataset contents are kept for the dataset. If\n      not specified or set to <code>null</code>, versions of dataset contents are retained for at\n      most 90 days. The number of versions of dataset contents retained is determined by the\n        <code>versioningConfiguration</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\">Keeping Multiple Versions of AWS IoT Analytics Data Sets</a> in the <i>AWS IoT\n        Analytics User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Optional. How long, in days, versions of dataset contents are kept for the dataset. If not\n      specified or set to <code>null</code>, versions of dataset contents are retained for at most\n      90 days. The number of versions of dataset contents retained is determined by the\n        <code>versioningConfiguration</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\">Keeping Multiple Versions of AWS IoT Analytics Data Sets</a> in the <i>AWS IoT\n        Analytics User Guide</i>.</p>"
                     }
                 },
                 "versioningConfiguration": {
                     "target": "com.amazonaws.iotanalytics#VersioningConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional. How many versions of dataset contents are kept. If not specified or set to\n      null, only the latest version plus the latest succeeded version (if they are different) are\n      kept for the time period specified by the <code>retentionPeriod</code> parameter. For more\n      information, see\n        <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\">Keeping Multiple Versions of AWS IoT Analytics Data Sets</a> in the <i>AWS IoT\n        Analytics User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Optional. How many versions of dataset contents are kept. If not specified or set to null,\n      only the latest version plus the latest succeeded version (if they are different) are kept for\n      the time period specified by the <code>retentionPeriod</code> parameter. For more information,\n      see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\">Keeping Multiple Versions of AWS IoT Analytics Data Sets</a> in the <i>AWS IoT\n        Analytics User Guide</i>.</p>"
                     }
                 },
                 "tags": {
@@ -921,7 +983,7 @@
                 "lateDataRules": {
                     "target": "com.amazonaws.iotanalytics#LateDataRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of data rules that send notifications to Amazon CloudWatch, when data arrives late. To\n      specify <code>lateDataRules</code>, the dataset must use a <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">DeltaTimer</a>\n      filter.</p>"
+                        "smithy.api#documentation": "<p>A list of data rules that send notifications to Amazon CloudWatch, when data arrives late. To\n  specify <code>lateDataRules</code>, the dataset must use a <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">DeltaTimer</a>\n  filter.</p>"
                     }
                 }
             }
@@ -1013,6 +1075,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Metadata which can be used to manage the data store.</p>"
                     }
+                },
+                "fileFormatConfiguration": {
+                    "target": "com.amazonaws.iotanalytics#FileFormatConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON \n      and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p>\n         <p>The default file format is JSON. You can specify only one format.</p>\n         <p>You can't change the file format after you create the data store.</p>"
+                    }
                 }
             }
         },
@@ -1068,7 +1136,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a pipeline. A pipeline consumes messages from a channel and allows \n          you to process the messages before storing them in a data store. You must specify both a \n          <code>channel</code> and a <code>datastore</code> activity and, optionally, as many\n          as 23 additional activities in the <code>pipelineActivities</code> array.</p>",
+                "smithy.api#documentation": "<p>Creates a pipeline. A pipeline consumes messages from a channel and allows you to process\n      the messages before storing them in a data store. You must specify both a <code>channel</code>\n      and a <code>datastore</code> activity and, optionally, as many as 23 additional activities in\n      the <code>pipelineActivities</code> array.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/pipelines",
@@ -1089,7 +1157,7 @@
                 "pipelineActivities": {
                     "target": "com.amazonaws.iotanalytics#PipelineActivities",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of  <code>PipelineActivity</code> objects. Activities perform transformations on\n      your messages, such as removing, renaming or adding message attributes; filtering messages\n      based on attribute values; invoking your Lambda functions on messages for advanced processing;\n      or performing mathematical transformations to normalize device data.</p>\n         <p>The list can be 2-25 <code>PipelineActivity</code> objects and must contain both a\n        <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must\n      contain only one activity. For example:</p>\n         <p>\n            <code>pipelineActivities = [\n  {\n    \"channel\": { ... }\n  },\n  {\n    \"lambda\": { ... }\n  },\n  ...      \n]</code>\n         </p>",
+                        "smithy.api#documentation": "<p>A list of <code>PipelineActivity</code> objects. Activities perform transformations on\n      your messages, such as removing, renaming or adding message attributes; filtering messages\n      based on attribute values; invoking your Lambda functions on messages for advanced processing;\n      or performing mathematical transformations to normalize device data.</p>\n         <p>The list can be 2-25 <code>PipelineActivity</code> objects and must contain both a\n        <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must\n      contain only one activity. For example:</p>\n         <p>\n            <code>pipelineActivities = [ { \"channel\": { ... } }, { \"lambda\": { ... } }, ...\n      ]</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1137,7 +1205,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.iotanalytics#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to interact with your\n      Amazon S3 resources.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon\n      S3 resources.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1164,7 +1232,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.iotanalytics#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to interact with your\n      Amazon S3 resources.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon\n      S3 resources.</p>"
                     }
                 }
             },
@@ -1191,7 +1259,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.iotanalytics#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to interact with your\n      Amazon S3 resources.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon\n      S3 resources.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1218,7 +1286,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.iotanalytics#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to interact with your\n      Amazon S3 resources.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon\n      S3 resources.</p>"
                     }
                 }
             },
@@ -1286,13 +1354,13 @@
                 "versioningConfiguration": {
                     "target": "com.amazonaws.iotanalytics#VersioningConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional. How many versions of dataset contents are kept. If not specified or set to\n      null, only the latest version plus the latest succeeded version (if they are different) are\n      kept for the time period specified by the <code>retentionPeriod</code> parameter. For more\n      information, see\n        <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\">Keeping Multiple Versions of AWS IoT Analytics Data Sets</a> in the <i>AWS IoT\n        Analytics User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Optional. How many versions of dataset contents are kept. If not specified or set to null,\n      only the latest version plus the latest succeeded version (if they are different) are kept for\n      the time period specified by the <code>retentionPeriod</code> parameter. For more information,\n      see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\">Keeping Multiple Versions of AWS IoT Analytics Data Sets</a> in the <i>AWS IoT\n        Analytics User Guide</i>.</p>"
                     }
                 },
                 "lateDataRules": {
                     "target": "com.amazonaws.iotanalytics#LateDataRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of data rules that send notifications to Amazon CloudWatch, when data arrives late. To\n      specify <code>lateDataRules</code>, the dataset must use a <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">DeltaTimer</a>\n      filter.</p>"
+                        "smithy.api#documentation": "<p>A list of data rules that send notifications to Amazon CloudWatch, when data arrives late. To\n  specify <code>lateDataRules</code>, the dataset must use a <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">DeltaTimer</a>\n  filter.</p>"
                     }
                 }
             },
@@ -1306,7 +1374,7 @@
                 "actionName": {
                     "target": "com.amazonaws.iotanalytics#DatasetActionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the data set action by which data set contents are automatically created.</p>"
+                        "smithy.api#documentation": "<p>The name of the data set action by which data set contents are automatically\n      created.</p>"
                     }
                 },
                 "queryAction": {
@@ -1323,7 +1391,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A <code>DatasetAction</code> object that specifies how data set contents are\n      automatically created.</p>"
+                "smithy.api#documentation": "<p>A <code>DatasetAction</code> object that specifies how data set contents are automatically\n      created.</p>"
             }
         },
         "com.amazonaws.iotanalytics#DatasetActionName": {
@@ -1555,7 +1623,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The dataset whose latest contents are used as input to the notebook or\n      application.</p>"
+                "smithy.api#documentation": "<p>The dataset whose latest contents are used as input to the notebook or application.</p>"
             }
         },
         "com.amazonaws.iotanalytics#DatasetEntries": {
@@ -1649,7 +1717,7 @@
                 "triggers": {
                     "target": "com.amazonaws.iotanalytics#DatasetTriggers",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of triggers. A trigger causes data set content to be populated at a specified time\n       interval or when another data set is populated. The list of triggers can be empty or contain up\n       to five <code>DataSetTrigger</code> objects</p>"
+                        "smithy.api#documentation": "<p>A list of triggers. A trigger causes data set content to be populated at a specified time\n      interval or when another data set is populated. The list of triggers can be empty or contain\n      up to five <code>DataSetTrigger</code> objects</p>"
                     }
                 },
                 "actions": {
@@ -1675,7 +1743,7 @@
                 "dataset": {
                     "target": "com.amazonaws.iotanalytics#TriggeringDataset",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data set whose content creation triggers the creation of this data set's contents.</p>"
+                        "smithy.api#documentation": "<p>The data set whose content creation triggers the creation of this data set's\n      contents.</p>"
                     }
                 }
             },
@@ -1743,7 +1811,13 @@
                 "lastMessageArrivalTime": {
                     "target": "com.amazonaws.iotanalytics#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time when a new message arrived in the data store.</p>\n         <p>AWS IoT Analytics updates this value at most once per minute for one data store. \n      Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> \n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+                        "smithy.api#documentation": "<p>The last time when a new message arrived in the data store.</p>\n         <p>AWS IoT Analytics updates this value at most once per minute for one data store. \n  Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> \n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+                    }
+                },
+                "fileFormatConfiguration": {
+                    "target": "com.amazonaws.iotanalytics#FileFormatConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON \n      and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p>\n         <p>The default file format is JSON. You can specify only one format.</p>\n         <p>You can't change the file format after you create the data store.</p>"
                     }
                 }
             },
@@ -1825,7 +1899,7 @@
                 "serviceManagedS3": {
                     "target": "com.amazonaws.iotanalytics#ServiceManagedDatastoreS3Storage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this to store data store data in an S3 bucket managed by AWS IoT Analytics. You\n      cannot change the choice of service-managed or customer-managed S3 storage after the data\n      store is created.</p>"
+                        "smithy.api#documentation": "<p>Use this to store data store data in an S3 bucket managed by AWS IoT Analytics. You cannot\n      change the choice of service-managed or customer-managed S3 storage after the data store is\n      created.</p>"
                     }
                 },
                 "customerManagedS3": {
@@ -1901,7 +1975,13 @@
                 "lastMessageArrivalTime": {
                     "target": "com.amazonaws.iotanalytics#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time when a new message arrived in the data store.</p>\n         <p>AWS IoT Analytics updates this value at most once per minute for one data store. \n      Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> \n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+                        "smithy.api#documentation": "<p>The last time when a new message arrived in the data store.</p>\n         <p>AWS IoT Analytics updates this value at most once per minute for one data store. \n  Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> \n         <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+                    }
+                },
+                "fileFormatType": {
+                    "target": "com.amazonaws.iotanalytics#FileFormatType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file format of the data in the data store.</p>"
                     }
                 }
             },
@@ -2155,7 +2235,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Used to limit data to that which has arrived since the last execution of the action.</p>"
+                "smithy.api#documentation": "<p>Used to limit data to that which has arrived since the last execution of the\n      action.</p>"
             }
         },
         "com.amazonaws.iotanalytics#DeltaTimeSessionWindowConfiguration": {
@@ -2164,13 +2244,13 @@
                 "timeoutInMinutes": {
                     "target": "com.amazonaws.iotanalytics#SessionTimeoutInMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A time interval. You can use <code>timeoutInMinutes</code> so that AWS IoT Analytics can batch up late data notifications \n      that have been generated since the last execution. AWS IoT Analytics sends one batch of notifications to Amazon CloudWatch Events at one time.</p>\n         <p>For more information about how to write a timestamp expression, \n      see <a href=\"https://prestodb.io/docs/0.172/functions/datetime.html\">Date and Time Functions and Operators</a>, \n      in the <i>Presto 0.172 Documentation</i>.</p>",
+                        "smithy.api#documentation": "<p>A time interval. You can use <code>timeoutInMinutes</code> so that AWS IoT Analytics can batch up late\n      data notifications that have been generated since the last execution. AWS IoT Analytics sends one batch of\n      notifications to Amazon CloudWatch Events at one time.</p>\n         <p>For more information about how to write a timestamp expression, see <a href=\"https://prestodb.io/docs/0.172/functions/datetime.html\">Date and Time Functions and\n        Operators</a>, in the <i>Presto 0.172 Documentation</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains the configuration information of a delta time session\n      window.</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">\n               <code>DeltaTime</code>\n            </a> specifies a time interval. \n      You can use <code>DeltaTime</code> to create dataset contents with data that has arrived in the data store since the last execution. \n      For an example of <code>DeltaTime</code>, see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/automate-create-dataset.html#automate-example6\">\n        Creating a SQL dataset with a delta window (CLI)</a> in the <i>AWS IoT Analytics User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A structure that contains the configuration information of a delta time session\n      window.</p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">\n               <code>DeltaTime</code>\n            </a> specifies a time interval. You can use\n        <code>DeltaTime</code> to create dataset contents with data that has arrived in the data\n      store since the last execution. For an example of <code>DeltaTime</code>, see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/automate-create-dataset.html#automate-example6\"> Creating\n        a SQL dataset with a delta window (CLI)</a> in the\n        <i>AWS IoT Analytics User Guide</i>.</p>"
             }
         },
         "com.amazonaws.iotanalytics#DescribeChannel": {
@@ -2221,7 +2301,7 @@
                 "includeStatistics": {
                     "target": "com.amazonaws.iotanalytics#IncludeStatisticsFlag",
                     "traits": {
-                        "smithy.api#documentation": "<p>If true, additional statistical information about the channel is included in the response.\n         This feature cannot be used with a channel whose S3 storage is customer-managed.</p>",
+                        "smithy.api#documentation": "<p>If true, additional statistical information about the channel is included in the response.\n      This feature cannot be used with a channel whose S3 storage is customer-managed.</p>",
                         "smithy.api#httpQuery": "includeStatistics"
                     }
                 }
@@ -2350,7 +2430,7 @@
                 "includeStatistics": {
                     "target": "com.amazonaws.iotanalytics#IncludeStatisticsFlag",
                     "traits": {
-                        "smithy.api#documentation": "<p>If true, additional statistical information about the data store is included in the response.\n         This feature cannot be used with a data store whose S3 storage is customer-managed.</p>",
+                        "smithy.api#documentation": "<p>If true, additional statistical information about the data store is included in the\n      response. This feature cannot be used with a data store whose S3 storage is\n      customer-managed.</p>",
                         "smithy.api#httpQuery": "includeStatistics"
                     }
                 }
@@ -2542,7 +2622,7 @@
                 "thingName": {
                     "target": "com.amazonaws.iotanalytics#AttributeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IoT device whose shadow information is added to \n          the message.</p>",
+                        "smithy.api#documentation": "<p>The name of the IoT device whose shadow information is added to the message.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2599,6 +2679,41 @@
                 "smithy.api#documentation": "<p>The estimated size of the resource.</p>"
             }
         },
+        "com.amazonaws.iotanalytics#FileFormatConfiguration": {
+            "type": "structure",
+            "members": {
+                "jsonConfiguration": {
+                    "target": "com.amazonaws.iotanalytics#JsonConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration information of the JSON format.</p>"
+                    }
+                },
+                "parquetConfiguration": {
+                    "target": "com.amazonaws.iotanalytics#ParquetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration information of the Parquet format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON \n      and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p>\n         <p>The default file format is JSON. You can specify only one format.</p>\n         <p>You can't change the file format after you create the data store.</p>"
+            }
+        },
+        "com.amazonaws.iotanalytics#FileFormatType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "JSON",
+                        "name": "JSON"
+                    },
+                    {
+                        "value": "PARQUET",
+                        "name": "PARQUET"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.iotanalytics#FilterActivity": {
             "type": "structure",
             "members": {
@@ -2612,7 +2727,7 @@
                 "filter": {
                     "target": "com.amazonaws.iotanalytics#FilterExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>An expression that looks like a SQL WHERE clause that must return a Boolean value. \n        Messages that satisfy the condition are passed to the next activity. </p>",
+                        "smithy.api#documentation": "<p>An expression that looks like a SQL WHERE clause that must return a Boolean value.\n      Messages that satisfy the condition are passed to the next activity. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2684,7 +2799,7 @@
                 "versionId": {
                     "target": "com.amazonaws.iotanalytics#DatasetContentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the data set whose contents are retrieved. You can also use\n         the strings \"$LATEST\" or \"$LATEST_SUCCEEDED\" to retrieve the contents of the \n         latest or latest successfully completed data set. If not specified, \"$LATEST_SUCCEEDED\" \n         is the default.</p>",
+                        "smithy.api#documentation": "<p>The version of the data set whose contents are retrieved. You can also use the strings\n      \"$LATEST\" or \"$LATEST_SUCCEEDED\" to retrieve the contents of the latest or latest successfully\n      completed data set. If not specified, \"$LATEST_SUCCEEDED\" is the default.</p>",
                         "smithy.api#httpQuery": "versionId"
                     }
                 }
@@ -2696,7 +2811,7 @@
                 "entries": {
                     "target": "com.amazonaws.iotanalytics#DatasetEntries",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of  <code>DatasetEntry</code> objects.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>DatasetEntry</code> objects.</p>"
                     }
                 },
                 "timestamp": {
@@ -2732,7 +2847,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information for coordination with AWS Glue, a fully managed extract,\n      transform and load  (ETL) service.</p>"
+                "smithy.api#documentation": "<p>Configuration information for coordination with AWS Glue, a fully managed extract,\n      transform and load (ETL) service.</p>"
             }
         },
         "com.amazonaws.iotanalytics#GlueDatabaseName": {
@@ -2823,6 +2938,13 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+            }
+        },
+        "com.amazonaws.iotanalytics#JsonConfiguration": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration information of the JSON format.</p>"
             }
         },
         "com.amazonaws.iotanalytics#LambdaActivity": {
@@ -3001,13 +3123,13 @@
                 "channelSummaries": {
                     "target": "com.amazonaws.iotanalytics#ChannelSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of  <code>ChannelSummary</code> objects.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>ChannelSummary</code> objects.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.iotanalytics#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no\n          more results.</p>"
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no more\n      results.</p>"
                     }
                 }
             }
@@ -3079,7 +3201,7 @@
                 "scheduledOnOrAfter": {
                     "target": "com.amazonaws.iotanalytics#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter to limit results to those data set contents whose creation is scheduled on or \n       after the given time. See the field <code>triggers.schedule</code> in the <code>CreateDataset</code> \n       request. (timestamp)</p>",
+                        "smithy.api#documentation": "<p>A filter to limit results to those data set contents whose creation is scheduled on or\n      after the given time. See the field <code>triggers.schedule</code> in the\n        <code>CreateDataset</code> request. (timestamp)</p>",
                         "smithy.api#httpQuery": "scheduledOnOrAfter"
                     }
                 },
@@ -3104,7 +3226,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iotanalytics#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no\n           more results.</p>"
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no more\n      results.</p>"
                     }
                 }
             }
@@ -3176,7 +3298,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iotanalytics#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no\n          more results.</p>"
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no more\n      results.</p>"
                     }
                 }
             }
@@ -3248,7 +3370,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iotanalytics#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no\n          more results.</p>"
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no more\n      results.</p>"
                     }
                 }
             }
@@ -3320,7 +3442,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iotanalytics#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no\n          more results.</p>"
+                        "smithy.api#documentation": "<p>The token to retrieve the next set of results, or <code>null</code> if there are no more\n      results.</p>"
                     }
                 }
             }
@@ -3409,7 +3531,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.iotanalytics#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role that grants permission to AWS IoT Analytics to\n          perform logging.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the role that grants permission to AWS IoT Analytics to perform logging.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3452,7 +3574,7 @@
                 "math": {
                     "target": "com.amazonaws.iotanalytics#MathExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>An expression that uses one or more existing attributes and must return an integer value.</p>",
+                        "smithy.api#documentation": "<p>An expression that uses one or more existing attributes and must return an integer\n      value.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3579,13 +3701,27 @@
                 "fileName": {
                     "target": "com.amazonaws.iotanalytics#OutputFileName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the location where dataset contents are stored, usually the URI of a file in\n      an S3 bucket.</p>",
+                        "smithy.api#documentation": "<p>The URI of the location where dataset contents are stored, usually the URI of a file in an\n      S3 bucket.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The value of the variable as a structure that specifies an output file URI.</p>"
+            }
+        },
+        "com.amazonaws.iotanalytics#ParquetConfiguration": {
+            "type": "structure",
+            "members": {
+                "schemaDefinition": {
+                    "target": "com.amazonaws.iotanalytics#SchemaDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information needed to define a schema.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration information of the Parquet format.</p>"
             }
         },
         "com.amazonaws.iotanalytics#Pipeline": {
@@ -3680,7 +3816,7 @@
                 "selectAttributes": {
                     "target": "com.amazonaws.iotanalytics#SelectAttributesActivity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Creates a new message using only the specified attributes from the original message.\n     </p>"
+                        "smithy.api#documentation": "<p>Creates a new message using only the specified attributes from the original message.\n    </p>"
                     }
                 },
                 "filter": {
@@ -3692,7 +3828,7 @@
                 "math": {
                     "target": "com.amazonaws.iotanalytics#MathActivity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Computes an arithmetic expression using the message's attributes and adds\n       it to the message.</p>"
+                        "smithy.api#documentation": "<p>Computes an arithmetic expression using the message's attributes and adds it to the\n      message.</p>"
                     }
                 },
                 "deviceRegistryEnrich": {
@@ -3812,7 +3948,7 @@
                 "deltaTime": {
                     "target": "com.amazonaws.iotanalytics#DeltaTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>Used to limit data to that which has arrived since the last execution of the action.</p>"
+                        "smithy.api#documentation": "<p>Used to limit data to that which has arrived since the last execution of the\n      action.</p>"
                     }
                 }
             },
@@ -3901,7 +4037,7 @@
                 "id": {
                     "target": "com.amazonaws.iotanalytics#ReprocessingId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>reprocessingId</code> returned by\n      <code>StartPipelineReprocessing</code>.</p>"
+                        "smithy.api#documentation": "<p>The <code>reprocessingId</code> returned by <code>StartPipelineReprocessing</code>.</p>"
                     }
                 },
                 "status": {
@@ -3977,7 +4113,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration of the resource used to execute the\n      <code>containerAction</code>.</p>"
+                "smithy.api#documentation": "<p>The configuration of the resource used to execute the <code>containerAction</code>.</p>"
             }
         },
         "com.amazonaws.iotanalytics#ResourceNotFoundException": {
@@ -4005,7 +4141,7 @@
                 "numberOfDays": {
                     "target": "com.amazonaws.iotanalytics#RetentionPeriodInDays",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days that message data is kept. The <code>unlimited</code> parameter must\n      be false.</p>"
+                        "smithy.api#documentation": "<p>The number of days that message data is kept. The <code>unlimited</code> parameter must be\n      false.</p>"
                     }
                 }
             },
@@ -4087,7 +4223,7 @@
                 "payloads": {
                     "target": "com.amazonaws.iotanalytics#MessagePayloads",
                     "traits": {
-                        "smithy.api#documentation": "<p>The enriched or transformed sample message payloads as base64-encoded strings. \n          (The results of running the pipeline activity on each input sample message payload,\n          encoded in base64.)</p>"
+                        "smithy.api#documentation": "<p>The enriched or transformed sample message payloads as base64-encoded strings. (The\n      results of running the pipeline activity on each input sample message payload, encoded in\n      base64.)</p>"
                     }
                 },
                 "logResult": {
@@ -4111,7 +4247,7 @@
                 "key": {
                     "target": "com.amazonaws.iotanalytics#BucketKeyExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key of the dataset contents object in an S3 bucket. Each object has a key that is a\n      unique identifier. Each object has exactly one key.</p>\n         <p>You can create a unique key with the following options:</p>\n         <ul>\n            <li>\n               <p>Use <code>!{iotanalytics:scheduleTime}</code> to insert the time of a scheduled SQL\n          query run.</p>\n            </li>\n            <li>\n               <p>Use <code>!{iotanalytics:versionId}</code> to insert a unique hash that identifies a\n          dataset content.</p>\n            </li>\n            <li>\n               <p>Use <code>!{iotanalytics:creationTime}</code> to insert the creation time of a dataset\n          content.</p>\n            </li>\n         </ul>\n         <p>The following example creates a unique key for a CSV file:\n        <code>dataset/mydataset/!{iotanalytics:scheduleTime}/!{iotanalytics:versionId}.csv</code>\n         </p>\n         <note>\n            <p>If you don't use <code>!{iotanalytics:versionId}</code> to specify the key, you might\n        get duplicate keys. For example, you might have two dataset contents with the same\n          <code>scheduleTime</code> but different <code>versionId</code>s. \n        This means that one dataset content overwrites the other. </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The key of the dataset contents object in an S3 bucket. Each object has a key that is a\n      unique identifier. Each object has exactly one key.</p>\n         <p>You can create a unique key with the following options:</p>\n         <ul>\n            <li>\n               <p>Use <code>!{iotanalytics:scheduleTime}</code> to insert the time of a scheduled SQL\n          query run.</p>\n            </li>\n            <li>\n               <p>Use <code>!{iotanalytics:versionId}</code> to insert a unique hash that identifies a\n          dataset content.</p>\n            </li>\n            <li>\n               <p>Use <code>!{iotanalytics:creationTime}</code> to insert the creation time of a dataset\n          content.</p>\n            </li>\n         </ul>\n         <p>The following example creates a unique key for a CSV file:\n        <code>dataset/mydataset/!{iotanalytics:scheduleTime}/!{iotanalytics:versionId}.csv</code>\n         </p>\n         <note>\n            <p>If you don't use <code>!{iotanalytics:versionId}</code> to specify the key, you might\n        get duplicate keys. For example, you might have two dataset contents with the same\n          <code>scheduleTime</code> but different <code>versionId</code>s. This means that one\n        dataset content overwrites the other. </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4124,13 +4260,13 @@
                 "roleArn": {
                     "target": "com.amazonaws.iotanalytics#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to interact with your\n      Amazon S3 and AWS Glue resources.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon\n      S3 and AWS Glue resources.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information for delivery of dataset contents to Amazon Simple Storage\n        Service (Amazon S3).</p>"
+                "smithy.api#documentation": "<p>Configuration information for delivery of dataset contents to Amazon Simple Storage\n      Service (Amazon S3).</p>"
             }
         },
         "com.amazonaws.iotanalytics#S3KeyPrefix": {
@@ -4141,6 +4277,28 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9!_.*'()/{}:-]*/$"
+            }
+        },
+        "com.amazonaws.iotanalytics#S3PathChannelMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9/_!'(){}\\*\\s\\.\\-\\=\\:]+$"
+            }
+        },
+        "com.amazonaws.iotanalytics#S3PathChannelMessages": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotanalytics#S3PathChannelMessage"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.iotanalytics#SampleChannelData": {
@@ -4169,7 +4327,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a sample of messages from the specified channel ingested during the specified\n          timeframe. Up to 10 messages can be retrieved.</p>",
+                "smithy.api#documentation": "<p>Retrieves a sample of messages from the specified channel ingested during the specified\n      timeframe. Up to 10 messages can be retrieved.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/channels/{channelName}/sample",
@@ -4217,7 +4375,7 @@
                 "payloads": {
                     "target": "com.amazonaws.iotanalytics#MessagePayloads",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of message samples.  Each sample message is returned as a base64-encoded\n          string.</p>"
+                        "smithy.api#documentation": "<p>The list of message samples. Each sample message is returned as a base64-encoded\n      string.</p>"
                     }
                 }
             }
@@ -4228,7 +4386,7 @@
                 "expression": {
                     "target": "com.amazonaws.iotanalytics#ScheduleExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The expression that defines when to trigger an update. \n        For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">Schedule Expressions for\n        Rules</a> in the <i>Amazon CloudWatch Events User\n      Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The expression that defines when to trigger an update. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">Schedule\n        Expressions for Rules</a> in the <i>Amazon CloudWatch Events User\n        Guide</i>.</p>"
                     }
                 }
             },
@@ -4238,6 +4396,20 @@
         },
         "com.amazonaws.iotanalytics#ScheduleExpression": {
             "type": "string"
+        },
+        "com.amazonaws.iotanalytics#SchemaDefinition": {
+            "type": "structure",
+            "members": {
+                "columns": {
+                    "target": "com.amazonaws.iotanalytics#Columns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies one or more columns that store your data.</p>\n         <p>Each schema can have up to 100 columns. Each column can have up to 100 nested types</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information needed to define a schema.</p>"
+            }
         },
         "com.amazonaws.iotanalytics#SelectAttributesActivity": {
             "type": "structure",
@@ -4264,7 +4436,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new message using only the specified attributes\n        from the original message.</p>"
+                "smithy.api#documentation": "<p>Creates a new message using only the specified attributes from the original\n      message.</p>"
             }
         },
         "com.amazonaws.iotanalytics#ServiceManagedChannelS3Storage": {
@@ -4285,7 +4457,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Use this to store data store data in an S3 bucket managed by AWS IoT Analytics. You\n      cannot change the choice of service-managed or customer-managed S3 storage after the data\n      store is created.</p>"
+                "smithy.api#documentation": "<p>Use this to store data store data in an S3 bucket managed by AWS IoT Analytics. You cannot\n      change the choice of service-managed or customer-managed S3 storage after the data store is\n      created.</p>"
             }
         },
         "com.amazonaws.iotanalytics#ServiceManagedDatastoreS3StorageSummary": {
@@ -4399,13 +4571,19 @@
                 "startTime": {
                     "target": "com.amazonaws.iotanalytics#StartTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start time (inclusive) of raw message data that is reprocessed.</p>"
+                        "smithy.api#documentation": "<p>The start time (inclusive) of raw message data that is reprocessed.</p>\n         <p>If you specify a value for the <code>startTime</code> parameter, you must not use the\n        <code>channelMessages</code> object.</p>"
                     }
                 },
                 "endTime": {
                     "target": "com.amazonaws.iotanalytics#EndTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end time (exclusive) of raw message data that is reprocessed.</p>"
+                        "smithy.api#documentation": "<p>The end time (exclusive) of raw message data that is reprocessed.</p>\n         <p>If you specify a value for the <code>endTime</code> parameter, you must not use the\n        <code>channelMessages</code> object.</p>"
+                    }
+                },
+                "channelMessages": {
+                    "target": "com.amazonaws.iotanalytics#ChannelMessages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies one or more sets of channel messages that you want to reprocess.</p>\n         <p>If you use the <code>channelMessages</code> object, you must not specify a value for\n        <code>startTime</code> and <code>endTime</code>.</p>"
                     }
                 }
             }
@@ -4517,7 +4695,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds to or modifies the tags of the given resource. Tags are metadata that can be used\n      to manage a resource.</p>",
+                "smithy.api#documentation": "<p>Adds to or modifies the tags of the given resource. Tags are metadata that can be used to\n      manage a resource.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags",
@@ -4711,7 +4889,7 @@
                 "retentionPeriod": {
                     "target": "com.amazonaws.iotanalytics#RetentionPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>How long, in days, message data is kept for the channel. The retention period cannot be updated\n        if the channel's S3 storage is customer-managed.</p>"
+                        "smithy.api#documentation": "<p>How long, in days, message data is kept for the channel. The retention period cannot be\n      updated if the channel's S3 storage is customer-managed.</p>"
                     }
                 }
             }
@@ -4768,7 +4946,7 @@
                 "triggers": {
                     "target": "com.amazonaws.iotanalytics#DatasetTriggers",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>DatasetTrigger</code> objects. The list can be empty or can contain up\n      to five <code>DatasetTrigger</code> objects.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>DatasetTrigger</code> objects. The list can be empty or can contain up to\n      five <code>DatasetTrigger</code> objects.</p>"
                     }
                 },
                 "contentDeliveryRules": {
@@ -4786,13 +4964,13 @@
                 "versioningConfiguration": {
                     "target": "com.amazonaws.iotanalytics#VersioningConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional. How many versions of dataset contents are kept. If not specified or set to\n      null, only the latest version plus the latest succeeded version (if they are different) are\n      kept for the time period specified by the <code>retentionPeriod</code> parameter. For more\n      information, see \n        <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\">Keeping Multiple Versions of AWS IoT Analytics Data Sets</a> in the <i>AWS IoT\n        Analytics User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Optional. How many versions of dataset contents are kept. If not specified or set to null,\n      only the latest version plus the latest succeeded version (if they are different) are kept for\n      the time period specified by the <code>retentionPeriod</code> parameter. For more information,\n      see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\">Keeping Multiple Versions of AWS IoT Analytics Data Sets</a> in the <i>AWS IoT\n        Analytics User Guide</i>.</p>"
                     }
                 },
                 "lateDataRules": {
                     "target": "com.amazonaws.iotanalytics#LateDataRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of data rules that send notifications to Amazon CloudWatch, when data arrives late. To\n      specify <code>lateDataRules</code>, the dataset must use a <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">DeltaTimer</a>\n      filter.</p>"
+                        "smithy.api#documentation": "<p>A list of data rules that send notifications to Amazon CloudWatch, when data arrives late. To\n  specify <code>lateDataRules</code>, the dataset must use a <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">DeltaTimer</a>\n  filter.</p>"
                     }
                 }
             }
@@ -4842,13 +5020,19 @@
                 "retentionPeriod": {
                     "target": "com.amazonaws.iotanalytics#RetentionPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>How long, in days, message data is kept for the data store. The retention period cannot be updated\n        if the data store's S3 storage is customer-managed.</p>"
+                        "smithy.api#documentation": "<p>How long, in days, message data is kept for the data store. The retention period cannot be\n      updated if the data store's S3 storage is customer-managed.</p>"
                     }
                 },
                 "datastoreStorage": {
                     "target": "com.amazonaws.iotanalytics#DatastoreStorage",
                     "traits": {
                         "smithy.api#documentation": "<p>Where data store data is stored. You can choose one of <code>serviceManagedS3</code> or\n        <code>customerManagedS3</code> storage. If not specified, the default\n        is<code>serviceManagedS3</code>. You cannot change this storage option after the data store\n      is created.</p>"
+                    }
+                },
+                "fileFormatConfiguration": {
+                    "target": "com.amazonaws.iotanalytics#FileFormatConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON \n      and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p>\n         <p>The default file format is JSON. You can specify only one format.</p>\n         <p>You can't change the file format after you create the data store.</p>"
                     }
                 }
             }
@@ -4879,7 +5063,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the settings of a pipeline. You must specify both a \n          <code>channel</code> and a <code>datastore</code> activity and, optionally, as many\n          as 23 additional activities in the <code>pipelineActivities</code> array.</p>",
+                "smithy.api#documentation": "<p>Updates the settings of a pipeline. You must specify both a <code>channel</code> and a\n        <code>datastore</code> activity and, optionally, as many as 23 additional activities in the\n        <code>pipelineActivities</code> array.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/pipelines/{pipelineName}",
@@ -4901,7 +5085,7 @@
                 "pipelineActivities": {
                     "target": "com.amazonaws.iotanalytics#PipelineActivities",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>PipelineActivity</code> objects. Activities perform transformations on\n      your messages, such as removing, renaming or adding message attributes; filtering messages\n      based on attribute values; invoking your Lambda functions on messages for advanced processing;\n      or performing mathematical transformations to normalize device data.</p>\n         <p>The list can be 2-25 <code>PipelineActivity</code> objects and must contain both a\n        <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must\n      contain only one activity. For example:</p>\n         <p>\n            <code>pipelineActivities = [\n  {\n    \"channel\": { ... }\n  },\n  {\n    \"lambda\": { ... }\n  },\n  ...      \n]</code>\n         </p>",
+                        "smithy.api#documentation": "<p>A list of <code>PipelineActivity</code> objects. Activities perform transformations on\n      your messages, such as removing, renaming or adding message attributes; filtering messages\n      based on attribute values; invoking your Lambda functions on messages for advanced processing;\n      or performing mathematical transformations to normalize device data.</p>\n         <p>The list can be 2-25 <code>PipelineActivity</code> objects and must contain both a\n        <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must\n      contain only one activity. For example:</p>\n         <p>\n            <code>pipelineActivities = [ { \"channel\": { ... } }, { \"lambda\": { ... } }, ...\n      ]</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4933,7 +5117,7 @@
                 "datasetContentVersionValue": {
                     "target": "com.amazonaws.iotanalytics#DatasetContentVersionValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the variable as a structure that specifies a dataset content\n      version.</p>"
+                        "smithy.api#documentation": "<p>The value of the variable as a structure that specifies a dataset content version.</p>"
                     }
                 },
                 "outputFileUriValue": {
@@ -4944,7 +5128,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An instance of a variable to be passed to the <code>containerAction</code> execution.\n      Each variable must have a name and a value given by one of <code>stringValue</code>,\n        <code>datasetContentVersionValue</code>, or <code>outputFileUriValue</code>.</p>"
+                "smithy.api#documentation": "<p>An instance of a variable to be passed to the <code>containerAction</code> execution. Each\n      variable must have a name and a value given by one of <code>stringValue</code>,\n        <code>datasetContentVersionValue</code>, or <code>outputFileUriValue</code>.</p>"
             }
         },
         "com.amazonaws.iotanalytics#VariableName": {
@@ -4980,7 +5164,7 @@
                 "maxVersions": {
                     "target": "com.amazonaws.iotanalytics#MaxVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p>How many versions of dataset contents are kept. The <code>unlimited</code> parameter\n      must be <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>How many versions of dataset contents are kept. The <code>unlimited</code> parameter must\n      be <code>false</code>.</p>"
                     }
                 }
             },

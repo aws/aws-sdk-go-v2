@@ -33,13 +33,14 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.devopsguru#__string",
+                    "target": "com.amazonaws.devopsguru#ErrorMessageString",
                     "traits": {
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p> You don't have permissions to perform the requested operation. The user or role that is making the request must have at \n\t\t\tleast one IAM permissions policy attached that grants the required permissions. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html\">Access Management</a> in the <i>IAM User Guide</i>. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -76,6 +77,7 @@
                 }
             ],
             "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tAdds a notification channel to DevOps Guru. A notification channel is used to notify you about important DevOps Guru events, such as when an insight is generated.\n\t\t</p>\n\t\t\n\t\t       <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAWS KMS–encrypted Amazon SNS topics</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/channels",
@@ -89,6 +91,7 @@
                 "Config": {
                     "target": "com.amazonaws.devopsguru#NotificationChannelConfig",
                     "traits": {
+                        "smithy.api#documentation": "<p> A <code>NotificationChannelConfig</code> object that specifies what type of\n   \t\tnotification channel to add. The one \n      \tsupported notification channel is Amazon Simple Notification Service (Amazon SNS). </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -98,8 +101,28 @@
             "type": "structure",
             "members": {
                 "Id": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                    "target": "com.amazonaws.devopsguru#NotificationChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tThe ID of the added notification channel.\n   \t</p>",
+                        "smithy.api#required": {}
+                    }
                 }
+            }
+        },
+        "com.amazonaws.devopsguru#AnomalyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[\\w-]*$"
+            }
+        },
+        "com.amazonaws.devopsguru#AnomalyLimit": {
+            "type": "double",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.devopsguru#AnomalySeverity": {
@@ -125,8 +148,14 @@
             "type": "structure",
             "members": {
                 "CloudWatchMetrics": {
-                    "target": "com.amazonaws.devopsguru#__listOfCloudWatchMetricsDetail"
+                    "target": "com.amazonaws.devopsguru#CloudWatchMetricsDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of <code>CloudWatchMetricsDetail</code> object that contains information\n\t\t\tabout the analyzed metrics that displayed anomalous behavior. </p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Details about the source of the anomalous operational data that triggered the anomaly. The\n\t\t\tone supported source is Amazon CloudWatch metrics. </p>"
             }
         },
         "com.amazonaws.devopsguru#AnomalyStatus": {
@@ -147,468 +176,25 @@
         "com.amazonaws.devopsguru#AnomalyTimeRange": {
             "type": "structure",
             "members": {
-                "EndTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix"
-                },
                 "StartTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix",
+                    "target": "com.amazonaws.devopsguru#Timestamp",
                     "traits": {
-                        "smithy.api#required": {}
-                    }
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#CloudFormationCollection": {
-            "type": "structure",
-            "members": {
-                "StackNames": {
-                    "target": "com.amazonaws.devopsguru#__listOf__stringMin1Max128PatternAZAZAZAZ09"
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#CloudFormationCollectionFilter": {
-            "type": "structure",
-            "members": {
-                "StackNames": {
-                    "target": "com.amazonaws.devopsguru#__listOf__stringMin1Max128PatternAZAZAZAZ09"
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#CloudFormationHealth": {
-            "type": "structure",
-            "members": {
-                "Insight": {
-                    "target": "com.amazonaws.devopsguru#InsightHealth"
-                },
-                "StackName": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max128PatternAZAZAZAZ09"
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#CloudWatchMetricsDetail": {
-            "type": "structure",
-            "members": {
-                "Dimensions": {
-                    "target": "com.amazonaws.devopsguru#__listOfCloudWatchMetricsDimension"
-                },
-                "MetricName": {
-                    "target": "com.amazonaws.devopsguru#__string"
-                },
-                "Namespace": {
-                    "target": "com.amazonaws.devopsguru#__string"
-                },
-                "Period": {
-                    "target": "com.amazonaws.devopsguru#__integer"
-                },
-                "Stat": {
-                    "target": "com.amazonaws.devopsguru#CloudWatchMetricsStat"
-                },
-                "Unit": {
-                    "target": "com.amazonaws.devopsguru#__string"
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#CloudWatchMetricsDimension": {
-            "type": "structure",
-            "members": {
-                "Name": {
-                    "target": "com.amazonaws.devopsguru#__string"
-                },
-                "Value": {
-                    "target": "com.amazonaws.devopsguru#__string"
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#CloudWatchMetricsStat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Sum",
-                        "name": "Sum"
-                    },
-                    {
-                        "value": "Average",
-                        "name": "Average"
-                    },
-                    {
-                        "value": "SampleCount",
-                        "name": "SampleCount"
-                    },
-                    {
-                        "value": "Minimum",
-                        "name": "Minimum"
-                    },
-                    {
-                        "value": "Maximum",
-                        "name": "Maximum"
-                    },
-                    {
-                        "value": "p99",
-                        "name": "p99"
-                    },
-                    {
-                        "value": "p90",
-                        "name": "p90"
-                    },
-                    {
-                        "value": "p50",
-                        "name": "p50"
-                    }
-                ]
-            }
-        },
-        "com.amazonaws.devopsguru#ConflictException": {
-            "type": "structure",
-            "members": {
-                "Message": {
-                    "target": "com.amazonaws.devopsguru#__string",
-                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe time when the anomalous behavior started.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
                 },
-                "ResourceId": {
-                    "target": "com.amazonaws.devopsguru#__string",
+                "EndTime": {
+                    "target": "com.amazonaws.devopsguru#Timestamp",
                     "traits": {
-                        "smithy.api#required": {}
-                    }
-                },
-                "ResourceType": {
-                    "target": "com.amazonaws.devopsguru#__string",
-                    "traits": {
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> The time when the anomalous behavior ended. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 409
+                "smithy.api#documentation": "<p>\n\t\t\tA time range that specifies when the observed unusual behavior in an anomaly started and ended.\n\t\t</p>"
             }
         },
-        "com.amazonaws.devopsguru#DescribeAccountHealth": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.devopsguru#DescribeAccountHealthRequest"
-            },
-            "output": {
-                "target": "com.amazonaws.devopsguru#DescribeAccountHealthResponse"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#InternalServerException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#ThrottlingException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#ValidationException"
-                }
-            ],
-            "traits": {
-                "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/accounts/health",
-                    "code": 200
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DescribeAccountHealthRequest": {
-            "type": "structure",
-            "members": {}
-        },
-        "com.amazonaws.devopsguru#DescribeAccountHealthResponse": {
-            "type": "structure",
-            "members": {
-                "MetricsAnalyzed": {
-                    "target": "com.amazonaws.devopsguru#__integer"
-                },
-                "OpenProactiveInsights": {
-                    "target": "com.amazonaws.devopsguru#__integer"
-                },
-                "OpenReactiveInsights": {
-                    "target": "com.amazonaws.devopsguru#__integer"
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DescribeAccountOverview": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.devopsguru#DescribeAccountOverviewRequest"
-            },
-            "output": {
-                "target": "com.amazonaws.devopsguru#DescribeAccountOverviewResponse"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#InternalServerException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#ThrottlingException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#ValidationException"
-                }
-            ],
-            "traits": {
-                "smithy.api#http": {
-                    "method": "POST",
-                    "uri": "/accounts/overview",
-                    "code": 200
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DescribeAccountOverviewRequest": {
-            "type": "structure",
-            "members": {
-                "FromTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix",
-                    "traits": {
-                        "smithy.api#required": {}
-                    }
-                },
-                "ToTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix"
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DescribeAccountOverviewResponse": {
-            "type": "structure",
-            "members": {
-                "MeanTimeToRecoverInMilliseconds": {
-                    "target": "com.amazonaws.devopsguru#__long"
-                },
-                "ProactiveInsights": {
-                    "target": "com.amazonaws.devopsguru#__integer"
-                },
-                "ReactiveInsights": {
-                    "target": "com.amazonaws.devopsguru#__integer"
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DescribeAnomaly": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.devopsguru#DescribeAnomalyRequest"
-            },
-            "output": {
-                "target": "com.amazonaws.devopsguru#DescribeAnomalyResponse"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#InternalServerException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#ThrottlingException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#ValidationException"
-                }
-            ],
-            "traits": {
-                "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/anomalies/{Id}",
-                    "code": 200
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DescribeAnomalyRequest": {
-            "type": "structure",
-            "members": {
-                "Id": {
-                    "target": "com.amazonaws.devopsguru#__string",
-                    "traits": {
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DescribeAnomalyResponse": {
-            "type": "structure",
-            "members": {
-                "ProactiveAnomaly": {
-                    "target": "com.amazonaws.devopsguru#ProactiveAnomaly"
-                },
-                "ReactiveAnomaly": {
-                    "target": "com.amazonaws.devopsguru#ReactiveAnomaly"
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DescribeInsight": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.devopsguru#DescribeInsightRequest"
-            },
-            "output": {
-                "target": "com.amazonaws.devopsguru#DescribeInsightResponse"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#InternalServerException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#ThrottlingException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#ValidationException"
-                }
-            ],
-            "traits": {
-                "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/insights/{Id}",
-                    "code": 200
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DescribeInsightRequest": {
-            "type": "structure",
-            "members": {
-                "Id": {
-                    "target": "com.amazonaws.devopsguru#__string",
-                    "traits": {
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DescribeInsightResponse": {
-            "type": "structure",
-            "members": {
-                "ProactiveInsight": {
-                    "target": "com.amazonaws.devopsguru#ProactiveInsight"
-                },
-                "ReactiveInsight": {
-                    "target": "com.amazonaws.devopsguru#ReactiveInsight"
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DescribeResourceCollectionHealth": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.devopsguru#DescribeResourceCollectionHealthRequest"
-            },
-            "output": {
-                "target": "com.amazonaws.devopsguru#DescribeResourceCollectionHealthResponse"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#InternalServerException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#ThrottlingException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#ValidationException"
-                }
-            ],
-            "traits": {
-                "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/accounts/health/resource-collection/{ResourceCollectionType}",
-                    "code": 200
-                },
-                "smithy.api#paginated": {
-                    "inputToken": "NextToken",
-                    "outputToken": "NextToken"
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DescribeResourceCollectionHealthRequest": {
-            "type": "structure",
-            "members": {
-                "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__string",
-                    "traits": {
-                        "smithy.api#httpQuery": "NextToken"
-                    }
-                },
-                "ResourceCollectionType": {
-                    "target": "com.amazonaws.devopsguru#__string",
-                    "traits": {
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DescribeResourceCollectionHealthResponse": {
-            "type": "structure",
-            "members": {
-                "CloudFormation": {
-                    "target": "com.amazonaws.devopsguru#__listOfCloudFormationHealth"
-                },
-                "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DescribeServiceIntegration": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.devopsguru#DescribeServiceIntegrationRequest"
-            },
-            "output": {
-                "target": "com.amazonaws.devopsguru#DescribeServiceIntegrationResponse"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#InternalServerException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#ThrottlingException"
-                },
-                {
-                    "target": "com.amazonaws.devopsguru#ValidationException"
-                }
-            ],
-            "traits": {
-                "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/service-integrations",
-                    "code": 200
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DescribeServiceIntegrationRequest": {
-            "type": "structure",
-            "members": {}
-        },
-        "com.amazonaws.devopsguru#DescribeServiceIntegrationResponse": {
-            "type": "structure",
-            "members": {
-                "ServiceIntegration": {
-                    "target": "com.amazonaws.devopsguru#ServiceIntegrationConfig"
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#DevOpsGuru": {
+        "com.amazonaws.devopsguru#CapstoneControlPlaneService": {
             "type": "service",
             "version": "2020-12-01",
             "operations": [
@@ -679,47 +265,696 @@
                     "name": "devops-guru"
                 },
                 "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p> Amazon DevOps Guru is a fully managed service that helps you identify anomalous behavior in business\n\t\t\tcritical operational applications. You specify the AWS resources that you want DevOps Guru to cover,\n\t\t\tthen the Amazon CloudWatch metrics and AWS CloudTrail events related to those resources are analyzed. When\n\t\t\tanomalous behavior is detected, DevOps Guru creates an <i>insight</i> that includes\n\t\t\trecommendations, related events, and related metrics that can help you improve your\n\t\t\toperational applications. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/welcome.html\">What is Amazon DevOps Guru</a>. </p>\n\t\t\n\t\t       <p>\n\t\t\tYou can specify 1 or 2 Amazon Simple Notification Service topics so you are notified every time a new insight is created. You can also enable DevOps Guru to generate \n\t\t\tan OpsItem in AWS Systems Manager for each insight to help you manage and track your work addressing insights.\n\t\t</p>\n\t\t\n\t\t       <p>\n\t\t\tTo learn about the DevOps Guru workflow, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/welcome.html#how-it-works\">How DevOps Guru works</a>. To \n\t\t\tlearn about DevOps Guru concepts, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/concepts.html\">Concepts in DevOps Guru</a>.\n\t\t</p>",
                 "smithy.api#title": "Amazon DevOps Guru"
+            }
+        },
+        "com.amazonaws.devopsguru#Channels": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#NotificationChannel"
+            }
+        },
+        "com.amazonaws.devopsguru#CloudFormationCollection": {
+            "type": "structure",
+            "members": {
+                "StackNames": {
+                    "target": "com.amazonaws.devopsguru#StackNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn array of CloudFormation stack names.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. \n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> \n\t\t\tin the <i>AWS CloudFormation User Guide</i>.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#CloudFormationCollectionFilter": {
+            "type": "structure",
+            "members": {
+                "StackNames": {
+                    "target": "com.amazonaws.devopsguru#StackNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn array of CloudFormation stack names.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. \n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> \n\t\t\tin the <i>AWS CloudFormation User Guide</i>.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#CloudFormationHealth": {
+            "type": "structure",
+            "members": {
+                "StackName": {
+                    "target": "com.amazonaws.devopsguru#StackName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tThe name of the CloudFormation stack.\n   \t</p>"
+                    }
+                },
+                "Insight": {
+                    "target": "com.amazonaws.devopsguru#InsightHealth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tInformation about the health of the AWS resources in your account that are specified by an AWS CloudFormation stack, including \n   \t\tthe number of open proactive, open reactive insights, and the Mean Time to Recover (MTTR) of closed insights.\n   \t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tInformation about the health of AWS resources in your account that are specified by an AWS CloudFormation stack.\n   \t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#CloudFormationHealths": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#CloudFormationHealth"
+            }
+        },
+        "com.amazonaws.devopsguru#CloudWatchMetricsDetail": {
+            "type": "structure",
+            "members": {
+                "MetricName": {
+                    "target": "com.amazonaws.devopsguru#CloudWatchMetricsMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe name of the CloudWatch metric.\n\t\t</p>"
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.devopsguru#CloudWatchMetricsNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe namespace of the CloudWatch metric. A namespace is a container for CloudWatch metrics.\n\t\t</p>"
+                    }
+                },
+                "Dimensions": {
+                    "target": "com.amazonaws.devopsguru#CloudWatchMetricsDimensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn array of CloudWatch dimensions associated with \n\t\t</p>"
+                    }
+                },
+                "Stat": {
+                    "target": "com.amazonaws.devopsguru#CloudWatchMetricsStat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe type of statistic associated with the CloudWatch metric. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic\">Statistics</a> in the \n\t\t\t<i>Amazon CloudWatch User Guide</i>.\n\t\t</p>"
+                    }
+                },
+                "Unit": {
+                    "target": "com.amazonaws.devopsguru#CloudWatchMetricsUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe unit of measure used for the CloudWatch metric. For example, <code>Bytes</code>, <code>Seconds</code>, \n\t\t\t<code>Count</code>, and <code>Percent</code>.\n\t\t</p>"
+                    }
+                },
+                "Period": {
+                    "target": "com.amazonaws.devopsguru#CloudWatchMetricsPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe length of time associated with the CloudWatch metric in number of seconds.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about an Amazon CloudWatch metric.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#CloudWatchMetricsDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#CloudWatchMetricsDetail"
+            }
+        },
+        "com.amazonaws.devopsguru#CloudWatchMetricsDimension": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#CloudWatchMetricsDimensionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe name of the CloudWatch dimension.\n\t\t</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.devopsguru#CloudWatchMetricsDimensionValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe value of the CloudWatch dimension.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The dimension of a Amazon CloudWatch metric that is used when DevOps Guru analyzes the resources in your\n\t\t\taccount for operational problems and anomalous behaviour. A dimension is a name/value pair\n\t\t\tthat is part of the identity of a metric. A metric can have up to 10 dimensions. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension\">Dimensions</a> in the <i>Amazon CloudWatch User Guide</i>. </p>"
+            }
+        },
+        "com.amazonaws.devopsguru#CloudWatchMetricsDimensionName": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#CloudWatchMetricsDimensionValue": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#CloudWatchMetricsDimensions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#CloudWatchMetricsDimension"
+            }
+        },
+        "com.amazonaws.devopsguru#CloudWatchMetricsMetricName": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#CloudWatchMetricsNamespace": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#CloudWatchMetricsPeriod": {
+            "type": "integer"
+        },
+        "com.amazonaws.devopsguru#CloudWatchMetricsStat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Sum",
+                        "name": "SUM"
+                    },
+                    {
+                        "value": "Average",
+                        "name": "AVERAGE"
+                    },
+                    {
+                        "value": "SampleCount",
+                        "name": "SAMPLE_COUNT"
+                    },
+                    {
+                        "value": "Minimum",
+                        "name": "MINIMUM"
+                    },
+                    {
+                        "value": "Maximum",
+                        "name": "MAXIMUM"
+                    },
+                    {
+                        "value": "p99",
+                        "name": "P99"
+                    },
+                    {
+                        "value": "p90",
+                        "name": "P90"
+                    },
+                    {
+                        "value": "p50",
+                        "name": "P50"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#CloudWatchMetricsUnit": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.devopsguru#ErrorMessageString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.devopsguru#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the AWS resource in which a conflict occurred.\n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.devopsguru#ResourceIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe type of the AWS resource in which a conflict occurred.\n\t\t</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tAn exception that is thrown when a conflict occurs.\n\t\t</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAccountHealth": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#DescribeAccountHealthRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#DescribeAccountHealthResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tReturns the number of open reactive insights, the number of open proactive insights, and the number of metrics analyzed in your AWS account. \n   \t\tUse these numbers to gauge the health of operations in your AWS account.\n   \t</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/health",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAccountHealthRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.devopsguru#DescribeAccountHealthResponse": {
+            "type": "structure",
+            "members": {
+                "OpenReactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#NumOpenReactiveInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tAn integer that specifies the number of open reactive insights in your AWS account. \n   \t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OpenProactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#NumOpenProactiveInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tAn integer that specifies the number of open proactive insights in your AWS account.\n   \t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricsAnalyzed": {
+                    "target": "com.amazonaws.devopsguru#NumMetricsAnalyzed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tAn integer that specifies the number of metrics that have been analyzed in your AWS account.\n   \t</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAccountOverview": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#DescribeAccountOverviewRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#DescribeAccountOverviewResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tFor the time range passed in, returns the number of open reactive insight that were created, the number of open proactive insights \n   \t\tthat were created, and the Mean Time to Recover (MTTR) for all closed reactive insights.\n   \t</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/overview",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAccountOverviewRequest": {
+            "type": "structure",
+            "members": {
+                "FromTime": {
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tThe start of the time range passed in. The start time granularity is at the \n   \t\tday level. The floor of the start time is used. Returned information occurred after this day. \n   \t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ToTime": {
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tThe end of the time range passed in. The start time granularity is at the \n   \t\tday level. The floor of the start time is used. Returned information occurred before this day. If this is not specified, then the current day is used.\n   \t</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAccountOverviewResponse": {
+            "type": "structure",
+            "members": {
+                "ReactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#NumReactiveInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tAn integer that specifies the number of open reactive insights in your AWS account that were created during the \n   \t\ttime range passed in.\n   \t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#NumProactiveInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tAn integer that specifies the number of open proactive insights in your AWS account that were created during the \n   \t\ttime range passed in.\n   \t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MeanTimeToRecoverInMilliseconds": {
+                    "target": "com.amazonaws.devopsguru#MeanTimeToRecoverInMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tThe Mean Time to Recover (MTTR) for all closed insights that were created during the \n   \t\ttime range passed in.\n   \t</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAnomaly": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#DescribeAnomalyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#DescribeAnomalyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tReturns details about an anomaly that you specify using its ID.\n   \t</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/anomalies/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAnomalyRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#AnomalyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tThe ID of the anomaly.\n   \t</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeAnomalyResponse": {
+            "type": "structure",
+            "members": {
+                "ProactiveAnomaly": {
+                    "target": "com.amazonaws.devopsguru#ProactiveAnomaly",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn <code>ReactiveAnomaly</code> object that represents the requested anomaly.\n\t\t</p>"
+                    }
+                },
+                "ReactiveAnomaly": {
+                    "target": "com.amazonaws.devopsguru#ReactiveAnomaly",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn <code>ProactiveAnomaly</code> object that represents the requested anomaly.\n\t\t</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeInsight": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#DescribeInsightRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#DescribeInsightResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tReturns details about an insight that you specify using its ID.\n   \t</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/insights/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeInsightRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#InsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tThe ID of the insight.\n   \t</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeInsightResponse": {
+            "type": "structure",
+            "members": {
+                "ProactiveInsight": {
+                    "target": "com.amazonaws.devopsguru#ProactiveInsight",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn <code>ProactiveInsight</code> object that represents the requested insight.\n\t\t</p>"
+                    }
+                },
+                "ReactiveInsight": {
+                    "target": "com.amazonaws.devopsguru#ReactiveInsight",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn <code>ReactiveInsight</code> object that represents the requested insight.\n\t\t</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeResourceCollectionHealth": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#DescribeResourceCollectionHealthRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#DescribeResourceCollectionHealthResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tReturns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in \n   \t\tresource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks.\n   \t</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/health/resource-collection/{ResourceCollectionType}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeResourceCollectionHealthRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceCollectionType": {
+                    "target": "com.amazonaws.devopsguru#ResourceCollectionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tAn AWS resource collection type. This type specifies how analyzed AWS resources are defined. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks.       \n   \t</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If this value is null, it retrieves the first page.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeResourceCollectionHealthResponse": {
+            "type": "structure",
+            "members": {
+                "CloudFormation": {
+                    "target": "com.amazonaws.devopsguru#CloudFormationHealths",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tThe returned <code>CloudFormationHealthOverview</code> object that contains an <code>InsightHealthOverview</code> object with \n   \t\tthe requested system health information.\n   \t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If there are no more pages, this value is null.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeServiceIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#DescribeServiceIntegrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#DescribeServiceIntegrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tReturns the integration status of services that are integrated with DevOps Guru. \n\t\t\tThe one service that can be integrated with DevOps Guru \n      \tis AWS Systems Manager, which can be used to create an OpsItem for each generated insight.\n\t\t</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/service-integrations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeServiceIntegrationRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.devopsguru#DescribeServiceIntegrationResponse": {
+            "type": "structure",
+            "members": {
+                "ServiceIntegration": {
+                    "target": "com.amazonaws.devopsguru#ServiceIntegrationConfig"
+                }
             }
         },
         "com.amazonaws.devopsguru#EndTimeRange": {
             "type": "structure",
             "members": {
                 "FromTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      \tThe earliest end time in the time range.\n      </p>"
+                    }
                 },
                 "ToTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      \tThe latest end time in the time range.\n      </p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      \tA range of time that specifies when anomalous behavior in an anomaly or insight ended.\n      </p>"
             }
+        },
+        "com.amazonaws.devopsguru#ErrorMessageString": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#ErrorNameString": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#ErrorQuotaCodeString": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#ErrorServiceCodeString": {
+            "type": "string"
         },
         "com.amazonaws.devopsguru#Event": {
             "type": "structure",
             "members": {
-                "DataSource": {
-                    "target": "com.amazonaws.devopsguru#EventDataSource"
-                },
-                "EventClass": {
-                    "target": "com.amazonaws.devopsguru#EventClass"
-                },
-                "EventSource": {
-                    "target": "com.amazonaws.devopsguru#__stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents"
-                },
-                "Id": {
-                    "target": "com.amazonaws.devopsguru#__string"
-                },
-                "Name": {
-                    "target": "com.amazonaws.devopsguru#__stringMin0Max50"
-                },
                 "ResourceCollection": {
                     "target": "com.amazonaws.devopsguru#ResourceCollection"
                 },
-                "Resources": {
-                    "target": "com.amazonaws.devopsguru#__listOfEventResource"
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#EventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the event.\n\t\t</p>"
+                    }
                 },
                 "Time": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A <code>Timestamp</code> that specifies the time the event occurred. </p>"
+                    }
+                },
+                "EventSource": {
+                    "target": "com.amazonaws.devopsguru#EventSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe AWS source that emitted the event.\n\t\t</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#EventName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe name of the event.\n\t\t</p>"
+                    }
+                },
+                "DataSource": {
+                    "target": "com.amazonaws.devopsguru#EventDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe source, <code>AWS_CLOUD_TRAIL</code> or <code>AWS_CODE_DEPLOY</code>, where DevOps Guru analysis found the event.\n\t\t</p>"
+                    }
+                },
+                "EventClass": {
+                    "target": "com.amazonaws.devopsguru#EventClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe class of the event. The class specifies what the event is related to, such as an infrastructure change, a deployment, or a schema change.\n\t\t</p>"
+                    }
+                },
+                "Resources": {
+                    "target": "com.amazonaws.devopsguru#EventResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn <code>EventResource</code> object that contains information about the resource that emitted the event.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tAn AWS resource event. AWS resource events and metrics are analyzed by DevOps Guru to find anomalous behavior and \n\t\t\tprovide recommendations to improve your operational solutions.\n\t\t</p>"
             }
         },
         "com.amazonaws.devopsguru#EventClass": {
@@ -764,35 +999,116 @@
                 ]
             }
         },
+        "com.amazonaws.devopsguru#EventId": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#EventName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.devopsguru#EventResource": {
             "type": "structure",
             "members": {
-                "Arn": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max2048PatternArnAwsAZAZ09AZ09D12"
+                "Type": {
+                    "target": "com.amazonaws.devopsguru#EventResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe type of resource that emitted an event.\n\t\t</p>"
+                    }
                 },
                 "Name": {
-                    "target": "com.amazonaws.devopsguru#__stringMin0Max2048Pattern"
+                    "target": "com.amazonaws.devopsguru#EventResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe name of the resource that emitted an event.\n\t\t</p>"
+                    }
                 },
-                "Type": {
-                    "target": "com.amazonaws.devopsguru#__stringMin0Max2048Pattern"
+                "Arn": {
+                    "target": "com.amazonaws.devopsguru#EventResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe Amazon Resource Name (ARN) of the resource that emitted an event.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tThe AWS resource that emitted an event. AWS resource events and metrics are analyzed by DevOps Guru to find anomalous behavior and \n\t\t\tprovide recommendations to improve your operational solutions.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#EventResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z]*:[a-z0-9-]*:[a-z0-9-]*:\\d{12}:.*$"
+            }
+        },
+        "com.amazonaws.devopsguru#EventResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.devopsguru#EventResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.devopsguru#EventResources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#EventResource"
+            }
+        },
+        "com.amazonaws.devopsguru#EventSource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[a-z]+[a-z0-9]*\\.amazonaws\\.com|aws\\.events$"
             }
         },
         "com.amazonaws.devopsguru#EventTimeRange": {
             "type": "structure",
             "members": {
                 "FromTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix",
+                    "target": "com.amazonaws.devopsguru#Timestamp",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe time when the event started.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ToTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix",
+                    "target": "com.amazonaws.devopsguru#Timestamp",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe time when the event ended.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tThe time range during which an AWS event occurred. AWS resource events and metrics are analyzed by DevOps Guru to find anomalous behavior and \n\t\t\tprovide recommendations to improve your operational solutions.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#Events": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#Event"
             }
         },
         "com.amazonaws.devopsguru#GetResourceCollection": {
@@ -821,6 +1137,7 @@
                 }
             ],
             "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tReturns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks.\n   \t</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/resource-collections/{ResourceCollectionType}",
@@ -835,17 +1152,19 @@
         "com.amazonaws.devopsguru#GetResourceCollectionRequest": {
             "type": "structure",
             "members": {
-                "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__string",
-                    "traits": {
-                        "smithy.api#httpQuery": "NextToken"
-                    }
-                },
                 "ResourceCollectionType": {
-                    "target": "com.amazonaws.devopsguru#__string",
+                    "target": "com.amazonaws.devopsguru#ResourceCollectionType",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tThe type of AWS resource collections to return. The one valid value is <code>CLOUD_FORMATION</code> for \n   \t\tAWS CloudFormation stacks.\n   \t</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If this value is null, it retrieves the first page.</p>",
+                        "smithy.api#httpQuery": "NextToken"
                     }
                 }
             }
@@ -853,23 +1172,38 @@
         "com.amazonaws.devopsguru#GetResourceCollectionResponse": {
             "type": "structure",
             "members": {
-                "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
-                },
                 "ResourceCollection": {
-                    "target": "com.amazonaws.devopsguru#ResourceCollectionFilter"
+                    "target": "com.amazonaws.devopsguru#ResourceCollectionFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tThe requested list of AWS resource collections. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks.\n   \t</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If there are no more pages, this value is null.</p>"
+                    }
                 }
             }
         },
         "com.amazonaws.devopsguru#InsightFeedback": {
             "type": "structure",
             "members": {
-                "Feedback": {
-                    "target": "com.amazonaws.devopsguru#InsightFeedbackOption"
-                },
                 "Id": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                    "target": "com.amazonaws.devopsguru#InsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      \tThe insight feedback ID.\n      </p>"
+                    }
+                },
+                "Feedback": {
+                    "target": "com.amazonaws.devopsguru#InsightFeedbackOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      \tThe feedback provided by the customer.\n      </p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      \tInformation about insight feedback received from a customer.\n      </p>"
             }
         },
         "com.amazonaws.devopsguru#InsightFeedbackOption": {
@@ -902,14 +1236,58 @@
         "com.amazonaws.devopsguru#InsightHealth": {
             "type": "structure",
             "members": {
-                "MeanTimeToRecoverInMilliseconds": {
-                    "target": "com.amazonaws.devopsguru#__long"
-                },
                 "OpenProactiveInsights": {
-                    "target": "com.amazonaws.devopsguru#__integer"
+                    "target": "com.amazonaws.devopsguru#NumOpenProactiveInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      \tThe number of open proactive insights.\n      </p>"
+                    }
                 },
                 "OpenReactiveInsights": {
-                    "target": "com.amazonaws.devopsguru#__integer"
+                    "target": "com.amazonaws.devopsguru#NumOpenReactiveInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      \tThe number of open reactive insights.\n      </p>"
+                    }
+                },
+                "MeanTimeToRecoverInMilliseconds": {
+                    "target": "com.amazonaws.devopsguru#MeanTimeToRecoverInMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      \tThe Meant Time to Recover (MTTR) for the insight.\t\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      \tInformation about the number of open reactive and proactive insights that can be \n      \tused to gauge the health of your system.\n      </p>"
+            }
+        },
+        "com.amazonaws.devopsguru#InsightId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[\\w-]*$"
+            }
+        },
+        "com.amazonaws.devopsguru#InsightName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 530
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.devopsguru#InsightSeverities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#InsightSeverity"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
                 }
             }
         },
@@ -947,18 +1325,37 @@
                 ]
             }
         },
+        "com.amazonaws.devopsguru#InsightStatuses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#InsightStatus"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.devopsguru#InsightTimeRange": {
             "type": "structure",
             "members": {
-                "EndTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix"
-                },
                 "StartTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix",
+                    "target": "com.amazonaws.devopsguru#Timestamp",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe time when the behavior described in an insight started.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe time when the behavior described in an insight ended.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A time ranged that specifies when the observed behavior in an insight started and\n\t\t\tended. </p>"
             }
         },
         "com.amazonaws.devopsguru#InsightType": {
@@ -980,13 +1377,21 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.devopsguru#__string",
+                    "target": "com.amazonaws.devopsguru#ErrorMessageString",
                     "traits": {
                         "smithy.api#required": {}
+                    }
+                },
+                "RetryAfterSeconds": {
+                    "target": "com.amazonaws.devopsguru#RetryAfterSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe number of seconds after which the action that caused the internal server \n\t\t\texception can be retried.\n\t\t</p>",
+                        "smithy.api#httpHeader": "Retry-After"
                     }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p>An internal failure in an Amazon service occurred.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -1017,6 +1422,7 @@
                 }
             ],
             "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tReturns a list of the anomalies that belong to an insight that you specify using its ID.\n   \t</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/anomalies/insight/{InsightId}",
@@ -1029,38 +1435,67 @@
                 }
             }
         },
+        "com.amazonaws.devopsguru#ListAnomaliesForInsightMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
         "com.amazonaws.devopsguru#ListAnomaliesForInsightRequest": {
             "type": "structure",
             "members": {
                 "InsightId": {
-                    "target": "com.amazonaws.devopsguru#__string",
+                    "target": "com.amazonaws.devopsguru#InsightId",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the insight. The returned anomalies belong to this insight.\n\t\t</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
+                "StartTimeRange": {
+                    "target": "com.amazonaws.devopsguru#StartTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tA time range used to specify when the requested anomalies started. All returned anomalies started \n   \t\tduring this time range.\n   \t</p>"
+                    }
+                },
                 "MaxResults": {
-                    "target": "com.amazonaws.devopsguru#__integerMin1Max500"
+                    "target": "com.amazonaws.devopsguru#ListAnomaliesForInsightMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
                 },
                 "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
-                },
-                "StartTimeRange": {
-                    "target": "com.amazonaws.devopsguru#StartTimeRange"
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
+                    }
                 }
             }
         },
         "com.amazonaws.devopsguru#ListAnomaliesForInsightResponse": {
             "type": "structure",
             "members": {
-                "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
-                },
                 "ProactiveAnomalies": {
-                    "target": "com.amazonaws.devopsguru#__listOfProactiveAnomalySummary"
+                    "target": "com.amazonaws.devopsguru#ProactiveAnomalies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn array of <code>ProactiveAnomalySummary</code> objects that represent the requested anomalies\n\t\t</p>"
+                    }
                 },
                 "ReactiveAnomalies": {
-                    "target": "com.amazonaws.devopsguru#__listOfReactiveAnomalySummary"
+                    "target": "com.amazonaws.devopsguru#ReactiveAnomalies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn array of <code>ReactiveAnomalySummary</code> objects that represent the requested anomalies\n\t\t</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If there are no more pages, this value is null.</p>"
+                    }
                 }
             }
         },
@@ -1090,6 +1525,7 @@
                 }
             ],
             "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tReturns a list of the events emitted by the resources that are evaluated by DevOps Guru. You can use filters to specify which events are returned.\n   \t</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/events",
@@ -1106,23 +1542,51 @@
         "com.amazonaws.devopsguru#ListEventsFilters": {
             "type": "structure",
             "members": {
-                "DataSource": {
-                    "target": "com.amazonaws.devopsguru#EventDataSource"
-                },
-                "EventClass": {
-                    "target": "com.amazonaws.devopsguru#EventClass"
-                },
-                "EventSource": {
-                    "target": "com.amazonaws.devopsguru#__stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents"
+                "InsightId": {
+                    "target": "com.amazonaws.devopsguru#InsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn ID of an insight that is related to the events you want to filter for.\n\t\t</p>"
+                    }
                 },
                 "EventTimeRange": {
-                    "target": "com.amazonaws.devopsguru#EventTimeRange"
+                    "target": "com.amazonaws.devopsguru#EventTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A time range during which you want the filtered events to have occurred. </p>"
+                    }
                 },
-                "InsightId": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                "EventClass": {
+                    "target": "com.amazonaws.devopsguru#EventClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe class of the events you want to filter for, such as an infrastructure change, a deployment, or a schema change.      \t\n\t\t</p>"
+                    }
+                },
+                "EventSource": {
+                    "target": "com.amazonaws.devopsguru#EventSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe AWS source that emitted the events you want to filter for.\n\t\t</p>"
+                    }
+                },
+                "DataSource": {
+                    "target": "com.amazonaws.devopsguru#EventDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe source, <code>AWS_CLOUD_TRAIL</code> or <code>AWS_CODE_DEPLOY</code>, of the events you want returned.\n\t\t</p>"
+                    }
                 },
                 "ResourceCollection": {
                     "target": "com.amazonaws.devopsguru#ResourceCollection"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tFilters you can use to specify which events are returned when <code>ListEvents</code> is called.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#ListEventsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 200
                 }
             }
         },
@@ -1132,14 +1596,21 @@
                 "Filters": {
                     "target": "com.amazonaws.devopsguru#ListEventsFilters",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tA <code>ListEventsFilters</code> object used to specify which events to return.\n   \t</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MaxResults": {
-                    "target": "com.amazonaws.devopsguru#__integerMin1Max200"
+                    "target": "com.amazonaws.devopsguru#ListEventsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
                 },
                 "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
+                    }
                 }
             }
         },
@@ -1147,10 +1618,17 @@
             "type": "structure",
             "members": {
                 "Events": {
-                    "target": "com.amazonaws.devopsguru#__listOfEvent"
+                    "target": "com.amazonaws.devopsguru#Events",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tA list of the requested events.\n   \t</p>",
+                        "smithy.api#required": {}
+                    }
                 },
                 "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If there are no more pages, this value is null.</p>"
+                    }
                 }
             }
         },
@@ -1177,6 +1655,7 @@
                 }
             ],
             "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tReturns a list of insights in your AWS account. You can specify which insights are returned by their start time and \n   \t\tstatus (<code>ONGOING</code>, <code>CLOSED</code>, or <code>ANY</code>).\n   \t</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/insights",
@@ -1192,34 +1671,54 @@
         "com.amazonaws.devopsguru#ListInsightsAnyStatusFilter": {
             "type": "structure",
             "members": {
-                "StartTimeRange": {
-                    "target": "com.amazonaws.devopsguru#StartTimeRange",
-                    "traits": {
-                        "smithy.api#required": {}
-                    }
-                },
                 "Type": {
                     "target": "com.amazonaws.devopsguru#InsightType",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tUse to filter for either <code>REACTIVE</code> or <code>PROACTIVE</code> insights.\n   \t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTimeRange": {
+                    "target": "com.amazonaws.devopsguru#StartTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tA time range used to specify when the behavior of the filtered insights started.\n   \t</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tUsed to filter for insights that have any status.\n   \t</p>"
             }
         },
         "com.amazonaws.devopsguru#ListInsightsClosedStatusFilter": {
             "type": "structure",
             "members": {
-                "EndTimeRange": {
-                    "target": "com.amazonaws.devopsguru#EndTimeRange",
-                    "traits": {
-                        "smithy.api#required": {}
-                    }
-                },
                 "Type": {
                     "target": "com.amazonaws.devopsguru#InsightType",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n      \tUse to filter for either <code>REACTIVE</code> or <code>PROACTIVE</code> insights.\n      </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "EndTimeRange": {
+                    "target": "com.amazonaws.devopsguru#EndTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tA time range used to specify when the behavior of the filtered insights ended.\n   \t</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tUsed to filter for insights that have the status <code>CLOSED</code>.\n   \t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#ListInsightsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
                 }
             }
         },
@@ -1229,24 +1728,35 @@
                 "Type": {
                     "target": "com.amazonaws.devopsguru#InsightType",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tUse to filter for either <code>REACTIVE</code> or <code>PROACTIVE</code> insights.\n   \t</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      \tUsed to filter for insights that have the status <code>ONGOING</code>.\n      </p>"
             }
         },
         "com.amazonaws.devopsguru#ListInsightsRequest": {
             "type": "structure",
             "members": {
-                "MaxResults": {
-                    "target": "com.amazonaws.devopsguru#__integerMin1Max100"
-                },
-                "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
-                },
                 "StatusFilter": {
                     "target": "com.amazonaws.devopsguru#ListInsightsStatusFilter",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n      \tA filter used to filter the returned insights by their status. You can specify one status filter.\n      </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.devopsguru#ListInsightsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
                     }
                 }
             }
@@ -1254,29 +1764,50 @@
         "com.amazonaws.devopsguru#ListInsightsResponse": {
             "type": "structure",
             "members": {
-                "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
-                },
                 "ProactiveInsights": {
-                    "target": "com.amazonaws.devopsguru#__listOfProactiveInsightSummary"
+                    "target": "com.amazonaws.devopsguru#ProactiveInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe returned list of proactive insights.\n\t\t</p>"
+                    }
                 },
                 "ReactiveInsights": {
-                    "target": "com.amazonaws.devopsguru#__listOfReactiveInsightSummary"
+                    "target": "com.amazonaws.devopsguru#ReactiveInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe returned list of reactive insights.\t\n\t\t</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If there are no more pages, this value is null.</p>"
+                    }
                 }
             }
         },
         "com.amazonaws.devopsguru#ListInsightsStatusFilter": {
             "type": "structure",
             "members": {
-                "Any": {
-                    "target": "com.amazonaws.devopsguru#ListInsightsAnyStatusFilter"
+                "Ongoing": {
+                    "target": "com.amazonaws.devopsguru#ListInsightsOngoingStatusFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      \tA <code>ListInsightsAnyStatusFilter</code> that specifies ongoing insights \n      \tthat are either <code>REACTIVE</code> or <code>PROACTIVE</code>.\n      </p>"
+                    }
                 },
                 "Closed": {
-                    "target": "com.amazonaws.devopsguru#ListInsightsClosedStatusFilter"
+                    "target": "com.amazonaws.devopsguru#ListInsightsClosedStatusFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tA <code>ListInsightsClosedStatusFilter</code> that specifies closed insights that are \n   \t\teither <code>REACTIVE</code> or <code>PROACTIVE</code>.\n   \t</p>"
+                    }
                 },
-                "Ongoing": {
-                    "target": "com.amazonaws.devopsguru#ListInsightsOngoingStatusFilter"
+                "Any": {
+                    "target": "com.amazonaws.devopsguru#ListInsightsAnyStatusFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tA <code>ListInsightsAnyStatusFilter</code> that specifies insights of any status \n   \t\tthat are either <code>REACTIVE</code> or <code>PROACTIVE</code>.\n   \t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      \tA filter used by <code>ListInsights</code> to specify which insights to return.\n      </p>"
             }
         },
         "com.amazonaws.devopsguru#ListNotificationChannels": {
@@ -1302,6 +1833,7 @@
                 }
             ],
             "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tReturns a list of notification channels configured for DevOps Guru. Each notification channel is used to notify you when \n   \t\tDevOps Guru generates an insight that contains information about how to improve your operations. The one \n      \tsupported notification channel is Amazon Simple Notification Service (Amazon SNS).\n   \t</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/channels",
@@ -1318,7 +1850,10 @@
             "type": "structure",
             "members": {
                 "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
+                    }
                 }
             }
         },
@@ -1326,10 +1861,16 @@
             "type": "structure",
             "members": {
                 "Channels": {
-                    "target": "com.amazonaws.devopsguru#__listOfNotificationChannel"
+                    "target": "com.amazonaws.devopsguru#Channels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tAn array that contains the requested notification channels.\n   \t</p>"
+                    }
                 },
                 "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If there are no more pages, this value is null.</p>"
+                    }
                 }
             }
         },
@@ -1359,6 +1900,7 @@
                 }
             ],
             "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tReturns a list of a specified insight's recommendations. Each recommendation includes a list of related metrics and a list of related events.\n   \t</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/recommendations",
@@ -1375,36 +1917,61 @@
             "type": "structure",
             "members": {
                 "InsightId": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW",
+                    "target": "com.amazonaws.devopsguru#InsightId",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the requested insight.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
+                    }
                 }
             }
         },
         "com.amazonaws.devopsguru#ListRecommendationsResponse": {
             "type": "structure",
             "members": {
-                "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
-                },
                 "Recommendations": {
-                    "target": "com.amazonaws.devopsguru#__listOfRecommendation"
+                    "target": "com.amazonaws.devopsguru#Recommendations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tAn array of the requested recommendations.\n   \t</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If there are no more pages, this value is null.</p>"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.devopsguru#MeanTimeToRecoverInMilliseconds": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.devopsguru#NotificationChannel": {
             "type": "structure",
             "members": {
-                "Config": {
-                    "target": "com.amazonaws.devopsguru#NotificationChannelConfig"
-                },
                 "Id": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
+                    "target": "com.amazonaws.devopsguru#NotificationChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of a notification channel.\n\t\t</p>"
+                    }
+                },
+                "Config": {
+                    "target": "com.amazonaws.devopsguru#NotificationChannelConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tA <code>NotificationChannelConfig</code> object that contains information about configured notification channels.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about a notification channel. A notification channel is used to notify you when DevOps Guru creates an insight. \n\t\t\tThe one \n      \tsupported notification channel is Amazon Simple Notification Service (Amazon SNS).\n\t\t</p>\n\t\t\n\t\t       <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAWS KMS–encrypted Amazon SNS topics</a>.</p>"
             }
         },
         "com.amazonaws.devopsguru#NotificationChannelConfig": {
@@ -1413,30 +1980,72 @@
                 "Sns": {
                     "target": "com.amazonaws.devopsguru#SnsChannelConfig",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tInformation about a notification channel configured in DevOps Guru to send notifications when insights are created.\n\t\t</p>\n\t\t\n\t\t       <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAWS KMS–encrypted Amazon SNS topics</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Information about notification channels you have configured with DevOps Guru.\n\t\t\tThe one \n      \tsupported notification channel is Amazon Simple Notification Service (Amazon SNS).</p>"
             }
+        },
+        "com.amazonaws.devopsguru#NotificationChannelId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.devopsguru#NumMetricsAnalyzed": {
+            "type": "integer"
+        },
+        "com.amazonaws.devopsguru#NumOpenProactiveInsights": {
+            "type": "integer"
+        },
+        "com.amazonaws.devopsguru#NumOpenReactiveInsights": {
+            "type": "integer"
+        },
+        "com.amazonaws.devopsguru#NumProactiveInsights": {
+            "type": "integer"
+        },
+        "com.amazonaws.devopsguru#NumReactiveInsights": {
+            "type": "integer"
         },
         "com.amazonaws.devopsguru#OpsCenterIntegration": {
             "type": "structure",
             "members": {
                 "OptInStatus": {
-                    "target": "com.amazonaws.devopsguru#OptInStatus"
+                    "target": "com.amazonaws.devopsguru#OptInStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tSpecifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for each created insight.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about whether DevOps Guru is configured to create an OpsItem in AWS Systems Manager OpsCenter for each created insight.\n\t\t</p>"
             }
         },
         "com.amazonaws.devopsguru#OpsCenterIntegrationConfig": {
             "type": "structure",
             "members": {
                 "OptInStatus": {
-                    "target": "com.amazonaws.devopsguru#OptInStatus"
+                    "target": "com.amazonaws.devopsguru#OptInStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tSpecifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for each created insight.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about whether DevOps Guru is configured to create an OpsItem in AWS Systems Manager OpsCenter for each created insight.\n\t\t</p>"
             }
         },
         "com.amazonaws.devopsguru#OptInStatus": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tSpecifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for each created insight.\n\t\t</p>",
                 "smithy.api#enum": [
                     {
                         "value": "ENABLED",
@@ -1452,98 +2061,177 @@
         "com.amazonaws.devopsguru#PredictionTimeRange": {
             "type": "structure",
             "members": {
-                "EndTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix"
-                },
                 "StartTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix",
+                    "target": "com.amazonaws.devopsguru#Timestamp",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe time range during which a metric limit is expected to be exceeded. This applies to proactive insights only.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe time when the behavior in a proactive insight is expected to end.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tThe time range during which anomalous behavior in a proactive anomaly or an insight is expected to occur. \n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#ProactiveAnomalies": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#ProactiveAnomalySummary"
             }
         },
         "com.amazonaws.devopsguru#ProactiveAnomaly": {
             "type": "structure",
             "members": {
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#AnomalyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of a proactive anomaly.\n\t\t</p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#AnomalySeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe severity of a proactive anomaly.\n\t\t</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#AnomalyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe status of a proactive anomaly.\n\t\t</p>"
+                    }
+                },
+                "UpdateTime": {
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe time of the anomaly's most recent update.\n\t\t</p>"
+                    }
+                },
                 "AnomalyTimeRange": {
                     "target": "com.amazonaws.devopsguru#AnomalyTimeRange"
-                },
-                "AssociatedInsightId": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
-                },
-                "Id": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
-                },
-                "Limit": {
-                    "target": "com.amazonaws.devopsguru#__double"
                 },
                 "PredictionTimeRange": {
                     "target": "com.amazonaws.devopsguru#PredictionTimeRange"
                 },
+                "SourceDetails": {
+                    "target": "com.amazonaws.devopsguru#AnomalySourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tDetails about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. \n\t\t</p>"
+                    }
+                },
+                "AssociatedInsightId": {
+                    "target": "com.amazonaws.devopsguru#InsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the insight that contains this anomaly. An insight is composed of related anomalies.\n\t\t</p>"
+                    }
+                },
                 "ResourceCollection": {
                     "target": "com.amazonaws.devopsguru#ResourceCollection"
                 },
-                "Severity": {
-                    "target": "com.amazonaws.devopsguru#AnomalySeverity"
-                },
-                "SourceDetails": {
-                    "target": "com.amazonaws.devopsguru#AnomalySourceDetails"
-                },
-                "Status": {
-                    "target": "com.amazonaws.devopsguru#AnomalyStatus"
-                },
-                "UpdateTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                "Limit": {
+                    "target": "com.amazonaws.devopsguru#AnomalyLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tA threshold that was exceeded by behavior in analyzed resources. Exceeding this\n\t\t\tthreshold is related to the anomalous behavior that generated this anomaly.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an anomaly. This object is returned by <code>ListAnomalies</code>.</p>"
             }
         },
         "com.amazonaws.devopsguru#ProactiveAnomalySummary": {
             "type": "structure",
             "members": {
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#AnomalyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the anomaly.</p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#AnomalySeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity of the anomaly.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#AnomalyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the anomaly.</p>"
+                    }
+                },
+                "UpdateTime": {
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe time of the anomaly's most recent update.\n\t\t</p>"
+                    }
+                },
                 "AnomalyTimeRange": {
                     "target": "com.amazonaws.devopsguru#AnomalyTimeRange"
-                },
-                "AssociatedInsightId": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
-                },
-                "Id": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
-                },
-                "Limit": {
-                    "target": "com.amazonaws.devopsguru#__double"
                 },
                 "PredictionTimeRange": {
                     "target": "com.amazonaws.devopsguru#PredictionTimeRange"
                 },
+                "SourceDetails": {
+                    "target": "com.amazonaws.devopsguru#AnomalySourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tDetails about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. \n\t\t</p>"
+                    }
+                },
+                "AssociatedInsightId": {
+                    "target": "com.amazonaws.devopsguru#InsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the insight that contains this anomaly. An insight is composed of related anomalies.\n\t\t</p>"
+                    }
+                },
                 "ResourceCollection": {
                     "target": "com.amazonaws.devopsguru#ResourceCollection"
                 },
-                "Severity": {
-                    "target": "com.amazonaws.devopsguru#AnomalySeverity"
-                },
-                "SourceDetails": {
-                    "target": "com.amazonaws.devopsguru#AnomalySourceDetails"
-                },
-                "Status": {
-                    "target": "com.amazonaws.devopsguru#AnomalyStatus"
-                },
-                "UpdateTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                "Limit": {
+                    "target": "com.amazonaws.devopsguru#AnomalyLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tA threshold that was exceeded by behavior in analyzed resources. Exceeding this\n\t\t\tthreshold is related to the anomalous behavior that generated this anomaly.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a proactive anomaly. This object is returned by\n\t\t\t<code>DescribeAnomaly.</code>\n         </p>"
             }
         },
         "com.amazonaws.devopsguru#ProactiveInsight": {
             "type": "structure",
             "members": {
                 "Id": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                    "target": "com.amazonaws.devopsguru#InsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the proactive insight. </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#InsightName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the proactive insight. </p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#InsightSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity of the proactive insight. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#InsightStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the proactive insight. </p>"
+                    }
                 },
                 "InsightTimeRange": {
                     "target": "com.amazonaws.devopsguru#InsightTimeRange"
-                },
-                "Name": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max530PatternSS"
                 },
                 "PredictionTimeRange": {
                     "target": "com.amazonaws.devopsguru#PredictionTimeRange"
@@ -1551,41 +2239,62 @@
                 "ResourceCollection": {
                     "target": "com.amazonaws.devopsguru#ResourceCollection"
                 },
-                "Severity": {
-                    "target": "com.amazonaws.devopsguru#InsightSeverity"
-                },
                 "SsmOpsItemId": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100Pattern"
-                },
-                "Status": {
-                    "target": "com.amazonaws.devopsguru#InsightStatus"
+                    "target": "com.amazonaws.devopsguru#SsmOpsItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the AWS System Manager OpsItem created for this insight. You must enable \n\t\t\tthe creation of OpstItems insights before they are created for each insight.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a proactive insight. This object is returned by <code>ListInsights</code>.</p>"
             }
         },
         "com.amazonaws.devopsguru#ProactiveInsightSummary": {
             "type": "structure",
             "members": {
                 "Id": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                    "target": "com.amazonaws.devopsguru#InsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the proactive insight. </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#InsightName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the proactive insight. </p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#InsightSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity of the proactive insight. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#InsightStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the proactive insight. </p>"
+                    }
                 },
                 "InsightTimeRange": {
                     "target": "com.amazonaws.devopsguru#InsightTimeRange"
-                },
-                "Name": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max530PatternSS"
                 },
                 "PredictionTimeRange": {
                     "target": "com.amazonaws.devopsguru#PredictionTimeRange"
                 },
                 "ResourceCollection": {
                     "target": "com.amazonaws.devopsguru#ResourceCollection"
-                },
-                "Severity": {
-                    "target": "com.amazonaws.devopsguru#InsightSeverity"
-                },
-                "Status": {
-                    "target": "com.amazonaws.devopsguru#InsightStatus"
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a proactive insight. This object is returned by\n\t\t\t<code>DescribeInsight.</code>\n         </p>"
+            }
+        },
+        "com.amazonaws.devopsguru#ProactiveInsights": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#ProactiveInsightSummary"
             }
         },
         "com.amazonaws.devopsguru#PutFeedback": {
@@ -1617,6 +2326,7 @@
                 }
             ],
             "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tCollects customer feedback about the specified insight.\n   \t</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/feedback",
@@ -1628,7 +2338,10 @@
             "type": "structure",
             "members": {
                 "InsightFeedback": {
-                    "target": "com.amazonaws.devopsguru#InsightFeedback"
+                    "target": "com.amazonaws.devopsguru#InsightFeedback",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tThe feedback from customers is about the recommendations in this insight.\n   \t</p>"
+                    }
                 }
             }
         },
@@ -1636,191 +2349,425 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.devopsguru#ReactiveAnomalies": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#ReactiveAnomalySummary"
+            }
+        },
         "com.amazonaws.devopsguru#ReactiveAnomaly": {
             "type": "structure",
             "members": {
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#AnomalyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the reactive anomaly. </p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#AnomalySeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity of the anomaly. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#AnomalyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe status of the anomaly.\n\t\t</p>"
+                    }
+                },
                 "AnomalyTimeRange": {
                     "target": "com.amazonaws.devopsguru#AnomalyTimeRange"
                 },
-                "AssociatedInsightId": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                "SourceDetails": {
+                    "target": "com.amazonaws.devopsguru#AnomalySourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tDetails about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. \n\t\t</p>"
+                    }
                 },
-                "Id": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                "AssociatedInsightId": {
+                    "target": "com.amazonaws.devopsguru#InsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the insight that contains this anomaly. An insight is composed of related anomalies.\n\t\t</p>"
+                    }
                 },
                 "ResourceCollection": {
                     "target": "com.amazonaws.devopsguru#ResourceCollection"
-                },
-                "Severity": {
-                    "target": "com.amazonaws.devopsguru#AnomalySeverity"
-                },
-                "SourceDetails": {
-                    "target": "com.amazonaws.devopsguru#AnomalySourceDetails"
-                },
-                "Status": {
-                    "target": "com.amazonaws.devopsguru#AnomalyStatus"
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a reactive anomaly.  This object is returned by <code>ListAnomalies</code>.</p>"
             }
         },
         "com.amazonaws.devopsguru#ReactiveAnomalySummary": {
             "type": "structure",
             "members": {
+                "Id": {
+                    "target": "com.amazonaws.devopsguru#AnomalyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the reactive anomaly.\n\t\t</p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#AnomalySeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe severity of the reactive anomaly.\t\t\t\n\t\t</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#AnomalyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe status of the reactive anomaly.\n\t\t</p>"
+                    }
+                },
                 "AnomalyTimeRange": {
                     "target": "com.amazonaws.devopsguru#AnomalyTimeRange"
                 },
-                "AssociatedInsightId": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                "SourceDetails": {
+                    "target": "com.amazonaws.devopsguru#AnomalySourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tDetails about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. \n\t\t</p>"
+                    }
                 },
-                "Id": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                "AssociatedInsightId": {
+                    "target": "com.amazonaws.devopsguru#InsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the insight that contains this anomaly. An insight is composed of related anomalies.\n\t\t</p>"
+                    }
                 },
                 "ResourceCollection": {
                     "target": "com.amazonaws.devopsguru#ResourceCollection"
-                },
-                "Severity": {
-                    "target": "com.amazonaws.devopsguru#AnomalySeverity"
-                },
-                "SourceDetails": {
-                    "target": "com.amazonaws.devopsguru#AnomalySourceDetails"
-                },
-                "Status": {
-                    "target": "com.amazonaws.devopsguru#AnomalyStatus"
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a reactive anomaly. This object is returned by\n\t\t\t<code>DescribeAnomaly.</code>\n         </p>"
             }
         },
         "com.amazonaws.devopsguru#ReactiveInsight": {
             "type": "structure",
             "members": {
                 "Id": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                    "target": "com.amazonaws.devopsguru#InsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of a reactive insight.\n\t\t</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#InsightName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe name of a reactive insight.\n\t\t</p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#InsightSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe severity of a reactive insight.\n\t\t</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#InsightStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe status of a reactive insight.\n\t\t</p>"
+                    }
                 },
                 "InsightTimeRange": {
                     "target": "com.amazonaws.devopsguru#InsightTimeRange"
                 },
-                "Name": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max530PatternSS"
-                },
                 "ResourceCollection": {
                     "target": "com.amazonaws.devopsguru#ResourceCollection"
                 },
-                "Severity": {
-                    "target": "com.amazonaws.devopsguru#InsightSeverity"
-                },
                 "SsmOpsItemId": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100Pattern"
-                },
-                "Status": {
-                    "target": "com.amazonaws.devopsguru#InsightStatus"
+                    "target": "com.amazonaws.devopsguru#SsmOpsItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the AWS System Manager OpsItem created for this insight. You must enable \n\t\t\tthe creation of OpstItems insights before they are created for each insight.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about a reactive insight. This object is returned by <code>ListInsights</code>.\n\t\t</p>"
             }
         },
         "com.amazonaws.devopsguru#ReactiveInsightSummary": {
             "type": "structure",
             "members": {
                 "Id": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max100PatternW"
+                    "target": "com.amazonaws.devopsguru#InsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of a reactive summary.\n\t\t</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#InsightName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe name of a reactive insight.\n\t\t</p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.devopsguru#InsightSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe severity of a reactive insight.\n\t\t</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#InsightStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe status of a reactive insight.\n\t\t</p>"
+                    }
                 },
                 "InsightTimeRange": {
                     "target": "com.amazonaws.devopsguru#InsightTimeRange"
                 },
-                "Name": {
-                    "target": "com.amazonaws.devopsguru#__stringMin1Max530PatternSS"
-                },
                 "ResourceCollection": {
                     "target": "com.amazonaws.devopsguru#ResourceCollection"
-                },
-                "Severity": {
-                    "target": "com.amazonaws.devopsguru#InsightSeverity"
-                },
-                "Status": {
-                    "target": "com.amazonaws.devopsguru#InsightStatus"
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Information about a reactive insight. This object is returned by\n\t\t\t\t<code>DescribeInsight.</code>\n         </p>"
+            }
+        },
+        "com.amazonaws.devopsguru#ReactiveInsights": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#ReactiveInsightSummary"
             }
         },
         "com.amazonaws.devopsguru#Recommendation": {
             "type": "structure",
             "members": {
                 "Description": {
-                    "target": "com.amazonaws.devopsguru#__string"
+                    "target": "com.amazonaws.devopsguru#RecommendationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tA description of the problem.\n\t\t</p>"
+                    }
                 },
                 "Link": {
-                    "target": "com.amazonaws.devopsguru#__string"
+                    "target": "com.amazonaws.devopsguru#RecommendationLink",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tA hyperlink to information to help you address the problem.\n\t\t</p>"
+                    }
                 },
                 "Name": {
-                    "target": "com.amazonaws.devopsguru#__string"
+                    "target": "com.amazonaws.devopsguru#RecommendationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe name of the recommendation.\n\t\t</p>"
+                    }
                 },
                 "Reason": {
-                    "target": "com.amazonaws.devopsguru#__string"
-                },
-                "RelatedAnomalies": {
-                    "target": "com.amazonaws.devopsguru#__listOfRecommendationRelatedAnomaly"
+                    "target": "com.amazonaws.devopsguru#RecommendationReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe reason DevOps Guru flagged the anomalous behavior as a problem.\n\t\t</p>"
+                    }
                 },
                 "RelatedEvents": {
-                    "target": "com.amazonaws.devopsguru#__listOfRecommendationRelatedEvent"
+                    "target": "com.amazonaws.devopsguru#RecommendationRelatedEvents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tEvents that are related to the problem. Use these events to learn more about what's happening and to help address the issue.\n\t\t</p>"
+                    }
+                },
+                "RelatedAnomalies": {
+                    "target": "com.amazonaws.devopsguru#RecommendationRelatedAnomalies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAnomalies that are related to the problem. Use these Anomalies to learn more about what's happening and to help address the issue.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Recommendation information to help you remediate detected anomalous behavior that\n\t\t\tgenerated an insight. </p>"
+            }
+        },
+        "com.amazonaws.devopsguru#RecommendationDescription": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#RecommendationLink": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#RecommendationName": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#RecommendationReason": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedAnomalies": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#RecommendationRelatedAnomaly"
             }
         },
         "com.amazonaws.devopsguru#RecommendationRelatedAnomaly": {
             "type": "structure",
             "members": {
                 "Resources": {
-                    "target": "com.amazonaws.devopsguru#__listOfRecommendationRelatedAnomalyResource"
+                    "target": "com.amazonaws.devopsguru#RecommendationRelatedAnomalyResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn array of objects that represent resources in which DevOps Guru detected anomalous behavior. Each object contains the name \n\t\t\tand type of the resource.\n\t\t</p>"
+                    }
                 },
                 "SourceDetails": {
-                    "target": "com.amazonaws.devopsguru#__listOfRecommendationRelatedAnomalySourceDetail"
+                    "target": "com.amazonaws.devopsguru#RelatedAnomalySourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tInformation about where the anomalous behavior related the recommendation was found. For example, details in Amazon CloudWatch metrics.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about an anomaly that is related to a recommendation.\n\t\t</p>"
             }
         },
         "com.amazonaws.devopsguru#RecommendationRelatedAnomalyResource": {
             "type": "structure",
             "members": {
                 "Name": {
-                    "target": "com.amazonaws.devopsguru#__string"
+                    "target": "com.amazonaws.devopsguru#RecommendationRelatedAnomalyResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe name of the resource.\n\t\t</p>"
+                    }
                 },
                 "Type": {
-                    "target": "com.amazonaws.devopsguru#__string"
+                    "target": "com.amazonaws.devopsguru#RecommendationRelatedAnomalyResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe type of the resource.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about a resource in which DevOps Guru detected anomalous behavior.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedAnomalyResourceName": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedAnomalyResourceType": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedAnomalyResources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#RecommendationRelatedAnomalyResource"
             }
         },
         "com.amazonaws.devopsguru#RecommendationRelatedAnomalySourceDetail": {
             "type": "structure",
             "members": {
                 "CloudWatchMetrics": {
-                    "target": "com.amazonaws.devopsguru#__listOfRecommendationRelatedCloudWatchMetricsSourceDetail"
+                    "target": "com.amazonaws.devopsguru#RecommendationRelatedCloudWatchMetricsSourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of <code>CloudWatchMetricsDetail</code> objects that contains information\n\t\t\tabout the analyzed metrics that displayed anomalous behavior. </p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tContains an array of <code>RecommendationRelatedCloudWatchMetricsSourceDetail</code> objects that contain the name \n\t\t\tand namespace of an Amazon CloudWatch metric.\n\t\t</p>"
             }
         },
         "com.amazonaws.devopsguru#RecommendationRelatedCloudWatchMetricsSourceDetail": {
             "type": "structure",
             "members": {
                 "MetricName": {
-                    "target": "com.amazonaws.devopsguru#__string"
+                    "target": "com.amazonaws.devopsguru#RecommendationRelatedCloudWatchMetricsSourceMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch metric.</p>"
+                    }
                 },
                 "Namespace": {
-                    "target": "com.amazonaws.devopsguru#__string"
+                    "target": "com.amazonaws.devopsguru#RecommendationRelatedCloudWatchMetricsSourceNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the CloudWatch metric. A namespace is a container for CloudWatch metrics.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about an Amazon CloudWatch metric that is analyzed by DevOps Guru. It is one of many analyzed metrics \n\t\t\tthat are used to generate insights.\n\t\t</p>"
             }
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedCloudWatchMetricsSourceDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#RecommendationRelatedCloudWatchMetricsSourceDetail"
+            }
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedCloudWatchMetricsSourceMetricName": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedCloudWatchMetricsSourceNamespace": {
+            "type": "string"
         },
         "com.amazonaws.devopsguru#RecommendationRelatedEvent": {
             "type": "structure",
             "members": {
                 "Name": {
-                    "target": "com.amazonaws.devopsguru#__string"
+                    "target": "com.amazonaws.devopsguru#RecommendationRelatedEventName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe name of the event. This corresponds to the <code>Name</code> field in an \n\t\t\t<code>Event</code> object.\n\t\t</p>"
+                    }
                 },
                 "Resources": {
-                    "target": "com.amazonaws.devopsguru#__listOfRecommendationRelatedEventResource"
+                    "target": "com.amazonaws.devopsguru#RecommendationRelatedEventResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tA <code>ResourceCollection</code> object that contains arrays of the names of AWS \n\t\t\tCloudFormation stacks.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about an event that is related to a recommendation.\n\t\t</p>"
             }
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedEventName": {
+            "type": "string"
         },
         "com.amazonaws.devopsguru#RecommendationRelatedEventResource": {
             "type": "structure",
             "members": {
                 "Name": {
-                    "target": "com.amazonaws.devopsguru#__string"
+                    "target": "com.amazonaws.devopsguru#RecommendationRelatedEventResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe name of the resource that emitted the event. This corresponds to the <code>Name</code> field in an \n\t\t\t<code>EventResource</code> object.\n\t\t</p>"
+                    }
                 },
                 "Type": {
-                    "target": "com.amazonaws.devopsguru#__string"
+                    "target": "com.amazonaws.devopsguru#RecommendationRelatedEventResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe type of the resource that emitted the event. This corresponds to the <code>Type</code> field in an \n\t\t\t<code>EventResource</code> object.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about an AWS resource that emitted and event that is related to a recommendation in an insight. \n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedEventResourceName": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedEventResourceType": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedEventResources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#RecommendationRelatedEventResource"
+            }
+        },
+        "com.amazonaws.devopsguru#RecommendationRelatedEvents": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#RecommendationRelatedEvent"
+            }
+        },
+        "com.amazonaws.devopsguru#Recommendations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#Recommendation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#RelatedAnomalySourceDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#RecommendationRelatedAnomalySourceDetail"
             }
         },
         "com.amazonaws.devopsguru#RemoveNotificationChannel": {
@@ -1852,6 +2799,7 @@
                 }
             ],
             "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tRemoves a notification channel from DevOps Guru. A notification channel is used to notify you when DevOps Guru generates an insight \n   \t\tthat contains information about how to improve your operations.\n   \t</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/channels/{Id}",
@@ -1863,8 +2811,9 @@
             "type": "structure",
             "members": {
                 "Id": {
-                    "target": "com.amazonaws.devopsguru#__string",
+                    "target": "com.amazonaws.devopsguru#NotificationChannelId",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tThe ID of the notification channel to be removed.\n   \t</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1879,44 +2828,79 @@
             "type": "structure",
             "members": {
                 "CloudFormation": {
-                    "target": "com.amazonaws.devopsguru#CloudFormationCollection"
+                    "target": "com.amazonaws.devopsguru#CloudFormationCollection",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An array of the names of AWS CloudFormation stacks. The stacks define AWS resources\n   \t\tthat DevOps Guru analyzes. \n   \t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tA collection of AWS resources supported by DevOps Guru. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks.\n\t\t</p>"
             }
         },
         "com.amazonaws.devopsguru#ResourceCollectionFilter": {
             "type": "structure",
             "members": {
                 "CloudFormation": {
-                    "target": "com.amazonaws.devopsguru#CloudFormationCollectionFilter"
+                    "target": "com.amazonaws.devopsguru#CloudFormationCollectionFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tInformation about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. \n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> \n\t\t\tin the <i>AWS CloudFormation User Guide</i>.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru.\n\t\t</p>"
             }
+        },
+        "com.amazonaws.devopsguru#ResourceCollectionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWS_CLOUD_FORMATION",
+                        "name": "AWS_CLOUD_FORMATION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#ResourceIdString": {
+            "type": "string"
+        },
+        "com.amazonaws.devopsguru#ResourceIdType": {
+            "type": "string"
         },
         "com.amazonaws.devopsguru#ResourceNotFoundException": {
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.devopsguru#__string",
+                    "target": "com.amazonaws.devopsguru#ErrorMessageString",
                     "traits": {
                         "smithy.api#required": {}
                     }
                 },
                 "ResourceId": {
-                    "target": "com.amazonaws.devopsguru#__string",
+                    "target": "com.amazonaws.devopsguru#ResourceIdString",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the AWS resource that could not be found.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ResourceType": {
-                    "target": "com.amazonaws.devopsguru#__string",
+                    "target": "com.amazonaws.devopsguru#ResourceIdType",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe type of the AWS resource that could not be found.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p>A requested resource could not be found</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
+        },
+        "com.amazonaws.devopsguru#RetryAfterSeconds": {
+            "type": "integer"
         },
         "com.amazonaws.devopsguru#SearchInsights": {
             "type": "operation",
@@ -1941,6 +2925,7 @@
                 }
             ],
             "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tReturns a list of insights in your AWS account. You can specify which insights are returned by their start time, one or more statuses \n   \t\t(<code>ONGOING</code>, <code>CLOSED</code>, and <code>CLOSED</code>), one or more severities (<code>LOW</code>, <code>MEDIUM</code>, \n   \t\tand <code>HIGH</code>), and type (<code>REACTIVE</code> or <code>PROACTIVE</code>).\n   \t</p>\n   \t     <p>\n   \t\tUse the <code>Filters</code> parameter to specify status and severity \n   \t\tsearch parameters. Use the <code>Type</code> parameter to specify <code>REACTIVE</code> or <code>PROACTIVE</code> in your search.\n   \t</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/insights/search",
@@ -1956,38 +2941,68 @@
         "com.amazonaws.devopsguru#SearchInsightsFilters": {
             "type": "structure",
             "members": {
-                "ResourceCollection": {
-                    "target": "com.amazonaws.devopsguru#ResourceCollection"
-                },
                 "Severities": {
-                    "target": "com.amazonaws.devopsguru#__listOfInsightSeverity"
+                    "target": "com.amazonaws.devopsguru#InsightSeverities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tAn array of severity values used to search for insights.\n   \t</p>"
+                    }
                 },
                 "Statuses": {
-                    "target": "com.amazonaws.devopsguru#__listOfInsightStatus"
+                    "target": "com.amazonaws.devopsguru#InsightStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tAn array of status values used to search for insights.\n   \t</p>"
+                    }
+                },
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#ResourceCollection"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n   \t\tSpecifies one or more severity values and one or more status values that are used to search \n   \t\tfor insights. \n   \t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#SearchInsightsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
                 }
             }
         },
         "com.amazonaws.devopsguru#SearchInsightsRequest": {
             "type": "structure",
             "members": {
-                "Filters": {
-                    "target": "com.amazonaws.devopsguru#SearchInsightsFilters"
-                },
-                "MaxResults": {
-                    "target": "com.amazonaws.devopsguru#__integerMin1Max100"
-                },
-                "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
-                },
                 "StartTimeRange": {
                     "target": "com.amazonaws.devopsguru#StartTimeRange",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tThe start of the time range passed in. Returned insights occurred after this time.\n   \t</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.devopsguru#SearchInsightsFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tA <code>SearchInsightsFilters</code> object that is used to set the severity and status filters on your insight search.\n   \t</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.devopsguru#SearchInsightsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call.\n\tTo retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.devopsguru#InsightType",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n   \t\tThe type of insights you are searching for (<code>REACTIVE</code> or <code>PROACTIVE</code>).\n   \t</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1996,14 +3011,23 @@
         "com.amazonaws.devopsguru#SearchInsightsResponse": {
             "type": "structure",
             "members": {
-                "NextToken": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912"
-                },
                 "ProactiveInsights": {
-                    "target": "com.amazonaws.devopsguru#__listOfProactiveInsightSummary"
+                    "target": "com.amazonaws.devopsguru#ProactiveInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe returned proactive insights.\n\t\t</p>"
+                    }
                 },
                 "ReactiveInsights": {
-                    "target": "com.amazonaws.devopsguru#__listOfReactiveInsightSummary"
+                    "target": "com.amazonaws.devopsguru#ReactiveInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe returned reactive insights.\n\t\t</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If there are no more pages, this value is null.</p>"
+                    }
                 }
             }
         },
@@ -2011,18 +3035,25 @@
             "type": "structure",
             "members": {
                 "OpsCenter": {
-                    "target": "com.amazonaws.devopsguru#OpsCenterIntegration"
+                    "target": "com.amazonaws.devopsguru#OpsCenterIntegration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tInformation about whether DevOps Guru is configured to create an OpsItem in AWS Systems Manager OpsCenter for each created insight. \n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about the integration of DevOps Guru with another AWS service, such as AWS Systems Manager.\n\t\t</p>"
             }
         },
         "com.amazonaws.devopsguru#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.devopsguru#__string"
+                    "target": "com.amazonaws.devopsguru#ErrorMessageString"
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p>The request contains a value that exceeds a maximum quota.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -2031,48 +3062,122 @@
             "type": "structure",
             "members": {
                 "TopicArn": {
-                    "target": "com.amazonaws.devopsguru#__stringMin36Max1024PatternArnAwsAZ09SnsAZ09D12"
+                    "target": "com.amazonaws.devopsguru#TopicArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic. </p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Contains the Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic. </p>\n\t\t\n\t\t       <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n\t\t\t\t     <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAWS KMS–encrypted Amazon SNS topics</a>.</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#SsmOpsItemId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.devopsguru#StackName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z*]+[a-zA-Z0-9-]*$"
+            }
+        },
+        "com.amazonaws.devopsguru#StackNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#StackName"
             }
         },
         "com.amazonaws.devopsguru#StartTimeRange": {
             "type": "structure",
             "members": {
                 "FromTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe start time of the time range.\n\t\t</p>"
+                    }
                 },
                 "ToTime": {
-                    "target": "com.amazonaws.devopsguru#__timestampUnix"
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe end time of the time range.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tA time range used to specify when the behavior of an insight or anomaly started. \n\t\t</p>"
             }
         },
         "com.amazonaws.devopsguru#ThrottlingException": {
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.devopsguru#__string",
+                    "target": "com.amazonaws.devopsguru#ErrorMessageString",
                     "traits": {
                         "smithy.api#required": {}
                     }
                 },
                 "QuotaCode": {
-                    "target": "com.amazonaws.devopsguru#__string"
+                    "target": "com.amazonaws.devopsguru#ErrorQuotaCodeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe code of the quota that was exceeded, causing the throttling exception.\n\t\t</p>"
+                    }
                 },
                 "ServiceCode": {
-                    "target": "com.amazonaws.devopsguru#__string"
+                    "target": "com.amazonaws.devopsguru#ErrorServiceCodeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe code of the service that caused the throttling exception.\n\t\t</p>"
+                    }
+                },
+                "RetryAfterSeconds": {
+                    "target": "com.amazonaws.devopsguru#RetryAfterSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe number of seconds after which the action that caused the throttling \n\t\t\texception can be retried.\n\t\t</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to a request throttling.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.devopsguru#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.devopsguru#TopicArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\\d{12}:[^:]+$"
             }
         },
         "com.amazonaws.devopsguru#UpdateCloudFormationCollectionFilter": {
             "type": "structure",
             "members": {
                 "StackNames": {
-                    "target": "com.amazonaws.devopsguru#__listOf__stringMin1Max128PatternAZAZAZAZ09"
+                    "target": "com.amazonaws.devopsguru#UpdateStackNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn array of the name of stacks to update.\n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Contains the names of AWS CloudFormation stacks used to update a collection of stacks. </p>"
             }
         },
         "com.amazonaws.devopsguru#UpdateResourceCollection": {
@@ -2101,6 +3206,7 @@
                 }
             ],
             "traits": {
+                "smithy.api#documentation": "<p> Updates the collection of resources that DevOps Guru analyzes.\n\t\t\tThe one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks. This method also creates the IAM role required for you\n\t\t\tto use DevOps Guru. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/resource-collections",
@@ -2127,8 +3233,14 @@
             "type": "structure",
             "members": {
                 "CloudFormation": {
-                    "target": "com.amazonaws.devopsguru#UpdateCloudFormationCollectionFilter"
+                    "target": "com.amazonaws.devopsguru#UpdateCloudFormationCollectionFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn collection of AWS CloudFormation stacks. \n\t\t</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tContains information used to update a collection of AWS resources.\n\t\t</p>"
             }
         },
         "com.amazonaws.devopsguru#UpdateResourceCollectionRequest": {
@@ -2137,6 +3249,7 @@
                 "Action": {
                     "target": "com.amazonaws.devopsguru#UpdateResourceCollectionAction",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tSpecifies if the resource collection in the request is added or deleted to the resource collection. \n\t\t</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2178,6 +3291,7 @@
                 }
             ],
             "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tEnables or disables integration with a service that can be integrated with DevOps Guru. The one service that can be integrated with\n\t\t\tDevOps Guru is AWS Systems Manager, which can be used to create an OpsItem for each generated insight.\n\t\t</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/service-integrations",
@@ -2191,6 +3305,9 @@
                 "OpsCenter": {
                     "target": "com.amazonaws.devopsguru#OpsCenterIntegrationConfig"
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about updating the integration status of an AWS service, such as AWS Systems Manager, with DevOps Guru. \n\t\t</p>"
             }
         },
         "com.amazonaws.devopsguru#UpdateServiceIntegrationRequest": {
@@ -2199,6 +3316,7 @@
                 "ServiceIntegration": {
                     "target": "com.amazonaws.devopsguru#UpdateServiceIntegrationConfig",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAn <code>IntegratedServiceConfig</code> object used to specify the integrated service you want to update, and whether you \n\t\t\twant to update it to enabled or disabled.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2208,23 +3326,50 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.devopsguru#UpdateStackNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#StackName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#UuidNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
         "com.amazonaws.devopsguru#ValidationException": {
             "type": "structure",
             "members": {
-                "Fields": {
-                    "target": "com.amazonaws.devopsguru#__listOfValidationExceptionField"
-                },
                 "Message": {
-                    "target": "com.amazonaws.devopsguru#__string",
+                    "target": "com.amazonaws.devopsguru#ErrorMessageString",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tA message that describes the validation exception.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Reason": {
-                    "target": "com.amazonaws.devopsguru#ValidationExceptionReason"
+                    "target": "com.amazonaws.devopsguru#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe reason the validation exception was thrown.\n\t\t</p>"
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.devopsguru#ValidationExceptionFields"
                 }
             },
             "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tContains information about data passed in to a field during a request that is not valid. \n\t\t</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -2232,18 +3377,32 @@
         "com.amazonaws.devopsguru#ValidationExceptionField": {
             "type": "structure",
             "members": {
-                "Message": {
-                    "target": "com.amazonaws.devopsguru#__string",
+                "Name": {
+                    "target": "com.amazonaws.devopsguru#ErrorNameString",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe name of the field.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
                 },
-                "Name": {
-                    "target": "com.amazonaws.devopsguru#__string",
+                "Message": {
+                    "target": "com.amazonaws.devopsguru#ErrorMessageString",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe message associated with the validation exception with information to help \n\t\t\tdetermine its cause.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tThe field associated with the validation exception.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#ValidationExceptionFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#ValidationExceptionField"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tAn array of fields that are associated with the validation exception.\n\t\t</p>"
             }
         },
         "com.amazonaws.devopsguru#ValidationExceptionReason": {
@@ -2267,276 +3426,6 @@
                         "name": "OTHER"
                     }
                 ]
-            }
-        },
-        "com.amazonaws.devopsguru#__double": {
-            "type": "double"
-        },
-        "com.amazonaws.devopsguru#__integer": {
-            "type": "integer"
-        },
-        "com.amazonaws.devopsguru#__integerMin1Max100": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 100
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#__integerMin1Max200": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 200
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#__integerMin1Max500": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 500
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfCloudFormationHealth": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#CloudFormationHealth"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfCloudWatchMetricsDetail": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#CloudWatchMetricsDetail"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfCloudWatchMetricsDimension": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#CloudWatchMetricsDimension"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfEvent": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#Event"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfEventResource": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#EventResource"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfInsightSeverity": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#InsightSeverity"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfInsightStatus": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#InsightStatus"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfNotificationChannel": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#NotificationChannel"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfProactiveAnomalySummary": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#ProactiveAnomalySummary"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfProactiveInsightSummary": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#ProactiveInsightSummary"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfReactiveAnomalySummary": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#ReactiveAnomalySummary"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfReactiveInsightSummary": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#ReactiveInsightSummary"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfRecommendation": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#Recommendation"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfRecommendationRelatedAnomaly": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#RecommendationRelatedAnomaly"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfRecommendationRelatedAnomalyResource": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#RecommendationRelatedAnomalyResource"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfRecommendationRelatedAnomalySourceDetail": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#RecommendationRelatedAnomalySourceDetail"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfRecommendationRelatedCloudWatchMetricsSourceDetail": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#RecommendationRelatedCloudWatchMetricsSourceDetail"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfRecommendationRelatedEvent": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#RecommendationRelatedEvent"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfRecommendationRelatedEventResource": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#RecommendationRelatedEventResource"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOfValidationExceptionField": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#ValidationExceptionField"
-            }
-        },
-        "com.amazonaws.devopsguru#__listOf__stringMin1Max128PatternAZAZAZAZ09": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.devopsguru#__stringMin1Max128PatternAZAZAZAZ09"
-            }
-        },
-        "com.amazonaws.devopsguru#__long": {
-            "type": "long"
-        },
-        "com.amazonaws.devopsguru#__string": {
-            "type": "string"
-        },
-        "com.amazonaws.devopsguru#__stringMin0Max2048Pattern": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 2048
-                },
-                "smithy.api#pattern": "^.*$"
-            }
-        },
-        "com.amazonaws.devopsguru#__stringMin0Max50": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 50
-                }
-            }
-        },
-        "com.amazonaws.devopsguru#__stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 10,
-                    "max": 50
-                },
-                "smithy.api#pattern": "^[a-z]+[a-z0-9]*\\.amazonaws\\.com|aws\\.events$"
-            }
-        },
-        "com.amazonaws.devopsguru#__stringMin1Max100Pattern": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 100
-                },
-                "smithy.api#pattern": "^.*$"
-            }
-        },
-        "com.amazonaws.devopsguru#__stringMin1Max100PatternW": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 100
-                },
-                "smithy.api#pattern": "^[\\w-]*$"
-            }
-        },
-        "com.amazonaws.devopsguru#__stringMin1Max128PatternAZAZAZAZ09": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 128
-                },
-                "smithy.api#pattern": "^[a-zA-Z*]+[a-zA-Z0-9-]*$"
-            }
-        },
-        "com.amazonaws.devopsguru#__stringMin1Max530PatternSS": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 530
-                },
-                "smithy.api#pattern": "^[\\s\\S]*$"
-            }
-        },
-        "com.amazonaws.devopsguru#__stringMin36Max1024PatternArnAwsAZ09SnsAZ09D12": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 36,
-                    "max": 1024
-                },
-                "smithy.api#pattern": "^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\\d{12}:[^:]+$"
-            }
-        },
-        "com.amazonaws.devopsguru#__stringMin36Max2048PatternArnAwsAZAZ09AZ09D12": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 36,
-                    "max": 2048
-                },
-                "smithy.api#pattern": "^arn:aws[-a-z]*:[a-z0-9-]*:[a-z0-9-]*:\\d{12}:.*$"
-            }
-        },
-        "com.amazonaws.devopsguru#__stringMin36Max36PatternAF098AF094AF094AF094AF0912": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 36,
-                    "max": 36
-                },
-                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
-            }
-        },
-        "com.amazonaws.devopsguru#__timestampUnix": {
-            "type": "timestamp",
-            "traits": {
-                "smithy.api#timestampFormat": "epoch-seconds"
             }
         }
     }

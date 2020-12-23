@@ -1,0 +1,3730 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.customerprofiles#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.customerprofiles#AddProfileKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#AddProfileKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#AddProfileKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a new key value with a specific profile, such as a Contact Trace Record (CTR)\n         ContactId.</p>\n         <p>A profile object can have a single unique key and any number of additional keys that can\n         be used to identify the profile that it belongs to.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/profiles/keys",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#AddProfileKeyRequest": {
+            "type": "structure",
+            "members": {
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a customer profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#requestValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#AddProfileKeyResponse": {
+            "type": "structure",
+            "members": {
+                "KeyName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile.</p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#requestValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key values.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#Address": {
+            "type": "structure",
+            "members": {
+                "Address1": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first line of a customer address.</p>"
+                    }
+                },
+                "Address2": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The second line of a customer address.</p>"
+                    }
+                },
+                "Address3": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The third line of a customer address.</p>"
+                    }
+                },
+                "Address4": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fourth line of a customer address.</p>"
+                    }
+                },
+                "City": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The city in which a customer lives.</p>"
+                    }
+                },
+                "County": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The county in which a customer lives.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state in which a customer lives.</p>"
+                    }
+                },
+                "Province": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The province in which a customer lives.</p>"
+                    }
+                },
+                "Country": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country in which a customer lives.</p>"
+                    }
+                },
+                "PostalCode": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The postal code of a customer address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A generic address associated with the customer that is not mailing, shipping, or\n         billing.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#Attributes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.customerprofiles#string1To255"
+            },
+            "value": {
+                "target": "com.amazonaws.customerprofiles#string1To255"
+            }
+        },
+        "com.amazonaws.customerprofiles#BadRequestException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input you provided is invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateDomain": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#CreateDomainRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#CreateDomainResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a domain, which is a container for all customer data, such as customer profile\n         attributes, object types, profile keys, and encryption keys. You can create multiple\n         domains, and each domain can have multiple third-party integrations.</p>\n         <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon\n         Connect instances can be associated with one domain.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateDomainRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultExpirationDays": {
+                    "target": "com.amazonaws.customerprofiles#expirationDaysInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default number of days until the data within the domain expires.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultEncryptionKey": {
+                    "target": "com.amazonaws.customerprofiles#encryptionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default encryption key, which is an AWS managed key, is used when no specific type\n         of encryption key is specified. It is used to encrypt all data before it is placed in\n         permanent or semi-permanent storage.</p>"
+                    }
+                },
+                "DeadLetterQueueUrl": {
+                    "target": "com.amazonaws.customerprofiles#sqsQueueUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with\n         ingesting data from third party applications. You must set up a policy on the\n         DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to\n         send messages to the DeadLetterQueue.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateDomainResponse": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultExpirationDays": {
+                    "target": "com.amazonaws.customerprofiles#expirationDaysInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default number of days until the data within the domain expires.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultEncryptionKey": {
+                    "target": "com.amazonaws.customerprofiles#encryptionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default encryption key, which is an AWS managed key, is used when no specific type\n         of encryption key is specified. It is used to encrypt all data before it is placed in\n         permanent or semi-permanent storage.</p>"
+                    }
+                },
+                "DeadLetterQueueUrl": {
+                    "target": "com.amazonaws.customerprofiles#sqsQueueUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with\n         ingesting data from third party applications.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was most recently edited.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#CreateProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#CreateProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a standard profile.</p>\n         <p>A standard profile represents the following attributes for a customer profile in a\n         domain.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/profiles",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateProfileRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountNumber": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique account number that you have given to the customer.</p>"
+                    }
+                },
+                "AdditionalInformation": {
+                    "target": "com.amazonaws.customerprofiles#string1To1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any additional information relevant to the customer's profile.</p>"
+                    }
+                },
+                "PartyType": {
+                    "target": "com.amazonaws.customerprofiles#PartyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of profile used to describe the customer.</p>"
+                    }
+                },
+                "BusinessName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the customer’s business.</p>"
+                    }
+                },
+                "FirstName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s first name.</p>"
+                    }
+                },
+                "MiddleName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s middle name.</p>"
+                    }
+                },
+                "LastName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s last name.</p>"
+                    }
+                },
+                "BirthDate": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s birth date.</p>"
+                    }
+                },
+                "Gender": {
+                    "target": "com.amazonaws.customerprofiles#Gender",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gender with which the customer identifies.</p>"
+                    }
+                },
+                "PhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's phone number, which has not been specified as a mobile, home, or business\n         number.</p>"
+                    }
+                },
+                "MobilePhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s mobile phone number.</p>"
+                    }
+                },
+                "HomePhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s home phone number.</p>"
+                    }
+                },
+                "BusinessPhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s business phone number.</p>"
+                    }
+                },
+                "EmailAddress": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's email address, which has not been specified as a personal or business\n         address.</p>"
+                    }
+                },
+                "PersonalEmailAddress": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s personal email address.</p>"
+                    }
+                },
+                "BusinessEmailAddress": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s business email address.</p>"
+                    }
+                },
+                "Address": {
+                    "target": "com.amazonaws.customerprofiles#Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A generic address associated with the customer that is not mailing, shipping, or\n         billing.</p>"
+                    }
+                },
+                "ShippingAddress": {
+                    "target": "com.amazonaws.customerprofiles#Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s shipping address.</p>"
+                    }
+                },
+                "MailingAddress": {
+                    "target": "com.amazonaws.customerprofiles#Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s mailing address.</p>"
+                    }
+                },
+                "BillingAddress": {
+                    "target": "com.amazonaws.customerprofiles#Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s billing address.</p>"
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.customerprofiles#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key value pair of attributes of a customer profile.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateProfileResponse": {
+            "type": "structure",
+            "members": {
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a customer profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CustomerProfiles_20200815": {
+            "type": "service",
+            "version": "2020-08-15",
+            "operations": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AddProfileKey"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#CreateDomain"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#CreateProfile"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#DeleteDomain"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#DeleteIntegration"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#DeleteProfile"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#DeleteProfileKey"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#DeleteProfileObject"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#DeleteProfileObjectType"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetDomain"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetIntegration"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetProfileObjectType"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetProfileObjectTypeTemplate"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListAccountIntegrations"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListDomains"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListIntegrations"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListProfileObjects"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListProfileObjectTypes"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListProfileObjectTypeTemplates"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#PutIntegration"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#PutProfileObject"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#PutProfileObjectType"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#SearchProfiles"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#UpdateDomain"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#UpdateProfile"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Customer Profiles",
+                    "arnNamespace": "profile",
+                    "cloudFormationName": "CustomerProfiles",
+                    "cloudTrailEventSource": "customerprofiles.amazonaws.com",
+                    "endpointPrefix": "profile"
+                },
+                "aws.auth#sigv4": {
+                    "name": "profile"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Amazon Connect Customer Profiles</fullname>\n         <p>Welcome to the Amazon Connect Customer Profiles API Reference. This guide provides\n         information about the Amazon Connect Customer Profiles API, including supported operations,\n         data types, parameters, and schemas.</p>\n         <p>Amazon Connect Customer Profiles is a unified customer profile for your contact center\n         that has pre-built connectors powered by AppFlow that make it easy to combine customer\n         information from third party applications, such as Salesforce (CRM), ServiceNow (ITSM), and\n         your enterprise resource planning (ERP), with contact history from your Amazon Connect\n         contact center.</p>\n         <p>If you're new to Amazon Connect, you might find it helpful to also review the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/what-is-amazon-connect.html\">Amazon Connect Administrator Guide</a>.</p>",
+                "smithy.api#title": "Amazon Connect Customer Profiles"
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteDomain": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DeleteDomainRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DeleteDomainResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a specific domain and all of its customer data, such as customer profile\n         attributes and their related objects.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/domains/{DomainName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteDomainRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteDomainResponse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that indicates the delete request is done.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DeleteIntegrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DeleteIntegrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes an integration from a specific domain.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/integrations/delete",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteIntegrationRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Uri": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the S3 bucket or any other type of data source.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteIntegrationResponse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that indicates the delete request is done.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DeleteProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DeleteProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the standard customer profile and all data pertaining to the profile.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/profiles/delete",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteProfileKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DeleteProfileKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DeleteProfileKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a searchable key from a customer profile.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/profiles/keys/delete",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteProfileKeyRequest": {
+            "type": "structure",
+            "members": {
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a customer profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#requestValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteProfileKeyResponse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that indicates the delete request is done.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteProfileObject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DeleteProfileObjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DeleteProfileObjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes an object associated with a profile of a given ProfileObjectType.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/profiles/objects/delete",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteProfileObjectRequest": {
+            "type": "structure",
+            "members": {
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a customer profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileObjectUniqueKey": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the profile object generated by the service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteProfileObjectResponse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that indicates the delete request is done.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteProfileObjectType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DeleteProfileObjectTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DeleteProfileObjectTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a ProfileObjectType from a specific domain as well as removes all the\n         ProfileObjects of that type. It also disables integrations from this specific\n         ProfileObjectType. In addition, it scrubs all of the fields of the standard profile that\n         were populated from this ProfileObjectType.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/domains/{DomainName}/object-types/{ObjectTypeName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteProfileObjectTypeRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteProfileObjectTypeResponse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that indicates the delete request is done.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteProfileRequest": {
+            "type": "structure",
+            "members": {
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a customer profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteProfileResponse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that indicates the delete request is done.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DomainList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ListDomainItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#DomainStats": {
+            "type": "structure",
+            "members": {
+                "ProfileCount": {
+                    "target": "com.amazonaws.customerprofiles#long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of profiles currently in the domain.</p>"
+                    }
+                },
+                "MeteringProfileCount": {
+                    "target": "com.amazonaws.customerprofiles#long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of profiles that you are currently paying for in the domain. If you have more\n         than 100 objects associated with a single profile, that profile counts as two profiles. If\n         you have more than 200 objects, that profile counts as three, and so on.</p>"
+                    }
+                },
+                "ObjectCount": {
+                    "target": "com.amazonaws.customerprofiles#long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of objects in domain.</p>"
+                    }
+                },
+                "TotalSize": {
+                    "target": "com.amazonaws.customerprofiles#long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total size, in bytes, of all objects in the domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Usage-specific statistics about the domain.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#FieldContentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "STRING",
+                        "name": "STRING"
+                    },
+                    {
+                        "value": "NUMBER",
+                        "name": "NUMBER"
+                    },
+                    {
+                        "value": "PHONE_NUMBER",
+                        "name": "PHONE_NUMBER"
+                    },
+                    {
+                        "value": "EMAIL_ADDRESS",
+                        "name": "EMAIL_ADDRESS"
+                    },
+                    {
+                        "value": "NAME",
+                        "name": "NAME"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.customerprofiles#FieldMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.customerprofiles#name"
+            },
+            "value": {
+                "target": "com.amazonaws.customerprofiles#ObjectTypeField"
+            }
+        },
+        "com.amazonaws.customerprofiles#FieldNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#name"
+            }
+        },
+        "com.amazonaws.customerprofiles#Gender": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MALE",
+                        "name": "MALE"
+                    },
+                    {
+                        "value": "FEMALE",
+                        "name": "FEMALE"
+                    },
+                    {
+                        "value": "UNSPECIFIED",
+                        "name": "UNSPECIFIED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.customerprofiles#GetDomain": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetDomainRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetDomainResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a specific domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetDomainRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name for the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetDomainResponse": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultExpirationDays": {
+                    "target": "com.amazonaws.customerprofiles#expirationDaysInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default number of days until the data within the domain expires.</p>"
+                    }
+                },
+                "DefaultEncryptionKey": {
+                    "target": "com.amazonaws.customerprofiles#encryptionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default encryption key, which is an AWS managed key, is used when no specific type\n         of encryption key is specified. It is used to encrypt all data before it is placed in\n         permanent or semi-permanent storage.</p>"
+                    }
+                },
+                "DeadLetterQueueUrl": {
+                    "target": "com.amazonaws.customerprofiles#sqsQueueUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with\n         ingesting data from third party applications.</p>"
+                    }
+                },
+                "Stats": {
+                    "target": "com.amazonaws.customerprofiles#DomainStats",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Usage-specific statistics about the domain.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was most recently edited.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetIntegrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetIntegrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an integration for a domain.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/integrations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetIntegrationRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Uri": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the S3 bucket or any other type of data source.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetIntegrationResponse": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Uri": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the S3 bucket or any other type of data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was most recently edited.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetProfileObjectType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetProfileObjectTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetProfileObjectTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the object types for a specific domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/object-types/{ObjectTypeName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetProfileObjectTypeRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetProfileObjectTypeResponse": {
+            "type": "structure",
+            "members": {
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemplateId": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the object template.</p>"
+                    }
+                },
+                "ExpirationDays": {
+                    "target": "com.amazonaws.customerprofiles#expirationDaysInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days until the data in the object expires.</p>"
+                    }
+                },
+                "EncryptionKey": {
+                    "target": "com.amazonaws.customerprofiles#encryptionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided key to encrypt the profile object that will be created in this\n         profile object type.</p>"
+                    }
+                },
+                "AllowProfileCreation": {
+                    "target": "com.amazonaws.customerprofiles#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether a profile should be created when data is received if one doesn’t exist\n         for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation\n         flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and\n         associate this object with the profile. If it is set to <code>TRUE</code>, and if no match\n         is found, then the service creates a new standard profile.</p>"
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.customerprofiles#FieldMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the name and ObjectType field.</p>"
+                    }
+                },
+                "Keys": {
+                    "target": "com.amazonaws.customerprofiles#KeyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique keys that can be used to map data to the profile.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was created.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was most recently edited.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetProfileObjectTypeTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetProfileObjectTypeTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetProfileObjectTypeTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the template information for a specific object type.</p>\n         <p>A template is a predefined ProfileObjectType, such as “Salesforce-Account” or\n         “Salesforce-Contact.” When a user sends a ProfileObject, using the PutProfileObject API,\n         with an ObjectTypeName that matches one of the TemplateIds, it uses the mappings from the\n         template.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/templates/{TemplateId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetProfileObjectTypeTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "TemplateId": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the object template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetProfileObjectTypeTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "TemplateId": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the object template.</p>"
+                    }
+                },
+                "SourceName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source of the object template.</p>"
+                    }
+                },
+                "SourceObject": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the object template.</p>"
+                    }
+                },
+                "AllowProfileCreation": {
+                    "target": "com.amazonaws.customerprofiles#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether a profile should be created when data is received if one doesn’t exist\n         for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation\n         flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and\n         associate this object with the profile. If it is set to <code>TRUE</code>, and if no match\n         is found, then the service creates a new standard profile.</p>"
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.customerprofiles#FieldMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the name and ObjectType field.</p>"
+                    }
+                },
+                "Keys": {
+                    "target": "com.amazonaws.customerprofiles#KeyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique keys that can be used to map data to the profile.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#IntegrationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ListIntegrationItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal service error occurred.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.customerprofiles#KeyMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.customerprofiles#name"
+            },
+            "value": {
+                "target": "com.amazonaws.customerprofiles#ObjectTypeKeyList"
+            }
+        },
+        "com.amazonaws.customerprofiles#ListAccountIntegrations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListAccountIntegrationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListAccountIntegrationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all of the integrations associated to a specific URI in the AWS account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/integrations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListAccountIntegrationsRequest": {
+            "type": "structure",
+            "members": {
+                "Uri": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the S3 bucket or any other type of data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous ListAccountIntegrations API call.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects returned per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListAccountIntegrationsResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#IntegrationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of ListAccountIntegration instances.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous ListAccountIntegrations API call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListDomainItem": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was most recently edited.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object in a list that represents a domain.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ListDomains": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListDomainsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListDomainsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all the domains for an AWS account that have been created.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListDomainsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous ListDomain API call.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects returned per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListDomainsResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#DomainList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of ListDomains instances.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous ListDomains API call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListIntegrationItem": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Uri": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the S3 bucket or any other type of data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was most recently edited.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An integration in list of integrations.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ListIntegrations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListIntegrationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListIntegrationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all of the integrations in your domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/integrations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListIntegrationsRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous ListIntegrations API call.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects returned per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListIntegrationsResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#IntegrationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of ListIntegrations instances.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous ListIntegrations API call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListProfileObjectTypeItem": {
+            "type": "structure",
+            "members": {
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was created.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was most recently edited.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A ProfileObjectType instance.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ListProfileObjectTypeTemplateItem": {
+            "type": "structure",
+            "members": {
+                "TemplateId": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the object template.</p>"
+                    }
+                },
+                "SourceName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source of the object template.</p>"
+                    }
+                },
+                "SourceObject": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the object template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A ProfileObjectTypeTemplate in a list of ProfileObjectTypeTemplates.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ListProfileObjectTypeTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListProfileObjectTypeTemplatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListProfileObjectTypeTemplatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all of the template information for object types.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/templates",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListProfileObjectTypeTemplatesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous ListObjectTypeTemplates API call.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects returned per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListProfileObjectTypeTemplatesResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#ProfileObjectTypeTemplateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of ListProfileObjectType template instances.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous ListObjectTypeTemplates API call. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListProfileObjectTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListProfileObjectTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListProfileObjectTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all of the templates available within the service.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/object-types",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListProfileObjectTypesRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the next page of results to return.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects returned per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListProfileObjectTypesResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#ProfileObjectTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of ListProfileObjectTypes instances.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the next page of results to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListProfileObjects": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListProfileObjectsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListProfileObjectsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of objects associated with a profile of a given ProfileObjectType.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/profiles/objects",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListProfileObjectsItem": {
+            "type": "structure",
+            "members": {
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the kind of object being added to a profile, such as\n         \"Salesforce-Account.\"</p>"
+                    }
+                },
+                "ProfileObjectUniqueKey": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the ProfileObject generated by the service.</p>"
+                    }
+                },
+                "Object": {
+                    "target": "com.amazonaws.customerprofiles#stringifiedJson",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON representation of a ProfileObject that belongs to a profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A ProfileObject in a list of ProfileObjects.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ListProfileObjectsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous call to ListProfileObjects.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects returned per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a customer profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListProfileObjectsResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#ProfileObjectList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of ListProfileObject instances.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous call to ListProfileObjects.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Displays the tags associated with an Amazon Connect Customer Profiles resource. In\n         Connect Customer Profiles, domains, profile object types, and integrations can be\n         tagged.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.customerprofiles#TagArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource for which you want to view tags.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ObjectTypeField": {
+            "type": "structure",
+            "members": {
+                "Source": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field of a ProfileObject. For example: _source.FirstName, where “_source” is a\n         ProfileObjectType of a Zendesk user and “FirstName” is a field in that ObjectType.</p>"
+                    }
+                },
+                "Target": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the data in the standard ProfileObject model. For example:\n         _profile.Address.PostalCode.</p>"
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.customerprofiles#FieldContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content type of the field. Used for determining equality when searching.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a field in a ProfileObjectType.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ObjectTypeKey": {
+            "type": "structure",
+            "members": {
+                "StandardIdentifiers": {
+                    "target": "com.amazonaws.customerprofiles#StandardIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of keys that a ProfileObject can have. Each ProfileObject can have only 1\n         UNIQUE key but multiple PROFILE keys. PROFILE means that this key can be used to tie an\n         object to a PROFILE. UNIQUE means that it can be used to uniquely identify an object. If a\n         key a is marked as SECONDARY, it will be used to search for profiles after all other\n         PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is\n         not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the\n         profile does not already exist before the object is ingested, otherwise it is only used for\n         matching objects to profiles.</p>"
+                    }
+                },
+                "FieldNames": {
+                    "target": "com.amazonaws.customerprofiles#FieldNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference for the key name of the fields map.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that defines the Key element of a ProfileObject. A Key is a special element\n         that can be used to search for a customer profile.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ObjectTypeKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ObjectTypeKey"
+            }
+        },
+        "com.amazonaws.customerprofiles#PartyType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "INDIVIDUAL",
+                        "name": "INDIVIDUAL"
+                    },
+                    {
+                        "value": "BUSINESS",
+                        "name": "BUSINESS"
+                    },
+                    {
+                        "value": "OTHER",
+                        "name": "OTHER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.customerprofiles#Profile": {
+            "type": "structure",
+            "members": {
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a customer profile.</p>"
+                    }
+                },
+                "AccountNumber": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique account number that you have given to the customer.</p>"
+                    }
+                },
+                "AdditionalInformation": {
+                    "target": "com.amazonaws.customerprofiles#string1To1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any additional information relevant to the customer's profile.</p>"
+                    }
+                },
+                "PartyType": {
+                    "target": "com.amazonaws.customerprofiles#PartyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of profile used to describe the customer.</p>"
+                    }
+                },
+                "BusinessName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the customer’s business.</p>"
+                    }
+                },
+                "FirstName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s first name.</p>"
+                    }
+                },
+                "MiddleName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s middle name.</p>"
+                    }
+                },
+                "LastName": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s last name.</p>"
+                    }
+                },
+                "BirthDate": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s birth date.</p>"
+                    }
+                },
+                "Gender": {
+                    "target": "com.amazonaws.customerprofiles#Gender",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gender with which the customer identifies.</p>"
+                    }
+                },
+                "PhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's phone number, which has not been specified as a mobile, home, or business\n         number.</p>"
+                    }
+                },
+                "MobilePhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s mobile phone number.</p>"
+                    }
+                },
+                "HomePhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s home phone number.</p>"
+                    }
+                },
+                "BusinessPhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s home phone number.</p>"
+                    }
+                },
+                "EmailAddress": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's email address, which has not been specified as a personal or business\n         address.</p>"
+                    }
+                },
+                "PersonalEmailAddress": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s personal email address.</p>"
+                    }
+                },
+                "BusinessEmailAddress": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s business email address.</p>"
+                    }
+                },
+                "Address": {
+                    "target": "com.amazonaws.customerprofiles#Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A generic address associated with the customer that is not mailing, shipping, or\n         billing.</p>"
+                    }
+                },
+                "ShippingAddress": {
+                    "target": "com.amazonaws.customerprofiles#Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s shipping address.</p>"
+                    }
+                },
+                "MailingAddress": {
+                    "target": "com.amazonaws.customerprofiles#Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s mailing address.</p>"
+                    }
+                },
+                "BillingAddress": {
+                    "target": "com.amazonaws.customerprofiles#Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s billing address.</p>"
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.customerprofiles#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key value pair of attributes of a customer profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The standard profile of a customer.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#Profile"
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileObjectList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ListProfileObjectsItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileObjectTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ListProfileObjectTypeItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileObjectTypeTemplateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ListProfileObjectTypeTemplateItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#PutIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#PutIntegrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#PutIntegrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds an integration between the service and a third-party service, which includes Amazon\n         AppFlow and Amazon Connect.</p>\n         <p>An integration can belong to only one domain.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/domains/{DomainName}/integrations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#PutIntegrationRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Uri": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the S3 bucket or any other type of data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#PutIntegrationResponse": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Uri": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the S3 bucket or any other type of data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was most recently edited.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#PutProfileObject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#PutProfileObjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#PutProfileObjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds additional objects to customer profiles of a given ObjectType.</p>\n         <p>When adding a specific profile object, like a Contact Trace Record (CTR), an inferred\n         profile can get created if it is not mapped to an existing profile. The resulting profile\n         will only have a phone number populated in the standard ProfileObject. Any additional CTRs\n         with the same phone number will be mapped to the same inferred profile.</p>\n         <p>When a ProfileObject is created and if a ProfileObjectType already exists for the\n         ProfileObject, it will provide data to a standard profile depending on the\n         ProfileObjectType definition.</p>\n         <p>PutProfileObject needs an ObjectType, which can be created using\n         PutProfileObjectType.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/domains/{DomainName}/profiles/objects",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#PutProfileObjectRequest": {
+            "type": "structure",
+            "members": {
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Object": {
+                    "target": "com.amazonaws.customerprofiles#stringifiedJson",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that is serialized from a JSON object.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#PutProfileObjectResponse": {
+            "type": "structure",
+            "members": {
+                "ProfileObjectUniqueKey": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the profile object generated by the service.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#PutProfileObjectType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#PutProfileObjectTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#PutProfileObjectTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a ProfileObjectType.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/domains/{DomainName}/object-types/{ObjectTypeName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#PutProfileObjectTypeRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemplateId": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the object template.</p>"
+                    }
+                },
+                "ExpirationDays": {
+                    "target": "com.amazonaws.customerprofiles#expirationDaysInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days until the data in the object expires.</p>"
+                    }
+                },
+                "EncryptionKey": {
+                    "target": "com.amazonaws.customerprofiles#encryptionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided key to encrypt the profile object that will be created in this\n         profile object type.</p>"
+                    }
+                },
+                "AllowProfileCreation": {
+                    "target": "com.amazonaws.customerprofiles#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether a profile should be created when data is received if one doesn’t exist\n         for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation\n         flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and\n         associate this object with the profile. If it is set to <code>TRUE</code>, and if no match\n         is found, then the service creates a new standard profile.</p>"
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.customerprofiles#FieldMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the name and ObjectType field.</p>"
+                    }
+                },
+                "Keys": {
+                    "target": "com.amazonaws.customerprofiles#KeyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique keys that can be used to map data to the profile.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#PutProfileObjectTypeResponse": {
+            "type": "structure",
+            "members": {
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemplateId": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the object template.</p>"
+                    }
+                },
+                "ExpirationDays": {
+                    "target": "com.amazonaws.customerprofiles#expirationDaysInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days until the data in the object expires.</p>"
+                    }
+                },
+                "EncryptionKey": {
+                    "target": "com.amazonaws.customerprofiles#encryptionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided key to encrypt the profile object that will be created in this\n         profile object type.</p>"
+                    }
+                },
+                "AllowProfileCreation": {
+                    "target": "com.amazonaws.customerprofiles#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether a profile should be created when data is received if one doesn’t exist\n         for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation\n         flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and\n         associate this object with the profile. If it is set to <code>TRUE</code>, and if no match\n         is found, then the service creates a new standard profile.</p>"
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.customerprofiles#FieldMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of the name and ObjectType field.</p>"
+                    }
+                },
+                "Keys": {
+                    "target": "com.amazonaws.customerprofiles#KeyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique keys that can be used to map data to the profile.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was created.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was most recently edited.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested resource does not exist, or access was denied.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.customerprofiles#SearchProfiles": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#SearchProfilesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#SearchProfilesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches for profiles within a specific domain name using name, phone number, email\n         address, account number, or a custom defined index.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/profiles/search",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#SearchProfilesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous SearchProfiles API call.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects returned per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile. The predefined keys you can use to search\n         include: _account, _profileId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId,\n         _salesforceAccountId, _salesforceContactId, _zendeskUserId, _zendeskExternalId,\n         _serviceNowSystemId.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#requestValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key values.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#SearchProfilesResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#ProfileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of SearchProfiles instances.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous SearchProfiles API call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#StandardIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PROFILE",
+                        "name": "PROFILE"
+                    },
+                    {
+                        "value": "UNIQUE",
+                        "name": "UNIQUE"
+                    },
+                    {
+                        "value": "SECONDARY",
+                        "name": "SECONDARY"
+                    },
+                    {
+                        "value": "LOOKUP_ONLY",
+                        "name": "LOOKUP_ONLY"
+                    },
+                    {
+                        "value": "NEW_ONLY",
+                        "name": "NEW_ONLY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.customerprofiles#StandardIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#StandardIdentifier"
+            }
+        },
+        "com.amazonaws.customerprofiles#TagArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9]{1,10}:profile"
+            }
+        },
+        "com.amazonaws.customerprofiles#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.customerprofiles#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.customerprofiles#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.customerprofiles#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified Amazon Connect Customer\n         Profiles resource. Tags can help you organize and categorize your resources. You can also\n         use them to scope user permissions by granting a user permission to access or change only\n         resources with certain tag values. In Connect Customer Profiles, domains, profile object\n         types, and integrations can be tagged.</p>\n         <p>Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of\n         characters.</p>\n         <p>You can use the TagResource action with a resource that already has tags. If you specify\n         a new tag key, this tag is appended to the list of tags associated with the resource. If\n         you specify a tag key that is already associated with the resource, the new tag value that\n         you specify replaces the previous value for that tag.</p>\n         <p>You can associate as many as 50 tags with a resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.customerprofiles#TagArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource that you're adding tags to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.customerprofiles#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You exceeded the maximum number of requests.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.customerprofiles#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes one or more tags from the specified Amazon Connect Customer Profiles resource.\n         In Connect Customer Profiles, domains, profile object types, and integrations can be\n         tagged.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.customerprofiles#TagArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource from which you are removing tags.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.customerprofiles#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tag keys to remove from the resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.customerprofiles#UpdateAddress": {
+            "type": "structure",
+            "members": {
+                "Address1": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first line of a customer address.</p>"
+                    }
+                },
+                "Address2": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The second line of a customer address.</p>"
+                    }
+                },
+                "Address3": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The third line of a customer address.</p>"
+                    }
+                },
+                "Address4": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fourth line of a customer address.</p>"
+                    }
+                },
+                "City": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The city in which a customer lives.</p>"
+                    }
+                },
+                "County": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The county in which a customer lives.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state in which a customer lives.</p>"
+                    }
+                },
+                "Province": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The province in which a customer lives.</p>"
+                    }
+                },
+                "Country": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country in which a customer lives.</p>"
+                    }
+                },
+                "PostalCode": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The postal code of a customer address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates associated with the address properties of a customer profile.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#UpdateAttributes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.customerprofiles#string1To255"
+            },
+            "value": {
+                "target": "com.amazonaws.customerprofiles#string0To255"
+            }
+        },
+        "com.amazonaws.customerprofiles#UpdateDomain": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#UpdateDomainRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#UpdateDomainResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the properties of a domain, including creating or selecting a dead letter queue\n         or an encryption key.</p>\n         <p>Once a domain is created, the name can’t be changed.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/domains/{DomainName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#UpdateDomainRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name for the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultExpirationDays": {
+                    "target": "com.amazonaws.customerprofiles#expirationDaysInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default number of days until the data within the domain expires.</p>"
+                    }
+                },
+                "DefaultEncryptionKey": {
+                    "target": "com.amazonaws.customerprofiles#encryptionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default encryption key, which is an AWS managed key, is used when no specific type\n         of encryption key is specified. It is used to encrypt all data before it is placed in\n         permanent or semi-permanent storage. If specified as an empty string, it will clear any\n         existing value.</p>"
+                    }
+                },
+                "DeadLetterQueueUrl": {
+                    "target": "com.amazonaws.customerprofiles#sqsQueueUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with\n         ingesting data from third party applications. If specified as an empty string, it will\n         clear any existing value. You must set up a policy on the DeadLetterQueue for the\n         SendMessage operation to enable Amazon Connect Customer Profiles to send messages to the\n         DeadLetterQueue.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#UpdateDomainResponse": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultExpirationDays": {
+                    "target": "com.amazonaws.customerprofiles#expirationDaysInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default number of days until the data within the domain expires.</p>"
+                    }
+                },
+                "DefaultEncryptionKey": {
+                    "target": "com.amazonaws.customerprofiles#encryptionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default encryption key, which is an AWS managed key, is used when no specific type\n         of encryption key is specified. It is used to encrypt all data before it is placed in\n         permanent or semi-permanent storage.</p>"
+                    }
+                },
+                "DeadLetterQueueUrl": {
+                    "target": "com.amazonaws.customerprofiles#sqsQueueUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with\n         ingesting data from third party applications.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the domain was most recently edited.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#UpdateProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#UpdateProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#UpdateProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the properties of a profile. The ProfileId is required for updating a customer\n         profile.</p>\n         <p>When calling the UpdateProfile API, specifying an empty string value means that any\n         existing value will be removed. Not specifying a string value means that any value already\n         there will be kept.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/domains/{DomainName}/profiles",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#UpdateProfileRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a customer profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AdditionalInformation": {
+                    "target": "com.amazonaws.customerprofiles#string0To1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any additional information relevant to the customer's profile.</p>"
+                    }
+                },
+                "AccountNumber": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique account number that you have given to the customer.</p>"
+                    }
+                },
+                "PartyType": {
+                    "target": "com.amazonaws.customerprofiles#PartyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of profile used to describe the customer.</p>"
+                    }
+                },
+                "BusinessName": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the customer’s business.</p>"
+                    }
+                },
+                "FirstName": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s first name.</p>"
+                    }
+                },
+                "MiddleName": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s middle name.</p>"
+                    }
+                },
+                "LastName": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s last name.</p>"
+                    }
+                },
+                "BirthDate": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s birth date.</p>"
+                    }
+                },
+                "Gender": {
+                    "target": "com.amazonaws.customerprofiles#Gender",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gender with which the customer identifies.</p>"
+                    }
+                },
+                "PhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's phone number, which has not been specified as a mobile, home, or business\n         number.</p>"
+                    }
+                },
+                "MobilePhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s mobile phone number.</p>"
+                    }
+                },
+                "HomePhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s home phone number.</p>"
+                    }
+                },
+                "BusinessPhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s business phone number.</p>"
+                    }
+                },
+                "EmailAddress": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer's email address, which has not been specified as a personal or business\n         address.</p>"
+                    }
+                },
+                "PersonalEmailAddress": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s personal email address.</p>"
+                    }
+                },
+                "BusinessEmailAddress": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s business email address.</p>"
+                    }
+                },
+                "Address": {
+                    "target": "com.amazonaws.customerprofiles#UpdateAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A generic address associated with the customer that is not mailing, shipping, or\n         billing.</p>"
+                    }
+                },
+                "ShippingAddress": {
+                    "target": "com.amazonaws.customerprofiles#UpdateAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s shipping address.</p>"
+                    }
+                },
+                "MailingAddress": {
+                    "target": "com.amazonaws.customerprofiles#UpdateAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s mailing address.</p>"
+                    }
+                },
+                "BillingAddress": {
+                    "target": "com.amazonaws.customerprofiles#UpdateAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer’s billing address.</p>"
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.customerprofiles#UpdateAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key value pair of attributes of a customer profile.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#UpdateProfileResponse": {
+            "type": "structure",
+            "members": {
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a customer profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#boolean": {
+            "type": "boolean"
+        },
+        "com.amazonaws.customerprofiles#encryptionKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#expirationDaysInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1098
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#long": {
+            "type": "long"
+        },
+        "com.amazonaws.customerprofiles#maxSize100": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#message": {
+            "type": "string"
+        },
+        "com.amazonaws.customerprofiles#name": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.customerprofiles#requestValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#string1To255"
+            }
+        },
+        "com.amazonaws.customerprofiles#sqsQueueUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#string0To1000": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#string0To255": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#string1To1000": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#string1To255": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#stringifiedJson": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256000
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#text": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.customerprofiles#token": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#typeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$"
+            }
+        },
+        "com.amazonaws.customerprofiles#uuid": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "[a-f0-9]{32}"
+            }
+        }
+    }
+}

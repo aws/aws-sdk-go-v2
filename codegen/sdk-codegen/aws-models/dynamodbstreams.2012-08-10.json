@@ -473,10 +473,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "HASH"
+                        "value": "HASH",
+                        "name": "HASH"
                     },
                     {
-                        "value": "RANGE"
+                        "value": "RANGE",
+                        "name": "RANGE"
                     }
                 ]
             }
@@ -597,13 +599,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "INSERT"
+                        "value": "INSERT",
+                        "name": "INSERT"
                     },
                     {
-                        "value": "MODIFY"
+                        "value": "MODIFY",
+                        "name": "MODIFY"
                     },
                     {
-                        "value": "REMOVE"
+                        "value": "REMOVE",
+                        "name": "REMOVE"
                     }
                 ]
             }
@@ -781,16 +786,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "TRIM_HORIZON"
+                        "value": "TRIM_HORIZON",
+                        "name": "TRIM_HORIZON"
                     },
                     {
-                        "value": "LATEST"
+                        "value": "LATEST",
+                        "name": "LATEST"
                     },
                     {
-                        "value": "AT_SEQUENCE_NUMBER"
+                        "value": "AT_SEQUENCE_NUMBER",
+                        "name": "AT_SEQUENCE_NUMBER"
                     },
                     {
-                        "value": "AFTER_SEQUENCE_NUMBER"
+                        "value": "AFTER_SEQUENCE_NUMBER",
+                        "name": "AFTER_SEQUENCE_NUMBER"
                     }
                 ]
             }
@@ -953,16 +962,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ENABLING"
+                        "value": "ENABLING",
+                        "name": "ENABLING"
                     },
                     {
-                        "value": "ENABLED"
+                        "value": "ENABLED",
+                        "name": "ENABLED"
                     },
                     {
-                        "value": "DISABLING"
+                        "value": "DISABLING",
+                        "name": "DISABLING"
                     },
                     {
-                        "value": "DISABLED"
+                        "value": "DISABLED",
+                        "name": "DISABLED"
                     }
                 ]
             }
@@ -972,16 +985,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "NEW_IMAGE"
+                        "value": "NEW_IMAGE",
+                        "name": "NEW_IMAGE"
                     },
                     {
-                        "value": "OLD_IMAGE"
+                        "value": "OLD_IMAGE",
+                        "name": "OLD_IMAGE"
                     },
                     {
-                        "value": "NEW_AND_OLD_IMAGES"
+                        "value": "NEW_AND_OLD_IMAGES",
+                        "name": "NEW_AND_OLD_IMAGES"
                     },
                     {
-                        "value": "KEYS_ONLY"
+                        "value": "KEYS_ONLY",
+                        "name": "KEYS_ONLY"
                     }
                 ]
             }

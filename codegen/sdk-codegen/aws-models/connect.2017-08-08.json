@@ -99,6 +99,9 @@
                     "target": "com.amazonaws.connect#CreateIntegrationAssociation"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreateQuickConnect"
+                },
+                {
                     "target": "com.amazonaws.connect#CreateRoutingProfile"
                 },
                 {
@@ -115,6 +118,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DeleteIntegrationAssociation"
+                },
+                {
+                    "target": "com.amazonaws.connect#DeleteQuickConnect"
                 },
                 {
                     "target": "com.amazonaws.connect#DeleteUseCase"
@@ -136,6 +142,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeInstanceStorageConfig"
+                },
+                {
+                    "target": "com.amazonaws.connect#DescribeQuickConnect"
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeRoutingProfile"
@@ -216,6 +225,9 @@
                     "target": "com.amazonaws.connect#ListQueues"
                 },
                 {
+                    "target": "com.amazonaws.connect#ListQuickConnects"
+                },
+                {
                     "target": "com.amazonaws.connect#ListRoutingProfileQueues"
                 },
                 {
@@ -283,6 +295,12 @@
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateInstanceStorageConfig"
+                },
+                {
+                    "target": "com.amazonaws.connect#UpdateQuickConnectConfig"
+                },
+                {
+                    "target": "com.amazonaws.connect#UpdateQuickConnectName"
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateRoutingProfileConcurrency"
@@ -363,7 +381,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates an approved origin to an Amazon Connect instance.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Associates an approved origin to an Amazon Connect instance.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/instance/{InstanceId}/approved-origin",
@@ -420,7 +438,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a storage resource type for the first time. You can only associate one type of\n   storage configuration in a single call. This means, for example, that you can't define an\n   instance with multiple S3 buckets for storing chat transcripts.</p>\n         <p>This API does not create a resource that doesn't exist. It only associates it to the\n   instance. Ensure that the resource being specified in the storage configuration, like an Amazon\n   S3 bucket, exists when being used for association.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Associates a storage resource type for the first time. You can only associate one type of\n   storage configuration in a single call. This means, for example, that you can't define an\n   instance with multiple S3 buckets for storing chat transcripts.</p>\n         <p>This API does not create a resource that doesn't exist. It only associates it to the\n   instance. Ensure that the resource being specified in the storage configuration, like an Amazon\n   S3 bucket, exists when being used for association.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/instance/{InstanceId}/storage-config",
@@ -495,7 +513,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows the specified Amazon Connect instance to access the specified Lambda function.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Allows the specified Amazon Connect instance to access the specified Lambda function.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/instance/{InstanceId}/lambda-function",
@@ -552,7 +570,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/instance/{InstanceId}/lex-bot",
@@ -671,7 +689,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a security key to the instance.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Associates a security key to the instance.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/instance/{InstanceId}/security-key",
@@ -1333,7 +1351,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Create an AppIntegration association with anAmazon Connect instance.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Create an AppIntegration association with an Amazon Connect instance.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/instance/{InstanceId}/integration-associations",
@@ -1402,6 +1420,102 @@
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the association.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateQuickConnect": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateQuickConnectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateQuickConnectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Creates a quick connect for the specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/quick-connects/{InstanceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateQuickConnectRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#QuickConnectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the quick connect.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#QuickConnectDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the quick connect.</p>"
+                    }
+                },
+                "QuickConnectConfig": {
+                    "target": "com.amazonaws.connect#QuickConnectConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration settings for the quick connect.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateQuickConnectResponse": {
+            "type": "structure",
+            "members": {
+                "QuickConnectARN": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the quick connect. </p>"
+                    }
+                },
+                "QuickConnectId": {
+                    "target": "com.amazonaws.connect#QuickConnectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the quick connect.</p>"
                     }
                 }
             }
@@ -2073,6 +2187,58 @@
                 }
             }
         },
+        "com.amazonaws.connect#DeleteQuickConnect": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteQuickConnectRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Deletes a quick connect.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/quick-connects/{InstanceId}/{QuickConnectId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteQuickConnectRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuickConnectId": {
+                    "target": "com.amazonaws.connect#QuickConnectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the quick connect.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#DeleteUseCase": {
             "type": "operation",
             "input": {
@@ -2326,7 +2492,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the current state of the specified instance identifier. It tracks the instance while\n   it is being created and returns an error status if applicable. </p>\n         <p>If an instance is not created successfully, the instance status reason field returns details\n   relevant to the reason. The instance in a failed state is returned only for 24 hours after the\n   CreateInstance API was invoked.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Returns the current state of the specified instance identifier. It tracks the instance while\n   it is being created and returns an error status if applicable. </p>\n         <p>If an instance is not created successfully, the instance status reason field returns details\n   relevant to the reason. The instance in a failed state is returned only for 24 hours after the\n   CreateInstance API was invoked.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/instance/{InstanceId}",
@@ -2360,7 +2526,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified instance attribute.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Describes the specified instance attribute.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/instance/{InstanceId}/attribute/{AttributeType}",
@@ -2450,7 +2616,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the current storage configurations for the specified resource type, association\n   ID, and instance ID.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Retrieves the current storage configurations for the specified resource type, association\n   ID, and instance ID.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/instance/{InstanceId}/storage-config/{AssociationId}",
@@ -2494,6 +2660,72 @@
                     "target": "com.amazonaws.connect#InstanceStorageConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>A valid storage type.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeQuickConnect": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DescribeQuickConnectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DescribeQuickConnectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Describes the quick connect.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/quick-connects/{InstanceId}/{QuickConnectId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeQuickConnectRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuickConnectId": {
+                    "target": "com.amazonaws.connect#QuickConnectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the quick connect.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeQuickConnectResponse": {
+            "type": "structure",
+            "members": {
+                "QuickConnect": {
+                    "target": "com.amazonaws.connect#QuickConnect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the quick connect.</p>"
                     }
                 }
             }
@@ -2865,7 +3097,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Revokes access to integrated applications from Amazon Connect.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Revokes access to integrated applications from Amazon Connect.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/instance/{InstanceId}/approved-origin",
@@ -2917,7 +3149,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the storage type configurations for the specified resource type and association\n   ID.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Removes the storage type configurations for the specified resource type and association\n   ID.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/instance/{InstanceId}/storage-config/{AssociationId}",
@@ -2977,7 +3209,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove the Lambda function from the drop-down options available in the relevant contact flow\n   blocks.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Remove the Lambda function from the drop-down options available in the relevant contact flow\n   blocks.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/instance/{InstanceId}/lambda-function",
@@ -3029,7 +3261,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Revokes authorization from the specified instance to access the specified Amazon Lex bot.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Revokes authorization from the specified instance to access the specified Amazon Lex bot.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/instance/{InstanceId}/lex-bot",
@@ -3148,7 +3380,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified security key.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Deletes the specified security key.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/instance/{InstanceId}/security-key/{AssociationId}",
@@ -4726,7 +4958,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a paginated list of all approved origins associated with the instance.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Returns a paginated list of all approved origins associated with the instance.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/instance/{InstanceId}/approved-origins",
@@ -5314,7 +5546,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a paginated list of all the Lambda functions that show up in the drop-down options\n   in the relevant contact flow blocks.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Returns a paginated list of all the Lambda functions that show up in the drop-down options\n   in the relevant contact flow blocks.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/instance/{InstanceId}/lambda-functions",
@@ -5399,7 +5631,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a paginated list of all the Amazon Lex bots currently associated with the\n   instance.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Returns a paginated list of all the Amazon Lex bots currently associated with the\n   instance.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/instance/{InstanceId}/lex-bots",
@@ -5732,6 +5964,98 @@
                 }
             }
         },
+        "com.amazonaws.connect#ListQuickConnects": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListQuickConnectsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListQuickConnectsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Provides information about the quick connects for the specified Amazon Connect instance. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/quick-connects/{InstanceId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "QuickConnectSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListQuickConnectsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult1000",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximimum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "QuickConnectTypes": {
+                    "target": "com.amazonaws.connect#QuickConnectTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are\n   prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).</p>",
+                        "smithy.api#httpQuery": "QuickConnectTypes"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ListQuickConnectsResponse": {
+            "type": "structure",
+            "members": {
+                "QuickConnectSummaryList": {
+                    "target": "com.amazonaws.connect#QuickConnectSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the quick connects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#ListRoutingProfileQueues": {
             "type": "operation",
             "input": {
@@ -5936,7 +6260,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a paginated list of all security keys associated with the instance.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Returns a paginated list of all security keys associated with the instance.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/instance/{InstanceId}/security-keys",
@@ -7556,6 +7880,21 @@
         "com.amazonaws.connect#PhoneNumberId": {
             "type": "string"
         },
+        "com.amazonaws.connect#PhoneNumberQuickConnectConfig": {
+            "type": "structure",
+            "members": {
+                "PhoneNumber": {
+                    "target": "com.amazonaws.connect#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number in E.164 format.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a phone number for a quick connect.</p>"
+            }
+        },
         "com.amazonaws.connect#PhoneNumberSummary": {
             "type": "structure",
             "members": {
@@ -7757,6 +8096,28 @@
                 }
             }
         },
+        "com.amazonaws.connect#QueueQuickConnectConfig": {
+            "type": "structure",
+            "members": {
+                "QueueId": {
+                    "target": "com.amazonaws.connect#QueueId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the queue.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactFlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a queue for a quick connect. The contact flow must be of type Transfer to Queue.</p>"
+            }
+        },
         "com.amazonaws.connect#QueueReference": {
             "type": "structure",
             "members": {
@@ -7851,6 +8212,173 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#QuickConnect": {
+            "type": "structure",
+            "members": {
+                "QuickConnectARN": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the quick connect.</p>"
+                    }
+                },
+                "QuickConnectId": {
+                    "target": "com.amazonaws.connect#QuickConnectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the quick connect.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#QuickConnectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the quick connect.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#QuickConnectDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description.</p>"
+                    }
+                },
+                "QuickConnectConfig": {
+                    "target": "com.amazonaws.connect#QuickConnectConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the quick connect.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a quick connect.</p>"
+            }
+        },
+        "com.amazonaws.connect#QuickConnectConfig": {
+            "type": "structure",
+            "members": {
+                "QuickConnectType": {
+                    "target": "com.amazonaws.connect#QuickConnectType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are\n   prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).\n   </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserConfig": {
+                    "target": "com.amazonaws.connect#UserQuickConnectConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user configuration. This is required only if QuickConnectType is USER.</p>"
+                    }
+                },
+                "QueueConfig": {
+                    "target": "com.amazonaws.connect#QueueQuickConnectConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The queue configuration. This is required only if QuickConnectType is QUEUE.</p>"
+                    }
+                },
+                "PhoneConfig": {
+                    "target": "com.amazonaws.connect#PhoneNumberQuickConnectConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration settings for a quick connect.</p>"
+            }
+        },
+        "com.amazonaws.connect#QuickConnectDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.connect#QuickConnectId": {
+            "type": "string"
+        },
+        "com.amazonaws.connect#QuickConnectName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 127
+                }
+            }
+        },
+        "com.amazonaws.connect#QuickConnectSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#QuickConnectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the quick connect.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN).</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#QuickConnectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name.</p>"
+                    }
+                },
+                "QuickConnectType": {
+                    "target": "com.amazonaws.connect#QuickConnectType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are\n   prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a quick connect.</p>"
+            }
+        },
+        "com.amazonaws.connect#QuickConnectSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#QuickConnectSummary"
+            }
+        },
+        "com.amazonaws.connect#QuickConnectType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "USER",
+                        "name": "USER"
+                    },
+                    {
+                        "value": "QUEUE",
+                        "name": "QUEUE"
+                    },
+                    {
+                        "value": "PHONE_NUMBER",
+                        "name": "PHONE_NUMBER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connect#QuickConnectTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#QuickConnectType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
                 }
             }
         },
@@ -9097,7 +9625,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource.</p>\n         <p>The supported resource types are users, routing profiles, and contact flows.</p>\n         <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based\n    Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource.</p>\n         <p>The supported resource types are users, routing profiles, quick connects, and contact flows.</p>\n         <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based\n    Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}",
@@ -9568,6 +10096,129 @@
                     "target": "com.amazonaws.connect#InstanceStorageConfig",
                     "traits": {
                         "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateQuickConnectConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateQuickConnectConfigRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Updates the configuration settings for the specified quick connect.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/quick-connects/{InstanceId}/{QuickConnectId}/config",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateQuickConnectConfigRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuickConnectId": {
+                    "target": "com.amazonaws.connect#QuickConnectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the quick connect.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuickConnectConfig": {
+                    "target": "com.amazonaws.connect#QuickConnectConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the configuration settings for the quick connect.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateQuickConnectName": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateQuickConnectNameRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Updates the name and description of a quick connect. The request accepts the following data\n   in JSON format. At least Name or Description must be provided.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/quick-connects/{InstanceId}/{QuickConnectId}/name",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateQuickConnectNameRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuickConnectId": {
+                    "target": "com.amazonaws.connect#QuickConnectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the quick connect.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#QuickConnectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the quick connect.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#QuickConnectDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the quick connect.</p>"
                     }
                 }
             }
@@ -10419,6 +11070,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the phone configuration settings for a user.</p>"
+            }
+        },
+        "com.amazonaws.connect#UserQuickConnectConfig": {
+            "type": "structure",
+            "members": {
+                "UserId": {
+                    "target": "com.amazonaws.connect#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactFlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the quick connect configuration settings for a user. The contact flow must be of type Transfer to Agent.</p>"
             }
         },
         "com.amazonaws.connect#UserSummary": {

@@ -191,16 +191,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "EC2"
+                        "value": "EC2",
+                        "name": "EC2"
                     },
                     {
-                        "value": "CODE_DEPLOY"
+                        "value": "CODE_DEPLOY",
+                        "name": "CODE_DEPLOY"
                     },
                     {
-                        "value": "HEALTH"
+                        "value": "HEALTH",
+                        "name": "HEALTH"
                     },
                     {
-                        "value": "RDS"
+                        "value": "RDS",
+                        "name": "RDS"
                     }
                 ]
             }
@@ -304,16 +308,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CLOUDWATCH_ALARM"
+                        "value": "CLOUDWATCH_ALARM",
+                        "name": "CLOUDWATCH_ALARM"
                     },
                     {
-                        "value": "CLOUDWATCH_LOG"
+                        "value": "CLOUDWATCH_LOG",
+                        "name": "CLOUDWATCH_LOG"
                     },
                     {
-                        "value": "CLOUDFORMATION"
+                        "value": "CLOUDFORMATION",
+                        "name": "CLOUDFORMATION"
                     },
                     {
-                        "value": "SSM_ASSOCIATION"
+                        "value": "SSM_ASSOCIATION",
+                        "name": "SSM_ASSOCIATION"
                     }
                 ]
             }
@@ -323,13 +331,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "INFO"
+                        "value": "INFO",
+                        "name": "INFO"
                     },
                     {
-                        "value": "WARN"
+                        "value": "WARN",
+                        "name": "WARN"
                     },
                     {
-                        "value": "ERROR"
+                        "value": "ERROR",
+                        "name": "ERROR"
                     }
                 ]
             }
@@ -1295,7 +1306,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "INSIGHTS_FEEDBACK"
+                        "value": "INSIGHTS_FEEDBACK",
+                        "name": "INSIGHTS_FEEDBACK"
                     }
                 ]
             }
@@ -1305,13 +1317,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "NOT_SPECIFIED"
+                        "value": "NOT_SPECIFIED",
+                        "name": "NOT_SPECIFIED"
                     },
                     {
-                        "value": "USEFUL"
+                        "value": "USEFUL",
+                        "name": "USEFUL"
                     },
                     {
-                        "value": "NOT_USEFUL"
+                        "value": "NOT_USEFUL",
+                        "name": "NOT_USEFUL"
                     }
                 ]
             }
@@ -1851,13 +1866,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ERROR"
+                        "value": "ERROR",
+                        "name": "ERROR"
                     },
                     {
-                        "value": "WARN"
+                        "value": "WARN",
+                        "name": "WARN"
                     },
                     {
-                        "value": "INFO"
+                        "value": "INFO",
+                        "name": "INFO"
                     }
                 ]
             }
@@ -2288,10 +2306,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "WINDOWS"
+                        "value": "WINDOWS",
+                        "name": "WINDOWS"
                     },
                     {
-                        "value": "LINUX"
+                        "value": "LINUX",
+                        "name": "LINUX"
                     }
                 ]
             }
@@ -2489,13 +2509,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Low"
+                        "value": "Low",
+                        "name": "Low"
                     },
                     {
-                        "value": "Medium"
+                        "value": "Medium",
+                        "name": "Medium"
                     },
                     {
-                        "value": "High"
+                        "value": "High",
+                        "name": "High"
                     }
                 ]
             }
@@ -2526,13 +2549,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "IGNORE"
+                        "value": "IGNORE",
+                        "name": "IGNORE"
                     },
                     {
-                        "value": "RESOLVED"
+                        "value": "RESOLVED",
+                        "name": "RESOLVED"
                     },
                     {
-                        "value": "PENDING"
+                        "value": "PENDING",
+                        "name": "PENDING"
                     }
                 ]
             }
@@ -2667,40 +2693,52 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CUSTOM"
+                        "value": "CUSTOM",
+                        "name": "CUSTOM"
                     },
                     {
-                        "value": "DEFAULT"
+                        "value": "DEFAULT",
+                        "name": "DEFAULT"
                     },
                     {
-                        "value": "DOT_NET_CORE"
+                        "value": "DOT_NET_CORE",
+                        "name": "DOT_NET_CORE"
                     },
                     {
-                        "value": "DOT_NET_WORKER"
+                        "value": "DOT_NET_WORKER",
+                        "name": "DOT_NET_WORKER"
                     },
                     {
-                        "value": "DOT_NET_WEB_TIER"
+                        "value": "DOT_NET_WEB_TIER",
+                        "name": "DOT_NET_WEB_TIER"
                     },
                     {
-                        "value": "DOT_NET_WEB"
+                        "value": "DOT_NET_WEB",
+                        "name": "DOT_NET_WEB"
                     },
                     {
-                        "value": "SQL_SERVER"
+                        "value": "SQL_SERVER",
+                        "name": "SQL_SERVER"
                     },
                     {
-                        "value": "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP"
+                        "value": "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP",
+                        "name": "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP"
                     },
                     {
-                        "value": "MYSQL"
+                        "value": "MYSQL",
+                        "name": "MYSQL"
                     },
                     {
-                        "value": "POSTGRESQL"
+                        "value": "POSTGRESQL",
+                        "name": "POSTGRESQL"
                     },
                     {
-                        "value": "JAVA_JMX"
+                        "value": "JAVA_JMX",
+                        "name": "JAVA_JMX"
                     },
                     {
-                        "value": "ORACLE"
+                        "value": "ORACLE",
+                        "name": "ORACLE"
                     }
                 ],
                 "smithy.api#length": {

@@ -174,10 +174,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CNY"
+                        "value": "CNY",
+                        "name": "CNY"
                     },
                     {
-                        "value": "USD"
+                        "value": "USD",
+                        "name": "USD"
                     }
                 ]
             }

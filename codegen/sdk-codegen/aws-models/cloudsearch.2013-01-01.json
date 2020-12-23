@@ -168,16 +168,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "none"
+                        "value": "none",
+                        "name": "none"
                     },
                     {
-                        "value": "minimal"
+                        "value": "minimal",
+                        "name": "minimal"
                     },
                     {
-                        "value": "light"
+                        "value": "light",
+                        "name": "light"
                     },
                     {
-                        "value": "full"
+                        "value": "full",
+                        "name": "full"
                     }
                 ]
             }
@@ -249,109 +253,144 @@
                 "smithy.api#documentation": "<p>An <a href=\"http://tools.ietf.org/html/rfc4646\" target=\"_blank\">IETF RFC 4646</a> language code or <code>mul</code>  for multiple languages.</p>",
                 "smithy.api#enum": [
                     {
-                        "value": "ar"
+                        "value": "ar",
+                        "name": "ar"
                     },
                     {
-                        "value": "bg"
+                        "value": "bg",
+                        "name": "bg"
                     },
                     {
-                        "value": "ca"
+                        "value": "ca",
+                        "name": "ca"
                     },
                     {
-                        "value": "cs"
+                        "value": "cs",
+                        "name": "cs"
                     },
                     {
-                        "value": "da"
+                        "value": "da",
+                        "name": "da"
                     },
                     {
-                        "value": "de"
+                        "value": "de",
+                        "name": "de"
                     },
                     {
-                        "value": "el"
+                        "value": "el",
+                        "name": "el"
                     },
                     {
-                        "value": "en"
+                        "value": "en",
+                        "name": "en"
                     },
                     {
-                        "value": "es"
+                        "value": "es",
+                        "name": "es"
                     },
                     {
-                        "value": "eu"
+                        "value": "eu",
+                        "name": "eu"
                     },
                     {
-                        "value": "fa"
+                        "value": "fa",
+                        "name": "fa"
                     },
                     {
-                        "value": "fi"
+                        "value": "fi",
+                        "name": "fi"
                     },
                     {
-                        "value": "fr"
+                        "value": "fr",
+                        "name": "fr"
                     },
                     {
-                        "value": "ga"
+                        "value": "ga",
+                        "name": "ga"
                     },
                     {
-                        "value": "gl"
+                        "value": "gl",
+                        "name": "gl"
                     },
                     {
-                        "value": "he"
+                        "value": "he",
+                        "name": "he"
                     },
                     {
-                        "value": "hi"
+                        "value": "hi",
+                        "name": "hi"
                     },
                     {
-                        "value": "hu"
+                        "value": "hu",
+                        "name": "hu"
                     },
                     {
-                        "value": "hy"
+                        "value": "hy",
+                        "name": "hy"
                     },
                     {
-                        "value": "id"
+                        "value": "id",
+                        "name": "id"
                     },
                     {
-                        "value": "it"
+                        "value": "it",
+                        "name": "it"
                     },
                     {
-                        "value": "ja"
+                        "value": "ja",
+                        "name": "ja"
                     },
                     {
-                        "value": "ko"
+                        "value": "ko",
+                        "name": "ko"
                     },
                     {
-                        "value": "lv"
+                        "value": "lv",
+                        "name": "lv"
                     },
                     {
-                        "value": "mul"
+                        "value": "mul",
+                        "name": "mul"
                     },
                     {
-                        "value": "nl"
+                        "value": "nl",
+                        "name": "nl"
                     },
                     {
-                        "value": "no"
+                        "value": "no",
+                        "name": "no"
                     },
                     {
-                        "value": "pt"
+                        "value": "pt",
+                        "name": "pt"
                     },
                     {
-                        "value": "ro"
+                        "value": "ro",
+                        "name": "ro"
                     },
                     {
-                        "value": "ru"
+                        "value": "ru",
+                        "name": "ru"
                     },
                     {
-                        "value": "sv"
+                        "value": "sv",
+                        "name": "sv"
                     },
                     {
-                        "value": "th"
+                        "value": "th",
+                        "name": "th"
                     },
                     {
-                        "value": "tr"
+                        "value": "tr",
+                        "name": "tr"
                     },
                     {
-                        "value": "zh-Hans"
+                        "value": "zh-Hans",
+                        "name": "zh_Hans"
                     },
                     {
-                        "value": "zh-Hant"
+                        "value": "zh-Hant",
+                        "name": "zh_Hant"
                     }
                 ]
             }
@@ -2268,37 +2307,48 @@
                 "smithy.api#documentation": "<p>The type of field. The valid options for a field depend on the field type. For more information about the supported field types, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html\" target=\"_blank\">Configuring Index Fields</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>",
                 "smithy.api#enum": [
                     {
-                        "value": "int"
+                        "value": "int",
+                        "name": "int"
                     },
                     {
-                        "value": "double"
+                        "value": "double",
+                        "name": "double"
                     },
                     {
-                        "value": "literal"
+                        "value": "literal",
+                        "name": "literal"
                     },
                     {
-                        "value": "text"
+                        "value": "text",
+                        "name": "text"
                     },
                     {
-                        "value": "date"
+                        "value": "date",
+                        "name": "date"
                     },
                     {
-                        "value": "latlon"
+                        "value": "latlon",
+                        "name": "latlon"
                     },
                     {
-                        "value": "int-array"
+                        "value": "int-array",
+                        "name": "int_array"
                     },
                     {
-                        "value": "double-array"
+                        "value": "double-array",
+                        "name": "double_array"
                     },
                     {
-                        "value": "literal-array"
+                        "value": "literal-array",
+                        "name": "literal_array"
                     },
                     {
-                        "value": "text-array"
+                        "value": "text-array",
+                        "name": "text_array"
                     },
                     {
-                        "value": "date-array"
+                        "value": "date-array",
+                        "name": "date_array"
                     }
                 ]
             }
@@ -2637,16 +2687,20 @@
                 "smithy.api#documentation": "<p>The state of processing a change to an option. One of:</p>\n    <ul>\n      <li>RequiresIndexDocuments: The option's latest value will not be deployed until  <a>IndexDocuments</a> has been called and indexing is complete.</li>\n      <li>Processing: The option's latest value is in the process of being activated.</li>\n      <li>Active: The option's latest value is fully deployed. </li>\n      <li>FailedToValidate: The option value is not compatible with the domain's data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents.</li>\n    </ul>",
                 "smithy.api#enum": [
                     {
-                        "value": "RequiresIndexDocuments"
+                        "value": "RequiresIndexDocuments",
+                        "name": "RequiresIndexDocuments"
                     },
                     {
-                        "value": "Processing"
+                        "value": "Processing",
+                        "name": "Processing"
                     },
                     {
-                        "value": "Active"
+                        "value": "Active",
+                        "name": "Active"
                     },
                     {
-                        "value": "FailedToValidate"
+                        "value": "FailedToValidate",
+                        "name": "FailedToValidate"
                     }
                 ]
             }
@@ -2707,28 +2761,36 @@
                 "smithy.api#documentation": "<p>The instance type (such as <code>search.m1.small</code>) on which an index partition is hosted.</p>",
                 "smithy.api#enum": [
                     {
-                        "value": "search.m1.small"
+                        "value": "search.m1.small",
+                        "name": "search_m1_small"
                     },
                     {
-                        "value": "search.m1.large"
+                        "value": "search.m1.large",
+                        "name": "search_m1_large"
                     },
                     {
-                        "value": "search.m2.xlarge"
+                        "value": "search.m2.xlarge",
+                        "name": "search_m2_xlarge"
                     },
                     {
-                        "value": "search.m2.2xlarge"
+                        "value": "search.m2.2xlarge",
+                        "name": "search_m2_2xlarge"
                     },
                     {
-                        "value": "search.m3.medium"
+                        "value": "search.m3.medium",
+                        "name": "search_m3_medium"
                     },
                     {
-                        "value": "search.m3.large"
+                        "value": "search.m3.large",
+                        "name": "search_m3_large"
                     },
                     {
-                        "value": "search.m3.xlarge"
+                        "value": "search.m3.xlarge",
+                        "name": "search_m3_xlarge"
                     },
                     {
-                        "value": "search.m3.2xlarge"
+                        "value": "search.m3.2xlarge",
+                        "name": "search_m3_2xlarge"
                     }
                 ]
             }
@@ -2869,13 +2931,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "none"
+                        "value": "none",
+                        "name": "none"
                     },
                     {
-                        "value": "low"
+                        "value": "low",
+                        "name": "low"
                     },
                     {
-                        "value": "high"
+                        "value": "high",
+                        "name": "high"
                     }
                 ]
             }

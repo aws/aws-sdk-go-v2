@@ -359,16 +359,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "START_TO_CLOSE"
+                        "value": "START_TO_CLOSE",
+                        "name": "START_TO_CLOSE"
                     },
                     {
-                        "value": "SCHEDULE_TO_START"
+                        "value": "SCHEDULE_TO_START",
+                        "name": "SCHEDULE_TO_START"
                     },
                     {
-                        "value": "SCHEDULE_TO_CLOSE"
+                        "value": "SCHEDULE_TO_CLOSE",
+                        "name": "SCHEDULE_TO_CLOSE"
                     },
                     {
-                        "value": "HEARTBEAT"
+                        "value": "HEARTBEAT",
+                        "name": "HEARTBEAT"
                     }
                 ]
             }
@@ -558,10 +562,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "TIMER_ID_UNKNOWN"
+                        "value": "TIMER_ID_UNKNOWN",
+                        "name": "TIMER_ID_UNKNOWN"
                     },
                     {
-                        "value": "OPERATION_NOT_PERMITTED"
+                        "value": "OPERATION_NOT_PERMITTED",
+                        "name": "OPERATION_NOT_PERMITTED"
                     }
                 ]
             }
@@ -614,10 +620,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "UNHANDLED_DECISION"
+                        "value": "UNHANDLED_DECISION",
+                        "name": "UNHANDLED_DECISION"
                     },
                     {
-                        "value": "OPERATION_NOT_PERMITTED"
+                        "value": "OPERATION_NOT_PERMITTED",
+                        "name": "OPERATION_NOT_PERMITTED"
                     }
                 ]
             }
@@ -661,13 +669,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "TERMINATE"
+                        "value": "TERMINATE",
+                        "name": "TERMINATE"
                     },
                     {
-                        "value": "REQUEST_CANCEL"
+                        "value": "REQUEST_CANCEL",
+                        "name": "REQUEST_CANCEL"
                     },
                     {
-                        "value": "ABANDON"
+                        "value": "ABANDON",
+                        "name": "ABANDON"
                     }
                 ]
             }
@@ -917,22 +928,28 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "COMPLETED"
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     },
                     {
-                        "value": "CANCELED"
+                        "value": "CANCELED",
+                        "name": "CANCELED"
                     },
                     {
-                        "value": "TERMINATED"
+                        "value": "TERMINATED",
+                        "name": "TERMINATED"
                     },
                     {
-                        "value": "CONTINUED_AS_NEW"
+                        "value": "CONTINUED_AS_NEW",
+                        "name": "CONTINUED_AS_NEW"
                     },
                     {
-                        "value": "TIMED_OUT"
+                        "value": "TIMED_OUT",
+                        "name": "TIMED_OUT"
                     }
                 ]
             }
@@ -971,10 +988,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "UNHANDLED_DECISION"
+                        "value": "UNHANDLED_DECISION",
+                        "name": "UNHANDLED_DECISION"
                     },
                     {
-                        "value": "OPERATION_NOT_PERMITTED"
+                        "value": "OPERATION_NOT_PERMITTED",
+                        "name": "OPERATION_NOT_PERMITTED"
                     }
                 ]
             }
@@ -1068,31 +1087,40 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "UNHANDLED_DECISION"
+                        "value": "UNHANDLED_DECISION",
+                        "name": "UNHANDLED_DECISION"
                     },
                     {
-                        "value": "WORKFLOW_TYPE_DEPRECATED"
+                        "value": "WORKFLOW_TYPE_DEPRECATED",
+                        "name": "WORKFLOW_TYPE_DEPRECATED"
                     },
                     {
-                        "value": "WORKFLOW_TYPE_DOES_NOT_EXIST"
+                        "value": "WORKFLOW_TYPE_DOES_NOT_EXIST",
+                        "name": "WORKFLOW_TYPE_DOES_NOT_EXIST"
                     },
                     {
-                        "value": "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED"
+                        "value": "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED",
+                        "name": "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED"
                     },
                     {
-                        "value": "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED"
+                        "value": "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED",
+                        "name": "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED"
                     },
                     {
-                        "value": "DEFAULT_TASK_LIST_UNDEFINED"
+                        "value": "DEFAULT_TASK_LIST_UNDEFINED",
+                        "name": "DEFAULT_TASK_LIST_UNDEFINED"
                     },
                     {
-                        "value": "DEFAULT_CHILD_POLICY_UNDEFINED"
+                        "value": "DEFAULT_CHILD_POLICY_UNDEFINED",
+                        "name": "DEFAULT_CHILD_POLICY_UNDEFINED"
                     },
                     {
-                        "value": "CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED"
+                        "value": "CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED",
+                        "name": "CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED"
                     },
                     {
-                        "value": "OPERATION_NOT_PERMITTED"
+                        "value": "OPERATION_NOT_PERMITTED",
+                        "name": "OPERATION_NOT_PERMITTED"
                     }
                 ]
             }
@@ -1603,7 +1631,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "START_TO_CLOSE"
+                        "value": "START_TO_CLOSE",
+                        "name": "START_TO_CLOSE"
                     }
                 ]
             }
@@ -1613,43 +1642,56 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ScheduleActivityTask"
+                        "value": "ScheduleActivityTask",
+                        "name": "ScheduleActivityTask"
                     },
                     {
-                        "value": "RequestCancelActivityTask"
+                        "value": "RequestCancelActivityTask",
+                        "name": "RequestCancelActivityTask"
                     },
                     {
-                        "value": "CompleteWorkflowExecution"
+                        "value": "CompleteWorkflowExecution",
+                        "name": "CompleteWorkflowExecution"
                     },
                     {
-                        "value": "FailWorkflowExecution"
+                        "value": "FailWorkflowExecution",
+                        "name": "FailWorkflowExecution"
                     },
                     {
-                        "value": "CancelWorkflowExecution"
+                        "value": "CancelWorkflowExecution",
+                        "name": "CancelWorkflowExecution"
                     },
                     {
-                        "value": "ContinueAsNewWorkflowExecution"
+                        "value": "ContinueAsNewWorkflowExecution",
+                        "name": "ContinueAsNewWorkflowExecution"
                     },
                     {
-                        "value": "RecordMarker"
+                        "value": "RecordMarker",
+                        "name": "RecordMarker"
                     },
                     {
-                        "value": "StartTimer"
+                        "value": "StartTimer",
+                        "name": "StartTimer"
                     },
                     {
-                        "value": "CancelTimer"
+                        "value": "CancelTimer",
+                        "name": "CancelTimer"
                     },
                     {
-                        "value": "SignalExternalWorkflowExecution"
+                        "value": "SignalExternalWorkflowExecution",
+                        "name": "SignalExternalWorkflowExecution"
                     },
                     {
-                        "value": "RequestCancelExternalWorkflowExecution"
+                        "value": "RequestCancelExternalWorkflowExecution",
+                        "name": "RequestCancelExternalWorkflowExecution"
                     },
                     {
-                        "value": "StartChildWorkflowExecution"
+                        "value": "StartChildWorkflowExecution",
+                        "name": "StartChildWorkflowExecution"
                     },
                     {
-                        "value": "ScheduleLambdaFunction"
+                        "value": "ScheduleLambdaFunction",
+                        "name": "ScheduleLambdaFunction"
                     }
                 ]
             }
@@ -2109,166 +2151,220 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "WorkflowExecutionStarted"
+                        "value": "WorkflowExecutionStarted",
+                        "name": "WorkflowExecutionStarted"
                     },
                     {
-                        "value": "WorkflowExecutionCancelRequested"
+                        "value": "WorkflowExecutionCancelRequested",
+                        "name": "WorkflowExecutionCancelRequested"
                     },
                     {
-                        "value": "WorkflowExecutionCompleted"
+                        "value": "WorkflowExecutionCompleted",
+                        "name": "WorkflowExecutionCompleted"
                     },
                     {
-                        "value": "CompleteWorkflowExecutionFailed"
+                        "value": "CompleteWorkflowExecutionFailed",
+                        "name": "CompleteWorkflowExecutionFailed"
                     },
                     {
-                        "value": "WorkflowExecutionFailed"
+                        "value": "WorkflowExecutionFailed",
+                        "name": "WorkflowExecutionFailed"
                     },
                     {
-                        "value": "FailWorkflowExecutionFailed"
+                        "value": "FailWorkflowExecutionFailed",
+                        "name": "FailWorkflowExecutionFailed"
                     },
                     {
-                        "value": "WorkflowExecutionTimedOut"
+                        "value": "WorkflowExecutionTimedOut",
+                        "name": "WorkflowExecutionTimedOut"
                     },
                     {
-                        "value": "WorkflowExecutionCanceled"
+                        "value": "WorkflowExecutionCanceled",
+                        "name": "WorkflowExecutionCanceled"
                     },
                     {
-                        "value": "CancelWorkflowExecutionFailed"
+                        "value": "CancelWorkflowExecutionFailed",
+                        "name": "CancelWorkflowExecutionFailed"
                     },
                     {
-                        "value": "WorkflowExecutionContinuedAsNew"
+                        "value": "WorkflowExecutionContinuedAsNew",
+                        "name": "WorkflowExecutionContinuedAsNew"
                     },
                     {
-                        "value": "ContinueAsNewWorkflowExecutionFailed"
+                        "value": "ContinueAsNewWorkflowExecutionFailed",
+                        "name": "ContinueAsNewWorkflowExecutionFailed"
                     },
                     {
-                        "value": "WorkflowExecutionTerminated"
+                        "value": "WorkflowExecutionTerminated",
+                        "name": "WorkflowExecutionTerminated"
                     },
                     {
-                        "value": "DecisionTaskScheduled"
+                        "value": "DecisionTaskScheduled",
+                        "name": "DecisionTaskScheduled"
                     },
                     {
-                        "value": "DecisionTaskStarted"
+                        "value": "DecisionTaskStarted",
+                        "name": "DecisionTaskStarted"
                     },
                     {
-                        "value": "DecisionTaskCompleted"
+                        "value": "DecisionTaskCompleted",
+                        "name": "DecisionTaskCompleted"
                     },
                     {
-                        "value": "DecisionTaskTimedOut"
+                        "value": "DecisionTaskTimedOut",
+                        "name": "DecisionTaskTimedOut"
                     },
                     {
-                        "value": "ActivityTaskScheduled"
+                        "value": "ActivityTaskScheduled",
+                        "name": "ActivityTaskScheduled"
                     },
                     {
-                        "value": "ScheduleActivityTaskFailed"
+                        "value": "ScheduleActivityTaskFailed",
+                        "name": "ScheduleActivityTaskFailed"
                     },
                     {
-                        "value": "ActivityTaskStarted"
+                        "value": "ActivityTaskStarted",
+                        "name": "ActivityTaskStarted"
                     },
                     {
-                        "value": "ActivityTaskCompleted"
+                        "value": "ActivityTaskCompleted",
+                        "name": "ActivityTaskCompleted"
                     },
                     {
-                        "value": "ActivityTaskFailed"
+                        "value": "ActivityTaskFailed",
+                        "name": "ActivityTaskFailed"
                     },
                     {
-                        "value": "ActivityTaskTimedOut"
+                        "value": "ActivityTaskTimedOut",
+                        "name": "ActivityTaskTimedOut"
                     },
                     {
-                        "value": "ActivityTaskCanceled"
+                        "value": "ActivityTaskCanceled",
+                        "name": "ActivityTaskCanceled"
                     },
                     {
-                        "value": "ActivityTaskCancelRequested"
+                        "value": "ActivityTaskCancelRequested",
+                        "name": "ActivityTaskCancelRequested"
                     },
                     {
-                        "value": "RequestCancelActivityTaskFailed"
+                        "value": "RequestCancelActivityTaskFailed",
+                        "name": "RequestCancelActivityTaskFailed"
                     },
                     {
-                        "value": "WorkflowExecutionSignaled"
+                        "value": "WorkflowExecutionSignaled",
+                        "name": "WorkflowExecutionSignaled"
                     },
                     {
-                        "value": "MarkerRecorded"
+                        "value": "MarkerRecorded",
+                        "name": "MarkerRecorded"
                     },
                     {
-                        "value": "RecordMarkerFailed"
+                        "value": "RecordMarkerFailed",
+                        "name": "RecordMarkerFailed"
                     },
                     {
-                        "value": "TimerStarted"
+                        "value": "TimerStarted",
+                        "name": "TimerStarted"
                     },
                     {
-                        "value": "StartTimerFailed"
+                        "value": "StartTimerFailed",
+                        "name": "StartTimerFailed"
                     },
                     {
-                        "value": "TimerFired"
+                        "value": "TimerFired",
+                        "name": "TimerFired"
                     },
                     {
-                        "value": "TimerCanceled"
+                        "value": "TimerCanceled",
+                        "name": "TimerCanceled"
                     },
                     {
-                        "value": "CancelTimerFailed"
+                        "value": "CancelTimerFailed",
+                        "name": "CancelTimerFailed"
                     },
                     {
-                        "value": "StartChildWorkflowExecutionInitiated"
+                        "value": "StartChildWorkflowExecutionInitiated",
+                        "name": "StartChildWorkflowExecutionInitiated"
                     },
                     {
-                        "value": "StartChildWorkflowExecutionFailed"
+                        "value": "StartChildWorkflowExecutionFailed",
+                        "name": "StartChildWorkflowExecutionFailed"
                     },
                     {
-                        "value": "ChildWorkflowExecutionStarted"
+                        "value": "ChildWorkflowExecutionStarted",
+                        "name": "ChildWorkflowExecutionStarted"
                     },
                     {
-                        "value": "ChildWorkflowExecutionCompleted"
+                        "value": "ChildWorkflowExecutionCompleted",
+                        "name": "ChildWorkflowExecutionCompleted"
                     },
                     {
-                        "value": "ChildWorkflowExecutionFailed"
+                        "value": "ChildWorkflowExecutionFailed",
+                        "name": "ChildWorkflowExecutionFailed"
                     },
                     {
-                        "value": "ChildWorkflowExecutionTimedOut"
+                        "value": "ChildWorkflowExecutionTimedOut",
+                        "name": "ChildWorkflowExecutionTimedOut"
                     },
                     {
-                        "value": "ChildWorkflowExecutionCanceled"
+                        "value": "ChildWorkflowExecutionCanceled",
+                        "name": "ChildWorkflowExecutionCanceled"
                     },
                     {
-                        "value": "ChildWorkflowExecutionTerminated"
+                        "value": "ChildWorkflowExecutionTerminated",
+                        "name": "ChildWorkflowExecutionTerminated"
                     },
                     {
-                        "value": "SignalExternalWorkflowExecutionInitiated"
+                        "value": "SignalExternalWorkflowExecutionInitiated",
+                        "name": "SignalExternalWorkflowExecutionInitiated"
                     },
                     {
-                        "value": "SignalExternalWorkflowExecutionFailed"
+                        "value": "SignalExternalWorkflowExecutionFailed",
+                        "name": "SignalExternalWorkflowExecutionFailed"
                     },
                     {
-                        "value": "ExternalWorkflowExecutionSignaled"
+                        "value": "ExternalWorkflowExecutionSignaled",
+                        "name": "ExternalWorkflowExecutionSignaled"
                     },
                     {
-                        "value": "RequestCancelExternalWorkflowExecutionInitiated"
+                        "value": "RequestCancelExternalWorkflowExecutionInitiated",
+                        "name": "RequestCancelExternalWorkflowExecutionInitiated"
                     },
                     {
-                        "value": "RequestCancelExternalWorkflowExecutionFailed"
+                        "value": "RequestCancelExternalWorkflowExecutionFailed",
+                        "name": "RequestCancelExternalWorkflowExecutionFailed"
                     },
                     {
-                        "value": "ExternalWorkflowExecutionCancelRequested"
+                        "value": "ExternalWorkflowExecutionCancelRequested",
+                        "name": "ExternalWorkflowExecutionCancelRequested"
                     },
                     {
-                        "value": "LambdaFunctionScheduled"
+                        "value": "LambdaFunctionScheduled",
+                        "name": "LambdaFunctionScheduled"
                     },
                     {
-                        "value": "LambdaFunctionStarted"
+                        "value": "LambdaFunctionStarted",
+                        "name": "LambdaFunctionStarted"
                     },
                     {
-                        "value": "LambdaFunctionCompleted"
+                        "value": "LambdaFunctionCompleted",
+                        "name": "LambdaFunctionCompleted"
                     },
                     {
-                        "value": "LambdaFunctionFailed"
+                        "value": "LambdaFunctionFailed",
+                        "name": "LambdaFunctionFailed"
                     },
                     {
-                        "value": "LambdaFunctionTimedOut"
+                        "value": "LambdaFunctionTimedOut",
+                        "name": "LambdaFunctionTimedOut"
                     },
                     {
-                        "value": "ScheduleLambdaFunctionFailed"
+                        "value": "ScheduleLambdaFunctionFailed",
+                        "name": "ScheduleLambdaFunctionFailed"
                     },
                     {
-                        "value": "StartLambdaFunctionFailed"
+                        "value": "StartLambdaFunctionFailed",
+                        "name": "StartLambdaFunctionFailed"
                     }
                 ]
             }
@@ -2278,10 +2374,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "OPEN"
+                        "value": "OPEN",
+                        "name": "OPEN"
                     },
                     {
-                        "value": "CLOSED"
+                        "value": "CLOSED",
+                        "name": "CLOSED"
                     }
                 ]
             }
@@ -2376,10 +2474,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "UNHANDLED_DECISION"
+                        "value": "UNHANDLED_DECISION",
+                        "name": "UNHANDLED_DECISION"
                     },
                     {
-                        "value": "OPERATION_NOT_PERMITTED"
+                        "value": "OPERATION_NOT_PERMITTED",
+                        "name": "OPERATION_NOT_PERMITTED"
                     }
                 ]
             }
@@ -3051,7 +3151,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "START_TO_CLOSE"
+                        "value": "START_TO_CLOSE",
+                        "name": "START_TO_CLOSE"
                     }
                 ]
             }
@@ -3783,7 +3884,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "OPERATION_NOT_PERMITTED"
+                        "value": "OPERATION_NOT_PERMITTED",
+                        "name": "OPERATION_NOT_PERMITTED"
                     }
                 ]
             }
@@ -4058,10 +4160,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "REGISTERED"
+                        "value": "REGISTERED",
+                        "name": "REGISTERED"
                     },
                     {
-                        "value": "DEPRECATED"
+                        "value": "DEPRECATED",
+                        "name": "DEPRECATED"
                     }
                 ]
             }
@@ -4086,10 +4190,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ACTIVITY_ID_UNKNOWN"
+                        "value": "ACTIVITY_ID_UNKNOWN",
+                        "name": "ACTIVITY_ID_UNKNOWN"
                     },
                     {
-                        "value": "OPERATION_NOT_PERMITTED"
+                        "value": "OPERATION_NOT_PERMITTED",
+                        "name": "OPERATION_NOT_PERMITTED"
                     }
                 ]
             }
@@ -4155,13 +4261,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION"
+                        "value": "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION",
+                        "name": "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION"
                     },
                     {
-                        "value": "REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
+                        "value": "REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED",
+                        "name": "REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
                     },
                     {
-                        "value": "OPERATION_NOT_PERMITTED"
+                        "value": "OPERATION_NOT_PERMITTED",
+                        "name": "OPERATION_NOT_PERMITTED"
                     }
                 ]
             }
@@ -4588,37 +4697,48 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ACTIVITY_TYPE_DEPRECATED"
+                        "value": "ACTIVITY_TYPE_DEPRECATED",
+                        "name": "ACTIVITY_TYPE_DEPRECATED"
                     },
                     {
-                        "value": "ACTIVITY_TYPE_DOES_NOT_EXIST"
+                        "value": "ACTIVITY_TYPE_DOES_NOT_EXIST",
+                        "name": "ACTIVITY_TYPE_DOES_NOT_EXIST"
                     },
                     {
-                        "value": "ACTIVITY_ID_ALREADY_IN_USE"
+                        "value": "ACTIVITY_ID_ALREADY_IN_USE",
+                        "name": "ACTIVITY_ID_ALREADY_IN_USE"
                     },
                     {
-                        "value": "OPEN_ACTIVITIES_LIMIT_EXCEEDED"
+                        "value": "OPEN_ACTIVITIES_LIMIT_EXCEEDED",
+                        "name": "OPEN_ACTIVITIES_LIMIT_EXCEEDED"
                     },
                     {
-                        "value": "ACTIVITY_CREATION_RATE_EXCEEDED"
+                        "value": "ACTIVITY_CREATION_RATE_EXCEEDED",
+                        "name": "ACTIVITY_CREATION_RATE_EXCEEDED"
                     },
                     {
-                        "value": "DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED"
+                        "value": "DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED",
+                        "name": "DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED"
                     },
                     {
-                        "value": "DEFAULT_TASK_LIST_UNDEFINED"
+                        "value": "DEFAULT_TASK_LIST_UNDEFINED",
+                        "name": "DEFAULT_TASK_LIST_UNDEFINED"
                     },
                     {
-                        "value": "DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED"
+                        "value": "DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED",
+                        "name": "DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED"
                     },
                     {
-                        "value": "DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED"
+                        "value": "DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED",
+                        "name": "DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED"
                     },
                     {
-                        "value": "DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED"
+                        "value": "DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED",
+                        "name": "DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED"
                     },
                     {
-                        "value": "OPERATION_NOT_PERMITTED"
+                        "value": "OPERATION_NOT_PERMITTED",
+                        "name": "OPERATION_NOT_PERMITTED"
                     }
                 ]
             }
@@ -4704,16 +4824,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ID_ALREADY_IN_USE"
+                        "value": "ID_ALREADY_IN_USE",
+                        "name": "ID_ALREADY_IN_USE"
                     },
                     {
-                        "value": "OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED"
+                        "value": "OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED",
+                        "name": "OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED"
                     },
                     {
-                        "value": "LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED"
+                        "value": "LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED",
+                        "name": "LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED"
                     },
                     {
-                        "value": "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION"
+                        "value": "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION",
+                        "name": "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION"
                     }
                 ]
             }
@@ -4799,13 +4923,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION"
+                        "value": "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION",
+                        "name": "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION"
                     },
                     {
-                        "value": "SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
+                        "value": "SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED",
+                        "name": "SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
                     },
                     {
-                        "value": "OPERATION_NOT_PERMITTED"
+                        "value": "OPERATION_NOT_PERMITTED",
+                        "name": "OPERATION_NOT_PERMITTED"
                     }
                 ]
             }
@@ -5185,37 +5312,48 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "WORKFLOW_TYPE_DOES_NOT_EXIST"
+                        "value": "WORKFLOW_TYPE_DOES_NOT_EXIST",
+                        "name": "WORKFLOW_TYPE_DOES_NOT_EXIST"
                     },
                     {
-                        "value": "WORKFLOW_TYPE_DEPRECATED"
+                        "value": "WORKFLOW_TYPE_DEPRECATED",
+                        "name": "WORKFLOW_TYPE_DEPRECATED"
                     },
                     {
-                        "value": "OPEN_CHILDREN_LIMIT_EXCEEDED"
+                        "value": "OPEN_CHILDREN_LIMIT_EXCEEDED",
+                        "name": "OPEN_CHILDREN_LIMIT_EXCEEDED"
                     },
                     {
-                        "value": "OPEN_WORKFLOWS_LIMIT_EXCEEDED"
+                        "value": "OPEN_WORKFLOWS_LIMIT_EXCEEDED",
+                        "name": "OPEN_WORKFLOWS_LIMIT_EXCEEDED"
                     },
                     {
-                        "value": "CHILD_CREATION_RATE_EXCEEDED"
+                        "value": "CHILD_CREATION_RATE_EXCEEDED",
+                        "name": "CHILD_CREATION_RATE_EXCEEDED"
                     },
                     {
-                        "value": "WORKFLOW_ALREADY_RUNNING"
+                        "value": "WORKFLOW_ALREADY_RUNNING",
+                        "name": "WORKFLOW_ALREADY_RUNNING"
                     },
                     {
-                        "value": "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED"
+                        "value": "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED",
+                        "name": "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED"
                     },
                     {
-                        "value": "DEFAULT_TASK_LIST_UNDEFINED"
+                        "value": "DEFAULT_TASK_LIST_UNDEFINED",
+                        "name": "DEFAULT_TASK_LIST_UNDEFINED"
                     },
                     {
-                        "value": "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED"
+                        "value": "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED",
+                        "name": "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED"
                     },
                     {
-                        "value": "DEFAULT_CHILD_POLICY_UNDEFINED"
+                        "value": "DEFAULT_CHILD_POLICY_UNDEFINED",
+                        "name": "DEFAULT_CHILD_POLICY_UNDEFINED"
                     },
                     {
-                        "value": "OPERATION_NOT_PERMITTED"
+                        "value": "OPERATION_NOT_PERMITTED",
+                        "name": "OPERATION_NOT_PERMITTED"
                     }
                 ]
             }
@@ -5359,7 +5497,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ASSUME_ROLE_FAILED"
+                        "value": "ASSUME_ROLE_FAILED",
+                        "name": "ASSUME_ROLE_FAILED"
                     }
                 ]
             }
@@ -5423,16 +5562,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "TIMER_ID_ALREADY_IN_USE"
+                        "value": "TIMER_ID_ALREADY_IN_USE",
+                        "name": "TIMER_ID_ALREADY_IN_USE"
                     },
                     {
-                        "value": "OPEN_TIMERS_LIMIT_EXCEEDED"
+                        "value": "OPEN_TIMERS_LIMIT_EXCEEDED",
+                        "name": "OPEN_TIMERS_LIMIT_EXCEEDED"
                     },
                     {
-                        "value": "TIMER_CREATION_RATE_EXCEEDED"
+                        "value": "TIMER_CREATION_RATE_EXCEEDED",
+                        "name": "TIMER_CREATION_RATE_EXCEEDED"
                     },
                     {
-                        "value": "OPERATION_NOT_PERMITTED"
+                        "value": "OPERATION_NOT_PERMITTED",
+                        "name": "OPERATION_NOT_PERMITTED"
                     }
                 ]
             }
@@ -6114,7 +6257,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CHILD_POLICY_APPLIED"
+                        "value": "CHILD_POLICY_APPLIED",
+                        "name": "CHILD_POLICY_APPLIED"
                     }
                 ]
             }
@@ -6674,13 +6818,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CHILD_POLICY_APPLIED"
+                        "value": "CHILD_POLICY_APPLIED",
+                        "name": "CHILD_POLICY_APPLIED"
                     },
                     {
-                        "value": "EVENT_LIMIT_EXCEEDED"
+                        "value": "EVENT_LIMIT_EXCEEDED",
+                        "name": "EVENT_LIMIT_EXCEEDED"
                     },
                     {
-                        "value": "OPERATOR_INITIATED"
+                        "value": "OPERATOR_INITIATED",
+                        "name": "OPERATOR_INITIATED"
                     }
                 ]
             }
@@ -6745,7 +6892,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "START_TO_CLOSE"
+                        "value": "START_TO_CLOSE",
+                        "name": "START_TO_CLOSE"
                     }
                 ]
             }

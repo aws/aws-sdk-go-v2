@@ -1,0 +1,925 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.iotfleethub#AWSIoTFleetHub": {
+            "type": "service",
+            "version": "2020-11-03",
+            "operations": [
+                {
+                    "target": "com.amazonaws.iotfleethub#CreateApplication"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#DeleteApplication"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#DescribeApplication"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#ListApplications"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#UpdateApplication"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "IoTFleetHub",
+                    "arnNamespace": "iotfleethub",
+                    "cloudFormationName": "IoTFleetHub",
+                    "cloudTrailEventSource": "iotfleethub.amazonaws.com",
+                    "endpointPrefix": "api.fleethub.iot"
+                },
+                "aws.auth#sigv4": {
+                    "name": "iotfleethub"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>With Fleet Hub for AWS IoT Device Management you can build stand-alone web applications for monitoring the health of your device fleets.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#title": "AWS IoT Fleet Hub"
+            }
+        },
+        "com.amazonaws.iotfleethub#ApplicationState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "CREATE_FAILED",
+                        "name": "CREATE_FAILED"
+                    },
+                    {
+                        "value": "DELETE_FAILED",
+                        "name": "DELETE_FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotfleethub#ApplicationSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotfleethub#ApplicationSummary"
+            }
+        },
+        "com.amazonaws.iotfleethub#ApplicationSummary": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.iotfleethub#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique Id of the web application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationName": {
+                    "target": "com.amazonaws.iotfleethub#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the web application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationDescription": {
+                    "target": "com.amazonaws.iotfleethub#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the web application.</p>"
+                    }
+                },
+                "applicationUrl": {
+                    "target": "com.amazonaws.iotfleethub#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the web application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationCreationDate": {
+                    "target": "com.amazonaws.iotfleethub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date (in Unix epoch time) when the web application was created.</p>"
+                    }
+                },
+                "applicationLastUpdateDate": {
+                    "target": "com.amazonaws.iotfleethub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date (in Unix epoch time) when the web application was last updated.</p>"
+                    }
+                },
+                "applicationState": {
+                    "target": "com.amazonaws.iotfleethub#ApplicationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the web application.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of information about a AWS IoT Device Management web application.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.iotfleethub#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^arn:[!-~]+$"
+            }
+        },
+        "com.amazonaws.iotfleethub#ClientRequestToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.iotfleethub#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotfleethub#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request conflicts with the current state of the resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.iotfleethub#CreateApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotfleethub#CreateApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotfleethub#CreateApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotfleethub#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Fleet Hub for AWS IoT Device Management web application.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/applications",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#CreateApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "applicationName": {
+                    "target": "com.amazonaws.iotfleethub#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the web application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationDescription": {
+                    "target": "com.amazonaws.iotfleethub#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the web application.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.iotfleethub#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. \n      Don't reuse this client token if a new idempotent request is required.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.iotfleethub#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the role that the web application assumes when it interacts with AWS IoT Core.</p>\n         <note>\n            <p>The name of the role must be in the form <code>AWSIotFleetHub_<i>random_string</i>\n               </code>.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.iotfleethub#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of key/value pairs that you can use to manage the web application resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#CreateApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.iotfleethub#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique Id of the web application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationArn": {
+                    "target": "com.amazonaws.iotfleethub#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the web application.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#DeleteApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotfleethub#DeleteApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotfleethub#DeleteApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotfleethub#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a Fleet Hub for AWS IoT Device Management web application.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/applications/{applicationId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#DeleteApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.iotfleethub#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique Id of the web application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.iotfleethub#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. \n      Don't reuse this client token if a new idempotent request is required.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#DeleteApplicationResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotfleethub#DescribeApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotfleethub#DescribeApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotfleethub#DescribeApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotfleethub#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a Fleet Hub for AWS IoT Device Management web application.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/applications/{applicationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#DescribeApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.iotfleethub#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique Id of the web application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#DescribeApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.iotfleethub#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique Id of the web application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationArn": {
+                    "target": "com.amazonaws.iotfleethub#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the web application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationName": {
+                    "target": "com.amazonaws.iotfleethub#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the web application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationDescription": {
+                    "target": "com.amazonaws.iotfleethub#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the web application.</p>"
+                    }
+                },
+                "applicationUrl": {
+                    "target": "com.amazonaws.iotfleethub#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the web application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationState": {
+                    "target": "com.amazonaws.iotfleethub#ApplicationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the web application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationCreationDate": {
+                    "target": "com.amazonaws.iotfleethub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date (in Unix epoch time) when the application was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationLastUpdateDate": {
+                    "target": "com.amazonaws.iotfleethub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date (in Unix epoch time) when the application was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.iotfleethub#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the role that the web application assumes when it interacts with AWS IoT Core.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ssoClientId": {
+                    "target": "com.amazonaws.iotfleethub#SsoClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Id of the single sign-on client that you use to authenticate and authorize users on the web application.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.iotfleethub#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message indicating why the <code>DescribeApplication</code> API failed.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.iotfleethub#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of key/value pairs that you can use to manage the web application resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#Description": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[ -~]*$"
+            }
+        },
+        "com.amazonaws.iotfleethub#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.iotfleethub#Id": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.iotfleethub#InternalFailureException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotfleethub#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An unexpected error has occurred.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.iotfleethub#InvalidRequestException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotfleethub#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request is not valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.iotfleethub#LimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotfleethub#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A limit has been exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 410
+            }
+        },
+        "com.amazonaws.iotfleethub#ListApplications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotfleethub#ListApplicationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotfleethub#ListApplicationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotfleethub#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a list of Fleet Hub for AWS IoT Device Management web applications for the current account.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/applications",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken"
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#ListApplicationsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.iotfleethub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used to get the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#ListApplicationsResponse": {
+            "type": "structure",
+            "members": {
+                "applicationSummaries": {
+                    "target": "com.amazonaws.iotfleethub#ApplicationSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that provide summaries of information about the web applications in the list.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotfleethub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used to get the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotfleethub#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotfleethub#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotfleethub#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags for the specified resource.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.iotfleethub#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.iotfleethub#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags assigned to the resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#Name": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[ -~]*$"
+            }
+        },
+        "com.amazonaws.iotfleethub#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9+/=]+$"
+            }
+        },
+        "com.amazonaws.iotfleethub#ResourceArn": {
+            "type": "string"
+        },
+        "com.amazonaws.iotfleethub#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotfleethub#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.iotfleethub#SsoClientId": {
+            "type": "string"
+        },
+        "com.amazonaws.iotfleethub#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.iotfleethub#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotfleethub#TagKey"
+            }
+        },
+        "com.amazonaws.iotfleethub#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iotfleethub#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.iotfleethub#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotfleethub#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotfleethub#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotfleethub#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds to or modifies the tags of the specified resource. Tags are metadata which can be used to manage a resource.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.iotfleethub#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.iotfleethub#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new or modified tags for the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotfleethub#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iotfleethub#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The rate exceeds the limit.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.iotfleethub#Timestamp": {
+            "type": "long"
+        },
+        "com.amazonaws.iotfleethub#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotfleethub#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotfleethub#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotfleethub#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the specified tags (metadata) from the resource.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.iotfleethub#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.iotfleethub#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the keys of the tags to be removed from the resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotfleethub#UpdateApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotfleethub#UpdateApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotfleethub#UpdateApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotfleethub#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotfleethub#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates information about a Fleet Hub for a AWS IoT Device Management web application.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/applications/{applicationId}",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#UpdateApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.iotfleethub#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique Id of the web application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationName": {
+                    "target": "com.amazonaws.iotfleethub#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the web application.</p>"
+                    }
+                },
+                "applicationDescription": {
+                    "target": "com.amazonaws.iotfleethub#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the web application.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.iotfleethub#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. \n      Don't reuse this client token if a new idempotent request is required.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotfleethub#UpdateApplicationResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotfleethub#Url": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^https\\://\\S+$"
+            }
+        }
+    }
+}

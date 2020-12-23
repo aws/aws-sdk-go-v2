@@ -559,6 +559,9 @@
                     "target": "com.amazonaws.ssm#ListComplianceSummaries"
                 },
                 {
+                    "target": "com.amazonaws.ssm#ListDocumentMetadataHistory"
+                },
+                {
                     "target": "com.amazonaws.ssm#ListDocuments"
                 },
                 {
@@ -566,6 +569,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssm#ListInventoryEntries"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ListOpsItemEvents"
                 },
                 {
                     "target": "com.amazonaws.ssm#ListOpsMetadata"
@@ -625,6 +631,9 @@
                     "target": "com.amazonaws.ssm#StartAutomationExecution"
                 },
                 {
+                    "target": "com.amazonaws.ssm#StartChangeRequestExecution"
+                },
+                {
                     "target": "com.amazonaws.ssm#StartSession"
                 },
                 {
@@ -644,6 +653,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssm#UpdateDocumentDefaultVersion"
+                },
+                {
+                    "target": "com.amazonaws.ssm#UpdateDocumentMetadata"
                 },
                 {
                     "target": "com.amazonaws.ssm#UpdateMaintenanceWindow"
@@ -948,6 +960,12 @@
                     "target": "com.amazonaws.ssm#ApplyOnlyAtCronInterval",
                     "traits": {
                         "smithy.api#documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is\n   created and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you create it. This parameter is not supported for rate\n   expressions.</p>"
+                    }
+                },
+                "TargetLocations": {
+                    "target": "com.amazonaws.ssm#TargetLocations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The combination of AWS Regions and AWS accounts where you want to run the\n   association.</p>"
                     }
                 }
             },
@@ -1626,6 +1644,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is\n   created and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you create it. This parameter is not supported for rate\n   expressions.</p>"
                     }
+                },
+                "TargetLocations": {
+                    "target": "com.amazonaws.ssm#TargetLocations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The combination of AWS Regions and AWS accounts where you wanted to run the association when\n   this association version was created.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1862,6 +1886,18 @@
                 "smithy.api#pattern": "^aws:[a-zA-Z]{3,25}$"
             }
         },
+        "com.amazonaws.ssm#AutomationDefinitionNotApprovedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssm#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates that the Change Manager change template used in the change request was rejected or is\n   still in a pending state.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.ssm#AutomationDefinitionNotFoundException": {
             "type": "structure",
             "members": {
@@ -2038,6 +2074,42 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An aggregate of step execution statuses displayed in the AWS Console for a multi-Region and\n   multi-account Automation execution.</p>"
                     }
+                },
+                "AutomationSubtype": {
+                    "target": "com.amazonaws.ssm#AutomationSubtype",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subtype of the Automation operation. Currently, the only supported value is\n    <code>ChangeRequest</code>.</p>"
+                    }
+                },
+                "ScheduledTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the Automation operation is scheduled to start.</p>"
+                    }
+                },
+                "Runbooks": {
+                    "target": "com.amazonaws.ssm#Runbooks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Automation runbooks (Automation documents) that are run as part of a\n   runbook workflow.</p>\n         <note>\n            <p>The Automation runbooks specified for the runbook workflow can't run until all required\n    approvals for the change request have been received.</p>\n         </note>"
+                    }
+                },
+                "OpsItemId": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of an OpsItem that is created to represent a Change Manager change request.</p>"
+                    }
+                },
+                "AssociationId": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a State Manager association used in the Automation operation.</p>"
+                    }
+                },
+                "ChangeRequestName": {
+                    "target": "com.amazonaws.ssm#ChangeRequestName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Change Manager change request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2109,6 +2181,14 @@
                     {
                         "value": "TargetResourceGroup",
                         "name": "TARGET_RESOURCE_GROUP"
+                    },
+                    {
+                        "value": "AutomationSubtype",
+                        "name": "AUTOMATION_SUBTYPE"
+                    },
+                    {
+                        "value": "OpsItemId",
+                        "name": "OPS_ITEM_ID"
                     }
                 ]
             }
@@ -2301,6 +2381,42 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Use this filter with <a>DescribeAutomationExecutions</a>. Specify either Local or\n   CrossAccount. CrossAccount is an Automation that runs in multiple AWS Regions and accounts. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Running Automation workflows in multiple AWS Regions and accounts</a> in the\n    <i>AWS Systems Manager User Guide</i>. </p>"
                     }
+                },
+                "AutomationSubtype": {
+                    "target": "com.amazonaws.ssm#AutomationSubtype",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subtype of the Automation operation. Currently, the only supported value is\n    <code>ChangeRequest</code>.</p>"
+                    }
+                },
+                "ScheduledTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the Automation operation is scheduled to start.</p>"
+                    }
+                },
+                "Runbooks": {
+                    "target": "com.amazonaws.ssm#Runbooks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Automation runbooks (Automation documents) that are run during a\n   runbook workflow in Change Manager.</p>\n         <note>\n            <p>The Automation runbooks specified for the runbook workflow can't run until all required\n    approvals for the change request have been received.</p>\n         </note>"
+                    }
+                },
+                "OpsItemId": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of an OpsItem that is created to represent a Change Manager change request.</p>"
+                    }
+                },
+                "AssociationId": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a State Manager association used in the Automation operation.</p>"
+                    }
+                },
+                "ChangeRequestName": {
+                    "target": "com.amazonaws.ssm#ChangeRequestName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Change Manager change request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2360,6 +2476,46 @@
                     {
                         "value": "Failed",
                         "name": "FAILED"
+                    },
+                    {
+                        "value": "PendingApproval",
+                        "name": "PENDING_APPROVAL"
+                    },
+                    {
+                        "value": "Approved",
+                        "name": "APPROVED"
+                    },
+                    {
+                        "value": "Rejected",
+                        "name": "REJECTED"
+                    },
+                    {
+                        "value": "Scheduled",
+                        "name": "SCHEDULED"
+                    },
+                    {
+                        "value": "RunbookInProgress",
+                        "name": "RUNBOOK_INPROGRESS"
+                    },
+                    {
+                        "value": "PendingChangeCalendarOverride",
+                        "name": "PENDING_CHANGE_CALENDAR_OVERRIDE"
+                    },
+                    {
+                        "value": "ChangeCalendarOverrideApproved",
+                        "name": "CHANGE_CALENDAR_OVERRIDE_APPROVED"
+                    },
+                    {
+                        "value": "ChangeCalendarOverrideRejected",
+                        "name": "CHANGE_CALENDAR_OVERRIDE_REJECTED"
+                    },
+                    {
+                        "value": "CompletedWithSuccess",
+                        "name": "COMPLETED_WITH_SUCCESS"
+                    },
+                    {
+                        "value": "CompletedWithFailure",
+                        "name": "COMPLETED_WITH_FAILURE"
                     }
                 ]
             }
@@ -2419,6 +2575,17 @@
             "traits": {
                 "smithy.api#documentation": "<p>The specified step name and execution ID don't exist. Verify the information and try\n   again.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ssm#AutomationSubtype": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ChangeRequest",
+                        "name": "ChangeRequest"
+                    }
+                ]
             }
         },
         "com.amazonaws.ssm#AutomationTargetParameterName": {
@@ -2598,6 +2765,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the maintenance window execution that has been stopped.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.ssm#ChangeRequestName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
                 }
             }
         },
@@ -3994,6 +4170,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is\n   created and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you create it. This parameter is not supported for rate\n   expressions.</p>"
                     }
+                },
+                "TargetLocations": {
+                    "target": "com.amazonaws.ssm#TargetLocations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this action to create an association in multiple Regions and multiple accounts.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4103,6 +4285,12 @@
                     "target": "com.amazonaws.ssm#ApplyOnlyAtCronInterval",
                     "traits": {
                         "smithy.api#documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is\n   created and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you create it. This parameter is not supported for rate\n   expressions.</p>"
+                    }
+                },
+                "TargetLocations": {
+                    "target": "com.amazonaws.ssm#TargetLocations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A location is a combination of AWS Regions and AWS accounts where you want to run the\n   association. Use this action to create an association in multiple Regions and multiple\n   accounts.</p>"
                     }
                 }
             }
@@ -4283,14 +4471,14 @@
                 "ScheduleTimezone": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowTimezone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet\n   Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"etc/UTC\", or\n   \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time\n    Zone Database</a> on the IANA website.</p>"
+                        "smithy.api#documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet\n   Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"UTC\", or\n   \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time\n    Zone Database</a> on the IANA website.</p>"
                     }
                 },
                 "ScheduleOffset": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowOffset",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The number of days to wait after the date and time specified by a CRON expression before\n   running the maintenance window.</p>\n         <p>For example, the following cron expression schedules a maintenance window to run on the\n   third Tuesday of every month at 11:30 PM.</p>\n         <p>\n            <code>cron(0 30 23 ? * TUE#3 *)</code>\n         </p>\n         <p>If the schedule offset is <code>2</code>, the maintenance window won't run until two days\n   later.</p>"
+                        "smithy.api#documentation": "<p>The number of days to wait after the date and time specified by a CRON expression before\n   running the maintenance window.</p>\n         <p>For example, the following cron expression schedules a maintenance window to run on the\n   third Tuesday of every month at 11:30 PM.</p>\n         <p>\n            <code>cron(30 23 ? * TUE#3 *)</code>\n         </p>\n         <p>If the schedule offset is <code>2</code>, the maintenance window won't run until two days\n   later.</p>"
                     }
                 },
                 "Duration": {
@@ -4376,6 +4564,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "OpsItemType": {
+                    "target": "com.amazonaws.ssm#OpsItemType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of OpsItem to create. Currently, the only valid values are\n    <code>/aws/changerequest</code> and <code>/aws/issue</code>.</p>"
+                    }
+                },
                 "OperationalData": {
                     "target": "com.amazonaws.ssm#OpsItemOperationalData",
                     "traits": {
@@ -4431,6 +4625,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specify a severity to assign to an OpsItem.</p>"
                     }
+                },
+                "ActualStartTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time a runbook workflow started. Currently reported only for the OpsItem type\n    <code>/aws/changerequest</code>.</p>"
+                    }
+                },
+                "ActualEndTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time a runbook workflow ended. Currently reported only for the OpsItem type\n    <code>/aws/changerequest</code>.</p>"
+                    }
+                },
+                "PlannedStartTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time specified in a change request for a runbook workflow to start. Currently supported\n   only for the OpsItem type <code>/aws/changerequest</code>.</p>"
+                    }
+                },
+                "PlannedEndTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time specified in a change request for a runbook workflow to end. Currently supported\n   only for the OpsItem type <code>/aws/changerequest</code>.</p>"
+                    }
                 }
             }
         },
@@ -4471,7 +4689,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>If you create a new application in AppManager, Systems Manager calls this API action to specify\n   information about the new application, including the application type.</p>"
+                "smithy.api#documentation": "<p>If you create a new application in Application Manager, Systems Manager calls this API action to specify\n   information about the new application, including the application type.</p>"
             }
         },
         "com.amazonaws.ssm#CreateOpsMetadataRequest": {
@@ -4480,14 +4698,14 @@
                 "ResourceId": {
                     "target": "com.amazonaws.ssm#OpsMetadataResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A resource ID for a new AppManager application.</p>",
+                        "smithy.api#documentation": "<p>A resource ID for a new Application Manager application.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Metadata": {
                     "target": "com.amazonaws.ssm#MetadataMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Metadata for a new AppManager application. </p>"
+                        "smithy.api#documentation": "<p>Metadata for a new Application Manager application. </p>"
                     }
                 }
             }
@@ -7108,7 +7326,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tasks in a maintenance window.</p>",
+                "smithy.api#documentation": "<p>Lists the tasks in a maintenance window.</p>\n      \n         <note>\n            <p>For maintenance window tasks without a specified target, you cannot supply values for\n     <code>--max-errors</code> and <code>--max-concurrency</code>. Instead, the system inserts a\n    placeholder value of <code>1</code>, which may be reported in the response to this command.\n    These values do not affect the running of your task and can be ignored.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -7843,6 +8061,9 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.ssm#DocumentAuthor": {
+            "type": "string"
+        },
         "com.amazonaws.ssm#DocumentContent": {
             "type": "string",
             "traits": {
@@ -8010,6 +8231,36 @@
                     "target": "com.amazonaws.ssm#DocumentRequiresList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of SSM documents required by a document. For example, an\n    <code>ApplicationConfiguration</code> document requires an\n    <code>ApplicationConfigurationSchema</code> document.</p>"
+                    }
+                },
+                "Author": {
+                    "target": "com.amazonaws.ssm#DocumentAuthor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user in your organization who created the document.</p>"
+                    }
+                },
+                "ReviewInformation": {
+                    "target": "com.amazonaws.ssm#ReviewInformationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the review of a document.</p>"
+                    }
+                },
+                "ApprovedVersion": {
+                    "target": "com.amazonaws.ssm#DocumentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the document currently approved for use in the organization.</p>"
+                    }
+                },
+                "PendingReviewVersion": {
+                    "target": "com.amazonaws.ssm#DocumentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the document that is currently under review.</p>"
+                    }
+                },
+                "ReviewStatus": {
+                    "target": "com.amazonaws.ssm#ReviewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the review.</p>"
                     }
                 }
             },
@@ -8195,6 +8446,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of SSM documents required by a document. For example, an\n    <code>ApplicationConfiguration</code> document requires an\n    <code>ApplicationConfigurationSchema</code> document.</p>"
                     }
+                },
+                "ReviewStatus": {
+                    "target": "com.amazonaws.ssm#ReviewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of a document review.</p>"
+                    }
+                },
+                "Author": {
+                    "target": "com.amazonaws.ssm#DocumentAuthor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user in your organization who created the document.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8278,6 +8541,31 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.ssm#DocumentMetadataEnum": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DocumentReviews",
+                        "name": "DocumentReviews"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssm#DocumentMetadataResponseInfo": {
+            "type": "structure",
+            "members": {
+                "ReviewerResponse": {
+                    "target": "com.amazonaws.ssm#DocumentReviewerResponseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a reviewer's response to a document review request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the response to a document review request.</p>"
+            }
+        },
         "com.amazonaws.ssm#DocumentName": {
             "type": "string",
             "traits": {
@@ -8342,10 +8630,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "String"
+                        "value": "String",
+                        "name": "String"
                     },
                     {
-                        "value": "StringList"
+                        "value": "StringList",
+                        "name": "StringList"
                     }
                 ]
             }
@@ -8403,6 +8693,147 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.ssm#DocumentReviewAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SendForReview",
+                        "name": "SendForReview"
+                    },
+                    {
+                        "value": "UpdateReview",
+                        "name": "UpdateReview"
+                    },
+                    {
+                        "value": "Approve",
+                        "name": "Approve"
+                    },
+                    {
+                        "value": "Reject",
+                        "name": "Reject"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssm#DocumentReviewComment": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^(?!\\s*$).+"
+            }
+        },
+        "com.amazonaws.ssm#DocumentReviewCommentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#DocumentReviewCommentSource"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.ssm#DocumentReviewCommentSource": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.ssm#DocumentReviewCommentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of information added to a review request. Currently, only the value\n    <code>Comment</code> is supported.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.ssm#DocumentReviewComment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of a comment entered by a user who requests a review of a new document version,\n   or who reviews the new version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about comments added to a document review request.</p>"
+            }
+        },
+        "com.amazonaws.ssm#DocumentReviewCommentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Comment",
+                        "name": "Comment"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssm#DocumentReviewerResponseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#DocumentReviewerResponseSource"
+            }
+        },
+        "com.amazonaws.ssm#DocumentReviewerResponseSource": {
+            "type": "structure",
+            "members": {
+                "CreateTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a reviewer entered a response to a document review request.</p>"
+                    }
+                },
+                "UpdatedTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a reviewer last updated a response to a document review\n   request.</p>"
+                    }
+                },
+                "ReviewStatus": {
+                    "target": "com.amazonaws.ssm#ReviewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current review status of a new custom SSM document created by a member of your\n   organization, or of the latest version of an existing SSM document.</p>\n         <p>Only one version of a document can be in the APPROVED state at a time. When a new version is\n   approved, the status of the previous version changes to REJECTED.</p>\n         <p>Only one version of a document can be in review, or PENDING, at a time.</p>"
+                    }
+                },
+                "Comment": {
+                    "target": "com.amazonaws.ssm#DocumentReviewCommentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comment entered by a reviewer as part of their document review response.</p>"
+                    }
+                },
+                "Reviewer": {
+                    "target": "com.amazonaws.ssm#Reviewer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user in your organization assigned to review a document request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a reviewer's response to a document review request.</p>"
+            }
+        },
+        "com.amazonaws.ssm#DocumentReviews": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.ssm#DocumentReviewAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action to take on a document approval review request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Comment": {
+                    "target": "com.amazonaws.ssm#DocumentReviewCommentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment entered by a user in your organization about the document review request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a document approval review.</p>"
             }
         },
         "com.amazonaws.ssm#DocumentSchemaVersion": {
@@ -8484,6 +8915,10 @@
                     {
                         "value": "ChangeCalendar",
                         "name": "ChangeCalendar"
+                    },
+                    {
+                        "value": "Automation.ChangeTemplate",
+                        "name": "ChangeTemplate"
                     }
                 ]
             }
@@ -8543,6 +8978,12 @@
                     "target": "com.amazonaws.ssm#DocumentStatusInformation",
                     "traits": {
                         "smithy.api#documentation": "<p>A message returned by AWS Systems Manager that explains the <code>Status</code> value. For example, a\n    <code>Failed</code> status might be explained by the <code>StatusInformation</code> message,\n   \"The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct.\"</p>"
+                    }
+                },
+                "ReviewStatus": {
+                    "target": "com.amazonaws.ssm#ReviewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the approval review for the latest version of the document.</p>"
                     }
                 }
             },
@@ -8691,7 +9132,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 64
-                }
+                },
+                "smithy.api#pattern": "[\\w+=,.@-]+"
             }
         },
         "com.amazonaws.ssm#ExpirationDate": {
@@ -8763,13 +9205,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Client"
+                        "value": "Client",
+                        "name": "Client"
                     },
                     {
-                        "value": "Server"
+                        "value": "Server",
+                        "name": "Server"
                     },
                     {
-                        "value": "Unknown"
+                        "value": "Unknown",
+                        "name": "Unknown"
                     }
                 ]
             }
@@ -9421,6 +9866,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the document attachments, including names, locations, sizes, and so\n   on.</p>"
                     }
+                },
+                "ReviewStatus": {
+                    "target": "com.amazonaws.ssm#ReviewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current review status of a new custom Systems Manager document (SSM document) created by a member\n   of your organization, or of the latest version of an existing SSM document.</p>\n         <p>Only one version of an SSM document can be in the APPROVED state at a time. When a new\n   version is approved, the status of the previous version changes to REJECTED.</p>\n         <p>Only one version of an SSM document can be in review, or PENDING, at a time.</p>"
+                    }
                 }
             }
         },
@@ -10002,7 +10453,7 @@
                 "ScheduleTimezone": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowTimezone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet\n   Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"etc/UTC\", or\n   \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time\n    Zone Database</a> on the IANA website.</p>"
+                        "smithy.api#documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet\n   Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"UTC\", or\n   \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time\n    Zone Database</a> on the IANA website.</p>"
                     }
                 },
                 "ScheduleOffset": {
@@ -10073,7 +10524,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tasks in a maintenance window.</p>"
+                "smithy.api#documentation": "<p>Lists the tasks in a maintenance window.</p>\n      \n         <note>\n            <p>For maintenance window tasks without a specified target, you cannot supply values for\n     <code>--max-errors</code> and <code>--max-concurrency</code>. Instead, the system inserts a\n    placeholder value of <code>1</code>, which may be reported in the response to this command.\n    These values do not affect the running of your task and can be ignored.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#GetMaintenanceWindowTaskRequest": {
@@ -10155,13 +10606,13 @@
                 "MaxConcurrency": {
                     "target": "com.amazonaws.ssm#MaxConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of targets allowed to run this task in parallel.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of targets allowed to run this task in parallel.</p>\n      \n         <note>\n            <p>For maintenance window tasks without a target specified, you cannot supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>, which may be reported\n    in the response to this command. This value does not affect the running of your task and can be\n    ignored.</p>\n         </note>"
                     }
                 },
                 "MaxErrors": {
                     "target": "com.amazonaws.ssm#MaxErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of errors allowed before the task stops being scheduled.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of errors allowed before the task stops being scheduled.</p>\n      \n         <note>\n            <p>For maintenance window tasks without a target specified, you cannot supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>, which may be reported\n    in the response to this command. This value does not affect the running of your task and can be\n    ignored.</p>\n         </note>"
                     }
                 },
                 "LoggingInfo": {
@@ -10247,7 +10698,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>View operational metadata related to an application in AppManager.</p>"
+                "smithy.api#documentation": "<p>View operational metadata related to an application in Application Manager.</p>"
             }
         },
         "com.amazonaws.ssm#GetOpsMetadataMaxResults": {
@@ -10290,13 +10741,13 @@
                 "ResourceId": {
                     "target": "com.amazonaws.ssm#OpsMetadataResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource ID of the AppManager application.</p>"
+                        "smithy.api#documentation": "<p>The resource ID of the Application Manager application.</p>"
                     }
                 },
                 "Metadata": {
                     "target": "com.amazonaws.ssm#MetadataMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>OpsMetadata for an AppManager application.</p>"
+                        "smithy.api#documentation": "<p>OpsMetadata for an Application Manager application.</p>"
                     }
                 },
                 "NextToken": {
@@ -11266,7 +11717,7 @@
                 "LastPingDateTime": {
                     "target": "com.amazonaws.ssm#DateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time when agent last pinged Systems Manager service. </p>"
+                        "smithy.api#documentation": "<p>The date and time when the agent last pinged the Systems Manager service. </p>"
                     }
                 },
                 "AgentVersion": {
@@ -13647,6 +14098,105 @@
                 }
             }
         },
+        "com.amazonaws.ssm#ListDocumentMetadataHistory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#ListDocumentMetadataHistoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#ListDocumentMetadataHistoryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidDocument"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidDocumentVersion"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidNextToken"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Information about approval reviews for a version of an SSM document.</p>"
+            }
+        },
+        "com.amazonaws.ssm#ListDocumentMetadataHistoryRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.ssm#DocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the document.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DocumentVersion": {
+                    "target": "com.amazonaws.ssm#DocumentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the document.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.ssm#DocumentMetadataEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of data for which details are being requested. Currently, the only supported value\n   is <code>DocumentReviews</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssm#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n   call.)</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssm#MaxResults",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#ListDocumentMetadataHistoryResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.ssm#DocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the document.</p>"
+                    }
+                },
+                "DocumentVersion": {
+                    "target": "com.amazonaws.ssm#DocumentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the document.</p>"
+                    }
+                },
+                "Author": {
+                    "target": "com.amazonaws.ssm#DocumentAuthor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user ID of the person in the organization who requested the document review.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.ssm#DocumentMetadataResponseInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the response to the document approval request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssm#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ssm#ListDocumentVersions": {
             "type": "operation",
             "input": {
@@ -13902,6 +14452,78 @@
                 }
             }
         },
+        "com.amazonaws.ssm#ListOpsItemEvents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#ListOpsItemEventsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#ListOpsItemEventsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#OpsItemInvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#OpsItemLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#OpsItemNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all OpsItem events in the current AWS account and Region. You can limit\n   the results to events associated with specific OpsItems by specifying a filter.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Summaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssm#ListOpsItemEventsRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.ssm#OpsItemEventFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more OpsItem filters. Use a filter to return a more specific list of results. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssm#OpsItemEventMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#ListOpsItemEventsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n   results. </p>"
+                    }
+                },
+                "Summaries": {
+                    "target": "com.amazonaws.ssm#OpsItemEventSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of event information for the specified OpsItems.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ssm#ListOpsMetadata": {
             "type": "operation",
             "input": {
@@ -13919,7 +14541,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Systems Manager calls this API action when displaying all AppManager OpsMetadata objects or\n   blobs.</p>"
+                "smithy.api#documentation": "<p>Systems Manager calls this API action when displaying all Application Manager OpsMetadata objects or\n   blobs.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "OpsMetadataList",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.ssm#ListOpsMetadataMaxResults": {
@@ -13937,7 +14565,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ssm#OpsMetadataFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters to limit the number of OpsMetadata objects returned by the\n   call.</p>"
+                        "smithy.api#documentation": "<p>One or more filters to limit the number of OpsMetadata objects returned by the call.</p>"
                     }
                 },
                 "MaxResults": {
@@ -15363,12 +15991,12 @@
                 "Value": {
                     "target": "com.amazonaws.ssm#MetadataValueString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Metadata value to assign to an AppManager application.</p>"
+                        "smithy.api#documentation": "<p>Metadata value to assign to an Application Manager application.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Metadata to assign to an AppManager application.</p>"
+                "smithy.api#documentation": "<p>Metadata to assign to an Application Manager application.</p>"
             }
         },
         "com.amazonaws.ssm#MetadataValueString": {
@@ -15944,6 +16572,12 @@
                         "smithy.api#documentation": "<p>The ARN of the AWS account that created the OpsItem.</p>"
                     }
                 },
+                "OpsItemType": {
+                    "target": "com.amazonaws.ssm#OpsItemType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of OpsItem. Currently, the only valid values are <code>/aws/changerequest</code>\n   and <code>/aws/issue</code>.</p>"
+                    }
+                },
                 "CreatedTime": {
                     "target": "com.amazonaws.ssm#DateTime",
                     "traits": {
@@ -16033,6 +16667,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The severity of the OpsItem. Severity options range from 1 to 4.</p>"
                     }
+                },
+                "ActualStartTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time a runbook workflow started. Currently reported only for the OpsItem type\n    <code>/aws/changerequest</code>.</p>"
+                    }
+                },
+                "ActualEndTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time a runbook workflow ended. Currently reported only for the OpsItem type\n    <code>/aws/changerequest</code>.</p>"
+                    }
+                },
+                "PlannedStartTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time specified in a change request for a runbook workflow to start. Currently supported\n   only for the OpsItem type <code>/aws/changerequest</code>.</p>"
+                    }
+                },
+                "PlannedEndTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time specified in a change request for a runbook workflow to end. Currently supported\n   only for the OpsItem type <code>/aws/changerequest</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16060,7 +16718,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 64
-                }
+                },
+                "smithy.api#pattern": "^(?!\\s*$).+"
             }
         },
         "com.amazonaws.ssm#OpsItemDataKey": {
@@ -16069,7 +16728,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
-                }
+                },
+                "smithy.api#pattern": "^(?!\\s*$).+"
             }
         },
         "com.amazonaws.ssm#OpsItemDataType": {
@@ -16108,7 +16768,10 @@
             }
         },
         "com.amazonaws.ssm#OpsItemDataValueString": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "[\\s\\S]*\\S[\\s\\S]*"
+            }
         },
         "com.amazonaws.ssm#OpsItemDescription": {
             "type": "string",
@@ -16116,7 +16779,147 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1024
+                },
+                "smithy.api#pattern": "[\\s\\S]*\\S[\\s\\S]*"
+            }
+        },
+        "com.amazonaws.ssm#OpsItemEventFilter": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.ssm#OpsItemEventFilterKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter key. Currently, the only supported value is\n   <code>OpsItemId</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.ssm#OpsItemEventFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values for the filter, consisting of one or more OpsItem IDs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.ssm#OpsItemEventFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator used by the filter call. Currently, the only supported value is\n    <code>Equal</code>.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a filter for a specific list of OpsItem events. You can filter event information\n   by using tags. You specify tags by using a key-value pair mapping. </p>"
+            }
+        },
+        "com.amazonaws.ssm#OpsItemEventFilterKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OpsItemId",
+                        "name": "OPSITEM_ID"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssm#OpsItemEventFilterOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Equal",
+                        "name": "EQUAL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssm#OpsItemEventFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 15
+                },
+                "smithy.api#pattern": "^(oi)-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.ssm#OpsItemEventFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#OpsItemEventFilterValue"
+            }
+        },
+        "com.amazonaws.ssm#OpsItemEventFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#OpsItemEventFilter"
+            }
+        },
+        "com.amazonaws.ssm#OpsItemEventMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ssm#OpsItemEventSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#OpsItemEventSummary"
+            }
+        },
+        "com.amazonaws.ssm#OpsItemEventSummary": {
+            "type": "structure",
+            "members": {
+                "OpsItemId": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the OpsItem.</p>"
+                    }
+                },
+                "EventId": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the OpsItem event.</p>"
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the OpsItem event.</p>"
+                    }
+                },
+                "DetailType": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of information provided as a detail.</p>"
+                    }
+                },
+                "Detail": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specific information about the OpsItem event.</p>"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.ssm#OpsItemIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the user or resource that created the OpsItem event.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the OpsItem event was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about an OpsItem event.</p>"
             }
         },
         "com.amazonaws.ssm#OpsItemFilter": {
@@ -16185,6 +16988,22 @@
                         "name": "LAST_MODIFIED_TIME"
                     },
                     {
+                        "value": "ActualStartTime",
+                        "name": "ACTUAL_START_TIME"
+                    },
+                    {
+                        "value": "ActualEndTime",
+                        "name": "ACTUAL_END_TIME"
+                    },
+                    {
+                        "value": "PlannedStartTime",
+                        "name": "PLANNED_START_TIME"
+                    },
+                    {
+                        "value": "PlannedEndTime",
+                        "name": "PLANNED_END_TIME"
+                    },
+                    {
                         "value": "OperationalData",
                         "name": "OPERATIONAL_DATA"
                     },
@@ -16211,6 +17030,34 @@
                     {
                         "value": "Severity",
                         "name": "SEVERITY"
+                    },
+                    {
+                        "value": "OpsItemType",
+                        "name": "OPSITEM_TYPE"
+                    },
+                    {
+                        "value": "ChangeRequestByRequesterArn",
+                        "name": "CHANGE_REQUEST_REQUESTER_ARN"
+                    },
+                    {
+                        "value": "ChangeRequestByRequesterName",
+                        "name": "CHANGE_REQUEST_REQUESTER_NAME"
+                    },
+                    {
+                        "value": "ChangeRequestByApproverArn",
+                        "name": "CHANGE_REQUEST_APPROVER_ARN"
+                    },
+                    {
+                        "value": "ChangeRequestByApproverName",
+                        "name": "CHANGE_REQUEST_APPROVER_NAME"
+                    },
+                    {
+                        "value": "ChangeRequestByTemplate",
+                        "name": "CHANGE_REQUEST_TEMPLATE"
+                    },
+                    {
+                        "value": "ChangeRequestByTargetsResourceGroup",
+                        "name": "CHANGE_REQUEST_TARGETS_RESOURCE_GROUP"
                     }
                 ]
             }
@@ -16257,6 +17104,20 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^(oi)-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.ssm#OpsItemIdentity": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem event.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the user or resource that created an OpsItem event.</p>"
             }
         },
         "com.amazonaws.ssm#OpsItemInvalidParameterException": {
@@ -16374,7 +17235,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 64
-                }
+                },
+                "smithy.api#pattern": "^(?!\\s*$).+"
             }
         },
         "com.amazonaws.ssm#OpsItemSource": {
@@ -16382,8 +17244,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 64
-                }
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!\\s*$).+"
             }
         },
         "com.amazonaws.ssm#OpsItemStatus": {
@@ -16401,6 +17264,66 @@
                     {
                         "value": "Resolved",
                         "name": "RESOLVED"
+                    },
+                    {
+                        "value": "Pending",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "TimedOut",
+                        "name": "TIMED_OUT"
+                    },
+                    {
+                        "value": "Cancelling",
+                        "name": "CANCELLING"
+                    },
+                    {
+                        "value": "Cancelled",
+                        "name": "CANCELLED"
+                    },
+                    {
+                        "value": "Failed",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "CompletedWithSuccess",
+                        "name": "COMPLETED_WITH_SUCCESS"
+                    },
+                    {
+                        "value": "CompletedWithFailure",
+                        "name": "COMPLETED_WITH_FAILURE"
+                    },
+                    {
+                        "value": "Scheduled",
+                        "name": "SCHEDULED"
+                    },
+                    {
+                        "value": "RunbookInProgress",
+                        "name": "RUNBOOK_IN_PROGRESS"
+                    },
+                    {
+                        "value": "PendingChangeCalendarOverride",
+                        "name": "PENDING_CHANGE_CALENDAR_OVERRIDE"
+                    },
+                    {
+                        "value": "ChangeCalendarOverrideApproved",
+                        "name": "CHANGE_CALENDAR_OVERRIDE_APPROVED"
+                    },
+                    {
+                        "value": "ChangeCalendarOverrideRejected",
+                        "name": "CHANGE_CALENDAR_OVERRIDE_REJECTED"
+                    },
+                    {
+                        "value": "PendingApproval",
+                        "name": "PENDING_APPROVAL"
+                    },
+                    {
+                        "value": "Approved",
+                        "name": "APPROVED"
+                    },
+                    {
+                        "value": "Rejected",
+                        "name": "REJECTED"
                     }
                 ]
             }
@@ -16485,6 +17408,36 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of OpsItems by severity.</p>"
                     }
+                },
+                "OpsItemType": {
+                    "target": "com.amazonaws.ssm#OpsItemType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of OpsItem. Currently, the only valid values are <code>/aws/changerequest</code>\n   and <code>/aws/issue</code>.</p>"
+                    }
+                },
+                "ActualStartTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time a runbook workflow started. Currently reported only for the OpsItem type\n    <code>/aws/changerequest</code>.</p>"
+                    }
+                },
+                "ActualEndTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time a runbook workflow ended. Currently reported only for the OpsItem type\n    <code>/aws/changerequest</code>.</p>"
+                    }
+                },
+                "PlannedStartTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time specified in a change request for a runbook workflow to start. Currently supported\n   only for the OpsItem type <code>/aws/changerequest</code>.</p>"
+                    }
+                },
+                "PlannedEndTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time specified in a change request for a runbook workflow to end. Currently supported\n   only for the OpsItem type <code>/aws/changerequest</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16497,8 +17450,12 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1024
-                }
+                },
+                "smithy.api#pattern": "^(?!\\s*$).+"
             }
+        },
+        "com.amazonaws.ssm#OpsItemType": {
+            "type": "string"
         },
         "com.amazonaws.ssm#OpsMetadata": {
             "type": "structure",
@@ -16506,7 +17463,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.ssm#OpsMetadataResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AppManager application.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Application Manager application.</p>"
                     }
                 },
                 "OpsMetadataArn": {
@@ -16535,7 +17492,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Operational metadata for an application in AppManager.</p>"
+                "smithy.api#documentation": "<p>Operational metadata for an application in Application Manager.</p>"
             }
         },
         "com.amazonaws.ssm#OpsMetadataAlreadyExistsException": {
@@ -16645,7 +17602,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The OpsMetadata object exceeds the maximum number of OpsMetadata keys that you can assign to an application in AppManager.</p>",
+                "smithy.api#documentation": "<p>The OpsMetadata object exceeds the maximum number of OpsMetadata keys that you can assign to\n   an application in Application Manager.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -16657,7 +17614,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Your account reached the maximum number of OpsMetadata objects allowed by AppManager. The\n   maximum is 200 OpsMetadata objects. Delete one or more OpsMetadata object and try again.</p>",
+                "smithy.api#documentation": "<p>Your account reached the maximum number of OpsMetadata objects allowed by Application Manager. The\n   maximum is 200 OpsMetadata objects. Delete one or more OpsMetadata object and try again.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -19139,8 +20096,7 @@
                 "Targets": {
                     "target": "com.amazonaws.ssm#Targets",
                     "traits": {
-                        "smithy.api#documentation": "<p>The targets (either instances or maintenance window targets).</p>\n         <p>Specify instances using the following format: </p>\n         <p>\n            <code>Key=InstanceIds,Values=<instance-id-1>,<instance-id-2></code>\n         </p>\n         <p>Specify maintenance window targets using the following format:</p>\n         <p>\n            <code>Key=WindowTargetIds;,Values=<window-target-id-1>,<window-target-id-2></code>\n         </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The targets (either instances or maintenance window targets).</p>\n      \n         <note>\n            <p>One or more targets must be specified for maintenance window Run Command-type tasks.\n    Depending on the task, targets are optional for other maintenance window task types (Automation,\n    AWS Lambda, and AWS Step Functions). For more information about running tasks that do not\n    specify targets, see see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering\n     maintenance window tasks without targets</a> in the\n    <i>AWS Systems Manager User Guide</i>.</p>\n         </note>\n         <p>Specify instances using the following format: </p>\n         <p>\n            <code>Key=InstanceIds,Values=<instance-id-1>,<instance-id-2></code>\n         </p>\n         <p>Specify maintenance window targets using the following format:</p>\n         <p>\n            <code>Key=WindowTargetIds,Values=<window-target-id-1>,<window-target-id-2></code>\n         </p>"
                     }
                 },
                 "TaskArn": {
@@ -19185,15 +20141,13 @@
                 "MaxConcurrency": {
                     "target": "com.amazonaws.ssm#MaxConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of targets this task can be run for in parallel.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The maximum number of targets this task can be run for in parallel.</p>\n      \n         <note>\n            <p>For maintenance window tasks without a target specified, you cannot supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>. This value does not\n    affect the running of your task.</p>\n         </note>"
                     }
                 },
                 "MaxErrors": {
                     "target": "com.amazonaws.ssm#MaxErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of errors allowed before this task stops being scheduled.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The maximum number of errors allowed before this task stops being scheduled.</p>\n      \n         <note>\n            <p>For maintenance window tasks without a target specified, you cannot supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>. This value does not\n    affect the running of your task.</p>\n         </note>"
                     }
                 },
                 "LoggingInfo": {
@@ -20093,6 +21047,148 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and\n   receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p> \n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tAWS Region supported by AWS Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>AWS General Reference</i>.</p> \n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.ssm#ReviewInformation": {
+            "type": "structure",
+            "members": {
+                "ReviewedTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the reviewer took action on the document review request.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ssm#ReviewStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the document review request.</p>"
+                    }
+                },
+                "Reviewer": {
+                    "target": "com.amazonaws.ssm#Reviewer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reviewer assigned to take action on the document review request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the result of a document review request.</p>"
+            }
+        },
+        "com.amazonaws.ssm#ReviewInformationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#ReviewInformation",
+                "traits": {
+                    "smithy.api#xmlName": "ReviewInformation"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.ssm#ReviewStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "APPROVED",
+                        "name": "APPROVED"
+                    },
+                    {
+                        "value": "NOT_REVIEWED",
+                        "name": "NOT_REVIEWED"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "REJECTED",
+                        "name": "REJECTED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssm#Reviewer": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-.]{1,128}$"
+            }
+        },
+        "com.amazonaws.ssm#Runbook": {
+            "type": "structure",
+            "members": {
+                "DocumentName": {
+                    "target": "com.amazonaws.ssm#DocumentARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Automation runbook (Automation document) used in a runbook workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DocumentVersion": {
+                    "target": "com.amazonaws.ssm#DocumentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Automation runbook (Automation document) used in a\n   runbook workflow.</p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.ssm#AutomationParameterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value map of execution parameters, which were supplied when calling\n    <code>StartChangeRequestExecution</code>.</p>"
+                    }
+                },
+                "TargetParameterName": {
+                    "target": "com.amazonaws.ssm#AutomationParameterKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the parameter used as the target resource for the rate-controlled\n   runbook workflow. Required if you specify <code>Targets</code>. </p>"
+                    }
+                },
+                "Targets": {
+                    "target": "com.amazonaws.ssm#Targets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key-value mapping to target resources that the Runbook operation performs tasks on.\n   Required if you specify <code>TargetParameterName</code>.</p>"
+                    }
+                },
+                "MaxConcurrency": {
+                    "target": "com.amazonaws.ssm#MaxConcurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>MaxConcurrency</code> value specified by the user when the operation started,\n   indicating the maximum number of resources that the runbook operation can run on at the same\n   time.</p>"
+                    }
+                },
+                "MaxErrors": {
+                    "target": "com.amazonaws.ssm#MaxErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>MaxErrors</code> value specified by the user when the execution started,\n   indicating the maximum number of errors that can occur during the operation before the updates\n   are stopped or rolled back.</p>"
+                    }
+                },
+                "TargetLocations": {
+                    "target": "com.amazonaws.ssm#TargetLocations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the AWS Regions and accounts targeted by the current Runbook\n   operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an Automation runbook (Automation document) used in a runbook workflow in\n   Change Manager.</p>\n         <note>\n            <p>The Automation runbooks specified for the runbook workflow can't run until all required\n    approvals for the change request have been received.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.ssm#Runbooks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#Runbook"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
                 }
             }
         },
@@ -21080,6 +22176,107 @@
                 }
             }
         },
+        "com.amazonaws.ssm#StartChangeRequestExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#StartChangeRequestExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#StartChangeRequestExecutionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#AutomationDefinitionNotApprovedException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#AutomationDefinitionNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#AutomationDefinitionVersionNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#AutomationExecutionLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#IdempotentParameterMismatch"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidAutomationExecutionParametersException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a change request for Change Manager. The runbooks (Automation documents) specified in the\n   change request run only after all required approvals for the change request have been\n   received.</p>"
+            }
+        },
+        "com.amazonaws.ssm#StartChangeRequestExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "ScheduledTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time specified in the change request to run the Automation runbooks.</p>\n         <note>\n            <p>The Automation runbooks specified for the runbook workflow can't run until all required\n    approvals for the change request have been received.</p>\n         </note>"
+                    }
+                },
+                "DocumentName": {
+                    "target": "com.amazonaws.ssm#DocumentARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the change template document to run during the runbook workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DocumentVersion": {
+                    "target": "com.amazonaws.ssm#DocumentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the change template document to run during the runbook workflow.</p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.ssm#AutomationParameterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key-value map of parameters that match the declared parameters in the change template\n   document.</p>"
+                    }
+                },
+                "ChangeRequestName": {
+                    "target": "com.amazonaws.ssm#ChangeRequestName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the change request associated with the runbook workflow to be run.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ssm#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-provided idempotency token. The token must be unique, is case insensitive, enforces\n   the UUID format, and can't be reused.</p>"
+                    }
+                },
+                "Runbooks": {
+                    "target": "com.amazonaws.ssm#Runbooks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Automation runbooks (Automation documents) that are run during the\n   runbook workflow.</p>\n         <note>\n            <p>The Automation runbooks specified for the runbook workflow can't run until all required\n    approvals for the change request have been received.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssm#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for\n   a change request. Tags enable you to categorize a resource in different ways, such as by\n   purpose, owner, or environment. For example, you might want to tag a change request to identify\n   an environment or target AWS Region. In this case, you could specify the following key-value\n   pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=Environment,Value=Production</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=Region,Value=us-east-2</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#StartChangeRequestExecutionResult": {
+            "type": "structure",
+            "members": {
+                "AutomationExecutionId": {
+                    "target": "com.amazonaws.ssm#AutomationExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of a runbook workflow operation. (A runbook workflow is a type of Automation\n   operation.) </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ssm#StartSession": {
             "type": "operation",
             "input": {
@@ -21585,7 +22782,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of search criteria that targets instances using a Key,Value combination that you\n   specify.\n   </p>\n         <p>Supported formats include the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=<i>instance-id-1</i>,<i>instance-id-2</i>,<i>instance-id-3</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:<i>my-tag-key</i>,Values=<i>my-tag-value-1</i>,<i>my-tag-value-2</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag-key,Values=<i>my-tag-key-1</i>,<i>my-tag-key-2</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Run Command and Maintenance window targets only</b>:\n       <code>Key=resource-groups:Name,Values=<i>resource-group-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Maintenance window targets only</b>:\n       <code>Key=resource-groups:ResourceTypeFilters,Values=<i>resource-type-1</i>,<i>resource-type-2</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Automation targets only</b>:\n       <code>Key=ResourceGroup;Values=<i>resource-group-name</i>\n                  </code>\n               </p>\n            </li>\n         </ul>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=i-02573cafcfEXAMPLE,i-0471e04240EXAMPLE,i-07782c72faEXAMPLE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag-key,Values=Name,Instance-Type,CostCenter</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Run Command and Maintenance window targets only</b>:\n      <code>Key=resource-groups:Name,Values=ProductionResourceGroup</code>\n               </p>\n               <p>This example demonstrates how to target all resources in the resource group <b>ProductionResourceGroup</b> in your maintenance window.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Maintenance window targets only</b>:\n       <code>Key=resource-groups:ResourceTypeFilters,Values=<i>AWS::EC2::INSTANCE</i>,<i>AWS::EC2::VPC</i>\n                  </code>\n               </p>\n               <p>This example demonstrates how to target only EC2 instances and VPCs in your maintenance\n     window.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Automation targets only</b>:\n      <code>Key=ResourceGroup,Values=MyResourceGroup</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>State Manager association targets only</b>:\n       <code>Key=InstanceIds,Values=<i>*</i>\n                  </code>\n               </p>\n               <p>This example demonstrates how to target all managed instances in the AWS Region where the\n     association was created.</p>\n            </li>\n         </ul>\n         <p>For more information about how to send commands that target instances using\n    <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Targeting multiple instances</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>An array of search criteria that targets instances using a Key,Value combination that you\n   specify.\n   </p>\n      \n         <note>\n            <p> One or more targets must be specified for maintenance window Run Command-type tasks.\n    Depending on the task, targets are optional for other maintenance window task types (Automation,\n    AWS Lambda, and AWS Step Functions). For more information about running tasks that do not\n    specify targets, see see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering\n     maintenance window tasks without targets</a> in the\n    <i>AWS Systems Manager User Guide</i>.</p>\n         </note>\n         <p>Supported formats include the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=<i>instance-id-1</i>,<i>instance-id-2</i>,<i>instance-id-3</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:<i>my-tag-key</i>,Values=<i>my-tag-value-1</i>,<i>my-tag-value-2</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag-key,Values=<i>my-tag-key-1</i>,<i>my-tag-key-2</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Run Command and Maintenance window targets only</b>:\n       <code>Key=resource-groups:Name,Values=<i>resource-group-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Maintenance window targets only</b>:\n       <code>Key=resource-groups:ResourceTypeFilters,Values=<i>resource-type-1</i>,<i>resource-type-2</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Automation targets only</b>:\n       <code>Key=ResourceGroup;Values=<i>resource-group-name</i>\n                  </code>\n               </p>\n            </li>\n         </ul>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=i-02573cafcfEXAMPLE,i-0471e04240EXAMPLE,i-07782c72faEXAMPLE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag-key,Values=Name,Instance-Type,CostCenter</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Run Command and Maintenance window targets only</b>:\n      <code>Key=resource-groups:Name,Values=ProductionResourceGroup</code>\n               </p>\n               <p>This example demonstrates how to target all resources in the resource group <b>ProductionResourceGroup</b> in your maintenance window.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Maintenance window targets only</b>:\n       <code>Key=resource-groups:ResourceTypeFilters,Values=<i>AWS::EC2::INSTANCE</i>,<i>AWS::EC2::VPC</i>\n                  </code>\n               </p>\n               <p>This example demonstrates how to target only EC2 instances and VPCs in your maintenance\n     window.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Automation targets only</b>:\n      <code>Key=ResourceGroup,Values=MyResourceGroup</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>State Manager association targets only</b>:\n       <code>Key=InstanceIds,Values=<i>*</i>\n                  </code>\n               </p>\n               <p>This example demonstrates how to target all managed instances in the AWS Region where the\n     association was created.</p>\n            </li>\n         </ul>\n         <p>For more information about how to send commands that target instances using\n    <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Targeting multiple instances</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ssm#TargetCount": {
@@ -21631,19 +22828,19 @@
                 "TargetLocationMaxConcurrency": {
                     "target": "com.amazonaws.ssm#MaxConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of AWS accounts and AWS regions allowed to run the Automation\n   concurrently </p>"
+                        "smithy.api#documentation": "<p>The maximum number of AWS accounts and AWS regions allowed to run the Automation\n   concurrently.</p>"
                     }
                 },
                 "TargetLocationMaxErrors": {
                     "target": "com.amazonaws.ssm#MaxErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of errors allowed before the system stops queueing additional Automation\n   executions for the currently running Automation. </p>"
+                        "smithy.api#documentation": "<p>The maximum number of errors allowed before the system stops queueing additional Automation\n   executions for the currently running Automation.</p>"
                     }
                 },
                 "ExecutionRoleName": {
                     "target": "com.amazonaws.ssm#ExecutionRoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Automation execution role used by the currently running Automation.</p>"
+                        "smithy.api#documentation": "<p>The Automation execution role used by the currently running Automation. If not specified,\n   the default value is <code>AWS-SystemsManager-AutomationExecutionRole</code>.</p>"
                     }
                 }
             },
@@ -22107,6 +23304,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>By default, when you update an association, the system runs it immediately after it is\n   updated and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you update it. This parameter is not supported for rate\n   expressions.</p>\n         <p>Also, if you specified this option when you created the association, you can reset it. To do\n   so, specify the <code>no-apply-only-at-cron-interval</code> parameter when you update the\n   association from the command line. This parameter forces the association to run immediately after\n   updating it and according to the interval specified.</p>"
                     }
+                },
+                "TargetLocations": {
+                    "target": "com.amazonaws.ssm#TargetLocations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A location is a combination of AWS Regions and AWS accounts where you want to run the\n   association. Use this action to update an association in multiple Regions and multiple\n   accounts.</p>"
+                    }
                 }
             }
         },
@@ -22290,6 +23493,61 @@
                 }
             }
         },
+        "com.amazonaws.ssm#UpdateDocumentMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#UpdateDocumentMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#UpdateDocumentMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidDocument"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidDocumentOperation"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidDocumentVersion"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates information related to approval reviews for a specific version of a document.</p>"
+            }
+        },
+        "com.amazonaws.ssm#UpdateDocumentMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.ssm#DocumentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the document for which a version is to be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DocumentVersion": {
+                    "target": "com.amazonaws.ssm#DocumentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of a document to update.</p>"
+                    }
+                },
+                "DocumentReviews": {
+                    "target": "com.amazonaws.ssm#DocumentReviews",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The document review details to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#UpdateDocumentMetadataResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.ssm#UpdateDocumentRequest": {
             "type": "structure",
             "members": {
@@ -22395,7 +23653,7 @@
                 "StartDate": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowStringDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet\n   Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"etc/UTC\", or\n   \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time\n    Zone Database</a> on the IANA website.</p>"
+                        "smithy.api#documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet\n   Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"UTC\", or\n   \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time\n    Zone Database</a> on the IANA website.</p>"
                     }
                 },
                 "EndDate": {
@@ -22413,14 +23671,14 @@
                 "ScheduleTimezone": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowTimezone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet\n   Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"etc/UTC\", or\n   \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time\n    Zone Database</a> on the IANA website.</p>"
+                        "smithy.api#documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet\n   Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"UTC\", or\n   \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time\n    Zone Database</a> on the IANA website.</p>"
                     }
                 },
                 "ScheduleOffset": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowOffset",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The number of days to wait after the date and time specified by a CRON expression before\n   running the maintenance window.</p>\n         <p>For example, the following cron expression schedules a maintenance window to run the third\n   Tuesday of every month at 11:30 PM.</p>\n         <p>\n            <code>cron(0 30 23 ? * TUE#3 *)</code>\n         </p>\n         <p>If the schedule offset is <code>2</code>, the maintenance window won't run until two days\n   later.</p>"
+                        "smithy.api#documentation": "<p>The number of days to wait after the date and time specified by a CRON expression before\n   running the maintenance window.</p>\n         <p>For example, the following cron expression schedules a maintenance window to run the third\n   Tuesday of every month at 11:30 PM.</p>\n         <p>\n            <code>cron(30 23 ? * TUE#3 *)</code>\n         </p>\n         <p>If the schedule offset is <code>2</code>, the maintenance window won't run until two days\n   later.</p>"
                     }
                 },
                 "Duration": {
@@ -22502,7 +23760,7 @@
                 "ScheduleTimezone": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowTimezone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet\n   Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"etc/UTC\", or\n   \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time\n    Zone Database</a> on the IANA website.</p>"
+                        "smithy.api#documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet\n   Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"UTC\", or\n   \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time\n    Zone Database</a> on the IANA website.</p>"
                     }
                 },
                 "ScheduleOffset": {
@@ -22666,7 +23924,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies a task assigned to a maintenance window. You can't change the task type, but you\n   can change the following values:</p>\n         <ul>\n            <li>\n               <p>TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to\n     AWS-RunShellScript.</p>\n            </li>\n            <li>\n               <p>ServiceRoleArn</p>\n            </li>\n            <li>\n               <p>TaskInvocationParameters</p>\n            </li>\n            <li>\n               <p>Priority</p>\n            </li>\n            <li>\n               <p>MaxConcurrency</p>\n            </li>\n            <li>\n               <p>MaxErrors</p>\n            </li>\n         </ul>\n         <p>If the value for a parameter in <code>UpdateMaintenanceWindowTask</code> is null, then the\n   corresponding field is not modified. If you set <code>Replace</code> to true, then all fields\n   required by the <a>RegisterTaskWithMaintenanceWindow</a> action are required for this\n   request. Optional fields that aren't specified are set to null.</p>\n         <important>\n            <p>When you update a maintenance window task that has options specified in\n     <code>TaskInvocationParameters</code>, you must provide again all the\n     <code>TaskInvocationParameters</code> values that you want to retain. The values you do not\n    specify again are removed. For example, suppose that when you registered a Run Command task, you\n    specified <code>TaskInvocationParameters</code> values for <code>Comment</code>,\n     <code>NotificationConfig</code>, and <code>OutputS3BucketName</code>. If you update the\n    maintenance window task and specify only a different <code>OutputS3BucketName</code> value, the\n    values for <code>Comment</code> and <code>NotificationConfig</code> are removed.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Modifies a task assigned to a maintenance window. You can't change the task type, but you\n   can change the following values:</p>\n         <ul>\n            <li>\n               <p>TaskARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to\n     AWS-RunShellScript.</p>\n            </li>\n            <li>\n               <p>ServiceRoleArn</p>\n            </li>\n            <li>\n               <p>TaskInvocationParameters</p>\n            </li>\n            <li>\n               <p>Priority</p>\n            </li>\n            <li>\n               <p>MaxConcurrency</p>\n            </li>\n            <li>\n               <p>MaxErrors</p>\n            </li>\n         </ul>\n      \n         <note>\n            <p>One or more targets must be specified for maintenance window Run Command-type tasks.\n    Depending on the task, targets are optional for other maintenance window task types (Automation,\n    AWS Lambda, and AWS Step Functions). For more information about running tasks that do not\n    specify targets, see see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering\n     maintenance window tasks without targets</a> in the\n    <i>AWS Systems Manager User Guide</i>.</p>\n         </note>\n         <p>If the value for a parameter in <code>UpdateMaintenanceWindowTask</code> is null, then the\n   corresponding field is not modified. If you set <code>Replace</code> to true, then all fields\n   required by the <a>RegisterTaskWithMaintenanceWindow</a> action are required for this\n   request. Optional fields that aren't specified are set to null.</p>\n         <important>\n            <p>When you update a maintenance window task that has options specified in\n     <code>TaskInvocationParameters</code>, you must provide again all the\n     <code>TaskInvocationParameters</code> values that you want to retain. The values you do not\n    specify again are removed. For example, suppose that when you registered a Run Command task, you\n    specified <code>TaskInvocationParameters</code> values for <code>Comment</code>,\n     <code>NotificationConfig</code>, and <code>OutputS3BucketName</code>. If you update the\n    maintenance window task and specify only a different <code>OutputS3BucketName</code> value, the\n    values for <code>Comment</code> and <code>NotificationConfig</code> are removed.</p>\n         </important>"
             }
         },
         "com.amazonaws.ssm#UpdateMaintenanceWindowTaskRequest": {
@@ -22689,7 +23947,7 @@
                 "Targets": {
                     "target": "com.amazonaws.ssm#Targets",
                     "traits": {
-                        "smithy.api#documentation": "<p>The targets (either instances or tags) to modify. Instances are specified using\n   Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using\n   Key=tag_name,Values=tag_value. </p>"
+                        "smithy.api#documentation": "<p>The targets (either instances or tags) to modify. Instances are specified using\n   Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using\n   Key=tag_name,Values=tag_value. </p>\n      \n         <note>\n            <p>One or more targets must be specified for maintenance window Run Command-type tasks.\n    Depending on the task, targets are optional for other maintenance window task types (Automation,\n    AWS Lambda, and AWS Step Functions). For more information about running tasks that do not\n    specify targets, see see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering\n     maintenance window tasks without targets</a> in the\n    <i>AWS Systems Manager User Guide</i>.</p>\n         </note>"
                     }
                 },
                 "TaskArn": {
@@ -22726,13 +23984,13 @@
                 "MaxConcurrency": {
                     "target": "com.amazonaws.ssm#MaxConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new <code>MaxConcurrency</code> value you want to specify. <code>MaxConcurrency</code>\n   is the number of targets that are allowed to run this task in parallel.</p>"
+                        "smithy.api#documentation": "<p>The new <code>MaxConcurrency</code> value you want to specify. <code>MaxConcurrency</code>\n   is the number of targets that are allowed to run this task in parallel.</p>\n      \n         <note>\n            <p>For maintenance window tasks without a target specified, you cannot supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>, which may be reported\n    in the response to this command. This value does not affect the running of your task and can be\n    ignored.</p>\n         </note>"
                     }
                 },
                 "MaxErrors": {
                     "target": "com.amazonaws.ssm#MaxErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new <code>MaxErrors</code> value to specify. <code>MaxErrors</code> is the maximum\n   number of errors that are allowed before the task stops being scheduled.</p>"
+                        "smithy.api#documentation": "<p>The new <code>MaxErrors</code> value to specify. <code>MaxErrors</code> is the maximum\n   number of errors that are allowed before the task stops being scheduled.</p>\n      \n         <note>\n            <p>For maintenance window tasks without a target specified, you cannot supply a value for this\n    option. Instead, the system inserts a placeholder value of <code>1</code>, which may be reported\n    in the response to this command. This value does not affect the running of your task and can be\n    ignored.</p>\n         </note>"
                     }
                 },
                 "LoggingInfo": {
@@ -22986,6 +24244,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specify a new severity for an OpsItem.</p>"
                     }
+                },
+                "ActualStartTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time a runbook workflow started. Currently reported only for the OpsItem type\n    <code>/aws/changerequest</code>.</p>"
+                    }
+                },
+                "ActualEndTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time a runbook workflow ended. Currently reported only for the OpsItem type\n    <code>/aws/changerequest</code>.</p>"
+                    }
+                },
+                "PlannedStartTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time specified in a change request for a runbook workflow to start. Currently supported\n   only for the OpsItem type <code>/aws/changerequest</code>.</p>"
+                    }
+                },
+                "PlannedEndTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time specified in a change request for a runbook workflow to end. Currently supported\n   only for the OpsItem type <code>/aws/changerequest</code>.</p>"
+                    }
                 }
             }
         },
@@ -23019,7 +24301,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Systems Manager calls this API action when you edit OpsMetadata in AppManager.</p>"
+                "smithy.api#documentation": "<p>Systems Manager calls this API action when you edit OpsMetadata in Application Manager.</p>"
             }
         },
         "com.amazonaws.ssm#UpdateOpsMetadataRequest": {

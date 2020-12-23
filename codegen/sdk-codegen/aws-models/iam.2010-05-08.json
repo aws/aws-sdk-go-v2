@@ -7974,10 +7974,12 @@
                 "smithy.api#documentation": "<p>The policy usage type that indicates whether the policy is used as a permissions policy\n         or as the permissions boundary for an entity.</p>\n         <p>For more information about permissions boundaries, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html\">Permissions Boundaries for IAM\n            Identities </a> in the <i>IAM User Guide</i>.</p>",
                 "smithy.api#enum": [
                     {
-                        "value": "PermissionsPolicy"
+                        "value": "PermissionsPolicy",
+                        "name": "PermissionsPolicy"
                     },
                     {
-                        "value": "PermissionsBoundary"
+                        "value": "PermissionsBoundary",
+                        "name": "PermissionsBoundary"
                     }
                 ]
             }
@@ -8443,7 +8445,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "text/csv"
+                        "value": "text/csv",
+                        "name": "text_csv"
                     }
                 ]
             }
@@ -11043,13 +11046,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Assigned"
+                        "value": "Assigned",
+                        "name": "Assigned"
                     },
                     {
-                        "value": "Unassigned"
+                        "value": "Unassigned",
+                        "name": "Unassigned"
                     },
                     {
-                        "value": "Any"
+                        "value": "Any",
+                        "name": "Any"
                     }
                 ]
             }
@@ -11175,10 +11181,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SSH"
+                        "value": "SSH",
+                        "name": "SSH"
                     },
                     {
-                        "value": "PEM"
+                        "value": "PEM",
+                        "name": "PEM"
                     }
                 ]
             }
@@ -11331,13 +11339,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "IN_PROGRESS"
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
                     },
                     {
-                        "value": "COMPLETED"
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     }
                 ]
             }
@@ -11815,10 +11826,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Active"
+                        "value": "Active",
+                        "name": "Active"
                     },
                     {
-                        "value": "Inactive"
+                        "value": "Inactive",
+                        "name": "Inactive"
                     }
                 ]
             }
@@ -11831,82 +11844,108 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Users"
+                        "value": "Users",
+                        "name": "Users"
                     },
                     {
-                        "value": "UsersQuota"
+                        "value": "UsersQuota",
+                        "name": "UsersQuota"
                     },
                     {
-                        "value": "Groups"
+                        "value": "Groups",
+                        "name": "Groups"
                     },
                     {
-                        "value": "GroupsQuota"
+                        "value": "GroupsQuota",
+                        "name": "GroupsQuota"
                     },
                     {
-                        "value": "ServerCertificates"
+                        "value": "ServerCertificates",
+                        "name": "ServerCertificates"
                     },
                     {
-                        "value": "ServerCertificatesQuota"
+                        "value": "ServerCertificatesQuota",
+                        "name": "ServerCertificatesQuota"
                     },
                     {
-                        "value": "UserPolicySizeQuota"
+                        "value": "UserPolicySizeQuota",
+                        "name": "UserPolicySizeQuota"
                     },
                     {
-                        "value": "GroupPolicySizeQuota"
+                        "value": "GroupPolicySizeQuota",
+                        "name": "GroupPolicySizeQuota"
                     },
                     {
-                        "value": "GroupsPerUserQuota"
+                        "value": "GroupsPerUserQuota",
+                        "name": "GroupsPerUserQuota"
                     },
                     {
-                        "value": "SigningCertificatesPerUserQuota"
+                        "value": "SigningCertificatesPerUserQuota",
+                        "name": "SigningCertificatesPerUserQuota"
                     },
                     {
-                        "value": "AccessKeysPerUserQuota"
+                        "value": "AccessKeysPerUserQuota",
+                        "name": "AccessKeysPerUserQuota"
                     },
                     {
-                        "value": "MFADevices"
+                        "value": "MFADevices",
+                        "name": "MFADevices"
                     },
                     {
-                        "value": "MFADevicesInUse"
+                        "value": "MFADevicesInUse",
+                        "name": "MFADevicesInUse"
                     },
                     {
-                        "value": "AccountMFAEnabled"
+                        "value": "AccountMFAEnabled",
+                        "name": "AccountMFAEnabled"
                     },
                     {
-                        "value": "AccountAccessKeysPresent"
+                        "value": "AccountAccessKeysPresent",
+                        "name": "AccountAccessKeysPresent"
                     },
                     {
-                        "value": "AccountSigningCertificatesPresent"
+                        "value": "AccountSigningCertificatesPresent",
+                        "name": "AccountSigningCertificatesPresent"
                     },
                     {
-                        "value": "AttachedPoliciesPerGroupQuota"
+                        "value": "AttachedPoliciesPerGroupQuota",
+                        "name": "AttachedPoliciesPerGroupQuota"
                     },
                     {
-                        "value": "AttachedPoliciesPerRoleQuota"
+                        "value": "AttachedPoliciesPerRoleQuota",
+                        "name": "AttachedPoliciesPerRoleQuota"
                     },
                     {
-                        "value": "AttachedPoliciesPerUserQuota"
+                        "value": "AttachedPoliciesPerUserQuota",
+                        "name": "AttachedPoliciesPerUserQuota"
                     },
                     {
-                        "value": "Policies"
+                        "value": "Policies",
+                        "name": "Policies"
                     },
                     {
-                        "value": "PoliciesQuota"
+                        "value": "PoliciesQuota",
+                        "name": "PoliciesQuota"
                     },
                     {
-                        "value": "PolicySizeQuota"
+                        "value": "PolicySizeQuota",
+                        "name": "PolicySizeQuota"
                     },
                     {
-                        "value": "PolicyVersionsInUse"
+                        "value": "PolicyVersionsInUse",
+                        "name": "PolicyVersionsInUse"
                     },
                     {
-                        "value": "PolicyVersionsInUseQuota"
+                        "value": "PolicyVersionsInUseQuota",
+                        "name": "PolicyVersionsInUseQuota"
                     },
                     {
-                        "value": "VersionsPerPolicyQuota"
+                        "value": "VersionsPerPolicyQuota",
+                        "name": "VersionsPerPolicyQuota"
                     },
                     {
-                        "value": "GlobalEndpointTokenVersion"
+                        "value": "GlobalEndpointTokenVersion",
+                        "name": "GlobalEndpointTokenVersion"
                     }
                 ]
             }

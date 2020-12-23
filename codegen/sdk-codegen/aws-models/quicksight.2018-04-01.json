@@ -2250,7 +2250,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates and starts a new SPICE ingestion on a dataset</p>\n\t\t    \n\t\t       <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in\n\t\t\taccess control. For an example, see <a href=\"https://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/\">How do I create an IAM policy to control access to Amazon EC2 resources using\n\t\t\t\ttags?</a> in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.</p>",
+                "smithy.api#documentation": "<p>Creates and starts a new SPICE ingestion on a dataset</p>\n\t\t    \n\t\t       <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in\n\t\t\taccess control. For an example, see <a href=\"http://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/\">How do I create an IAM policy to control access to Amazon EC2 resources using\n\t\t\t\ttags?</a> in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}/ingestions/{IngestionId}",
@@ -3559,7 +3559,7 @@
                 "ImportMode": {
                     "target": "com.amazonaws.quicksight#DataSetImportMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether you want to import the data into SPICE.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether you want to import the data into SPICE.</p>"
                     }
                 },
                 "ConsumedSpiceCapacityInBytes": {
@@ -3748,7 +3748,7 @@
                 "ImportMode": {
                     "target": "com.amazonaws.quicksight#DataSetImportMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether you want to import the data into SPICE.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether you want to import the data into SPICE.</p>"
                     }
                 },
                 "RowLevelPermissionDataSet": {
@@ -3760,7 +3760,7 @@
                 "ColumnLevelPermissionRulesApplied": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates if the dataset has column level permission\n            configured.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates if the dataset has column level permission configured.</p>"
                     }
                 }
             },
@@ -7883,7 +7883,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a session URL and authorization code that you can use to embed an Amazon\n            QuickSight read-only dashboard in your web server code. Before you use this command,\n            make sure that you have configured the dashboards and permissions. </p>\n        <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not\n            from the user's browser. The following rules apply to the combination of URL and\n            authorization code:</p>\n        <ul>\n            <li>\n                <p>They must be used together.</p>\n            </li>\n            <li>\n                <p>They can be used one time only.</p>\n            </li>\n            <li>\n                <p>They are valid for 5 minutes after you run this command.</p>\n            </li>\n            <li>\n                <p>The resulting user session is valid for 10 hours.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html\">Embedding Amazon QuickSight</a> in the <i>Amazon QuickSight User\n            Guide</i>\n         .</p>",
+                "smithy.api#documentation": "<p>Generates a session URL and authorization code that you can use to embed an Amazon\n            QuickSight read-only dashboard in your web server code. Before you use this command,\n            make sure that you have configured the dashboards and permissions. </p>\n        <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not\n            from the user's browser. The following rules apply to the combination of URL and\n            authorization code:</p>\n        <ul>\n            <li>\n                <p>They must be used together.</p>\n            </li>\n            <li>\n                <p>They can be used one time only.</p>\n            </li>\n            <li>\n                <p>They are valid for 5 minutes after you run this command.</p>\n            </li>\n            <li>\n                <p>The resulting user session is valid for 10 hours.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}/embed-url",
@@ -7905,7 +7905,7 @@
                 "DashboardId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dashboard, also added to the IAM policy.</p>",
+                        "smithy.api#documentation": "<p>The ID for the dashboard, also added to the AWS Identity and Access Management (IAM)\n            policy.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7942,7 +7942,7 @@
                 "StatePersistenceEnabled": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Adds persistence of state for the user session in an embedded dashboard. Persistence applies to\n            the sheet and the parameter settings. These are control settings that the dashboard subscriber\n            (QuickSight reader) chooses while viewing the dashboard. If this is set to <code>TRUE</code>, the\n            settings are the same when the the subscriber reopens the same dashboard URL. The state is stored\n            in QuickSight, not in a browser cookie. If this is set to FALSE, the state of the user session is\n            not persisted. The default is <code>FALSE</code>.</p>",
+                        "smithy.api#documentation": "<p>Adds persistence of state for the user session in an embedded dashboard. Persistence\n            applies to the sheet and the parameter settings. These are control settings that the\n            dashboard subscriber (QuickSight reader) chooses while viewing the dashboard. If this is\n            set to <code>TRUE</code>, the settings are the same when the subscriber reopens the same\n            dashboard URL. The state is stored in QuickSight, not in a browser cookie. If this is\n            set to FALSE, the state of the user session is not persisted. The default is\n                <code>FALSE</code>.</p>",
                         "smithy.api#httpQuery": "state-persistence-enabled"
                     }
                 },
@@ -7963,13 +7963,10 @@
                 "AdditionalDashboardIds": {
                     "target": "com.amazonaws.quicksight#AdditionalDashboardIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of one or more dashboard ids that you want to add to a session that \n            includes anonymous authorizations. <code>IdentityType</code> must be set to ANONYMOUS \n            for this to work, because other identity types authenticate as QuickSight users. \n            For example, if you set \"<code>--dashboard-id dash_id1 --dashboard-id dash_id2 \n            dash_id3 identity-type ANONYMOUS</code>\", the session can access all \n            three dashboards.\n        </p>",
+                        "smithy.api#documentation": "<p>A list of one or more dashboard IDs that you want to add to a session that includes\n            anonymous users. The <code>IdentityType</code> parameter must be set to\n                <code>ANONYMOUS</code> for this to work, because other identity types authenticate\n            as QuickSight or IAM users. For example, if you set \"<code>--dashboard-id dash_id1\n                --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>\", the session\n            can access all three dashboards. </p>",
                         "smithy.api#httpQuery": "additional-dashboard-ids"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Parameter input for the <code>GetDashboardEmbedUrl</code> operation.</p>"
             }
         },
         "com.amazonaws.quicksight#GetDashboardEmbedUrlResponse": {
@@ -8073,7 +8070,7 @@
                 "UserArn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type.\n\t\t\tYou can use this for any type of Amazon QuickSight users in your account (readers, authors, or\n\t\t\tadmins). They need to be authenticated as one of the following:</p>\n\t\t       <ol>\n            <li>\n\t\t\t\t           <p>Active Directory (AD) users or group members</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Invited nonfederated users</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using\n                    SAML, OpenID Connect, or IAM federation</p>\n\t\t\t         </li>\n         </ol>\n         <p>Omit this parameter for users in the third group – IAM users and IAM\n            role-based sessions.</p>",
+                        "smithy.api#documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type.\n\t\t\tYou can use this for any type of Amazon QuickSight users in your account (readers, authors, or\n\t\t\tadmins). They need to be authenticated as one of the following:</p>\n\t\t       <ol>\n            <li>\n\t\t\t\t           <p>Active Directory (AD) users or group members</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Invited nonfederated users</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>AWS Identity and Access Management (IAM) users and IAM role-based sessions authenticated\n                    through Federated Single Sign-On using SAML, OpenID Connect, or IAM\n                    federation</p>\n\t\t\t         </li>\n         </ol>\n         <p>Omit this parameter for users in the third group, IAM users and IAM role-based\n            sessions.</p>",
                         "smithy.api#httpQuery": "user-arn"
                     }
                 }
@@ -8946,7 +8943,7 @@
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>Indicates that a row in a table is uniquely identified by the columns in a \n            join key. This is used by QuickSight to optimize query performance.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates that a row in a table is uniquely identified by the columns in\n            a join key. This is used by QuickSight to optimize query performance.</p>"
                     }
                 }
             },
@@ -12230,7 +12227,7 @@
                 "SessionName": {
                     "target": "com.amazonaws.quicksight#RoleSessionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>You need to use this parameter only when you register one or more users using an assumed\n\t\t\tIAM role. You don't need to provide the session name for other scenarios, for example when\n\t\t\tyou are registering an IAM user or an Amazon QuickSight user. You can register multiple\n\t\t\tusers using the same IAM role if each user has a different session name. For more\n\t\t\tinformation on assuming IAM roles, see <a href=\"https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html\">\n               <code>assume-role</code>\n            </a> in the <i>AWS CLI Reference.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>You need to use this parameter only when you register one or more users using an assumed\n\t\t\tIAM role. You don't need to provide the session name for other scenarios, for example when\n\t\t\tyou are registering an IAM user or an Amazon QuickSight user. You can register multiple\n\t\t\tusers using the same IAM role if each user has a different session name. For more\n\t\t\tinformation on assuming IAM roles, see <a href=\"https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html\">\n               <code>assume-role</code>\n            </a> in the <i>AWS CLI Reference.</i>\n         </p>"
                     }
                 },
                 "AwsAccountId": {
@@ -12303,6 +12300,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Catalog": {
+                    "target": "com.amazonaws.quicksight#RelationalTableCatalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog associated with a table.</p>"
+                    }
+                },
                 "Schema": {
                     "target": "com.amazonaws.quicksight#RelationalTableSchema",
                     "traits": {
@@ -12326,6 +12329,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A physical table type for relational data sources.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RelationalTableCatalog": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.quicksight#RelationalTableName": {
@@ -14432,7 +14444,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This error indicates that you are calling an embedding operation in Amazon QuickSight\n\t\t\twithout the required pricing plan on your AWS account. Before you can use anonymous \n\t\t\tembedding, a QuickSight administrator needs to add capacity pricing to QuickSight. You \n\t\t    can do this on the <b>Manage QuickSight</b> page. </p>\n        <p>After capacity pricing is added, you can enable anonymous embedding by using the \n            <code>\n               <a>GetDashboardEmbedUrl</a>\n            </code> API operation with the \n            <code>--identity-type ANONYMOUS</code> option.</p>",
+                "smithy.api#documentation": "<p>This error indicates that you are calling an embedding operation in Amazon QuickSight\n\t\t\twithout the required pricing plan on your AWS account. Before you can use embedding \n\t\t\tfor anonymous users, a QuickSight administrator needs to add capacity pricing to QuickSight. You \n\t\t    can do this on the <b>Manage QuickSight</b> page. </p>\n        <p>After capacity pricing is added, you can use the \n            <a>GetDashboardEmbedUrl</a> API operation with the \n            <code>--identity-type ANONYMOUS</code> option.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
