@@ -62,5 +62,4 @@ matrix:
 
 branches:
   only:
-    - master
-    - feature/SmithyAPIClient
+    - main
