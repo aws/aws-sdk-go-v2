@@ -155,7 +155,7 @@ func TestDownloadOrder(t *testing.T) {
 		d.Concurrency = 1
 	})
 
-	w := aws.NewWriteAtBuffer(make([]byte, len(buf12MB)))
+	w := manager.NewWriteAtBuffer(make([]byte, len(buf12MB)))
 	n, err := d.Download(context.Background(), w, &s3.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
@@ -182,7 +182,7 @@ func TestDownloadZero(t *testing.T) {
 	c, invocations, ranges := newDownloadRangeClient([]byte{})
 
 	d := manager.NewDownloader(c)
-	w := &aws.WriteAtBuffer{}
+	w := &manager.WriteAtBuffer{}
 	n, err := d.Download(context.Background(), w, &s3.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
@@ -211,7 +211,7 @@ func TestDownloadSetPartSize(t *testing.T) {
 		d.Concurrency = 1
 		d.PartSize = 1
 	})
-	w := &aws.WriteAtBuffer{}
+	w := &manager.WriteAtBuffer{}
 	n, err := d.Download(context.Background(), w, &s3.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
@@ -254,7 +254,7 @@ func TestDownloadError(t *testing.T) {
 		d.Concurrency = 1
 		d.PartSize = 1
 	})
-	w := &aws.WriteAtBuffer{}
+	w := &manager.WriteAtBuffer{}
 	n, err := d.Download(context.Background(), w, &s3.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
@@ -284,7 +284,7 @@ func TestDownloadNonChunk(t *testing.T) {
 	d := manager.NewDownloader(c, func(d *manager.Downloader) {
 		d.Concurrency = 1
 	})
-	w := &aws.WriteAtBuffer{}
+	w := &manager.WriteAtBuffer{}
 	n, err := d.Download(context.Background(), w, &s3.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
@@ -315,7 +315,7 @@ func TestDownloadNoContentRangeLength(t *testing.T) {
 	d := manager.NewDownloader(s, func(d *manager.Downloader) {
 		d.Concurrency = 1
 	})
-	w := &aws.WriteAtBuffer{}
+	w := &manager.WriteAtBuffer{}
 	n, err := d.Download(context.Background(), w, &s3.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
@@ -346,7 +346,7 @@ func TestDownloadContentRangeTotalAny(t *testing.T) {
 	d := manager.NewDownloader(s, func(d *manager.Downloader) {
 		d.Concurrency = 1
 	})
-	w := &aws.WriteAtBuffer{}
+	w := &manager.WriteAtBuffer{}
 	n, err := d.Download(context.Background(), w, &s3.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
@@ -381,7 +381,7 @@ func TestDownloadPartBodyRetry_SuccessRetry(t *testing.T) {
 		d.Concurrency = 1
 	})
 
-	w := &aws.WriteAtBuffer{}
+	w := &manager.WriteAtBuffer{}
 	n, err := d.Download(context.Background(), w, &s3.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
@@ -410,7 +410,7 @@ func TestDownloadPartBodyRetry_SuccessNoRetry(t *testing.T) {
 		d.Concurrency = 1
 	})
 
-	w := &aws.WriteAtBuffer{}
+	w := &manager.WriteAtBuffer{}
 	n, err := d.Download(context.Background(), w, &s3.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
@@ -440,7 +440,7 @@ func TestDownloadPartBodyRetry_FailRetry(t *testing.T) {
 		d.PartBodyMaxRetries = 0
 	})
 
-	w := &aws.WriteAtBuffer{}
+	w := &manager.WriteAtBuffer{}
 	n, err := d.Download(context.Background(), w, &s3.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
@@ -477,7 +477,7 @@ func TestDownloadWithContextCanceled(t *testing.T) {
 	ctx.Error = fmt.Errorf("context canceled")
 	close(ctx.DoneCh)
 
-	w := &aws.WriteAtBuffer{}
+	w := &manager.WriteAtBuffer{}
 
 	_, err := d.Download(ctx, w, &params)
 	if err == nil {
@@ -496,7 +496,7 @@ func TestDownload_WithRange(t *testing.T) {
 		d.PartSize = 1     // should be ignored
 	})
 
-	w := &aws.WriteAtBuffer{}
+	w := &manager.WriteAtBuffer{}
 	n, err := d.Download(context.Background(), w, &s3.GetObjectInput{
 		Bucket: aws.String("bucket"),
 		Key:    aws.String("key"),
@@ -560,7 +560,7 @@ func TestDownload_WithFailure(t *testing.T) {
 		d.Concurrency = 2
 	})
 
-	w := &aws.WriteAtBuffer{}
+	w := &manager.WriteAtBuffer{}
 	params := s3.GetObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
@@ -616,7 +616,7 @@ func TestDownloadBufferStrategy(t *testing.T) {
 				}
 			})
 
-			buffer := aws.NewWriteAtBuffer(make([]byte, len(expected)))
+			buffer := manager.NewWriteAtBuffer(make([]byte, len(expected)))
 
 			n, err := d.Download(context.Background(), buffer, &s3.GetObjectInput{
 				Bucket: aws.String("bucket"),
@@ -697,7 +697,7 @@ func TestDownloadBufferStrategy_Errors(t *testing.T) {
 		d.Concurrency = 1
 	})
 
-	buffer := aws.NewWriteAtBuffer(make([]byte, len(expected)))
+	buffer := manager.NewWriteAtBuffer(make([]byte, len(expected)))
 
 	n, err := d.Download(context.Background(), buffer, &s3.GetObjectInput{
 		Bucket: aws.String("bucket"),

@@ -13,7 +13,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/manager"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/manager/internal/integration"
@@ -189,7 +188,7 @@ func BenchmarkUpload(b *testing.B) {
 									for i := 0; i < b.N; i++ {
 										for {
 											b.ResetTimer()
-											reader := aws.ReadSeekCloser(io.LimitReader(&awstesting.EndlessReader{}, fileSize))
+											reader := manager.ReadSeekCloser(io.LimitReader(&awstesting.EndlessReader{}, fileSize))
 											err := benchUpload(b, benchConfig.bucket, integration.MustUUID(), reader, sdkConfig, benchConfig.clientConfig)
 											if err != nil {
 												b.Logf("upload failed, retrying: %v", err)
