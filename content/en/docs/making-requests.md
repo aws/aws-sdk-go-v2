@@ -403,13 +403,13 @@ params := &s3.ListObjectsV2Input{
 	Bucket: aws.String("my-bucket"),
 }
 
-pagiantor := s3.NewListObjectsV2Paginator(client, params, func(o *ListObjectsV2PaginatorOptions) {
+paginator := s3.NewListObjectsV2Paginator(client, params, func(o *ListObjectsV2PaginatorOptions) {
 	o.Limit = 10
 })
 
 pageNum := 0
-for pagiantor.HasMorePages() && pageNum < 3 {
-    output, err := pagiantor.NextPage(context.TODO())
+for paginator.HasMorePages() && pageNum < 3 {
+    output, err := paginator.NextPage(context.TODO())
     if err != nil {
     	log.Printf("error: %v", err)
     	return
@@ -424,3 +424,185 @@ for pagiantor.HasMorePages() && pageNum < 3 {
 Similar to client operation method, the client options like the request Region can be modified by providing one or more
 functional arguments to `NextPage`. For more information about overriding client options when calling an operation see
 [Overriding Clients For Operation]({{% ref "#OverrideClientOptionsForOperation" %}})
+
+
+## Using Waiters
+
+When interacting with AWS APIs that are asynchronous, you often need to wait 
+for a particular resource to become available in order to perform further 
+actions on it. 
+
+For example, the {{% alias service=DDBlong %}} `CreateTable` API returns 
+immediately with a TableStatus of CREATING, and you can't invoke read or 
+write operations until the table status has been transitioned to `ACTIVE`. 
+
+Writing logic to continuously poll the table status can be cumbersome 
+and error-prone. The waiters help take the complexity out of it and 
+are simple APIs that handle the polling task for you.
+
+For example, you can use waiters to poll if a {{% alias service=DDB %}} table 
+is created and ready for a write operation.
+
+```go
+import "context"
+import "fmt"
+import "log"
+import "time"
+import "github.com/aws/aws-sdk-go-v2/aws"
+import "github.com/aws/aws-sdk-go-v2/config"
+import "github.com/aws/aws-sdk-go-v2/service/dynamodb"
+
+// ...
+
+cfg, err := config.LoadDefaultConfig(context.TODO())
+if err != nil {
+    log.Printf("error: %v", err)
+    return
+}
+
+client := dynamodb.NewFromConfig(cfg)
+
+// we create a waiter instance by directly passing in a client
+// that satisfies the waiters client Interface. 
+waiter :=  dynamodb.NewTableExistsWaiter(client)
+
+// params is the input to api operation used by the waiter
+params := &dynamodb.DescribeTableInput {
+	TableName: aws.String("test-table")
+}
+
+// maxWaitTime is the maximum wait time, the waiter will wait for 
+// the resource status.
+maxWaitTime := 5 * time.Minutes
+
+// Wait will poll until it gets the resource status, or max wait time 
+// expires.
+err := waiter.Wait(context.TODO(), params, maxWaitTime)  
+if err == nil {
+    log.Printf("error: %v", err)
+    return 
+}
+fmt.Println("Dynamodb table is now ready for write operations")
+
+```
+
+#### Overriding waiter configuration
+
+By default, the SDK uses the minimum delay and maximum delay value configured with 
+optimal values defined by AWS services for different APIs. You can override waiter 
+configuration by providing functional options during waiter construction, or when 
+invoking a waiter operation. 
+
+For example, to override waiter configuration during waiter construction
+
+```go
+import "context"
+import "fmt"
+import "log"
+import "time"
+import "github.com/aws/aws-sdk-go-v2/aws"
+import "github.com/aws/aws-sdk-go-v2/config"
+import "github.com/aws/aws-sdk-go-v2/service/dynamodb"
+
+// ...
+
+cfg, err := config.LoadDefaultConfig(context.TODO())
+if err != nil {
+    log.Printf("error: %v", err)
+    return
+}
+
+client := dynamodb.NewFromConfig(cfg)
+
+// we create a waiter instance by directly passing in a client
+// that satisfies the waiters client Interface. 
+waiter :=  dynamodb.NewTableExistsWaiter(client, func (o *dynamodb.TableExistsWaiterOptions) {
+	
+	// override minimum delay to 10 seconds
+	o.MinDelay = 10 * time.Second
+	
+	// override maximum default delay to 300 seconds
+	o.MaxDelay = 300 * time.Second
+})
+```
+
+The `Wait` function on each waiter also takes in functional options.  
+Similar to the above example, you can override waiter configuration per `Wait` request. 
+
+```go
+// params is the input to api operation used by the waiter
+params := &dynamodb.DescribeTableInput {
+	TableName: aws.String("test-table")
+}
+
+// maxWaitTime is the maximum wait time, the waiter will wait for 
+// the resource status.
+maxWaitTime := 5 * time.Minutes
+
+// Wait will poll until it gets the resource status, or max wait time 
+// expires.
+err := waiter.Wait(context.TODO(), params, maxWaitTime, func (o *dynamodb.TableExistsWaiterOptions) {
+
+    // override minimum delay to 5 seconds
+    o.MinDelay = 5 * time.Second
+
+    // override maximum default delay to 120 seconds
+    o.MaxDelay = 120 * time.Second
+})
+if err == nil {
+    log.Printf("error: %v", err)
+    return 
+}
+fmt.Println("Dynamodb table is now ready for write operations")
+
+```
+
+#### Advanced waiter configuration overrides
+
+You can additionally customize the waiter default behavior by providing a custom 
+retryable function. The waiter-specific options also provides `APIOptions` to
+[customize operation middlewares](https://aws.github.io/aws-sdk-go-v2/docs/middleware/#writing-a-custom-middleware).
+
+For example, to configure advanced waiter overrides.
+
+```go
+import "context"
+import "fmt"
+import "log"
+import "time"
+import "github.com/aws/aws-sdk-go-v2/aws"
+import "github.com/aws/aws-sdk-go-v2/config"
+import "github.com/aws/aws-sdk-go-v2/service/dynamodb"
+import "github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+// ...
+
+cfg, err := config.LoadDefaultConfig(context.TODO())
+if err != nil {
+    log.Printf("error: %v", err)
+    return
+}
+
+client := dynamodb.NewFromConfig(cfg)
+
+// custom retryable defines if a waiter state is retryable or a terminal state.
+// For example purposes, we will configure the waiter to not wait 
+// if table status is returned as `UPDATING`
+customRetryable := func(ctx context.Context, params *dynamodb.DescribeTableInput, 
+	output *dynamodb.DescribeTableOutput, err error) (bool, error) {
+	if output.Table != nil {
+		if output.Table.TableStatus == types.TableStatusUpdating {
+			// if table status is `UPDATING`, no need to wait
+		    return false, nil	
+        }
+    }
+}
+
+// we create a waiter instance by directly passing in a client
+// that satisfies the waiters client Interface. 
+waiter :=  dynamodb.NewTableExistsWaiter(client, func (o *dynamodb.TableExistsWaiterOptions) {
+	
+	// override the service defined waiter-behavior
+	o.Retryable = customRetryable
+})
+
+```
