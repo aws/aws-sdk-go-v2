@@ -31,6 +31,7 @@ feedback and to take advantage of modern Go language features.
 * `aws`: Rename `NoOpRetryer` to `NopRetryer` to have consistent naming with rest of SDK ([#987](https://github.com/aws/aws-sdk-go-v2/pull/987))
     * Fixes [#878](https://github.com/aws/aws-sdk-go-v2/issues/878)
 * `service/s3control`: Change `S3InitiateRestoreObjectOperation.ExpirationInDays` from value to pointer type ([#988](https://github.com/aws/aws-sdk-go-v2/pull/988))
+* `aws`: `ReaderSeekerCloser` and `WriteAtBuffer` have been relocated to `feature/s3/manager`.
 
 ## New Features
 * *Waiters*: Add Waiter utilities for API clients ([aws/smithy-go#237](https://github.com/aws/smithy-go/pull/237))

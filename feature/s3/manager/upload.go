@@ -9,7 +9,6 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -312,7 +311,7 @@ func (u *uploader) initSize() error {
 
 	switch r := u.in.Body.(type) {
 	case io.Seeker:
-		n, err := aws.SeekerLen(r)
+		n, err := seekerLen(r)
 		if err != nil {
 			return err
 		}
