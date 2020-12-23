@@ -1,9 +1,6 @@
 sdk-go = "AWS SDK for Go V2"
 sdk-api = "AWS SDK for Go V2 API Reference"
 
-[tools]
-CLI = "AWS CLI"
-
 [service]
 AASlong = "Amazon AppStream"
 AAS = "Amazon AppStream"

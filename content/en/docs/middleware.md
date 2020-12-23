@@ -2,6 +2,7 @@
 title: "Customizing the AWS SDK for Go V2 Client Requests"
 linkTitle: "Middleware"
 description: "How to use stack step middleware to customize AWS SDK for Go V2 client requests."
+weight: 8
 ---
 
 {{% pageinfo color="warning" %}}
@@ -16,7 +17,7 @@ Build, Finalize, and Deserialize. Each step contains zero or more middleware tha
 output types. The following diagram and table provide an overview of how an operation's request and response traverses
 the stack.
 
-![Middleware](/aws-sdk-go-v2/diagram/middleware.png)
+![Middleware](/aws-sdk-go-v2/diagrams/middleware.png)
 
 Stack Step | Description
 --- | ---
@@ -62,7 +63,8 @@ The following examples show how you can write a custom middleware to populate th
 examples to show how to attach step middleware to the stack.
 
 ```go
-import "github.com/awslabs/smithy-go/middleware"
+import "github.com/aws/smithy-go/aws"
+import "github.com/aws/smithy-go/middleware"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
 
 // ...
@@ -77,7 +79,7 @@ var defaultBucket = middleware.InitializeMiddlewareFunc("DefaultBucket", func(
 	switch v := in.Parameters.(type) {
 	case *s3.GetObjectInput:
 		if v.Bucket == nil {
-			v.Bucket = "my-default-bucket"
+			v.Bucket = aws.String("my-default-bucket")
 		}
 	}
 
@@ -99,7 +101,7 @@ import "context"
 import "github.com/aws/aws-sdk-go-v2/aws"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
-import "github.com/awslabs/smithy-go/middleware"
+import "github.com/aws/smithy-go/middleware"
 
 // ...
 
@@ -127,7 +129,7 @@ import "context"
 import "github.com/aws/aws-sdk-go-v2/aws"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
-import "github.com/awslabs/smithy-go/middleware"
+import "github.com/aws/smithy-go/middleware"
 
 // ...
 
@@ -166,7 +168,7 @@ used `context.Context` to pass information down the stack.
 
 ```go
 import "context"
-import "github.com/awslabs/smithy-go/middleware"
+import "github.com/aws/smithy-go/middleware"
 
 // ...
 
@@ -233,7 +235,7 @@ The following examples shows how a custom middleware can add metadata that is re
 ```go
 import "context"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
-import "github.com/awslabs/smithy-go/middleware"
+import "github.com/aws/smithy-go/middleware"
 
 // ...
 

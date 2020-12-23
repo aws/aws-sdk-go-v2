@@ -2,6 +2,7 @@
 title: "Unit Testing with the AWS SDK for Go V2"
 linkTitle: "Testing"
 description: "How to mock the AWS SDK for Go V2 when unit testing your application."
+weight: 9
 ---
 
 You can mock out the AWS SDK for Go V2 when unit testing your application by
