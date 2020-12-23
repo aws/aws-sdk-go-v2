@@ -113,8 +113,8 @@ type CreateVolumeInput struct {
 	// Indicates whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach,
 	// you can attach the volume to up to 16 Instances built on the Nitro System
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances)
-	// in the same Availability Zone. This parameter is supported with io1 volumes
-	// only. For more information, see  Amazon EBS Multi-Attach
+	// in the same Availability Zone. This parameter is supported with io1 and io2
+	// volumes only. For more information, see  Amazon EBS Multi-Attach
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html) in
 	// the Amazon Elastic Compute Cloud User Guide.
 	MultiAttachEnabled bool

@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the details of a service quota increase request. The response to this
-// command provides the details in the RequestedServiceQuotaChange object.
+// Submits a quota increase request for the specified quota.
 func (c *Client) RequestServiceQuotaIncrease(ctx context.Context, params *RequestServiceQuotaIncreaseInput, optFns ...func(*Options)) (*RequestServiceQuotaIncreaseOutput, error) {
 	if params == nil {
 		params = &RequestServiceQuotaIncreaseInput{}
@@ -30,17 +29,17 @@ func (c *Client) RequestServiceQuotaIncrease(ctx context.Context, params *Reques
 
 type RequestServiceQuotaIncreaseInput struct {
 
-	// Specifies the value submitted in the service quota increase request.
+	// The new, increased value for the quota.
 	//
 	// This member is required.
 	DesiredValue *float64
 
-	// Specifies the service quota that you want to use.
+	// The quota identifier.
 	//
 	// This member is required.
 	QuotaCode *string
 
-	// Specifies the service that you want to use.
+	// The service identifier.
 	//
 	// This member is required.
 	ServiceCode *string
@@ -48,7 +47,7 @@ type RequestServiceQuotaIncreaseInput struct {
 
 type RequestServiceQuotaIncreaseOutput struct {
 
-	// Returns a list of service quota requests.
+	// Information about the quota increase request.
 	RequestedQuota *types.RequestedServiceQuotaChange
 
 	// Metadata pertaining to the operation's result.

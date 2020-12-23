@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Removes the storage type configurations for the specified resource type and
 // association ID.
 func (c *Client) DisassociateInstanceStorageConfig(ctx context.Context, params *DisassociateInstanceStorageConfigInput, optFns ...func(*Options)) (*DisassociateInstanceStorageConfigOutput, error) {

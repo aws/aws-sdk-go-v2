@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Returns details about an insight that you specify using its ID.
 func (c *Client) DescribeInsight(ctx context.Context, params *DescribeInsightInput, optFns ...func(*Options)) (*DescribeInsightOutput, error) {
 	if params == nil {
 		params = &DescribeInsightInput{}
@@ -28,13 +29,18 @@ func (c *Client) DescribeInsight(ctx context.Context, params *DescribeInsightInp
 
 type DescribeInsightInput struct {
 
+	// The ID of the insight.
+	//
 	// This member is required.
 	Id *string
 }
 
 type DescribeInsightOutput struct {
+
+	// An ProactiveInsight object that represents the requested insight.
 	ProactiveInsight *types.ProactiveInsight
 
+	// An ReactiveInsight object that represents the requested insight.
 	ReactiveInsight *types.ReactiveInsight
 
 	// Metadata pertaining to the operation's result.

@@ -1530,6 +1530,26 @@ func (m *validateOpListCommands) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDocumentMetadataHistory struct {
+}
+
+func (*validateOpListDocumentMetadataHistory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDocumentMetadataHistory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDocumentMetadataHistoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDocumentMetadataHistoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDocuments struct {
 }
 
@@ -1585,6 +1605,26 @@ func (m *validateOpListInventoryEntries) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListInventoryEntriesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListOpsItemEvents struct {
+}
+
+func (*validateOpListOpsItemEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListOpsItemEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListOpsItemEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListOpsItemEventsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1930,6 +1970,26 @@ func (m *validateOpStartAutomationExecution) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartChangeRequestExecution struct {
+}
+
+func (*validateOpStartChangeRequestExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartChangeRequestExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartChangeRequestExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartChangeRequestExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartSession struct {
 }
 
@@ -2065,6 +2125,26 @@ func (m *validateOpUpdateDocument) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateDocumentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateDocumentMetadata struct {
+}
+
+func (*validateOpUpdateDocumentMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDocumentMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDocumentMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDocumentMetadataInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2554,6 +2634,10 @@ func addOpListCommandsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCommands{}, middleware.After)
 }
 
+func addOpListDocumentMetadataHistoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDocumentMetadataHistory{}, middleware.After)
+}
+
 func addOpListDocumentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDocuments{}, middleware.After)
 }
@@ -2564,6 +2648,10 @@ func addOpListDocumentVersionsValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpListInventoryEntriesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListInventoryEntries{}, middleware.After)
+}
+
+func addOpListOpsItemEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListOpsItemEvents{}, middleware.After)
 }
 
 func addOpListOpsMetadataValidationMiddleware(stack *middleware.Stack) error {
@@ -2634,6 +2722,10 @@ func addOpStartAutomationExecutionValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpStartAutomationExecution{}, middleware.After)
 }
 
+func addOpStartChangeRequestExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartChangeRequestExecution{}, middleware.After)
+}
+
 func addOpStartSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartSession{}, middleware.After)
 }
@@ -2660,6 +2752,10 @@ func addOpUpdateDocumentDefaultVersionValidationMiddleware(stack *middleware.Sta
 
 func addOpUpdateDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDocument{}, middleware.After)
+}
+
+func addOpUpdateDocumentMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDocumentMetadata{}, middleware.After)
 }
 
 func addOpUpdateMaintenanceWindowValidationMiddleware(stack *middleware.Stack) error {
@@ -3046,6 +3142,21 @@ func validateDocumentRequiresList(v []types.DocumentRequires) error {
 	}
 }
 
+func validateDocumentReviews(v *types.DocumentReviews) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentReviews"}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInstanceInformationFilter(v *types.InstanceInformationFilter) error {
 	if v == nil {
 		return nil
@@ -3387,6 +3498,44 @@ func validateOpsFilterList(v []types.OpsFilter) error {
 	invalidParams := smithy.InvalidParamsError{Context: "OpsFilterList"}
 	for i := range v {
 		if err := validateOpsFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpsItemEventFilter(v *types.OpsItemEventFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpsItemEventFilter"}
+	if len(v.Key) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpsItemEventFilters(v []types.OpsItemEventFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpsItemEventFilters"}
+	for i := range v {
+		if err := validateOpsItemEventFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3829,6 +3978,38 @@ func validateResultAttributeList(v []types.ResultAttribute) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ResultAttributeList"}
 	for i := range v {
 		if err := validateResultAttribute(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRunbook(v *types.Runbook) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Runbook"}
+	if v.DocumentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRunbooks(v []types.Runbook) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Runbooks"}
+	for i := range v {
+		if err := validateRunbook(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -5293,6 +5474,24 @@ func validateOpListCommandsInput(v *ListCommandsInput) error {
 	}
 }
 
+func validateOpListDocumentMetadataHistoryInput(v *ListDocumentMetadataHistoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDocumentMetadataHistoryInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Metadata) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Metadata"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListDocumentsInput(v *ListDocumentsInput) error {
 	if v == nil {
 		return nil
@@ -5338,6 +5537,23 @@ func validateOpListInventoryEntriesInput(v *ListInventoryEntriesInput) error {
 	}
 	if v.Filters != nil {
 		if err := validateInventoryFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListOpsItemEventsInput(v *ListOpsItemEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOpsItemEventsInput"}
+	if v.Filters != nil {
+		if err := validateOpsItemEventFilters(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -5543,20 +5759,11 @@ func validateOpRegisterTaskWithMaintenanceWindowInput(v *RegisterTaskWithMainten
 	if v.WindowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WindowId"))
 	}
-	if v.Targets == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Targets"))
-	}
 	if v.TaskArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskArn"))
 	}
 	if len(v.TaskType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskType"))
-	}
-	if v.MaxConcurrency == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxConcurrency"))
-	}
-	if v.MaxErrors == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxErrors"))
 	}
 	if v.LoggingInfo != nil {
 		if err := validateLoggingInfo(v.LoggingInfo); err != nil {
@@ -5689,6 +5896,33 @@ func validateOpStartAutomationExecutionInput(v *StartAutomationExecutionInput) e
 	}
 }
 
+func validateOpStartChangeRequestExecutionInput(v *StartChangeRequestExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartChangeRequestExecutionInput"}
+	if v.DocumentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentName"))
+	}
+	if v.Runbooks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Runbooks"))
+	} else if v.Runbooks != nil {
+		if err := validateRunbooks(v.Runbooks); err != nil {
+			invalidParams.AddNested("Runbooks", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartSessionInput(v *StartSessionInput) error {
 	if v == nil {
 		return nil
@@ -5802,6 +6036,28 @@ func validateOpUpdateDocumentInput(v *UpdateDocumentInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDocumentMetadataInput(v *UpdateDocumentMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDocumentMetadataInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DocumentReviews == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentReviews"))
+	} else if v.DocumentReviews != nil {
+		if err := validateDocumentReviews(v.DocumentReviews); err != nil {
+			invalidParams.AddNested("DocumentReviews", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

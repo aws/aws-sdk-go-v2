@@ -13,8 +13,15 @@ import (
 
 // Gets the names of the key policies that are attached to a customer master key
 // (CMK). This operation is designed to get policy names that you can use in a
-// GetKeyPolicy operation. However, the only valid policy name is default. You
-// cannot perform this operation on a CMK in a different AWS account.
+// GetKeyPolicy operation. However, the only valid policy name is default.
+// Cross-account use: No. You cannot perform this operation on a CMK in a different
+// AWS account. Required permissions: kms:ListKeyPolicies
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations:
+//
+// * GetKeyPolicy
+//
+// * PutKeyPolicy
 func (c *Client) ListKeyPolicies(ctx context.Context, params *ListKeyPoliciesInput, optFns ...func(*Options)) (*ListKeyPoliciesOutput, error) {
 	if params == nil {
 		params = &ListKeyPoliciesInput{}

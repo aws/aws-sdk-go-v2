@@ -36,7 +36,23 @@ import (
 // operation must be in a compatible key state. For details, see How Key State
 // Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide.
+// AWS Key Management Service Developer Guide. Cross-account use: Yes. To perform
+// this operation with a CMK in a different AWS account, specify the key ARN or
+// alias ARN in the value of the KeyId parameter. Required permissions:
+// kms:GenerateDataKeyPairWithoutPlaintext
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations:
+//
+// * Decrypt
+//
+// * Encrypt
+//
+// * GenerateDataKey
+//
+// *
+// GenerateDataKeyPair
+//
+// * GenerateDataKeyWithoutPlaintext
 func (c *Client) GenerateDataKeyPairWithoutPlaintext(ctx context.Context, params *GenerateDataKeyPairWithoutPlaintextInput, optFns ...func(*Options)) (*GenerateDataKeyPairWithoutPlaintextOutput, error) {
 	if params == nil {
 		params = &GenerateDataKeyPairWithoutPlaintextInput{}
@@ -58,8 +74,9 @@ type GenerateDataKeyPairWithoutPlaintextInput struct {
 	// specify a symmetric CMK. You cannot use an asymmetric CMK or a CMK in a custom
 	// key store. To get the type and origin of your CMK, use the DescribeKey
 	// operation. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
-	// name, or alias ARN. When using an alias name, prefix it with "alias/". For
-	// example:
+	// name, or alias ARN. When using an alias name, prefix it with "alias/". To
+	// specify a CMK in a different AWS account, you must use the key ARN or alias ARN.
+	// For example:
 	//
 	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//

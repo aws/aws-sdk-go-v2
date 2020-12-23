@@ -194,6 +194,28 @@ type CloudwatchLogsExportConfiguration struct {
 	EnableLogTypes []string
 }
 
+// This data type is used as a response element in the ModifyDBCluster operation
+// and contains changes that will be applied during the next maintenance window.
+type ClusterPendingModifiedValues struct {
+
+	// The DBClusterIdentifier for the DB cluster.
+	DBClusterIdentifier *string
+
+	// The database engine version.
+	EngineVersion *string
+
+	// Whether mapping of AWS Identity and Access Management (IAM) accounts to database
+	// accounts is enabled.
+	IAMDatabaseAuthenticationEnabled *bool
+
+	// The master credentials for the DB cluster.
+	MasterUserPassword *string
+
+	// A list of the log types whose configuration is still pending. In other words,
+	// these log types are in the process of being activated or deactivated.
+	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports
+}
+
 // Specifies the settings that control the size and behavior of the connection pool
 // associated with a DBProxyTargetGroup.
 type ConnectionPoolConfiguration struct {
@@ -476,6 +498,11 @@ type DBCluster struct {
 
 	// Specifies whether the DB cluster has instances in multiple Availability Zones.
 	MultiAZ *bool
+
+	// Specifies that changes to the DB cluster are pending. This element is only
+	// included when changes are pending. Specific changes are identified by
+	// subelements.
+	PendingModifiedValues *ClusterPendingModifiedValues
 
 	// Specifies the progress of the operation as a percentage.
 	PercentProgress *string
@@ -918,6 +945,19 @@ type DBInstance struct {
 	// the DB cluster. Setting this value for an Aurora DB instance has no effect on
 	// the DB cluster setting. For more information, see DBCluster.
 	CopyTagsToSnapshot bool
+
+	// Specifies whether a customer-owned IP address (CoIP) is enabled for an RDS on
+	// Outposts DB instance. A CoIP provides local or external connectivity to
+	// resources in your Outpost subnets through your on-premises network. For some use
+	// cases, a CoIP can provide lower latency for connections to the DB instance from
+	// outside of its virtual private cloud (VPC) on your local network. For more
+	// information about RDS on Outposts, see Working with Amazon RDS on AWS Outposts
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
+	// the Amazon RDS User Guide. For more information about CoIPs, see Customer-owned
+	// IP addresses
+	// (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing)
+	// in the AWS Outposts User Guide.
+	CustomerOwnedIpEnabled *bool
 
 	// If the DB instance is a member of a DB cluster, contains the name of the DB
 	// cluster that the DB instance is a member of.
@@ -2548,60 +2588,60 @@ type PendingMaintenanceAction struct {
 	OptInStatus *string
 }
 
-// This data type is used as a response element in the ModifyDBInstance action.
+// This data type is used as a response element in the ModifyDBInstance action and
+// contains changes that will be applied during the next maintenance window.
 type PendingModifiedValues struct {
 
-	// Contains the new AllocatedStorage size for the DB instance that will be applied
-	// or is currently being applied.
+	// The allocated storage size for the DB instance specified in gibibytes .
 	AllocatedStorage *int32
 
-	// Specifies the pending number of days for which automated backups are retained.
+	// The number of days for which automated backups are retained.
 	BackupRetentionPeriod *int32
 
-	// Specifies the identifier of the CA certificate for the DB instance.
+	// The identifier of the CA certificate for the DB instance.
 	CACertificateIdentifier *string
 
-	// Contains the new DBInstanceClass for the DB instance that will be applied or is
-	// currently being applied.
+	// The name of the compute and memory capacity class for the DB instance.
 	DBInstanceClass *string
 
-	// Contains the new DBInstanceIdentifier for the DB instance that will be applied
-	// or is currently being applied.
+	// The database identifier for the DB instance.
 	DBInstanceIdentifier *string
 
-	// The new DB subnet group for the DB instance.
+	// The DB subnet group for the DB instance.
 	DBSubnetGroupName *string
 
-	// Indicates the database engine version.
+	// The database engine version.
 	EngineVersion *string
 
-	// Specifies the new Provisioned IOPS value for the DB instance that will be
-	// applied or is currently being applied.
+	// Whether mapping of AWS Identity and Access Management (IAM) accounts to database
+	// accounts is enabled.
+	IAMDatabaseAuthenticationEnabled *bool
+
+	// The Provisioned IOPS value for the DB instance.
 	Iops *int32
 
 	// The license model for the DB instance. Valid values: license-included |
 	// bring-your-own-license | general-public-license
 	LicenseModel *string
 
-	// Contains the pending or currently-in-progress change of the master credentials
-	// for the DB instance.
+	// The master credentials for the DB instance.
 	MasterUserPassword *string
 
-	// Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
+	// Indicates that the Single-AZ DB instance will change to a Multi-AZ deployment.
 	MultiAZ *bool
 
 	// A list of the log types whose configuration is still pending. In other words,
 	// these log types are in the process of being activated or deactivated.
 	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports
 
-	// Specifies the pending port for the DB instance.
+	// The port for the DB instance.
 	Port *int32
 
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance.
 	ProcessorFeatures []ProcessorFeature
 
-	// Specifies the storage type to be associated with the DB instance.
+	// The storage type of the DB instance.
 	StorageType *string
 }
 

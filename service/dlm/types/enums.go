@@ -2,6 +2,38 @@
 
 package types
 
+type EventSourceValues string
+
+// Enum values for EventSourceValues
+const (
+	EventSourceValuesManagedCwe EventSourceValues = "MANAGED_CWE"
+)
+
+// Values returns all known values for EventSourceValues. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventSourceValues) Values() []EventSourceValues {
+	return []EventSourceValues{
+		"MANAGED_CWE",
+	}
+}
+
+type EventTypeValues string
+
+// Enum values for EventTypeValues
+const (
+	EventTypeValuesSharesnapshot EventTypeValues = "shareSnapshot"
+)
+
+// Values returns all known values for EventTypeValues. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventTypeValues) Values() []EventTypeValues {
+	return []EventTypeValues{
+		"shareSnapshot",
+	}
+}
+
 type GettablePolicyStateValues string
 
 // Enum values for GettablePolicyStateValues
@@ -44,6 +76,7 @@ type PolicyTypeValues string
 const (
 	PolicyTypeValuesEbsSnapshotManagement PolicyTypeValues = "EBS_SNAPSHOT_MANAGEMENT"
 	PolicyTypeValuesImageManagement       PolicyTypeValues = "IMAGE_MANAGEMENT"
+	PolicyTypeValuesEventBasedPolicy      PolicyTypeValues = "EVENT_BASED_POLICY"
 )
 
 // Values returns all known values for PolicyTypeValues. Note that this can be
@@ -53,6 +86,7 @@ func (PolicyTypeValues) Values() []PolicyTypeValues {
 	return []PolicyTypeValues{
 		"EBS_SNAPSHOT_MANAGEMENT",
 		"IMAGE_MANAGEMENT",
+		"EVENT_BASED_POLICY",
 	}
 }
 

@@ -2,6 +2,24 @@
 
 package types
 
+type AccessControlRuleEffect string
+
+// Enum values for AccessControlRuleEffect
+const (
+	AccessControlRuleEffectAllow AccessControlRuleEffect = "ALLOW"
+	AccessControlRuleEffectDeny  AccessControlRuleEffect = "DENY"
+)
+
+// Values returns all known values for AccessControlRuleEffect. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccessControlRuleEffect) Values() []AccessControlRuleEffect {
+	return []AccessControlRuleEffect{
+		"ALLOW",
+		"DENY",
+	}
+}
+
 type EntityState string
 
 // Enum values for EntityState
@@ -19,6 +37,52 @@ func (EntityState) Values() []EntityState {
 		"ENABLED",
 		"DISABLED",
 		"DELETED",
+	}
+}
+
+type FolderName string
+
+// Enum values for FolderName
+const (
+	FolderNameInbox        FolderName = "INBOX"
+	FolderNameDeletedItems FolderName = "DELETED_ITEMS"
+	FolderNameSentItems    FolderName = "SENT_ITEMS"
+	FolderNameDrafts       FolderName = "DRAFTS"
+	FolderNameJunkEmail    FolderName = "JUNK_EMAIL"
+)
+
+// Values returns all known values for FolderName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FolderName) Values() []FolderName {
+	return []FolderName{
+		"INBOX",
+		"DELETED_ITEMS",
+		"SENT_ITEMS",
+		"DRAFTS",
+		"JUNK_EMAIL",
+	}
+}
+
+type MailboxExportJobState string
+
+// Enum values for MailboxExportJobState
+const (
+	MailboxExportJobStateRunning   MailboxExportJobState = "RUNNING"
+	MailboxExportJobStateCompleted MailboxExportJobState = "COMPLETED"
+	MailboxExportJobStateFailed    MailboxExportJobState = "FAILED"
+	MailboxExportJobStateCancelled MailboxExportJobState = "CANCELLED"
+)
+
+// Values returns all known values for MailboxExportJobState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MailboxExportJobState) Values() []MailboxExportJobState {
+	return []MailboxExportJobState{
+		"RUNNING",
+		"COMPLETED",
+		"FAILED",
+		"CANCELLED",
 	}
 }
 
@@ -75,6 +139,26 @@ func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"ROOM",
 		"EQUIPMENT",
+	}
+}
+
+type RetentionAction string
+
+// Enum values for RetentionAction
+const (
+	RetentionActionNone              RetentionAction = "NONE"
+	RetentionActionDelete            RetentionAction = "DELETE"
+	RetentionActionPermanentlyDelete RetentionAction = "PERMANENTLY_DELETE"
+)
+
+// Values returns all known values for RetentionAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RetentionAction) Values() []RetentionAction {
+	return []RetentionAction{
+		"NONE",
+		"DELETE",
+		"PERMANENTLY_DELETE",
 	}
 }
 

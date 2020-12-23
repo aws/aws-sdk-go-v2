@@ -4,6 +4,12 @@ package types
 
 type AcceleratorStatus string
 
+// Enum values for AcceleratorStatus
+const (
+	AcceleratorStatusDeployed   AcceleratorStatus = "DEPLOYED"
+	AcceleratorStatusInProgress AcceleratorStatus = "IN_PROGRESS"
+)
+
 // Values returns all known values for AcceleratorStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -52,6 +58,12 @@ func (ByoipCidrState) Values() []ByoipCidrState {
 
 type ClientAffinity string
 
+// Enum values for ClientAffinity
+const (
+	ClientAffinityNone     ClientAffinity = "NONE"
+	ClientAffinitySourceIp ClientAffinity = "SOURCE_IP"
+)
+
 // Values returns all known values for ClientAffinity. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -63,6 +75,12 @@ func (ClientAffinity) Values() []ClientAffinity {
 }
 
 type CustomRoutingAcceleratorStatus string
+
+// Enum values for CustomRoutingAcceleratorStatus
+const (
+	CustomRoutingAcceleratorStatusDeployed   CustomRoutingAcceleratorStatus = "DEPLOYED"
+	CustomRoutingAcceleratorStatusInProgress CustomRoutingAcceleratorStatus = "IN_PROGRESS"
+)
 
 // Values returns all known values for CustomRoutingAcceleratorStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
@@ -133,6 +151,13 @@ func (HealthCheckProtocol) Values() []HealthCheckProtocol {
 }
 
 type HealthState string
+
+// Enum values for HealthState
+const (
+	HealthStateInitial   HealthState = "INITIAL"
+	HealthStateHealthy   HealthState = "HEALTHY"
+	HealthStateUnhealthy HealthState = "UNHEALTHY"
+)
 
 // Values returns all known values for HealthState. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of

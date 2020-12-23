@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tasks in a maintenance window.
+// Lists the tasks in a maintenance window. For maintenance window tasks without a
+// specified target, you cannot supply values for --max-errors and
+// --max-concurrency. Instead, the system inserts a placeholder value of 1, which
+// may be reported in the response to this command. These values do not affect the
+// running of your task and can be ignored.
 func (c *Client) GetMaintenanceWindowTask(ctx context.Context, params *GetMaintenanceWindowTaskInput, optFns ...func(*Options)) (*GetMaintenanceWindowTaskOutput, error) {
 	if params == nil {
 		params = &GetMaintenanceWindowTaskInput{}
@@ -53,10 +57,18 @@ type GetMaintenanceWindowTaskOutput struct {
 	// MaintenanceWindowTaskInvocationParameters.
 	LoggingInfo *types.LoggingInfo
 
-	// The maximum number of targets allowed to run this task in parallel.
+	// The maximum number of targets allowed to run this task in parallel. For
+	// maintenance window tasks without a target specified, you cannot supply a value
+	// for this option. Instead, the system inserts a placeholder value of 1, which may
+	// be reported in the response to this command. This value does not affect the
+	// running of your task and can be ignored.
 	MaxConcurrency *string
 
-	// The maximum number of errors allowed before the task stops being scheduled.
+	// The maximum number of errors allowed before the task stops being scheduled. For
+	// maintenance window tasks without a target specified, you cannot supply a value
+	// for this option. Instead, the system inserts a placeholder value of 1, which may
+	// be reported in the response to this command. This value does not affect the
+	// running of your task and can be ignored.
 	MaxErrors *string
 
 	// The retrieved task name.

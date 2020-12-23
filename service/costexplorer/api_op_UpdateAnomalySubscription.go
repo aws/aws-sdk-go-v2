@@ -38,7 +38,7 @@ type UpdateAnomalySubscriptionInput struct {
 	// notifications.
 	Frequency types.AnomalySubscriptionFrequency
 
-	// A list of cost anomaly subscription ARNs.
+	// A list of cost anomaly monitor ARNs.
 	MonitorArnList []string
 
 	// The update to the subscriber list.

@@ -10,18 +10,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the state of a customer master key (CMK) to disabled, thereby preventing
-// its use for cryptographic operations
+// Sets the state of a customer master key (CMK) to disabled. This change
+// temporarily prevents use of the CMK for cryptographic operations
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations).
-// You cannot perform this operation on a CMK in a different AWS account. For more
-// information about how key state affects the use of a CMK, see How Key State
-// Affects the Use of a Customer Master Key
+// For more information about how key state affects the use of a CMK, see How Key
+// State Affects the Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide . The CMK that you use for this
 // operation must be in a compatible key state. For details, see How Key State
 // Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide.
+// AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a CMK in a different AWS account. Required
+// permissions: kms:DisableKey
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations: EnableKey
 func (c *Client) DisableKey(ctx context.Context, params *DisableKeyInput, optFns ...func(*Options)) (*DisableKeyOutput, error) {
 	if params == nil {
 		params = &DisableKeyInput{}

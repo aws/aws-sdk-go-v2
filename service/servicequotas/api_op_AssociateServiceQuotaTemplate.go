@@ -10,11 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates the Service Quotas template with your organization so that when new
-// accounts are created in your organization, the template submits increase
-// requests for the specified service quotas. Use the Service Quotas template to
-// request an increase for any adjustable quota value. After you define the Service
-// Quotas template, use this operation to associate, or enable, the template.
+// Associates your quota request template with your organization. When a new
+// account is created in your organization, the quota increase requests in the
+// template are automatically applied to the account. You can add a quota increase
+// request for any adjustable quota to your template.
 func (c *Client) AssociateServiceQuotaTemplate(ctx context.Context, params *AssociateServiceQuotaTemplateInput, optFns ...func(*Options)) (*AssociateServiceQuotaTemplateOutput, error) {
 	if params == nil {
 		params = &AssociateServiceQuotaTemplateInput{}

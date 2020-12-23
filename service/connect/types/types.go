@@ -522,6 +522,15 @@ type ParticipantDetails struct {
 	DisplayName *string
 }
 
+// Contains information about a phone number for a quick connect.
+type PhoneNumberQuickConnectConfig struct {
+
+	// The phone number in E.164 format.
+	//
+	// This member is required.
+	PhoneNumber *string
+}
+
 // Contains summary information about a phone number for a contact center.
 type PhoneNumberSummary struct {
 
@@ -561,6 +570,21 @@ type PromptSummary struct {
 	Name *string
 }
 
+// Contains information about a queue for a quick connect. The contact flow must be
+// of type Transfer to Queue.
+type QueueQuickConnectConfig struct {
+
+	// The identifier of the contact flow.
+	//
+	// This member is required.
+	ContactFlowId *string
+
+	// The identifier of the queue.
+	//
+	// This member is required.
+	QueueId *string
+}
+
 // Contains information about a queue resource for which metrics are returned.
 type QueueReference struct {
 
@@ -585,6 +609,67 @@ type QueueSummary struct {
 
 	// The type of queue.
 	QueueType QueueType
+}
+
+// Contains information about a quick connect.
+type QuickConnect struct {
+
+	// The description.
+	Description *string
+
+	// The name of the quick connect.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the quick connect.
+	QuickConnectARN *string
+
+	// Contains information about the quick connect.
+	QuickConnectConfig *QuickConnectConfig
+
+	// The identifier for the quick connect.
+	QuickConnectId *string
+
+	// One or more tags.
+	Tags map[string]string
+}
+
+// Contains configuration settings for a quick connect.
+type QuickConnectConfig struct {
+
+	// The type of quick connect. In the Amazon Connect console, when you create a
+	// quick connect, you are prompted to assign one of the following types: Agent
+	// (USER), External (PHONE_NUMBER), or Queue (QUEUE).
+	//
+	// This member is required.
+	QuickConnectType QuickConnectType
+
+	// The phone configuration. This is required only if QuickConnectType is
+	// PHONE_NUMBER.
+	PhoneConfig *PhoneNumberQuickConnectConfig
+
+	// The queue configuration. This is required only if QuickConnectType is QUEUE.
+	QueueConfig *QueueQuickConnectConfig
+
+	// The user configuration. This is required only if QuickConnectType is USER.
+	UserConfig *UserQuickConnectConfig
+}
+
+// Contains summary information about a quick connect.
+type QuickConnectSummary struct {
+
+	// The Amazon Resource Name (ARN).
+	Arn *string
+
+	// The identifier for the quick connect.
+	Id *string
+
+	// The name.
+	Name *string
+
+	// The type of quick connect. In the Amazon Connect console, when you create a
+	// quick connect, you are prompted to assign one of the following types: Agent
+	// (USER), External (PHONE_NUMBER), or Queue (QUEUE).
+	QuickConnectType QuickConnectType
 }
 
 // A link that an agent selects to complete a given task. You can have up to 4,096
@@ -860,6 +945,21 @@ type UserPhoneConfig struct {
 
 	// The phone number for the user's desk phone.
 	DeskPhoneNumber *string
+}
+
+// Contains information about the quick connect configuration settings for a user.
+// The contact flow must be of type Transfer to Agent.
+type UserQuickConnectConfig struct {
+
+	// The identifier of the contact flow.
+	//
+	// This member is required.
+	ContactFlowId *string
+
+	// The identifier of the user.
+	//
+	// This member is required.
+	UserId *string
 }
 
 // Contains summary information about a user.

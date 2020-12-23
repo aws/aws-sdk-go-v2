@@ -399,11 +399,11 @@ func awsRestjson1_serializeOpHttpBindingsDescribeResourceCollectionHealthInput(v
 		encoder.SetQuery("NextToken").String(*v.NextToken)
 	}
 
-	if v.ResourceCollectionType == nil || len(*v.ResourceCollectionType) == 0 {
+	if len(v.ResourceCollectionType) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceCollectionType must not be empty")}
 	}
-	if v.ResourceCollectionType != nil {
-		if err := encoder.SetURI("ResourceCollectionType").String(*v.ResourceCollectionType); err != nil {
+	if len(v.ResourceCollectionType) > 0 {
+		if err := encoder.SetURI("ResourceCollectionType").String(string(v.ResourceCollectionType)); err != nil {
 			return err
 		}
 	}
@@ -516,11 +516,11 @@ func awsRestjson1_serializeOpHttpBindingsGetResourceCollectionInput(v *GetResour
 		encoder.SetQuery("NextToken").String(*v.NextToken)
 	}
 
-	if v.ResourceCollectionType == nil || len(*v.ResourceCollectionType) == 0 {
+	if len(v.ResourceCollectionType) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceCollectionType must not be empty")}
 	}
-	if v.ResourceCollectionType != nil {
-		if err := encoder.SetURI("ResourceCollectionType").String(*v.ResourceCollectionType); err != nil {
+	if len(v.ResourceCollectionType) > 0 {
+		if err := encoder.SetURI("ResourceCollectionType").String(string(v.ResourceCollectionType)); err != nil {
 			return err
 		}
 	}
@@ -606,9 +606,9 @@ func awsRestjson1_serializeOpDocumentListAnomaliesForInsightInput(v *ListAnomali
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -698,9 +698,9 @@ func awsRestjson1_serializeOpDocumentListEventsInput(v *ListEventsInput, value s
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -776,9 +776,9 @@ func awsRestjson1_serializeOpDocumentListInsightsInput(v *ListInsightsInput, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1157,9 +1157,9 @@ func awsRestjson1_serializeOpDocumentSearchInsightsInput(v *SearchInsightsInput,
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1337,46 +1337,13 @@ func awsRestjson1_serializeOpDocumentUpdateServiceIntegrationInput(v *UpdateServ
 	return nil
 }
 
-func awsRestjson1_serializeDocument__listOf__stringMin1Max128PatternAZAZAZAZ09(v []string, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		av.String(v[i])
-	}
-	return nil
-}
-
-func awsRestjson1_serializeDocument__listOfInsightSeverity(v []types.InsightSeverity, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		av.String(string(v[i]))
-	}
-	return nil
-}
-
-func awsRestjson1_serializeDocument__listOfInsightStatus(v []types.InsightStatus, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		av.String(string(v[i]))
-	}
-	return nil
-}
-
 func awsRestjson1_serializeDocumentCloudFormationCollection(v *types.CloudFormationCollection, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	if v.StackNames != nil {
 		ok := object.Key("StackNames")
-		if err := awsRestjson1_serializeDocument__listOf__stringMin1Max128PatternAZAZAZAZ09(v.StackNames, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentStackNames(v.StackNames, ok); err != nil {
 			return err
 		}
 	}
@@ -1432,6 +1399,28 @@ func awsRestjson1_serializeDocumentInsightFeedback(v *types.InsightFeedback, val
 		ok.String(*v.Id)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInsightSeverities(v []types.InsightSeverity, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInsightStatuses(v []types.InsightStatus, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
@@ -1607,14 +1596,14 @@ func awsRestjson1_serializeDocumentSearchInsightsFilters(v *types.SearchInsights
 
 	if v.Severities != nil {
 		ok := object.Key("Severities")
-		if err := awsRestjson1_serializeDocument__listOfInsightSeverity(v.Severities, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentInsightSeverities(v.Severities, ok); err != nil {
 			return err
 		}
 	}
 
 	if v.Statuses != nil {
 		ok := object.Key("Statuses")
-		if err := awsRestjson1_serializeDocument__listOfInsightStatus(v.Statuses, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentInsightStatuses(v.Statuses, ok); err != nil {
 			return err
 		}
 	}
@@ -1631,6 +1620,17 @@ func awsRestjson1_serializeDocumentSnsChannelConfig(v *types.SnsChannelConfig, v
 		ok.String(*v.TopicArn)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStackNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -1657,7 +1657,7 @@ func awsRestjson1_serializeDocumentUpdateCloudFormationCollectionFilter(v *types
 
 	if v.StackNames != nil {
 		ok := object.Key("StackNames")
-		if err := awsRestjson1_serializeDocument__listOf__stringMin1Max128PatternAZAZAZAZ09(v.StackNames, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentUpdateStackNames(v.StackNames, ok); err != nil {
 			return err
 		}
 	}
@@ -1690,5 +1690,16 @@ func awsRestjson1_serializeDocumentUpdateServiceIntegrationConfig(v *types.Updat
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateStackNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }

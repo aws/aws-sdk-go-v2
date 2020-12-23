@@ -98,6 +98,19 @@ func (ContentModerationSortBy) Values() []ContentModerationSortBy {
 
 type EmotionName string
 
+// Enum values for EmotionName
+const (
+	EmotionNameHappy     EmotionName = "HAPPY"
+	EmotionNameSad       EmotionName = "SAD"
+	EmotionNameAngry     EmotionName = "ANGRY"
+	EmotionNameConfused  EmotionName = "CONFUSED"
+	EmotionNameDisgusted EmotionName = "DISGUSTED"
+	EmotionNameSurprised EmotionName = "SURPRISED"
+	EmotionNameCalm      EmotionName = "CALM"
+	EmotionNameUnknown   EmotionName = "UNKNOWN"
+	EmotionNameFear      EmotionName = "FEAR"
+)
+
 // Values returns all known values for EmotionName. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.

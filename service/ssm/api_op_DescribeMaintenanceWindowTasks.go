@@ -12,7 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tasks in a maintenance window.
+// Lists the tasks in a maintenance window. For maintenance window tasks without a
+// specified target, you cannot supply values for --max-errors and
+// --max-concurrency. Instead, the system inserts a placeholder value of 1, which
+// may be reported in the response to this command. These values do not affect the
+// running of your task and can be ignored.
 func (c *Client) DescribeMaintenanceWindowTasks(ctx context.Context, params *DescribeMaintenanceWindowTasksInput, optFns ...func(*Options)) (*DescribeMaintenanceWindowTasksOutput, error) {
 	if params == nil {
 		params = &DescribeMaintenanceWindowTasksInput{}

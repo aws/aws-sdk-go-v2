@@ -14,8 +14,8 @@ import (
 // overview, see Tagging Your Amazon SQS Queues
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-tags.html)
 // in the Amazon Simple Queue Service Developer Guide. Cross-account permissions
-// don't apply to this action. For more information, see Grant Cross-Account
-// Permissions to a Role and a User Name
+// don't apply to this action. For more information, see Grant cross-account
+// permissions to a role and a user name
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 // in the Amazon Simple Queue Service Developer Guide.
 func (c *Client) ListQueueTags(ctx context.Context, params *ListQueueTagsInput, optFns ...func(*Options)) (*ListQueueTagsOutput, error) {

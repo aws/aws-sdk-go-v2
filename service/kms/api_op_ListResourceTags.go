@@ -11,8 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all tags for the specified customer master key (CMK). You
-// cannot perform this operation on a CMK in a different AWS account.
+// Returns all tags on the specified customer master key (CMK). For general
+// information about tags, including the format and syntax, see Tagging AWS
+// resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
+// the Amazon Web Services General Reference. For information about using tags in
+// AWS KMS, see Tagging keys
+// (https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html).
+// Cross-account use: No. You cannot perform this operation on a CMK in a different
+// AWS account. Required permissions: kms:ListResourceTags
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations:
+//
+// * TagResource
+//
+// * UntagResource
 func (c *Client) ListResourceTags(ctx context.Context, params *ListResourceTagsInput, optFns ...func(*Options)) (*ListResourceTagsOutput, error) {
 	if params == nil {
 		params = &ListResourceTagsInput{}

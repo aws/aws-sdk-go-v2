@@ -4,6 +4,11 @@ package types
 
 type AnalyticsS3ExportFileFormat string
 
+// Enum values for AnalyticsS3ExportFileFormat
+const (
+	AnalyticsS3ExportFileFormatCsv AnalyticsS3ExportFileFormat = "CSV"
+)
+
 // Values returns all known values for AnalyticsS3ExportFileFormat. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
 // The ordering of this slice is not guaranteed to be stable across updates.
@@ -14,6 +19,12 @@ func (AnalyticsS3ExportFileFormat) Values() []AnalyticsS3ExportFileFormat {
 }
 
 type ArchiveStatus string
+
+// Enum values for ArchiveStatus
+const (
+	ArchiveStatusArchiveAccess     ArchiveStatus = "ARCHIVE_ACCESS"
+	ArchiveStatusDeepArchiveAccess ArchiveStatus = "DEEP_ARCHIVE_ACCESS"
+)
 
 // Values returns all known values for ArchiveStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -27,6 +38,12 @@ func (ArchiveStatus) Values() []ArchiveStatus {
 
 type BucketAccelerateStatus string
 
+// Enum values for BucketAccelerateStatus
+const (
+	BucketAccelerateStatusEnabled   BucketAccelerateStatus = "Enabled"
+	BucketAccelerateStatusSuspended BucketAccelerateStatus = "Suspended"
+)
+
 // Values returns all known values for BucketAccelerateStatus. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -38,6 +55,14 @@ func (BucketAccelerateStatus) Values() []BucketAccelerateStatus {
 }
 
 type BucketCannedACL string
+
+// Enum values for BucketCannedACL
+const (
+	BucketCannedACLPrivate           BucketCannedACL = "private"
+	BucketCannedACLPublicRead        BucketCannedACL = "public-read"
+	BucketCannedACLPublicReadWrite   BucketCannedACL = "public-read-write"
+	BucketCannedACLAuthenticatedRead BucketCannedACL = "authenticated-read"
+)
 
 // Values returns all known values for BucketCannedACL. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -52,6 +77,35 @@ func (BucketCannedACL) Values() []BucketCannedACL {
 }
 
 type BucketLocationConstraint string
+
+// Enum values for BucketLocationConstraint
+const (
+	BucketLocationConstraintAfSouth1     BucketLocationConstraint = "af-south-1"
+	BucketLocationConstraintApEast1      BucketLocationConstraint = "ap-east-1"
+	BucketLocationConstraintApNortheast1 BucketLocationConstraint = "ap-northeast-1"
+	BucketLocationConstraintApNortheast2 BucketLocationConstraint = "ap-northeast-2"
+	BucketLocationConstraintApNortheast3 BucketLocationConstraint = "ap-northeast-3"
+	BucketLocationConstraintApSouth1     BucketLocationConstraint = "ap-south-1"
+	BucketLocationConstraintApSoutheast1 BucketLocationConstraint = "ap-southeast-1"
+	BucketLocationConstraintApSoutheast2 BucketLocationConstraint = "ap-southeast-2"
+	BucketLocationConstraintCaCentral1   BucketLocationConstraint = "ca-central-1"
+	BucketLocationConstraintCnNorth1     BucketLocationConstraint = "cn-north-1"
+	BucketLocationConstraintCnNorthwest1 BucketLocationConstraint = "cn-northwest-1"
+	BucketLocationConstraintEu           BucketLocationConstraint = "EU"
+	BucketLocationConstraintEuCentral1   BucketLocationConstraint = "eu-central-1"
+	BucketLocationConstraintEuNorth1     BucketLocationConstraint = "eu-north-1"
+	BucketLocationConstraintEuSouth1     BucketLocationConstraint = "eu-south-1"
+	BucketLocationConstraintEuWest1      BucketLocationConstraint = "eu-west-1"
+	BucketLocationConstraintEuWest2      BucketLocationConstraint = "eu-west-2"
+	BucketLocationConstraintEuWest3      BucketLocationConstraint = "eu-west-3"
+	BucketLocationConstraintMeSouth1     BucketLocationConstraint = "me-south-1"
+	BucketLocationConstraintSaEast1      BucketLocationConstraint = "sa-east-1"
+	BucketLocationConstraintUsEast2      BucketLocationConstraint = "us-east-2"
+	BucketLocationConstraintUsGovEast1   BucketLocationConstraint = "us-gov-east-1"
+	BucketLocationConstraintUsGovWest1   BucketLocationConstraint = "us-gov-west-1"
+	BucketLocationConstraintUsWest1      BucketLocationConstraint = "us-west-1"
+	BucketLocationConstraintUsWest2      BucketLocationConstraint = "us-west-2"
+)
 
 // Values returns all known values for BucketLocationConstraint. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
@@ -88,6 +142,13 @@ func (BucketLocationConstraint) Values() []BucketLocationConstraint {
 
 type BucketLogsPermission string
 
+// Enum values for BucketLogsPermission
+const (
+	BucketLogsPermissionFullControl BucketLogsPermission = "FULL_CONTROL"
+	BucketLogsPermissionRead        BucketLogsPermission = "READ"
+	BucketLogsPermissionWrite       BucketLogsPermission = "WRITE"
+)
+
 // Values returns all known values for BucketLogsPermission. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -101,6 +162,12 @@ func (BucketLogsPermission) Values() []BucketLogsPermission {
 
 type BucketVersioningStatus string
 
+// Enum values for BucketVersioningStatus
+const (
+	BucketVersioningStatusEnabled   BucketVersioningStatus = "Enabled"
+	BucketVersioningStatusSuspended BucketVersioningStatus = "Suspended"
+)
+
 // Values returns all known values for BucketVersioningStatus. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -112,6 +179,13 @@ func (BucketVersioningStatus) Values() []BucketVersioningStatus {
 }
 
 type CompressionType string
+
+// Enum values for CompressionType
+const (
+	CompressionTypeNone  CompressionType = "NONE"
+	CompressionTypeGzip  CompressionType = "GZIP"
+	CompressionTypeBzip2 CompressionType = "BZIP2"
+)
 
 // Values returns all known values for CompressionType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -126,6 +200,12 @@ func (CompressionType) Values() []CompressionType {
 
 type DeleteMarkerReplicationStatus string
 
+// Enum values for DeleteMarkerReplicationStatus
+const (
+	DeleteMarkerReplicationStatusEnabled  DeleteMarkerReplicationStatus = "Enabled"
+	DeleteMarkerReplicationStatusDisabled DeleteMarkerReplicationStatus = "Disabled"
+)
+
 // Values returns all known values for DeleteMarkerReplicationStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
@@ -138,6 +218,11 @@ func (DeleteMarkerReplicationStatus) Values() []DeleteMarkerReplicationStatus {
 }
 
 type EncodingType string
+
+// Enum values for EncodingType
+const (
+	EncodingTypeUrl EncodingType = "url"
+)
 
 // Values returns all known values for EncodingType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -177,6 +262,12 @@ func (Event) Values() []Event {
 
 type ExistingObjectReplicationStatus string
 
+// Enum values for ExistingObjectReplicationStatus
+const (
+	ExistingObjectReplicationStatusEnabled  ExistingObjectReplicationStatus = "Enabled"
+	ExistingObjectReplicationStatusDisabled ExistingObjectReplicationStatus = "Disabled"
+)
+
 // Values returns all known values for ExistingObjectReplicationStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
@@ -190,6 +281,12 @@ func (ExistingObjectReplicationStatus) Values() []ExistingObjectReplicationStatu
 
 type ExpirationStatus string
 
+// Enum values for ExpirationStatus
+const (
+	ExpirationStatusEnabled  ExpirationStatus = "Enabled"
+	ExpirationStatusDisabled ExpirationStatus = "Disabled"
+)
+
 // Values returns all known values for ExpirationStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -201,6 +298,11 @@ func (ExpirationStatus) Values() []ExpirationStatus {
 }
 
 type ExpressionType string
+
+// Enum values for ExpressionType
+const (
+	ExpressionTypeSql ExpressionType = "SQL"
+)
 
 // Values returns all known values for ExpressionType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -233,6 +335,12 @@ func (FileHeaderInfo) Values() []FileHeaderInfo {
 
 type FilterRuleName string
 
+// Enum values for FilterRuleName
+const (
+	FilterRuleNamePrefix FilterRuleName = "prefix"
+	FilterRuleNameSuffix FilterRuleName = "suffix"
+)
+
 // Values returns all known values for FilterRuleName. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -244,6 +352,12 @@ func (FilterRuleName) Values() []FilterRuleName {
 }
 
 type IntelligentTieringAccessTier string
+
+// Enum values for IntelligentTieringAccessTier
+const (
+	IntelligentTieringAccessTierArchiveAccess     IntelligentTieringAccessTier = "ARCHIVE_ACCESS"
+	IntelligentTieringAccessTierDeepArchiveAccess IntelligentTieringAccessTier = "DEEP_ARCHIVE_ACCESS"
+)
 
 // Values returns all known values for IntelligentTieringAccessTier. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
@@ -257,6 +371,12 @@ func (IntelligentTieringAccessTier) Values() []IntelligentTieringAccessTier {
 
 type IntelligentTieringStatus string
 
+// Enum values for IntelligentTieringStatus
+const (
+	IntelligentTieringStatusEnabled  IntelligentTieringStatus = "Enabled"
+	IntelligentTieringStatusDisabled IntelligentTieringStatus = "Disabled"
+)
+
 // Values returns all known values for IntelligentTieringStatus. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -268,6 +388,13 @@ func (IntelligentTieringStatus) Values() []IntelligentTieringStatus {
 }
 
 type InventoryFormat string
+
+// Enum values for InventoryFormat
+const (
+	InventoryFormatCsv     InventoryFormat = "CSV"
+	InventoryFormatOrc     InventoryFormat = "ORC"
+	InventoryFormatParquet InventoryFormat = "Parquet"
+)
 
 // Values returns all known values for InventoryFormat. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -282,6 +409,12 @@ func (InventoryFormat) Values() []InventoryFormat {
 
 type InventoryFrequency string
 
+// Enum values for InventoryFrequency
+const (
+	InventoryFrequencyDaily  InventoryFrequency = "Daily"
+	InventoryFrequencyWeekly InventoryFrequency = "Weekly"
+)
+
 // Values returns all known values for InventoryFrequency. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -293,6 +426,12 @@ func (InventoryFrequency) Values() []InventoryFrequency {
 }
 
 type InventoryIncludedObjectVersions string
+
+// Enum values for InventoryIncludedObjectVersions
+const (
+	InventoryIncludedObjectVersionsAll     InventoryIncludedObjectVersions = "All"
+	InventoryIncludedObjectVersionsCurrent InventoryIncludedObjectVersions = "Current"
+)
 
 // Values returns all known values for InventoryIncludedObjectVersions. Note that
 // this can be expanded in the future, and so it is only as up to date as the
@@ -306,6 +445,21 @@ func (InventoryIncludedObjectVersions) Values() []InventoryIncludedObjectVersion
 }
 
 type InventoryOptionalField string
+
+// Enum values for InventoryOptionalField
+const (
+	InventoryOptionalFieldSize                         InventoryOptionalField = "Size"
+	InventoryOptionalFieldLastmodifieddate             InventoryOptionalField = "LastModifiedDate"
+	InventoryOptionalFieldStorageclass                 InventoryOptionalField = "StorageClass"
+	InventoryOptionalFieldEtag                         InventoryOptionalField = "ETag"
+	InventoryOptionalFieldIsmultipartuploaded          InventoryOptionalField = "IsMultipartUploaded"
+	InventoryOptionalFieldReplicationstatus            InventoryOptionalField = "ReplicationStatus"
+	InventoryOptionalFieldEncryptionstatus             InventoryOptionalField = "EncryptionStatus"
+	InventoryOptionalFieldObjectlockretainuntildate    InventoryOptionalField = "ObjectLockRetainUntilDate"
+	InventoryOptionalFieldObjectlockmode               InventoryOptionalField = "ObjectLockMode"
+	InventoryOptionalFieldObjectlocklegalholdstatus    InventoryOptionalField = "ObjectLockLegalHoldStatus"
+	InventoryOptionalFieldIntelligenttieringaccesstier InventoryOptionalField = "IntelligentTieringAccessTier"
+)
 
 // Values returns all known values for InventoryOptionalField. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
@@ -346,6 +500,12 @@ func (JSONType) Values() []JSONType {
 
 type MetadataDirective string
 
+// Enum values for MetadataDirective
+const (
+	MetadataDirectiveCopy    MetadataDirective = "COPY"
+	MetadataDirectiveReplace MetadataDirective = "REPLACE"
+)
+
 // Values returns all known values for MetadataDirective. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -357,6 +517,12 @@ func (MetadataDirective) Values() []MetadataDirective {
 }
 
 type MetricsStatus string
+
+// Enum values for MetricsStatus
+const (
+	MetricsStatusEnabled  MetricsStatus = "Enabled"
+	MetricsStatusDisabled MetricsStatus = "Disabled"
+)
 
 // Values returns all known values for MetricsStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -370,6 +536,12 @@ func (MetricsStatus) Values() []MetricsStatus {
 
 type MFADelete string
 
+// Enum values for MFADelete
+const (
+	MFADeleteEnabled  MFADelete = "Enabled"
+	MFADeleteDisabled MFADelete = "Disabled"
+)
+
 // Values returns all known values for MFADelete. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -382,6 +554,12 @@ func (MFADelete) Values() []MFADelete {
 
 type MFADeleteStatus string
 
+// Enum values for MFADeleteStatus
+const (
+	MFADeleteStatusEnabled  MFADeleteStatus = "Enabled"
+	MFADeleteStatusDisabled MFADeleteStatus = "Disabled"
+)
+
 // Values returns all known values for MFADeleteStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -393,6 +571,17 @@ func (MFADeleteStatus) Values() []MFADeleteStatus {
 }
 
 type ObjectCannedACL string
+
+// Enum values for ObjectCannedACL
+const (
+	ObjectCannedACLPrivate                ObjectCannedACL = "private"
+	ObjectCannedACLPublicRead             ObjectCannedACL = "public-read"
+	ObjectCannedACLPublicReadWrite        ObjectCannedACL = "public-read-write"
+	ObjectCannedACLAuthenticatedRead      ObjectCannedACL = "authenticated-read"
+	ObjectCannedACLAwsExecRead            ObjectCannedACL = "aws-exec-read"
+	ObjectCannedACLBucketOwnerRead        ObjectCannedACL = "bucket-owner-read"
+	ObjectCannedACLBucketOwnerFullControl ObjectCannedACL = "bucket-owner-full-control"
+)
 
 // Values returns all known values for ObjectCannedACL. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -411,6 +600,11 @@ func (ObjectCannedACL) Values() []ObjectCannedACL {
 
 type ObjectLockEnabled string
 
+// Enum values for ObjectLockEnabled
+const (
+	ObjectLockEnabledEnabled ObjectLockEnabled = "Enabled"
+)
+
 // Values returns all known values for ObjectLockEnabled. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -421,6 +615,12 @@ func (ObjectLockEnabled) Values() []ObjectLockEnabled {
 }
 
 type ObjectLockLegalHoldStatus string
+
+// Enum values for ObjectLockLegalHoldStatus
+const (
+	ObjectLockLegalHoldStatusOn  ObjectLockLegalHoldStatus = "ON"
+	ObjectLockLegalHoldStatusOff ObjectLockLegalHoldStatus = "OFF"
+)
 
 // Values returns all known values for ObjectLockLegalHoldStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
@@ -434,6 +634,12 @@ func (ObjectLockLegalHoldStatus) Values() []ObjectLockLegalHoldStatus {
 
 type ObjectLockMode string
 
+// Enum values for ObjectLockMode
+const (
+	ObjectLockModeGovernance ObjectLockMode = "GOVERNANCE"
+	ObjectLockModeCompliance ObjectLockMode = "COMPLIANCE"
+)
+
 // Values returns all known values for ObjectLockMode. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -445,6 +651,12 @@ func (ObjectLockMode) Values() []ObjectLockMode {
 }
 
 type ObjectLockRetentionMode string
+
+// Enum values for ObjectLockRetentionMode
+const (
+	ObjectLockRetentionModeGovernance ObjectLockRetentionMode = "GOVERNANCE"
+	ObjectLockRetentionModeCompliance ObjectLockRetentionMode = "COMPLIANCE"
+)
 
 // Values returns all known values for ObjectLockRetentionMode. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
@@ -458,6 +670,12 @@ func (ObjectLockRetentionMode) Values() []ObjectLockRetentionMode {
 
 type ObjectOwnership string
 
+// Enum values for ObjectOwnership
+const (
+	ObjectOwnershipBucketownerpreferred ObjectOwnership = "BucketOwnerPreferred"
+	ObjectOwnershipObjectwriter         ObjectOwnership = "ObjectWriter"
+)
+
 // Values returns all known values for ObjectOwnership. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -469,6 +687,18 @@ func (ObjectOwnership) Values() []ObjectOwnership {
 }
 
 type ObjectStorageClass string
+
+// Enum values for ObjectStorageClass
+const (
+	ObjectStorageClassStandard           ObjectStorageClass = "STANDARD"
+	ObjectStorageClassReducedRedundancy  ObjectStorageClass = "REDUCED_REDUNDANCY"
+	ObjectStorageClassGlacier            ObjectStorageClass = "GLACIER"
+	ObjectStorageClassStandardIa         ObjectStorageClass = "STANDARD_IA"
+	ObjectStorageClassOnezoneIa          ObjectStorageClass = "ONEZONE_IA"
+	ObjectStorageClassIntelligentTiering ObjectStorageClass = "INTELLIGENT_TIERING"
+	ObjectStorageClassDeepArchive        ObjectStorageClass = "DEEP_ARCHIVE"
+	ObjectStorageClassOutposts           ObjectStorageClass = "OUTPOSTS"
+)
 
 // Values returns all known values for ObjectStorageClass. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -488,6 +718,11 @@ func (ObjectStorageClass) Values() []ObjectStorageClass {
 
 type ObjectVersionStorageClass string
 
+// Enum values for ObjectVersionStorageClass
+const (
+	ObjectVersionStorageClassStandard ObjectVersionStorageClass = "STANDARD"
+)
+
 // Values returns all known values for ObjectVersionStorageClass. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
 // The ordering of this slice is not guaranteed to be stable across updates.
@@ -498,6 +733,11 @@ func (ObjectVersionStorageClass) Values() []ObjectVersionStorageClass {
 }
 
 type OwnerOverride string
+
+// Enum values for OwnerOverride
+const (
+	OwnerOverrideDestination OwnerOverride = "Destination"
+)
 
 // Values returns all known values for OwnerOverride. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -510,6 +750,12 @@ func (OwnerOverride) Values() []OwnerOverride {
 
 type Payer string
 
+// Enum values for Payer
+const (
+	PayerRequester   Payer = "Requester"
+	PayerBucketowner Payer = "BucketOwner"
+)
+
 // Values returns all known values for Payer. Note that this can be expanded in the
 // future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -521,6 +767,15 @@ func (Payer) Values() []Payer {
 }
 
 type Permission string
+
+// Enum values for Permission
+const (
+	PermissionFullControl Permission = "FULL_CONTROL"
+	PermissionWrite       Permission = "WRITE"
+	PermissionWriteAcp    Permission = "WRITE_ACP"
+	PermissionRead        Permission = "READ"
+	PermissionReadAcp     Permission = "READ_ACP"
+)
 
 // Values returns all known values for Permission. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -536,6 +791,12 @@ func (Permission) Values() []Permission {
 }
 
 type Protocol string
+
+// Enum values for Protocol
+const (
+	ProtocolHttp  Protocol = "http"
+	ProtocolHttps Protocol = "https"
+)
 
 // Values returns all known values for Protocol. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
@@ -567,6 +828,12 @@ func (QuoteFields) Values() []QuoteFields {
 
 type ReplicaModificationsStatus string
 
+// Enum values for ReplicaModificationsStatus
+const (
+	ReplicaModificationsStatusEnabled  ReplicaModificationsStatus = "Enabled"
+	ReplicaModificationsStatusDisabled ReplicaModificationsStatus = "Disabled"
+)
+
 // Values returns all known values for ReplicaModificationsStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
 // The ordering of this slice is not guaranteed to be stable across updates.
@@ -579,6 +846,12 @@ func (ReplicaModificationsStatus) Values() []ReplicaModificationsStatus {
 
 type ReplicationRuleStatus string
 
+// Enum values for ReplicationRuleStatus
+const (
+	ReplicationRuleStatusEnabled  ReplicationRuleStatus = "Enabled"
+	ReplicationRuleStatusDisabled ReplicationRuleStatus = "Disabled"
+)
+
 // Values returns all known values for ReplicationRuleStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -590,6 +863,14 @@ func (ReplicationRuleStatus) Values() []ReplicationRuleStatus {
 }
 
 type ReplicationStatus string
+
+// Enum values for ReplicationStatus
+const (
+	ReplicationStatusComplete ReplicationStatus = "COMPLETE"
+	ReplicationStatusPending  ReplicationStatus = "PENDING"
+	ReplicationStatusFailed   ReplicationStatus = "FAILED"
+	ReplicationStatusReplica  ReplicationStatus = "REPLICA"
+)
 
 // Values returns all known values for ReplicationStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -605,6 +886,12 @@ func (ReplicationStatus) Values() []ReplicationStatus {
 
 type ReplicationTimeStatus string
 
+// Enum values for ReplicationTimeStatus
+const (
+	ReplicationTimeStatusEnabled  ReplicationTimeStatus = "Enabled"
+	ReplicationTimeStatusDisabled ReplicationTimeStatus = "Disabled"
+)
+
 // Values returns all known values for ReplicationTimeStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -617,6 +904,11 @@ func (ReplicationTimeStatus) Values() []ReplicationTimeStatus {
 
 type RequestCharged string
 
+// Enum values for RequestCharged
+const (
+	RequestChargedRequester RequestCharged = "requester"
+)
+
 // Values returns all known values for RequestCharged. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -627,6 +919,11 @@ func (RequestCharged) Values() []RequestCharged {
 }
 
 type RequestPayer string
+
+// Enum values for RequestPayer
+const (
+	RequestPayerRequester RequestPayer = "requester"
+)
 
 // Values returns all known values for RequestPayer. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -655,6 +952,12 @@ func (RestoreRequestType) Values() []RestoreRequestType {
 
 type ServerSideEncryption string
 
+// Enum values for ServerSideEncryption
+const (
+	ServerSideEncryptionAes256 ServerSideEncryption = "AES256"
+	ServerSideEncryptionAwsKms ServerSideEncryption = "aws:kms"
+)
+
 // Values returns all known values for ServerSideEncryption. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -667,6 +970,12 @@ func (ServerSideEncryption) Values() []ServerSideEncryption {
 
 type SseKmsEncryptedObjectsStatus string
 
+// Enum values for SseKmsEncryptedObjectsStatus
+const (
+	SseKmsEncryptedObjectsStatusEnabled  SseKmsEncryptedObjectsStatus = "Enabled"
+	SseKmsEncryptedObjectsStatusDisabled SseKmsEncryptedObjectsStatus = "Disabled"
+)
+
 // Values returns all known values for SseKmsEncryptedObjectsStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
 // The ordering of this slice is not guaranteed to be stable across updates.
@@ -678,6 +987,18 @@ func (SseKmsEncryptedObjectsStatus) Values() []SseKmsEncryptedObjectsStatus {
 }
 
 type StorageClass string
+
+// Enum values for StorageClass
+const (
+	StorageClassStandard           StorageClass = "STANDARD"
+	StorageClassReducedRedundancy  StorageClass = "REDUCED_REDUNDANCY"
+	StorageClassStandardIa         StorageClass = "STANDARD_IA"
+	StorageClassOnezoneIa          StorageClass = "ONEZONE_IA"
+	StorageClassIntelligentTiering StorageClass = "INTELLIGENT_TIERING"
+	StorageClassGlacier            StorageClass = "GLACIER"
+	StorageClassDeepArchive        StorageClass = "DEEP_ARCHIVE"
+	StorageClassOutposts           StorageClass = "OUTPOSTS"
+)
 
 // Values returns all known values for StorageClass. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -697,6 +1018,11 @@ func (StorageClass) Values() []StorageClass {
 
 type StorageClassAnalysisSchemaVersion string
 
+// Enum values for StorageClassAnalysisSchemaVersion
+const (
+	StorageClassAnalysisSchemaVersionV1 StorageClassAnalysisSchemaVersion = "V_1"
+)
+
 // Values returns all known values for StorageClassAnalysisSchemaVersion. Note that
 // this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
@@ -708,6 +1034,12 @@ func (StorageClassAnalysisSchemaVersion) Values() []StorageClassAnalysisSchemaVe
 }
 
 type TaggingDirective string
+
+// Enum values for TaggingDirective
+const (
+	TaggingDirectiveCopy    TaggingDirective = "COPY"
+	TaggingDirectiveReplace TaggingDirective = "REPLACE"
+)
 
 // Values returns all known values for TaggingDirective. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -721,6 +1053,13 @@ func (TaggingDirective) Values() []TaggingDirective {
 
 type Tier string
 
+// Enum values for Tier
+const (
+	TierStandard  Tier = "Standard"
+	TierBulk      Tier = "Bulk"
+	TierExpedited Tier = "Expedited"
+)
+
 // Values returns all known values for Tier. Note that this can be expanded in the
 // future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -733,6 +1072,15 @@ func (Tier) Values() []Tier {
 }
 
 type TransitionStorageClass string
+
+// Enum values for TransitionStorageClass
+const (
+	TransitionStorageClassGlacier            TransitionStorageClass = "GLACIER"
+	TransitionStorageClassStandardIa         TransitionStorageClass = "STANDARD_IA"
+	TransitionStorageClassOnezoneIa          TransitionStorageClass = "ONEZONE_IA"
+	TransitionStorageClassIntelligentTiering TransitionStorageClass = "INTELLIGENT_TIERING"
+	TransitionStorageClassDeepArchive        TransitionStorageClass = "DEEP_ARCHIVE"
+)
 
 // Values returns all known values for TransitionStorageClass. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
@@ -748,6 +1096,13 @@ func (TransitionStorageClass) Values() []TransitionStorageClass {
 }
 
 type Type string
+
+// Enum values for Type
+const (
+	TypeCanonicaluser         Type = "CanonicalUser"
+	TypeAmazoncustomerbyemail Type = "AmazonCustomerByEmail"
+	TypeGroup                 Type = "Group"
+)
 
 // Values returns all known values for Type. Note that this can be expanded in the
 // future, and so it is only as up to date as the client. The ordering of this

@@ -1021,6 +1021,13 @@ func (UpdateBehavior) Values() []UpdateBehavior {
 
 type WorkerType string
 
+// Enum values for WorkerType
+const (
+	WorkerTypeStandard WorkerType = "Standard"
+	WorkerTypeG1x      WorkerType = "G.1X"
+	WorkerTypeG2x      WorkerType = "G.2X"
+)
+
 // Values returns all known values for WorkerType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.

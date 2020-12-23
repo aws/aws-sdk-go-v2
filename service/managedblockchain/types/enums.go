@@ -25,6 +25,7 @@ type Framework string
 // Enum values for Framework
 const (
 	FrameworkHyperledgerFabric Framework = "HYPERLEDGER_FABRIC"
+	FrameworkEthereum          Framework = "ETHEREUM"
 )
 
 // Values returns all known values for Framework. Note that this can be expanded in
@@ -33,6 +34,7 @@ const (
 func (Framework) Values() []Framework {
 	return []Framework{
 		"HYPERLEDGER_FABRIC",
+		"ETHEREUM",
 	}
 }
 
@@ -116,6 +118,7 @@ type NodeStatus string
 const (
 	NodeStatusCreating     NodeStatus = "CREATING"
 	NodeStatusAvailable    NodeStatus = "AVAILABLE"
+	NodeStatusUnhealthy    NodeStatus = "UNHEALTHY"
 	NodeStatusCreateFailed NodeStatus = "CREATE_FAILED"
 	NodeStatusUpdating     NodeStatus = "UPDATING"
 	NodeStatusDeleting     NodeStatus = "DELETING"
@@ -130,6 +133,7 @@ func (NodeStatus) Values() []NodeStatus {
 	return []NodeStatus{
 		"CREATING",
 		"AVAILABLE",
+		"UNHEALTHY",
 		"CREATE_FAILED",
 		"UPDATING",
 		"DELETING",

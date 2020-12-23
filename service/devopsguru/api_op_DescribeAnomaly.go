@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Returns details about an anomaly that you specify using its ID.
 func (c *Client) DescribeAnomaly(ctx context.Context, params *DescribeAnomalyInput, optFns ...func(*Options)) (*DescribeAnomalyOutput, error) {
 	if params == nil {
 		params = &DescribeAnomalyInput{}
@@ -28,13 +29,18 @@ func (c *Client) DescribeAnomaly(ctx context.Context, params *DescribeAnomalyInp
 
 type DescribeAnomalyInput struct {
 
+	// The ID of the anomaly.
+	//
 	// This member is required.
 	Id *string
 }
 
 type DescribeAnomalyOutput struct {
+
+	// An ReactiveAnomaly object that represents the requested anomaly.
 	ProactiveAnomaly *types.ProactiveAnomaly
 
+	// An ProactiveAnomaly object that represents the requested anomaly.
 	ReactiveAnomaly *types.ReactiveAnomaly
 
 	// Metadata pertaining to the operation's result.

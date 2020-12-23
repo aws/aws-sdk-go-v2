@@ -31,6 +31,7 @@ func (c *Client) DescribeComputeEnvironments(ctx context.Context, params *Descri
 	return out, nil
 }
 
+// Contains the parameters for DescribeComputeEnvironments.
 type DescribeComputeEnvironmentsInput struct {
 
 	// A list of up to 100 compute environment names or full Amazon Resource Name (ARN)
@@ -52,7 +53,7 @@ type DescribeComputeEnvironmentsInput struct {
 	// exceeded the value of that parameter. Pagination continues from the end of the
 	// previous results that returned the nextToken value. This value is null when
 	// there are no more results to return. This token should be treated as an opaque
-	// identifier that is only used to retrieve the next items in a list and not for
+	// identifier that's only used to retrieve the next items in a list and not for
 	// other programmatic purposes.
 	NextToken *string
 }

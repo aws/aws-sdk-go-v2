@@ -8638,6 +8638,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		}
 	}
 
+	if v.EnableCustomerOwnedIp != nil {
+		objectKey := object.Key("EnableCustomerOwnedIp")
+		objectKey.Boolean(*v.EnableCustomerOwnedIp)
+	}
+
 	if v.EnableIAMDatabaseAuthentication != nil {
 		objectKey := object.Key("EnableIAMDatabaseAuthentication")
 		objectKey.Boolean(*v.EnableIAMDatabaseAuthentication)
@@ -11293,6 +11298,11 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 		objectKey.String(*v.DomainIAMRoleName)
 	}
 
+	if v.EnableCustomerOwnedIp != nil {
+		objectKey := object.Key("EnableCustomerOwnedIp")
+		objectKey.Boolean(*v.EnableCustomerOwnedIp)
+	}
+
 	if v.EnableIAMDatabaseAuthentication != nil {
 		objectKey := object.Key("EnableIAMDatabaseAuthentication")
 		objectKey.Boolean(*v.EnableIAMDatabaseAuthentication)
@@ -12420,6 +12430,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 		}
 	}
 
+	if v.EnableCustomerOwnedIp != nil {
+		objectKey := object.Key("EnableCustomerOwnedIp")
+		objectKey.Boolean(*v.EnableCustomerOwnedIp)
+	}
+
 	if v.EnableIAMDatabaseAuthentication != nil {
 		objectKey := object.Key("EnableIAMDatabaseAuthentication")
 		objectKey.Boolean(*v.EnableIAMDatabaseAuthentication)
@@ -12800,6 +12815,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *Resto
 		if err := awsAwsquery_serializeDocumentLogTypeList(v.EnableCloudwatchLogsExports, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.EnableCustomerOwnedIp != nil {
+		objectKey := object.Key("EnableCustomerOwnedIp")
+		objectKey.Boolean(*v.EnableCustomerOwnedIp)
 	}
 
 	if v.EnableIAMDatabaseAuthentication != nil {

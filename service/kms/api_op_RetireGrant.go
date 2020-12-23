@@ -27,7 +27,21 @@ import (
 // or by a combination of the grant ID and the Amazon Resource Name (ARN) of the
 // customer master key (CMK). A grant token is a unique variable-length
 // base64-encoded string. A grant ID is a 64 character unique identifier of a
-// grant. The CreateGrant operation returns both.
+// grant. The CreateGrant operation returns both. Cross-account use: Yes. You can
+// retire a grant on a CMK in a different AWS account. Required permissions::
+// Permission to retire a grant is specified in the grant. You cannot control
+// access to this operation in a policy. For more information, see Using grants
+// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) in the AWS
+// Key Management Service Developer Guide. Related operations:
+//
+// * CreateGrant
+//
+// *
+// ListGrants
+//
+// * ListRetirableGrants
+//
+// * RevokeGrant
 func (c *Client) RetireGrant(ctx context.Context, params *RetireGrantInput, optFns ...func(*Options)) (*RetireGrantOutput, error) {
 	if params == nil {
 		params = &RetireGrantInput{}

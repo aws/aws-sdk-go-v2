@@ -216,6 +216,28 @@ type PortfolioDetail struct {
 	ProviderName *string
 }
 
+// Information about the portfolio share.
+type PortfolioShareDetail struct {
+
+	// Indicates whether the shared portfolio is imported by the recipient account. If
+	// the recipient is in an organization node, the share is automatically imported,
+	// and the field is always set to true.
+	Accepted bool
+
+	// The identifier of the recipient entity that received the portfolio share. The
+	// recipient entities can be one of the following: 1. An external account. 2. An
+	// organziation member account. 3. An organzational unit (OU). 4. The organization
+	// itself. (This shares with every account in the organization).
+	PrincipalId *string
+
+	// Indicates whether TagOptions sharing is enabled or disabled for the portfolio
+	// share.
+	ShareTagOptions bool
+
+	// The type of the portfolio share.
+	Type DescribePortfolioShareType
+}
+
 // Information about a principal.
 type Principal struct {
 
@@ -696,9 +718,15 @@ type ProvisioningArtifactPreferences struct {
 // product.
 type ProvisioningArtifactProperties struct {
 
-	// The URL of the CloudFormation template in Amazon S3. Specify the URL in JSON
-	// format as follows: "LoadTemplateFromURL":
-	// "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."
+	// Specify the template source with one of the following options, but not both.
+	// Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ] The URL of the
+	// CloudFormation template in Amazon S3. Specify the URL in JSON format as follows:
+	// "LoadTemplateFromURL":
+	// "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."ImportFromPhysicalId:
+	// The physical id of the resource that contains the template. Currently only
+	// supports CloudFormation stack arn. Specify the physical id in JSON format as
+	// follows: ImportFromPhysicalId:
+	// “arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId]
 	//
 	// This member is required.
 	Info map[string]string
@@ -771,15 +799,21 @@ type ProvisioningParameter struct {
 }
 
 // The user-defined preferences that will be applied when updating a provisioned
-// product. Not all preferences are applicable to all provisioned product types.
+// product. Not all preferences are applicable to all provisioned product type One
+// or more AWS accounts that will have access to the provisioned product.
+// Applicable only to a CFN_STACKSET provisioned product type. The AWS accounts
+// specified should be within the list of accounts in the STACKSET constraint. To
+// get the list of accounts in the STACKSET constraint, use the
+// DescribeProvisioningParameters operation. If no values are specified, the
+// default value is all accounts from the STACKSET constraint.
 type ProvisioningPreferences struct {
 
-	// One or more AWS accounts that will have access to the provisioned product.
-	// Applicable only to a CFN_STACKSET provisioned product type. The AWS accounts
-	// specified should be within the list of accounts in the STACKSET constraint. To
+	// One or more AWS accounts where the provisioned product will be available.
+	// Applicable only to a CFN_STACKSET provisioned product type. The specified
+	// accounts should be within the list of accounts from the STACKSET constraint. To
 	// get the list of accounts in the STACKSET constraint, use the
 	// DescribeProvisioningParameters operation. If no values are specified, the
-	// default value is all accounts from the STACKSET constraint.
+	// default value is all acounts from the STACKSET constraint.
 	StackSetAccounts []string
 
 	// The number of accounts, per region, for which this operation can fail before AWS
@@ -1143,6 +1177,9 @@ type TagOptionDetail struct {
 
 	// The TagOption key.
 	Key *string
+
+	// The AWS account Id of the owner account that created the TagOption.
+	Owner *string
 
 	// The TagOption value.
 	Value *string

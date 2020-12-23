@@ -10326,6 +10326,11 @@ func awsRestjson1_serializeDocumentRelationalTable(v *types.RelationalTable, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.Catalog != nil {
+		ok := object.Key("Catalog")
+		ok.String(*v.Catalog)
+	}
+
 	if v.DataSourceArn != nil {
 		ok := object.Key("DataSourceArn")
 		ok.String(*v.DataSourceArn)

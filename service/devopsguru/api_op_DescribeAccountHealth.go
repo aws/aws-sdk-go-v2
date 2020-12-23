@@ -10,6 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Returns the number of open reactive insights, the number of open proactive
+// insights, and the number of metrics analyzed in your AWS account. Use these
+// numbers to gauge the health of operations in your AWS account.
 func (c *Client) DescribeAccountHealth(ctx context.Context, params *DescribeAccountHealthInput, optFns ...func(*Options)) (*DescribeAccountHealthOutput, error) {
 	if params == nil {
 		params = &DescribeAccountHealthInput{}
@@ -29,10 +32,23 @@ type DescribeAccountHealthInput struct {
 }
 
 type DescribeAccountHealthOutput struct {
+
+	// An integer that specifies the number of metrics that have been analyzed in your
+	// AWS account.
+	//
+	// This member is required.
 	MetricsAnalyzed int32
 
+	// An integer that specifies the number of open proactive insights in your AWS
+	// account.
+	//
+	// This member is required.
 	OpenProactiveInsights int32
 
+	// An integer that specifies the number of open reactive insights in your AWS
+	// account.
+	//
+	// This member is required.
 	OpenReactiveInsights int32
 
 	// Metadata pertaining to the operation's result.

@@ -386,11 +386,11 @@ func validateListInsightsAnyStatusFilter(v *types.ListInsightsAnyStatusFilter) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListInsightsAnyStatusFilter"}
-	if v.StartTimeRange == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartTimeRange"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.StartTimeRange == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTimeRange"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -404,11 +404,11 @@ func validateListInsightsClosedStatusFilter(v *types.ListInsightsClosedStatusFil
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListInsightsClosedStatusFilter"}
-	if v.EndTimeRange == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndTimeRange"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.EndTimeRange == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTimeRange"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -437,9 +437,9 @@ func validateListInsightsStatusFilter(v *types.ListInsightsStatusFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListInsightsStatusFilter"}
-	if v.Any != nil {
-		if err := validateListInsightsAnyStatusFilter(v.Any); err != nil {
-			invalidParams.AddNested("Any", err.(smithy.InvalidParamsError))
+	if v.Ongoing != nil {
+		if err := validateListInsightsOngoingStatusFilter(v.Ongoing); err != nil {
+			invalidParams.AddNested("Ongoing", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Closed != nil {
@@ -447,9 +447,9 @@ func validateListInsightsStatusFilter(v *types.ListInsightsStatusFilter) error {
 			invalidParams.AddNested("Closed", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Ongoing != nil {
-		if err := validateListInsightsOngoingStatusFilter(v.Ongoing); err != nil {
-			invalidParams.AddNested("Ongoing", err.(smithy.InvalidParamsError))
+	if v.Any != nil {
+		if err := validateListInsightsAnyStatusFilter(v.Any); err != nil {
+			invalidParams.AddNested("Any", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -543,7 +543,7 @@ func validateOpDescribeResourceCollectionHealthInput(v *DescribeResourceCollecti
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeResourceCollectionHealthInput"}
-	if v.ResourceCollectionType == nil {
+	if len(v.ResourceCollectionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceCollectionType"))
 	}
 	if invalidParams.Len() > 0 {
@@ -558,7 +558,7 @@ func validateOpGetResourceCollectionInput(v *GetResourceCollectionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetResourceCollectionInput"}
-	if v.ResourceCollectionType == nil {
+	if len(v.ResourceCollectionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceCollectionType"))
 	}
 	if invalidParams.Len() > 0 {

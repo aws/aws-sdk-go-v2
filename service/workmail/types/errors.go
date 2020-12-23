@@ -7,6 +7,24 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// The directory is already in use by another WorkMail organization in the same
+// account and Region.
+type DirectoryInUseException struct {
+	Message *string
+}
+
+func (e *DirectoryInUseException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DirectoryInUseException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DirectoryInUseException) ErrorCode() string             { return "DirectoryInUseException" }
+func (e *DirectoryInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The directory service doesn't recognize the credentials supplied by WorkMail.
 type DirectoryServiceAuthenticationFailedException struct {
 	Message *string
@@ -28,7 +46,7 @@ func (e *DirectoryServiceAuthenticationFailedException) ErrorFault() smithy.Erro
 	return smithy.FaultClient
 }
 
-// The directory on which you are trying to perform operations isn't available.
+// The directory is unavailable. It might be located in another Region or deleted.
 type DirectoryUnavailableException struct {
 	Message *string
 }
@@ -173,6 +191,23 @@ func (e *InvalidPasswordException) ErrorMessage() string {
 func (e *InvalidPasswordException) ErrorCode() string             { return "InvalidPasswordException" }
 func (e *InvalidPasswordException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request exceeds the limit of the resource.
+type LimitExceededException struct {
+	Message *string
+}
+
+func (e *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *LimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // For an email or alias to be created in Amazon WorkMail, the included domain must
 // be defined in the organization.
 type MailDomainNotFoundException struct {
@@ -244,8 +279,8 @@ func (e *OrganizationNotFoundException) ErrorMessage() string {
 func (e *OrganizationNotFoundException) ErrorCode() string             { return "OrganizationNotFoundException" }
 func (e *OrganizationNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The organization must have a valid state (Active or Synchronizing) to perform
-// certain operations on the organization or its members.
+// The organization must have a valid state to perform certain operations on the
+// organization or its members.
 type OrganizationStateException struct {
 	Message *string
 }
@@ -278,6 +313,40 @@ func (e *ReservedNameException) ErrorMessage() string {
 }
 func (e *ReservedNameException) ErrorCode() string             { return "ReservedNameException" }
 func (e *ReservedNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The resource cannot be found.
+type ResourceNotFoundException struct {
+	Message *string
+}
+
+func (e *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The resource can have up to 50 user-applied tags.
+type TooManyTagsException struct {
+	Message *string
+}
+
+func (e *TooManyTagsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyTagsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can't perform a write operation against a read-only directory.
 type UnsupportedOperationException struct {

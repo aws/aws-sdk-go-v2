@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the details of the service quota increase request in your template.
+// Retrieves information about the specified quota increase request in your quota
+// request template.
 func (c *Client) GetServiceQuotaIncreaseRequestFromTemplate(ctx context.Context, params *GetServiceQuotaIncreaseRequestFromTemplateInput, optFns ...func(*Options)) (*GetServiceQuotaIncreaseRequestFromTemplateOutput, error) {
 	if params == nil {
 		params = &GetServiceQuotaIncreaseRequestFromTemplateInput{}
@@ -29,17 +30,17 @@ func (c *Client) GetServiceQuotaIncreaseRequestFromTemplate(ctx context.Context,
 
 type GetServiceQuotaIncreaseRequestFromTemplateInput struct {
 
-	// Specifies the AWS Region for the quota that you want to use.
+	// The AWS Region.
 	//
 	// This member is required.
 	AwsRegion *string
 
-	// Specifies the quota you want.
+	// The quota identifier.
 	//
 	// This member is required.
 	QuotaCode *string
 
-	// Specifies the service that you want to use.
+	// The service identifier.
 	//
 	// This member is required.
 	ServiceCode *string
@@ -47,7 +48,7 @@ type GetServiceQuotaIncreaseRequestFromTemplateInput struct {
 
 type GetServiceQuotaIncreaseRequestFromTemplateOutput struct {
 
-	// This object contains the details about the quota increase request.
+	// Information about the quota increase request.
 	ServiceQuotaIncreaseRequestInTemplate *types.ServiceQuotaIncreaseRequestInTemplate
 
 	// Metadata pertaining to the operation's result.

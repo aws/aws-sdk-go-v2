@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Associates a security key to the instance.
 func (c *Client) AssociateSecurityKey(ctx context.Context, params *AssociateSecurityKeyInput, optFns ...func(*Options)) (*AssociateSecurityKeyOutput, error) {
 	if params == nil {

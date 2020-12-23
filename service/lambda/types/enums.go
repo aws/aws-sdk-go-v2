@@ -20,6 +20,22 @@ func (CodeSigningPolicy) Values() []CodeSigningPolicy {
 	}
 }
 
+type EndPointType string
+
+// Enum values for EndPointType
+const (
+	EndPointTypeKafkaBootstrapServers EndPointType = "KAFKA_BOOTSTRAP_SERVERS"
+)
+
+// Values returns all known values for EndPointType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EndPointType) Values() []EndPointType {
+	return []EndPointType{
+		"KAFKA_BOOTSTRAP_SERVERS",
+	}
+}
+
 type EventSourcePosition string
 
 // Enum values for EventSourcePosition
@@ -37,6 +53,22 @@ func (EventSourcePosition) Values() []EventSourcePosition {
 		"TRIM_HORIZON",
 		"LATEST",
 		"AT_TIMESTAMP",
+	}
+}
+
+type FunctionResponseType string
+
+// Enum values for FunctionResponseType
+const (
+	FunctionResponseTypeReportbatchitemfailures FunctionResponseType = "ReportBatchItemFailures"
+)
+
+// Values returns all known values for FunctionResponseType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FunctionResponseType) Values() []FunctionResponseType {
+	return []FunctionResponseType{
+		"ReportBatchItemFailures",
 	}
 }
 
@@ -251,7 +283,11 @@ type SourceAccessType string
 
 // Enum values for SourceAccessType
 const (
-	SourceAccessTypeBasicAuth SourceAccessType = "BASIC_AUTH"
+	SourceAccessTypeBasicAuth        SourceAccessType = "BASIC_AUTH"
+	SourceAccessTypeVpcSubnet        SourceAccessType = "VPC_SUBNET"
+	SourceAccessTypeVpcSecurityGroup SourceAccessType = "VPC_SECURITY_GROUP"
+	SourceAccessTypeSaslScram512Auth SourceAccessType = "SASL_SCRAM_512_AUTH"
+	SourceAccessTypeSaslScram256Auth SourceAccessType = "SASL_SCRAM_256_AUTH"
 )
 
 // Values returns all known values for SourceAccessType. Note that this can be
@@ -260,6 +296,10 @@ const (
 func (SourceAccessType) Values() []SourceAccessType {
 	return []SourceAccessType{
 		"BASIC_AUTH",
+		"VPC_SUBNET",
+		"VPC_SECURITY_GROUP",
+		"SASL_SCRAM_512_AUTH",
+		"SASL_SCRAM_256_AUTH",
 	}
 }
 

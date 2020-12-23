@@ -98,6 +98,28 @@ func (CopyProductStatus) Values() []CopyProductStatus {
 	}
 }
 
+type DescribePortfolioShareType string
+
+// Enum values for DescribePortfolioShareType
+const (
+	DescribePortfolioShareTypeAccount                   DescribePortfolioShareType = "ACCOUNT"
+	DescribePortfolioShareTypeOrganization              DescribePortfolioShareType = "ORGANIZATION"
+	DescribePortfolioShareTypeOrganizationalUnit        DescribePortfolioShareType = "ORGANIZATIONAL_UNIT"
+	DescribePortfolioShareTypeOrganizationMemberAccount DescribePortfolioShareType = "ORGANIZATION_MEMBER_ACCOUNT"
+)
+
+// Values returns all known values for DescribePortfolioShareType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DescribePortfolioShareType) Values() []DescribePortfolioShareType {
+	return []DescribePortfolioShareType{
+		"ACCOUNT",
+		"ORGANIZATION",
+		"ORGANIZATIONAL_UNIT",
+		"ORGANIZATION_MEMBER_ACCOUNT",
+	}
+}
+
 type EvaluationType string
 
 // Enum values for EvaluationType
@@ -620,6 +642,13 @@ func (StackInstanceStatus) Values() []StackInstanceStatus {
 }
 
 type StackSetOperationType string
+
+// Enum values for StackSetOperationType
+const (
+	StackSetOperationTypeCreate StackSetOperationType = "CREATE"
+	StackSetOperationTypeUpdate StackSetOperationType = "UPDATE"
+	StackSetOperationTypeDelete StackSetOperationType = "DELETE"
+)
 
 // Values returns all known values for StackSetOperationType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The

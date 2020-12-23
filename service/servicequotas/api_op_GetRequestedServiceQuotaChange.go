@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the details for a particular increase request.
+// Retrieves information about the specified quota increase request.
 func (c *Client) GetRequestedServiceQuotaChange(ctx context.Context, params *GetRequestedServiceQuotaChangeInput, optFns ...func(*Options)) (*GetRequestedServiceQuotaChangeOutput, error) {
 	if params == nil {
 		params = &GetRequestedServiceQuotaChangeInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetRequestedServiceQuotaChange(ctx context.Context, params *Get
 
 type GetRequestedServiceQuotaChangeInput struct {
 
-	// Identifies the quota increase request.
+	// The ID of the quota increase request.
 	//
 	// This member is required.
 	RequestId *string
@@ -37,8 +37,7 @@ type GetRequestedServiceQuotaChangeInput struct {
 
 type GetRequestedServiceQuotaChangeOutput struct {
 
-	// Returns the RequestedServiceQuotaChange object for the specific increase
-	// request.
+	// Information about the quota increase request.
 	RequestedQuota *types.RequestedServiceQuotaChange
 
 	// Metadata pertaining to the operation's result.

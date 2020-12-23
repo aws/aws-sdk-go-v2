@@ -2,6 +2,26 @@
 
 package types
 
+// The case-insensitive input to indicate standard MIME type that describes the
+// format of the file that will be uploaded.
+type AttachmentItem struct {
+
+	// A unique identifier for the attachment.
+	AttachmentId *string
+
+	// A case-sensitive name of the attachment being uploaded.
+	AttachmentName *string
+
+	// Describes the MIME file type of the attachment. For a list of supported file
+	// types, see Feature specifications
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits)
+	// in the Amazon Connect Administrator Guide.
+	ContentType *string
+
+	// Status of the attachment.
+	Status ArtifactStatus
+}
+
 // Connection credentials.
 type ConnectionCredentials struct {
 
@@ -19,6 +39,9 @@ type Item struct {
 	// The time when the message or event was sent. It's specified in ISO 8601 format:
 	// yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
 	AbsoluteTime *string
+
+	// Provides information about the attachments.
+	Attachments []AttachmentItem
 
 	// The content of the message or event.
 	Content *string
@@ -55,6 +78,21 @@ type StartPosition struct {
 
 	// The start position of the most recent message where you want to start.
 	MostRecent int32
+}
+
+// Fields to be used while uploading the attachment.
+type UploadMetadata struct {
+
+	// The headers to be provided while uploading the file to the URL.
+	HeadersToInclude map[string]string
+
+	// The pre-signed URL using which file would be downloaded from Amazon S3 by the
+	// API caller.
+	Url *string
+
+	// The expiration time of the URL in ISO timestamp. It's specified in ISO 8601
+	// format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+	UrlExpiry *string
 }
 
 // The websocket for the participant's connection.

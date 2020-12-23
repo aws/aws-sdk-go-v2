@@ -12,7 +12,7 @@ type ArrayProperties struct {
 // An object representing the array properties of a job.
 type ArrayPropertiesDetail struct {
 
-	// The job index within the array that is associated with this job. This parameter
+	// The job index within the array that's associated with this job. This parameter
 	// is returned for array job children.
 	Index int32
 
@@ -27,7 +27,7 @@ type ArrayPropertiesDetail struct {
 // An object representing the array properties of a job.
 type ArrayPropertiesSummary struct {
 
-	// The job index within the array that is associated with this job. This parameter
+	// The job index within the array that's associated with this job. This parameter
 	// is returned for children of array jobs.
 	Index int32
 
@@ -35,7 +35,7 @@ type ArrayPropertiesSummary struct {
 	Size int32
 }
 
-// An object representing the details of a container that is part of a job attempt.
+// An object representing the details of a container that's part of a job attempt.
 type AttemptContainerDetail struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon ECS container instance that hosts
@@ -57,8 +57,8 @@ type AttemptContainerDetail struct {
 	// about a running or stopped container.
 	Reason *string
 
-	// The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with
-	// the job attempt. Each container attempt receives a task ARN when they reach the
+	// The Amazon Resource Name (ARN) of the Amazon ECS task that's associated with the
+	// job attempt. Each container attempt receives a task ARN when they reach the
 	// STARTING status.
 	TaskArn *string
 }
@@ -91,7 +91,8 @@ type ComputeEnvironmentDetail struct {
 	// This member is required.
 	ComputeEnvironmentArn *string
 
-	// The name of the compute environment.
+	// The name of the compute environment. Up to 128 letters (uppercase and
+	// lowercase), numbers, hyphens, and underscores are allowed.
 	//
 	// This member is required.
 	ComputeEnvironmentName *string
@@ -102,11 +103,17 @@ type ComputeEnvironmentDetail struct {
 	// This member is required.
 	EcsClusterArn *string
 
-	// The compute resources defined for the compute environment.
+	// The compute resources defined for the compute environment. For more information,
+	// see Compute Environments
+	// (https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
+	// in the AWS Batch User Guide.
 	ComputeResources *ComputeResource
 
 	// The service role associated with the compute environment that allows AWS Batch
-	// to make calls to AWS API operations on your behalf.
+	// to make calls to AWS API operations on your behalf. For more information, see
+	// AWS Batch service IAM role
+	// (https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html) in
+	// the AWS Batch User Guide.
 	ServiceRole *string
 
 	// The state of the compute environment. The valid values are ENABLED or DISABLED.
@@ -116,7 +123,7 @@ type ComputeEnvironmentDetail struct {
 	// automatically, based on the job queue demand. If the state is DISABLED, then the
 	// AWS Batch scheduler doesn't attempt to place jobs within the environment. Jobs
 	// in a STARTING or RUNNING state continue to progress normally. Managed compute
-	// environments in the DISABLED state do not scale out. However, they scale in to
+	// environments in the DISABLED state don't scale out. However, they scale in to
 	// minvCpus value after instances become idle.
 	State CEState
 
@@ -130,8 +137,8 @@ type ComputeEnvironmentDetail struct {
 	// The tags applied to the compute environment.
 	Tags map[string]string
 
-	// The type of compute environment: EC2, SPOT, FARGATE, or FARGATE_SPOT. For more
-	// information, see Compute Environments
+	// The type of the compute environment: MANAGED or UNMANAGED. For more information,
+	// see Compute Environments
 	// (https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
 	// in the AWS Batch User Guide.
 	Type CEType
@@ -140,7 +147,13 @@ type ComputeEnvironmentDetail struct {
 // The order in which compute environments are tried for job placement within a
 // queue. Compute environments are tried in ascending order. For example, if two
 // compute environments are associated with a job queue, the compute environment
-// with a lower order integer value is tried for job placement first.
+// with a lower order integer value is tried for job placement first. Compute
+// environments must be in the VALID state before you can associate them with a job
+// queue. All of the compute environments must be either EC2 (EC2 or SPOT) or
+// Fargate (FARGATE or FARGATE_SPOT); EC2 and Fargate compute environments can't be
+// mixed. All compute environments that are associated with a job queue must share
+// the same architecture. AWS Batch doesn't support mixing compute environment
+// architecture types in a single job queue.
 type ComputeEnvironmentOrder struct {
 
 	// The Amazon Resource Name (ARN) of the compute environment.
@@ -157,15 +170,18 @@ type ComputeEnvironmentOrder struct {
 	Order int32
 }
 
-// An object representing an AWS Batch compute resource.
+// An object representing an AWS Batch compute resource. For more information, see
+// Compute Environments
+// (https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
+// in the AWS Batch User Guide.
 type ComputeResource struct {
 
-	// The maximum number of Amazon EC2 vCPUs that an environment can reach. With both
-	// BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation strategies, AWS
-	// Batch may need to go above maxvCpus to meet your capacity requirements. In this
-	// event, AWS Batch will never go above maxvCpus by more than a single instance
-	// (e.g., no more than a single instance from among those specified in your compute
-	// environment).
+	// The maximum number of Amazon EC2 vCPUs that a compute environment can reach.
+	// With both BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation
+	// strategies, AWS Batch might need to go above maxvCpus to meet your capacity
+	// requirements. In this event, AWS Batch will never go above maxvCpus by more than
+	// a single instance (e.g., no more than a single instance from among those
+	// specified in your compute environment).
 	//
 	// This member is required.
 	MaxvCpus int32
@@ -183,7 +199,11 @@ type ComputeResource struct {
 	// The type of compute environment: EC2, SPOT, FARGATE, or FARGATE_SPOT. For more
 	// information, see Compute Environments
 	// (https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
-	// in the AWS Batch User Guide.
+	// in the AWS Batch User Guide. If you choose SPOT, you must also specify an Amazon
+	// EC2 Spot Fleet role with the spotIamFleetRole parameter. For more information,
+	// see Amazon EC2 Spot Fleet role
+	// (https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html) in
+	// the AWS Batch User Guide.
 	//
 	// This member is required.
 	Type CRType
@@ -221,12 +241,12 @@ type ComputeResource struct {
 
 	// The maximum percentage that a Spot Instance price can be when compared with the
 	// On-Demand price for that instance type before instances are launched. For
-	// example, if your maximum percentage is 20%, then the Spot price must be below
-	// 20% of the current On-Demand price for that Amazon EC2 instance. You always pay
-	// the lowest (market) price and never more than your maximum percentage. If you
-	// leave this field empty, the default value is 100% of the On-Demand price. This
-	// parameter isn't applicable to jobs running on Fargate resources, and shouldn't
-	// be specified.
+	// example, if your maximum percentage is 20%, then the Spot price must be less
+	// than 20% of the current On-Demand price for that Amazon EC2 instance. You always
+	// pay the lowest (market) price and never more than your maximum percentage. If
+	// you leave this field empty, the default value is 100% of the On-Demand price.
+	// This parameter isn't applicable to jobs running on Fargate resources, and
+	// shouldn't be specified.
 	BidPercentage int32
 
 	// The desired number of Amazon EC2 vCPUS in the compute environment. AWS Batch
@@ -235,13 +255,13 @@ type ComputeResource struct {
 	// and shouldn't be specified.
 	DesiredvCpus int32
 
-	// Provides information used to select Amazon Machine Images (AMIs) for instances
-	// in the compute environment. If Ec2Configuration isn't specified, the default is
-	// ECS_AL1. This parameter isn't applicable to jobs running on Fargate resources,
-	// and shouldn't be specified.
+	// Provides information used to select Amazon Machine Images (AMIs) for EC2
+	// instances in the compute environment. If Ec2Configuration isn't specified, the
+	// default is ECS_AL1. This parameter isn't applicable to jobs running on Fargate
+	// resources, and shouldn't be specified.
 	Ec2Configuration []Ec2Configuration
 
-	// The Amazon EC2 key pair that is used for instances launched in the compute
+	// The Amazon EC2 key pair that's used for instances launched in the compute
 	// environment. You can use this key pair to log in to your instances with SSH.
 	// This parameter isn't applicable to jobs running on Fargate resources, and
 	// shouldn't be specified.
@@ -274,15 +294,18 @@ type ComputeResource struct {
 	// Fargate resources, and shouldn't be specified.
 	InstanceRole *string
 
-	// The instances types that may be launched. You can specify instance families to
+	// The instances types that can be launched. You can specify instance families to
 	// launch any instance type within those families (for example, c5 or p3), or you
 	// can specify specific sizes within a family (such as c5.8xlarge). You can also
-	// choose optimal to select instance types (from the C, M, and R instance families)
-	// on the fly that match the demand of your job queues. This parameter isn't
-	// applicable to jobs running on Fargate resources, and shouldn't be specified.
-	// When you create a compute environment, the instance types that you select for
-	// the compute environment must share the same architecture. For example, you can't
-	// mix x86 and ARM instances in the same compute environment.
+	// choose optimal to select instance types (from the C4, M4, and R4 instance
+	// families) on the fly that match the demand of your job queues. This parameter
+	// isn't applicable to jobs running on Fargate resources, and shouldn't be
+	// specified. When you create a compute environment, the instance types that you
+	// select for the compute environment must share the same architecture. For
+	// example, you can't mix x86 and ARM instances in the same compute environment.
+	// Currently, optimal uses instance types from the C4, M4, and R4 instance
+	// families. In Regions that don't have instance types from those instance
+	// families, instance types from the C5, M5. and R5 instance families are used.
 	InstanceTypes []string
 
 	// The launch template to use for your compute resources. Any other compute
@@ -338,18 +361,21 @@ type ComputeResource struct {
 
 	// Key-value pair tags to be applied to EC2 resources that are launched in the
 	// compute environment. For AWS Batch, these take the form of "String1": "String2",
-	// where String1 is the tag key and String2 is the tag value—for example, { "Name":
+	// where String1 is the tag key and String2 is the tag value−for example, { "Name":
 	// "AWS Batch Instance - C4OnDemand" }. This is helpful for recognizing your AWS
-	// Batch instances in the Amazon EC2 console. These tags can not be updated or
+	// Batch instances in the Amazon EC2 console. These tags can't be updated or
 	// removed after the compute environment has been created; any changes require
 	// creating a new compute environment and removing the old compute environment.
 	// These tags are not seen when using the AWS Batch ListTagsForResource API
-	// operation.
+	// operation. This parameter isn't applicable to jobs running on Fargate resources,
+	// and shouldn't be specified.
 	Tags map[string]string
 }
 
 // An object representing the attributes of a compute environment that can be
-// updated.
+// updated. For more information, see Compute Environments
+// (https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
+// in the AWS Batch User Guide.
 type ComputeResourceUpdate struct {
 
 	// The desired number of Amazon EC2 vCPUS in the compute environment. This
@@ -357,19 +383,24 @@ type ComputeResourceUpdate struct {
 	// be specified.
 	DesiredvCpus int32
 
-	// The maximum number of Amazon EC2 vCPUs that an environment can reach.
+	// The maximum number of Amazon EC2 vCPUs that an environment can reach. With both
+	// BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation strategies, AWS
+	// Batch might need to go above maxvCpus to meet your capacity requirements. In
+	// this event, AWS Batch will never go above maxvCpus by more than a single
+	// instance (e.g., no more than a single instance from among those specified in
+	// your compute environment).
 	MaxvCpus int32
 
 	// The minimum number of Amazon EC2 vCPUs that an environment should maintain. This
-	// parameter isnt applicable to jobs running on Fargate resources, and shouldn't be
-	// specified.
+	// parameter isn't applicable to jobs running on Fargate resources, and shouldn't
+	// be specified.
 	MinvCpus int32
 
 	// The Amazon EC2 security groups associated with instances launched in the compute
 	// environment. This parameter is required for Fargate compute resources, where it
 	// can contain up to 5 security groups. This can't be specified for EC2 compute
 	// resources. Providing an empty list is handled as if this parameter wasn't
-	// specified and no changeis made.
+	// specified and no change is made.
 	SecurityGroupIds []string
 
 	// The VPC subnets that the compute resources are launched into. This parameter is
@@ -382,10 +413,10 @@ type ComputeResourceUpdate struct {
 	Subnets []string
 }
 
-// An object representing the details of a container that is part of a job.
+// An object representing the details of a container that's part of a job.
 type ContainerDetail struct {
 
-	// The command that is passed to the container.
+	// The command that's passed to the container.
 	Command []string
 
 	// The Amazon Resource Name (ARN) of the container instance that the container is
@@ -440,7 +471,7 @@ type ContainerDetail struct {
 	// (https://docs.docker.com/engine/admin/logging/overview/) in the Docker
 	// documentation. AWS Batch currently supports a subset of the logging drivers
 	// available to the Docker daemon (shown in the LogConfiguration data type).
-	// Additional log drivers may be available in future releases of the Amazon ECS
+	// Additional log drivers might be available in future releases of the Amazon ECS
 	// container agent. This parameter requires version 1.18 of the Docker Remote API
 	// or greater on your container instance. To check the Docker Remote API version on
 	// your container instance, log into your container instance and run the following
@@ -502,9 +533,9 @@ type ContainerDetail struct {
 	// in the AWS Batch User Guide.
 	Secrets []Secret
 
-	// The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with
-	// the container job. Each container attempt receives a task ARN when they reach
-	// the STARTING status.
+	// The Amazon Resource Name (ARN) of the Amazon ECS task that's associated with the
+	// container job. Each container attempt receives a task ARN when they reach the
+	// STARTING status.
 	TaskArn *string
 
 	// A list of ulimit values to set in the container. This parameter maps to Ulimits
@@ -592,11 +623,11 @@ type ContainerOverrides struct {
 	Vcpus int32
 }
 
-// Container properties are used in job definitions to describe the container that
-// is launched as part of a job.
+// Container properties are used in job definitions to describe the container
+// that's launched as part of a job.
 type ContainerProperties struct {
 
-	// The command that is passed to the container. This parameter maps to Cmd in the
+	// The command that's passed to the container. This parameter maps to Cmd in the
 	// Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the COMMAND
@@ -843,7 +874,7 @@ type Ec2Configuration struct {
 	// for all GPU instance families (for example P4 and G4) and can be used for all
 	// non-AWS Graviton-based instance types. ECS_AL1 Amazon Linux
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami)−Default
-	// for all non-GPU, non-AWS-Graviton instance families. Amazon Linux is reaching
+	// for all non-GPU, non-AWS Graviton instance families. Amazon Linux is reaching
 	// the end-of-life of standard support. For more information, see Amazon Linux AMI
 	// (http://aws.amazon.com/amazon-linux-ami/).
 	//
@@ -906,7 +937,7 @@ type FargatePlatformConfiguration struct {
 // the containers associated with it stop running.
 type Host struct {
 
-	// The path on the host container instance that is presented to the container. If
+	// The path on the host container instance that's presented to the container. If
 	// this parameter is empty, then the Docker daemon has assigned a host path for
 	// you. If this parameter contains a file location, then the data volume persists
 	// at the specified location on the host container instance until you delete it
@@ -1002,7 +1033,7 @@ type JobDependency struct {
 // An object representing an AWS Batch job.
 type JobDetail struct {
 
-	// The job definition that is used by this job.
+	// The job definition that's used by this job.
 	//
 	// This member is required.
 	JobDefinition *string
@@ -1029,7 +1060,7 @@ type JobDetail struct {
 	// This member is required.
 	StartedAt int64
 
-	// The current status for the job. If your jobs do not progress to STARTING, see
+	// The current status for the job. If your jobs don't progress to STARTING, see
 	// Jobs Stuck in RUNNABLE Status
 	// (https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable)
 	// in the troubleshooting section of the AWS Batch User Guide.
@@ -1059,8 +1090,8 @@ type JobDetail struct {
 	// The Amazon Resource Name (ARN) of the job.
 	JobArn *string
 
-	// An object representing the details of a node that is associated with a
-	// multi-node parallel job.
+	// An object representing the details of a node that's associated with a multi-node
+	// parallel job.
 	NodeDetails *NodeDetails
 
 	// An object representing the node properties of a multi-node parallel job. This
@@ -1123,7 +1154,13 @@ type JobQueueDetail struct {
 	// This member is required.
 	JobQueueName *string
 
-	// The priority of the job queue.
+	// The priority of the job queue. Job queues with a higher priority (or a higher
+	// integer value for the priority parameter) are evaluated first when associated
+	// with the same compute environment. Priority is determined in descending order,
+	// for example, a job queue with a priority value of 10 is given scheduling
+	// preference over a job queue with a priority value of 1. All of the compute
+	// environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or
+	// FARGATE_SPOT); EC2 and Fargate compute environments cannot be mixed.
 	//
 	// This member is required.
 	Priority int32
@@ -1142,7 +1179,10 @@ type JobQueueDetail struct {
 	// status of the job queue.
 	StatusReason *string
 
-	// The tags applied to the job queue.
+	// The tags applied to the job queue. For more information, see Tagging your AWS
+	// Batch resources
+	// (https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html) in AWS
+	// Batch User Guide.
 	Tags map[string]string
 }
 
@@ -1162,7 +1202,7 @@ type JobSummary struct {
 	// The array properties of the job, if it is an array job.
 	ArrayProperties *ArrayPropertiesSummary
 
-	// An object representing the details of the container that is associated with the
+	// An object representing the details of the container that's associated with the
 	// job.
 	Container *ContainerSummary
 
@@ -1283,10 +1323,32 @@ type LinuxParameters struct {
 	// swappiness value of 100 causes pages to be swapped very aggressively. Accepted
 	// values are whole numbers between 0 and 100. If the swappiness parameter isn't
 	// specified, a default value of 60 is used. If a value isn't specified for maxSwap
-	// then this parameter is ignored. This parameter maps to the --memory-swappiness
-	// option to docker run (https://docs.docker.com/engine/reference/run/). This
-	// parameter isn't applicable to jobs running on Fargate resources and shouldn't be
-	// provided.
+	// then this parameter is ignored. If maxSwap is set to 0, the container doesn't
+	// use swap. This parameter maps to the --memory-swappiness option to docker run
+	// (https://docs.docker.com/engine/reference/run/). Consider the following when you
+	// use a per-container swap configuration.
+	//
+	// * Swap space must be enabled and
+	// allocated on the container instance for the containers to use. The Amazon ECS
+	// optimized AMIs don't have swap enabled by default. You must enable swap on the
+	// instance to use this feature. For more information, see Instance Store Swap
+	// Volumes
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-swap-volumes.html)
+	// in the Amazon EC2 User Guide for Linux Instances or How do I allocate memory to
+	// work as swap space in an Amazon EC2 instance by using a swap file?
+	// (http://aws.amazon.com/premiumsupport/knowledge-center/ec2-memory-swap-file/)
+	//
+	// *
+	// The swap space parameters are only supported for job definitions using EC2
+	// resources.
+	//
+	// * If the maxSwap and swappiness parameters are omitted from a job
+	// definition, each container will have a default swappiness value of 60 and the
+	// total swap usage will be limited to two times the memory reservation of the
+	// container.
+	//
+	// This parameter isn't applicable to jobs running on Fargate resources
+	// and shouldn't be provided.
 	Swappiness int32
 
 	// The container path, mount options, and size (in MiB) of the tmpfs mount. This
@@ -1327,9 +1389,9 @@ type LogConfiguration struct {
 	// documentation. syslog Specifies the syslog logging driver. For more information,
 	// including usage and options, see Syslog logging driver
 	// (https://docs.docker.com/config/containers/logging/syslog/) in the Docker
-	// documentation. If you have a custom driver that isn't listed earlier that you
+	// documentation. If you have a custom driver that'sn't listed earlier that you
 	// want to work with the Amazon ECS container agent, you can fork the Amazon ECS
-	// container agent project that is available on GitHub
+	// container agent project that's available on GitHub
 	// (https://github.com/aws/amazon-ecs-agent) and customize it to work with that
 	// driver. We encourage you to submit pull requests for changes that you want to
 	// have included. However, Amazon Web Services doesn't currently support running
@@ -1355,7 +1417,7 @@ type LogConfiguration struct {
 	SecretOptions []Secret
 }
 
-// Details on a Docker volume mount point that is used in a job's container
+// Details on a Docker volume mount point that's used in a job's container
 // properties. This parameter maps to Volumes in the Create a container
 // (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.19/#create-a-container)
 // section of the Docker Remote API and the --volume option to docker run.
@@ -1413,7 +1475,7 @@ type NodeDetails struct {
 	NodeIndex int32
 }
 
-// Object representing any node overrides to a job definition that is used in a
+// Object representing any node overrides to a job definition that's used in a
 // SubmitJob API operation. This isn't applicable to jobs running on Fargate
 // resources and shouldn't be provided; use containerOverrides instead.
 type NodeOverrides struct {
@@ -1458,7 +1520,7 @@ type NodeProperties struct {
 	NumNodes int32
 }
 
-// An object representing the properties of a node that is associated with a
+// An object representing the properties of a node that's associated with a
 // multi-node parallel job.
 type NodePropertiesSummary struct {
 
@@ -1475,7 +1537,7 @@ type NodePropertiesSummary struct {
 	NumNodes int32
 }
 
-// Object representing any node overrides to a job definition that is used in a
+// Object representing any node overrides to a job definition that's used in a
 // SubmitJob API operation.
 type NodePropertyOverride struct {
 
@@ -1500,7 +1562,7 @@ type NodeRangeProperty struct {
 	// index values of 0 through 3. If the starting range value is omitted (:n), then 0
 	// is used to start the range. If the ending range value is omitted (n:), then the
 	// highest possible node index is used to end the range. Your accumulative node
-	// ranges must account for all nodes (0:n). You may nest node ranges, for example
+	// ranges must account for all nodes (0:n). You can nest node ranges, for example
 	// 0:10 and 4:5, in which case the 4:5 range properties override the 0:10
 	// properties.
 	//
@@ -1539,34 +1601,35 @@ type ResourceRequirement struct {
 	// Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the --memory
-	// option to docker run (https://docs.docker.com/engine/reference/run/). You must
-	// specify at least 4 MiB of memory for a job. If you're trying to maximize your
-	// resource utilization by providing your jobs as much memory as possible for a
-	// particular instance type, see Memory Management
+	// option to docker run (https://docs.docker.com/engine/reference/run/). If you're
+	// trying to maximize your resource utilization by providing your jobs as much
+	// memory as possible for a particular instance type, see Memory Management
 	// (https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html) in
 	// the AWS Batch User Guide. For jobs running on Fargate resources, then value is
-	// the hard limit (in GiB), represented in decimal form, and must match one of the
-	// supported values (0.5 and whole numbers between 1 and 30, inclusive) and the
-	// VCPU values must be one of the values supported for that memory value. value =
-	// 0.5 VCPU = 0.25 value = 1 VCPU = 0.25 or 0.5 value = 2 VCPU = 0.25, 0.5, or 1
-	// value = 3 VCPU = 0.5, or 1 value = 4 VCPU = 0.5, 1, or 2 value = 5, 6, or 7 VCPU
-	// = 1 or 2 value = 8 VCPU = 1, 2, or 4 value = 9, 10, 11, 12, 13, 14, 15, or 16
-	// VCPU = 2 or 4 value = 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, or 30
-	// VCPU = 4 type="VCPU" The number of vCPUs reserved for the container. This
+	// the hard limit (in MiB), and must match one of the supported values and the VCPU
+	// values must be one of the values supported for that memory value. value = 512
+	// VCPU = 0.25 value = 1024 VCPU = 0.25 or 0.5 value = 2048 VCPU = 0.25, 0.5, or 1
+	// value = 3072 VCPU = 0.5, or 1 value = 4096 VCPU = 0.5, 1, or 2 value = 5120,
+	// 6144, or 7168 VCPU = 1 or 2 value = 8192 VCPU = 1, 2, or 4 value = 9216, 10240,
+	// 11264, 12288, 13312, 14336, 15360, or 16384 VCPU = 2 or 4 value = 17408, 18432,
+	// 19456, 20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672, 29696, or
+	// 30720 VCPU = 4 type="VCPU" The number of vCPUs reserved for the container. This
 	// parameter maps to CpuShares in the Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
 	// --cpu-shares option to docker run
 	// (https://docs.docker.com/engine/reference/run/). Each vCPU is equivalent to
-	// 1,024 CPU shares. You must specify at least one vCPU. This is required but can
-	// be specified in several places; it must be specified for each node at least
-	// once. For jobs running on Fargate resources, then value must match one of the
-	// supported values and the MEMORY values must be one of the values supported for
-	// that VCPU value. The supported values are 0.25, 0.5, 1, 2, and 4 value = 0.25
-	// MEMORY = 0.5, 1, or 2 value = 0.5 MEMORY = 1, 2, 3, or 4 value = 1 MEMORY = 2,
-	// 3, 4, 5, 6, 7, or 8 value = 2 MEMORY = 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
-	// or 16 value = 4 MEMORY = 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-	// 22, 23, 24, 25, 26, 27, 28, 29, or 30
+	// 1,024 CPU shares. For EC2 resources, you must specify at least one vCPU. This is
+	// required but can be specified in several places; it must be specified for each
+	// node at least once. For jobs running on Fargate resources, then value must match
+	// one of the supported values and the MEMORY values must be one of the values
+	// supported for that VCPU value. The supported values are 0.25, 0.5, 1, 2, and 4
+	// value = 0.25 MEMORY = 512, 1024, or 2048 value = 0.5 MEMORY = 1024, 2048, 3072,
+	// or 4096 value = 1 MEMORY = 2048, 3072, 4096, 5120, 6144, 7168, or 8192 value = 2
+	// MEMORY = 4096, 5120, 6144, 7168, 8192, 9216, 10240, 11264, 12288, 13312, 14336,
+	// 15360, or 16384 value = 4 MEMORY = 8192, 9216, 10240, 11264, 12288, 13312,
+	// 14336, 15360, 16384, 17408, 18432, 19456, 20480, 21504, 22528, 23552, 24576,
+	// 25600, 26624, 27648, 28672, 29696, or 30720
 	//
 	// This member is required.
 	Value *string
@@ -1578,7 +1641,7 @@ type ResourceRequirement struct {
 // Batch User Guide.
 type RetryStrategy struct {
 
-	// The number of times to move a job to the RUNNABLE status. You may specify
+	// The number of times to move a job to the RUNNABLE status. You can specify
 	// between 1 and 10 attempts. If the value of attempts is greater than one, the job
 	// is retried on failure the same number of attempts as the value.
 	Attempts int32

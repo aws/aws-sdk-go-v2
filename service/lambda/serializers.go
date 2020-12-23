@@ -536,6 +536,13 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 		ok.String(*v.FunctionName)
 	}
 
+	if v.FunctionResponseTypes != nil {
+		ok := object.Key("FunctionResponseTypes")
+		if err := awsRestjson1_serializeDocumentFunctionResponseTypeList(v.FunctionResponseTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaximumBatchingWindowInSeconds != nil {
 		ok := object.Key("MaximumBatchingWindowInSeconds")
 		ok.Integer(*v.MaximumBatchingWindowInSeconds)
@@ -563,6 +570,13 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 		}
 	}
 
+	if v.SelfManagedEventSource != nil {
+		ok := object.Key("SelfManagedEventSource")
+		if err := awsRestjson1_serializeDocumentSelfManagedEventSource(v.SelfManagedEventSource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SourceAccessConfigurations != nil {
 		ok := object.Key("SourceAccessConfigurations")
 		if err := awsRestjson1_serializeDocumentSourceAccessConfigurations(v.SourceAccessConfigurations, ok); err != nil {
@@ -585,6 +599,11 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 		if err := awsRestjson1_serializeDocumentTopics(v.Topics, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.TumblingWindowInSeconds != nil {
+		ok := object.Key("TumblingWindowInSeconds")
+		ok.Integer(*v.TumblingWindowInSeconds)
 	}
 
 	return nil
@@ -4420,6 +4439,13 @@ func awsRestjson1_serializeOpDocumentUpdateEventSourceMappingInput(v *UpdateEven
 		ok.String(*v.FunctionName)
 	}
 
+	if v.FunctionResponseTypes != nil {
+		ok := object.Key("FunctionResponseTypes")
+		if err := awsRestjson1_serializeDocumentFunctionResponseTypeList(v.FunctionResponseTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaximumBatchingWindowInSeconds != nil {
 		ok := object.Key("MaximumBatchingWindowInSeconds")
 		ok.Integer(*v.MaximumBatchingWindowInSeconds)
@@ -4445,6 +4471,11 @@ func awsRestjson1_serializeOpDocumentUpdateEventSourceMappingInput(v *UpdateEven
 		if err := awsRestjson1_serializeDocumentSourceAccessConfigurations(v.SourceAccessConfigurations, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.TumblingWindowInSeconds != nil {
+		ok := object.Key("TumblingWindowInSeconds")
+		ok.Integer(*v.TumblingWindowInSeconds)
 	}
 
 	return nil
@@ -4938,6 +4969,33 @@ func awsRestjson1_serializeDocumentDestinationConfig(v *types.DestinationConfig,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEndpointLists(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEndpoints(v map[string][]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentEndpointLists(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEnvironment(v *types.Environment, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5022,6 +5080,17 @@ func awsRestjson1_serializeDocumentFunctionCode(v *types.FunctionCode, value smi
 		ok.Base64EncodeBytes(v.ZipFile)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFunctionResponseTypeList(v []types.FunctionResponseType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
@@ -5132,6 +5201,20 @@ func awsRestjson1_serializeDocumentSecurityGroupIds(v []string, value smithyjson
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSelfManagedEventSource(v *types.SelfManagedEventSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Endpoints != nil {
+		ok := object.Key("Endpoints")
+		if err := awsRestjson1_serializeDocumentEndpoints(v.Endpoints, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

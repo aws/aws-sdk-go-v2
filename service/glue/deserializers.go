@@ -21323,6 +21323,93 @@ func awsAwsjson11_deserializeDocumentColumnErrors(v *[]types.ColumnError, value 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentColumnImportance(v **types.ColumnImportance, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ColumnImportance
+	if *v == nil {
+		sv = &types.ColumnImportance{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ColumnName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
+				}
+				sv.ColumnName = ptr.String(jtv)
+			}
+
+		case "Importance":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected GenericBoundedDouble to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.Importance = ptr.Float64(f64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentColumnImportanceList(v *[]types.ColumnImportance, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ColumnImportance
+	if *v == nil {
+		cv = []types.ColumnImportance{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ColumnImportance
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentColumnImportance(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentColumnList(v *[]types.Column, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -24781,6 +24868,11 @@ func awsAwsjson11_deserializeDocumentFindMatchesMetrics(v **types.FindMatchesMet
 					return err
 				}
 				sv.AreaUnderPRCurve = ptr.Float64(f64)
+			}
+
+		case "ColumnImportances":
+			if err := awsAwsjson11_deserializeDocumentColumnImportanceList(&sv.ColumnImportances, value); err != nil {
+				return err
 			}
 
 		case "ConfusionMatrix":

@@ -206,6 +206,13 @@ func (DomainNameStatus) Values() []DomainNameStatus {
 
 type EndpointType string
 
+// Enum values for EndpointType
+const (
+	EndpointTypeRegional EndpointType = "REGIONAL"
+	EndpointTypeEdge     EndpointType = "EDGE"
+	EndpointTypePrivate  EndpointType = "PRIVATE"
+)
+
 // Values returns all known values for EndpointType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.
@@ -315,6 +322,16 @@ func (LocationStatusType) Values() []LocationStatusType {
 
 type Op string
 
+// Enum values for Op
+const (
+	OpAdd     Op = "add"
+	OpRemove  Op = "remove"
+	OpReplace Op = "replace"
+	OpMove    Op = "move"
+	OpCopy    Op = "copy"
+	OpTest    Op = "test"
+)
+
 // Values returns all known values for Op. Note that this can be expanded in the
 // future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -368,6 +385,12 @@ func (QuotaPeriodType) Values() []QuotaPeriodType {
 }
 
 type SecurityPolicy string
+
+// Enum values for SecurityPolicy
+const (
+	SecurityPolicyTls10 SecurityPolicy = "TLS_1_0"
+	SecurityPolicyTls12 SecurityPolicy = "TLS_1_2"
+)
 
 // Values returns all known values for SecurityPolicy. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The

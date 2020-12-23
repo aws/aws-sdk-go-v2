@@ -12,6 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Returns a list of the events emitted by the resources that are evaluated by
+// DevOps Guru. You can use filters to specify which events are returned.
 func (c *Client) ListEvents(ctx context.Context, params *ListEventsInput, optFns ...func(*Options)) (*ListEventsOutput, error) {
 	if params == nil {
 		params = &ListEventsInput{}
@@ -29,17 +31,29 @@ func (c *Client) ListEvents(ctx context.Context, params *ListEventsInput, optFns
 
 type ListEventsInput struct {
 
+	// A ListEventsFilters object used to specify which events to return.
+	//
 	// This member is required.
 	Filters *types.ListEventsFilters
 
-	MaxResults int32
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
 
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 }
 
 type ListEventsOutput struct {
+
+	// A list of the requested events.
+	//
+	// This member is required.
 	Events []types.Event
 
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -115,6 +129,8 @@ var _ ListEventsAPIClient = (*Client)(nil)
 
 // ListEventsPaginatorOptions is the paginator options for ListEvents
 type ListEventsPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -134,8 +150,8 @@ type ListEventsPaginator struct {
 // NewListEventsPaginator returns a new ListEventsPaginator
 func NewListEventsPaginator(client ListEventsAPIClient, params *ListEventsInput, optFns ...func(*ListEventsPaginatorOptions)) *ListEventsPaginator {
 	options := ListEventsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -168,7 +184,11 @@ func (p *ListEventsPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListEvents(ctx, &params, optFns...)
 	if err != nil {

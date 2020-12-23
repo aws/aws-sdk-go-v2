@@ -4,6 +4,14 @@ package types
 
 type AlgorithmicStemming string
 
+// Enum values for AlgorithmicStemming
+const (
+	AlgorithmicStemmingNone    AlgorithmicStemming = "none"
+	AlgorithmicStemmingMinimal AlgorithmicStemming = "minimal"
+	AlgorithmicStemmingLight   AlgorithmicStemming = "light"
+	AlgorithmicStemmingFull    AlgorithmicStemming = "full"
+)
+
 // Values returns all known values for AlgorithmicStemming. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -17,6 +25,45 @@ func (AlgorithmicStemming) Values() []AlgorithmicStemming {
 }
 
 type AnalysisSchemeLanguage string
+
+// Enum values for AnalysisSchemeLanguage
+const (
+	AnalysisSchemeLanguageAr     AnalysisSchemeLanguage = "ar"
+	AnalysisSchemeLanguageBg     AnalysisSchemeLanguage = "bg"
+	AnalysisSchemeLanguageCa     AnalysisSchemeLanguage = "ca"
+	AnalysisSchemeLanguageCs     AnalysisSchemeLanguage = "cs"
+	AnalysisSchemeLanguageDa     AnalysisSchemeLanguage = "da"
+	AnalysisSchemeLanguageDe     AnalysisSchemeLanguage = "de"
+	AnalysisSchemeLanguageEl     AnalysisSchemeLanguage = "el"
+	AnalysisSchemeLanguageEn     AnalysisSchemeLanguage = "en"
+	AnalysisSchemeLanguageEs     AnalysisSchemeLanguage = "es"
+	AnalysisSchemeLanguageEu     AnalysisSchemeLanguage = "eu"
+	AnalysisSchemeLanguageFa     AnalysisSchemeLanguage = "fa"
+	AnalysisSchemeLanguageFi     AnalysisSchemeLanguage = "fi"
+	AnalysisSchemeLanguageFr     AnalysisSchemeLanguage = "fr"
+	AnalysisSchemeLanguageGa     AnalysisSchemeLanguage = "ga"
+	AnalysisSchemeLanguageGl     AnalysisSchemeLanguage = "gl"
+	AnalysisSchemeLanguageHe     AnalysisSchemeLanguage = "he"
+	AnalysisSchemeLanguageHi     AnalysisSchemeLanguage = "hi"
+	AnalysisSchemeLanguageHu     AnalysisSchemeLanguage = "hu"
+	AnalysisSchemeLanguageHy     AnalysisSchemeLanguage = "hy"
+	AnalysisSchemeLanguageId     AnalysisSchemeLanguage = "id"
+	AnalysisSchemeLanguageIt     AnalysisSchemeLanguage = "it"
+	AnalysisSchemeLanguageJa     AnalysisSchemeLanguage = "ja"
+	AnalysisSchemeLanguageKo     AnalysisSchemeLanguage = "ko"
+	AnalysisSchemeLanguageLv     AnalysisSchemeLanguage = "lv"
+	AnalysisSchemeLanguageMul    AnalysisSchemeLanguage = "mul"
+	AnalysisSchemeLanguageNl     AnalysisSchemeLanguage = "nl"
+	AnalysisSchemeLanguageNo     AnalysisSchemeLanguage = "no"
+	AnalysisSchemeLanguagePt     AnalysisSchemeLanguage = "pt"
+	AnalysisSchemeLanguageRo     AnalysisSchemeLanguage = "ro"
+	AnalysisSchemeLanguageRu     AnalysisSchemeLanguage = "ru"
+	AnalysisSchemeLanguageSv     AnalysisSchemeLanguage = "sv"
+	AnalysisSchemeLanguageTh     AnalysisSchemeLanguage = "th"
+	AnalysisSchemeLanguageTr     AnalysisSchemeLanguage = "tr"
+	AnalysisSchemeLanguageZhHans AnalysisSchemeLanguage = "zh-Hans"
+	AnalysisSchemeLanguageZhHant AnalysisSchemeLanguage = "zh-Hant"
+)
 
 // Values returns all known values for AnalysisSchemeLanguage. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
@@ -63,6 +110,21 @@ func (AnalysisSchemeLanguage) Values() []AnalysisSchemeLanguage {
 
 type IndexFieldType string
 
+// Enum values for IndexFieldType
+const (
+	IndexFieldTypeInt          IndexFieldType = "int"
+	IndexFieldTypeDouble       IndexFieldType = "double"
+	IndexFieldTypeLiteral      IndexFieldType = "literal"
+	IndexFieldTypeText         IndexFieldType = "text"
+	IndexFieldTypeDate         IndexFieldType = "date"
+	IndexFieldTypeLatlon       IndexFieldType = "latlon"
+	IndexFieldTypeIntArray     IndexFieldType = "int-array"
+	IndexFieldTypeDoubleArray  IndexFieldType = "double-array"
+	IndexFieldTypeLiteralArray IndexFieldType = "literal-array"
+	IndexFieldTypeTextArray    IndexFieldType = "text-array"
+	IndexFieldTypeDateArray    IndexFieldType = "date-array"
+)
+
 // Values returns all known values for IndexFieldType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -84,6 +146,14 @@ func (IndexFieldType) Values() []IndexFieldType {
 
 type OptionState string
 
+// Enum values for OptionState
+const (
+	OptionStateRequiresindexdocuments OptionState = "RequiresIndexDocuments"
+	OptionStateProcessing             OptionState = "Processing"
+	OptionStateActive                 OptionState = "Active"
+	OptionStateFailedtovalidate       OptionState = "FailedToValidate"
+)
+
 // Values returns all known values for OptionState. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.
@@ -97,6 +167,18 @@ func (OptionState) Values() []OptionState {
 }
 
 type PartitionInstanceType string
+
+// Enum values for PartitionInstanceType
+const (
+	PartitionInstanceTypeSearchM1Small   PartitionInstanceType = "search.m1.small"
+	PartitionInstanceTypeSearchM1Large   PartitionInstanceType = "search.m1.large"
+	PartitionInstanceTypeSearchM2Xlarge  PartitionInstanceType = "search.m2.xlarge"
+	PartitionInstanceTypeSearchM22xlarge PartitionInstanceType = "search.m2.2xlarge"
+	PartitionInstanceTypeSearchM3Medium  PartitionInstanceType = "search.m3.medium"
+	PartitionInstanceTypeSearchM3Large   PartitionInstanceType = "search.m3.large"
+	PartitionInstanceTypeSearchM3Xlarge  PartitionInstanceType = "search.m3.xlarge"
+	PartitionInstanceTypeSearchM32xlarge PartitionInstanceType = "search.m3.2xlarge"
+)
 
 // Values returns all known values for PartitionInstanceType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -115,6 +197,13 @@ func (PartitionInstanceType) Values() []PartitionInstanceType {
 }
 
 type SuggesterFuzzyMatching string
+
+// Enum values for SuggesterFuzzyMatching
+const (
+	SuggesterFuzzyMatchingNone SuggesterFuzzyMatching = "none"
+	SuggesterFuzzyMatchingLow  SuggesterFuzzyMatching = "low"
+	SuggesterFuzzyMatchingHigh SuggesterFuzzyMatching = "high"
+)
 
 // Values returns all known values for SuggesterFuzzyMatching. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The

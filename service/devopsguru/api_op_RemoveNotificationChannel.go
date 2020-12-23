@@ -10,6 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Removes a notification channel from DevOps Guru. A notification channel is used
+// to notify you when DevOps Guru generates an insight that contains information
+// about how to improve your operations.
 func (c *Client) RemoveNotificationChannel(ctx context.Context, params *RemoveNotificationChannelInput, optFns ...func(*Options)) (*RemoveNotificationChannelOutput, error) {
 	if params == nil {
 		params = &RemoveNotificationChannelInput{}
@@ -27,6 +30,8 @@ func (c *Client) RemoveNotificationChannel(ctx context.Context, params *RemoveNo
 
 type RemoveNotificationChannelInput struct {
 
+	// The ID of the notification channel to be removed.
+	//
 	// This member is required.
 	Id *string
 }

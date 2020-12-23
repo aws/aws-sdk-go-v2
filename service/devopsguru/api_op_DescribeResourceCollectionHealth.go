@@ -12,6 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Returns the number of open proactive insights, open reactive insights, and the
+// Mean Time to Recover (MTTR) for all closed insights in resource collections in
+// your account. You specify the type of AWS resources collection. The one type of
+// AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can
+// be configured to analyze only the AWS resources that are defined in the stacks.
 func (c *Client) DescribeResourceCollectionHealth(ctx context.Context, params *DescribeResourceCollectionHealthInput, optFns ...func(*Options)) (*DescribeResourceCollectionHealthOutput, error) {
 	if params == nil {
 		params = &DescribeResourceCollectionHealthInput{}
@@ -29,15 +34,29 @@ func (c *Client) DescribeResourceCollectionHealth(ctx context.Context, params *D
 
 type DescribeResourceCollectionHealthInput struct {
 
+	// An AWS resource collection type. This type specifies how analyzed AWS resources
+	// are defined. The one type of AWS resource collection supported is AWS
+	// CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS
+	// resources that are defined in the stacks.
+	//
 	// This member is required.
-	ResourceCollectionType *string
+	ResourceCollectionType types.ResourceCollectionType
 
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 }
 
 type DescribeResourceCollectionHealthOutput struct {
+
+	// The returned CloudFormationHealthOverview object that contains an
+	// InsightHealthOverview object with the requested system health information.
+	//
+	// This member is required.
 	CloudFormation []types.CloudFormationHealth
 
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

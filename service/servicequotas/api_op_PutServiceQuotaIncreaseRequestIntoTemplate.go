@@ -11,11 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Defines and adds a quota to the service quota template. To add a quota to the
-// template, you must provide the ServiceCode, QuotaCode, AwsRegion, and
-// DesiredValue. Once you add a quota to the template, use
-// ListServiceQuotaIncreaseRequestsInTemplate to see the list of quotas in the
-// template.
+// Adds a quota increase request to your quota request template.
 func (c *Client) PutServiceQuotaIncreaseRequestIntoTemplate(ctx context.Context, params *PutServiceQuotaIncreaseRequestIntoTemplateInput, optFns ...func(*Options)) (*PutServiceQuotaIncreaseRequestIntoTemplateOutput, error) {
 	if params == nil {
 		params = &PutServiceQuotaIncreaseRequestIntoTemplateInput{}
@@ -33,22 +29,22 @@ func (c *Client) PutServiceQuotaIncreaseRequestIntoTemplate(ctx context.Context,
 
 type PutServiceQuotaIncreaseRequestIntoTemplateInput struct {
 
-	// Specifies the AWS Region for the quota.
+	// The AWS Region.
 	//
 	// This member is required.
 	AwsRegion *string
 
-	// Specifies the new, increased value for the quota.
+	// The new, increased value for the quota.
 	//
 	// This member is required.
 	DesiredValue *float64
 
-	// Specifies the service quota that you want to use.
+	// The quota identifier.
 	//
 	// This member is required.
 	QuotaCode *string
 
-	// Specifies the service that you want to use.
+	// The service identifier.
 	//
 	// This member is required.
 	ServiceCode *string
@@ -56,7 +52,7 @@ type PutServiceQuotaIncreaseRequestIntoTemplateInput struct {
 
 type PutServiceQuotaIncreaseRequestIntoTemplateOutput struct {
 
-	// A structure that contains information about one service quota increase request.
+	// Information about the quota increase request.
 	ServiceQuotaIncreaseRequestInTemplate *types.ServiceQuotaIncreaseRequestInTemplate
 
 	// Metadata pertaining to the operation's result.

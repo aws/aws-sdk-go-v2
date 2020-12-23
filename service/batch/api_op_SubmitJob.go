@@ -30,6 +30,7 @@ func (c *Client) SubmitJob(ctx context.Context, params *SubmitJobInput, optFns .
 	return out, nil
 }
 
+// Contains the parameters for SubmitJob.
 type SubmitJobInput struct {
 
 	// The job definition used by this job. This value can be one of name,
@@ -61,7 +62,7 @@ type SubmitJobInput struct {
 
 	// A list of container overrides in JSON format that specify the name of a
 	// container in the specified job definition and the overrides it should receive.
-	// You can override the default command for a container (that is specified in the
+	// You can override the default command for a container (that's specified in the
 	// job definition or the Docker image) with a command override. You can also
 	// override existing environment variables (that are specified in the job
 	// definition or Docker image) on a container or add new environment variables to

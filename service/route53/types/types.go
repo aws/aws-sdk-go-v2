@@ -524,6 +524,24 @@ type Dimension struct {
 	Value *string
 }
 
+// A string repesenting the status of DNSSEC signing.
+type DNSSECStatus struct {
+
+	// Indicates your hosted zone signging status: SIGNING, NOT_SIGNING, or
+	// INTERNAL_FAILURE. If the status is INTERNAL_FAILURE, see StatusMessage for
+	// information about steps that you can take to correct the problem. A status
+	// INTERNAL_FAILURE means there was an error during a request. Before you can
+	// continue to work with DNSSEC signing, including working with key signing keys
+	// (KSKs), you must correct the problem by enabling or disabling DNSSEC signing for
+	// the hosted zone.
+	ServeSignature *string
+
+	// The status message provided for the following DNSSEC signing status:
+	// INTERNAL_FAILURE. The status message includes information about what the problem
+	// might be and steps that you can take to correct the issue.
+	StatusMessage *string
+}
+
 // A complex type that contains information about a geographic location.
 type GeoLocation struct {
 
@@ -1035,6 +1053,107 @@ type HostedZoneSummary struct {
 	//
 	// This member is required.
 	Owner *HostedZoneOwner
+}
+
+// A key signing key (KSK) is a complex type that represents a public/private key
+// pair. The private key is used to generate a digital signature for the zone
+// signing key (ZSK). The public key is stored in the DNS and is used to
+// authenticate the ZSK. A KSK is always associated with a hosted zone; it cannot
+// exist by itself.
+type KeySigningKey struct {
+
+	// The date when the key signing key (KSK) was created.
+	CreatedDate *time.Time
+
+	// A string that represents a DNSKEY record.
+	DNSKEYRecord *string
+
+	// A string that represents a delegation signer (DS) record.
+	DSRecord *string
+
+	// A string used to represent the delegation signer digest algorithm. This value
+	// must follow the guidelines provided by RFC-8624 Section 3.3
+	// (https://tools.ietf.org/html/rfc8624#section-3.3).
+	DigestAlgorithmMnemonic *string
+
+	// An integer used to represent the delegation signer digest algorithm. This value
+	// must follow the guidelines provided by RFC-8624 Section 3.3
+	// (https://tools.ietf.org/html/rfc8624#section-3.3).
+	DigestAlgorithmType int32
+
+	// A cryptographic digest of a DNSKEY resource record (RR). DNSKEY records are used
+	// to publish the public key that resolvers can use to verify DNSSEC signatures
+	// that are used to secure certain kinds of information provided by the DNS system.
+	DigestValue *string
+
+	// An integer that specifies how the key is used. For key signing key (KSK), this
+	// value is always 257.
+	Flag int32
+
+	// An integer used to identify the DNSSEC record for the domain name. The process
+	// used to calculate the value is described in RFC-4034 Appendix B
+	// (https://tools.ietf.org/rfc/rfc4034.txt).
+	KeyTag int32
+
+	// The Amazon resource name (ARN) used to identify the customer managed key (CMK)
+	// in AWS Key Management Service (KMS). The KmsArn must be unique for each key
+	// signing key (KSK) in a single hosted zone. You must configure the CMK as
+	// follows: Status Enabled Key spec ECC_NIST_P256 Key usage Sign and verify Key
+	// policy The key policy must give permission for the following actions:
+	//
+	// *
+	// DescribeKey
+	//
+	// * GetPublicKey
+	//
+	// * Sign
+	//
+	// The key policy must also include the Amazon
+	// Route 53 service in the principal for your account. Specify the following:
+	//
+	// *
+	// "Service": "api-service.dnssec.route53.aws.internal"
+	//
+	// For more information about
+	// working with the customer managed key (CMK) in KMS, see AWS Key Management
+	// Service concepts
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html).
+	KmsArn *string
+
+	// The last time that the key signing key (KSK) was changed.
+	LastModifiedDate *time.Time
+
+	// An alphanumeric string used to identify a key signing key (KSK). Name must be
+	// unique for each key signing key in the same hosted zone.
+	Name *string
+
+	// The public key, represented as a Base64 encoding, as required by  RFC-4034 Page
+	// 5 (https://tools.ietf.org/rfc/rfc4034.txt).
+	PublicKey *string
+
+	// A string used to represent the signing algorithm. This value must follow the
+	// guidelines provided by RFC-8624 Section 3.1
+	// (https://tools.ietf.org/html/rfc8624#section-3.1).
+	SigningAlgorithmMnemonic *string
+
+	// An integer used to represent the signing algorithm. This value must follow the
+	// guidelines provided by RFC-8624 Section 3.1
+	// (https://tools.ietf.org/html/rfc8624#section-3.1).
+	SigningAlgorithmType int32
+
+	// A string that represents the current key signing key (KSK) status. Status can
+	// have one of the following values: ACTIVE The KSK is being used for signing.
+	// INACTIVE The KSK is not being used for signing. ACTION_NEEDED There is an error
+	// in the KSK that requires you to take action to resolve. INTERNAL_FAILURE There
+	// was an error during a request. Before you can continue to work with DNSSEC
+	// signing, including actions that involve this KSK, you must correct the problem.
+	// For example, you may need to activate or deactivate the KSK.
+	Status *string
+
+	// The status message provided for the following key signing key (KSK) statuses:
+	// ACTION_NEEDED or INTERNAL_FAILURE. The status message includes information about
+	// what the problem might be and steps that you can take to correct the issue.
+	StatusMessage *string
 }
 
 // If a health check or hosted zone was created by another service, LinkedService

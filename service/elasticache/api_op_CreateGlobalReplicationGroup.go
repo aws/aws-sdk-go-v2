@@ -48,7 +48,7 @@ type CreateGlobalReplicationGroupInput struct {
 	// Datastore name across multiple regions. For a full list of AWS Regions and their
 	// respective Global Datastore iD prefixes, see Using the AWS CLI with Global
 	// Datastores
-	// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters-CLI.html).
+	// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html).
 	//
 	// This member is required.
 	GlobalReplicationGroupIdSuffix *string

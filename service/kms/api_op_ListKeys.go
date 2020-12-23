@@ -13,7 +13,19 @@ import (
 )
 
 // Gets a list of all customer master keys (CMKs) in the caller's AWS account and
-// Region.
+// Region. Cross-account use: No. You cannot perform this operation on a CMK in a
+// different AWS account. Required permissions: kms:ListKeys
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (IAM policy) Related operations:
+//
+// * CreateKey
+//
+// * DescribeKey
+//
+// * ListAliases
+//
+// *
+// ListResourceTags
 func (c *Client) ListKeys(ctx context.Context, params *ListKeysInput, optFns ...func(*Options)) (*ListKeysOutput, error) {
 	if params == nil {
 		params = &ListKeysInput{}

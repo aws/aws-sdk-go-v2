@@ -125,6 +125,11 @@ type CreateAssociationInput struct {
 	// use AUTO mode.
 	SyncCompliance types.AssociationSyncCompliance
 
+	// A location is a combination of AWS Regions and AWS accounts where you want to
+	// run the association. Use this action to create an association in multiple
+	// Regions and multiple accounts.
+	TargetLocations []types.TargetLocation
+
 	// The targets for the association. You can target instances by using tags, AWS
 	// Resource Groups, all instances in an AWS account, or individual instance IDs.
 	// For more information about choosing targets for an association, see Using

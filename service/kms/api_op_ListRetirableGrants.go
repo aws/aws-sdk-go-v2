@@ -11,9 +11,26 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all grants for which the grant's RetiringPrincipal matches the
-// one specified. A typical use is to list all grants that you are able to retire.
-// To retire a grant, use RetireGrant.
+// Returns all grants in which the specified principal is the RetiringPrincipal in
+// the grant. You can specify any principal in your AWS account. The grants that
+// are returned include grants for CMKs in your AWS account and other AWS accounts.
+// You might use this operation to determine which grants you may retire. To retire
+// a grant, use the RetireGrant operation. Cross-account use: You must specify a
+// principal in your AWS account. However, this operation can return grants in any
+// AWS account. You do not need kms:ListRetirableGrants permission (or any other
+// additional permission) in any AWS account other than your own. Required
+// permissions: kms:ListRetirableGrants
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (IAM policy) in your AWS account. Related operations:
+//
+// * CreateGrant
+//
+// *
+// ListGrants
+//
+// * RetireGrant
+//
+// * RevokeGrant
 func (c *Client) ListRetirableGrants(ctx context.Context, params *ListRetirableGrantsInput, optFns ...func(*Options)) (*ListRetirableGrantsOutput, error) {
 	if params == nil {
 		params = &ListRetirableGrantsInput{}
@@ -31,8 +48,8 @@ func (c *Client) ListRetirableGrants(ctx context.Context, params *ListRetirableG
 
 type ListRetirableGrantsInput struct {
 
-	// The retiring principal for which to list grants. To specify the retiring
-	// principal, use the Amazon Resource Name (ARN)
+	// The retiring principal for which to list grants. Enter a principal in your AWS
+	// account. To specify the retiring principal, use the Amazon Resource Name (ARN)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// an AWS principal. Valid AWS principals include AWS accounts (root), IAM users,
 	// federated users, and assumed role users. For examples of the ARN syntax for

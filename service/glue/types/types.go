@@ -314,6 +314,12 @@ type ColumnError struct {
 	Error *ErrorDetail
 }
 
+type ColumnImportance struct {
+	ColumnName *string
+
+	Importance *float64
+}
+
 // Represents the generated column-level statistics for a table or partition.
 type ColumnStatistics struct {
 
@@ -1332,6 +1338,8 @@ type FindMatchesMetrics struct {
 	// precision vs. recall tradeoff. For more information, see Precision and recall
 	// (https://en.wikipedia.org/wiki/Precision_and_recall) in Wikipedia.
 	AreaUnderPRCurve *float64
+
+	ColumnImportances []ColumnImportance
 
 	// The confusion matrix shows you what your transform is predicting accurately and
 	// what types of errors it is making. For more information, see Confusion matrix

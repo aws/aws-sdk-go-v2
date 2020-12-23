@@ -6,6 +6,20 @@ import (
 	"time"
 )
 
+// Specifies an action for an event-based policy.
+type Action struct {
+
+	// The rule for copying shared snapshots across Regions.
+	//
+	// This member is required.
+	CrossRegionCopy []CrossRegionCopyAction
+
+	// A descriptive name for the action.
+	//
+	// This member is required.
+	Name *string
+}
+
 // Specifies when to create snapshots of EBS volumes. You must specify either a
 // Cron expression or an interval, interval unit, and start time. You cannot
 // specify both.
@@ -28,6 +42,23 @@ type CreateRule struct {
 	// operation occurs within a one-hour window following the specified time. If you
 	// do not specify a time, Amazon DLM selects a time within the next 24 hours.
 	Times []string
+}
+
+// Specifies a rule for copying shared snapshots across Regions.
+type CrossRegionCopyAction struct {
+
+	// The encryption settings for the copied snapshot.
+	//
+	// This member is required.
+	EncryptionConfiguration *EncryptionConfiguration
+
+	// The target Region.
+	//
+	// This member is required.
+	Target *string
+
+	// Specifies the retention rule for cross-Region snapshot copies.
+	RetainRule *CrossRegionCopyRetainRule
 }
 
 // Specifies the retention rule for cross-Region snapshot copies.
@@ -67,6 +98,63 @@ type CrossRegionCopyRule struct {
 
 	// The retention rule.
 	RetainRule *CrossRegionCopyRetainRule
+}
+
+// Specifies the encryption settings for shared snapshots that are copied across
+// Regions.
+type EncryptionConfiguration struct {
+
+	// To encrypt a copy of an unencrypted snapshot when encryption by default is not
+	// enabled, enable encryption using this parameter. Copies of encrypted snapshots
+	// are encrypted, even if this parameter is false or when encryption by default is
+	// not enabled.
+	//
+	// This member is required.
+	Encrypted bool
+
+	// The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use
+	// for EBS encryption. If this parameter is not specified, your AWS managed CMK for
+	// EBS is used.
+	CmkArn *string
+}
+
+// Specifies an event that triggers an event-based policy.
+type EventParameters struct {
+
+	// The snapshot description that can trigger the policy. The description pattern is
+	// specified using a regular expression. The policy runs only if a snapshot with a
+	// description that matches the specified pattern is shared with your account. For
+	// example, specifying ^.*Created for policy: policy-1234567890abcdef0.*$
+	// configures the policy to run only if snapshots created by policy
+	// policy-1234567890abcdef0 are shared with your account.
+	//
+	// This member is required.
+	DescriptionRegex *string
+
+	// The type of event. Currently, only snapshot sharing events are supported.
+	//
+	// This member is required.
+	EventType EventTypeValues
+
+	// The IDs of the AWS accounts that can trigger policy by sharing snapshots with
+	// your account. The policy only runs if one of the specified AWS accounts shares a
+	// snapshot with your account.
+	//
+	// This member is required.
+	SnapshotOwner []string
+}
+
+// Specifies an event that triggers an event-based policy.
+type EventSource struct {
+
+	// The source of the event. Currently only managed AWS CloudWatch Events rules are
+	// supported.
+	//
+	// This member is required.
+	Type EventSourceValues
+
+	// Information about the event.
+	Parameters *EventParameters
 }
 
 // Specifies a rule for enabling fast snapshot restore. You can enable fast
@@ -158,32 +246,53 @@ type Parameters struct {
 	// Applies to AMI lifecycle policies only. Indicates whether targeted instances are
 	// rebooted when the lifecycle policy runs. true indicates that targeted instances
 	// are not rebooted when the policy runs. false indicates that target instances are
-	// rebooted when the policy runs. The default is true (instance are not rebooted).
+	// rebooted when the policy runs. The default is true (instances are not rebooted).
 	NoReboot bool
 }
 
 // Specifies the configuration of a lifecycle policy.
 type PolicyDetails struct {
 
-	// A set of optional parameters for the policy.
+	// The actions to be performed when the event-based policy is triggered. You can
+	// specify only one action per policy. This parameter is required for event-based
+	// policies only. If you are creating a snapshot or AMI policy, omit this
+	// parameter.
+	Actions []Action
+
+	// The event that triggers the event-based policy. This parameter is required for
+	// event-based policies only. If you are creating a snapshot or AMI policy, omit
+	// this parameter.
+	EventSource *EventSource
+
+	// A set of optional parameters for snapshot and AMI lifecycle policies. This
+	// parameter is required for snapshot and AMI policies only. If you are creating an
+	// event-based policy, omit this parameter.
 	Parameters *Parameters
 
 	// The valid target resource types and actions a policy can manage. Specify
 	// EBS_SNAPSHOT_MANAGEMENT to create a lifecycle policy that manages the lifecycle
 	// of Amazon EBS snapshots. Specify IMAGE_MANAGEMENT to create a lifecycle policy
-	// that manages the lifecycle of EBS-backed AMIs. The default is
-	// EBS_SNAPSHOT_MANAGEMENT.
+	// that manages the lifecycle of EBS-backed AMIs. Specify EVENT_BASED_POLICY  to
+	// create an event-based policy that performs specific actions when a defined event
+	// occurs in your AWS account. The default is EBS_SNAPSHOT_MANAGEMENT.
 	PolicyType PolicyTypeValues
 
-	// The resource type. Use VOLUME to create snapshots of individual volumes or use
-	// INSTANCE to create multi-volume snapshots from the volumes for an instance.
+	// The target resource type for snapshot and AMI lifecycle policies. Use VOLUME to
+	// create snapshots of individual volumes or use INSTANCE to create multi-volume
+	// snapshots from the volumes for an instance. This parameter is required for
+	// snapshot and AMI policies only. If you are creating an event-based policy, omit
+	// this parameter.
 	ResourceTypes []ResourceTypeValues
 
-	// The schedules of policy-defined actions. A policy can have up to four schedules
-	// - one mandatory schedule and up to three optional schedules.
+	// The schedules of policy-defined actions for snapshot and AMI lifecycle policies.
+	// A policy can have up to four schedules—one mandatory schedule and up to three
+	// optional schedules. This parameter is required for snapshot and AMI policies
+	// only. If you are creating an event-based policy, omit this parameter.
 	Schedules []Schedule
 
-	// The single tag that identifies targeted resources for this policy.
+	// The single tag that identifies targeted resources for this policy. This
+	// parameter is required for snapshot and AMI policies only. If you are creating an
+	// event-based policy, omit this parameter.
 	TargetTags []Tag
 }
 
@@ -202,7 +311,7 @@ type RetainRule struct {
 	IntervalUnit RetentionIntervalUnitValues
 }
 
-// Specifies a backup schedule.
+// Specifies a backup schedule for a snapshot or AMI lifecycle policy.
 type Schedule struct {
 
 	// Copy all user-defined tags on a source volume to snapshots of the volume created
@@ -224,6 +333,9 @@ type Schedule struct {
 	// The retention rule.
 	RetainRule *RetainRule
 
+	// The rule for sharing snapshots with other AWS accounts.
+	ShareRules []ShareRule
+
 	// The tags to apply to policy-created resources. These user-defined tags are in
 	// addition to the AWS-added lifecycle tags.
 	TagsToAdd []Tag
@@ -233,6 +345,22 @@ type Schedule struct {
 	// one of the two following formats: $(instance-id) or $(timestamp). Variable tags
 	// are only valid for EBS Snapshot Management – Instance policies.
 	VariableTags []Tag
+}
+
+// Specifies a rule for sharing snapshots across AWS accounts.
+type ShareRule struct {
+
+	// The IDs of the AWS accounts with which to share the snapshots.
+	//
+	// This member is required.
+	TargetAccounts []string
+
+	// The period after which snapshots that are shared with other AWS accounts are
+	// automatically unshared.
+	UnshareInterval int32
+
+	// The unit of time for the automatic unsharing interval.
+	UnshareIntervalUnit RetentionIntervalUnitValues
 }
 
 // Specifies a tag for a resource.

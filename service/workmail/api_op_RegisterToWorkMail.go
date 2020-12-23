@@ -14,7 +14,7 @@ import (
 // use by associating a mailbox and calendaring capabilities. It performs no change
 // if the user, group, or resource is enabled and fails if the user, group, or
 // resource is deleted. This operation results in the accumulation of costs. For
-// more information, see Pricing (https://aws.amazon.com//workmail/pricing). The
+// more information, see Pricing (https://aws.amazon.com/workmail/pricing). The
 // equivalent console functionality for this operation is Enable. Users can either
 // be created by calling the CreateUser API operation or they can be synchronized
 // from your directory. For more information, see DeregisterFromWorkMail.

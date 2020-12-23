@@ -11,9 +11,21 @@ import (
 )
 
 // Revokes the specified grant for the specified customer master key (CMK). You can
-// revoke a grant to actively deny operations that depend on it. To perform this
-// operation on a CMK in a different AWS account, specify the key ARN in the value
-// of the KeyId parameter.
+// revoke a grant to actively deny operations that depend on it. Cross-account use:
+// Yes. To perform this operation on a CMK in a different AWS account, specify the
+// key ARN in the value of the KeyId parameter. Required permissions:
+// kms:RevokeGrant
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations:
+//
+// * CreateGrant
+//
+// * ListGrants
+//
+// *
+// ListRetirableGrants
+//
+// * RetireGrant
 func (c *Client) RevokeGrant(ctx context.Context, params *RevokeGrantInput, optFns ...func(*Options)) (*RevokeGrantOutput, error) {
 	if params == nil {
 		params = &RevokeGrantInput{}

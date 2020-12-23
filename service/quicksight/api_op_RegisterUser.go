@@ -113,8 +113,8 @@ type RegisterUserInput struct {
 	// QuickSight user. You can register multiple users using the same IAM role if each
 	// user has a different session name. For more information on assuming IAM roles,
 	// see assume-role
-	// (https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html)
-	// in the AWS CLI Reference.
+	// (https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html) in the
+	// AWS CLI Reference.
 	SessionName *string
 
 	// The Amazon QuickSight user name that you want to create for the user you are

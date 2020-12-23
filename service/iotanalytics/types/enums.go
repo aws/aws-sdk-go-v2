@@ -118,6 +118,24 @@ func (DatastoreStatus) Values() []DatastoreStatus {
 	}
 }
 
+type FileFormatType string
+
+// Enum values for FileFormatType
+const (
+	FileFormatTypeJson    FileFormatType = "JSON"
+	FileFormatTypeParquet FileFormatType = "PARQUET"
+)
+
+// Values returns all known values for FileFormatType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FileFormatType) Values() []FileFormatType {
+	return []FileFormatType{
+		"JSON",
+		"PARQUET",
+	}
+}
+
 type LoggingLevel string
 
 // Enum values for LoggingLevel

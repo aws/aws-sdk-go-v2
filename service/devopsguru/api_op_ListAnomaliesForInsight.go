@@ -12,6 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Returns a list of the anomalies that belong to an insight that you specify using
+// its ID.
 func (c *Client) ListAnomaliesForInsight(ctx context.Context, params *ListAnomaliesForInsightInput, optFns ...func(*Options)) (*ListAnomaliesForInsightOutput, error) {
 	if params == nil {
 		params = &ListAnomaliesForInsightInput{}
@@ -29,21 +31,36 @@ func (c *Client) ListAnomaliesForInsight(ctx context.Context, params *ListAnomal
 
 type ListAnomaliesForInsightInput struct {
 
+	// The ID of the insight. The returned anomalies belong to this insight.
+	//
 	// This member is required.
 	InsightId *string
 
-	MaxResults int32
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
 
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 
+	// A time range used to specify when the requested anomalies started. All returned
+	// anomalies started during this time range.
 	StartTimeRange *types.StartTimeRange
 }
 
 type ListAnomaliesForInsightOutput struct {
+
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
+	// An array of ProactiveAnomalySummary objects that represent the requested
+	// anomalies
 	ProactiveAnomalies []types.ProactiveAnomalySummary
 
+	// An array of ReactiveAnomalySummary objects that represent the requested
+	// anomalies
 	ReactiveAnomalies []types.ReactiveAnomalySummary
 
 	// Metadata pertaining to the operation's result.
@@ -121,6 +138,8 @@ var _ ListAnomaliesForInsightAPIClient = (*Client)(nil)
 // ListAnomaliesForInsightPaginatorOptions is the paginator options for
 // ListAnomaliesForInsight
 type ListAnomaliesForInsightPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -141,8 +160,8 @@ type ListAnomaliesForInsightPaginator struct {
 // ListAnomaliesForInsightPaginator
 func NewListAnomaliesForInsightPaginator(client ListAnomaliesForInsightAPIClient, params *ListAnomaliesForInsightInput, optFns ...func(*ListAnomaliesForInsightPaginatorOptions)) *ListAnomaliesForInsightPaginator {
 	options := ListAnomaliesForInsightPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -175,7 +194,11 @@ func (p *ListAnomaliesForInsightPaginator) NextPage(ctx context.Context, optFns 
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListAnomaliesForInsight(ctx, &params, optFns...)
 	if err != nil {

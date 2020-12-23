@@ -21,7 +21,7 @@ import (
 // gracefully.
 //
 // * Cross-account permissions don't apply to this action. For more
-// information, see Grant Cross-Account Permissions to a Role and a User Name
+// information, see Grant cross-account permissions to a role and a user name
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 // in the Amazon Simple Queue Service Developer Guide.
 //
@@ -132,36 +132,82 @@ type SetQueueAttributesInput struct {
 	// ContentBasedDeduplication – Enables content-based deduplication. For more
 	// information, see Exactly-Once Processing
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
-	// in the Amazon Simple Queue Service Developer Guide.
+	// in the Amazon Simple Queue Service Developer Guide. Note the following:
 	//
-	// * Every message must have a
-	// unique MessageDeduplicationId,
+	// * Every
+	// message must have a unique MessageDeduplicationId.
 	//
-	// * You may provide a MessageDeduplicationId
-	// explicitly.
+	// * You may provide a
+	// MessageDeduplicationId explicitly.
 	//
-	// * If you aren't able to provide a MessageDeduplicationId and you
-	// enable ContentBasedDeduplication for your queue, Amazon SQS uses a SHA-256 hash
-	// to generate the MessageDeduplicationId using the body of the message (but not
-	// the attributes of the message).
+	// * If you aren't able to provide a
+	// MessageDeduplicationId and you enable ContentBasedDeduplication for your queue,
+	// Amazon SQS uses a SHA-256 hash to generate the MessageDeduplicationId using the
+	// body of the message (but not the attributes of the message).
 	//
-	// * If you don't provide a MessageDeduplicationId
-	// and the queue doesn't have ContentBasedDeduplication set, the action fails with
-	// an error.
+	// * If you don't
+	// provide a MessageDeduplicationId and the queue doesn't have
+	// ContentBasedDeduplication set, the action fails with an error.
 	//
-	// * If the queue has ContentBasedDeduplication set, your
-	// MessageDeduplicationId overrides the generated one.
+	// * If the queue
+	// has ContentBasedDeduplication set, your MessageDeduplicationId overrides the
+	// generated one.
 	//
-	// * When
-	// ContentBasedDeduplication is in effect, messages with identical content sent
-	// within the deduplication interval are treated as duplicates and only one copy of
-	// the message is delivered.
+	// * When ContentBasedDeduplication is in effect, messages with
+	// identical content sent within the deduplication interval are treated as
+	// duplicates and only one copy of the message is delivered.
 	//
-	// * If you send one message with
-	// ContentBasedDeduplication enabled and then another message with a
+	// * If you send one
+	// message with ContentBasedDeduplication enabled and then another message with a
 	// MessageDeduplicationId that is the same as the one generated for the first
 	// MessageDeduplicationId, the two messages are treated as duplicates and only one
 	// copy of the message is delivered.
+	//
+	// Preview: High throughput for FIFO queues High
+	// throughput for Amazon SQS FIFO queues is in preview release and is subject to
+	// change. This feature provides a high number of transactions per second (TPS) for
+	// messages in FIFO queues. For information on throughput quotas, see Quotas
+	// related to messages
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html)
+	// in the Amazon Simple Queue Service Developer Guide. This preview includes two
+	// new attributes:
+	//
+	// * DeduplicationScope – Specifies whether message deduplication
+	// occurs at the message group or queue level. Valid values are messageGroup and
+	// queue.
+	//
+	// * FifoThroughputLimit – Specifies whether the FIFO queue throughput
+	// quota applies to the entire queue or per message group. Valid values are
+	// perQueue and perMessageGroupId. The perMessageGroupId value is allowed only when
+	// the value for DeduplicationScope is messageGroup.
+	//
+	// To enable high throughput for
+	// FIFO queues, do the following:
+	//
+	// * Set DeduplicationScope to messageGroup.
+	//
+	// * Set
+	// FifoThroughputLimit to perMessageGroupId.
+	//
+	// If you set these attributes to
+	// anything other than the values shown for enabling high throughput, standard
+	// throughput is in effect and deduplication occurs as specified. This preview is
+	// available in the following AWS Regions:
+	//
+	// * US East (Ohio); us-east-2
+	//
+	// * US East
+	// (N. Virginia); us-east-1
+	//
+	// * US West (Oregon); us-west-2
+	//
+	// * Europe (Ireland);
+	// eu-west-1
+	//
+	// For more information about high throughput for FIFO queues, see
+	// Preview: High throughput for FIFO queues
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/high-throughput-fifo.html)
+	// in the Amazon Simple Queue Service Developer Guide.
 	//
 	// This member is required.
 	Attributes map[string]string

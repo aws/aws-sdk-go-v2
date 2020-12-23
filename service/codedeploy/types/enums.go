@@ -514,6 +514,12 @@ func (ListStateFilterAction) Values() []ListStateFilterAction {
 
 type MinimumHealthyHostsType string
 
+// Enum values for MinimumHealthyHostsType
+const (
+	MinimumHealthyHostsTypeHostCount    MinimumHealthyHostsType = "HOST_COUNT"
+	MinimumHealthyHostsTypeFleetPercent MinimumHealthyHostsType = "FLEET_PERCENT"
+)
+
 // Values returns all known values for MinimumHealthyHostsType. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.

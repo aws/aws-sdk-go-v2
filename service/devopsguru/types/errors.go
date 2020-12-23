@@ -7,6 +7,11 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// You don't have permissions to perform the requested operation. The user or role
+// that is making the request must have at least one IAM permissions policy
+// attached that grants the required permissions. For more information, see Access
+// Management (https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the
+// IAM User Guide.
 type AccessDeniedException struct {
 	Message *string
 }
@@ -23,6 +28,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An exception that is thrown when a conflict occurs.
 type ConflictException struct {
 	Message *string
 
@@ -42,8 +48,11 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An internal failure in an Amazon service occurred.
 type InternalServerException struct {
 	Message *string
+
+	RetryAfterSeconds int32
 }
 
 func (e *InternalServerException) Error() string {
@@ -58,6 +67,7 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// A requested resource could not be found
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -77,6 +87,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request contains a value that exceeds a maximum quota.
 type ServiceQuotaExceededException struct {
 	Message *string
 }
@@ -93,11 +104,13 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request was denied due to a request throttling.
 type ThrottlingException struct {
 	Message *string
 
-	QuotaCode   *string
-	ServiceCode *string
+	QuotaCode         *string
+	ServiceCode       *string
+	RetryAfterSeconds int32
 }
 
 func (e *ThrottlingException) Error() string {
@@ -112,11 +125,13 @@ func (e *ThrottlingException) ErrorMessage() string {
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Contains information about data passed in to a field during a request that is
+// not valid.
 type ValidationException struct {
 	Message *string
 
-	Fields []ValidationExceptionField
 	Reason ValidationExceptionReason
+	Fields []ValidationExceptionField
 }
 
 func (e *ValidationException) Error() string {

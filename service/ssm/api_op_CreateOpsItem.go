@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Creates a new OpsItem. You must have permission in AWS Identity and Access
@@ -55,6 +56,14 @@ type CreateOpsItemInput struct {
 	// This member is required.
 	Title *string
 
+	// The time a runbook workflow ended. Currently reported only for the OpsItem type
+	// /aws/changerequest.
+	ActualEndTime *time.Time
+
+	// The time a runbook workflow started. Currently reported only for the OpsItem
+	// type /aws/changerequest.
+	ActualStartTime *time.Time
+
 	// Specify a category to assign to an OpsItem.
 	Category *string
 
@@ -80,6 +89,18 @@ type CreateOpsItemInput struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems)
 	// in the AWS Systems Manager User Guide.
 	OperationalData map[string]types.OpsItemDataValue
+
+	// The type of OpsItem to create. Currently, the only valid values are
+	// /aws/changerequest and /aws/issue.
+	OpsItemType *string
+
+	// The time specified in a change request for a runbook workflow to end. Currently
+	// supported only for the OpsItem type /aws/changerequest.
+	PlannedEndTime *time.Time
+
+	// The time specified in a change request for a runbook workflow to start.
+	// Currently supported only for the OpsItem type /aws/changerequest.
+	PlannedStartTime *time.Time
 
 	// The importance of this OpsItem in relation to other OpsItems in the system.
 	Priority *int32

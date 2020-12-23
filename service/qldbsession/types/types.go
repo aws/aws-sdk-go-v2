@@ -8,6 +8,9 @@ type AbortTransactionRequest struct {
 
 // Contains the details of the aborted transaction.
 type AbortTransactionResult struct {
+
+	// Contains server-side performance information for the command.
+	TimingInformation *TimingInformation
 }
 
 // Contains the details of the transaction to commit.
@@ -16,7 +19,10 @@ type CommitTransactionRequest struct {
 	// Specifies the commit digest for the transaction to commit. For every active
 	// transaction, the commit digest must be passed. QLDB validates CommitDigest and
 	// rejects the commit with an error if the digest computed on the client does not
-	// match the digest computed by QLDB.
+	// match the digest computed by QLDB. The purpose of the CommitDigest parameter is
+	// to ensure that QLDB commits a transaction if and only if the server has
+	// processed the exact set of statements sent by the client, in the same order that
+	// client sent them, and with no duplicates.
 	//
 	// This member is required.
 	CommitDigest []byte
@@ -33,6 +39,12 @@ type CommitTransactionResult struct {
 	// The commit digest of the committed transaction.
 	CommitDigest []byte
 
+	// Contains metrics about the number of I/O requests that were consumed.
+	ConsumedIOs *IOUsage
+
+	// Contains server-side performance information for the command.
+	TimingInformation *TimingInformation
+
 	// The transaction ID of the committed transaction.
 	TransactionId *string
 }
@@ -43,6 +55,9 @@ type EndSessionRequest struct {
 
 // Contains the details of the ended session.
 type EndSessionResult struct {
+
+	// Contains server-side performance information for the command.
+	TimingInformation *TimingInformation
 }
 
 // Specifies a request to execute a statement.
@@ -65,8 +80,14 @@ type ExecuteStatementRequest struct {
 // Contains the details of the executed statement.
 type ExecuteStatementResult struct {
 
+	// Contains metrics about the number of I/O requests that were consumed.
+	ConsumedIOs *IOUsage
+
 	// Contains the details of the first fetched page.
 	FirstPage *Page
+
+	// Contains server-side performance information for the command.
+	TimingInformation *TimingInformation
 }
 
 // Specifies the details of the page to be fetched.
@@ -86,8 +107,24 @@ type FetchPageRequest struct {
 // Contains the page that was fetched.
 type FetchPageResult struct {
 
+	// Contains metrics about the number of I/O requests that were consumed.
+	ConsumedIOs *IOUsage
+
 	// Contains details of the fetched page.
 	Page *Page
+
+	// Contains server-side performance information for the command.
+	TimingInformation *TimingInformation
+}
+
+// Contains I/O usage metrics for a command that was invoked.
+type IOUsage struct {
+
+	// The number of read I/O requests that the command performed.
+	ReadIOs int64
+
+	// The number of write I/O requests that the command performed.
+	WriteIOs int64
 }
 
 // Contains details of the fetched page.
@@ -115,6 +152,9 @@ type StartSessionResult struct {
 	// Session token of the started session. This SessionToken is required for every
 	// subsequent command that is issued during the current session.
 	SessionToken *string
+
+	// Contains server-side performance information for the command.
+	TimingInformation *TimingInformation
 }
 
 // Specifies a request to start a transaction.
@@ -124,11 +164,24 @@ type StartTransactionRequest struct {
 // Contains the details of the started transaction.
 type StartTransactionResult struct {
 
+	// Contains server-side performance information for the command.
+	TimingInformation *TimingInformation
+
 	// The transaction ID of the started transaction.
 	TransactionId *string
 }
 
-// A structure that can contain an Amazon Ion value in multiple encoding formats.
+// Contains server-side performance information for a command. Amazon QLDB captures
+// timing information between the times when it receives the request and when it
+// sends the corresponding response.
+type TimingInformation struct {
+
+	// The amount of time that was taken for the command to finish processing, measured
+	// in milliseconds.
+	ProcessingTimeMilliseconds int64
+}
+
+// A structure that can contain a value in multiple encoding formats.
 type ValueHolder struct {
 
 	// An Amazon Ion binary value contained in a ValueHolder structure.

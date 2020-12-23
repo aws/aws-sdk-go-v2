@@ -27,6 +27,7 @@ func (c *Client) RegisterJobDefinition(ctx context.Context, params *RegisterJobD
 	return out, nil
 }
 
+// Contains the parameters for RegisterJobDefinition.
 type RegisterJobDefinitionInput struct {
 
 	// The name of the job definition to register. Up to 128 letters (uppercase and
@@ -80,7 +81,7 @@ type RegisterJobDefinitionInput struct {
 	PropagateTags bool
 
 	// The retry strategy to use for failed jobs that are submitted with this job
-	// definition. Any retry strategy that is specified during a SubmitJob operation
+	// definition. Any retry strategy that's specified during a SubmitJob operation
 	// overrides the retry strategy defined here. If a job is terminated due to a
 	// timeout, it isn't retried.
 	RetryStrategy *types.RetryStrategy
@@ -95,7 +96,7 @@ type RegisterJobDefinitionInput struct {
 	// The timeout configuration for jobs that are submitted with this job definition,
 	// after which AWS Batch terminates your jobs if they have not finished. If a job
 	// is terminated due to a timeout, it isn't retried. The minimum value for the
-	// timeout is 60 seconds. Any timeout configuration that is specified during a
+	// timeout is 60 seconds. Any timeout configuration that's specified during a
 	// SubmitJob operation overrides the timeout configuration defined here. For more
 	// information, see Job Timeouts
 	// (https://docs.aws.amazon.com/batch/latest/userguide/job_timeouts.html) in the

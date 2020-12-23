@@ -14,7 +14,7 @@ import (
 
 // Creates a proposal for a change to the network that other members of the network
 // can vote on, for example, a proposal to add a new member to the network. Any
-// member can create a proposal.
+// member can create a proposal. Applies only to Hyperledger Fabric.
 func (c *Client) CreateProposal(ctx context.Context, params *CreateProposalInput, optFns ...func(*Options)) (*CreateProposalOutput, error) {
 	if params == nil {
 		params = &CreateProposalInput{}

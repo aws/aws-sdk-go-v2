@@ -73,6 +73,14 @@ type GetDocumentOutput struct {
 	// document.
 	Requires []types.DocumentRequires
 
+	// The current review status of a new custom Systems Manager document (SSM
+	// document) created by a member of your organization, or of the latest version of
+	// an existing SSM document. Only one version of an SSM document can be in the
+	// APPROVED state at a time. When a new version is approved, the status of the
+	// previous version changes to REJECTED. Only one version of an SSM document can be
+	// in review, or PENDING, at a time.
+	ReviewStatus types.ReviewStatus
+
 	// The status of the Systems Manager document, such as Creating, Active, Updating,
 	// Failed, and Deleting.
 	Status types.DocumentStatus

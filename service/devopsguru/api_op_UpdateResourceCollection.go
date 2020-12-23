@@ -11,6 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates the collection of resources that DevOps Guru analyzes. The one type of
+// AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can
+// be configured to analyze only the AWS resources that are defined in the stacks.
+// This method also creates the IAM role required for you to use DevOps Guru.
 func (c *Client) UpdateResourceCollection(ctx context.Context, params *UpdateResourceCollectionInput, optFns ...func(*Options)) (*UpdateResourceCollectionOutput, error) {
 	if params == nil {
 		params = &UpdateResourceCollectionInput{}
@@ -28,9 +32,14 @@ func (c *Client) UpdateResourceCollection(ctx context.Context, params *UpdateRes
 
 type UpdateResourceCollectionInput struct {
 
+	// Specifies if the resource collection in the request is added or deleted to the
+	// resource collection.
+	//
 	// This member is required.
 	Action types.UpdateResourceCollectionAction
 
+	// Contains information used to update a collection of AWS resources.
+	//
 	// This member is required.
 	ResourceCollection *types.UpdateResourceCollectionFilter
 }

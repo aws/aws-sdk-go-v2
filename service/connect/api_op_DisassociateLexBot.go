@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Revokes authorization from the specified instance to access the specified Amazon
 // Lex bot.
 func (c *Client) DisassociateLexBot(ctx context.Context, params *DisassociateLexBotInput, optFns ...func(*Options)) (*DisassociateLexBotOutput, error) {

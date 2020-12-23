@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Systems Manager calls this API action when you edit OpsMetadata in AppManager.
+// Systems Manager calls this API action when you edit OpsMetadata in Application
+// Manager.
 func (c *Client) UpdateOpsMetadata(ctx context.Context, params *UpdateOpsMetadataInput, optFns ...func(*Options)) (*UpdateOpsMetadataOutput, error) {
 	if params == nil {
 		params = &UpdateOpsMetadataInput{}

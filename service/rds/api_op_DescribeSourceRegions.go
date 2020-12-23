@@ -13,7 +13,8 @@ import (
 )
 
 // Returns a list of the source AWS Regions where the current AWS Region can create
-// a read replica or copy a DB snapshot from. This API action supports pagination.
+// a read replica, copy a DB snapshot from, or replicate automated backups from.
+// This API action supports pagination.
 func (c *Client) DescribeSourceRegions(ctx context.Context, params *DescribeSourceRegionsInput, optFns ...func(*Options)) (*DescribeSourceRegionsOutput, error) {
 	if params == nil {
 		params = &DescribeSourceRegionsInput{}

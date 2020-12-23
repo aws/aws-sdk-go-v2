@@ -29,6 +29,7 @@ func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns .
 	return out, nil
 }
 
+// Contains the parameters for CancelJob.
 type CancelJobInput struct {
 
 	// The AWS Batch job ID of the job to cancel.

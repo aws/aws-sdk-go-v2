@@ -190,6 +190,26 @@ func (m *validateOpCreateIntegrationAssociation) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateQuickConnect struct {
+}
+
+func (*validateOpCreateQuickConnect) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateQuickConnect) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateQuickConnectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateQuickConnectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRoutingProfile struct {
 }
 
@@ -305,6 +325,26 @@ func (m *validateOpDeleteIntegrationAssociation) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteIntegrationAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteQuickConnect struct {
+}
+
+func (*validateOpDeleteQuickConnect) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteQuickConnect) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteQuickConnectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteQuickConnectInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -445,6 +485,26 @@ func (m *validateOpDescribeInstanceStorageConfig) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeInstanceStorageConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeQuickConnect struct {
+}
+
+func (*validateOpDescribeQuickConnect) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeQuickConnect) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeQuickConnectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeQuickConnectInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -950,6 +1010,26 @@ func (m *validateOpListQueues) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListQuickConnects struct {
+}
+
+func (*validateOpListQuickConnects) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListQuickConnects) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListQuickConnectsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListQuickConnectsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListRoutingProfileQueues struct {
 }
 
@@ -1410,6 +1490,46 @@ func (m *validateOpUpdateInstanceStorageConfig) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateQuickConnectConfig struct {
+}
+
+func (*validateOpUpdateQuickConnectConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQuickConnectConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQuickConnectConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQuickConnectConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateQuickConnectName struct {
+}
+
+func (*validateOpUpdateQuickConnectName) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQuickConnectName) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQuickConnectNameInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQuickConnectNameInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRoutingProfileConcurrency struct {
 }
 
@@ -1666,6 +1786,10 @@ func addOpCreateIntegrationAssociationValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpCreateIntegrationAssociation{}, middleware.After)
 }
 
+func addOpCreateQuickConnectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateQuickConnect{}, middleware.After)
+}
+
 func addOpCreateRoutingProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRoutingProfile{}, middleware.After)
 }
@@ -1688,6 +1812,10 @@ func addOpDeleteInstanceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteIntegrationAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteIntegrationAssociation{}, middleware.After)
+}
+
+func addOpDeleteQuickConnectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteQuickConnect{}, middleware.After)
 }
 
 func addOpDeleteUseCaseValidationMiddleware(stack *middleware.Stack) error {
@@ -1716,6 +1844,10 @@ func addOpDescribeInstanceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeInstanceStorageConfig{}, middleware.After)
+}
+
+func addOpDescribeQuickConnectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeQuickConnect{}, middleware.After)
 }
 
 func addOpDescribeRoutingProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -1818,6 +1950,10 @@ func addOpListQueuesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListQueues{}, middleware.After)
 }
 
+func addOpListQuickConnectsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListQuickConnects{}, middleware.After)
+}
+
 func addOpListRoutingProfileQueuesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRoutingProfileQueues{}, middleware.After)
 }
@@ -1908,6 +2044,14 @@ func addOpUpdateInstanceAttributeValidationMiddleware(stack *middleware.Stack) e
 
 func addOpUpdateInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateInstanceStorageConfig{}, middleware.After)
+}
+
+func addOpUpdateQuickConnectConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQuickConnectConfig{}, middleware.After)
+}
+
+func addOpUpdateQuickConnectNameValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQuickConnectName{}, middleware.After)
 }
 
 func addOpUpdateRoutingProfileConcurrencyValidationMiddleware(stack *middleware.Stack) error {
@@ -2194,6 +2338,69 @@ func validateParticipantDetails(v *types.ParticipantDetails) error {
 	}
 }
 
+func validatePhoneNumberQuickConnectConfig(v *types.PhoneNumberQuickConnectConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PhoneNumberQuickConnectConfig"}
+	if v.PhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueueQuickConnectConfig(v *types.QueueQuickConnectConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueueQuickConnectConfig"}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.ContactFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQuickConnectConfig(v *types.QuickConnectConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QuickConnectConfig"}
+	if len(v.QuickConnectType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("QuickConnectType"))
+	}
+	if v.UserConfig != nil {
+		if err := validateUserQuickConnectConfig(v.UserConfig); err != nil {
+			invalidParams.AddNested("UserConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QueueConfig != nil {
+		if err := validateQueueQuickConnectConfig(v.QueueConfig); err != nil {
+			invalidParams.AddNested("QueueConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PhoneConfig != nil {
+		if err := validatePhoneNumberQuickConnectConfig(v.PhoneConfig); err != nil {
+			invalidParams.AddNested("PhoneConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateReference(v *types.Reference) error {
 	if v == nil {
 		return nil
@@ -2313,6 +2520,24 @@ func validateUserPhoneConfig(v *types.UserPhoneConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UserPhoneConfig"}
 	if len(v.PhoneType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUserQuickConnectConfig(v *types.UserQuickConnectConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UserQuickConnectConfig"}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if v.ContactFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2518,6 +2743,31 @@ func validateOpCreateIntegrationAssociationInput(v *CreateIntegrationAssociation
 	}
 }
 
+func validateOpCreateQuickConnectInput(v *CreateQuickConnectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateQuickConnectInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.QuickConnectConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuickConnectConfig"))
+	} else if v.QuickConnectConfig != nil {
+		if err := validateQuickConnectConfig(v.QuickConnectConfig); err != nil {
+			invalidParams.AddNested("QuickConnectConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateRoutingProfileInput(v *CreateRoutingProfileInput) error {
 	if v == nil {
 		return nil
@@ -2657,6 +2907,24 @@ func validateOpDeleteIntegrationAssociationInput(v *DeleteIntegrationAssociation
 	}
 }
 
+func validateOpDeleteQuickConnectInput(v *DeleteQuickConnectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteQuickConnectInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QuickConnectId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuickConnectId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteUseCaseInput(v *DeleteUseCaseInput) error {
 	if v == nil {
 		return nil
@@ -2778,6 +3046,24 @@ func validateOpDescribeInstanceStorageConfigInput(v *DescribeInstanceStorageConf
 	}
 	if len(v.ResourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeQuickConnectInput(v *DescribeQuickConnectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeQuickConnectInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QuickConnectId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuickConnectId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3215,6 +3501,21 @@ func validateOpListQueuesInput(v *ListQueuesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListQueuesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListQuickConnectsInput(v *ListQuickConnectsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListQuickConnectsInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
@@ -3670,6 +3971,49 @@ func validateOpUpdateInstanceStorageConfigInput(v *UpdateInstanceStorageConfigIn
 		if err := validateInstanceStorageConfig(v.StorageConfig); err != nil {
 			invalidParams.AddNested("StorageConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQuickConnectConfigInput(v *UpdateQuickConnectConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQuickConnectConfigInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QuickConnectId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuickConnectId"))
+	}
+	if v.QuickConnectConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuickConnectConfig"))
+	} else if v.QuickConnectConfig != nil {
+		if err := validateQuickConnectConfig(v.QuickConnectConfig); err != nil {
+			invalidParams.AddNested("QuickConnectConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQuickConnectNameInput(v *UpdateQuickConnectNameInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQuickConnectNameInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QuickConnectId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuickConnectId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

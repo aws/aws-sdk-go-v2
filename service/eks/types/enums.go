@@ -28,6 +28,17 @@ func (AddonIssueCode) Values() []AddonIssueCode {
 
 type AddonStatus string
 
+// Enum values for AddonStatus
+const (
+	AddonStatusCreating     AddonStatus = "CREATING"
+	AddonStatusActive       AddonStatus = "ACTIVE"
+	AddonStatusCreateFailed AddonStatus = "CREATE_FAILED"
+	AddonStatusUpdating     AddonStatus = "UPDATING"
+	AddonStatusDeleting     AddonStatus = "DELETING"
+	AddonStatusDeleteFailed AddonStatus = "DELETE_FAILED"
+	AddonStatusDegraded     AddonStatus = "DEGRADED"
+)
+
 // Values returns all known values for AddonStatus. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.
@@ -45,6 +56,13 @@ func (AddonStatus) Values() []AddonStatus {
 
 type AMITypes string
 
+// Enum values for AMITypes
+const (
+	AMITypesAl2X8664    AMITypes = "AL2_x86_64"
+	AMITypesAl2X8664Gpu AMITypes = "AL2_x86_64_GPU"
+	AMITypesAl2Arm64    AMITypes = "AL2_ARM_64"
+)
+
 // Values returns all known values for AMITypes. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -58,6 +76,12 @@ func (AMITypes) Values() []AMITypes {
 
 type CapacityTypes string
 
+// Enum values for CapacityTypes
+const (
+	CapacityTypesOnDemand CapacityTypes = "ON_DEMAND"
+	CapacityTypesSpot     CapacityTypes = "SPOT"
+)
+
 // Values returns all known values for CapacityTypes. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -69,6 +93,15 @@ func (CapacityTypes) Values() []CapacityTypes {
 }
 
 type ClusterStatus string
+
+// Enum values for ClusterStatus
+const (
+	ClusterStatusCreating ClusterStatus = "CREATING"
+	ClusterStatusActive   ClusterStatus = "ACTIVE"
+	ClusterStatusDeleting ClusterStatus = "DELETING"
+	ClusterStatusFailed   ClusterStatus = "FAILED"
+	ClusterStatusUpdating ClusterStatus = "UPDATING"
+)
 
 // Values returns all known values for ClusterStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -126,6 +159,15 @@ func (ErrorCode) Values() []ErrorCode {
 }
 
 type FargateProfileStatus string
+
+// Enum values for FargateProfileStatus
+const (
+	FargateProfileStatusCreating     FargateProfileStatus = "CREATING"
+	FargateProfileStatusActive       FargateProfileStatus = "ACTIVE"
+	FargateProfileStatusDeleting     FargateProfileStatus = "DELETING"
+	FargateProfileStatusCreateFailed FargateProfileStatus = "CREATE_FAILED"
+	FargateProfileStatusDeleteFailed FargateProfileStatus = "DELETE_FAILED"
+)
 
 // Values returns all known values for FargateProfileStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -216,6 +258,17 @@ func (NodegroupIssueCode) Values() []NodegroupIssueCode {
 
 type NodegroupStatus string
 
+// Enum values for NodegroupStatus
+const (
+	NodegroupStatusCreating     NodegroupStatus = "CREATING"
+	NodegroupStatusActive       NodegroupStatus = "ACTIVE"
+	NodegroupStatusUpdating     NodegroupStatus = "UPDATING"
+	NodegroupStatusDeleting     NodegroupStatus = "DELETING"
+	NodegroupStatusCreateFailed NodegroupStatus = "CREATE_FAILED"
+	NodegroupStatusDeleteFailed NodegroupStatus = "DELETE_FAILED"
+	NodegroupStatusDegraded     NodegroupStatus = "DEGRADED"
+)
+
 // Values returns all known values for NodegroupStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -232,6 +285,12 @@ func (NodegroupStatus) Values() []NodegroupStatus {
 }
 
 type ResolveConflicts string
+
+// Enum values for ResolveConflicts
+const (
+	ResolveConflictsOverwrite ResolveConflicts = "OVERWRITE"
+	ResolveConflictsNone      ResolveConflicts = "NONE"
+)
 
 // Values returns all known values for ResolveConflicts. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The

@@ -571,9 +571,6 @@ func validateNodeConfiguration(v *types.NodeConfiguration) error {
 	if v.InstanceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
 	}
-	if v.AvailabilityZone == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -713,9 +710,6 @@ func validateOpCreateNodeInput(v *CreateNodeInput) error {
 	if v.NetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
 	}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
-	}
 	if v.NodeConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeConfiguration"))
 	} else if v.NodeConfiguration != nil {
@@ -784,9 +778,6 @@ func validateOpDeleteNodeInput(v *DeleteNodeInput) error {
 	if v.NetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
 	}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
-	}
 	if v.NodeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
 	}
@@ -838,9 +829,6 @@ func validateOpGetNodeInput(v *GetNodeInput) error {
 	if v.NetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
 	}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
-	}
 	if v.NodeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
 	}
@@ -891,9 +879,6 @@ func validateOpListNodesInput(v *ListNodesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListNodesInput"}
 	if v.NetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
-	}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -975,9 +960,6 @@ func validateOpUpdateNodeInput(v *UpdateNodeInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNodeInput"}
 	if v.NetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
-	}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
 	}
 	if v.NodeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))

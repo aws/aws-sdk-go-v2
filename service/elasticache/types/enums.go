@@ -22,6 +22,12 @@ func (AuthenticationType) Values() []AuthenticationType {
 
 type AuthTokenUpdateStatus string
 
+// Enum values for AuthTokenUpdateStatus
+const (
+	AuthTokenUpdateStatusSetting  AuthTokenUpdateStatus = "SETTING"
+	AuthTokenUpdateStatusRotating AuthTokenUpdateStatus = "ROTATING"
+)
+
 // Values returns all known values for AuthTokenUpdateStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -33,6 +39,13 @@ func (AuthTokenUpdateStatus) Values() []AuthTokenUpdateStatus {
 }
 
 type AuthTokenUpdateStrategyType string
+
+// Enum values for AuthTokenUpdateStrategyType
+const (
+	AuthTokenUpdateStrategyTypeSet    AuthTokenUpdateStrategyType = "SET"
+	AuthTokenUpdateStrategyTypeRotate AuthTokenUpdateStrategyType = "ROTATE"
+	AuthTokenUpdateStrategyTypeDelete AuthTokenUpdateStrategyType = "DELETE"
+)
 
 // Values returns all known values for AuthTokenUpdateStrategyType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
@@ -86,6 +99,12 @@ func (AZMode) Values() []AZMode {
 }
 
 type ChangeType string
+
+// Enum values for ChangeType
+const (
+	ChangeTypeImmediate      ChangeType = "immediate"
+	ChangeTypeRequiresReboot ChangeType = "requires-reboot"
+)
 
 // Values returns all known values for ChangeType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -275,6 +294,17 @@ func (SlaMet) Values() []SlaMet {
 }
 
 type SourceType string
+
+// Enum values for SourceType
+const (
+	SourceTypeCacheCluster        SourceType = "cache-cluster"
+	SourceTypeCacheParameterGroup SourceType = "cache-parameter-group"
+	SourceTypeCacheSecurityGroup  SourceType = "cache-security-group"
+	SourceTypeCacheSubnetGroup    SourceType = "cache-subnet-group"
+	SourceTypeReplicationGroup    SourceType = "replication-group"
+	SourceTypeUser                SourceType = "user"
+	SourceTypeUserGroup           SourceType = "user-group"
+)
 
 // Values returns all known values for SourceType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of

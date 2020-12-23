@@ -148,6 +148,17 @@ func (LoadBalancerTypeEnum) Values() []LoadBalancerTypeEnum {
 
 type ProtocolEnum string
 
+// Enum values for ProtocolEnum
+const (
+	ProtocolEnumHttp   ProtocolEnum = "HTTP"
+	ProtocolEnumHttps  ProtocolEnum = "HTTPS"
+	ProtocolEnumTcp    ProtocolEnum = "TCP"
+	ProtocolEnumTls    ProtocolEnum = "TLS"
+	ProtocolEnumUdp    ProtocolEnum = "UDP"
+	ProtocolEnumTcpUdp ProtocolEnum = "TCP_UDP"
+	ProtocolEnumGeneve ProtocolEnum = "GENEVE"
+)
+
 // Values returns all known values for ProtocolEnum. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.

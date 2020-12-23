@@ -7096,6 +7096,32 @@ func awsAwsjson11_deserializeDocumentAliasListEntry(v **types.AliasListEntry, va
 				sv.AliasName = ptr.String(jtv)
 			}
 
+		case "CreationDate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "LastUpdatedDate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DateType to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.LastUpdatedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
 		case "TargetKeyId":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -208,6 +208,12 @@ func (EventType) Values() []EventType {
 
 type IdentityType string
 
+// Enum values for IdentityType
+const (
+	IdentityTypeEmailaddress IdentityType = "EmailAddress"
+	IdentityTypeDomain       IdentityType = "Domain"
+)
+
 // Values returns all known values for IdentityType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.
@@ -220,6 +226,12 @@ func (IdentityType) Values() []IdentityType {
 
 type InvocationType string
 
+// Enum values for InvocationType
+const (
+	InvocationTypeEvent           InvocationType = "Event"
+	InvocationTypeRequestresponse InvocationType = "RequestResponse"
+)
+
 // Values returns all known values for InvocationType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -231,6 +243,13 @@ func (InvocationType) Values() []InvocationType {
 }
 
 type NotificationType string
+
+// Enum values for NotificationType
+const (
+	NotificationTypeBounce    NotificationType = "Bounce"
+	NotificationTypeComplaint NotificationType = "Complaint"
+	NotificationTypeDelivery  NotificationType = "Delivery"
+)
 
 // Values returns all known values for NotificationType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -314,6 +333,15 @@ func (TlsPolicy) Values() []TlsPolicy {
 }
 
 type VerificationStatus string
+
+// Enum values for VerificationStatus
+const (
+	VerificationStatusPending          VerificationStatus = "Pending"
+	VerificationStatusSuccess          VerificationStatus = "Success"
+	VerificationStatusFailed           VerificationStatus = "Failed"
+	VerificationStatusTemporaryfailure VerificationStatus = "TemporaryFailure"
+	VerificationStatusNotstarted       VerificationStatus = "NotStarted"
+)
 
 // Values returns all known values for VerificationStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The

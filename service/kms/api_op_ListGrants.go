@@ -12,14 +12,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of all grants for the specified customer master key (CMK). To
-// perform this operation on a CMK in a different AWS account, specify the key ARN
-// in the value of the KeyId parameter. The GranteePrincipal field in the
-// ListGrants response usually contains the user or role designated as the grantee
-// principal in the grant. However, when the grantee principal in the grant is an
-// AWS service, the GranteePrincipal field contains the service principal
+// Gets a list of all grants for the specified customer master key (CMK). The
+// GranteePrincipal field in the ListGrants response usually contains the user or
+// role designated as the grantee principal in the grant. However, when the grantee
+// principal in the grant is an AWS service, the GranteePrincipal field contains
+// the service principal
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services),
-// which might represent several different grantee principals.
+// which might represent several different grantee principals. Cross-account use:
+// Yes. To perform this operation on a CMK in a different AWS account, specify the
+// key ARN in the value of the KeyId parameter. Required permissions:
+// kms:ListGrants
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations:
+//
+// * CreateGrant
+//
+// * ListRetirableGrants
+//
+// *
+// RetireGrant
+//
+// * RevokeGrant
 func (c *Client) ListGrants(ctx context.Context, params *ListGrantsInput, optFns ...func(*Options)) (*ListGrantsOutput, error) {
 	if params == nil {
 		params = &ListGrantsInput{}

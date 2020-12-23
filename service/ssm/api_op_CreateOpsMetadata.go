@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// If you create a new application in AppManager, Systems Manager calls this API
-// action to specify information about the new application, including the
+// If you create a new application in Application Manager, Systems Manager calls
+// this API action to specify information about the new application, including the
 // application type.
 func (c *Client) CreateOpsMetadata(ctx context.Context, params *CreateOpsMetadataInput, optFns ...func(*Options)) (*CreateOpsMetadataOutput, error) {
 	if params == nil {
@@ -31,12 +31,12 @@ func (c *Client) CreateOpsMetadata(ctx context.Context, params *CreateOpsMetadat
 
 type CreateOpsMetadataInput struct {
 
-	// A resource ID for a new AppManager application.
+	// A resource ID for a new Application Manager application.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// Metadata for a new AppManager application.
+	// Metadata for a new Application Manager application.
 	Metadata map[string]types.MetadataValue
 }
 

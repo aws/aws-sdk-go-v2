@@ -12,6 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Returns lists AWS resources that are of the specified resource collection type.
+// The one type of AWS resource collection supported is AWS CloudFormation stacks.
+// DevOps Guru can be configured to analyze only the AWS resources that are defined
+// in the stacks.
 func (c *Client) GetResourceCollection(ctx context.Context, params *GetResourceCollectionInput, optFns ...func(*Options)) (*GetResourceCollectionOutput, error) {
 	if params == nil {
 		params = &GetResourceCollectionInput{}
@@ -29,15 +33,26 @@ func (c *Client) GetResourceCollection(ctx context.Context, params *GetResourceC
 
 type GetResourceCollectionInput struct {
 
+	// The type of AWS resource collections to return. The one valid value is
+	// CLOUD_FORMATION for AWS CloudFormation stacks.
+	//
 	// This member is required.
-	ResourceCollectionType *string
+	ResourceCollectionType types.ResourceCollectionType
 
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 }
 
 type GetResourceCollectionOutput struct {
+
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
+	// The requested list of AWS resource collections. The one type of AWS resource
+	// collection supported is AWS CloudFormation stacks. DevOps Guru can be configured
+	// to analyze only the AWS resources that are defined in the stacks.
 	ResourceCollection *types.ResourceCollectionFilter
 
 	// Metadata pertaining to the operation's result.

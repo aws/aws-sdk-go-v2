@@ -1302,6 +1302,52 @@ func (m *awsAwsjson11_serializeOpDescribePortfolio) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribePortfolioShares struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribePortfolioShares) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribePortfolioShares) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribePortfolioSharesInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWS242ServiceCatalogService.DescribePortfolioShares")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribePortfolioSharesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDescribePortfolioShareStatus struct {
 }
 
@@ -3627,6 +3673,52 @@ func (m *awsAwsjson11_serializeOpUpdatePortfolio) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdatePortfolioShare struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdatePortfolioShare) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdatePortfolioShare) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdatePortfolioShareInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWS242ServiceCatalogService.UpdatePortfolioShare")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdatePortfolioShareInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateProduct struct {
 }
 
@@ -4774,6 +4866,11 @@ func awsAwsjson11_serializeOpDocumentCreatePortfolioShareInput(v *CreatePortfoli
 		ok.String(*v.PortfolioId)
 	}
 
+	if v.ShareTagOptions {
+		ok := object.Key("ShareTagOptions")
+		ok.Boolean(v.ShareTagOptions)
+	}
+
 	return nil
 }
 
@@ -5205,6 +5302,33 @@ func awsAwsjson11_serializeOpDocumentDescribePortfolioInput(v *DescribePortfolio
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribePortfolioSharesInput(v *DescribePortfolioSharesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PageSize != 0 {
+		ok := object.Key("PageSize")
+		ok.Integer(v.PageSize)
+	}
+
+	if v.PageToken != nil {
+		ok := object.Key("PageToken")
+		ok.String(*v.PageToken)
+	}
+
+	if v.PortfolioId != nil {
+		ok := object.Key("PortfolioId")
+		ok.String(*v.PortfolioId)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribePortfolioShareStatusInput(v *DescribePortfolioShareStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5234,6 +5358,11 @@ func awsAwsjson11_serializeOpDocumentDescribeProductAsAdminInput(v *DescribeProd
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.SourcePortfolioId != nil {
+		ok := object.Key("SourcePortfolioId")
+		ok.String(*v.SourcePortfolioId)
 	}
 
 	return nil
@@ -6611,6 +6740,40 @@ func awsAwsjson11_serializeOpDocumentUpdatePortfolioInput(v *UpdatePortfolioInpu
 		if err := awsAwsjson11_serializeDocumentTagKeys(v.RemoveTags, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdatePortfolioShareInput(v *UpdatePortfolioShareInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AcceptLanguage != nil {
+		ok := object.Key("AcceptLanguage")
+		ok.String(*v.AcceptLanguage)
+	}
+
+	if v.AccountId != nil {
+		ok := object.Key("AccountId")
+		ok.String(*v.AccountId)
+	}
+
+	if v.OrganizationNode != nil {
+		ok := object.Key("OrganizationNode")
+		if err := awsAwsjson11_serializeDocumentOrganizationNode(v.OrganizationNode, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PortfolioId != nil {
+		ok := object.Key("PortfolioId")
+		ok.String(*v.PortfolioId)
+	}
+
+	if v.ShareTagOptions != nil {
+		ok := object.Key("ShareTagOptions")
+		ok.Boolean(*v.ShareTagOptions)
 	}
 
 	return nil

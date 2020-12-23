@@ -4,6 +4,14 @@ package types
 
 type CloudWatchEventSource string
 
+// Enum values for CloudWatchEventSource
+const (
+	CloudWatchEventSourceEc2        CloudWatchEventSource = "EC2"
+	CloudWatchEventSourceCodeDeploy CloudWatchEventSource = "CODE_DEPLOY"
+	CloudWatchEventSourceHealth     CloudWatchEventSource = "HEALTH"
+	CloudWatchEventSourceRds        CloudWatchEventSource = "RDS"
+)
+
 // Values returns all known values for CloudWatchEventSource. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -17,6 +25,14 @@ func (CloudWatchEventSource) Values() []CloudWatchEventSource {
 }
 
 type ConfigurationEventResourceType string
+
+// Enum values for ConfigurationEventResourceType
+const (
+	ConfigurationEventResourceTypeCloudwatchAlarm ConfigurationEventResourceType = "CLOUDWATCH_ALARM"
+	ConfigurationEventResourceTypeCloudwatchLog   ConfigurationEventResourceType = "CLOUDWATCH_LOG"
+	ConfigurationEventResourceTypeCloudformation  ConfigurationEventResourceType = "CLOUDFORMATION"
+	ConfigurationEventResourceTypeSsmAssociation  ConfigurationEventResourceType = "SSM_ASSOCIATION"
+)
 
 // Values returns all known values for ConfigurationEventResourceType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
@@ -33,6 +49,13 @@ func (ConfigurationEventResourceType) Values() []ConfigurationEventResourceType 
 
 type ConfigurationEventStatus string
 
+// Enum values for ConfigurationEventStatus
+const (
+	ConfigurationEventStatusInfo  ConfigurationEventStatus = "INFO"
+	ConfigurationEventStatusWarn  ConfigurationEventStatus = "WARN"
+	ConfigurationEventStatusError ConfigurationEventStatus = "ERROR"
+)
+
 // Values returns all known values for ConfigurationEventStatus. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -46,6 +69,11 @@ func (ConfigurationEventStatus) Values() []ConfigurationEventStatus {
 
 type FeedbackKey string
 
+// Enum values for FeedbackKey
+const (
+	FeedbackKeyInsightsFeedback FeedbackKey = "INSIGHTS_FEEDBACK"
+)
+
 // Values returns all known values for FeedbackKey. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.
@@ -56,6 +84,13 @@ func (FeedbackKey) Values() []FeedbackKey {
 }
 
 type FeedbackValue string
+
+// Enum values for FeedbackValue
+const (
+	FeedbackValueNotSpecified FeedbackValue = "NOT_SPECIFIED"
+	FeedbackValueUseful       FeedbackValue = "USEFUL"
+	FeedbackValueNotUseful    FeedbackValue = "NOT_USEFUL"
+)
 
 // Values returns all known values for FeedbackValue. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -70,6 +105,13 @@ func (FeedbackValue) Values() []FeedbackValue {
 
 type LogFilter string
 
+// Enum values for LogFilter
+const (
+	LogFilterError LogFilter = "ERROR"
+	LogFilterWarn  LogFilter = "WARN"
+	LogFilterInfo  LogFilter = "INFO"
+)
+
 // Values returns all known values for LogFilter. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -83,6 +125,12 @@ func (LogFilter) Values() []LogFilter {
 
 type OsType string
 
+// Enum values for OsType
+const (
+	OsTypeWindows OsType = "WINDOWS"
+	OsTypeLinux   OsType = "LINUX"
+)
+
 // Values returns all known values for OsType. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -94,6 +142,13 @@ func (OsType) Values() []OsType {
 }
 
 type SeverityLevel string
+
+// Enum values for SeverityLevel
+const (
+	SeverityLevelLow    SeverityLevel = "Low"
+	SeverityLevelMedium SeverityLevel = "Medium"
+	SeverityLevelHigh   SeverityLevel = "High"
+)
 
 // Values returns all known values for SeverityLevel. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -108,6 +163,13 @@ func (SeverityLevel) Values() []SeverityLevel {
 
 type Status string
 
+// Enum values for Status
+const (
+	StatusIgnore   Status = "IGNORE"
+	StatusResolved Status = "RESOLVED"
+	StatusPending  Status = "PENDING"
+)
+
 // Values returns all known values for Status. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -120,6 +182,22 @@ func (Status) Values() []Status {
 }
 
 type Tier string
+
+// Enum values for Tier
+const (
+	TierCustom                             Tier = "CUSTOM"
+	TierDefault                            Tier = "DEFAULT"
+	TierDotNetCore                         Tier = "DOT_NET_CORE"
+	TierDotNetWorker                       Tier = "DOT_NET_WORKER"
+	TierDotNetWebTier                      Tier = "DOT_NET_WEB_TIER"
+	TierDotNetWeb                          Tier = "DOT_NET_WEB"
+	TierSqlServer                          Tier = "SQL_SERVER"
+	TierSqlServerAlwaysonAvailabilityGroup Tier = "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP"
+	TierMysql                              Tier = "MYSQL"
+	TierPostgresql                         Tier = "POSTGRESQL"
+	TierJavaJmx                            Tier = "JAVA_JMX"
+	TierOracle                             Tier = "ORACLE"
+)
 
 // Values returns all known values for Tier. Note that this can be expanded in the
 // future, and so it is only as up to date as the client. The ordering of this

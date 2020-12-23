@@ -25082,6 +25082,11 @@ func awsEc2query_serializeDocumentEbsBlockDevice(v *types.EbsBlockDevice, value 
 		objectKey.String(*v.KmsKeyId)
 	}
 
+	if v.OutpostArn != nil {
+		objectKey := object.Key("OutpostArn")
+		objectKey.String(*v.OutpostArn)
+	}
+
 	if v.SnapshotId != nil {
 		objectKey := object.Key("SnapshotId")
 		objectKey.String(*v.SnapshotId)
@@ -30963,6 +30968,13 @@ func awsEc2query_serializeOpDocumentAllocateAddressInput(v *AllocateAddressInput
 		objectKey.String(*v.PublicIpv4Pool)
 	}
 
+	if v.TagSpecifications != nil {
+		objectKey := object.FlatKey("TagSpecification")
+		if err := awsEc2query_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -31890,6 +31902,11 @@ func awsEc2query_serializeOpDocumentCopyImageInput(v *CopyImageInput, value quer
 		objectKey.String(*v.Description)
 	}
 
+	if v.DestinationOutpostArn != nil {
+		objectKey := object.Key("DestinationOutpostArn")
+		objectKey.String(*v.DestinationOutpostArn)
+	}
+
 	if v.DryRun {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
@@ -32584,6 +32601,11 @@ func awsEc2query_serializeOpDocumentCreateImageInput(v *CreateImageInput, value 
 	if v.NoReboot {
 		objectKey := object.Key("NoReboot")
 		objectKey.Boolean(v.NoReboot)
+	}
+
+	if v.OutpostArn != nil {
+		objectKey := object.Key("OutpostArn")
+		objectKey.String(*v.OutpostArn)
 	}
 
 	if v.TagSpecifications != nil {

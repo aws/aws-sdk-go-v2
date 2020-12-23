@@ -1434,7 +1434,7 @@ func awsAwsjson11_serializeDocumentAnomalySubscription(v *types.AnomalySubscript
 
 	if v.MonitorArnList != nil {
 		ok := object.Key("MonitorArnList")
-		if err := awsAwsjson11_serializeDocumentValues(v.MonitorArnList, ok); err != nil {
+		if err := awsAwsjson11_serializeDocumentMonitorArnList(v.MonitorArnList, ok); err != nil {
 			return err
 		}
 	}
@@ -1681,6 +1681,17 @@ func awsAwsjson11_serializeDocumentMatchOptions(v []types.MatchOption, value smi
 }
 
 func awsAwsjson11_serializeDocumentMetricNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMonitorArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -2636,7 +2647,7 @@ func awsAwsjson11_serializeOpDocumentUpdateAnomalySubscriptionInput(v *UpdateAno
 
 	if v.MonitorArnList != nil {
 		ok := object.Key("MonitorArnList")
-		if err := awsAwsjson11_serializeDocumentValues(v.MonitorArnList, ok); err != nil {
+		if err := awsAwsjson11_serializeDocumentMonitorArnList(v.MonitorArnList, ok); err != nil {
 			return err
 		}
 	}

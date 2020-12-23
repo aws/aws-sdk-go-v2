@@ -19,7 +19,7 @@ type Outpost struct {
 	// AvailabilityZoneId.
 	AvailabilityZoneId *string
 
-	// The Outpost description.
+	// The description of the Outpost.
 	Description *string
 
 	// The life cycle status.

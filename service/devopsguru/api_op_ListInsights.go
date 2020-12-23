@@ -12,6 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Returns a list of insights in your AWS account. You can specify which insights
+// are returned by their start time and status (ONGOING, CLOSED, or ANY).
 func (c *Client) ListInsights(ctx context.Context, params *ListInsightsInput, optFns ...func(*Options)) (*ListInsightsOutput, error) {
 	if params == nil {
 		params = &ListInsightsInput{}
@@ -29,19 +31,31 @@ func (c *Client) ListInsights(ctx context.Context, params *ListInsightsInput, op
 
 type ListInsightsInput struct {
 
+	// A filter used to filter the returned insights by their status. You can specify
+	// one status filter.
+	//
 	// This member is required.
 	StatusFilter *types.ListInsightsStatusFilter
 
-	MaxResults int32
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
 
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 }
 
 type ListInsightsOutput struct {
+
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
+	// The returned list of proactive insights.
 	ProactiveInsights []types.ProactiveInsightSummary
 
+	// The returned list of reactive insights.
 	ReactiveInsights []types.ReactiveInsightSummary
 
 	// Metadata pertaining to the operation's result.
@@ -117,6 +131,8 @@ var _ ListInsightsAPIClient = (*Client)(nil)
 
 // ListInsightsPaginatorOptions is the paginator options for ListInsights
 type ListInsightsPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -136,8 +152,8 @@ type ListInsightsPaginator struct {
 // NewListInsightsPaginator returns a new ListInsightsPaginator
 func NewListInsightsPaginator(client ListInsightsAPIClient, params *ListInsightsInput, optFns ...func(*ListInsightsPaginatorOptions)) *ListInsightsPaginator {
 	options := ListInsightsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -170,7 +186,11 @@ func (p *ListInsightsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListInsights(ctx, &params, optFns...)
 	if err != nil {

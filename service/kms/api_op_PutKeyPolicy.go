@@ -10,11 +10,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches a key policy to the specified customer master key (CMK). You cannot
-// perform this operation on a CMK in a different AWS account. For more information
-// about key policies, see Key Policies
+// Attaches a key policy to the specified customer master key (CMK). For more
+// information about key policies, see Key Policies
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
-// AWS Key Management Service Developer Guide.
+// AWS Key Management Service Developer Guide. For help writing and formatting a
+// JSON policy document, see the IAM JSON Policy Reference
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in
+// the IAM User Guide . For examples of adding a key policy in multiple programming
+// languages, see Setting a key policy
+// (https://docs.aws.amazon.com/kms/latest/developerguide/programming-key-policies.html#put-policy)
+// in the AWS Key Management Service Developer Guide. Cross-account use: No. You
+// cannot perform this operation on a CMK in a different AWS account. Required
+// permissions: kms:PutKeyPolicy
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations: GetKeyPolicy
 func (c *Client) PutKeyPolicy(ctx context.Context, params *PutKeyPolicyInput, optFns ...func(*Options)) (*PutKeyPolicyOutput, error) {
 	if params == nil {
 		params = &PutKeyPolicyInput{}

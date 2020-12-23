@@ -12,6 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Returns a list of notification channels configured for DevOps Guru. Each
+// notification channel is used to notify you when DevOps Guru generates an insight
+// that contains information about how to improve your operations. The one
+// supported notification channel is Amazon Simple Notification Service (Amazon
+// SNS).
 func (c *Client) ListNotificationChannels(ctx context.Context, params *ListNotificationChannelsInput, optFns ...func(*Options)) (*ListNotificationChannelsOutput, error) {
 	if params == nil {
 		params = &ListNotificationChannelsInput{}
@@ -28,12 +33,19 @@ func (c *Client) ListNotificationChannels(ctx context.Context, params *ListNotif
 }
 
 type ListNotificationChannelsInput struct {
+
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 }
 
 type ListNotificationChannelsOutput struct {
+
+	// An array that contains the requested notification channels.
 	Channels []types.NotificationChannel
 
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

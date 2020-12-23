@@ -2,13 +2,40 @@
 
 package types
 
+type ArtifactStatus string
+
+// Enum values for ArtifactStatus
+const (
+	ArtifactStatusApproved   ArtifactStatus = "APPROVED"
+	ArtifactStatusRejected   ArtifactStatus = "REJECTED"
+	ArtifactStatusInProgress ArtifactStatus = "IN_PROGRESS"
+)
+
+// Values returns all known values for ArtifactStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ArtifactStatus) Values() []ArtifactStatus {
+	return []ArtifactStatus{
+		"APPROVED",
+		"REJECTED",
+		"IN_PROGRESS",
+	}
+}
+
 type ChatItemType string
 
 // Enum values for ChatItemType
 const (
-	ChatItemTypeMessage       ChatItemType = "MESSAGE"
-	ChatItemTypeEvent         ChatItemType = "EVENT"
-	ChatItemTypeConnectionAck ChatItemType = "CONNECTION_ACK"
+	ChatItemTypeTyping            ChatItemType = "TYPING"
+	ChatItemTypeParticipantJoined ChatItemType = "PARTICIPANT_JOINED"
+	ChatItemTypeParticipantLeft   ChatItemType = "PARTICIPANT_LEFT"
+	ChatItemTypeChatEnded         ChatItemType = "CHAT_ENDED"
+	ChatItemTypeTransferSucceeded ChatItemType = "TRANSFER_SUCCEEDED"
+	ChatItemTypeTransferFailed    ChatItemType = "TRANSFER_FAILED"
+	ChatItemTypeMessage           ChatItemType = "MESSAGE"
+	ChatItemTypeEvent             ChatItemType = "EVENT"
+	ChatItemTypeAttachment        ChatItemType = "ATTACHMENT"
+	ChatItemTypeConnectionAck     ChatItemType = "CONNECTION_ACK"
 )
 
 // Values returns all known values for ChatItemType. Note that this can be expanded
@@ -16,8 +43,15 @@ const (
 // this slice is not guaranteed to be stable across updates.
 func (ChatItemType) Values() []ChatItemType {
 	return []ChatItemType{
+		"TYPING",
+		"PARTICIPANT_JOINED",
+		"PARTICIPANT_LEFT",
+		"CHAT_ENDED",
+		"TRANSFER_SUCCEEDED",
+		"TRANSFER_FAILED",
 		"MESSAGE",
 		"EVENT",
+		"ATTACHMENT",
 		"CONNECTION_ACK",
 	}
 }

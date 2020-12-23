@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Revokes access to integrated applications from Amazon Connect.
 func (c *Client) DisassociateApprovedOrigin(ctx context.Context, params *DisassociateApprovedOriginInput, optFns ...func(*Options)) (*DisassociateApprovedOriginOutput, error) {
 	if params == nil {

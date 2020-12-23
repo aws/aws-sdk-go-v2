@@ -339,6 +339,11 @@ func awsAwsjson10_deserializeDocumentAbortTransactionResult(v **types.AbortTrans
 
 	for key, value := range shape {
 		switch key {
+		case "TimingInformation":
+			if err := awsAwsjson10_deserializeDocumentTimingInformation(&sv.TimingInformation, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -432,6 +437,16 @@ func awsAwsjson10_deserializeDocumentCommitTransactionResult(v **types.CommitTra
 				sv.CommitDigest = dv
 			}
 
+		case "ConsumedIOs":
+			if err := awsAwsjson10_deserializeDocumentIOUsage(&sv.ConsumedIOs, value); err != nil {
+				return err
+			}
+
+		case "TimingInformation":
+			if err := awsAwsjson10_deserializeDocumentTimingInformation(&sv.TimingInformation, value); err != nil {
+				return err
+			}
+
 		case "TransactionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -472,6 +487,11 @@ func awsAwsjson10_deserializeDocumentEndSessionResult(v **types.EndSessionResult
 
 	for key, value := range shape {
 		switch key {
+		case "TimingInformation":
+			if err := awsAwsjson10_deserializeDocumentTimingInformation(&sv.TimingInformation, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -503,8 +523,18 @@ func awsAwsjson10_deserializeDocumentExecuteStatementResult(v **types.ExecuteSta
 
 	for key, value := range shape {
 		switch key {
+		case "ConsumedIOs":
+			if err := awsAwsjson10_deserializeDocumentIOUsage(&sv.ConsumedIOs, value); err != nil {
+				return err
+			}
+
 		case "FirstPage":
 			if err := awsAwsjson10_deserializeDocumentPage(&sv.FirstPage, value); err != nil {
+				return err
+			}
+
+		case "TimingInformation":
+			if err := awsAwsjson10_deserializeDocumentTimingInformation(&sv.TimingInformation, value); err != nil {
 				return err
 			}
 
@@ -539,8 +569,18 @@ func awsAwsjson10_deserializeDocumentFetchPageResult(v **types.FetchPageResult, 
 
 	for key, value := range shape {
 		switch key {
+		case "ConsumedIOs":
+			if err := awsAwsjson10_deserializeDocumentIOUsage(&sv.ConsumedIOs, value); err != nil {
+				return err
+			}
+
 		case "Page":
 			if err := awsAwsjson10_deserializeDocumentPage(&sv.Page, value); err != nil {
+				return err
+			}
+
+		case "TimingInformation":
+			if err := awsAwsjson10_deserializeDocumentTimingInformation(&sv.TimingInformation, value); err != nil {
 				return err
 			}
 
@@ -591,6 +631,63 @@ func awsAwsjson10_deserializeDocumentInvalidSessionException(v **types.InvalidSe
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentIOUsage(v **types.IOUsage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IOUsage
+	if *v == nil {
+		sv = &types.IOUsage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ReadIOs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ReadIOs to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ReadIOs = i64
+			}
+
+		case "WriteIOs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WriteIOs to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WriteIOs = i64
 			}
 
 		default:
@@ -798,6 +895,11 @@ func awsAwsjson10_deserializeDocumentStartSessionResult(v **types.StartSessionRe
 				sv.SessionToken = ptr.String(jtv)
 			}
 
+		case "TimingInformation":
+			if err := awsAwsjson10_deserializeDocumentTimingInformation(&sv.TimingInformation, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -829,6 +931,11 @@ func awsAwsjson10_deserializeDocumentStartTransactionResult(v **types.StartTrans
 
 	for key, value := range shape {
 		switch key {
+		case "TimingInformation":
+			if err := awsAwsjson10_deserializeDocumentTimingInformation(&sv.TimingInformation, value); err != nil {
+				return err
+			}
+
 		case "TransactionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -836,6 +943,50 @@ func awsAwsjson10_deserializeDocumentStartTransactionResult(v **types.StartTrans
 					return fmt.Errorf("expected TransactionId to be of type string, got %T instead", value)
 				}
 				sv.TransactionId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentTimingInformation(v **types.TimingInformation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimingInformation
+	if *v == nil {
+		sv = &types.TimingInformation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ProcessingTimeMilliseconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ProcessingTimeMilliseconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ProcessingTimeMilliseconds = i64
 			}
 
 		default:

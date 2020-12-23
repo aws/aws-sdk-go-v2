@@ -19,25 +19,30 @@ import (
 // fields and objects, which Security Hub customers use to manage their
 // investigation workflow.
 //
+// * Note
+//
+// * UserDefinedFields
+//
+// * VerificationState
+//
+// *
+// Workflow
+//
+// BatchImportFindings can be used to update the following finding fields
+// and objects only if they have not been updated using BatchUpdateFindings. After
+// they are updated using BatchUpdateFindings, these fields cannot be updated using
+// BatchImportFindings.
+//
 // * Confidence
 //
 // * Criticality
 //
-// * Note
+// * RelatedFindings
 //
 // *
-// RelatedFindings
-//
-// * Severity
+// Severity
 //
 // * Types
-//
-// * UserDefinedFields
-//
-// *
-// VerificationState
-//
-// * Workflow
 func (c *Client) BatchImportFindings(ctx context.Context, params *BatchImportFindingsInput, optFns ...func(*Options)) (*BatchImportFindingsOutput, error) {
 	if params == nil {
 		params = &BatchImportFindingsInput{}

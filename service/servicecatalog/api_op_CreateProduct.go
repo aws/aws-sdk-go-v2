@@ -12,7 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a product. A delegated admin is authorized to invoke this command.
+// Creates a product. A delegated admin is authorized to invoke this command. The
+// user or role that performs this operation must have the
+// cloudformation:GetTemplate IAM policy permission. This policy permission is
+// required when using the ImportFromPhysicalId template source in the information
+// data section.
 func (c *Client) CreateProduct(ctx context.Context, params *CreateProductInput, optFns ...func(*Options)) (*CreateProductOutput, error) {
 	if params == nil {
 		params = &CreateProductInput{}
@@ -52,8 +56,7 @@ type CreateProductInput struct {
 	// This member is required.
 	ProductType types.ProductType
 
-	// The configuration of the provisioning artifact. The info field accepts
-	// ImportFromPhysicalID.
+	// The configuration of the provisioning artifact.
 	//
 	// This member is required.
 	ProvisioningArtifactParameters *types.ProvisioningArtifactProperties
@@ -79,7 +82,8 @@ type CreateProductInput struct {
 	// The contact email for product support.
 	SupportEmail *string
 
-	// The contact URL for product support.
+	// The contact URL for product support. ^https?:\/\// / is the pattern used to
+	// validate SupportUrl.
 	SupportUrl *string
 
 	// One or more tags.

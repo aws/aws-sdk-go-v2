@@ -31,8 +31,8 @@ import (
 // For a full list of tag restrictions, see Limits Related to Queues
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-limits.html#limits-queues)
 // in the Amazon Simple Queue Service Developer Guide. Cross-account permissions
-// don't apply to this action. For more information, see Grant Cross-Account
-// Permissions to a Role and a User Name
+// don't apply to this action. For more information, see Grant cross-account
+// permissions to a role and a user name
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 // in the Amazon Simple Queue Service Developer Guide.
 func (c *Client) TagQueue(ctx context.Context, params *TagQueueInput, optFns ...func(*Options)) (*TagQueueOutput, error) {

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// View operational metadata related to an application in AppManager.
+// View operational metadata related to an application in Application Manager.
 func (c *Client) GetOpsMetadata(ctx context.Context, params *GetOpsMetadataInput, optFns ...func(*Options)) (*GetOpsMetadataOutput, error) {
 	if params == nil {
 		params = &GetOpsMetadataInput{}
@@ -44,14 +44,14 @@ type GetOpsMetadataInput struct {
 
 type GetOpsMetadataOutput struct {
 
-	// OpsMetadata for an AppManager application.
+	// OpsMetadata for an Application Manager application.
 	Metadata map[string]types.MetadataValue
 
 	// The token for the next set of items to return. Use this token to get the next
 	// set of results.
 	NextToken *string
 
-	// The resource ID of the AppManager application.
+	// The resource ID of the Application Manager application.
 	ResourceId *string
 
 	// Metadata pertaining to the operation's result.

@@ -101,7 +101,7 @@ type CopyDBSnapshotInput struct {
 	// your DB instance uses a nondefault option group. If your source DB instance uses
 	// Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify
 	// this option when copying across AWS Regions. For more information, see Option
-	// Group Considerations
+	// group considerations
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options)
 	// in the Amazon RDS User Guide.
 	OptionGroupName *string

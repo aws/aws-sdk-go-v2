@@ -29,6 +29,7 @@ func (c *Client) DescribeJobDefinitions(ctx context.Context, params *DescribeJob
 	return out, nil
 }
 
+// Contains the parameters for DescribeJobDefinitions.
 type DescribeJobDefinitionsInput struct {
 
 	// The name of the job definition to describe.
@@ -51,9 +52,8 @@ type DescribeJobDefinitionsInput struct {
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
 	// returned the nextToken value. This value is null when there are no more results
-	// to return. This token should be treated as an opaque identifier that is only
-	// used to retrieve the next items in a list and not for other programmatic
-	// purposes.
+	// to return. This token should be treated as an opaque identifier that's only used
+	// to retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// The status used to filter job definitions.

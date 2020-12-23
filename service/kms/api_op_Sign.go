@@ -47,7 +47,11 @@ import (
 // KMS. The CMK that you use for this operation must be in a compatible key state.
 // For details, see How Key State Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide.
+// AWS Key Management Service Developer Guide. Cross-account use: Yes. To perform
+// this operation with a CMK in a different AWS account, specify the key ARN or
+// alias ARN in the value of the KeyId parameter. Required permissions: kms:Sign
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations: Verify
 func (c *Client) Sign(ctx context.Context, params *SignInput, optFns ...func(*Options)) (*SignOutput, error) {
 	if params == nil {
 		params = &SignInput{}

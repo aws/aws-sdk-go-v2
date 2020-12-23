@@ -29,8 +29,14 @@ func (c *Client) ListImages(ctx context.Context, params *ListImagesInput, optFns
 
 type ListImagesInput struct {
 
+	// Requests a list of images with a specific recipe name.
+	ByName bool
+
 	// The filters.
 	Filters []types.Filter
+
+	// Includes deprecated images in the response list.
+	IncludeDeprecated bool
 
 	// The maximum items to return in a request.
 	MaxResults int32

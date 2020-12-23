@@ -46,7 +46,7 @@ type CloudWatchMetricsStat string
 const (
 	CloudWatchMetricsStatSum         CloudWatchMetricsStat = "Sum"
 	CloudWatchMetricsStatAverage     CloudWatchMetricsStat = "Average"
-	CloudWatchMetricsStatSamplecount CloudWatchMetricsStat = "SampleCount"
+	CloudWatchMetricsStatSampleCount CloudWatchMetricsStat = "SampleCount"
 	CloudWatchMetricsStatMinimum     CloudWatchMetricsStat = "Minimum"
 	CloudWatchMetricsStatMaximum     CloudWatchMetricsStat = "Maximum"
 	CloudWatchMetricsStatP99         CloudWatchMetricsStat = "p99"
@@ -207,6 +207,22 @@ func (OptInStatus) Values() []OptInStatus {
 	return []OptInStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type ResourceCollectionType string
+
+// Enum values for ResourceCollectionType
+const (
+	ResourceCollectionTypeAwsCloudFormation ResourceCollectionType = "AWS_CLOUD_FORMATION"
+)
+
+// Values returns all known values for ResourceCollectionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceCollectionType) Values() []ResourceCollectionType {
+	return []ResourceCollectionType{
+		"AWS_CLOUD_FORMATION",
 	}
 }
 

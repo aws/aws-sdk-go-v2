@@ -6,182 +6,196 @@ import (
 	"time"
 )
 
-// Returns an error that explains why the action did not succeed.
+// An error that explains why an action did not succeed.
 type ErrorReason struct {
 
-	// Service Quotas returns the following error values.
-	// DEPENDENCY_ACCESS_DENIED_ERROR is returned when the caller does not have
-	// permission to call the service or service quota. To resolve the error, you need
-	// permission to access the service or service quota. DEPENDENCY_THROTTLING_ERROR
-	// is returned when the service being called is throttling Service Quotas.
-	// DEPENDENCY_SERVICE_ERROR is returned when the service being called has
-	// availability issues. SERVICE_QUOTA_NOT_AVAILABLE_ERROR is returned when there
-	// was an error in Service Quotas.
+	// Service Quotas returns the following error values:
+	//
+	// *
+	// DEPENDENCY_ACCESS_DENIED_ERROR - The caller does not have the required
+	// permissions to complete the action. To resolve the error, you must have
+	// permission to access the service or quota.
+	//
+	// * DEPENDENCY_THROTTLING_ERROR - The
+	// service is throttling Service Quotas.
+	//
+	// * DEPENDENCY_SERVICE_ERROR - The service
+	// is not available.
+	//
+	// * SERVICE_QUOTA_NOT_AVAILABLE_ERROR - There was an error in
+	// Service Quotas.
 	ErrorCode ErrorCode
 
-	// The error message that provides more detail.
+	// The error message.
 	ErrorMessage *string
 }
 
-// A structure that uses CloudWatch metrics to gather data about the service quota.
+// Information about the CloudWatch metric that reflects quota usage.
 type MetricInfo struct {
 
-	// A dimension is a name/value pair that is part of the identity of a metric. Every
-	// metric has specific characteristics that describe it, and you can think of
-	// dimensions as categories for those characteristics. These dimensions are part of
-	// the CloudWatch Metric Identity that measures usage against a particular service
-	// quota.
+	// The metric dimension. This is a name/value pair that is part of the identity of
+	// a metric.
 	MetricDimensions map[string]string
 
-	// The name of the CloudWatch metric that measures usage of a service quota. This
-	// is a required field.
+	// The name of the metric.
 	MetricName *string
 
-	// The namespace of the metric. The namespace is a container for CloudWatch
-	// metrics. You can specify a name for the namespace when you create a metric.
+	// The namespace of the metric.
 	MetricNamespace *string
 
-	// Statistics are metric data aggregations over specified periods of time. This is
-	// the recommended statistic to use when comparing usage in the CloudWatch Metric
-	// against your Service Quota.
+	// The metric statistic that we recommend you use when determining quota usage.
 	MetricStatisticRecommendation *string
 }
 
-// A structure that contains information about the quota period.
+// Information about the quota period.
 type QuotaPeriod struct {
 
-	// The time unit of a period.
+	// The time unit.
 	PeriodUnit PeriodUnit
 
-	// The value of a period.
+	// The value.
 	PeriodValue *int32
 }
 
-// A structure that contains information about a requested change for a quota.
+// Information about a quota increase request.
 type RequestedServiceQuotaChange struct {
 
-	// The case Id for the service quota increase request.
+	// The case ID.
 	CaseId *string
 
-	// The date and time when the service quota increase request was received and the
-	// case Id was created.
+	// The date and time when the quota increase request was received and the case ID
+	// was created.
 	Created *time.Time
 
-	// New increased value for the service quota.
+	// The new, increased value for the quota.
 	DesiredValue *float64
 
-	// Identifies if the quota is global.
+	// Indicates whether the quota is global.
 	GlobalQuota bool
 
-	// The unique identifier of a requested service quota change.
+	// The unique identifier.
 	Id *string
 
-	// The date and time of the most recent change in the service quota increase
-	// request.
+	// The date and time of the most recent change.
 	LastUpdated *time.Time
 
-	// The Amazon Resource Name (ARN) of the service quota.
+	// The Amazon Resource Name (ARN) of the quota.
 	QuotaArn *string
 
-	// Specifies the service quota that you want to use.
+	// The quota identifier.
 	QuotaCode *string
 
-	// Name of the service quota.
+	// The quota name.
 	QuotaName *string
 
-	// The IAM identity who submitted the service quota increase request.
+	// The IAM identity of the requester.
 	Requester *string
 
-	// Specifies the service that you want to use.
+	// The service identifier.
 	ServiceCode *string
 
-	// The name of the AWS service specified in the increase request.
+	// The service name.
 	ServiceName *string
 
-	// State of the service quota increase request.
+	// The state of the quota increase request.
 	Status RequestStatus
 
-	// Specifies the unit used for the quota.
+	// The unit of measurement.
 	Unit *string
 }
 
-// A structure that contains the ServiceName and ServiceCode. It does not include
-// all details of the service quota. To get those values, use the ListServiceQuotas
-// operation.
+// Information about a service.
 type ServiceInfo struct {
 
-	// Specifies the service that you want to use.
+	// The service identifier.
 	ServiceCode *string
 
-	// The name of the AWS service specified in the increase request.
+	// The service name.
 	ServiceName *string
 }
 
-// A structure that contains the full set of details that define the service quota.
+// Information about a quota.
 type ServiceQuota struct {
 
-	// Specifies if the quota value can be increased.
+	// Indicates whether the quota value can be increased.
 	Adjustable bool
 
-	// Specifies the ErrorCode and ErrorMessage when success isn't achieved.
+	// The error code and error reason.
 	ErrorReason *ErrorReason
 
-	// Specifies if the quota is global.
+	// Indicates whether the quota is global.
 	GlobalQuota bool
 
-	// Identifies the unit and value of how time is measured.
+	// The period of time.
 	Period *QuotaPeriod
 
-	// The Amazon Resource Name (ARN) of the service quota.
+	// The Amazon Resource Name (ARN) of the quota.
 	QuotaArn *string
 
-	// The code identifier for the service quota specified.
+	// The quota identifier.
 	QuotaCode *string
 
-	// The name identifier of the service quota.
+	// The quota name.
 	QuotaName *string
 
-	// Specifies the service that you want to use.
+	// The service identifier.
 	ServiceCode *string
 
-	// The name of the AWS service specified in the increase request.
+	// The service name.
 	ServiceName *string
 
-	// The unit of measurement for the value of the service quota.
+	// The unit of measurement.
 	Unit *string
 
-	// Specifies the details about the measurement.
+	// Information about the measurement.
 	UsageMetric *MetricInfo
 
-	// The value of service quota.
+	// The quota value.
 	Value *float64
 }
 
-// A structure that contains information about one service quota increase request.
+// Information about a quota increase request.
 type ServiceQuotaIncreaseRequestInTemplate struct {
 
-	// The AWS Region where the increase request occurs.
+	// The AWS Region.
 	AwsRegion *string
 
-	// Identifies the new, increased value of the service quota in the increase
-	// request.
+	// The new, increased value of the quota.
 	DesiredValue *float64
 
-	// Specifies if the quota is a global quota.
+	// Indicates whether the quota is global.
 	GlobalQuota bool
 
-	// The code identifier for the service quota specified in the increase request.
+	// The quota identifier.
 	QuotaCode *string
 
-	// The name of the service quota in the increase request.
+	// The quota name.
 	QuotaName *string
 
-	// The code identifier for the AWS service specified in the increase request.
+	// The service identifier.
 	ServiceCode *string
 
-	// The name of the AWS service specified in the increase request.
+	// The service name.
 	ServiceName *string
 
-	// The unit of measure for the increase request.
+	// The unit of measurement.
 	Unit *string
+}
+
+// A complex data type that contains a tag key and tag value.
+type Tag struct {
+
+	// A string that contains a tag key. The string length should be between 1 and 128
+	// characters. Valid characters include a-z, A-Z, 0-9, space, and the special
+	// characters _ - . : / = + @.
+	//
+	// This member is required.
+	Key *string
+
+	// A string that contains an optional tag value. The string length should be
+	// between 0 and 256 characters. Valid characters include a-z, A-Z, 0-9, space, and
+	// the special characters _ - . : / = + @.
+	//
+	// This member is required.
+	Value *string
 }

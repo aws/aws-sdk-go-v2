@@ -33,6 +33,7 @@ func (c *Client) CreateJobQueue(ctx context.Context, params *CreateJobQueueInput
 	return out, nil
 }
 
+// Contains the parameters for CreateJobQueue.
 type CreateJobQueueInput struct {
 
 	// The set of compute environments mapped to a job queue and their order relative
@@ -41,12 +42,15 @@ type CreateJobQueueInput struct {
 	// state before you can associate them with a job queue. You can associate up to
 	// three compute environments with a job queue. All of the compute environments
 	// must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or FARGATE_SPOT); EC2 and
-	// Fargate compute environments can't be mixed.
+	// Fargate compute environments can't be mixed. All compute environments that are
+	// associated with a job queue must share the same architecture. AWS Batch doesn't
+	// support mixing compute environment architecture types in a single job queue.
 	//
 	// This member is required.
 	ComputeEnvironmentOrder []types.ComputeEnvironmentOrder
 
-	// The name of the job queue.
+	// The name of the job queue. Up to 128 letters (uppercase and lowercase), numbers,
+	// and underscores are allowed.
 	//
 	// This member is required.
 	JobQueueName *string
@@ -55,7 +59,9 @@ type CreateJobQueueInput struct {
 	// integer value for the priority parameter) are evaluated first when associated
 	// with the same compute environment. Priority is determined in descending order.
 	// For example, a job queue with a priority value of 10 is given scheduling
-	// preference over a job queue with a priority value of 1.
+	// preference over a job queue with a priority value of 1. All of the compute
+	// environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or
+	// FARGATE_SPOT); EC2 and Fargate compute environments cannot be mixed.
 	//
 	// This member is required.
 	Priority int32
@@ -67,9 +73,9 @@ type CreateJobQueueInput struct {
 
 	// The tags that you apply to the job queue to help you categorize and organize
 	// your resources. Each tag consists of a key and an optional value. For more
-	// information, see Tagging AWS Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in AWS General
-	// Reference.
+	// information, see Tagging your AWS Batch resources
+	// (https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html) in AWS
+	// Batch User Guide.
 	Tags map[string]string
 }
 

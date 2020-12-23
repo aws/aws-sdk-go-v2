@@ -4,6 +4,12 @@ package types
 
 type KeyType string
 
+// Enum values for KeyType
+const (
+	KeyTypeHash  KeyType = "HASH"
+	KeyTypeRange KeyType = "RANGE"
+)
+
 // Values returns all known values for KeyType. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -15,6 +21,13 @@ func (KeyType) Values() []KeyType {
 }
 
 type OperationType string
+
+// Enum values for OperationType
+const (
+	OperationTypeInsert OperationType = "INSERT"
+	OperationTypeModify OperationType = "MODIFY"
+	OperationTypeRemove OperationType = "REMOVE"
+)
 
 // Values returns all known values for OperationType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -28,6 +41,14 @@ func (OperationType) Values() []OperationType {
 }
 
 type ShardIteratorType string
+
+// Enum values for ShardIteratorType
+const (
+	ShardIteratorTypeTrimHorizon         ShardIteratorType = "TRIM_HORIZON"
+	ShardIteratorTypeLatest              ShardIteratorType = "LATEST"
+	ShardIteratorTypeAtSequenceNumber    ShardIteratorType = "AT_SEQUENCE_NUMBER"
+	ShardIteratorTypeAfterSequenceNumber ShardIteratorType = "AFTER_SEQUENCE_NUMBER"
+)
 
 // Values returns all known values for ShardIteratorType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -43,6 +64,14 @@ func (ShardIteratorType) Values() []ShardIteratorType {
 
 type StreamStatus string
 
+// Enum values for StreamStatus
+const (
+	StreamStatusEnabling  StreamStatus = "ENABLING"
+	StreamStatusEnabled   StreamStatus = "ENABLED"
+	StreamStatusDisabling StreamStatus = "DISABLING"
+	StreamStatusDisabled  StreamStatus = "DISABLED"
+)
+
 // Values returns all known values for StreamStatus. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.
@@ -56,6 +85,14 @@ func (StreamStatus) Values() []StreamStatus {
 }
 
 type StreamViewType string
+
+// Enum values for StreamViewType
+const (
+	StreamViewTypeNewImage        StreamViewType = "NEW_IMAGE"
+	StreamViewTypeOldImage        StreamViewType = "OLD_IMAGE"
+	StreamViewTypeNewAndOldImages StreamViewType = "NEW_AND_OLD_IMAGES"
+	StreamViewTypeKeysOnly        StreamViewType = "KEYS_ONLY"
+)
 
 // Values returns all known values for StreamViewType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The

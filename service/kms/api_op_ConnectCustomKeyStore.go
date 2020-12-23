@@ -43,7 +43,23 @@ import (
 // again. If you are having trouble connecting or disconnecting a custom key store,
 // see Troubleshooting a Custom Key Store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html) in the
-// AWS Key Management Service Developer Guide.
+// AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a custom key store in a different AWS account.
+// Required permissions: kms:ConnectCustomKeyStore
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (IAM policy) Related operations
+//
+// * CreateCustomKeyStore
+//
+// *
+// DeleteCustomKeyStore
+//
+// * DescribeCustomKeyStores
+//
+// * DisconnectCustomKeyStore
+//
+// *
+// UpdateCustomKeyStore
 func (c *Client) ConnectCustomKeyStore(ctx context.Context, params *ConnectCustomKeyStoreInput, optFns ...func(*Options)) (*ConnectCustomKeyStoreOutput, error) {
 	if params == nil {
 		params = &ConnectCustomKeyStoreInput{}

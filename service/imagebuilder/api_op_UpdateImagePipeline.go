@@ -41,17 +41,14 @@ type UpdateImagePipelineInput struct {
 	// This member is required.
 	ImagePipelineArn *string
 
-	// The Amazon Resource Name (ARN) of the image recipe that will be used to
-	// configure images updated by this image pipeline.
-	//
-	// This member is required.
-	ImageRecipeArn *string
-
 	// The Amazon Resource Name (ARN) of the infrastructure configuration that will be
 	// used to build images updated by this image pipeline.
 	//
 	// This member is required.
 	InfrastructureConfigurationArn *string
+
+	// The Amazon Resource Name (ARN) of the container pipeline to update.
+	ContainerRecipeArn *string
 
 	// The description of the image pipeline.
 	Description *string
@@ -64,6 +61,10 @@ type UpdateImagePipelineInput struct {
 	// operating system (OS) version and package list. This information is used to
 	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
 	EnhancedImageMetadataEnabled bool
+
+	// The Amazon Resource Name (ARN) of the image recipe that will be used to
+	// configure images updated by this image pipeline.
+	ImageRecipeArn *string
 
 	// The image test configuration of the image pipeline.
 	ImageTestsConfiguration *types.ImageTestsConfiguration

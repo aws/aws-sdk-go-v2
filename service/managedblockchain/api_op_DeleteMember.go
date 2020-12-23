@@ -16,7 +16,7 @@ import (
 // account that owns the member. In all other cases, the DeleteMember action is
 // carried out as the result of an approved proposal to remove a member. If
 // MemberId is the last member in a network specified by the last AWS account, the
-// network is deleted also.
+// network is deleted also. Applies only to Hyperledger Fabric.
 func (c *Client) DeleteMember(ctx context.Context, params *DeleteMemberInput, optFns ...func(*Options)) (*DeleteMemberOutput, error) {
 	if params == nil {
 		params = &DeleteMemberInput{}

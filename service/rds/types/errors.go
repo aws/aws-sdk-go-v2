@@ -1053,7 +1053,8 @@ func (e *ExportTaskNotFoundFault) ErrorMessage() string {
 func (e *ExportTaskNotFoundFault) ErrorCode() string             { return "ExportTaskNotFoundFault" }
 func (e *ExportTaskNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
+// The GlobalClusterIdentifier already exists. Choose a new global database
+// identifier (unique name) to create a new global database cluster.
 type GlobalClusterAlreadyExistsFault struct {
 	Message *string
 }
@@ -1072,7 +1073,8 @@ func (e *GlobalClusterAlreadyExistsFault) ErrorCode() string {
 }
 func (e *GlobalClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
+// The GlobalClusterIdentifier doesn't refer to an existing global database
+// cluster.
 type GlobalClusterNotFoundFault struct {
 	Message *string
 }
@@ -1089,7 +1091,8 @@ func (e *GlobalClusterNotFoundFault) ErrorMessage() string {
 func (e *GlobalClusterNotFoundFault) ErrorCode() string             { return "GlobalClusterNotFoundFault" }
 func (e *GlobalClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
+// The number of global database clusters for this account is already at the
+// maximum allowed.
 type GlobalClusterQuotaExceededFault struct {
 	Message *string
 }
@@ -1604,7 +1607,8 @@ func (e *InvalidExportTaskStateFault) ErrorMessage() string {
 func (e *InvalidExportTaskStateFault) ErrorCode() string             { return "InvalidExportTaskStateFault" }
 func (e *InvalidExportTaskStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
+// The global cluster is in an invalid state and can't perform the requested
+// operation.
 type InvalidGlobalClusterStateFault struct {
 	Message *string
 }

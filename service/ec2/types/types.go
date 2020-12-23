@@ -1972,6 +1972,8 @@ type EbsBlockDevice struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html).
 	KmsKeyId *string
 
+	OutpostArn *string
+
 	// The ID of the snapshot.
 	SnapshotId *string
 
@@ -3855,6 +3857,8 @@ type Instance struct {
 
 	// Any block device mapping entries for the instance.
 	BlockDeviceMappings []InstanceBlockDeviceMapping
+
+	BootMode BootModeValues
 
 	// The ID of the Capacity Reservation.
 	CapacityReservationId *string
@@ -9648,18 +9652,20 @@ type TagSpecification struct {
 
 	// The type of resource to tag. Currently, the resource types that support tagging
 	// on creation are: capacity-reservation | carrier-gateway | client-vpn-endpoint |
-	// customer-gateway | dedicated-host | dhcp-options | export-image-task |
-	// export-instance-task | fleet | fpga-image | host-reservation | import-image-task
-	// | import-snapshot-task | instance | internet-gateway | ipv4pool-ec2 |
-	// ipv6pool-ec2 | key-pair | launch-template | placement-group | prefix-list |
-	// natgateway | network-acl | route-table | security-group | spot-fleet-request |
+	// customer-gateway | dedicated-host | dhcp-options | egress-only-internet-gateway
+	// | elastic-ip | elastic-gpu | export-image-task | export-instance-task | fleet |
+	// fpga-image | host-reservation | image| import-image-task | import-snapshot-task
+	// | instance | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 | key-pair |
+	// launch-template | local-gateway-route-table-vpc-association | placement-group |
+	// prefix-list | natgateway | network-acl | network-interface | reserved-instances
+	// |route-table | security-group| snapshot | spot-fleet-request |
 	// spot-instances-request | snapshot | subnet | traffic-mirror-filter |
 	// traffic-mirror-session | traffic-mirror-target | transit-gateway |
-	// transit-gateway-attachment | transit-gateway-connect-peer |
-	// transit-gateway-multicast-domain | transit-gateway-route-table | volume |vpc |
-	// vpc-peering-connection | vpc-endpoint (for interface and gateway endpoints) |
-	// vpc-endpoint-service (for AWS PrivateLink) | vpc-flow-log | vpn-connection |
-	// vpn-gateway. To tag a resource after it has been created, see CreateTags
+	// transit-gateway-attachment | transit-gateway-multicast-domain |
+	// transit-gateway-route-table | volume |vpc |  vpc-peering-connection |
+	// vpc-endpoint (for interface and gateway endpoints) | vpc-endpoint-service (for
+	// AWS PrivateLink) | vpc-flow-log | vpn-connection | vpn-gateway. To tag a
+	// resource after it has been created, see CreateTags
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
 	ResourceType ResourceType
 
@@ -10983,6 +10989,7 @@ type VolumeModification struct {
 	// The original IOPS rate of the volume.
 	OriginalIops int32
 
+	// The original setting for Amazon EBS Multi-Attach.
 	OriginalMultiAttachEnabled bool
 
 	// The original size of the volume, in GiB.
@@ -11006,6 +11013,7 @@ type VolumeModification struct {
 	// The target IOPS rate of the volume.
 	TargetIops int32
 
+	// The target setting for Amazon EBS Multi-Attach.
 	TargetMultiAttachEnabled bool
 
 	// The target size of the volume, in GiB.

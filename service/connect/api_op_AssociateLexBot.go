@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Allows the specified Amazon Connect instance to access the specified Amazon Lex
 // bot.
 func (c *Client) AssociateLexBot(ctx context.Context, params *AssociateLexBotInput, optFns ...func(*Options)) (*AssociateLexBotOutput, error) {

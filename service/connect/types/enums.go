@@ -860,6 +860,26 @@ func (QueueType) Values() []QueueType {
 	}
 }
 
+type QuickConnectType string
+
+// Enum values for QuickConnectType
+const (
+	QuickConnectTypeUser        QuickConnectType = "USER"
+	QuickConnectTypeQueue       QuickConnectType = "QUEUE"
+	QuickConnectTypePhoneNumber QuickConnectType = "PHONE_NUMBER"
+)
+
+// Values returns all known values for QuickConnectType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QuickConnectType) Values() []QuickConnectType {
+	return []QuickConnectType{
+		"USER",
+		"QUEUE",
+		"PHONE_NUMBER",
+	}
+}
+
 type ReferenceType string
 
 // Enum values for ReferenceType

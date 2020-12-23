@@ -6,6 +6,45 @@ import (
 	"time"
 )
 
+// A rule that controls access to an Amazon WorkMail organization.
+type AccessControlRule struct {
+
+	// Access protocol actions to include in the rule. Valid values include ActiveSync,
+	// AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
+	Actions []string
+
+	// The date that the rule was created.
+	DateCreated *time.Time
+
+	// The date that the rule was modified.
+	DateModified *time.Time
+
+	// The rule description.
+	Description *string
+
+	// The rule effect.
+	Effect AccessControlRuleEffect
+
+	// IPv4 CIDR ranges to include in the rule.
+	IpRanges []string
+
+	// The rule name.
+	Name *string
+
+	// Access protocol actions to exclude from the rule. Valid values include
+	// ActiveSync, AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
+	NotActions []string
+
+	// IPv4 CIDR ranges to exclude from the rule.
+	NotIpRanges []string
+
+	// User IDs to exclude from the rule.
+	NotUserIds []string
+
+	// User IDs to include in the rule.
+	UserIds []string
+}
+
 // At least one delegate must be associated to the resource to disable automatic
 // replies from the resource.
 type BookingOptions struct {
@@ -36,6 +75,39 @@ type Delegate struct {
 	Type MemberType
 }
 
+// The domain to associate with an Amazon WorkMail organization. When you configure
+// a domain hosted in Amazon Route 53 (Route 53), all recommended DNS records are
+// added to the organization when you create it. For more information, see Adding a
+// domain (https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html)
+// in the Amazon WorkMail Administrator Guide.
+type Domain struct {
+
+	// The fully qualified domain name.
+	DomainName *string
+
+	// The hosted zone ID for a domain hosted in Route 53. Required when configuring a
+	// domain hosted in Route 53.
+	HostedZoneId *string
+}
+
+// The configuration applied to an organization's folders by its retention policy.
+type FolderConfiguration struct {
+
+	// The action to take on the folder contents at the end of the folder configuration
+	// period.
+	//
+	// This member is required.
+	Action RetentionAction
+
+	// The folder name.
+	//
+	// This member is required.
+	Name FolderName
+
+	// The period of time at which the folder configuration action is applied.
+	Period *int32
+}
+
 // The representation of an Amazon WorkMail group.
 type Group struct {
 
@@ -56,6 +128,39 @@ type Group struct {
 
 	// The state of the group, which can be ENABLED, DISABLED, or DELETED.
 	State EntityState
+}
+
+// The details of a mailbox export job, including the user or resource ID
+// associated with the mailbox and the S3 bucket that the mailbox contents are
+// exported to.
+type MailboxExportJob struct {
+
+	// The mailbox export job description.
+	Description *string
+
+	// The mailbox export job end timestamp.
+	EndTime *time.Time
+
+	// The identifier of the user or resource associated with the mailbox.
+	EntityId *string
+
+	// The estimated progress of the mailbox export job, in percentage points.
+	EstimatedProgress int32
+
+	// The identifier of the mailbox export job.
+	JobId *string
+
+	// The name of the S3 bucket.
+	S3BucketName *string
+
+	// The path to the S3 bucket and file that the mailbox export job exports to.
+	S3Path *string
+
+	// The mailbox export job start timestamp.
+	StartTime *time.Time
+
+	// The state of the mailbox export job.
+	State MailboxExportJobState
 }
 
 // The representation of a user or group.
@@ -85,6 +190,9 @@ type OrganizationSummary struct {
 
 	// The alias associated with the organization.
 	Alias *string
+
+	// The default email domain associated with the organization.
+	DefaultMailDomain *string
 
 	// The error message associated with the organization. It is only present if
 	// unexpected behavior has occurred with regards to the organization. It provides
@@ -147,6 +255,20 @@ type Resource struct {
 
 	// The type of the resource: equipment or room.
 	Type ResourceType
+}
+
+// Describes a tag applied to a resource.
+type Tag struct {
+
+	// The key of the tag.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the tag.
+	//
+	// This member is required.
+	Value *string
 }
 
 // The representation of an Amazon WorkMail user.

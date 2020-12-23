@@ -41,6 +41,7 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 	return out, nil
 }
 
+// Contains the parameters for ListJobs.
 type ListJobsInput struct {
 
 	// The job ID for an array job. Specifying an array job ID with this parameter
@@ -72,7 +73,7 @@ type ListJobsInput struct {
 	// maxResults was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
 	// nextToken value. This value is null when there are no more results to return.
-	// This token should be treated as an opaque identifier that is only used to
+	// This token should be treated as an opaque identifier that's only used to
 	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 }

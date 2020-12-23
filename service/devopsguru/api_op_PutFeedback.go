@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Collects customer feedback about the specified insight.
 func (c *Client) PutFeedback(ctx context.Context, params *PutFeedbackInput, optFns ...func(*Options)) (*PutFeedbackOutput, error) {
 	if params == nil {
 		params = &PutFeedbackInput{}
@@ -27,6 +28,8 @@ func (c *Client) PutFeedback(ctx context.Context, params *PutFeedbackInput, optF
 }
 
 type PutFeedbackInput struct {
+
+	// The feedback from customers is about the recommendations in this insight.
 	InsightFeedback *types.InsightFeedback
 }
 

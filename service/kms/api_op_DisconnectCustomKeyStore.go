@@ -28,6 +28,22 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 // feature in AWS KMS, which combines the convenience and extensive integration of
 // AWS KMS with the isolation and control of a single-tenant key store.
+// Cross-account use: No. You cannot perform this operation on a custom key store
+// in a different AWS account. Required permissions: kms:DisconnectCustomKeyStore
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (IAM policy) Related operations:
+//
+// * ConnectCustomKeyStore
+//
+// *
+// CreateCustomKeyStore
+//
+// * DeleteCustomKeyStore
+//
+// * DescribeCustomKeyStores
+//
+// *
+// UpdateCustomKeyStore
 func (c *Client) DisconnectCustomKeyStore(ctx context.Context, params *DisconnectCustomKeyStoreInput, optFns ...func(*Options)) (*DisconnectCustomKeyStoreOutput, error) {
 	if params == nil {
 		params = &DisconnectCustomKeyStoreInput{}

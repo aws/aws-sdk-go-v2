@@ -75,19 +75,19 @@ type UpdateMaintenanceWindowInput struct {
 	// The number of days to wait after the date and time specified by a CRON
 	// expression before running the maintenance window. For example, the following
 	// cron expression schedules a maintenance window to run the third Tuesday of every
-	// month at 11:30 PM. cron(0 30 23 ? * TUE#3 *) If the schedule offset is 2, the
+	// month at 11:30 PM. cron(30 23 ? * TUE#3 *) If the schedule offset is 2, the
 	// maintenance window won't run until two days later.
 	ScheduleOffset int32
 
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format. For example:
-	// "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the
+	// "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the
 	// Time Zone Database (https://www.iana.org/time-zones) on the IANA website.
 	ScheduleTimezone *string
 
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format. For example:
-	// "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the
+	// "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the
 	// Time Zone Database (https://www.iana.org/time-zones) on the IANA website.
 	StartDate *string
 }
@@ -128,7 +128,7 @@ type UpdateMaintenanceWindowOutput struct {
 
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format. For example:
-	// "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the
+	// "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the
 	// Time Zone Database (https://www.iana.org/time-zones) on the IANA website.
 	ScheduleTimezone *string
 

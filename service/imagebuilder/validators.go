@@ -50,6 +50,26 @@ func (m *validateOpCreateComponent) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateContainerRecipe struct {
+}
+
+func (*validateOpCreateContainerRecipe) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContainerRecipe) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContainerRecipeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContainerRecipeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDistributionConfiguration struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpDeleteComponent) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteComponentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteContainerRecipe struct {
+}
+
+func (*validateOpDeleteContainerRecipe) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteContainerRecipe) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteContainerRecipeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteContainerRecipeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -305,6 +345,46 @@ func (m *validateOpGetComponentPolicy) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetComponentPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetContainerRecipe struct {
+}
+
+func (*validateOpGetContainerRecipe) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetContainerRecipe) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetContainerRecipeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetContainerRecipeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetContainerRecipePolicy struct {
+}
+
+func (*validateOpGetContainerRecipePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetContainerRecipePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetContainerRecipePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetContainerRecipePolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +650,26 @@ func (m *validateOpPutComponentPolicy) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutContainerRecipePolicy struct {
+}
+
+func (*validateOpPutContainerRecipePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutContainerRecipePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutContainerRecipePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutContainerRecipePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutImagePolicy struct {
 }
 
@@ -738,6 +838,10 @@ func addOpCreateComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateComponent{}, middleware.After)
 }
 
+func addOpCreateContainerRecipeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContainerRecipe{}, middleware.After)
+}
+
 func addOpCreateDistributionConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDistributionConfiguration{}, middleware.After)
 }
@@ -760,6 +864,10 @@ func addOpCreateInfrastructureConfigurationValidationMiddleware(stack *middlewar
 
 func addOpDeleteComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteComponent{}, middleware.After)
+}
+
+func addOpDeleteContainerRecipeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteContainerRecipe{}, middleware.After)
 }
 
 func addOpDeleteDistributionConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -788,6 +896,14 @@ func addOpGetComponentValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetComponentPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetComponentPolicy{}, middleware.After)
+}
+
+func addOpGetContainerRecipeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetContainerRecipe{}, middleware.After)
+}
+
+func addOpGetContainerRecipePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetContainerRecipePolicy{}, middleware.After)
 }
 
 func addOpGetDistributionConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -840,6 +956,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPutComponentPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutComponentPolicy{}, middleware.After)
+}
+
+func addOpPutContainerRecipePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutContainerRecipePolicy{}, middleware.After)
 }
 
 func addOpPutImagePolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -906,6 +1026,25 @@ func validateComponentConfigurationList(v []types.ComponentConfiguration) error 
 	}
 }
 
+func validateContainerDistributionConfiguration(v *types.ContainerDistributionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerDistributionConfiguration"}
+	if v.TargetRepository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetRepository"))
+	} else if v.TargetRepository != nil {
+		if err := validateTargetContainerRepository(v.TargetRepository); err != nil {
+			invalidParams.AddNested("TargetRepository", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDistribution(v *types.Distribution) error {
 	if v == nil {
 		return nil
@@ -913,6 +1052,11 @@ func validateDistribution(v *types.Distribution) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Distribution"}
 	if v.Region == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if v.ContainerDistributionConfiguration != nil {
+		if err := validateContainerDistributionConfiguration(v.ContainerDistributionConfiguration); err != nil {
+			invalidParams.AddNested("ContainerDistributionConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -930,6 +1074,24 @@ func validateDistributionList(v []types.Distribution) error {
 		if err := validateDistribution(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetContainerRepository(v *types.TargetContainerRepository) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetContainerRepository"}
+	if len(v.Service) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -980,6 +1142,50 @@ func validateOpCreateComponentInput(v *CreateComponentInput) error {
 	}
 }
 
+func validateOpCreateContainerRecipeInput(v *CreateContainerRecipeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContainerRecipeInput"}
+	if len(v.ContainerType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerType"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SemanticVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SemanticVersion"))
+	}
+	if v.Components == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Components"))
+	} else if v.Components != nil {
+		if err := validateComponentConfigurationList(v.Components); err != nil {
+			invalidParams.AddNested("Components", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DockerfileTemplateData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DockerfileTemplateData"))
+	}
+	if v.ParentImage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParentImage"))
+	}
+	if v.TargetRepository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetRepository"))
+	} else if v.TargetRepository != nil {
+		if err := validateTargetContainerRepository(v.TargetRepository); err != nil {
+			invalidParams.AddNested("TargetRepository", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDistributionConfigurationInput(v *CreateDistributionConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -1010,9 +1216,6 @@ func validateOpCreateImageInput(v *CreateImageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateImageInput"}
-	if v.ImageRecipeArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageRecipeArn"))
-	}
 	if v.InfrastructureConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureConfigurationArn"))
 	}
@@ -1033,9 +1236,6 @@ func validateOpCreateImagePipelineInput(v *CreateImagePipelineInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateImagePipelineInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.ImageRecipeArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageRecipeArn"))
 	}
 	if v.InfrastructureConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureConfigurationArn"))
@@ -1109,6 +1309,21 @@ func validateOpDeleteComponentInput(v *DeleteComponentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteComponentInput"}
 	if v.ComponentBuildVersionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComponentBuildVersionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteContainerRecipeInput(v *DeleteContainerRecipeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteContainerRecipeInput"}
+	if v.ContainerRecipeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerRecipeArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1214,6 +1429,36 @@ func validateOpGetComponentPolicyInput(v *GetComponentPolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetComponentPolicyInput"}
 	if v.ComponentArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComponentArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetContainerRecipeInput(v *GetContainerRecipeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetContainerRecipeInput"}
+	if v.ContainerRecipeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerRecipeArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetContainerRecipePolicyInput(v *GetContainerRecipePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetContainerRecipePolicyInput"}
+	if v.ContainerRecipeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerRecipeArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1435,6 +1680,24 @@ func validateOpPutComponentPolicyInput(v *PutComponentPolicyInput) error {
 	}
 }
 
+func validateOpPutContainerRecipePolicyInput(v *PutContainerRecipePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutContainerRecipePolicyInput"}
+	if v.ContainerRecipeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerRecipeArn"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutImagePolicyInput(v *PutImagePolicyInput) error {
 	if v == nil {
 		return nil
@@ -1557,9 +1820,6 @@ func validateOpUpdateImagePipelineInput(v *UpdateImagePipelineInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateImagePipelineInput"}
 	if v.ImagePipelineArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImagePipelineArn"))
-	}
-	if v.ImageRecipeArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageRecipeArn"))
 	}
 	if v.InfrastructureConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureConfigurationArn"))

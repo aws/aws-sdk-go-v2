@@ -91,6 +91,14 @@ type ChannelActivity struct {
 	Next *string
 }
 
+// Specifies one or more sets of channel messages.
+type ChannelMessages struct {
+
+	// Specifies one or more keys that identify the Amazon Simple Storage Service
+	// (Amazon S3) objects that save your channel messages.
+	S3Paths []string
+}
+
 // Statistics information about the channel.
 type ChannelStatistics struct {
 
@@ -148,6 +156,23 @@ type ChannelSummary struct {
 
 	// The status of the channel.
 	Status ChannelStatus
+}
+
+// Contains information about a column that stores your data.
+type Column struct {
+
+	// The name of the column.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of data. For more information about the supported data types, see
+	// Common data types
+	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html) in the AWS
+	// Glue Developer Guide.
+	//
+	// This member is required.
+	Type *string
 }
 
 // Information required to run the containerAction to produce dataset contents.
@@ -456,6 +481,12 @@ type Datastore struct {
 	// When the data store was created.
 	CreationTime *time.Time
 
+	// Contains the configuration information of file formats. AWS IoT Analytics data
+	// stores support JSON and Parquet (https://parquet.apache.org/). The default file
+	// format is JSON. You can specify only one format. You can't change the file
+	// format after you create the data store.
+	FileFormatConfiguration *FileFormatConfiguration
+
 	// The last time when a new message arrived in the data store. AWS IoT Analytics
 	// updates this value at most once per minute for one data store. Hence, the
 	// lastMessageArrivalTime value is an approximation. This feature only applies to
@@ -555,6 +586,9 @@ type DatastoreSummary struct {
 
 	// Where data store data is stored.
 	DatastoreStorage *DatastoreStorageSummary
+
+	// The file format of the data in the data store.
+	FileFormatType FileFormatType
 
 	// The last time when a new message arrived in the data store. AWS IoT Analytics
 	// updates this value at most once per minute for one data store. Hence, the
@@ -680,6 +714,19 @@ type EstimatedResourceSize struct {
 	EstimatedSizeInBytes *float64
 }
 
+// Contains the configuration information of file formats. AWS IoT Analytics data
+// stores support JSON and Parquet (https://parquet.apache.org/). The default file
+// format is JSON. You can specify only one format. You can't change the file
+// format after you create the data store.
+type FileFormatConfiguration struct {
+
+	// Contains the configuration information of the JSON format.
+	JsonConfiguration *JsonConfiguration
+
+	// Contains the configuration information of the Parquet format.
+	ParquetConfiguration *ParquetConfiguration
+}
+
 // An activity that filters a message based on its attributes.
 type FilterActivity struct {
 
@@ -729,6 +776,10 @@ type IotEventsDestinationConfiguration struct {
 	//
 	// This member is required.
 	RoleArn *string
+}
+
+// Contains the configuration information of the JSON format.
+type JsonConfiguration struct {
 }
 
 // An activity that runs a Lambda function to modify the message.
@@ -844,6 +895,13 @@ type OutputFileUriValue struct {
 	//
 	// This member is required.
 	FileName *string
+}
+
+// Contains the configuration information of the Parquet format.
+type ParquetConfiguration struct {
+
+	// Information needed to define a schema.
+	SchemaDefinition *SchemaDefinition
 }
 
 // Contains information about a pipeline.
@@ -1038,6 +1096,14 @@ type Schedule struct {
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html)
 	// in the Amazon CloudWatch Events User Guide.
 	Expression *string
+}
+
+// Information needed to define a schema.
+type SchemaDefinition struct {
+
+	// Specifies one or more columns that store your data. Each schema can have up to
+	// 100 columns. Each column can have up to 100 nested types
+	Columns []Column
 }
 
 // Creates a new message using only the specified attributes from the original

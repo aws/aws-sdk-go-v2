@@ -603,7 +603,7 @@ type DataSet struct {
 	// The ID of the dataset.
 	DataSetId *string
 
-	// Indicates whether you want to import the data into SPICE.
+	// A value that indicates whether you want to import the data into SPICE.
 	ImportMode DataSetImportMode
 
 	// The last time that this dataset was updated.
@@ -667,7 +667,7 @@ type DataSetSummary struct {
 	// The Amazon Resource Name (ARN) of the dataset.
 	Arn *string
 
-	// Indicates if the dataset has column level permission configured.
+	// A value that indicates if the dataset has column level permission configured.
 	ColumnLevelPermissionRulesApplied bool
 
 	// The time that this dataset was created.
@@ -676,7 +676,7 @@ type DataSetSummary struct {
 	// The ID of the dataset.
 	DataSetId *string
 
-	// Indicates whether you want to import the data into SPICE.
+	// A value that indicates whether you want to import the data into SPICE.
 	ImportMode DataSetImportMode
 
 	// The last time that this dataset was updated.
@@ -1192,8 +1192,8 @@ type JoinInstruction struct {
 // Properties associated with the columns participating in a join.
 type JoinKeyProperties struct {
 
-	// Indicates that a row in a table is uniquely identified by the columns in a join
-	// key. This is used by QuickSight to optimize query performance.
+	// A value that indicates that a row in a table is uniquely identified by the
+	// columns in a join key. This is used by QuickSight to optimize query performance.
 	UniqueKey bool
 }
 
@@ -1515,6 +1515,9 @@ type RelationalTable struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The catalog associated with a table.
+	Catalog *string
 
 	// The schema name. This name applies to certain relational database engines.
 	Schema *string

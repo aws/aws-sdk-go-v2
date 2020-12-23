@@ -128,6 +128,11 @@ type UpdateAssociationInput struct {
 	// use AUTO mode.
 	SyncCompliance types.AssociationSyncCompliance
 
+	// A location is a combination of AWS Regions and AWS accounts where you want to
+	// run the association. Use this action to update an association in multiple
+	// Regions and multiple accounts.
+	TargetLocations []types.TargetLocation
+
 	// The targets of the association.
 	Targets []types.Target
 }

@@ -245,35 +245,35 @@ type CreateDBInstanceInput struct {
 	// reserved by the specified database engine
 	//
 	// PostgreSQL The name of the database
-	// to create when the DB instance is created. If this parameter isn't specified,
-	// the default "postgres" database is created in the DB instance. Constraints:
+	// to create when the DB instance is created. If this parameter isn't specified, no
+	// database is created in the DB instance. Constraints:
 	//
-	// *
-	// Must contain 1 to 63 letters, numbers, or underscores.
+	// * Must contain 1 to 63
+	// letters, numbers, or underscores.
 	//
-	// * Must begin with a
-	// letter. Subsequent characters can be letters, underscores, or digits (0-9).
-	//
-	// *
-	// Can't be a word reserved by the specified database engine
-	//
-	// Oracle The Oracle
-	// System ID (SID) of the created DB instance. If you specify null, the default
-	// value ORCL is used. You can't specify the string NULL, or any other reserved
-	// word, for DBName. Default: ORCL Constraints:
-	//
-	// * Can't be longer than 8
-	// characters
-	//
-	// SQL Server Not applicable. Must be null. Amazon Aurora The name of
-	// the database to create when the primary instance of the DB cluster is created.
-	// If this parameter isn't specified, no database is created in the DB instance.
-	// Constraints:
-	//
-	// * Must contain 1 to 64 letters or numbers.
+	// * Must begin with a letter. Subsequent
+	// characters can be letters, underscores, or digits (0-9).
 	//
 	// * Can't be a word
 	// reserved by the specified database engine
+	//
+	// Oracle The Oracle System ID (SID) of
+	// the created DB instance. If you specify null, the default value ORCL is used.
+	// You can't specify the string NULL, or any other reserved word, for DBName.
+	// Default: ORCL Constraints:
+	//
+	// * Can't be longer than 8 characters
+	//
+	// SQL Server Not
+	// applicable. Must be null. Amazon Aurora The name of the database to create when
+	// the primary instance of the DB cluster is created. If this parameter isn't
+	// specified, no database is created in the DB instance. Constraints:
+	//
+	// * Must
+	// contain 1 to 64 letters or numbers.
+	//
+	// * Can't be a word reserved by the specified
+	// database engine
 	DBName *string
 
 	// The name of the DB parameter group to associate with this DB instance. If you do
@@ -331,6 +331,19 @@ type CreateDBInstanceInput struct {
 	// general, and slowquery. Oracle Possible values are alert, audit, listener, and
 	// trace. PostgreSQL Possible values are postgresql and upgrade.
 	EnableCloudwatchLogsExports []string
+
+	// A value that indicates whether to enable a customer-owned IP address (CoIP) for
+	// an RDS on Outposts DB instance. A CoIP provides local or external connectivity
+	// to resources in your Outpost subnets through your on-premises network. For some
+	// use cases, a CoIP can provide lower latency for connections to the DB instance
+	// from outside of its virtual private cloud (VPC) on your local network. For more
+	// information about RDS on Outposts, see Working with Amazon RDS on AWS Outposts
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
+	// the Amazon RDS User Guide. For more information about CoIPs, see Customer-owned
+	// IP addresses
+	// (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing)
+	// in the AWS Outposts User Guide.
+	EnableCustomerOwnedIp *bool
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.

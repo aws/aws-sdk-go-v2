@@ -3556,7 +3556,7 @@ func awsRestxml_serializeOpHttpBindingsGetObjectInput(v *GetObjectInput, encoder
 	}
 
 	if v.ResponseExpires != nil {
-		encoder.SetQuery("response-expires").String(smithytime.FormatDateTime(*v.ResponseExpires))
+		encoder.SetQuery("response-expires").String(smithytime.FormatHTTPDate(*v.ResponseExpires))
 	}
 
 	if v.SSECustomerAlgorithm != nil && len(*v.SSECustomerAlgorithm) > 0 {

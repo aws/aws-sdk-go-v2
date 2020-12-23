@@ -11,6 +11,9 @@ import (
 	"time"
 )
 
+// For the time range passed in, returns the number of open reactive insight that
+// were created, the number of open proactive insights that were created, and the
+// Mean Time to Recover (MTTR) for all closed reactive insights.
 func (c *Client) DescribeAccountOverview(ctx context.Context, params *DescribeAccountOverviewInput, optFns ...func(*Options)) (*DescribeAccountOverviewOutput, error) {
 	if params == nil {
 		params = &DescribeAccountOverviewInput{}
@@ -28,17 +31,37 @@ func (c *Client) DescribeAccountOverview(ctx context.Context, params *DescribeAc
 
 type DescribeAccountOverviewInput struct {
 
+	// The start of the time range passed in. The start time granularity is at the day
+	// level. The floor of the start time is used. Returned information occurred after
+	// this day.
+	//
 	// This member is required.
 	FromTime *time.Time
 
+	// The end of the time range passed in. The start time granularity is at the day
+	// level. The floor of the start time is used. Returned information occurred before
+	// this day. If this is not specified, then the current day is used.
 	ToTime *time.Time
 }
 
 type DescribeAccountOverviewOutput struct {
-	MeanTimeToRecoverInMilliseconds int64
 
+	// The Mean Time to Recover (MTTR) for all closed insights that were created during
+	// the time range passed in.
+	//
+	// This member is required.
+	MeanTimeToRecoverInMilliseconds *int64
+
+	// An integer that specifies the number of open proactive insights in your AWS
+	// account that were created during the time range passed in.
+	//
+	// This member is required.
 	ProactiveInsights int32
 
+	// An integer that specifies the number of open reactive insights in your AWS
+	// account that were created during the time range passed in.
+	//
+	// This member is required.
 	ReactiveInsights int32
 
 	// Metadata pertaining to the operation's result.

@@ -10,13 +10,29 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified tags from the specified customer master key (CMK). You
-// cannot perform this operation on a CMK in a different AWS account. To remove a
-// tag, specify the tag key. To change the tag value of an existing tag key, use
-// TagResource. The CMK that you use for this operation must be in a compatible key
-// state. For details, see How Key State Affects Use of a Customer Master Key
+// Deletes tags from a customer managed CMK
+// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk).
+// To delete a tag, specify the tag key and the CMK. When it succeeds, the
+// UntagResource operation doesn't return any output. Also, if the specified tag
+// key isn't found on the CMK, it doesn't throw an exception or return a response.
+// To confirm that the operation worked, use the ListResourceTags operation. For
+// general information about tags, including the format and syntax, see Tagging AWS
+// resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
+// the Amazon Web Services General Reference. For information about using tags in
+// AWS KMS, see Tagging keys
+// (https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html). The
+// CMK that you use for this operation must be in a compatible key state. For
+// details, see How Key State Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide.
+// AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a CMK in a different AWS account. Required
+// permissions: kms:UntagResource
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations
+//
+// * TagResource
+//
+// * ListResourceTags
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -34,8 +50,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// A unique identifier for the CMK from which you are removing tags. Specify the
-	// key ID or the Amazon Resource Name (ARN) of the CMK. For example:
+	// Identifies the CMK from which you are removing tags. Specify the key ID or the
+	// Amazon Resource Name (ARN) of the CMK. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab

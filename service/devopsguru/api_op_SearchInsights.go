@@ -12,6 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Returns a list of insights in your AWS account. You can specify which insights
+// are returned by their start time, one or more statuses (ONGOING, CLOSED, and
+// CLOSED), one or more severities (LOW, MEDIUM, and HIGH), and type (REACTIVE or
+// PROACTIVE). Use the Filters parameter to specify status and severity search
+// parameters. Use the Type parameter to specify REACTIVE or PROACTIVE in your
+// search.
 func (c *Client) SearchInsights(ctx context.Context, params *SearchInsightsInput, optFns ...func(*Options)) (*SearchInsightsOutput, error) {
 	if params == nil {
 		params = &SearchInsightsInput{}
@@ -29,24 +35,40 @@ func (c *Client) SearchInsights(ctx context.Context, params *SearchInsightsInput
 
 type SearchInsightsInput struct {
 
+	// The start of the time range passed in. Returned insights occurred after this
+	// time.
+	//
 	// This member is required.
 	StartTimeRange *types.StartTimeRange
 
+	// The type of insights you are searching for (REACTIVE or PROACTIVE).
+	//
 	// This member is required.
 	Type types.InsightType
 
+	// A SearchInsightsFilters object that is used to set the severity and status
+	// filters on your insight search.
 	Filters *types.SearchInsightsFilters
 
-	MaxResults int32
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
 
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 }
 
 type SearchInsightsOutput struct {
+
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
+	// The returned proactive insights.
 	ProactiveInsights []types.ProactiveInsightSummary
 
+	// The returned reactive insights.
 	ReactiveInsights []types.ReactiveInsightSummary
 
 	// Metadata pertaining to the operation's result.
@@ -123,6 +145,8 @@ var _ SearchInsightsAPIClient = (*Client)(nil)
 
 // SearchInsightsPaginatorOptions is the paginator options for SearchInsights
 type SearchInsightsPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -142,8 +166,8 @@ type SearchInsightsPaginator struct {
 // NewSearchInsightsPaginator returns a new SearchInsightsPaginator
 func NewSearchInsightsPaginator(client SearchInsightsAPIClient, params *SearchInsightsInput, optFns ...func(*SearchInsightsPaginatorOptions)) *SearchInsightsPaginator {
 	options := SearchInsightsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -176,7 +200,11 @@ func (p *SearchInsightsPaginator) NextPage(ctx context.Context, optFns ...func(*
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.SearchInsights(ctx, &params, optFns...)
 	if err != nil {

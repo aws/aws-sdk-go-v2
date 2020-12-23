@@ -53,15 +53,27 @@ import (
 // For information about
 // symmetric and asymmetric CMKs, see Using Symmetric and Asymmetric CMKs
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
-// in the AWS Key Management Service Developer Guide. To perform this operation on
-// a CMK in a different AWS account, specify the key ARN in the value of the KeyId
-// parameter. For more information about grants, see Grants
+// in the AWS Key Management Service Developer Guide. For more information about
+// grants, see Grants
 // (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) in the AWS
 // Key Management Service Developer Guide . The CMK that you use for this operation
 // must be in a compatible key state. For details, see How Key State Affects Use of
 // a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide.
+// AWS Key Management Service Developer Guide. Cross-account use: Yes. To perform
+// this operation on a CMK in a different AWS account, specify the key ARN in the
+// value of the KeyId parameter. Required permissions: kms:CreateGrant
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations:
+//
+// * ListGrants
+//
+// * ListRetirableGrants
+//
+// *
+// RetireGrant
+//
+// * RevokeGrant
 func (c *Client) CreateGrant(ctx context.Context, params *CreateGrantInput, optFns ...func(*Options)) (*CreateGrantOutput, error) {
 	if params == nil {
 		params = &CreateGrantInput{}
@@ -119,7 +131,10 @@ type CreateGrantInput struct {
 	// specified in this structure. For more information about encryption context, see
 	// Encryption Context
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
-	// in the AWS Key Management Service Developer Guide .
+	// in the AWS Key Management Service Developer Guide . Grant constraints are not
+	// applied to operations that do not support an encryption context, such as
+	// cryptographic operations with asymmetric CMKs and management operations, such as
+	// DescribeKey or RetireGrant.
 	Constraints *types.GrantConstraints
 
 	// A list of grant tokens. For more information, see Grant Tokens
@@ -127,16 +142,16 @@ type CreateGrantInput struct {
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []string
 
-	// A friendly name for identifying the grant. Use this value to prevent the
-	// unintended creation of duplicate grants when retrying this request. When this
-	// value is absent, all CreateGrant requests result in a new grant with a unique
-	// GrantId even if all the supplied parameters are identical. This can result in
-	// unintended duplicates when you retry the CreateGrant request. When this value is
-	// present, you can retry a CreateGrant request with identical parameters; if the
-	// grant already exists, the original GrantId is returned without creating a new
-	// grant. Note that the returned grant token is unique with every CreateGrant
-	// request, even when a duplicate GrantId is returned. All grant tokens obtained in
-	// this way can be used interchangeably.
+	// A friendly name for the grant. Use this value to prevent the unintended creation
+	// of duplicate grants when retrying this request. When this value is absent, all
+	// CreateGrant requests result in a new grant with a unique GrantId even if all the
+	// supplied parameters are identical. This can result in unintended duplicates when
+	// you retry the CreateGrant request. When this value is present, you can retry a
+	// CreateGrant request with identical parameters; if the grant already exists, the
+	// original GrantId is returned without creating a new grant. Note that the
+	// returned grant token is unique with every CreateGrant request, even when a
+	// duplicate GrantId is returned. All grant tokens for the same grant ID can be
+	// used interchangeably.
 	Name *string
 
 	// The principal that is given permission to retire the grant by using RetireGrant

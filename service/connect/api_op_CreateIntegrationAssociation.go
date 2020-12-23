@@ -12,7 +12,7 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
-// Create an AppIntegration association with anAmazon Connect instance.
+// Create an AppIntegration association with an Amazon Connect instance.
 func (c *Client) CreateIntegrationAssociation(ctx context.Context, params *CreateIntegrationAssociationInput, optFns ...func(*Options)) (*CreateIntegrationAssociationOutput, error) {
 	if params == nil {
 		params = &CreateIntegrationAssociationInput{}

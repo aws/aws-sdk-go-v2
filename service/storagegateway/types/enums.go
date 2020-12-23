@@ -4,6 +4,17 @@ package types
 
 type ActiveDirectoryStatus string
 
+// Enum values for ActiveDirectoryStatus
+const (
+	ActiveDirectoryStatusAccessDenied ActiveDirectoryStatus = "ACCESS_DENIED"
+	ActiveDirectoryStatusDetached     ActiveDirectoryStatus = "DETACHED"
+	ActiveDirectoryStatusJoined       ActiveDirectoryStatus = "JOINED"
+	ActiveDirectoryStatusJoining      ActiveDirectoryStatus = "JOINING"
+	ActiveDirectoryStatusNetworkError ActiveDirectoryStatus = "NETWORK_ERROR"
+	ActiveDirectoryStatusTimeout      ActiveDirectoryStatus = "TIMEOUT"
+	ActiveDirectoryStatusUnknownError ActiveDirectoryStatus = "UNKNOWN_ERROR"
+)
+
 // Values returns all known values for ActiveDirectoryStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -21,6 +32,13 @@ func (ActiveDirectoryStatus) Values() []ActiveDirectoryStatus {
 
 type AvailabilityMonitorTestStatus string
 
+// Enum values for AvailabilityMonitorTestStatus
+const (
+	AvailabilityMonitorTestStatusComplete AvailabilityMonitorTestStatus = "COMPLETE"
+	AvailabilityMonitorTestStatusFailed   AvailabilityMonitorTestStatus = "FAILED"
+	AvailabilityMonitorTestStatusPending  AvailabilityMonitorTestStatus = "PENDING"
+)
+
 // Values returns all known values for AvailabilityMonitorTestStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
 // client. The ordering of this slice is not guaranteed to be stable across
@@ -35,6 +53,12 @@ func (AvailabilityMonitorTestStatus) Values() []AvailabilityMonitorTestStatus {
 
 type CaseSensitivity string
 
+// Enum values for CaseSensitivity
+const (
+	CaseSensitivityClientspecified CaseSensitivity = "ClientSpecified"
+	CaseSensitivityCasesensitive   CaseSensitivity = "CaseSensitive"
+)
+
 // Values returns all known values for CaseSensitivity. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -46,6 +70,72 @@ func (CaseSensitivity) Values() []CaseSensitivity {
 }
 
 type ErrorCode string
+
+// Enum values for ErrorCode
+const (
+	ErrorCodeActivationkeyexpired              ErrorCode = "ActivationKeyExpired"
+	ErrorCodeActivationkeyinvalid              ErrorCode = "ActivationKeyInvalid"
+	ErrorCodeActivationkeynotfound             ErrorCode = "ActivationKeyNotFound"
+	ErrorCodeGatewayinternalerror              ErrorCode = "GatewayInternalError"
+	ErrorCodeGatewaynotconnected               ErrorCode = "GatewayNotConnected"
+	ErrorCodeGatewaynotfound                   ErrorCode = "GatewayNotFound"
+	ErrorCodeGatewayproxynetworkconnectionbusy ErrorCode = "GatewayProxyNetworkConnectionBusy"
+	ErrorCodeAuthenticationfailure             ErrorCode = "AuthenticationFailure"
+	ErrorCodeBandwidththrottleschedulenotfound ErrorCode = "BandwidthThrottleScheduleNotFound"
+	ErrorCodeBlocked                           ErrorCode = "Blocked"
+	ErrorCodeCannotexportsnapshot              ErrorCode = "CannotExportSnapshot"
+	ErrorCodeChapcredentialnotfound            ErrorCode = "ChapCredentialNotFound"
+	ErrorCodeDiskalreadyallocated              ErrorCode = "DiskAlreadyAllocated"
+	ErrorCodeDiskdoesnotexist                  ErrorCode = "DiskDoesNotExist"
+	ErrorCodeDisksizegreaterthanvolumemaxsize  ErrorCode = "DiskSizeGreaterThanVolumeMaxSize"
+	ErrorCodeDisksizelessthanvolumesize        ErrorCode = "DiskSizeLessThanVolumeSize"
+	ErrorCodeDisksizenotgigaligned             ErrorCode = "DiskSizeNotGigAligned"
+	ErrorCodeDuplicatecertificateinfo          ErrorCode = "DuplicateCertificateInfo"
+	ErrorCodeDuplicateschedule                 ErrorCode = "DuplicateSchedule"
+	ErrorCodeEndpointnotfound                  ErrorCode = "EndpointNotFound"
+	ErrorCodeIamnotsupported                   ErrorCode = "IAMNotSupported"
+	ErrorCodeInitiatorinvalid                  ErrorCode = "InitiatorInvalid"
+	ErrorCodeInitiatornotfound                 ErrorCode = "InitiatorNotFound"
+	ErrorCodeInternalerror                     ErrorCode = "InternalError"
+	ErrorCodeInvalidgateway                    ErrorCode = "InvalidGateway"
+	ErrorCodeInvalidendpoint                   ErrorCode = "InvalidEndpoint"
+	ErrorCodeInvalidparameters                 ErrorCode = "InvalidParameters"
+	ErrorCodeInvalidschedule                   ErrorCode = "InvalidSchedule"
+	ErrorCodeLocalstoragelimitexceeded         ErrorCode = "LocalStorageLimitExceeded"
+	ErrorCodeLunalreadyallocated               ErrorCode = "LunAlreadyAllocated "
+	ErrorCodeLuninvalid                        ErrorCode = "LunInvalid"
+	ErrorCodeJoindomaininprogress              ErrorCode = "JoinDomainInProgress"
+	ErrorCodeMaximumcontentlengthexceeded      ErrorCode = "MaximumContentLengthExceeded"
+	ErrorCodeMaximumtapecartridgecountexceeded ErrorCode = "MaximumTapeCartridgeCountExceeded"
+	ErrorCodeMaximumvolumecountexceeded        ErrorCode = "MaximumVolumeCountExceeded"
+	ErrorCodeNetworkconfigurationchanged       ErrorCode = "NetworkConfigurationChanged"
+	ErrorCodeNodisksavailable                  ErrorCode = "NoDisksAvailable"
+	ErrorCodeNotimplemented                    ErrorCode = "NotImplemented"
+	ErrorCodeNotsupported                      ErrorCode = "NotSupported"
+	ErrorCodeOperationaborted                  ErrorCode = "OperationAborted"
+	ErrorCodeOutdatedgateway                   ErrorCode = "OutdatedGateway"
+	ErrorCodeParametersnotimplemented          ErrorCode = "ParametersNotImplemented"
+	ErrorCodeRegioninvalid                     ErrorCode = "RegionInvalid"
+	ErrorCodeRequesttimeout                    ErrorCode = "RequestTimeout"
+	ErrorCodeServiceunavailable                ErrorCode = "ServiceUnavailable"
+	ErrorCodeSnapshotdeleted                   ErrorCode = "SnapshotDeleted"
+	ErrorCodeSnapshotidinvalid                 ErrorCode = "SnapshotIdInvalid"
+	ErrorCodeSnapshotinprogress                ErrorCode = "SnapshotInProgress"
+	ErrorCodeSnapshotnotfound                  ErrorCode = "SnapshotNotFound"
+	ErrorCodeSnapshotschedulenotfound          ErrorCode = "SnapshotScheduleNotFound"
+	ErrorCodeStagingareafull                   ErrorCode = "StagingAreaFull"
+	ErrorCodeStoragefailure                    ErrorCode = "StorageFailure"
+	ErrorCodeTapecartridgenotfound             ErrorCode = "TapeCartridgeNotFound"
+	ErrorCodeTargetalreadyexists               ErrorCode = "TargetAlreadyExists"
+	ErrorCodeTargetinvalid                     ErrorCode = "TargetInvalid"
+	ErrorCodeTargetnotfound                    ErrorCode = "TargetNotFound"
+	ErrorCodeUnauthorizedoperation             ErrorCode = "UnauthorizedOperation"
+	ErrorCodeVolumealreadyexists               ErrorCode = "VolumeAlreadyExists"
+	ErrorCodeVolumeidinvalid                   ErrorCode = "VolumeIdInvalid"
+	ErrorCodeVolumeinuse                       ErrorCode = "VolumeInUse"
+	ErrorCodeVolumenotfound                    ErrorCode = "VolumeNotFound"
+	ErrorCodeVolumenotready                    ErrorCode = "VolumeNotReady"
+)
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
@@ -119,6 +209,12 @@ func (ErrorCode) Values() []ErrorCode {
 
 type FileShareType string
 
+// Enum values for FileShareType
+const (
+	FileShareTypeNfs FileShareType = "NFS"
+	FileShareTypeSmb FileShareType = "SMB"
+)
+
 // Values returns all known values for FileShareType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -130,6 +226,15 @@ func (FileShareType) Values() []FileShareType {
 }
 
 type HostEnvironment string
+
+// Enum values for HostEnvironment
+const (
+	HostEnvironmentVmware HostEnvironment = "VMWARE"
+	HostEnvironmentHyperV HostEnvironment = "HYPER-V"
+	HostEnvironmentEc2    HostEnvironment = "EC2"
+	HostEnvironmentKvm    HostEnvironment = "KVM"
+	HostEnvironmentOther  HostEnvironment = "OTHER"
+)
 
 // Values returns all known values for HostEnvironment. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -145,6 +250,17 @@ func (HostEnvironment) Values() []HostEnvironment {
 }
 
 type ObjectACL string
+
+// Enum values for ObjectACL
+const (
+	ObjectACLPrivate                ObjectACL = "private"
+	ObjectACLPublicRead             ObjectACL = "public-read"
+	ObjectACLPublicReadWrite        ObjectACL = "public-read-write"
+	ObjectACLAuthenticatedRead      ObjectACL = "authenticated-read"
+	ObjectACLBucketOwnerRead        ObjectACL = "bucket-owner-read"
+	ObjectACLBucketOwnerFullControl ObjectACL = "bucket-owner-full-control"
+	ObjectACLAwsExecRead            ObjectACL = "aws-exec-read"
+)
 
 // Values returns all known values for ObjectACL. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
@@ -163,6 +279,12 @@ func (ObjectACL) Values() []ObjectACL {
 
 type PoolStatus string
 
+// Enum values for PoolStatus
+const (
+	PoolStatusActive  PoolStatus = "ACTIVE"
+	PoolStatusDeleted PoolStatus = "DELETED"
+)
+
 // Values returns all known values for PoolStatus. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.
@@ -174,6 +296,13 @@ func (PoolStatus) Values() []PoolStatus {
 }
 
 type RetentionLockType string
+
+// Enum values for RetentionLockType
+const (
+	RetentionLockTypeCompliance RetentionLockType = "COMPLIANCE"
+	RetentionLockTypeGovernance RetentionLockType = "GOVERNANCE"
+	RetentionLockTypeNone       RetentionLockType = "NONE"
+)
 
 // Values returns all known values for RetentionLockType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -188,6 +317,13 @@ func (RetentionLockType) Values() []RetentionLockType {
 
 type SMBSecurityStrategy string
 
+// Enum values for SMBSecurityStrategy
+const (
+	SMBSecurityStrategyClientspecified     SMBSecurityStrategy = "ClientSpecified"
+	SMBSecurityStrategyMandatorysigning    SMBSecurityStrategy = "MandatorySigning"
+	SMBSecurityStrategyMandatoryencryption SMBSecurityStrategy = "MandatoryEncryption"
+)
+
 // Values returns all known values for SMBSecurityStrategy. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -200,6 +336,12 @@ func (SMBSecurityStrategy) Values() []SMBSecurityStrategy {
 }
 
 type TapeStorageClass string
+
+// Enum values for TapeStorageClass
+const (
+	TapeStorageClassDeepArchive TapeStorageClass = "DEEP_ARCHIVE"
+	TapeStorageClassGlacier     TapeStorageClass = "GLACIER"
+)
 
 // Values returns all known values for TapeStorageClass. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The

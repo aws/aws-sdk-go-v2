@@ -12,6 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Returns a list of a specified insight's recommendations. Each recommendation
+// includes a list of related metrics and a list of related events.
 func (c *Client) ListRecommendations(ctx context.Context, params *ListRecommendationsInput, optFns ...func(*Options)) (*ListRecommendationsOutput, error) {
 	if params == nil {
 		params = &ListRecommendationsInput{}
@@ -29,15 +31,23 @@ func (c *Client) ListRecommendations(ctx context.Context, params *ListRecommenda
 
 type ListRecommendationsInput struct {
 
+	// The ID of the requested insight.
+	//
 	// This member is required.
 	InsightId *string
 
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 }
 
 type ListRecommendationsOutput struct {
+
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
+	// An array of the requested recommendations.
 	Recommendations []types.Recommendation
 
 	// Metadata pertaining to the operation's result.

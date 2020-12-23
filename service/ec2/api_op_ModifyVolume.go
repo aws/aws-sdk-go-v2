@@ -87,6 +87,13 @@ type ModifyVolumeInput struct {
 	// If no IOPS value is specified, the existing value is retained.
 	Iops int32
 
+	// Specifies whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach,
+	// you can attach the volume to up to 16  Nitro-based instances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances)
+	// in the same Availability Zone. This parameter is supported with io1 and io2
+	// volumes only. For more information, see  Amazon EBS Multi-Attach
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html) in
+	// the Amazon Elastic Compute Cloud User Guide.
 	MultiAttachEnabled bool
 
 	// The target size of the volume, in GiB. The target volume size must be greater

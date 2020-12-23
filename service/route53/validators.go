@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpActivateKeySigningKey struct {
+}
+
+func (*validateOpActivateKeySigningKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpActivateKeySigningKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ActivateKeySigningKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpActivateKeySigningKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateVPCWithHostedZone struct {
 }
 
@@ -105,6 +125,26 @@ func (m *validateOpCreateHostedZone) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateHostedZoneInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateKeySigningKey struct {
+}
+
+func (*validateOpCreateKeySigningKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateKeySigningKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateKeySigningKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateKeySigningKeyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +270,26 @@ func (m *validateOpCreateVPCAssociationAuthorization) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeactivateKeySigningKey struct {
+}
+
+func (*validateOpDeactivateKeySigningKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeactivateKeySigningKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeactivateKeySigningKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeactivateKeySigningKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteHealthCheck struct {
 }
 
@@ -265,6 +325,26 @@ func (m *validateOpDeleteHostedZone) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteHostedZoneInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteKeySigningKey struct {
+}
+
+func (*validateOpDeleteKeySigningKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteKeySigningKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteKeySigningKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteKeySigningKeyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +450,26 @@ func (m *validateOpDeleteVPCAssociationAuthorization) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisableHostedZoneDNSSEC struct {
+}
+
+func (*validateOpDisableHostedZoneDNSSEC) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableHostedZoneDNSSEC) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableHostedZoneDNSSECInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableHostedZoneDNSSECInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateVPCFromHostedZone struct {
 }
 
@@ -385,6 +485,26 @@ func (m *validateOpDisassociateVPCFromHostedZone) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateVPCFromHostedZoneInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEnableHostedZoneDNSSEC struct {
+}
+
+func (*validateOpEnableHostedZoneDNSSEC) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableHostedZoneDNSSEC) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableHostedZoneDNSSECInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableHostedZoneDNSSECInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -425,6 +545,26 @@ func (m *validateOpGetChange) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetChangeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDNSSEC struct {
+}
+
+func (*validateOpGetDNSSEC) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDNSSEC) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDNSSECInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDNSSECInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -890,6 +1030,10 @@ func (m *validateOpUpdateTrafficPolicyInstance) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpActivateKeySigningKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpActivateKeySigningKey{}, middleware.After)
+}
+
 func addOpAssociateVPCWithHostedZoneValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateVPCWithHostedZone{}, middleware.After)
 }
@@ -908,6 +1052,10 @@ func addOpCreateHealthCheckValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateHostedZoneValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateHostedZone{}, middleware.After)
+}
+
+func addOpCreateKeySigningKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateKeySigningKey{}, middleware.After)
 }
 
 func addOpCreateQueryLoggingConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -934,12 +1082,20 @@ func addOpCreateVPCAssociationAuthorizationValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpCreateVPCAssociationAuthorization{}, middleware.After)
 }
 
+func addOpDeactivateKeySigningKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeactivateKeySigningKey{}, middleware.After)
+}
+
 func addOpDeleteHealthCheckValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteHealthCheck{}, middleware.After)
 }
 
 func addOpDeleteHostedZoneValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteHostedZone{}, middleware.After)
+}
+
+func addOpDeleteKeySigningKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteKeySigningKey{}, middleware.After)
 }
 
 func addOpDeleteQueryLoggingConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -962,8 +1118,16 @@ func addOpDeleteVPCAssociationAuthorizationValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpDeleteVPCAssociationAuthorization{}, middleware.After)
 }
 
+func addOpDisableHostedZoneDNSSECValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableHostedZoneDNSSEC{}, middleware.After)
+}
+
 func addOpDisassociateVPCFromHostedZoneValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateVPCFromHostedZone{}, middleware.After)
+}
+
+func addOpEnableHostedZoneDNSSECValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableHostedZoneDNSSEC{}, middleware.After)
 }
 
 func addOpGetAccountLimitValidationMiddleware(stack *middleware.Stack) error {
@@ -972,6 +1136,10 @@ func addOpGetAccountLimitValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetChangeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetChange{}, middleware.After)
+}
+
+func addOpGetDNSSECValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDNSSEC{}, middleware.After)
 }
 
 func addOpGetHealthCheckValidationMiddleware(stack *middleware.Stack) error {
@@ -1240,6 +1408,24 @@ func validateResourceRecordSet(v *types.ResourceRecordSet) error {
 	}
 }
 
+func validateOpActivateKeySigningKeyInput(v *ActivateKeySigningKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActivateKeySigningKeyInput"}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateVPCWithHostedZoneInput(v *AssociateVPCWithHostedZoneInput) error {
 	if v == nil {
 		return nil
@@ -1330,6 +1516,33 @@ func validateOpCreateHostedZoneInput(v *CreateHostedZoneInput) error {
 	}
 	if v.CallerReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CallerReference"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateKeySigningKeyInput(v *CreateKeySigningKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateKeySigningKeyInput"}
+	if v.CallerReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallerReference"))
+	}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
+	}
+	if v.KeyManagementServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyManagementServiceArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Status == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1452,6 +1665,24 @@ func validateOpCreateVPCAssociationAuthorizationInput(v *CreateVPCAssociationAut
 	}
 }
 
+func validateOpDeactivateKeySigningKeyInput(v *DeactivateKeySigningKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeactivateKeySigningKeyInput"}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteHealthCheckInput(v *DeleteHealthCheckInput) error {
 	if v == nil {
 		return nil
@@ -1474,6 +1705,24 @@ func validateOpDeleteHostedZoneInput(v *DeleteHostedZoneInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteHostedZoneInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteKeySigningKeyInput(v *DeleteKeySigningKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteKeySigningKeyInput"}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1563,6 +1812,21 @@ func validateOpDeleteVPCAssociationAuthorizationInput(v *DeleteVPCAssociationAut
 	}
 }
 
+func validateOpDisableHostedZoneDNSSECInput(v *DisableHostedZoneDNSSECInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableHostedZoneDNSSECInput"}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateVPCFromHostedZoneInput(v *DisassociateVPCFromHostedZoneInput) error {
 	if v == nil {
 		return nil
@@ -1573,6 +1837,21 @@ func validateOpDisassociateVPCFromHostedZoneInput(v *DisassociateVPCFromHostedZo
 	}
 	if v.VPC == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VPC"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableHostedZoneDNSSECInput(v *EnableHostedZoneDNSSECInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableHostedZoneDNSSECInput"}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1603,6 +1882,21 @@ func validateOpGetChangeInput(v *GetChangeInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetChangeInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDNSSECInput(v *GetDNSSECInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDNSSECInput"}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

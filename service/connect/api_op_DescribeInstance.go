@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Returns the current state of the specified instance identifier. It tracks the
 // instance while it is being created and returns an error status if applicable. If
 // an instance is not created successfully, the instance status reason field

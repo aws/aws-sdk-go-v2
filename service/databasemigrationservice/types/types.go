@@ -147,6 +147,24 @@ type DocDbSettings struct {
 	// The port value for the DocumentDB source endpoint.
 	Port *int32
 
+	// The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as
+	// the trusted entity and grants the required permissions to access the value in
+	// SecretsManagerSecret. SecretsManagerSecret has the value of the AWS Secrets
+	// Manager secret that allows access to the DocumentDB endpoint. You can specify
+	// one of two sets of values for these permissions. You can specify the values for
+	// this setting and SecretsManagerSecretId. Or you can specify clear-text values
+	// for UserName, Password, ServerName, and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret and the
+	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
+	// see Using secrets to access AWS Database Migration Service resources
+	// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// in the AWS Database Migration Service User Guide.
+	SecretsManagerAccessRoleArn *string
+
+	// The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that
+	// contains the DocumentDB endpoint connection details.
+	SecretsManagerSecretId *string
+
 	// The name of the server on the DocumentDB source endpoint.
 	ServerName *string
 
@@ -423,7 +441,7 @@ type EventSubscription struct {
 // Identifies the name and value of a filter object. This filter is used to limit
 // the number and type of AWS DMS objects that are returned for a particular
 // Describe* call or similar operation. Filters are used as an optional parameter
-// to the following APIs.
+// for certain API operations.
 type Filter struct {
 
 	// The name of the filter as specified for a Describe* or similar operation.
@@ -456,6 +474,24 @@ type IBMDb2Settings struct {
 
 	// Endpoint TCP port.
 	Port *int32
+
+	// The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as
+	// the trusted entity and grants the required permissions to access the value in
+	// SecretsManagerSecret. SecretsManagerSecret has the value of the AWS Secrets
+	// Manager secret that allows access to the Db2 LUW endpoint. You can specify one
+	// of two sets of values for these permissions. You can specify the values for this
+	// setting and SecretsManagerSecretId. Or you can specify clear-text values for
+	// UserName, Password, ServerName, and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret and the
+	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
+	// see Using secrets to access AWS Database Migration Service resources
+	// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// in the AWS Database Migration Service User Guide.
+	SecretsManagerAccessRoleArn *string
+
+	// The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that
+	// contains the Db2 LUW endpoint connection details.
+	SecretsManagerSecretId *string
 
 	// Fully qualified domain name of the endpoint.
 	ServerName *string
@@ -575,9 +611,9 @@ type MicrosoftSQLServerSettings struct {
 	// The maximum size of the packets (in bytes) used to transfer data using BCP.
 	BcpPacketSize *int32
 
-	// Specify a filegroup for the AWS DMS internal tables. When the replication task
-	// starts, all the internal AWS DMS control tables (awsdms_ apply_exception,
-	// awsdms_apply, awsdms_changes) are created on the specified filegroup.
+	// Specifies a file group for the AWS DMS internal tables. When the replication
+	// task starts, all the internal AWS DMS control tables (awsdms_ apply_exception,
+	// awsdms_apply, awsdms_changes) are created for the specified file group.
 	ControlTablesFileGroup *string
 
 	// Database name for the endpoint.
@@ -611,6 +647,24 @@ type MicrosoftSQLServerSettings struct {
 	// Therefore, if you need to run parallel AWS DMS tasks against the same database,
 	// use the default method.
 	SafeguardPolicy SafeguardPolicy
+
+	// The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as
+	// the trusted entity and grants the required permissions to access the value in
+	// SecretsManagerSecret. SecretsManagerSecret has the value of the AWS Secrets
+	// Manager secret that allows access to the SQL Server endpoint. You can specify
+	// one of two sets of values for these permissions. You can specify the values for
+	// this setting and SecretsManagerSecretId. Or you can specify clear-text values
+	// for UserName, Password, ServerName, and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret and the
+	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
+	// see Using secrets to access AWS Database Migration Service resources
+	// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// in the AWS Database Migration Service User Guide.
+	SecretsManagerAccessRoleArn *string
+
+	// The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that
+	// contains the SQL Server endpoint connection details.
+	SecretsManagerSecretId *string
 
 	// Fully qualified domain name of the endpoint.
 	ServerName *string
@@ -670,6 +724,24 @@ type MongoDbSettings struct {
 	// The port value for the MongoDB source endpoint.
 	Port *int32
 
+	// The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as
+	// the trusted entity and grants the required permissions to access the value in
+	// SecretsManagerSecret. SecretsManagerSecret has the value of the AWS Secrets
+	// Manager secret that allows access to the MongoDB endpoint. You can specify one
+	// of two sets of values for these permissions. You can specify the values for this
+	// setting and SecretsManagerSecretId. Or you can specify clear-text values for
+	// UserName, Password, ServerName, and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret and the
+	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
+	// see Using secrets to access AWS Database Migration Service resources
+	// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// in the AWS Database Migration Service User Guide.
+	SecretsManagerAccessRoleArn *string
+
+	// The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that
+	// contains the MongoDB endpoint connection details.
+	SecretsManagerSecretId *string
+
 	// The name of the server on the MongoDB source endpoint.
 	ServerName *string
 
@@ -697,11 +769,11 @@ type MySQLSettings struct {
 	// MySQL-compatible database. Example: maxFileSize=512
 	MaxFileSize *int32
 
-	// Improves performance when loading data into the MySQLcompatible target database.
-	// Specifies how many threads to use to load the data into the MySQL-compatible
-	// target database. Setting a large number of threads can have an adverse effect on
-	// database performance, because a separate connection is required for each thread.
-	// Example: parallelLoadThreads=1
+	// Improves performance when loading data into the MySQL-compatible target
+	// database. Specifies how many threads to use to load the data into the
+	// MySQL-compatible target database. Setting a large number of threads can have an
+	// adverse effect on database performance, because a separate connection is
+	// required for each thread. Example: parallelLoadThreads=1
 	ParallelLoadThreads *int32
 
 	// Endpoint connection password.
@@ -709,6 +781,24 @@ type MySQLSettings struct {
 
 	// Endpoint TCP port.
 	Port *int32
+
+	// The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as
+	// the trusted entity and grants the required permissions to access the value in
+	// SecretsManagerSecret. SecretsManagerSecret has the value of the AWS Secrets
+	// Manager secret that allows access to the MySQL endpoint. You can specify one of
+	// two sets of values for these permissions. You can specify the values for this
+	// setting and SecretsManagerSecretId. Or you can specify clear-text values for
+	// UserName, Password, ServerName, and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret and the
+	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
+	// see Using secrets to access AWS Database Migration Service resources
+	// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// in the AWS Database Migration Service User Guide.
+	SecretsManagerAccessRoleArn *string
+
+	// The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that
+	// contains the MySQL endpoint connection details.
+	SecretsManagerSecretId *string
 
 	// Fully qualified domain name of the endpoint.
 	ServerName *string
@@ -905,6 +995,24 @@ type OracleSettings struct {
 	// Example: retryInterval=6;
 	RetryInterval *int32
 
+	// The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as
+	// the trusted entity and grants the required permissions to access the value in
+	// SecretsManagerSecret. SecretsManagerSecret has the value of the AWS Secrets
+	// Manager secret that allows access to the Oracle endpoint. You can specify one of
+	// two sets of values for these permissions. You can specify the values for this
+	// setting and SecretsManagerSecretId. Or you can specify clear-text values for
+	// UserName, Password, ServerName, and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret and the
+	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
+	// see Using secrets to access AWS Database Migration Service resources
+	// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// in the AWS Database Migration Service User Guide.
+	SecretsManagerAccessRoleArn *string
+
+	// The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that
+	// contains the Oracle endpoint connection details.
+	SecretsManagerSecretId *string
+
 	// For an Oracle source endpoint, the transparent data encryption (TDE) password
 	// required by AWM DMS to access Oracle redo logs encrypted by TDE using Binary
 	// Reader. It is also the  TDE_Password  part of the comma-separated value you set
@@ -1066,6 +1174,24 @@ type PostgreSQLSettings struct {
 	// Endpoint TCP port.
 	Port *int32
 
+	// The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as
+	// the trusted entity and grants the required permissions to access the value in
+	// SecretsManagerSecret. SecretsManagerSecret has the value of the AWS Secrets
+	// Manager secret that allows access to the PostgreSQL endpoint. You can specify
+	// one of two sets of values for these permissions. You can specify the values for
+	// this setting and SecretsManagerSecretId. Or you can specify clear-text values
+	// for UserName, Password, ServerName, and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret and the
+	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
+	// see Using secrets to access AWS Database Migration Service resources
+	// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// in the AWS Database Migration Service User Guide.
+	SecretsManagerAccessRoleArn *string
+
+	// The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that
+	// contains the PostgreSQL endpoint connection details.
+	SecretsManagerSecretId *string
+
 	// Fully qualified domain name of the endpoint.
 	ServerName *string
 
@@ -1098,10 +1224,11 @@ type RedshiftSettings struct {
 	// converts source records into .csv files and loads them to the
 	// BucketFolder/TableID path. AWS DMS uses the Redshift COPY command to upload the
 	// .csv files to the target table. The files are deleted once the COPY operation
-	// has finished. For more information, see Amazon Redshift Database Developer Guide
-	// (https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html) For
-	// change-data-capture (CDC) mode, AWS DMS creates a NetChanges table, and loads
-	// the .csv files to this BucketFolder/NetChangesTableID path.
+	// has finished. For more information, see COPY
+	// (https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html) in the Amazon
+	// Redshift Database Developer Guide. For change-data-capture (CDC) mode, AWS DMS
+	// creates a NetChanges table, and loads the .csv files to this
+	// BucketFolder/NetChangesTableID path.
 	BucketFolder *string
 
 	// The name of the intermediate S3 bucket used to store .csv files before uploading
@@ -1190,6 +1317,24 @@ type RedshiftSettings struct {
 
 	// A list of characters that you want to replace. Use with ReplaceChars.
 	ReplaceInvalidChars *string
+
+	// The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as
+	// the trusted entity and grants the required permissions to access the value in
+	// SecretsManagerSecret. SecretsManagerSecret has the value of the AWS Secrets
+	// Manager secret that allows access to the Amazon Redshift endpoint. You can
+	// specify one of two sets of values for these permissions. You can specify the
+	// values for this setting and SecretsManagerSecretId. Or you can specify
+	// clear-text values for UserName, Password, ServerName, and Port. You can't
+	// specify both. For more information on creating this SecretsManagerSecret and the
+	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
+	// see Using secrets to access AWS Database Migration Service resources
+	// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// in the AWS Database Migration Service User Guide.
+	SecretsManagerAccessRoleArn *string
+
+	// The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that
+	// contains the Amazon Redshift endpoint connection details.
+	SecretsManagerSecretId *string
 
 	// The name of the Amazon Redshift cluster you are using.
 	ServerName *string
@@ -1891,18 +2036,25 @@ type S3Settings struct {
 	// Specifies the folder path of CDC files. For an S3 source, this setting is
 	// required if a task captures change data; otherwise, it's optional. If CdcPath is
 	// set, AWS DMS reads CDC files from this path and replicates the data changes to
-	// the target endpoint. For an S3 target, if CdcPathis set, it is the folder path
-	// where data changes are replicated. If you set PreserveTransactions to true, AWS
-	// DMS verifies that you have set this parameter to a folder path on your S3 target
-	// where AWS DMS can save the transaction order for the CDC load. AWS DMS creates
-	// this CDC folder path in either your S3 target working directory or the S3 target
-	// location specified by BucketFolder and BucketName. For example, if you specify
-	// CdcPath as MyChangedData, and you specify BucketName as MyTargetBucket but do
-	// not specify BucketFolder, AWS DMS creates the CDC folder path following:
-	// MyTargetBucket/MyChangedData. If you specify the same CdcPath, and you specify
-	// BucketName as MyTargetBucket and BucketFolder as MyTargetData, AWS DMS creates
-	// the CDC folder path following: MyTargetBucket/MyTargetData/MyChangedData. This
-	// setting is supported in AWS DMS versions 3.4.2 and later.
+	// the target endpoint. For an S3 target if you set PreserveTransactions
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-PreserveTransactions)
+	// to true, AWS DMS verifies that you have set this parameter to a folder path on
+	// your S3 target where AWS DMS can save the transaction order for the CDC load.
+	// AWS DMS creates this CDC folder path in either your S3 target working directory
+	// or the S3 target location specified by BucketFolder
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketFolder)
+	// and BucketName
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketName).
+	// For example, if you specify CdcPath as MyChangedData, and you specify BucketName
+	// as MyTargetBucket but do not specify BucketFolder, AWS DMS creates the CDC
+	// folder path following: MyTargetBucket/MyChangedData. If you specify the same
+	// CdcPath, and you specify BucketName as MyTargetBucket and BucketFolder as
+	// MyTargetData, AWS DMS creates the CDC folder path following:
+	// MyTargetBucket/MyTargetData/MyChangedData. For more information on CDC including
+	// transaction order on an S3 target, see Capturing data changes (CDC) including
+	// transaction order on the S3 target
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath).
+	// This setting is supported in AWS DMS versions 3.4.2 and later.
 	CdcPath *string
 
 	// An optional parameter to use GZIP to compress the target files. Set to GZIP to
@@ -1916,11 +2068,13 @@ type S3Settings struct {
 	CsvDelimiter *string
 
 	// This setting only applies if your Amazon S3 output files during a change data
-	// capture (CDC) load are written in .csv format. If UseCsvNoSupValue is set to
-	// true, specify a string value that you want AWS DMS to use for all columns not
-	// included in the supplemental log. If you do not specify a string value, AWS DMS
-	// uses the null value for these columns regardless of the UseCsvNoSupValue
-	// setting. This setting is supported in AWS DMS versions 3.4.1 and later.
+	// capture (CDC) load are written in .csv format. If UseCsvNoSupValue
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-UseCsvNoSupValue)
+	// is set to true, specify a string value that you want AWS DMS to use for all
+	// columns not included in the supplemental log. If you do not specify a string
+	// value, AWS DMS uses the null value for these columns regardless of the
+	// UseCsvNoSupValue setting. This setting is supported in AWS DMS versions 3.4.1
+	// and later.
 	CsvNoSupValue *string
 
 	// The delimiter used to separate rows in the .csv file for both source and target.
@@ -2059,8 +2213,12 @@ type S3Settings struct {
 	ParquetVersion ParquetVersionValue
 
 	// If set to true, AWS DMS saves the transaction order for a change data capture
-	// (CDC) load on the Amazon S3 target specified by CdcPath. This setting is
-	// supported in AWS DMS versions 3.4.2 and later.
+	// (CDC) load on the Amazon S3 target specified by CdcPath
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CdcPath).
+	// For more information, see Capturing data changes (CDC) including transaction
+	// order on the S3 target
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath).
+	// This setting is supported in AWS DMS versions 3.4.2 and later.
 	PreserveTransactions *bool
 
 	// The number of rows in a row group. A smaller row group size provides faster
@@ -2100,9 +2258,10 @@ type S3Settings struct {
 
 	// This setting applies if the S3 output files during a change data capture (CDC)
 	// load are written in .csv format. If set to true for columns not included in the
-	// supplemental log, AWS DMS uses the value specified by CsvNoSupValue. If not set
-	// or set to false, AWS DMS uses the null value for these columns. This setting is
-	// supported in AWS DMS versions 3.4.1 and later.
+	// supplemental log, AWS DMS uses the value specified by CsvNoSupValue
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CsvNoSupValue).
+	// If not set or set to false, AWS DMS uses the null value for these columns. This
+	// setting is supported in AWS DMS versions 3.4.1 and later.
 	UseCsvNoSupValue *bool
 }
 
@@ -2160,6 +2319,24 @@ type SybaseSettings struct {
 
 	// Endpoint TCP port.
 	Port *int32
+
+	// The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as
+	// the trusted entity and grants the required permissions to access the value in
+	// SecretsManagerSecret. SecretsManagerSecret has the value of the AWS Secrets
+	// Manager secret that allows access to the SAP ASE endpoint. You can specify one
+	// of two sets of values for these permissions. You can specify the values for this
+	// setting and SecretsManagerSecretId. Or you can specify clear-text values for
+	// UserName, Password, ServerName, and Port. You can't specify both. For more
+	// information on creating this SecretsManagerSecret and the
+	// SecretsManagerAccessRoleArn and SecretsManagerSecretId required to access it,
+	// see Using secrets to access AWS Database Migration Service resources
+	// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager)
+	// in the AWS Database Migration Service User Guide.
+	SecretsManagerAccessRoleArn *string
+
+	// The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that
+	// contains the SAP SAE endpoint connection details.
+	SecretsManagerSecretId *string
 
 	// Fully qualified domain name of the endpoint.
 	ServerName *string

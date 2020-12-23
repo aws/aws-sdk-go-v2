@@ -26201,6 +26201,15 @@ func awsRestjson1_deserializeDocumentRelationalTable(v **types.RelationalTable, 
 
 	for key, value := range shape {
 		switch key {
+		case "Catalog":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RelationalTableCatalog to be of type string, got %T instead", value)
+				}
+				sv.Catalog = ptr.String(jtv)
+			}
+
 		case "DataSourceArn":
 			if value != nil {
 				jtv, ok := value.(string)

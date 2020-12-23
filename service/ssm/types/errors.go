@@ -132,6 +132,28 @@ func (e *AssociationVersionLimitExceeded) ErrorCode() string {
 }
 func (e *AssociationVersionLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Indicates that the Change Manager change template used in the change request was
+// rejected or is still in a pending state.
+type AutomationDefinitionNotApprovedException struct {
+	Message *string
+}
+
+func (e *AutomationDefinitionNotApprovedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AutomationDefinitionNotApprovedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AutomationDefinitionNotApprovedException) ErrorCode() string {
+	return "AutomationDefinitionNotApprovedException"
+}
+func (e *AutomationDefinitionNotApprovedException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // An Automation document with the specified name could not be found.
 type AutomationDefinitionNotFoundException struct {
 	Message *string
@@ -1598,7 +1620,7 @@ func (e *OpsMetadataInvalidArgumentException) ErrorFault() smithy.ErrorFault {
 }
 
 // The OpsMetadata object exceeds the maximum number of OpsMetadata keys that you
-// can assign to an application in AppManager.
+// can assign to an application in Application Manager.
 type OpsMetadataKeyLimitExceededException struct {
 	Message *string
 }
@@ -1620,7 +1642,7 @@ func (e *OpsMetadataKeyLimitExceededException) ErrorFault() smithy.ErrorFault {
 }
 
 // Your account reached the maximum number of OpsMetadata objects allowed by
-// AppManager. The maximum is 200 OpsMetadata objects. Delete one or more
+// Application Manager. The maximum is 200 OpsMetadata objects. Delete one or more
 // OpsMetadata object and try again.
 type OpsMetadataLimitExceededException struct {
 	Message *string

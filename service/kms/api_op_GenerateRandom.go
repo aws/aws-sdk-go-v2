@@ -17,6 +17,9 @@ import (
 // specify the custom key store ID. For more information about entropy and random
 // number generation, see the AWS Key Management Service Cryptographic Details
 // (https://d0.awsstatic.com/whitepapers/KMS-Cryptographic-Details.pdf) whitepaper.
+// Required permissions: kms:GenerateRandom
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (IAM policy)
 func (c *Client) GenerateRandom(ctx context.Context, params *GenerateRandomInput, optFns ...func(*Options)) (*GenerateRandomOutput, error) {
 	if params == nil {
 		params = &GenerateRandomInput{}

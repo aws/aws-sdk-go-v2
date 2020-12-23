@@ -2547,6 +2547,16 @@ func awsAwsjson11_serializeDocumentDocDbSettings(v *types.DocDbSettings, value s
 		ok.Integer(*v.Port)
 	}
 
+	if v.SecretsManagerAccessRoleArn != nil {
+		ok := object.Key("SecretsManagerAccessRoleArn")
+		ok.String(*v.SecretsManagerAccessRoleArn)
+	}
+
+	if v.SecretsManagerSecretId != nil {
+		ok := object.Key("SecretsManagerSecretId")
+		ok.String(*v.SecretsManagerSecretId)
+	}
+
 	if v.ServerName != nil {
 		ok := object.Key("ServerName")
 		ok.String(*v.ServerName)
@@ -2691,6 +2701,16 @@ func awsAwsjson11_serializeDocumentIBMDb2Settings(v *types.IBMDb2Settings, value
 	if v.Port != nil {
 		ok := object.Key("Port")
 		ok.Integer(*v.Port)
+	}
+
+	if v.SecretsManagerAccessRoleArn != nil {
+		ok := object.Key("SecretsManagerAccessRoleArn")
+		ok.String(*v.SecretsManagerAccessRoleArn)
+	}
+
+	if v.SecretsManagerSecretId != nil {
+		ok := object.Key("SecretsManagerSecretId")
+		ok.String(*v.SecretsManagerSecretId)
 	}
 
 	if v.ServerName != nil {
@@ -2881,6 +2901,16 @@ func awsAwsjson11_serializeDocumentMicrosoftSQLServerSettings(v *types.Microsoft
 		ok.String(string(v.SafeguardPolicy))
 	}
 
+	if v.SecretsManagerAccessRoleArn != nil {
+		ok := object.Key("SecretsManagerAccessRoleArn")
+		ok.String(*v.SecretsManagerAccessRoleArn)
+	}
+
+	if v.SecretsManagerSecretId != nil {
+		ok := object.Key("SecretsManagerSecretId")
+		ok.String(*v.SecretsManagerSecretId)
+	}
+
 	if v.ServerName != nil {
 		ok := object.Key("ServerName")
 		ok.String(*v.ServerName)
@@ -2953,6 +2983,16 @@ func awsAwsjson11_serializeDocumentMongoDbSettings(v *types.MongoDbSettings, val
 		ok.Integer(*v.Port)
 	}
 
+	if v.SecretsManagerAccessRoleArn != nil {
+		ok := object.Key("SecretsManagerAccessRoleArn")
+		ok.String(*v.SecretsManagerAccessRoleArn)
+	}
+
+	if v.SecretsManagerSecretId != nil {
+		ok := object.Key("SecretsManagerSecretId")
+		ok.String(*v.SecretsManagerSecretId)
+	}
+
 	if v.ServerName != nil {
 		ok := object.Key("ServerName")
 		ok.String(*v.ServerName)
@@ -3003,6 +3043,16 @@ func awsAwsjson11_serializeDocumentMySQLSettings(v *types.MySQLSettings, value s
 	if v.Port != nil {
 		ok := object.Key("Port")
 		ok.Integer(*v.Port)
+	}
+
+	if v.SecretsManagerAccessRoleArn != nil {
+		ok := object.Key("SecretsManagerAccessRoleArn")
+		ok.String(*v.SecretsManagerAccessRoleArn)
+	}
+
+	if v.SecretsManagerSecretId != nil {
+		ok := object.Key("SecretsManagerSecretId")
+		ok.String(*v.SecretsManagerSecretId)
 	}
 
 	if v.ServerName != nil {
@@ -3194,6 +3244,16 @@ func awsAwsjson11_serializeDocumentOracleSettings(v *types.OracleSettings, value
 		ok.Integer(*v.RetryInterval)
 	}
 
+	if v.SecretsManagerAccessRoleArn != nil {
+		ok := object.Key("SecretsManagerAccessRoleArn")
+		ok.String(*v.SecretsManagerAccessRoleArn)
+	}
+
+	if v.SecretsManagerSecretId != nil {
+		ok := object.Key("SecretsManagerSecretId")
+		ok.String(*v.SecretsManagerSecretId)
+	}
+
 	if v.SecurityDbEncryption != nil {
 		ok := object.Key("SecurityDbEncryption")
 		ok.String(*v.SecurityDbEncryption)
@@ -3274,6 +3334,16 @@ func awsAwsjson11_serializeDocumentPostgreSQLSettings(v *types.PostgreSQLSetting
 	if v.Port != nil {
 		ok := object.Key("Port")
 		ok.Integer(*v.Port)
+	}
+
+	if v.SecretsManagerAccessRoleArn != nil {
+		ok := object.Key("SecretsManagerAccessRoleArn")
+		ok.String(*v.SecretsManagerAccessRoleArn)
+	}
+
+	if v.SecretsManagerSecretId != nil {
+		ok := object.Key("SecretsManagerSecretId")
+		ok.String(*v.SecretsManagerSecretId)
 	}
 
 	if v.ServerName != nil {
@@ -3396,6 +3466,16 @@ func awsAwsjson11_serializeDocumentRedshiftSettings(v *types.RedshiftSettings, v
 	if v.ReplaceInvalidChars != nil {
 		ok := object.Key("ReplaceInvalidChars")
 		ok.String(*v.ReplaceInvalidChars)
+	}
+
+	if v.SecretsManagerAccessRoleArn != nil {
+		ok := object.Key("SecretsManagerAccessRoleArn")
+		ok.String(*v.SecretsManagerAccessRoleArn)
+	}
+
+	if v.SecretsManagerSecretId != nil {
+		ok := object.Key("SecretsManagerSecretId")
+		ok.String(*v.SecretsManagerSecretId)
 	}
 
 	if v.ServerName != nil {
@@ -3627,6 +3707,16 @@ func awsAwsjson11_serializeDocumentSybaseSettings(v *types.SybaseSettings, value
 	if v.Port != nil {
 		ok := object.Key("Port")
 		ok.Integer(*v.Port)
+	}
+
+	if v.SecretsManagerAccessRoleArn != nil {
+		ok := object.Key("SecretsManagerAccessRoleArn")
+		ok.String(*v.SecretsManagerAccessRoleArn)
+	}
+
+	if v.SecretsManagerSecretId != nil {
+		ok := object.Key("SecretsManagerSecretId")
+		ok.String(*v.SecretsManagerSecretId)
 	}
 
 	if v.ServerName != nil {

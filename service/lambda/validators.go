@@ -1425,9 +1425,6 @@ func validateOpCreateEventSourceMappingInput(v *CreateEventSourceMappingInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEventSourceMappingInput"}
-	if v.EventSourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventSourceArn"))
-	}
 	if v.FunctionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
 	}

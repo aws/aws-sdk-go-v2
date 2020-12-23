@@ -28,6 +28,7 @@ func (c *Client) TerminateJob(ctx context.Context, params *TerminateJobInput, op
 	return out, nil
 }
 
+// Contains the parameters for TerminateJob.
 type TerminateJobInput struct {
 
 	// The AWS Batch job ID of the job to terminate.

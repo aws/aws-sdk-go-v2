@@ -1071,6 +1071,9 @@ type RightsizingRecommendationConfiguration struct {
 // Metadata for this recommendation set.
 type RightsizingRecommendationMetadata struct {
 
+	// Additional metadata that may be applicable to the recommendation.
+	AdditionalMetadata *string
+
 	// The timestamp for when AWS made this recommendation.
 	GenerationTimestamp *string
 

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the quota increase requests in the template.
+// Lists the quota increase requests in the specified quota request template.
 func (c *Client) ListServiceQuotaIncreaseRequestsInTemplate(ctx context.Context, params *ListServiceQuotaIncreaseRequestsInTemplateInput, optFns ...func(*Options)) (*ListServiceQuotaIncreaseRequestsInTemplateOutput, error) {
 	if params == nil {
 		params = &ListServiceQuotaIncreaseRequestsInTemplateInput{}
@@ -30,41 +30,28 @@ func (c *Client) ListServiceQuotaIncreaseRequestsInTemplate(ctx context.Context,
 
 type ListServiceQuotaIncreaseRequestsInTemplateInput struct {
 
-	// Specifies the AWS Region for the quota that you want to use.
+	// The AWS Region.
 	AwsRegion *string
 
-	// (Optional) Limits the number of results that you want to include in the
-	// response. If you don't include this parameter, the response defaults to a value
-	// that's specific to the operation. If additional items exist beyond the specified
-	// maximum, the NextToken element is present and has a value (isn't null). Include
-	// that value as the NextToken request parameter in the call to the operation to
-	// get the next part of the results. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, if any, make another call with the token returned from this
+	// call.
 	MaxResults *int32
 
-	// (Optional) Use this parameter in a request if you receive a NextToken response
-	// in a previous request that indicates that there's more output available. In a
-	// subsequent call, set it to the value of the previous call's NextToken response
-	// to indicate where the output should continue from.
+	// The token for the next page of results.
 	NextToken *string
 
-	// The identifier for a service. When performing an operation, use the ServiceCode
-	// to specify a particular service.
+	// The service identifier.
 	ServiceCode *string
 }
 
 type ListServiceQuotaIncreaseRequestsInTemplateOutput struct {
 
-	// If present in the response, this value indicates there's more output available
-	// that what's included in the current response. This can occur even when the
-	// response includes no values at all, such as when you ask for a filtered view of
-	// a very long list. Use this value in the NextToken request parameter in a
-	// subsequent call to the operation to continue processing and get the next part of
-	// the output. You should repeat this until the NextToken response element comes
-	// back empty (as null).
+	// The token to use to retrieve the next page of results. This value is null when
+	// there are no more results to return.
 	NextToken *string
 
-	// Returns the list of values of the quota increase request in the template.
+	// Information about the quota increase requests.
 	ServiceQuotaIncreaseRequestInTemplateList []types.ServiceQuotaIncreaseRequestInTemplate
 
 	// Metadata pertaining to the operation's result.
@@ -139,13 +126,9 @@ var _ ListServiceQuotaIncreaseRequestsInTemplateAPIClient = (*Client)(nil)
 // ListServiceQuotaIncreaseRequestsInTemplatePaginatorOptions is the paginator
 // options for ListServiceQuotaIncreaseRequestsInTemplate
 type ListServiceQuotaIncreaseRequestsInTemplatePaginatorOptions struct {
-	// (Optional) Limits the number of results that you want to include in the
-	// response. If you don't include this parameter, the response defaults to a value
-	// that's specific to the operation. If additional items exist beyond the specified
-	// maximum, the NextToken element is present and has a value (isn't null). Include
-	// that value as the NextToken request parameter in the call to the operation to
-	// get the next part of the results. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, if any, make another call with the token returned from this
+	// call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

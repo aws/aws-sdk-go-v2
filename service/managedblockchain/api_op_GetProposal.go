@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns detailed information about a proposal.
+// Returns detailed information about a proposal. Applies only to Hyperledger
+// Fabric.
 func (c *Client) GetProposal(ctx context.Context, params *GetProposalInput, optFns ...func(*Options)) (*GetProposalOutput, error) {
 	if params == nil {
 		params = &GetProposalInput{}

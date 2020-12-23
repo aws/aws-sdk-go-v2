@@ -911,6 +911,11 @@ func awsRestjson1_deserializeOpDocumentCreateEventSourceMappingOutput(v **Create
 				sv.FunctionArn = ptr.String(jtv)
 			}
 
+		case "FunctionResponseTypes":
+			if err := awsRestjson1_deserializeDocumentFunctionResponseTypeList(&sv.FunctionResponseTypes, value); err != nil {
+				return err
+			}
+
 		case "LastModified":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -990,6 +995,11 @@ func awsRestjson1_deserializeOpDocumentCreateEventSourceMappingOutput(v **Create
 				return err
 			}
 
+		case "SelfManagedEventSource":
+			if err := awsRestjson1_deserializeDocumentSelfManagedEventSource(&sv.SelfManagedEventSource, value); err != nil {
+				return err
+			}
+
 		case "SourceAccessConfigurations":
 			if err := awsRestjson1_deserializeDocumentSourceAccessConfigurations(&sv.SourceAccessConfigurations, value); err != nil {
 				return err
@@ -1038,6 +1048,19 @@ func awsRestjson1_deserializeOpDocumentCreateEventSourceMappingOutput(v **Create
 		case "Topics":
 			if err := awsRestjson1_deserializeDocumentTopics(&sv.Topics, value); err != nil {
 				return err
+			}
+
+		case "TumblingWindowInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TumblingWindowInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TumblingWindowInSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "UUID":
@@ -1861,6 +1884,11 @@ func awsRestjson1_deserializeOpDocumentDeleteEventSourceMappingOutput(v **Delete
 				sv.FunctionArn = ptr.String(jtv)
 			}
 
+		case "FunctionResponseTypes":
+			if err := awsRestjson1_deserializeDocumentFunctionResponseTypeList(&sv.FunctionResponseTypes, value); err != nil {
+				return err
+			}
+
 		case "LastModified":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1940,6 +1968,11 @@ func awsRestjson1_deserializeOpDocumentDeleteEventSourceMappingOutput(v **Delete
 				return err
 			}
 
+		case "SelfManagedEventSource":
+			if err := awsRestjson1_deserializeDocumentSelfManagedEventSource(&sv.SelfManagedEventSource, value); err != nil {
+				return err
+			}
+
 		case "SourceAccessConfigurations":
 			if err := awsRestjson1_deserializeDocumentSourceAccessConfigurations(&sv.SourceAccessConfigurations, value); err != nil {
 				return err
@@ -1988,6 +2021,19 @@ func awsRestjson1_deserializeOpDocumentDeleteEventSourceMappingOutput(v **Delete
 		case "Topics":
 			if err := awsRestjson1_deserializeDocumentTopics(&sv.Topics, value); err != nil {
 				return err
+			}
+
+		case "TumblingWindowInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TumblingWindowInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TumblingWindowInSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "UUID":
@@ -3265,6 +3311,11 @@ func awsRestjson1_deserializeOpDocumentGetEventSourceMappingOutput(v **GetEventS
 				sv.FunctionArn = ptr.String(jtv)
 			}
 
+		case "FunctionResponseTypes":
+			if err := awsRestjson1_deserializeDocumentFunctionResponseTypeList(&sv.FunctionResponseTypes, value); err != nil {
+				return err
+			}
+
 		case "LastModified":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3344,6 +3395,11 @@ func awsRestjson1_deserializeOpDocumentGetEventSourceMappingOutput(v **GetEventS
 				return err
 			}
 
+		case "SelfManagedEventSource":
+			if err := awsRestjson1_deserializeDocumentSelfManagedEventSource(&sv.SelfManagedEventSource, value); err != nil {
+				return err
+			}
+
 		case "SourceAccessConfigurations":
 			if err := awsRestjson1_deserializeDocumentSourceAccessConfigurations(&sv.SourceAccessConfigurations, value); err != nil {
 				return err
@@ -3392,6 +3448,19 @@ func awsRestjson1_deserializeOpDocumentGetEventSourceMappingOutput(v **GetEventS
 		case "Topics":
 			if err := awsRestjson1_deserializeDocumentTopics(&sv.Topics, value); err != nil {
 				return err
+			}
+
+		case "TumblingWindowInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TumblingWindowInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TumblingWindowInSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "UUID":
@@ -9982,6 +10051,11 @@ func awsRestjson1_deserializeOpDocumentUpdateEventSourceMappingOutput(v **Update
 				sv.FunctionArn = ptr.String(jtv)
 			}
 
+		case "FunctionResponseTypes":
+			if err := awsRestjson1_deserializeDocumentFunctionResponseTypeList(&sv.FunctionResponseTypes, value); err != nil {
+				return err
+			}
+
 		case "LastModified":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10061,6 +10135,11 @@ func awsRestjson1_deserializeOpDocumentUpdateEventSourceMappingOutput(v **Update
 				return err
 			}
 
+		case "SelfManagedEventSource":
+			if err := awsRestjson1_deserializeDocumentSelfManagedEventSource(&sv.SelfManagedEventSource, value); err != nil {
+				return err
+			}
+
 		case "SourceAccessConfigurations":
 			if err := awsRestjson1_deserializeDocumentSourceAccessConfigurations(&sv.SourceAccessConfigurations, value); err != nil {
 				return err
@@ -10109,6 +10188,19 @@ func awsRestjson1_deserializeOpDocumentUpdateEventSourceMappingOutput(v **Update
 		case "Topics":
 			if err := awsRestjson1_deserializeDocumentTopics(&sv.Topics, value); err != nil {
 				return err
+			}
+
+		case "TumblingWindowInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TumblingWindowInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TumblingWindowInSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "UUID":
@@ -13625,6 +13717,76 @@ func awsRestjson1_deserializeDocumentEFSMountTimeoutException(v **types.EFSMount
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEndpointLists(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Endpoint to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEndpoints(v *map[string][]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string][]string
+	if *v == nil {
+		mv = map[string][]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal []string
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentEndpointLists(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentENILimitReachedException(v **types.ENILimitReachedException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13867,6 +14029,11 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 				sv.FunctionArn = ptr.String(jtv)
 			}
 
+		case "FunctionResponseTypes":
+			if err := awsRestjson1_deserializeDocumentFunctionResponseTypeList(&sv.FunctionResponseTypes, value); err != nil {
+				return err
+			}
+
 		case "LastModified":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13946,6 +14113,11 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 				return err
 			}
 
+		case "SelfManagedEventSource":
+			if err := awsRestjson1_deserializeDocumentSelfManagedEventSource(&sv.SelfManagedEventSource, value); err != nil {
+				return err
+			}
+
 		case "SourceAccessConfigurations":
 			if err := awsRestjson1_deserializeDocumentSourceAccessConfigurations(&sv.SourceAccessConfigurations, value); err != nil {
 				return err
@@ -13994,6 +14166,19 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 		case "Topics":
 			if err := awsRestjson1_deserializeDocumentTopics(&sv.Topics, value); err != nil {
 				return err
+			}
+
+		case "TumblingWindowInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TumblingWindowInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TumblingWindowInSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "UUID":
@@ -14673,6 +14858,42 @@ func awsRestjson1_deserializeDocumentFunctionList(v *[]types.FunctionConfigurati
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFunctionResponseTypeList(v *[]types.FunctionResponseType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FunctionResponseType
+	if *v == nil {
+		cv = []types.FunctionResponseType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FunctionResponseType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected FunctionResponseType to be of type string, got %T instead", value)
+			}
+			col = types.FunctionResponseType(jtv)
+		}
 		cv = append(cv, col)
 
 	}
@@ -16435,6 +16656,42 @@ func awsRestjson1_deserializeDocumentSecurityGroupIds(v *[]string, value interfa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSelfManagedEventSource(v **types.SelfManagedEventSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SelfManagedEventSource
+	if *v == nil {
+		sv = &types.SelfManagedEventSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Endpoints":
+			if err := awsRestjson1_deserializeDocumentEndpoints(&sv.Endpoints, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentServiceException(v **types.ServiceException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16555,7 +16812,7 @@ func awsRestjson1_deserializeDocumentSourceAccessConfiguration(v **types.SourceA
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
 				}
 				sv.URI = ptr.String(jtv)
 			}

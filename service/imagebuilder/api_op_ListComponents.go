@@ -29,6 +29,9 @@ func (c *Client) ListComponents(ctx context.Context, params *ListComponentsInput
 
 type ListComponentsInput struct {
 
+	// Returns the list of component build versions for the specified semantic version.
+	ByName bool
+
 	// The filters.
 	Filters []types.Filter
 

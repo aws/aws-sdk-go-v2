@@ -642,6 +642,38 @@ func awsRestjson1_serializeOpDocumentUpdateLifecyclePolicyInput(v *UpdateLifecyc
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAction(v *types.Action, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CrossRegionCopy != nil {
+		ok := object.Key("CrossRegionCopy")
+		if err := awsRestjson1_serializeDocumentCrossRegionCopyActionList(v.CrossRegionCopy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentActionList(v []types.Action, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAction(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAvailabilityZoneList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -679,6 +711,45 @@ func awsRestjson1_serializeDocumentCreateRule(v *types.CreateRule, value smithyj
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCrossRegionCopyAction(v *types.CrossRegionCopyAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("EncryptionConfiguration")
+		if err := awsRestjson1_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RetainRule != nil {
+		ok := object.Key("RetainRule")
+		if err := awsRestjson1_serializeDocumentCrossRegionCopyRetainRule(v.RetainRule, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Target != nil {
+		ok := object.Key("Target")
+		ok.String(*v.Target)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCrossRegionCopyActionList(v []types.CrossRegionCopyAction, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCrossRegionCopyAction(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -746,6 +817,66 @@ func awsRestjson1_serializeDocumentCrossRegionCopyRules(v []types.CrossRegionCop
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEncryptionConfiguration(v *types.EncryptionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CmkArn != nil {
+		ok := object.Key("CmkArn")
+		ok.String(*v.CmkArn)
+	}
+
+	if v.Encrypted {
+		ok := object.Key("Encrypted")
+		ok.Boolean(v.Encrypted)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEventParameters(v *types.EventParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DescriptionRegex != nil {
+		ok := object.Key("DescriptionRegex")
+		ok.String(*v.DescriptionRegex)
+	}
+
+	if len(v.EventType) > 0 {
+		ok := object.Key("EventType")
+		ok.String(string(v.EventType))
+	}
+
+	if v.SnapshotOwner != nil {
+		ok := object.Key("SnapshotOwner")
+		if err := awsRestjson1_serializeDocumentSnapshotOwnerList(v.SnapshotOwner, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEventSource(v *types.EventSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Parameters != nil {
+		ok := object.Key("Parameters")
+		if err := awsRestjson1_serializeDocumentEventParameters(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFastRestoreRule(v *types.FastRestoreRule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -795,6 +926,20 @@ func awsRestjson1_serializeDocumentParameters(v *types.Parameters, value smithyj
 func awsRestjson1_serializeDocumentPolicyDetails(v *types.PolicyDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Actions != nil {
+		ok := object.Key("Actions")
+		if err := awsRestjson1_serializeDocumentActionList(v.Actions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EventSource != nil {
+		ok := object.Key("EventSource")
+		if err := awsRestjson1_serializeDocumentEventSource(v.EventSource, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Parameters != nil {
 		ok := object.Key("Parameters")
@@ -907,6 +1052,13 @@ func awsRestjson1_serializeDocumentSchedule(v *types.Schedule, value smithyjson.
 		}
 	}
 
+	if v.ShareRules != nil {
+		ok := object.Key("ShareRules")
+		if err := awsRestjson1_serializeDocumentShareRules(v.ShareRules, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TagsToAdd != nil {
 		ok := object.Key("TagsToAdd")
 		if err := awsRestjson1_serializeDocumentTagsToAddList(v.TagsToAdd, ok); err != nil {
@@ -933,6 +1085,65 @@ func awsRestjson1_serializeDocumentScheduleList(v []types.Schedule, value smithy
 		if err := awsRestjson1_serializeDocumentSchedule(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentShareRule(v *types.ShareRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TargetAccounts != nil {
+		ok := object.Key("TargetAccounts")
+		if err := awsRestjson1_serializeDocumentShareTargetAccountList(v.TargetAccounts, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UnshareInterval != 0 {
+		ok := object.Key("UnshareInterval")
+		ok.Integer(v.UnshareInterval)
+	}
+
+	if len(v.UnshareIntervalUnit) > 0 {
+		ok := object.Key("UnshareIntervalUnit")
+		ok.String(string(v.UnshareIntervalUnit))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentShareRules(v []types.ShareRule, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentShareRule(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentShareTargetAccountList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapshotOwnerList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

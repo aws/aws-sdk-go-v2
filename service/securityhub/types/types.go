@@ -5218,12 +5218,11 @@ type Result struct {
 }
 
 // The severity of the finding. The finding provider can provide the initial
-// severity, but cannot update it after that. The severity can only be updated by a
-// master account. It cannot be updated by a member account. The finding must have
-// either Label or Normalized populated. If only one of these attributes is
-// populated, then Security Hub automatically populates the other one. If neither
-// attribute is populated, then the finding is invalid. Label is the preferred
-// attribute.
+// severity. The finding provider can only update the severity if it has not been
+// updated using BatchUpdateFindings. The finding must have either Label or
+// Normalized populated. If only one of these attributes is populated, then
+// Security Hub automatically populates the other one. If neither attribute is
+// populated, then the finding is invalid. Label is the preferred attribute.
 type Severity struct {
 
 	// The severity value of the finding. The allowed values are the following.

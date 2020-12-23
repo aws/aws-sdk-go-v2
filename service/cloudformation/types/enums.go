@@ -4,6 +4,13 @@ package types
 
 type AccountGateStatus string
 
+// Enum values for AccountGateStatus
+const (
+	AccountGateStatusSucceeded AccountGateStatus = "SUCCEEDED"
+	AccountGateStatusFailed    AccountGateStatus = "FAILED"
+	AccountGateStatusSkipped   AccountGateStatus = "SKIPPED"
+)
+
 // Values returns all known values for AccountGateStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -150,6 +157,12 @@ func (ChangeType) Values() []ChangeType {
 }
 
 type DeprecatedStatus string
+
+// Enum values for DeprecatedStatus
+const (
+	DeprecatedStatusLive       DeprecatedStatus = "LIVE"
+	DeprecatedStatusDeprecated DeprecatedStatus = "DEPRECATED"
+)
 
 // Values returns all known values for DeprecatedStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -311,6 +324,12 @@ func (OperationStatus) Values() []OperationStatus {
 
 type PermissionModels string
 
+// Enum values for PermissionModels
+const (
+	PermissionModelsServiceManaged PermissionModels = "SERVICE_MANAGED"
+	PermissionModelsSelfManaged    PermissionModels = "SELF_MANAGED"
+)
+
 // Values returns all known values for PermissionModels. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -322,6 +341,13 @@ func (PermissionModels) Values() []PermissionModels {
 }
 
 type ProvisioningType string
+
+// Enum values for ProvisioningType
+const (
+	ProvisioningTypeNonProvisionable ProvisioningType = "NON_PROVISIONABLE"
+	ProvisioningTypeImmutable        ProvisioningType = "IMMUTABLE"
+	ProvisioningTypeFullyMutable     ProvisioningType = "FULLY_MUTABLE"
+)
 
 // Values returns all known values for ProvisioningType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -336,6 +362,13 @@ func (ProvisioningType) Values() []ProvisioningType {
 
 type RegistrationStatus string
 
+// Enum values for RegistrationStatus
+const (
+	RegistrationStatusComplete   RegistrationStatus = "COMPLETE"
+	RegistrationStatusInProgress RegistrationStatus = "IN_PROGRESS"
+	RegistrationStatusFailed     RegistrationStatus = "FAILED"
+)
+
 // Values returns all known values for RegistrationStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -348,6 +381,12 @@ func (RegistrationStatus) Values() []RegistrationStatus {
 }
 
 type RegistryType string
+
+// Enum values for RegistryType
+const (
+	RegistryTypeResource RegistryType = "RESOURCE"
+	RegistryTypeModule   RegistryType = "MODULE"
+)
 
 // Values returns all known values for RegistryType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -533,6 +572,16 @@ func (StackDriftStatus) Values() []StackDriftStatus {
 
 type StackInstanceDetailedStatus string
 
+// Enum values for StackInstanceDetailedStatus
+const (
+	StackInstanceDetailedStatusPending    StackInstanceDetailedStatus = "PENDING"
+	StackInstanceDetailedStatusRunning    StackInstanceDetailedStatus = "RUNNING"
+	StackInstanceDetailedStatusSucceeded  StackInstanceDetailedStatus = "SUCCEEDED"
+	StackInstanceDetailedStatusFailed     StackInstanceDetailedStatus = "FAILED"
+	StackInstanceDetailedStatusCancelled  StackInstanceDetailedStatus = "CANCELLED"
+	StackInstanceDetailedStatusInoperable StackInstanceDetailedStatus = "INOPERABLE"
+)
+
 // Values returns all known values for StackInstanceDetailedStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
 // The ordering of this slice is not guaranteed to be stable across updates.
@@ -549,6 +598,11 @@ func (StackInstanceDetailedStatus) Values() []StackInstanceDetailedStatus {
 
 type StackInstanceFilterName string
 
+// Enum values for StackInstanceFilterName
+const (
+	StackInstanceFilterNameDetailedStatus StackInstanceFilterName = "DETAILED_STATUS"
+)
+
 // Values returns all known values for StackInstanceFilterName. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -559,6 +613,13 @@ func (StackInstanceFilterName) Values() []StackInstanceFilterName {
 }
 
 type StackInstanceStatus string
+
+// Enum values for StackInstanceStatus
+const (
+	StackInstanceStatusCurrent    StackInstanceStatus = "CURRENT"
+	StackInstanceStatusOutdated   StackInstanceStatus = "OUTDATED"
+	StackInstanceStatusInoperable StackInstanceStatus = "INOPERABLE"
+)
 
 // Values returns all known values for StackInstanceStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -639,6 +700,14 @@ func (StackSetDriftStatus) Values() []StackSetDriftStatus {
 
 type StackSetOperationAction string
 
+// Enum values for StackSetOperationAction
+const (
+	StackSetOperationActionCreate      StackSetOperationAction = "CREATE"
+	StackSetOperationActionUpdate      StackSetOperationAction = "UPDATE"
+	StackSetOperationActionDelete      StackSetOperationAction = "DELETE"
+	StackSetOperationActionDetectDrift StackSetOperationAction = "DETECT_DRIFT"
+)
+
 // Values returns all known values for StackSetOperationAction. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -652,6 +721,15 @@ func (StackSetOperationAction) Values() []StackSetOperationAction {
 }
 
 type StackSetOperationResultStatus string
+
+// Enum values for StackSetOperationResultStatus
+const (
+	StackSetOperationResultStatusPending   StackSetOperationResultStatus = "PENDING"
+	StackSetOperationResultStatusRunning   StackSetOperationResultStatus = "RUNNING"
+	StackSetOperationResultStatusSucceeded StackSetOperationResultStatus = "SUCCEEDED"
+	StackSetOperationResultStatusFailed    StackSetOperationResultStatus = "FAILED"
+	StackSetOperationResultStatusCancelled StackSetOperationResultStatus = "CANCELLED"
+)
 
 // Values returns all known values for StackSetOperationResultStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
@@ -669,6 +747,16 @@ func (StackSetOperationResultStatus) Values() []StackSetOperationResultStatus {
 
 type StackSetOperationStatus string
 
+// Enum values for StackSetOperationStatus
+const (
+	StackSetOperationStatusRunning   StackSetOperationStatus = "RUNNING"
+	StackSetOperationStatusSucceeded StackSetOperationStatus = "SUCCEEDED"
+	StackSetOperationStatusFailed    StackSetOperationStatus = "FAILED"
+	StackSetOperationStatusStopping  StackSetOperationStatus = "STOPPING"
+	StackSetOperationStatusStopped   StackSetOperationStatus = "STOPPED"
+	StackSetOperationStatusQueued    StackSetOperationStatus = "QUEUED"
+)
+
 // Values returns all known values for StackSetOperationStatus. Note that this can
 // be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -684,6 +772,12 @@ func (StackSetOperationStatus) Values() []StackSetOperationStatus {
 }
 
 type StackSetStatus string
+
+// Enum values for StackSetStatus
+const (
+	StackSetStatusActive  StackSetStatus = "ACTIVE"
+	StackSetStatusDeleted StackSetStatus = "DELETED"
+)
 
 // Values returns all known values for StackSetStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -772,6 +866,12 @@ func (TemplateStage) Values() []TemplateStage {
 }
 
 type Visibility string
+
+// Enum values for Visibility
+const (
+	VisibilityPublic  Visibility = "PUBLIC"
+	VisibilityPrivate Visibility = "PRIVATE"
+)
 
 // Values returns all known values for Visibility. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of

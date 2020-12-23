@@ -11,9 +11,10 @@ import (
 )
 
 // Deletes the specified job queue. You must first disable submissions for a queue
-// with the UpdateJobQueue operation. All jobs in the queue are terminated when you
-// delete a job queue. It's not necessary to disassociate compute environments from
-// a queue before submitting a DeleteJobQueue request.
+// with the UpdateJobQueue operation. All jobs in the queue are eventually
+// terminated when you delete a job queue. The jobs are terminated at a rate of
+// about 16 jobs each second. It's not necessary to disassociate compute
+// environments from a queue before submitting a DeleteJobQueue request.
 func (c *Client) DeleteJobQueue(ctx context.Context, params *DeleteJobQueueInput, optFns ...func(*Options)) (*DeleteJobQueueOutput, error) {
 	if params == nil {
 		params = &DeleteJobQueueInput{}
@@ -29,6 +30,7 @@ func (c *Client) DeleteJobQueue(ctx context.Context, params *DeleteJobQueueInput
 	return out, nil
 }
 
+// Contains the parameters for DeleteJobQueue.
 type DeleteJobQueueInput struct {
 
 	// The short name or full Amazon Resource Name (ARN) of the queue to delete.

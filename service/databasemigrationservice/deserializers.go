@@ -7771,6 +7771,24 @@ func awsAwsjson11_deserializeDocumentDocDbSettings(v **types.DocDbSettings, valu
 				sv.Port = ptr.Int32(int32(i64))
 			}
 
+		case "SecretsManagerAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerAccessRoleArn = ptr.String(jtv)
+			}
+
+		case "SecretsManagerSecretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerSecretId = ptr.String(jtv)
+			}
+
 		case "ServerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8653,6 +8671,24 @@ func awsAwsjson11_deserializeDocumentIBMDb2Settings(v **types.IBMDb2Settings, va
 				sv.Port = ptr.Int32(int32(i64))
 			}
 
+		case "SecretsManagerAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerAccessRoleArn = ptr.String(jtv)
+			}
+
+		case "SecretsManagerSecretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerSecretId = ptr.String(jtv)
+			}
+
 		case "ServerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9495,6 +9531,24 @@ func awsAwsjson11_deserializeDocumentMicrosoftSQLServerSettings(v **types.Micros
 				sv.SafeguardPolicy = types.SafeguardPolicy(jtv)
 			}
 
+		case "SecretsManagerAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerAccessRoleArn = ptr.String(jtv)
+			}
+
+		case "SecretsManagerSecretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerSecretId = ptr.String(jtv)
+			}
+
 		case "ServerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9647,6 +9701,24 @@ func awsAwsjson11_deserializeDocumentMongoDbSettings(v **types.MongoDbSettings, 
 				sv.Port = ptr.Int32(int32(i64))
 			}
 
+		case "SecretsManagerAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerAccessRoleArn = ptr.String(jtv)
+			}
+
+		case "SecretsManagerSecretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerSecretId = ptr.String(jtv)
+			}
+
 		case "ServerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9773,6 +9845,24 @@ func awsAwsjson11_deserializeDocumentMySQLSettings(v **types.MySQLSettings, valu
 					return err
 				}
 				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "SecretsManagerAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerAccessRoleArn = ptr.String(jtv)
+			}
+
+		case "SecretsManagerSecretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerSecretId = ptr.String(jtv)
 			}
 
 		case "ServerName":
@@ -10190,6 +10280,24 @@ func awsAwsjson11_deserializeDocumentOracleSettings(v **types.OracleSettings, va
 					return err
 				}
 				sv.RetryInterval = ptr.Int32(int32(i64))
+			}
+
+		case "SecretsManagerAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerAccessRoleArn = ptr.String(jtv)
+			}
+
+		case "SecretsManagerSecretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerSecretId = ptr.String(jtv)
 			}
 
 		case "SecurityDbEncryption":
@@ -10693,6 +10801,24 @@ func awsAwsjson11_deserializeDocumentPostgreSQLSettings(v **types.PostgreSQLSett
 				sv.Port = ptr.Int32(int32(i64))
 			}
 
+		case "SecretsManagerAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerAccessRoleArn = ptr.String(jtv)
+			}
+
+		case "SecretsManagerSecretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerSecretId = ptr.String(jtv)
+			}
+
 		case "ServerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10949,6 +11075,24 @@ func awsAwsjson11_deserializeDocumentRedshiftSettings(v **types.RedshiftSettings
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ReplaceInvalidChars = ptr.String(jtv)
+			}
+
+		case "SecretsManagerAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerAccessRoleArn = ptr.String(jtv)
+			}
+
+		case "SecretsManagerSecretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerSecretId = ptr.String(jtv)
 			}
 
 		case "ServerName":
@@ -13685,6 +13829,24 @@ func awsAwsjson11_deserializeDocumentSybaseSettings(v **types.SybaseSettings, va
 					return err
 				}
 				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "SecretsManagerAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerAccessRoleArn = ptr.String(jtv)
+			}
+
+		case "SecretsManagerSecretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerSecretId = ptr.String(jtv)
 			}
 
 		case "ServerName":

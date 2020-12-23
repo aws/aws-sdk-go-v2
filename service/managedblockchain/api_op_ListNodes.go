@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the nodes within a network.
+// Returns information about the nodes within a network. Applies to Hyperledger
+// Fabric and Ethereum.
 func (c *Client) ListNodes(ctx context.Context, params *ListNodesInput, optFns ...func(*Options)) (*ListNodesOutput, error) {
 	if params == nil {
 		params = &ListNodesInput{}
@@ -30,11 +31,6 @@ func (c *Client) ListNodes(ctx context.Context, params *ListNodesInput, optFns .
 
 type ListNodesInput struct {
 
-	// The unique identifier of the member who owns the nodes to list.
-	//
-	// This member is required.
-	MemberId *string
-
 	// The unique identifier of the network for which to list nodes.
 	//
 	// This member is required.
@@ -42,6 +38,10 @@ type ListNodesInput struct {
 
 	// The maximum number of nodes to list.
 	MaxResults *int32
+
+	// The unique identifier of the member who owns the nodes to list. Applies only to
+	// Hyperledger Fabric and is required for Hyperledger Fabric.
+	MemberId *string
 
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string

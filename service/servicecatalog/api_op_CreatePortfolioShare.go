@@ -17,8 +17,11 @@ import (
 // organization, an organizational unit, or a specific account. Note that if a
 // delegated admin is de-registered, they can no longer create portfolio shares.
 // AWSOrganizationsAccess must be enabled in order to create a portfolio share to
-// an organization node. You can't share a shared resource. This includes
-// portfolios that contain a shared product.
+// an organization node. You can't share a shared resource, including portfolios
+// that contain a shared product. If the portfolio share with the specified account
+// or organization node already exists, this action will have no effect and will
+// not return an error. To update an existing share, you must use the
+// UpdatePortfolioShare API instead.
 func (c *Client) CreatePortfolioShare(ctx context.Context, params *CreatePortfolioShareInput, optFns ...func(*Options)) (*CreatePortfolioShareOutput, error) {
 	if params == nil {
 		params = &CreatePortfolioShareInput{}
@@ -59,6 +62,10 @@ type CreatePortfolioShareInput struct {
 	// PortfolioShareToken will be returned in the output in order for the
 	// administrator to monitor the status of the PortfolioShare creation process.
 	OrganizationNode *types.OrganizationNode
+
+	// Enables or disables TagOptions  sharing when creating the portfolio share. If
+	// this flag is not provided, TagOptions sharing is disabled.
+	ShareTagOptions bool
 }
 
 type CreatePortfolioShareOutput struct {

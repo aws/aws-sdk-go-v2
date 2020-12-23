@@ -12,15 +12,18 @@ import (
 
 // Cancels the deletion of a customer master key (CMK). When this operation
 // succeeds, the key state of the CMK is Disabled. To enable the CMK, use
-// EnableKey. You cannot perform this operation on a CMK in a different AWS
-// account. For more information about scheduling and canceling deletion of a CMK,
-// see Deleting Customer Master Keys
+// EnableKey. For more information about scheduling and canceling deletion of a
+// CMK, see Deleting Customer Master Keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html) in
 // the AWS Key Management Service Developer Guide. The CMK that you use for this
 // operation must be in a compatible key state. For details, see How Key State
 // Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide.
+// AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a CMK in a different AWS account. Required
+// permissions: kms:CancelKeyDeletion
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations: ScheduleKeyDeletion
 func (c *Client) CancelKeyDeletion(ctx context.Context, params *CancelKeyDeletionInput, optFns ...func(*Options)) (*CancelKeyDeletionOutput, error) {
 	if params == nil {
 		params = &CancelKeyDeletionInput{}

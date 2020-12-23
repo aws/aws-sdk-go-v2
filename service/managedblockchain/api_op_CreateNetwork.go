@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new blockchain network using Amazon Managed Blockchain.
+// Creates a new blockchain network using Amazon Managed Blockchain. Applies only
+// to Hyperledger Fabric.
 func (c *Client) CreateNetwork(ctx context.Context, params *CreateNetworkInput, optFns ...func(*Options)) (*CreateNetworkOutput, error) {
 	if params == nil {
 		params = &CreateNetworkInput{}
