@@ -3,13 +3,10 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.79.0" />
-
-<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+<meta name="generator" content="Hugo 0.79.0" /><META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 
 
-
-<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="shortcut icon" href="/aws-sdk-go-v2/favicons/favicon.ico" >
 <link rel="apple-touch-icon" href="/aws-sdk-go-v2/favicons/apple-touch-icon-180x180.png" sizes="180x180">
 <link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/favicon-16x16.png" sizes="16x16">
 <link rel="icon" type="image/png" href="/aws-sdk-go-v2/favicons/favicon-32x32.png" sizes="32x32">
@@ -25,12 +22,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/making-requests/" />
 <meta property="article:published_time" content="2020-11-12T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-12-10T11:45:29-08:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
+<meta property="article:modified_time" content="2020-12-23T13:49:48-08:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
 <meta itemprop="name" content="Using the AWS SDK for Go V2 with AWS Services">
 <meta itemprop="description" content="Construct service clients and make operation calls to send requests to AWS services.">
 <meta itemprop="datePublished" content="2020-11-12T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2020-12-10T11:45:29-08:00" />
-<meta itemprop="wordCount" content="2003">
+<meta itemprop="dateModified" content="2020-12-23T13:49:48-08:00" />
+<meta itemprop="wordCount" content="2690">
 
 
 
@@ -43,8 +40,10 @@
 
 
 
-<link rel="preload" href="/aws-sdk-go-v2/scss/main.min.a40e8388f84bdd24bc3411e01a2a4a50b09036c9b079bd05a1eb025839f53861.css" as="style">
-<link href="/aws-sdk-go-v2/scss/main.min.a40e8388f84bdd24bc3411e01a2a4a50b09036c9b079bd05a1eb025839f53861.css" rel="stylesheet" integrity="">
+
+
+<link rel="preload" href="/aws-sdk-go-v2/scss/main.min.8a4af4456d089c65f15a7db096ea76ad09053a521af65177b0ec0d79bddb8bb5.css" as="style">
+<link href="/aws-sdk-go-v2/scss/main.min.8a4af4456d089c65f15a7db096ea76ad09053a521af65177b0ec0d79bddb8bb5.css" rel="stylesheet" integrity="">
 
 
 <script
@@ -66,7 +65,7 @@
       
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
         <a class="navbar-brand" href="/aws-sdk-go-v2/">
-		<span class="navbar-logo"></span><span class="text-uppercase font-weight-bold">AWS SDK for Go V2</span>
+		<span class="navbar-logo"><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 304 182" style="enable-background:new 0 0 304 182"><style>.st0{fill:#fff}.st1{fill-rule:evenodd;clip-rule:evenodd;fill:#f90}</style><g><path class="st0" d="M86.4 66.4c0 3.7.4 6.7 1.1 8.9.8 2.2 1.8 4.6 3.2 7.2.5.8.7 1.6.7 2.3.0 1-.6 2-1.9 3l-6.3 4.2c-.9.6-1.8.9-2.6.9-1 0-2-.5-3-1.4C76.2 90 75 88.4 74 86.8c-1-1.7-2-3.6-3.1-5.9-7.8 9.2-17.6 13.8-29.4 13.8-8.4.0-15.1-2.4-20-7.2s-7.4-11.2-7.4-19.2c0-8.5 3-15.4 9.1-20.6s14.2-7.8 24.5-7.8c3.4.0 6.9.3 10.6.8s7.5 1.3 11.5 2.2v-7.3c0-7.6-1.6-12.9-4.7-16-3.2-3.1-8.6-4.6-16.3-4.6-3.5.0-7.1.4-10.8 1.3-3.7.9-7.3 2-10.8 3.4-1.6.7-2.8 1.1-3.5 1.3s-1.2.3-1.6.3c-1.4.0-2.1-1-2.1-3.1v-4.9c0-1.6.2-2.8.7-3.5.5-.7 1.4-1.4 2.8-2.1 3.5-1.8 7.7-3.3 12.6-4.5 4.9-1.3 10.1-1.9 15.6-1.9 11.9.0 20.6 2.7 26.2 8.1 5.5 5.4 8.3 13.6 8.3 24.6V66.4zM45.8 81.6c3.3.0 6.7-.6 10.3-1.8 3.6-1.2 6.8-3.4 9.5-6.4 1.6-1.9 2.8-4 3.4-6.4.6-2.4 1-5.3 1-8.7v-4.2c-2.9-.7-6-1.3-9.2-1.7-3.2-.4-6.3-.6-9.4-.6-6.7.0-11.6 1.3-14.9 4s-4.9 6.5-4.9 11.5c0 4.7 1.2 8.2 3.7 10.6C37.7 80.4 41.2 81.6 45.8 81.6zM126.1 92.4c-1.8.0-3-.3-3.8-1-.8-.6-1.5-2-2.1-3.9L96.7 10.2c-.6-2-.9-3.3-.9-4 0-1.6.8-2.5 2.4-2.5h9.8c1.9.0 3.2.3 3.9 1 .8.6 1.4 2 2 3.9l16.8 66.2 15.6-66.2c.5-2 1.1-3.3 1.9-3.9.8-.6 2.2-1 4-1h8c1.9.0 3.2.3 4 1 .8.6 1.5 2 1.9 3.9l15.8 67 17.3-67c.6-2 1.3-3.3 2-3.9.8-.6 2.1-1 3.9-1h9.3c1.6.0 2.5.8 2.5 2.5.0.5-.1 1-.2 1.6s-.3 1.4-.7 2.5l-24.1 77.3c-.6 2-1.3 3.3-2.1 3.9-.8.6-2.1 1-3.8 1h-8.6c-1.9.0-3.2-.3-4-1s-1.5-2-1.9-4L156 23l-15.4 64.4c-.5 2-1.1 3.3-1.9 4s-2.2 1-4 1H126.1zM254.6 95.1c-5.2.0-10.4-.6-15.4-1.8s-8.9-2.5-11.5-4c-1.6-.9-2.7-1.9-3.1-2.8-.4-.9-.6-1.9-.6-2.8v-5.1c0-2.1.8-3.1 2.3-3.1.6.0 1.2.1 1.8.3.6.2 1.5.6 2.5 1 3.4 1.5 7.1 2.7 11 3.5 4 .8 7.9 1.2 11.9 1.2 6.3.0 11.2-1.1 14.6-3.3s5.2-5.4 5.2-9.5c0-2.8-.9-5.1-2.7-7s-5.2-3.6-10.1-5.2L246 52c-7.3-2.3-12.7-5.7-16-10.2-3.3-4.4-5-9.3-5-14.5.0-4.2.9-7.9 2.7-11.1 1.8-3.2 4.2-6 7.2-8.2 3-2.3 6.4-4 10.4-5.2 4-1.2 8.2-1.7 12.6-1.7 2.2.0 4.5.1 6.7.4 2.3.3 4.4.7 6.5 1.1 2 .5 3.9 1 5.7 1.6 1.8.6 3.2 1.2 4.2 1.8 1.4.8 2.4 1.6 3 2.5.6.8.9 1.9.9 3.3v4.7c0 2.1-.8 3.2-2.3 3.2-.8.0-2.1-.4-3.8-1.2-5.7-2.6-12.1-3.9-19.2-3.9-5.7.0-10.2.9-13.3 2.8-3.1 1.9-4.7 4.8-4.7 8.9.0 2.8 1 5.2 3 7.1s5.7 3.8 11 5.5l14.2 4.5c7.2 2.3 12.4 5.5 15.5 9.6s4.6 8.8 4.6 14c0 4.3-.9 8.2-2.6 11.6-1.8 3.4-4.2 6.4-7.3 8.8-3.1 2.5-6.8 4.3-11.1 5.6C264.4 94.4 259.7 95.1 254.6 95.1z"/><g><path class="st1" d="M273.5 143.7c-32.9 24.3-80.7 37.2-121.8 37.2-57.6.0-109.5-21.3-148.7-56.7-3.1-2.8-.3-6.6 3.4-4.4 42.4 24.6 94.7 39.5 148.8 39.5 36.5.0 76.6-7.6 113.5-23.2C274.2 133.6 278.9 139.7 273.5 143.7z"/><path class="st1" d="M287.2 128.1c-4.2-5.4-27.8-2.6-38.5-1.3-3.2.4-3.7-2.4-.8-4.5 18.8-13.2 49.7-9.4 53.3-5 3.6 4.5-1 35.4-18.6 50.2-2.7 2.3-5.3 1.1-4.1-1.9C282.5 155.7 291.4 133.4 287.2 128.1z"/></g></g></svg></span><span class="text-uppercase font-weight-bold">AWS SDK for Go V2</span>
 	</a>
 	<div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
 		<ul class="navbar-nav mt-2 mt-lg-0">
@@ -79,7 +78,7 @@
 				
 				
 				
-				<a class="nav-link active" href="/aws-sdk-go-v2/docs/" ><span class="active">Documentation</span></a>
+				<a  class="nav-link active" href="/aws-sdk-go-v2/docs/" ><span class="active">Developer Guide</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -87,7 +86,7 @@
 				
 				
 				
-				<a class="nav-link" href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2" target="_blank" ><span>API</span></a>
+				<a id="APIRef" class="nav-link" href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2" target="_blank" ><span>API Reference</span></a>
 			</li>
 			
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
@@ -95,7 +94,7 @@
 				
 				
 				
-				<a class="nav-link" href="https://github.com/aws/aws-sdk-go-v2" target="_blank" ><span>GitHub</span></a>
+				<a id="GitHubRepo" class="nav-link" href="https://github.com/aws/aws-sdk-go-v2" target="_blank" ><span>GitHub</span></a>
 			</li>
 			
 			
@@ -113,7 +112,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c5574c27dfa6a260860207d71b08d554.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.517d46cd1a9e9c0ce431d07399ea8a4d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -133,7 +132,7 @@
 
 <div id="td-sidebar-menu" class="td-sidebar__inner">
   
-  <form class="td-sidebar__search d-flex align-items-center d-lg-none">
+  <form class="td-sidebar__search d-flex align-items-center">
     
 
 
@@ -145,7 +144,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.c5574c27dfa6a260860207d71b08d554.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.517d46cd1a9e9c0ce431d07399ea8a4d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -158,6 +157,7 @@
   <nav class="collapse td-sidebar-nav" id="td-section-nav">
     
     
+    
 
 
 
@@ -166,7 +166,7 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/aws-sdk-go-v2/docs/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Documentation</a>
+    <a  href="/aws-sdk-go-v2/docs/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Developer Guide</a>
   </li>
   <ul>
     <li class="collapse show" id="aws-sdk-go-v2docs">
@@ -174,13 +174,16 @@
       
       
       
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsgetting-started" href="/aws-sdk-go-v2/docs/getting-started/">Getting Started</a>
+        
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsgetting-started" href="/aws-sdk-go-v2/docs/getting-started/">Getting Started</a>
       
-      
-      
-      
+        
+          
 
 
 
@@ -197,155 +200,39 @@
       
       
       
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints" href="/aws-sdk-go-v2/docs/configuring-sdk/endpoints/">Endpoints</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http" href="/aws-sdk-go-v2/docs/configuring-sdk/custom-http/">HTTP Client</a>
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdkendpoints" href="/aws-sdk-go-v2/docs/configuring-sdk/endpoints/">Endpoints</a>
+        
       
       
       
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdklogging" href="/aws-sdk-go-v2/docs/configuring-sdk/logging/">Logging</a>
-      
-      
-    </li>
-  </ul>
-</ul>
-
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdkcustom-http" href="/aws-sdk-go-v2/docs/configuring-sdk/custom-http/">HTTP Client</a>
+        
       
       
       
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docshandling-errors" href="/aws-sdk-go-v2/docs/handling-errors/">Handling Errors</a>
-      
-      
-      
-      
-
-
-
-
-
-
-<ul class="td-sidebar-nav__section pr-md-3">
-  <li class="td-sidebar-nav__section-title">
-    <a  href="/aws-sdk-go-v2/docs/sdk-utilities/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">SDK Utilities</a>
-  </li>
-  <ul>
-    <li class="collapse " id="aws-sdk-go-v2docssdk-utilities">
-      
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiescloudfront" href="/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/">Amazon CloudFront</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiesec2-imds" href="/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/">Amazon EC2 IMDS</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiess3" href="/aws-sdk-go-v2/docs/sdk-utilities/s3/">Amazon S3</a>
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsconfiguring-sdklogging" href="/aws-sdk-go-v2/docs/configuring-sdk/logging/">Logging</a>
+        
       
       
     </li>
   </ul>
 </ul>
 
+        
       
       
       
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-aws-sdk-go-v2docsmaking-requests" href="/aws-sdk-go-v2/docs/making-requests/">Using AWS Services</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docscloud9-go" href="/aws-sdk-go-v2/docs/cloud9-go/">Using Cloud9 with the SDK</a>
-      
-      
-      
-      
-
-
-
-
-
-
-<ul class="td-sidebar-nav__section pr-md-3">
-  <li class="td-sidebar-nav__section-title">
-    <a  href="/aws-sdk-go-v2/docs/security/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Security</a>
-  </li>
-  <ul>
-    <li class="collapse " id="aws-sdk-go-v2docssecurity">
-      
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritycompliance-validation" href="/aws-sdk-go-v2/docs/security/compliance-validation/">Compliance Validation</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecurityiam" href="/aws-sdk-go-v2/docs/security/iam/">Identity and Access Management</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecurityinfrastructure-security" href="/aws-sdk-go-v2/docs/security/infrastructure-security/">Infrastructure Security</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritydisaster-recovery-resiliency" href="/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/">Resilience</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritydata-protection" href="/aws-sdk-go-v2/docs/security/data-protection/">Data Protection</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritytls" href="/aws-sdk-go-v2/docs/security/tls/">Enforcing TLS 1.2</a>
-      
-      
-    </li>
-  </ul>
-</ul>
-
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsmiddleware" href="/aws-sdk-go-v2/docs/middleware/">Middleware</a>
-      
-      
-      
-      
+        
+          
 
 
 
@@ -365,6 +252,169 @@
   </ul>
 </ul>
 
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page  active" id="m-aws-sdk-go-v2docsmaking-requests" href="/aws-sdk-go-v2/docs/making-requests/">Using AWS Services</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docshandling-errors" href="/aws-sdk-go-v2/docs/handling-errors/">Handling Errors</a>
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/sdk-utilities/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">SDK Utilities</a>
+  </li>
+  <ul>
+    <li class="collapse " id="aws-sdk-go-v2docssdk-utilities">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiescloudfront" href="/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/">Amazon CloudFront</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiesec2-imds" href="/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/">Amazon EC2 IMDS</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssdk-utilitiess3" href="/aws-sdk-go-v2/docs/sdk-utilities/s3/">Amazon S3</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsmiddleware" href="/aws-sdk-go-v2/docs/middleware/">Middleware</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docsunit-testing" href="/aws-sdk-go-v2/docs/unit-testing/">Testing</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docscloud9-go" href="/aws-sdk-go-v2/docs/cloud9-go/">Using Cloud9 with the SDK</a>
+        
+      
+      
+      
+        
+          
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/aws-sdk-go-v2/docs/security/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Security</a>
+  </li>
+  <ul>
+    <li class="collapse " id="aws-sdk-go-v2docssecurity">
+      
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritycompliance-validation" href="/aws-sdk-go-v2/docs/security/compliance-validation/">Compliance Validation</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecurityiam" href="/aws-sdk-go-v2/docs/security/iam/">Identity and Access Management</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecurityinfrastructure-security" href="/aws-sdk-go-v2/docs/security/infrastructure-security/">Infrastructure Security</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritydisaster-recovery-resiliency" href="/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/">Resilience</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritydata-protection" href="/aws-sdk-go-v2/docs/security/data-protection/">Data Protection</a>
+        
+      
+      
+      
+        
+          
+          
+          <a class="td-sidebar-link td-sidebar-link__page " id="m-aws-sdk-go-v2docssecuritytls" href="/aws-sdk-go-v2/docs/security/tls/">Enforcing TLS 1.2</a>
+        
+      
+      
+    </li>
+  </ul>
+</ul>
+
+        
       
       
     </li>
@@ -380,33 +430,35 @@
           </div>
           <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
             
+  
+  
+  
+  
+  
+  <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+  
+    
+    
+      
+    
+    
+    
+    
+    
+    
+    
 
+    <a href="https://github.com/aws/aws-sdk-go-v2/edit/documentation/content/en/docs/making-requests.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+    <a href="https://github.com/aws/aws-sdk-go-v2/new/documentation/content/en/docs/making-requests.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> Create child page</a>
+    <a href="https://github.com/aws/aws-sdk-go-v2/issues/new?title=Using%20the%20AWS%20SDK%20for%20Go%20V2%20with%20AWS%20Services" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+    
+      
+      <a href="https://github.com/aws/aws-sdk-go-v2/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
+    
 
-
-
-
-
-<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-
-
-
-
-
-
-
-
-
-
-
-<a href="https://github.com/aws/aws-sdk-go-v2/edit/documentation/content/en/docs/making-requests.md" target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
-<a href="https://github.com/aws/aws-sdk-go-v2/new/documentation/content/en/docs/making-requests.md?filename=change-me.md&amp;value=---%0Atitle%3A&#43;%22Long&#43;Page&#43;Title%22%0AlinkTitle%3A&#43;%22Short&#43;Nav&#43;Title%22%0Aweight%3A&#43;100%0Adescription%3A&#43;%3E-%0A&#43;&#43;&#43;&#43;&#43;Page&#43;description&#43;for&#43;heading&#43;and&#43;indexes.%0A---%0A%0A%23%23&#43;Heading%0A%0AEdit&#43;this&#43;template&#43;to&#43;create&#43;your&#43;new&#43;page.%0A%0A%2A&#43;Give&#43;it&#43;a&#43;good&#43;name%2C&#43;ending&#43;in&#43;%60.md%60&#43;-&#43;e.g.&#43;%60getting-started.md%60%0A%2A&#43;Edit&#43;the&#43;%22front&#43;matter%22&#43;section&#43;at&#43;the&#43;top&#43;of&#43;the&#43;page&#43;%28weight&#43;controls&#43;how&#43;its&#43;ordered&#43;amongst&#43;other&#43;pages&#43;in&#43;the&#43;same&#43;directory%3B&#43;lowest&#43;number&#43;first%29.%0A%2A&#43;Add&#43;a&#43;good&#43;commit&#43;message&#43;at&#43;the&#43;bottom&#43;of&#43;the&#43;page&#43;%28%3C80&#43;characters%3B&#43;use&#43;the&#43;extended&#43;description&#43;field&#43;for&#43;more&#43;detail%29.%0A%2A&#43;Create&#43;a&#43;new&#43;branch&#43;so&#43;you&#43;can&#43;preview&#43;your&#43;new&#43;file&#43;and&#43;request&#43;a&#43;review&#43;via&#43;Pull&#43;Request.%0A" target="_blank"><i class="fa fa-edit fa-fw"></i> Create child page</a>
-<a href="https://github.com/aws/aws-sdk-go-v2/issues/new?title=Using%20the%20AWS%20SDK%20for%20Go%20V2%20with%20AWS%20Services" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
-
-
-<a href="https://github.com/aws/aws-sdk-go-v2/issues/new" target="_blank"><i class="fas fa-tasks fa-fw"></i> Create project issue</a>
-
-</div>
-
+  
+  
+  </div>
 
 
 
@@ -429,7 +481,11 @@
     </li>
     <li><a href="#concurrently-using-service-clients">Concurrently Using Service Clients</a></li>
     <li><a href="#using-paginators">Using Operation Paginators</a></li>
-    <li><a href="#using-waiters">Using Waiters</a></li>
+    <li><a href="#using-waiters">Using Waiters</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -451,7 +507,7 @@
 
 
 <li class="breadcrumb-item" >
-	<a href="https://aws.github.io/aws-sdk-go-v2/docs/">Documentation</a>
+	<a href="https://aws.github.io/aws-sdk-go-v2/docs/">Developer Guide</a>
 </li>
 
 
@@ -487,12 +543,13 @@ provide slightly different construction patterns that we will look at in the fol
 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#LoadDefaultConfig">config.LoadDefaultConfig</a>. For more information on constructing
 an <code>aws.Config</code> see <a href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/">Configure the SDK</a>. The following example shows how to construct
 an Amazon S3 service client using the <code>aws.Config</code>and the <code>NewFromConfig</code> function:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;context&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
 <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
 
 <span style="color:#8f5902;font-style:italic">// ...
 </span><span style="color:#8f5902;font-style:italic"></span>
-<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">())</span>
 <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
 	<span style="color:#204a87">panic</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
 <span style="color:#000;font-weight:bold">}</span>
@@ -502,12 +559,13 @@ an Amazon S3 service client using the <code>aws.Config</code>and the <code>NewFr
 <p><code>NewFromConfig</code> can take one or more functional arguments that can mutate a client&rsquo;s configuration <code>Options</code> struct.
 This allows you to make specific overrides such as changing the Region, or modifying service specific options such as
 Amazon S3 <code>UseAccelerate</code> option. For example:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;context&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
 <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
 
 <span style="color:#8f5902;font-style:italic">// ...
 </span><span style="color:#8f5902;font-style:italic"></span>
-<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">())</span>
 <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
 	<span style="color:#204a87">panic</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
 <span style="color:#000;font-weight:bold">}</span>
@@ -539,7 +597,7 @@ client using <code>New</code>:</p>
 </span><span style="color:#8f5902;font-style:italic"></span>
 <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">New</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">{</span>
 	<span style="color:#000">Region</span><span style="color:#000;font-weight:bold">:</span>      <span style="color:#4e9a06">&#34;us-west-2&#34;</span><span style="color:#000;font-weight:bold">,</span>
-	<span style="color:#000">Credentials</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">CredentialsCache</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">Provider</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">credentials</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewStaticCredentials</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">accessKey</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">secretKey</span><span style="color:#000;font-weight:bold">)}.</span>
+	<span style="color:#000">Credentials</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewCredentialsCache</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">credentials</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewStaticCredentials</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">accessKey</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">secretKey</span><span style="color:#000;font-weight:bold">)),</span>
 <span style="color:#000;font-weight:bold">})</span>
 </code></pre></div><h4 id="overriding-configuration-1">Overriding Configuration</h4>
 <p><code>New</code> can take one or more functional arguments that can mutate a client&rsquo;s configuration <code>Options</code> struct.
@@ -553,7 +611,7 @@ such as Amazon S3 <code>UseAccelerate</code> option. For example:</p>
 </span><span style="color:#8f5902;font-style:italic"></span>
 <span style="color:#000">options</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">{</span>
     <span style="color:#000">Region</span><span style="color:#000;font-weight:bold">:</span>      <span style="color:#4e9a06">&#34;us-west-2&#34;</span><span style="color:#000;font-weight:bold">,</span>
-    <span style="color:#000">Credentials</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">CredentialsCache</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">Provider</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">credentials</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewStaticCredentials</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">accessKey</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">secretKey</span><span style="color:#000;font-weight:bold">)}.</span>
+    <span style="color:#000">Credentials</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewCredentialsCache</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">credentials</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewStaticCredentials</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">accessKey</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">secretKey</span><span style="color:#000;font-weight:bold">)).</span>
 <span style="color:#000;font-weight:bold">}</span>
 
 <span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">New</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">options</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
@@ -597,7 +655,7 @@ our input using the <code>types</code> package, and <code>aws.&lt;Type&gt;</code
 
 <span style="color:#8f5902;font-style:italic">// ...
 </span><span style="color:#8f5902;font-style:italic"></span>
-<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">())</span>
 <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
 	<span style="color:#204a87">panic</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
 <span style="color:#000;font-weight:bold">}</span>
@@ -615,7 +673,7 @@ the client options can be modified at the time the operation method is called by
 arguments to the service operation method. This action is concurrency safe and will not affect other concurrent
 operations on the client.</p>
 <p>For example to override the client region from &ldquo;us-west-2&rdquo; to &ldquo;us-east-1&rdquo;:</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithRegion</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;us-west-2&#34;</span><span style="color:#000;font-weight:bold">))</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithRegion</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;us-west-2&#34;</span><span style="color:#000;font-weight:bold">))</span>
 <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
 	<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
 	<span style="color:#204a87;font-weight:bold">return</span>
@@ -696,14 +754,15 @@ troubleshooting a request:</p>
 client with as many goroutines as you want.</p>
 <p>In the following example, an  service client is used in multiple goroutines. This example
 concurrently uploads two objects to an Amazon S3 bucket.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;log&#34;</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;context&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;log&#34;</span>
 <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;strings&#34;</span>
 <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
 <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
 
 <span style="color:#8f5902;font-style:italic">// ...
 </span><span style="color:#8f5902;font-style:italic"></span>
-<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">())</span>
 <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
 	<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
 	<span style="color:#204a87;font-weight:bold">return</span>
@@ -771,14 +830,15 @@ should always be checked before attempting to use the returned response structur
 See <a href="#HandlingOperationResponses">Handling Operation Responses</a></p>
 <p>The following example uses the <code>ListObjectsV2</code> paginator to list up to three pages of object keys from the
 <code>ListObjectV2</code>operation. Each page consists of up to 10 keys, which is defined by the <code>Limit</code> paginator option.</p>
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;log&#34;</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;context&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;log&#34;</span>
 <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
 <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws&#34;</span>
 <span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/s3&#34;</span>
 
 <span style="color:#8f5902;font-style:italic">// ...
 </span><span style="color:#8f5902;font-style:italic"></span>
-<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">()</span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">())</span>
 <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
 	<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
 	<span style="color:#204a87;font-weight:bold">return</span>
@@ -790,13 +850,13 @@ See <a href="#HandlingOperationResponses">Handling Operation Responses</a></p>
 	<span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;my-bucket&#34;</span><span style="color:#000;font-weight:bold">),</span>
 <span style="color:#000;font-weight:bold">}</span>
 
-<span style="color:#000">pagiantor</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewListObjectsV2Paginator</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">client</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">params</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">ListObjectsV2PaginatorOptions</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="color:#000">paginator</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewListObjectsV2Paginator</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">client</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">params</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">ListObjectsV2PaginatorOptions</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
 	<span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Limit</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">10</span>
 <span style="color:#000;font-weight:bold">})</span>
 
 <span style="color:#000">pageNum</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#0000cf;font-weight:bold">0</span>
-<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">pagiantor</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HasMorePages</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">pageNum</span> <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#0000cf;font-weight:bold">3</span> <span style="color:#000;font-weight:bold">{</span>
-    <span style="color:#000">output</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">pagiantor</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NextPage</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">())</span>
+<span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">paginator</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HasMorePages</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> <span style="color:#000">pageNum</span> <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#0000cf;font-weight:bold">3</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">output</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">paginator</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NextPage</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">())</span>
     <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
     	<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
     	<span style="color:#204a87;font-weight:bold">return</span>
@@ -810,17 +870,166 @@ See <a href="#HandlingOperationResponses">Handling Operation Responses</a></p>
 functional arguments to <code>NextPage</code>. For more information about overriding client options when calling an operation see
 <a href="#OverrideClientOptionsForOperation">Overriding Clients For Operation</a></p>
 <h2 id="using-waiters">Using Waiters</h2>
+<p>When interacting with AWS APIs that are asynchronous, you often need to wait
+for a particular resource to become available in order to perform further
+actions on it.</p>
+<p>For example, the Amazon DynamoDB <code>CreateTable</code> API returns
+immediately with a TableStatus of CREATING, and you can&rsquo;t invoke read or
+write operations until the table status has been transitioned to <code>ACTIVE</code>.</p>
+<p>Writing logic to continuously poll the table status can be cumbersome
+and error-prone. The waiters help take the complexity out of it and
+are simple APIs that handle the polling task for you.</p>
+<p>For example, you can use waiters to poll if a DynamoDB table
+is created and ready for a write operation.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;context&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;fmt&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;log&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;time&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/dynamodb&#34;</span>
 
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">())</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#204a87;font-weight:bold">return</span>
+<span style="color:#000;font-weight:bold">}</span>
 
-<div class="pageinfo pageinfo-primary">
-<p>Waiters are not currently supported in the current AWS SDK for Go V2 developer preview release.</p>
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">)</span>
 
-</div>
+<span style="color:#8f5902;font-style:italic">// we create a waiter instance by directly passing in a client
+</span><span style="color:#8f5902;font-style:italic">// that satisfies the waiters client Interface. 
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">waiter</span> <span style="color:#ce5c00;font-weight:bold">:=</span>  <span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewTableExistsWaiter</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">client</span><span style="color:#000;font-weight:bold">)</span>
 
+<span style="color:#8f5902;font-style:italic">// params is the input to api operation used by the waiter
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">params</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">DescribeTableInput</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">TableName</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;test-table&#34;</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
 
+<span style="color:#8f5902;font-style:italic">// maxWaitTime is the maximum wait time, the waiter will wait for 
+</span><span style="color:#8f5902;font-style:italic">// the resource status.
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">maxWaitTime</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#0000cf;font-weight:bold">5</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">time</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Minutes</span>
+
+<span style="color:#8f5902;font-style:italic">// Wait will poll until it gets the resource status, or max wait time 
+</span><span style="color:#8f5902;font-style:italic">// expires.
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">waiter</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Wait</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#000">params</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">maxWaitTime</span><span style="color:#000;font-weight:bold">)</span>  
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#204a87;font-weight:bold">return</span> 
+<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Dynamodb table is now ready for write operations&#34;</span><span style="color:#000;font-weight:bold">)</span>
+
+</code></pre></div><h4 id="overriding-waiter-configuration">Overriding waiter configuration</h4>
+<p>By default, the SDK uses the minimum delay and maximum delay value configured with
+optimal values defined by AWS services for different APIs. You can override waiter
+configuration by providing functional options during waiter construction, or when
+invoking a waiter operation.</p>
+<p>For example, to override waiter configuration during waiter construction</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;context&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;fmt&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;log&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;time&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/dynamodb&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">())</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#204a87;font-weight:bold">return</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#8f5902;font-style:italic">// we create a waiter instance by directly passing in a client
+</span><span style="color:#8f5902;font-style:italic">// that satisfies the waiters client Interface. 
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">waiter</span> <span style="color:#ce5c00;font-weight:bold">:=</span>  <span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewTableExistsWaiter</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">client</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TableExistsWaiterOptions</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	
+	<span style="color:#8f5902;font-style:italic">// override minimum delay to 10 seconds
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">MinDelay</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">10</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">time</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Second</span>
+	
+	<span style="color:#8f5902;font-style:italic">// override maximum default delay to 300 seconds
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">MaxDelay</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">300</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">time</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Second</span>
+<span style="color:#000;font-weight:bold">})</span>
+</code></pre></div><p>The <code>Wait</code> function on each waiter also takes in functional options.<br>
+Similar to the above example, you can override waiter configuration per <code>Wait</code> request.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#8f5902;font-style:italic">// params is the input to api operation used by the waiter
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">params</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">DescribeTableInput</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">TableName</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">aws</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;test-table&#34;</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#8f5902;font-style:italic">// maxWaitTime is the maximum wait time, the waiter will wait for 
+</span><span style="color:#8f5902;font-style:italic">// the resource status.
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">maxWaitTime</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#0000cf;font-weight:bold">5</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">time</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Minutes</span>
+
+<span style="color:#8f5902;font-style:italic">// Wait will poll until it gets the resource status, or max wait time 
+</span><span style="color:#8f5902;font-style:italic">// expires.
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">waiter</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Wait</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#000">params</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">maxWaitTime</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TableExistsWaiterOptions</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+
+    <span style="color:#8f5902;font-style:italic">// override minimum delay to 5 seconds
+</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">MinDelay</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">5</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">time</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Second</span>
+
+    <span style="color:#8f5902;font-style:italic">// override maximum default delay to 120 seconds
+</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">MaxDelay</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">120</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">time</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Second</span>
+<span style="color:#000;font-weight:bold">})</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#204a87;font-weight:bold">return</span> 
+<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Dynamodb table is now ready for write operations&#34;</span><span style="color:#000;font-weight:bold">)</span>
+
+</code></pre></div><h4 id="advanced-waiter-configuration-overrides">Advanced waiter configuration overrides</h4>
+<p>You can additionally customize the waiter default behavior by providing a custom
+retryable function. The waiter-specific options also provides <code>APIOptions</code> to
+<a href="https://aws.github.io/aws-sdk-go-v2/docs/middleware/#writing-a-custom-middleware">customize operation middlewares</a>.</p>
+<p>For example, to configure advanced waiter overrides.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;context&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;fmt&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;log&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;time&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/dynamodb&#34;</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/dynamodb/types&#34;</span>
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">())</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;error: %v&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#204a87;font-weight:bold">return</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">)</span>
+
+<span style="color:#8f5902;font-style:italic">// custom retryable defines if a waiter state is retryable or a terminal state.
+</span><span style="color:#8f5902;font-style:italic">// For example purposes, we will configure the waiter to not wait 
+</span><span style="color:#8f5902;font-style:italic">// if table status is returned as `UPDATING`
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">customRetryable</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">params</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">DescribeTableInput</span><span style="color:#000;font-weight:bold">,</span> 
+	<span style="color:#000">output</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">DescribeTableOutput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">bool</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">output</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Table</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+		<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">output</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Table</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TableStatus</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#000">types</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TableStatusUpdating</span> <span style="color:#000;font-weight:bold">{</span>
+			<span style="color:#8f5902;font-style:italic">// if table status is `UPDATING`, no need to wait
+</span><span style="color:#8f5902;font-style:italic"></span>		    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#204a87;font-weight:bold">false</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">nil</span>	
+        <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#8f5902;font-style:italic">// we create a waiter instance by directly passing in a client
+</span><span style="color:#8f5902;font-style:italic">// that satisfies the waiters client Interface. 
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000">waiter</span> <span style="color:#ce5c00;font-weight:bold">:=</span>  <span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewTableExistsWaiter</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">client</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">dynamodb</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TableExistsWaiterOptions</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	
+	<span style="color:#8f5902;font-style:italic">// override the service defined waiter-behavior
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Retryable</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">customRetryable</span>
+<span style="color:#000;font-weight:bold">})</span>
+
+</code></pre></div>
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified December 10, 2020: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/fde6dd80a0d36b5a5ebb6eccc3fda8238c9c85f6">Initial Migration Guide Content (#942) (fde6dd8)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified December 23, 2020: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/82eb3357e4c880b1af0b80cb5f41f6130a0f33bb">update shared creds/config and waiter documentation (#1000) (82eb335)</a>
 </div>
 </div>
 
@@ -895,7 +1104,7 @@ functional arguments to <code>NextPage</code>. For more information about overri
 
 
 
-<script src="/aws-sdk-go-v2/js/main.min.460c8ae21829f9b330823a08f34ac961d7d0daa8874c8c9eba7ea0484bb42a79.js" integrity="sha256-RgyK4hgp&#43;bMwgjoI80rJYdfQ2qiHTIyeun6gSEu0Knk=" crossorigin="anonymous"></script>
+<script src="/aws-sdk-go-v2/js/main.min.f820bfc507c3ebefe17f8881ec4ee10013f3b89ad9555a50acf9bb1771e6823f.js" integrity="sha256-&#43;CC/xQfD6&#43;/hf4iB7E7hABPzuJrZVVpQrPm7F3Hmgj8=" crossorigin="anonymous"></script>
 
 
 

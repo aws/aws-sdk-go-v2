@@ -16,4 +16,4 @@ ENV PATH /opt/nodejs/bin:${PATH}
 
 RUN npm install && \
     git submodule update --init --recursive themes/docsy && \
-    hugo -d docs
+    HUGO_ENV=production hugo -d docs --gc
