@@ -32,7 +32,7 @@ if err != nil {
 ```
 
 `config.LoadDefaultConfig(context.TODO())` will construct an [aws.Config]({{< apiref "aws#Config" >}})
-using the AWS shared configuration sources. This includes configuring a credential provider. configuring the AWS Region,
+using the AWS shared configuration sources. This includes configuring a credential provider, configuring the AWS Region,
 and loading service specific configuration. Service clients can be constructed using the loaded `aws.Config`, providing
 a consistent pattern for constructing clients.
 
@@ -87,10 +87,10 @@ default credential chain looks for credentials in the following order:
 
 1. Environment variables.
    1. Static Credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`)
-   1. Web Identity Token (`AWS_WEB_IDENTITY_TOKEN_FILE`)
-1. Shared credentials file.
-   1. ~/.aws/credentials
-   1. ~/.aws/config
+   2. Web Identity Token (`AWS_WEB_IDENTITY_TOKEN_FILE`)
+1. Shared configuration files.
+   1. SDK defaults to `credentials` file under `.aws` folder that is placed in the home folder on your computer.
+   1. SDK defaults to `config` file under `.aws` folder that is placed in the home folder on your computer.
 1. If your application uses an ECS task definition or RunTask API operation,
    {{% alias service=IAM %}} role for tasks.
 1. If your application is running on an {{% alias service=EC2 %}} instance, {{% alias service=IAM %}} role for {{% alias service=EC2 %}}.
@@ -113,11 +113,12 @@ following order:
    credentials to make AWS calls. {{% alias service=IAM %}} roles provide an easy way to
    distribute and manage credentials on multiple {{% alias service=EC2 %}} instances.
 
-1. Use a shared credentials file.
-
-   This credentials file is the same one used by other SDKs and the {{% alias tools=CLI %}}.
-   If you're already using a shared credentials file, you can also use
-   it for this purpose.
+1. Use shared credentials or config files.
+    
+   The credentials and config files can be shared across other AWS SDKs and {{% alias service=CLI %}}.
+   As a security best practice, we recommend using credentials file for setting sensitive values 
+   such as access key IDs and secret keys. Here are the 
+   [formatting requirements](https://docs.aws.amazon.com/credref/latest/refdocs/file-format.html) for each of these files.
 
 4. Use environment variables.
 
@@ -141,21 +142,55 @@ If you have configured your instance to use {{% alias service=IAM %}} roles, the
 these credentials for your application automatically. You don't need to
 manually specify these credentials.
 
-### Shared Credentials File
+### Shared Credentials and Configuration
 
-A credential file is a plaintext file that contains your access keys.
-The file must be on the same machine on which you're running your
-application. The file must be named `credentials` and located in the
-`.aws/` folder in your home directory. The home directory can vary by
-operating system. In Windows, you can refer to your home directory by
-using the environment variable :code:`%UserProfile%`. In Unix-like systems, you
-can use the environment variable :code:`$HOME` or :code:`~` (tilde).
-
-If you already use this file for other SDKs and tools (like the {{% alias tools=CLI %}}),
-you don't need to change anything to use the files in this SDK. If
+The shared credentials and config files are the most common way that you can 
+provide those pieces of information to an AWS tool or SDK.
 you use different credentials for different tools or applications, you
 can use *profiles* to configure multiple access keys in the same
 configuration file.
+
+The Go SDK V2 introduces the ability to provide multiple credentials or 
+config files using the `config.LoadOptions`. If not provided, SDK uses 
+files stored at default locations mentioned in the 
+[specifying credentials](https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/#specifying-credentials) 
+section.
+
+```go
+import (
+    "context"
+    "github.com/aws/aws-sdk-go-v2/config"    
+)
+
+// ...
+
+cfg , err := config.LoadDefaultConfig(context.TODO(), 
+	WithSharedCredentialsFiles(
+	    []string{"test/credentials", "data/credentials"}
+	), 
+    WithSharedConfigFiles(
+        []string("test/config", "data/config")
+    )	
+) 
+
+```
+
+When working with shared credentials and config files, if duplicate profiles 
+are specified they are merged to resolve a profile. In case of merge conflict,
+
+1. If duplicate profiles are specified within a same credentials/config file,
+   the profile properties specified in the latter profile takes precedence. 
+
+1. If duplicate profiles are specified across either multiple credentials files 
+   or across multiple config files, the profile properties are resolved as per 
+   the order of file input to the `config.LoadOptions`. The profile properties 
+   in the latter files take precedence.
+   
+1. If a profile exists in both credentials file and config file, the credentials file 
+   properties take precedence.
+   
+If need be, you can enable `LogConfigurationWarnings` on `config.LoadOptions`, and 
+log the profile resolution steps.  
 
 #### Creating the Credentials File
 
@@ -183,6 +218,36 @@ aws_access_key_id = <YOUR_TEMP_ACCESS_KEY_ID>
 aws_secret_access_key = <YOUR_TEMP_SECRET_ACCESS_KEY>
 aws_session_token = <YOUR_SESSION_TOKEN>
 ```
+The section name for a non-default profile within a credentials file 
+must not begin with the word `profile`. You can read more at 
+[AWS Tools and SDKs Shared Configuration and Credentials Reference Guide](https://docs.aws.amazon.com/credref/latest/refdocs/file-format.html#file-format-creds).
+
+#### Creating the Config File
+
+If you don't have a shared credentials file (`.aws/config`), you
+can use any text editor to create one in your home directory. Add the
+following content to your config file, replacing`<REGION>` with the 
+region you want to use for an api call.
+
+```ini
+[default]
+region = <REGION>
+```
+
+The `[default]` heading defines config for the default profile,
+which the SDK will use unless you configure it to use another profile.
+
+You can use named profiles, as shown in the following example:
+
+```ini
+[profile named-profile]
+region = <REGION>
+```
+
+The section name for a non-default profile within a config file
+must always begin with the word `profile `, followed by the 
+intended profile name. You can read more at 
+[AWS Tools and SDKs Shared Configuration and Credentials Reference Guide](https://docs.aws.amazon.com/credref/latest/refdocs/file-format.html#file-format-config).
 
 #### Specifying Profiles
 
@@ -207,7 +272,7 @@ aws_secret_access_key = <YOUR_PROD_SECRET_ACCESS_KEY>
 
 By default, the SDK checks the `AWS_PROFILE` environment variable to
 determine which profile to use. If no `AWS_PROFILE` variable is set,
-the SDK uses the default profile.
+the SDK uses the `default` profile.
 
 Sometimes, you may to want to use a different profile with your application.
 For example let's say you want to use the `test-account` credentials with
