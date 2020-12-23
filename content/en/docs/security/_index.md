@@ -2,6 +2,7 @@
 title: "Security for this AWS Product or Service"
 linkTitle: "Security"
 date: "2020-11-09"
+weight: 10
 ---
 
 Cloud security at Amazon Web Services (AWS) is the highest priority. As an AWS

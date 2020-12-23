@@ -2,6 +2,7 @@
 title: "Using AWS Cloud9 with the AWS SDK for Go V2"
 linkTitle: "Using Cloud9 with the SDK"
 date: "2020-11-12"
+weight: 10
 ---
 
 You can use {{% alias service=AC9long %}} with the {{% alias sdk-go %}} to write and run your Go code using just a

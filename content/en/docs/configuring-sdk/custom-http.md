@@ -23,8 +23,7 @@ wrapping the client using [WithHTTPClient]({{< apiref "config#WithHTTP" >}}) and
 `LoadDefaultConfig`. For example to pass `customClient` as our client:
 
 ```go
-cfg, err := config.LoadDefaultConfig(context.TODO(), 
-	config.WithHTTPClient(customClient))
+cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithHTTPClient(customClient))
 ```
 
 ## Timeout

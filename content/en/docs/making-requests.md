@@ -3,6 +3,7 @@ title: "Using the AWS SDK for Go V2 with AWS Services"
 linkTitle: "Using AWS Services"
 date: "2020-11-12"
 description: "Construct service clients and make operation calls to send requests to AWS services."
+weight: 5
 ---
 
 To make calls to an AWS service, you must first construct a service client instance. A service client
@@ -92,7 +93,7 @@ import "github.com/aws/aws-sdk-go-v2/service/s3"
 
 client := s3.New(s3.Options{
 	Region:      "us-west-2",
-	Credentials: &aws.CredentialsCache{Provider: credentials.NewStaticCredentials(accessKey, secretKey)}.
+	Credentials: aws.NewCredentialsCache(credentials.NewStaticCredentials(accessKey, secretKey)),
 })
 ```
 
@@ -111,7 +112,7 @@ import "github.com/aws/aws-sdk-go-v2/service/s3"
 
 options := s3.Options{
     Region:      "us-west-2",
-    Credentials: &aws.CredentialsCache{Provider: credentials.NewStaticCredentials(accessKey, secretKey)}.
+    Credentials: aws.NewCredentialsCache(credentials.NewStaticCredentials(accessKey, secretKey)).
 }
 
 client := s3.New(options, func(o *s3.Options) {
@@ -423,9 +424,3 @@ for pagiantor.HasMorePages() && pageNum < 3 {
 Similar to client operation method, the client options like the request Region can be modified by providing one or more
 functional arguments to `NextPage`. For more information about overriding client options when calling an operation see
 [Overriding Clients For Operation]({{% ref "#OverrideClientOptionsForOperation" %}})
-
-## Using Waiters
-
-{{% pageinfo info"info" %}}
-Waiters are not currently supported in the current {{% alias sdk-go %}} developer preview release.
-{{% /pageinfo %}}

@@ -280,7 +280,7 @@ If you explicitly provide credentials, as in this example, the SDK uses only tho
 All credential providers passed to or returned by `LoadDefaultConfig` are wrapped in a
 [CredentialsCache]({{< apiref "aws#CredentialsCache" >}}) automatically. This enables caching and concurrency safe 
 credential access. If you explicitly configure a provider on `aws.Config` directly you must explicitly wrap the provider
-with this type.
+with this type using [NewCredentialsCache]({{< apiref "aws#NewCredentialsCache" >}}).
 {{% /pageinfo %}}
 
 #### Static Credentials

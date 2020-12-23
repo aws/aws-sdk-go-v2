@@ -1,6 +1,6 @@
 ---
-title: "User Guide"
-linkTitle: "User Guide"
+title: "Developer Guide"
+linkTitle: "Developer Guide"
 date: "2020-11-12"
 weight: 1
 menu:
@@ -8,7 +8,7 @@ menu:
         weight: 20
 ---
 
-Welcome to the AWS SDK for Go. The AWS SDK for Go provides APIs and utilities that developers can use to build Go
+Welcome to the AWS SDK for Go. The AWS SDK for Go V2 provides APIs and utilities that developers can use to build Go
 applications that use AWS services, such as Amazon Elastic Compute Cloud (Amazon EC2) and Amazon Simple Storage
 Service (Amazon S3).
 

@@ -3,6 +3,7 @@ title: "Handling Errors in the AWS SDK for Go V2"
 linkTitle: "Handling Errors"
 date: "2020-11-12"
 description: "Use the Error interface to handle errors from the AWS SDK for Go V2 or AWS service."
+weight: 6
 ---
 
 The {{% alias sdk-go %}} returns errors that satisfy the Go `error` interface type  You can use the `Error()` method to
@@ -49,7 +50,7 @@ For example:
 
 ```go
 import "log"
-import "github.com/awslabs/smithy-go"
+import "github.com/aws/smithy-go"
 
 // ...
 
@@ -94,7 +95,7 @@ the fault of the error was due to the client or server if known. For example:
 
 ```go
 import "log"
-import "github.com/awslabs/smithy-go"
+import "github.com/aws/smithy-go"
 
 // ...
 

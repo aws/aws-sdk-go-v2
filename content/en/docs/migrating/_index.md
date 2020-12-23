@@ -2,6 +2,7 @@
 title: "Migrating to the AWS SDK for Go V2"
 linkTitle: "Migrating"
 description: "How to migrate to the AWS SDK for Go V2 from AWS SDK for Go V1."
+weight: 4
 ---
 
 ## Minimum Go Version
@@ -675,7 +676,7 @@ if err != nil {
 import "context"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
 import "github.com/aws/aws-sdk-go-v2/service/s3/types"
-import "github.com/awslabs/smithy-go"
+import "github.com/aws/smithy-go"
 
 // ...
 
