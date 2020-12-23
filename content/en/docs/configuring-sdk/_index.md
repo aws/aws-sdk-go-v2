@@ -115,7 +115,7 @@ following order:
 
 1. Use shared credentials or config files.
     
-   The credentials and config files can be shared across other AWS SDKs and {{% alias service=CLI %}}.
+   The credentials and config files are shared across other AWS SDKs and {{% alias service=CLI %}}.
    As a security best practice, we recommend using credentials file for setting sensitive values 
    such as access key IDs and secret keys. Here are the 
    [formatting requirements](https://docs.aws.amazon.com/credref/latest/refdocs/file-format.html) for each of these files.
@@ -144,16 +144,14 @@ manually specify these credentials.
 
 ### Shared Credentials and Configuration
 
-The shared credentials and config files are the most common way that you can 
-provide those pieces of information to an AWS tool or SDK.
-you use different credentials for different tools or applications, you
-can use *profiles* to configure multiple access keys in the same
-configuration file.
+The shared credentials and config files can be used to share common configuration 
+amongst AWS SDKs and other tools. If you use different credentials for different 
+tools or applications, you can use *profiles* to configure multiple access keys 
+in the same configuration file.
 
-The Go SDK V2 introduces the ability to provide multiple credentials or 
-config files using the `config.LoadOptions`. If not provided, SDK uses 
-files stored at default locations mentioned in the 
-[specifying credentials](https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/#specifying-credentials) 
+You can provide multiple credential or config files locations using 
+`config.LoadOptions`, by default the SDK loads files stored at default 
+locations mentioned in the [specifying credentials](https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/#specifying-credentials) 
 section.
 
 ```go
@@ -226,8 +224,8 @@ must not begin with the word `profile`. You can read more at
 
 If you don't have a shared credentials file (`.aws/config`), you
 can use any text editor to create one in your home directory. Add the
-following content to your config file, replacing`<REGION>` with the 
-region you want to use for an api call.
+following content to your config file, replacing `<REGION>` with the 
+desired region.
 
 ```ini
 [default]
@@ -237,7 +235,7 @@ region = <REGION>
 The `[default]` heading defines config for the default profile,
 which the SDK will use unless you configure it to use another profile.
 
-You can use named profiles, as shown in the following example:
+You use named profiles, as shown in the following example:
 
 ```ini
 [profile named-profile]
