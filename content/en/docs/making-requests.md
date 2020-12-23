@@ -432,25 +432,16 @@ When interacting with AWS APIs that are asynchronous, you often need to wait
 for a particular resource to become available in order to perform further 
 actions on it. 
 
-Let’s take an example of {{% alias service=DDBlong %}} `CreateTable` API. 
-After you invoke the API, the response returns immediately with a TableStatus 
-of CREATING, and you can’t invoke read or write operations until the table 
-status has been transitioned to `ACTIVE`. 
+For example, the {{% alias service=DDBlong %}} `CreateTable` API returns 
+immediately with a TableStatus of CREATING, and you can't invoke read or 
+write operations until the table status has been transitioned to `ACTIVE`. 
 
 Writing logic to continuously poll the table status can be cumbersome 
-and error-prone. This is especially true when you are dealing with multiple 
-AWS resources, as different resources often have different polling APIs and 
-success states that indicate the availability of that particular resource
+and error-prone. The waiters help take the complexity out of it and 
+are simple APIs that handle the polling task for you.
 
-The waiters help take the complexity out of it and are simple APIs that handle 
-the polling task for you. It also provides polling configurations, such as the 
-maximum wait time, minimum delay and maximum delay between polling retries. 
-Waiters use a back-off strategy between each attempt. With the waiters utility, 
-you can focus on working with the resource without worrying how to make sure 
-that this resource is ready.
-
-The following example shows how you can use waiters to poll if a 
-{{% alias service=DDB %}} table is created and ready for a write operation.
+For example, you can use waiters to poll if a {{% alias service=DDB %}} table 
+is created and ready for a write operation.
 
 ```go
 import "context"
@@ -495,18 +486,14 @@ fmt.Println("Dynamodb table is now ready for write operations")
 
 ```
 
-Since the waiter constructor takes in a client interface, you can 
-provide a custom client that will be used by the waiter to poll the resource.
-This design also makes it easier to mock the waiter for testing purposes,
-
 #### Overriding waiter configuration
 
-By default, SDK uses the minimum delay and maximum delay value configured with 
-optimal values defined by AWS services for different APIs. You can override these
-configurations on the entire waiter or per request, via waiter-specific 
-functional options present for each waiter. 
+By default, the SDK uses the minimum delay and maximum delay value configured with 
+optimal values defined by AWS services for different APIs. You can override waiter 
+configuration by providing functional options during waiter construction, or when 
+invoking a waiter operation. 
 
-Here's how you can configure waiter-level override configuration
+For example, to override waiter configuration during waiter construction
 
 ```go
 import "context"
@@ -539,7 +526,7 @@ waiter :=  dynamodb.NewTableExistsWaiter(client, func (o *dynamodb.TableExistsWa
 })
 ```
 
-The `Wait` function on each waiter also takes in waiter-specific functional options.  
+The `Wait` function on each waiter also takes in functional options.  
 Similar to the above example, you can override waiter configuration per `Wait` request. 
 
 ```go
@@ -572,12 +559,11 @@ fmt.Println("Dynamodb table is now ready for write operations")
 
 #### Advanced waiter configuration overrides
 
-In the new design of waiters, SDK provides advanced capabilities such as overriding how SDK determines, 
-if a waiter should retry based on the provided input or obtained api response. This functionality is 
-helpful for users who want to additionally customize and control the waiter behavior. The waiter-specific 
-options also provides `APIOptions` to [customize operation middlewares](https://aws.github.io/aws-sdk-go-v2/docs/middleware/#writing-a-custom-middleware).
+You can additionally customize the waiter default behavior by providing a custom 
+retryable function. The waiter-specific options also provides `APIOptions` to
+[customize operation middlewares](https://aws.github.io/aws-sdk-go-v2/docs/middleware/#writing-a-custom-middleware).
 
-Here's how you can configure advanced waiter overrides.
+For example, to configure advanced waiter overrides.
 
 ```go
 import "context"
