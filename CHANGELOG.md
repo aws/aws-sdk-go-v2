@@ -1,3 +1,101 @@
+# Pending Release
+
+We’re happy to announce the Release Candidate (RC) of the AWS SDK for Go v2.
+This RC follows the developer preview release of the AWS SDK for Go v2. The SDK
+has undergone a major rewrite from the v1 code base to incorporate your
+feedback and to take advantage of modern Go language features.
+
+## Documentation
+* Developer Guide: https://aws.github.io/aws-sdk-go-v2/docs/
+* API Reference docs: https://pkg.go.dev/github.com/aws/aws-sdk-go-v2
+* Migration Guide: https://aws.github.io/aws-sdk-go-v2/docs/migrating/
+
+## Breaking Changes
+* Dependency `github.com/awslabs/smithy-go` has been relocated to `github.com/aws/smithy-go`
+    * The `smithy-go` repository was moved from the `awslabs` GitHub organization to `aws`.
+    * `xml`, `httpbinding`, and `json` package relocated under `encoding` package.
+* The module `ec2imds` moved to `feature/ec2/imds` path ([#984](https://github.com/aws/aws-sdk-go-v2/pull/984))
+    * Moves the `ec2imds` feature module to be in common location as other SDK features.
+* `aws/signer/v4`: Refactor AWS Sigv4 Signer and options types to allow function options ([#955](https://github.com/aws/aws-sdk-go-v2/pull/955))
+    * Fixes [#917](https://github.com/aws/aws-sdk-go-v2/issues/917), [#960](https://github.com/aws/aws-sdk-go-v2/issues/960), [#958](https://github.com/aws/aws-sdk-go-v2/issues/958)
+* `aws`: CredentialCache type updated to require constructor function ([#946](https://github.com/aws/aws-sdk-go-v2/pull/946))
+    * Fixes [#940](https://github.com/aws/aws-sdk-go-v2/issues/940)
+* `credentials`: ExpiryWindow and Jitter moved from credential provider to `CredentialCache` ([#946](https://github.com/aws/aws-sdk-go-v2/pull/946))
+    * Moves ExpiryWindow and Jitter options to common option of the `CredentialCache` instead of duplicated across providers.
+    * Fixes [#940](https://github.com/aws/aws-sdk-go-v2/issues/940)
+* `config`: Ensure shared credentials file has precedence over shared config file ([#990](https://github.com/aws/aws-sdk-go-v2/pull/990))
+    * The shared config file was incorrectly overriding the shared credentials file when merging values.
+* `config`: Add `context.Context` to `LoadDefaultConfig` ([#951](https://github.com/aws/aws-sdk-go-v2/pull/951))
+    * Updates `config#LoadDefaultConfig` function to take `context.Context` as well as functional options for the `config#LoadOptions` type.
+    * Fixes [#926](https://github.com/aws/aws-sdk-go-v2/issues/926), [#819](https://github.com/aws/aws-sdk-go-v2/issues/819)
+* `aws`: Rename `NoOpRetryer` to `NopRetryer` to have consistent naming with rest of SDK ([#987](https://github.com/aws/aws-sdk-go-v2/pull/987))
+    * Fixes [#878](https://github.com/aws/aws-sdk-go-v2/issues/878)
+* `service/s3control`: Change `S3InitiateRestoreObjectOperation.ExpirationInDays` from value to pointer type ([#988](https://github.com/aws/aws-sdk-go-v2/pull/988))
+
+## New Features
+* *Waiters*: Add Waiter utilities for API clients ([aws/smithy-go#237](https://github.com/aws/smithy-go/pull/237))
+    * Your application can now use Waiter utilities to wait for AWS resources.
+* `feature/dynamodb/attributevalue`: Add Amazon DynamoDB Attribute value marshaler utility ([#948](https://github.com/aws/aws-sdk-go-v2/pull/948))
+    * Adds a utility for marshaling Go types too and from Amazon DynamoDB AttributeValues.
+    * Also includes utility for converting from Amazon DynamoDB Streams AttributeValues to Amazon DynamoDB AttributeValues.
+* `feature/dynamodbstreams/attributevalue`: Add Amazon DynamoDB Streams Attribute value marshaler utility ([#948](https://github.com/aws/aws-sdk-go-v2/pull/948))
+    * Adds a utility for marshaling Go types too and from Amazon DynamoDB Streams AttributeValues.
+    * Also includes utility for converting from Amazon DynamoDB AttributeValues to Amazon DynamoDB Streams AttributeValues.
+* `feature/dynamodb/expression`: Add Amazon DynamoDB expression utility ([#981](https://github.com/aws/aws-sdk-go-v2/pull/981))
+    * Adds the expression utility to the SDK for easily building Amazon DynamoDB operation expressions in code.
+
+## Bug Fixes
+* `service/s3`: Fix Presigner to configure client correctly for Amazon S3 ([#969](https://github.com/aws/aws-sdk-go-v2/pull/969))
+* service/s3: Fix deserialization of CompleteMultipartUpload ([#965](https://github.com/aws/aws-sdk-go-v2/pull/965)
+    * Fixes [#927](https://github.com/aws/aws-sdk-go-v2/issues/927)
+* `codegen`: Fix API client union serialization ([#979](https://github.com/aws/aws-sdk-go-v2/pull/979))
+    * Fixes [#978](https://github.com/aws/aws-sdk-go-v2/issues/978)
+
+## Service Client Highlights
+* API Clients have been bumped to version `v0.31.0`
+* Regenerate API Clients from updated API models adding waiter utilities, and union parameters.
+* `codegen`:
+    * Add documentation to union API parameters describing valid member types, and usage example ([aws/smithy-go#239](https://github.com/aws/smithy-go/pull/239))
+    * Normalize Metadata header map keys to be lower case ([aws/smithy-go#241](https://github.com/aws/smithy-go/pull/241)), ([#982](https://github.com/aws/aws-sdk-go-v2/pull/982))
+        * Fixes [#376](https://github.com/aws/aws-sdk-go-v2/issues/376) Amazon S3 Metadata parameters keys are always returned as lower case.
+    * Fix API client deserialization of XML based responses ([aws/smithy-go#245](https://github.com/aws/smithy-go/pull/245)), ([#992](https://github.com/aws/aws-sdk-go-v2/pull/992))
+        * Fixes [#910](https://github.com/aws/aws-sdk-go-v2/issues/910)
+* `service/s3`, `service/s3control`:
+    * Add support for reading `s3_use_arn_region` from shared config file ([#991](https://github.com/aws/aws-sdk-go-v2/pull/991))
+    * Add Utility for getting RequestID and HostID of response ([#983](https://github.com/aws/aws-sdk-go-v2/pull/983))
+
+
+## Other changes
+* Updates branch `HEAD` points from `master` to `main`.
+    * This should not impact your application, but if you have pull requests or forks of the SDK you may need to update the upstream branch your fork is based off of.
+
+## Migrating from v2 preview SDK's v0.30.0 to v0.31.0 release candidate
+
+### smithy-go module relocation
+
+If your application uses `smithy-go` utilities for request pipeline your application will need to be updated to refer to the new import path of `github.com/aws/smithy-go`. If you application did *not* use `smithy-go` utilities directly, your application will update automatically.
+
+### EC2 IMDS module relocation
+
+If your application used the `ec2imds` module, it has been relocated to `feature/ec2/imds`. Your application will need to update to the new import path, `github.com/aws/aws-sdk-go-v2/feature/ec2/imds`.
+
+### CredentialsCache Constructor and ExpiryWindow Options
+
+The `aws#CredentialsCache` type was updated, and a new constructor function, `NewCredentialsCache` was added. This function needs to be used to initialize the `CredentialCache`. The constructor also has function options to specify additional configuration, e.g. ExpiryWindow and Jitter.
+
+If your application was specifying the `ExpiryWindow` with the `credentials/stscreds#AssumeRoleOptions`, `credentials/stscreds#WebIdentityRoleOptions`, `credentials/processcreds#Options`, or `credentials/ec2rolecrds#Options` types the `ExpiryWindow` option will need to specified on the `CredentialsCache` constructor instead.
+
+### AWS Sigv4 Signer Refactor
+
+The `aws/signer/v4` package's `Signer.SignHTTP` and `Signer.PresignHTTP` methods were updated to take functional options. If your application provided a custom implementation for API client's `HTTPSignerV4` or `HTTPPresignerV4` interfaces, that implementation will need to be updated for the new function signature.
+
+### Configuration Loading
+
+The `config#LoadDefaultConfig` function has been updated to require a `context.Context` as the first parameter, with additional optional function options as variadic additional arguments. Your application will need to update its usage of `LoadDefaultConfig` to pass in `context.Context` as the first parameter. If your application used the `With...` helpers those should continue to work without issue.
+
+The v2 SDK corrects its behavior to be inline with the AWS CLI and other AWS SDKs. Refer to https://docs.aws.amazon.com/credref/latest/refdocs/overview.html for more information how to use the shared config and credentials files.
+
+
 # Release 2020-11-30
 
 ## Breaking Change
@@ -21,7 +119,7 @@
     * Fixes the `LoadDefaultConfig`'s configuration provider order to correctly load a custom HTTP client prior to configuring the client for `AWS_CA_BUNDLE` environment variable.
 * `service/s3`: Fix signature mismatch error for s3 ([#913](https://github.com/aws/aws-sdk-go-v2/pull/913))
     * Fixes ([#883](https://github.com/aws/aws-sdk-go-v2/issues/883))
-* `service/s3control`: 
+* `service/s3control`:
     * Fix HostPrefix addition behavior for s3control ([#882](https://github.com/aws/aws-sdk-go-v2/pull/882))
         * Fixes ([#863](https://github.com/aws/aws-sdk-go-v2/issues/863))
     * Fix s3control error deserializer ([#875](https://github.com/aws/aws-sdk-go-v2/pull/875))
@@ -32,7 +130,7 @@
 * Logging support has been added to service clients. See [Logging](https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/logging/) in the Developer Guide. ([#872](https://github.com/aws/aws-sdk-go-v2/pull/872))
 * `service`: Add support for pre-signed URL clients for S3, RDS, EC2 service ([#888](https://github.com/aws/aws-sdk-go-v2/pull/888))
     * `service/s3`: operations `PutObject` and `GetObject` are now supported with s3 pre-signed url client.
-    * `service/ec2`: operation `CopySnapshot` is now supported with ec2 pre-signed url client. 
+    * `service/ec2`: operation `CopySnapshot` is now supported with ec2 pre-signed url client.
     * `service/rds`: operations `CopyDBSnapshot`, `CreateDBInstanceReadReplica`, `CopyDBClusterSnapshot`, `CreateDBCluster` are now supported with rds pre-signed url client.
 * `service/s3`: Add support for S3 access point and S3 on outposts access point ARNs ([#870](https://github.com/aws/aws-sdk-go-v2/pull/870))
 * `service/s3control`: Adds support for S3 on outposts access point and S3 on outposts bucket ARNs ([#870](https://github.com/aws/aws-sdk-go-v2/pull/870))
@@ -42,13 +140,13 @@
 ### aws.BuildableHTTPClient move
 The `aws`'s `BuildableHTTPClient` HTTP client implementation was moved to `aws/transport/http` as `BuildableClient`. If your application used the `aws.BuildableHTTPClient` type, update it to use the `BuildableClient` in the `aws/transport/http` package.
 
-### Slice and Map API member types 
+### Slice and Map API member types
 This release includes several code generation updates for API client's slice map members. Using API modeling metadata the Slice and map members are now generated as value types instead of pointer types. For your application this means that for these types, the SDK no longer will have pointer member types, and have value member types.
 
 To migrate to this change you'll need to remove the pointer handling for slice and map members, and instead use value type handling of the member values.
 
 ### Boolean and Number API member types
-Similar to the slice and map API member types being generated as value, the SDK's code generation now has metadata where the SDK can generate boolean and number members as value type instead of pointer types. 
+Similar to the slice and map API member types being generated as value, the SDK's code generation now has metadata where the SDK can generate boolean and number members as value type instead of pointer types.
 
 To migrate to this change you'll need to remove the pointer handling for numbers and boolean member types, and instead use value handling.
 
@@ -70,7 +168,7 @@ To migrate to this change you'll need to remove the pointer handling for numbers
 * Dependency Update: Updated SDK dependencies to their latest versions.
 
 ## Migrating from v2 preview SDK's v0.28.0 to v0.29.0
-* API Clients ResolverOptions type renamed to EndpointResolverOptions 
+* API Clients ResolverOptions type renamed to EndpointResolverOptions
 
 # Release 2020-10-26
 
@@ -115,7 +213,7 @@ To migrate to this change you'll need to remove the pointer handling for numbers
 * `codegen`: Rename `smithy-go`'s `smithy.OperationError` to `smithy.OperationInvokeError`.
 
 ## Core SDK Highlights
-* `config`: 
+* `config`:
   * Bumped to `v0.2.0`
   * Refactor Config Module, Add Config Package Documentation and Examples, Improve Overall SDK Readme ([#822](https://github.com/aws/aws-sdk-go-v2/pull/822))
 * `credentials`:
@@ -129,7 +227,7 @@ To migrate to this change you'll need to remove the pointer handling for numbers
 
 #### Configuration
 
-The `config` module's exported types were trimmed down to add clarity and reduce confusion. Additional changes to the `config` module' helpers. 
+The `config` module's exported types were trimmed down to add clarity and reduce confusion. Additional changes to the `config` module' helpers.
 
 * Refactored `WithCredentialsProvider`, `WithHTTPClient`, and `WithEndpointResolver` to functions instead of structs.
 * Removed `MFATokenFuncProvider`, use `AssumeRoleCredentialOptionsProvider` for setting options for `stscreds.AssumeRoleOptions`.
@@ -162,10 +260,10 @@ The `config` module's exported types were trimmed down to add clarity and reduce
 ## Announcements
 We’re happy to share the updated clients for the v0.25.0 preview version of the AWS SDK for Go V2.
 
-The updated clients leverage new developments and advancements within AWS and the Go software ecosystem at large since 
-our original preview announcement. Using the new clients will be a bit different than before. The key differences are: 
+The updated clients leverage new developments and advancements within AWS and the Go software ecosystem at large since
+our original preview announcement. Using the new clients will be a bit different than before. The key differences are:
 simplified API operation invocation, performance improvements, support for error wrapping, and a new middleware architecture.
-So below we have a guided walkthrough to help try it out and share your feedback in order to better influence the features 
+So below we have a guided walkthrough to help try it out and share your feedback in order to better influence the features
 you’d like to see in the GA version.
 
 See [Announcement Blog Post](https://aws.amazon.com/blogs/developer/client-updates-in-the-preview-version-of-the-aws-sdk-for-go-v2/) for more details.
