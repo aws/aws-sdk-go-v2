@@ -3,14 +3,13 @@
 [![Build Status](https://travis-ci.org/aws/aws-sdk-go-v2.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-go-v2) [![SDK Documentation](https://img.shields.io/badge/SDK-Documentation-blue)](https://aws.github.io/aws-sdk-go-v2/docs/) [![API Reference](https://img.shields.io/badge/api-reference-blue.svg)](https://pkg.go.dev/mod/github.com/aws/aws-sdk-go-v2) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-blue.svg)](https://github.com/aws/aws-sdk-go/blob/master/LICENSE.txt)
 
 
-`aws-sdk-go-v2` is the **Release Candidate** the v2 AWS SDK for the Go programming language. This Release Candidate is provided to receive feedback from the language community on SDK changes prior to reaching General Availability (GA) status. As such, users should expect the SDK to release minor version releases that break backwards compatibility before reaching GA status. The release notes for the breaking change will include information about the breaking change, and how you can migrate to the latest version.
+`aws-sdk-go-v2` is the **Release Candidate** for the v2 AWS SDK for the Go programming language. This Release Candidate is provided to receive feedback from the language community on SDK changes prior to reaching General Availability (GA) status. As such, users should expect the SDK to release minor version releases that break backwards compatibility before reaching GA status. The release notes for the breaking change will include information about the breaking change, and how you can migrate to the latest version.
 
 Check out the [Issues] and [Projects] for design and updates being made to the SDK. The v2 SDK requires a minimum version of `Go 1.15`.
 
 We'll be expanding out the [Issues] and [Projects] sections with additional changes to the SDK based on your feedback, and SDK's core's improvements. Check the the SDK's [CHANGELOG] for information about the latest updates to the SDK.
 
 Jump To:
-* [Project Status](#project-status)
 * [Getting Started](#getting-started)
 * [Getting Help](#getting-help)
 * [Contributing](#feedback-and-contributing)
@@ -62,7 +61,7 @@ func main() {
     svc := dynamodb.NewFromConfig(cfg)
 
     // Build the request with its input parameters
-    resp, err := svc.ListTables(context.Background(), &dynamodb.ListTablesInput{
+    resp, err := svc.ListTables(context.TODO(), &dynamodb.ListTablesInput{
         Limit: aws.Int32(5),
     })
     if err != nil {
