@@ -1,4 +1,4 @@
-# Pending Release
+# Release 2020-12-23
 
 We’re happy to announce the Release Candidate (RC) of the AWS SDK for Go v2.
 This RC follows the developer preview release of the AWS SDK for Go v2. The SDK
