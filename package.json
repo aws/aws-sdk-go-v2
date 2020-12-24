@@ -20,7 +20,7 @@
     "url": "git+https://github.com/aws/aws-sdk-go-v2.git#documentation"
   },
   "author": "",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/skmcgrail/aws-sdk-go-v2/issues"
   },
