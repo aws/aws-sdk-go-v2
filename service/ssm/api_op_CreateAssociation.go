@@ -56,7 +56,7 @@ type CreateAssociationInput struct {
 	// By default, when you create a new associations, the system runs it immediately
 	// after it is created and then according to the schedule you specified. Specify
 	// this option if you don't want an association to run immediately after you create
-	// it.
+	// it. This parameter is not supported for rate expressions.
 	ApplyOnlyAtCronInterval bool
 
 	// Specify a descriptive name for the association.
@@ -124,6 +124,11 @@ type CreateAssociationInput struct {
 	// direct call to the PutComplianceItems API action. By default, all associations
 	// use AUTO mode.
 	SyncCompliance types.AssociationSyncCompliance
+
+	// A location is a combination of AWS Regions and AWS accounts where you want to
+	// run the association. Use this action to create an association in multiple
+	// Regions and multiple accounts.
+	TargetLocations []types.TargetLocation
 
 	// The targets for the association. You can target instances by using tags, AWS
 	// Resource Groups, all instances in an AWS account, or individual instance IDs.

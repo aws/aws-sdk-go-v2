@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateParallelData struct {
+}
+
+func (*validateOpCreateParallelData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateParallelData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateParallelDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateParallelDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteParallelData struct {
+}
+
+func (*validateOpDeleteParallelData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteParallelData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteParallelDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteParallelDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteTerminology struct {
 }
 
@@ -45,6 +85,26 @@ func (m *validateOpDescribeTextTranslationJob) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeTextTranslationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetParallelData struct {
+}
+
+func (*validateOpGetParallelData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetParallelData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetParallelDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetParallelDataInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -150,12 +210,44 @@ func (m *validateOpTranslateText) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateParallelData struct {
+}
+
+func (*validateOpUpdateParallelData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateParallelData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateParallelDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateParallelDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpCreateParallelDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateParallelData{}, middleware.After)
+}
+
+func addOpDeleteParallelDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteParallelData{}, middleware.After)
+}
+
 func addOpDeleteTerminologyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTerminology{}, middleware.After)
 }
 
 func addOpDescribeTextTranslationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTextTranslationJob{}, middleware.After)
+}
+
+func addOpGetParallelDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetParallelData{}, middleware.After)
 }
 
 func addOpGetTerminologyValidationMiddleware(stack *middleware.Stack) error {
@@ -178,16 +270,20 @@ func addOpTranslateTextValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTranslateText{}, middleware.After)
 }
 
+func addOpUpdateParallelDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateParallelData{}, middleware.After)
+}
+
 func validateEncryptionKey(v *types.EncryptionKey) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EncryptionKey"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -201,11 +297,11 @@ func validateInputDataConfig(v *types.InputDataConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InputDataConfig"}
-	if v.ContentType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
-	}
 	if v.S3Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if v.ContentType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -229,16 +325,79 @@ func validateOutputDataConfig(v *types.OutputDataConfig) error {
 	}
 }
 
+func validateParallelDataConfig(v *types.ParallelDataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParallelDataConfig"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTerminologyData(v *types.TerminologyData) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TerminologyData"}
+	if v.File == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("File"))
+	}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
-	if v.File == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("File"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateParallelDataInput(v *CreateParallelDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateParallelDataInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ParallelDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParallelDataConfig"))
+	} else if v.ParallelDataConfig != nil {
+		if err := validateParallelDataConfig(v.ParallelDataConfig); err != nil {
+			invalidParams.AddNested("ParallelDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionKey != nil {
+		if err := validateEncryptionKey(v.EncryptionKey); err != nil {
+			invalidParams.AddNested("EncryptionKey", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteParallelDataInput(v *DeleteParallelDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteParallelDataInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -277,6 +436,21 @@ func validateOpDescribeTextTranslationJobInput(v *DescribeTextTranslationJobInpu
 	}
 }
 
+func validateOpGetParallelDataInput(v *GetParallelDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetParallelDataInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTerminologyInput(v *GetTerminologyInput) error {
 	if v == nil {
 		return nil
@@ -303,6 +477,9 @@ func validateOpImportTerminologyInput(v *ImportTerminologyInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if len(v.MergeStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MergeStrategy"))
+	}
 	if v.TerminologyData == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TerminologyData"))
 	} else if v.TerminologyData != nil {
@@ -314,9 +491,6 @@ func validateOpImportTerminologyInput(v *ImportTerminologyInput) error {
 		if err := validateEncryptionKey(v.EncryptionKey); err != nil {
 			invalidParams.AddNested("EncryptionKey", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.MergeStrategy) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("MergeStrategy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -330,8 +504,12 @@ func validateOpStartTextTranslationJobInput(v *StartTextTranslationJobInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartTextTranslationJobInput"}
-	if v.DataAccessRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
+	if v.InputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
+	} else if v.InputDataConfig != nil {
+		if err := validateInputDataConfig(v.InputDataConfig); err != nil {
+			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.OutputDataConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputDataConfig"))
@@ -340,21 +518,17 @@ func validateOpStartTextTranslationJobInput(v *StartTextTranslationJobInput) err
 			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.InputDataConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
-	} else if v.InputDataConfig != nil {
-		if err := validateInputDataConfig(v.InputDataConfig); err != nil {
-			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
-		}
+	if v.DataAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
 	}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	if v.SourceLanguageCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLanguageCode"))
 	}
 	if v.TargetLanguageCodes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetLanguageCodes"))
 	}
-	if v.SourceLanguageCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceLanguageCode"))
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -386,11 +560,36 @@ func validateOpTranslateTextInput(v *TranslateTextInput) error {
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
+	if v.SourceLanguageCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLanguageCode"))
+	}
 	if v.TargetLanguageCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetLanguageCode"))
 	}
-	if v.SourceLanguageCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceLanguageCode"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateParallelDataInput(v *UpdateParallelDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateParallelDataInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ParallelDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParallelDataConfig"))
+	} else if v.ParallelDataConfig != nil {
+		if err := validateParallelDataConfig(v.ParallelDataConfig); err != nil {
+			invalidParams.AddNested("ParallelDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

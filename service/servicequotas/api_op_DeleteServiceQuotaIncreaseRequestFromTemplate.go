@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a service quota increase request from the Service Quotas template.
+// Deletes the quota increase request for the specified quota from your quota
+// request template.
 func (c *Client) DeleteServiceQuotaIncreaseRequestFromTemplate(ctx context.Context, params *DeleteServiceQuotaIncreaseRequestFromTemplateInput, optFns ...func(*Options)) (*DeleteServiceQuotaIncreaseRequestFromTemplateOutput, error) {
 	if params == nil {
 		params = &DeleteServiceQuotaIncreaseRequestFromTemplateInput{}
@@ -28,17 +29,17 @@ func (c *Client) DeleteServiceQuotaIncreaseRequestFromTemplate(ctx context.Conte
 
 type DeleteServiceQuotaIncreaseRequestFromTemplateInput struct {
 
-	// Specifies the AWS Region for the quota that you want to delete.
+	// The AWS Region.
 	//
 	// This member is required.
 	AwsRegion *string
 
-	// Specifies the code for the quota that you want to delete.
+	// The quota identifier.
 	//
 	// This member is required.
 	QuotaCode *string
 
-	// Specifies the code for the service that you want to delete.
+	// The service identifier.
 	//
 	// This member is required.
 	ServiceCode *string

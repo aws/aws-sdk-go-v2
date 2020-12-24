@@ -842,6 +842,105 @@ func (m *awsAwsjson11_serializeOpUpdateTrail) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAdvancedEventSelector(v *types.AdvancedEventSelector, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FieldSelectors != nil {
+		ok := object.Key("FieldSelectors")
+		if err := awsAwsjson11_serializeDocumentAdvancedFieldSelectors(v.FieldSelectors, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAdvancedEventSelectors(v []types.AdvancedEventSelector, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAdvancedEventSelector(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAdvancedFieldSelector(v *types.AdvancedFieldSelector, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndsWith != nil {
+		ok := object.Key("EndsWith")
+		if err := awsAwsjson11_serializeDocumentOperator(v.EndsWith, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Equals != nil {
+		ok := object.Key("Equals")
+		if err := awsAwsjson11_serializeDocumentOperator(v.Equals, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Field != nil {
+		ok := object.Key("Field")
+		ok.String(*v.Field)
+	}
+
+	if v.NotEndsWith != nil {
+		ok := object.Key("NotEndsWith")
+		if err := awsAwsjson11_serializeDocumentOperator(v.NotEndsWith, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NotEquals != nil {
+		ok := object.Key("NotEquals")
+		if err := awsAwsjson11_serializeDocumentOperator(v.NotEquals, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NotStartsWith != nil {
+		ok := object.Key("NotStartsWith")
+		if err := awsAwsjson11_serializeDocumentOperator(v.NotStartsWith, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StartsWith != nil {
+		ok := object.Key("StartsWith")
+		if err := awsAwsjson11_serializeDocumentOperator(v.StartsWith, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAdvancedFieldSelectors(v []types.AdvancedFieldSelector, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAdvancedFieldSelector(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDataResource(v *types.DataResource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -991,6 +1090,17 @@ func awsAwsjson11_serializeDocumentLookupAttributesList(v []types.LookupAttribut
 		if err := awsAwsjson11_serializeDocumentLookupAttribute(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOperator(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1309,6 +1419,13 @@ func awsAwsjson11_serializeOpDocumentLookupEventsInput(v *LookupEventsInput, val
 func awsAwsjson11_serializeOpDocumentPutEventSelectorsInput(v *PutEventSelectorsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdvancedEventSelectors != nil {
+		ok := object.Key("AdvancedEventSelectors")
+		if err := awsAwsjson11_serializeDocumentAdvancedEventSelectors(v.AdvancedEventSelectors, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.EventSelectors != nil {
 		ok := object.Key("EventSelectors")

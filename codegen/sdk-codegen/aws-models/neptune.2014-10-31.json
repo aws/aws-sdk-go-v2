@@ -381,10 +381,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "immediate"
+                        "value": "immediate",
+                        "name": "immediate"
                     },
                     {
-                        "value": "pending-reboot"
+                        "value": "pending-reboot",
+                        "name": "pending_reboot"
                     }
                 ]
             }
@@ -8200,22 +8202,28 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "db-instance"
+                        "value": "db-instance",
+                        "name": "db_instance"
                     },
                     {
-                        "value": "db-parameter-group"
+                        "value": "db-parameter-group",
+                        "name": "db_parameter_group"
                     },
                     {
-                        "value": "db-security-group"
+                        "value": "db-security-group",
+                        "name": "db_security_group"
                     },
                     {
-                        "value": "db-snapshot"
+                        "value": "db-snapshot",
+                        "name": "db_snapshot"
                     },
                     {
-                        "value": "db-cluster"
+                        "value": "db-cluster",
+                        "name": "db_cluster"
                     },
                     {
-                        "value": "db-cluster-snapshot"
+                        "value": "db-cluster-snapshot",
+                        "name": "db_cluster_snapshot"
                     }
                 ]
             }

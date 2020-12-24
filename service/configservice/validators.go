@@ -1415,17 +1415,17 @@ func validateAggregateResourceIdentifier(v *types.AggregateResourceIdentifier) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AggregateResourceIdentifier"}
-	if len(v.ResourceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
-	}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	if v.SourceAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceAccountId"))
 	}
 	if v.SourceRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceRegion"))
 	}
-	if v.SourceAccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceAccountId"))
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1458,11 +1458,11 @@ func validateConformancePackInputParameter(v *types.ConformancePackInputParamete
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConformancePackInputParameter"}
-	if v.ParameterValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ParameterValue"))
-	}
 	if v.ParameterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParameterName"))
+	}
+	if v.ParameterValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParameterValue"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1585,16 +1585,16 @@ func validateRemediationConfiguration(v *types.RemediationConfiguration) error {
 	if v.ConfigRuleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigRuleName"))
 	}
-	if v.Parameters != nil {
-		if err := validateRemediationParameters(v.Parameters); err != nil {
-			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
-		}
-	}
 	if len(v.TargetType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetType"))
 	}
 	if v.TargetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetId"))
+	}
+	if v.Parameters != nil {
+		if err := validateRemediationParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1643,14 +1643,14 @@ func validateRemediationParameterValue(v *types.RemediationParameterValue) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemediationParameterValue"}
-	if v.StaticValue != nil {
-		if err := validateStaticValue(v.StaticValue); err != nil {
-			invalidParams.AddNested("StaticValue", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ResourceValue != nil {
 		if err := validateResourceValue(v.ResourceValue); err != nil {
 			invalidParams.AddNested("ResourceValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StaticValue != nil {
+		if err := validateStaticValue(v.StaticValue); err != nil {
+			invalidParams.AddNested("StaticValue", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1765,15 +1765,15 @@ func validateOpBatchGetAggregateResourceConfigInput(v *BatchGetAggregateResource
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetAggregateResourceConfigInput"}
+	if v.ConfigurationAggregatorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationAggregatorName"))
+	}
 	if v.ResourceIdentifiers == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifiers"))
 	} else if v.ResourceIdentifiers != nil {
 		if err := validateResourceIdentifiersList(v.ResourceIdentifiers); err != nil {
 			invalidParams.AddNested("ResourceIdentifiers", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ConfigurationAggregatorName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationAggregatorName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1995,11 +1995,11 @@ func validateOpDeleteResourceConfigInput(v *DeleteResourceConfigInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourceConfigInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.ResourceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2144,11 +2144,11 @@ func validateOpGetAggregateComplianceDetailsByConfigRuleInput(v *GetAggregateCom
 	if v.ConfigRuleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigRuleName"))
 	}
-	if v.AwsRegion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AwsRegion"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.AwsRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsRegion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2192,15 +2192,15 @@ func validateOpGetAggregateResourceConfigInput(v *GetAggregateResourceConfigInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAggregateResourceConfigInput"}
+	if v.ConfigurationAggregatorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationAggregatorName"))
+	}
 	if v.ResourceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
 	} else if v.ResourceIdentifier != nil {
 		if err := validateAggregateResourceIdentifier(v.ResourceIdentifier); err != nil {
 			invalidParams.AddNested("ResourceIdentifier", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ConfigurationAggregatorName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationAggregatorName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2229,11 +2229,11 @@ func validateOpGetComplianceDetailsByResourceInput(v *GetComplianceDetailsByReso
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetComplianceDetailsByResourceInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.ResourceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2373,11 +2373,11 @@ func validateOpPutAggregationAuthorizationInput(v *PutAggregationAuthorizationIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutAggregationAuthorizationInput"}
-	if v.AuthorizedAwsRegion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthorizedAwsRegion"))
-	}
 	if v.AuthorizedAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthorizedAccountId"))
+	}
+	if v.AuthorizedAwsRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizedAwsRegion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2413,14 +2413,14 @@ func validateOpPutConfigurationAggregatorInput(v *PutConfigurationAggregatorInpu
 	if v.ConfigurationAggregatorName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationAggregatorName"))
 	}
-	if v.OrganizationAggregationSource != nil {
-		if err := validateOrganizationAggregationSource(v.OrganizationAggregationSource); err != nil {
-			invalidParams.AddNested("OrganizationAggregationSource", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.AccountAggregationSources != nil {
 		if err := validateAccountAggregationSourceList(v.AccountAggregationSources); err != nil {
 			invalidParams.AddNested("AccountAggregationSources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OrganizationAggregationSource != nil {
+		if err := validateOrganizationAggregationSource(v.OrganizationAggregationSource); err != nil {
+			invalidParams.AddNested("OrganizationAggregationSource", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2485,13 +2485,13 @@ func validateOpPutEvaluationsInput(v *PutEvaluationsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutEvaluationsInput"}
-	if v.ResultToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResultToken"))
-	}
 	if v.Evaluations != nil {
 		if err := validateEvaluations(v.Evaluations); err != nil {
 			invalidParams.AddNested("Evaluations", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ResultToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResultToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2505,13 +2505,13 @@ func validateOpPutOrganizationConfigRuleInput(v *PutOrganizationConfigRuleInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutOrganizationConfigRuleInput"}
+	if v.OrganizationConfigRuleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationConfigRuleName"))
+	}
 	if v.OrganizationManagedRuleMetadata != nil {
 		if err := validateOrganizationManagedRuleMetadata(v.OrganizationManagedRuleMetadata); err != nil {
 			invalidParams.AddNested("OrganizationManagedRuleMetadata", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.OrganizationConfigRuleName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationConfigRuleName"))
 	}
 	if v.OrganizationCustomRuleMetadata != nil {
 		if err := validateOrganizationCustomRuleMetadata(v.OrganizationCustomRuleMetadata); err != nil {
@@ -2587,17 +2587,17 @@ func validateOpPutResourceConfigInput(v *PutResourceConfigInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutResourceConfigInput"}
+	if v.ResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
 	if v.SchemaVersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaVersionId"))
-	}
-	if v.Configuration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
 	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
-	if v.ResourceType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2671,15 +2671,15 @@ func validateOpStartRemediationExecutionInput(v *StartRemediationExecutionInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartRemediationExecutionInput"}
+	if v.ConfigRuleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigRuleName"))
+	}
 	if v.ResourceKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceKeys"))
 	} else if v.ResourceKeys != nil {
 		if err := validateResourceKeys(v.ResourceKeys); err != nil {
 			invalidParams.AddNested("ResourceKeys", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ConfigRuleName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConfigRuleName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2708,11 +2708,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2726,11 +2726,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

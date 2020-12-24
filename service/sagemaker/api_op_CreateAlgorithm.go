@@ -81,6 +81,12 @@ type CreateAlgorithmInput struct {
 	// output content formats that the algorithm supports for inference.
 	InferenceSpecification *types.InferenceSpecification
 
+	// An array of key-value pairs. You can use tags to categorize your AWS resources
+	// in different ways, for example, by purpose, owner, or environment. For more
+	// information, see Tagging AWS Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	Tags []types.Tag
+
 	// Specifies configurations for one or more training jobs and that Amazon SageMaker
 	// runs to test the algorithm's training code and, optionally, one or more batch
 	// transform jobs that Amazon SageMaker runs to test the algorithm's inference

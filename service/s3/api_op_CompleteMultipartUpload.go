@@ -164,6 +164,10 @@ type CompleteMultipartUploadOutput struct {
 	// Amazon Simple Storage Service Developer Guide.
 	Bucket *string
 
+	// Indicates whether the multipart upload uses an S3 Bucket Key for server-side
+	// encryption with AWS KMS (SSE-KMS).
+	BucketKeyEnabled bool
+
 	// Entity tag that identifies the newly created object's data. Objects with
 	// different object data will have different entity tags. The entity tag is an
 	// opaque string. The entity tag may or may not be an MD5 digest of the object

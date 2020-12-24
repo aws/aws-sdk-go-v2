@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a listing of proposals for the network.
+// Returns a list of proposals for the network. Applies only to Hyperledger Fabric.
 func (c *Client) ListProposals(ctx context.Context, params *ListProposalsInput, optFns ...func(*Options)) (*ListProposalsOutput, error) {
 	if params == nil {
 		params = &ListProposalsInput{}

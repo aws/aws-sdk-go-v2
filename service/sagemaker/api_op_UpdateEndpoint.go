@@ -50,6 +50,9 @@ type UpdateEndpointInput struct {
 	// This member is required.
 	EndpointName *string
 
+	// The deployment configuration for the endpoint to be updated.
+	DeploymentConfig *types.DeploymentConfig
+
 	// When you are updating endpoint resources with
 	// UpdateEndpointInput$RetainAllVariantProperties, whose value is set to true,
 	// ExcludeRetainedVariantProperties specifies the list of type VariantProperty to
@@ -58,11 +61,13 @@ type UpdateEndpointInput struct {
 	ExcludeRetainedVariantProperties []types.VariantProperty
 
 	// When updating endpoint resources, enables or disables the retention of variant
-	// properties, such as the instance count or the variant weight. To retain the
-	// variant properties of an endpoint when updating it, set
-	// RetainAllVariantProperties to true. To use the variant properties specified in a
-	// new EndpointConfig call when updating an endpoint, set
-	// RetainAllVariantProperties to false.
+	// properties
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VariantProperty.html),
+	// such as the instance count or the variant weight. To retain the variant
+	// properties of an endpoint when updating it, set RetainAllVariantProperties to
+	// true. To use the variant properties specified in a new EndpointConfig call when
+	// updating an endpoint, set RetainAllVariantProperties to false. The default is
+	// false.
 	RetainAllVariantProperties bool
 }
 

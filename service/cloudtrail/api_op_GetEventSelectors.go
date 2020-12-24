@@ -73,6 +73,9 @@ type GetEventSelectorsInput struct {
 
 type GetEventSelectorsOutput struct {
 
+	// The advanced event selectors that are configured for the trail.
+	AdvancedEventSelectors []types.AdvancedEventSelector
+
 	// The event selectors that are configured for the trail.
 	EventSelectors []types.EventSelector
 

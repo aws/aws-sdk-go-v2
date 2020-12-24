@@ -18,6 +18,24 @@ func (AnalyticsS3ExportFileFormat) Values() []AnalyticsS3ExportFileFormat {
 	}
 }
 
+type ArchiveStatus string
+
+// Enum values for ArchiveStatus
+const (
+	ArchiveStatusArchiveAccess     ArchiveStatus = "ARCHIVE_ACCESS"
+	ArchiveStatusDeepArchiveAccess ArchiveStatus = "DEEP_ARCHIVE_ACCESS"
+)
+
+// Values returns all known values for ArchiveStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ArchiveStatus) Values() []ArchiveStatus {
+	return []ArchiveStatus{
+		"ARCHIVE_ACCESS",
+		"DEEP_ARCHIVE_ACCESS",
+	}
+}
+
 type BucketAccelerateStatus string
 
 // Enum values for BucketAccelerateStatus
@@ -217,27 +235,6 @@ func (EncodingType) Values() []EncodingType {
 
 type Event string
 
-// Enum values for Event
-const (
-	EventS3Reducedredundancylostobject                  Event = "s3:ReducedRedundancyLostObject"
-	EventS3Objectcreated                                Event = "s3:ObjectCreated:*"
-	EventS3ObjectcreatedPut                             Event = "s3:ObjectCreated:Put"
-	EventS3ObjectcreatedPost                            Event = "s3:ObjectCreated:Post"
-	EventS3ObjectcreatedCopy                            Event = "s3:ObjectCreated:Copy"
-	EventS3ObjectcreatedCompletemultipartupload         Event = "s3:ObjectCreated:CompleteMultipartUpload"
-	EventS3Objectremoved                                Event = "s3:ObjectRemoved:*"
-	EventS3ObjectremovedDelete                          Event = "s3:ObjectRemoved:Delete"
-	EventS3ObjectremovedDeletemarkercreated             Event = "s3:ObjectRemoved:DeleteMarkerCreated"
-	EventS3Objectrestore                                Event = "s3:ObjectRestore:*"
-	EventS3ObjectrestorePost                            Event = "s3:ObjectRestore:Post"
-	EventS3ObjectrestoreCompleted                       Event = "s3:ObjectRestore:Completed"
-	EventS3Replication                                  Event = "s3:Replication:*"
-	EventS3ReplicationOperationfailedreplication        Event = "s3:Replication:OperationFailedReplication"
-	EventS3ReplicationOperationnottracked               Event = "s3:Replication:OperationNotTracked"
-	EventS3ReplicationOperationmissedthreshold          Event = "s3:Replication:OperationMissedThreshold"
-	EventS3ReplicationOperationreplicatedafterthreshold Event = "s3:Replication:OperationReplicatedAfterThreshold"
-)
-
 // Values returns all known values for Event. Note that this can be expanded in the
 // future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -351,6 +348,42 @@ func (FilterRuleName) Values() []FilterRuleName {
 	return []FilterRuleName{
 		"prefix",
 		"suffix",
+	}
+}
+
+type IntelligentTieringAccessTier string
+
+// Enum values for IntelligentTieringAccessTier
+const (
+	IntelligentTieringAccessTierArchiveAccess     IntelligentTieringAccessTier = "ARCHIVE_ACCESS"
+	IntelligentTieringAccessTierDeepArchiveAccess IntelligentTieringAccessTier = "DEEP_ARCHIVE_ACCESS"
+)
+
+// Values returns all known values for IntelligentTieringAccessTier. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntelligentTieringAccessTier) Values() []IntelligentTieringAccessTier {
+	return []IntelligentTieringAccessTier{
+		"ARCHIVE_ACCESS",
+		"DEEP_ARCHIVE_ACCESS",
+	}
+}
+
+type IntelligentTieringStatus string
+
+// Enum values for IntelligentTieringStatus
+const (
+	IntelligentTieringStatusEnabled  IntelligentTieringStatus = "Enabled"
+	IntelligentTieringStatusDisabled IntelligentTieringStatus = "Disabled"
+)
+
+// Values returns all known values for IntelligentTieringStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IntelligentTieringStatus) Values() []IntelligentTieringStatus {
+	return []IntelligentTieringStatus{
+		"Enabled",
+		"Disabled",
 	}
 }
 
@@ -790,6 +823,24 @@ func (QuoteFields) Values() []QuoteFields {
 	return []QuoteFields{
 		"ALWAYS",
 		"ASNEEDED",
+	}
+}
+
+type ReplicaModificationsStatus string
+
+// Enum values for ReplicaModificationsStatus
+const (
+	ReplicaModificationsStatusEnabled  ReplicaModificationsStatus = "Enabled"
+	ReplicaModificationsStatusDisabled ReplicaModificationsStatus = "Disabled"
+)
+
+// Values returns all known values for ReplicaModificationsStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicaModificationsStatus) Values() []ReplicaModificationsStatus {
+	return []ReplicaModificationsStatus{
+		"Enabled",
+		"Disabled",
 	}
 }
 

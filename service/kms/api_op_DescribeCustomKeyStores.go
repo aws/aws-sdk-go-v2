@@ -33,7 +33,23 @@ import (
 // and contains the minimum number of HSMs required for the operation, if any. For
 // help repairing your custom key store, see the Troubleshooting Custom Key Stores
 // (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html) topic
-// in the AWS Key Management Service Developer Guide.
+// in the AWS Key Management Service Developer Guide. Cross-account use: No. You
+// cannot perform this operation on a custom key store in a different AWS account.
+// Required permissions: kms:DescribeCustomKeyStores
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (IAM policy) Related operations:
+//
+// * ConnectCustomKeyStore
+//
+// *
+// CreateCustomKeyStore
+//
+// * DeleteCustomKeyStore
+//
+// * DisconnectCustomKeyStore
+//
+// *
+// UpdateCustomKeyStore
 func (c *Client) DescribeCustomKeyStores(ctx context.Context, params *DescribeCustomKeyStoresInput, optFns ...func(*Options)) (*DescribeCustomKeyStoresOutput, error) {
 	if params == nil {
 		params = &DescribeCustomKeyStoresInput{}

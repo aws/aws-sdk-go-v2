@@ -46,8 +46,11 @@ type CreateOutpostInput struct {
 	// AvailabilityZoneId.
 	AvailabilityZoneId *string
 
-	// The Outpost description.
+	// The description of the Outpost.
 	Description *string
+
+	// The tags to apply to the Outpost.
+	Tags map[string]string
 }
 
 type CreateOutpostOutput struct {

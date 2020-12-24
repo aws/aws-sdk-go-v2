@@ -60,13 +60,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SUCCEEDED"
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     },
                     {
-                        "value": "SKIPPED"
+                        "value": "SKIPPED",
+                        "name": "SKIPPED"
                     }
                 ]
             }
@@ -1572,10 +1575,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "LIVE"
+                        "value": "LIVE",
+                        "name": "LIVE"
                     },
                     {
-                        "value": "DEPRECATED"
+                        "value": "DEPRECATED",
+                        "name": "DEPRECATED"
                     }
                 ]
             }
@@ -4637,10 +4642,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SERVICE_MANAGED"
+                        "value": "SERVICE_MANAGED",
+                        "name": "SERVICE_MANAGED"
                     },
                     {
-                        "value": "SELF_MANAGED"
+                        "value": "SELF_MANAGED",
+                        "name": "SELF_MANAGED"
                     }
                 ]
             }
@@ -4751,13 +4758,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "NON_PROVISIONABLE"
+                        "value": "NON_PROVISIONABLE",
+                        "name": "NON_PROVISIONABLE"
                     },
                     {
-                        "value": "IMMUTABLE"
+                        "value": "IMMUTABLE",
+                        "name": "IMMUTABLE"
                     },
                     {
-                        "value": "FULLY_MUTABLE"
+                        "value": "FULLY_MUTABLE",
+                        "name": "FULLY_MUTABLE"
                     }
                 ]
             }
@@ -4928,13 +4938,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "COMPLETE"
+                        "value": "COMPLETE",
+                        "name": "COMPLETE"
                     },
                     {
-                        "value": "IN_PROGRESS"
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     }
                 ]
             }
@@ -4960,10 +4973,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "RESOURCE"
+                        "value": "RESOURCE",
+                        "name": "RESOURCE"
                     },
                     {
-                        "value": "MODULE"
+                        "value": "MODULE",
+                        "name": "MODULE"
                     }
                 ]
             }
@@ -6085,22 +6100,28 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PENDING"
+                        "value": "PENDING",
+                        "name": "PENDING"
                     },
                     {
-                        "value": "RUNNING"
+                        "value": "RUNNING",
+                        "name": "RUNNING"
                     },
                     {
-                        "value": "SUCCEEDED"
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     },
                     {
-                        "value": "CANCELLED"
+                        "value": "CANCELLED",
+                        "name": "CANCELLED"
                     },
                     {
-                        "value": "INOPERABLE"
+                        "value": "INOPERABLE",
+                        "name": "INOPERABLE"
                     }
                 ]
             }
@@ -6130,7 +6151,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "DETAILED_STATUS"
+                        "value": "DETAILED_STATUS",
+                        "name": "DETAILED_STATUS"
                     }
                 ]
             }
@@ -6174,13 +6196,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CURRENT"
+                        "value": "CURRENT",
+                        "name": "CURRENT"
                     },
                     {
-                        "value": "OUTDATED"
+                        "value": "OUTDATED",
+                        "name": "OUTDATED"
                     },
                     {
-                        "value": "INOPERABLE"
+                        "value": "INOPERABLE",
+                        "name": "INOPERABLE"
                     }
                 ]
             }
@@ -7029,16 +7054,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CREATE"
+                        "value": "CREATE",
+                        "name": "CREATE"
                     },
                     {
-                        "value": "UPDATE"
+                        "value": "UPDATE",
+                        "name": "UPDATE"
                     },
                     {
-                        "value": "DELETE"
+                        "value": "DELETE",
+                        "name": "DELETE"
                     },
                     {
-                        "value": "DETECT_DRIFT"
+                        "value": "DETECT_DRIFT",
+                        "name": "DETECT_DRIFT"
                     }
                 ]
             }
@@ -7086,19 +7115,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PENDING"
+                        "value": "PENDING",
+                        "name": "PENDING"
                     },
                     {
-                        "value": "RUNNING"
+                        "value": "RUNNING",
+                        "name": "RUNNING"
                     },
                     {
-                        "value": "SUCCEEDED"
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     },
                     {
-                        "value": "CANCELLED"
+                        "value": "CANCELLED",
+                        "name": "CANCELLED"
                     }
                 ]
             }
@@ -7158,22 +7192,28 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "RUNNING"
+                        "value": "RUNNING",
+                        "name": "RUNNING"
                     },
                     {
-                        "value": "SUCCEEDED"
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     },
                     {
-                        "value": "STOPPING"
+                        "value": "STOPPING",
+                        "name": "STOPPING"
                     },
                     {
-                        "value": "STOPPED"
+                        "value": "STOPPED",
+                        "name": "STOPPED"
                     },
                     {
-                        "value": "QUEUED"
+                        "value": "QUEUED",
+                        "name": "QUEUED"
                     }
                 ]
             }
@@ -7227,10 +7267,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ACTIVE"
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
                     },
                     {
-                        "value": "DELETED"
+                        "value": "DELETED",
+                        "name": "DELETED"
                     }
                 ]
             }
@@ -8417,10 +8459,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PUBLIC"
+                        "value": "PUBLIC",
+                        "name": "PUBLIC"
                     },
                     {
-                        "value": "PRIVATE"
+                        "value": "PRIVATE",
+                        "name": "PRIVATE"
                     }
                 ]
             }

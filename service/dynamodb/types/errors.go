@@ -82,6 +82,24 @@ func (e *ContinuousBackupsUnavailableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// There was an attempt to insert an item with the same primary key as an item that
+// already exists in the DynamoDB table.
+type DuplicateItemException struct {
+	Message *string
+}
+
+func (e *DuplicateItemException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DuplicateItemException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DuplicateItemException) ErrorCode() string             { return "DuplicateItemException" }
+func (e *DuplicateItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // There was a conflict when writing to the specified S3 bucket.
 type ExportConflictException struct {
 	Message *string

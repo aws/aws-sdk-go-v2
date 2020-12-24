@@ -38,17 +38,17 @@ func validateOpSendSSHPublicKeyInput(v *SendSSHPublicKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendSSHPublicKeyInput"}
-	if v.SSHPublicKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SSHPublicKey"))
-	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
-	if v.AvailabilityZone == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
-	}
 	if v.InstanceOSUser == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceOSUser"))
+	}
+	if v.SSHPublicKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SSHPublicKey"))
+	}
+	if v.AvailabilityZone == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

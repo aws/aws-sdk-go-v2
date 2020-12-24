@@ -168,6 +168,197 @@ type CidrAuthorizationContext struct {
 	Signature *string
 }
 
+// Attributes of a custom routing accelerator.
+type CustomRoutingAccelerator struct {
+
+	// The Amazon Resource Name (ARN) of the custom routing accelerator.
+	AcceleratorArn *string
+
+	// The date and time that the accelerator was created.
+	CreatedTime *time.Time
+
+	// The Domain Name System (DNS) name that Global Accelerator creates that points to
+	// your accelerator's static IP addresses. The naming convention for the DNS name
+	// is the following: A lowercase letter a, followed by a 16-bit random hex string,
+	// followed by .awsglobalaccelerator.com. For example:
+	// a1234567890abcdef.awsglobalaccelerator.com. For more information about the
+	// default DNS name, see  Support for DNS Addressing in Global Accelerator
+	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-accelerators.html#about-accelerators.dns-addressing)
+	// in the AWS Global Accelerator Developer Guide.
+	DnsName *string
+
+	// Indicates whether the accelerator is enabled. The value is true or false. The
+	// default value is true. If the value is set to true, the accelerator cannot be
+	// deleted. If set to false, accelerator can be deleted.
+	Enabled *bool
+
+	// The value for the address type must be IPv4.
+	IpAddressType IpAddressType
+
+	// The static IP addresses that Global Accelerator associates with the accelerator.
+	IpSets []IpSet
+
+	// The date and time that the accelerator was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the accelerator. The name must contain only alphanumeric characters
+	// or hyphens (-), and must not begin or end with a hyphen.
+	Name *string
+
+	// Describes the deployment status of the accelerator.
+	Status CustomRoutingAcceleratorStatus
+}
+
+// Attributes of a custom routing accelerator.
+type CustomRoutingAcceleratorAttributes struct {
+
+	// Indicates whether flow logs are enabled. The default value is false. If the
+	// value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For more
+	// information, see Flow Logs
+	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html)
+	// in the AWS Global Accelerator Developer Guide.
+	FlowLogsEnabled *bool
+
+	// The name of the Amazon S3 bucket for the flow logs. Attribute is required if
+	// FlowLogsEnabled is true. The bucket must exist and have a bucket policy that
+	// grants AWS Global Accelerator permission to write to the bucket.
+	FlowLogsS3Bucket *string
+
+	// The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute
+	// is required if FlowLogsEnabled is true. If you don’t specify a prefix, the flow
+	// logs are stored in the root of the bucket. If you specify slash (/) for the S3
+	// bucket prefix, the log file bucket folder structure will include a double slash
+	// (//), like the following: DOC-EXAMPLE-BUCKET//AWSLogs/aws_account_id
+	FlowLogsS3Prefix *string
+}
+
+// For a custom routing accelerator, sets the port range and protocol for all
+// endpoints (virtual private cloud subnets) in an endpoint group to accept client
+// traffic on.
+type CustomRoutingDestinationConfiguration struct {
+
+	// The first port, inclusive, in the range of ports for the endpoint group that is
+	// associated with a custom routing accelerator.
+	//
+	// This member is required.
+	FromPort *int32
+
+	// The protocol for the endpoint group that is associated with a custom routing
+	// accelerator. The protocol can be either TCP or UDP.
+	//
+	// This member is required.
+	Protocols []CustomRoutingProtocol
+
+	// The last port, inclusive, in the range of ports for the endpoint group that is
+	// associated with a custom routing accelerator.
+	//
+	// This member is required.
+	ToPort *int32
+}
+
+// For a custom routing accelerator, describes the port range and protocol for all
+// endpoints (virtual private cloud subnets) in an endpoint group to accept client
+// traffic on.
+type CustomRoutingDestinationDescription struct {
+
+	// The first port, inclusive, in the range of ports for the endpoint group that is
+	// associated with a custom routing accelerator.
+	FromPort *int32
+
+	// The protocol for the endpoint group that is associated with a custom routing
+	// accelerator. The protocol can be either TCP or UDP.
+	Protocols []Protocol
+
+	// The last port, inclusive, in the range of ports for the endpoint group that is
+	// associated with a custom routing accelerator.
+	ToPort *int32
+}
+
+// The list of endpoint objects. For custom routing, this is a list of virtual
+// private cloud (VPC) subnet IDs.
+type CustomRoutingEndpointConfiguration struct {
+
+	// An ID for the endpoint. For custom routing accelerators, this is the virtual
+	// private cloud (VPC) subnet ID.
+	EndpointId *string
+}
+
+// A complex type for an endpoint for a custom routing accelerator. Each endpoint
+// group can include one or more endpoints, which are virtual private cloud (VPC)
+// subnets.
+type CustomRoutingEndpointDescription struct {
+
+	// An ID for the endpoint. For custom routing accelerators, this is the virtual
+	// private cloud (VPC) subnet ID.
+	EndpointId *string
+}
+
+// A complex type for the endpoint group for a custom routing accelerator. An AWS
+// Region can have only one endpoint group for a specific listener.
+type CustomRoutingEndpointGroup struct {
+
+	// For a custom routing accelerator, describes the port range and protocol for all
+	// endpoints (virtual private cloud subnets) in an endpoint group to accept client
+	// traffic on.
+	DestinationDescriptions []CustomRoutingDestinationDescription
+
+	// For a custom routing accelerator, describes the endpoints (virtual private cloud
+	// subnets) in an endpoint group to accept client traffic on.
+	EndpointDescriptions []CustomRoutingEndpointDescription
+
+	// The Amazon Resource Name (ARN) of the endpoint group.
+	EndpointGroupArn *string
+
+	// The AWS Region where the endpoint group is located.
+	EndpointGroupRegion *string
+}
+
+// A complex type for a listener for a custom routing accelerator.
+type CustomRoutingListener struct {
+
+	// The Amazon Resource Name (ARN) of the listener.
+	ListenerArn *string
+
+	// The port range to support for connections from clients to your accelerator.
+	// Separately, you set port ranges for endpoints. For more information, see About
+	// endpoints for custom routing accelerators
+	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html).
+	PortRanges []PortRange
+}
+
+// The port mappings for a specified endpoint IP address (destination).
+type DestinationPortMapping struct {
+
+	// The Amazon Resource Name (ARN) of the custom routing accelerator that you have
+	// port mappings for.
+	AcceleratorArn *string
+
+	// The IP address/port combinations (sockets) that map to a given destination
+	// socket address.
+	AcceleratorSocketAddresses []SocketAddress
+
+	// The endpoint IP address/port combination for traffic received on the accelerator
+	// socket address.
+	DestinationSocketAddress *SocketAddress
+
+	// Indicates whether or not a port mapping destination can receive traffic. The
+	// value is either ALLOW, if traffic is allowed to the destination, or DENY, if
+	// traffic is not allowed to the destination.
+	DestinationTrafficState CustomRoutingDestinationTrafficState
+
+	// The Amazon Resource Name (ARN) of the endpoint group.
+	EndpointGroupArn *string
+
+	// The AWS Region for the endpoint group.
+	EndpointGroupRegion *string
+
+	// The ID for the virtual private cloud (VPC) subnet.
+	EndpointId *string
+
+	// The IP address type, which must be IPv4.
+	IpAddressType IpAddressType
+}
+
 // A complex type for endpoints. A resource must be valid and active when you add
 // it as an endpoint.
 type EndpointConfiguration struct {
@@ -220,30 +411,11 @@ type EndpointDescription struct {
 	// An ID for the endpoint. If the endpoint is a Network Load Balancer or
 	// Application Load Balancer, this is the Amazon Resource Name (ARN) of the
 	// resource. If the endpoint is an Elastic IP address, this is the Elastic IP
-	// address allocation ID. For EC2 instances, this is the EC2 instance ID. An
+	// address allocation ID. For Amazon EC2 instances, this is the EC2 instance ID. An
 	// Application Load Balancer can be either internal or internet-facing.
 	EndpointId *string
 
-	// The reason code associated with why the endpoint is not healthy. If the endpoint
-	// state is healthy, a reason code is not provided. If the endpoint state is
-	// unhealthy, the reason code can be one of the following values:
-	//
-	// * Timeout: The
-	// health check requests to the endpoint are timing out before returning a
-	// status.
-	//
-	// * Failed: The health check failed, for example because the endpoint
-	// response was invalid (malformed).
-	//
-	// If the endpoint state is initial, the reason
-	// code can be one of the following values:
-	//
-	// * ProvisioningInProgress: The endpoint
-	// is in the process of being provisioned.
-	//
-	// * InitialHealthChecking: Global
-	// Accelerator is still setting up the minimum number of health checks for the
-	// endpoint that are required to determine its health status.
+	// Returns a null result.
 	HealthReason *string
 
 	// The health status of the endpoint.
@@ -352,6 +524,35 @@ type Listener struct {
 	Protocol Protocol
 }
 
+// Returns the ports and associated IP addresses and ports of Amazon EC2 instances
+// in your virtual private cloud (VPC) subnets. Custom routing is a port mapping
+// protocol in AWS Global Accelerator that statically associates port ranges with
+// VPC subnets, which allows Global Accelerator to route to specific instances and
+// ports within one or more subnets.
+type PortMapping struct {
+
+	// The accelerator port.
+	AcceleratorPort *int32
+
+	// The EC2 instance IP address and port number in the virtual private cloud (VPC)
+	// subnet.
+	DestinationSocketAddress *SocketAddress
+
+	// Indicates whether or not a port mapping destination can receive traffic. The
+	// value is either ALLOW, if traffic is allowed to the destination, or DENY, if
+	// traffic is not allowed to the destination.
+	DestinationTrafficState CustomRoutingDestinationTrafficState
+
+	// The Amazon Resource Name (ARN) of the endpoint group.
+	EndpointGroupArn *string
+
+	// The IP address of the VPC subnet (the subnet ID).
+	EndpointId *string
+
+	// The protocols supported by the endpoint group.
+	Protocols []CustomRoutingProtocol
+}
+
 // Override specific listener ports used to route traffic to endpoints that are
 // part of an endpoint group. For example, you can create a port override in which
 // the listener receives user traffic on ports 80 and 443, but your accelerator
@@ -379,6 +580,16 @@ type PortRange struct {
 
 	// The last port in the range of ports, inclusive.
 	ToPort *int32
+}
+
+// An IP address/port combination.
+type SocketAddress struct {
+
+	// The IP address for the socket address.
+	IpAddress *string
+
+	// The port for the socket address.
+	Port *int32
 }
 
 // A complex type that contains a Tag key and Tag value.

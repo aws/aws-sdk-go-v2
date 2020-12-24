@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Deletes the specified security key.
 func (c *Client) DisassociateSecurityKey(ctx context.Context, params *DisassociateSecurityKeyInput, optFns ...func(*Options)) (*DisassociateSecurityKeyOutput, error) {
 	if params == nil {

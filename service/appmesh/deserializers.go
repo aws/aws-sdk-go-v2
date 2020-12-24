@@ -6613,8 +6613,6 @@ loop:
 
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
-			// TODO: FIX ME
-			_ = value
 			break loop
 
 		}
@@ -6789,8 +6787,6 @@ loop:
 
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
-			// TODO: FIX ME
-			_ = value
 			break loop
 
 		}
@@ -8198,8 +8194,6 @@ loop:
 
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
-			// TODO: FIX ME
-			_ = value
 			break loop
 
 		}
@@ -8326,8 +8320,6 @@ loop:
 
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
-			// TODO: FIX ME
-			_ = value
 			break loop
 
 		}
@@ -9165,8 +9157,6 @@ loop:
 
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
-			// TODO: FIX ME
-			_ = value
 			break loop
 
 		}
@@ -9299,8 +9289,6 @@ loop:
 
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
-			// TODO: FIX ME
-			_ = value
 			break loop
 
 		}
@@ -10375,8 +10363,6 @@ loop:
 
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
-			// TODO: FIX ME
-			_ = value
 			break loop
 
 		}
@@ -10808,8 +10794,6 @@ loop:
 
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
-			// TODO: FIX ME
-			_ = value
 			break loop
 
 		}
@@ -10927,8 +10911,6 @@ loop:
 
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
-			// TODO: FIX ME
-			_ = value
 			break loop
 
 		}
@@ -11551,8 +11533,6 @@ loop:
 
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
-			// TODO: FIX ME
-			_ = value
 			break loop
 
 		}
@@ -12051,8 +12031,6 @@ loop:
 
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
-			// TODO: FIX ME
-			_ = value
 			break loop
 
 		}
@@ -12991,8 +12969,6 @@ loop:
 
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
-			// TODO: FIX ME
-			_ = value
 			break loop
 
 		}

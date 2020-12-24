@@ -3731,9 +3731,9 @@ func awsAwsquery_serializeOpDocumentDescribeEnvironmentManagedActionHistoryInput
 		objectKey.String(*v.EnvironmentName)
 	}
 
-	if v.MaxItems != 0 {
+	if v.MaxItems != nil {
 		objectKey := object.Key("MaxItems")
-		objectKey.Integer(v.MaxItems)
+		objectKey.Integer(*v.MaxItems)
 	}
 
 	if v.NextToken != nil {

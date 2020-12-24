@@ -21,17 +21,35 @@ type Alias struct {
 
 // Value of a segment annotation. Has one of three value types: Number, Boolean, or
 // String.
-type AnnotationValue struct {
-
-	// Value for a Boolean annotation.
-	BooleanValue *bool
-
-	// Value for a Number annotation.
-	NumberValue *float64
-
-	// Value for a String annotation.
-	StringValue *string
+//
+// The following types satisfy this interface:
+//  AnnotationValueMemberNumberValue
+//  AnnotationValueMemberBooleanValue
+//  AnnotationValueMemberStringValue
+type AnnotationValue interface {
+	isAnnotationValue()
 }
+
+// Value for a Number annotation.
+type AnnotationValueMemberNumberValue struct {
+	Value float64
+}
+
+func (*AnnotationValueMemberNumberValue) isAnnotationValue() {}
+
+// Value for a Boolean annotation.
+type AnnotationValueMemberBooleanValue struct {
+	Value bool
+}
+
+func (*AnnotationValueMemberBooleanValue) isAnnotationValue() {}
+
+// Value for a String annotation.
+type AnnotationValueMemberStringValue struct {
+	Value string
+}
+
+func (*AnnotationValueMemberStringValue) isAnnotationValue() {}
 
 // The service within the service graph that has anomalously high fault rates.
 type AnomalousService struct {
@@ -1113,8 +1131,17 @@ type UnprocessedTraceSegment struct {
 type ValueWithServiceIds struct {
 
 	// Values of the annotation.
-	AnnotationValue *AnnotationValue
+	AnnotationValue AnnotationValue
 
 	// Services to which the annotation applies.
 	ServiceIds []ServiceId
 }
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+}
+
+func (*UnknownUnionMember) isAnnotationValue() {}

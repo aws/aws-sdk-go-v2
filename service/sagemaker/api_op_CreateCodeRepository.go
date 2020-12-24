@@ -48,6 +48,12 @@ type CreateCodeRepositoryInput struct {
 	//
 	// This member is required.
 	GitConfig *types.GitConfig
+
+	// An array of key-value pairs. You can use tags to categorize your AWS resources
+	// in different ways, for example, by purpose, owner, or environment. For more
+	// information, see Tagging AWS Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	Tags []types.Tag
 }
 
 type CreateCodeRepositoryOutput struct {

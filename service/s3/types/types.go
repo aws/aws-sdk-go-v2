@@ -82,7 +82,7 @@ type AnalyticsConfiguration struct {
 	// The filter used to describe a set of objects for analyses. A filter must have
 	// exactly one prefix, one tag, or one conjunction (AnalyticsAndOperator). If no
 	// filter is provided, all objects will be considered in any analysis.
-	Filter *AnalyticsFilter
+	Filter AnalyticsFilter
 }
 
 // Where to publish the analytics results.
@@ -97,18 +97,36 @@ type AnalyticsExportDestination struct {
 // The filter used to describe a set of objects for analyses. A filter must have
 // exactly one prefix, one tag, or one conjunction (AnalyticsAndOperator). If no
 // filter is provided, all objects will be considered in any analysis.
-type AnalyticsFilter struct {
-
-	// A conjunction (logical AND) of predicates, which is used in evaluating an
-	// analytics filter. The operator must have at least two predicates.
-	And *AnalyticsAndOperator
-
-	// The prefix to use when evaluating an analytics filter.
-	Prefix *string
-
-	// The tag to use when evaluating an analytics filter.
-	Tag *Tag
+//
+// The following types satisfy this interface:
+//  AnalyticsFilterMemberPrefix
+//  AnalyticsFilterMemberTag
+//  AnalyticsFilterMemberAnd
+type AnalyticsFilter interface {
+	isAnalyticsFilter()
 }
+
+// The prefix to use when evaluating an analytics filter.
+type AnalyticsFilterMemberPrefix struct {
+	Value string
+}
+
+func (*AnalyticsFilterMemberPrefix) isAnalyticsFilter() {}
+
+// The tag to use when evaluating an analytics filter.
+type AnalyticsFilterMemberTag struct {
+	Value Tag
+}
+
+func (*AnalyticsFilterMemberTag) isAnalyticsFilter() {}
+
+// A conjunction (logical AND) of predicates, which is used in evaluating an
+// analytics filter. The operator must have at least two predicates.
+type AnalyticsFilterMemberAnd struct {
+	Value AnalyticsAndOperator
+}
+
+func (*AnalyticsFilterMemberAnd) isAnalyticsFilter() {}
 
 // Contains information about where to publish the analytics results.
 type AnalyticsS3BucketDestination struct {
@@ -137,7 +155,8 @@ type AnalyticsS3BucketDestination struct {
 // globally unique, and the namespace is shared by all AWS accounts.
 type Bucket struct {
 
-	// Date the bucket was created.
+	// Date the bucket was created. This date can change when making changes to your
+	// bucket, such as editing its bucket policy.
 	CreationDate *time.Time
 
 	// The name of the bucket.
@@ -435,22 +454,24 @@ type DeleteMarkerEntry struct {
 	VersionId *string
 }
 
-// Specifies whether Amazon S3 replicates the delete markers. If you specify a
-// Filter, you must specify this element. However, in the latest version of
-// replication configuration (when Filter is specified), Amazon S3 doesn't
-// replicate delete markers. Therefore, the DeleteMarkerReplication element can
-// contain only Disabled. For an example configuration, see Basic Rule
-// Configuration
+// Specifies whether Amazon S3 replicates delete markers. If you specify a Filter
+// in your replication configuration, you must also include a
+// DeleteMarkerReplication element. If your Filter includes a Tag element, the
+// DeleteMarkerReplicationStatus must be set to Disabled, because Amazon S3 does
+// not support replicating delete markers for tag-based rules. For an example
+// configuration, see Basic Rule Configuration
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config).
-// If you don't specify the Filter element, Amazon S3 assumes that the replication
-// configuration is the earlier version, V1. In the earlier version, Amazon S3
-// handled replication of delete markers differently. For more information, see
+// For more information about delete marker replication, see Basic Rule
+// Configuration
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html).
+// If you are using an earlier version of the replication configuration, Amazon S3
+// handles replication of delete markers differently. For more information, see
 // Backward Compatibility
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).
 type DeleteMarkerReplication struct {
 
-	// Indicates whether to replicate delete markers. In the current implementation,
-	// Amazon S3 doesn't replicate the delete markers. The status must be Disabled.
+	// Indicates whether to replicate delete markers. Indicates whether to replicate
+	// delete markers.
 	Status DeleteMarkerReplicationStatus
 }
 
@@ -484,9 +505,8 @@ type Destination struct {
 	// SourceSelectionCriteria is specified, you must specify this element.
 	EncryptionConfiguration *EncryptionConfiguration
 
-	// A container specifying replication metrics-related settings enabling metrics and
-	// Amazon S3 events for S3 Replication Time Control (S3 RTC). Must be specified
-	// together with a ReplicationTime block.
+	// A container specifying replication metrics-related settings enabling replication
+	// metrics and events.
 	Metrics *Metrics
 
 	// A container specifying S3 Replication Time Control (S3 RTC), including whether
@@ -1527,7 +1547,7 @@ type FilterRule struct {
 // Container for S3 Glacier job parameters.
 type GlacierJobParameters struct {
 
-	// S3 Glacier retrieval tier at which the restore will be processed.
+	// Retrieval tier at which the restore will be processed.
 	//
 	// This member is required.
 	Tier Tier
@@ -1628,6 +1648,62 @@ type InputSerialization struct {
 
 	// Specifies Parquet as object's input serialization format.
 	Parquet *ParquetInput
+}
+
+// A container for specifying S3 Intelligent-Tiering filters. The filters determine
+// the subset of objects to which the rule applies.
+type IntelligentTieringAndOperator struct {
+
+	// An object key name prefix that identifies the subset of objects to which the
+	// configuration applies.
+	Prefix *string
+
+	// All of these tags must exist in the object's tag set in order for the
+	// configuration to apply.
+	Tags []Tag
+}
+
+// Specifies the S3 Intelligent-Tiering configuration for an Amazon S3 bucket. For
+// information about the S3 Intelligent-Tiering storage class, see Storage class
+// for automatically optimizing frequently and infrequently accessed objects
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access).
+type IntelligentTieringConfiguration struct {
+
+	// The ID used to identify the S3 Intelligent-Tiering configuration.
+	//
+	// This member is required.
+	Id *string
+
+	// Specifies the status of the configuration.
+	//
+	// This member is required.
+	Status IntelligentTieringStatus
+
+	// Specifies the S3 Intelligent-Tiering storage class tier of the configuration.
+	//
+	// This member is required.
+	Tierings []Tiering
+
+	// Specifies a bucket filter. The configuration only includes objects that meet the
+	// filter's criteria.
+	Filter *IntelligentTieringFilter
+}
+
+// The Filter is used to identify objects that the S3 Intelligent-Tiering
+// configuration applies to.
+type IntelligentTieringFilter struct {
+
+	// A conjunction (logical AND) of predicates, which is used in evaluating a metrics
+	// filter. The operator must have at least two predicates, and an object must match
+	// all of the predicates in order for the filter to apply.
+	And *IntelligentTieringAndOperator
+
+	// An object key name prefix that identifies the subset of objects to which the
+	// rule applies.
+	Prefix *string
+
+	// A container of a key value name pair.
+	Tag *Tag
 }
 
 // Specifies the inventory configuration for an Amazon S3 bucket. For more
@@ -1826,7 +1902,7 @@ type LifecycleRule struct {
 
 	// The Filter is used to identify objects that a Lifecycle Rule applies to. A
 	// Filter must have exactly one of Prefix, Tag, or And specified.
-	Filter *LifecycleRuleFilter
+	Filter LifecycleRuleFilter
 
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
 	ID *string
@@ -1870,19 +1946,37 @@ type LifecycleRuleAndOperator struct {
 
 // The Filter is used to identify objects that a Lifecycle Rule applies to. A
 // Filter must have exactly one of Prefix, Tag, or And specified.
-type LifecycleRuleFilter struct {
-
-	// This is used in a Lifecycle Rule Filter to apply a logical AND to two or more
-	// predicates. The Lifecycle Rule will apply to any object matching all of the
-	// predicates configured inside the And operator.
-	And *LifecycleRuleAndOperator
-
-	// Prefix identifying one or more objects to which the rule applies.
-	Prefix *string
-
-	// This tag must exist in the object's tag set in order for the rule to apply.
-	Tag *Tag
+//
+// The following types satisfy this interface:
+//  LifecycleRuleFilterMemberPrefix
+//  LifecycleRuleFilterMemberTag
+//  LifecycleRuleFilterMemberAnd
+type LifecycleRuleFilter interface {
+	isLifecycleRuleFilter()
 }
+
+// Prefix identifying one or more objects to which the rule applies.
+type LifecycleRuleFilterMemberPrefix struct {
+	Value string
+}
+
+func (*LifecycleRuleFilterMemberPrefix) isLifecycleRuleFilter() {}
+
+// This tag must exist in the object's tag set in order for the rule to apply.
+type LifecycleRuleFilterMemberTag struct {
+	Value Tag
+}
+
+func (*LifecycleRuleFilterMemberTag) isLifecycleRuleFilter() {}
+
+// This is used in a Lifecycle Rule Filter to apply a logical AND to two or more
+// predicates. The Lifecycle Rule will apply to any object matching all of the
+// predicates configured inside the And operator.
+type LifecycleRuleFilterMemberAnd struct {
+	Value LifecycleRuleAndOperator
+}
+
+func (*LifecycleRuleFilterMemberAnd) isLifecycleRuleFilter() {}
 
 // Describes where logs are stored and the prefix that Amazon S3 assigns to all log
 // object keys for a bucket. For more information, see PUT Bucket logging
@@ -1921,21 +2015,18 @@ type MetadataEntry struct {
 	Value *string
 }
 
-// A container specifying replication metrics-related settings enabling metrics and
-// Amazon S3 events for S3 Replication Time Control (S3 RTC). Must be specified
-// together with a ReplicationTime block.
+// A container specifying replication metrics-related settings enabling replication
+// metrics and events.
 type Metrics struct {
-
-	// A container specifying the time threshold for emitting the
-	// s3:Replication:OperationMissedThreshold event.
-	//
-	// This member is required.
-	EventThreshold *ReplicationTimeValue
 
 	// Specifies whether the replication metrics are enabled.
 	//
 	// This member is required.
 	Status MetricsStatus
+
+	// A container specifying the time threshold for emitting the
+	// s3:Replication:OperationMissedThreshold event.
+	EventThreshold *ReplicationTimeValue
 }
 
 // A conjunction (logical AND) of predicates, which is used in evaluating a metrics
@@ -1967,25 +2058,43 @@ type MetricsConfiguration struct {
 	// Specifies a metrics configuration filter. The metrics configuration will only
 	// include objects that meet the filter's criteria. A filter must be a prefix, a
 	// tag, or a conjunction (MetricsAndOperator).
-	Filter *MetricsFilter
+	Filter MetricsFilter
 }
 
 // Specifies a metrics configuration filter. The metrics configuration only
 // includes objects that meet the filter's criteria. A filter must be a prefix, a
 // tag, or a conjunction (MetricsAndOperator).
-type MetricsFilter struct {
-
-	// A conjunction (logical AND) of predicates, which is used in evaluating a metrics
-	// filter. The operator must have at least two predicates, and an object must match
-	// all of the predicates in order for the filter to apply.
-	And *MetricsAndOperator
-
-	// The prefix used when evaluating a metrics filter.
-	Prefix *string
-
-	// The tag used when evaluating a metrics filter.
-	Tag *Tag
+//
+// The following types satisfy this interface:
+//  MetricsFilterMemberPrefix
+//  MetricsFilterMemberTag
+//  MetricsFilterMemberAnd
+type MetricsFilter interface {
+	isMetricsFilter()
 }
+
+// The prefix used when evaluating a metrics filter.
+type MetricsFilterMemberPrefix struct {
+	Value string
+}
+
+func (*MetricsFilterMemberPrefix) isMetricsFilter() {}
+
+// The tag used when evaluating a metrics filter.
+type MetricsFilterMemberTag struct {
+	Value Tag
+}
+
+func (*MetricsFilterMemberTag) isMetricsFilter() {}
+
+// A conjunction (logical AND) of predicates, which is used in evaluating a metrics
+// filter. The operator must have at least two predicates, and an object must match
+// all of the predicates in order for the filter to apply.
+type MetricsFilterMemberAnd struct {
+	Value MetricsAndOperator
+}
+
+func (*MetricsFilterMemberAnd) isMetricsFilter() {}
 
 // Container for the MultipartUpload for the Amazon S3 object.
 type MultipartUpload struct {
@@ -2304,10 +2413,10 @@ type PublicAccessBlockConfiguration struct {
 
 	// Specifies whether Amazon S3 should restrict public bucket policies for this
 	// bucket. Setting this element to TRUE restricts access to this bucket to only AWS
-	// services and authorized users within this account if the bucket has a public
-	// policy. Enabling this setting doesn't affect previously stored bucket policies,
-	// except that public and cross-account access within any public bucket policy,
-	// including non-public delegation to specific accounts, is blocked.
+	// service principals and authorized users within this account if the bucket has a
+	// public policy. Enabling this setting doesn't affect previously stored bucket
+	// policies, except that public and cross-account access within any public bucket
+	// policy, including non-public delegation to specific accounts, is blocked.
 	RestrictPublicBuckets bool
 }
 
@@ -2379,6 +2488,21 @@ type RedirectAllRequestsTo struct {
 	Protocol Protocol
 }
 
+// A filter that you can specify for selection for modifications on replicas.
+// Amazon S3 doesn't replicate replica modifications by default. In the latest
+// version of replication configuration (when Filter is specified), you can specify
+// this element and set the status to Enabled to replicate modifications on
+// replicas. If you don't specify the Filter element, Amazon S3 assumes that the
+// replication configuration is the earlier version, V1. In the earlier version,
+// this element is not allowed.
+type ReplicaModifications struct {
+
+	// Specifies whether Amazon S3 replicates modifications on replicas.
+	//
+	// This member is required.
+	Status ReplicaModificationsStatus
+}
+
 // A container for replication rules. You can add up to 1,000 rules. The maximum
 // size of a replication configuration is 2 MB.
 type ReplicationConfiguration struct {
@@ -2413,16 +2537,18 @@ type ReplicationRule struct {
 	// This member is required.
 	Status ReplicationRuleStatus
 
-	// Specifies whether Amazon S3 replicates the delete markers. If you specify a
-	// Filter, you must specify this element. However, in the latest version of
-	// replication configuration (when Filter is specified), Amazon S3 doesn't
-	// replicate delete markers. Therefore, the DeleteMarkerReplication element can
-	// contain only Disabled. For an example configuration, see Basic Rule
-	// Configuration
+	// Specifies whether Amazon S3 replicates delete markers. If you specify a Filter
+	// in your replication configuration, you must also include a
+	// DeleteMarkerReplication element. If your Filter includes a Tag element, the
+	// DeleteMarkerReplicationStatus must be set to Disabled, because Amazon S3 does
+	// not support replicating delete markers for tag-based rules. For an example
+	// configuration, see Basic Rule Configuration
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config).
-	// If you don't specify the Filter element, Amazon S3 assumes that the replication
-	// configuration is the earlier version, V1. In the earlier version, Amazon S3
-	// handled replication of delete markers differently. For more information, see
+	// For more information about delete marker replication, see Basic Rule
+	// Configuration
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html).
+	// If you are using an earlier version of the replication configuration, Amazon S3
+	// handles replication of delete markers differently. For more information, see
 	// Backward Compatibility
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).
 	DeleteMarkerReplication *DeleteMarkerReplication
@@ -2432,7 +2558,7 @@ type ReplicationRule struct {
 
 	// A filter that identifies the subset of objects to which the replication rule
 	// applies. A Filter must specify exactly one Prefix, Tag, or an And child element.
-	Filter *ReplicationRuleFilter
+	Filter ReplicationRuleFilter
 
 	// A unique identifier for the rule. The maximum value is 255 characters.
 	ID *string
@@ -2444,18 +2570,11 @@ type ReplicationRule struct {
 	// Deprecated: This member has been deprecated.
 	Prefix *string
 
-	// The priority associated with the rule. If you specify multiple rules in a
-	// replication configuration, Amazon S3 prioritizes the rules to prevent conflicts
-	// when filtering. If two or more rules identify the same object based on a
-	// specified filter, the rule with higher priority takes precedence. For
-	// example:
-	//
-	// * Same object quality prefix-based filter criteria if prefixes you
-	// specified in multiple rules overlap
-	//
-	// * Same object qualify tag-based filter
-	// criteria specified in multiple rules
-	//
+	// The priority indicates which rule has precedence whenever two or more
+	// replication rules conflict. Amazon S3 will attempt to replicate objects
+	// according to all replication rules. However, if there are two or more rules with
+	// the same destination bucket, then objects will be replicated according to the
+	// rule with the highest priority. The higher the number, the higher the priority.
 	// For more information, see Replication
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the Amazon
 	// Simple Storage Service Developer Guide.
@@ -2490,27 +2609,45 @@ type ReplicationRuleAndOperator struct {
 
 // A filter that identifies the subset of objects to which the replication rule
 // applies. A Filter must specify exactly one Prefix, Tag, or an And child element.
-type ReplicationRuleFilter struct {
-
-	// A container for specifying rule filters. The filters determine the subset of
-	// objects to which the rule applies. This element is required only if you specify
-	// more than one filter. For example:
-	//
-	// * If you specify both a Prefix and a Tag
-	// filter, wrap these filters in an And tag.
-	//
-	// * If you specify a filter based on
-	// multiple tags, wrap the Tag elements in an And tag.
-	And *ReplicationRuleAndOperator
-
-	// An object key name prefix that identifies the subset of objects to which the
-	// rule applies.
-	Prefix *string
-
-	// A container for specifying a tag key and value. The rule applies only to objects
-	// that have the tag in their tag set.
-	Tag *Tag
+//
+// The following types satisfy this interface:
+//  ReplicationRuleFilterMemberPrefix
+//  ReplicationRuleFilterMemberTag
+//  ReplicationRuleFilterMemberAnd
+type ReplicationRuleFilter interface {
+	isReplicationRuleFilter()
 }
+
+// An object key name prefix that identifies the subset of objects to which the
+// rule applies.
+type ReplicationRuleFilterMemberPrefix struct {
+	Value string
+}
+
+func (*ReplicationRuleFilterMemberPrefix) isReplicationRuleFilter() {}
+
+// A container for specifying a tag key and value. The rule applies only to objects
+// that have the tag in their tag set.
+type ReplicationRuleFilterMemberTag struct {
+	Value Tag
+}
+
+func (*ReplicationRuleFilterMemberTag) isReplicationRuleFilter() {}
+
+// A container for specifying rule filters. The filters determine the subset of
+// objects to which the rule applies. This element is required only if you specify
+// more than one filter. For example:
+//
+// * If you specify both a Prefix and a Tag
+// filter, wrap these filters in an And tag.
+//
+// * If you specify a filter based on
+// multiple tags, wrap the Tag elements in an And tag.
+type ReplicationRuleFilterMemberAnd struct {
+	Value ReplicationRuleAndOperator
+}
+
+func (*ReplicationRuleFilterMemberAnd) isReplicationRuleFilter() {}
 
 // A container specifying S3 Replication Time Control (S3 RTC) related information,
 // including whether S3 RTC is enabled and the time when all objects and operations
@@ -2550,7 +2687,8 @@ type RequestPaymentConfiguration struct {
 type RestoreRequest struct {
 
 	// Lifetime of the active copy in days. Do not use with restores that specify
-	// OutputLocation.
+	// OutputLocation. The Days element is required for regular restores, and must not
+	// be provided for select requests.
 	Days int32
 
 	// The optional description for the job.
@@ -2566,7 +2704,7 @@ type RestoreRequest struct {
 	// Describes the parameters for Select job types.
 	SelectParameters *SelectParameters
 
-	// S3 Glacier retrieval tier at which the restore will be processed.
+	// Retrieval tier at which the restore will be processed.
 	Tier Tier
 
 	// Type of restore request.
@@ -2710,6 +2848,15 @@ type ServerSideEncryptionRule struct {
 	// bucket. If a PUT Object request doesn't specify any server-side encryption, this
 	// default encryption will be applied.
 	ApplyServerSideEncryptionByDefault *ServerSideEncryptionByDefault
+
+	// Specifies whether Amazon S3 should use an S3 Bucket Key with server-side
+	// encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects
+	// are not affected. Setting the BucketKeyEnabled element to true causes Amazon S3
+	// to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled. For more
+	// information, see Amazon S3 Bucket Keys
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the Amazon
+	// Simple Storage Service Developer Guide.
+	BucketKeyEnabled bool
 }
 
 // A container that describes additional filters for identifying the source objects
@@ -2718,6 +2865,15 @@ type ServerSideEncryptionRule struct {
 // specify for objects created with server-side encryption using a customer master
 // key (CMK) stored in AWS Key Management Service (SSE-KMS).
 type SourceSelectionCriteria struct {
+
+	// A filter that you can specify for selections for modifications on replicas.
+	// Amazon S3 doesn't replicate replica modifications by default. In the latest
+	// version of replication configuration (when Filter is specified), you can specify
+	// this element and set the status to Enabled to replicate modifications on
+	// replicas. If you don't specify the Filter element, Amazon S3 assumes that the
+	// replication configuration is the earlier version, V1. In the earlier version,
+	// this element is not allowed
+	ReplicaModifications *ReplicaModifications
 
 	// A container for filter information for the selection of Amazon S3 objects
 	// encrypted with AWS KMS. If you include SourceSelectionCriteria in the
@@ -2808,6 +2964,29 @@ type TargetGrant struct {
 	Permission BucketLogsPermission
 }
 
+// The S3 Intelligent-Tiering storage class is designed to optimize storage costs
+// by automatically moving data to the most cost-effective storage access tier,
+// without additional operational overhead.
+type Tiering struct {
+
+	// S3 Intelligent-Tiering access tier. See Storage class for automatically
+	// optimizing frequently and infrequently accessed objects
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access)
+	// for a list of access tiers in the S3 Intelligent-Tiering storage class.
+	//
+	// This member is required.
+	AccessTier IntelligentTieringAccessTier
+
+	// The number of consecutive days of no access after which an object will be
+	// eligible to be transitioned to the corresponding tier. The minimum number of
+	// days specified for Archive Access tier must be at least 90 days and Deep Archive
+	// Access tier must be at least 180 days. The maximum can be up to 2 years (730
+	// days).
+	//
+	// This member is required.
+	Days int32
+}
+
 // A container for specifying the configuration for publication of messages to an
 // Amazon Simple Notification Service (Amazon SNS) topic when Amazon S3 detects
 // specified events.
@@ -2888,3 +3067,15 @@ type WebsiteConfiguration struct {
 	// Rules that define when a redirect is applied and the redirect behavior.
 	RoutingRules []RoutingRule
 }
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+}
+
+func (*UnknownUnionMember) isAnalyticsFilter()       {}
+func (*UnknownUnionMember) isLifecycleRuleFilter()   {}
+func (*UnknownUnionMember) isMetricsFilter()         {}
+func (*UnknownUnionMember) isReplicationRuleFilter() {}

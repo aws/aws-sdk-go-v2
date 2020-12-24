@@ -2272,31 +2272,40 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "HAPPY"
+                        "value": "HAPPY",
+                        "name": "HAPPY"
                     },
                     {
-                        "value": "SAD"
+                        "value": "SAD",
+                        "name": "SAD"
                     },
                     {
-                        "value": "ANGRY"
+                        "value": "ANGRY",
+                        "name": "ANGRY"
                     },
                     {
-                        "value": "CONFUSED"
+                        "value": "CONFUSED",
+                        "name": "CONFUSED"
                     },
                     {
-                        "value": "DISGUSTED"
+                        "value": "DISGUSTED",
+                        "name": "DISGUSTED"
                     },
                     {
-                        "value": "SURPRISED"
+                        "value": "SURPRISED",
+                        "name": "SURPRISED"
                     },
                     {
-                        "value": "CALM"
+                        "value": "CALM",
+                        "name": "CALM"
                     },
                     {
-                        "value": "UNKNOWN"
+                        "value": "UNKNOWN",
+                        "name": "UNKNOWN"
                     },
                     {
-                        "value": "FEAR"
+                        "value": "FEAR",
+                        "name": "FEAR"
                     }
                 ]
             }

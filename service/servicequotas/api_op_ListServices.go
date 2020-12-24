@@ -12,9 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the AWS services available in Service Quotas. Not all AWS services are
-// available in Service Quotas. To list the see the list of the service quotas for
-// a specific service, use ListServiceQuotas.
+// Lists the names and codes for the services integrated with Service Quotas.
 func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, optFns ...func(*Options)) (*ListServicesOutput, error) {
 	if params == nil {
 		params = &ListServicesInput{}
@@ -32,34 +30,22 @@ func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, op
 
 type ListServicesInput struct {
 
-	// (Optional) Limits the number of results that you want to include in the
-	// response. If you don't include this parameter, the response defaults to a value
-	// that's specific to the operation. If additional items exist beyond the specified
-	// maximum, the NextToken element is present and has a value (isn't null). Include
-	// that value as the NextToken request parameter in the call to the operation to
-	// get the next part of the results. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, if any, make another call with the token returned from this
+	// call.
 	MaxResults *int32
 
-	// (Optional) Use this parameter in a request if you receive a NextToken response
-	// in a previous request that indicates that there's more output available. In a
-	// subsequent call, set it to the value of the previous call's NextToken response
-	// to indicate where the output should continue from.
+	// The token for the next page of results.
 	NextToken *string
 }
 
 type ListServicesOutput struct {
 
-	// If present in the response, this value indicates there's more output available
-	// that what's included in the current response. This can occur even when the
-	// response includes no values at all, such as when you ask for a filtered view of
-	// a very long list. Use this value in the NextToken request parameter in a
-	// subsequent call to the operation to continue processing and get the next part of
-	// the output. You should repeat this until the NextToken response element comes
-	// back empty (as null).
+	// The token to use to retrieve the next page of results. This value is null when
+	// there are no more results to return.
 	NextToken *string
 
-	// Returns a list of services.
+	// Information about the services.
 	Services []types.ServiceInfo
 
 	// Metadata pertaining to the operation's result.
@@ -132,13 +118,9 @@ var _ ListServicesAPIClient = (*Client)(nil)
 
 // ListServicesPaginatorOptions is the paginator options for ListServices
 type ListServicesPaginatorOptions struct {
-	// (Optional) Limits the number of results that you want to include in the
-	// response. If you don't include this parameter, the response defaults to a value
-	// that's specific to the operation. If additional items exist beyond the specified
-	// maximum, the NextToken element is present and has a value (isn't null). Include
-	// that value as the NextToken request parameter in the call to the operation to
-	// get the next part of the results. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, if any, make another call with the token returned from this
+	// call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

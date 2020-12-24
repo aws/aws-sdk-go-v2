@@ -4,6 +4,7 @@ package route53
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
@@ -52,7 +53,7 @@ type ListHostedZonesInput struct {
 	// return. If you have more than maxitems hosted zones, the value of IsTruncated in
 	// the response is true, and the value of NextMarker is the hosted zone ID of the
 	// first hosted zone that Route 53 will return if you submit another request.
-	MaxItems *string
+	MaxItems *int32
 }
 
 type ListHostedZonesOutput struct {
@@ -81,7 +82,7 @@ type ListHostedZonesOutput struct {
 	// ListHostedZones that produced the current response.
 	//
 	// This member is required.
-	MaxItems *string
+	MaxItems *int32
 
 	// If IsTruncated is true, the value of NextMarker identifies the first hosted zone
 	// in the next group of hosted zones. Submit another ListHostedZones request, and
@@ -151,6 +152,95 @@ func addOperationListHostedZonesMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	return nil
+}
+
+// ListHostedZonesAPIClient is a client that implements the ListHostedZones
+// operation.
+type ListHostedZonesAPIClient interface {
+	ListHostedZones(context.Context, *ListHostedZonesInput, ...func(*Options)) (*ListHostedZonesOutput, error)
+}
+
+var _ ListHostedZonesAPIClient = (*Client)(nil)
+
+// ListHostedZonesPaginatorOptions is the paginator options for ListHostedZones
+type ListHostedZonesPaginatorOptions struct {
+	// (Optional) The maximum number of hosted zones that you want Amazon Route 53 to
+	// return. If you have more than maxitems hosted zones, the value of IsTruncated in
+	// the response is true, and the value of NextMarker is the hosted zone ID of the
+	// first hosted zone that Route 53 will return if you submit another request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListHostedZonesPaginator is a paginator for ListHostedZones
+type ListHostedZonesPaginator struct {
+	options   ListHostedZonesPaginatorOptions
+	client    ListHostedZonesAPIClient
+	params    *ListHostedZonesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListHostedZonesPaginator returns a new ListHostedZonesPaginator
+func NewListHostedZonesPaginator(client ListHostedZonesAPIClient, params *ListHostedZonesInput, optFns ...func(*ListHostedZonesPaginatorOptions)) *ListHostedZonesPaginator {
+	options := ListHostedZonesPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListHostedZonesInput{}
+	}
+
+	return &ListHostedZonesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListHostedZonesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListHostedZones page.
+func (p *ListHostedZonesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListHostedZonesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.ListHostedZones(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextMarker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListHostedZones(region string) *awsmiddleware.RegisterServiceMetadata {

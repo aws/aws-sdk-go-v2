@@ -13,14 +13,13 @@ import (
 
 // Creates a unique customer managed customer master key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master-keys)
-// (CMK) in your AWS account and Region. You cannot use this operation to create a
-// CMK in a different AWS account. You can use the CreateKey operation to create
-// symmetric or asymmetric CMKs.
+// (CMK) in your AWS account and Region. You can use the CreateKey operation to
+// create symmetric or asymmetric CMKs.
 //
-// * Symmetric CMKs contain a 256-bit symmetric key
-// that never leaves AWS KMS unencrypted. To use the CMK, you must call AWS KMS.
-// You can use a symmetric CMK to encrypt and decrypt small amounts of data, but
-// they are typically used to generate data keys
+// * Symmetric CMKs contain a 256-bit
+// symmetric key that never leaves AWS KMS unencrypted. To use the CMK, you must
+// call AWS KMS. You can use a symmetric CMK to encrypt and decrypt small amounts
+// of data, but they are typically used to generate data keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys)
 // and data keys pairs
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-key-pairs).
@@ -64,7 +63,23 @@ import (
 // an asymmetric CMK in a custom key store. For information about custom key stores
 // in AWS KMS see Using Custom Key Stores
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
-// in the AWS Key Management Service Developer Guide .
+// in the AWS Key Management Service Developer Guide . Cross-account use: No. You
+// cannot use this operation to create a CMK in a different AWS account. Required
+// permissions: kms:CreateKey
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (IAM policy). To use the Tags parameter, kms:TagResource
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (IAM policy). For examples and information about related permissions, see Allow
+// a user to create CMKs
+// (https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html#iam-policy-example-create-key)
+// in the AWS Key Management Service Developer Guide. Related operations:
+//
+// *
+// DescribeKey
+//
+// * ListKeys
+//
+// * ScheduleKeyDeletion
 func (c *Client) CreateKey(ctx context.Context, params *CreateKeyInput, optFns ...func(*Options)) (*CreateKeyOutput, error) {
 	if params == nil {
 		params = &CreateKeyInput{}
@@ -225,7 +240,10 @@ type CreateKeyInput struct {
 	// information, see Default Key Policy
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default)
 	// in the AWS Key Management Service Developer Guide. The key policy size quota is
-	// 32 kilobytes (32768 bytes).
+	// 32 kilobytes (32768 bytes). For help writing and formatting a JSON policy
+	// document, see the IAM JSON Policy Reference
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in
+	// the IAM User Guide .
 	Policy *string
 
 	// One or more tags. Each tag consists of a tag key and a tag value. Both the tag
@@ -235,7 +253,10 @@ type CreateKeyInput struct {
 	// changing, deleting and listing tags for CMKs, see Tagging Keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html). Use
 	// this parameter to tag the CMK when it is created. To add tags to an existing
-	// CMK, use the TagResource operation.
+	// CMK, use the TagResource operation. To use this parameter, you must have
+	// kms:TagResource
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+	// permission in an IAM policy.
 	Tags []types.Tag
 }
 

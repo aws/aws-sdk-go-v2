@@ -48,6 +48,10 @@ type ListResourceInventoryInput struct {
 	//
 	// * resource_id - The ID of the resource.
 	// Logical operators are EQUALS | NOT_EQUALS.
+	//
+	// * tag: - The key/value combination
+	// of a tag assigned to the resource. Logical operators are EQUALS (single account)
+	// or EQUALS | NOT_EQUALS (cross account).
 	Filters []types.InventoryFilter
 
 	// Maximum number of results to return in a single call.

@@ -399,11 +399,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -434,14 +434,14 @@ func validateOpAssociateNodeInput(v *AssociateNodeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateNodeInput"}
-	if v.EngineAttributes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EngineAttributes"))
+	if v.ServerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerName"))
 	}
 	if v.NodeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeName"))
 	}
-	if v.ServerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServerName"))
+	if v.EngineAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EngineAttributes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -455,13 +455,13 @@ func validateOpCreateBackupInput(v *CreateBackupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateBackupInput"}
+	if v.ServerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerName"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ServerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -475,11 +475,8 @@ func validateOpCreateServerInput(v *CreateServerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateServerInput"}
-	if v.ServiceRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceRoleArn"))
-	}
-	if v.InstanceType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	if v.Engine == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
 	}
 	if v.ServerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerName"))
@@ -487,13 +484,16 @@ func validateOpCreateServerInput(v *CreateServerInput) error {
 	if v.InstanceProfileArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceProfileArn"))
 	}
+	if v.InstanceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if v.ServiceRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceRoleArn"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Engine == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -570,11 +570,11 @@ func validateOpDisassociateNodeInput(v *DisassociateNodeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateNodeInput"}
-	if v.NodeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodeName"))
-	}
 	if v.ServerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerName"))
+	}
+	if v.NodeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -588,11 +588,11 @@ func validateOpExportServerEngineAttributeInput(v *ExportServerEngineAttributeIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExportServerEngineAttributeInput"}
-	if v.ServerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServerName"))
-	}
 	if v.ExportAttributeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExportAttributeName"))
+	}
+	if v.ServerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

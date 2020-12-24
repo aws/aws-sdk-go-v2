@@ -111,53 +111,57 @@ import (
 // already been restored. A select request doesn’t return error response
 // 409.
 //
-// Restoring Archives Objects in the GLACIER and DEEP_ARCHIVE storage classes
-// are archived. To access an archived object, you must first initiate a restore
-// request. This restores a temporary copy of the archived object. In a restore
-// request, you specify the number of days that you want the restored copy to
-// exist. After the specified period, Amazon S3 deletes the temporary copy but the
-// object remains archived in the GLACIER or DEEP_ARCHIVE storage class that object
-// was restored from. To restore a specific object version, you can provide a
-// version ID. If you don't provide a version ID, Amazon S3 restores the current
-// version. The time it takes restore jobs to finish depends on which storage class
-// the object is being restored from and which data access tier you specify. When
-// restoring an archived object (or using a select request), you can specify one of
-// the following data access tier options in the Tier element of the request
-// body:
-//
-// * Expedited - Expedited retrievals allow you to quickly access your data
-// stored in the GLACIER storage class when occasional urgent requests for a subset
-// of archives are required. For all but the largest archived objects (250 MB+),
-// data accessed using Expedited retrievals are typically made available within 1–5
-// minutes. Provisioned capacity ensures that retrieval capacity for Expedited
-// retrievals is available when you need it. Expedited retrievals and provisioned
-// capacity are not available for the DEEP_ARCHIVE storage class.
-//
-// * Standard - S3
-// Standard retrievals allow you to access any of your archived objects within
-// several hours. This is the default option for the GLACIER and DEEP_ARCHIVE
-// retrieval requests that do not specify the retrieval option. S3 Standard
-// retrievals typically complete within 3-5 hours from the GLACIER storage class
-// and typically complete within 12 hours from the DEEP_ARCHIVE storage class.
+// Restoring objects Objects that you archive to the S3 Glacier or S3 Glacier
+// Deep Archive storage class, and S3 Intelligent-Tiering Archive or S3
+// Intelligent-Tiering Deep Archive tiers are not accessible in real time. For
+// objects in Archive Access or Deep Archive Access tiers you must first initiate a
+// restore request, and then wait until the object is moved into the Frequent
+// Access tier. For objects in S3 Glacier or S3 Glacier Deep Archive storage
+// classes you must first initiate a restore request, and then wait until a
+// temporary copy of the object is available. To access an archived object, you
+// must restore the object for the duration (number of days) that you specify. To
+// restore a specific object version, you can provide a version ID. If you don't
+// provide a version ID, Amazon S3 restores the current version. When restoring an
+// archived object (or using a select request), you can specify one of the
+// following data access tier options in the Tier element of the request body:
 //
 // *
-// Bulk - Bulk retrievals are Amazon S3 Glacier’s lowest-cost retrieval option,
-// enabling you to retrieve large amounts, even petabytes, of data inexpensively in
-// a day. Bulk retrievals typically complete within 5-12 hours from the GLACIER
-// storage class and typically complete within 48 hours from the DEEP_ARCHIVE
-// storage class.
+// Expedited - Expedited retrievals allow you to quickly access your data stored in
+// the S3 Glacier storage class or S3 Intelligent-Tiering Archive tier when
+// occasional urgent requests for a subset of archives are required. For all but
+// the largest archived objects (250 MB+), data accessed using Expedited retrievals
+// is typically made available within 1–5 minutes. Provisioned capacity ensures
+// that retrieval capacity for Expedited retrievals is available when you need it.
+// Expedited retrievals and provisioned capacity are not available for objects
+// stored in the S3 Glacier Deep Archive storage class or S3 Intelligent-Tiering
+// Deep Archive tier.
 //
-// For more information about archive retrieval options and
-// provisioned capacity for Expedited data access, see Restoring Archived Objects
+// * Standard - Standard retrievals allow you to access any of
+// your archived objects within several hours. This is the default option for
+// retrieval requests that do not specify the retrieval option. Standard retrievals
+// typically finish within 3–5 hours for objects stored in the S3 Glacier storage
+// class or S3 Intelligent-Tiering Archive tier. They typically finish within 12
+// hours for objects stored in the S3 Glacier Deep Archive storage class or S3
+// Intelligent-Tiering Deep Archive tier. Standard retrievals are free for objects
+// stored in S3 Intelligent-Tiering.
+//
+// * Bulk - Bulk retrievals are the lowest-cost
+// retrieval option in S3 Glacier, enabling you to retrieve large amounts, even
+// petabytes, of data inexpensively. Bulk retrievals typically finish within 5–12
+// hours for objects stored in the S3 Glacier storage class or S3
+// Intelligent-Tiering Archive tier. They typically finish within 48 hours for
+// objects stored in the S3 Glacier Deep Archive storage class or S3
+// Intelligent-Tiering Deep Archive tier. Bulk retrievals are free for objects
+// stored in S3 Intelligent-Tiering.
+//
+// For more information about archive retrieval
+// options and provisioned capacity for Expedited data access, see Restoring
+// Archived Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html) in the
 // Amazon Simple Storage Service Developer Guide. You can use Amazon S3 restore
 // speed upgrade to change the restore speed to a faster speed while it is in
-// progress. You upgrade the speed of an in-progress restoration by issuing another
-// restore request to the same object, setting a new Tier request element. When
-// issuing a request to upgrade the restore tier, you must choose a tier that is
-// faster than the tier that the in-progress restore is using. You must not change
-// any other parameters, such as the Days request element. For more information,
-// see  Upgrading the Speed of an In-Progress Restore
+// progress. For more information, see  Upgrading the speed of an in-progress
+// restore
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html#restoring-objects-upgrade-tier.title.html)
 // in the Amazon Simple Storage Service Developer Guide. To get the status of
 // object restoration, you can send a HEAD request. Operations return the
@@ -183,11 +187,11 @@ import (
 // Amazon Simple Storage Service Developer Guide. Responses A successful operation
 // returns either the 200 OK or 202 Accepted status code.
 //
-// * If the object copy is
-// not previously restored, then Amazon S3 returns 202 Accepted in the response.
+// * If the object is not
+// previously restored, then Amazon S3 returns 202 Accepted in the response.
 //
-// *
-// If the object copy is previously restored, Amazon S3 returns 200 OK in the
+// * If
+// the object is previously restored, Amazon S3 returns 200 OK in the
 // response.
 //
 // Special Errors
@@ -205,20 +209,20 @@ import (
 //
 // * Code: GlacierExpeditedRetrievalNotAvailable
 //
-// * Cause: S3 Glacier
-// expedited retrievals are currently not available. Try again later. (Returned if
-// there is insufficient capacity to process the Expedited request. This error
-// applies only to Expedited retrievals and not to S3 Standard or Bulk
-// retrievals.)
+// * Cause: expedited
+// retrievals are currently not available. Try again later. (Returned if there is
+// insufficient capacity to process the Expedited request. This error applies only
+// to Expedited retrievals and not to S3 Standard or Bulk retrievals.)
 //
-// * HTTP Status Code: 503
+// * HTTP
+// Status Code: 503
 //
 // * SOAP Fault Code Prefix: N/A
 //
-// Related
-// Resources
+// Related Resources
 //
-// * PutBucketLifecycleConfiguration
+// *
+// PutBucketLifecycleConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html)
 //
 // *
@@ -246,7 +250,7 @@ func (c *Client) RestoreObject(ctx context.Context, params *RestoreObjectInput, 
 
 type RestoreObjectInput struct {
 
-	// The bucket name or containing the object to restore. When using this API with an
+	// The bucket name containing the object to restore. When using this API with an
 	// access point, you must direct requests to the access point hostname. The access
 	// point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this

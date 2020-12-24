@@ -51,8 +51,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	ResourceType ResourceType
-	RequestId    *string
 	ResourceId   *string
+	RequestId    *string
 }
 
 func (e *ResourceNotFoundException) Error() string {

@@ -41,7 +41,7 @@ func TestUploadOrderMulti(t *testing.T) {
 		Bucket:               aws.String("Bucket"),
 		Key:                  aws.String("Key - value"),
 		Body:                 bytes.NewReader(buf12MB),
-		ServerSideEncryption: types.ServerSideEncryptionAwsKms,
+		ServerSideEncryption: "aws:kms",
 		SSEKMSKeyId:          aws.String("KmsId"),
 		ContentType:          aws.String("content/type"),
 	})
@@ -101,7 +101,7 @@ func TestUploadOrderMulti(t *testing.T) {
 	// Custom headers
 	cmu := (*args)[0].(*s3.CreateMultipartUploadInput)
 
-	if e, a := types.ServerSideEncryptionAwsKms, cmu.ServerSideEncryption; e != a {
+	if e, a := types.ServerSideEncryption("aws:kms"), cmu.ServerSideEncryption; e != a {
 		t.Errorf("expect %q, got %q", e, a)
 	}
 
@@ -208,7 +208,7 @@ func TestUploadOrderSingle(t *testing.T) {
 		Bucket:               aws.String("Bucket"),
 		Key:                  aws.String("Key - value"),
 		Body:                 bytes.NewReader(buf2MB),
-		ServerSideEncryption: types.ServerSideEncryptionAwsKms,
+		ServerSideEncryption: "aws:kms",
 		SSEKMSKeyId:          aws.String("KmsId"),
 		ContentType:          aws.String("content/type"),
 	})
@@ -235,7 +235,7 @@ func TestUploadOrderSingle(t *testing.T) {
 
 	putObjectInput := (*params)[0].(*s3.PutObjectInput)
 
-	if e, a := types.ServerSideEncryptionAwsKms, putObjectInput.ServerSideEncryption; e != a {
+	if e, a := types.ServerSideEncryption("aws:kms"), putObjectInput.ServerSideEncryption; e != a {
 		t.Errorf("expect %q, got %q", e, a)
 	}
 

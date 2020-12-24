@@ -188,9 +188,9 @@ func (e *WAFInvalidOperationException) ErrorFault() smithy.ErrorFault { return s
 type WAFInvalidParameterException struct {
 	Message *string
 
+	Field     ParameterExceptionField
 	Parameter *string
 	Reason    ParameterExceptionReason
-	Field     ParameterExceptionField
 }
 
 func (e *WAFInvalidParameterException) Error() string {

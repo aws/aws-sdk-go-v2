@@ -10,16 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables the Service Quotas template. Once the template is disabled, it does not
-// request quota increases for new accounts in your organization. Disabling the
-// quota template does not apply the quota increase requests from the template.
-// Related operations
-//
-// * To enable the quota template, call
-// AssociateServiceQuotaTemplate.
-//
-// * To delete a specific service quota from the
-// template, use DeleteServiceQuotaIncreaseRequestFromTemplate.
+// Disables your quota request template. After a template is disabled, the quota
+// increase requests in the template are not applied to new accounts in your
+// organization. Disabling a quota request template does not apply its quota
+// increase requests.
 func (c *Client) DisassociateServiceQuotaTemplate(ctx context.Context, params *DisassociateServiceQuotaTemplateInput, optFns ...func(*Options)) (*DisassociateServiceQuotaTemplateOutput, error) {
 	if params == nil {
 		params = &DisassociateServiceQuotaTemplateInput{}

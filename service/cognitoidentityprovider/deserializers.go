@@ -15698,6 +15698,104 @@ func awsAwsjson11_deserializeDocumentCustomDomainConfigType(v **types.CustomDoma
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCustomEmailLambdaVersionConfigType(v **types.CustomEmailLambdaVersionConfigType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomEmailLambdaVersionConfigType
+	if *v == nil {
+		sv = &types.CustomEmailLambdaVersionConfigType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LambdaArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
+				}
+				sv.LambdaArn = ptr.String(jtv)
+			}
+
+		case "LambdaVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomEmailSenderLambdaVersionType to be of type string, got %T instead", value)
+				}
+				sv.LambdaVersion = types.CustomEmailSenderLambdaVersionType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomSMSLambdaVersionConfigType(v **types.CustomSMSLambdaVersionConfigType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomSMSLambdaVersionConfigType
+	if *v == nil {
+		sv = &types.CustomSMSLambdaVersionConfigType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LambdaArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
+				}
+				sv.LambdaArn = ptr.String(jtv)
+			}
+
+		case "LambdaVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomSMSSenderLambdaVersionType to be of type string, got %T instead", value)
+				}
+				sv.LambdaVersion = types.CustomSMSSenderLambdaVersionType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDeviceConfigurationType(v **types.DeviceConfigurationType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17134,6 +17232,11 @@ func awsAwsjson11_deserializeDocumentLambdaConfigType(v **types.LambdaConfigType
 				sv.CreateAuthChallenge = ptr.String(jtv)
 			}
 
+		case "CustomEmailSender":
+			if err := awsAwsjson11_deserializeDocumentCustomEmailLambdaVersionConfigType(&sv.CustomEmailSender, value); err != nil {
+				return err
+			}
+
 		case "CustomMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17143,6 +17246,11 @@ func awsAwsjson11_deserializeDocumentLambdaConfigType(v **types.LambdaConfigType
 				sv.CustomMessage = ptr.String(jtv)
 			}
 
+		case "CustomSMSSender":
+			if err := awsAwsjson11_deserializeDocumentCustomSMSLambdaVersionConfigType(&sv.CustomSMSSender, value); err != nil {
+				return err
+			}
+
 		case "DefineAuthChallenge":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17150,6 +17258,15 @@ func awsAwsjson11_deserializeDocumentLambdaConfigType(v **types.LambdaConfigType
 					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
 				}
 				sv.DefineAuthChallenge = ptr.String(jtv)
+			}
+
+		case "KMSKeyID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
+				}
+				sv.KMSKeyID = ptr.String(jtv)
 			}
 
 		case "PostAuthentication":

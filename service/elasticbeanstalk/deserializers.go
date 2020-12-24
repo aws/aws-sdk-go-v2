@@ -6135,20 +6135,23 @@ func awsAwsquery_deserializeDocumentApplicationDescriptionList(v *[]types.Applic
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.ApplicationDescription
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentApplicationDescription(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.ApplicationDescription
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentApplicationDescription(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -6497,20 +6500,23 @@ func awsAwsquery_deserializeDocumentApplicationVersionDescriptionList(v *[]types
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.ApplicationVersionDescription
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentApplicationVersionDescription(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.ApplicationVersionDescription
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentApplicationVersionDescription(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -6659,20 +6665,23 @@ func awsAwsquery_deserializeDocumentAutoScalingGroupList(v *[]types.AutoScalingG
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.AutoScalingGroup
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentAutoScalingGroup(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.AutoScalingGroup
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentAutoScalingGroup(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -6724,20 +6733,23 @@ func awsAwsquery_deserializeDocumentAvailableSolutionStackDetailsList(v *[]types
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.SolutionStackDescription
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentSolutionStackDescription(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.SolutionStackDescription
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentSolutionStackDescription(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -6791,25 +6803,28 @@ func awsAwsquery_deserializeDocumentAvailableSolutionStackNamesList(v *[]string,
 		}
 		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 		decoder = memberDecoder
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col string
-				val, err := decoder.Value()
-				if err != nil {
-					return err
-				}
-				if val == nil {
-					break
-				}
-				{
-					xtv := string(val)
-					col = xtv
-				}
-				sv = append(sv, col)
-				break
-			} else {
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col string
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
 				break
 			}
+			{
+				xtv := string(val)
+				col = xtv
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -6917,25 +6932,28 @@ func awsAwsquery_deserializeDocumentCauses(v *[]string, decoder smithyxml.NodeDe
 		}
 		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 		decoder = memberDecoder
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col string
-				val, err := decoder.Value()
-				if err != nil {
-					return err
-				}
-				if val == nil {
-					break
-				}
-				{
-					xtv := string(val)
-					col = xtv
-				}
-				sv = append(sv, col)
-				break
-			} else {
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col string
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
 				break
 			}
+			{
+				xtv := string(val)
+				col = xtv
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -7221,20 +7239,23 @@ func awsAwsquery_deserializeDocumentConfigurationOptionDescriptionsList(v *[]typ
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.ConfigurationOptionDescription
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentConfigurationOptionDescription(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.ConfigurationOptionDescription
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentConfigurationOptionDescription(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -7288,25 +7309,28 @@ func awsAwsquery_deserializeDocumentConfigurationOptionPossibleValues(v *[]strin
 		}
 		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 		decoder = memberDecoder
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col string
-				val, err := decoder.Value()
-				if err != nil {
-					return err
-				}
-				if val == nil {
-					break
-				}
-				{
-					xtv := string(val)
-					col = xtv
-				}
-				sv = append(sv, col)
-				break
-			} else {
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col string
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
 				break
 			}
+			{
+				xtv := string(val)
+				col = xtv
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -7451,20 +7475,23 @@ func awsAwsquery_deserializeDocumentConfigurationOptionSettingsList(v *[]types.C
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.ConfigurationOptionSetting
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentConfigurationOptionSetting(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.ConfigurationOptionSetting
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentConfigurationOptionSetting(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -7683,20 +7710,23 @@ func awsAwsquery_deserializeDocumentConfigurationSettingsDescriptionList(v *[]ty
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.ConfigurationSettingsDescription
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentConfigurationSettingsDescription(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.ConfigurationSettingsDescription
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentConfigurationSettingsDescription(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -7750,25 +7780,28 @@ func awsAwsquery_deserializeDocumentConfigurationTemplateNamesList(v *[]string, 
 		}
 		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 		decoder = memberDecoder
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col string
-				val, err := decoder.Value()
-				if err != nil {
-					return err
-				}
-				if val == nil {
-					break
-				}
-				{
-					xtv := string(val)
-					col = xtv
-				}
-				sv = append(sv, col)
-				break
-			} else {
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col string
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
 				break
 			}
+			{
+				xtv := string(val)
+				col = xtv
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -8059,20 +8092,23 @@ func awsAwsquery_deserializeDocumentCustomAmiList(v *[]types.CustomAmi, decoder 
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.CustomAmi
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentCustomAmi(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.CustomAmi
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentCustomAmi(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -8568,20 +8604,23 @@ func awsAwsquery_deserializeDocumentEnvironmentDescriptionsList(v *[]types.Envir
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.EnvironmentDescription
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentEnvironmentDescription(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.EnvironmentDescription
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentEnvironmentDescription(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -8725,20 +8764,23 @@ func awsAwsquery_deserializeDocumentEnvironmentInfoDescriptionList(v *[]types.En
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.EnvironmentInfoDescription
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentEnvironmentInfoDescription(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.EnvironmentInfoDescription
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentEnvironmentInfoDescription(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -8852,20 +8894,23 @@ func awsAwsquery_deserializeDocumentEnvironmentLinks(v *[]types.EnvironmentLink,
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.EnvironmentLink
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentEnvironmentLink(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.EnvironmentLink
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentEnvironmentLink(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -9282,20 +9327,23 @@ func awsAwsquery_deserializeDocumentEventDescriptionList(v *[]types.EventDescrip
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.EventDescription
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentEventDescription(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.EventDescription
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentEventDescription(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -9396,20 +9444,23 @@ func awsAwsquery_deserializeDocumentInstanceHealthList(v *[]types.SingleInstance
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.SingleInstanceHealth
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentSingleInstanceHealth(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.SingleInstanceHealth
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentSingleInstanceHealth(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -9633,20 +9684,23 @@ func awsAwsquery_deserializeDocumentInstanceList(v *[]types.Instance, decoder sm
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.Instance
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentInstance(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.Instance
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentInstance(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -10017,20 +10071,23 @@ func awsAwsquery_deserializeDocumentLaunchConfigurationList(v *[]types.LaunchCon
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.LaunchConfiguration
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentLaunchConfiguration(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.LaunchConfiguration
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentLaunchConfiguration(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -10131,20 +10188,23 @@ func awsAwsquery_deserializeDocumentLaunchTemplateList(v *[]types.LaunchTemplate
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.LaunchTemplate
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentLaunchTemplate(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.LaunchTemplate
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentLaunchTemplate(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -10264,29 +10324,32 @@ func awsAwsquery_deserializeDocumentLoadAverage(v *[]float64, decoder smithyxml.
 		}
 		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 		decoder = memberDecoder
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col float64
-				val, err := decoder.Value()
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col float64
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
 				if err != nil {
 					return err
 				}
-				if val == nil {
-					break
-				}
-				{
-					xtv := string(val)
-					f64, err := strconv.ParseFloat(xtv, 64)
-					if err != nil {
-						return err
-					}
-					col = f64
-				}
-				sv = append(sv, col)
-				break
-			} else {
-				break
+				col = f64
 			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -10464,20 +10527,23 @@ func awsAwsquery_deserializeDocumentLoadBalancerList(v *[]types.LoadBalancer, de
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.LoadBalancer
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentLoadBalancer(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.LoadBalancer
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentLoadBalancer(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -10529,20 +10595,23 @@ func awsAwsquery_deserializeDocumentLoadBalancerListenersDescription(v *[]types.
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.Listener
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentListener(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.Listener
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentListener(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -10847,20 +10916,23 @@ func awsAwsquery_deserializeDocumentManagedActionHistoryItems(v *[]types.Managed
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.ManagedActionHistoryItem
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentManagedActionHistoryItem(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.ManagedActionHistoryItem
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentManagedActionHistoryItem(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -10961,20 +11033,23 @@ func awsAwsquery_deserializeDocumentManagedActions(v *[]types.ManagedAction, dec
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.ManagedAction
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentManagedAction(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.ManagedAction
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentManagedAction(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -11405,20 +11480,23 @@ func awsAwsquery_deserializeDocumentPlatformBranchSummaryList(v *[]types.Platfor
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.PlatformBranchSummary
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentPlatformBranchSummary(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.PlatformBranchSummary
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentPlatformBranchSummary(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -11814,20 +11892,23 @@ func awsAwsquery_deserializeDocumentPlatformFrameworks(v *[]types.PlatformFramew
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.PlatformFramework
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentPlatformFramework(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.PlatformFramework
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentPlatformFramework(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -11941,20 +12022,23 @@ func awsAwsquery_deserializeDocumentPlatformProgrammingLanguages(v *[]types.Plat
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.PlatformProgrammingLanguage
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentPlatformProgrammingLanguage(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.PlatformProgrammingLanguage
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentPlatformProgrammingLanguage(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -12184,20 +12268,23 @@ func awsAwsquery_deserializeDocumentPlatformSummaryList(v *[]types.PlatformSumma
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.PlatformSummary
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentPlatformSummary(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.PlatformSummary
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentPlatformSummary(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -12360,20 +12447,23 @@ func awsAwsquery_deserializeDocumentQueueList(v *[]types.Queue, decoder smithyxm
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.Queue
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentQueue(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.Queue
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentQueue(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -13001,25 +13091,28 @@ func awsAwsquery_deserializeDocumentSolutionStackFileTypeList(v *[]string, decod
 		}
 		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 		decoder = memberDecoder
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col string
-				val, err := decoder.Value()
-				if err != nil {
-					return err
-				}
-				if val == nil {
-					break
-				}
-				{
-					xtv := string(val)
-					col = xtv
-				}
-				sv = append(sv, col)
-				break
-			} else {
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col string
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
 				break
 			}
+			{
+				xtv := string(val)
+				col = xtv
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -13306,25 +13399,28 @@ func awsAwsquery_deserializeDocumentSupportedAddonList(v *[]string, decoder smit
 		}
 		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 		decoder = memberDecoder
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col string
-				val, err := decoder.Value()
-				if err != nil {
-					return err
-				}
-				if val == nil {
-					break
-				}
-				{
-					xtv := string(val)
-					col = xtv
-				}
-				sv = append(sv, col)
-				break
-			} else {
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col string
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
 				break
 			}
+			{
+				xtv := string(val)
+				col = xtv
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -13383,25 +13479,28 @@ func awsAwsquery_deserializeDocumentSupportedTierList(v *[]string, decoder smith
 		}
 		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 		decoder = memberDecoder
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col string
-				val, err := decoder.Value()
-				if err != nil {
-					return err
-				}
-				if val == nil {
-					break
-				}
-				{
-					xtv := string(val)
-					col = xtv
-				}
-				sv = append(sv, col)
-				break
-			} else {
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col string
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
 				break
 			}
+			{
+				xtv := string(val)
+				col = xtv
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -13568,20 +13667,23 @@ func awsAwsquery_deserializeDocumentTagList(v *[]types.Tag, decoder smithyxml.No
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.Tag
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentTag(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.Tag
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentTag(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -14025,20 +14127,23 @@ func awsAwsquery_deserializeDocumentTriggerList(v *[]types.Trigger, decoder smit
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.Trigger
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentTrigger(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.Trigger
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentTrigger(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -14178,20 +14283,23 @@ func awsAwsquery_deserializeDocumentValidationMessagesList(v *[]types.Validation
 		if done {
 			break
 		}
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col types.ValidationMessage
-				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				destAddr := &col
-				if err := awsAwsquery_deserializeDocumentValidationMessage(&destAddr, nodeDecoder); err != nil {
-					return err
-				}
-				col = *destAddr
-				sv = append(sv, col)
-				break
-			} else {
-				break
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.ValidationMessage
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentValidationMessage(&destAddr, nodeDecoder); err != nil {
+				return err
 			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}
@@ -14245,25 +14353,28 @@ func awsAwsquery_deserializeDocumentVersionLabelsList(v *[]string, decoder smith
 		}
 		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 		decoder = memberDecoder
-		for {
-			if strings.EqualFold("member", t.Name.Local) {
-				var col string
-				val, err := decoder.Value()
-				if err != nil {
-					return err
-				}
-				if val == nil {
-					break
-				}
-				{
-					xtv := string(val)
-					col = xtv
-				}
-				sv = append(sv, col)
-				break
-			} else {
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col string
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
 				break
 			}
+			{
+				xtv := string(val)
+				col = xtv
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
 		}
 		decoder = originalDecoder
 	}

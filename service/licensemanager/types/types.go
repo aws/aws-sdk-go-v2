@@ -13,6 +13,20 @@ type AutomatedDiscoveryInformation struct {
 	LastRunTime *time.Time
 }
 
+// Details about a borrow configuration.
+type BorrowConfiguration struct {
+
+	// Indicates whether early check-ins are allowed.
+	//
+	// This member is required.
+	AllowEarlyCheckIn *bool
+
+	// Maximum time for the borrow configuration, in minutes.
+	//
+	// This member is required.
+	MaxTimeToLiveInMinutes *int32
+}
+
 // Details about license consumption.
 type ConsumedLicenseSummary struct {
 
@@ -21,6 +35,96 @@ type ConsumedLicenseSummary struct {
 
 	// Resource type of the resource consuming a license.
 	ResourceType ResourceType
+}
+
+// Details about a consumption configuration.
+type ConsumptionConfiguration struct {
+
+	// Details about a borrow configuration.
+	BorrowConfiguration *BorrowConfiguration
+
+	// Details about a provisional configuration.
+	ProvisionalConfiguration *ProvisionalConfiguration
+
+	// Renewal frequency.
+	RenewType RenewType
+}
+
+// Describes a time range, in ISO8601-UTC format.
+type DatetimeRange struct {
+
+	// Start of the time range.
+	//
+	// This member is required.
+	Begin *string
+
+	// End of the time range.
+	End *string
+}
+
+// Describes a resource entitled for use with a license.
+type Entitlement struct {
+
+	// Entitlement name.
+	//
+	// This member is required.
+	Name *string
+
+	// Entitlement unit.
+	//
+	// This member is required.
+	Unit EntitlementUnit
+
+	// Indicates whether check-ins are allowed.
+	AllowCheckIn *bool
+
+	// Maximum entitlement count. Use if the unit is not None.
+	MaxCount *int64
+
+	// Indicates whether overages are allowed.
+	Overage *bool
+
+	// Entitlement resource. Use only if the unit is None.
+	Value *string
+}
+
+// Data associated with an entitlement resource.
+type EntitlementData struct {
+
+	// Entitlement data name.
+	//
+	// This member is required.
+	Name *string
+
+	// Entitlement data unit.
+	//
+	// This member is required.
+	Unit EntitlementDataUnit
+
+	// Entitlement data value.
+	Value *string
+}
+
+// Usage associated with an entitlement resource.
+type EntitlementUsage struct {
+
+	// Resource usage consumed.
+	//
+	// This member is required.
+	ConsumedValue *string
+
+	// Entitlement usage name.
+	//
+	// This member is required.
+	Name *string
+
+	// Entitlement usage unit.
+	//
+	// This member is required.
+	Unit EntitlementDataUnit
+
+	// Maximum entitlement usage count.
+	MaxCount *string
 }
 
 // A filter name and value pair that is used to return more specific results from a
@@ -33,6 +137,108 @@ type Filter struct {
 
 	// Filter values. Filter values are case-sensitive.
 	Values []string
+}
+
+// Describes a grant.
+type Grant struct {
+
+	// Amazon Resource Name (ARN) of the grant.
+	//
+	// This member is required.
+	GrantArn *string
+
+	// Grant name.
+	//
+	// This member is required.
+	GrantName *string
+
+	// Grant status.
+	//
+	// This member is required.
+	GrantStatus GrantStatus
+
+	// Granted operations.
+	//
+	// This member is required.
+	GrantedOperations []AllowedOperation
+
+	// The grantee principal ARN.
+	//
+	// This member is required.
+	GranteePrincipalArn *string
+
+	// Home Region of the grant.
+	//
+	// This member is required.
+	HomeRegion *string
+
+	// License ARN.
+	//
+	// This member is required.
+	LicenseArn *string
+
+	// Parent ARN.
+	//
+	// This member is required.
+	ParentArn *string
+
+	// Grant version.
+	//
+	// This member is required.
+	Version *string
+
+	// Grant status reason.
+	StatusReason *string
+}
+
+// Describes a license that is granted to a grantee.
+type GrantedLicense struct {
+
+	// Granted license beneficiary.
+	Beneficiary *string
+
+	// Configuration for consumption of the license.
+	ConsumptionConfiguration *ConsumptionConfiguration
+
+	// Creation time of the granted license.
+	CreateTime *string
+
+	// License entitlements.
+	Entitlements []Entitlement
+
+	// Home Region of the granted license.
+	HomeRegion *string
+
+	// Granted license issuer.
+	Issuer *IssuerDetails
+
+	// Amazon Resource Name (ARN) of the license.
+	LicenseArn *string
+
+	// Granted license metadata.
+	LicenseMetadata []Metadata
+
+	// License name.
+	LicenseName *string
+
+	// Product name.
+	ProductName *string
+
+	// Product SKU.
+	ProductSKU *string
+
+	// Granted license received metadata.
+	ReceivedMetadata *ReceivedMetadata
+
+	// Granted license status.
+	Status LicenseStatus
+
+	// Date and time range during which the granted license is valid, in ISO8601-UTC
+	// format.
+	Validity *DatetimeRange
+
+	// Version of the granted license.
+	Version *string
 }
 
 // An inventory filter.
@@ -50,6 +256,79 @@ type InventoryFilter struct {
 
 	// Value of the filter.
 	Value *string
+}
+
+// Details about the issuer of a license.
+type Issuer struct {
+
+	// Issuer name.
+	//
+	// This member is required.
+	Name *string
+
+	// Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of
+	// sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.
+	SignKey *string
+}
+
+// Details associated with the issuer of a license.
+type IssuerDetails struct {
+
+	// Issuer key fingerprint.
+	KeyFingerprint *string
+
+	// Issuer name.
+	Name *string
+
+	// Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of
+	// sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.
+	SignKey *string
+}
+
+// Software license that is managed in AWS License Manager.
+type License struct {
+
+	// License beneficiary.
+	Beneficiary *string
+
+	// Configuration for consumption of the license.
+	ConsumptionConfiguration *ConsumptionConfiguration
+
+	// License creation time.
+	CreateTime *string
+
+	// License entitlements.
+	Entitlements []Entitlement
+
+	// Home Region of the license.
+	HomeRegion *string
+
+	// License issuer.
+	Issuer *IssuerDetails
+
+	// Amazon Resource Name (ARN) of the license.
+	LicenseArn *string
+
+	// License metadata.
+	LicenseMetadata []Metadata
+
+	// License name.
+	LicenseName *string
+
+	// Product name.
+	ProductName *string
+
+	// Product SKU.
+	ProductSKU *string
+
+	// License status.
+	Status LicenseStatus
+
+	// Date and time range during which the license is valid, in ISO8601-UTC format.
+	Validity *DatetimeRange
+
+	// License version.
+	Version *string
 }
 
 // A license configuration is an abstraction of a customer license agreement that
@@ -71,6 +350,9 @@ type LicenseConfiguration struct {
 
 	// Description of the license configuration.
 	Description *string
+
+	// When true, disassociates a resource when software is uninstalled.
+	DisassociateWhenNotFound *bool
 
 	// Amazon Resource Name (ARN) of the license configuration.
 	LicenseConfigurationArn *string
@@ -108,6 +390,9 @@ type LicenseConfiguration struct {
 
 // Describes an association with a license configuration.
 type LicenseConfigurationAssociation struct {
+
+	// Scope of AMI associations. The possible value is cross-account.
+	AmiAssociationScope *string
 
 	// Time when the license configuration was associated with the resource.
 	AssociationTime *time.Time
@@ -179,6 +464,16 @@ type LicenseSpecification struct {
 	//
 	// This member is required.
 	LicenseConfigurationArn *string
+
+	// Scope of AMI associations. The possible value is cross-account.
+	AmiAssociationScope *string
+}
+
+// Describes the entitlement usage associated with a license.
+type LicenseUsage struct {
+
+	// License entitlement usages.
+	EntitlementUsages []EntitlementUsage
 }
 
 // Summary information about a managed resource.
@@ -191,13 +486,13 @@ type ManagedResourceSummary struct {
 	ResourceType ResourceType
 }
 
-// Reserved.
+// Describes key/value pairs.
 type Metadata struct {
 
-	// Reserved.
+	// The key name.
 	Name *string
 
-	// Reserved.
+	// The value.
 	Value *string
 }
 
@@ -275,6 +570,25 @@ type ProductInformationFilter struct {
 	ProductInformationFilterValue []string
 }
 
+// Details about a provisional configuration.
+type ProvisionalConfiguration struct {
+
+	// Maximum time for the provisional configuration, in minutes.
+	//
+	// This member is required.
+	MaxTimeToLiveInMinutes *int32
+}
+
+// Metadata associated with received licenses and grants.
+type ReceivedMetadata struct {
+
+	// Allowed operations.
+	AllowedOperations []AllowedOperation
+
+	// Received status.
+	ReceivedStatus ReceivedStatus
+}
+
 // Details about a resource.
 type ResourceInventory struct {
 
@@ -305,4 +619,29 @@ type Tag struct {
 
 	// Tag value.
 	Value *string
+}
+
+// Describes a token.
+type TokenData struct {
+
+	// Token expiration time, in ISO8601-UTC format.
+	ExpirationTime *string
+
+	// Amazon Resource Name (ARN) of the license.
+	LicenseArn *string
+
+	// Amazon Resource Names (ARN) of the roles included in the token.
+	RoleArns []string
+
+	// Token status. The possible values are AVAILABLE and DELETED.
+	Status *string
+
+	// Token ID.
+	TokenId *string
+
+	// Data specified by the caller.
+	TokenProperties []string
+
+	// Type of token generated. The supported value is REFRESH_TOKEN.
+	TokenType *string
 }

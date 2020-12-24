@@ -34,7 +34,7 @@ type GetMemberDetectorsInput struct {
 	// This member is required.
 	AccountIds []string
 
-	// The detector ID for the master account.
+	// The detector ID for the administrator account.
 	//
 	// This member is required.
 	DetectorId *string

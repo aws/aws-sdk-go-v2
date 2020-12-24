@@ -9,7 +9,8 @@ import (
 // A policy type that defines the voting rules for the network. The rules decide if
 // a proposal is approved. Approval may be based on criteria such as the percentage
 // of YES votes and the duration of the proposal. The policy applies to all
-// proposals and is specified when the network is created.
+// proposals and is specified when the network is created. Applies only to
+// Hyperledger Fabric.
 type ApprovalThresholdPolicy struct {
 
 	// The duration from the time that a proposal is created until it expires. If
@@ -32,7 +33,8 @@ type ApprovalThresholdPolicy struct {
 	ThresholdPercentage *int32
 }
 
-// An invitation to an AWS account to create a member and join the network.
+// An invitation to an AWS account to create a member and join the network. Applies
+// only to Hyperledger Fabric.
 type Invitation struct {
 
 	// The date and time that the invitation was created.
@@ -71,7 +73,8 @@ type Invitation struct {
 }
 
 // An action to invite a specific AWS account to create a member and join the
-// network. The InviteAction is carried out when a Proposal is APPROVED.
+// network. The InviteAction is carried out when a Proposal is APPROVED. Applies
+// only to Hyperledger Fabric.
 type InviteAction struct {
 
 	// The AWS account ID to invite.
@@ -94,7 +97,7 @@ type LogConfigurations struct {
 	Cloudwatch *LogConfiguration
 }
 
-// Member configuration properties.
+// Member configuration properties. Applies only to Hyperledger Fabric.
 type Member struct {
 
 	// The date and time that the member was created.
@@ -142,7 +145,7 @@ type Member struct {
 	Status MemberStatus
 }
 
-// Configuration properties of the member.
+// Configuration properties of the member. Applies only to Hyperledger Fabric.
 type MemberConfiguration struct {
 
 	// Configuration properties of the blockchain framework relevant to the member.
@@ -181,8 +184,8 @@ type MemberFabricConfiguration struct {
 	// The password for the member's initial administrative user. The AdminPassword
 	// must be at least eight characters long and no more than 32 characters. It must
 	// contain at least one uppercase letter, one lowercase letter, and one digit. It
-	// cannot have a single quote(‘), double quote(“), forward slash(/), backward
-	// slash(\), @, or a space.
+	// cannot have a single quotation mark (‘), a double quotation marks (“), a forward
+	// slash(/), a backward slash(\), @, or a space.
 	//
 	// This member is required.
 	AdminPassword *string
@@ -230,7 +233,8 @@ type MemberLogPublishingConfiguration struct {
 	Fabric *MemberFabricLogPublishingConfiguration
 }
 
-// A summary of configuration properties for a member.
+// A summary of configuration properties for a member. Applies only to Hyperledger
+// Fabric.
 type MemberSummary struct {
 
 	// The date and time that the member was created.
@@ -308,6 +312,20 @@ type Network struct {
 	VpcEndpointServiceName *string
 }
 
+// Attributes of Ethereum for a network.
+type NetworkEthereumAttributes struct {
+
+	// The Ethereum CHAIN_ID associated with the Ethereum network. Chain IDs are as
+	// follows:
+	//
+	// * mainnet = 1
+	//
+	// * rinkeby = 4
+	//
+	// * ropsten = 3
+	ChainId *string
+}
+
 // Attributes of Hyperledger Fabric for a network.
 type NetworkFabricAttributes struct {
 
@@ -334,6 +352,10 @@ type NetworkFabricConfiguration struct {
 // Attributes relevant to the network for the blockchain framework that the network
 // uses.
 type NetworkFrameworkAttributes struct {
+
+	// Attributes of an Ethereum network for Managed Blockchain resources participating
+	// in an Ethereum network.
+	Ethereum *NetworkEthereumAttributes
 
 	// Attributes of Hyperledger Fabric for a Managed Blockchain network that uses
 	// Hyperledger Fabric.
@@ -374,7 +396,7 @@ type NetworkSummary struct {
 	Status NetworkStatus
 }
 
-// Configuration properties of a peer node.
+// Configuration properties of a node.
 type Node struct {
 
 	// The Availability Zone in which the node exists.
@@ -392,48 +414,66 @@ type Node struct {
 	// The instance type of the node.
 	InstanceType *string
 
-	// Configuration properties for logging events associated with a peer node owned by
-	// a member in a Managed Blockchain network.
+	// Configuration properties for logging events associated with a peer node on a
+	// Hyperledger Fabric network on Managed Blockchain.
 	LogPublishingConfiguration *NodeLogPublishingConfiguration
 
-	// The unique identifier of the member to which the node belongs.
+	// The unique identifier of the member to which the node belongs. Applies only to
+	// Hyperledger Fabric.
 	MemberId *string
 
-	// The unique identifier of the network that the node is in.
+	// The unique identifier of the network that the node is on.
 	NetworkId *string
 
-	// The state database that the node uses. Values are LevelDB or CouchDB.
+	// The state database that the node uses. Values are LevelDB or CouchDB. Applies
+	// only to Hyperledger Fabric.
 	StateDB StateDBType
 
 	// The status of the node.
 	Status NodeStatus
 }
 
-// Configuration properties of a peer node.
+// Configuration properties of a node.
 type NodeConfiguration struct {
-
-	// The Availability Zone in which the node exists.
-	//
-	// This member is required.
-	AvailabilityZone *string
 
 	// The Amazon Managed Blockchain instance type for the node.
 	//
 	// This member is required.
 	InstanceType *string
 
-	// Configuration properties for logging events associated with a peer node owned by
-	// a member in a Managed Blockchain network.
+	// The Availability Zone in which the node exists.
+	AvailabilityZone *string
+
+	// Configuration properties for logging events associated with a peer node on a
+	// Hyperledger Fabric network on Managed Blockchain.
 	LogPublishingConfiguration *NodeLogPublishingConfiguration
 
 	// The state database that the node uses. Values are LevelDB or CouchDB. When using
 	// an Amazon Managed Blockchain network with Hyperledger Fabric version 1.4 or
-	// later, the default is CouchDB.
+	// later, the default is CouchDB. Applies only to Hyperledger Fabric.
 	StateDB StateDBType
 }
 
-// Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain network
-// that uses Hyperledger Fabric.
+// Attributes of an Ethereum node.
+type NodeEthereumAttributes struct {
+
+	// The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC methods
+	// over HTTP connections from a client. Use this endpoint in client code for smart
+	// contracts when using an HTTP connection. Connections to this endpoint are
+	// authenticated using Signature Version 4
+	// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+	HttpEndpoint *string
+
+	// The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC methods
+	// over WebSockets connections from a client. Use this endpoint in client code for
+	// smart contracts when using a WebSockets connection. Connections to this endpoint
+	// are authenticated using Signature Version 4
+	// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+	WebSocketEndpoint *string
+}
+
+// Attributes of Hyperledger Fabric for a peer node on a Hyperledger Fabric network
+// on Managed Blockchain.
 type NodeFabricAttributes struct {
 
 	// The endpoint that identifies the peer node for all services except peer
@@ -463,17 +503,21 @@ type NodeFabricLogPublishingConfiguration struct {
 	PeerLogs *LogConfigurations
 }
 
-// Attributes relevant to a peer node on a Managed Blockchain network for the
-// blockchain framework that the network uses.
+// Attributes relevant to a node on a Managed Blockchain network for the blockchain
+// framework that the network uses.
 type NodeFrameworkAttributes struct {
+
+	// Attributes of Ethereum for a node on a Managed Blockchain network that uses
+	// Ethereum.
+	Ethereum *NodeEthereumAttributes
 
 	// Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain network
 	// that uses Hyperledger Fabric.
 	Fabric *NodeFabricAttributes
 }
 
-// Configuration properties for logging events associated with a peer node owned by
-// a member in a Managed Blockchain network.
+// Configuration properties for logging events associated with a peer node on a
+// Hyperledger Fabric network on Managed Blockchain.
 type NodeLogPublishingConfiguration struct {
 
 	// Configuration properties for logging events associated with a node that is owned
@@ -482,7 +526,7 @@ type NodeLogPublishingConfiguration struct {
 	Fabric *NodeFabricLogPublishingConfiguration
 }
 
-// A summary of configuration properties for a peer node.
+// A summary of configuration properties for a node.
 type NodeSummary struct {
 
 	// The Availability Zone in which the node exists.
@@ -501,7 +545,8 @@ type NodeSummary struct {
 	Status NodeStatus
 }
 
-// Properties of a proposal on a Managed Blockchain network.
+// Properties of a proposal on a Managed Blockchain network. Applies only to
+// Hyperledger Fabric.
 type Proposal struct {
 
 	// The actions to perform on the network if the proposal is APPROVED.
@@ -567,7 +612,8 @@ type Proposal struct {
 	YesVoteCount *int32
 }
 
-// The actions to carry out if a proposal is APPROVED.
+// The actions to carry out if a proposal is APPROVED. Applies only to Hyperledger
+// Fabric.
 type ProposalActions struct {
 
 	// The actions to perform for an APPROVED proposal to invite an AWS account to
@@ -580,7 +626,7 @@ type ProposalActions struct {
 	Removals []RemoveAction
 }
 
-// Properties of a proposal.
+// Properties of a proposal. Applies only to Hyperledger Fabric.
 type ProposalSummary struct {
 
 	// The date and time that the proposal was created.
@@ -631,7 +677,7 @@ type ProposalSummary struct {
 
 // An action to remove a member from a Managed Blockchain network as the result of
 // a removal proposal that is APPROVED. The member and all associated resources are
-// deleted from the network.
+// deleted from the network. Applies only to Hyperledger Fabric.
 type RemoveAction struct {
 
 	// The unique identifier of the member to remove.
@@ -640,7 +686,8 @@ type RemoveAction struct {
 	MemberId *string
 }
 
-// Properties of an individual vote that a member cast for a proposal.
+// Properties of an individual vote that a member cast for a proposal. Applies only
+// to Hyperledger Fabric.
 type VoteSummary struct {
 
 	// The unique identifier of the member that cast the vote.
@@ -653,7 +700,8 @@ type VoteSummary struct {
 	Vote VoteValue
 }
 
-// The voting rules for the network to decide if a proposal is accepted
+// The voting rules for the network to decide if a proposal is accepted Applies
+// only to Hyperledger Fabric.
 type VotingPolicy struct {
 
 	// Defines the rules for the network for voting on proposals, such as the

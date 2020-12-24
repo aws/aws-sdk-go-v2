@@ -150,6 +150,26 @@ func (m *validateOpCreateInsight) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateMembers struct {
+}
+
+func (*validateOpCreateMembers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMembers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMembersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMembersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeclineInvitations struct {
 }
 
@@ -230,6 +250,26 @@ func (m *validateOpDeleteInvitations) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteMembers struct {
+}
+
+func (*validateOpDeleteMembers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMembers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMembersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMembersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeStandardsControls struct {
 }
 
@@ -270,6 +310,46 @@ func (m *validateOpDisableImportFindingsForProduct) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisableOrganizationAdminAccount struct {
+}
+
+func (*validateOpDisableOrganizationAdminAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableOrganizationAdminAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableOrganizationAdminAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableOrganizationAdminAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateMembers struct {
+}
+
+func (*validateOpDisassociateMembers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateMembers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateMembersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateMembersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEnableImportFindingsForProduct struct {
 }
 
@@ -285,6 +365,26 @@ func (m *validateOpEnableImportFindingsForProduct) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpEnableImportFindingsForProductInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEnableOrganizationAdminAccount struct {
+}
+
+func (*validateOpEnableOrganizationAdminAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableOrganizationAdminAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableOrganizationAdminAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableOrganizationAdminAccountInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -325,6 +425,26 @@ func (m *validateOpGetMembers) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetMembersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpInviteMembers struct {
+}
+
+func (*validateOpInviteMembers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInviteMembers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InviteMembersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInviteMembersInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -450,6 +570,26 @@ func (m *validateOpUpdateInsight) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateOrganizationConfiguration struct {
+}
+
+func (*validateOpUpdateOrganizationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateOrganizationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateOrganizationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateOrganizationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateStandardsControl struct {
 }
 
@@ -498,6 +638,10 @@ func addOpCreateInsightValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateInsight{}, middleware.After)
 }
 
+func addOpCreateMembersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMembers{}, middleware.After)
+}
+
 func addOpDeclineInvitationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeclineInvitations{}, middleware.After)
 }
@@ -514,6 +658,10 @@ func addOpDeleteInvitationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteInvitations{}, middleware.After)
 }
 
+func addOpDeleteMembersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMembers{}, middleware.After)
+}
+
 func addOpDescribeStandardsControlsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeStandardsControls{}, middleware.After)
 }
@@ -522,8 +670,20 @@ func addOpDisableImportFindingsForProductValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpDisableImportFindingsForProduct{}, middleware.After)
 }
 
+func addOpDisableOrganizationAdminAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableOrganizationAdminAccount{}, middleware.After)
+}
+
+func addOpDisassociateMembersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateMembers{}, middleware.After)
+}
+
 func addOpEnableImportFindingsForProductValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableImportFindingsForProduct{}, middleware.After)
+}
+
+func addOpEnableOrganizationAdminAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableOrganizationAdminAccount{}, middleware.After)
 }
 
 func addOpGetInsightResultsValidationMiddleware(stack *middleware.Stack) error {
@@ -532,6 +692,10 @@ func addOpGetInsightResultsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMembers{}, middleware.After)
+}
+
+func addOpInviteMembersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInviteMembers{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -558,8 +722,44 @@ func addOpUpdateInsightValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateInsight{}, middleware.After)
 }
 
+func addOpUpdateOrganizationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateOrganizationConfiguration{}, middleware.After)
+}
+
 func addOpUpdateStandardsControlValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateStandardsControl{}, middleware.After)
+}
+
+func validateAccountDetails(v *types.AccountDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccountDetails"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAccountDetailsList(v []types.AccountDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccountDetailsList"}
+	for i := range v {
+		if err := validateAccountDetails(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAwsSecurityFinding(v *types.AwsSecurityFinding) error {
@@ -567,69 +767,69 @@ func validateAwsSecurityFinding(v *types.AwsSecurityFinding) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AwsSecurityFinding"}
-	if v.ProductArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductArn"))
-	}
-	if v.CreatedAt == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CreatedAt"))
-	}
-	if v.Compliance != nil {
-		if err := validateCompliance(v.Compliance); err != nil {
-			invalidParams.AddNested("Compliance", err.(smithy.InvalidParamsError))
-		}
+	if v.SchemaVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaVersion"))
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	if v.ProductArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductArn"))
 	}
-	if v.Vulnerabilities != nil {
-		if err := validateVulnerabilityList(v.Vulnerabilities); err != nil {
-			invalidParams.AddNested("Vulnerabilities", err.(smithy.InvalidParamsError))
-		}
+	if v.GeneratorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GeneratorId"))
+	}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
 	if v.Types == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Types"))
+	}
+	if v.CreatedAt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CreatedAt"))
+	}
+	if v.UpdatedAt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdatedAt"))
+	}
+	if v.Severity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Severity"))
+	}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if v.Malware != nil {
 		if err := validateMalwareList(v.Malware); err != nil {
 			invalidParams.AddNested("Malware", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SchemaVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaVersion"))
+	if v.Resources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resources"))
+	} else if v.Resources != nil {
+		if err := validateResourceList(v.Resources); err != nil {
+			invalidParams.AddNested("Resources", err.(smithy.InvalidParamsError))
+		}
 	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	if v.Compliance != nil {
+		if err := validateCompliance(v.Compliance); err != nil {
+			invalidParams.AddNested("Compliance", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.RelatedFindings != nil {
 		if err := validateRelatedFindingList(v.RelatedFindings); err != nil {
 			invalidParams.AddNested("RelatedFindings", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Severity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Severity"))
-	}
-	if v.GeneratorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GeneratorId"))
-	}
-	if v.UpdatedAt == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UpdatedAt"))
-	}
 	if v.Note != nil {
 		if err := validateNote(v.Note); err != nil {
 			invalidParams.AddNested("Note", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.AwsAccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
-	}
-	if v.Resources == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Resources"))
-	} else if v.Resources != nil {
-		if err := validateResourceList(v.Resources); err != nil {
-			invalidParams.AddNested("Resources", err.(smithy.InvalidParamsError))
+	if v.Vulnerabilities != nil {
+		if err := validateVulnerabilityList(v.Vulnerabilities); err != nil {
+			invalidParams.AddNested("Vulnerabilities", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.PatchSummary != nil {
@@ -649,11 +849,11 @@ func validateAwsSecurityFindingIdentifier(v *types.AwsSecurityFindingIdentifier)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AwsSecurityFindingIdentifier"}
-	if v.ProductArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductArn"))
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.ProductArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -750,14 +950,14 @@ func validateNote(v *types.Note) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Note"}
-	if v.UpdatedAt == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UpdatedAt"))
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
 	if v.UpdatedBy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UpdatedBy"))
 	}
-	if v.Text == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	if v.UpdatedAt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdatedAt"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -839,11 +1039,11 @@ func validateResource(v *types.Resource) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Resource"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.Type == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1061,11 +1261,6 @@ func validateOpBatchUpdateFindingsInput(v *BatchUpdateFindingsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateFindingsInput"}
-	if v.RelatedFindings != nil {
-		if err := validateRelatedFindingList(v.RelatedFindings); err != nil {
-			invalidParams.AddNested("RelatedFindings", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.FindingIdentifiers == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FindingIdentifiers"))
 	} else if v.FindingIdentifiers != nil {
@@ -1076,6 +1271,11 @@ func validateOpBatchUpdateFindingsInput(v *BatchUpdateFindingsInput) error {
 	if v.Note != nil {
 		if err := validateNoteUpdate(v.Note); err != nil {
 			invalidParams.AddNested("Note", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RelatedFindings != nil {
+		if err := validateRelatedFindingList(v.RelatedFindings); err != nil {
+			invalidParams.AddNested("RelatedFindings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1093,11 +1293,11 @@ func validateOpCreateActionTargetInput(v *CreateActionTargetInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.Description == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1119,6 +1319,25 @@ func validateOpCreateInsightInput(v *CreateInsightInput) error {
 	}
 	if v.GroupByAttribute == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupByAttribute"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateMembersInput(v *CreateMembersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMembersInput"}
+	if v.AccountDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountDetails"))
+	} else if v.AccountDetails != nil {
+		if err := validateAccountDetailsList(v.AccountDetails); err != nil {
+			invalidParams.AddNested("AccountDetails", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1187,6 +1406,21 @@ func validateOpDeleteInvitationsInput(v *DeleteInvitationsInput) error {
 	}
 }
 
+func validateOpDeleteMembersInput(v *DeleteMembersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMembersInput"}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeStandardsControlsInput(v *DescribeStandardsControlsInput) error {
 	if v == nil {
 		return nil
@@ -1217,6 +1451,36 @@ func validateOpDisableImportFindingsForProductInput(v *DisableImportFindingsForP
 	}
 }
 
+func validateOpDisableOrganizationAdminAccountInput(v *DisableOrganizationAdminAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableOrganizationAdminAccountInput"}
+	if v.AdminAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdminAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateMembersInput(v *DisassociateMembersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateMembersInput"}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpEnableImportFindingsForProductInput(v *EnableImportFindingsForProductInput) error {
 	if v == nil {
 		return nil
@@ -1224,6 +1488,21 @@ func validateOpEnableImportFindingsForProductInput(v *EnableImportFindingsForPro
 	invalidParams := smithy.InvalidParamsError{Context: "EnableImportFindingsForProductInput"}
 	if v.ProductArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableOrganizationAdminAccountInput(v *EnableOrganizationAdminAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableOrganizationAdminAccountInput"}
+	if v.AdminAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdminAccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1262,6 +1541,21 @@ func validateOpGetMembersInput(v *GetMembersInput) error {
 	}
 }
 
+func validateOpInviteMembersInput(v *InviteMembersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InviteMembersInput"}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -1282,11 +1576,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1356,6 +1650,18 @@ func validateOpUpdateInsightInput(v *UpdateInsightInput) error {
 	if v.InsightArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InsightArn"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateOrganizationConfigurationInput(v *UpdateOrganizationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOrganizationConfigurationInput"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

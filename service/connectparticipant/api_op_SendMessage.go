@@ -12,7 +12,9 @@ import (
 )
 
 // Sends a message. Note that ConnectionToken is used for invoking this API instead
-// of ParticipantToken.
+// of ParticipantToken. The Amazon Connect Participant Service APIs do not use
+// Signature Version 4 authentication
+// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 func (c *Client) SendMessage(ctx context.Context, params *SendMessageInput, optFns ...func(*Options)) (*SendMessageOutput, error) {
 	if params == nil {
 		params = &SendMessageInput{}

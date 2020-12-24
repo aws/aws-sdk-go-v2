@@ -110,6 +110,26 @@ func (m *validateOpCreateForecast) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePredictorBacktestExportJob struct {
+}
+
+func (*validateOpCreatePredictorBacktestExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePredictorBacktestExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePredictorBacktestExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePredictorBacktestExportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreatePredictor struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpDeleteForecast) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteForecastInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePredictorBacktestExportJob struct {
+}
+
+func (*validateOpDeletePredictorBacktestExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePredictorBacktestExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePredictorBacktestExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePredictorBacktestExportJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -350,6 +390,26 @@ func (m *validateOpDescribeForecast) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribePredictorBacktestExportJob struct {
+}
+
+func (*validateOpDescribePredictorBacktestExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePredictorBacktestExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePredictorBacktestExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePredictorBacktestExportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribePredictor struct {
 }
 
@@ -445,6 +505,26 @@ func (m *validateOpListForecasts) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListForecastsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPredictorBacktestExportJobs struct {
+}
+
+func (*validateOpListPredictorBacktestExportJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPredictorBacktestExportJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPredictorBacktestExportJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPredictorBacktestExportJobsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +650,10 @@ func addOpCreateForecastValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateForecast{}, middleware.After)
 }
 
+func addOpCreatePredictorBacktestExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePredictorBacktestExportJob{}, middleware.After)
+}
+
 func addOpCreatePredictorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePredictor{}, middleware.After)
 }
@@ -592,6 +676,10 @@ func addOpDeleteForecastExportJobValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDeleteForecastValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteForecast{}, middleware.After)
+}
+
+func addOpDeletePredictorBacktestExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePredictorBacktestExportJob{}, middleware.After)
 }
 
 func addOpDeletePredictorValidationMiddleware(stack *middleware.Stack) error {
@@ -618,6 +706,10 @@ func addOpDescribeForecastValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeForecast{}, middleware.After)
 }
 
+func addOpDescribePredictorBacktestExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePredictorBacktestExportJob{}, middleware.After)
+}
+
 func addOpDescribePredictorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribePredictor{}, middleware.After)
 }
@@ -636,6 +728,10 @@ func addOpListForecastExportJobsValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListForecastsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListForecasts{}, middleware.After)
+}
+
+func addOpListPredictorBacktestExportJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPredictorBacktestExportJobs{}, middleware.After)
 }
 
 func addOpListPredictorsValidationMiddleware(stack *middleware.Stack) error {
@@ -1244,6 +1340,36 @@ func validateOpCreateForecastInput(v *CreateForecastInput) error {
 	}
 }
 
+func validateOpCreatePredictorBacktestExportJobInput(v *CreatePredictorBacktestExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePredictorBacktestExportJobInput"}
+	if v.PredictorBacktestExportJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PredictorBacktestExportJobName"))
+	}
+	if v.PredictorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PredictorArn"))
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	} else if v.Destination != nil {
+		if err := validateDataDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreatePredictorInput(v *CreatePredictorInput) error {
 	if v == nil {
 		return nil
@@ -1366,6 +1492,21 @@ func validateOpDeleteForecastInput(v *DeleteForecastInput) error {
 	}
 }
 
+func validateOpDeletePredictorBacktestExportJobInput(v *DeletePredictorBacktestExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePredictorBacktestExportJobInput"}
+	if v.PredictorBacktestExportJobArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PredictorBacktestExportJobArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeletePredictorInput(v *DeletePredictorInput) error {
 	if v == nil {
 		return nil
@@ -1456,6 +1597,21 @@ func validateOpDescribeForecastInput(v *DescribeForecastInput) error {
 	}
 }
 
+func validateOpDescribePredictorBacktestExportJobInput(v *DescribePredictorBacktestExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePredictorBacktestExportJobInput"}
+	if v.PredictorBacktestExportJobArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PredictorBacktestExportJobArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribePredictorInput(v *DescribePredictorInput) error {
 	if v == nil {
 		return nil
@@ -1525,6 +1681,23 @@ func validateOpListForecastsInput(v *ListForecastsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListForecastsInput"}
+	if v.Filters != nil {
+		if err := validateFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPredictorBacktestExportJobsInput(v *ListPredictorBacktestExportJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPredictorBacktestExportJobsInput"}
 	if v.Filters != nil {
 		if err := validateFilters(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))

@@ -52,6 +52,12 @@ type UpdateAssetModelInput struct {
 	// This member is required.
 	AssetModelName *string
 
+	// The composite asset models that are part of this asset model. Composite asset
+	// models are asset models that contain specific properties. Each composite model
+	// has a type that defines the properties that the composite model supports. Use
+	// composite asset models to define alarms on this asset model.
+	AssetModelCompositeModels []types.AssetModelCompositeModel
+
 	// A description for the asset model.
 	AssetModelDescription *string
 

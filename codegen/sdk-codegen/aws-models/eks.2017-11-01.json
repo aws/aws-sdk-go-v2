@@ -34,13 +34,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "AL2_x86_64"
+                        "value": "AL2_x86_64",
+                        "name": "AL2_x86_64"
                     },
                     {
-                        "value": "AL2_x86_64_GPU"
+                        "value": "AL2_x86_64_GPU",
+                        "name": "AL2_x86_64_GPU"
                     },
                     {
-                        "value": "AL2_ARM_64"
+                        "value": "AL2_ARM_64",
+                        "name": "AL2_ARM_64"
                     }
                 ]
             }
@@ -319,25 +322,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CREATING"
+                        "value": "CREATING",
+                        "name": "CREATING"
                     },
                     {
-                        "value": "ACTIVE"
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
                     },
                     {
-                        "value": "CREATE_FAILED"
+                        "value": "CREATE_FAILED",
+                        "name": "CREATE_FAILED"
                     },
                     {
-                        "value": "UPDATING"
+                        "value": "UPDATING",
+                        "name": "UPDATING"
                     },
                     {
-                        "value": "DELETING"
+                        "value": "DELETING",
+                        "name": "DELETING"
                     },
                     {
-                        "value": "DELETE_FAILED"
+                        "value": "DELETE_FAILED",
+                        "name": "DELETE_FAILED"
                     },
                     {
-                        "value": "DEGRADED"
+                        "value": "DEGRADED",
+                        "name": "DEGRADED"
                     }
                 ]
             }
@@ -442,10 +452,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ON_DEMAND"
+                        "value": "ON_DEMAND",
+                        "name": "ON_DEMAND"
                     },
                     {
-                        "value": "SPOT"
+                        "value": "SPOT",
+                        "name": "SPOT"
                     }
                 ]
             }
@@ -611,19 +623,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CREATING"
+                        "value": "CREATING",
+                        "name": "CREATING"
                     },
                     {
-                        "value": "ACTIVE"
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
                     },
                     {
-                        "value": "DELETING"
+                        "value": "DELETING",
+                        "name": "DELETING"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     },
                     {
-                        "value": "UPDATING"
+                        "value": "UPDATING",
+                        "name": "UPDATING"
                     }
                 ]
             }
@@ -2192,19 +2209,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CREATING"
+                        "value": "CREATING",
+                        "name": "CREATING"
                     },
                     {
-                        "value": "ACTIVE"
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
                     },
                     {
-                        "value": "DELETING"
+                        "value": "DELETING",
+                        "name": "DELETING"
                     },
                     {
-                        "value": "CREATE_FAILED"
+                        "value": "CREATE_FAILED",
+                        "name": "CREATE_FAILED"
                     },
                     {
-                        "value": "DELETE_FAILED"
+                        "value": "DELETE_FAILED",
+                        "name": "DELETE_FAILED"
                     }
                 ]
             }
@@ -3238,25 +3260,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CREATING"
+                        "value": "CREATING",
+                        "name": "CREATING"
                     },
                     {
-                        "value": "ACTIVE"
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
                     },
                     {
-                        "value": "UPDATING"
+                        "value": "UPDATING",
+                        "name": "UPDATING"
                     },
                     {
-                        "value": "DELETING"
+                        "value": "DELETING",
+                        "name": "DELETING"
                     },
                     {
-                        "value": "CREATE_FAILED"
+                        "value": "CREATE_FAILED",
+                        "name": "CREATE_FAILED"
                     },
                     {
-                        "value": "DELETE_FAILED"
+                        "value": "DELETE_FAILED",
+                        "name": "DELETE_FAILED"
                     },
                     {
-                        "value": "DEGRADED"
+                        "value": "DEGRADED",
+                        "name": "DEGRADED"
                     }
                 ]
             }
@@ -3327,10 +3356,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "OVERWRITE"
+                        "value": "OVERWRITE",
+                        "name": "OVERWRITE"
                     },
                     {
-                        "value": "NONE"
+                        "value": "NONE",
+                        "name": "NONE"
                     }
                 ]
             }

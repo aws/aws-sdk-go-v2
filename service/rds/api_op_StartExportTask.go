@@ -42,18 +42,18 @@ type StartExportTaskInput struct {
 	// This member is required.
 	IamRoleArn *string
 
-	// The ID of the AWS KMS key to use to encrypt the snapshot exported to Amazon S3.
-	// The KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the
-	// KMS key alias for the KMS encryption key. The caller of this operation must be
-	// authorized to execute the following operations. These can be set in the KMS key
-	// policy:
+	// The ID of the AWS KMS customer master key (CMK) to use to encrypt the snapshot
+	// exported to Amazon S3. The AWS KMS key identifier is the key ARN, key ID, alias
+	// ARN, or alias name for the AWS KMS customer master key (CMK). The caller of this
+	// operation must be authorized to execute the following operations. These can be
+	// set in the AWS KMS key policy:
 	//
 	// * GrantOperation.Encrypt
 	//
-	// * GrantOperation.Decrypt
-	//
 	// *
-	// GrantOperation.GenerateDataKey
+	// GrantOperation.Decrypt
+	//
+	// * GrantOperation.GenerateDataKey
 	//
 	// *
 	// GrantOperation.GenerateDataKeyWithoutPlaintext
@@ -141,11 +141,11 @@ type StartExportTaskOutput struct {
 	// snapshot.
 	IamRoleArn *string
 
-	// The ID of the AWS KMS key that is used to encrypt the snapshot when it's
-	// exported to Amazon S3. The KMS key ID is the Amazon Resource Name (ARN), the KMS
-	// key identifier, or the KMS key alias for the KMS encryption key. The IAM role
-	// used for the snapshot export must have encryption and decryption permissions to
-	// use this KMS key.
+	// The key identifier of the AWS KMS customer master key (CMK) that is used to
+	// encrypt the snapshot when it's exported to Amazon S3. The AWS KMS CMK identifier
+	// is its key ARN, key ID, alias ARN, or alias name. The IAM role used for the
+	// snapshot export must have encryption and decryption permissions to use this AWS
+	// KMS CMK.
 	KmsKeyId *string
 
 	// The progress of the snapshot export task as a percentage.

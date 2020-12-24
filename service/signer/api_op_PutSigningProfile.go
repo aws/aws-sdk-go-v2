@@ -42,16 +42,18 @@ type PutSigningProfileInput struct {
 	// This member is required.
 	ProfileName *string
 
-	// The AWS Certificate Manager certificate that will be used to sign code with the
-	// new signing profile.
-	//
-	// This member is required.
-	SigningMaterial *types.SigningMaterial
-
 	// A subfield of platform. This specifies any different configuration options that
 	// you want to apply to the chosen platform (such as a different hash-algorithm or
 	// signing-algorithm).
 	Overrides *types.SigningPlatformOverrides
+
+	// The default validity period override for any signature generated using this
+	// signing profile. If unspecified, the default is 135 months.
+	SignatureValidityPeriod *types.SignatureValidityPeriod
+
+	// The AWS Certificate Manager certificate that will be used to sign code with the
+	// new signing profile.
+	SigningMaterial *types.SigningMaterial
 
 	// Map of key-value pairs for signing. These can include any information that you
 	// want to use during signing.
@@ -65,6 +67,12 @@ type PutSigningProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) of the signing profile created.
 	Arn *string
+
+	// The version of the signing profile being created.
+	ProfileVersion *string
+
+	// The signing profile ARN, including the profile version.
+	ProfileVersionArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

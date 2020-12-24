@@ -570,6 +570,26 @@ func (m *validateOpDescribePortfolio) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribePortfolioShares struct {
+}
+
+func (*validateOpDescribePortfolioShares) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePortfolioShares) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePortfolioSharesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePortfolioSharesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribePortfolioShareStatus struct {
 }
 
@@ -1210,6 +1230,26 @@ func (m *validateOpUpdatePortfolio) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePortfolioShare struct {
+}
+
+func (*validateOpUpdatePortfolioShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePortfolioShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePortfolioShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePortfolioShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateProduct struct {
 }
 
@@ -1442,6 +1482,10 @@ func addOpDescribePortfolioValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribePortfolio{}, middleware.After)
 }
 
+func addOpDescribePortfolioSharesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePortfolioShares{}, middleware.After)
+}
+
 func addOpDescribePortfolioShareStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribePortfolioShareStatus{}, middleware.After)
 }
@@ -1568,6 +1612,10 @@ func addOpUpdateConstraintValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdatePortfolioValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePortfolio{}, middleware.After)
+}
+
+func addOpUpdatePortfolioShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePortfolioShare{}, middleware.After)
 }
 
 func addOpUpdateProductValidationMiddleware(stack *middleware.Stack) error {
@@ -2240,6 +2288,24 @@ func validateOpDescribePortfolioInput(v *DescribePortfolioInput) error {
 	}
 }
 
+func validateOpDescribePortfolioSharesInput(v *DescribePortfolioSharesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePortfolioSharesInput"}
+	if v.PortfolioId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortfolioId"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribePortfolioShareStatusInput(v *DescribePortfolioShareStatusInput) error {
 	if v == nil {
 		return nil
@@ -2773,6 +2839,21 @@ func validateOpUpdatePortfolioInput(v *UpdatePortfolioInput) error {
 		if err := validateAddTags(v.AddTags); err != nil {
 			invalidParams.AddNested("AddTags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePortfolioShareInput(v *UpdatePortfolioShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePortfolioShareInput"}
+	if v.PortfolioId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortfolioId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -28,8 +28,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type ConflictException struct {
 	Message *string
 
-	ResourceType ResourceType
 	ResourceId   *string
+	ResourceType ResourceType
 }
 
 func (e *ConflictException) Error() string {

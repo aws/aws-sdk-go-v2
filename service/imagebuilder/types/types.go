@@ -67,7 +67,7 @@ type Component struct {
 	Description *string
 
 	// The encryption status of the component.
-	Encrypted *bool
+	Encrypted bool
 
 	// The KMS key identifier used to encrypt the component.
 	KmsKeyId *string
@@ -180,6 +180,117 @@ type ComponentVersion struct {
 	Version *string
 }
 
+// A container encapsulates the runtime environment for an application.
+type Container struct {
+
+	// A list of URIs for containers created in the context Region.
+	ImageUris []string
+
+	// Containers and container images are Region-specific. This is the Region context
+	// for the container.
+	Region *string
+}
+
+// Container distribution settings for encryption, licensing, and sharing in a
+// specific Region.
+type ContainerDistributionConfiguration struct {
+
+	// The destination repository for the container distribution configuration.
+	//
+	// This member is required.
+	TargetRepository *TargetContainerRepository
+
+	// Tags that are attached to the container distribution configuration.
+	ContainerTags []string
+
+	// The description of the container distribution configuration.
+	Description *string
+}
+
+// A container recipe.
+type ContainerRecipe struct {
+
+	// The Amazon Resource Name (ARN) of the container recipe.
+	Arn *string
+
+	// Components for build and test that are included in the container recipe.
+	Components []ComponentConfiguration
+
+	// Specifies the type of container, such as Docker.
+	ContainerType ContainerType
+
+	// The date when this container recipe was created.
+	DateCreated *string
+
+	// The description of the container recipe.
+	Description *string
+
+	// Dockerfiles are text documents that are used to build Docker containers, and
+	// ensure that they contain all of the elements required by the application running
+	// inside. The template data consists of contextual variables where Image Builder
+	// places build information or scripts, based on your container image recipe.
+	DockerfileTemplateData *string
+
+	// A flag that indicates if the target container is encrypted.
+	Encrypted bool
+
+	// Identifies which KMS key is used to encrypt the container image for distribution
+	// to the target Region.
+	KmsKeyId *string
+
+	// The name of the container recipe.
+	Name *string
+
+	// The owner of the container recipe.
+	Owner *string
+
+	// The source image for the container recipe.
+	ParentImage *string
+
+	// The system platform for the container, such as Windows or Linux.
+	Platform Platform
+
+	// Tags that are attached to the container recipe.
+	Tags map[string]string
+
+	// The destination repository for the container image.
+	TargetRepository *TargetContainerRepository
+
+	// The semantic version of the container recipe (<major>.<minor>.<patch>).
+	Version *string
+
+	// The working directory for use during build and test workflows.
+	WorkingDirectory *string
+}
+
+// A summary of a container recipe
+type ContainerRecipeSummary struct {
+
+	// The Amazon Resource Name (ARN) of the container recipe.
+	Arn *string
+
+	// Specifies the type of container, such as "Docker".
+	ContainerType ContainerType
+
+	// The date when this container recipe was created.
+	DateCreated *string
+
+	// The name of the container recipe.
+	Name *string
+
+	// The owner of the container recipe.
+	Owner *string
+
+	// The source image for the container recipe.
+	ParentImage *string
+
+	// The system platform for the container, such as Windows or Linux.
+	Platform Platform
+
+	// Tags that are attached to the container recipe.
+	Tags map[string]string
+}
+
 // Defines the settings for a specific Region.
 type Distribution struct {
 
@@ -190,6 +301,10 @@ type Distribution struct {
 
 	// The specific AMI settings (for example, launch permissions, AMI tags).
 	AmiDistributionConfiguration *AmiDistributionConfiguration
+
+	// Container distribution settings for encryption, licensing, and sharing in a
+	// specific Region.
+	ContainerDistributionConfiguration *ContainerDistributionConfiguration
 
 	// The License Manager Configuration to associate with the AMI in the specified
 	// Region.
@@ -202,7 +317,7 @@ type DistributionConfiguration struct {
 	// The maximum duration in minutes for this distribution configuration.
 	//
 	// This member is required.
-	TimeoutMinutes *int32
+	TimeoutMinutes int32
 
 	// The Amazon Resource Name (ARN) of the distribution configuration.
 	Arn *string
@@ -244,6 +359,9 @@ type DistributionConfigurationSummary struct {
 	// The name of the distribution configuration.
 	Name *string
 
+	// A list of Regions where the container image is distributed to.
+	Regions []string
+
 	// The tags associated with the distribution configuration.
 	Tags map[string]string
 }
@@ -252,13 +370,13 @@ type DistributionConfigurationSummary struct {
 type EbsInstanceBlockDeviceSpecification struct {
 
 	// Use to configure delete on termination of the associated device.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// Use to configure device encryption.
-	Encrypted *bool
+	Encrypted bool
 
 	// Use to configure device IOPS.
-	Iops *int32
+	Iops int32
 
 	// Use to configure the KMS key to use when encrypting the device.
 	KmsKeyId *string
@@ -267,7 +385,7 @@ type EbsInstanceBlockDeviceSpecification struct {
 	SnapshotId *string
 
 	// Use to override the device's volume size.
-	VolumeSize *int32
+	VolumeSize int32
 
 	// Use to override the device's volume type.
 	VolumeType EbsVolumeType
@@ -291,6 +409,9 @@ type Image struct {
 	// The Amazon Resource Name (ARN) of the image.
 	Arn *string
 
+	// The container recipe used to create the container image type.
+	ContainerRecipe *ContainerRecipe
+
 	// The date on which this image was created.
 	DateCreated *string
 
@@ -300,7 +421,7 @@ type Image struct {
 	// Collects additional information about the image being created, including the
 	// operating system (OS) version and package list. This information is used to
 	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
-	EnhancedImageMetadataEnabled *bool
+	EnhancedImageMetadataEnabled bool
 
 	// The image recipe used when creating the image.
 	ImageRecipe *ImageRecipe
@@ -336,6 +457,9 @@ type Image struct {
 	// The tags of the image.
 	Tags map[string]string
 
+	// Specifies whether this is an AMI or container image.
+	Type ImageType
+
 	// The semantic version of the image.
 	Version *string
 }
@@ -345,6 +469,10 @@ type ImagePipeline struct {
 
 	// The Amazon Resource Name (ARN) of the image pipeline.
 	Arn *string
+
+	// The Amazon Resource Name (ARN) of the container recipe that is used for this
+	// pipeline.
+	ContainerRecipeArn *string
 
 	// The date on which this image pipeline was created.
 	DateCreated *string
@@ -368,7 +496,7 @@ type ImagePipeline struct {
 	// Collects additional information about the image being created, including the
 	// operating system (OS) version and package list. This information is used to
 	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
-	EnhancedImageMetadataEnabled *bool
+	EnhancedImageMetadataEnabled bool
 
 	// The Amazon Resource Name (ARN) of the image recipe associated with this image
 	// pipeline.
@@ -429,6 +557,10 @@ type ImageRecipe struct {
 
 	// The tags of the image recipe.
 	Tags map[string]string
+
+	// Specifies which type of image is created by the recipe - an AMI or a container
+	// image.
+	Type ImageType
 
 	// The version of the image recipe.
 	Version *string
@@ -503,6 +635,9 @@ type ImageSummary struct {
 	// The tags of the image.
 	Tags map[string]string
 
+	// Specifies whether this is an AMI or container image.
+	Type ImageType
+
 	// The version of the image.
 	Version *string
 }
@@ -511,10 +646,10 @@ type ImageSummary struct {
 type ImageTestsConfiguration struct {
 
 	// Defines if tests should be executed when building this image.
-	ImageTestsEnabled *bool
+	ImageTestsEnabled bool
 
 	// The maximum time in minutes that tests are permitted to run.
-	TimeoutMinutes *int32
+	TimeoutMinutes int32
 }
 
 // An image semantic version.
@@ -538,6 +673,9 @@ type ImageVersion struct {
 
 	// The platform of the image semantic version.
 	Platform Platform
+
+	// Specifies whether this is an AMI or container image.
+	Type ImageType
 
 	// The semantic version of the image semantic version.
 	Version *string
@@ -590,7 +728,7 @@ type InfrastructureConfiguration struct {
 
 	// The terminate instance on failure configuration of the infrastructure
 	// configuration.
-	TerminateInstanceOnFailure *bool
+	TerminateInstanceOnFailure bool
 }
 
 // The infrastructure used when building EC2 AMIs.
@@ -662,6 +800,10 @@ type OutputResources struct {
 
 	// The EC2 AMIs created by this image.
 	Amis []Ami
+
+	// Container images that the pipeline has generated and stored in the output
+	// repository.
+	Containers []Container
 }
 
 // Amazon S3 logging configuration.
@@ -696,4 +838,19 @@ type Schedule struct {
 	// expression in Image Builder, see Use cron expressions in EC2 Image Builder
 	// (https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html).
 	ScheduleExpression *string
+}
+
+// The container repository where the output container image is stored.
+type TargetContainerRepository struct {
+
+	// The name of the container repository where the output container image is stored.
+	// This name is prefixed by the repository location.
+	//
+	// This member is required.
+	RepositoryName *string
+
+	// Specifies the service in which this image was registered.
+	//
+	// This member is required.
+	Service ContainerRepositoryService
 }

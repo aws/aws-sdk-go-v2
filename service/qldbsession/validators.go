@@ -39,11 +39,11 @@ func validateCommitTransactionRequest(v *types.CommitTransactionRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CommitTransactionRequest"}
-	if v.CommitDigest == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CommitDigest"))
-	}
 	if v.TransactionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransactionId"))
+	}
+	if v.CommitDigest == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CommitDigest"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -75,11 +75,11 @@ func validateFetchPageRequest(v *types.FetchPageRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FetchPageRequest"}
-	if v.NextPageToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NextPageToken"))
-	}
 	if v.TransactionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransactionId"))
+	}
+	if v.NextPageToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NextPageToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -108,11 +108,6 @@ func validateOpSendCommandInput(v *SendCommandInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendCommandInput"}
-	if v.FetchPage != nil {
-		if err := validateFetchPageRequest(v.FetchPage); err != nil {
-			invalidParams.AddNested("FetchPage", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.StartSession != nil {
 		if err := validateStartSessionRequest(v.StartSession); err != nil {
 			invalidParams.AddNested("StartSession", err.(smithy.InvalidParamsError))
@@ -126,6 +121,11 @@ func validateOpSendCommandInput(v *SendCommandInput) error {
 	if v.ExecuteStatement != nil {
 		if err := validateExecuteStatementRequest(v.ExecuteStatement); err != nil {
 			invalidParams.AddNested("ExecuteStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FetchPage != nil {
+		if err := validateFetchPageRequest(v.FetchPage); err != nil {
+			invalidParams.AddNested("FetchPage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -140,11 +140,11 @@ func validateOpTagResourcesInput(v *TagResourcesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourcesInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceARNList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARNList"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

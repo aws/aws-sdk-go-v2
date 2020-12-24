@@ -55,6 +55,9 @@ type AssociateExternalConnectionInput struct {
 	// *
 	// public:maven-commonsware - for the CommonsWare Android repository.
 	//
+	// *
+	// public:nuget-org - for the NuGet Gallery.
+	//
 	// This member is required.
 	ExternalConnection *string
 

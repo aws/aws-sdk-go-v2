@@ -46,7 +46,7 @@ type GetMetricDataInput struct {
 	// The queues, up to 100, or channels, to use to filter the metrics returned.
 	// Metric data is retrieved only for the resources associated with the queues or
 	// channels included in the filter. You can include both queue IDs and queue ARNs
-	// in the same request. Both VOICE and CHAT channels are supported.
+	// in the same request. VOICE, CHAT, and TASK channels are supported.
 	//
 	// This member is required.
 	Filters *types.Filters

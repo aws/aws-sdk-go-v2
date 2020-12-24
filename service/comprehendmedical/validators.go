@@ -588,9 +588,6 @@ func validateOpStartEntitiesDetectionV2JobInput(v *StartEntitiesDetectionV2JobIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartEntitiesDetectionV2JobInput"}
-	if v.DataAccessRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
-	}
 	if v.InputDataConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
 	} else if v.InputDataConfig != nil {
@@ -598,15 +595,18 @@ func validateOpStartEntitiesDetectionV2JobInput(v *StartEntitiesDetectionV2JobIn
 			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
-	}
 	if v.OutputDataConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputDataConfig"))
 	} else if v.OutputDataConfig != nil {
 		if err := validateOutputDataConfig(v.OutputDataConfig); err != nil {
 			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.DataAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -620,9 +620,6 @@ func validateOpStartICD10CMInferenceJobInput(v *StartICD10CMInferenceJobInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartICD10CMInferenceJobInput"}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
-	}
 	if v.InputDataConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
 	} else if v.InputDataConfig != nil {
@@ -630,15 +627,18 @@ func validateOpStartICD10CMInferenceJobInput(v *StartICD10CMInferenceJobInput) e
 			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.DataAccessRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
-	}
 	if v.OutputDataConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputDataConfig"))
 	} else if v.OutputDataConfig != nil {
 		if err := validateOutputDataConfig(v.OutputDataConfig); err != nil {
 			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.DataAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -659,18 +659,18 @@ func validateOpStartPHIDetectionJobInput(v *StartPHIDetectionJobInput) error {
 			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.DataAccessRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
-	}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
-	}
 	if v.OutputDataConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputDataConfig"))
 	} else if v.OutputDataConfig != nil {
 		if err := validateOutputDataConfig(v.OutputDataConfig); err != nil {
 			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.DataAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -684,8 +684,12 @@ func validateOpStartRxNormInferenceJobInput(v *StartRxNormInferenceJobInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartRxNormInferenceJobInput"}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	if v.InputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
+	} else if v.InputDataConfig != nil {
+		if err := validateInputDataConfig(v.InputDataConfig); err != nil {
+			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.OutputDataConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputDataConfig"))
@@ -697,12 +701,8 @@ func validateOpStartRxNormInferenceJobInput(v *StartRxNormInferenceJobInput) err
 	if v.DataAccessRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
 	}
-	if v.InputDataConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
-	} else if v.InputDataConfig != nil {
-		if err := validateInputDataConfig(v.InputDataConfig); err != nil {
-			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
-		}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

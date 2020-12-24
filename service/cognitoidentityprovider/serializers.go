@@ -4982,6 +4982,40 @@ func awsAwsjson11_serializeDocumentCustomDomainConfigType(v *types.CustomDomainC
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCustomEmailLambdaVersionConfigType(v *types.CustomEmailLambdaVersionConfigType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LambdaArn != nil {
+		ok := object.Key("LambdaArn")
+		ok.String(*v.LambdaArn)
+	}
+
+	if len(v.LambdaVersion) > 0 {
+		ok := object.Key("LambdaVersion")
+		ok.String(string(v.LambdaVersion))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomSMSLambdaVersionConfigType(v *types.CustomSMSLambdaVersionConfigType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LambdaArn != nil {
+		ok := object.Key("LambdaArn")
+		ok.String(*v.LambdaArn)
+	}
+
+	if len(v.LambdaVersion) > 0 {
+		ok := object.Key("LambdaVersion")
+		ok.String(string(v.LambdaVersion))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDeliveryMediumListType(v []types.DeliveryMediumType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5131,14 +5165,33 @@ func awsAwsjson11_serializeDocumentLambdaConfigType(v *types.LambdaConfigType, v
 		ok.String(*v.CreateAuthChallenge)
 	}
 
+	if v.CustomEmailSender != nil {
+		ok := object.Key("CustomEmailSender")
+		if err := awsAwsjson11_serializeDocumentCustomEmailLambdaVersionConfigType(v.CustomEmailSender, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CustomMessage != nil {
 		ok := object.Key("CustomMessage")
 		ok.String(*v.CustomMessage)
 	}
 
+	if v.CustomSMSSender != nil {
+		ok := object.Key("CustomSMSSender")
+		if err := awsAwsjson11_serializeDocumentCustomSMSLambdaVersionConfigType(v.CustomSMSSender, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DefineAuthChallenge != nil {
 		ok := object.Key("DefineAuthChallenge")
 		ok.String(*v.DefineAuthChallenge)
+	}
+
+	if v.KMSKeyID != nil {
+		ok := object.Key("KMSKeyID")
+		ok.String(*v.KMSKeyID)
 	}
 
 	if v.PostAuthentication != nil {

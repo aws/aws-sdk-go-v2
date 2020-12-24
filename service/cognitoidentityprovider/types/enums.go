@@ -204,6 +204,40 @@ func (CompromisedCredentialsEventActionType) Values() []CompromisedCredentialsEv
 	}
 }
 
+type CustomEmailSenderLambdaVersionType string
+
+// Enum values for CustomEmailSenderLambdaVersionType
+const (
+	CustomEmailSenderLambdaVersionTypeV10 CustomEmailSenderLambdaVersionType = "V1_0"
+)
+
+// Values returns all known values for CustomEmailSenderLambdaVersionType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CustomEmailSenderLambdaVersionType) Values() []CustomEmailSenderLambdaVersionType {
+	return []CustomEmailSenderLambdaVersionType{
+		"V1_0",
+	}
+}
+
+type CustomSMSSenderLambdaVersionType string
+
+// Enum values for CustomSMSSenderLambdaVersionType
+const (
+	CustomSMSSenderLambdaVersionTypeV10 CustomSMSSenderLambdaVersionType = "V1_0"
+)
+
+// Values returns all known values for CustomSMSSenderLambdaVersionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CustomSMSSenderLambdaVersionType) Values() []CustomSMSSenderLambdaVersionType {
+	return []CustomSMSSenderLambdaVersionType{
+		"V1_0",
+	}
+}
+
 type DefaultEmailOptionType string
 
 // Enum values for DefaultEmailOptionType

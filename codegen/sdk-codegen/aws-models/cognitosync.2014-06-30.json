@@ -1518,10 +1518,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "replace"
+                        "value": "replace",
+                        "name": "replace"
                     },
                     {
-                        "value": "remove"
+                        "value": "remove",
+                        "name": "remove"
                     }
                 ]
             }
@@ -1531,16 +1533,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "APNS"
+                        "value": "APNS",
+                        "name": "APNS"
                     },
                     {
-                        "value": "APNS_SANDBOX"
+                        "value": "APNS_SANDBOX",
+                        "name": "APNS_SANDBOX"
                     },
                     {
-                        "value": "GCM"
+                        "value": "GCM",
+                        "name": "GCM"
                     },
                     {
-                        "value": "ADM"
+                        "value": "ADM",
+                        "name": "ADM"
                     }
                 ]
             }
@@ -1975,10 +1981,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ENABLED"
+                        "value": "ENABLED",
+                        "name": "ENABLED"
                     },
                     {
-                        "value": "DISABLED"
+                        "value": "DISABLED",
+                        "name": "DISABLED"
                     }
                 ]
             }

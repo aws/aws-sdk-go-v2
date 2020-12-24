@@ -4,6 +4,7 @@ package route53
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
@@ -49,7 +50,7 @@ type ListQueryLoggingConfigsInput struct {
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html#API_ListQueryLoggingConfigs_RequestSyntax)
 	// in the response to get the next page of results. If you don't specify a value
 	// for MaxResults, Route 53 returns up to 100 configurations.
-	MaxResults *string
+	MaxResults *int32
 
 	// (Optional) If the current AWS account has more than MaxResults query logging
 	// configurations, use NextToken to get the second and subsequent pages of results.
@@ -140,6 +141,99 @@ func addOperationListQueryLoggingConfigsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// ListQueryLoggingConfigsAPIClient is a client that implements the
+// ListQueryLoggingConfigs operation.
+type ListQueryLoggingConfigsAPIClient interface {
+	ListQueryLoggingConfigs(context.Context, *ListQueryLoggingConfigsInput, ...func(*Options)) (*ListQueryLoggingConfigsOutput, error)
+}
+
+var _ ListQueryLoggingConfigsAPIClient = (*Client)(nil)
+
+// ListQueryLoggingConfigsPaginatorOptions is the paginator options for
+// ListQueryLoggingConfigs
+type ListQueryLoggingConfigsPaginatorOptions struct {
+	// (Optional) The maximum number of query logging configurations that you want
+	// Amazon Route 53 to return in response to the current request. If the current AWS
+	// account has more than MaxResults configurations, use the value of NextToken
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html#API_ListQueryLoggingConfigs_RequestSyntax)
+	// in the response to get the next page of results. If you don't specify a value
+	// for MaxResults, Route 53 returns up to 100 configurations.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListQueryLoggingConfigsPaginator is a paginator for ListQueryLoggingConfigs
+type ListQueryLoggingConfigsPaginator struct {
+	options   ListQueryLoggingConfigsPaginatorOptions
+	client    ListQueryLoggingConfigsAPIClient
+	params    *ListQueryLoggingConfigsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListQueryLoggingConfigsPaginator returns a new
+// ListQueryLoggingConfigsPaginator
+func NewListQueryLoggingConfigsPaginator(client ListQueryLoggingConfigsAPIClient, params *ListQueryLoggingConfigsInput, optFns ...func(*ListQueryLoggingConfigsPaginatorOptions)) *ListQueryLoggingConfigsPaginator {
+	options := ListQueryLoggingConfigsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListQueryLoggingConfigsInput{}
+	}
+
+	return &ListQueryLoggingConfigsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListQueryLoggingConfigsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListQueryLoggingConfigs page.
+func (p *ListQueryLoggingConfigsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListQueryLoggingConfigsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListQueryLoggingConfigs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListQueryLoggingConfigs(region string) *awsmiddleware.RegisterServiceMetadata {

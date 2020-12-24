@@ -58,14 +58,18 @@ type GetEventSourceMappingOutput struct {
 	// The ARN of the Lambda function.
 	FunctionArn *string
 
+	// (Streams) A list of current response type enums applied to the event source
+	// mapping.
+	FunctionResponseTypes []types.FunctionResponseType
+
 	// The date that the event source mapping was last updated, or its state changed.
 	LastModified *time.Time
 
 	// The result of the last AWS Lambda invocation of your Lambda function.
 	LastProcessingResult *string
 
-	// (Streams) The maximum amount of time to gather records before invoking the
-	// function, in seconds. The default value is zero.
+	// (Streams and SQS standard queues) The maximum amount of time to gather records
+	// before invoking the function, in seconds. The default value is zero.
 	MaximumBatchingWindowInSeconds *int32
 
 	// (Streams) Discard records older than the specified age. The default value is
@@ -85,15 +89,11 @@ type GetEventSourceMappingOutput struct {
 	// (MQ) The name of the Amazon MQ broker destination queue to consume.
 	Queues []string
 
-	// (MQ) The Secrets Manager secret that stores your broker credentials. To store
-	// your secret, use the following format:  { "username": "your username",
-	// "password": "your password" } To reference the secret, use the following format:
-	// [ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]
-	//
-	// The value of Type is always
-	// BASIC_AUTH. To encrypt the secret, you can use customer or service managed keys.
-	// When using a customer managed KMS key, the Lambda execution role requires
-	// kms:Decrypt permissions.
+	// The Self-Managed Apache Kafka cluster for your event source.
+	SelfManagedEventSource *types.SelfManagedEventSource
+
+	// An array of the authentication protocol, or the VPC components to secure your
+	// event source.
 	SourceAccessConfigurations []types.SourceAccessConfiguration
 
 	// The position in a stream from which to start reading. Required for Amazon
@@ -112,8 +112,12 @@ type GetEventSourceMappingOutput struct {
 	// user, or by the Lambda service.
 	StateTransitionReason *string
 
-	// (MSK) The name of the Kafka topic to consume.
+	// The name of the Kafka topic.
 	Topics []string
+
+	// (Streams) The duration of a processing window in seconds. The range is between 1
+	// second up to 15 minutes.
+	TumblingWindowInSeconds *int32
 
 	// The identifier of the event source mapping.
 	UUID *string

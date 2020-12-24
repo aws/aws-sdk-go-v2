@@ -159,6 +159,9 @@ func validateChange(v *types.Change) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Change"}
+	if v.ChangeType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeType"))
+	}
 	if v.Entity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Entity"))
 	} else if v.Entity != nil {
@@ -168,9 +171,6 @@ func validateChange(v *types.Change) error {
 	}
 	if v.Details == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Details"))
-	}
-	if v.ChangeType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -216,11 +216,11 @@ func validateOpCancelChangeSetInput(v *CancelChangeSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CancelChangeSetInput"}
-	if v.ChangeSetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeSetId"))
-	}
 	if v.Catalog == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.ChangeSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeSetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -234,11 +234,11 @@ func validateOpDescribeChangeSetInput(v *DescribeChangeSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeChangeSetInput"}
-	if v.ChangeSetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeSetId"))
-	}
 	if v.Catalog == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.ChangeSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeSetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -303,15 +303,15 @@ func validateOpStartChangeSetInput(v *StartChangeSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartChangeSetInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
 	if v.ChangeSet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChangeSet"))
 	} else if v.ChangeSet != nil {
 		if err := validateRequestedChangeList(v.ChangeSet); err != nil {
 			invalidParams.AddNested("ChangeSet", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Catalog == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

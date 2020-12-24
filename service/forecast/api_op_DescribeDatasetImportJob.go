@@ -79,6 +79,8 @@ type DescribeDatasetImportJobOutput struct {
 	// Statistical information about each field in the input data.
 	FieldStatistics map[string]types.Statistics
 
+	GeolocationFormat *string
+
 	// The last time that the dataset was modified. The time depends on the status of
 	// the job, as follows:
 	//
@@ -107,6 +109,8 @@ type DescribeDatasetImportJobOutput struct {
 	// DELETE_IN_PROGRESS, DELETE_FAILED
 	Status *string
 
+	TimeZone *string
+
 	// The format of timestamps in the dataset. The format that you specify depends on
 	// the DataFrequency specified when the dataset was created. The following formats
 	// are supported
@@ -117,6 +121,8 @@ type DescribeDatasetImportJobOutput struct {
 	// * "yyyy-MM-dd HH:mm:ss" For the following data frequencies: H, 30min, 15min,
 	// and 1min; and optionally, for: Y, M, W, and D
 	TimestampFormat *string
+
+	UseGeolocationForTimeZone bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

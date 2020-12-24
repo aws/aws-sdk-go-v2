@@ -34,6 +34,9 @@ type CreateRequestValidatorInput struct {
 	// This member is required.
 	RestApiId *string
 
+	// The name of the to-be-created RequestValidator.
+	Name *string
+
 	// A Boolean flag to indicate whether to validate request body according to the
 	// configured model schema for the method (true) or not (false).
 	ValidateRequestBody bool

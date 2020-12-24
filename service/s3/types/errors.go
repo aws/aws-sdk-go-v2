@@ -46,6 +46,26 @@ func (e *BucketAlreadyOwnedByYou) ErrorMessage() string {
 func (e *BucketAlreadyOwnedByYou) ErrorCode() string             { return "BucketAlreadyOwnedByYou" }
 func (e *BucketAlreadyOwnedByYou) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Object is archived and inaccessible until restored.
+type InvalidObjectState struct {
+	Message *string
+
+	StorageClass StorageClass
+	AccessTier   IntelligentTieringAccessTier
+}
+
+func (e *InvalidObjectState) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidObjectState) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidObjectState) ErrorCode() string             { return "InvalidObjectState" }
+func (e *InvalidObjectState) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified bucket does not exist.
 type NoSuchBucket struct {
 	Message *string

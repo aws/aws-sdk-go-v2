@@ -471,14 +471,14 @@ func validateExportFilter(v *types.ExportFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExportFilter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.Values == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Values"))
 	}
 	if v.Condition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -734,13 +734,13 @@ func validateOpDeleteTagsInput(v *DeleteTagsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTagsInput"}
+	if v.ConfigurationIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationIds"))
+	}
 	if v.Tags != nil {
 		if err := validateTagSet(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ConfigurationIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -838,17 +838,17 @@ func validateOpListConfigurationsInput(v *ListConfigurationsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListConfigurationsInput"}
-	if v.OrderBy != nil {
-		if err := validateOrderByList(v.OrderBy); err != nil {
-			invalidParams.AddNested("OrderBy", err.(smithy.InvalidParamsError))
-		}
-	}
 	if len(v.ConfigurationType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationType"))
 	}
 	if v.Filters != nil {
 		if err := validateFilters(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OrderBy != nil {
+		if err := validateOrderByList(v.OrderBy); err != nil {
+			invalidParams.AddNested("OrderBy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

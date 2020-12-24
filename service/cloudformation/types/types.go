@@ -157,11 +157,11 @@ type ChangeSetSummary struct {
 }
 
 // [Service-managed permissions] The AWS Organizations accounts to which StackSets
-// deploys. StackSets does not deploy stack instances to the organization master
-// account, even if the master account is in your organization or in an OU in your
-// organization. For update operations, you can specify either Accounts or
-// OrganizationalUnitIds. For create and delete operations, specify
-// OrganizationalUnitIds.
+// deploys. StackSets does not deploy stack instances to the organization
+// management account, even if the organization management account is in your
+// organization or in an OU in your organization. For update operations, you can
+// specify either Accounts or OrganizationalUnitIds. For create and delete
+// operations, specify OrganizationalUnitIds.
 type DeploymentTargets struct {
 
 	// The names of one or more AWS accounts for which you want to deploy stack set
@@ -203,6 +203,29 @@ type LoggingConfig struct {
 	//
 	// This member is required.
 	LogRoleArn *string
+}
+
+// Contains information about the module from which the resource was created, if
+// the resource was created from a module included in the stack template. For more
+// information on modules, see Using modules to encapsulate and reuse resource
+// configurations in the CloudFormation User Guide.
+type ModuleInfo struct {
+
+	// A concantenated list of the logical IDs of the module or modules containing the
+	// resource. Modules are listed starting with the inner-most nested module, and
+	// separated by /. In the following example, the resource was created from a
+	// module, moduleA, that is nested inside a parent module, moduleB. moduleA/moduleB
+	// For more information, see Referencing resources in a module in the
+	// CloudFormation User Guide.
+	LogicalIdHierarchy *string
+
+	// A concantenated list of the the module type or types containing the resource.
+	// Module types are listed starting with the inner-most nested module, and
+	// separated by /. In the following example, the resource was created from a module
+	// of type AWS::First::Example::MODULE, that is nested inside a parent module of
+	// type AWS::Second::Example::MODULE.
+	// AWS::First::Example::MODULE/AWS::Second::Example::MODULE
+	TypeHierarchy *string
 }
 
 // The Output data type.
@@ -353,6 +376,10 @@ type ResourceChange struct {
 
 	// The resource's logical ID, which is defined in the stack's template.
 	LogicalResourceId *string
+
+	// Contains information about the module from which the resource was created, if
+	// the resource was created from a module included in the stack template.
+	ModuleInfo *ModuleInfo
 
 	// The resource's physical ID (resource name). Resources that you are adding don't
 	// have physical IDs because they haven't been created.
@@ -1029,6 +1056,10 @@ type StackResource struct {
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
 	DriftInformation *StackResourceDriftInformation
 
+	// Contains information about the module from which the resource was created, if
+	// the resource was created from a module included in the stack template.
+	ModuleInfo *ModuleInfo
+
 	// The name or unique identifier that corresponds to a physical instance ID of a
 	// resource supported by AWS CloudFormation.
 	PhysicalResourceId *string
@@ -1083,6 +1114,10 @@ type StackResourceDetail struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-metadata.html)
 	// in the AWS CloudFormation User Guide.
 	Metadata *string
+
+	// Contains information about the module from which the resource was created, if
+	// the resource was created from a module included in the stack template.
+	ModuleInfo *ModuleInfo
 
 	// The name or unique identifier that corresponds to a physical instance ID of a
 	// resource supported by AWS CloudFormation.
@@ -1163,6 +1198,10 @@ type StackResourceDrift struct {
 	// parameters. For resources whose StackResourceDriftStatus is DELETED, this
 	// structure will not be present.
 	ExpectedProperties *string
+
+	// Contains information about the module from which the resource was created, if
+	// the resource was created from a module included in the stack template.
+	ModuleInfo *ModuleInfo
 
 	// The name or unique identifier that corresponds to a physical instance ID of a
 	// resource supported by AWS CloudFormation.
@@ -1279,6 +1318,10 @@ type StackResourceSummary struct {
 	// Unregulated Configuration Changes to Stacks and Resources
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
 	DriftInformation *StackResourceDriftInformationSummary
+
+	// Contains information about the module from which the resource was created, if
+	// the resource was created from a module included in the stack template.
+	ModuleInfo *ModuleInfo
 
 	// The name or unique identifier that corresponds to a physical instance ID of the
 	// resource.

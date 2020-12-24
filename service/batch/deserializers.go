@@ -3308,6 +3308,11 @@ func awsRestjson1_deserializeDocumentComputeResource(v **types.ComputeResource, 
 				sv.DesiredvCpus = int32(i64)
 			}
 
+		case "ec2Configuration":
+			if err := awsRestjson1_deserializeDocumentEc2ConfigurationList(&sv.Ec2Configuration, value); err != nil {
+				return err
+			}
+
 		case "ec2KeyPair":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3485,6 +3490,11 @@ func awsRestjson1_deserializeDocumentContainerDetail(v **types.ContainerDetail, 
 				sv.ExitCode = int32(i64)
 			}
 
+		case "fargatePlatformConfiguration":
+			if err := awsRestjson1_deserializeDocumentFargatePlatformConfiguration(&sv.FargatePlatformConfiguration, value); err != nil {
+				return err
+			}
+
 		case "image":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3546,6 +3556,11 @@ func awsRestjson1_deserializeDocumentContainerDetail(v **types.ContainerDetail, 
 
 		case "mountPoints":
 			if err := awsRestjson1_deserializeDocumentMountPoints(&sv.MountPoints, value); err != nil {
+				return err
+			}
+
+		case "networkConfiguration":
+			if err := awsRestjson1_deserializeDocumentNetworkConfiguration(&sv.NetworkConfiguration, value); err != nil {
 				return err
 			}
 
@@ -3682,6 +3697,11 @@ func awsRestjson1_deserializeDocumentContainerProperties(v **types.ContainerProp
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
 
+		case "fargatePlatformConfiguration":
+			if err := awsRestjson1_deserializeDocumentFargatePlatformConfiguration(&sv.FargatePlatformConfiguration, value); err != nil {
+				return err
+			}
+
 		case "image":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3734,6 +3754,11 @@ func awsRestjson1_deserializeDocumentContainerProperties(v **types.ContainerProp
 
 		case "mountPoints":
 			if err := awsRestjson1_deserializeDocumentMountPoints(&sv.MountPoints, value); err != nil {
+				return err
+			}
+
+		case "networkConfiguration":
+			if err := awsRestjson1_deserializeDocumentNetworkConfiguration(&sv.NetworkConfiguration, value); err != nil {
 				return err
 			}
 
@@ -3983,6 +4008,89 @@ func awsRestjson1_deserializeDocumentDevicesList(v *[]types.Device, value interf
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEc2Configuration(v **types.Ec2Configuration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Ec2Configuration
+	if *v == nil {
+		sv = &types.Ec2Configuration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "imageIdOverride":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageIdOverride to be of type string, got %T instead", value)
+				}
+				sv.ImageIdOverride = ptr.String(jtv)
+			}
+
+		case "imageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageType to be of type string, got %T instead", value)
+				}
+				sv.ImageType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEc2ConfigurationList(v *[]types.Ec2Configuration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Ec2Configuration
+	if *v == nil {
+		cv = []types.Ec2Configuration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Ec2Configuration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentEc2Configuration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEnvironmentVariables(v *[]types.KeyValuePair, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4118,6 +4226,46 @@ func awsRestjson1_deserializeDocumentEvaluateOnExitList(v *[]types.EvaluateOnExi
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFargatePlatformConfiguration(v **types.FargatePlatformConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FargatePlatformConfiguration
+	if *v == nil {
+		sv = &types.FargatePlatformConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "platformVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PlatformVersion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentHost(v **types.Host, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4211,6 +4359,20 @@ func awsRestjson1_deserializeDocumentJobDefinition(v **types.JobDefinition, valu
 		case "parameters":
 			if err := awsRestjson1_deserializeDocumentParametersMap(&sv.Parameters, value); err != nil {
 				return err
+			}
+
+		case "platformCapabilities":
+			if err := awsRestjson1_deserializeDocumentPlatformCapabilityList(&sv.PlatformCapabilities, value); err != nil {
+				return err
+			}
+
+		case "propagateTags":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.PropagateTags = jtv
 			}
 
 		case "retryStrategy":
@@ -4498,6 +4660,20 @@ func awsRestjson1_deserializeDocumentJobDetail(v **types.JobDetail, value interf
 		case "parameters":
 			if err := awsRestjson1_deserializeDocumentParametersMap(&sv.Parameters, value); err != nil {
 				return err
+			}
+
+		case "platformCapabilities":
+			if err := awsRestjson1_deserializeDocumentPlatformCapabilityList(&sv.PlatformCapabilities, value); err != nil {
+				return err
+			}
+
+		case "propagateTags":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.PropagateTags = jtv
 			}
 
 		case "retryStrategy":
@@ -5317,6 +5493,46 @@ func awsRestjson1_deserializeDocumentMountPoints(v *[]types.MountPoint, value in
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNetworkConfiguration(v **types.NetworkConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkConfiguration
+	if *v == nil {
+		sv = &types.NetworkConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "assignPublicIp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AssignPublicIp to be of type string, got %T instead", value)
+				}
+				sv.AssignPublicIp = types.AssignPublicIp(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentNetworkInterface(v **types.NetworkInterface, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5702,6 +5918,42 @@ func awsRestjson1_deserializeDocumentParametersMap(v *map[string]string, value i
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPlatformCapabilityList(v *[]types.PlatformCapability, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PlatformCapability
+	if *v == nil {
+		cv = []types.PlatformCapability{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PlatformCapability
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PlatformCapability to be of type string, got %T instead", value)
+			}
+			col = types.PlatformCapability(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

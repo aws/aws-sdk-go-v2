@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Returns a paginated list of all attribute types for the given instance.
 func (c *Client) ListInstanceAttributes(ctx context.Context, params *ListInstanceAttributesInput, optFns ...func(*Options)) (*ListInstanceAttributesOutput, error) {
 	if params == nil {

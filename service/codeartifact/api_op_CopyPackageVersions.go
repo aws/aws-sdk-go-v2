@@ -51,6 +51,8 @@ type CopyPackageVersionsInput struct {
 	// * maven: A Maven package that contains compiled code in a
 	// distributable format, such as a JAR file.
 	//
+	// * nuget: A NuGet package.
+	//
 	// This member is required.
 	Format types.PackageFormat
 
@@ -91,6 +93,9 @@ type CopyPackageVersionsInput struct {
 	// * A Python package
 	// does not contain a corresponding component, so Python packages do not have a
 	// namespace.
+	//
+	// * A NuGet package does not contain a corresponding component, so
+	// NuGet packages do not have a namespace.
 	Namespace *string
 
 	// A list of key-value pairs. The keys are package versions and the values are

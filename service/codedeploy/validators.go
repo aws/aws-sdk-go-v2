@@ -806,11 +806,11 @@ func validateOpAddTagsToOnPremisesInstancesInput(v *AddTagsToOnPremisesInstances
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddTagsToOnPremisesInstancesInput"}
-	if v.InstanceNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceNames"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if v.InstanceNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1067,11 +1067,11 @@ func validateOpGetApplicationRevisionInput(v *GetApplicationRevisionInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetApplicationRevisionInput"}
-	if v.Revision == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Revision"))
-	}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.Revision == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Revision"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1100,11 +1100,11 @@ func validateOpGetDeploymentGroupInput(v *GetDeploymentGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDeploymentGroupInput"}
-	if v.DeploymentGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeploymentGroupName"))
-	}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.DeploymentGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1226,11 +1226,11 @@ func validateOpRegisterApplicationRevisionInput(v *RegisterApplicationRevisionIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterApplicationRevisionInput"}
-	if v.Revision == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Revision"))
-	}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.Revision == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Revision"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1328,11 +1328,11 @@ func validateOpUpdateDeploymentGroupInput(v *UpdateDeploymentGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDeploymentGroupInput"}
-	if v.CurrentDeploymentGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentDeploymentGroupName"))
-	}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.CurrentDeploymentGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentDeploymentGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

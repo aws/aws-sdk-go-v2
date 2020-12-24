@@ -268,14 +268,15 @@ type DataSourceType string
 
 // Enum values for DataSourceType
 const (
-	DataSourceTypeS3         DataSourceType = "S3"
-	DataSourceTypeSharepoint DataSourceType = "SHAREPOINT"
-	DataSourceTypeDatabase   DataSourceType = "DATABASE"
-	DataSourceTypeSalesforce DataSourceType = "SALESFORCE"
-	DataSourceTypeOnedrive   DataSourceType = "ONEDRIVE"
-	DataSourceTypeServicenow DataSourceType = "SERVICENOW"
-	DataSourceTypeCustom     DataSourceType = "CUSTOM"
-	DataSourceTypeConfluence DataSourceType = "CONFLUENCE"
+	DataSourceTypeS3          DataSourceType = "S3"
+	DataSourceTypeSharepoint  DataSourceType = "SHAREPOINT"
+	DataSourceTypeDatabase    DataSourceType = "DATABASE"
+	DataSourceTypeSalesforce  DataSourceType = "SALESFORCE"
+	DataSourceTypeOnedrive    DataSourceType = "ONEDRIVE"
+	DataSourceTypeServicenow  DataSourceType = "SERVICENOW"
+	DataSourceTypeCustom      DataSourceType = "CUSTOM"
+	DataSourceTypeConfluence  DataSourceType = "CONFLUENCE"
+	DataSourceTypeGoogledrive DataSourceType = "GOOGLEDRIVE"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -291,6 +292,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"SERVICENOW",
 		"CUSTOM",
 		"CONFLUENCE",
+		"GOOGLEDRIVE",
 	}
 }
 
@@ -375,6 +377,24 @@ func (FaqStatus) Values() []FaqStatus {
 		"ACTIVE",
 		"DELETING",
 		"FAILED",
+	}
+}
+
+type HighlightType string
+
+// Enum values for HighlightType
+const (
+	HighlightTypeStandard         HighlightType = "STANDARD"
+	HighlightTypeThesaurusSynonym HighlightType = "THESAURUS_SYNONYM"
+)
+
+// Values returns all known values for HighlightType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HighlightType) Values() []HighlightType {
+	return []HighlightType{
+		"STANDARD",
+		"THESAURUS_SYNONYM",
 	}
 }
 
@@ -710,6 +730,32 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"DESC",
 		"ASC",
+	}
+}
+
+type ThesaurusStatus string
+
+// Enum values for ThesaurusStatus
+const (
+	ThesaurusStatusCreating              ThesaurusStatus = "CREATING"
+	ThesaurusStatusActive                ThesaurusStatus = "ACTIVE"
+	ThesaurusStatusDeleting              ThesaurusStatus = "DELETING"
+	ThesaurusStatusUpdating              ThesaurusStatus = "UPDATING"
+	ThesaurusStatusActiveButUpdateFailed ThesaurusStatus = "ACTIVE_BUT_UPDATE_FAILED"
+	ThesaurusStatusFailed                ThesaurusStatus = "FAILED"
+)
+
+// Values returns all known values for ThesaurusStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThesaurusStatus) Values() []ThesaurusStatus {
+	return []ThesaurusStatus{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+		"UPDATING",
+		"ACTIVE_BUT_UPDATE_FAILED",
+		"FAILED",
 	}
 }
 

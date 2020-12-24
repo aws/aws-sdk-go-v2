@@ -29,7 +29,7 @@ type Connection struct {
 	OwnerAccountId *string
 
 	// The name of the external provider where your third-party code repository is
-	// configured. The valid provider type is Bitbucket.
+	// configured.
 	ProviderType ProviderType
 }
 

@@ -687,11 +687,11 @@ func validateDefinitionDocument(v *types.DefinitionDocument) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DefinitionDocument"}
-	if v.Text == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Text"))
-	}
 	if len(v.Language) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Language"))
+	}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -852,15 +852,15 @@ func validateOpCreateSystemInstanceInput(v *CreateSystemInstanceInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.Target) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Target"))
-	}
 	if v.Definition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
 	} else if v.Definition != nil {
 		if err := validateDefinitionDocument(v.Definition); err != nil {
 			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
 		}
+	}
+	if len(v.Target) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -953,11 +953,11 @@ func validateOpDissociateEntityFromThingInput(v *DissociateEntityFromThingInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DissociateEntityFromThingInput"}
-	if len(v.EntityType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
-	}
 	if v.ThingName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1207,11 +1207,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1247,15 +1247,15 @@ func validateOpUpdateSystemTemplateInput(v *UpdateSystemTemplateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSystemTemplateInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.Definition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
 	} else if v.Definition != nil {
 		if err := validateDefinitionDocument(v.Definition); err != nil {
 			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

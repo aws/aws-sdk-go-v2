@@ -19,11 +19,11 @@ import (
 // symbolic links (symlinks) from your FSx file system to its linked data
 // repository. A CreateDataRepositoryTask operation will fail if a data repository
 // is not linked to the FSx file system. To learn more about data repository tasks,
-// see Using Data Repository Tasks
+// see Data Repository Tasks
 // (https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html).
-// To learn more about linking a data repository to your file system, see Setting
-// the Export Prefix
-// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repository.html#export-prefix).
+// To learn more about linking a data repository to your file system, see Linking
+// your file system to an S3 bucket
+// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-fs-linked-data-repo.html).
 func (c *Client) CreateDataRepositoryTask(ctx context.Context, params *CreateDataRepositoryTaskInput, optFns ...func(*Options)) (*CreateDataRepositoryTaskOutput, error) {
 	if params == nil {
 		params = &CreateDataRepositoryTaskInput{}

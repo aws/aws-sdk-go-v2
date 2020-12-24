@@ -32,8 +32,15 @@ import (
 // backing key. If you cancel the deletion, the original key rotation status is
 // restored.
 //
-// To perform this operation on a CMK in a different AWS account,
-// specify the key ARN in the value of the KeyId parameter.
+// Cross-account use: Yes. To perform this operation on a CMK in a
+// different AWS account, specify the key ARN in the value of the KeyId parameter.
+// Required permissions: kms:GetKeyRotationStatus
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations:
+//
+// * DisableKeyRotation
+//
+// * EnableKeyRotation
 func (c *Client) GetKeyRotationStatus(ctx context.Context, params *GetKeyRotationStatusInput, optFns ...func(*Options)) (*GetKeyRotationStatusOutput, error) {
 	if params == nil {
 		params = &GetKeyRotationStatusInput{}

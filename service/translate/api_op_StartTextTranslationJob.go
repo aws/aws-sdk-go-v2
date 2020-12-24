@@ -75,6 +75,11 @@ type StartTextTranslationJobInput struct {
 	// The name of the batch translation job to be performed.
 	JobName *string
 
+	// The names of the parallel data resources to use in the batch translation job.
+	// For a list of available parallel data resources, use the ListParallelData
+	// operation.
+	ParallelDataNames []string
+
 	// The name of the terminology to use in the batch translation job. For a list of
 	// available terminologies, use the ListTerminologies operation.
 	TerminologyNames []string

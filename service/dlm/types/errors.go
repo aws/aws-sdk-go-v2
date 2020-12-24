@@ -31,9 +31,9 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 type InvalidRequestException struct {
 	Message *string
 
-	MutuallyExclusiveParameters []string
-	RequiredParameters          []string
 	Code                        *string
+	RequiredParameters          []string
+	MutuallyExclusiveParameters []string
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -72,9 +72,9 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type ResourceNotFoundException struct {
 	Message *string
 
-	ResourceIds  []string
-	ResourceType *string
 	Code         *string
+	ResourceType *string
+	ResourceIds  []string
 }
 
 func (e *ResourceNotFoundException) Error() string {

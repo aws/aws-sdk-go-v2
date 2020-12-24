@@ -1553,13 +1553,17 @@ func awsRestjson1_serializeDocumentS3ExportConfiguration(v *types.S3ExportConfig
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTags(v map[string]string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTags(v map[string]*string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		om.String(v[key])
+		if vv := v[key]; vv == nil {
+			om.Null()
+			continue
+		}
+		om.String(*v[key])
 	}
 	return nil
 }

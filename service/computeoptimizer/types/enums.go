@@ -2,6 +2,62 @@
 
 package types
 
+type EBSFilterName string
+
+// Enum values for EBSFilterName
+const (
+	EBSFilterNameFinding EBSFilterName = "Finding"
+)
+
+// Values returns all known values for EBSFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EBSFilterName) Values() []EBSFilterName {
+	return []EBSFilterName{
+		"Finding",
+	}
+}
+
+type EBSFinding string
+
+// Enum values for EBSFinding
+const (
+	EBSFindingOptimized    EBSFinding = "Optimized"
+	EBSFindingNotOptimized EBSFinding = "NotOptimized"
+)
+
+// Values returns all known values for EBSFinding. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EBSFinding) Values() []EBSFinding {
+	return []EBSFinding{
+		"Optimized",
+		"NotOptimized",
+	}
+}
+
+type EBSMetricName string
+
+// Enum values for EBSMetricName
+const (
+	EBSMetricNameVolumeReadOpsPerSecond    EBSMetricName = "VolumeReadOpsPerSecond"
+	EBSMetricNameVolumeWriteOpsPerSecond   EBSMetricName = "VolumeWriteOpsPerSecond"
+	EBSMetricNameVolumeReadBytesPerSecond  EBSMetricName = "VolumeReadBytesPerSecond"
+	EBSMetricNameVolumeWriteBytesPerSecond EBSMetricName = "VolumeWriteBytesPerSecond"
+)
+
+// Values returns all known values for EBSMetricName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EBSMetricName) Values() []EBSMetricName {
+	return []EBSMetricName{
+		"VolumeReadOpsPerSecond",
+		"VolumeWriteOpsPerSecond",
+		"VolumeReadBytesPerSecond",
+		"VolumeWriteBytesPerSecond",
+	}
+}
+
 type ExportableAutoScalingGroupField string
 
 // Enum values for ExportableAutoScalingGroupField
@@ -317,6 +373,7 @@ type RecommendationSourceType string
 const (
 	RecommendationSourceTypeEc2Instance      RecommendationSourceType = "Ec2Instance"
 	RecommendationSourceTypeAutoScalingGroup RecommendationSourceType = "AutoScalingGroup"
+	RecommendationSourceTypeEbsVolume        RecommendationSourceType = "EbsVolume"
 )
 
 // Values returns all known values for RecommendationSourceType. Note that this can
@@ -326,6 +383,7 @@ func (RecommendationSourceType) Values() []RecommendationSourceType {
 	return []RecommendationSourceType{
 		"Ec2Instance",
 		"AutoScalingGroup",
+		"EbsVolume",
 	}
 }
 

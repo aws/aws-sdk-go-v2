@@ -49,6 +49,9 @@ type ListPackageVersionAssetsInput struct {
 	// * maven: A Maven package that contains
 	// compiled code in a distributable format, such as a JAR file.
 	//
+	// * nuget: A NuGet
+	// package.
+	//
 	// This member is required.
 	Format types.PackageFormat
 
@@ -86,6 +89,9 @@ type ListPackageVersionAssetsInput struct {
 	// * A Python package
 	// does not contain a corresponding component, so Python packages do not have a
 	// namespace.
+	//
+	// * A NuGet package does not contain a corresponding component, so
+	// NuGet packages do not have a namespace.
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -114,6 +120,9 @@ type ListPackageVersionAssetsOutput struct {
 	// * A Python package
 	// does not contain a corresponding component, so Python packages do not have a
 	// namespace.
+	//
+	// * A NuGet package does not contain a corresponding component, so
+	// NuGet packages do not have a namespace.
 	Namespace *string
 
 	// If there are additional results, this is the token for the next set of results.

@@ -111,11 +111,11 @@ func validateFilter(v *types.Filter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Filter"}
-	if v.AttributeValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AttributeValue"))
-	}
 	if v.AttributePath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttributePath"))
+	}
+	if v.AttributeValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeValue"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

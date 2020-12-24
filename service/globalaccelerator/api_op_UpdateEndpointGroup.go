@@ -12,8 +12,7 @@ import (
 )
 
 // Update an endpoint group. A resource must be valid and active when you add it as
-// an endpoint. To see an AWS CLI example of updating an endpoint group, scroll
-// down to Example.
+// an endpoint.
 func (c *Client) UpdateEndpointGroup(ctx context.Context, params *UpdateEndpointGroupInput, optFns ...func(*Options)) (*UpdateEndpointGroupOutput, error) {
 	if params == nil {
 		params = &UpdateEndpointGroupInput{}

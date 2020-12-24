@@ -62,9 +62,6 @@ func validateOpGenerateDataSetInput(v *GenerateDataSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GenerateDataSetInput"}
-	if v.SnsTopicArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SnsTopicArn"))
-	}
 	if len(v.DataSetType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSetType"))
 	}
@@ -76,6 +73,9 @@ func validateOpGenerateDataSetInput(v *GenerateDataSetInput) error {
 	}
 	if v.DestinationS3BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationS3BucketName"))
+	}
+	if v.SnsTopicArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnsTopicArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -89,20 +89,20 @@ func validateOpStartSupportDataExportInput(v *StartSupportDataExportInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartSupportDataExportInput"}
-	if v.SnsTopicArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SnsTopicArn"))
+	if len(v.DataSetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetType"))
 	}
 	if v.FromDate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FromDate"))
 	}
+	if v.RoleNameArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleNameArn"))
+	}
 	if v.DestinationS3BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationS3BucketName"))
 	}
-	if len(v.DataSetType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSetType"))
-	}
-	if v.RoleNameArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleNameArn"))
+	if v.SnsTopicArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnsTopicArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

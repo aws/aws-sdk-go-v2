@@ -4,6 +4,7 @@ package dynamodb
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
@@ -456,6 +457,95 @@ func addOperationQueryMiddlewares(stack *middleware.Stack, options Options) (err
 		return err
 	}
 	return nil
+}
+
+// QueryAPIClient is a client that implements the Query operation.
+type QueryAPIClient interface {
+	Query(context.Context, *QueryInput, ...func(*Options)) (*QueryOutput, error)
+}
+
+var _ QueryAPIClient = (*Client)(nil)
+
+// QueryPaginatorOptions is the paginator options for Query
+type QueryPaginatorOptions struct {
+	// The maximum number of items to evaluate (not necessarily the number of matching
+	// items). If DynamoDB processes the number of items up to the limit while
+	// processing the results, it stops the operation and returns the matching values
+	// up to that point, and a key in LastEvaluatedKey to apply in a subsequent
+	// operation, so that you can pick up where you left off. Also, if the processed
+	// dataset size exceeds 1 MB before DynamoDB reaches this limit, it stops the
+	// operation and returns the matching values up to the limit, and a key in
+	// LastEvaluatedKey to apply in a subsequent operation to continue the operation.
+	// For more information, see Query and Scan
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html)
+	// in the Amazon DynamoDB Developer Guide.
+	Limit int32
+}
+
+// QueryPaginator is a paginator for Query
+type QueryPaginator struct {
+	options   QueryPaginatorOptions
+	client    QueryAPIClient
+	params    *QueryInput
+	nextToken map[string]types.AttributeValue
+	firstPage bool
+}
+
+// NewQueryPaginator returns a new QueryPaginator
+func NewQueryPaginator(client QueryAPIClient, params *QueryInput, optFns ...func(*QueryPaginatorOptions)) *QueryPaginator {
+	options := QueryPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &QueryInput{}
+	}
+
+	return &QueryPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *QueryPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next Query page.
+func (p *QueryPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*QueryOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.ExclusiveStartKey = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.Query(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.LastEvaluatedKey
+
+	_ = prevToken
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opQuery(region string) *awsmiddleware.RegisterServiceMetadata {

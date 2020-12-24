@@ -59,7 +59,7 @@ type ListHostedZonesByVPCInput struct {
 	// the response includes a NextToken element. NextToken contains an encrypted token
 	// that identifies the first hosted zone that Route 53 will return if you submit
 	// another request.
-	MaxItems *string
+	MaxItems *int32
 
 	// If the previous response included a NextToken element, the specified VPC is
 	// associated with more hosted zones. To get more hosted zones, submit another
@@ -82,7 +82,7 @@ type ListHostedZonesByVPCOutput struct {
 	// ListHostedZonesByVPC request.
 	//
 	// This member is required.
-	MaxItems *string
+	MaxItems *int32
 
 	// The value that you specified for NextToken in the most recent
 	// ListHostedZonesByVPC request.

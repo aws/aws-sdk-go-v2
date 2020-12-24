@@ -43,7 +43,7 @@ type ListRealtimeLogConfigsInput struct {
 
 	// The maximum number of real-time log configurations that you want in the
 	// response.
-	MaxItems *string
+	MaxItems *int32
 }
 
 type ListRealtimeLogConfigsOutput struct {

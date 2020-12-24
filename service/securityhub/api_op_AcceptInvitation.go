@@ -11,9 +11,10 @@ import (
 )
 
 // Accepts the invitation to be a member account and be monitored by the Security
-// Hub master account that the invitation was sent from. When the member account
-// accepts the invitation, permission is granted to the master account to view
-// findings generated in the member account.
+// Hub master account that the invitation was sent from. This operation is only
+// used by member accounts that are not added through Organizations. When the
+// member account accepts the invitation, permission is granted to the master
+// account to view findings generated in the member account.
 func (c *Client) AcceptInvitation(ctx context.Context, params *AcceptInvitationInput, optFns ...func(*Options)) (*AcceptInvitationOutput, error) {
 	if params == nil {
 		params = &AcceptInvitationInput{}

@@ -81,6 +81,9 @@ type UpdateFunctionConfigurationInput struct {
 	// (https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html).
 	Handler *string
 
+	// Configuration values that override the container image Dockerfile.
+	ImageConfig *types.ImageConfig
+
 	// The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt
 	// your function's environment variables. If it's not provided, AWS Lambda uses a
 	// default service key.
@@ -92,9 +95,9 @@ type UpdateFunctionConfigurationInput struct {
 	// including the version.
 	Layers []string
 
-	// The amount of memory that your function has access to. Increasing the function's
-	// memory also increases its CPU allocation. The default value is 128 MB. The value
-	// must be a multiple of 64 MB.
+	// The amount of memory available to the function at runtime. Increasing the
+	// function's memory also increases its CPU allocation. The default value is 128
+	// MB. The value can be any multiple of 1 MB.
 	MemorySize *int32
 
 	// Only update the function if the revision ID matches the ID that's specified. Use
@@ -155,6 +158,9 @@ type UpdateFunctionConfigurationOutput struct {
 	// The function that Lambda calls to begin executing your function.
 	Handler *string
 
+	// The function's image configuration values.
+	ImageConfigResponse *types.ImageConfigResponse
+
 	// The KMS key that's used to encrypt the function's environment variables. This
 	// key is only returned if you've configured a customer managed CMK.
 	KMSKeyArn *string
@@ -180,8 +186,12 @@ type UpdateFunctionConfigurationOutput struct {
 	// For Lambda@Edge functions, the ARN of the master function.
 	MasterArn *string
 
-	// The memory that's allocated to the function.
+	// The amount of memory available to the function at runtime.
 	MemorySize *int32
+
+	// The type of deployment package. Set to Image for container image and set Zip for
+	// .zip file archive.
+	PackageType types.PackageType
 
 	// The latest updated revision of the function or alias.
 	RevisionId *string
@@ -191,6 +201,12 @@ type UpdateFunctionConfigurationOutput struct {
 
 	// The runtime environment for the Lambda function.
 	Runtime types.Runtime
+
+	// The ARN of the signing job.
+	SigningJobArn *string
+
+	// The ARN of the signing profile version.
+	SigningProfileVersionArn *string
 
 	// The current state of the function. When the state is Inactive, you can
 	// reactivate the function by invoking it.

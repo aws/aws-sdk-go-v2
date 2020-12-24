@@ -546,6 +546,13 @@ func awsRestjson1_serializeOpDocumentCreateDatastoreInput(v *CreateDatastoreInpu
 		}
 	}
 
+	if v.FileFormatConfiguration != nil {
+		ok := object.Key("fileFormatConfiguration")
+		if err := awsRestjson1_serializeDocumentFileFormatConfiguration(v.FileFormatConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RetentionPeriod != nil {
 		ok := object.Key("retentionPeriod")
 		if err := awsRestjson1_serializeDocumentRetentionPeriod(v.RetentionPeriod, ok); err != nil {
@@ -2041,6 +2048,13 @@ func awsRestjson1_serializeOpDocumentStartPipelineReprocessingInput(v *StartPipe
 	object := value.Object()
 	defer object.Close()
 
+	if v.ChannelMessages != nil {
+		ok := object.Key("channelMessages")
+		if err := awsRestjson1_serializeDocumentChannelMessages(v.ChannelMessages, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EndTime != nil {
 		ok := object.Key("endTime")
 		ok.Double(smithytime.FormatEpochSeconds(*v.EndTime))
@@ -2504,6 +2518,13 @@ func awsRestjson1_serializeOpDocumentUpdateDatastoreInput(v *UpdateDatastoreInpu
 		}
 	}
 
+	if v.FileFormatConfiguration != nil {
+		ok := object.Key("fileFormatConfiguration")
+		if err := awsRestjson1_serializeDocumentFileFormatConfiguration(v.FileFormatConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RetentionPeriod != nil {
 		ok := object.Key("retentionPeriod")
 		if err := awsRestjson1_serializeDocumentRetentionPeriod(v.RetentionPeriod, ok); err != nil {
@@ -2670,6 +2691,20 @@ func awsRestjson1_serializeDocumentChannelActivity(v *types.ChannelActivity, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentChannelMessages(v *types.ChannelMessages, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Paths != nil {
+		ok := object.Key("s3Paths")
+		if err := awsRestjson1_serializeDocumentS3PathChannelMessages(v.S3Paths, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentChannelStorage(v *types.ChannelStorage, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2688,6 +2723,36 @@ func awsRestjson1_serializeDocumentChannelStorage(v *types.ChannelStorage, value
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentColumn(v *types.Column, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Type != nil {
+		ok := object.Key("type")
+		ok.String(*v.Type)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentColumns(v []types.Column, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentColumn(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -2921,24 +2986,27 @@ func awsRestjson1_serializeDocumentDatastoreActivity(v *types.DatastoreActivity,
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDatastoreStorage(v *types.DatastoreStorage, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDatastoreStorage(v types.DatastoreStorage, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.CustomerManagedS3 != nil {
-		ok := object.Key("customerManagedS3")
-		if err := awsRestjson1_serializeDocumentCustomerManagedDatastoreS3Storage(v.CustomerManagedS3, ok); err != nil {
+	switch uv := v.(type) {
+	case *types.DatastoreStorageMemberCustomerManagedS3:
+		av := object.Key("customerManagedS3")
+		if err := awsRestjson1_serializeDocumentCustomerManagedDatastoreS3Storage(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.ServiceManagedS3 != nil {
-		ok := object.Key("serviceManagedS3")
-		if err := awsRestjson1_serializeDocumentServiceManagedDatastoreS3Storage(v.ServiceManagedS3, ok); err != nil {
+	case *types.DatastoreStorageMemberServiceManagedS3:
+		av := object.Key("serviceManagedS3")
+		if err := awsRestjson1_serializeDocumentServiceManagedDatastoreS3Storage(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -3035,6 +3103,27 @@ func awsRestjson1_serializeDocumentDeviceShadowEnrichActivity(v *types.DeviceSha
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFileFormatConfiguration(v *types.FileFormatConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JsonConfiguration != nil {
+		ok := object.Key("jsonConfiguration")
+		if err := awsRestjson1_serializeDocumentJsonConfiguration(v.JsonConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ParquetConfiguration != nil {
+		ok := object.Key("parquetConfiguration")
+		if err := awsRestjson1_serializeDocumentParquetConfiguration(v.ParquetConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFilterActivity(v *types.FilterActivity, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3087,6 +3176,13 @@ func awsRestjson1_serializeDocumentIotEventsDestinationConfiguration(v *types.Io
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
 	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJsonConfiguration(v *types.JsonConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	return nil
 }
@@ -3264,6 +3360,20 @@ func awsRestjson1_serializeDocumentOutputFileUriValue(v *types.OutputFileUriValu
 	if v.FileName != nil {
 		ok := object.Key("fileName")
 		ok.String(*v.FileName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParquetConfiguration(v *types.ParquetConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SchemaDefinition != nil {
+		ok := object.Key("schemaDefinition")
+		if err := awsRestjson1_serializeDocumentSchemaDefinition(v.SchemaDefinition, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3473,6 +3583,17 @@ func awsRestjson1_serializeDocumentS3DestinationConfiguration(v *types.S3Destina
 	return nil
 }
 
+func awsRestjson1_serializeDocumentS3PathChannelMessages(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSchedule(v *types.Schedule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3480,6 +3601,20 @@ func awsRestjson1_serializeDocumentSchedule(v *types.Schedule, value smithyjson.
 	if v.Expression != nil {
 		ok := object.Key("expression")
 		ok.String(*v.Expression)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchemaDefinition(v *types.SchemaDefinition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Columns != nil {
+		ok := object.Key("columns")
+		if err := awsRestjson1_serializeDocumentColumns(v.Columns, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

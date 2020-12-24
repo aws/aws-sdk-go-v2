@@ -635,13 +635,13 @@ func validateAddOutputRequest(v *types.AddOutputRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddOutputRequest"}
-	if len(v.Protocol) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
-	}
 	if v.Encryption != nil {
 		if err := validateEncryption(v.Encryption); err != nil {
 			invalidParams.AddNested("Encryption", err.(smithy.InvalidParamsError))
 		}
+	}
+	if len(v.Protocol) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -710,14 +710,14 @@ func validateVpcInterfaceRequest(v *types.VpcInterfaceRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VpcInterfaceRequest"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if v.SecurityGroupIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.SubnetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
@@ -756,15 +756,15 @@ func validateOpAddFlowSourcesInput(v *AddFlowSourcesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddFlowSourcesInput"}
+	if v.FlowArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
 	if v.Sources == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
 	} else if v.Sources != nil {
 		if err := validate__listOfSetSourceRequest(v.Sources); err != nil {
 			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.FlowArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -800,9 +800,17 @@ func validateOpCreateFlowInput(v *CreateFlowInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFlowInput"}
-	if v.Sources != nil {
-		if err := validate__listOfSetSourceRequest(v.Sources); err != nil {
-			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
+	if v.Entitlements != nil {
+		if err := validate__listOfGrantEntitlementRequest(v.Entitlements); err != nil {
+			invalidParams.AddNested("Entitlements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Outputs != nil {
+		if err := validate__listOfAddOutputRequest(v.Outputs); err != nil {
+			invalidParams.AddNested("Outputs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Source != nil {
@@ -810,17 +818,9 @@ func validateOpCreateFlowInput(v *CreateFlowInput) error {
 			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Outputs != nil {
-		if err := validate__listOfAddOutputRequest(v.Outputs); err != nil {
-			invalidParams.AddNested("Outputs", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.Entitlements != nil {
-		if err := validate__listOfGrantEntitlementRequest(v.Entitlements); err != nil {
-			invalidParams.AddNested("Entitlements", err.(smithy.InvalidParamsError))
+	if v.Sources != nil {
+		if err := validate__listOfSetSourceRequest(v.Sources); err != nil {
+			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.VpcInterfaces != nil {
@@ -900,15 +900,15 @@ func validateOpGrantFlowEntitlementsInput(v *GrantFlowEntitlementsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GrantFlowEntitlementsInput"}
-	if v.FlowArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
-	}
 	if v.Entitlements == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Entitlements"))
 	} else if v.Entitlements != nil {
 		if err := validate__listOfGrantEntitlementRequest(v.Entitlements); err != nil {
 			invalidParams.AddNested("Entitlements", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.FlowArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -940,11 +940,11 @@ func validateOpPurchaseOfferingInput(v *PurchaseOfferingInput) error {
 	if v.OfferingArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OfferingArn"))
 	}
-	if v.Start == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Start"))
-	}
 	if v.ReservationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReservationName"))
+	}
+	if v.Start == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Start"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1012,11 +1012,11 @@ func validateOpRevokeFlowEntitlementInput(v *RevokeFlowEntitlementInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RevokeFlowEntitlementInput"}
-	if v.FlowArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
-	}
 	if v.EntitlementArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntitlementArn"))
+	}
+	if v.FlowArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1078,11 +1078,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1129,11 +1129,11 @@ func validateOpUpdateFlowOutputInput(v *UpdateFlowOutputInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFlowOutputInput"}
-	if v.OutputArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OutputArn"))
-	}
 	if v.FlowArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
+	if v.OutputArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1147,11 +1147,11 @@ func validateOpUpdateFlowSourceInput(v *UpdateFlowSourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFlowSourceInput"}
-	if v.SourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))
-	}
 	if v.FlowArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
+	if v.SourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

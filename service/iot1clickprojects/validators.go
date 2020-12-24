@@ -374,17 +374,17 @@ func validateOpAssociateDeviceWithPlacementInput(v *AssociateDeviceWithPlacement
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateDeviceWithPlacementInput"}
-	if v.PlacementName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
-	}
-	if v.DeviceTemplateName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceTemplateName"))
-	}
 	if v.ProjectName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
+	if v.PlacementName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
+	}
 	if v.DeviceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
+	}
+	if v.DeviceTemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceTemplateName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -398,11 +398,11 @@ func validateOpCreatePlacementInput(v *CreatePlacementInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePlacementInput"}
-	if v.ProjectName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
-	}
 	if v.PlacementName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
+	}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -431,11 +431,11 @@ func validateOpDeletePlacementInput(v *DeletePlacementInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeletePlacementInput"}
-	if v.ProjectName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
-	}
 	if v.PlacementName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
+	}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -464,11 +464,11 @@ func validateOpDescribePlacementInput(v *DescribePlacementInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribePlacementInput"}
-	if v.ProjectName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
-	}
 	if v.PlacementName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
+	}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -497,11 +497,11 @@ func validateOpDisassociateDeviceFromPlacementInput(v *DisassociateDeviceFromPla
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateDeviceFromPlacementInput"}
-	if v.PlacementName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
-	}
 	if v.ProjectName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.PlacementName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
 	}
 	if v.DeviceTemplateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceTemplateName"))
@@ -518,11 +518,11 @@ func validateOpGetDevicesInPlacementInput(v *GetDevicesInPlacementInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDevicesInPlacementInput"}
-	if v.PlacementName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
-	}
 	if v.ProjectName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.PlacementName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -566,11 +566,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -65,6 +65,7 @@ const (
 	PackageFormatNpm   PackageFormat = "npm"
 	PackageFormatPypi  PackageFormat = "pypi"
 	PackageFormatMaven PackageFormat = "maven"
+	PackageFormatNuget PackageFormat = "nuget"
 )
 
 // Values returns all known values for PackageFormat. Note that this can be
@@ -75,6 +76,7 @@ func (PackageFormat) Values() []PackageFormat {
 		"npm",
 		"pypi",
 		"maven",
+		"nuget",
 	}
 }
 

@@ -383,6 +383,7 @@ const (
 	RRTypeSpf   RRType = "SPF"
 	RRTypeAaaa  RRType = "AAAA"
 	RRTypeCaa   RRType = "CAA"
+	RRTypeDs    RRType = "DS"
 )
 
 // Values returns all known values for RRType. Note that this can be expanded in
@@ -402,6 +403,7 @@ func (RRType) Values() []RRType {
 		"SPF",
 		"AAAA",
 		"CAA",
+		"DS",
 	}
 }
 

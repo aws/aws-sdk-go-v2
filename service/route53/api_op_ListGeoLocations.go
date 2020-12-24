@@ -40,7 +40,7 @@ type ListGeoLocationsInput struct {
 	// (Optional) The maximum number of geolocations to be included in the response
 	// body for this request. If more than maxitems geolocations remain to be listed,
 	// then the value of the IsTruncated element in the response is true.
-	MaxItems *string
+	MaxItems *int32
 
 	// The code for the continent with which you want to start listing locations that
 	// Amazon Route 53 supports for geolocation. If Route 53 has already returned a
@@ -88,7 +88,7 @@ type ListGeoLocationsOutput struct {
 	// The value that you specified for MaxItems in the request.
 	//
 	// This member is required.
-	MaxItems *string
+	MaxItems *int32
 
 	// If IsTruncated is true, you can make a follow-up request to display more
 	// locations. Enter the value of NextContinentCode in the startcontinentcode

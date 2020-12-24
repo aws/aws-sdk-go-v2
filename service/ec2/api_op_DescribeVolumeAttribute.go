@@ -13,7 +13,7 @@ import (
 
 // Describes the specified attribute of the specified volume. You can specify only
 // one attribute at a time. For more information about EBS volumes, see Amazon EBS
-// Volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html) in
+// volumes (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumes.html) in
 // the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) DescribeVolumeAttribute(ctx context.Context, params *DescribeVolumeAttributeInput, optFns ...func(*Options)) (*DescribeVolumeAttributeOutput, error) {
 	if params == nil {

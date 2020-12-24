@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Returns a paginated list of all the Amazon Lex bots currently associated with
 // the instance.
 func (c *Client) ListLexBots(ctx context.Context, params *ListLexBotsInput, optFns ...func(*Options)) (*ListLexBotsOutput, error) {

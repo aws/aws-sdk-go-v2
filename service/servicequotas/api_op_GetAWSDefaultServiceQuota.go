@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the default service quotas values. The Value returned for each quota
-// is the AWS default value, even if the quotas have been increased..
+// Retrieves the default value for the specified quota. The default value does not
+// reflect any quota increases.
 func (c *Client) GetAWSDefaultServiceQuota(ctx context.Context, params *GetAWSDefaultServiceQuotaInput, optFns ...func(*Options)) (*GetAWSDefaultServiceQuotaOutput, error) {
 	if params == nil {
 		params = &GetAWSDefaultServiceQuotaInput{}
@@ -30,12 +30,12 @@ func (c *Client) GetAWSDefaultServiceQuota(ctx context.Context, params *GetAWSDe
 
 type GetAWSDefaultServiceQuotaInput struct {
 
-	// Identifies the service quota you want to select.
+	// The quota identifier.
 	//
 	// This member is required.
 	QuotaCode *string
 
-	// Specifies the service that you want to use.
+	// The service identifier.
 	//
 	// This member is required.
 	ServiceCode *string
@@ -43,7 +43,7 @@ type GetAWSDefaultServiceQuotaInput struct {
 
 type GetAWSDefaultServiceQuotaOutput struct {
 
-	// Returns the ServiceQuota object which contains all values for a quota.
+	// Information about the quota.
 	Quota *types.ServiceQuota
 
 	// Metadata pertaining to the operation's result.

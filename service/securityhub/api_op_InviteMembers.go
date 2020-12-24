@@ -12,11 +12,13 @@ import (
 )
 
 // Invites other AWS accounts to become member accounts for the Security Hub master
-// account that the invitation is sent from. Before you can use this action to
-// invite a member, you must first use the CreateMembers action to create the
-// member account in Security Hub. When the account owner accepts the invitation to
-// become a member account and enables Security Hub, the master account can view
-// the findings generated from the member account.
+// account that the invitation is sent from. This operation is only used to invite
+// accounts that do not belong to an organization. Organization accounts do not
+// receive invitations. Before you can use this action to invite a member, you must
+// first use the CreateMembers action to create the member account in Security Hub.
+// When the account owner enables Security Hub and accepts the invitation to become
+// a member account, the master account can view the findings generated from the
+// member account.
 func (c *Client) InviteMembers(ctx context.Context, params *InviteMembersInput, optFns ...func(*Options)) (*InviteMembersOutput, error) {
 	if params == nil {
 		params = &InviteMembersInput{}
@@ -36,6 +38,8 @@ type InviteMembersInput struct {
 
 	// The list of account IDs of the AWS accounts to invite to Security Hub as
 	// members.
+	//
+	// This member is required.
 	AccountIds []string
 }
 
@@ -89,6 +93,9 @@ func addOperationInviteMembersMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpInviteMembersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInviteMembers(options.Region), middleware.Before); err != nil {

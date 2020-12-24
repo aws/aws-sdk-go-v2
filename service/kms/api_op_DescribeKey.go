@@ -47,9 +47,26 @@ import (
 // KMS creates an AWS managed CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys).
 // Then, it associates the alias with the new CMK, and returns the KeyId and Arn of
-// the new CMK in the response. To perform this operation on a CMK in a different
-// AWS account, specify the key ARN or alias ARN in the value of the KeyId
-// parameter.
+// the new CMK in the response. Cross-account use: Yes. To perform this operation
+// with a CMK in a different AWS account, specify the key ARN or alias ARN in the
+// value of the KeyId parameter. Required permissions: kms:DescribeKey
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations:
+//
+// * GetKeyPolicy
+//
+// * GetKeyRotationStatus
+//
+// *
+// ListAliases
+//
+// * ListGrants
+//
+// * ListKeys
+//
+// * ListResourceTags
+//
+// * ListRetirableGrants
 func (c *Client) DescribeKey(ctx context.Context, params *DescribeKeyInput, optFns ...func(*Options)) (*DescribeKeyOutput, error) {
 	if params == nil {
 		params = &DescribeKeyInput{}

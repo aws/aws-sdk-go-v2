@@ -2000,6 +2000,13 @@ func awsRestjson1_serializeDocumentDestinationConnectorProperties(v *types.Desti
 		}
 	}
 
+	if v.Upsolver != nil {
+		ok := object.Key("Upsolver")
+		if err := awsRestjson1_serializeDocumentUpsolverDestinationProperties(v.Upsolver, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3075,6 +3082,56 @@ func awsRestjson1_serializeDocumentTriggerProperties(v *types.TriggerProperties,
 	if v.Scheduled != nil {
 		ok := object.Key("Scheduled")
 		if err := awsRestjson1_serializeDocumentScheduledTriggerProperties(v.Scheduled, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpsolverDestinationProperties(v *types.UpsolverDestinationProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketName != nil {
+		ok := object.Key("bucketName")
+		ok.String(*v.BucketName)
+	}
+
+	if v.BucketPrefix != nil {
+		ok := object.Key("bucketPrefix")
+		ok.String(*v.BucketPrefix)
+	}
+
+	if v.S3OutputFormatConfig != nil {
+		ok := object.Key("s3OutputFormatConfig")
+		if err := awsRestjson1_serializeDocumentUpsolverS3OutputFormatConfig(v.S3OutputFormatConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpsolverS3OutputFormatConfig(v *types.UpsolverS3OutputFormatConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AggregationConfig != nil {
+		ok := object.Key("aggregationConfig")
+		if err := awsRestjson1_serializeDocumentAggregationConfig(v.AggregationConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.FileType) > 0 {
+		ok := object.Key("fileType")
+		ok.String(string(v.FileType))
+	}
+
+	if v.PrefixConfig != nil {
+		ok := object.Key("prefixConfig")
+		if err := awsRestjson1_serializeDocumentPrefixConfig(v.PrefixConfig, ok); err != nil {
 			return err
 		}
 	}

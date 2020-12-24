@@ -324,6 +324,22 @@ type AudioSelectorSettings struct {
 	AudioTrackSelection *AudioTrackSelection
 }
 
+// Placeholder documentation for AudioSilenceFailoverSettings
+type AudioSilenceFailoverSettings struct {
+
+	// The name of the audio selector in the input that MediaLive should monitor to
+	// detect silence. Select your most important rendition. If you didn't create an
+	// audio selector in this input, leave blank.
+	//
+	// This member is required.
+	AudioSelectorName *string
+
+	// The amount of time (in milliseconds) that the active input must be silent before
+	// automatic input failover occurs. Silence is defined as audio loss or audio
+	// quieter than -50 dBFS.
+	AudioSilenceThresholdMsec int32
+}
+
 // Audio Track
 type AudioTrack struct {
 
@@ -1212,9 +1228,17 @@ type FailoverCondition struct {
 // Settings for one failover condition.
 type FailoverConditionSettings struct {
 
+	// MediaLive will perform a failover if the specified audio selector is silent for
+	// the specified period.
+	AudioSilenceSettings *AudioSilenceFailoverSettings
+
 	// MediaLive will perform a failover if content is not detected in this input for
 	// the specified period.
 	InputLossSettings *InputLossFailoverSettings
+
+	// MediaLive will perform a failover if content is considered black for the
+	// specified period.
+	VideoBlackSettings *VideoBlackFailoverSettings
 }
 
 // Feature Activations
@@ -2455,6 +2479,41 @@ type InputDeviceSummary struct {
 
 	// The type of the input device.
 	Type InputDeviceType
+
+	// Settings that describe an input device that is type UHD.
+	UhdDeviceSettings *InputDeviceUhdSettings
+}
+
+// Settings that describe the active source from the input device, and the video
+// characteristics of that source.
+type InputDeviceUhdSettings struct {
+
+	// If you specified Auto as the configured input, specifies which of the sources is
+	// currently active (SDI or HDMI).
+	ActiveInput InputDeviceActiveInput
+
+	// The source at the input device that is currently active. You can specify this
+	// source.
+	ConfiguredInput InputDeviceConfiguredInput
+
+	// The state of the input device.
+	DeviceState InputDeviceState
+
+	// The frame rate of the video source.
+	Framerate float64
+
+	// The height of the video source, in pixels.
+	Height int32
+
+	// The current maximum bitrate for ingesting this source, in bits per second. You
+	// can specify this maximum.
+	MaxBitrate int32
+
+	// The scan type of the video source.
+	ScanType InputDeviceScanType
+
+	// The width of the video source, in pixels.
+	Width int32
 }
 
 // Input Location
@@ -4518,6 +4577,25 @@ type ValidationError struct {
 
 	// The error message.
 	ErrorMessage *string
+}
+
+// Placeholder documentation for VideoBlackFailoverSettings
+type VideoBlackFailoverSettings struct {
+
+	// A value used in calculating the threshold below which MediaLive considers a
+	// pixel to be 'black'. For the input to be considered black, every pixel in a
+	// frame must be below this threshold. The threshold is calculated as a percentage
+	// (expressed as a decimal) of white. Therefore .1 means 10% white (or 90% black).
+	// Note how the formula works for any color depth. For example, if you set this
+	// field to 0.1 in 10-bit color depth: (10230.1=102.3), which means a pixel value
+	// of 102 or less is 'black'. If you set this field to .1 in an 8-bit color depth:
+	// (2550.1=25.5), which means a pixel value of 25 or less is 'black'. The range is
+	// 0.0 to 1.0, with any number of decimal places.
+	BlackDetectThreshold float64
+
+	// The amount of time (in milliseconds) that the active input must be black before
+	// automatic input failover occurs.
+	VideoBlackThresholdMsec int32
 }
 
 // Video Codec Settings

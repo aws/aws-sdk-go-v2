@@ -333,6 +333,32 @@ func (e *ThrottlingException) ErrorMessage() string {
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This error indicates that you are calling an embedding operation in Amazon
+// QuickSight without the required pricing plan on your AWS account. Before you can
+// use embedding for anonymous users, a QuickSight administrator needs to add
+// capacity pricing to QuickSight. You can do this on the Manage QuickSight page.
+// After capacity pricing is added, you can use the GetDashboardEmbedUrl API
+// operation with the --identity-type ANONYMOUS option.
+type UnsupportedPricingPlanException struct {
+	Message *string
+
+	RequestId *string
+}
+
+func (e *UnsupportedPricingPlanException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnsupportedPricingPlanException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnsupportedPricingPlanException) ErrorCode() string {
+	return "UnsupportedPricingPlanException"
+}
+func (e *UnsupportedPricingPlanException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This error indicates that you are calling an operation on an Amazon QuickSight
 // subscription where the edition doesn't include support for that operation.
 // Amazon QuickSight currently has Standard Edition and Enterprise Edition. Not

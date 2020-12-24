@@ -52,8 +52,8 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	S3DestinationConfig *types.S3DestinationConfig
 
 	// The IDs of the AWS accounts for which to export Auto Scaling group
-	// recommendations. If your account is the master account of an organization, use
-	// this parameter to specify the member accounts for which you want to export
+	// recommendations. If your account is the management account of an organization,
+	// use this parameter to specify the member accounts for which you want to export
 	// recommendations. This parameter cannot be specified together with the include
 	// member accounts parameter. The parameters are mutually exclusive.
 	// Recommendations for member accounts are not included in the export if this
@@ -76,7 +76,7 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	Filters []types.Filter
 
 	// Indicates whether to include recommendations for resources in all member
-	// accounts of the organization if your account is the master account of an
+	// accounts of the organization if your account is the management account of an
 	// organization. The member accounts must also be opted in to Compute Optimizer.
 	// Recommendations for member accounts of the organization are not included in the
 	// export file if this parameter is omitted. This parameter cannot be specified

@@ -183,11 +183,6 @@ func validateUsageRecord(v *types.UsageRecord) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UsageRecord"}
-	if v.UsageAllocations != nil {
-		if err := validateUsageAllocations(v.UsageAllocations); err != nil {
-			invalidParams.AddNested("UsageAllocations", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Timestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
 	}
@@ -196,6 +191,11 @@ func validateUsageRecord(v *types.UsageRecord) error {
 	}
 	if v.Dimension == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Dimension"))
+	}
+	if v.UsageAllocations != nil {
+		if err := validateUsageAllocations(v.UsageAllocations); err != nil {
+			invalidParams.AddNested("UsageAllocations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -248,6 +248,9 @@ func validateOpMeterUsageInput(v *MeterUsageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MeterUsageInput"}
+	if v.ProductCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductCode"))
+	}
 	if v.Timestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
 	}
@@ -258,9 +261,6 @@ func validateOpMeterUsageInput(v *MeterUsageInput) error {
 		if err := validateUsageAllocations(v.UsageAllocations); err != nil {
 			invalidParams.AddNested("UsageAllocations", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ProductCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -274,11 +274,11 @@ func validateOpRegisterUsageInput(v *RegisterUsageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterUsageInput"}
-	if v.PublicKeyVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PublicKeyVersion"))
-	}
 	if v.ProductCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductCode"))
+	}
+	if v.PublicKeyVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublicKeyVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

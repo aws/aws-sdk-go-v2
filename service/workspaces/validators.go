@@ -1121,19 +1121,19 @@ func validateWorkspaceRequest(v *types.WorkspaceRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WorkspaceRequest"}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.BundleId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
-	if v.DirectoryId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	if v.BundleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1218,14 +1218,14 @@ func validateOpCopyWorkspaceImageInput(v *CopyWorkspaceImageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CopyWorkspaceImageInput"}
-	if v.SourceRegion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceRegion"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.SourceImageId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceImageId"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.SourceRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceRegion"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -1264,13 +1264,13 @@ func validateOpCreateIpGroupInput(v *CreateIpGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateIpGroupInput"}
+	if v.GroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.GroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1284,15 +1284,15 @@ func validateOpCreateTagsInput(v *CreateTagsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTagsInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1355,11 +1355,11 @@ func validateOpDeleteTagsInput(v *DeleteTagsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTagsInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1511,22 +1511,22 @@ func validateOpImportWorkspaceImageInput(v *ImportWorkspaceImageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportWorkspaceImageInput"}
-	if v.ImageName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageName"))
-	}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ImageDescription == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageDescription"))
-	}
 	if v.Ec2ImageId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Ec2ImageId"))
 	}
 	if len(v.IngestionProcess) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("IngestionProcess"))
+	}
+	if v.ImageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageName"))
+	}
+	if v.ImageDescription == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageDescription"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1573,11 +1573,11 @@ func validateOpModifyClientPropertiesInput(v *ModifyClientPropertiesInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyClientPropertiesInput"}
-	if v.ClientProperties == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientProperties"))
-	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.ClientProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientProperties"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1591,11 +1591,11 @@ func validateOpModifySelfservicePermissionsInput(v *ModifySelfservicePermissions
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifySelfservicePermissionsInput"}
-	if v.SelfservicePermissions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SelfservicePermissions"))
-	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.SelfservicePermissions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SelfservicePermissions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1609,11 +1609,11 @@ func validateOpModifyWorkspaceAccessPropertiesInput(v *ModifyWorkspaceAccessProp
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyWorkspaceAccessPropertiesInput"}
-	if v.WorkspaceAccessProperties == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceAccessProperties"))
-	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.WorkspaceAccessProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceAccessProperties"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1627,11 +1627,11 @@ func validateOpModifyWorkspaceCreationPropertiesInput(v *ModifyWorkspaceCreation
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyWorkspaceCreationPropertiesInput"}
-	if v.WorkspaceCreationProperties == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceCreationProperties"))
-	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.WorkspaceCreationProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceCreationProperties"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1719,11 +1719,11 @@ func validateOpRegisterWorkspaceDirectoryInput(v *RegisterWorkspaceDirectoryInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterWorkspaceDirectoryInput"}
-	if v.EnableWorkDocs == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EnableWorkDocs"))
-	}
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if v.EnableWorkDocs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnableWorkDocs"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -1846,11 +1846,11 @@ func validateOpUpdateRulesOfIpGroupInput(v *UpdateRulesOfIpGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRulesOfIpGroupInput"}
-	if v.UserRules == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserRules"))
-	}
 	if v.GroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
+	}
+	if v.UserRules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserRules"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1864,14 +1864,14 @@ func validateOpUpdateWorkspaceImagePermissionInput(v *UpdateWorkspaceImagePermis
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateWorkspaceImagePermissionInput"}
+	if v.ImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
+	}
 	if v.AllowCopyImage == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AllowCopyImage"))
 	}
 	if v.SharedAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SharedAccountId"))
-	}
-	if v.ImageId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1644,7 +1644,7 @@ func awsRestjson1_serializeOpHttpBindingsListJobsInput(v *ListJobsInput, encoder
 	}
 
 	if v.Limit != nil {
-		encoder.SetQuery("limit").String(*v.Limit)
+		encoder.SetQuery("limit").Integer(*v.Limit)
 	}
 
 	if v.Marker != nil {
@@ -1728,7 +1728,7 @@ func awsRestjson1_serializeOpHttpBindingsListMultipartUploadsInput(v *ListMultip
 	}
 
 	if v.Limit != nil {
-		encoder.SetQuery("limit").String(*v.Limit)
+		encoder.SetQuery("limit").Integer(*v.Limit)
 	}
 
 	if v.Marker != nil {
@@ -1808,7 +1808,7 @@ func awsRestjson1_serializeOpHttpBindingsListPartsInput(v *ListPartsInput, encod
 	}
 
 	if v.Limit != nil {
-		encoder.SetQuery("limit").String(*v.Limit)
+		encoder.SetQuery("limit").Integer(*v.Limit)
 	}
 
 	if v.Marker != nil {
@@ -2032,7 +2032,7 @@ func awsRestjson1_serializeOpHttpBindingsListVaultsInput(v *ListVaultsInput, enc
 	}
 
 	if v.Limit != nil {
-		encoder.SetQuery("limit").String(*v.Limit)
+		encoder.SetQuery("limit").Integer(*v.Limit)
 	}
 
 	if v.Marker != nil {

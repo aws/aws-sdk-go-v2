@@ -537,11 +537,11 @@ func validateInputDataConfig(v *types.InputDataConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InputDataConfig"}
-	if v.DataAccessRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
-	}
 	if v.S3Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if v.DataAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -555,14 +555,14 @@ func validateOpCreateLanguageModelInput(v *CreateLanguageModelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLanguageModelInput"}
-	if v.ModelName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
-	}
 	if len(v.LanguageCode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
 	}
 	if len(v.BaseModelName) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("BaseModelName"))
+	}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
 	}
 	if v.InputDataConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
@@ -622,11 +622,11 @@ func validateOpCreateVocabularyInput(v *CreateVocabularyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateVocabularyInput"}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
-	}
 	if v.VocabularyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VocabularyName"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -820,23 +820,23 @@ func validateOpStartMedicalTranscriptionJobInput(v *StartMedicalTranscriptionJob
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartMedicalTranscriptionJobInput"}
-	if v.OutputBucketName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OutputBucketName"))
+	if v.MedicalTranscriptionJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MedicalTranscriptionJobName"))
 	}
 	if len(v.LanguageCode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
 	}
-	if v.MedicalTranscriptionJobName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MedicalTranscriptionJobName"))
+	if v.Media == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Media"))
+	}
+	if v.OutputBucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputBucketName"))
 	}
 	if len(v.Specialty) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Specialty"))
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if v.Media == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Media"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -850,16 +850,16 @@ func validateOpStartTranscriptionJobInput(v *StartTranscriptionJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartTranscriptionJobInput"}
-	if v.ContentRedaction != nil {
-		if err := validateContentRedaction(v.ContentRedaction); err != nil {
-			invalidParams.AddNested("ContentRedaction", err.(smithy.InvalidParamsError))
-		}
+	if v.TranscriptionJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TranscriptionJobName"))
 	}
 	if v.Media == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Media"))
 	}
-	if v.TranscriptionJobName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TranscriptionJobName"))
+	if v.ContentRedaction != nil {
+		if err := validateContentRedaction(v.ContentRedaction); err != nil {
+			invalidParams.AddNested("ContentRedaction", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -873,11 +873,11 @@ func validateOpUpdateMedicalVocabularyInput(v *UpdateMedicalVocabularyInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMedicalVocabularyInput"}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
-	}
 	if v.VocabularyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VocabularyName"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

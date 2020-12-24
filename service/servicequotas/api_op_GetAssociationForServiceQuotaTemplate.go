@@ -11,9 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the ServiceQuotaTemplateAssociationStatus value from the service. Use
-// this action to determine if the Service Quota template is associated, or
-// enabled.
+// Retrieves the status of the association for the quota request template.
 func (c *Client) GetAssociationForServiceQuotaTemplate(ctx context.Context, params *GetAssociationForServiceQuotaTemplateInput, optFns ...func(*Options)) (*GetAssociationForServiceQuotaTemplateOutput, error) {
 	if params == nil {
 		params = &GetAssociationForServiceQuotaTemplateInput{}
@@ -34,9 +32,8 @@ type GetAssociationForServiceQuotaTemplateInput struct {
 
 type GetAssociationForServiceQuotaTemplateOutput struct {
 
-	// Specifies whether the template is ASSOCIATED or DISASSOCIATED. If the template
-	// is ASSOCIATED, then it requests service quota increases for all new accounts
-	// created in your organization.
+	// The association status. If the status is ASSOCIATED, the quota increase requests
+	// in the template are automatically applied to new accounts in your organization.
 	ServiceQuotaTemplateAssociationStatus types.ServiceQuotaTemplateAssociationStatus
 
 	// Metadata pertaining to the operation's result.

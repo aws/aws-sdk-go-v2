@@ -431,10 +431,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "customer_support_contacts_data"
+                        "value": "customer_support_contacts_data",
+                        "name": "customer_support_contacts_data"
                     },
                     {
-                        "value": "test_customer_support_contacts_data"
+                        "value": "test_customer_support_contacts_data",
+                        "name": "test_customer_support_contacts_data"
                     }
                 ],
                 "smithy.api#length": {

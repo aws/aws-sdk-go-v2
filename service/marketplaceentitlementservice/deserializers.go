@@ -351,7 +351,7 @@ func awsAwsjson11_deserializeDocumentEntitlementList(v *[]types.Entitlement, val
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentEntitlementValue(v **types.EntitlementValue, value interface{}) error {
+func awsAwsjson11_deserializeDocumentEntitlementValue(v *types.EntitlementValue, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -364,25 +364,24 @@ func awsAwsjson11_deserializeDocumentEntitlementValue(v **types.EntitlementValue
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var sv *types.EntitlementValue
-	if *v == nil {
-		sv = &types.EntitlementValue{}
-	} else {
-		sv = *v
-	}
-
+	var uv types.EntitlementValue
+loop:
 	for key, value := range shape {
 		switch key {
 		case "BooleanValue":
+			var mv bool
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.BooleanValue = ptr.Bool(jtv)
+				mv = jtv
 			}
+			uv = &types.EntitlementValueMemberBooleanValue{Value: mv}
+			break loop
 
 		case "DoubleValue":
+			var mv float64
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
@@ -392,10 +391,13 @@ func awsAwsjson11_deserializeDocumentEntitlementValue(v **types.EntitlementValue
 				if err != nil {
 					return err
 				}
-				sv.DoubleValue = ptr.Float64(f64)
+				mv = f64
 			}
+			uv = &types.EntitlementValueMemberDoubleValue{Value: mv}
+			break loop
 
 		case "IntegerValue":
+			var mv int32
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
@@ -405,24 +407,30 @@ func awsAwsjson11_deserializeDocumentEntitlementValue(v **types.EntitlementValue
 				if err != nil {
 					return err
 				}
-				sv.IntegerValue = ptr.Int32(int32(i64))
+				mv = int32(i64)
 			}
+			uv = &types.EntitlementValueMemberIntegerValue{Value: mv}
+			break loop
 
 		case "StringValue":
+			var mv string
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.StringValue = ptr.String(jtv)
+				mv = jtv
 			}
+			uv = &types.EntitlementValueMemberStringValue{Value: mv}
+			break loop
 
 		default:
-			_, _ = key, value
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
 
 		}
 	}
-	*v = sv
+	*v = uv
 	return nil
 }
 

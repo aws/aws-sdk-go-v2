@@ -782,14 +782,14 @@ func validateOpAssociateDomainInput(v *AssociateDomainInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateDomainInput"}
+	if v.FleetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
+	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if v.AcmCertificateArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AcmCertificateArn"))
-	}
-	if v.FleetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -821,11 +821,11 @@ func validateOpAssociateWebsiteCertificateAuthorityInput(v *AssociateWebsiteCert
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateWebsiteCertificateAuthorityInput"}
-	if v.Certificate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Certificate"))
-	}
 	if v.FleetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
+	}
+	if v.Certificate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Certificate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -899,11 +899,11 @@ func validateOpDescribeDeviceInput(v *DescribeDeviceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDeviceInput"}
-	if v.DeviceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
-	}
 	if v.FleetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
+	}
+	if v.DeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -980,11 +980,11 @@ func validateOpDescribeWebsiteCertificateAuthorityInput(v *DescribeWebsiteCertif
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeWebsiteCertificateAuthorityInput"}
-	if v.WebsiteCaId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WebsiteCaId"))
-	}
 	if v.FleetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
+	}
+	if v.WebsiteCaId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WebsiteCaId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1034,11 +1034,11 @@ func validateOpDisassociateWebsiteCertificateAuthorityInput(v *DisassociateWebsi
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateWebsiteCertificateAuthorityInput"}
-	if v.WebsiteCaId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WebsiteCaId"))
-	}
 	if v.FleetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
+	}
+	if v.WebsiteCaId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WebsiteCaId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1127,11 +1127,11 @@ func validateOpRestoreDomainAccessInput(v *RestoreDomainAccessInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RestoreDomainAccessInput"}
-	if v.DomainName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
-	}
 	if v.FleetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1163,11 +1163,11 @@ func validateOpSignOutUserInput(v *SignOutUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SignOutUserInput"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.FleetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1232,6 +1232,9 @@ func validateOpUpdateCompanyNetworkConfigurationInput(v *UpdateCompanyNetworkCon
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCompanyNetworkConfigurationInput"}
+	if v.FleetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
+	}
 	if v.VpcId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
 	}
@@ -1240,9 +1243,6 @@ func validateOpUpdateCompanyNetworkConfigurationInput(v *UpdateCompanyNetworkCon
 	}
 	if v.SecurityGroupIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
-	}
-	if v.FleetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FleetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

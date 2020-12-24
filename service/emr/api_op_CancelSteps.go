@@ -14,9 +14,9 @@ import (
 // Cancels a pending step or steps in a running cluster. Available only in Amazon
 // EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps
 // are allowed in each CancelSteps request. CancelSteps is idempotent but
-// asynchronous; it does not guarantee a step will be canceled, even if the request
-// is successfully submitted. You can only cancel steps that are in a PENDING
-// state.
+// asynchronous; it does not guarantee that a step will be canceled, even if the
+// request is successfully submitted. You can only cancel steps that are in a
+// PENDING state.
 func (c *Client) CancelSteps(ctx context.Context, params *CancelStepsInput, optFns ...func(*Options)) (*CancelStepsOutput, error) {
 	if params == nil {
 		params = &CancelStepsInput{}
@@ -35,7 +35,7 @@ func (c *Client) CancelSteps(ctx context.Context, params *CancelStepsInput, optF
 // The input argument to the CancelSteps operation.
 type CancelStepsInput struct {
 
-	// The ClusterID for which specified steps will be canceled. Use RunJobFlow and
+	// The ClusterID for the specified steps that will be canceled. Use RunJobFlow and
 	// ListClusters to get ClusterIDs.
 	//
 	// This member is required.
@@ -47,7 +47,7 @@ type CancelStepsInput struct {
 	// This member is required.
 	StepIds []string
 
-	// The option to choose for cancelling RUNNING steps. By default, the value is
+	// The option to choose to cancel RUNNING steps. By default, the value is
 	// SEND_INTERRUPT.
 	StepCancellationOption types.StepCancellationOption
 }

@@ -66,15 +66,45 @@ type DescribeModelPackageOutput struct {
 	// This member is required.
 	ModelPackageStatusDetails *types.ModelPackageStatusDetails
 
+	// A description provided for the model approval.
+	ApprovalDescription *string
+
 	// Whether the model package is certified for listing on AWS Marketplace.
 	CertifyForMarketplace bool
+
+	// Information about the user who created or modified an experiment, trial, or
+	// trial component.
+	CreatedBy *types.UserContext
 
 	// Details about inference jobs that can be run with models based on this model
 	// package.
 	InferenceSpecification *types.InferenceSpecification
 
+	// Information about the user who created or modified an experiment, trial, or
+	// trial component.
+	LastModifiedBy *types.UserContext
+
+	// The last time the model package was modified.
+	LastModifiedTime *time.Time
+
+	// Metadata properties of the tracking entity, trial, or trial component.
+	MetadataProperties *types.MetadataProperties
+
+	// The approval status of the model package.
+	ModelApprovalStatus types.ModelApprovalStatus
+
+	// Metrics for the model.
+	ModelMetrics *types.ModelMetrics
+
 	// A brief summary of the model package.
 	ModelPackageDescription *string
+
+	// If the model is a versioned model, the name of the model group that the
+	// versioned model belongs to.
+	ModelPackageGroupName *string
+
+	// The version of the model package.
+	ModelPackageVersion *int32
 
 	// Details about the algorithm that was used to create the model package.
 	SourceAlgorithmSpecification *types.SourceAlgorithmSpecification

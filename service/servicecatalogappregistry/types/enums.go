@@ -17,3 +17,21 @@ func (ResourceType) Values() []ResourceType {
 		"CFN_STACK",
 	}
 }
+
+type SyncAction string
+
+// Enum values for SyncAction
+const (
+	SyncActionStartSync SyncAction = "START_SYNC"
+	SyncActionNoAction  SyncAction = "NO_ACTION"
+)
+
+// Values returns all known values for SyncAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SyncAction) Values() []SyncAction {
+	return []SyncAction{
+		"START_SYNC",
+		"NO_ACTION",
+	}
+}

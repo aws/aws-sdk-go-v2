@@ -46,6 +46,8 @@ type DescribePackageVersionInput struct {
 	//
 	// * maven
 	//
+	// * nuget
+	//
 	// This member is required.
 	Format types.PackageFormat
 
@@ -79,6 +81,9 @@ type DescribePackageVersionInput struct {
 	// * A Python package
 	// does not contain a corresponding component, so Python packages do not have a
 	// namespace.
+	//
+	// * A NuGet package does not contain a corresponding component, so
+	// NuGet packages do not have a namespace.
 	Namespace *string
 }
 

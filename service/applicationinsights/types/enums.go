@@ -9,6 +9,7 @@ const (
 	CloudWatchEventSourceEc2        CloudWatchEventSource = "EC2"
 	CloudWatchEventSourceCodeDeploy CloudWatchEventSource = "CODE_DEPLOY"
 	CloudWatchEventSourceHealth     CloudWatchEventSource = "HEALTH"
+	CloudWatchEventSourceRds        CloudWatchEventSource = "RDS"
 )
 
 // Values returns all known values for CloudWatchEventSource. Note that this can be
@@ -19,6 +20,7 @@ func (CloudWatchEventSource) Values() []CloudWatchEventSource {
 		"EC2",
 		"CODE_DEPLOY",
 		"HEALTH",
+		"RDS",
 	}
 }
 
@@ -27,6 +29,7 @@ type ConfigurationEventResourceType string
 // Enum values for ConfigurationEventResourceType
 const (
 	ConfigurationEventResourceTypeCloudwatchAlarm ConfigurationEventResourceType = "CLOUDWATCH_ALARM"
+	ConfigurationEventResourceTypeCloudwatchLog   ConfigurationEventResourceType = "CLOUDWATCH_LOG"
 	ConfigurationEventResourceTypeCloudformation  ConfigurationEventResourceType = "CLOUDFORMATION"
 	ConfigurationEventResourceTypeSsmAssociation  ConfigurationEventResourceType = "SSM_ASSOCIATION"
 )
@@ -38,6 +41,7 @@ const (
 func (ConfigurationEventResourceType) Values() []ConfigurationEventResourceType {
 	return []ConfigurationEventResourceType{
 		"CLOUDWATCH_ALARM",
+		"CLOUDWATCH_LOG",
 		"CLOUDFORMATION",
 		"SSM_ASSOCIATION",
 	}
@@ -119,6 +123,24 @@ func (LogFilter) Values() []LogFilter {
 	}
 }
 
+type OsType string
+
+// Enum values for OsType
+const (
+	OsTypeWindows OsType = "WINDOWS"
+	OsTypeLinux   OsType = "LINUX"
+)
+
+// Values returns all known values for OsType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (OsType) Values() []OsType {
+	return []OsType{
+		"WINDOWS",
+		"LINUX",
+	}
+}
+
 type SeverityLevel string
 
 // Enum values for SeverityLevel
@@ -163,11 +185,18 @@ type Tier string
 
 // Enum values for Tier
 const (
-	TierDefault      Tier = "DEFAULT"
-	TierDotNetCore   Tier = "DOT_NET_CORE"
-	TierDotNetWorker Tier = "DOT_NET_WORKER"
-	TierDotNetWeb    Tier = "DOT_NET_WEB"
-	TierSqlServer    Tier = "SQL_SERVER"
+	TierCustom                             Tier = "CUSTOM"
+	TierDefault                            Tier = "DEFAULT"
+	TierDotNetCore                         Tier = "DOT_NET_CORE"
+	TierDotNetWorker                       Tier = "DOT_NET_WORKER"
+	TierDotNetWebTier                      Tier = "DOT_NET_WEB_TIER"
+	TierDotNetWeb                          Tier = "DOT_NET_WEB"
+	TierSqlServer                          Tier = "SQL_SERVER"
+	TierSqlServerAlwaysonAvailabilityGroup Tier = "SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP"
+	TierMysql                              Tier = "MYSQL"
+	TierPostgresql                         Tier = "POSTGRESQL"
+	TierJavaJmx                            Tier = "JAVA_JMX"
+	TierOracle                             Tier = "ORACLE"
 )
 
 // Values returns all known values for Tier. Note that this can be expanded in the
@@ -175,10 +204,17 @@ const (
 // slice is not guaranteed to be stable across updates.
 func (Tier) Values() []Tier {
 	return []Tier{
+		"CUSTOM",
 		"DEFAULT",
 		"DOT_NET_CORE",
 		"DOT_NET_WORKER",
+		"DOT_NET_WEB_TIER",
 		"DOT_NET_WEB",
 		"SQL_SERVER",
+		"SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP",
+		"MYSQL",
+		"POSTGRESQL",
+		"JAVA_JMX",
+		"ORACLE",
 	}
 }

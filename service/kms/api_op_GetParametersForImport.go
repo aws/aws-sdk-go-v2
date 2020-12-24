@@ -32,7 +32,16 @@ import (
 // in a compatible key state. For details, see How Key State Affects Use of a
 // Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide.
+// AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a CMK in a different AWS account. Required
+// permissions: kms:GetParametersForImport
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations:
+//
+// * ImportKeyMaterial
+//
+// *
+// DeleteImportedKeyMaterial
 func (c *Client) GetParametersForImport(ctx context.Context, params *GetParametersForImportInput, optFns ...func(*Options)) (*GetParametersForImportOutput, error) {
 	if params == nil {
 		params = &GetParametersForImportInput{}

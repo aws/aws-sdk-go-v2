@@ -56,10 +56,8 @@ type PutObjectRetentionInput struct {
 	// Indicates whether this operation should bypass Governance-mode restrictions.
 	BypassGovernanceRetention bool
 
-	// The MD5 hash for the request body.
-	//
-	// Deprecated: Content-MD5 header will now be automatically computed and injected
-	// in associated operation's Http request.
+	// The MD5 hash for the request body. For requests made using the AWS Command Line
+	// Interface (CLI) or AWS SDKs, this field is calculated automatically.
 	ContentMD5 *string
 
 	// The account id of the expected bucket owner. If the bucket is owned by a

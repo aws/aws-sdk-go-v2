@@ -16,9 +16,10 @@ import (
 // accounts either by invitation or through an organization. When using Create
 // Members as an organizations delegated administrator this action will enable
 // GuardDuty in the added member accounts, with the exception of the organization
-// master account, which must enable GuardDuty prior to being added as a member. If
-// you are adding accounts by invitation use this action after GuardDuty has been
-// enabled in potential member accounts and before using Invite Members
+// delegated administrator account, which must enable GuardDuty prior to being
+// added as a member. If you are adding accounts by invitation use this action
+// after GuardDuty has been enabled in potential member accounts and before using
+// Invite Members
 // (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html).
 func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, optFns ...func(*Options)) (*CreateMembersOutput, error) {
 	if params == nil {
@@ -38,7 +39,7 @@ func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, 
 type CreateMembersInput struct {
 
 	// A list of account ID and email address pairs of the accounts that you want to
-	// associate with the master GuardDuty account.
+	// associate with the GuardDuty administrator account.
 	//
 	// This member is required.
 	AccountDetails []types.AccountDetail

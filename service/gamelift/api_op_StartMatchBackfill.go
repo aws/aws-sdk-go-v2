@@ -31,11 +31,11 @@ import (
 // and the GameSession object is updated to include matchmaker data on the new
 // players. For more detail on how match backfill requests are processed, see  How
 // Amazon GameLift FlexMatch Works
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-match.html).
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/gamelift-match.html).
 // Learn more  Backfill Existing Games with FlexMatch
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html)
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html)
 // How GameLift FlexMatch Works
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-match.html)
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/gamelift-match.html)
 // Related operations
 //
 // * StartMatchmaking
@@ -74,14 +74,6 @@ type StartMatchBackfillInput struct {
 	// This member is required.
 	ConfigurationName *string
 
-	// Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
-	// that is assigned to a game session and uniquely identifies it. This is the same
-	// as the game session ID.
-	//
-	// This member is required.
-	GameSessionArn *string
-
 	// Match information on all players that are currently assigned to the game
 	// session. This information is used by the matchmaker to find new players and add
 	// them to the existing game.
@@ -90,7 +82,7 @@ type StartMatchBackfillInput struct {
 	// information is maintained in the GameSession object, MatchmakerData property,
 	// for all players who are currently assigned to the game session. The matchmaker
 	// data is in JSON syntax, formatted as a string. For more details, see  Match Data
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data).
+	// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data).
 	//
 	// *
 	// LatencyInMs -\\- If the matchmaker uses player latency, include a latency value,
@@ -99,6 +91,12 @@ type StartMatchBackfillInput struct {
 	//
 	// This member is required.
 	Players []types.Player
+
+	// Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// that is assigned to a game session and uniquely identifies it. This is the same
+	// as the game session ID.
+	GameSessionArn *string
 
 	// A unique identifier for a matchmaking ticket. If no ticket ID is specified here,
 	// Amazon GameLift will generate one in the form of a UUID. Use this identifier to

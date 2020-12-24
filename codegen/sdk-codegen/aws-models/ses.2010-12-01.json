@@ -2704,10 +2704,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "EmailAddress"
+                        "value": "EmailAddress",
+                        "name": "EmailAddress"
                     },
                     {
-                        "value": "Domain"
+                        "value": "Domain",
+                        "name": "Domain"
                     }
                 ]
             }
@@ -2954,10 +2956,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Event"
+                        "value": "Event",
+                        "name": "Event"
                     },
                     {
-                        "value": "RequestResponse"
+                        "value": "RequestResponse",
+                        "name": "RequestResponse"
                     }
                 ]
             }
@@ -3579,13 +3583,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Bounce"
+                        "value": "Bounce",
+                        "name": "Bounce"
                     },
                     {
-                        "value": "Complaint"
+                        "value": "Complaint",
+                        "name": "Complaint"
                     },
                     {
-                        "value": "Delivery"
+                        "value": "Delivery",
+                        "name": "Delivery"
                     }
                 ]
             }
@@ -6081,19 +6088,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Pending"
+                        "value": "Pending",
+                        "name": "Pending"
                     },
                     {
-                        "value": "Success"
+                        "value": "Success",
+                        "name": "Success"
                     },
                     {
-                        "value": "Failed"
+                        "value": "Failed",
+                        "name": "Failed"
                     },
                     {
-                        "value": "TemporaryFailure"
+                        "value": "TemporaryFailure",
+                        "name": "TemporaryFailure"
                     },
                     {
-                        "value": "NotStarted"
+                        "value": "NotStarted",
+                        "name": "NotStarted"
                     }
                 ]
             }

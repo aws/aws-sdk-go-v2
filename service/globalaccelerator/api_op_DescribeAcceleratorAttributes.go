@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe the attributes of an accelerator. To see an AWS CLI example of
-// describing the attributes of an accelerator, scroll down to Example.
+// Describe the attributes of an accelerator.
 func (c *Client) DescribeAcceleratorAttributes(ctx context.Context, params *DescribeAcceleratorAttributesInput, optFns ...func(*Options)) (*DescribeAcceleratorAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeAcceleratorAttributesInput{}

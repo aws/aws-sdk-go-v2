@@ -180,8 +180,8 @@ type ModifyDBInstanceInput struct {
 	// The new DB subnet group for the DB instance. You can use this parameter to move
 	// your DB instance to a different VPC. If your DB instance isn't in a VPC, you can
 	// also use this parameter to move your DB instance into a VPC. For more
-	// information, see Updating the VPC for a DB Instance
-	// (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)
+	// information, see Working with a DB instance in a VPC
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)
 	// in the Amazon RDS User Guide. Changing the subnet group causes an outage during
 	// the change. The change is applied during the next maintenance window, unless you
 	// enable ApplyImmediately. Constraints: If supplied, must match the name of an
@@ -206,6 +206,19 @@ type ModifyDBInstanceInput struct {
 
 	// The name of the IAM role to use when making API calls to the Directory Service.
 	DomainIAMRoleName *string
+
+	// A value that indicates whether to enable a customer-owned IP address (CoIP) for
+	// an RDS on Outposts DB instance. A CoIP provides local or external connectivity
+	// to resources in your Outpost subnets through your on-premises network. For some
+	// use cases, a CoIP can provide lower latency for connections to the DB instance
+	// from outside of its virtual private cloud (VPC) on your local network. For more
+	// information about RDS on Outposts, see Working with Amazon RDS on AWS Outposts
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
+	// the Amazon RDS User Guide. For more information about CoIPs, see Customer-owned
+	// IP addresses
+	// (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing)
+	// in the AWS Outposts User Guide.
+	EnableCustomerOwnedIp *bool
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
@@ -333,12 +346,12 @@ type ModifyDBInstanceInput struct {
 	// with a DB instance
 	OptionGroupName *string
 
-	// The AWS KMS key identifier for encryption of Performance Insights data. The KMS
-	// key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
-	// alias for the KMS encryption key. If you do not specify a value for
-	// PerformanceInsightsKMSKeyId, then Amazon RDS uses your default encryption key.
-	// AWS KMS creates the default encryption key for your AWS account. Your AWS
-	// account has a different default encryption key for each AWS Region.
+	// The AWS KMS key identifier for encryption of Performance Insights data. The AWS
+	// KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS
+	// KMS customer master key (CMK). If you do not specify a value for
+	// PerformanceInsightsKMSKeyId, then Amazon RDS uses your default CMK. There is a
+	// default CMK for your AWS account. Your AWS account has a different default CMK
+	// for each AWS Region.
 	PerformanceInsightsKMSKeyId *string
 
 	// The amount of time, in days, to retain Performance Insights data. Valid values

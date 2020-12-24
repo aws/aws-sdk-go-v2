@@ -403,13 +403,13 @@ func validateOpCreateSignalingChannelInput(v *CreateSignalingChannelInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSignalingChannelInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
 	if v.Tags != nil {
 		if err := validateTagOnCreateList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ChannelName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -513,15 +513,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -583,11 +583,11 @@ func validateOpUpdateDataRetentionInput(v *UpdateDataRetentionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataRetentionInput"}
-	if len(v.Operation) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Operation"))
-	}
 	if v.CurrentVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
+	}
+	if len(v.Operation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operation"))
 	}
 	if v.DataRetentionChangeInHours == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataRetentionChangeInHours"))
@@ -604,11 +604,11 @@ func validateOpUpdateSignalingChannelInput(v *UpdateSignalingChannelInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSignalingChannelInput"}
-	if v.CurrentVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
-	}
 	if v.ChannelARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelARN"))
+	}
+	if v.CurrentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

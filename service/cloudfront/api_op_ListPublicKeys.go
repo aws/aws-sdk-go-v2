@@ -37,7 +37,7 @@ type ListPublicKeysInput struct {
 	Marker *string
 
 	// The maximum number of public keys you want in the response body.
-	MaxItems *string
+	MaxItems *int32
 }
 
 type ListPublicKeysOutput struct {

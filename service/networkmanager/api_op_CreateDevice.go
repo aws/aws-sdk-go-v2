@@ -36,6 +36,9 @@ type CreateDeviceInput struct {
 	// This member is required.
 	GlobalNetworkId *string
 
+	// The AWS location of the device.
+	AWSLocation *types.AWSLocation
+
 	// A description of the device. Length Constraints: Maximum length of 256
 	// characters.
 	Description *string

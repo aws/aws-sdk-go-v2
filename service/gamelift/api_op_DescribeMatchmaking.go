@@ -23,9 +23,9 @@ import (
 // configuration. Continuously poling ticket status with DescribeMatchmaking should
 // only be used for games in development with low matchmaking usage. Learn more
 // Add FlexMatch to a Game Client
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html)
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
 // Set Up FlexMatch Event Notification
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html)
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html)
 // Related operations
 //
 // * StartMatchmaking

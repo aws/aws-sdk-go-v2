@@ -14,15 +14,22 @@ import (
 // specified customer master key (CMK) unusable. For more information about
 // importing key material into AWS KMS, see Importing Key Material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html) in
-// the AWS Key Management Service Developer Guide. You cannot perform this
-// operation on a CMK in a different AWS account. When the specified CMK is in the
+// the AWS Key Management Service Developer Guide. When the specified CMK is in the
 // PendingDeletion state, this operation does not change the CMK's state.
 // Otherwise, it changes the CMK's state to PendingImport. After you delete key
 // material, you can use ImportKeyMaterial to reimport the same key material into
 // the CMK. The CMK that you use for this operation must be in a compatible key
 // state. For details, see How Key State Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide.
+// AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a CMK in a different AWS account. Required
+// permissions: kms:DeleteImportedKeyMaterial
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations:
+//
+// * GetParametersForImport
+//
+// * ImportKeyMaterial
 func (c *Client) DeleteImportedKeyMaterial(ctx context.Context, params *DeleteImportedKeyMaterialInput, optFns ...func(*Options)) (*DeleteImportedKeyMaterialOutput, error) {
 	if params == nil {
 		params = &DeleteImportedKeyMaterialInput{}

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a member configuration with new parameters.
+// Updates a member configuration with new parameters. Applies only to Hyperledger
+// Fabric.
 func (c *Client) UpdateMember(ctx context.Context, params *UpdateMemberInput, optFns ...func(*Options)) (*UpdateMemberOutput, error) {
 	if params == nil {
 		params = &UpdateMemberInput{}
@@ -29,12 +30,13 @@ func (c *Client) UpdateMember(ctx context.Context, params *UpdateMemberInput, op
 
 type UpdateMemberInput struct {
 
-	// The unique ID of the member.
+	// The unique identifier of the member.
 	//
 	// This member is required.
 	MemberId *string
 
-	// The unique ID of the Managed Blockchain network to which the member belongs.
+	// The unique identifier of the Managed Blockchain network to which the member
+	// belongs.
 	//
 	// This member is required.
 	NetworkId *string

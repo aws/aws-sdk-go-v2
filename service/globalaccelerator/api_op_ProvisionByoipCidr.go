@@ -16,8 +16,7 @@ import (
 // address range is provisioned, it is ready to be advertised using
 // AdvertiseByoipCidr
 // (https://docs.aws.amazon.com/global-accelerator/latest/api/AdvertiseByoipCidr.html).
-// To see an AWS CLI example of provisioning an address range for BYOIP, scroll
-// down to Example. For more information, see Bring Your Own IP Addresses (BYOIP)
+// For more information, see Bring Your Own IP Addresses (BYOIP)
 // (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in
 // the AWS Global Accelerator Developer Guide.
 func (c *Client) ProvisionByoipCidr(ctx context.Context, params *ProvisionByoipCidrInput, optFns ...func(*Options)) (*ProvisionByoipCidrOutput, error) {

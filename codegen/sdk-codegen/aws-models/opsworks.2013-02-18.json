@@ -161,16 +161,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "DocumentRoot"
+                        "value": "DocumentRoot",
+                        "name": "DocumentRoot"
                     },
                     {
-                        "value": "RailsEnv"
+                        "value": "RailsEnv",
+                        "name": "RailsEnv"
                     },
                     {
-                        "value": "AutoBundleOnDeploy"
+                        "value": "AutoBundleOnDeploy",
+                        "name": "AutoBundleOnDeploy"
                     },
                     {
-                        "value": "AwsFlowRubySettings"
+                        "value": "AwsFlowRubySettings",
+                        "name": "AwsFlowRubySettings"
                     }
                 ]
             }
@@ -180,25 +184,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "aws-flow-ruby"
+                        "value": "aws-flow-ruby",
+                        "name": "aws_flow_ruby"
                     },
                     {
-                        "value": "java"
+                        "value": "java",
+                        "name": "java"
                     },
                     {
-                        "value": "rails"
+                        "value": "rails",
+                        "name": "rails"
                     },
                     {
-                        "value": "php"
+                        "value": "php",
+                        "name": "php"
                     },
                     {
-                        "value": "nodejs"
+                        "value": "nodejs",
+                        "name": "nodejs"
                     },
                     {
-                        "value": "static"
+                        "value": "static",
+                        "name": "static"
                     },
                     {
-                        "value": "other"
+                        "value": "other",
+                        "name": "other"
                     }
                 ]
             }
@@ -214,10 +225,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "x86_64"
+                        "value": "x86_64",
+                        "name": "x86_64"
                     },
                     {
-                        "value": "i386"
+                        "value": "i386",
+                        "name": "i386"
                     }
                 ]
             }
@@ -419,10 +432,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "load"
+                        "value": "load",
+                        "name": "load"
                     },
                     {
-                        "value": "timer"
+                        "value": "timer",
+                        "name": "timer"
                     }
                 ]
             }
@@ -690,280 +705,372 @@
                 "smithy.api#documentation": "<p>Specifies the encoding of the log file so that the file can be read correctly. The default is <code>utf_8</code>. Encodings supported by Python <code>codecs.decode()</code> can be used here.</p>",
                 "smithy.api#enum": [
                     {
-                        "value": "ascii"
+                        "value": "ascii",
+                        "name": "ascii"
                     },
                     {
-                        "value": "big5"
+                        "value": "big5",
+                        "name": "big5"
                     },
                     {
-                        "value": "big5hkscs"
+                        "value": "big5hkscs",
+                        "name": "big5hkscs"
                     },
                     {
-                        "value": "cp037"
+                        "value": "cp037",
+                        "name": "cp037"
                     },
                     {
-                        "value": "cp424"
+                        "value": "cp424",
+                        "name": "cp424"
                     },
                     {
-                        "value": "cp437"
+                        "value": "cp437",
+                        "name": "cp437"
                     },
                     {
-                        "value": "cp500"
+                        "value": "cp500",
+                        "name": "cp500"
                     },
                     {
-                        "value": "cp720"
+                        "value": "cp720",
+                        "name": "cp720"
                     },
                     {
-                        "value": "cp737"
+                        "value": "cp737",
+                        "name": "cp737"
                     },
                     {
-                        "value": "cp775"
+                        "value": "cp775",
+                        "name": "cp775"
                     },
                     {
-                        "value": "cp850"
+                        "value": "cp850",
+                        "name": "cp850"
                     },
                     {
-                        "value": "cp852"
+                        "value": "cp852",
+                        "name": "cp852"
                     },
                     {
-                        "value": "cp855"
+                        "value": "cp855",
+                        "name": "cp855"
                     },
                     {
-                        "value": "cp856"
+                        "value": "cp856",
+                        "name": "cp856"
                     },
                     {
-                        "value": "cp857"
+                        "value": "cp857",
+                        "name": "cp857"
                     },
                     {
-                        "value": "cp858"
+                        "value": "cp858",
+                        "name": "cp858"
                     },
                     {
-                        "value": "cp860"
+                        "value": "cp860",
+                        "name": "cp860"
                     },
                     {
-                        "value": "cp861"
+                        "value": "cp861",
+                        "name": "cp861"
                     },
                     {
-                        "value": "cp862"
+                        "value": "cp862",
+                        "name": "cp862"
                     },
                     {
-                        "value": "cp863"
+                        "value": "cp863",
+                        "name": "cp863"
                     },
                     {
-                        "value": "cp864"
+                        "value": "cp864",
+                        "name": "cp864"
                     },
                     {
-                        "value": "cp865"
+                        "value": "cp865",
+                        "name": "cp865"
                     },
                     {
-                        "value": "cp866"
+                        "value": "cp866",
+                        "name": "cp866"
                     },
                     {
-                        "value": "cp869"
+                        "value": "cp869",
+                        "name": "cp869"
                     },
                     {
-                        "value": "cp874"
+                        "value": "cp874",
+                        "name": "cp874"
                     },
                     {
-                        "value": "cp875"
+                        "value": "cp875",
+                        "name": "cp875"
                     },
                     {
-                        "value": "cp932"
+                        "value": "cp932",
+                        "name": "cp932"
                     },
                     {
-                        "value": "cp949"
+                        "value": "cp949",
+                        "name": "cp949"
                     },
                     {
-                        "value": "cp950"
+                        "value": "cp950",
+                        "name": "cp950"
                     },
                     {
-                        "value": "cp1006"
+                        "value": "cp1006",
+                        "name": "cp1006"
                     },
                     {
-                        "value": "cp1026"
+                        "value": "cp1026",
+                        "name": "cp1026"
                     },
                     {
-                        "value": "cp1140"
+                        "value": "cp1140",
+                        "name": "cp1140"
                     },
                     {
-                        "value": "cp1250"
+                        "value": "cp1250",
+                        "name": "cp1250"
                     },
                     {
-                        "value": "cp1251"
+                        "value": "cp1251",
+                        "name": "cp1251"
                     },
                     {
-                        "value": "cp1252"
+                        "value": "cp1252",
+                        "name": "cp1252"
                     },
                     {
-                        "value": "cp1253"
+                        "value": "cp1253",
+                        "name": "cp1253"
                     },
                     {
-                        "value": "cp1254"
+                        "value": "cp1254",
+                        "name": "cp1254"
                     },
                     {
-                        "value": "cp1255"
+                        "value": "cp1255",
+                        "name": "cp1255"
                     },
                     {
-                        "value": "cp1256"
+                        "value": "cp1256",
+                        "name": "cp1256"
                     },
                     {
-                        "value": "cp1257"
+                        "value": "cp1257",
+                        "name": "cp1257"
                     },
                     {
-                        "value": "cp1258"
+                        "value": "cp1258",
+                        "name": "cp1258"
                     },
                     {
-                        "value": "euc_jp"
+                        "value": "euc_jp",
+                        "name": "euc_jp"
                     },
                     {
-                        "value": "euc_jis_2004"
+                        "value": "euc_jis_2004",
+                        "name": "euc_jis_2004"
                     },
                     {
-                        "value": "euc_jisx0213"
+                        "value": "euc_jisx0213",
+                        "name": "euc_jisx0213"
                     },
                     {
-                        "value": "euc_kr"
+                        "value": "euc_kr",
+                        "name": "euc_kr"
                     },
                     {
-                        "value": "gb2312"
+                        "value": "gb2312",
+                        "name": "gb2312"
                     },
                     {
-                        "value": "gbk"
+                        "value": "gbk",
+                        "name": "gbk"
                     },
                     {
-                        "value": "gb18030"
+                        "value": "gb18030",
+                        "name": "gb18030"
                     },
                     {
-                        "value": "hz"
+                        "value": "hz",
+                        "name": "hz"
                     },
                     {
-                        "value": "iso2022_jp"
+                        "value": "iso2022_jp",
+                        "name": "iso2022_jp"
                     },
                     {
-                        "value": "iso2022_jp_1"
+                        "value": "iso2022_jp_1",
+                        "name": "iso2022_jp_1"
                     },
                     {
-                        "value": "iso2022_jp_2"
+                        "value": "iso2022_jp_2",
+                        "name": "iso2022_jp_2"
                     },
                     {
-                        "value": "iso2022_jp_2004"
+                        "value": "iso2022_jp_2004",
+                        "name": "iso2022_jp_2004"
                     },
                     {
-                        "value": "iso2022_jp_3"
+                        "value": "iso2022_jp_3",
+                        "name": "iso2022_jp_3"
                     },
                     {
-                        "value": "iso2022_jp_ext"
+                        "value": "iso2022_jp_ext",
+                        "name": "iso2022_jp_ext"
                     },
                     {
-                        "value": "iso2022_kr"
+                        "value": "iso2022_kr",
+                        "name": "iso2022_kr"
                     },
                     {
-                        "value": "latin_1"
+                        "value": "latin_1",
+                        "name": "latin_1"
                     },
                     {
-                        "value": "iso8859_2"
+                        "value": "iso8859_2",
+                        "name": "iso8859_2"
                     },
                     {
-                        "value": "iso8859_3"
+                        "value": "iso8859_3",
+                        "name": "iso8859_3"
                     },
                     {
-                        "value": "iso8859_4"
+                        "value": "iso8859_4",
+                        "name": "iso8859_4"
                     },
                     {
-                        "value": "iso8859_5"
+                        "value": "iso8859_5",
+                        "name": "iso8859_5"
                     },
                     {
-                        "value": "iso8859_6"
+                        "value": "iso8859_6",
+                        "name": "iso8859_6"
                     },
                     {
-                        "value": "iso8859_7"
+                        "value": "iso8859_7",
+                        "name": "iso8859_7"
                     },
                     {
-                        "value": "iso8859_8"
+                        "value": "iso8859_8",
+                        "name": "iso8859_8"
                     },
                     {
-                        "value": "iso8859_9"
+                        "value": "iso8859_9",
+                        "name": "iso8859_9"
                     },
                     {
-                        "value": "iso8859_10"
+                        "value": "iso8859_10",
+                        "name": "iso8859_10"
                     },
                     {
-                        "value": "iso8859_13"
+                        "value": "iso8859_13",
+                        "name": "iso8859_13"
                     },
                     {
-                        "value": "iso8859_14"
+                        "value": "iso8859_14",
+                        "name": "iso8859_14"
                     },
                     {
-                        "value": "iso8859_15"
+                        "value": "iso8859_15",
+                        "name": "iso8859_15"
                     },
                     {
-                        "value": "iso8859_16"
+                        "value": "iso8859_16",
+                        "name": "iso8859_16"
                     },
                     {
-                        "value": "johab"
+                        "value": "johab",
+                        "name": "johab"
                     },
                     {
-                        "value": "koi8_r"
+                        "value": "koi8_r",
+                        "name": "koi8_r"
                     },
                     {
-                        "value": "koi8_u"
+                        "value": "koi8_u",
+                        "name": "koi8_u"
                     },
                     {
-                        "value": "mac_cyrillic"
+                        "value": "mac_cyrillic",
+                        "name": "mac_cyrillic"
                     },
                     {
-                        "value": "mac_greek"
+                        "value": "mac_greek",
+                        "name": "mac_greek"
                     },
                     {
-                        "value": "mac_iceland"
+                        "value": "mac_iceland",
+                        "name": "mac_iceland"
                     },
                     {
-                        "value": "mac_latin2"
+                        "value": "mac_latin2",
+                        "name": "mac_latin2"
                     },
                     {
-                        "value": "mac_roman"
+                        "value": "mac_roman",
+                        "name": "mac_roman"
                     },
                     {
-                        "value": "mac_turkish"
+                        "value": "mac_turkish",
+                        "name": "mac_turkish"
                     },
                     {
-                        "value": "ptcp154"
+                        "value": "ptcp154",
+                        "name": "ptcp154"
                     },
                     {
-                        "value": "shift_jis"
+                        "value": "shift_jis",
+                        "name": "shift_jis"
                     },
                     {
-                        "value": "shift_jis_2004"
+                        "value": "shift_jis_2004",
+                        "name": "shift_jis_2004"
                     },
                     {
-                        "value": "shift_jisx0213"
+                        "value": "shift_jisx0213",
+                        "name": "shift_jisx0213"
                     },
                     {
-                        "value": "utf_32"
+                        "value": "utf_32",
+                        "name": "utf_32"
                     },
                     {
-                        "value": "utf_32_be"
+                        "value": "utf_32_be",
+                        "name": "utf_32_be"
                     },
                     {
-                        "value": "utf_32_le"
+                        "value": "utf_32_le",
+                        "name": "utf_32_le"
                     },
                     {
-                        "value": "utf_16"
+                        "value": "utf_16",
+                        "name": "utf_16"
                     },
                     {
-                        "value": "utf_16_be"
+                        "value": "utf_16_be",
+                        "name": "utf_16_be"
                     },
                     {
-                        "value": "utf_16_le"
+                        "value": "utf_16_le",
+                        "name": "utf_16_le"
                     },
                     {
-                        "value": "utf_7"
+                        "value": "utf_7",
+                        "name": "utf_7"
                     },
                     {
-                        "value": "utf_8"
+                        "value": "utf_8",
+                        "name": "utf_8"
                     },
                     {
-                        "value": "utf_8_sig"
+                        "value": "utf_8_sig",
+                        "name": "utf_8_sig"
                     }
                 ]
             }
@@ -974,10 +1081,12 @@
                 "smithy.api#documentation": "<p>Specifies where to start to read data (start_of_file or end_of_file). The default is start_of_file. It's only used if there is no state persisted for that log stream.</p>",
                 "smithy.api#enum": [
                     {
-                        "value": "start_of_file"
+                        "value": "start_of_file",
+                        "name": "start_of_file"
                     },
                     {
-                        "value": "end_of_file"
+                        "value": "end_of_file",
+                        "name": "end_of_file"
                     }
                 ]
             }
@@ -1071,10 +1180,12 @@
                 "smithy.api#documentation": "<p>The preferred time zone for logs streamed to CloudWatch Logs. Valid values are <code>LOCAL</code> and <code>UTC</code>, for Coordinated Universal Time.</p>",
                 "smithy.api#enum": [
                     {
-                        "value": "LOCAL"
+                        "value": "LOCAL",
+                        "name": "LOCAL"
                     },
                     {
-                        "value": "UTC"
+                        "value": "UTC",
+                        "name": "UTC"
                     }
                 ]
             }
@@ -2182,40 +2293,52 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "install_dependencies"
+                        "value": "install_dependencies",
+                        "name": "install_dependencies"
                     },
                     {
-                        "value": "update_dependencies"
+                        "value": "update_dependencies",
+                        "name": "update_dependencies"
                     },
                     {
-                        "value": "update_custom_cookbooks"
+                        "value": "update_custom_cookbooks",
+                        "name": "update_custom_cookbooks"
                     },
                     {
-                        "value": "execute_recipes"
+                        "value": "execute_recipes",
+                        "name": "execute_recipes"
                     },
                     {
-                        "value": "configure"
+                        "value": "configure",
+                        "name": "configure"
                     },
                     {
-                        "value": "setup"
+                        "value": "setup",
+                        "name": "setup"
                     },
                     {
-                        "value": "deploy"
+                        "value": "deploy",
+                        "name": "deploy"
                     },
                     {
-                        "value": "rollback"
+                        "value": "rollback",
+                        "name": "rollback"
                     },
                     {
-                        "value": "start"
+                        "value": "start",
+                        "name": "start"
                     },
                     {
-                        "value": "stop"
+                        "value": "stop",
+                        "name": "stop"
                     },
                     {
-                        "value": "restart"
+                        "value": "restart",
+                        "name": "restart"
                     },
                     {
-                        "value": "undeploy"
+                        "value": "undeploy",
+                        "name": "undeploy"
                     }
                 ]
             }
@@ -4884,79 +5007,104 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "EcsClusterArn"
+                        "value": "EcsClusterArn",
+                        "name": "EcsClusterArn"
                     },
                     {
-                        "value": "EnableHaproxyStats"
+                        "value": "EnableHaproxyStats",
+                        "name": "EnableHaproxyStats"
                     },
                     {
-                        "value": "HaproxyStatsUrl"
+                        "value": "HaproxyStatsUrl",
+                        "name": "HaproxyStatsUrl"
                     },
                     {
-                        "value": "HaproxyStatsUser"
+                        "value": "HaproxyStatsUser",
+                        "name": "HaproxyStatsUser"
                     },
                     {
-                        "value": "HaproxyStatsPassword"
+                        "value": "HaproxyStatsPassword",
+                        "name": "HaproxyStatsPassword"
                     },
                     {
-                        "value": "HaproxyHealthCheckUrl"
+                        "value": "HaproxyHealthCheckUrl",
+                        "name": "HaproxyHealthCheckUrl"
                     },
                     {
-                        "value": "HaproxyHealthCheckMethod"
+                        "value": "HaproxyHealthCheckMethod",
+                        "name": "HaproxyHealthCheckMethod"
                     },
                     {
-                        "value": "MysqlRootPassword"
+                        "value": "MysqlRootPassword",
+                        "name": "MysqlRootPassword"
                     },
                     {
-                        "value": "MysqlRootPasswordUbiquitous"
+                        "value": "MysqlRootPasswordUbiquitous",
+                        "name": "MysqlRootPasswordUbiquitous"
                     },
                     {
-                        "value": "GangliaUrl"
+                        "value": "GangliaUrl",
+                        "name": "GangliaUrl"
                     },
                     {
-                        "value": "GangliaUser"
+                        "value": "GangliaUser",
+                        "name": "GangliaUser"
                     },
                     {
-                        "value": "GangliaPassword"
+                        "value": "GangliaPassword",
+                        "name": "GangliaPassword"
                     },
                     {
-                        "value": "MemcachedMemory"
+                        "value": "MemcachedMemory",
+                        "name": "MemcachedMemory"
                     },
                     {
-                        "value": "NodejsVersion"
+                        "value": "NodejsVersion",
+                        "name": "NodejsVersion"
                     },
                     {
-                        "value": "RubyVersion"
+                        "value": "RubyVersion",
+                        "name": "RubyVersion"
                     },
                     {
-                        "value": "RubygemsVersion"
+                        "value": "RubygemsVersion",
+                        "name": "RubygemsVersion"
                     },
                     {
-                        "value": "ManageBundler"
+                        "value": "ManageBundler",
+                        "name": "ManageBundler"
                     },
                     {
-                        "value": "BundlerVersion"
+                        "value": "BundlerVersion",
+                        "name": "BundlerVersion"
                     },
                     {
-                        "value": "RailsStack"
+                        "value": "RailsStack",
+                        "name": "RailsStack"
                     },
                     {
-                        "value": "PassengerVersion"
+                        "value": "PassengerVersion",
+                        "name": "PassengerVersion"
                     },
                     {
-                        "value": "Jvm"
+                        "value": "Jvm",
+                        "name": "Jvm"
                     },
                     {
-                        "value": "JvmVersion"
+                        "value": "JvmVersion",
+                        "name": "JvmVersion"
                     },
                     {
-                        "value": "JvmOptions"
+                        "value": "JvmOptions",
+                        "name": "JvmOptions"
                     },
                     {
-                        "value": "JavaAppServer"
+                        "value": "JavaAppServer",
+                        "name": "JavaAppServer"
                     },
                     {
-                        "value": "JavaAppServerVersion"
+                        "value": "JavaAppServerVersion",
+                        "name": "JavaAppServerVersion"
                     }
                 ]
             }
@@ -4966,40 +5114,52 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "aws-flow-ruby"
+                        "value": "aws-flow-ruby",
+                        "name": "aws_flow_ruby"
                     },
                     {
-                        "value": "ecs-cluster"
+                        "value": "ecs-cluster",
+                        "name": "ecs_cluster"
                     },
                     {
-                        "value": "java-app"
+                        "value": "java-app",
+                        "name": "java_app"
                     },
                     {
-                        "value": "lb"
+                        "value": "lb",
+                        "name": "lb"
                     },
                     {
-                        "value": "web"
+                        "value": "web",
+                        "name": "web"
                     },
                     {
-                        "value": "php-app"
+                        "value": "php-app",
+                        "name": "php_app"
                     },
                     {
-                        "value": "rails-app"
+                        "value": "rails-app",
+                        "name": "rails_app"
                     },
                     {
-                        "value": "nodejs-app"
+                        "value": "nodejs-app",
+                        "name": "nodejs_app"
                     },
                     {
-                        "value": "memcached"
+                        "value": "memcached",
+                        "name": "memcached"
                     },
                     {
-                        "value": "db-master"
+                        "value": "db-master",
+                        "name": "db_master"
                     },
                     {
-                        "value": "monitoring-master"
+                        "value": "monitoring-master",
+                        "name": "monitoring_master"
                     },
                     {
-                        "value": "custom"
+                        "value": "custom",
+                        "name": "custom"
                     }
                 ]
             }
@@ -6089,10 +6249,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ebs"
+                        "value": "ebs",
+                        "name": "ebs"
                     },
                     {
-                        "value": "instance-store"
+                        "value": "instance-store",
+                        "name": "instance_store"
                     }
                 ]
             }
@@ -6384,16 +6546,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "git"
+                        "value": "git",
+                        "name": "git"
                     },
                     {
-                        "value": "svn"
+                        "value": "svn",
+                        "name": "svn"
                     },
                     {
-                        "value": "archive"
+                        "value": "archive",
+                        "name": "archive"
                     },
                     {
-                        "value": "s3"
+                        "value": "s3",
+                        "name": "s3"
                     }
                 ]
             }
@@ -6580,7 +6746,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Color"
+                        "value": "Color",
+                        "name": "Color"
                     }
                 ]
             }
@@ -7701,10 +7868,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "paravirtual"
+                        "value": "paravirtual",
+                        "name": "paravirtual"
                     },
                     {
-                        "value": "hvm"
+                        "value": "hvm",
+                        "name": "hvm"
                     }
                 ]
             }
@@ -7865,13 +8034,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "gp2"
+                        "value": "gp2",
+                        "name": "gp2"
                     },
                     {
-                        "value": "io1"
+                        "value": "io1",
+                        "name": "io1"
                     },
                     {
-                        "value": "standard"
+                        "value": "standard",
+                        "name": "standard"
                     }
                 ]
             }

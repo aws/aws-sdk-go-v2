@@ -58,7 +58,7 @@ type CreateDataSourceInput struct {
 	Credentials *types.DataSourceCredentials
 
 	// The parameters that QuickSight uses to connect to your underlying source.
-	DataSourceParameters *types.DataSourceParameters
+	DataSourceParameters types.DataSourceParameters
 
 	// A list of resource permissions on the data source.
 	Permissions []types.ResourcePermission

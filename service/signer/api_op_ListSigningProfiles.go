@@ -47,6 +47,13 @@ type ListSigningProfilesInput struct {
 	// request. Set it to the value of nextToken from the response that you just
 	// received.
 	NextToken *string
+
+	// Filters results to return only signing jobs initiated for a specified signing
+	// platform.
+	PlatformId *string
+
+	// Filters results to return only signing jobs with statuses in the specified list.
+	Statuses []types.SigningProfileStatus
 }
 
 type ListSigningProfilesOutput struct {

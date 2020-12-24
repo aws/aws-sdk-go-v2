@@ -2251,6 +2251,29 @@
                 "target": "com.amazonaws.glue#ColumnError"
             }
         },
+        "com.amazonaws.glue#ColumnImportance": {
+            "type": "structure",
+            "members": {
+                "ColumnName": {
+                    "target": "com.amazonaws.glue#NameString"
+                },
+                "Importance": {
+                    "target": "com.amazonaws.glue#GenericBoundedDouble"
+                }
+            }
+        },
+        "com.amazonaws.glue#ColumnImportanceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#ColumnImportance"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.glue#ColumnList": {
             "type": "list",
             "member": {
@@ -7317,6 +7340,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The confusion matrix shows you what your transform is predicting accurately and what types of errors it is making.</p>\n\t        <p>For more information, see <a href=\"https://en.wikipedia.org/wiki/Confusion_matrix\">Confusion matrix</a> in Wikipedia.</p>"
                     }
+                },
+                "ColumnImportances": {
+                    "target": "com.amazonaws.glue#ColumnImportanceList"
                 }
             },
             "traits": {
@@ -19489,13 +19515,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Standard"
+                        "value": "Standard",
+                        "name": "Standard"
                     },
                     {
-                        "value": "G.1X"
+                        "value": "G.1X",
+                        "name": "G_1X"
                     },
                     {
-                        "value": "G.2X"
+                        "value": "G.2X",
+                        "name": "G_2X"
                     }
                 ]
             }

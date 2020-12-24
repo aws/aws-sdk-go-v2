@@ -4,14 +4,6 @@ package types
 
 type AnalyzerStatus string
 
-// Enum values for AnalyzerStatus
-const (
-	AnalyzerStatusActive   AnalyzerStatus = "ACTIVE"
-	AnalyzerStatusCreating AnalyzerStatus = "CREATING"
-	AnalyzerStatusDisabled AnalyzerStatus = "DISABLED"
-	AnalyzerStatusFailed   AnalyzerStatus = "FAILED"
-)
-
 // Values returns all known values for AnalyzerStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -25,14 +17,6 @@ func (AnalyzerStatus) Values() []AnalyzerStatus {
 }
 
 type FindingSourceType string
-
-// Enum values for FindingSourceType
-const (
-	FindingSourceTypePolicy        FindingSourceType = "POLICY"
-	FindingSourceTypeBucketAcl     FindingSourceType = "BUCKET_ACL"
-	FindingSourceTypeS3AccessPoint FindingSourceType = "S3_ACCESS_POINT"
-	FindingSourceTypeKmsGrant      FindingSourceType = "KMS_GRANT"
-)
 
 // Values returns all known values for FindingSourceType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -48,13 +32,6 @@ func (FindingSourceType) Values() []FindingSourceType {
 
 type FindingStatus string
 
-// Enum values for FindingStatus
-const (
-	FindingStatusActive   FindingStatus = "ACTIVE"
-	FindingStatusArchived FindingStatus = "ARCHIVED"
-	FindingStatusResolved FindingStatus = "RESOLVED"
-)
-
 // Values returns all known values for FindingStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -68,12 +45,6 @@ func (FindingStatus) Values() []FindingStatus {
 
 type FindingStatusUpdate string
 
-// Enum values for FindingStatusUpdate
-const (
-	FindingStatusUpdateActive   FindingStatusUpdate = "ACTIVE"
-	FindingStatusUpdateArchived FindingStatusUpdate = "ARCHIVED"
-)
-
 // Values returns all known values for FindingStatusUpdate. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -86,12 +57,6 @@ func (FindingStatusUpdate) Values() []FindingStatusUpdate {
 
 type OrderBy string
 
-// Enum values for OrderBy
-const (
-	OrderByAsc  OrderBy = "ASC"
-	OrderByDesc OrderBy = "DESC"
-)
-
 // Values returns all known values for OrderBy. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -103,14 +68,6 @@ func (OrderBy) Values() []OrderBy {
 }
 
 type ReasonCode string
-
-// Enum values for ReasonCode
-const (
-	ReasonCodeAwsServiceAccessDisabled           ReasonCode = "AWS_SERVICE_ACCESS_DISABLED"
-	ReasonCodeDelegatedAdministratorDeregistered ReasonCode = "DELEGATED_ADMINISTRATOR_DEREGISTERED"
-	ReasonCodeOrganizationDeleted                ReasonCode = "ORGANIZATION_DELETED"
-	ReasonCodeServiceLinkedRoleCreationFailed    ReasonCode = "SERVICE_LINKED_ROLE_CREATION_FAILED"
-)
 
 // Values returns all known values for ReasonCode. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -125,16 +82,6 @@ func (ReasonCode) Values() []ReasonCode {
 }
 
 type ResourceType string
-
-// Enum values for ResourceType
-const (
-	ResourceTypeAwsS3Bucket           ResourceType = "AWS::S3::Bucket"
-	ResourceTypeAwsIamRole            ResourceType = "AWS::IAM::Role"
-	ResourceTypeAwsSqsQueue           ResourceType = "AWS::SQS::Queue"
-	ResourceTypeAwsLambdaFunction     ResourceType = "AWS::Lambda::Function"
-	ResourceTypeAwsLambdaLayerversion ResourceType = "AWS::Lambda::LayerVersion"
-	ResourceTypeAwsKmsKey             ResourceType = "AWS::KMS::Key"
-)
 
 // Values returns all known values for ResourceType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -151,12 +98,6 @@ func (ResourceType) Values() []ResourceType {
 }
 
 type Type string
-
-// Enum values for Type
-const (
-	TypeAccount      Type = "ACCOUNT"
-	TypeOrganization Type = "ORGANIZATION"
-)
 
 // Values returns all known values for Type. Note that this can be expanded in the
 // future, and so it is only as up to date as the client. The ordering of this

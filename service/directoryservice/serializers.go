@@ -1440,6 +1440,52 @@ func (m *awsAwsjson11_serializeOpDescribeTrusts) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDisableClientAuthentication struct {
+}
+
+func (*awsAwsjson11_serializeOpDisableClientAuthentication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDisableClientAuthentication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisableClientAuthenticationInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("DirectoryService_20150416.DisableClientAuthentication")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDisableClientAuthenticationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDisableLDAPS struct {
 }
 
@@ -1563,6 +1609,52 @@ func (m *awsAwsjson11_serializeOpDisableSso) HandleSerialize(ctx context.Context
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDisableSsoInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpEnableClientAuthentication struct {
+}
+
+func (*awsAwsjson11_serializeOpEnableClientAuthentication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpEnableClientAuthentication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*EnableClientAuthenticationInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("DirectoryService_20150416.EnableClientAuthentication")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentEnableClientAuthenticationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2807,6 +2899,18 @@ func awsAwsjson11_serializeDocumentCidrIps(v []string, value smithyjson.Value) e
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentClientCertAuthSettings(v *types.ClientCertAuthSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.OCSPUrl != nil {
+		ok := object.Key("OCSPUrl")
+		ok.String(*v.OCSPUrl)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDirectoryConnectSettings(v *types.DirectoryConnectSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3845,6 +3949,23 @@ func awsAwsjson11_serializeOpDocumentDescribeTrustsInput(v *DescribeTrustsInput,
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDisableClientAuthenticationInput(v *DisableClientAuthenticationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DirectoryId != nil {
+		ok := object.Key("DirectoryId")
+		ok.String(*v.DirectoryId)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDisableLDAPSInput(v *DisableLDAPSInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3891,6 +4012,23 @@ func awsAwsjson11_serializeOpDocumentDisableSsoInput(v *DisableSsoInput, value s
 	if v.UserName != nil {
 		ok := object.Key("UserName")
 		ok.String(*v.UserName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentEnableClientAuthenticationInput(v *EnableClientAuthenticationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DirectoryId != nil {
+		ok := object.Key("DirectoryId")
+		ok.String(*v.DirectoryId)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
 	}
 
 	return nil
@@ -4092,9 +4230,21 @@ func awsAwsjson11_serializeOpDocumentRegisterCertificateInput(v *RegisterCertifi
 		ok.String(*v.CertificateData)
 	}
 
+	if v.ClientCertAuthSettings != nil {
+		ok := object.Key("ClientCertAuthSettings")
+		if err := awsAwsjson11_serializeDocumentClientCertAuthSettings(v.ClientCertAuthSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DirectoryId != nil {
 		ok := object.Key("DirectoryId")
 		ok.String(*v.DirectoryId)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
 	}
 
 	return nil

@@ -496,11 +496,11 @@ func validateOpCreateLedgerInput(v *CreateLedgerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLedgerInput"}
-	if len(v.PermissionsMode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("PermissionsMode"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.PermissionsMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionsMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -583,6 +583,12 @@ func validateOpExportJournalToS3Input(v *ExportJournalToS3Input) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.InclusiveStartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InclusiveStartTime"))
+	}
+	if v.ExclusiveEndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExclusiveEndTime"))
+	}
 	if v.S3ExportConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3ExportConfiguration"))
 	} else if v.S3ExportConfiguration != nil {
@@ -592,12 +598,6 @@ func validateOpExportJournalToS3Input(v *ExportJournalToS3Input) error {
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
-	if v.InclusiveStartTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InclusiveStartTime"))
-	}
-	if v.ExclusiveEndTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExclusiveEndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -611,11 +611,11 @@ func validateOpGetBlockInput(v *GetBlockInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetBlockInput"}
-	if v.BlockAddress == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BlockAddress"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.BlockAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlockAddress"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -647,11 +647,11 @@ func validateOpGetRevisionInput(v *GetRevisionInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.DocumentId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DocumentId"))
-	}
 	if v.BlockAddress == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BlockAddress"))
+	}
+	if v.DocumentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -710,14 +710,14 @@ func validateOpStreamJournalToKinesisInput(v *StreamJournalToKinesisInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StreamJournalToKinesisInput"}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
 	if v.LedgerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LedgerName"))
 	}
-	if v.StreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.InclusiveStartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InclusiveStartTime"))
 	}
 	if v.KinesisConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KinesisConfiguration"))
@@ -726,8 +726,8 @@ func validateOpStreamJournalToKinesisInput(v *StreamJournalToKinesisInput) error
 			invalidParams.AddNested("KinesisConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.InclusiveStartTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InclusiveStartTime"))
+	if v.StreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -759,11 +759,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

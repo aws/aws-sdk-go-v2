@@ -45,7 +45,9 @@ func (e *InternalException) ErrorMessage() string {
 func (e *InternalException) ErrorCode() string             { return "InternalException" }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// AWS Security Hub isn't enabled for the account used to make this request.
+// There is an issue with the account used to make the request. Either Security Hub
+// is not enabled for the account, or the account does not have permission to
+// perform this action.
 type InvalidAccessException struct {
 	Message *string
 
@@ -85,7 +87,8 @@ func (e *InvalidInputException) ErrorCode() string             { return "Invalid
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to create resources beyond the
-// current AWS account limits. The error code describes the limit exceeded.
+// current AWS account or throttling limits. The error code describes the limit
+// exceeded.
 type LimitExceededException struct {
 	Message *string
 

@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Returns a paginated list of all the Lambda functions that show up in the
 // drop-down options in the relevant contact flow blocks.
 func (c *Client) ListLambdaFunctions(ctx context.Context, params *ListLambdaFunctionsInput, optFns ...func(*Options)) (*ListLambdaFunctionsOutput, error) {

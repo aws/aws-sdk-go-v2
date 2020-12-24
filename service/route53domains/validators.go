@@ -584,11 +584,11 @@ func validateExtraParam(v *types.ExtraParam) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExtraParam"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if len(v.Name) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -714,11 +714,11 @@ func validateOpDeleteTagsForDomainInput(v *DeleteTagsForDomainInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTagsForDomainInput"}
-	if v.TagsToDelete == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagsToDelete"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.TagsToDelete == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagsToDelete"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -855,11 +855,11 @@ func validateOpRegisterDomainInput(v *RegisterDomainInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterDomainInput"}
-	if v.DurationInYears == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DurationInYears"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.DurationInYears == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DurationInYears"))
 	}
 	if v.AdminContact == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AdminContact"))
@@ -939,11 +939,16 @@ func validateOpTransferDomainInput(v *TransferDomainInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TransferDomainInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
 	if v.DurationInYears == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DurationInYears"))
 	}
-	if v.DomainName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	if v.Nameservers != nil {
+		if err := validateNameserverList(v.Nameservers); err != nil {
+			invalidParams.AddNested("Nameservers", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.AdminContact == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AdminContact"))
@@ -952,9 +957,11 @@ func validateOpTransferDomainInput(v *TransferDomainInput) error {
 			invalidParams.AddNested("AdminContact", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Nameservers != nil {
-		if err := validateNameserverList(v.Nameservers); err != nil {
-			invalidParams.AddNested("Nameservers", err.(smithy.InvalidParamsError))
+	if v.RegistrantContact == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrantContact"))
+	} else if v.RegistrantContact != nil {
+		if err := validateContactDetail(v.RegistrantContact); err != nil {
+			invalidParams.AddNested("RegistrantContact", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.TechContact == nil {
@@ -962,13 +969,6 @@ func validateOpTransferDomainInput(v *TransferDomainInput) error {
 	} else if v.TechContact != nil {
 		if err := validateContactDetail(v.TechContact); err != nil {
 			invalidParams.AddNested("TechContact", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.RegistrantContact == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RegistrantContact"))
-	} else if v.RegistrantContact != nil {
-		if err := validateContactDetail(v.RegistrantContact); err != nil {
-			invalidParams.AddNested("RegistrantContact", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -983,11 +983,11 @@ func validateOpTransferDomainToAnotherAwsAccountInput(v *TransferDomainToAnother
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TransferDomainToAnotherAwsAccountInput"}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1001,13 +1001,13 @@ func validateOpUpdateDomainContactInput(v *UpdateDomainContactInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDomainContactInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
 	if v.AdminContact != nil {
 		if err := validateContactDetail(v.AdminContact); err != nil {
 			invalidParams.AddNested("AdminContact", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DomainName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if v.RegistrantContact != nil {
 		if err := validateContactDetail(v.RegistrantContact); err != nil {

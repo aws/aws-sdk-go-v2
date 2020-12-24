@@ -2,6 +2,40 @@
 
 package types
 
+type CodeSigningPolicy string
+
+// Enum values for CodeSigningPolicy
+const (
+	CodeSigningPolicyWarn    CodeSigningPolicy = "Warn"
+	CodeSigningPolicyEnforce CodeSigningPolicy = "Enforce"
+)
+
+// Values returns all known values for CodeSigningPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CodeSigningPolicy) Values() []CodeSigningPolicy {
+	return []CodeSigningPolicy{
+		"Warn",
+		"Enforce",
+	}
+}
+
+type EndPointType string
+
+// Enum values for EndPointType
+const (
+	EndPointTypeKafkaBootstrapServers EndPointType = "KAFKA_BOOTSTRAP_SERVERS"
+)
+
+// Values returns all known values for EndPointType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EndPointType) Values() []EndPointType {
+	return []EndPointType{
+		"KAFKA_BOOTSTRAP_SERVERS",
+	}
+}
+
 type EventSourcePosition string
 
 // Enum values for EventSourcePosition
@@ -19,6 +53,22 @@ func (EventSourcePosition) Values() []EventSourcePosition {
 		"TRIM_HORIZON",
 		"LATEST",
 		"AT_TIMESTAMP",
+	}
+}
+
+type FunctionResponseType string
+
+// Enum values for FunctionResponseType
+const (
+	FunctionResponseTypeReportbatchitemfailures FunctionResponseType = "ReportBatchItemFailures"
+)
+
+// Values returns all known values for FunctionResponseType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FunctionResponseType) Values() []FunctionResponseType {
+	return []FunctionResponseType{
+		"ReportBatchItemFailures",
 	}
 }
 
@@ -89,6 +139,9 @@ const (
 	LastUpdateStatusReasonCodeSubnetoutofipaddresses      LastUpdateStatusReasonCode = "SubnetOutOfIPAddresses"
 	LastUpdateStatusReasonCodeInvalidsubnet               LastUpdateStatusReasonCode = "InvalidSubnet"
 	LastUpdateStatusReasonCodeInvalidsecuritygroup        LastUpdateStatusReasonCode = "InvalidSecurityGroup"
+	LastUpdateStatusReasonCodeImagedeleted                LastUpdateStatusReasonCode = "ImageDeleted"
+	LastUpdateStatusReasonCodeImageaccessdenied           LastUpdateStatusReasonCode = "ImageAccessDenied"
+	LastUpdateStatusReasonCodeInvalidimage                LastUpdateStatusReasonCode = "InvalidImage"
 )
 
 // Values returns all known values for LastUpdateStatusReasonCode. Note that this
@@ -103,6 +156,9 @@ func (LastUpdateStatusReasonCode) Values() []LastUpdateStatusReasonCode {
 		"SubnetOutOfIPAddresses",
 		"InvalidSubnet",
 		"InvalidSecurityGroup",
+		"ImageDeleted",
+		"ImageAccessDenied",
+		"InvalidImage",
 	}
 }
 
@@ -121,6 +177,24 @@ func (LogType) Values() []LogType {
 	return []LogType{
 		"None",
 		"Tail",
+	}
+}
+
+type PackageType string
+
+// Enum values for PackageType
+const (
+	PackageTypeZip   PackageType = "Zip"
+	PackageTypeImage PackageType = "Image"
+)
+
+// Values returns all known values for PackageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PackageType) Values() []PackageType {
+	return []PackageType{
+		"Zip",
+		"Image",
 	}
 }
 
@@ -209,7 +283,11 @@ type SourceAccessType string
 
 // Enum values for SourceAccessType
 const (
-	SourceAccessTypeBasicAuth SourceAccessType = "BASIC_AUTH"
+	SourceAccessTypeBasicAuth        SourceAccessType = "BASIC_AUTH"
+	SourceAccessTypeVpcSubnet        SourceAccessType = "VPC_SUBNET"
+	SourceAccessTypeVpcSecurityGroup SourceAccessType = "VPC_SECURITY_GROUP"
+	SourceAccessTypeSaslScram512Auth SourceAccessType = "SASL_SCRAM_512_AUTH"
+	SourceAccessTypeSaslScram256Auth SourceAccessType = "SASL_SCRAM_256_AUTH"
 )
 
 // Values returns all known values for SourceAccessType. Note that this can be
@@ -218,6 +296,10 @@ const (
 func (SourceAccessType) Values() []SourceAccessType {
 	return []SourceAccessType{
 		"BASIC_AUTH",
+		"VPC_SUBNET",
+		"VPC_SECURITY_GROUP",
+		"SASL_SCRAM_512_AUTH",
+		"SASL_SCRAM_256_AUTH",
 	}
 }
 
@@ -257,6 +339,9 @@ const (
 	StateReasonCodeSubnetoutofipaddresses      StateReasonCode = "SubnetOutOfIPAddresses"
 	StateReasonCodeInvalidsubnet               StateReasonCode = "InvalidSubnet"
 	StateReasonCodeInvalidsecuritygroup        StateReasonCode = "InvalidSecurityGroup"
+	StateReasonCodeImagedeleted                StateReasonCode = "ImageDeleted"
+	StateReasonCodeImageaccessdenied           StateReasonCode = "ImageAccessDenied"
+	StateReasonCodeInvalidimage                StateReasonCode = "InvalidImage"
 )
 
 // Values returns all known values for StateReasonCode. Note that this can be
@@ -274,6 +359,9 @@ func (StateReasonCode) Values() []StateReasonCode {
 		"SubnetOutOfIPAddresses",
 		"InvalidSubnet",
 		"InvalidSecurityGroup",
+		"ImageDeleted",
+		"ImageAccessDenied",
+		"InvalidImage",
 	}
 }
 

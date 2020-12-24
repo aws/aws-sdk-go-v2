@@ -4481,6 +4481,12 @@ func awsRestjson1_serializeOpHttpBindingsGetDashboardEmbedUrlInput(v *GetDashboa
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AdditionalDashboardIds != nil {
+		for i := range v.AdditionalDashboardIds {
+			encoder.AddQuery("additional-dashboard-ids").String(v.AdditionalDashboardIds[i])
+		}
+	}
+
 	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
 	}
@@ -4501,6 +4507,10 @@ func awsRestjson1_serializeOpHttpBindingsGetDashboardEmbedUrlInput(v *GetDashboa
 
 	if len(v.IdentityType) > 0 {
 		encoder.SetQuery("creds-type").String(string(v.IdentityType))
+	}
+
+	if v.Namespace != nil {
+		encoder.SetQuery("namespace").String(*v.Namespace)
 	}
 
 	if v.ResetDisabled {
@@ -9505,150 +9515,135 @@ func awsRestjson1_serializeDocumentDataSourceCredentials(v *types.DataSourceCred
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDataSourceParameters(v *types.DataSourceParameters, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDataSourceParameters(v types.DataSourceParameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.AmazonElasticsearchParameters != nil {
-		ok := object.Key("AmazonElasticsearchParameters")
-		if err := awsRestjson1_serializeDocumentAmazonElasticsearchParameters(v.AmazonElasticsearchParameters, ok); err != nil {
+	switch uv := v.(type) {
+	case *types.DataSourceParametersMemberAmazonElasticsearchParameters:
+		av := object.Key("AmazonElasticsearchParameters")
+		if err := awsRestjson1_serializeDocumentAmazonElasticsearchParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.AthenaParameters != nil {
-		ok := object.Key("AthenaParameters")
-		if err := awsRestjson1_serializeDocumentAthenaParameters(v.AthenaParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberAthenaParameters:
+		av := object.Key("AthenaParameters")
+		if err := awsRestjson1_serializeDocumentAthenaParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.AuroraParameters != nil {
-		ok := object.Key("AuroraParameters")
-		if err := awsRestjson1_serializeDocumentAuroraParameters(v.AuroraParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberAuroraParameters:
+		av := object.Key("AuroraParameters")
+		if err := awsRestjson1_serializeDocumentAuroraParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.AuroraPostgreSqlParameters != nil {
-		ok := object.Key("AuroraPostgreSqlParameters")
-		if err := awsRestjson1_serializeDocumentAuroraPostgreSqlParameters(v.AuroraPostgreSqlParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberAuroraPostgreSqlParameters:
+		av := object.Key("AuroraPostgreSqlParameters")
+		if err := awsRestjson1_serializeDocumentAuroraPostgreSqlParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.AwsIotAnalyticsParameters != nil {
-		ok := object.Key("AwsIotAnalyticsParameters")
-		if err := awsRestjson1_serializeDocumentAwsIotAnalyticsParameters(v.AwsIotAnalyticsParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberAwsIotAnalyticsParameters:
+		av := object.Key("AwsIotAnalyticsParameters")
+		if err := awsRestjson1_serializeDocumentAwsIotAnalyticsParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.JiraParameters != nil {
-		ok := object.Key("JiraParameters")
-		if err := awsRestjson1_serializeDocumentJiraParameters(v.JiraParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberJiraParameters:
+		av := object.Key("JiraParameters")
+		if err := awsRestjson1_serializeDocumentJiraParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.MariaDbParameters != nil {
-		ok := object.Key("MariaDbParameters")
-		if err := awsRestjson1_serializeDocumentMariaDbParameters(v.MariaDbParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberMariaDbParameters:
+		av := object.Key("MariaDbParameters")
+		if err := awsRestjson1_serializeDocumentMariaDbParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.MySqlParameters != nil {
-		ok := object.Key("MySqlParameters")
-		if err := awsRestjson1_serializeDocumentMySqlParameters(v.MySqlParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberMySqlParameters:
+		av := object.Key("MySqlParameters")
+		if err := awsRestjson1_serializeDocumentMySqlParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.OracleParameters != nil {
-		ok := object.Key("OracleParameters")
-		if err := awsRestjson1_serializeDocumentOracleParameters(v.OracleParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberOracleParameters:
+		av := object.Key("OracleParameters")
+		if err := awsRestjson1_serializeDocumentOracleParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.PostgreSqlParameters != nil {
-		ok := object.Key("PostgreSqlParameters")
-		if err := awsRestjson1_serializeDocumentPostgreSqlParameters(v.PostgreSqlParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberPostgreSqlParameters:
+		av := object.Key("PostgreSqlParameters")
+		if err := awsRestjson1_serializeDocumentPostgreSqlParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.PrestoParameters != nil {
-		ok := object.Key("PrestoParameters")
-		if err := awsRestjson1_serializeDocumentPrestoParameters(v.PrestoParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberPrestoParameters:
+		av := object.Key("PrestoParameters")
+		if err := awsRestjson1_serializeDocumentPrestoParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.RdsParameters != nil {
-		ok := object.Key("RdsParameters")
-		if err := awsRestjson1_serializeDocumentRdsParameters(v.RdsParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberRdsParameters:
+		av := object.Key("RdsParameters")
+		if err := awsRestjson1_serializeDocumentRdsParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.RedshiftParameters != nil {
-		ok := object.Key("RedshiftParameters")
-		if err := awsRestjson1_serializeDocumentRedshiftParameters(v.RedshiftParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberRedshiftParameters:
+		av := object.Key("RedshiftParameters")
+		if err := awsRestjson1_serializeDocumentRedshiftParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.S3Parameters != nil {
-		ok := object.Key("S3Parameters")
-		if err := awsRestjson1_serializeDocumentS3Parameters(v.S3Parameters, ok); err != nil {
+	case *types.DataSourceParametersMemberS3Parameters:
+		av := object.Key("S3Parameters")
+		if err := awsRestjson1_serializeDocumentS3Parameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.ServiceNowParameters != nil {
-		ok := object.Key("ServiceNowParameters")
-		if err := awsRestjson1_serializeDocumentServiceNowParameters(v.ServiceNowParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberServiceNowParameters:
+		av := object.Key("ServiceNowParameters")
+		if err := awsRestjson1_serializeDocumentServiceNowParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.SnowflakeParameters != nil {
-		ok := object.Key("SnowflakeParameters")
-		if err := awsRestjson1_serializeDocumentSnowflakeParameters(v.SnowflakeParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberSnowflakeParameters:
+		av := object.Key("SnowflakeParameters")
+		if err := awsRestjson1_serializeDocumentSnowflakeParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.SparkParameters != nil {
-		ok := object.Key("SparkParameters")
-		if err := awsRestjson1_serializeDocumentSparkParameters(v.SparkParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberSparkParameters:
+		av := object.Key("SparkParameters")
+		if err := awsRestjson1_serializeDocumentSparkParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.SqlServerParameters != nil {
-		ok := object.Key("SqlServerParameters")
-		if err := awsRestjson1_serializeDocumentSqlServerParameters(v.SqlServerParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberSqlServerParameters:
+		av := object.Key("SqlServerParameters")
+		if err := awsRestjson1_serializeDocumentSqlServerParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.TeradataParameters != nil {
-		ok := object.Key("TeradataParameters")
-		if err := awsRestjson1_serializeDocumentTeradataParameters(v.TeradataParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberTeradataParameters:
+		av := object.Key("TeradataParameters")
+		if err := awsRestjson1_serializeDocumentTeradataParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.TwitterParameters != nil {
-		ok := object.Key("TwitterParameters")
-		if err := awsRestjson1_serializeDocumentTwitterParameters(v.TwitterParameters, ok); err != nil {
+	case *types.DataSourceParametersMemberTwitterParameters:
+		av := object.Key("TwitterParameters")
+		if err := awsRestjson1_serializeDocumentTwitterParameters(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -9658,7 +9653,10 @@ func awsRestjson1_serializeDocumentDataSourceParametersList(v []types.DataSource
 
 	for i := range v {
 		av := array.Value()
-		if err := awsRestjson1_serializeDocumentDataSourceParameters(&v[i], av); err != nil {
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentDataSourceParameters(v[i], av); err != nil {
 			return err
 		}
 	}
@@ -9905,6 +9903,13 @@ func awsRestjson1_serializeDocumentJoinInstruction(v *types.JoinInstruction, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.LeftJoinKeyProperties != nil {
+		ok := object.Key("LeftJoinKeyProperties")
+		if err := awsRestjson1_serializeDocumentJoinKeyProperties(v.LeftJoinKeyProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LeftOperand != nil {
 		ok := object.Key("LeftOperand")
 		ok.String(*v.LeftOperand)
@@ -9915,6 +9920,13 @@ func awsRestjson1_serializeDocumentJoinInstruction(v *types.JoinInstruction, val
 		ok.String(*v.OnClause)
 	}
 
+	if v.RightJoinKeyProperties != nil {
+		ok := object.Key("RightJoinKeyProperties")
+		if err := awsRestjson1_serializeDocumentJoinKeyProperties(v.RightJoinKeyProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RightOperand != nil {
 		ok := object.Key("RightOperand")
 		ok.String(*v.RightOperand)
@@ -9923,6 +9935,18 @@ func awsRestjson1_serializeDocumentJoinInstruction(v *types.JoinInstruction, val
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")
 		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJoinKeyProperties(v *types.JoinKeyProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.UniqueKey {
+		ok := object.Key("UniqueKey")
+		ok.Boolean(v.UniqueKey)
 	}
 
 	return nil
@@ -10128,31 +10152,33 @@ func awsRestjson1_serializeDocumentParameters(v *types.Parameters, value smithyj
 	return nil
 }
 
-func awsRestjson1_serializeDocumentPhysicalTable(v *types.PhysicalTable, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentPhysicalTable(v types.PhysicalTable, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.CustomSql != nil {
-		ok := object.Key("CustomSql")
-		if err := awsRestjson1_serializeDocumentCustomSql(v.CustomSql, ok); err != nil {
+	switch uv := v.(type) {
+	case *types.PhysicalTableMemberCustomSql:
+		av := object.Key("CustomSql")
+		if err := awsRestjson1_serializeDocumentCustomSql(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.RelationalTable != nil {
-		ok := object.Key("RelationalTable")
-		if err := awsRestjson1_serializeDocumentRelationalTable(v.RelationalTable, ok); err != nil {
+	case *types.PhysicalTableMemberRelationalTable:
+		av := object.Key("RelationalTable")
+		if err := awsRestjson1_serializeDocumentRelationalTable(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.S3Source != nil {
-		ok := object.Key("S3Source")
-		if err := awsRestjson1_serializeDocumentS3Source(v.S3Source, ok); err != nil {
+	case *types.PhysicalTableMemberS3Source:
+		av := object.Key("S3Source")
+		if err := awsRestjson1_serializeDocumentS3Source(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -10162,8 +10188,10 @@ func awsRestjson1_serializeDocumentPhysicalTableMap(v map[string]types.PhysicalT
 
 	for key := range v {
 		om := object.Key(key)
-		mapVar := v[key]
-		if err := awsRestjson1_serializeDocumentPhysicalTable(&mapVar, om); err != nil {
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentPhysicalTable(v[key], om); err != nil {
 			return err
 		}
 	}
@@ -10297,6 +10325,11 @@ func awsRestjson1_serializeDocumentRedshiftParameters(v *types.RedshiftParameter
 func awsRestjson1_serializeDocumentRelationalTable(v *types.RelationalTable, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Catalog != nil {
+		ok := object.Key("Catalog")
+		ok.String(*v.Catalog)
+	}
 
 	if v.DataSourceArn != nil {
 		ok := object.Key("DataSourceArn")
@@ -10792,52 +10825,51 @@ func awsRestjson1_serializeDocumentTimestampList(v []time.Time, value smithyjson
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTransformOperation(v *types.TransformOperation, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTransformOperation(v types.TransformOperation, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.CastColumnTypeOperation != nil {
-		ok := object.Key("CastColumnTypeOperation")
-		if err := awsRestjson1_serializeDocumentCastColumnTypeOperation(v.CastColumnTypeOperation, ok); err != nil {
+	switch uv := v.(type) {
+	case *types.TransformOperationMemberCastColumnTypeOperation:
+		av := object.Key("CastColumnTypeOperation")
+		if err := awsRestjson1_serializeDocumentCastColumnTypeOperation(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.CreateColumnsOperation != nil {
-		ok := object.Key("CreateColumnsOperation")
-		if err := awsRestjson1_serializeDocumentCreateColumnsOperation(v.CreateColumnsOperation, ok); err != nil {
+	case *types.TransformOperationMemberCreateColumnsOperation:
+		av := object.Key("CreateColumnsOperation")
+		if err := awsRestjson1_serializeDocumentCreateColumnsOperation(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.FilterOperation != nil {
-		ok := object.Key("FilterOperation")
-		if err := awsRestjson1_serializeDocumentFilterOperation(v.FilterOperation, ok); err != nil {
+	case *types.TransformOperationMemberFilterOperation:
+		av := object.Key("FilterOperation")
+		if err := awsRestjson1_serializeDocumentFilterOperation(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.ProjectOperation != nil {
-		ok := object.Key("ProjectOperation")
-		if err := awsRestjson1_serializeDocumentProjectOperation(v.ProjectOperation, ok); err != nil {
+	case *types.TransformOperationMemberProjectOperation:
+		av := object.Key("ProjectOperation")
+		if err := awsRestjson1_serializeDocumentProjectOperation(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.RenameColumnOperation != nil {
-		ok := object.Key("RenameColumnOperation")
-		if err := awsRestjson1_serializeDocumentRenameColumnOperation(v.RenameColumnOperation, ok); err != nil {
+	case *types.TransformOperationMemberRenameColumnOperation:
+		av := object.Key("RenameColumnOperation")
+		if err := awsRestjson1_serializeDocumentRenameColumnOperation(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
-	if v.TagColumnOperation != nil {
-		ok := object.Key("TagColumnOperation")
-		if err := awsRestjson1_serializeDocumentTagColumnOperation(v.TagColumnOperation, ok); err != nil {
+	case *types.TransformOperationMemberTagColumnOperation:
+		av := object.Key("TagColumnOperation")
+		if err := awsRestjson1_serializeDocumentTagColumnOperation(&uv.Value, av); err != nil {
 			return err
 		}
-	}
 
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -10847,7 +10879,10 @@ func awsRestjson1_serializeDocumentTransformOperationList(v []types.TransformOpe
 
 	for i := range v {
 		av := array.Value()
-		if err := awsRestjson1_serializeDocumentTransformOperation(&v[i], av); err != nil {
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentTransformOperation(v[i], av); err != nil {
 			return err
 		}
 	}

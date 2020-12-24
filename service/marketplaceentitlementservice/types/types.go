@@ -34,26 +34,58 @@ type Entitlement struct {
 
 	// The EntitlementValue represents the amount of capacity that the customer is
 	// entitled to for the product.
-	Value *EntitlementValue
+	Value EntitlementValue
 }
 
 // The EntitlementValue represents the amount of capacity that the customer is
 // entitled to for the product.
-type EntitlementValue struct {
-
-	// The BooleanValue field will be populated with a boolean value when the
-	// entitlement is a boolean type. Otherwise, the field will not be set.
-	BooleanValue *bool
-
-	// The DoubleValue field will be populated with a double value when the entitlement
-	// is a double type. Otherwise, the field will not be set.
-	DoubleValue *float64
-
-	// The IntegerValue field will be populated with an integer value when the
-	// entitlement is an integer type. Otherwise, the field will not be set.
-	IntegerValue *int32
-
-	// The StringValue field will be populated with a string value when the entitlement
-	// is a string type. Otherwise, the field will not be set.
-	StringValue *string
+//
+// The following types satisfy this interface:
+//  EntitlementValueMemberIntegerValue
+//  EntitlementValueMemberDoubleValue
+//  EntitlementValueMemberBooleanValue
+//  EntitlementValueMemberStringValue
+type EntitlementValue interface {
+	isEntitlementValue()
 }
+
+// The IntegerValue field will be populated with an integer value when the
+// entitlement is an integer type. Otherwise, the field will not be set.
+type EntitlementValueMemberIntegerValue struct {
+	Value int32
+}
+
+func (*EntitlementValueMemberIntegerValue) isEntitlementValue() {}
+
+// The DoubleValue field will be populated with a double value when the entitlement
+// is a double type. Otherwise, the field will not be set.
+type EntitlementValueMemberDoubleValue struct {
+	Value float64
+}
+
+func (*EntitlementValueMemberDoubleValue) isEntitlementValue() {}
+
+// The BooleanValue field will be populated with a boolean value when the
+// entitlement is a boolean type. Otherwise, the field will not be set.
+type EntitlementValueMemberBooleanValue struct {
+	Value bool
+}
+
+func (*EntitlementValueMemberBooleanValue) isEntitlementValue() {}
+
+// The StringValue field will be populated with a string value when the entitlement
+// is a string type. Otherwise, the field will not be set.
+type EntitlementValueMemberStringValue struct {
+	Value string
+}
+
+func (*EntitlementValueMemberStringValue) isEntitlementValue() {}
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+}
+
+func (*UnknownUnionMember) isEntitlementValue() {}

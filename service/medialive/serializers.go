@@ -3970,6 +3970,13 @@ func awsRestjson1_serializeOpDocumentUpdateInputDeviceInput(v *UpdateInputDevice
 		ok.String(*v.Name)
 	}
 
+	if v.UhdDeviceSettings != nil {
+		ok := object.Key("uhdDeviceSettings")
+		if err := awsRestjson1_serializeDocumentInputDeviceConfigurableSettings(v.UhdDeviceSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5144,6 +5151,23 @@ func awsRestjson1_serializeDocumentAudioSelectorSettings(v *types.AudioSelectorS
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioSilenceFailoverSettings(v *types.AudioSilenceFailoverSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AudioSelectorName != nil {
+		ok := object.Key("audioSelectorName")
+		ok.String(*v.AudioSelectorName)
+	}
+
+	if v.AudioSilenceThresholdMsec != 0 {
+		ok := object.Key("audioSilenceThresholdMsec")
+		ok.Integer(v.AudioSilenceThresholdMsec)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAudioTrack(v *types.AudioTrack, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6103,9 +6127,23 @@ func awsRestjson1_serializeDocumentFailoverConditionSettings(v *types.FailoverCo
 	object := value.Object()
 	defer object.Close()
 
+	if v.AudioSilenceSettings != nil {
+		ok := object.Key("audioSilenceSettings")
+		if err := awsRestjson1_serializeDocumentAudioSilenceFailoverSettings(v.AudioSilenceSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InputLossSettings != nil {
 		ok := object.Key("inputLossSettings")
 		if err := awsRestjson1_serializeDocumentInputLossFailoverSettings(v.InputLossSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VideoBlackSettings != nil {
+		ok := object.Key("videoBlackSettings")
+		if err := awsRestjson1_serializeDocumentVideoBlackFailoverSettings(v.VideoBlackSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -9584,6 +9622,23 @@ func awsRestjson1_serializeDocumentUdpOutputSettings(v *types.UdpOutputSettings,
 		if err := awsRestjson1_serializeDocumentFecOutputSettings(v.FecOutputSettings, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoBlackFailoverSettings(v *types.VideoBlackFailoverSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BlackDetectThreshold != 0 {
+		ok := object.Key("blackDetectThreshold")
+		ok.Double(v.BlackDetectThreshold)
+	}
+
+	if v.VideoBlackThresholdMsec != 0 {
+		ok := object.Key("videoBlackThresholdMsec")
+		ok.Integer(v.VideoBlackThresholdMsec)
 	}
 
 	return nil

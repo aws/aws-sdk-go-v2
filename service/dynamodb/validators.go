@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchExecuteStatement struct {
+}
+
+func (*validateOpBatchExecuteStatement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchExecuteStatement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchExecuteStatementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchExecuteStatementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetItem struct {
 }
 
@@ -290,6 +310,26 @@ func (m *validateOpDescribeGlobalTableSettings) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeKinesisStreamingDestination struct {
+}
+
+func (*validateOpDescribeKinesisStreamingDestination) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeKinesisStreamingDestination) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeKinesisStreamingDestinationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeKinesisStreamingDestinationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeTable struct {
 }
 
@@ -345,6 +385,86 @@ func (m *validateOpDescribeTimeToLive) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeTimeToLiveInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisableKinesisStreamingDestination struct {
+}
+
+func (*validateOpDisableKinesisStreamingDestination) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableKinesisStreamingDestination) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableKinesisStreamingDestinationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableKinesisStreamingDestinationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEnableKinesisStreamingDestination struct {
+}
+
+func (*validateOpEnableKinesisStreamingDestination) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableKinesisStreamingDestination) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableKinesisStreamingDestinationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableKinesisStreamingDestinationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpExecuteStatement struct {
+}
+
+func (*validateOpExecuteStatement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExecuteStatement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExecuteStatementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExecuteStatementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpExecuteTransaction struct {
+}
+
+func (*validateOpExecuteTransaction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExecuteTransaction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExecuteTransactionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExecuteTransactionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +870,10 @@ func (m *validateOpUpdateTimeToLive) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchExecuteStatementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchExecuteStatement{}, middleware.After)
+}
+
 func addOpBatchGetItemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetItem{}, middleware.After)
 }
@@ -806,6 +930,10 @@ func addOpDescribeGlobalTableSettingsValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDescribeGlobalTableSettings{}, middleware.After)
 }
 
+func addOpDescribeKinesisStreamingDestinationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeKinesisStreamingDestination{}, middleware.After)
+}
+
 func addOpDescribeTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTable{}, middleware.After)
 }
@@ -816,6 +944,22 @@ func addOpDescribeTableReplicaAutoScalingValidationMiddleware(stack *middleware.
 
 func addOpDescribeTimeToLiveValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTimeToLive{}, middleware.After)
+}
+
+func addOpDisableKinesisStreamingDestinationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableKinesisStreamingDestination{}, middleware.After)
+}
+
+func addOpEnableKinesisStreamingDestinationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableKinesisStreamingDestination{}, middleware.After)
+}
+
+func addOpExecuteStatementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExecuteStatement{}, middleware.After)
+}
+
+func addOpExecuteTransactionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExecuteTransaction{}, middleware.After)
 }
 
 func addOpExportTableToPointInTimeValidationMiddleware(stack *middleware.Stack) error {
@@ -994,6 +1138,21 @@ func validateBatchGetRequestMap(v map[string]types.KeysAndAttributes) error {
 		if err := validateKeysAndAttributes(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchStatementRequest(v *types.BatchStatementRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchStatementRequest"}
+	if v.Statement == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Statement"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1496,6 +1655,55 @@ func validateLocalSecondaryIndexList(v []types.LocalSecondaryIndex) error {
 	invalidParams := smithy.InvalidParamsError{Context: "LocalSecondaryIndexList"}
 	for i := range v {
 		if err := validateLocalSecondaryIndex(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParameterizedStatement(v *types.ParameterizedStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParameterizedStatement"}
+	if v.Statement == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Statement"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParameterizedStatements(v []types.ParameterizedStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParameterizedStatements"}
+	for i := range v {
+		if err := validateParameterizedStatement(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePartiQLBatchRequest(v []types.BatchStatementRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PartiQLBatchRequest"}
+	for i := range v {
+		if err := validateBatchStatementRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2097,6 +2305,25 @@ func validateWriteRequests(v []types.WriteRequest) error {
 	}
 }
 
+func validateOpBatchExecuteStatementInput(v *BatchExecuteStatementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchExecuteStatementInput"}
+	if v.Statements == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Statements"))
+	} else if v.Statements != nil {
+		if err := validatePartiQLBatchRequest(v.Statements); err != nil {
+			invalidParams.AddNested("Statements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetItemInput(v *BatchGetItemInput) error {
 	if v == nil {
 		return nil
@@ -2363,6 +2590,21 @@ func validateOpDescribeGlobalTableSettingsInput(v *DescribeGlobalTableSettingsIn
 	}
 }
 
+func validateOpDescribeKinesisStreamingDestinationInput(v *DescribeKinesisStreamingDestinationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeKinesisStreamingDestinationInput"}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeTableInput(v *DescribeTableInput) error {
 	if v == nil {
 		return nil
@@ -2400,6 +2642,76 @@ func validateOpDescribeTimeToLiveInput(v *DescribeTimeToLiveInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeTimeToLiveInput"}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisableKinesisStreamingDestinationInput(v *DisableKinesisStreamingDestinationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableKinesisStreamingDestinationInput"}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.StreamArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableKinesisStreamingDestinationInput(v *EnableKinesisStreamingDestinationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableKinesisStreamingDestinationInput"}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.StreamArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpExecuteStatementInput(v *ExecuteStatementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExecuteStatementInput"}
+	if v.Statement == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Statement"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpExecuteTransactionInput(v *ExecuteTransactionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExecuteTransactionInput"}
+	if v.TransactStatements == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransactStatements"))
+	} else if v.TransactStatements != nil {
+		if err := validateParameterizedStatements(v.TransactStatements); err != nil {
+			invalidParams.AddNested("TransactStatements", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -450,6 +450,26 @@ func (m *validateOpCreateMLTransform) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePartitionIndex struct {
+}
+
+func (*validateOpCreatePartitionIndex) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePartitionIndex) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePartitionIndexInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePartitionIndexInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreatePartition struct {
 }
 
@@ -805,6 +825,26 @@ func (m *validateOpDeleteMLTransform) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteMLTransformInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePartitionIndex struct {
+}
+
+func (*validateOpDeletePartitionIndex) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePartitionIndex) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePartitionIndexInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePartitionIndexInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2678,6 +2718,10 @@ func addOpCreateMLTransformValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMLTransform{}, middleware.After)
 }
 
+func addOpCreatePartitionIndexValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePartitionIndex{}, middleware.After)
+}
+
 func addOpCreatePartitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePartition{}, middleware.After)
 }
@@ -2748,6 +2792,10 @@ func addOpDeleteJobValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteMLTransformValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMLTransform{}, middleware.After)
+}
+
+func addOpDeletePartitionIndexValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePartitionIndex{}, middleware.After)
 }
 
 func addOpDeletePartitionValidationMiddleware(stack *middleware.Stack) error {
@@ -4605,6 +4653,31 @@ func validateOpCreateMLTransformInput(v *CreateMLTransformInput) error {
 	}
 }
 
+func validateOpCreatePartitionIndexInput(v *CreatePartitionIndexInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePartitionIndexInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.PartitionIndex == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartitionIndex"))
+	} else if v.PartitionIndex != nil {
+		if err := validatePartitionIndex(v.PartitionIndex); err != nil {
+			invalidParams.AddNested("PartitionIndex", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreatePartitionInput(v *CreatePartitionInput) error {
 	if v == nil {
 		return nil
@@ -4926,6 +4999,27 @@ func validateOpDeleteMLTransformInput(v *DeleteMLTransformInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMLTransformInput"}
 	if v.TransformId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransformId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePartitionIndexInput(v *DeletePartitionIndexInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePartitionIndexInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.IndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

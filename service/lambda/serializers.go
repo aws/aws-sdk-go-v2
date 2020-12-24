@@ -352,6 +352,93 @@ func awsRestjson1_serializeOpDocumentCreateAliasInput(v *CreateAliasInput, value
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateCodeSigningConfig struct {
+}
+
+func (*awsRestjson1_serializeOpCreateCodeSigningConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateCodeSigningConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateCodeSigningConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-04-22/code-signing-configs")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateCodeSigningConfigInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateCodeSigningConfigInput(v *CreateCodeSigningConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateCodeSigningConfigInput(v *CreateCodeSigningConfigInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedPublishers != nil {
+		ok := object.Key("AllowedPublishers")
+		if err := awsRestjson1_serializeDocumentAllowedPublishers(v.AllowedPublishers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CodeSigningPolicies != nil {
+		ok := object.Key("CodeSigningPolicies")
+		if err := awsRestjson1_serializeDocumentCodeSigningPolicies(v.CodeSigningPolicies, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateEventSourceMapping struct {
 }
 
@@ -449,6 +536,13 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 		ok.String(*v.FunctionName)
 	}
 
+	if v.FunctionResponseTypes != nil {
+		ok := object.Key("FunctionResponseTypes")
+		if err := awsRestjson1_serializeDocumentFunctionResponseTypeList(v.FunctionResponseTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaximumBatchingWindowInSeconds != nil {
 		ok := object.Key("MaximumBatchingWindowInSeconds")
 		ok.Integer(*v.MaximumBatchingWindowInSeconds)
@@ -476,6 +570,13 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 		}
 	}
 
+	if v.SelfManagedEventSource != nil {
+		ok := object.Key("SelfManagedEventSource")
+		if err := awsRestjson1_serializeDocumentSelfManagedEventSource(v.SelfManagedEventSource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SourceAccessConfigurations != nil {
 		ok := object.Key("SourceAccessConfigurations")
 		if err := awsRestjson1_serializeDocumentSourceAccessConfigurations(v.SourceAccessConfigurations, ok); err != nil {
@@ -498,6 +599,11 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 		if err := awsRestjson1_serializeDocumentTopics(v.Topics, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.TumblingWindowInSeconds != nil {
+		ok := object.Key("TumblingWindowInSeconds")
+		ok.Integer(*v.TumblingWindowInSeconds)
 	}
 
 	return nil
@@ -575,6 +681,11 @@ func awsRestjson1_serializeOpDocumentCreateFunctionInput(v *CreateFunctionInput,
 		}
 	}
 
+	if v.CodeSigningConfigArn != nil {
+		ok := object.Key("CodeSigningConfigArn")
+		ok.String(*v.CodeSigningConfigArn)
+	}
+
 	if v.DeadLetterConfig != nil {
 		ok := object.Key("DeadLetterConfig")
 		if err := awsRestjson1_serializeDocumentDeadLetterConfig(v.DeadLetterConfig, ok); err != nil {
@@ -611,6 +722,13 @@ func awsRestjson1_serializeOpDocumentCreateFunctionInput(v *CreateFunctionInput,
 		ok.String(*v.Handler)
 	}
 
+	if v.ImageConfig != nil {
+		ok := object.Key("ImageConfig")
+		if err := awsRestjson1_serializeDocumentImageConfig(v.ImageConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.KMSKeyArn != nil {
 		ok := object.Key("KMSKeyArn")
 		ok.String(*v.KMSKeyArn)
@@ -626,6 +744,11 @@ func awsRestjson1_serializeOpDocumentCreateFunctionInput(v *CreateFunctionInput,
 	if v.MemorySize != nil {
 		ok := object.Key("MemorySize")
 		ok.Integer(*v.MemorySize)
+	}
+
+	if len(v.PackageType) > 0 {
+		ok := object.Key("PackageType")
+		ok.String(string(v.PackageType))
 	}
 
 	if v.Publish {
@@ -737,6 +860,69 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAliasInput(v *DeleteAliasInput, e
 	}
 	if v.Name != nil {
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteCodeSigningConfig struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteCodeSigningConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteCodeSigningConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteCodeSigningConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-04-22/code-signing-configs/{CodeSigningConfigArn}")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteCodeSigningConfigInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteCodeSigningConfigInput(v *DeleteCodeSigningConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CodeSigningConfigArn == nil || len(*v.CodeSigningConfigArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CodeSigningConfigArn must not be empty")}
+	}
+	if v.CodeSigningConfigArn != nil {
+		if err := encoder.SetURI("CodeSigningConfigArn").String(*v.CodeSigningConfigArn); err != nil {
 			return err
 		}
 	}
@@ -869,6 +1055,69 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFunctionInput(v *DeleteFunctionIn
 
 	if v.Qualifier != nil {
 		encoder.SetQuery("Qualifier").String(*v.Qualifier)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteFunctionCodeSigningConfig struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteFunctionCodeSigningConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteFunctionCodeSigningConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteFunctionCodeSigningConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-06-30/functions/{FunctionName}/code-signing-config")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteFunctionCodeSigningConfigInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteFunctionCodeSigningConfigInput(v *DeleteFunctionCodeSigningConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
+	}
+	if v.FunctionName != nil {
+		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1265,6 +1514,69 @@ func awsRestjson1_serializeOpHttpBindingsGetAliasInput(v *GetAliasInput, encoder
 	return nil
 }
 
+type awsRestjson1_serializeOpGetCodeSigningConfig struct {
+}
+
+func (*awsRestjson1_serializeOpGetCodeSigningConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetCodeSigningConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetCodeSigningConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-04-22/code-signing-configs/{CodeSigningConfigArn}")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetCodeSigningConfigInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetCodeSigningConfigInput(v *GetCodeSigningConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CodeSigningConfigArn == nil || len(*v.CodeSigningConfigArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CodeSigningConfigArn must not be empty")}
+	}
+	if v.CodeSigningConfigArn != nil {
+		if err := encoder.SetURI("CodeSigningConfigArn").String(*v.CodeSigningConfigArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetEventSourceMapping struct {
 }
 
@@ -1390,6 +1702,69 @@ func awsRestjson1_serializeOpHttpBindingsGetFunctionInput(v *GetFunctionInput, e
 
 	if v.Qualifier != nil {
 		encoder.SetQuery("Qualifier").String(*v.Qualifier)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetFunctionCodeSigningConfig struct {
+}
+
+func (*awsRestjson1_serializeOpGetFunctionCodeSigningConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetFunctionCodeSigningConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetFunctionCodeSigningConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-06-30/functions/{FunctionName}/code-signing-config")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetFunctionCodeSigningConfigInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetFunctionCodeSigningConfigInput(v *GetFunctionCodeSigningConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
+	}
+	if v.FunctionName != nil {
+		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2170,6 +2545,68 @@ func awsRestjson1_serializeOpHttpBindingsListAliasesInput(v *ListAliasesInput, e
 	return nil
 }
 
+type awsRestjson1_serializeOpListCodeSigningConfigs struct {
+}
+
+func (*awsRestjson1_serializeOpListCodeSigningConfigs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListCodeSigningConfigs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListCodeSigningConfigsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-04-22/code-signing-configs")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListCodeSigningConfigsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListCodeSigningConfigsInput(v *ListCodeSigningConfigsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Marker != nil {
+		encoder.SetQuery("Marker").String(*v.Marker)
+	}
+
+	if v.MaxItems != nil {
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListEventSourceMappings struct {
 }
 
@@ -2372,6 +2809,77 @@ func awsRestjson1_serializeOpHttpBindingsListFunctionsInput(v *ListFunctionsInpu
 
 	if v.MasterRegion != nil {
 		encoder.SetQuery("MasterRegion").String(*v.MasterRegion)
+	}
+
+	if v.MaxItems != nil {
+		encoder.SetQuery("MaxItems").Integer(*v.MaxItems)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListFunctionsByCodeSigningConfig struct {
+}
+
+func (*awsRestjson1_serializeOpListFunctionsByCodeSigningConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListFunctionsByCodeSigningConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListFunctionsByCodeSigningConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-04-22/code-signing-configs/{CodeSigningConfigArn}/functions")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListFunctionsByCodeSigningConfigInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListFunctionsByCodeSigningConfigInput(v *ListFunctionsByCodeSigningConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CodeSigningConfigArn == nil || len(*v.CodeSigningConfigArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CodeSigningConfigArn must not be empty")}
+	}
+	if v.CodeSigningConfigArn != nil {
+		if err := encoder.SetURI("CodeSigningConfigArn").String(*v.CodeSigningConfigArn); err != nil {
+			return err
+		}
+	}
+
+	if v.Marker != nil {
+		encoder.SetQuery("Marker").String(*v.Marker)
 	}
 
 	if v.MaxItems != nil {
@@ -2923,6 +3431,92 @@ func awsRestjson1_serializeOpDocumentPublishVersionInput(v *PublishVersionInput,
 	if v.RevisionId != nil {
 		ok := object.Key("RevisionId")
 		ok.String(*v.RevisionId)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPutFunctionCodeSigningConfig struct {
+}
+
+func (*awsRestjson1_serializeOpPutFunctionCodeSigningConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutFunctionCodeSigningConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutFunctionCodeSigningConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-06-30/functions/{FunctionName}/code-signing-config")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPutFunctionCodeSigningConfigInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutFunctionCodeSigningConfigInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutFunctionCodeSigningConfigInput(v *PutFunctionCodeSigningConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FunctionName == nil || len(*v.FunctionName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FunctionName must not be empty")}
+	}
+	if v.FunctionName != nil {
+		if err := encoder.SetURI("FunctionName").String(*v.FunctionName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutFunctionCodeSigningConfigInput(v *PutFunctionCodeSigningConfigInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CodeSigningConfigArn != nil {
+		ok := object.Key("CodeSigningConfigArn")
+		ok.String(*v.CodeSigningConfigArn)
 	}
 
 	return nil
@@ -3640,6 +4234,106 @@ func awsRestjson1_serializeOpDocumentUpdateAliasInput(v *UpdateAliasInput, value
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateCodeSigningConfig struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateCodeSigningConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateCodeSigningConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateCodeSigningConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-04-22/code-signing-configs/{CodeSigningConfigArn}")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateCodeSigningConfigInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateCodeSigningConfigInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateCodeSigningConfigInput(v *UpdateCodeSigningConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CodeSigningConfigArn == nil || len(*v.CodeSigningConfigArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CodeSigningConfigArn must not be empty")}
+	}
+	if v.CodeSigningConfigArn != nil {
+		if err := encoder.SetURI("CodeSigningConfigArn").String(*v.CodeSigningConfigArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateCodeSigningConfigInput(v *UpdateCodeSigningConfigInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedPublishers != nil {
+		ok := object.Key("AllowedPublishers")
+		if err := awsRestjson1_serializeDocumentAllowedPublishers(v.AllowedPublishers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CodeSigningPolicies != nil {
+		ok := object.Key("CodeSigningPolicies")
+		if err := awsRestjson1_serializeDocumentCodeSigningPolicies(v.CodeSigningPolicies, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateEventSourceMapping struct {
 }
 
@@ -3745,6 +4439,13 @@ func awsRestjson1_serializeOpDocumentUpdateEventSourceMappingInput(v *UpdateEven
 		ok.String(*v.FunctionName)
 	}
 
+	if v.FunctionResponseTypes != nil {
+		ok := object.Key("FunctionResponseTypes")
+		if err := awsRestjson1_serializeDocumentFunctionResponseTypeList(v.FunctionResponseTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaximumBatchingWindowInSeconds != nil {
 		ok := object.Key("MaximumBatchingWindowInSeconds")
 		ok.Integer(*v.MaximumBatchingWindowInSeconds)
@@ -3770,6 +4471,11 @@ func awsRestjson1_serializeOpDocumentUpdateEventSourceMappingInput(v *UpdateEven
 		if err := awsRestjson1_serializeDocumentSourceAccessConfigurations(v.SourceAccessConfigurations, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.TumblingWindowInSeconds != nil {
+		ok := object.Key("TumblingWindowInSeconds")
+		ok.Integer(*v.TumblingWindowInSeconds)
 	}
 
 	return nil
@@ -3856,6 +4562,11 @@ func awsRestjson1_serializeOpDocumentUpdateFunctionCodeInput(v *UpdateFunctionCo
 	if v.DryRun {
 		ok := object.Key("DryRun")
 		ok.Boolean(v.DryRun)
+	}
+
+	if v.ImageUri != nil {
+		ok := object.Key("ImageUri")
+		ok.String(*v.ImageUri)
 	}
 
 	if v.Publish {
@@ -3998,6 +4709,13 @@ func awsRestjson1_serializeOpDocumentUpdateFunctionConfigurationInput(v *UpdateF
 	if v.Handler != nil {
 		ok := object.Key("Handler")
 		ok.String(*v.Handler)
+	}
+
+	if v.ImageConfig != nil {
+		ok := object.Key("ImageConfig")
+		if err := awsRestjson1_serializeDocumentImageConfig(v.ImageConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.KMSKeyArn != nil {
@@ -4181,6 +4899,32 @@ func awsRestjson1_serializeDocumentAliasRoutingConfiguration(v *types.AliasRouti
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAllowedPublishers(v *types.AllowedPublishers, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SigningProfileVersionArns != nil {
+		ok := object.Key("SigningProfileVersionArns")
+		if err := awsRestjson1_serializeDocumentSigningProfileVersionArns(v.SigningProfileVersionArns, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodeSigningPolicies(v *types.CodeSigningPolicies, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.UntrustedArtifactOnDeployment) > 0 {
+		ok := object.Key("UntrustedArtifactOnDeployment")
+		ok.String(string(v.UntrustedArtifactOnDeployment))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCompatibleRuntimes(v []types.Runtime, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4222,6 +4966,33 @@ func awsRestjson1_serializeDocumentDestinationConfig(v *types.DestinationConfig,
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEndpointLists(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEndpoints(v map[string][]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentEndpointLists(v[key], om); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -4284,6 +5055,11 @@ func awsRestjson1_serializeDocumentFunctionCode(v *types.FunctionCode, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.ImageUri != nil {
+		ok := object.Key("ImageUri")
+		ok.String(*v.ImageUri)
+	}
+
 	if v.S3Bucket != nil {
 		ok := object.Key("S3Bucket")
 		ok.String(*v.S3Bucket)
@@ -4302,6 +5078,43 @@ func awsRestjson1_serializeDocumentFunctionCode(v *types.FunctionCode, value smi
 	if v.ZipFile != nil {
 		ok := object.Key("ZipFile")
 		ok.Base64EncodeBytes(v.ZipFile)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFunctionResponseTypeList(v []types.FunctionResponseType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImageConfig(v *types.ImageConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Command != nil {
+		ok := object.Key("Command")
+		if err := awsRestjson1_serializeDocumentStringList(v.Command, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EntryPoint != nil {
+		ok := object.Key("EntryPoint")
+		if err := awsRestjson1_serializeDocumentStringList(v.EntryPoint, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkingDirectory != nil {
+		ok := object.Key("WorkingDirectory")
+		ok.String(*v.WorkingDirectory)
 	}
 
 	return nil
@@ -4391,6 +5204,31 @@ func awsRestjson1_serializeDocumentSecurityGroupIds(v []string, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSelfManagedEventSource(v *types.SelfManagedEventSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Endpoints != nil {
+		ok := object.Key("Endpoints")
+		if err := awsRestjson1_serializeDocumentEndpoints(v.Endpoints, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSigningProfileVersionArns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSourceAccessConfiguration(v *types.SourceAccessConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4417,6 +5255,17 @@ func awsRestjson1_serializeDocumentSourceAccessConfigurations(v []types.SourceAc
 		if err := awsRestjson1_serializeDocumentSourceAccessConfiguration(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStringList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

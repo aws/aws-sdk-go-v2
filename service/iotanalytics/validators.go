@@ -759,6 +759,41 @@ func validateChannelStorage(v *types.ChannelStorage) error {
 	}
 }
 
+func validateColumn(v *types.Column) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Column"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateColumns(v []types.Column) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Columns"}
+	for i := range v {
+		if err := validateColumn(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContainerDatasetAction(v *types.ContainerDatasetAction) error {
 	if v == nil {
 		return nil
@@ -794,24 +829,6 @@ func validateCustomerManagedChannelS3Storage(v *types.CustomerManagedChannelS3St
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CustomerManagedChannelS3Storage"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateCustomerManagedDatastoreS3Storage(v *types.CustomerManagedDatastoreS3Storage) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CustomerManagedDatastoreS3Storage"}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
@@ -989,23 +1006,6 @@ func validateDatastoreActivity(v *types.DatastoreActivity) error {
 	}
 }
 
-func validateDatastoreStorage(v *types.DatastoreStorage) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DatastoreStorage"}
-	if v.CustomerManagedS3 != nil {
-		if err := validateCustomerManagedDatastoreS3Storage(v.CustomerManagedS3); err != nil {
-			invalidParams.AddNested("CustomerManagedS3", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateDeltaTime(v *types.DeltaTime) error {
 	if v == nil {
 		return nil
@@ -1079,6 +1079,23 @@ func validateDeviceShadowEnrichActivity(v *types.DeviceShadowEnrichActivity) err
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFileFormatConfiguration(v *types.FileFormatConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FileFormatConfiguration"}
+	if v.ParquetConfiguration != nil {
+		if err := validateParquetConfiguration(v.ParquetConfiguration); err != nil {
+			invalidParams.AddNested("ParquetConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1304,6 +1321,23 @@ func validateOutputFileUriValue(v *types.OutputFileUriValue) error {
 	}
 }
 
+func validateParquetConfiguration(v *types.ParquetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParquetConfiguration"}
+	if v.SchemaDefinition != nil {
+		if err := validateSchemaDefinition(v.SchemaDefinition); err != nil {
+			invalidParams.AddNested("SchemaDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePipelineActivities(v []types.PipelineActivity) error {
 	if v == nil {
 		return nil
@@ -1468,6 +1502,23 @@ func validateS3DestinationConfiguration(v *types.S3DestinationConfiguration) err
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSchemaDefinition(v *types.SchemaDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SchemaDefinition"}
+	if v.Columns != nil {
+		if err := validateColumns(v.Columns); err != nil {
+			invalidParams.AddNested("Columns", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1736,14 +1787,14 @@ func validateOpCreateDatastoreInput(v *CreateDatastoreInput) error {
 	if v.DatastoreName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatastoreName"))
 	}
-	if v.DatastoreStorage != nil {
-		if err := validateDatastoreStorage(v.DatastoreStorage); err != nil {
-			invalidParams.AddNested("DatastoreStorage", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FileFormatConfiguration != nil {
+		if err := validateFileFormatConfiguration(v.FileFormatConfiguration); err != nil {
+			invalidParams.AddNested("FileFormatConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2136,9 +2187,9 @@ func validateOpUpdateDatastoreInput(v *UpdateDatastoreInput) error {
 	if v.DatastoreName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatastoreName"))
 	}
-	if v.DatastoreStorage != nil {
-		if err := validateDatastoreStorage(v.DatastoreStorage); err != nil {
-			invalidParams.AddNested("DatastoreStorage", err.(smithy.InvalidParamsError))
+	if v.FileFormatConfiguration != nil {
+		if err := validateFileFormatConfiguration(v.FileFormatConfiguration); err != nil {
+			invalidParams.AddNested("FileFormatConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

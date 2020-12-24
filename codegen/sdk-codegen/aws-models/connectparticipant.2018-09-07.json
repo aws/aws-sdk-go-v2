@@ -50,10 +50,16 @@
             "version": "2018-09-07",
             "operations": [
                 {
+                    "target": "com.amazonaws.connectparticipant#CompleteAttachmentUpload"
+                },
+                {
                     "target": "com.amazonaws.connectparticipant#CreateParticipantConnection"
                 },
                 {
                     "target": "com.amazonaws.connectparticipant#DisconnectParticipant"
+                },
+                {
+                    "target": "com.amazonaws.connectparticipant#GetAttachment"
                 },
                 {
                     "target": "com.amazonaws.connectparticipant#GetTranscript"
@@ -63,6 +69,9 @@
                 },
                 {
                     "target": "com.amazonaws.connectparticipant#SendMessage"
+                },
+                {
+                    "target": "com.amazonaws.connectparticipant#StartAttachmentUpload"
                 }
             ],
             "traits": {
@@ -79,6 +88,101 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that makes it easy to set up and manage\n            a customer contact center and provide reliable customer engagement at any scale.</p>\n        <p>Amazon Connect enables customer contacts through voice or chat.</p>\n\n        <p>The APIs described here are used by chat participants, such as agents and\n            customers.</p>",
                 "smithy.api#title": "Amazon Connect Participant Service"
+            }
+        },
+        "com.amazonaws.connectparticipant#ArtifactId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connectparticipant#ArtifactStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "APPROVED",
+                        "name": "APPROVED"
+                    },
+                    {
+                        "value": "REJECTED",
+                        "name": "REJECTED"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectparticipant#AttachmentIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectparticipant#ArtifactId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.connectparticipant#AttachmentItem": {
+            "type": "structure",
+            "members": {
+                "ContentType": {
+                    "target": "com.amazonaws.connectparticipant#ContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the MIME file type of the attachment. For a list of supported file types, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits\">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+                    }
+                },
+                "AttachmentId": {
+                    "target": "com.amazonaws.connectparticipant#ArtifactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the attachment.</p>"
+                    }
+                },
+                "AttachmentName": {
+                    "target": "com.amazonaws.connectparticipant#AttachmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A case-sensitive name of the attachment being uploaded.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connectparticipant#ArtifactStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the attachment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The case-insensitive input to indicate standard MIME type that describes the format of the file\n            that will be uploaded.</p>"
+            }
+        },
+        "com.amazonaws.connectparticipant#AttachmentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connectparticipant#AttachmentSizeInBytes": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.connectparticipant#Attachments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectparticipant#AttachmentItem"
             }
         },
         "com.amazonaws.connectparticipant#ChatContent": {
@@ -113,12 +217,40 @@
             "traits": {
                 "smithy.api#enum": [
                     {
+                        "value": "TYPING",
+                        "name": "TYPING"
+                    },
+                    {
+                        "value": "PARTICIPANT_JOINED",
+                        "name": "PARTICIPANT_JOINED"
+                    },
+                    {
+                        "value": "PARTICIPANT_LEFT",
+                        "name": "PARTICIPANT_LEFT"
+                    },
+                    {
+                        "value": "CHAT_ENDED",
+                        "name": "CHAT_ENDED"
+                    },
+                    {
+                        "value": "TRANSFER_SUCCEEDED",
+                        "name": "TRANSFER_SUCCEEDED"
+                    },
+                    {
+                        "value": "TRANSFER_FAILED",
+                        "name": "TRANSFER_FAILED"
+                    },
+                    {
                         "value": "MESSAGE",
                         "name": "MESSAGE"
                     },
                     {
                         "value": "EVENT",
                         "name": "EVENT"
+                    },
+                    {
+                        "value": "ATTACHMENT",
+                        "name": "ATTACHMENT"
                     },
                     {
                         "value": "CONNECTION_ACK",
@@ -134,6 +266,91 @@
                     "min": 0,
                     "max": 500
                 }
+            }
+        },
+        "com.amazonaws.connectparticipant#CompleteAttachmentUpload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectparticipant#CompleteAttachmentUploadRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectparticipant#CompleteAttachmentUploadResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectparticipant#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectparticipant#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectparticipant#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectparticipant#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connectparticipant#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectparticipant#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Allows you to confirm that the attachment has been uploaded using the pre-signed URL\n            provided in StartAttachmentUpload API. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/participant/complete-attachment-upload",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connectparticipant#CompleteAttachmentUploadRequest": {
+            "type": "structure",
+            "members": {
+                "AttachmentIds": {
+                    "target": "com.amazonaws.connectparticipant#AttachmentIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique identifiers for the attachments.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connectparticipant#NonEmptyClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionToken": {
+                    "target": "com.amazonaws.connectparticipant#ParticipantToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication token associated with the participant's connection.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Bearer",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectparticipant#CompleteAttachmentUploadResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.connectparticipant#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.connectparticipant#Reason",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An attachment with that identifier is already being uploaded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.connectparticipant#ConnectionCredentials": {
@@ -191,6 +408,15 @@
                 }
             }
         },
+        "com.amazonaws.connectparticipant#ContentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
         "com.amazonaws.connectparticipant#CreateParticipantConnection": {
             "type": "operation",
             "input": {
@@ -214,7 +440,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates the participant's connection. Note that ParticipantToken is used for invoking\n            this API instead of ConnectionToken.</p>\n        <p>The participant token is valid for the lifetime of the participant – until the they\n            are part of a contact.</p>\n        <p>The response URL for <code>WEBSOCKET</code> Type has a connect expiry timeout of 100s. Clients must\n            manually connect to the returned websocket URL and subscribe to the desired topic.  </p>\n        <p>For\n            chat, you need to publish the following on the established websocket connection:</p>\n       \n       \n        <p>\n            <code>{\"topic\":\"aws/subscribe\",\"content\":{\"topics\":[\"aws/chat\"]}}</code>\n         </p>\n        \n        <p>Upon websocket URL expiry, as\n            specified in the response ConnectionExpiry parameter, clients need to call this API\n            again to obtain a new websocket URL and perform the same steps as before.</p>",
+                "smithy.api#documentation": "<p>Creates the participant's connection. Note that ParticipantToken is used for invoking\n            this API instead of ConnectionToken.</p>\n        <p>The participant token is valid for the lifetime of the participant – until they are\n            part of a contact.</p>\n        <p>The response URL for <code>WEBSOCKET</code> Type has a connect expiry timeout of 100s.\n            Clients must manually connect to the returned websocket URL and subscribe to the desired\n            topic. </p>\n        <p>For chat, you need to publish the following on the established websocket\n            connection:</p>\n\n\n        <p>\n            <code>{\"topic\":\"aws/subscribe\",\"content\":{\"topics\":[\"aws/chat\"]}}</code>\n         </p>\n\n        <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter,\n            clients need to call this API again to obtain a new websocket URL and perform the same\n            steps as before.</p>\n\n        <note>\n            <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>\n        </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/connection",
@@ -235,7 +461,7 @@
                 "ParticipantToken": {
                     "target": "com.amazonaws.connectparticipant#ParticipantToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Participant Token as obtained from <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContactResponse.html\">StartChatContact</a> API response.</p>",
+                        "smithy.api#documentation": "<p>This is a header parameter.</p>\n        <p>The Participant Token as obtained from <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html\">StartChatContact</a>\n            API response.</p>",
                         "smithy.api#httpHeader": "X-Amz-Bearer",
                         "smithy.api#required": {}
                     }
@@ -282,7 +508,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disconnects a participant. Note that ConnectionToken is used for invoking this API\n            instead of ParticipantToken.</p>",
+                "smithy.api#documentation": "<p>Disconnects a participant. Note that ConnectionToken is used for invoking this API\n            instead of ParticipantToken.</p>\n        <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/disconnect",
@@ -323,6 +549,74 @@
                 }
             }
         },
+        "com.amazonaws.connectparticipant#GetAttachment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectparticipant#GetAttachmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectparticipant#GetAttachmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectparticipant#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectparticipant#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectparticipant#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectparticipant#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a pre-signed URL for download of a completed attachment. This is an\n            asynchronous API for use with active contacts.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/participant/attachment",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connectparticipant#GetAttachmentRequest": {
+            "type": "structure",
+            "members": {
+                "AttachmentId": {
+                    "target": "com.amazonaws.connectparticipant#ArtifactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the attachment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionToken": {
+                    "target": "com.amazonaws.connectparticipant#ParticipantToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication token associated with the participant's connection.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Bearer",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectparticipant#GetAttachmentResponse": {
+            "type": "structure",
+            "members": {
+                "Url": {
+                    "target": "com.amazonaws.connectparticipant#PreSignedAttachmentUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.</p>"
+                    }
+                },
+                "UrlExpiry": {
+                    "target": "com.amazonaws.connectparticipant#ISO8601Datetime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connectparticipant#GetTranscript": {
             "type": "operation",
             "input": {
@@ -346,7 +640,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a transcript of the session. Note that ConnectionToken is used for invoking\n            this API instead of ParticipantToken.</p>",
+                "smithy.api#documentation": "<p>Retrieves a transcript of the session, including details about any attachments. Note\n            that ConnectionToken is used for invoking this API instead of ParticipantToken.</p>\n        <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/transcript",
@@ -372,7 +666,7 @@
                     "target": "com.amazonaws.connectparticipant#MaxResults",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The maximum number of results to return in the page. Default: 10. \n           </p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the page. Default: 10. </p>"
                     }
                 },
                 "NextToken": {
@@ -384,7 +678,7 @@
                 "ScanDirection": {
                     "target": "com.amazonaws.connectparticipant#ScanDirection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The direction from StartPosition from which to retrieve message. Default: BACKWARD when no StartPosition is provided, FORWARD with StartPosition. </p>"
+                        "smithy.api#documentation": "<p>The direction from StartPosition from which to retrieve message. Default: BACKWARD\n            when no StartPosition is provided, FORWARD with StartPosition. </p>"
                     }
                 },
                 "SortOrder": {
@@ -510,6 +804,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The role of the sender. For example, is it a customer, agent, or system.</p>"
                     }
+                },
+                "Attachments": {
+                    "target": "com.amazonaws.connectparticipant#Attachments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about the attachments.</p>"
+                    }
                 }
             },
             "traits": {
@@ -543,6 +843,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.connectparticipant#NonEmptyClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
                 }
             }
         },
@@ -580,6 +889,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.connectparticipant#PreSignedAttachmentUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
                 }
             }
         },
@@ -639,7 +957,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends an event. Note that ConnectionToken is used for invoking this API instead of\n            ParticipantToken.</p>",
+                "smithy.api#documentation": "<p>Sends an event. Note that ConnectionToken is used for invoking this API instead of\n            ParticipantToken.</p>\n        <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/event",
@@ -720,7 +1038,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends a message. Note that ConnectionToken is used for invoking this API instead of\n            ParticipantToken.</p>",
+                "smithy.api#documentation": "<p>Sends a message. Note that ConnectionToken is used for invoking this API instead of\n            ParticipantToken.</p>\n        <note>\n            <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>\n        </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/message",
@@ -779,6 +1097,22 @@
                 }
             }
         },
+        "com.amazonaws.connectparticipant#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.connectparticipant#Message",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The number of attachments per contact exceeds the quota.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
         "com.amazonaws.connectparticipant#SortKey": {
             "type": "string",
             "traits": {
@@ -792,6 +1126,99 @@
                         "name": "ASCENDING"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.connectparticipant#StartAttachmentUpload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectparticipant#StartAttachmentUploadRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectparticipant#StartAttachmentUploadResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectparticipant#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectparticipant#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectparticipant#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connectparticipant#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectparticipant#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a pre-signed Amazon S3 URL in response for uploading the file directly to\n            S3.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/participant/start-attachment-upload",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connectparticipant#StartAttachmentUploadRequest": {
+            "type": "structure",
+            "members": {
+                "ContentType": {
+                    "target": "com.amazonaws.connectparticipant#ContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the MIME file type of the attachment. For a list of supported file types, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits\">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttachmentSizeInBytes": {
+                    "target": "com.amazonaws.connectparticipant#AttachmentSizeInBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the attachment in bytes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttachmentName": {
+                    "target": "com.amazonaws.connectparticipant#AttachmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A case-sensitive name of the attachment being uploaded.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connectparticipant#NonEmptyClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique case sensitive identifier to support idempotency of request.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionToken": {
+                    "target": "com.amazonaws.connectparticipant#ParticipantToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication token associated with the participant's connection.</p>",
+                        "smithy.api#httpHeader": "X-Amz-Bearer",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectparticipant#StartAttachmentUploadResponse": {
+            "type": "structure",
+            "members": {
+                "AttachmentId": {
+                    "target": "com.amazonaws.connectparticipant#ArtifactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the attachment.</p>"
+                    }
+                },
+                "UploadMetadata": {
+                    "target": "com.amazonaws.connectparticipant#UploadMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Fields to be used while uploading the attachment.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.connectparticipant#StartPosition": {
@@ -840,6 +1267,68 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connectparticipant#Item"
+            }
+        },
+        "com.amazonaws.connectparticipant#UploadMetadata": {
+            "type": "structure",
+            "members": {
+                "Url": {
+                    "target": "com.amazonaws.connectparticipant#UploadMetadataUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.</p>"
+                    }
+                },
+                "UrlExpiry": {
+                    "target": "com.amazonaws.connectparticipant#ISO8601Datetime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>"
+                    }
+                },
+                "HeadersToInclude": {
+                    "target": "com.amazonaws.connectparticipant#UploadMetadataSignedHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The headers to be provided while uploading the file to the URL.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Fields to be used while uploading the attachment.</p>"
+            }
+        },
+        "com.amazonaws.connectparticipant#UploadMetadataSignedHeaders": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connectparticipant#UploadMetadataSignedHeadersKey"
+            },
+            "value": {
+                "target": "com.amazonaws.connectparticipant#UploadMetadataSignedHeadersValue"
+            }
+        },
+        "com.amazonaws.connectparticipant#UploadMetadataSignedHeadersKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.connectparticipant#UploadMetadataSignedHeadersValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connectparticipant#UploadMetadataUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
             }
         },
         "com.amazonaws.connectparticipant#ValidationException": {

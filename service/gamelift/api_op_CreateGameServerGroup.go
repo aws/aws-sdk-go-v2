@@ -197,7 +197,7 @@ type CreateGameServerGroupInput struct {
 	// used. You can use this parameter to specify VPCs that you've set up. This
 	// property cannot be updated after the game server group is created, and the
 	// corresponding Auto Scaling group will always use the property value that is set
-	// with this request, even if the Auto Scaling group is updated directly
+	// with this request, even if the Auto Scaling group is updated directly.
 	VpcSubnets []string
 }
 

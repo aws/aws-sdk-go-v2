@@ -37,7 +37,13 @@ type UpdateDatastoreInput struct {
 	// Where data store data is stored. You can choose one of serviceManagedS3 or
 	// customerManagedS3 storage. If not specified, the default isserviceManagedS3. You
 	// cannot change this storage option after the data store is created.
-	DatastoreStorage *types.DatastoreStorage
+	DatastoreStorage types.DatastoreStorage
+
+	// Contains the configuration information of file formats. AWS IoT Analytics data
+	// stores support JSON and Parquet (https://parquet.apache.org/). The default file
+	// format is JSON. You can specify only one format. You can't change the file
+	// format after you create the data store.
+	FileFormatConfiguration *types.FileFormatConfiguration
 
 	// How long, in days, message data is kept for the data store. The retention period
 	// cannot be updated if the data store's S3 storage is customer-managed.

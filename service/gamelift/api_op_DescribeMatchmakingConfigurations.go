@@ -20,7 +20,7 @@ import (
 // successful, a configuration is returned for each requested name. When specifying
 // a list of names, only configurations that currently exist are returned. Learn
 // more  Setting Up FlexMatch Matchmakers
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/matchmaker-build.html)
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/matchmaker-build.html)
 // Related operations
 //
 // * CreateMatchmakingConfiguration

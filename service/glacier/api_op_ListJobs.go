@@ -4,6 +4,7 @@ package glacier
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
@@ -78,7 +79,7 @@ type ListJobsInput struct {
 	// The maximum number of jobs to be returned. The default limit is 50. The number
 	// of jobs returned might be fewer than the specified limit, but the number of
 	// returned jobs never exceeds the limit.
-	Limit *string
+	Limit *int32
 
 	// An opaque string used for pagination. This value specifies the job at which the
 	// listing of jobs should begin. Get the marker value from a previous List Jobs
@@ -174,6 +175,93 @@ func addOperationListJobsMiddlewares(stack *middleware.Stack, options Options) (
 		return err
 	}
 	return nil
+}
+
+// ListJobsAPIClient is a client that implements the ListJobs operation.
+type ListJobsAPIClient interface {
+	ListJobs(context.Context, *ListJobsInput, ...func(*Options)) (*ListJobsOutput, error)
+}
+
+var _ ListJobsAPIClient = (*Client)(nil)
+
+// ListJobsPaginatorOptions is the paginator options for ListJobs
+type ListJobsPaginatorOptions struct {
+	// The maximum number of jobs to be returned. The default limit is 50. The number
+	// of jobs returned might be fewer than the specified limit, but the number of
+	// returned jobs never exceeds the limit.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListJobsPaginator is a paginator for ListJobs
+type ListJobsPaginator struct {
+	options   ListJobsPaginatorOptions
+	client    ListJobsAPIClient
+	params    *ListJobsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListJobsPaginator returns a new ListJobsPaginator
+func NewListJobsPaginator(client ListJobsAPIClient, params *ListJobsInput, optFns ...func(*ListJobsPaginatorOptions)) *ListJobsPaginator {
+	options := ListJobsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListJobsInput{}
+	}
+
+	return &ListJobsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListJobsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListJobs page.
+func (p *ListJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListJobsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListJobs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListJobs(region string) *awsmiddleware.RegisterServiceMetadata {

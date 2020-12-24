@@ -10,73 +10,46 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a display name for a customer managed customer master key (CMK). You can
-// use an alias to identify a CMK in cryptographic operations
+// Creates a friendly name for a customer master key (CMK). You can use an alias to
+// identify a CMK in the AWS KMS console, in the DescribeKey operation and in
+// cryptographic operations
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations),
-// such as Encrypt and GenerateDataKey. You can change the CMK associated with the
-// alias at any time. Aliases are easier to remember than key IDs. They can also
-// help to simplify your applications. For example, if you use an alias in your
-// code, you can change the CMK your code uses by associating a given alias with a
-// different CMK. To run the same code in multiple AWS regions, use an alias in
-// your code, such as alias/ApplicationKey. Then, in each AWS Region, create an
-// alias/ApplicationKey alias that is associated with a CMK in that Region. When
-// you run your code, it uses the alias/ApplicationKey CMK for that AWS Region
-// without any Region-specific code. This operation does not return a response. To
-// get the alias that you created, use the ListAliases operation. To use aliases
-// successfully, be aware of the following information.
-//
-// * Each alias points to
-// only one CMK at a time, although a single CMK can have multiple aliases. The
-// alias and its associated CMK must be in the same AWS account and Region.
-//
-// * You
-// can associate an alias with any customer managed CMK in the same AWS account and
-// Region. However, you do not have permission to associate an alias with an AWS
-// managed CMK
-// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
-// or an AWS owned CMK
-// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk).
-//
-// *
-// To change the CMK associated with an alias, use the UpdateAlias operation. The
-// current CMK and the new CMK must be the same type (both symmetric or both
-// asymmetric) and they must have the same key usage (ENCRYPT_DECRYPT or
-// SIGN_VERIFY). This restriction prevents cryptographic errors in code that uses
-// aliases.
-//
-// * The alias name must begin with alias/ followed by a name, such as
-// alias/ExampleAlias. It can contain only alphanumeric characters, forward slashes
-// (/), underscores (_), and dashes (-). The alias name cannot begin with
-// alias/aws/. The alias/aws/ prefix is reserved for AWS managed CMKs
-// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk).
-//
-// *
-// The alias name must be unique within an AWS Region. However, you can use the
-// same alias name in multiple Regions of the same AWS account. Each instance of
-// the alias is associated with a CMK in its Region.
-//
-// * After you create an alias,
-// you cannot change its alias name. However, you can use the DeleteAlias operation
-// to delete the alias and then create a new alias with the desired name.
-//
-// * You
-// can use an alias name or alias ARN to identify a CMK in AWS KMS cryptographic
-// operations
-// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
-// and in the DescribeKey operation. However, you cannot use alias names or alias
-// ARNs in API operations that manage CMKs, such as DisableKey or GetKeyPolicy. For
-// information about the valid CMK identifiers for each AWS KMS API operation, see
-// the descriptions of the KeyId parameter in the API operation
-// documentation.
-//
-// Because an alias is not a property of a CMK, you can delete and
-// change the aliases of a CMK without affecting the CMK. Also, aliases do not
-// appear in the response from the DescribeKey operation. To get the aliases and
-// alias ARNs of CMKs in each AWS account and Region, use the ListAliases
-// operation. The CMK that you use for this operation must be in a compatible key
-// state. For details, see How Key State Affects Use of a Customer Master Key
+// such as Encrypt and GenerateDataKey. You can also change the CMK that's
+// associated with the alias (UpdateAlias) or delete the alias (DeleteAlias) at any
+// time. These operations don't affect the underlying CMK. You can associate the
+// alias with any customer managed CMK in the same AWS Region. Each alias is
+// associated with only on CMK at a time, but a CMK can have multiple aliases. A
+// valid CMK is required. You can't create an alias without a CMK. The alias must
+// be unique in the account and Region, but you can have aliases with the same name
+// in different Regions. For detailed information about aliases, see Using aliases
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html) in the
+// AWS Key Management Service Developer Guide. This operation does not return a
+// response. To get the alias that you created, use the ListAliases operation. The
+// CMK that you use for this operation must be in a compatible key state. For
+// details, see How Key State Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide.
+// AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on an alias in a different AWS account. Required
+// permissions
+//
+// * kms:CreateAlias
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// on the alias (IAM policy).
+//
+// * kms:CreateAlias
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// on the CMK (key policy).
+//
+// For details, see Controlling access to aliases
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access)
+// in the AWS Key Management Service Developer Guide. Related operations:
+//
+// *
+// DeleteAlias
+//
+// * ListAliases
+//
+// * UpdateAlias
 func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optFns ...func(*Options)) (*CreateAliasOutput, error) {
 	if params == nil {
 		params = &CreateAliasInput{}
@@ -95,17 +68,32 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 type CreateAliasInput struct {
 
 	// Specifies the alias name. This value must begin with alias/ followed by a name,
-	// such as alias/ExampleAlias. The alias name cannot begin with alias/aws/. The
-	// alias/aws/ prefix is reserved for AWS managed CMKs.
+	// such as alias/ExampleAlias. The AliasName value must be string of 1-256
+	// characters. It can contain only alphanumeric characters, forward slashes (/),
+	// underscores (_), and dashes (-). The alias name cannot begin with alias/aws/.
+	// The alias/aws/ prefix is reserved for AWS managed CMKs
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk).
 	//
 	// This member is required.
 	AliasName *string
 
-	// Identifies the CMK to which the alias refers. Specify the key ID or the Amazon
-	// Resource Name (ARN) of the CMK. You cannot specify another alias. For help
+	// Associates the alias with the specified customer managed CMK
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk).
+	// The CMK must be in the same AWS Region. A valid CMK ID is required. If you
+	// supply a null or empty string value, this operation returns an error. For help
 	// finding the key ID and ARN, see Finding the Key ID and ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn)
-	// in the AWS Key Management Service Developer Guide.
+	// in the AWS Key Management Service Developer Guide. Specify the key ID or the
+	// Amazon Resource Name (ARN) of the CMK. For example:
+	//
+	// * Key ID:
+	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// * Key ARN:
+	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// To
+	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	TargetKeyId *string

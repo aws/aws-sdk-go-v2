@@ -654,14 +654,14 @@ func validateSourceBuildInformation(v *types.SourceBuildInformation) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SourceBuildInformation"}
-	if v.SourceLocation == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceLocation"))
+	if len(v.SourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
 	}
 	if len(v.SourceRepository) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceRepository"))
 	}
-	if len(v.SourceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
+	if v.SourceLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLocation"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -690,11 +690,11 @@ func validateOpAssociateEnvironmentOperationsRoleInput(v *AssociateEnvironmentOp
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateEnvironmentOperationsRoleInput"}
-	if v.OperationsRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OperationsRole"))
-	}
 	if v.EnvironmentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
+	}
+	if v.OperationsRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OperationsRole"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -723,13 +723,13 @@ func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateApplicationInput"}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
 	if v.ResourceLifecycleConfig != nil {
 		if err := validateApplicationResourceLifecycleConfig(v.ResourceLifecycleConfig); err != nil {
 			invalidParams.AddNested("ResourceLifecycleConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -743,21 +743,21 @@ func validateOpCreateApplicationVersionInput(v *CreateApplicationVersionInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateApplicationVersionInput"}
-	if v.BuildConfiguration != nil {
-		if err := validateBuildConfiguration(v.BuildConfiguration); err != nil {
-			invalidParams.AddNested("BuildConfiguration", err.(smithy.InvalidParamsError))
-		}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.VersionLabel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionLabel"))
 	}
 	if v.SourceBuildInformation != nil {
 		if err := validateSourceBuildInformation(v.SourceBuildInformation); err != nil {
 			invalidParams.AddNested("SourceBuildInformation", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.VersionLabel == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VersionLabel"))
-	}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	if v.BuildConfiguration != nil {
+		if err := validateBuildConfiguration(v.BuildConfiguration); err != nil {
+			invalidParams.AddNested("BuildConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -804,14 +804,14 @@ func validateOpCreatePlatformVersionInput(v *CreatePlatformVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePlatformVersionInput"}
-	if v.PlatformDefinitionBundle == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PlatformDefinitionBundle"))
+	if v.PlatformName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlatformName"))
 	}
 	if v.PlatformVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PlatformVersion"))
 	}
-	if v.PlatformName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PlatformName"))
+	if v.PlatformDefinitionBundle == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlatformDefinitionBundle"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -876,11 +876,11 @@ func validateOpDeleteEnvironmentConfigurationInput(v *DeleteEnvironmentConfigura
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteEnvironmentConfigurationInput"}
-	if v.EnvironmentName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
-	}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.EnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -984,15 +984,15 @@ func validateOpUpdateApplicationResourceLifecycleInput(v *UpdateApplicationResou
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateApplicationResourceLifecycleInput"}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
 	if v.ResourceLifecycleConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceLifecycleConfig"))
 	} else if v.ResourceLifecycleConfig != nil {
 		if err := validateApplicationResourceLifecycleConfig(v.ResourceLifecycleConfig); err != nil {
 			invalidParams.AddNested("ResourceLifecycleConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ApplicationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1006,11 +1006,11 @@ func validateOpUpdateApplicationVersionInput(v *UpdateApplicationVersionInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateApplicationVersionInput"}
-	if v.VersionLabel == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VersionLabel"))
-	}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.VersionLabel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionLabel"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

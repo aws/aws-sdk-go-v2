@@ -13,7 +13,8 @@ import (
 )
 
 // Lists all Security Hub membership invitations that were sent to the current AWS
-// account.
+// account. This operation is only used by accounts that do not belong to an
+// organization. Organization accounts do not receive invitations.
 func (c *Client) ListInvitations(ctx context.Context, params *ListInvitationsInput, optFns ...func(*Options)) (*ListInvitationsOutput, error) {
 	if params == nil {
 		params = &ListInvitationsInput{}

@@ -190,6 +190,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateHost struct {
+}
+
+func (*validateOpUpdateHost) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateHost) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateHostInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateHostInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConnection{}, middleware.After)
 }
@@ -226,16 +246,20 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateHostValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateHost{}, middleware.After)
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -266,14 +290,14 @@ func validateVpcConfiguration(v *types.VpcConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VpcConfiguration"}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
 	if v.SecurityGroupIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
-	}
-	if v.VpcId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -287,13 +311,13 @@ func validateOpCreateConnectionInput(v *CreateConnectionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectionInput"}
+	if v.ConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionName"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ConnectionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConnectionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -307,19 +331,19 @@ func validateOpCreateHostInput(v *CreateHostInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateHostInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if len(v.ProviderType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ProviderType"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.ProviderEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderEndpoint"))
 	}
 	if v.VpcConfiguration != nil {
 		if err := validateVpcConfiguration(v.VpcConfiguration); err != nil {
 			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ProviderEndpoint == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProviderEndpoint"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -435,6 +459,26 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateHostInput(v *UpdateHostInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateHostInput"}
+	if v.HostArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostArn"))
+	}
+	if v.VpcConfiguration != nil {
+		if err := validateVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

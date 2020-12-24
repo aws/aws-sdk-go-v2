@@ -16,7 +16,7 @@ import (
 // interface. An IPSet is a list of IP addresses that are trusted for secure
 // communication with AWS infrastructure and applications. GuardDuty doesn't
 // generate findings for IP addresses that are included in IPSets. Only users from
-// the master account can use this operation.
+// the administrator account can use this operation.
 func (c *Client) CreateIPSet(ctx context.Context, params *CreateIPSetInput, optFns ...func(*Options)) (*CreateIPSetOutput, error) {
 	if params == nil {
 		params = &CreateIPSetInput{}

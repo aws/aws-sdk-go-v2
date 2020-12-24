@@ -11,8 +11,115 @@ import (
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
+
+type awsRestjson1_serializeOpAddProfilePermission struct {
+}
+
+func (*awsRestjson1_serializeOpAddProfilePermission) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAddProfilePermission) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AddProfilePermissionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/signing-profiles/{profileName}/permissions")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsAddProfilePermissionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAddProfilePermissionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAddProfilePermissionInput(v *AddProfilePermissionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ProfileName == nil || len(*v.ProfileName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profileName must not be empty")}
+	}
+	if v.ProfileName != nil {
+		if err := encoder.SetURI("profileName").String(*v.ProfileName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAddProfilePermissionInput(v *AddProfilePermissionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Action != nil {
+		ok := object.Key("action")
+		ok.String(*v.Action)
+	}
+
+	if v.Principal != nil {
+		ok := object.Key("principal")
+		ok.String(*v.Principal)
+	}
+
+	if v.ProfileVersion != nil {
+		ok := object.Key("profileVersion")
+		ok.String(*v.ProfileVersion)
+	}
+
+	if v.RevisionId != nil {
+		ok := object.Key("revisionId")
+		ok.String(*v.RevisionId)
+	}
+
+	if v.StatementId != nil {
+		ok := object.Key("statementId")
+		ok.String(*v.StatementId)
+	}
+
+	return nil
+}
 
 type awsRestjson1_serializeOpCancelSigningProfile struct {
 }
@@ -263,6 +370,77 @@ func awsRestjson1_serializeOpHttpBindingsGetSigningProfileInput(v *GetSigningPro
 		}
 	}
 
+	if v.ProfileOwner != nil {
+		encoder.SetQuery("profileOwner").String(*v.ProfileOwner)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListProfilePermissions struct {
+}
+
+func (*awsRestjson1_serializeOpListProfilePermissions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListProfilePermissions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListProfilePermissionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/signing-profiles/{profileName}/permissions")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListProfilePermissionsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListProfilePermissionsInput(v *ListProfilePermissionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.ProfileName == nil || len(*v.ProfileName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profileName must not be empty")}
+	}
+	if v.ProfileName != nil {
+		if err := encoder.SetURI("profileName").String(*v.ProfileName); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -317,6 +495,14 @@ func awsRestjson1_serializeOpHttpBindingsListSigningJobsInput(v *ListSigningJobs
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.IsRevoked {
+		encoder.SetQuery("isRevoked").Boolean(v.IsRevoked)
+	}
+
+	if v.JobInvoker != nil {
+		encoder.SetQuery("jobInvoker").String(*v.JobInvoker)
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
@@ -331,6 +517,14 @@ func awsRestjson1_serializeOpHttpBindingsListSigningJobsInput(v *ListSigningJobs
 
 	if v.RequestedBy != nil {
 		encoder.SetQuery("requestedBy").String(*v.RequestedBy)
+	}
+
+	if v.SignatureExpiresAfter != nil {
+		encoder.SetQuery("signatureExpiresAfter").String(smithytime.FormatDateTime(*v.SignatureExpiresAfter))
+	}
+
+	if v.SignatureExpiresBefore != nil {
+		encoder.SetQuery("signatureExpiresBefore").String(smithytime.FormatDateTime(*v.SignatureExpiresBefore))
 	}
 
 	if len(v.Status) > 0 {
@@ -475,6 +669,16 @@ func awsRestjson1_serializeOpHttpBindingsListSigningProfilesInput(v *ListSigning
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.PlatformId != nil {
+		encoder.SetQuery("platformId").String(*v.PlatformId)
+	}
+
+	if v.Statuses != nil {
+		for i := range v.Statuses {
+			encoder.AddQuery("statuses").String(string(v.Statuses[i]))
+		}
 	}
 
 	return nil
@@ -633,6 +837,13 @@ func awsRestjson1_serializeOpDocumentPutSigningProfileInput(v *PutSigningProfile
 		ok.String(*v.PlatformId)
 	}
 
+	if v.SignatureValidityPeriod != nil {
+		ok := object.Key("signatureValidityPeriod")
+		if err := awsRestjson1_serializeDocumentSignatureValidityPeriod(v.SignatureValidityPeriod, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SigningMaterial != nil {
 		ok := object.Key("signingMaterial")
 		if err := awsRestjson1_serializeDocumentSigningMaterial(v.SigningMaterial, ok); err != nil {
@@ -652,6 +863,269 @@ func awsRestjson1_serializeOpDocumentPutSigningProfileInput(v *PutSigningProfile
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpRemoveProfilePermission struct {
+}
+
+func (*awsRestjson1_serializeOpRemoveProfilePermission) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpRemoveProfilePermission) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RemoveProfilePermissionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/signing-profiles/{profileName}/permissions/{statementId}")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsRemoveProfilePermissionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsRemoveProfilePermissionInput(v *RemoveProfilePermissionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ProfileName == nil || len(*v.ProfileName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profileName must not be empty")}
+	}
+	if v.ProfileName != nil {
+		if err := encoder.SetURI("profileName").String(*v.ProfileName); err != nil {
+			return err
+		}
+	}
+
+	if v.RevisionId != nil {
+		encoder.SetQuery("revisionId").String(*v.RevisionId)
+	}
+
+	if v.StatementId == nil || len(*v.StatementId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member statementId must not be empty")}
+	}
+	if v.StatementId != nil {
+		if err := encoder.SetURI("statementId").String(*v.StatementId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpRevokeSignature struct {
+}
+
+func (*awsRestjson1_serializeOpRevokeSignature) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpRevokeSignature) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RevokeSignatureInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/signing-jobs/{jobId}/revoke")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsRevokeSignatureInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentRevokeSignatureInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsRevokeSignatureInput(v *RevokeSignatureInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.JobId == nil || len(*v.JobId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member jobId must not be empty")}
+	}
+	if v.JobId != nil {
+		if err := encoder.SetURI("jobId").String(*v.JobId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentRevokeSignatureInput(v *RevokeSignatureInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JobOwner != nil {
+		ok := object.Key("jobOwner")
+		ok.String(*v.JobOwner)
+	}
+
+	if v.Reason != nil {
+		ok := object.Key("reason")
+		ok.String(*v.Reason)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpRevokeSigningProfile struct {
+}
+
+func (*awsRestjson1_serializeOpRevokeSigningProfile) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpRevokeSigningProfile) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RevokeSigningProfileInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/signing-profiles/{profileName}/revoke")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsRevokeSigningProfileInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentRevokeSigningProfileInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsRevokeSigningProfileInput(v *RevokeSigningProfileInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ProfileName == nil || len(*v.ProfileName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member profileName must not be empty")}
+	}
+	if v.ProfileName != nil {
+		if err := encoder.SetURI("profileName").String(*v.ProfileName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentRevokeSigningProfileInput(v *RevokeSigningProfileInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EffectiveTime != nil {
+		ok := object.Key("effectiveTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EffectiveTime))
+	}
+
+	if v.ProfileVersion != nil {
+		ok := object.Key("profileVersion")
+		ok.String(*v.ProfileVersion)
+	}
+
+	if v.Reason != nil {
+		ok := object.Key("reason")
+		ok.String(*v.Reason)
 	}
 
 	return nil
@@ -737,6 +1211,11 @@ func awsRestjson1_serializeOpDocumentStartSigningJobInput(v *StartSigningJobInpu
 	if v.ProfileName != nil {
 		ok := object.Key("profileName")
 		ok.String(*v.ProfileName)
+	}
+
+	if v.ProfileOwner != nil {
+		ok := object.Key("profileOwner")
+		ok.String(*v.ProfileOwner)
 	}
 
 	if v.Source != nil {
@@ -954,6 +1433,23 @@ func awsRestjson1_serializeDocumentS3Source(v *types.S3Source, value smithyjson.
 	if v.Version != nil {
 		ok := object.Key("version")
 		ok.String(*v.Version)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSignatureValidityPeriod(v *types.SignatureValidityPeriod, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	if v.Value != 0 {
+		ok := object.Key("value")
+		ok.Integer(v.Value)
 	}
 
 	return nil

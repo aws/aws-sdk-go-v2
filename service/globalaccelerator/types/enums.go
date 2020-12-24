@@ -74,6 +74,62 @@ func (ClientAffinity) Values() []ClientAffinity {
 	}
 }
 
+type CustomRoutingAcceleratorStatus string
+
+// Enum values for CustomRoutingAcceleratorStatus
+const (
+	CustomRoutingAcceleratorStatusDeployed   CustomRoutingAcceleratorStatus = "DEPLOYED"
+	CustomRoutingAcceleratorStatusInProgress CustomRoutingAcceleratorStatus = "IN_PROGRESS"
+)
+
+// Values returns all known values for CustomRoutingAcceleratorStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CustomRoutingAcceleratorStatus) Values() []CustomRoutingAcceleratorStatus {
+	return []CustomRoutingAcceleratorStatus{
+		"DEPLOYED",
+		"IN_PROGRESS",
+	}
+}
+
+type CustomRoutingDestinationTrafficState string
+
+// Enum values for CustomRoutingDestinationTrafficState
+const (
+	CustomRoutingDestinationTrafficStateAllow CustomRoutingDestinationTrafficState = "ALLOW"
+	CustomRoutingDestinationTrafficStateDeny  CustomRoutingDestinationTrafficState = "DENY"
+)
+
+// Values returns all known values for CustomRoutingDestinationTrafficState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CustomRoutingDestinationTrafficState) Values() []CustomRoutingDestinationTrafficState {
+	return []CustomRoutingDestinationTrafficState{
+		"ALLOW",
+		"DENY",
+	}
+}
+
+type CustomRoutingProtocol string
+
+// Enum values for CustomRoutingProtocol
+const (
+	CustomRoutingProtocolTcp CustomRoutingProtocol = "TCP"
+	CustomRoutingProtocolUdp CustomRoutingProtocol = "UDP"
+)
+
+// Values returns all known values for CustomRoutingProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CustomRoutingProtocol) Values() []CustomRoutingProtocol {
+	return []CustomRoutingProtocol{
+		"TCP",
+		"UDP",
+	}
+}
+
 type HealthCheckProtocol string
 
 // Enum values for HealthCheckProtocol

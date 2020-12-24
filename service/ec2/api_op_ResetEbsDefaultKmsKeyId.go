@@ -14,7 +14,7 @@ import (
 // in this Region to the AWS managed CMK for EBS. After resetting the default CMK
 // to the AWS managed CMK, you can continue to encrypt by a customer managed CMK by
 // specifying it when you create the volume. For more information, see Amazon EBS
-// Encryption
+// encryption
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
 // Amazon Elastic Compute Cloud User Guide.
 func (c *Client) ResetEbsDefaultKmsKeyId(ctx context.Context, params *ResetEbsDefaultKmsKeyIdInput, optFns ...func(*Options)) (*ResetEbsDefaultKmsKeyIdOutput, error) {

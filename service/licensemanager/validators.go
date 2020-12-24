@@ -10,6 +10,126 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAcceptGrant struct {
+}
+
+func (*validateOpAcceptGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcceptGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcceptGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcceptGrantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCheckInLicense struct {
+}
+
+func (*validateOpCheckInLicense) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCheckInLicense) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CheckInLicenseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCheckInLicenseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCheckoutBorrowLicense struct {
+}
+
+func (*validateOpCheckoutBorrowLicense) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCheckoutBorrowLicense) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CheckoutBorrowLicenseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCheckoutBorrowLicenseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCheckoutLicense struct {
+}
+
+func (*validateOpCheckoutLicense) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCheckoutLicense) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CheckoutLicenseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCheckoutLicenseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateGrant struct {
+}
+
+func (*validateOpCreateGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateGrantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateGrantVersion struct {
+}
+
+func (*validateOpCreateGrantVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateGrantVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateGrantVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateGrantVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLicenseConfiguration struct {
 }
 
@@ -25,6 +145,86 @@ func (m *validateOpCreateLicenseConfiguration) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateLicenseConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateLicense struct {
+}
+
+func (*validateOpCreateLicense) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLicense) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLicenseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLicenseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateLicenseVersion struct {
+}
+
+func (*validateOpCreateLicenseVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLicenseVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLicenseVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLicenseVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateToken struct {
+}
+
+func (*validateOpCreateToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteGrant struct {
+}
+
+func (*validateOpDeleteGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteGrantInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -50,6 +250,106 @@ func (m *validateOpDeleteLicenseConfiguration) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteLicense struct {
+}
+
+func (*validateOpDeleteLicense) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLicense) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLicenseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLicenseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteToken struct {
+}
+
+func (*validateOpDeleteToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpExtendLicenseConsumption struct {
+}
+
+func (*validateOpExtendLicenseConsumption) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExtendLicenseConsumption) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExtendLicenseConsumptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExtendLicenseConsumptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAccessToken struct {
+}
+
+func (*validateOpGetAccessToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccessToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccessTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccessTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetGrant struct {
+}
+
+func (*validateOpGetGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetGrantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetLicenseConfiguration struct {
 }
 
@@ -65,6 +365,46 @@ func (m *validateOpGetLicenseConfiguration) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetLicenseConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetLicense struct {
+}
+
+func (*validateOpGetLicense) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLicense) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLicenseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLicenseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetLicenseUsage struct {
+}
+
+func (*validateOpGetLicenseUsage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLicenseUsage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLicenseUsageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLicenseUsageInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -130,6 +470,26 @@ func (m *validateOpListLicenseSpecificationsForResource) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListLicenseVersions struct {
+}
+
+func (*validateOpListLicenseVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListLicenseVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListLicenseVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListLicenseVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListResourceInventory struct {
 }
 
@@ -185,6 +545,26 @@ func (m *validateOpListUsageForLicenseConfiguration) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListUsageForLicenseConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRejectGrant struct {
+}
+
+func (*validateOpRejectGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRejectGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RejectGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRejectGrantInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -290,16 +670,84 @@ func (m *validateOpUpdateServiceSettings) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAcceptGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcceptGrant{}, middleware.After)
+}
+
+func addOpCheckInLicenseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCheckInLicense{}, middleware.After)
+}
+
+func addOpCheckoutBorrowLicenseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCheckoutBorrowLicense{}, middleware.After)
+}
+
+func addOpCheckoutLicenseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCheckoutLicense{}, middleware.After)
+}
+
+func addOpCreateGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateGrant{}, middleware.After)
+}
+
+func addOpCreateGrantVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateGrantVersion{}, middleware.After)
+}
+
 func addOpCreateLicenseConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLicenseConfiguration{}, middleware.After)
+}
+
+func addOpCreateLicenseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLicense{}, middleware.After)
+}
+
+func addOpCreateLicenseVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLicenseVersion{}, middleware.After)
+}
+
+func addOpCreateTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateToken{}, middleware.After)
+}
+
+func addOpDeleteGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteGrant{}, middleware.After)
 }
 
 func addOpDeleteLicenseConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLicenseConfiguration{}, middleware.After)
 }
 
+func addOpDeleteLicenseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLicense{}, middleware.After)
+}
+
+func addOpDeleteTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteToken{}, middleware.After)
+}
+
+func addOpExtendLicenseConsumptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExtendLicenseConsumption{}, middleware.After)
+}
+
+func addOpGetAccessTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccessToken{}, middleware.After)
+}
+
+func addOpGetGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetGrant{}, middleware.After)
+}
+
 func addOpGetLicenseConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLicenseConfiguration{}, middleware.After)
+}
+
+func addOpGetLicenseValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLicense{}, middleware.After)
+}
+
+func addOpGetLicenseUsageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLicenseUsage{}, middleware.After)
 }
 
 func addOpListAssociationsForLicenseConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -314,6 +762,10 @@ func addOpListLicenseSpecificationsForResourceValidationMiddleware(stack *middle
 	return stack.Initialize.Add(&validateOpListLicenseSpecificationsForResource{}, middleware.After)
 }
 
+func addOpListLicenseVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListLicenseVersions{}, middleware.After)
+}
+
 func addOpListResourceInventoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListResourceInventory{}, middleware.After)
 }
@@ -324,6 +776,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListUsageForLicenseConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUsageForLicenseConfiguration{}, middleware.After)
+}
+
+func addOpRejectGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRejectGrant{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -346,16 +802,141 @@ func addOpUpdateServiceSettingsValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpUpdateServiceSettings{}, middleware.After)
 }
 
+func validateBorrowConfiguration(v *types.BorrowConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BorrowConfiguration"}
+	if v.AllowEarlyCheckIn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowEarlyCheckIn"))
+	}
+	if v.MaxTimeToLiveInMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxTimeToLiveInMinutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConsumptionConfiguration(v *types.ConsumptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConsumptionConfiguration"}
+	if v.ProvisionalConfiguration != nil {
+		if err := validateProvisionalConfiguration(v.ProvisionalConfiguration); err != nil {
+			invalidParams.AddNested("ProvisionalConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BorrowConfiguration != nil {
+		if err := validateBorrowConfiguration(v.BorrowConfiguration); err != nil {
+			invalidParams.AddNested("BorrowConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDatetimeRange(v *types.DatetimeRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatetimeRange"}
+	if v.Begin == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Begin"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEntitlement(v *types.Entitlement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Entitlement"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Unit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEntitlementData(v *types.EntitlementData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EntitlementData"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Unit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEntitlementDataList(v []types.EntitlementData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EntitlementDataList"}
+	for i := range v {
+		if err := validateEntitlementData(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEntitlementList(v []types.Entitlement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EntitlementList"}
+	for i := range v {
+		if err := validateEntitlement(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInventoryFilter(v *types.InventoryFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InventoryFilter"}
-	if len(v.Condition) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Condition) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -373,6 +954,21 @@ func validateInventoryFilterList(v []types.InventoryFilter) error {
 		if err := validateInventoryFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIssuer(v *types.Issuer) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Issuer"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -452,14 +1048,14 @@ func validateProductInformationFilter(v *types.ProductInformationFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProductInformationFilter"}
+	if v.ProductInformationFilterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductInformationFilterName"))
+	}
 	if v.ProductInformationFilterValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductInformationFilterValue"))
 	}
 	if v.ProductInformationFilterComparator == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductInformationFilterComparator"))
-	}
-	if v.ProductInformationFilterName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductInformationFilterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -502,21 +1098,325 @@ func validateProductInformationList(v []types.ProductInformation) error {
 	}
 }
 
+func validateProvisionalConfiguration(v *types.ProvisionalConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProvisionalConfiguration"}
+	if v.MaxTimeToLiveInMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxTimeToLiveInMinutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAcceptGrantInput(v *AcceptGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptGrantInput"}
+	if v.GrantArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GrantArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCheckInLicenseInput(v *CheckInLicenseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CheckInLicenseInput"}
+	if v.LicenseConsumptionToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseConsumptionToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCheckoutBorrowLicenseInput(v *CheckoutBorrowLicenseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CheckoutBorrowLicenseInput"}
+	if v.LicenseArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseArn"))
+	}
+	if v.Entitlements == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entitlements"))
+	} else if v.Entitlements != nil {
+		if err := validateEntitlementDataList(v.Entitlements); err != nil {
+			invalidParams.AddNested("Entitlements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.DigitalSignatureMethod) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DigitalSignatureMethod"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCheckoutLicenseInput(v *CheckoutLicenseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CheckoutLicenseInput"}
+	if v.ProductSKU == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductSKU"))
+	}
+	if len(v.CheckoutType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CheckoutType"))
+	}
+	if v.KeyFingerprint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyFingerprint"))
+	}
+	if v.Entitlements == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entitlements"))
+	} else if v.Entitlements != nil {
+		if err := validateEntitlementDataList(v.Entitlements); err != nil {
+			invalidParams.AddNested("Entitlements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateGrantInput(v *CreateGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateGrantInput"}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.GrantName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GrantName"))
+	}
+	if v.LicenseArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseArn"))
+	}
+	if v.Principals == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Principals"))
+	}
+	if v.HomeRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HomeRegion"))
+	}
+	if v.AllowedOperations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowedOperations"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateGrantVersionInput(v *CreateGrantVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateGrantVersionInput"}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.GrantArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GrantArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateLicenseConfigurationInput(v *CreateLicenseConfigurationInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLicenseConfigurationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.LicenseCountingType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseCountingType"))
+	}
 	if v.ProductInformationList != nil {
 		if err := validateProductInformationList(v.ProductInformationList); err != nil {
 			invalidParams.AddNested("ProductInformationList", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.LicenseCountingType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LicenseCountingType"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+}
+
+func validateOpCreateLicenseInput(v *CreateLicenseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLicenseInput"}
+	if v.LicenseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseName"))
+	}
+	if v.ProductName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductName"))
+	}
+	if v.ProductSKU == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductSKU"))
+	}
+	if v.Issuer == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Issuer"))
+	} else if v.Issuer != nil {
+		if err := validateIssuer(v.Issuer); err != nil {
+			invalidParams.AddNested("Issuer", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HomeRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HomeRegion"))
+	}
+	if v.Validity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Validity"))
+	} else if v.Validity != nil {
+		if err := validateDatetimeRange(v.Validity); err != nil {
+			invalidParams.AddNested("Validity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Entitlements == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entitlements"))
+	} else if v.Entitlements != nil {
+		if err := validateEntitlementList(v.Entitlements); err != nil {
+			invalidParams.AddNested("Entitlements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Beneficiary == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Beneficiary"))
+	}
+	if v.ConsumptionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumptionConfiguration"))
+	} else if v.ConsumptionConfiguration != nil {
+		if err := validateConsumptionConfiguration(v.ConsumptionConfiguration); err != nil {
+			invalidParams.AddNested("ConsumptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLicenseVersionInput(v *CreateLicenseVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLicenseVersionInput"}
+	if v.LicenseArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseArn"))
+	}
+	if v.LicenseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseName"))
+	}
+	if v.ProductName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductName"))
+	}
+	if v.Issuer == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Issuer"))
+	} else if v.Issuer != nil {
+		if err := validateIssuer(v.Issuer); err != nil {
+			invalidParams.AddNested("Issuer", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HomeRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HomeRegion"))
+	}
+	if v.Validity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Validity"))
+	} else if v.Validity != nil {
+		if err := validateDatetimeRange(v.Validity); err != nil {
+			invalidParams.AddNested("Validity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Entitlements == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entitlements"))
+	} else if v.Entitlements != nil {
+		if err := validateEntitlementList(v.Entitlements); err != nil {
+			invalidParams.AddNested("Entitlements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConsumptionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumptionConfiguration"))
+	} else if v.ConsumptionConfiguration != nil {
+		if err := validateConsumptionConfiguration(v.ConsumptionConfiguration); err != nil {
+			invalidParams.AddNested("ConsumptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateTokenInput(v *CreateTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTokenInput"}
+	if v.LicenseArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseArn"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteGrantInput(v *DeleteGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteGrantInput"}
+	if v.GrantArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GrantArn"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -540,6 +1440,84 @@ func validateOpDeleteLicenseConfigurationInput(v *DeleteLicenseConfigurationInpu
 	}
 }
 
+func validateOpDeleteLicenseInput(v *DeleteLicenseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLicenseInput"}
+	if v.LicenseArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseArn"))
+	}
+	if v.SourceVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTokenInput(v *DeleteTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTokenInput"}
+	if v.TokenId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpExtendLicenseConsumptionInput(v *ExtendLicenseConsumptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExtendLicenseConsumptionInput"}
+	if v.LicenseConsumptionToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseConsumptionToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAccessTokenInput(v *GetAccessTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccessTokenInput"}
+	if v.Token == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Token"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetGrantInput(v *GetGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetGrantInput"}
+	if v.GrantArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GrantArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetLicenseConfigurationInput(v *GetLicenseConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -547,6 +1525,36 @@ func validateOpGetLicenseConfigurationInput(v *GetLicenseConfigurationInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "GetLicenseConfigurationInput"}
 	if v.LicenseConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LicenseConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetLicenseInput(v *GetLicenseInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLicenseInput"}
+	if v.LicenseArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetLicenseUsageInput(v *GetLicenseUsageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLicenseUsageInput"}
+	if v.LicenseArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -592,6 +1600,21 @@ func validateOpListLicenseSpecificationsForResourceInput(v *ListLicenseSpecifica
 	invalidParams := smithy.InvalidParamsError{Context: "ListLicenseSpecificationsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListLicenseVersionsInput(v *ListLicenseVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListLicenseVersionsInput"}
+	if v.LicenseArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -647,6 +1670,21 @@ func validateOpListUsageForLicenseConfigurationInput(v *ListUsageForLicenseConfi
 	}
 }
 
+func validateOpRejectGrantInput(v *RejectGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectGrantInput"}
+	if v.GrantArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GrantArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -670,11 +1708,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -688,13 +1726,13 @@ func validateOpUpdateLicenseConfigurationInput(v *UpdateLicenseConfigurationInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLicenseConfigurationInput"}
+	if v.LicenseConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseConfigurationArn"))
+	}
 	if v.ProductInformationList != nil {
 		if err := validateProductInformationList(v.ProductInformationList); err != nil {
 			invalidParams.AddNested("ProductInformationList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.LicenseConfigurationArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LicenseConfigurationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -708,13 +1746,13 @@ func validateOpUpdateLicenseSpecificationsForResourceInput(v *UpdateLicenseSpeci
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLicenseSpecificationsForResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
 	if v.AddLicenseSpecifications != nil {
 		if err := validateLicenseSpecifications(v.AddLicenseSpecifications); err != nil {
 			invalidParams.AddNested("AddLicenseSpecifications", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if v.RemoveLicenseSpecifications != nil {
 		if err := validateLicenseSpecifications(v.RemoveLicenseSpecifications); err != nil {

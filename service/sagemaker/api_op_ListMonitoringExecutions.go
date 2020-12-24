@@ -49,8 +49,16 @@ type ListMonitoringExecutionsInput struct {
 	// The maximum number of jobs to return in the response. The default value is 10.
 	MaxResults *int32
 
+	// Gets a list of the monitoring job runs of the specified monitoring job
+	// definitions.
+	MonitoringJobDefinitionName *string
+
 	// Name of a specific schedule to fetch jobs for.
 	MonitoringScheduleName *string
+
+	// A filter that returns only the monitoring job runs of the specified monitoring
+	// type.
+	MonitoringTypeEquals types.MonitoringType
 
 	// The token returned if the response is truncated. To retrieve the next set of job
 	// executions, use it in the next request.

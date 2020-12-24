@@ -42,8 +42,7 @@ type ListOrganizationAdminAccountsInput struct {
 
 type ListOrganizationAdminAccountsOutput struct {
 
-	// An AdminAccounts object that includes a list of accounts configured as GuardDuty
-	// delegated administrators.
+	// A list of accounts configured as GuardDuty delegated administrators.
 	AdminAccounts []types.AdminAccount
 
 	// The pagination parameter to be used on the next list operation to retrieve more

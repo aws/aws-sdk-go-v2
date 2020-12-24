@@ -140,17 +140,17 @@ func validateOpGetEC2RecommendationProjectedMetricsInput(v *GetEC2Recommendation
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetEC2RecommendationProjectedMetricsInput"}
-	if v.StartTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
 	if len(v.Stat) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Stat"))
 	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
-	}
-	if v.InstanceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

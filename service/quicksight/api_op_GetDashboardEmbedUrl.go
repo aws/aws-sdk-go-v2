@@ -29,9 +29,9 @@ import (
 // resulting user session is valid for 10 hours.
 //
 // For more information, see
-// Embedding Amazon QuickSight
-// (https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html)
-// in the Amazon QuickSight User Guide .
+// Embedded Analytics
+// (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html) in
+// the Amazon QuickSight User Guide.
 func (c *Client) GetDashboardEmbedUrl(ctx context.Context, params *GetDashboardEmbedUrlInput, optFns ...func(*Options)) (*GetDashboardEmbedUrlOutput, error) {
 	if params == nil {
 		params = &GetDashboardEmbedUrlInput{}
@@ -54,7 +54,8 @@ type GetDashboardEmbedUrlInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID for the dashboard, also added to the IAM policy.
+	// The ID for the dashboard, also added to the AWS Identity and Access Management
+	// (IAM) policy.
 	//
 	// This member is required.
 	DashboardId *string
@@ -62,7 +63,18 @@ type GetDashboardEmbedUrlInput struct {
 	// The authentication method that the user uses to sign in.
 	//
 	// This member is required.
-	IdentityType types.IdentityType
+	IdentityType types.EmbeddingIdentityType
+
+	// A list of one or more dashboard IDs that you want to add to a session that
+	// includes anonymous users. The IdentityType parameter must be set to ANONYMOUS
+	// for this to work, because other identity types authenticate as QuickSight or IAM
+	// users. For example, if you set "--dashboard-id dash_id1 --dashboard-id dash_id2
+	// dash_id3 identity-type ANONYMOUS", the session can access all three dashboards.
+	AdditionalDashboardIds []string
+
+	// The QuickSight namespace that contains the dashboard IDs in this request. If
+	// you're not using a custom namespace, set this to "default".
+	Namespace *string
 
 	// Remove the reset button on the embedded dashboard. The default is FALSE, which
 	// enables the reset button.
@@ -75,7 +87,7 @@ type GetDashboardEmbedUrlInput struct {
 	// Adds persistence of state for the user session in an embedded dashboard.
 	// Persistence applies to the sheet and the parameter settings. These are control
 	// settings that the dashboard subscriber (QuickSight reader) chooses while viewing
-	// the dashboard. If this is set to TRUE, the settings are the same when the the
+	// the dashboard. If this is set to TRUE, the settings are the same when the
 	// subscriber reopens the same dashboard URL. The state is stored in QuickSight,
 	// not in a browser cookie. If this is set to FALSE, the state of the user session
 	// is not persisted. The default is FALSE.
@@ -103,6 +115,7 @@ type GetDashboardEmbedUrlInput struct {
 	UserArn *string
 }
 
+// Output returned from the GetDashboardEmbedUrl operation.
 type GetDashboardEmbedUrlOutput struct {
 
 	// A single-use URL that you can put into your server-side webpage to embed your

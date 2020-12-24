@@ -57,6 +57,9 @@ type DescribeTrialOutput struct {
 	// When the trial was last modified.
 	LastModifiedTime *time.Time
 
+	// Metadata properties of the tracking entity, trial, or trial component.
+	MetadataProperties *types.MetadataProperties
+
 	// The Amazon Resource Name (ARN) of the source and, optionally, the job type.
 	Source *types.TrialSource
 

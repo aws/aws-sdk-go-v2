@@ -42,6 +42,26 @@ type ListModelPackagesInput struct {
 	// The maximum number of model packages to return in the response.
 	MaxResults *int32
 
+	// A filter that returns only the model packages with the specified approval
+	// status.
+	ModelApprovalStatus types.ModelApprovalStatus
+
+	// A filter that returns only model versions that belong to the specified model
+	// group.
+	ModelPackageGroupName *string
+
+	// A filter that returns onlyl the model packages of the specified type. This can
+	// be one of the following values.
+	//
+	// * VERSIONED - List only versioned models.
+	//
+	// *
+	// UNVERSIONED - List only unversioined models.
+	//
+	// * BOTH - List both versioned and
+	// unversioned models.
+	ModelPackageType types.ModelPackageType
+
 	// A string in the model package name. This filter returns only model packages
 	// whose name contains the specified string.
 	NameContains *string

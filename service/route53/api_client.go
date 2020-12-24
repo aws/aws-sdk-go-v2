@@ -235,6 +235,13 @@ func addSanitizeURLMiddleware(stack *middleware.Stack) error {
 // another operation (e.g. it expects just '1234')
 func sanitizeHostedZoneIDInput(input interface{}) error {
 	switch i := input.(type) {
+	case *ActivateKeySigningKeyInput:
+		if i.HostedZoneId != nil {
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
+			i.HostedZoneId = &v
+		}
+
 	case *AssociateVPCWithHostedZoneInput:
 		if i.HostedZoneId != nil {
 			idx := strings.LastIndex(*i.HostedZoneId, `/`)
@@ -254,6 +261,13 @@ func sanitizeHostedZoneIDInput(input interface{}) error {
 			idx := strings.LastIndex(*i.DelegationSetId, `/`)
 			v := (*i.DelegationSetId)[idx+1:]
 			i.DelegationSetId = &v
+		}
+
+	case *CreateKeySigningKeyInput:
+		if i.HostedZoneId != nil {
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
+			i.HostedZoneId = &v
 		}
 
 	case *CreateQueryLoggingConfigInput:
@@ -284,11 +298,25 @@ func sanitizeHostedZoneIDInput(input interface{}) error {
 			i.HostedZoneId = &v
 		}
 
+	case *DeactivateKeySigningKeyInput:
+		if i.HostedZoneId != nil {
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
+			i.HostedZoneId = &v
+		}
+
 	case *DeleteHostedZoneInput:
 		if i.Id != nil {
 			idx := strings.LastIndex(*i.Id, `/`)
 			v := (*i.Id)[idx+1:]
 			i.Id = &v
+		}
+
+	case *DeleteKeySigningKeyInput:
+		if i.HostedZoneId != nil {
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
+			i.HostedZoneId = &v
 		}
 
 	case *DeleteReusableDelegationSetInput:
@@ -305,7 +333,21 @@ func sanitizeHostedZoneIDInput(input interface{}) error {
 			i.HostedZoneId = &v
 		}
 
+	case *DisableHostedZoneDNSSECInput:
+		if i.HostedZoneId != nil {
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
+			i.HostedZoneId = &v
+		}
+
 	case *DisassociateVPCFromHostedZoneInput:
+		if i.HostedZoneId != nil {
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
+			i.HostedZoneId = &v
+		}
+
+	case *EnableHostedZoneDNSSECInput:
 		if i.HostedZoneId != nil {
 			idx := strings.LastIndex(*i.HostedZoneId, `/`)
 			v := (*i.HostedZoneId)[idx+1:]
@@ -317,6 +359,13 @@ func sanitizeHostedZoneIDInput(input interface{}) error {
 			idx := strings.LastIndex(*i.Id, `/`)
 			v := (*i.Id)[idx+1:]
 			i.Id = &v
+		}
+
+	case *GetDNSSECInput:
+		if i.HostedZoneId != nil {
+			idx := strings.LastIndex(*i.HostedZoneId, `/`)
+			v := (*i.HostedZoneId)[idx+1:]
+			i.HostedZoneId = &v
 		}
 
 	case *GetHostedZoneInput:

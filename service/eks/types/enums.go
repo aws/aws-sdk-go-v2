@@ -2,6 +2,58 @@
 
 package types
 
+type AddonIssueCode string
+
+// Enum values for AddonIssueCode
+const (
+	AddonIssueCodeAccessDenied                 AddonIssueCode = "AccessDenied"
+	AddonIssueCodeInternalFailure              AddonIssueCode = "InternalFailure"
+	AddonIssueCodeClusterUnreachable           AddonIssueCode = "ClusterUnreachable"
+	AddonIssueCodeInsufficientNumberOfReplicas AddonIssueCode = "InsufficientNumberOfReplicas"
+	AddonIssueCodeConfigurationConflict        AddonIssueCode = "ConfigurationConflict"
+)
+
+// Values returns all known values for AddonIssueCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AddonIssueCode) Values() []AddonIssueCode {
+	return []AddonIssueCode{
+		"AccessDenied",
+		"InternalFailure",
+		"ClusterUnreachable",
+		"InsufficientNumberOfReplicas",
+		"ConfigurationConflict",
+	}
+}
+
+type AddonStatus string
+
+// Enum values for AddonStatus
+const (
+	AddonStatusCreating     AddonStatus = "CREATING"
+	AddonStatusActive       AddonStatus = "ACTIVE"
+	AddonStatusCreateFailed AddonStatus = "CREATE_FAILED"
+	AddonStatusUpdating     AddonStatus = "UPDATING"
+	AddonStatusDeleting     AddonStatus = "DELETING"
+	AddonStatusDeleteFailed AddonStatus = "DELETE_FAILED"
+	AddonStatusDegraded     AddonStatus = "DEGRADED"
+)
+
+// Values returns all known values for AddonStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AddonStatus) Values() []AddonStatus {
+	return []AddonStatus{
+		"CREATING",
+		"ACTIVE",
+		"CREATE_FAILED",
+		"UPDATING",
+		"DELETING",
+		"DELETE_FAILED",
+		"DEGRADED",
+	}
+}
+
 type AMITypes string
 
 // Enum values for AMITypes
@@ -19,6 +71,24 @@ func (AMITypes) Values() []AMITypes {
 		"AL2_x86_64",
 		"AL2_x86_64_GPU",
 		"AL2_ARM_64",
+	}
+}
+
+type CapacityTypes string
+
+// Enum values for CapacityTypes
+const (
+	CapacityTypesOnDemand CapacityTypes = "ON_DEMAND"
+	CapacityTypesSpot     CapacityTypes = "SPOT"
+)
+
+// Values returns all known values for CapacityTypes. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityTypes) Values() []CapacityTypes {
+	return []CapacityTypes{
+		"ON_DEMAND",
+		"SPOT",
 	}
 }
 
@@ -50,18 +120,20 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeSubnetNotFound            ErrorCode = "SubnetNotFound"
-	ErrorCodeSecurityGroupNotFound     ErrorCode = "SecurityGroupNotFound"
-	ErrorCodeEniLimitReached           ErrorCode = "EniLimitReached"
-	ErrorCodeIpNotAvailable            ErrorCode = "IpNotAvailable"
-	ErrorCodeAccessDenied              ErrorCode = "AccessDenied"
-	ErrorCodeOperationNotPermitted     ErrorCode = "OperationNotPermitted"
-	ErrorCodeVpcIdNotFound             ErrorCode = "VpcIdNotFound"
-	ErrorCodeUnknown                   ErrorCode = "Unknown"
-	ErrorCodeNodeCreationFailure       ErrorCode = "NodeCreationFailure"
-	ErrorCodePodEvictionFailure        ErrorCode = "PodEvictionFailure"
-	ErrorCodeInsufficientFreeAddresses ErrorCode = "InsufficientFreeAddresses"
-	ErrorCodeClusterUnreachable        ErrorCode = "ClusterUnreachable"
+	ErrorCodeSubnetNotFound               ErrorCode = "SubnetNotFound"
+	ErrorCodeSecurityGroupNotFound        ErrorCode = "SecurityGroupNotFound"
+	ErrorCodeEniLimitReached              ErrorCode = "EniLimitReached"
+	ErrorCodeIpNotAvailable               ErrorCode = "IpNotAvailable"
+	ErrorCodeAccessDenied                 ErrorCode = "AccessDenied"
+	ErrorCodeOperationNotPermitted        ErrorCode = "OperationNotPermitted"
+	ErrorCodeVpcIdNotFound                ErrorCode = "VpcIdNotFound"
+	ErrorCodeUnknown                      ErrorCode = "Unknown"
+	ErrorCodeNodeCreationFailure          ErrorCode = "NodeCreationFailure"
+	ErrorCodePodEvictionFailure           ErrorCode = "PodEvictionFailure"
+	ErrorCodeInsufficientFreeAddresses    ErrorCode = "InsufficientFreeAddresses"
+	ErrorCodeClusterUnreachable           ErrorCode = "ClusterUnreachable"
+	ErrorCodeInsufficientNumberOfReplicas ErrorCode = "InsufficientNumberOfReplicas"
+	ErrorCodeConfigurationConflict        ErrorCode = "ConfigurationConflict"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -81,6 +153,8 @@ func (ErrorCode) Values() []ErrorCode {
 		"PodEvictionFailure",
 		"InsufficientFreeAddresses",
 		"ClusterUnreachable",
+		"InsufficientNumberOfReplicas",
+		"ConfigurationConflict",
 	}
 }
 
@@ -210,6 +284,24 @@ func (NodegroupStatus) Values() []NodegroupStatus {
 	}
 }
 
+type ResolveConflicts string
+
+// Enum values for ResolveConflicts
+const (
+	ResolveConflictsOverwrite ResolveConflicts = "OVERWRITE"
+	ResolveConflictsNone      ResolveConflicts = "NONE"
+)
+
+// Values returns all known values for ResolveConflicts. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResolveConflicts) Values() []ResolveConflicts {
+	return []ResolveConflicts{
+		"OVERWRITE",
+		"NONE",
+	}
+}
+
 type UpdateParamType string
 
 // Enum values for UpdateParamType
@@ -226,6 +318,9 @@ const (
 	UpdateParamTypeMinSize               UpdateParamType = "MinSize"
 	UpdateParamTypeReleaseVersion        UpdateParamType = "ReleaseVersion"
 	UpdateParamTypePublicAccessCidrs     UpdateParamType = "PublicAccessCidrs"
+	UpdateParamTypeAddonVersion          UpdateParamType = "AddonVersion"
+	UpdateParamTypeServiceAccountRoleArn UpdateParamType = "ServiceAccountRoleArn"
+	UpdateParamTypeResolveConflicts      UpdateParamType = "ResolveConflicts"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -245,6 +340,9 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"MinSize",
 		"ReleaseVersion",
 		"PublicAccessCidrs",
+		"AddonVersion",
+		"ServiceAccountRoleArn",
+		"ResolveConflicts",
 	}
 }
 
@@ -278,6 +376,7 @@ const (
 	UpdateTypeEndpointAccessUpdate UpdateType = "EndpointAccessUpdate"
 	UpdateTypeLoggingUpdate        UpdateType = "LoggingUpdate"
 	UpdateTypeConfigUpdate         UpdateType = "ConfigUpdate"
+	UpdateTypeAddonUpdate          UpdateType = "AddonUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -289,5 +388,6 @@ func (UpdateType) Values() []UpdateType {
 		"EndpointAccessUpdate",
 		"LoggingUpdate",
 		"ConfigUpdate",
+		"AddonUpdate",
 	}
 }

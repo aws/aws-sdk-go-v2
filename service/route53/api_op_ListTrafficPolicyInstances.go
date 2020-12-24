@@ -53,7 +53,7 @@ type ListTrafficPolicyInstancesInput struct {
 	// TrafficPolicyInstanceNameMarker, and TrafficPolicyInstanceTypeMarker represent
 	// the first traffic policy instance in the next group of MaxItems traffic policy
 	// instances.
-	MaxItems *string
+	MaxItems *int32
 
 	// If the value of IsTruncated in the previous response was true, you have more
 	// traffic policy instances. To get more traffic policy instances, submit another
@@ -90,7 +90,7 @@ type ListTrafficPolicyInstancesOutput struct {
 	// ListTrafficPolicyInstances that produced the current response.
 	//
 	// This member is required.
-	MaxItems *string
+	MaxItems *int32
 
 	// A list that contains one TrafficPolicyInstance element for each traffic policy
 	// instance that matches the elements in the request.

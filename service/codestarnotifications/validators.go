@@ -327,11 +327,11 @@ func validateListEventTypesFilter(v *types.ListEventTypesFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListEventTypesFilter"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if len(v.Name) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -435,6 +435,9 @@ func validateOpCreateNotificationRuleInput(v *CreateNotificationRuleInput) error
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.EventTypeIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTypeIds"))
+	}
 	if v.Resource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
 	}
@@ -443,9 +446,6 @@ func validateOpCreateNotificationRuleInput(v *CreateNotificationRuleInput) error
 	}
 	if len(v.DetailType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DetailType"))
-	}
-	if v.EventTypeIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventTypeIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

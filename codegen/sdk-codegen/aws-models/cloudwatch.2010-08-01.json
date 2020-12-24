@@ -156,10 +156,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CompositeAlarm"
+                        "value": "CompositeAlarm",
+                        "name": "CompositeAlarm"
                     },
                     {
-                        "value": "MetricAlarm"
+                        "value": "MetricAlarm",
+                        "name": "MetricAlarm"
                     }
                 ]
             }
@@ -270,13 +272,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PENDING_TRAINING"
+                        "value": "PENDING_TRAINING",
+                        "name": "PENDING_TRAINING"
                     },
                     {
-                        "value": "TRAINED_INSUFFICIENT_DATA"
+                        "value": "TRAINED_INSUFFICIENT_DATA",
+                        "name": "TRAINED_INSUFFICIENT_DATA"
                     },
                     {
-                        "value": "TRAINED"
+                        "value": "TRAINED",
+                        "name": "TRAINED"
                     }
                 ]
             }
@@ -301,25 +306,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "GreaterThanOrEqualToThreshold"
+                        "value": "GreaterThanOrEqualToThreshold",
+                        "name": "GreaterThanOrEqualToThreshold"
                     },
                     {
-                        "value": "GreaterThanThreshold"
+                        "value": "GreaterThanThreshold",
+                        "name": "GreaterThanThreshold"
                     },
                     {
-                        "value": "LessThanThreshold"
+                        "value": "LessThanThreshold",
+                        "name": "LessThanThreshold"
                     },
                     {
-                        "value": "LessThanOrEqualToThreshold"
+                        "value": "LessThanOrEqualToThreshold",
+                        "name": "LessThanOrEqualToThreshold"
                     },
                     {
-                        "value": "LessThanLowerOrGreaterThanUpperThreshold"
+                        "value": "LessThanLowerOrGreaterThanUpperThreshold",
+                        "name": "LessThanLowerOrGreaterThanUpperThreshold"
                     },
                     {
-                        "value": "LessThanLowerThreshold"
+                        "value": "LessThanLowerThreshold",
+                        "name": "LessThanLowerThreshold"
                     },
                     {
-                        "value": "GreaterThanUpperThreshold"
+                        "value": "GreaterThanUpperThreshold",
+                        "name": "GreaterThanUpperThreshold"
                     }
                 ]
             }
@@ -2066,13 +2078,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ConfigurationUpdate"
+                        "value": "ConfigurationUpdate",
+                        "name": "ConfigurationUpdate"
                     },
                     {
-                        "value": "StateUpdate"
+                        "value": "StateUpdate",
+                        "name": "StateUpdate"
                     },
                     {
-                        "value": "Action"
+                        "value": "Action",
+                        "name": "Action"
                     }
                 ]
             }
@@ -3852,85 +3867,112 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Seconds"
+                        "value": "Seconds",
+                        "name": "Seconds"
                     },
                     {
-                        "value": "Microseconds"
+                        "value": "Microseconds",
+                        "name": "Microseconds"
                     },
                     {
-                        "value": "Milliseconds"
+                        "value": "Milliseconds",
+                        "name": "Milliseconds"
                     },
                     {
-                        "value": "Bytes"
+                        "value": "Bytes",
+                        "name": "Bytes"
                     },
                     {
-                        "value": "Kilobytes"
+                        "value": "Kilobytes",
+                        "name": "Kilobytes"
                     },
                     {
-                        "value": "Megabytes"
+                        "value": "Megabytes",
+                        "name": "Megabytes"
                     },
                     {
-                        "value": "Gigabytes"
+                        "value": "Gigabytes",
+                        "name": "Gigabytes"
                     },
                     {
-                        "value": "Terabytes"
+                        "value": "Terabytes",
+                        "name": "Terabytes"
                     },
                     {
-                        "value": "Bits"
+                        "value": "Bits",
+                        "name": "Bits"
                     },
                     {
-                        "value": "Kilobits"
+                        "value": "Kilobits",
+                        "name": "Kilobits"
                     },
                     {
-                        "value": "Megabits"
+                        "value": "Megabits",
+                        "name": "Megabits"
                     },
                     {
-                        "value": "Gigabits"
+                        "value": "Gigabits",
+                        "name": "Gigabits"
                     },
                     {
-                        "value": "Terabits"
+                        "value": "Terabits",
+                        "name": "Terabits"
                     },
                     {
-                        "value": "Percent"
+                        "value": "Percent",
+                        "name": "Percent"
                     },
                     {
-                        "value": "Count"
+                        "value": "Count",
+                        "name": "Count"
                     },
                     {
-                        "value": "Bytes/Second"
+                        "value": "Bytes/Second",
+                        "name": "Bytes_Second"
                     },
                     {
-                        "value": "Kilobytes/Second"
+                        "value": "Kilobytes/Second",
+                        "name": "Kilobytes_Second"
                     },
                     {
-                        "value": "Megabytes/Second"
+                        "value": "Megabytes/Second",
+                        "name": "Megabytes_Second"
                     },
                     {
-                        "value": "Gigabytes/Second"
+                        "value": "Gigabytes/Second",
+                        "name": "Gigabytes_Second"
                     },
                     {
-                        "value": "Terabytes/Second"
+                        "value": "Terabytes/Second",
+                        "name": "Terabytes_Second"
                     },
                     {
-                        "value": "Bits/Second"
+                        "value": "Bits/Second",
+                        "name": "Bits_Second"
                     },
                     {
-                        "value": "Kilobits/Second"
+                        "value": "Kilobits/Second",
+                        "name": "Kilobits_Second"
                     },
                     {
-                        "value": "Megabits/Second"
+                        "value": "Megabits/Second",
+                        "name": "Megabits_Second"
                     },
                     {
-                        "value": "Gigabits/Second"
+                        "value": "Gigabits/Second",
+                        "name": "Gigabits_Second"
                     },
                     {
-                        "value": "Terabits/Second"
+                        "value": "Terabits/Second",
+                        "name": "Terabits_Second"
                     },
                     {
-                        "value": "Count/Second"
+                        "value": "Count/Second",
+                        "name": "Count_Second"
                     },
                     {
-                        "value": "None"
+                        "value": "None",
+                        "name": "None"
                     }
                 ]
             }
@@ -3961,13 +4003,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "OK"
+                        "value": "OK",
+                        "name": "OK"
                     },
                     {
-                        "value": "ALARM"
+                        "value": "ALARM",
+                        "name": "ALARM"
                     },
                     {
-                        "value": "INSUFFICIENT_DATA"
+                        "value": "INSUFFICIENT_DATA",
+                        "name": "INSUFFICIENT_DATA"
                     }
                 ]
             }
@@ -3977,19 +4022,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SampleCount"
+                        "value": "SampleCount",
+                        "name": "SampleCount"
                     },
                     {
-                        "value": "Average"
+                        "value": "Average",
+                        "name": "Average"
                     },
                     {
-                        "value": "Sum"
+                        "value": "Sum",
+                        "name": "Sum"
                     },
                     {
-                        "value": "Minimum"
+                        "value": "Minimum",
+                        "name": "Minimum"
                     },
                     {
-                        "value": "Maximum"
+                        "value": "Maximum",
+                        "name": "Maximum"
                     }
                 ]
             }

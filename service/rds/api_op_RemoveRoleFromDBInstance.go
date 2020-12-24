@@ -42,7 +42,7 @@ type RemoveRoleFromDBInstanceInput struct {
 	FeatureName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB
-	// instance, for example arn:aws:iam::123456789012:role/AccessRole.
+	// instance, for example, arn:aws:iam::123456789012:role/AccessRole.
 	//
 	// This member is required.
 	RoleArn *string

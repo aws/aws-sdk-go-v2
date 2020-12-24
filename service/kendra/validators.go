@@ -110,6 +110,26 @@ func (m *validateOpCreateIndex) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateThesaurus struct {
+}
+
+func (*validateOpCreateThesaurus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateThesaurus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateThesaurusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateThesaurusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDataSource struct {
 }
 
@@ -170,6 +190,26 @@ func (m *validateOpDeleteIndex) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteThesaurus struct {
+}
+
+func (*validateOpDeleteThesaurus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteThesaurus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteThesaurusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteThesaurusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDataSource struct {
 }
 
@@ -225,6 +265,26 @@ func (m *validateOpDescribeIndex) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeIndexInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeThesaurus struct {
+}
+
+func (*validateOpDescribeThesaurus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeThesaurus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeThesaurusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeThesaurusInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -305,6 +365,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListThesauri struct {
+}
+
+func (*validateOpListThesauri) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListThesauri) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListThesauriInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListThesauriInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -470,6 +550,26 @@ func (m *validateOpUpdateIndex) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateThesaurus struct {
+}
+
+func (*validateOpUpdateThesaurus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateThesaurus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateThesaurusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateThesaurusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpBatchDeleteDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDeleteDocument{}, middleware.After)
 }
@@ -490,6 +590,10 @@ func addOpCreateIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIndex{}, middleware.After)
 }
 
+func addOpCreateThesaurusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateThesaurus{}, middleware.After)
+}
+
 func addOpDeleteDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataSource{}, middleware.After)
 }
@@ -502,6 +606,10 @@ func addOpDeleteIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteIndex{}, middleware.After)
 }
 
+func addOpDeleteThesaurusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteThesaurus{}, middleware.After)
+}
+
 func addOpDescribeDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDataSource{}, middleware.After)
 }
@@ -512,6 +620,10 @@ func addOpDescribeFaqValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeIndex{}, middleware.After)
+}
+
+func addOpDescribeThesaurusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeThesaurus{}, middleware.After)
 }
 
 func addOpListDataSourcesValidationMiddleware(stack *middleware.Stack) error {
@@ -528,6 +640,10 @@ func addOpListFaqsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListThesauriValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListThesauri{}, middleware.After)
 }
 
 func addOpQueryValidationMiddleware(stack *middleware.Stack) error {
@@ -560,6 +676,10 @@ func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateIndex{}, middleware.After)
+}
+
+func addOpUpdateThesaurusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateThesaurus{}, middleware.After)
 }
 
 func validateAclConfiguration(v *types.AclConfiguration) error {
@@ -867,6 +987,11 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 			invalidParams.AddNested("ConfluenceConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.GoogleDriveConfiguration != nil {
+		if err := validateGoogleDriveConfiguration(v.GoogleDriveConfiguration); err != nil {
+			invalidParams.AddNested("GoogleDriveConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1053,6 +1178,26 @@ func validateDocumentMetadataConfigurationList(v []types.DocumentMetadataConfigu
 	for i := range v {
 		if err := validateDocumentMetadataConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGoogleDriveConfiguration(v *types.GoogleDriveConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GoogleDriveConfiguration"}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if v.FieldMappings != nil {
+		if err := validateDataSourceToIndexFieldMappingList(v.FieldMappings); err != nil {
+			invalidParams.AddNested("FieldMappings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1779,6 +1924,39 @@ func validateOpCreateIndexInput(v *CreateIndexInput) error {
 	}
 }
 
+func validateOpCreateThesaurusInput(v *CreateThesaurusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateThesaurusInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceS3Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceS3Path"))
+	} else if v.SourceS3Path != nil {
+		if err := validateS3Path(v.SourceS3Path); err != nil {
+			invalidParams.AddNested("SourceS3Path", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDataSourceInput(v *DeleteDataSourceInput) error {
 	if v == nil {
 		return nil
@@ -1830,6 +2008,24 @@ func validateOpDeleteIndexInput(v *DeleteIndexInput) error {
 	}
 }
 
+func validateOpDeleteThesaurusInput(v *DeleteThesaurusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteThesaurusInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDataSourceInput(v *DescribeDataSourceInput) error {
 	if v == nil {
 		return nil
@@ -1873,6 +2069,24 @@ func validateOpDescribeIndexInput(v *DescribeIndexInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeIndexInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeThesaurusInput(v *DescribeThesaurusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeThesaurusInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1936,6 +2150,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListThesauriInput(v *ListThesauriInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListThesauriInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2120,6 +2349,29 @@ func validateOpUpdateIndexInput(v *UpdateIndexInput) error {
 	if v.UserTokenConfigurations != nil {
 		if err := validateUserTokenConfigurationList(v.UserTokenConfigurations); err != nil {
 			invalidParams.AddNested("UserTokenConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateThesaurusInput(v *UpdateThesaurusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateThesaurusInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.SourceS3Path != nil {
+		if err := validateS3Path(v.SourceS3Path); err != nil {
+			invalidParams.AddNested("SourceS3Path", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

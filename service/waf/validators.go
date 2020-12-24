@@ -1479,10 +1479,8 @@ func validateActivatedRule(v *types.ActivatedRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ActivatedRule"}
-	if v.OverrideAction != nil {
-		if err := validateWafOverrideAction(v.OverrideAction); err != nil {
-			invalidParams.AddNested("OverrideAction", err.(smithy.InvalidParamsError))
-		}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
 	}
 	if v.RuleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
@@ -1492,8 +1490,10 @@ func validateActivatedRule(v *types.ActivatedRule) error {
 			invalidParams.AddNested("Action", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Priority == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	if v.OverrideAction != nil {
+		if err := validateWafOverrideAction(v.OverrideAction); err != nil {
+			invalidParams.AddNested("OverrideAction", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ExcludedRules != nil {
 		if err := validateExcludedRules(v.ExcludedRules); err != nil {
@@ -1512,15 +1512,15 @@ func validateByteMatchSetUpdate(v *types.ByteMatchSetUpdate) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ByteMatchSetUpdate"}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
 	if v.ByteMatchTuple == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ByteMatchTuple"))
 	} else if v.ByteMatchTuple != nil {
 		if err := validateByteMatchTuple(v.ByteMatchTuple); err != nil {
 			invalidParams.AddNested("ByteMatchTuple", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.Action) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1551,12 +1551,6 @@ func validateByteMatchTuple(v *types.ByteMatchTuple) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ByteMatchTuple"}
-	if len(v.PositionalConstraint) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("PositionalConstraint"))
-	}
-	if len(v.TextTransformation) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TextTransformation"))
-	}
 	if v.FieldToMatch == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FieldToMatch"))
 	} else if v.FieldToMatch != nil {
@@ -1566,6 +1560,12 @@ func validateByteMatchTuple(v *types.ByteMatchTuple) error {
 	}
 	if v.TargetString == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetString"))
+	}
+	if len(v.TextTransformation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TextTransformation"))
+	}
+	if len(v.PositionalConstraint) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PositionalConstraint"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1644,15 +1644,15 @@ func validateGeoMatchSetUpdate(v *types.GeoMatchSetUpdate) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GeoMatchSetUpdate"}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
 	if v.GeoMatchConstraint == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GeoMatchConstraint"))
 	} else if v.GeoMatchConstraint != nil {
 		if err := validateGeoMatchConstraint(v.GeoMatchConstraint); err != nil {
 			invalidParams.AddNested("GeoMatchConstraint", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.Action) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1683,11 +1683,11 @@ func validateIPSetDescriptor(v *types.IPSetDescriptor) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IPSetDescriptor"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1701,15 +1701,15 @@ func validateIPSetUpdate(v *types.IPSetUpdate) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IPSetUpdate"}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
 	if v.IPSetDescriptor == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IPSetDescriptor"))
 	} else if v.IPSetDescriptor != nil {
 		if err := validateIPSetDescriptor(v.IPSetDescriptor); err != nil {
 			invalidParams.AddNested("IPSetDescriptor", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.Action) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1740,16 +1740,16 @@ func validateLoggingConfiguration(v *types.LoggingConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LoggingConfiguration"}
-	if v.RedactedFields != nil {
-		if err := validateRedactedFields(v.RedactedFields); err != nil {
-			invalidParams.AddNested("RedactedFields", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if v.LogDestinationConfigs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogDestinationConfigs"))
+	}
+	if v.RedactedFields != nil {
+		if err := validateRedactedFields(v.RedactedFields); err != nil {
+			invalidParams.AddNested("RedactedFields", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1763,14 +1763,14 @@ func validatePredicate(v *types.Predicate) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Predicate"}
-	if v.DataId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataId"))
+	if v.Negated == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Negated"))
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
-	if v.Negated == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Negated"))
+	if v.DataId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1840,15 +1840,15 @@ func validateRegexMatchTuple(v *types.RegexMatchTuple) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegexMatchTuple"}
-	if len(v.TextTransformation) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TextTransformation"))
-	}
 	if v.FieldToMatch == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FieldToMatch"))
 	} else if v.FieldToMatch != nil {
 		if err := validateFieldToMatch(v.FieldToMatch); err != nil {
 			invalidParams.AddNested("FieldToMatch", err.(smithy.InvalidParamsError))
 		}
+	}
+	if len(v.TextTransformation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TextTransformation"))
 	}
 	if v.RegexPatternSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RegexPatternSetId"))
@@ -1978,15 +1978,15 @@ func validateSizeConstraint(v *types.SizeConstraint) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SizeConstraint"}
-	if len(v.TextTransformation) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TextTransformation"))
-	}
 	if v.FieldToMatch == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FieldToMatch"))
 	} else if v.FieldToMatch != nil {
 		if err := validateFieldToMatch(v.FieldToMatch); err != nil {
 			invalidParams.AddNested("FieldToMatch", err.(smithy.InvalidParamsError))
 		}
+	}
+	if len(v.TextTransformation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TextTransformation"))
 	}
 	if len(v.ComparisonOperator) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
@@ -2138,11 +2138,11 @@ func validateTimeWindow(v *types.TimeWindow) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TimeWindow"}
-	if v.EndTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
-	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2186,15 +2186,15 @@ func validateWebACLUpdate(v *types.WebACLUpdate) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WebACLUpdate"}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
 	if v.ActivatedRule == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActivatedRule"))
 	} else if v.ActivatedRule != nil {
 		if err := validateActivatedRule(v.ActivatedRule); err != nil {
 			invalidParams.AddNested("ActivatedRule", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.Action) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2264,15 +2264,15 @@ func validateXssMatchTuple(v *types.XssMatchTuple) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "XssMatchTuple"}
-	if len(v.TextTransformation) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TextTransformation"))
-	}
 	if v.FieldToMatch == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FieldToMatch"))
 	} else if v.FieldToMatch != nil {
 		if err := validateFieldToMatch(v.FieldToMatch); err != nil {
 			invalidParams.AddNested("FieldToMatch", err.(smithy.InvalidParamsError))
 		}
+	}
+	if len(v.TextTransformation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TextTransformation"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2286,11 +2286,11 @@ func validateOpCreateByteMatchSetInput(v *CreateByteMatchSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateByteMatchSetInput"}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2304,11 +2304,11 @@ func validateOpCreateGeoMatchSetInput(v *CreateGeoMatchSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateGeoMatchSetInput"}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2340,17 +2340,17 @@ func validateOpCreateRateBasedRuleInput(v *CreateRateBasedRuleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateRateBasedRuleInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
 	if len(v.RateKey) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RateKey"))
 	}
 	if v.ChangeToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
-	if v.MetricName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -2387,11 +2387,11 @@ func validateOpCreateRegexPatternSetInput(v *CreateRegexPatternSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateRegexPatternSetInput"}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2405,19 +2405,19 @@ func validateOpCreateRuleGroupInput(v *CreateRuleGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateRuleGroupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.MetricName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2431,19 +2431,19 @@ func validateOpCreateRuleInput(v *CreateRuleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateRuleInput"}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.MetricName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2496,6 +2496,9 @@ func validateOpCreateWebACLInput(v *CreateWebACLInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
 	if v.DefaultAction == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DefaultAction"))
 	} else if v.DefaultAction != nil {
@@ -2503,16 +2506,13 @@ func validateOpCreateWebACLInput(v *CreateWebACLInput) error {
 			invalidParams.AddNested("DefaultAction", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
-	if v.MetricName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2649,11 +2649,11 @@ func validateOpDeleteRateBasedRuleInput(v *DeleteRateBasedRuleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRateBasedRuleInput"}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
 	if v.RuleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2667,11 +2667,11 @@ func validateOpDeleteRegexMatchSetInput(v *DeleteRegexMatchSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRegexMatchSetInput"}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
 	if v.RegexMatchSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RegexMatchSetId"))
+	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2739,11 +2739,11 @@ func validateOpDeleteSizeConstraintSetInput(v *DeleteSizeConstraintSetInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteSizeConstraintSetInput"}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
 	if v.SizeConstraintSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SizeConstraintSetId"))
+	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2775,11 +2775,11 @@ func validateOpDeleteWebACLInput(v *DeleteWebACLInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteWebACLInput"}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
 	if v.WebACLId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WebACLId"))
+	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2793,11 +2793,11 @@ func validateOpDeleteXssMatchSetInput(v *DeleteXssMatchSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteXssMatchSetInput"}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
 	if v.XssMatchSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("XssMatchSetId"))
+	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3128,15 +3128,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3168,11 +3168,11 @@ func validateOpUpdateByteMatchSetInput(v *UpdateByteMatchSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateByteMatchSetInput"}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
 	if v.ByteMatchSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ByteMatchSetId"))
+	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if v.Updates == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Updates"))
@@ -3196,15 +3196,15 @@ func validateOpUpdateGeoMatchSetInput(v *UpdateGeoMatchSetInput) error {
 	if v.GeoMatchSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GeoMatchSetId"))
 	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
+	}
 	if v.Updates == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Updates"))
 	} else if v.Updates != nil {
 		if err := validateGeoMatchSetUpdates(v.Updates); err != nil {
 			invalidParams.AddNested("Updates", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3218,18 +3218,18 @@ func validateOpUpdateIPSetInput(v *UpdateIPSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateIPSetInput"}
+	if v.IPSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IPSetId"))
+	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
+	}
 	if v.Updates == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Updates"))
 	} else if v.Updates != nil {
 		if err := validateIPSetUpdates(v.Updates); err != nil {
 			invalidParams.AddNested("Updates", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.IPSetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IPSetId"))
-	}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3243,18 +3243,18 @@ func validateOpUpdateRateBasedRuleInput(v *UpdateRateBasedRuleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRateBasedRuleInput"}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
+	}
 	if v.Updates == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Updates"))
 	} else if v.Updates != nil {
 		if err := validateRuleUpdates(v.Updates); err != nil {
 			invalidParams.AddNested("Updates", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
-	if v.RuleId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3268,6 +3268,9 @@ func validateOpUpdateRegexMatchSetInput(v *UpdateRegexMatchSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRegexMatchSetInput"}
+	if v.RegexMatchSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegexMatchSetId"))
+	}
 	if v.Updates == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Updates"))
 	} else if v.Updates != nil {
@@ -3277,9 +3280,6 @@ func validateOpUpdateRegexMatchSetInput(v *UpdateRegexMatchSetInput) error {
 	}
 	if v.ChangeToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
-	if v.RegexMatchSetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RegexMatchSetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3296,15 +3296,15 @@ func validateOpUpdateRegexPatternSetInput(v *UpdateRegexPatternSetInput) error {
 	if v.RegexPatternSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RegexPatternSetId"))
 	}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
 	if v.Updates == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Updates"))
 	} else if v.Updates != nil {
 		if err := validateRegexPatternSetUpdates(v.Updates); err != nil {
 			invalidParams.AddNested("Updates", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3318,6 +3318,9 @@ func validateOpUpdateRuleGroupInput(v *UpdateRuleGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRuleGroupInput"}
+	if v.RuleGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleGroupId"))
+	}
 	if v.Updates == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Updates"))
 	} else if v.Updates != nil {
@@ -3327,9 +3330,6 @@ func validateOpUpdateRuleGroupInput(v *UpdateRuleGroupInput) error {
 	}
 	if v.ChangeToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
-	if v.RuleGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RuleGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3371,15 +3371,15 @@ func validateOpUpdateSizeConstraintSetInput(v *UpdateSizeConstraintSetInput) err
 	if v.SizeConstraintSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SizeConstraintSetId"))
 	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
+	}
 	if v.Updates == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Updates"))
 	} else if v.Updates != nil {
 		if err := validateSizeConstraintSetUpdates(v.Updates); err != nil {
 			invalidParams.AddNested("Updates", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3418,11 +3418,6 @@ func validateOpUpdateWebACLInput(v *UpdateWebACLInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateWebACLInput"}
-	if v.DefaultAction != nil {
-		if err := validateWafAction(v.DefaultAction); err != nil {
-			invalidParams.AddNested("DefaultAction", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.WebACLId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WebACLId"))
 	}
@@ -3432,6 +3427,11 @@ func validateOpUpdateWebACLInput(v *UpdateWebACLInput) error {
 	if v.Updates != nil {
 		if err := validateWebACLUpdates(v.Updates); err != nil {
 			invalidParams.AddNested("Updates", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DefaultAction != nil {
+		if err := validateWafAction(v.DefaultAction); err != nil {
+			invalidParams.AddNested("DefaultAction", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3446,18 +3446,18 @@ func validateOpUpdateXssMatchSetInput(v *UpdateXssMatchSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateXssMatchSetInput"}
+	if v.XssMatchSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("XssMatchSetId"))
+	}
+	if v.ChangeToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
+	}
 	if v.Updates == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Updates"))
 	} else if v.Updates != nil {
 		if err := validateXssMatchSetUpdates(v.Updates); err != nil {
 			invalidParams.AddNested("Updates", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ChangeToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeToken"))
-	}
-	if v.XssMatchSetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("XssMatchSetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

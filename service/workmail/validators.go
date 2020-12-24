@@ -1167,11 +1167,11 @@ func validateFolderConfiguration(v *types.FolderConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FolderConfiguration"}
-	if len(v.Action) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Action"))
-	}
 	if len(v.Name) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1240,11 +1240,11 @@ func validateOpAssociateDelegateToResourceInput(v *AssociateDelegateToResourceIn
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
-	if v.EntityId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
-	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.EntityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1258,14 +1258,14 @@ func validateOpAssociateMemberToGroupInput(v *AssociateMemberToGroupInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateMemberToGroupInput"}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if v.GroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
+	}
+	if v.MemberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1282,11 +1282,11 @@ func validateOpCancelMailboxExportJobInput(v *CancelMailboxExportJobInput) error
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1303,11 +1303,11 @@ func validateOpCreateAliasInput(v *CreateAliasInput) error {
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
-	if v.Alias == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
-	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1321,11 +1321,11 @@ func validateOpCreateGroupInput(v *CreateGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateGroupInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1354,14 +1354,14 @@ func validateOpCreateResourceInput(v *CreateResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateResourceInput"}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1375,17 +1375,17 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUserInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
 	if v.DisplayName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
 	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1399,11 +1399,11 @@ func validateOpDeleteAccessControlRuleInput(v *DeleteAccessControlRuleInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccessControlRuleInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1417,14 +1417,14 @@ func validateOpDeleteAliasInput(v *DeleteAliasInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAliasInput"}
-	if v.Alias == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if v.Alias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1456,14 +1456,14 @@ func validateOpDeleteMailboxPermissionsInput(v *DeleteMailboxPermissionsInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMailboxPermissionsInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
 	}
 	if v.GranteeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GranteeId"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1510,11 +1510,11 @@ func validateOpDeleteRetentionPolicyInput(v *DeleteRetentionPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRetentionPolicyInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1546,11 +1546,11 @@ func validateOpDeregisterFromWorkMailInput(v *DeregisterFromWorkMailInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterFromWorkMailInput"}
-	if v.EntityId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.EntityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1564,11 +1564,11 @@ func validateOpDescribeGroupInput(v *DescribeGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeGroupInput"}
-	if v.GroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.GroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1651,11 +1651,11 @@ func validateOpDisassociateDelegateFromResourceInput(v *DisassociateDelegateFrom
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateDelegateFromResourceInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
@@ -1672,14 +1672,14 @@ func validateOpDisassociateMemberFromGroupInput(v *DisassociateMemberFromGroupIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateMemberFromGroupInput"}
-	if v.MemberId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if v.GroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
+	}
+	if v.MemberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1693,14 +1693,14 @@ func validateOpGetAccessControlEffectInput(v *GetAccessControlEffectInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAccessControlEffectInput"}
-	if v.Action == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Action"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if v.IpAddress == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpAddress"))
+	}
+	if v.Action == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
@@ -1732,11 +1732,11 @@ func validateOpGetMailboxDetailsInput(v *GetMailboxDetailsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetMailboxDetailsInput"}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1783,11 +1783,11 @@ func validateOpListGroupMembersInput(v *ListGroupMembersInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListGroupMembersInput"}
-	if v.GroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.GroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1849,11 +1849,11 @@ func validateOpListResourceDelegatesInput(v *ListResourceDelegatesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListResourceDelegatesInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1912,14 +1912,14 @@ func validateOpPutAccessControlRuleInput(v *PutAccessControlRuleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutAccessControlRuleInput"}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if len(v.Effect) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Effect"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
@@ -1936,17 +1936,17 @@ func validateOpPutMailboxPermissionsInput(v *PutMailboxPermissionsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutMailboxPermissionsInput"}
-	if v.GranteeId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GranteeId"))
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
 	}
+	if v.GranteeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GranteeId"))
+	}
 	if v.PermissionValues == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PermissionValues"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1960,11 +1960,11 @@ func validateOpPutRetentionPolicyInput(v *PutRetentionPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutRetentionPolicyInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.FolderConfigurations == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FolderConfigurations"))
@@ -1985,14 +1985,14 @@ func validateOpRegisterToWorkMailInput(v *RegisterToWorkMailInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterToWorkMailInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
 	}
 	if v.Email == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Email"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2006,11 +2006,11 @@ func validateOpResetPasswordInput(v *ResetPasswordInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResetPasswordInput"}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if v.Password == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Password"))
@@ -2027,26 +2027,26 @@ func validateOpStartMailboxExportJobInput(v *StartMailboxExportJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartMailboxExportJobInput"}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
 	}
 	if v.S3BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3BucketName"))
 	}
 	if v.S3Prefix == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Prefix"))
-	}
-	if v.OrganizationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
-	}
-	if v.KmsKeyArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2060,15 +2060,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2100,11 +2100,11 @@ func validateOpUpdateMailboxQuotaInput(v *UpdateMailboxQuotaInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMailboxQuotaInput"}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if v.MailboxQuota == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MailboxQuota"))
@@ -2124,11 +2124,11 @@ func validateOpUpdatePrimaryEmailAddressInput(v *UpdatePrimaryEmailAddressInput)
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
-	if v.Email == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Email"))
-	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if v.Email == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Email"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2142,11 +2142,11 @@ func validateOpUpdateResourceInput(v *UpdateResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourceInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

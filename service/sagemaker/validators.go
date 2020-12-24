@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAddAssociation struct {
+}
+
+func (*validateOpAddAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAddTags struct {
 }
 
@@ -45,6 +65,26 @@ func (m *validateOpAssociateTrialComponent) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpAssociateTrialComponentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAction struct {
+}
+
+func (*validateOpCreateAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateActionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -110,6 +150,26 @@ func (m *validateOpCreateApp) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateArtifact struct {
+}
+
+func (*validateOpCreateArtifact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateArtifact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateArtifactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateArtifactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAutoMLJob struct {
 }
 
@@ -170,6 +230,66 @@ func (m *validateOpCreateCompilationJob) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateContext struct {
+}
+
+func (*validateOpCreateContext) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContext) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContextInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContextInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateDataQualityJobDefinition struct {
+}
+
+func (*validateOpCreateDataQualityJobDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataQualityJobDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataQualityJobDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataQualityJobDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateDeviceFleet struct {
+}
+
+func (*validateOpCreateDeviceFleet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDeviceFleet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDeviceFleetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDeviceFleetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDomain struct {
 }
 
@@ -185,6 +305,26 @@ func (m *validateOpCreateDomain) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateEdgePackagingJob struct {
+}
+
+func (*validateOpCreateEdgePackagingJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEdgePackagingJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEdgePackagingJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEdgePackagingJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -245,6 +385,26 @@ func (m *validateOpCreateExperiment) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateExperimentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateFeatureGroup struct {
+}
+
+func (*validateOpCreateFeatureGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFeatureGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFeatureGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFeatureGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +530,46 @@ func (m *validateOpCreateLabelingJob) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateModelBiasJobDefinition struct {
+}
+
+func (*validateOpCreateModelBiasJobDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateModelBiasJobDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateModelBiasJobDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateModelBiasJobDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateModelExplainabilityJobDefinition struct {
+}
+
+func (*validateOpCreateModelExplainabilityJobDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateModelExplainabilityJobDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateModelExplainabilityJobDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateModelExplainabilityJobDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateModel struct {
 }
 
@@ -390,6 +590,26 @@ func (m *validateOpCreateModel) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateModelPackageGroup struct {
+}
+
+func (*validateOpCreateModelPackageGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateModelPackageGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateModelPackageGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateModelPackageGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateModelPackage struct {
 }
 
@@ -405,6 +625,26 @@ func (m *validateOpCreateModelPackage) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateModelPackageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateModelQualityJobDefinition struct {
+}
+
+func (*validateOpCreateModelQualityJobDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateModelQualityJobDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateModelQualityJobDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateModelQualityJobDefinitionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -470,6 +710,26 @@ func (m *validateOpCreateNotebookInstanceLifecycleConfig) HandleInitialize(ctx c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePipeline struct {
+}
+
+func (*validateOpCreatePipeline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePipeline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePipelineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePipelineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreatePresignedDomainUrl struct {
 }
 
@@ -525,6 +785,26 @@ func (m *validateOpCreateProcessingJob) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateProcessingJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateProject struct {
+}
+
+func (*validateOpCreateProject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateProject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateProjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateProjectInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -670,6 +950,26 @@ func (m *validateOpCreateWorkteam) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAction struct {
+}
+
+func (*validateOpDeleteAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAlgorithm struct {
 }
 
@@ -730,6 +1030,46 @@ func (m *validateOpDeleteApp) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteArtifact struct {
+}
+
+func (*validateOpDeleteArtifact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteArtifact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteArtifactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteArtifactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAssociation struct {
+}
+
+func (*validateOpDeleteAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteCodeRepository struct {
 }
 
@@ -745,6 +1085,66 @@ func (m *validateOpDeleteCodeRepository) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCodeRepositoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteContext struct {
+}
+
+func (*validateOpDeleteContext) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteContext) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteContextInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteContextInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDataQualityJobDefinition struct {
+}
+
+func (*validateOpDeleteDataQualityJobDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataQualityJobDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDataQualityJobDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDataQualityJobDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDeviceFleet struct {
+}
+
+func (*validateOpDeleteDeviceFleet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDeviceFleet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDeviceFleetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDeviceFleetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -830,6 +1230,26 @@ func (m *validateOpDeleteExperiment) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteFeatureGroup struct {
+}
+
+func (*validateOpDeleteFeatureGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFeatureGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFeatureGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFeatureGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteFlowDefinition struct {
 }
 
@@ -910,6 +1330,46 @@ func (m *validateOpDeleteImageVersion) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteModelBiasJobDefinition struct {
+}
+
+func (*validateOpDeleteModelBiasJobDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteModelBiasJobDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteModelBiasJobDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteModelBiasJobDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteModelExplainabilityJobDefinition struct {
+}
+
+func (*validateOpDeleteModelExplainabilityJobDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteModelExplainabilityJobDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteModelExplainabilityJobDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteModelExplainabilityJobDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteModel struct {
 }
 
@@ -930,6 +1390,46 @@ func (m *validateOpDeleteModel) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteModelPackageGroup struct {
+}
+
+func (*validateOpDeleteModelPackageGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteModelPackageGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteModelPackageGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteModelPackageGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteModelPackageGroupPolicy struct {
+}
+
+func (*validateOpDeleteModelPackageGroupPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteModelPackageGroupPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteModelPackageGroupPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteModelPackageGroupPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteModelPackage struct {
 }
 
@@ -945,6 +1445,26 @@ func (m *validateOpDeleteModelPackage) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteModelPackageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteModelQualityJobDefinition struct {
+}
+
+func (*validateOpDeleteModelQualityJobDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteModelQualityJobDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteModelQualityJobDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteModelQualityJobDefinitionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1005,6 +1525,46 @@ func (m *validateOpDeleteNotebookInstanceLifecycleConfig) HandleInitialize(ctx c
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteNotebookInstanceLifecycleConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePipeline struct {
+}
+
+func (*validateOpDeletePipeline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePipeline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePipelineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePipelineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteProject struct {
+}
+
+func (*validateOpDeleteProject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteProject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteProjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteProjectInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1130,6 +1690,46 @@ func (m *validateOpDeleteWorkteam) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeregisterDevices struct {
+}
+
+func (*validateOpDeregisterDevices) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeregisterDevices) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeregisterDevicesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeregisterDevicesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAction struct {
+}
+
+func (*validateOpDescribeAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeAlgorithm struct {
 }
 
@@ -1185,6 +1785,26 @@ func (m *validateOpDescribeApp) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAppInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeArtifact struct {
+}
+
+func (*validateOpDescribeArtifact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeArtifact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeArtifactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeArtifactInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1250,6 +1870,86 @@ func (m *validateOpDescribeCompilationJob) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeContext struct {
+}
+
+func (*validateOpDescribeContext) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeContext) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeContextInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeContextInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeDataQualityJobDefinition struct {
+}
+
+func (*validateOpDescribeDataQualityJobDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDataQualityJobDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDataQualityJobDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDataQualityJobDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeDeviceFleet struct {
+}
+
+func (*validateOpDescribeDeviceFleet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDeviceFleet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDeviceFleetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDeviceFleetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeDevice struct {
+}
+
+func (*validateOpDescribeDevice) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDevice) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDeviceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDeviceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDomain struct {
 }
 
@@ -1265,6 +1965,26 @@ func (m *validateOpDescribeDomain) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeEdgePackagingJob struct {
+}
+
+func (*validateOpDescribeEdgePackagingJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeEdgePackagingJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeEdgePackagingJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeEdgePackagingJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1325,6 +2045,26 @@ func (m *validateOpDescribeExperiment) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeExperimentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeFeatureGroup struct {
+}
+
+func (*validateOpDescribeFeatureGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFeatureGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFeatureGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFeatureGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1450,6 +2190,46 @@ func (m *validateOpDescribeLabelingJob) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeModelBiasJobDefinition struct {
+}
+
+func (*validateOpDescribeModelBiasJobDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeModelBiasJobDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeModelBiasJobDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeModelBiasJobDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeModelExplainabilityJobDefinition struct {
+}
+
+func (*validateOpDescribeModelExplainabilityJobDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeModelExplainabilityJobDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeModelExplainabilityJobDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeModelExplainabilityJobDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeModel struct {
 }
 
@@ -1470,6 +2250,26 @@ func (m *validateOpDescribeModel) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeModelPackageGroup struct {
+}
+
+func (*validateOpDescribeModelPackageGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeModelPackageGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeModelPackageGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeModelPackageGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeModelPackage struct {
 }
 
@@ -1485,6 +2285,26 @@ func (m *validateOpDescribeModelPackage) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeModelPackageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeModelQualityJobDefinition struct {
+}
+
+func (*validateOpDescribeModelQualityJobDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeModelQualityJobDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeModelQualityJobDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeModelQualityJobDefinitionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1550,6 +2370,66 @@ func (m *validateOpDescribeNotebookInstanceLifecycleConfig) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribePipelineDefinitionForExecution struct {
+}
+
+func (*validateOpDescribePipelineDefinitionForExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePipelineDefinitionForExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePipelineDefinitionForExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePipelineDefinitionForExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribePipelineExecution struct {
+}
+
+func (*validateOpDescribePipelineExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePipelineExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePipelineExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePipelineExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribePipeline struct {
+}
+
+func (*validateOpDescribePipeline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePipeline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePipelineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePipelineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeProcessingJob struct {
 }
 
@@ -1565,6 +2445,26 @@ func (m *validateOpDescribeProcessingJob) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeProcessingJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeProject struct {
+}
+
+func (*validateOpDescribeProject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeProject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeProjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeProjectInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1750,6 +2650,46 @@ func (m *validateOpDisassociateTrialComponent) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDeviceFleetReport struct {
+}
+
+func (*validateOpGetDeviceFleetReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDeviceFleetReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDeviceFleetReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDeviceFleetReportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetModelPackageGroupPolicy struct {
+}
+
+func (*validateOpGetModelPackageGroupPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetModelPackageGroupPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetModelPackageGroupPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetModelPackageGroupPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSearchSuggestions struct {
 }
 
@@ -1830,6 +2770,46 @@ func (m *validateOpListLabelingJobsForWorkteam) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListPipelineExecutions struct {
+}
+
+func (*validateOpListPipelineExecutions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPipelineExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPipelineExecutionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPipelineExecutionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPipelineParametersForExecution struct {
+}
+
+func (*validateOpListPipelineParametersForExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPipelineParametersForExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPipelineParametersForExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPipelineParametersForExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTags struct {
 }
 
@@ -1865,6 +2845,46 @@ func (m *validateOpListTrainingJobsForHyperParameterTuningJob) HandleInitialize(
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTrainingJobsForHyperParameterTuningJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutModelPackageGroupPolicy struct {
+}
+
+func (*validateOpPutModelPackageGroupPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutModelPackageGroupPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutModelPackageGroupPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutModelPackageGroupPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRegisterDevices struct {
+}
+
+func (*validateOpRegisterDevices) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterDevices) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterDevicesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterDevicesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1950,6 +2970,26 @@ func (m *validateOpStartNotebookInstance) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartPipelineExecution struct {
+}
+
+func (*validateOpStartPipelineExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartPipelineExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartPipelineExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartPipelineExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopAutoMLJob struct {
 }
 
@@ -1985,6 +3025,26 @@ func (m *validateOpStopCompilationJob) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopCompilationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopEdgePackagingJob struct {
+}
+
+func (*validateOpStopEdgePackagingJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopEdgePackagingJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopEdgePackagingJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopEdgePackagingJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2070,6 +3130,26 @@ func (m *validateOpStopNotebookInstance) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopPipelineExecution struct {
+}
+
+func (*validateOpStopPipelineExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopPipelineExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopPipelineExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopPipelineExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopProcessingJob struct {
 }
 
@@ -2130,6 +3210,26 @@ func (m *validateOpStopTransformJob) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAction struct {
+}
+
+func (*validateOpUpdateAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateAppImageConfig struct {
 }
 
@@ -2150,6 +3250,26 @@ func (m *validateOpUpdateAppImageConfig) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateArtifact struct {
+}
+
+func (*validateOpUpdateArtifact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateArtifact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateArtifactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateArtifactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCodeRepository struct {
 }
 
@@ -2165,6 +3285,66 @@ func (m *validateOpUpdateCodeRepository) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateCodeRepositoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateContext struct {
+}
+
+func (*validateOpUpdateContext) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateContext) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateContextInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateContextInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateDeviceFleet struct {
+}
+
+func (*validateOpUpdateDeviceFleet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDeviceFleet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDeviceFleetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDeviceFleetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateDevices struct {
+}
+
+func (*validateOpUpdateDevices) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDevices) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDevicesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDevicesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2270,6 +3450,26 @@ func (m *validateOpUpdateImage) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateModelPackage struct {
+}
+
+func (*validateOpUpdateModelPackage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateModelPackage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateModelPackageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateModelPackageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMonitoringSchedule struct {
 }
 
@@ -2325,6 +3525,66 @@ func (m *validateOpUpdateNotebookInstanceLifecycleConfig) HandleInitialize(ctx c
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateNotebookInstanceLifecycleConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdatePipelineExecution struct {
+}
+
+func (*validateOpUpdatePipelineExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePipelineExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePipelineExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePipelineExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdatePipeline struct {
+}
+
+func (*validateOpUpdatePipeline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePipeline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePipelineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePipelineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateTrainingJob struct {
+}
+
+func (*validateOpUpdateTrainingJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTrainingJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTrainingJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTrainingJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2430,12 +3690,20 @@ func (m *validateOpUpdateWorkteam) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAddAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddAssociation{}, middleware.After)
+}
+
 func addOpAddTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddTags{}, middleware.After)
 }
 
 func addOpAssociateTrialComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateTrialComponent{}, middleware.After)
+}
+
+func addOpCreateActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAction{}, middleware.After)
 }
 
 func addOpCreateAlgorithmValidationMiddleware(stack *middleware.Stack) error {
@@ -2450,6 +3718,10 @@ func addOpCreateAppValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateApp{}, middleware.After)
 }
 
+func addOpCreateArtifactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateArtifact{}, middleware.After)
+}
+
 func addOpCreateAutoMLJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAutoMLJob{}, middleware.After)
 }
@@ -2462,8 +3734,24 @@ func addOpCreateCompilationJobValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateCompilationJob{}, middleware.After)
 }
 
+func addOpCreateContextValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContext{}, middleware.After)
+}
+
+func addOpCreateDataQualityJobDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataQualityJobDefinition{}, middleware.After)
+}
+
+func addOpCreateDeviceFleetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDeviceFleet{}, middleware.After)
+}
+
 func addOpCreateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDomain{}, middleware.After)
+}
+
+func addOpCreateEdgePackagingJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEdgePackagingJob{}, middleware.After)
 }
 
 func addOpCreateEndpointConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -2476,6 +3764,10 @@ func addOpCreateEndpointValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateExperimentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateExperiment{}, middleware.After)
+}
+
+func addOpCreateFeatureGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFeatureGroup{}, middleware.After)
 }
 
 func addOpCreateFlowDefinitionValidationMiddleware(stack *middleware.Stack) error {
@@ -2502,12 +3794,28 @@ func addOpCreateLabelingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLabelingJob{}, middleware.After)
 }
 
+func addOpCreateModelBiasJobDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateModelBiasJobDefinition{}, middleware.After)
+}
+
+func addOpCreateModelExplainabilityJobDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateModelExplainabilityJobDefinition{}, middleware.After)
+}
+
 func addOpCreateModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateModel{}, middleware.After)
 }
 
+func addOpCreateModelPackageGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateModelPackageGroup{}, middleware.After)
+}
+
 func addOpCreateModelPackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateModelPackage{}, middleware.After)
+}
+
+func addOpCreateModelQualityJobDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateModelQualityJobDefinition{}, middleware.After)
 }
 
 func addOpCreateMonitoringScheduleValidationMiddleware(stack *middleware.Stack) error {
@@ -2522,6 +3830,10 @@ func addOpCreateNotebookInstanceLifecycleConfigValidationMiddleware(stack *middl
 	return stack.Initialize.Add(&validateOpCreateNotebookInstanceLifecycleConfig{}, middleware.After)
 }
 
+func addOpCreatePipelineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePipeline{}, middleware.After)
+}
+
 func addOpCreatePresignedDomainUrlValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePresignedDomainUrl{}, middleware.After)
 }
@@ -2532,6 +3844,10 @@ func addOpCreatePresignedNotebookInstanceUrlValidationMiddleware(stack *middlewa
 
 func addOpCreateProcessingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProcessingJob{}, middleware.After)
+}
+
+func addOpCreateProjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateProject{}, middleware.After)
 }
 
 func addOpCreateTrainingJobValidationMiddleware(stack *middleware.Stack) error {
@@ -2562,6 +3878,10 @@ func addOpCreateWorkteamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkteam{}, middleware.After)
 }
 
+func addOpDeleteActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAction{}, middleware.After)
+}
+
 func addOpDeleteAlgorithmValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAlgorithm{}, middleware.After)
 }
@@ -2574,8 +3894,28 @@ func addOpDeleteAppValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteApp{}, middleware.After)
 }
 
+func addOpDeleteArtifactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteArtifact{}, middleware.After)
+}
+
+func addOpDeleteAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAssociation{}, middleware.After)
+}
+
 func addOpDeleteCodeRepositoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCodeRepository{}, middleware.After)
+}
+
+func addOpDeleteContextValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteContext{}, middleware.After)
+}
+
+func addOpDeleteDataQualityJobDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataQualityJobDefinition{}, middleware.After)
+}
+
+func addOpDeleteDeviceFleetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDeviceFleet{}, middleware.After)
 }
 
 func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -2594,6 +3934,10 @@ func addOpDeleteExperimentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteExperiment{}, middleware.After)
 }
 
+func addOpDeleteFeatureGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFeatureGroup{}, middleware.After)
+}
+
 func addOpDeleteFlowDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFlowDefinition{}, middleware.After)
 }
@@ -2610,12 +3954,32 @@ func addOpDeleteImageVersionValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDeleteImageVersion{}, middleware.After)
 }
 
+func addOpDeleteModelBiasJobDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteModelBiasJobDefinition{}, middleware.After)
+}
+
+func addOpDeleteModelExplainabilityJobDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteModelExplainabilityJobDefinition{}, middleware.After)
+}
+
 func addOpDeleteModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteModel{}, middleware.After)
 }
 
+func addOpDeleteModelPackageGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteModelPackageGroup{}, middleware.After)
+}
+
+func addOpDeleteModelPackageGroupPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteModelPackageGroupPolicy{}, middleware.After)
+}
+
 func addOpDeleteModelPackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteModelPackage{}, middleware.After)
+}
+
+func addOpDeleteModelQualityJobDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteModelQualityJobDefinition{}, middleware.After)
 }
 
 func addOpDeleteMonitoringScheduleValidationMiddleware(stack *middleware.Stack) error {
@@ -2628,6 +3992,14 @@ func addOpDeleteNotebookInstanceValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDeleteNotebookInstanceLifecycleConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNotebookInstanceLifecycleConfig{}, middleware.After)
+}
+
+func addOpDeletePipelineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePipeline{}, middleware.After)
+}
+
+func addOpDeleteProjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteProject{}, middleware.After)
 }
 
 func addOpDeleteTagsValidationMiddleware(stack *middleware.Stack) error {
@@ -2654,6 +4026,14 @@ func addOpDeleteWorkteamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWorkteam{}, middleware.After)
 }
 
+func addOpDeregisterDevicesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeregisterDevices{}, middleware.After)
+}
+
+func addOpDescribeActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAction{}, middleware.After)
+}
+
 func addOpDescribeAlgorithmValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAlgorithm{}, middleware.After)
 }
@@ -2664,6 +4044,10 @@ func addOpDescribeAppImageConfigValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDescribeAppValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeApp{}, middleware.After)
+}
+
+func addOpDescribeArtifactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeArtifact{}, middleware.After)
 }
 
 func addOpDescribeAutoMLJobValidationMiddleware(stack *middleware.Stack) error {
@@ -2678,8 +4062,28 @@ func addOpDescribeCompilationJobValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDescribeCompilationJob{}, middleware.After)
 }
 
+func addOpDescribeContextValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeContext{}, middleware.After)
+}
+
+func addOpDescribeDataQualityJobDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDataQualityJobDefinition{}, middleware.After)
+}
+
+func addOpDescribeDeviceFleetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDeviceFleet{}, middleware.After)
+}
+
+func addOpDescribeDeviceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDevice{}, middleware.After)
+}
+
 func addOpDescribeDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDomain{}, middleware.After)
+}
+
+func addOpDescribeEdgePackagingJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeEdgePackagingJob{}, middleware.After)
 }
 
 func addOpDescribeEndpointConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -2692,6 +4096,10 @@ func addOpDescribeEndpointValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeExperimentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeExperiment{}, middleware.After)
+}
+
+func addOpDescribeFeatureGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFeatureGroup{}, middleware.After)
 }
 
 func addOpDescribeFlowDefinitionValidationMiddleware(stack *middleware.Stack) error {
@@ -2718,12 +4126,28 @@ func addOpDescribeLabelingJobValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeLabelingJob{}, middleware.After)
 }
 
+func addOpDescribeModelBiasJobDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeModelBiasJobDefinition{}, middleware.After)
+}
+
+func addOpDescribeModelExplainabilityJobDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeModelExplainabilityJobDefinition{}, middleware.After)
+}
+
 func addOpDescribeModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeModel{}, middleware.After)
 }
 
+func addOpDescribeModelPackageGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeModelPackageGroup{}, middleware.After)
+}
+
 func addOpDescribeModelPackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeModelPackage{}, middleware.After)
+}
+
+func addOpDescribeModelQualityJobDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeModelQualityJobDefinition{}, middleware.After)
 }
 
 func addOpDescribeMonitoringScheduleValidationMiddleware(stack *middleware.Stack) error {
@@ -2738,8 +4162,24 @@ func addOpDescribeNotebookInstanceLifecycleConfigValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpDescribeNotebookInstanceLifecycleConfig{}, middleware.After)
 }
 
+func addOpDescribePipelineDefinitionForExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePipelineDefinitionForExecution{}, middleware.After)
+}
+
+func addOpDescribePipelineExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePipelineExecution{}, middleware.After)
+}
+
+func addOpDescribePipelineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePipeline{}, middleware.After)
+}
+
 func addOpDescribeProcessingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeProcessingJob{}, middleware.After)
+}
+
+func addOpDescribeProjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeProject{}, middleware.After)
 }
 
 func addOpDescribeSubscribedWorkteamValidationMiddleware(stack *middleware.Stack) error {
@@ -2778,6 +4218,14 @@ func addOpDisassociateTrialComponentValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpDisassociateTrialComponent{}, middleware.After)
 }
 
+func addOpGetDeviceFleetReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDeviceFleetReport{}, middleware.After)
+}
+
+func addOpGetModelPackageGroupPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetModelPackageGroupPolicy{}, middleware.After)
+}
+
 func addOpGetSearchSuggestionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSearchSuggestions{}, middleware.After)
 }
@@ -2794,12 +4242,28 @@ func addOpListLabelingJobsForWorkteamValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpListLabelingJobsForWorkteam{}, middleware.After)
 }
 
+func addOpListPipelineExecutionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPipelineExecutions{}, middleware.After)
+}
+
+func addOpListPipelineParametersForExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPipelineParametersForExecution{}, middleware.After)
+}
+
 func addOpListTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTags{}, middleware.After)
 }
 
 func addOpListTrainingJobsForHyperParameterTuningJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTrainingJobsForHyperParameterTuningJob{}, middleware.After)
+}
+
+func addOpPutModelPackageGroupPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutModelPackageGroupPolicy{}, middleware.After)
+}
+
+func addOpRegisterDevicesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterDevices{}, middleware.After)
 }
 
 func addOpRenderUiTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -2818,12 +4282,20 @@ func addOpStartNotebookInstanceValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpStartNotebookInstance{}, middleware.After)
 }
 
+func addOpStartPipelineExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartPipelineExecution{}, middleware.After)
+}
+
 func addOpStopAutoMLJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopAutoMLJob{}, middleware.After)
 }
 
 func addOpStopCompilationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopCompilationJob{}, middleware.After)
+}
+
+func addOpStopEdgePackagingJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopEdgePackagingJob{}, middleware.After)
 }
 
 func addOpStopHyperParameterTuningJobValidationMiddleware(stack *middleware.Stack) error {
@@ -2842,6 +4314,10 @@ func addOpStopNotebookInstanceValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpStopNotebookInstance{}, middleware.After)
 }
 
+func addOpStopPipelineExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopPipelineExecution{}, middleware.After)
+}
+
 func addOpStopProcessingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopProcessingJob{}, middleware.After)
 }
@@ -2854,12 +4330,32 @@ func addOpStopTransformJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopTransformJob{}, middleware.After)
 }
 
+func addOpUpdateActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAction{}, middleware.After)
+}
+
 func addOpUpdateAppImageConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAppImageConfig{}, middleware.After)
 }
 
+func addOpUpdateArtifactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateArtifact{}, middleware.After)
+}
+
 func addOpUpdateCodeRepositoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCodeRepository{}, middleware.After)
+}
+
+func addOpUpdateContextValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateContext{}, middleware.After)
+}
+
+func addOpUpdateDeviceFleetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDeviceFleet{}, middleware.After)
+}
+
+func addOpUpdateDevicesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDevices{}, middleware.After)
 }
 
 func addOpUpdateDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -2882,6 +4378,10 @@ func addOpUpdateImageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateImage{}, middleware.After)
 }
 
+func addOpUpdateModelPackageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateModelPackage{}, middleware.After)
+}
+
 func addOpUpdateMonitoringScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMonitoringSchedule{}, middleware.After)
 }
@@ -2892,6 +4392,18 @@ func addOpUpdateNotebookInstanceValidationMiddleware(stack *middleware.Stack) er
 
 func addOpUpdateNotebookInstanceLifecycleConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateNotebookInstanceLifecycleConfig{}, middleware.After)
+}
+
+func addOpUpdatePipelineExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePipelineExecution{}, middleware.After)
+}
+
+func addOpUpdatePipelineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePipeline{}, middleware.After)
+}
+
+func addOpUpdateTrainingJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTrainingJob{}, middleware.After)
 }
 
 func addOpUpdateTrialComponentValidationMiddleware(stack *middleware.Stack) error {
@@ -2912,6 +4424,21 @@ func addOpUpdateWorkforceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateWorkteamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkteam{}, middleware.After)
+}
+
+func validateActionSource(v *types.ActionSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionSource"}
+	if v.SourceUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAlgorithmSpecification(v *types.AlgorithmSpecification) error {
@@ -3022,6 +4549,88 @@ func validateAppSpecification(v *types.AppSpecification) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AppSpecification"}
 	if v.ImageUri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImageUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateArtifactSource(v *types.ArtifactSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ArtifactSource"}
+	if v.SourceUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceUri"))
+	}
+	if v.SourceTypes != nil {
+		if err := validateArtifactSourceTypes(v.SourceTypes); err != nil {
+			invalidParams.AddNested("SourceTypes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateArtifactSourceType(v *types.ArtifactSourceType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ArtifactSourceType"}
+	if len(v.SourceIdType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceIdType"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateArtifactSourceTypes(v []types.ArtifactSourceType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ArtifactSourceTypes"}
+	for i := range v {
+		if err := validateArtifactSourceType(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAthenaDatasetDefinition(v *types.AthenaDatasetDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AthenaDatasetDefinition"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.QueryString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
+	if v.OutputS3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputS3Uri"))
+	}
+	if len(v.OutputFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputFormat"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3162,6 +4771,60 @@ func validateAutoMLSecurityConfig(v *types.AutoMLSecurityConfig) error {
 		if err := validateVpcConfig(v.VpcConfig); err != nil {
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBias(v *types.Bias) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Bias"}
+	if v.Report != nil {
+		if err := validateMetricsSource(v.Report); err != nil {
+			invalidParams.AddNested("Report", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBlueGreenUpdatePolicy(v *types.BlueGreenUpdatePolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BlueGreenUpdatePolicy"}
+	if v.TrafficRoutingConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficRoutingConfiguration"))
+	} else if v.TrafficRoutingConfiguration != nil {
+		if err := validateTrafficRoutingConfig(v.TrafficRoutingConfiguration); err != nil {
+			invalidParams.AddNested("TrafficRoutingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCapacitySize(v *types.CapacitySize) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CapacitySize"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3405,6 +5068,21 @@ func validateContainerDefinitionList(v []types.ContainerDefinition) error {
 	}
 }
 
+func validateContextSource(v *types.ContextSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContextSource"}
+	if v.SourceUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContinuousParameterRange(v *types.ContinuousParameterRange) error {
 	if v == nil {
 		return nil
@@ -3521,6 +5199,83 @@ func validateDataCaptureConfig(v *types.DataCaptureConfig) error {
 	}
 }
 
+func validateDataCatalogConfig(v *types.DataCatalogConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataCatalogConfig"}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataQualityAppSpecification(v *types.DataQualityAppSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataQualityAppSpecification"}
+	if v.ImageUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataQualityJobInput(v *types.DataQualityJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataQualityJobInput"}
+	if v.EndpointInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointInput"))
+	} else if v.EndpointInput != nil {
+		if err := validateEndpointInput(v.EndpointInput); err != nil {
+			invalidParams.AddNested("EndpointInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDatasetDefinition(v *types.DatasetDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatasetDefinition"}
+	if v.AthenaDatasetDefinition != nil {
+		if err := validateAthenaDatasetDefinition(v.AthenaDatasetDefinition); err != nil {
+			invalidParams.AddNested("AthenaDatasetDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RedshiftDatasetDefinition != nil {
+		if err := validateRedshiftDatasetDefinition(v.RedshiftDatasetDefinition); err != nil {
+			invalidParams.AddNested("RedshiftDatasetDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataSource(v *types.DataSource) error {
 	if v == nil {
 		return nil
@@ -3593,6 +5348,25 @@ func validateDebugRuleConfigurations(v []types.DebugRuleConfiguration) error {
 	}
 }
 
+func validateDeploymentConfig(v *types.DeploymentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeploymentConfig"}
+	if v.BlueGreenUpdatePolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueGreenUpdatePolicy"))
+	} else if v.BlueGreenUpdatePolicy != nil {
+		if err := validateBlueGreenUpdatePolicy(v.BlueGreenUpdatePolicy); err != nil {
+			invalidParams.AddNested("BlueGreenUpdatePolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDesiredWeightAndCapacity(v *types.DesiredWeightAndCapacity) error {
 	if v == nil {
 		return nil
@@ -3625,6 +5399,53 @@ func validateDesiredWeightAndCapacityList(v []types.DesiredWeightAndCapacity) er
 	}
 }
 
+func validateDevice(v *types.Device) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Device"}
+	if v.DeviceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDevices(v []types.Device) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Devices"}
+	for i := range v {
+		if err := validateDevice(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEdgeOutputConfig(v *types.EdgeOutputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EdgeOutputConfig"}
+	if v.S3OutputLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3OutputLocation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEndpointInput(v *types.EndpointInput) error {
 	if v == nil {
 		return nil
@@ -3635,6 +5456,23 @@ func validateEndpointInput(v *types.EndpointInput) error {
 	}
 	if v.LocalPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocalPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExplainability(v *types.Explainability) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Explainability"}
+	if v.Report != nil {
+		if err := validateMetricsSource(v.Report); err != nil {
+			invalidParams.AddNested("Report", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4103,12 +5941,6 @@ func validateInferenceSpecification(v *types.InferenceSpecification) error {
 			invalidParams.AddNested("Containers", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SupportedTransformInstanceTypes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SupportedTransformInstanceTypes"))
-	}
-	if v.SupportedRealtimeInferenceInstanceTypes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SupportedRealtimeInferenceInstanceTypes"))
-	}
 	if v.SupportedContentTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SupportedContentTypes"))
 	}
@@ -4459,6 +6291,155 @@ func validateMetricDefinitionList(v []types.MetricDefinition) error {
 	}
 }
 
+func validateMetricsSource(v *types.MetricsSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricsSource"}
+	if v.ContentType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelBiasAppSpecification(v *types.ModelBiasAppSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelBiasAppSpecification"}
+	if v.ImageUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageUri"))
+	}
+	if v.ConfigUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelBiasJobInput(v *types.ModelBiasJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelBiasJobInput"}
+	if v.EndpointInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointInput"))
+	} else if v.EndpointInput != nil {
+		if err := validateEndpointInput(v.EndpointInput); err != nil {
+			invalidParams.AddNested("EndpointInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GroundTruthS3Input == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroundTruthS3Input"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelDataQuality(v *types.ModelDataQuality) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelDataQuality"}
+	if v.Statistics != nil {
+		if err := validateMetricsSource(v.Statistics); err != nil {
+			invalidParams.AddNested("Statistics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Constraints != nil {
+		if err := validateMetricsSource(v.Constraints); err != nil {
+			invalidParams.AddNested("Constraints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelExplainabilityAppSpecification(v *types.ModelExplainabilityAppSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelExplainabilityAppSpecification"}
+	if v.ImageUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageUri"))
+	}
+	if v.ConfigUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelExplainabilityJobInput(v *types.ModelExplainabilityJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelExplainabilityJobInput"}
+	if v.EndpointInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointInput"))
+	} else if v.EndpointInput != nil {
+		if err := validateEndpointInput(v.EndpointInput); err != nil {
+			invalidParams.AddNested("EndpointInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelMetrics(v *types.ModelMetrics) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelMetrics"}
+	if v.ModelQuality != nil {
+		if err := validateModelQuality(v.ModelQuality); err != nil {
+			invalidParams.AddNested("ModelQuality", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelDataQuality != nil {
+		if err := validateModelDataQuality(v.ModelDataQuality); err != nil {
+			invalidParams.AddNested("ModelDataQuality", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Bias != nil {
+		if err := validateBias(v.Bias); err != nil {
+			invalidParams.AddNested("Bias", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Explainability != nil {
+		if err := validateExplainability(v.Explainability); err != nil {
+			invalidParams.AddNested("Explainability", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateModelPackageContainerDefinition(v *types.ModelPackageContainerDefinition) error {
 	if v == nil {
 		return nil
@@ -4544,6 +6525,65 @@ func validateModelPackageValidationSpecification(v *types.ModelPackageValidation
 		if err := validateModelPackageValidationProfiles(v.ValidationProfiles); err != nil {
 			invalidParams.AddNested("ValidationProfiles", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelQuality(v *types.ModelQuality) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelQuality"}
+	if v.Statistics != nil {
+		if err := validateMetricsSource(v.Statistics); err != nil {
+			invalidParams.AddNested("Statistics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Constraints != nil {
+		if err := validateMetricsSource(v.Constraints); err != nil {
+			invalidParams.AddNested("Constraints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelQualityAppSpecification(v *types.ModelQualityAppSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelQualityAppSpecification"}
+	if v.ImageUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelQualityJobInput(v *types.ModelQualityJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelQualityJobInput"}
+	if v.EndpointInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointInput"))
+	} else if v.EndpointInput != nil {
+		if err := validateEndpointInput(v.EndpointInput); err != nil {
+			invalidParams.AddNested("EndpointInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GroundTruthS3Input == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroundTruthS3Input"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4677,6 +6717,23 @@ func validateMonitoringJobDefinition(v *types.MonitoringJobDefinition) error {
 	}
 }
 
+func validateMonitoringNetworkConfig(v *types.MonitoringNetworkConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonitoringNetworkConfig"}
+	if v.VpcConfig != nil {
+		if err := validateVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMonitoringOutput(v *types.MonitoringOutput) error {
 	if v == nil {
 		return nil
@@ -4779,9 +6836,7 @@ func validateMonitoringScheduleConfig(v *types.MonitoringScheduleConfig) error {
 			invalidParams.AddNested("ScheduleConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.MonitoringJobDefinition == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MonitoringJobDefinition"))
-	} else if v.MonitoringJobDefinition != nil {
+	if v.MonitoringJobDefinition != nil {
 		if err := validateMonitoringJobDefinition(v.MonitoringJobDefinition); err != nil {
 			invalidParams.AddNested("MonitoringJobDefinition", err.(smithy.InvalidParamsError))
 		}
@@ -4852,6 +6907,30 @@ func validateNetworkConfig(v *types.NetworkConfig) error {
 	if v.VpcConfig != nil {
 		if err := validateVpcConfig(v.VpcConfig); err != nil {
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOfflineStoreConfig(v *types.OfflineStoreConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OfflineStoreConfig"}
+	if v.S3StorageConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3StorageConfig"))
+	} else if v.S3StorageConfig != nil {
+		if err := validateS3StorageConfig(v.S3StorageConfig); err != nil {
+			invalidParams.AddNested("S3StorageConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataCatalogConfig != nil {
+		if err := validateDataCatalogConfig(v.DataCatalogConfig); err != nil {
+			invalidParams.AddNested("DataCatalogConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4947,6 +7026,41 @@ func validateOutputDataConfig(v *types.OutputDataConfig) error {
 	}
 }
 
+func validateParameter(v *types.Parameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Parameter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParameterList(v []types.Parameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParameterList"}
+	for i := range v {
+		if err := validateParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateParameterRange(v *types.ParameterRange) error {
 	if v == nil {
 		return nil
@@ -5022,6 +7136,21 @@ func validateProcessingClusterConfig(v *types.ProcessingClusterConfig) error {
 	}
 }
 
+func validateProcessingFeatureStoreOutput(v *types.ProcessingFeatureStoreOutput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProcessingFeatureStoreOutput"}
+	if v.FeatureGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateProcessingInput(v *types.ProcessingInput) error {
 	if v == nil {
 		return nil
@@ -5030,11 +7159,14 @@ func validateProcessingInput(v *types.ProcessingInput) error {
 	if v.InputName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputName"))
 	}
-	if v.S3Input == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3Input"))
-	} else if v.S3Input != nil {
+	if v.S3Input != nil {
 		if err := validateProcessingS3Input(v.S3Input); err != nil {
 			invalidParams.AddNested("S3Input", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DatasetDefinition != nil {
+		if err := validateDatasetDefinition(v.DatasetDefinition); err != nil {
+			invalidParams.AddNested("DatasetDefinition", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5069,11 +7201,14 @@ func validateProcessingOutput(v *types.ProcessingOutput) error {
 	if v.OutputName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputName"))
 	}
-	if v.S3Output == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3Output"))
-	} else if v.S3Output != nil {
+	if v.S3Output != nil {
 		if err := validateProcessingS3Output(v.S3Output); err != nil {
 			invalidParams.AddNested("S3Output", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FeatureStoreOutput != nil {
+		if err := validateProcessingFeatureStoreOutput(v.FeatureStoreOutput); err != nil {
+			invalidParams.AddNested("FeatureStoreOutput", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5146,14 +7281,8 @@ func validateProcessingS3Input(v *types.ProcessingS3Input) error {
 	if v.S3Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
 	}
-	if v.LocalPath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LocalPath"))
-	}
 	if len(v.S3DataType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("S3DataType"))
-	}
-	if len(v.S3InputMode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("S3InputMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5236,6 +7365,56 @@ func validateProductionVariantList(v []types.ProductionVariant) error {
 	}
 }
 
+func validateProfilerConfig(v *types.ProfilerConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProfilerConfig"}
+	if v.S3OutputPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3OutputPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProfilerRuleConfiguration(v *types.ProfilerRuleConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProfilerRuleConfiguration"}
+	if v.RuleConfigurationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleConfigurationName"))
+	}
+	if v.RuleEvaluatorImage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleEvaluatorImage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProfilerRuleConfigurations(v []types.ProfilerRuleConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProfilerRuleConfigurations"}
+	for i := range v {
+		if err := validateProfilerRuleConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePropertyNameQuery(v *types.PropertyNameQuery) error {
 	if v == nil {
 		return nil
@@ -5243,6 +7422,39 @@ func validatePropertyNameQuery(v *types.PropertyNameQuery) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PropertyNameQuery"}
 	if v.PropertyNameHint == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PropertyNameHint"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRedshiftDatasetDefinition(v *types.RedshiftDatasetDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedshiftDatasetDefinition"}
+	if v.ClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
+	if v.DbUser == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbUser"))
+	}
+	if v.QueryString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
+	if v.ClusterRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterRoleArn"))
+	}
+	if v.OutputS3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputS3Uri"))
+	}
+	if len(v.OutputFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputFormat"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5311,6 +7523,21 @@ func validateS3DataSource(v *types.S3DataSource) error {
 	}
 }
 
+func validateS3StorageConfig(v *types.S3StorageConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3StorageConfig"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateScheduleConfig(v *types.ScheduleConfig) error {
 	if v == nil {
 		return nil
@@ -5362,6 +7589,24 @@ func validateSearchExpressionList(v []types.SearchExpression) error {
 		if err := validateSearchExpression(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServiceCatalogProvisioningDetails(v *types.ServiceCatalogProvisioningDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceCatalogProvisioningDetails"}
+	if v.ProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	}
+	if v.ProvisioningArtifactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningArtifactId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5525,6 +7770,29 @@ func validateTensorBoardOutputConfig(v *types.TensorBoardOutputConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TensorBoardOutputConfig"}
 	if v.S3OutputPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3OutputPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrafficRoutingConfig(v *types.TrafficRoutingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrafficRoutingConfig"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.WaitIntervalInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WaitIntervalInSeconds"))
+	}
+	if v.CanarySize != nil {
+		if err := validateCapacitySize(v.CanarySize); err != nil {
+			invalidParams.AddNested("CanarySize", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5864,6 +8132,24 @@ func validateVpcConfig(v *types.VpcConfig) error {
 	}
 }
 
+func validateOpAddAssociationInput(v *AddAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddAssociationInput"}
+	if v.SourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))
+	}
+	if v.DestinationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAddTagsInput(v *AddTagsInput) error {
 	if v == nil {
 		return nil
@@ -5904,6 +8190,36 @@ func validateOpAssociateTrialComponentInput(v *AssociateTrialComponentInput) err
 	}
 }
 
+func validateOpCreateActionInput(v *CreateActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateActionInput"}
+	if v.ActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateActionSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ActionType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionType"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAlgorithmInput(v *CreateAlgorithmInput) error {
 	if v == nil {
 		return nil
@@ -5927,6 +8243,11 @@ func validateOpCreateAlgorithmInput(v *CreateAlgorithmInput) error {
 	if v.ValidationSpecification != nil {
 		if err := validateAlgorithmValidationSpecification(v.ValidationSpecification); err != nil {
 			invalidParams.AddNested("ValidationSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5977,6 +8298,33 @@ func validateOpCreateAppInput(v *CreateAppInput) error {
 	}
 	if v.AppName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppName"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateArtifactInput(v *CreateArtifactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateArtifactInput"}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateArtifactSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ArtifactType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ArtifactType"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -6052,6 +8400,11 @@ func validateOpCreateCodeRepositoryInput(v *CreateCodeRepositoryInput) error {
 			invalidParams.AddNested("GitConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6099,6 +8452,124 @@ func validateOpCreateCompilationJobInput(v *CreateCompilationJobInput) error {
 	}
 }
 
+func validateOpCreateContextInput(v *CreateContextInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContextInput"}
+	if v.ContextName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextName"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateContextSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContextType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextType"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDataQualityJobDefinitionInput(v *CreateDataQualityJobDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataQualityJobDefinitionInput"}
+	if v.JobDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobDefinitionName"))
+	}
+	if v.DataQualityAppSpecification == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataQualityAppSpecification"))
+	} else if v.DataQualityAppSpecification != nil {
+		if err := validateDataQualityAppSpecification(v.DataQualityAppSpecification); err != nil {
+			invalidParams.AddNested("DataQualityAppSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataQualityJobInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataQualityJobInput"))
+	} else if v.DataQualityJobInput != nil {
+		if err := validateDataQualityJobInput(v.DataQualityJobInput); err != nil {
+			invalidParams.AddNested("DataQualityJobInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataQualityJobOutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataQualityJobOutputConfig"))
+	} else if v.DataQualityJobOutputConfig != nil {
+		if err := validateMonitoringOutputConfig(v.DataQualityJobOutputConfig); err != nil {
+			invalidParams.AddNested("DataQualityJobOutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JobResources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobResources"))
+	} else if v.JobResources != nil {
+		if err := validateMonitoringResources(v.JobResources); err != nil {
+			invalidParams.AddNested("JobResources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NetworkConfig != nil {
+		if err := validateMonitoringNetworkConfig(v.NetworkConfig); err != nil {
+			invalidParams.AddNested("NetworkConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.StoppingCondition != nil {
+		if err := validateMonitoringStoppingCondition(v.StoppingCondition); err != nil {
+			invalidParams.AddNested("StoppingCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDeviceFleetInput(v *CreateDeviceFleetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDeviceFleetInput"}
+	if v.DeviceFleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceFleetName"))
+	}
+	if v.OutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	} else if v.OutputConfig != nil {
+		if err := validateEdgeOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	if v == nil {
 		return nil
@@ -6122,6 +8593,45 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	}
 	if v.VpcId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateEdgePackagingJobInput(v *CreateEdgePackagingJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEdgePackagingJobInput"}
+	if v.EdgePackagingJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgePackagingJobName"))
+	}
+	if v.CompilationJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CompilationJobName"))
+	}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
+	}
+	if v.ModelVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelVersion"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.OutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	} else if v.OutputConfig != nil {
+		if err := validateEdgeOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -6197,6 +8707,40 @@ func validateOpCreateExperimentInput(v *CreateExperimentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateExperimentInput"}
 	if v.ExperimentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExperimentName"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateFeatureGroupInput(v *CreateFeatureGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFeatureGroupInput"}
+	if v.FeatureGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureGroupName"))
+	}
+	if v.RecordIdentifierFeatureName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordIdentifierFeatureName"))
+	}
+	if v.EventTimeFeatureName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTimeFeatureName"))
+	}
+	if v.FeatureDefinitions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureDefinitions"))
+	}
+	if v.OfflineStoreConfig != nil {
+		if err := validateOfflineStoreConfig(v.OfflineStoreConfig); err != nil {
+			invalidParams.AddNested("OfflineStoreConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -6422,6 +8966,128 @@ func validateOpCreateLabelingJobInput(v *CreateLabelingJobInput) error {
 	}
 }
 
+func validateOpCreateModelBiasJobDefinitionInput(v *CreateModelBiasJobDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateModelBiasJobDefinitionInput"}
+	if v.JobDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobDefinitionName"))
+	}
+	if v.ModelBiasAppSpecification == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelBiasAppSpecification"))
+	} else if v.ModelBiasAppSpecification != nil {
+		if err := validateModelBiasAppSpecification(v.ModelBiasAppSpecification); err != nil {
+			invalidParams.AddNested("ModelBiasAppSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelBiasJobInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelBiasJobInput"))
+	} else if v.ModelBiasJobInput != nil {
+		if err := validateModelBiasJobInput(v.ModelBiasJobInput); err != nil {
+			invalidParams.AddNested("ModelBiasJobInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelBiasJobOutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelBiasJobOutputConfig"))
+	} else if v.ModelBiasJobOutputConfig != nil {
+		if err := validateMonitoringOutputConfig(v.ModelBiasJobOutputConfig); err != nil {
+			invalidParams.AddNested("ModelBiasJobOutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JobResources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobResources"))
+	} else if v.JobResources != nil {
+		if err := validateMonitoringResources(v.JobResources); err != nil {
+			invalidParams.AddNested("JobResources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NetworkConfig != nil {
+		if err := validateMonitoringNetworkConfig(v.NetworkConfig); err != nil {
+			invalidParams.AddNested("NetworkConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.StoppingCondition != nil {
+		if err := validateMonitoringStoppingCondition(v.StoppingCondition); err != nil {
+			invalidParams.AddNested("StoppingCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateModelExplainabilityJobDefinitionInput(v *CreateModelExplainabilityJobDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateModelExplainabilityJobDefinitionInput"}
+	if v.JobDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobDefinitionName"))
+	}
+	if v.ModelExplainabilityAppSpecification == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelExplainabilityAppSpecification"))
+	} else if v.ModelExplainabilityAppSpecification != nil {
+		if err := validateModelExplainabilityAppSpecification(v.ModelExplainabilityAppSpecification); err != nil {
+			invalidParams.AddNested("ModelExplainabilityAppSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelExplainabilityJobInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelExplainabilityJobInput"))
+	} else if v.ModelExplainabilityJobInput != nil {
+		if err := validateModelExplainabilityJobInput(v.ModelExplainabilityJobInput); err != nil {
+			invalidParams.AddNested("ModelExplainabilityJobInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelExplainabilityJobOutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelExplainabilityJobOutputConfig"))
+	} else if v.ModelExplainabilityJobOutputConfig != nil {
+		if err := validateMonitoringOutputConfig(v.ModelExplainabilityJobOutputConfig); err != nil {
+			invalidParams.AddNested("ModelExplainabilityJobOutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JobResources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobResources"))
+	} else if v.JobResources != nil {
+		if err := validateMonitoringResources(v.JobResources); err != nil {
+			invalidParams.AddNested("JobResources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NetworkConfig != nil {
+		if err := validateMonitoringNetworkConfig(v.NetworkConfig); err != nil {
+			invalidParams.AddNested("NetworkConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.StoppingCondition != nil {
+		if err := validateMonitoringStoppingCondition(v.StoppingCondition); err != nil {
+			invalidParams.AddNested("StoppingCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateModelInput(v *CreateModelInput) error {
 	if v == nil {
 		return nil
@@ -6460,6 +9126,26 @@ func validateOpCreateModelInput(v *CreateModelInput) error {
 	}
 }
 
+func validateOpCreateModelPackageGroupInput(v *CreateModelPackageGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateModelPackageGroupInput"}
+	if v.ModelPackageGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageGroupName"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateModelPackageInput(v *CreateModelPackageInput) error {
 	if v == nil {
 		return nil
@@ -6478,6 +9164,77 @@ func validateOpCreateModelPackageInput(v *CreateModelPackageInput) error {
 	if v.SourceAlgorithmSpecification != nil {
 		if err := validateSourceAlgorithmSpecification(v.SourceAlgorithmSpecification); err != nil {
 			invalidParams.AddNested("SourceAlgorithmSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelMetrics != nil {
+		if err := validateModelMetrics(v.ModelMetrics); err != nil {
+			invalidParams.AddNested("ModelMetrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateModelQualityJobDefinitionInput(v *CreateModelQualityJobDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateModelQualityJobDefinitionInput"}
+	if v.JobDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobDefinitionName"))
+	}
+	if v.ModelQualityAppSpecification == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelQualityAppSpecification"))
+	} else if v.ModelQualityAppSpecification != nil {
+		if err := validateModelQualityAppSpecification(v.ModelQualityAppSpecification); err != nil {
+			invalidParams.AddNested("ModelQualityAppSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelQualityJobInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelQualityJobInput"))
+	} else if v.ModelQualityJobInput != nil {
+		if err := validateModelQualityJobInput(v.ModelQualityJobInput); err != nil {
+			invalidParams.AddNested("ModelQualityJobInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelQualityJobOutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelQualityJobOutputConfig"))
+	} else if v.ModelQualityJobOutputConfig != nil {
+		if err := validateMonitoringOutputConfig(v.ModelQualityJobOutputConfig); err != nil {
+			invalidParams.AddNested("ModelQualityJobOutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JobResources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobResources"))
+	} else if v.JobResources != nil {
+		if err := validateMonitoringResources(v.JobResources); err != nil {
+			invalidParams.AddNested("JobResources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NetworkConfig != nil {
+		if err := validateMonitoringNetworkConfig(v.NetworkConfig); err != nil {
+			invalidParams.AddNested("NetworkConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.StoppingCondition != nil {
+		if err := validateMonitoringStoppingCondition(v.StoppingCondition); err != nil {
+			invalidParams.AddNested("StoppingCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6547,6 +9304,35 @@ func validateOpCreateNotebookInstanceLifecycleConfigInput(v *CreateNotebookInsta
 	invalidParams := smithy.InvalidParamsError{Context: "CreateNotebookInstanceLifecycleConfigInput"}
 	if v.NotebookInstanceLifecycleConfigName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NotebookInstanceLifecycleConfigName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePipelineInput(v *CreatePipelineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePipelineInput"}
+	if v.PipelineName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
+	}
+	if v.PipelineDefinition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineDefinition"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6645,6 +9431,33 @@ func validateOpCreateProcessingJobInput(v *CreateProcessingJobInput) error {
 	}
 }
 
+func validateOpCreateProjectInput(v *CreateProjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateProjectInput"}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.ServiceCatalogProvisioningDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceCatalogProvisioningDetails"))
+	} else if v.ServiceCatalogProvisioningDetails != nil {
+		if err := validateServiceCatalogProvisioningDetails(v.ServiceCatalogProvisioningDetails); err != nil {
+			invalidParams.AddNested("ServiceCatalogProvisioningDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateTrainingJobInput(v *CreateTrainingJobInput) error {
 	if v == nil {
 		return nil
@@ -6713,6 +9526,16 @@ func validateOpCreateTrainingJobInput(v *CreateTrainingJobInput) error {
 	if v.TensorBoardOutputConfig != nil {
 		if err := validateTensorBoardOutputConfig(v.TensorBoardOutputConfig); err != nil {
 			invalidParams.AddNested("TensorBoardOutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProfilerConfig != nil {
+		if err := validateProfilerConfig(v.ProfilerConfig); err != nil {
+			invalidParams.AddNested("ProfilerConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProfilerRuleConfigurations != nil {
+		if err := validateProfilerRuleConfigurations(v.ProfilerRuleConfigurations); err != nil {
+			invalidParams.AddNested("ProfilerRuleConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6912,6 +9735,21 @@ func validateOpCreateWorkteamInput(v *CreateWorkteamInput) error {
 	}
 }
 
+func validateOpDeleteActionInput(v *DeleteActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteActionInput"}
+	if v.ActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAlgorithmInput(v *DeleteAlgorithmInput) error {
 	if v == nil {
 		return nil
@@ -6966,6 +9804,41 @@ func validateOpDeleteAppInput(v *DeleteAppInput) error {
 	}
 }
 
+func validateOpDeleteArtifactInput(v *DeleteArtifactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteArtifactInput"}
+	if v.Source != nil {
+		if err := validateArtifactSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAssociationInput(v *DeleteAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAssociationInput"}
+	if v.SourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))
+	}
+	if v.DestinationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCodeRepositoryInput(v *DeleteCodeRepositoryInput) error {
 	if v == nil {
 		return nil
@@ -6973,6 +9846,51 @@ func validateOpDeleteCodeRepositoryInput(v *DeleteCodeRepositoryInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteCodeRepositoryInput"}
 	if v.CodeRepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CodeRepositoryName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteContextInput(v *DeleteContextInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteContextInput"}
+	if v.ContextName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDataQualityJobDefinitionInput(v *DeleteDataQualityJobDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataQualityJobDefinitionInput"}
+	if v.JobDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobDefinitionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDeviceFleetInput(v *DeleteDeviceFleetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDeviceFleetInput"}
+	if v.DeviceFleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceFleetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7033,6 +9951,21 @@ func validateOpDeleteExperimentInput(v *DeleteExperimentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteExperimentInput"}
 	if v.ExperimentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExperimentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFeatureGroupInput(v *DeleteFeatureGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFeatureGroupInput"}
+	if v.FeatureGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7104,6 +10037,36 @@ func validateOpDeleteImageVersionInput(v *DeleteImageVersionInput) error {
 	}
 }
 
+func validateOpDeleteModelBiasJobDefinitionInput(v *DeleteModelBiasJobDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteModelBiasJobDefinitionInput"}
+	if v.JobDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobDefinitionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteModelExplainabilityJobDefinitionInput(v *DeleteModelExplainabilityJobDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteModelExplainabilityJobDefinitionInput"}
+	if v.JobDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobDefinitionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteModelInput(v *DeleteModelInput) error {
 	if v == nil {
 		return nil
@@ -7119,6 +10082,36 @@ func validateOpDeleteModelInput(v *DeleteModelInput) error {
 	}
 }
 
+func validateOpDeleteModelPackageGroupInput(v *DeleteModelPackageGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteModelPackageGroupInput"}
+	if v.ModelPackageGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteModelPackageGroupPolicyInput(v *DeleteModelPackageGroupPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteModelPackageGroupPolicyInput"}
+	if v.ModelPackageGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteModelPackageInput(v *DeleteModelPackageInput) error {
 	if v == nil {
 		return nil
@@ -7126,6 +10119,21 @@ func validateOpDeleteModelPackageInput(v *DeleteModelPackageInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteModelPackageInput"}
 	if v.ModelPackageName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteModelQualityJobDefinitionInput(v *DeleteModelQualityJobDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteModelQualityJobDefinitionInput"}
+	if v.JobDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobDefinitionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7171,6 +10179,39 @@ func validateOpDeleteNotebookInstanceLifecycleConfigInput(v *DeleteNotebookInsta
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteNotebookInstanceLifecycleConfigInput"}
 	if v.NotebookInstanceLifecycleConfigName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NotebookInstanceLifecycleConfigName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePipelineInput(v *DeletePipelineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePipelineInput"}
+	if v.PipelineName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteProjectInput(v *DeleteProjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteProjectInput"}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7275,6 +10316,39 @@ func validateOpDeleteWorkteamInput(v *DeleteWorkteamInput) error {
 	}
 }
 
+func validateOpDeregisterDevicesInput(v *DeregisterDevicesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeregisterDevicesInput"}
+	if v.DeviceFleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceFleetName"))
+	}
+	if v.DeviceNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeActionInput(v *DescribeActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeActionInput"}
+	if v.ActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeAlgorithmInput(v *DescribeAlgorithmInput) error {
 	if v == nil {
 		return nil
@@ -7329,6 +10403,21 @@ func validateOpDescribeAppInput(v *DescribeAppInput) error {
 	}
 }
 
+func validateOpDescribeArtifactInput(v *DescribeArtifactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeArtifactInput"}
+	if v.ArtifactArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ArtifactArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeAutoMLJobInput(v *DescribeAutoMLJobInput) error {
 	if v == nil {
 		return nil
@@ -7374,6 +10463,69 @@ func validateOpDescribeCompilationJobInput(v *DescribeCompilationJobInput) error
 	}
 }
 
+func validateOpDescribeContextInput(v *DescribeContextInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeContextInput"}
+	if v.ContextName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDataQualityJobDefinitionInput(v *DescribeDataQualityJobDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDataQualityJobDefinitionInput"}
+	if v.JobDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobDefinitionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDeviceFleetInput(v *DescribeDeviceFleetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDeviceFleetInput"}
+	if v.DeviceFleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceFleetName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDeviceInput(v *DescribeDeviceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDeviceInput"}
+	if v.DeviceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceName"))
+	}
+	if v.DeviceFleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceFleetName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDomainInput(v *DescribeDomainInput) error {
 	if v == nil {
 		return nil
@@ -7381,6 +10533,21 @@ func validateOpDescribeDomainInput(v *DescribeDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDomainInput"}
 	if v.DomainId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeEdgePackagingJobInput(v *DescribeEdgePackagingJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeEdgePackagingJobInput"}
+	if v.EdgePackagingJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgePackagingJobName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7426,6 +10593,21 @@ func validateOpDescribeExperimentInput(v *DescribeExperimentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeExperimentInput"}
 	if v.ExperimentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExperimentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeFeatureGroupInput(v *DescribeFeatureGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFeatureGroupInput"}
+	if v.FeatureGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7524,6 +10706,36 @@ func validateOpDescribeLabelingJobInput(v *DescribeLabelingJobInput) error {
 	}
 }
 
+func validateOpDescribeModelBiasJobDefinitionInput(v *DescribeModelBiasJobDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeModelBiasJobDefinitionInput"}
+	if v.JobDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobDefinitionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeModelExplainabilityJobDefinitionInput(v *DescribeModelExplainabilityJobDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeModelExplainabilityJobDefinitionInput"}
+	if v.JobDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobDefinitionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeModelInput(v *DescribeModelInput) error {
 	if v == nil {
 		return nil
@@ -7539,6 +10751,21 @@ func validateOpDescribeModelInput(v *DescribeModelInput) error {
 	}
 }
 
+func validateOpDescribeModelPackageGroupInput(v *DescribeModelPackageGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeModelPackageGroupInput"}
+	if v.ModelPackageGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeModelPackageInput(v *DescribeModelPackageInput) error {
 	if v == nil {
 		return nil
@@ -7546,6 +10773,21 @@ func validateOpDescribeModelPackageInput(v *DescribeModelPackageInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeModelPackageInput"}
 	if v.ModelPackageName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeModelQualityJobDefinitionInput(v *DescribeModelQualityJobDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeModelQualityJobDefinitionInput"}
+	if v.JobDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobDefinitionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7599,6 +10841,51 @@ func validateOpDescribeNotebookInstanceLifecycleConfigInput(v *DescribeNotebookI
 	}
 }
 
+func validateOpDescribePipelineDefinitionForExecutionInput(v *DescribePipelineDefinitionForExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePipelineDefinitionForExecutionInput"}
+	if v.PipelineExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineExecutionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribePipelineExecutionInput(v *DescribePipelineExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePipelineExecutionInput"}
+	if v.PipelineExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineExecutionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribePipelineInput(v *DescribePipelineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePipelineInput"}
+	if v.PipelineName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeProcessingJobInput(v *DescribeProcessingJobInput) error {
 	if v == nil {
 		return nil
@@ -7606,6 +10893,21 @@ func validateOpDescribeProcessingJobInput(v *DescribeProcessingJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeProcessingJobInput"}
 	if v.ProcessingJobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProcessingJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeProjectInput(v *DescribeProjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeProjectInput"}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7755,6 +11057,36 @@ func validateOpDisassociateTrialComponentInput(v *DisassociateTrialComponentInpu
 	}
 }
 
+func validateOpGetDeviceFleetReportInput(v *GetDeviceFleetReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDeviceFleetReportInput"}
+	if v.DeviceFleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceFleetName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetModelPackageGroupPolicyInput(v *GetModelPackageGroupPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetModelPackageGroupPolicyInput"}
+	if v.ModelPackageGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSearchSuggestionsInput(v *GetSearchSuggestionsInput) error {
 	if v == nil {
 		return nil
@@ -7820,6 +11152,36 @@ func validateOpListLabelingJobsForWorkteamInput(v *ListLabelingJobsForWorkteamIn
 	}
 }
 
+func validateOpListPipelineExecutionsInput(v *ListPipelineExecutionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPipelineExecutionsInput"}
+	if v.PipelineName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPipelineParametersForExecutionInput(v *ListPipelineParametersForExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPipelineParametersForExecutionInput"}
+	if v.PipelineExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineExecutionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsInput(v *ListTagsInput) error {
 	if v == nil {
 		return nil
@@ -7842,6 +11204,51 @@ func validateOpListTrainingJobsForHyperParameterTuningJobInput(v *ListTrainingJo
 	invalidParams := smithy.InvalidParamsError{Context: "ListTrainingJobsForHyperParameterTuningJobInput"}
 	if v.HyperParameterTuningJobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HyperParameterTuningJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutModelPackageGroupPolicyInput(v *PutModelPackageGroupPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutModelPackageGroupPolicyInput"}
+	if v.ModelPackageGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageGroupName"))
+	}
+	if v.ResourcePolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourcePolicy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterDevicesInput(v *RegisterDevicesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterDevicesInput"}
+	if v.DeviceFleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceFleetName"))
+	}
+	if v.Devices == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Devices"))
+	} else if v.Devices != nil {
+		if err := validateDevices(v.Devices); err != nil {
+			invalidParams.AddNested("Devices", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7927,6 +11334,29 @@ func validateOpStartNotebookInstanceInput(v *StartNotebookInstanceInput) error {
 	}
 }
 
+func validateOpStartPipelineExecutionInput(v *StartPipelineExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartPipelineExecutionInput"}
+	if v.PipelineName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
+	}
+	if v.PipelineParameters != nil {
+		if err := validateParameterList(v.PipelineParameters); err != nil {
+			invalidParams.AddNested("PipelineParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopAutoMLJobInput(v *StopAutoMLJobInput) error {
 	if v == nil {
 		return nil
@@ -7949,6 +11379,21 @@ func validateOpStopCompilationJobInput(v *StopCompilationJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopCompilationJobInput"}
 	if v.CompilationJobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CompilationJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopEdgePackagingJobInput(v *StopEdgePackagingJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopEdgePackagingJobInput"}
+	if v.EdgePackagingJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgePackagingJobName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8017,6 +11462,24 @@ func validateOpStopNotebookInstanceInput(v *StopNotebookInstanceInput) error {
 	}
 }
 
+func validateOpStopPipelineExecutionInput(v *StopPipelineExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopPipelineExecutionInput"}
+	if v.PipelineExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineExecutionArn"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopProcessingJobInput(v *StopProcessingJobInput) error {
 	if v == nil {
 		return nil
@@ -8062,6 +11525,21 @@ func validateOpStopTransformJobInput(v *StopTransformJobInput) error {
 	}
 }
 
+func validateOpUpdateActionInput(v *UpdateActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateActionInput"}
+	if v.ActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateAppImageConfigInput(v *UpdateAppImageConfigInput) error {
 	if v == nil {
 		return nil
@@ -8082,6 +11560,21 @@ func validateOpUpdateAppImageConfigInput(v *UpdateAppImageConfigInput) error {
 	}
 }
 
+func validateOpUpdateArtifactInput(v *UpdateArtifactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateArtifactInput"}
+	if v.ArtifactArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ArtifactArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateCodeRepositoryInput(v *UpdateCodeRepositoryInput) error {
 	if v == nil {
 		return nil
@@ -8089,6 +11582,65 @@ func validateOpUpdateCodeRepositoryInput(v *UpdateCodeRepositoryInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCodeRepositoryInput"}
 	if v.CodeRepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CodeRepositoryName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateContextInput(v *UpdateContextInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateContextInput"}
+	if v.ContextName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDeviceFleetInput(v *UpdateDeviceFleetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDeviceFleetInput"}
+	if v.DeviceFleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceFleetName"))
+	}
+	if v.OutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	} else if v.OutputConfig != nil {
+		if err := validateEdgeOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDevicesInput(v *UpdateDevicesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDevicesInput"}
+	if v.DeviceFleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceFleetName"))
+	}
+	if v.Devices == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Devices"))
+	} else if v.Devices != nil {
+		if err := validateDevices(v.Devices); err != nil {
+			invalidParams.AddNested("Devices", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8131,6 +11683,11 @@ func validateOpUpdateEndpointInput(v *UpdateEndpointInput) error {
 	if v.ExcludeRetainedVariantProperties != nil {
 		if err := validateVariantPropertyList(v.ExcludeRetainedVariantProperties); err != nil {
 			invalidParams.AddNested("ExcludeRetainedVariantProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeploymentConfig != nil {
+		if err := validateDeploymentConfig(v.DeploymentConfig); err != nil {
+			invalidParams.AddNested("DeploymentConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -8192,6 +11749,24 @@ func validateOpUpdateImageInput(v *UpdateImageInput) error {
 	}
 }
 
+func validateOpUpdateModelPackageInput(v *UpdateModelPackageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateModelPackageInput"}
+	if v.ModelPackageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageArn"))
+	}
+	if len(v.ModelApprovalStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelApprovalStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateMonitoringScheduleInput(v *UpdateMonitoringScheduleInput) error {
 	if v == nil {
 		return nil
@@ -8236,6 +11811,56 @@ func validateOpUpdateNotebookInstanceLifecycleConfigInput(v *UpdateNotebookInsta
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNotebookInstanceLifecycleConfigInput"}
 	if v.NotebookInstanceLifecycleConfigName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NotebookInstanceLifecycleConfigName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePipelineExecutionInput(v *UpdatePipelineExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePipelineExecutionInput"}
+	if v.PipelineExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineExecutionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePipelineInput(v *UpdatePipelineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePipelineInput"}
+	if v.PipelineName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTrainingJobInput(v *UpdateTrainingJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTrainingJobInput"}
+	if v.TrainingJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrainingJobName"))
+	}
+	if v.ProfilerRuleConfigurations != nil {
+		if err := validateProfilerRuleConfigurations(v.ProfilerRuleConfigurations); err != nil {
+			invalidParams.AddNested("ProfilerRuleConfigurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

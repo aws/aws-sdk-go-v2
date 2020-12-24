@@ -2386,21 +2386,6 @@ func addOpUpdateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateUser{}, middleware.After)
 }
 
-func validateAmazonElasticsearchParameters(v *types.AmazonElasticsearchParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AmazonElasticsearchParameters"}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateAnalysisSourceEntity(v *types.AnalysisSourceEntity) error {
 	if v == nil {
 		return nil
@@ -2432,113 +2417,6 @@ func validateAnalysisSourceTemplate(v *types.AnalysisSourceTemplate) error {
 	}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateAuroraParameters(v *types.AuroraParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AuroraParameters"}
-	if v.Host == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Host"))
-	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateAuroraPostgreSqlParameters(v *types.AuroraPostgreSqlParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AuroraPostgreSqlParameters"}
-	if v.Host == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Host"))
-	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateAwsIotAnalyticsParameters(v *types.AwsIotAnalyticsParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AwsIotAnalyticsParameters"}
-	if v.DataSetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSetName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateCalculatedColumn(v *types.CalculatedColumn) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CalculatedColumn"}
-	if v.ColumnName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
-	}
-	if v.ColumnId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ColumnId"))
-	}
-	if v.Expression == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateCalculatedColumnList(v []types.CalculatedColumn) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CalculatedColumnList"}
-	for i := range v {
-		if err := validateCalculatedColumn(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateCastColumnTypeOperation(v *types.CastColumnTypeOperation) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CastColumnTypeOperation"}
-	if v.ColumnName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
-	}
-	if len(v.NewColumnType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("NewColumnType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2581,25 +2459,6 @@ func validateColumnGroupList(v []types.ColumnGroup) error {
 	}
 }
 
-func validateCreateColumnsOperation(v *types.CreateColumnsOperation) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CreateColumnsOperation"}
-	if v.Columns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Columns"))
-	} else if v.Columns != nil {
-		if err := validateCalculatedColumnList(v.Columns); err != nil {
-			invalidParams.AddNested("Columns", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateCredentialPair(v *types.CredentialPair) error {
 	if v == nil {
 		return nil
@@ -2610,37 +2469,6 @@ func validateCredentialPair(v *types.CredentialPair) error {
 	}
 	if v.Password == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Password"))
-	}
-	if v.AlternateDataSourceParameters != nil {
-		if err := validateDataSourceParametersList(v.AlternateDataSourceParameters); err != nil {
-			invalidParams.AddNested("AlternateDataSourceParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateCustomSql(v *types.CustomSql) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CustomSql"}
-	if v.DataSourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSourceArn"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.SqlQuery == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SqlQuery"))
-	}
-	if v.Columns != nil {
-		if err := validateInputColumnList(v.Columns); err != nil {
-			invalidParams.AddNested("Columns", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2772,130 +2600,6 @@ func validateDataSourceCredentials(v *types.DataSourceCredentials) error {
 	}
 }
 
-func validateDataSourceParameters(v *types.DataSourceParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DataSourceParameters"}
-	if v.AmazonElasticsearchParameters != nil {
-		if err := validateAmazonElasticsearchParameters(v.AmazonElasticsearchParameters); err != nil {
-			invalidParams.AddNested("AmazonElasticsearchParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AuroraParameters != nil {
-		if err := validateAuroraParameters(v.AuroraParameters); err != nil {
-			invalidParams.AddNested("AuroraParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AuroraPostgreSqlParameters != nil {
-		if err := validateAuroraPostgreSqlParameters(v.AuroraPostgreSqlParameters); err != nil {
-			invalidParams.AddNested("AuroraPostgreSqlParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AwsIotAnalyticsParameters != nil {
-		if err := validateAwsIotAnalyticsParameters(v.AwsIotAnalyticsParameters); err != nil {
-			invalidParams.AddNested("AwsIotAnalyticsParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.JiraParameters != nil {
-		if err := validateJiraParameters(v.JiraParameters); err != nil {
-			invalidParams.AddNested("JiraParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.MariaDbParameters != nil {
-		if err := validateMariaDbParameters(v.MariaDbParameters); err != nil {
-			invalidParams.AddNested("MariaDbParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.MySqlParameters != nil {
-		if err := validateMySqlParameters(v.MySqlParameters); err != nil {
-			invalidParams.AddNested("MySqlParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.OracleParameters != nil {
-		if err := validateOracleParameters(v.OracleParameters); err != nil {
-			invalidParams.AddNested("OracleParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.PostgreSqlParameters != nil {
-		if err := validatePostgreSqlParameters(v.PostgreSqlParameters); err != nil {
-			invalidParams.AddNested("PostgreSqlParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.PrestoParameters != nil {
-		if err := validatePrestoParameters(v.PrestoParameters); err != nil {
-			invalidParams.AddNested("PrestoParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.RdsParameters != nil {
-		if err := validateRdsParameters(v.RdsParameters); err != nil {
-			invalidParams.AddNested("RdsParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.RedshiftParameters != nil {
-		if err := validateRedshiftParameters(v.RedshiftParameters); err != nil {
-			invalidParams.AddNested("RedshiftParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.S3Parameters != nil {
-		if err := validateS3Parameters(v.S3Parameters); err != nil {
-			invalidParams.AddNested("S3Parameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ServiceNowParameters != nil {
-		if err := validateServiceNowParameters(v.ServiceNowParameters); err != nil {
-			invalidParams.AddNested("ServiceNowParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.SnowflakeParameters != nil {
-		if err := validateSnowflakeParameters(v.SnowflakeParameters); err != nil {
-			invalidParams.AddNested("SnowflakeParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.SparkParameters != nil {
-		if err := validateSparkParameters(v.SparkParameters); err != nil {
-			invalidParams.AddNested("SparkParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.SqlServerParameters != nil {
-		if err := validateSqlServerParameters(v.SqlServerParameters); err != nil {
-			invalidParams.AddNested("SqlServerParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.TeradataParameters != nil {
-		if err := validateTeradataParameters(v.TeradataParameters); err != nil {
-			invalidParams.AddNested("TeradataParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.TwitterParameters != nil {
-		if err := validateTwitterParameters(v.TwitterParameters); err != nil {
-			invalidParams.AddNested("TwitterParameters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateDataSourceParametersList(v []types.DataSourceParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DataSourceParametersList"}
-	for i := range v {
-		if err := validateDataSourceParameters(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateDateTimeParameter(v *types.DateTimeParameter) error {
 	if v == nil {
 		return nil
@@ -2966,21 +2670,6 @@ func validateDecimalParameterList(v []types.DecimalParameter) error {
 	}
 }
 
-func validateFilterOperation(v *types.FilterOperation) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "FilterOperation"}
-	if v.ConditionExpression == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConditionExpression"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateGeoSpatialColumnGroup(v *types.GeoSpatialColumnGroup) error {
 	if v == nil {
 		return nil
@@ -2994,41 +2683,6 @@ func validateGeoSpatialColumnGroup(v *types.GeoSpatialColumnGroup) error {
 	}
 	if v.Columns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Columns"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateInputColumn(v *types.InputColumn) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "InputColumn"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateInputColumnList(v []types.InputColumn) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "InputColumnList"}
-	for i := range v {
-		if err := validateInputColumn(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3072,21 +2726,6 @@ func validateIntegerParameterList(v []types.IntegerParameter) error {
 	}
 }
 
-func validateJiraParameters(v *types.JiraParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "JiraParameters"}
-	if v.SiteBaseUrl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SiteBaseUrl"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateJoinInstruction(v *types.JoinInstruction) error {
 	if v == nil {
 		return nil
@@ -3118,11 +2757,6 @@ func validateLogicalTable(v *types.LogicalTable) error {
 	invalidParams := smithy.InvalidParamsError{Context: "LogicalTable"}
 	if v.Alias == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Alias"))
-	}
-	if v.DataTransforms != nil {
-		if err := validateTransformOperationList(v.DataTransforms); err != nil {
-			invalidParams.AddNested("DataTransforms", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.Source == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Source"))
@@ -3173,78 +2807,6 @@ func validateLogicalTableSource(v *types.LogicalTableSource) error {
 	}
 }
 
-func validateManifestFileLocation(v *types.ManifestFileLocation) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ManifestFileLocation"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateMariaDbParameters(v *types.MariaDbParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "MariaDbParameters"}
-	if v.Host == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Host"))
-	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateMySqlParameters(v *types.MySqlParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "MySqlParameters"}
-	if v.Host == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Host"))
-	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOracleParameters(v *types.OracleParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "OracleParameters"}
-	if v.Host == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Host"))
-	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateParameters(v *types.Parameters) error {
 	if v == nil {
 		return nil
@@ -3269,178 +2831,6 @@ func validateParameters(v *types.Parameters) error {
 		if err := validateDateTimeParameterList(v.DateTimeParameters); err != nil {
 			invalidParams.AddNested("DateTimeParameters", err.(smithy.InvalidParamsError))
 		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validatePhysicalTable(v *types.PhysicalTable) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "PhysicalTable"}
-	if v.RelationalTable != nil {
-		if err := validateRelationalTable(v.RelationalTable); err != nil {
-			invalidParams.AddNested("RelationalTable", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.CustomSql != nil {
-		if err := validateCustomSql(v.CustomSql); err != nil {
-			invalidParams.AddNested("CustomSql", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.S3Source != nil {
-		if err := validateS3Source(v.S3Source); err != nil {
-			invalidParams.AddNested("S3Source", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validatePhysicalTableMap(v map[string]types.PhysicalTable) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "PhysicalTableMap"}
-	for key := range v {
-		value := v[key]
-		if err := validatePhysicalTable(&value); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validatePostgreSqlParameters(v *types.PostgreSqlParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "PostgreSqlParameters"}
-	if v.Host == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Host"))
-	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validatePrestoParameters(v *types.PrestoParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "PrestoParameters"}
-	if v.Host == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Host"))
-	}
-	if v.Catalog == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateProjectOperation(v *types.ProjectOperation) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ProjectOperation"}
-	if v.ProjectedColumns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectedColumns"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateRdsParameters(v *types.RdsParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "RdsParameters"}
-	if v.InstanceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
-	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateRedshiftParameters(v *types.RedshiftParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "RedshiftParameters"}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateRelationalTable(v *types.RelationalTable) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "RelationalTable"}
-	if v.DataSourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSourceArn"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.InputColumns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputColumns"))
-	} else if v.InputColumns != nil {
-		if err := validateInputColumnList(v.InputColumns); err != nil {
-			invalidParams.AddNested("InputColumns", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateRenameColumnOperation(v *types.RenameColumnOperation) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "RenameColumnOperation"}
-	if v.ColumnName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
-	}
-	if v.NewColumnName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NewColumnName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3502,116 +2892,6 @@ func validateRowLevelPermissionDataSet(v *types.RowLevelPermissionDataSet) error
 	}
 }
 
-func validateS3Parameters(v *types.S3Parameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "S3Parameters"}
-	if v.ManifestFileLocation == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ManifestFileLocation"))
-	} else if v.ManifestFileLocation != nil {
-		if err := validateManifestFileLocation(v.ManifestFileLocation); err != nil {
-			invalidParams.AddNested("ManifestFileLocation", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateS3Source(v *types.S3Source) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "S3Source"}
-	if v.DataSourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSourceArn"))
-	}
-	if v.InputColumns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputColumns"))
-	} else if v.InputColumns != nil {
-		if err := validateInputColumnList(v.InputColumns); err != nil {
-			invalidParams.AddNested("InputColumns", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateServiceNowParameters(v *types.ServiceNowParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ServiceNowParameters"}
-	if v.SiteBaseUrl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SiteBaseUrl"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateSnowflakeParameters(v *types.SnowflakeParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "SnowflakeParameters"}
-	if v.Host == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Host"))
-	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
-	if v.Warehouse == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Warehouse"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateSparkParameters(v *types.SparkParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "SparkParameters"}
-	if v.Host == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Host"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateSqlServerParameters(v *types.SqlServerParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "SqlServerParameters"}
-	if v.Host == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Host"))
-	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateStringParameter(v *types.StringParameter) error {
 	if v == nil {
 		return nil
@@ -3657,24 +2937,6 @@ func validateTag(v *types.Tag) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateTagColumnOperation(v *types.TagColumnOperation) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "TagColumnOperation"}
-	if v.ColumnName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
-	}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3751,98 +3013,6 @@ func validateTemplateSourceTemplate(v *types.TemplateSourceTemplate) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TemplateSourceTemplate"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateTeradataParameters(v *types.TeradataParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "TeradataParameters"}
-	if v.Host == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Host"))
-	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateTransformOperation(v *types.TransformOperation) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "TransformOperation"}
-	if v.ProjectOperation != nil {
-		if err := validateProjectOperation(v.ProjectOperation); err != nil {
-			invalidParams.AddNested("ProjectOperation", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.FilterOperation != nil {
-		if err := validateFilterOperation(v.FilterOperation); err != nil {
-			invalidParams.AddNested("FilterOperation", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.CreateColumnsOperation != nil {
-		if err := validateCreateColumnsOperation(v.CreateColumnsOperation); err != nil {
-			invalidParams.AddNested("CreateColumnsOperation", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.RenameColumnOperation != nil {
-		if err := validateRenameColumnOperation(v.RenameColumnOperation); err != nil {
-			invalidParams.AddNested("RenameColumnOperation", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.CastColumnTypeOperation != nil {
-		if err := validateCastColumnTypeOperation(v.CastColumnTypeOperation); err != nil {
-			invalidParams.AddNested("CastColumnTypeOperation", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.TagColumnOperation != nil {
-		if err := validateTagColumnOperation(v.TagColumnOperation); err != nil {
-			invalidParams.AddNested("TagColumnOperation", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateTransformOperationList(v []types.TransformOperation) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "TransformOperationList"}
-	for i := range v {
-		if err := validateTransformOperation(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateTwitterParameters(v *types.TwitterParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "TwitterParameters"}
-	if v.Query == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Query"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4029,10 +3199,6 @@ func validateOpCreateDataSetInput(v *CreateDataSetInput) error {
 	}
 	if v.PhysicalTableMap == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PhysicalTableMap"))
-	} else if v.PhysicalTableMap != nil {
-		if err := validatePhysicalTableMap(v.PhysicalTableMap); err != nil {
-			invalidParams.AddNested("PhysicalTableMap", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.LogicalTableMap != nil {
 		if err := validateLogicalTableMap(v.LogicalTableMap); err != nil {
@@ -4085,11 +3251,6 @@ func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if v.DataSourceParameters != nil {
-		if err := validateDataSourceParameters(v.DataSourceParameters); err != nil {
-			invalidParams.AddNested("DataSourceParameters", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.Credentials != nil {
 		if err := validateDataSourceCredentials(v.Credentials); err != nil {
@@ -5736,10 +4897,6 @@ func validateOpUpdateDataSetInput(v *UpdateDataSetInput) error {
 	}
 	if v.PhysicalTableMap == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PhysicalTableMap"))
-	} else if v.PhysicalTableMap != nil {
-		if err := validatePhysicalTableMap(v.PhysicalTableMap); err != nil {
-			invalidParams.AddNested("PhysicalTableMap", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.LogicalTableMap != nil {
 		if err := validateLogicalTableMap(v.LogicalTableMap); err != nil {
@@ -5807,11 +4964,6 @@ func validateOpUpdateDataSourceInput(v *UpdateDataSourceInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.DataSourceParameters != nil {
-		if err := validateDataSourceParameters(v.DataSourceParameters); err != nil {
-			invalidParams.AddNested("DataSourceParameters", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.Credentials != nil {
 		if err := validateDataSourceCredentials(v.Credentials); err != nil {

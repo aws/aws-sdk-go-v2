@@ -410,14 +410,13 @@ func validateComputeResource(v *types.ComputeResource) error {
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
-	if v.InstanceRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceRole"))
-	}
-	if v.InstanceTypes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceTypes"))
-	}
 	if v.Subnets == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
+	}
+	if v.Ec2Configuration != nil {
+		if err := validateEc2ConfigurationList(v.Ec2Configuration); err != nil {
+			invalidParams.AddNested("Ec2Configuration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -512,6 +511,38 @@ func validateDevicesList(v []types.Device) error {
 	}
 }
 
+func validateEc2Configuration(v *types.Ec2Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Ec2Configuration"}
+	if v.ImageType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEc2ConfigurationList(v []types.Ec2Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Ec2ConfigurationList"}
+	for i := range v {
+		if err := validateEc2Configuration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEvaluateOnExit(v *types.EvaluateOnExit) error {
 	if v == nil {
 		return nil
@@ -549,14 +580,14 @@ func validateLinuxParameters(v *types.LinuxParameters) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LinuxParameters"}
-	if v.Tmpfs != nil {
-		if err := validateTmpfsList(v.Tmpfs); err != nil {
-			invalidParams.AddNested("Tmpfs", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Devices != nil {
 		if err := validateDevicesList(v.Devices); err != nil {
 			invalidParams.AddNested("Devices", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tmpfs != nil {
+		if err := validateTmpfsList(v.Tmpfs); err != nil {
+			invalidParams.AddNested("Tmpfs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -571,13 +602,13 @@ func validateLogConfiguration(v *types.LogConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LogConfiguration"}
+	if len(v.LogDriver) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogDriver"))
+	}
 	if v.SecretOptions != nil {
 		if err := validateSecretList(v.SecretOptions); err != nil {
 			invalidParams.AddNested("SecretOptions", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.LogDriver) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LogDriver"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -627,13 +658,13 @@ func validateNodePropertyOverride(v *types.NodePropertyOverride) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NodePropertyOverride"}
+	if v.TargetNodes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetNodes"))
+	}
 	if v.ContainerOverrides != nil {
 		if err := validateContainerOverrides(v.ContainerOverrides); err != nil {
 			invalidParams.AddNested("ContainerOverrides", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.TargetNodes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetNodes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -681,13 +712,13 @@ func validateNodeRangeProperty(v *types.NodeRangeProperty) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NodeRangeProperty"}
+	if v.TargetNodes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetNodes"))
+	}
 	if v.Container != nil {
 		if err := validateContainerProperties(v.Container); err != nil {
 			invalidParams.AddNested("Container", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.TargetNodes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetNodes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -701,11 +732,11 @@ func validateResourceRequirement(v *types.ResourceRequirement) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceRequirement"}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -753,11 +784,11 @@ func validateSecret(v *types.Secret) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Secret"}
-	if v.ValueFrom == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ValueFrom"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ValueFrom == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ValueFrom"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -852,11 +883,11 @@ func validateOpCancelJobInput(v *CancelJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CancelJobInput"}
-	if v.Reason == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
-	}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.Reason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -993,26 +1024,26 @@ func validateOpRegisterJobDefinitionInput(v *RegisterJobDefinitionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterJobDefinitionInput"}
+	if v.JobDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobDefinitionName"))
+	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if v.NodeProperties != nil {
-		if err := validateNodeProperties(v.NodeProperties); err != nil {
-			invalidParams.AddNested("NodeProperties", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.ContainerProperties != nil {
 		if err := validateContainerProperties(v.ContainerProperties); err != nil {
 			invalidParams.AddNested("ContainerProperties", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.NodeProperties != nil {
+		if err := validateNodeProperties(v.NodeProperties); err != nil {
+			invalidParams.AddNested("NodeProperties", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.RetryStrategy != nil {
 		if err := validateRetryStrategy(v.RetryStrategy); err != nil {
 			invalidParams.AddNested("RetryStrategy", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.JobDefinitionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobDefinitionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1026,14 +1057,19 @@ func validateOpSubmitJobInput(v *SubmitJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SubmitJobInput"}
-	if v.JobQueue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobQueue"))
-	}
 	if v.JobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
 	}
+	if v.JobQueue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobQueue"))
+	}
 	if v.JobDefinition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobDefinition"))
+	}
+	if v.ContainerOverrides != nil {
+		if err := validateContainerOverrides(v.ContainerOverrides); err != nil {
+			invalidParams.AddNested("ContainerOverrides", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.NodeOverrides != nil {
 		if err := validateNodeOverrides(v.NodeOverrides); err != nil {
@@ -1043,11 +1079,6 @@ func validateOpSubmitJobInput(v *SubmitJobInput) error {
 	if v.RetryStrategy != nil {
 		if err := validateRetryStrategy(v.RetryStrategy); err != nil {
 			invalidParams.AddNested("RetryStrategy", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ContainerOverrides != nil {
-		if err := validateContainerOverrides(v.ContainerOverrides); err != nil {
-			invalidParams.AddNested("ContainerOverrides", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1062,11 +1093,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1131,13 +1162,13 @@ func validateOpUpdateJobQueueInput(v *UpdateJobQueueInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateJobQueueInput"}
+	if v.JobQueue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobQueue"))
+	}
 	if v.ComputeEnvironmentOrder != nil {
 		if err := validateComputeEnvironmentOrders(v.ComputeEnvironmentOrder); err != nil {
 			invalidParams.AddNested("ComputeEnvironmentOrder", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.JobQueue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobQueue"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

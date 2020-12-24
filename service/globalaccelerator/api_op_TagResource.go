@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Add tags to an accelerator resource. To see an AWS CLI example of adding tags to
-// an accelerator, scroll down to Example. For more information, see Tagging in AWS
+// Add tags to an accelerator resource. For more information, see Tagging in AWS
 // Global Accelerator
 // (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
 // in the AWS Global Accelerator Developer Guide.

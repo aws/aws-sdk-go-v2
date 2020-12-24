@@ -13,8 +13,18 @@ type ApplicationComponent struct {
 	// The name of the component.
 	ComponentName *string
 
+	// If logging is supported for the resource type, indicates whether the component
+	// has configured logs to be monitored.
+	ComponentRemarks *string
+
+	// Workloads detected in the application component.
+	DetectedWorkload map[string]map[string]string
+
 	// Indicates whether the application component is monitored.
 	Monitor *bool
+
+	// The operating system of the component.
+	OsType OsType
 
 	// The resource type. Supported resource types include EC2 instances, Auto Scaling
 	// group, Classic ELB, Application ELB, and SQS Queue.
@@ -84,21 +94,30 @@ type ConfigurationEvent struct {
 // An object that defines the log patterns that belongs to a LogPatternSet.
 type LogPattern struct {
 
-	// A regular expression that defines the log pattern. A log pattern can contains at
-	// many as 50 characters, and it cannot be empty.
+	// A regular expression that defines the log pattern. A log pattern can contain as
+	// many as 50 characters, and it cannot be empty. The pattern must be DFA
+	// compatible. Patterns that utilize forward lookahead or backreference
+	// constructions are not supported.
 	Pattern *string
 
-	// The name of the log pattern. A log pattern name can contains at many as 50
+	// The name of the log pattern. A log pattern name can contain as many as 50
 	// characters, and it cannot be empty. The characters can be Unicode letters,
-	// digits or one of the following symbols: period, dash, underscore.
+	// digits, or one of the following symbols: period, dash, underscore.
 	PatternName *string
 
-	// The name of the log pattern. A log pattern name can contains at many as 30
+	// The name of the log pattern. A log pattern name can contain as many as 30
 	// characters, and it cannot be empty. The characters can be Unicode letters,
-	// digits or one of the following symbols: period, dash, underscore.
+	// digits, or one of the following symbols: period, dash, underscore.
 	PatternSetName *string
 
-	// Rank of the log pattern.
+	// Rank of the log pattern. Must be a value between 1 and 1,000,000. The patterns
+	// are sorted by rank, so we recommend that you set your highest priority patterns
+	// with the lowest rank. A pattern of rank 1 will be the first to get matched to a
+	// log line. A pattern of rank 1,000,000 will be last to get matched. When you
+	// configure custom log patterns from the console, a Low severity pattern
+	// translates to a 750,000 rank. A Medium severity pattern translates to a 500,000
+	// rank. And a High severity pattern translates to a 250,000 rank. Rank values less
+	// than 1 or greater than 1,000,000 are reserved for AWS-provided patterns.
 	Rank int32
 }
 
@@ -131,6 +150,19 @@ type Observation struct {
 
 	// The status of the CodeDeploy deployment, for example SUCCESS or  FAILURE.
 	CodeDeployState *string
+
+	// The cause of an EBS CloudWatch event.
+	EbsCause *string
+
+	// The type of EBS CloudWatch event, such as createVolume, deleteVolume or
+	// attachVolume.
+	EbsEvent *string
+
+	// The request ID of an EBS CloudWatch event.
+	EbsRequestId *string
+
+	// The result of an EBS CloudWatch event, such as failed or succeeded.
+	EbsResult *string
 
 	// The state of the instance, such as STOPPING or TERMINATING.
 	Ec2State *string
@@ -176,6 +208,15 @@ type Observation struct {
 	// The namespace of the observation metric.
 	MetricNamespace *string
 
+	// The category of an RDS event.
+	RdsEventCategories *string
+
+	// The message of an RDS event.
+	RdsEventMessage *string
+
+	// The name of the S3 CloudWatch Event-based observation.
+	S3EventName *string
+
 	// The source resource ARN of the observation.
 	SourceARN *string
 
@@ -184,6 +225,18 @@ type Observation struct {
 
 	// The time when the observation was first detected, in epoch seconds.
 	StartTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the step function-based observation.
+	StatesArn *string
+
+	// The Amazon Resource Name (ARN) of the step function execution-based observation.
+	StatesExecutionArn *string
+
+	// The input to the step function-based observation.
+	StatesInput *string
+
+	// The status of the step function-related observation.
+	StatesStatus *string
 
 	// The unit of the source observation metric.
 	Unit *string

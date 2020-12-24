@@ -12,17 +12,18 @@ import (
 )
 
 // Creates a Lambda function. To create a function, you need a deployment package
-// (https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html) and an
-// execution role
+// (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html) and
+// an execution role
 // (https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role).
-// The deployment package contains your function code. The execution role grants
-// the function permission to use AWS services, such as Amazon CloudWatch Logs for
-// log streaming and AWS X-Ray for request tracing. When you create a function,
-// Lambda provisions an instance of the function and its supporting resources. If
-// your function connects to a VPC, this process can take a minute or so. During
-// this time, you can't invoke or modify the function. The State, StateReason, and
-// StateReasonCode fields in the response from GetFunctionConfiguration indicate
-// when the function is ready to invoke. For more information, see Function States
+// The deployment package is a .zip file archive or container image that contains
+// your function code. The execution role grants the function permission to use AWS
+// services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for
+// request tracing. When you create a function, Lambda provisions an instance of
+// the function and its supporting resources. If your function connects to a VPC,
+// this process can take a minute or so. During this time, you can't invoke or
+// modify the function. The State, StateReason, and StateReasonCode fields in the
+// response from GetFunctionConfiguration indicate when the function is ready to
+// invoke. For more information, see Function States
 // (https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html). A function
 // has an unpublished version, and can have published versions and aliases. The
 // unpublished version changes when you update your function's code and
@@ -34,7 +35,13 @@ import (
 // settings. You can modify version-specific settings later with
 // UpdateFunctionConfiguration. Function-level settings apply to both the
 // unpublished and published versions of the function, and include tags
-// (TagResource) and per-function concurrency limits (PutFunctionConcurrency). If
+// (TagResource) and per-function concurrency limits (PutFunctionConcurrency). You
+// can use code signing if your deployment package is a .zip file archive. To
+// enable code signing for this function, specify the ARN of a code-signing
+// configuration. When a user attempts to deploy a code package with
+// UpdateFunctionCode, Lambda checks that the code package has a valid signature
+// from a trusted publisher. The code-signing configuration includes set set of
+// signing profiles, which define the trusted publishers for this function. If
 // another account or an AWS service invokes your function, use AddPermission to
 // grant permission by creating a resource-based IAM policy. You can grant
 // permissions at the function level, on a version, or on an alias. To invoke your
@@ -82,25 +89,15 @@ type CreateFunctionInput struct {
 	// This member is required.
 	FunctionName *string
 
-	// The name of the method within your code that Lambda calls to execute your
-	// function. The format includes the file name. It can also include namespaces and
-	// other qualifiers, depending on the runtime. For more information, see
-	// Programming Model
-	// (https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html).
-	//
-	// This member is required.
-	Handler *string
-
 	// The Amazon Resource Name (ARN) of the function's execution role.
 	//
 	// This member is required.
 	Role *string
 
-	// The identifier of the function's runtime
-	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
-	//
-	// This member is required.
-	Runtime types.Runtime
+	// To enable code signing for this function, specify the ARN of a code-signing
+	// configuration. A code-signing configuration includes a set of signing profiles,
+	// which define the trusted publishers for this function.
+	CodeSigningConfigArn *string
 
 	// A dead letter queue configuration that specifies the queue or topic where Lambda
 	// sends asynchronous events when they fail processing. For more information, see
@@ -117,6 +114,16 @@ type CreateFunctionInput struct {
 	// Connection settings for an Amazon EFS file system.
 	FileSystemConfigs []types.FileSystemConfig
 
+	// The name of the method within your code that Lambda calls to execute your
+	// function. The format includes the file name. It can also include namespaces and
+	// other qualifiers, depending on the runtime. For more information, see
+	// Programming Model
+	// (https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html).
+	Handler *string
+
+	// Configuration values that override the container image Dockerfile.
+	ImageConfig *types.ImageConfig
+
 	// The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt
 	// your function's environment variables. If it's not provided, AWS Lambda uses a
 	// default service key.
@@ -128,13 +135,21 @@ type CreateFunctionInput struct {
 	// including the version.
 	Layers []string
 
-	// The amount of memory that your function has access to. Increasing the function's
-	// memory also increases its CPU allocation. The default value is 128 MB. The value
-	// must be a multiple of 64 MB.
+	// The amount of memory available to the function at runtime. Increasing the
+	// function's memory also increases its CPU allocation. The default value is 128
+	// MB. The value can be any multiple of 1 MB.
 	MemorySize *int32
+
+	// The type of deployment package. Set to Image for container image and set Zip for
+	// ZIP archive.
+	PackageType types.PackageType
 
 	// Set to true to publish the first version of the function during creation.
 	Publish bool
+
+	// The identifier of the function's runtime
+	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html).
+	Runtime types.Runtime
 
 	// A list of tags (https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to
 	// apply to the function.
@@ -186,6 +201,9 @@ type CreateFunctionOutput struct {
 	// The function that Lambda calls to begin executing your function.
 	Handler *string
 
+	// The function's image configuration values.
+	ImageConfigResponse *types.ImageConfigResponse
+
 	// The KMS key that's used to encrypt the function's environment variables. This
 	// key is only returned if you've configured a customer managed CMK.
 	KMSKeyArn *string
@@ -211,8 +229,12 @@ type CreateFunctionOutput struct {
 	// For Lambda@Edge functions, the ARN of the master function.
 	MasterArn *string
 
-	// The memory that's allocated to the function.
+	// The amount of memory available to the function at runtime.
 	MemorySize *int32
+
+	// The type of deployment package. Set to Image for container image and set Zip for
+	// .zip file archive.
+	PackageType types.PackageType
 
 	// The latest updated revision of the function or alias.
 	RevisionId *string
@@ -222,6 +244,12 @@ type CreateFunctionOutput struct {
 
 	// The runtime environment for the Lambda function.
 	Runtime types.Runtime
+
+	// The ARN of the signing job.
+	SigningJobArn *string
+
+	// The ARN of the signing profile version.
+	SigningProfileVersionArn *string
 
 	// The current state of the function. When the state is Inactive, you can
 	// reactivate the function by invoking it.

@@ -36,17 +36,15 @@ type CreateImageInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the image recipe that defines how images are
-	// configured, tested, and assessed.
-	//
-	// This member is required.
-	ImageRecipeArn *string
-
 	// The Amazon Resource Name (ARN) of the infrastructure configuration that defines
 	// the environment in which your image will be built and tested.
 	//
 	// This member is required.
 	InfrastructureConfigurationArn *string
+
+	// The Amazon Resource Name (ARN) of the container recipe that defines how images
+	// are configured and tested.
+	ContainerRecipeArn *string
 
 	// The Amazon Resource Name (ARN) of the distribution configuration that defines
 	// and configures the outputs of your pipeline.
@@ -55,7 +53,11 @@ type CreateImageInput struct {
 	// Collects additional information about the image being created, including the
 	// operating system (OS) version and package list. This information is used to
 	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
-	EnhancedImageMetadataEnabled *bool
+	EnhancedImageMetadataEnabled bool
+
+	// The Amazon Resource Name (ARN) of the image recipe that defines how images are
+	// configured, tested, and assessed.
+	ImageRecipeArn *string
 
 	// The image tests configuration of the image.
 	ImageTestsConfiguration *types.ImageTestsConfiguration

@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Returns a paginated list of all security keys associated with the instance.
 func (c *Client) ListSecurityKeys(ctx context.Context, params *ListSecurityKeysInput, optFns ...func(*Options)) (*ListSecurityKeysOutput, error) {
 	if params == nil {

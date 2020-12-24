@@ -607,13 +607,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "region"
+                        "value": "region",
+                        "name": "region"
                     },
                     {
-                        "value": "availability-zone"
+                        "value": "availability-zone",
+                        "name": "availability_zone"
                     },
                     {
-                        "value": "availability-zone-id"
+                        "value": "availability-zone-id",
+                        "name": "availability_zone_id"
                     }
                 ],
                 "smithy.api#length": {

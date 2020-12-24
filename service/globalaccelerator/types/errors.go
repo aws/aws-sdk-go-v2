@@ -119,6 +119,40 @@ func (e *ByoipCidrNotFoundException) ErrorMessage() string {
 func (e *ByoipCidrNotFoundException) ErrorCode() string             { return "ByoipCidrNotFoundException" }
 func (e *ByoipCidrNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// You can't use both of those options.
+type ConflictException struct {
+	Message *string
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The endpoint that you specified doesn't exist.
+type EndpointAlreadyExistsException struct {
+	Message *string
+}
+
+func (e *EndpointAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EndpointAlreadyExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EndpointAlreadyExistsException) ErrorCode() string             { return "EndpointAlreadyExistsException" }
+func (e *EndpointAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The endpoint group that you specified already exists.
 type EndpointGroupAlreadyExistsException struct {
 	Message *string
@@ -156,6 +190,23 @@ func (e *EndpointGroupNotFoundException) ErrorMessage() string {
 }
 func (e *EndpointGroupNotFoundException) ErrorCode() string             { return "EndpointGroupNotFoundException" }
 func (e *EndpointGroupNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The endpoint that you specified doesn't exist.
+type EndpointNotFoundException struct {
+	Message *string
+}
+
+func (e *EndpointNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EndpointNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EndpointNotFoundException) ErrorCode() string             { return "EndpointNotFoundException" }
+func (e *EndpointNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The CIDR that you specified is not valid for this action. For example, the state
 // of the CIDR might be incorrect for this action.

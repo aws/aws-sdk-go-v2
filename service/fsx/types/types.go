@@ -18,8 +18,8 @@ type ActiveDirectoryBackupAttributes struct {
 	DomainName *string
 }
 
-// Describes a specific Amazon FSx Administrative Action for the current Windows
-// file system.
+// Describes a specific Amazon FSx administrative action for the current Windows or
+// Lustre file system.
 type AdministrativeAction struct {
 
 	// Describes the type of administrative action, as follows:
@@ -31,20 +31,31 @@ type AdministrativeAction struct {
 	// *
 	// STORAGE_OPTIMIZATION - Once the FILE_SYSTEM_UPDATE task to increase a file
 	// system's storage capacity completes successfully, a STORAGE_OPTIMIZATION task
-	// starts. Storage optimization is the process of migrating the file system data to
-	// the new, larger disks. You can track the storage migration progress using the
+	// starts.
+	//
+	// * For Windows, storage optimization is the process of migrating the
+	// file system data to the new, larger disks.
+	//
+	// * For Lustre, storage optimization
+	// consists of rebalancing the data across the existing and newly added file
+	// servers.
+	//
+	// You can track the storage optimization progress using the
 	// ProgressPercent property. When STORAGE_OPTIMIZATION completes successfully, the
 	// parent FILE_SYSTEM_UPDATE action status changes to COMPLETED. For more
-	// information, see Managing Storage Capacity
-	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html).
+	// information, see Managing storage capacity
+	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html)
+	// in the Amazon FSx for Windows File Server User Guide and Managing storage and
+	// throughput capacity
+	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html)
+	// in the Amazon FSx for Lustre User Guide.
 	//
-	// *
-	// FILE_SYSTEM_ALIAS_ASSOCIATION - A file system update to associate a new DNS
-	// alias with the file system. For more information, see .
+	// * FILE_SYSTEM_ALIAS_ASSOCIATION - A
+	// file system update to associate a new DNS alias with the file system. For more
+	// information, see .
 	//
-	// *
-	// FILE_SYSTEM_ALIAS_DISASSOCIATION - A file system update to disassociate a DNS
-	// alias from the file system. For more information, see .
+	// * FILE_SYSTEM_ALIAS_DISASSOCIATION - A file system update to
+	// disassociate a DNS alias from the file system. For more information, see .
 	AdministrativeActionType AdministrativeActionType
 
 	// Provides information about a failed administrative action.
@@ -74,9 +85,13 @@ type AdministrativeAction struct {
 	// *
 	// UPDATED_OPTIMIZING - For a storage capacity increase update, Amazon FSx has
 	// updated the file system with the new storage capacity, and is now performing the
-	// storage optimization process. For more information, see Managing Storage
-	// Capacity
-	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html).
+	// storage optimization process. For more information, see Managing storage
+	// capacity
+	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html)
+	// in the Amazon FSx for Windows File Server User Guide and Managing storage and
+	// throughput capacity
+	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html)
+	// in the Amazon FSx for Lustre User Guide.
 	Status Status
 
 	// Describes the target value for the administration action, provided in the
@@ -140,7 +155,15 @@ type Alias struct {
 	Name *string
 }
 
-// A backup of an Amazon FSx for file system.
+// A backup of an Amazon FSx file system. For more information see:
+//
+// * Working with
+// backups for Windows file systems
+// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html)
+//
+// *
+// Working with backups for Lustre file systems
+// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html)
 type Backup struct {
 
 	// The ID of the backup.
@@ -164,16 +187,20 @@ type Backup struct {
 	// * AVAILABLE - The backup is fully
 	// available.
 	//
-	// * CREATING - FSx is creating the backup.
+	// * PENDING - For user-initiated backups on Lustre file systems only;
+	// Amazon FSx has not started creating the backup.
 	//
-	// * TRANSFERRING - For
-	// Lustre file systems only; FSx is transferring the backup to S3.
+	// * CREATING - Amazon FSx is
+	// creating the backup.
 	//
-	// * DELETED - The
-	// backup was deleted is no longer available.
+	// * TRANSFERRING - For user-initiated backups on Lustre file
+	// systems only; Amazon FSx is transferring the backup to S3.
 	//
-	// * FAILED - Amazon FSx could not
-	// complete the backup.
+	// * DELETED - Amazon
+	// FSx deleted the backup and it is no longer available.
+	//
+	// * FAILED - Amazon FSx
+	// could not complete the backup.
 	//
 	// This member is required.
 	Lifecycle BackupLifecycle
@@ -834,7 +861,7 @@ type FileSystem struct {
 	// The Amazon Resource Name (ARN) for the file system resource.
 	ResourceARN *string
 
-	// The storage capacity of the file system in gigabytes (GB).
+	// The storage capacity of the file system in gibibytes (GiB).
 	StorageCapacity *int32
 
 	// The storage type of the file system. Valid values are SSD and HDD. If set to

@@ -558,11 +558,11 @@ func validateCreationInfo(v *types.CreationInfo) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreationInfo"}
-	if v.OwnerGid == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OwnerGid"))
-	}
 	if v.OwnerUid == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OwnerUid"))
+	}
+	if v.OwnerGid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OwnerGid"))
 	}
 	if v.Permissions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
@@ -649,26 +649,26 @@ func validateOpCreateAccessPointInput(v *CreateAccessPointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAccessPointInput"}
-	if v.FileSystemId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.RootDirectory != nil {
-		if err := validateRootDirectory(v.RootDirectory); err != nil {
-			invalidParams.AddNested("RootDirectory", err.(smithy.InvalidParamsError))
-		}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
 	}
 	if v.PosixUser != nil {
 		if err := validatePosixUser(v.PosixUser); err != nil {
 			invalidParams.AddNested("PosixUser", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	if v.RootDirectory != nil {
+		if err := validateRootDirectory(v.RootDirectory); err != nil {
+			invalidParams.AddNested("RootDirectory", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -702,11 +702,11 @@ func validateOpCreateMountTargetInput(v *CreateMountTargetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateMountTargetInput"}
-	if v.SubnetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
-	}
 	if v.FileSystemId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if v.SubnetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -720,15 +720,15 @@ func validateOpCreateTagsInput(v *CreateTagsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTagsInput"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.FileSystemId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -802,11 +802,11 @@ func validateOpDeleteTagsInput(v *DeleteTagsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTagsInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.FileSystemId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -947,11 +947,11 @@ func validateOpPutFileSystemPolicyInput(v *PutFileSystemPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutFileSystemPolicyInput"}
-	if v.Policy == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
-	}
 	if v.FileSystemId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -965,11 +965,11 @@ func validateOpPutLifecycleConfigurationInput(v *PutLifecycleConfigurationInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutLifecycleConfigurationInput"}
-	if v.LifecyclePolicies == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LifecyclePolicies"))
-	}
 	if v.FileSystemId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if v.LifecyclePolicies == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LifecyclePolicies"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -983,15 +983,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

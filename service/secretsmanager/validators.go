@@ -542,11 +542,11 @@ func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutResourcePolicyInput"}
-	if v.ResourcePolicy == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourcePolicy"))
-	}
 	if v.SecretId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecretId"))
+	}
+	if v.ResourcePolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourcePolicy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -623,11 +623,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.SecretId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecretId"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

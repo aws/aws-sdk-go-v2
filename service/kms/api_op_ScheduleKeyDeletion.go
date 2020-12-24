@@ -28,15 +28,22 @@ import (
 // associated AWS CloudHSM cluster. However, you might need to manually delete the
 // orphaned key material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key)
-// from the cluster and its backups. You cannot perform this operation on a CMK in
-// a different AWS account. For more information about scheduling a CMK for
-// deletion, see Deleting Customer Master Keys
+// from the cluster and its backups. For more information about scheduling a CMK
+// for deletion, see Deleting Customer Master Keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html) in
 // the AWS Key Management Service Developer Guide. The CMK that you use for this
 // operation must be in a compatible key state. For details, see How Key State
 // Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide.
+// AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a CMK in a different AWS account. Required
+// permissions: kms:ScheduleKeyDeletion
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations
+//
+// * CancelKeyDeletion
+//
+// * DisableKey
 func (c *Client) ScheduleKeyDeletion(ctx context.Context, params *ScheduleKeyDeletionInput, optFns ...func(*Options)) (*ScheduleKeyDeletionOutput, error) {
 	if params == nil {
 		params = &ScheduleKeyDeletionInput{}

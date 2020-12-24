@@ -16689,30 +16689,31 @@ func awsRestjson1_serializeDocumentAssetPropertyValueList(v []types.AssetPropert
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAssetPropertyVariant(v *types.AssetPropertyVariant, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAssetPropertyVariant(v types.AssetPropertyVariant, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.BooleanValue != nil {
-		ok := object.Key("booleanValue")
-		ok.String(*v.BooleanValue)
-	}
+	switch uv := v.(type) {
+	case *types.AssetPropertyVariantMemberBooleanValue:
+		av := object.Key("booleanValue")
+		av.String(uv.Value)
 
-	if v.DoubleValue != nil {
-		ok := object.Key("doubleValue")
-		ok.String(*v.DoubleValue)
-	}
+	case *types.AssetPropertyVariantMemberDoubleValue:
+		av := object.Key("doubleValue")
+		av.String(uv.Value)
 
-	if v.IntegerValue != nil {
-		ok := object.Key("integerValue")
-		ok.String(*v.IntegerValue)
-	}
+	case *types.AssetPropertyVariantMemberIntegerValue:
+		av := object.Key("integerValue")
+		av.String(uv.Value)
 
-	if v.StringValue != nil {
-		ok := object.Key("stringValue")
-		ok.String(*v.StringValue)
-	}
+	case *types.AssetPropertyVariantMemberStringValue:
+		av := object.Key("stringValue")
+		av.String(uv.Value)
 
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -18099,6 +18100,11 @@ func awsRestjson1_serializeDocumentOTAUpdateFile(v *types.OTAUpdateFile, value s
 	if v.FileName != nil {
 		ok := object.Key("fileName")
 		ok.String(*v.FileName)
+	}
+
+	if v.FileType != nil {
+		ok := object.Key("fileType")
+		ok.Integer(*v.FileType)
 	}
 
 	if v.FileVersion != nil {

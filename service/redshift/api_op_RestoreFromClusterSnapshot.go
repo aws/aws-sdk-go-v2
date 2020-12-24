@@ -84,6 +84,10 @@ type RestoreFromClusterSnapshotInput struct {
 	// random, system-chosen Availability Zone. Example: us-east-2a
 	AvailabilityZone *string
 
+	// The option to enable relocation for an Amazon Redshift cluster between
+	// Availability Zones after the cluster is restored.
+	AvailabilityZoneRelocation *bool
+
 	// The name of the parameter group to be associated with this cluster. Default: The
 	// default Amazon Redshift cluster parameter group. For information about the
 	// default parameter group, go to Working with Amazon Redshift Parameter Groups

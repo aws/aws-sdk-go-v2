@@ -176,15 +176,13 @@ type RestoreDBInstanceFromS3Input struct {
 	// in the Amazon RDS User Guide.
 	Iops *int32
 
-	// The AWS KMS key identifier for an encrypted DB instance. The KMS key identifier
-	// is the Amazon Resource Name (ARN) for the KMS encryption key. If you are
-	// creating a DB instance with the same AWS account that owns the KMS encryption
-	// key used to encrypt the new DB instance, then you can use the KMS key alias
-	// instead of the ARN for the KM encryption key. If the StorageEncrypted parameter
-	// is enabled, and you do not specify a value for the KmsKeyId parameter, then
-	// Amazon RDS will use your default encryption key. AWS KMS creates the default
-	// encryption key for your AWS account. Your AWS account has a different default
-	// encryption key for each AWS Region.
+	// The AWS KMS key identifier for an encrypted DB instance. The AWS KMS key
+	// identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS
+	// customer master key (CMK). To use a CMK in a different AWS account, specify the
+	// key ARN or alias ARN. If the StorageEncrypted parameter is enabled, and you do
+	// not specify a value for the KmsKeyId parameter, then Amazon RDS will use your
+	// default CMK. There is a default CMK for your AWS account. Your AWS account has a
+	// different default CMK for each AWS Region.
 	KmsKeyId *string
 
 	// The license model for this DB instance. Use general-public-license.
@@ -235,12 +233,12 @@ type RestoreDBInstanceFromS3Input struct {
 	// argument is omitted, the default option group for the specified engine is used.
 	OptionGroupName *string
 
-	// The AWS KMS key identifier for encryption of Performance Insights data. The KMS
-	// key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the KMS key
-	// alias for the KMS encryption key. If you do not specify a value for
-	// PerformanceInsightsKMSKeyId, then Amazon RDS uses your default encryption key.
-	// AWS KMS creates the default encryption key for your AWS account. Your AWS
-	// account has a different default encryption key for each AWS Region.
+	// The AWS KMS key identifier for encryption of Performance Insights data. The AWS
+	// KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS
+	// KMS customer master key (CMK). If you do not specify a value for
+	// PerformanceInsightsKMSKeyId, then Amazon RDS uses your default CMK. There is a
+	// default CMK for your AWS account. Your AWS account has a different default CMK
+	// for each AWS Region.
 	PerformanceInsightsKMSKeyId *string
 
 	// The amount of time, in days, to retain Performance Insights data. Valid values

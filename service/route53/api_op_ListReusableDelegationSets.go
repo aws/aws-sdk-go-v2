@@ -44,7 +44,7 @@ type ListReusableDelegationSetsInput struct {
 	// The number of reusable delegation sets that you want Amazon Route 53 to return
 	// in the response to this request. If you specify a value greater than 100, Route
 	// 53 returns only the first 100 reusable delegation sets.
-	MaxItems *string
+	MaxItems *int32
 }
 
 // A complex type that contains information about the reusable delegation sets that
@@ -74,7 +74,7 @@ type ListReusableDelegationSetsOutput struct {
 	// ListReusableDelegationSets that produced the current response.
 	//
 	// This member is required.
-	MaxItems *string
+	MaxItems *int32
 
 	// If IsTruncated is true, the value of NextMarker identifies the next reusable
 	// delegation set that Amazon Route 53 will return if you submit another

@@ -80,6 +80,7 @@ type SigningProfileStatus string
 const (
 	SigningProfileStatusActive   SigningProfileStatus = "Active"
 	SigningProfileStatusCanceled SigningProfileStatus = "Canceled"
+	SigningProfileStatusRevoked  SigningProfileStatus = "Revoked"
 )
 
 // Values returns all known values for SigningProfileStatus. Note that this can be
@@ -89,6 +90,7 @@ func (SigningProfileStatus) Values() []SigningProfileStatus {
 	return []SigningProfileStatus{
 		"Active",
 		"Canceled",
+		"Revoked",
 	}
 }
 
@@ -109,5 +111,25 @@ func (SigningStatus) Values() []SigningStatus {
 		"InProgress",
 		"Failed",
 		"Succeeded",
+	}
+}
+
+type ValidityType string
+
+// Enum values for ValidityType
+const (
+	ValidityTypeDays   ValidityType = "DAYS"
+	ValidityTypeMonths ValidityType = "MONTHS"
+	ValidityTypeYears  ValidityType = "YEARS"
+)
+
+// Values returns all known values for ValidityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ValidityType) Values() []ValidityType {
+	return []ValidityType{
+		"DAYS",
+		"MONTHS",
+		"YEARS",
 	}
 }

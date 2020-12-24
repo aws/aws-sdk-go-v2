@@ -148,10 +148,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "DEPLOYED"
+                        "value": "DEPLOYED",
+                        "name": "DEPLOYED"
                     },
                     {
-                        "value": "IN_PROGRESS"
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
                     }
                 ]
             }
@@ -527,10 +529,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "NONE"
+                        "value": "NONE",
+                        "name": "NONE"
                     },
                     {
-                        "value": "SOURCE_IP"
+                        "value": "SOURCE_IP",
+                        "name": "SOURCE_IP"
                     }
                 ]
             }
@@ -1145,10 +1149,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "DEPLOYED"
+                        "value": "DEPLOYED",
+                        "name": "DEPLOYED"
                     },
                     {
-                        "value": "IN_PROGRESS"
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
                     }
                 ]
             }
@@ -2612,13 +2618,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "INITIAL"
+                        "value": "INITIAL",
+                        "name": "INITIAL"
                     },
                     {
-                        "value": "HEALTHY"
+                        "value": "HEALTHY",
+                        "name": "HEALTHY"
                     },
                     {
-                        "value": "UNHEALTHY"
+                        "value": "UNHEALTHY",
+                        "name": "UNHEALTHY"
                     }
                 ]
             }
@@ -2853,7 +2862,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the IP address ranges that were specified in calls to <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/api/ProvisionByoipCidr.html\">ProvisionByoipCidr</a>, including\n\t\t\tthe current state and a history of state changes.</p>"
+                "smithy.api#documentation": "<p>Lists the IP address ranges that were specified in calls to <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/api/ProvisionByoipCidr.html\">ProvisionByoipCidr</a>, including\n\t\t\tthe current state and a history of state changes.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.globalaccelerator#ListByoipCidrsRequest": {

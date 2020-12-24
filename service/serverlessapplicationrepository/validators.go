@@ -395,11 +395,11 @@ func validateApplicationPolicyStatement(v *types.ApplicationPolicyStatement) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ApplicationPolicyStatement"}
-	if v.Principals == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Principals"))
-	}
 	if v.Actions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	}
+	if v.Principals == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Principals"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -448,11 +448,11 @@ func validateRollbackTrigger(v *types.RollbackTrigger) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RollbackTrigger"}
-	if v.Type == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -466,11 +466,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -484,14 +484,14 @@ func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateApplicationInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.Author == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Author"))
 	}
 	if v.Description == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
-	if v.Author == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Author"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -523,12 +523,12 @@ func validateOpCreateCloudFormationChangeSetInput(v *CreateCloudFormationChangeS
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCloudFormationChangeSetInput"}
-	if v.StackName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
-	if v.Tags != nil {
-		if err := validate__listOfTag(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+	if v.ParameterOverrides != nil {
+		if err := validate__listOfParameterValue(v.ParameterOverrides); err != nil {
+			invalidParams.AddNested("ParameterOverrides", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.RollbackConfiguration != nil {
@@ -536,12 +536,12 @@ func validateOpCreateCloudFormationChangeSetInput(v *CreateCloudFormationChangeS
 			invalidParams.AddNested("RollbackConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ApplicationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
 	}
-	if v.ParameterOverrides != nil {
-		if err := validate__listOfParameterValue(v.ParameterOverrides); err != nil {
-			invalidParams.AddNested("ParameterOverrides", err.(smithy.InvalidParamsError))
+	if v.Tags != nil {
+		if err := validate__listOfTag(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

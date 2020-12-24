@@ -53,6 +53,9 @@ type CreateTrialInput struct {
 	// DisplayName isn't specified, TrialName is displayed.
 	DisplayName *string
 
+	// Metadata properties of the tracking entity, trial, or trial component.
+	MetadataProperties *types.MetadataProperties
+
 	// A list of tags to associate with the trial. You can use Search API to search on
 	// the tags.
 	Tags []types.Tag

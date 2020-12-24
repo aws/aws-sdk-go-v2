@@ -247,7 +247,7 @@ func (m *awsRestjson1_serializeOpCreateNode) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/networks/{NetworkId}/members/{MemberId}/nodes")
+	opPath, opQuery := httpbinding.SplitURI("/networks/{NetworkId}/nodes")
 	request.URL.Path = opPath
 	if len(request.URL.RawQuery) > 0 {
 		request.URL.RawQuery = "&" + opQuery
@@ -288,15 +288,6 @@ func awsRestjson1_serializeOpHttpBindingsCreateNodeInput(v *CreateNodeInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MemberId == nil || len(*v.MemberId) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
-	}
-	if v.MemberId != nil {
-		if err := encoder.SetURI("MemberId").String(*v.MemberId); err != nil {
-			return err
-		}
-	}
-
 	if v.NetworkId == nil || len(*v.NetworkId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
 	}
@@ -316,6 +307,11 @@ func awsRestjson1_serializeOpDocumentCreateNodeInput(v *CreateNodeInput, value s
 	if v.ClientRequestToken != nil {
 		ok := object.Key("ClientRequestToken")
 		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.MemberId != nil {
+		ok := object.Key("MemberId")
+		ok.String(*v.MemberId)
 	}
 
 	if v.NodeConfiguration != nil {
@@ -524,7 +520,7 @@ func (m *awsRestjson1_serializeOpDeleteNode) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/networks/{NetworkId}/members/{MemberId}/nodes/{NodeId}")
+	opPath, opQuery := httpbinding.SplitURI("/networks/{NetworkId}/nodes/{NodeId}")
 	request.URL.Path = opPath
 	if len(request.URL.RawQuery) > 0 {
 		request.URL.RawQuery = "&" + opQuery
@@ -554,13 +550,8 @@ func awsRestjson1_serializeOpHttpBindingsDeleteNodeInput(v *DeleteNodeInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MemberId == nil || len(*v.MemberId) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
-	}
 	if v.MemberId != nil {
-		if err := encoder.SetURI("MemberId").String(*v.MemberId); err != nil {
-			return err
-		}
+		encoder.SetQuery("memberId").String(*v.MemberId)
 	}
 
 	if v.NetworkId == nil || len(*v.NetworkId) == 0 {
@@ -740,7 +731,7 @@ func (m *awsRestjson1_serializeOpGetNode) HandleSerialize(ctx context.Context, i
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/networks/{NetworkId}/members/{MemberId}/nodes/{NodeId}")
+	opPath, opQuery := httpbinding.SplitURI("/networks/{NetworkId}/nodes/{NodeId}")
 	request.URL.Path = opPath
 	if len(request.URL.RawQuery) > 0 {
 		request.URL.RawQuery = "&" + opQuery
@@ -770,13 +761,8 @@ func awsRestjson1_serializeOpHttpBindingsGetNodeInput(v *GetNodeInput, encoder *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MemberId == nil || len(*v.MemberId) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
-	}
 	if v.MemberId != nil {
-		if err := encoder.SetURI("MemberId").String(*v.MemberId); err != nil {
-			return err
-		}
+		encoder.SetQuery("memberId").String(*v.MemberId)
 	}
 
 	if v.NetworkId == nil || len(*v.NetworkId) == 0 {
@@ -1112,7 +1098,7 @@ func (m *awsRestjson1_serializeOpListNodes) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/networks/{NetworkId}/members/{MemberId}/nodes")
+	opPath, opQuery := httpbinding.SplitURI("/networks/{NetworkId}/nodes")
 	request.URL.Path = opPath
 	if len(request.URL.RawQuery) > 0 {
 		request.URL.RawQuery = "&" + opQuery
@@ -1146,13 +1132,8 @@ func awsRestjson1_serializeOpHttpBindingsListNodesInput(v *ListNodesInput, encod
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
-	if v.MemberId == nil || len(*v.MemberId) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
-	}
 	if v.MemberId != nil {
-		if err := encoder.SetURI("MemberId").String(*v.MemberId); err != nil {
-			return err
-		}
+		encoder.SetQuery("memberId").String(*v.MemberId)
 	}
 
 	if v.NetworkId == nil || len(*v.NetworkId) == 0 {
@@ -1507,7 +1488,7 @@ func (m *awsRestjson1_serializeOpUpdateNode) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/networks/{NetworkId}/members/{MemberId}/nodes/{NodeId}")
+	opPath, opQuery := httpbinding.SplitURI("/networks/{NetworkId}/nodes/{NodeId}")
 	request.URL.Path = opPath
 	if len(request.URL.RawQuery) > 0 {
 		request.URL.RawQuery = "&" + opQuery
@@ -1548,15 +1529,6 @@ func awsRestjson1_serializeOpHttpBindingsUpdateNodeInput(v *UpdateNodeInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MemberId == nil || len(*v.MemberId) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member MemberId must not be empty")}
-	}
-	if v.MemberId != nil {
-		if err := encoder.SetURI("MemberId").String(*v.MemberId); err != nil {
-			return err
-		}
-	}
-
 	if v.NetworkId == nil || len(*v.NetworkId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member NetworkId must not be empty")}
 	}
@@ -1587,6 +1559,11 @@ func awsRestjson1_serializeOpDocumentUpdateNodeInput(v *UpdateNodeInput, value s
 		if err := awsRestjson1_serializeDocumentNodeLogPublishingConfiguration(v.LogPublishingConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.MemberId != nil {
+		ok := object.Key("MemberId")
+		ok.String(*v.MemberId)
 	}
 
 	return nil

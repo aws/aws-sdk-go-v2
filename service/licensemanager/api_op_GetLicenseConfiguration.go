@@ -49,6 +49,9 @@ type GetLicenseConfigurationOutput struct {
 	// Description of the license configuration.
 	Description *string
 
+	// When true, disassociates a resource when software is uninstalled.
+	DisassociateWhenNotFound *bool
+
 	// Amazon Resource Name (ARN) of the license configuration.
 	LicenseConfigurationArn *string
 

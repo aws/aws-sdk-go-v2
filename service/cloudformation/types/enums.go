@@ -385,6 +385,7 @@ type RegistryType string
 // Enum values for RegistryType
 const (
 	RegistryTypeResource RegistryType = "RESOURCE"
+	RegistryTypeModule   RegistryType = "MODULE"
 )
 
 // Values returns all known values for RegistryType. Note that this can be expanded
@@ -393,6 +394,7 @@ const (
 func (RegistryType) Values() []RegistryType {
 	return []RegistryType{
 		"RESOURCE",
+		"MODULE",
 	}
 }
 

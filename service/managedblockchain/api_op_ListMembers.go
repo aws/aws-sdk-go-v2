@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a listing of the members in a network and properties of their
-// configurations.
+// Returns a list of the members in a network and properties of their
+// configurations. Applies only to Hyperledger Fabric.
 func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optFns ...func(*Options)) (*ListMembersOutput, error) {
 	if params == nil {
 		params = &ListMembersInput{}

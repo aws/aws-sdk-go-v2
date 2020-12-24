@@ -17,7 +17,7 @@ import (
 //
 // *
 // Cross-account permissions don't apply to this action. For more information, see
-// Grant Cross-Account Permissions to a Role and a User Name
+// Grant cross-account permissions to a role and a user name
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 // in the Amazon Simple Queue Service Developer Guide.
 //

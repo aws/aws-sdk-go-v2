@@ -8255,10 +8255,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "static"
+                        "value": "static",
+                        "name": "static"
                     },
                     {
-                        "value": "dynamic"
+                        "value": "dynamic",
+                        "name": "dynamic"
                     }
                 ]
             }
@@ -9054,10 +9056,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Regular"
+                        "value": "Regular",
+                        "name": "Regular"
                     },
                     {
-                        "value": "Upgradable"
+                        "value": "Upgradable",
+                        "name": "Upgradable"
                     }
                 ]
             }
@@ -10142,13 +10146,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "MODIFYING"
+                        "value": "MODIFYING",
+                        "name": "MODIFYING"
                     },
                     {
-                        "value": "ACTIVE"
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     }
                 ]
             }
@@ -11040,19 +11047,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "cluster"
+                        "value": "cluster",
+                        "name": "cluster"
                     },
                     {
-                        "value": "cluster-parameter-group"
+                        "value": "cluster-parameter-group",
+                        "name": "cluster_parameter_group"
                     },
                     {
-                        "value": "cluster-security-group"
+                        "value": "cluster-security-group",
+                        "name": "cluster_security_group"
                     },
                     {
-                        "value": "cluster-snapshot"
+                        "value": "cluster-snapshot",
+                        "name": "cluster_snapshot"
                     },
                     {
-                        "value": "scheduled-action"
+                        "value": "scheduled-action",
+                        "name": "scheduled_action"
                     }
                 ]
             }
@@ -11412,19 +11424,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PENDING"
+                        "value": "PENDING",
+                        "name": "PENDING"
                     },
                     {
-                        "value": "IN_PROGRESS"
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
                     },
                     {
-                        "value": "SUCCEEDED"
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     },
                     {
-                        "value": "CANCELED"
+                        "value": "CANCELED",
+                        "name": "CANCELED"
                     }
                 ]
             }

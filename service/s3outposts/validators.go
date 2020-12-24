@@ -65,11 +65,11 @@ func validateOpCreateEndpointInput(v *CreateEndpointInput) error {
 	if v.OutpostId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutpostId"))
 	}
-	if v.SecurityGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupId"))
-	}
 	if v.SubnetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
+	}
+	if v.SecurityGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

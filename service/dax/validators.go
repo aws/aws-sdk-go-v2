@@ -414,19 +414,19 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateClusterInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
 	if v.NodeType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeType"))
 	}
-	if v.ClusterName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	if v.IamRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
 	}
 	if v.SSESpecification != nil {
 		if err := validateSSESpecification(v.SSESpecification); err != nil {
 			invalidParams.AddNested("SSESpecification", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.IamRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -596,11 +596,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -614,11 +614,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

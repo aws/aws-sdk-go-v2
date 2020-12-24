@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a peer node in a member.
+// Creates a node on the specified blockchain network. Applies to Hyperledger
+// Fabric and Ethereum.
 func (c *Client) CreateNode(ctx context.Context, params *CreateNodeInput, optFns ...func(*Options)) (*CreateNodeOutput, error) {
 	if params == nil {
 		params = &CreateNodeInput{}
@@ -38,12 +39,15 @@ type CreateNodeInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// The unique identifier of the member that owns this node.
+	// The unique identifier of the network for the node. Ethereum public networks have
+	// the following NetworkIds:
 	//
-	// This member is required.
-	MemberId *string
-
-	// The unique identifier of the network in which this node runs.
+	// * n-ethereum-mainnet
+	//
+	// * n-ethereum-rinkeby
+	//
+	// *
+	// n-ethereum-ropsten
 	//
 	// This member is required.
 	NetworkId *string
@@ -52,6 +56,10 @@ type CreateNodeInput struct {
 	//
 	// This member is required.
 	NodeConfiguration *types.NodeConfiguration
+
+	// The unique identifier of the member that owns this node. Applies only to
+	// Hyperledger Fabric.
+	MemberId *string
 }
 
 type CreateNodeOutput struct {

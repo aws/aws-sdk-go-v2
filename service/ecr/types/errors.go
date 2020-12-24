@@ -120,9 +120,9 @@ func (e *InvalidLayerException) ErrorFault() smithy.ErrorFault { return smithy.F
 type InvalidLayerPartException struct {
 	Message *string
 
+	RegistryId            *string
 	RepositoryName        *string
 	UploadId              *string
-	RegistryId            *string
 	LastValidByteReceived *int64
 }
 
@@ -365,6 +365,25 @@ func (e *ReferencedImagesNotFoundException) ErrorCode() string {
 }
 func (e *ReferencedImagesNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The registry doesn't have an associated registry policy.
+type RegistryPolicyNotFoundException struct {
+	Message *string
+}
+
+func (e *RegistryPolicyNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RegistryPolicyNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RegistryPolicyNotFoundException) ErrorCode() string {
+	return "RegistryPolicyNotFoundException"
+}
+func (e *RegistryPolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified repository already exists in the specified registry.
 type RepositoryAlreadyExistsException struct {
 	Message *string
@@ -528,3 +547,20 @@ func (e *UploadNotFoundException) ErrorMessage() string {
 }
 func (e *UploadNotFoundException) ErrorCode() string             { return "UploadNotFoundException" }
 func (e *UploadNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// There was an exception validating this request.
+type ValidationException struct {
+	Message *string
+}
+
+func (e *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ValidationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

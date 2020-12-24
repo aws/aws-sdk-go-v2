@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAddProfilePermission struct {
+}
+
+func (*validateOpAddProfilePermission) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddProfilePermission) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddProfilePermissionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddProfilePermissionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelSigningProfile struct {
 }
 
@@ -90,6 +110,26 @@ func (m *validateOpGetSigningProfile) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListProfilePermissions struct {
+}
+
+func (*validateOpListProfilePermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListProfilePermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListProfilePermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListProfilePermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -125,6 +165,66 @@ func (m *validateOpPutSigningProfile) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutSigningProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRemoveProfilePermission struct {
+}
+
+func (*validateOpRemoveProfilePermission) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveProfilePermission) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveProfilePermissionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveProfilePermissionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRevokeSignature struct {
+}
+
+func (*validateOpRevokeSignature) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRevokeSignature) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RevokeSignatureInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRevokeSignatureInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRevokeSigningProfile struct {
+}
+
+func (*validateOpRevokeSigningProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRevokeSigningProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RevokeSigningProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRevokeSigningProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,6 +290,10 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAddProfilePermissionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddProfilePermission{}, middleware.After)
+}
+
 func addOpCancelSigningProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelSigningProfile{}, middleware.After)
 }
@@ -206,12 +310,28 @@ func addOpGetSigningProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSigningProfile{}, middleware.After)
 }
 
+func addOpListProfilePermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListProfilePermissions{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
 func addOpPutSigningProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutSigningProfile{}, middleware.After)
+}
+
+func addOpRemoveProfilePermissionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveProfilePermission{}, middleware.After)
+}
+
+func addOpRevokeSignatureValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRevokeSignature{}, middleware.After)
+}
+
+func addOpRevokeSigningProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRevokeSigningProfile{}, middleware.After)
 }
 
 func addOpStartSigningJobValidationMiddleware(stack *middleware.Stack) error {
@@ -234,11 +354,11 @@ func validateS3Source(v *types.S3Source) error {
 	if v.BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
 	}
-	if v.Version == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Version"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -271,6 +391,30 @@ func validateSource(v *types.Source) error {
 		if err := validateS3Source(v.S3); err != nil {
 			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAddProfilePermissionInput(v *AddProfilePermissionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddProfilePermissionInput"}
+	if v.ProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileName"))
+	}
+	if v.Action == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if v.Principal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
+	}
+	if v.StatementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatementId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -339,6 +483,21 @@ func validateOpGetSigningProfileInput(v *GetSigningProfileInput) error {
 	}
 }
 
+func validateOpListProfilePermissionsInput(v *ListProfilePermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListProfilePermissionsInput"}
+	if v.ProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -362,15 +521,76 @@ func validateOpPutSigningProfileInput(v *PutSigningProfileInput) error {
 	if v.ProfileName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfileName"))
 	}
-	if v.PlatformId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PlatformId"))
-	}
-	if v.SigningMaterial == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SigningMaterial"))
-	} else if v.SigningMaterial != nil {
+	if v.SigningMaterial != nil {
 		if err := validateSigningMaterial(v.SigningMaterial); err != nil {
 			invalidParams.AddNested("SigningMaterial", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.PlatformId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlatformId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveProfilePermissionInput(v *RemoveProfilePermissionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveProfilePermissionInput"}
+	if v.ProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileName"))
+	}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
+	}
+	if v.StatementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatementId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRevokeSignatureInput(v *RevokeSignatureInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevokeSignatureInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.Reason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRevokeSigningProfileInput(v *RevokeSigningProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevokeSigningProfileInput"}
+	if v.ProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileName"))
+	}
+	if v.ProfileVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileVersion"))
+	}
+	if v.Reason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
+	}
+	if v.EffectiveTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EffectiveTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -384,9 +604,6 @@ func validateOpStartSigningJobInput(v *StartSigningJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartSigningJobInput"}
-	if v.ClientRequestToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
-	}
 	if v.Source == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Source"))
 	} else if v.Source != nil {
@@ -396,6 +613,12 @@ func validateOpStartSigningJobInput(v *StartSigningJobInput) error {
 	}
 	if v.Destination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if v.ProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileName"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -427,11 +650,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

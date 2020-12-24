@@ -842,6 +842,52 @@ func (m *awsAwsjson10_serializeOpStartExecution) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpStartSyncExecution struct {
+}
+
+func (*awsAwsjson10_serializeOpStartSyncExecution) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpStartSyncExecution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartSyncExecutionInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSStepFunctions.StartSyncExecution")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentStartSyncExecutionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpStopExecution struct {
 }
 
@@ -1454,6 +1500,33 @@ func awsAwsjson10_serializeOpDocumentSendTaskSuccessInput(v *SendTaskSuccessInpu
 }
 
 func awsAwsjson10_serializeOpDocumentStartExecutionInput(v *StartExecutionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Input != nil {
+		ok := object.Key("input")
+		ok.String(*v.Input)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.StateMachineArn != nil {
+		ok := object.Key("stateMachineArn")
+		ok.String(*v.StateMachineArn)
+	}
+
+	if v.TraceHeader != nil {
+		ok := object.Key("traceHeader")
+		ok.String(*v.TraceHeader)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentStartSyncExecutionInput(v *StartSyncExecutionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

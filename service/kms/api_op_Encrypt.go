@@ -81,9 +81,18 @@ import (
 // CMK that you use for this operation must be in a compatible key state. For
 // details, see How Key State Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide. To perform this operation on a CMK
-// in a different AWS account, specify the key ARN or alias ARN in the value of the
-// KeyId parameter.
+// AWS Key Management Service Developer Guide. Cross-account use: Yes. To perform
+// this operation with a CMK in a different AWS account, specify the key ARN or
+// alias ARN in the value of the KeyId parameter. Required permissions: kms:Encrypt
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations:
+//
+// * Decrypt
+//
+// * GenerateDataKey
+//
+// *
+// GenerateDataKeyPair
 func (c *Client) Encrypt(ctx context.Context, params *EncryptInput, optFns ...func(*Options)) (*EncryptOutput, error) {
 	if params == nil {
 		params = &EncryptInput{}

@@ -66,6 +66,24 @@ import (
 // *
 // Use the plaintext data key to decrypt data outside of AWS KMS, then erase the
 // plaintext data key from memory.
+//
+// Cross-account use: Yes. To perform this
+// operation with a CMK in a different AWS account, specify the key ARN or alias
+// ARN in the value of the KeyId parameter. Required permissions:
+// kms:GenerateDataKey
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations:
+//
+// * Decrypt
+//
+// * Encrypt
+//
+// * GenerateDataKeyPair
+//
+// *
+// GenerateDataKeyPairWithoutPlaintext
+//
+// * GenerateDataKeyWithoutPlaintext
 func (c *Client) GenerateDataKey(ctx context.Context, params *GenerateDataKeyInput, optFns ...func(*Options)) (*GenerateDataKeyOutput, error) {
 	if params == nil {
 		params = &GenerateDataKeyInput{}

@@ -712,11 +712,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -815,11 +815,11 @@ func validateOpAssociateResolverRuleInput(v *AssociateResolverRuleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateResolverRuleInput"}
-	if v.VPCId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VPCId"))
-	}
 	if v.ResolverRuleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResolverRuleId"))
+	}
+	if v.VPCId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VPCId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -836,6 +836,12 @@ func validateOpCreateResolverEndpointInput(v *CreateResolverEndpointInput) error
 	if v.CreatorRequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CreatorRequestId"))
 	}
+	if v.SecurityGroupIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if len(v.Direction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Direction"))
+	}
 	if v.IpAddresses == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpAddresses"))
 	} else if v.IpAddresses != nil {
@@ -847,12 +853,6 @@ func validateOpCreateResolverEndpointInput(v *CreateResolverEndpointInput) error
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.Direction) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Direction"))
-	}
-	if v.SecurityGroupIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -869,16 +869,16 @@ func validateOpCreateResolverQueryLogConfigInput(v *CreateResolverQueryLogConfig
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.DestinationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationArn"))
 	}
 	if v.CreatorRequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CreatorRequestId"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -892,11 +892,14 @@ func validateOpCreateResolverRuleInput(v *CreateResolverRuleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateResolverRuleInput"}
+	if v.CreatorRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CreatorRequestId"))
+	}
 	if len(v.RuleType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleType"))
 	}
-	if v.CreatorRequestId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CreatorRequestId"))
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if v.TargetIps != nil {
 		if err := validateTargetList(v.TargetIps); err != nil {
@@ -907,9 +910,6 @@ func validateOpCreateResolverRuleInput(v *CreateResolverRuleInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DomainName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -968,11 +968,11 @@ func validateOpDisassociateResolverEndpointIpAddressInput(v *DisassociateResolve
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateResolverEndpointIpAddressInput"}
-	if v.IpAddress == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IpAddress"))
-	}
 	if v.ResolverEndpointId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResolverEndpointId"))
+	}
+	if v.IpAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpAddress"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1175,11 +1175,11 @@ func validateOpPutResolverRulePolicyInput(v *PutResolverRulePolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutResolverRulePolicyInput"}
-	if v.ResolverRulePolicy == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResolverRulePolicy"))
-	}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.ResolverRulePolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolverRulePolicy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

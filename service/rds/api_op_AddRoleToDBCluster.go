@@ -38,7 +38,7 @@ type AddRoleToDBClusterInput struct {
 	DBClusterIdentifier *string
 
 	// The Amazon Resource Name (ARN) of the IAM role to associate with the Aurora DB
-	// cluster, for example arn:aws:iam::123456789012:role/AuroraAccessRole.
+	// cluster, for example, arn:aws:iam::123456789012:role/AuroraAccessRole.
 	//
 	// This member is required.
 	RoleArn *string

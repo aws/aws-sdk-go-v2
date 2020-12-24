@@ -56,7 +56,12 @@ import (
 // use for this operation must be in a compatible key state. For details, see How
 // Key State Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide.
+// AWS Key Management Service Developer Guide. Cross-account use: Yes. To perform
+// this operation with a CMK in a different AWS account, specify the key ARN or
+// alias ARN in the value of the KeyId parameter. Required permissions:
+// kms:GetPublicKey
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations: CreateKey
 func (c *Client) GetPublicKey(ctx context.Context, params *GetPublicKeyInput, optFns ...func(*Options)) (*GetPublicKeyOutput, error) {
 	if params == nil {
 		params = &GetPublicKeyInput{}

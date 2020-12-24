@@ -38,11 +38,11 @@ func validateOpInvokeEndpointInput(v *InvokeEndpointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InvokeEndpointInput"}
-	if v.Body == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Body"))
-	}
 	if v.EndpointName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
+	}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

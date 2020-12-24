@@ -4,6 +4,7 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
@@ -113,6 +114,88 @@ func addOperationListUserPoolsMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// ListUserPoolsAPIClient is a client that implements the ListUserPools operation.
+type ListUserPoolsAPIClient interface {
+	ListUserPools(context.Context, *ListUserPoolsInput, ...func(*Options)) (*ListUserPoolsOutput, error)
+}
+
+var _ ListUserPoolsAPIClient = (*Client)(nil)
+
+// ListUserPoolsPaginatorOptions is the paginator options for ListUserPools
+type ListUserPoolsPaginatorOptions struct {
+	// The maximum number of results you want the request to return when listing the
+	// user pools.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListUserPoolsPaginator is a paginator for ListUserPools
+type ListUserPoolsPaginator struct {
+	options   ListUserPoolsPaginatorOptions
+	client    ListUserPoolsAPIClient
+	params    *ListUserPoolsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListUserPoolsPaginator returns a new ListUserPoolsPaginator
+func NewListUserPoolsPaginator(client ListUserPoolsAPIClient, params *ListUserPoolsInput, optFns ...func(*ListUserPoolsPaginatorOptions)) *ListUserPoolsPaginator {
+	options := ListUserPoolsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListUserPoolsInput{}
+	}
+
+	return &ListUserPoolsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListUserPoolsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListUserPools page.
+func (p *ListUserPoolsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListUserPoolsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListUserPools(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListUserPools(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -2,6 +2,27 @@
 
 package types
 
+type InstanceAccessControlAttributeConfigurationStatus string
+
+// Enum values for InstanceAccessControlAttributeConfigurationStatus
+const (
+	InstanceAccessControlAttributeConfigurationStatusEnabled            InstanceAccessControlAttributeConfigurationStatus = "ENABLED"
+	InstanceAccessControlAttributeConfigurationStatusCreationInProgress InstanceAccessControlAttributeConfigurationStatus = "CREATION_IN_PROGRESS"
+	InstanceAccessControlAttributeConfigurationStatusCreationFailed     InstanceAccessControlAttributeConfigurationStatus = "CREATION_FAILED"
+)
+
+// Values returns all known values for
+// InstanceAccessControlAttributeConfigurationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceAccessControlAttributeConfigurationStatus) Values() []InstanceAccessControlAttributeConfigurationStatus {
+	return []InstanceAccessControlAttributeConfigurationStatus{
+		"ENABLED",
+		"CREATION_IN_PROGRESS",
+		"CREATION_FAILED",
+	}
+}
+
 type PrincipalType string
 
 // Enum values for PrincipalType

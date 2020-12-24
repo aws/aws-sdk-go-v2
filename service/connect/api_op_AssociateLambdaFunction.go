@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Allows the specified Amazon Connect instance to access the specified Lambda
 // function.
 func (c *Client) AssociateLambdaFunction(ctx context.Context, params *AssociateLambdaFunctionInput, optFns ...func(*Options)) (*AssociateLambdaFunctionOutput, error) {

@@ -150,8 +150,10 @@ type CreateNotebookInstanceInput struct {
 	// from your ML compute instance.
 	SubnetId *string
 
-	// A list of tags to associate with the notebook instance. You can add tags later
-	// by using the CreateTags API.
+	// An array of key-value pairs. You can use tags to categorize your AWS resources
+	// in different ways, for example, by purpose, owner, or environment. For more
+	// information, see Tagging AWS Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []types.Tag
 
 	// The size, in GB, of the ML storage volume to attach to the notebook instance.

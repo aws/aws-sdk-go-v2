@@ -34,7 +34,7 @@ type UpdateDetectorInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// An object that describes which data sources will be updated.
+	// Describes which data sources will be updated.
 	DataSources *types.DataSourceConfigurations
 
 	// Specifies whether the detector is enabled or not enabled.

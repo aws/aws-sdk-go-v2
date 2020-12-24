@@ -46,6 +46,9 @@ type CreateApiKeyInput struct {
 	// created API key value. This parameter is deprecated and should not be used.
 	GenerateDistinctId bool
 
+	// The name of the ApiKey.
+	Name *string
+
 	// DEPRECATED FOR USAGE PLANS - Specifies stages associated with the API key.
 	StageKeys []types.StageKey
 

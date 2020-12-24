@@ -11,9 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a Lambda function's code. The function's code is locked when you publish
-// a version. You can't modify the code of a published version, only the
-// unpublished version.
+// Updates a Lambda function's code. If code signing is enabled for the function,
+// the code package must be signed by a trusted publisher. For more information,
+// see Configuring code signing
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html).
+// The function's code is locked when you publish a version. You can't modify the
+// code of a published version, only the unpublished version. For a function
+// defined as a container image, Lambda resolves the image tag to an image digest.
+// In Amazon ECR, if you update the image tag to a new image, Lambda does not
+// automatically update the function.
 func (c *Client) UpdateFunctionCode(ctx context.Context, params *UpdateFunctionCodeInput, optFns ...func(*Options)) (*UpdateFunctionCodeOutput, error) {
 	if params == nil {
 		params = &UpdateFunctionCodeInput{}
@@ -51,6 +57,9 @@ type UpdateFunctionCodeInput struct {
 	// Set to true to validate the request parameters and access permissions without
 	// modifying the function code.
 	DryRun bool
+
+	// URI of a container image in the Amazon ECR registry.
+	ImageUri *string
 
 	// Set to true to publish a new version of the function after updating the code.
 	// This has the same effect as calling PublishVersion separately.
@@ -106,6 +115,9 @@ type UpdateFunctionCodeOutput struct {
 	// The function that Lambda calls to begin executing your function.
 	Handler *string
 
+	// The function's image configuration values.
+	ImageConfigResponse *types.ImageConfigResponse
+
 	// The KMS key that's used to encrypt the function's environment variables. This
 	// key is only returned if you've configured a customer managed CMK.
 	KMSKeyArn *string
@@ -131,8 +143,12 @@ type UpdateFunctionCodeOutput struct {
 	// For Lambda@Edge functions, the ARN of the master function.
 	MasterArn *string
 
-	// The memory that's allocated to the function.
+	// The amount of memory available to the function at runtime.
 	MemorySize *int32
+
+	// The type of deployment package. Set to Image for container image and set Zip for
+	// .zip file archive.
+	PackageType types.PackageType
 
 	// The latest updated revision of the function or alias.
 	RevisionId *string
@@ -142,6 +158,12 @@ type UpdateFunctionCodeOutput struct {
 
 	// The runtime environment for the Lambda function.
 	Runtime types.Runtime
+
+	// The ARN of the signing job.
+	SigningJobArn *string
+
+	// The ARN of the signing profile version.
+	SigningProfileVersionArn *string
 
 	// The current state of the function. When the state is Inactive, you can
 	// reactivate the function by invoking it.

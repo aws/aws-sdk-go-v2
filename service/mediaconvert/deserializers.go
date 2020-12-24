@@ -7596,6 +7596,15 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 
 	for key, value := range shape {
 		switch key {
+		case "audioDuration":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmfcAudioDuration to be of type string, got %T instead", value)
+				}
+				sv.AudioDuration = types.CmfcAudioDuration(jtv)
+			}
+
 		case "scte35Esam":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8018,6 +8027,19 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 					return err
 				}
 				sv.MinBufferTime = int32(i64)
+			}
+
+		case "minFinalSegmentLength":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __doubleMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.MinFinalSegmentLength = f64
 			}
 
 		case "mpdProfile":
@@ -11774,7 +11796,7 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA to be of type string, got %T instead", value)
 				}
 				sv.FileInput = ptr.String(jtv)
 			}
@@ -13052,6 +13074,15 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				sv.AudioBufferModel = types.M2tsAudioBufferModel(jtv)
 			}
 
+		case "audioDuration":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M2tsAudioDuration to be of type string, got %T instead", value)
+				}
+				sv.AudioDuration = types.M2tsAudioDuration(jtv)
+			}
+
 		case "audioFramesPerPes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13446,6 +13477,15 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 
 	for key, value := range shape {
 		switch key {
+		case "audioDuration":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M3u8AudioDuration to be of type string, got %T instead", value)
+				}
+				sv.AudioDuration = types.M3u8AudioDuration(jtv)
+			}
+
 		case "audioFramesPerPes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14090,6 +14130,15 @@ func awsRestjson1_deserializeDocumentMp4Settings(v **types.Mp4Settings, value in
 
 	for key, value := range shape {
 		switch key {
+		case "audioDuration":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmfcAudioDuration to be of type string, got %T instead", value)
+				}
+				sv.AudioDuration = types.CmfcAudioDuration(jtv)
+			}
+
 		case "cslgAtom":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14170,6 +14219,24 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 
 	for key, value := range shape {
 		switch key {
+		case "accessibilityCaptionHints":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MpdAccessibilityCaptionHints to be of type string, got %T instead", value)
+				}
+				sv.AccessibilityCaptionHints = types.MpdAccessibilityCaptionHints(jtv)
+			}
+
+		case "audioDuration":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MpdAudioDuration to be of type string, got %T instead", value)
+				}
+				sv.AudioDuration = types.MpdAudioDuration(jtv)
+			}
+
 		case "captionContainerType":
 			if value != nil {
 				jtv, ok := value.(string)

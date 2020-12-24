@@ -36,6 +36,38 @@ func (ComponentType) Values() []ComponentType {
 	}
 }
 
+type ContainerRepositoryService string
+
+// Enum values for ContainerRepositoryService
+const (
+	ContainerRepositoryServiceEcr ContainerRepositoryService = "ECR"
+)
+
+// Values returns all known values for ContainerRepositoryService. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerRepositoryService) Values() []ContainerRepositoryService {
+	return []ContainerRepositoryService{
+		"ECR",
+	}
+}
+
+type ContainerType string
+
+// Enum values for ContainerType
+const (
+	ContainerTypeDocker ContainerType = "DOCKER"
+)
+
+// Values returns all known values for ContainerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerType) Values() []ContainerType {
+	return []ContainerType{
+		"DOCKER",
+	}
+}
+
 type EbsVolumeType string
 
 // Enum values for EbsVolumeType
@@ -95,6 +127,24 @@ func (ImageStatus) Values() []ImageStatus {
 		"FAILED",
 		"DEPRECATED",
 		"DELETED",
+	}
+}
+
+type ImageType string
+
+// Enum values for ImageType
+const (
+	ImageTypeAmi    ImageType = "AMI"
+	ImageTypeDocker ImageType = "DOCKER"
+)
+
+// Values returns all known values for ImageType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ImageType) Values() []ImageType {
+	return []ImageType{
+		"AMI",
+		"DOCKER",
 	}
 }
 

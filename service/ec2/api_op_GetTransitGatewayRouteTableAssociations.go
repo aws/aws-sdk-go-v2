@@ -48,10 +48,10 @@ type GetTransitGatewayRouteTableAssociationsInput struct {
 	// resource.
 	//
 	// * resource-type - The resource type. Valid values are vpc | vpn |
-	// direct-connect-gateway | peering.
+	// direct-connect-gateway | peering | connect.
 	//
-	// * transit-gateway-attachment-id - The ID of
-	// the attachment.
+	// * transit-gateway-attachment-id -
+	// The ID of the attachment.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

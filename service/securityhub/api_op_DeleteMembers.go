@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified member accounts from Security Hub.
+// Deletes the specified member accounts from Security Hub. Can be used to delete
+// member accounts that belong to an organization as well as member accounts that
+// were invited manually.
 func (c *Client) DeleteMembers(ctx context.Context, params *DeleteMembersInput, optFns ...func(*Options)) (*DeleteMembersOutput, error) {
 	if params == nil {
 		params = &DeleteMembersInput{}
@@ -30,6 +32,8 @@ func (c *Client) DeleteMembers(ctx context.Context, params *DeleteMembersInput, 
 type DeleteMembersInput struct {
 
 	// The list of account IDs for the member accounts to delete.
+	//
+	// This member is required.
 	AccountIds []string
 }
 
@@ -83,6 +87,9 @@ func addOperationDeleteMembersMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpDeleteMembersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMembers(options.Region), middleware.Before); err != nil {

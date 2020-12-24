@@ -150,8 +150,8 @@ type CreateAutoScalingGroupInput struct {
 	LifecycleHookSpecificationList []types.LifecycleHookSpecification
 
 	// A list of Classic Load Balancers associated with this Auto Scaling group. For
-	// Application Load Balancers and Network Load Balancers, specify TargetGroupARNs
-	// instead.
+	// Application Load Balancers, Network Load Balancers, and Gateway Load Balancers,
+	// specify the TargetGroupARNs property instead.
 	LoadBalancerNames []string
 
 	// The maximum amount of time, in seconds, that an instance can be in service. The
@@ -173,9 +173,7 @@ type CreateAutoScalingGroupInput struct {
 	// templates for individual instance types. For more information, see Auto Scaling
 	// groups with multiple instance types and purchase options
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
-	// in the Amazon EC2 Auto Scaling User Guide. Conditional: You must specify either
-	// a launch template (LaunchTemplate or MixedInstancesPolicy) or a launch
-	// configuration (LaunchConfigurationName or InstanceId).
+	// in the Amazon EC2 Auto Scaling User Guide.
 	MixedInstancesPolicy *types.MixedInstancesPolicy
 
 	// Indicates whether newly launched instances are protected from termination by

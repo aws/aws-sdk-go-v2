@@ -3740,6 +3740,11 @@ func awsRestjson1_deserializeDocumentConnectorMetadata(v **types.ConnectorMetada
 				return err
 			}
 
+		case "Upsolver":
+			if err := awsRestjson1_deserializeDocumentUpsolverMetadata(&sv.Upsolver, value); err != nil {
+				return err
+			}
+
 		case "Veeva":
 			if err := awsRestjson1_deserializeDocumentVeevaMetadata(&sv.Veeva, value); err != nil {
 				return err
@@ -4394,6 +4399,11 @@ func awsRestjson1_deserializeDocumentDestinationConnectorProperties(v **types.De
 
 		case "Snowflake":
 			if err := awsRestjson1_deserializeDocumentSnowflakeDestinationProperties(&sv.Snowflake, value); err != nil {
+				return err
+			}
+
+		case "Upsolver":
+			if err := awsRestjson1_deserializeDocumentUpsolverDestinationProperties(&sv.Upsolver, value); err != nil {
 				return err
 			}
 
@@ -7989,6 +7999,141 @@ func awsRestjson1_deserializeDocumentUnsupportedOperationException(v **types.Uns
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUpsolverDestinationProperties(v **types.UpsolverDestinationProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UpsolverDestinationProperties
+	if *v == nil {
+		sv = &types.UpsolverDestinationProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bucketName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpsolverBucketName to be of type string, got %T instead", value)
+				}
+				sv.BucketName = ptr.String(jtv)
+			}
+
+		case "bucketPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketPrefix to be of type string, got %T instead", value)
+				}
+				sv.BucketPrefix = ptr.String(jtv)
+			}
+
+		case "s3OutputFormatConfig":
+			if err := awsRestjson1_deserializeDocumentUpsolverS3OutputFormatConfig(&sv.S3OutputFormatConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUpsolverMetadata(v **types.UpsolverMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UpsolverMetadata
+	if *v == nil {
+		sv = &types.UpsolverMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUpsolverS3OutputFormatConfig(v **types.UpsolverS3OutputFormatConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UpsolverS3OutputFormatConfig
+	if *v == nil {
+		sv = &types.UpsolverS3OutputFormatConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "aggregationConfig":
+			if err := awsRestjson1_deserializeDocumentAggregationConfig(&sv.AggregationConfig, value); err != nil {
+				return err
+			}
+
+		case "fileType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FileType to be of type string, got %T instead", value)
+				}
+				sv.FileType = types.FileType(jtv)
+			}
+
+		case "prefixConfig":
+			if err := awsRestjson1_deserializeDocumentPrefixConfig(&sv.PrefixConfig, value); err != nil {
+				return err
 			}
 
 		default:

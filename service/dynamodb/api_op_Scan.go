@@ -4,6 +4,7 @@ package dynamodb
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
@@ -380,6 +381,95 @@ func addOperationScanMiddlewares(stack *middleware.Stack, options Options) (err 
 		return err
 	}
 	return nil
+}
+
+// ScanAPIClient is a client that implements the Scan operation.
+type ScanAPIClient interface {
+	Scan(context.Context, *ScanInput, ...func(*Options)) (*ScanOutput, error)
+}
+
+var _ ScanAPIClient = (*Client)(nil)
+
+// ScanPaginatorOptions is the paginator options for Scan
+type ScanPaginatorOptions struct {
+	// The maximum number of items to evaluate (not necessarily the number of matching
+	// items). If DynamoDB processes the number of items up to the limit while
+	// processing the results, it stops the operation and returns the matching values
+	// up to that point, and a key in LastEvaluatedKey to apply in a subsequent
+	// operation, so that you can pick up where you left off. Also, if the processed
+	// dataset size exceeds 1 MB before DynamoDB reaches this limit, it stops the
+	// operation and returns the matching values up to the limit, and a key in
+	// LastEvaluatedKey to apply in a subsequent operation to continue the operation.
+	// For more information, see Working with Queries
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html)
+	// in the Amazon DynamoDB Developer Guide.
+	Limit int32
+}
+
+// ScanPaginator is a paginator for Scan
+type ScanPaginator struct {
+	options   ScanPaginatorOptions
+	client    ScanAPIClient
+	params    *ScanInput
+	nextToken map[string]types.AttributeValue
+	firstPage bool
+}
+
+// NewScanPaginator returns a new ScanPaginator
+func NewScanPaginator(client ScanAPIClient, params *ScanInput, optFns ...func(*ScanPaginatorOptions)) *ScanPaginator {
+	options := ScanPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ScanInput{}
+	}
+
+	return &ScanPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ScanPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next Scan page.
+func (p *ScanPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ScanOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.ExclusiveStartKey = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.Scan(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.LastEvaluatedKey
+
+	_ = prevToken
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opScan(region string) *awsmiddleware.RegisterServiceMetadata {

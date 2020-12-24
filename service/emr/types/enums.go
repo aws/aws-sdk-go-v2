@@ -44,6 +44,24 @@ func (AdjustmentType) Values() []AdjustmentType {
 	}
 }
 
+type AuthMode string
+
+// Enum values for AuthMode
+const (
+	AuthModeSso AuthMode = "SSO"
+	AuthModeIam AuthMode = "IAM"
+)
+
+// Values returns all known values for AuthMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AuthMode) Values() []AuthMode {
+	return []AuthMode{
+		"SSO",
+		"IAM",
+	}
+}
+
 type AutoScalingPolicyState string
 
 // Enum values for AutoScalingPolicyState
@@ -222,6 +240,24 @@ const (
 func (ExecutionEngineType) Values() []ExecutionEngineType {
 	return []ExecutionEngineType{
 		"EMR",
+	}
+}
+
+type IdentityType string
+
+// Enum values for IdentityType
+const (
+	IdentityTypeUser  IdentityType = "USER"
+	IdentityTypeGroup IdentityType = "GROUP"
+)
+
+// Values returns all known values for IdentityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IdentityType) Values() []IdentityType {
+	return []IdentityType{
+		"USER",
+		"GROUP",
 	}
 }
 

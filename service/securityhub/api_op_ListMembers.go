@@ -13,7 +13,8 @@ import (
 )
 
 // Lists details about all member accounts for the current Security Hub master
-// account.
+// account. The results include both member accounts that belong to an organization
+// and member accounts that were invited manually.
 func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optFns ...func(*Options)) (*ListMembersOutput, error) {
 	if params == nil {
 		params = &ListMembersInput{}
@@ -43,9 +44,8 @@ type ListMembersInput struct {
 	// Specifies which member accounts to include in the response based on their
 	// relationship status with the master account. The default value is TRUE. If
 	// OnlyAssociated is set to TRUE, the response includes member accounts whose
-	// relationship status with the master is set to ENABLED or DISABLED. If
-	// OnlyAssociated is set to FALSE, the response includes all existing member
-	// accounts.
+	// relationship status with the master is set to ENABLED. If OnlyAssociated is set
+	// to FALSE, the response includes all existing member accounts.
 	OnlyAssociated bool
 }
 

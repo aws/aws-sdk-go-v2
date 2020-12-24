@@ -226,7 +226,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "AWSIoT"
+                        "value": "AWSIoT",
+                        "name": "AWSIoT"
                     }
                 ]
             }
@@ -471,10 +472,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "RSA"
+                        "value": "RSA",
+                        "name": "RSA"
                     },
                     {
-                        "value": "ECDSA"
+                        "value": "ECDSA",
+                        "name": "ECDSA"
                     }
                 ]
             }
@@ -755,10 +758,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SHA1"
+                        "value": "SHA1",
+                        "name": "SHA1"
                     },
                     {
-                        "value": "SHA256"
+                        "value": "SHA256",
+                        "name": "SHA256"
                     }
                 ]
             }
@@ -796,13 +801,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "JSON"
+                        "value": "JSON",
+                        "name": "JSON"
                     },
                     {
-                        "value": "JSONEmbedded"
+                        "value": "JSONEmbedded",
+                        "name": "JSONEmbedded"
                     },
                     {
-                        "value": "JSONDetached"
+                        "value": "JSONDetached",
+                        "name": "JSONDetached"
                     }
                 ]
             }
@@ -2240,13 +2248,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Active"
+                        "value": "Active",
+                        "name": "Active"
                     },
                     {
-                        "value": "Canceled"
+                        "value": "Canceled",
+                        "name": "Canceled"
                     },
                     {
-                        "value": "Revoked"
+                        "value": "Revoked",
+                        "name": "Revoked"
                     }
                 ]
             }
@@ -2262,13 +2273,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "InProgress"
+                        "value": "InProgress",
+                        "name": "InProgress"
                     },
                     {
-                        "value": "Failed"
+                        "value": "Failed",
+                        "name": "Failed"
                     },
                     {
-                        "value": "Succeeded"
+                        "value": "Succeeded",
+                        "name": "Succeeded"
                     }
                 ]
             }
@@ -2609,13 +2623,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "DAYS"
+                        "value": "DAYS",
+                        "name": "DAYS"
                     },
                     {
-                        "value": "MONTHS"
+                        "value": "MONTHS",
+                        "name": "MONTHS"
                     },
                     {
-                        "value": "YEARS"
+                        "value": "YEARS",
+                        "name": "YEARS"
                     }
                 ]
             }

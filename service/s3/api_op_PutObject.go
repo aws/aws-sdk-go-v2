@@ -35,17 +35,19 @@ import (
 // can optionally request server-side encryption. With server-side encryption,
 // Amazon S3 encrypts your data as it writes it to disks in its data centers and
 // decrypts the data when you access it. You have the option to provide your own
-// encryption key or use AWS managed encryption keys. For more information, see
-// Using Server-Side Encryption
+// encryption key or use AWS managed encryption keys (SSE-S3 or SSE-KMS). For more
+// information, see Using Server-Side Encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html).
-// Access Control List (ACL)-Specific Request Headers
-//
-// You can use headers to grant
-// ACL- based permissions. By default, all objects are private. Only the owner has
-// full access control. When adding a new object, you can grant permissions to
-// individual AWS accounts or to predefined groups defined by Amazon S3. These
-// permissions are then added to the ACL on the object. For more information, see
-// Access Control List (ACL) Overview
+// If you request server-side encryption using AWS Key Management Service
+// (SSE-KMS), you can enable an S3 Bucket Key at the object-level. For more
+// information, see Amazon S3 Bucket Keys
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the Amazon
+// Simple Storage Service Developer Guide. Access Control List (ACL)-Specific
+// Request Headers You can use headers to grant ACL- based permissions. By default,
+// all objects are private. Only the owner has full access control. When adding a
+// new object, you can grant permissions to individual AWS accounts or to
+// predefined groups defined by Amazon S3. These permissions are then added to the
+// ACL on the object. For more information, see Access Control List (ACL) Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) and Managing
 // ACLs Using the REST API
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html).
@@ -123,6 +125,13 @@ type PutObjectInput struct {
 
 	// Object data.
 	Body io.Reader
+
+	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption
+	// with server-side encryption using AWS KMS (SSE-KMS). Setting this header to true
+	// causes Amazon S3 to use an S3 Bucket Key for object encryption with SSE-KMS.
+	// Specifying this header with a PUT operation doesn’t affect bucket-level settings
+	// for S3 Bucket Key.
+	BucketKeyEnabled bool
 
 	// Can be used to specify caching behavior along the request/reply chain. For more
 	// information, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
@@ -277,6 +286,10 @@ type PutObjectInput struct {
 }
 
 type PutObjectOutput struct {
+
+	// Indicates whether the uploaded object uses an S3 Bucket Key for server-side
+	// encryption with AWS KMS (SSE-KMS).
+	BucketKeyEnabled bool
 
 	// Entity tag for the uploaded object.
 	ETag *string

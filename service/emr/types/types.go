@@ -100,9 +100,9 @@ type AutoScalingPolicyStatus struct {
 // exception using PermittedPublicSecurityGroupRuleRanges.
 type BlockPublicAccessConfiguration struct {
 
-	// Indicates whether EMR block public access is enabled (true) or disabled (false).
-	// By default, the value is false for accounts that have created EMR clusters
-	// before July 2019. For accounts created after this, the default is true.
+	// Indicates whether Amazon EMR block public access is enabled (true) or disabled
+	// (false). By default, the value is false for accounts that have created EMR
+	// clusters before July 2019. For accounts created after this, the default is true.
 	//
 	// This member is required.
 	BlockPublicSecurityGroupRules bool
@@ -255,8 +255,8 @@ type Cluster struct {
 	// EBS-backed Linux AMI if the cluster uses a custom AMI.
 	CustomAmiId *string
 
-	// The size, in GiB, of the EBS root device volume of the Linux AMI that is used
-	// for each EC2 instance. Available in Amazon EMR version 4.x and later.
+	// The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is
+	// used for each EC2 instance. Available in Amazon EMR version 4.x and later.
 	EbsRootVolumeSize *int32
 
 	// Provides information about the EC2 instances in a cluster grouped by category.
@@ -277,7 +277,7 @@ type Cluster struct {
 	// using a security configuration. For more information see Use Kerberos
 	// Authentication
 	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html) in
-	// the EMR Management Guide.
+	// the Amazon EMR Management Guide.
 	KerberosAttributes *KerberosAttributes
 
 	// The AWS KMS customer master key (CMK) used for encrypting log files. This
@@ -336,13 +336,13 @@ type Cluster struct {
 	// instance-hour boundary, regardless of when the request to terminate the instance
 	// was submitted. This option is only available with Amazon EMR 5.1.0 and later and
 	// is the default for clusters created using that version.
-	// TERMINATE_AT_TASK_COMPLETION indicates that Amazon EMR blacklists and drains
-	// tasks from nodes before terminating the Amazon EC2 instances, regardless of the
-	// instance-hour boundary. With either behavior, Amazon EMR removes the least
-	// active nodes first and blocks instance termination if it could lead to HDFS
-	// corruption. TERMINATE_AT_TASK_COMPLETION is available only in Amazon EMR version
-	// 4.1.0 and later, and is the default for versions of Amazon EMR earlier than
-	// 5.1.0.
+	// TERMINATE_AT_TASK_COMPLETION indicates that Amazon EMR adds nodes to a deny list
+	// and drains tasks from nodes before terminating the Amazon EC2 instances,
+	// regardless of the instance-hour boundary. With either behavior, Amazon EMR
+	// removes the least active nodes first and blocks instance termination if it could
+	// lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION is available only in
+	// Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon
+	// EMR earlier than 5.1.0.
 	ScaleDownBehavior ScaleDownBehavior
 
 	// The name of the security configuration applied to the cluster.
@@ -437,7 +437,7 @@ type ClusterTimeline struct {
 	// The date and time when the cluster was terminated.
 	EndDateTime *time.Time
 
-	// The date and time when the cluster was ready to execute steps.
+	// The date and time when the cluster was ready to run steps.
 	ReadyDateTime *time.Time
 }
 
@@ -460,7 +460,7 @@ type Command struct {
 // configuration.
 type ComputeLimits struct {
 
-	// The upper boundary of EC2 units. It is measured through VCPU cores or instances
+	// The upper boundary of EC2 units. It is measured through vCPU cores or instances
 	// for instance groups and measured through units for instance fleets. Managed
 	// scaling activities are not allowed beyond this boundary. The limit only applies
 	// to the core and task nodes. The master node cannot be scaled after initial
@@ -469,7 +469,7 @@ type ComputeLimits struct {
 	// This member is required.
 	MaximumCapacityUnits *int32
 
-	// The lower boundary of EC2 units. It is measured through VCPU cores or instances
+	// The lower boundary of EC2 units. It is measured through vCPU cores or instances
 	// for instance groups and measured through units for instance fleets. Managed
 	// scaling activities are not allowed beyond this boundary. The limit only applies
 	// to the core and task nodes. The master node cannot be scaled after initial
@@ -484,16 +484,16 @@ type ComputeLimits struct {
 	UnitType ComputeLimitsUnitType
 
 	// The upper boundary of EC2 units for core node type in a cluster. It is measured
-	// through VCPU cores or instances for instance groups and measured through units
+	// through vCPU cores or instances for instance groups and measured through units
 	// for instance fleets. The core units are not allowed to scale beyond this
 	// boundary. The parameter is used to split capacity allocation between core and
 	// task nodes.
 	MaximumCoreCapacityUnits *int32
 
-	// The upper boundary of On-Demand EC2 units. It is measured through VCPU cores or
+	// The upper boundary of On-Demand EC2 units. It is measured through vCPU cores or
 	// instances for instance groups and measured through units for instance fleets.
 	// The On-Demand units are not allowed to scale beyond this boundary. The parameter
-	// is used to split capacity allocation between On-Demand and Spot instances.
+	// is used to split capacity allocation between On-Demand and Spot Instances.
 	MaximumOnDemandCapacityUnits *int32
 }
 
@@ -652,9 +652,9 @@ type FailureDetails struct {
 	// recorded.
 	LogFile *string
 
-	// The descriptive message including the error the EMR service has identified as
-	// the cause of step failure. This is text from an error log that describes the
-	// root cause of the failure.
+	// The descriptive message including the error the Amazon EMR service has
+	// identified as the cause of step failure. This is text from an error log that
+	// describes the root cause of the failure.
 	Message *string
 
 	// The reason for the step failure. In the case where the service cannot
@@ -703,7 +703,7 @@ type HadoopStepConfig struct {
 	MainClass *string
 
 	// The list of Java properties that are set when the step runs. You can use these
-	// properties to pass key value pairs to your main function.
+	// properties to pass key-value pairs to your main function.
 	Properties map[string]string
 }
 
@@ -749,7 +749,7 @@ type Instance struct {
 
 // Describes an instance fleet, which is a group of EC2 instances that host a
 // particular node type (master, core, or task) in an Amazon EMR cluster. Instance
-// fleets can consist of a mix of instance types and On-Demand and Spot instances,
+// fleets can consist of a mix of instance types and On-Demand and Spot Instances,
 // which are provisioned to meet a defined target capacity. The instance fleet
 // configuration is available only in Amazon EMR versions 4.8.0 and later,
 // excluding 5.0.x versions.
@@ -786,10 +786,10 @@ type InstanceFleet struct {
 	Status *InstanceFleetStatus
 
 	// The target capacity of On-Demand units for the instance fleet, which determines
-	// how many On-Demand instances to provision. When the instance fleet launches,
-	// Amazon EMR tries to provision On-Demand instances as specified by
+	// how many On-Demand Instances to provision. When the instance fleet launches,
+	// Amazon EMR tries to provision On-Demand Instances as specified by
 	// InstanceTypeConfig. Each instance configuration has a specified
-	// WeightedCapacity. When an On-Demand instance is provisioned, the
+	// WeightedCapacity. When an On-Demand Instance is provisioned, the
 	// WeightedCapacity units count toward the target capacity. Amazon EMR provisions
 	// instances until the target capacity is totally fulfilled, even if this results
 	// in an overage. For example, if there are 2 units remaining to fulfill capacity,
@@ -797,7 +797,7 @@ type InstanceFleet struct {
 	// units, the instance is provisioned, and the target capacity is exceeded by 3
 	// units. You can use InstanceFleet$ProvisionedOnDemandCapacity to determine the
 	// Spot capacity units that have been provisioned for the instance fleet. If not
-	// specified or set to 0, only Spot instances are provisioned for the instance
+	// specified or set to 0, only Spot Instances are provisioned for the instance
 	// fleet using TargetSpotCapacity. At least one of TargetSpotCapacity and
 	// TargetOnDemandCapacity should be greater than 0. For a master instance fleet,
 	// only one of TargetSpotCapacity and TargetOnDemandCapacity can be specified, and
@@ -845,16 +845,16 @@ type InstanceFleetConfig struct {
 	Name *string
 
 	// The target capacity of On-Demand units for the instance fleet, which determines
-	// how many On-Demand instances to provision. When the instance fleet launches,
-	// Amazon EMR tries to provision On-Demand instances as specified by
+	// how many On-Demand Instances to provision. When the instance fleet launches,
+	// Amazon EMR tries to provision On-Demand Instances as specified by
 	// InstanceTypeConfig. Each instance configuration has a specified
-	// WeightedCapacity. When an On-Demand instance is provisioned, the
+	// WeightedCapacity. When an On-Demand Instance is provisioned, the
 	// WeightedCapacity units count toward the target capacity. Amazon EMR provisions
 	// instances until the target capacity is totally fulfilled, even if this results
 	// in an overage. For example, if there are 2 units remaining to fulfill capacity,
 	// and Amazon EMR can only provision an instance with a WeightedCapacity of 5
 	// units, the instance is provisioned, and the target capacity is exceeded by 3
-	// units. If not specified or set to 0, only Spot instances are provisioned for the
+	// units. If not specified or set to 0, only Spot Instances are provisioned for the
 	// instance fleet using TargetSpotCapacity. At least one of TargetSpotCapacity and
 	// TargetOnDemandCapacity should be greater than 0. For a master instance fleet,
 	// only one of TargetSpotCapacity and TargetOnDemandCapacity can be specified, and
@@ -862,16 +862,16 @@ type InstanceFleetConfig struct {
 	TargetOnDemandCapacity *int32
 
 	// The target capacity of Spot units for the instance fleet, which determines how
-	// many Spot instances to provision. When the instance fleet launches, Amazon EMR
-	// tries to provision Spot instances as specified by InstanceTypeConfig. Each
-	// instance configuration has a specified WeightedCapacity. When a Spot instance is
+	// many Spot Instances to provision. When the instance fleet launches, Amazon EMR
+	// tries to provision Spot Instances as specified by InstanceTypeConfig. Each
+	// instance configuration has a specified WeightedCapacity. When a Spot Instance is
 	// provisioned, the WeightedCapacity units count toward the target capacity. Amazon
 	// EMR provisions instances until the target capacity is totally fulfilled, even if
 	// this results in an overage. For example, if there are 2 units remaining to
 	// fulfill capacity, and Amazon EMR can only provision an instance with a
 	// WeightedCapacity of 5 units, the instance is provisioned, and the target
 	// capacity is exceeded by 3 units. If not specified or set to 0, only On-Demand
-	// instances are provisioned for the instance fleet. At least one of
+	// Instances are provisioned for the instance fleet. At least one of
 	// TargetSpotCapacity and TargetOnDemandCapacity should be greater than 0. For a
 	// master instance fleet, only one of TargetSpotCapacity and TargetOnDemandCapacity
 	// can be specified, and its value must be 1.
@@ -897,21 +897,21 @@ type InstanceFleetModifyConfig struct {
 	TargetSpotCapacity *int32
 }
 
-// The launch specification for Spot instances in the fleet, which determines the
+// The launch specification for Spot Instances in the fleet, which determines the
 // defined duration, provisioning timeout behavior, and allocation strategy. The
 // instance fleet configuration is available only in Amazon EMR versions 4.8.0 and
-// later, excluding 5.0.x versions. On-Demand and Spot instance allocation
+// later, excluding 5.0.x versions. On-Demand and Spot Instance allocation
 // strategies are available in Amazon EMR version 5.12.1 and later.
 type InstanceFleetProvisioningSpecifications struct {
 
-	// The launch specification for On-Demand instances in the instance fleet, which
+	// The launch specification for On-Demand Instances in the instance fleet, which
 	// determines the allocation strategy. The instance fleet configuration is
 	// available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.
-	// On-Demand instances allocation strategy is available in Amazon EMR version
+	// On-Demand Instances allocation strategy is available in Amazon EMR version
 	// 5.12.1 and later.
 	OnDemandSpecification *OnDemandProvisioningSpecification
 
-	// The launch specification for Spot instances in the fleet, which determines the
+	// The launch specification for Spot Instances in the fleet, which determines the
 	// defined duration, provisioning timeout behavior, and allocation strategy.
 	SpotSpecification *SpotProvisioningSpecification
 }
@@ -993,7 +993,7 @@ type InstanceGroup struct {
 	// a CloudWatch metric. See PutAutoScalingPolicy.
 	AutoScalingPolicy *AutoScalingPolicyDescription
 
-	// The bid price for each EC2 Spot instance type as defined by InstanceType.
+	// The bid price for each EC2 Spot Instance type as defined by InstanceType.
 	// Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is
 	// provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
 	BidPrice *string
@@ -1076,7 +1076,7 @@ type InstanceGroupConfig struct {
 	// a CloudWatch metric. See PutAutoScalingPolicy.
 	AutoScalingPolicy *AutoScalingPolicy
 
-	// The bid price for each EC2 Spot instance type as defined by InstanceType.
+	// The bid price for each EC2 Spot Instance type as defined by InstanceType.
 	// Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is
 	// provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
 	BidPrice *string
@@ -1136,7 +1136,7 @@ type InstanceGroupDetail struct {
 	// This member is required.
 	State InstanceGroupState
 
-	// The bid price for each EC2 Spot instance type as defined by InstanceType.
+	// The bid price for each EC2 Spot Instance type as defined by InstanceType.
 	// Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is
 	// provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
 	BidPrice *string
@@ -1163,7 +1163,7 @@ type InstanceGroupDetail struct {
 // Modify the size or configurations of an instance group.
 type InstanceGroupModifyConfig struct {
 
-	// Unique ID of the instance group to expand or shrink.
+	// Unique ID of the instance group to modify.
 	//
 	// This member is required.
 	InstanceGroupId *string
@@ -1271,9 +1271,9 @@ type InstanceTimeline struct {
 
 // An instance type configuration for each instance type in an instance fleet,
 // which determines the EC2 instances Amazon EMR attempts to provision to fulfill
-// On-Demand and Spot target capacities. There can be a maximum of 5 instance type
-// configurations in a fleet. The instance fleet configuration is available only in
-// Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.
+// On-Demand and Spot target capacities. There can be a maximum of five instance
+// type configurations in a fleet. The instance fleet configuration is available
+// only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.
 type InstanceTypeConfig struct {
 
 	// An EC2 instance type, such as m3.xlarge.
@@ -1281,12 +1281,12 @@ type InstanceTypeConfig struct {
 	// This member is required.
 	InstanceType *string
 
-	// The bid price for each EC2 Spot instance type as defined by InstanceType.
+	// The bid price for each EC2 Spot Instance type as defined by InstanceType.
 	// Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is
 	// provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
 	BidPrice *string
 
-	// The bid price, as a percentage of On-Demand price, for each EC2 Spot instance as
+	// The bid price, as a percentage of On-Demand price, for each EC2 Spot Instance as
 	// defined by InstanceType. Expressed as a number (for example, 20 specifies 20%).
 	// If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided,
 	// BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
@@ -1297,7 +1297,7 @@ type InstanceTypeConfig struct {
 	// cluster.
 	Configurations []Configuration
 
-	// The configuration of Amazon Elastic Block Storage (EBS) attached to each
+	// The configuration of Amazon Elastic Block Storage (Amazon EBS) attached to each
 	// instance as defined by InstanceType.
 	EbsConfiguration *EbsConfiguration
 
@@ -1313,11 +1313,11 @@ type InstanceTypeConfig struct {
 // later, excluding 5.0.x versions.
 type InstanceTypeSpecification struct {
 
-	// The bid price for each EC2 Spot instance type as defined by InstanceType.
+	// The bid price for each EC2 Spot Instance type as defined by InstanceType.
 	// Expressed in USD.
 	BidPrice *string
 
-	// The bid price, as a percentage of On-Demand price, for each EC2 Spot instance as
+	// The bid price, as a percentage of On-Demand price, for each EC2 Spot Instance as
 	// defined by InstanceType. Expressed as a number (for example, 20 specifies 20%).
 	BidPriceAsPercentageOfOnDemandPrice *float64
 
@@ -1326,7 +1326,7 @@ type InstanceTypeSpecification struct {
 	// Amazon EMR.
 	Configurations []Configuration
 
-	// The configuration of Amazon Elastic Block Storage (EBS) attached to each
+	// The configuration of Amazon Elastic Block Storage (Amazon EBS) attached to each
 	// instance as defined by InstanceType.
 	EbsBlockDevices []EbsBlockDevice
 
@@ -1397,24 +1397,24 @@ type JobFlowDetail struct {
 	// instance-hour boundary, regardless of when the request to terminate the instance
 	// was submitted. This option is only available with Amazon EMR 5.1.0 and later and
 	// is the default for clusters created using that version.
-	// TERMINATE_AT_TASK_COMPLETION indicates that Amazon EMR blacklists and drains
-	// tasks from nodes before terminating the Amazon EC2 instances, regardless of the
-	// instance-hour boundary. With either behavior, Amazon EMR removes the least
-	// active nodes first and blocks instance termination if it could lead to HDFS
-	// corruption. TERMINATE_AT_TASK_COMPLETION available only in Amazon EMR version
-	// 4.1.0 and later, and is the default for versions of Amazon EMR earlier than
-	// 5.1.0.
+	// TERMINATE_AT_TASK_COMPLETION indicates that Amazon EMR adds nodes to a deny list
+	// and drains tasks from nodes before terminating the Amazon EC2 instances,
+	// regardless of the instance-hour boundary. With either behavior, Amazon EMR
+	// removes the least active nodes first and blocks instance termination if it could
+	// lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION available only in Amazon
+	// EMR version 4.1.0 and later, and is the default for versions of Amazon EMR
+	// earlier than 5.1.0.
 	ScaleDownBehavior ScaleDownBehavior
 
-	// The IAM role that will be assumed by the Amazon EMR service to access AWS
-	// resources on your behalf.
+	// The IAM role that is assumed by the Amazon EMR service to access AWS resources
+	// on your behalf.
 	ServiceRole *string
 
 	// A list of steps run by the job flow.
 	Steps []StepDetail
 
-	// A list of strings set by third party software when the job flow is launched. If
-	// you are not using third party software to manage the job flow this value is
+	// A list of strings set by third-party software when the job flow is launched. If
+	// you are not using third-party software to manage the job flow, this value is
 	// empty.
 	SupportedProducts []string
 
@@ -1458,10 +1458,9 @@ type JobFlowExecutionStatusDetail struct {
 
 // A description of the Amazon EC2 instance on which the cluster (job flow) runs. A
 // valid JobFlowInstancesConfig must contain either InstanceGroups or
-// InstanceFleets, which is the recommended configuration. They cannot be used
-// together. You may also have MasterInstanceType, SlaveInstanceType, and
-// InstanceCount (all three must be present), but we don't recommend this
-// configuration.
+// InstanceFleets. They cannot be used together. You may also have
+// MasterInstanceType, SlaveInstanceType, and InstanceCount (all three must be
+// present), but we don't recommend this configuration.
 type JobFlowInstancesConfig struct {
 
 	// A list of additional Amazon EC2 security group IDs for the master node.
@@ -1470,8 +1469,8 @@ type JobFlowInstancesConfig struct {
 	// A list of additional Amazon EC2 security group IDs for the core and task nodes.
 	AdditionalSlaveSecurityGroups []string
 
-	// The name of the EC2 key pair that can be used to ssh to the master node as the
-	// user called "hadoop."
+	// The name of the EC2 key pair that can be used to connect to the master node
+	// using SSH as the user called "hadoop."
 	Ec2KeyName *string
 
 	// Applies to clusters that use the uniform instance group configuration. To launch
@@ -1494,11 +1493,11 @@ type JobFlowInstancesConfig struct {
 	EmrManagedSlaveSecurityGroup *string
 
 	// Applies only to Amazon EMR release versions earlier than 4.0. The Hadoop version
-	// for the cluster. Valid inputs are "0.18" (deprecated), "0.20" (deprecated),
-	// "0.20.205" (deprecated), "1.0.3", "2.2.0", or "2.4.0". If you do not set this
-	// value, the default of 0.18 is used, unless the AmiVersion parameter is set in
-	// the RunJobFlow call, in which case the default version of Hadoop for that AMI
-	// version is used.
+	// for the cluster. Valid inputs are "0.18" (no longer maintained), "0.20" (no
+	// longer maintained), "0.20.205" (no longer maintained), "1.0.3", "2.2.0", or
+	// "2.4.0". If you do not set this value, the default of 0.18 is used, unless the
+	// AmiVersion parameter is set in the RunJobFlow call, in which case the default
+	// version of Hadoop for that AMI version is used.
 	HadoopVersion *string
 
 	// The number of EC2 instances in the cluster.
@@ -1556,7 +1555,8 @@ type JobFlowInstancesDetail struct {
 	// This member is required.
 	SlaveInstanceType *string
 
-	// The name of an Amazon EC2 key pair that can be used to ssh to the master node.
+	// The name of an Amazon EC2 key pair that can be used to connect to the master
+	// node using SSH.
 	Ec2KeyName *string
 
 	// For clusters launched within Amazon Virtual Private Cloud, this is the
@@ -1581,11 +1581,11 @@ type JobFlowInstancesDetail struct {
 	MasterPublicDnsName *string
 
 	// An approximation of the cost of the cluster, represented in m1.small/hours. This
-	// value is incremented one time for every hour that an m1.small runs. Larger
-	// instances are weighted more, so an Amazon EC2 instance that is roughly four
-	// times more expensive would result in the normalized instance hours being
-	// incremented by four. This result is only an approximation and does not reflect
-	// the actual billing rate.
+	// value is increased one time for every hour that an m1.small instance runs.
+	// Larger instances are weighted more heavily, so an Amazon EC2 instance that is
+	// roughly four times more expensive would result in the normalized instance hours
+	// being increased incrementally four times. This result is only an approximation
+	// and does not reflect the actual billing rate.
 	NormalizedInstanceHours *int32
 
 	// The Amazon EC2 Availability Zone for the cluster.
@@ -1601,7 +1601,7 @@ type JobFlowInstancesDetail struct {
 // using a security configuration. For more information see Use Kerberos
 // Authentication
 // (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html) in
-// the EMR Management Guide.
+// the Amazon EMR Management Guide.
 type KerberosAttributes struct {
 
 	// The password used within the cluster for the kadmin service on the
@@ -1630,10 +1630,10 @@ type KerberosAttributes struct {
 	CrossRealmTrustPrincipalPassword *string
 }
 
-// A key value pair.
+// A key-value pair.
 type KeyValue struct {
 
-	// The unique identifier of a key value pair.
+	// The unique identifier of a key-value pair.
 	Key *string
 
 	// The value part of the identified key.
@@ -1745,8 +1745,8 @@ type NotebookExecution struct {
 	// execution stopped because of a StopNotebookExecution request.
 	Status NotebookExecutionStatus
 
-	// A list of tags associated with a notebook execution. Tags are user-defined key
-	// value pairs that consist of a required key string with a maximum of 128
+	// A list of tags associated with a notebook execution. Tags are user-defined
+	// key-value pairs that consist of a required key string with a maximum of 128
 	// characters and an optional value string with a maximum of 256 characters.
 	Tags []Tag
 }
@@ -1804,14 +1804,14 @@ type NotebookExecutionSummary struct {
 	Status NotebookExecutionStatus
 }
 
-// The launch specification for On-Demand instances in the instance fleet, which
+// The launch specification for On-Demand Instances in the instance fleet, which
 // determines the allocation strategy. The instance fleet configuration is
 // available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.
-// On-Demand instances allocation strategy is available in Amazon EMR version
+// On-Demand Instances allocation strategy is available in Amazon EMR version
 // 5.12.1 and later.
 type OnDemandProvisioningSpecification struct {
 
-	// Specifies the strategy to use in launching On-Demand instance fleets. Currently,
+	// Specifies the strategy to use in launching On-Demand Instance fleets. Currently,
 	// the only option is lowest-price (the default), which launches the lowest price
 	// first.
 	//
@@ -1962,6 +1962,66 @@ type SecurityConfigurationSummary struct {
 	Name *string
 }
 
+// Details for an Amazon EMR Studio session mapping including creation time, user
+// or group ID, Studio ID, and so on.
+type SessionMappingDetail struct {
+
+	// The time the session mapping was created.
+	CreationTime *time.Time
+
+	// The globally unique identifier (GUID) of the user or group.
+	IdentityId *string
+
+	// The name of the user or group. For more information, see UserName
+	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId)
+	// and DisplayName
+	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
+	// in the AWS SSO Identity Store API Reference.
+	IdentityName *string
+
+	// Specifies whether the identity mapped to the Studio is a user or a group.
+	IdentityType IdentityType
+
+	// The time the session mapping was last modified.
+	LastModifiedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the session policy associated with the user or
+	// group.
+	SessionPolicyArn *string
+
+	// The ID of the Amazon EMR Studio.
+	StudioId *string
+}
+
+// Details for an Amazon EMR Studio session mapping. The details do not include the
+// time the session mapping was last modified.
+type SessionMappingSummary struct {
+
+	// The time the session mapping was created.
+	CreationTime *time.Time
+
+	// The globally unique identifier (GUID) of the user or group from the AWS SSO
+	// Identity Store.
+	IdentityId *string
+
+	// The name of the user or group. For more information, see UserName
+	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId)
+	// and DisplayName
+	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
+	// in the AWS SSO Identity Store API Reference.
+	IdentityName *string
+
+	// Specifies whether the identity mapped to the Studio is a user or a group.
+	IdentityType IdentityType
+
+	// The Amazon Resource Name (ARN) of the session policy associated with the user or
+	// group.
+	SessionPolicyArn *string
+
+	// The ID of the Amazon EMR Studio.
+	StudioId *string
+}
+
 // Policy for customizing shrink operations. Allows configuration of
 // decommissioning timeout and targeted instance shrinking.
 type ShrinkPolicy struct {
@@ -2009,24 +2069,24 @@ type SimpleScalingPolicyConfiguration struct {
 	CoolDown *int32
 }
 
-// The launch specification for Spot instances in the instance fleet, which
+// The launch specification for Spot Instances in the instance fleet, which
 // determines the defined duration, provisioning timeout behavior, and allocation
 // strategy. The instance fleet configuration is available only in Amazon EMR
-// versions 4.8.0 and later, excluding 5.0.x versions. Spot instance allocation
+// versions 4.8.0 and later, excluding 5.0.x versions. Spot Instance allocation
 // strategy is available in Amazon EMR version 5.12.1 and later.
 type SpotProvisioningSpecification struct {
 
 	// The action to take when TargetSpotCapacity has not been fulfilled when the
-	// TimeoutDurationMinutes has expired; that is, when all Spot instances could not
+	// TimeoutDurationMinutes has expired; that is, when all Spot Instances could not
 	// be provisioned within the Spot provisioning timeout. Valid values are
 	// TERMINATE_CLUSTER and SWITCH_TO_ON_DEMAND. SWITCH_TO_ON_DEMAND specifies that if
-	// no Spot instances are available, On-Demand Instances should be provisioned to
+	// no Spot Instances are available, On-Demand Instances should be provisioned to
 	// fulfill any remaining Spot capacity.
 	//
 	// This member is required.
 	TimeoutAction SpotProvisioningTimeoutAction
 
-	// The spot provisioning timeout period in minutes. If Spot instances are not
+	// The spot provisioning timeout period in minutes. If Spot Instances are not
 	// provisioned within this time period, the TimeOutAction is taken. Minimum value
 	// is 5 and maximum value is 1440. The timeout applies only during initial
 	// provisioning, when the cluster is first created.
@@ -2034,18 +2094,18 @@ type SpotProvisioningSpecification struct {
 	// This member is required.
 	TimeoutDurationMinutes *int32
 
-	// Specifies the strategy to use in launching Spot instance fleets. Currently, the
+	// Specifies the strategy to use in launching Spot Instance fleets. Currently, the
 	// only option is capacity-optimized (the default), which launches instances from
-	// Spot instance pools with optimal capacity for the number of instances that are
+	// Spot Instance pools with optimal capacity for the number of instances that are
 	// launching.
 	AllocationStrategy SpotProvisioningAllocationStrategy
 
-	// The defined duration for Spot instances (also known as Spot blocks) in minutes.
-	// When specified, the Spot instance does not terminate before the defined duration
+	// The defined duration for Spot Instances (also known as Spot blocks) in minutes.
+	// When specified, the Spot Instance does not terminate before the defined duration
 	// expires, and defined duration pricing for Spot instances applies. Valid values
 	// are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot
-	// instance receives its instance ID. At the end of the duration, Amazon EC2 marks
-	// the Spot instance for termination and provides a Spot instance termination
+	// Instance receives its instance ID. At the end of the duration, Amazon EC2 marks
+	// the Spot Instance for termination and provides a Spot Instance termination
 	// notice, which gives the instance a two-minute warning before it terminates.
 	BlockDurationMinutes *int32
 }
@@ -2190,6 +2250,86 @@ type StepTimeline struct {
 	StartDateTime *time.Time
 }
 
+// Details for an Amazon EMR Studio including ID, creation time, name, and so on.
+type Studio struct {
+
+	// Specifies whether the Studio authenticates users using single sign-on (SSO) or
+	// IAM.
+	AuthMode AuthMode
+
+	// The time the Amazon EMR Studio was created.
+	CreationTime *time.Time
+
+	// The default Amazon S3 location to back up Amazon EMR Studio Workspaces and
+	// notebook files.
+	DefaultS3Location *string
+
+	// The detailed description of the EMR Studio.
+	Description *string
+
+	// The ID of the Engine security group associated with the Amazon EMR Studio. The
+	// Engine security group allows inbound network traffic from resources in the
+	// Workspace security group.
+	EngineSecurityGroupId *string
+
+	// The name of the EMR Studio.
+	Name *string
+
+	// The name of the IAM role assumed by the Amazon EMR Studio.
+	ServiceRole *string
+
+	// The Amazon Resource Name (ARN) of the EMR Studio.
+	StudioArn *string
+
+	// The ID of the EMR Studio.
+	StudioId *string
+
+	// The list of IDs of the subnets associated with the Amazon EMR Studio.
+	SubnetIds []string
+
+	// A list of tags associated with the Amazon EMR Studio.
+	Tags []Tag
+
+	// The unique access URL of the Amazon EMR Studio.
+	Url *string
+
+	// The name of the IAM role assumed by users logged in to the Amazon EMR Studio.
+	UserRole *string
+
+	// The ID of the VPC associated with the EMR Studio.
+	VpcId *string
+
+	// The ID of the Workspace security group associated with the Amazon EMR Studio.
+	// The Workspace security group allows outbound network traffic to resources in the
+	// Engine security group and to the internet.
+	WorkspaceSecurityGroupId *string
+}
+
+// Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. The
+// details do not include subnets, IAM roles, security groups, or tags associated
+// with the Studio.
+type StudioSummary struct {
+
+	// The time when the Amazon EMR Studio was created.
+	CreationTime *time.Time
+
+	// The detailed description of the EMR Studio.
+	Description *string
+
+	// The name of the Amazon EMR Studio.
+	Name *string
+
+	// The ID of the Amazon EMR Studio.
+	StudioId *string
+
+	// The unique access URL of the Amazon EMR Studio.
+	Url *string
+
+	// The ID of the Virtual Private Cloud (Amazon VPC) associated with the Amazon EMR
+	// Studio.
+	VpcId *string
+}
+
 // The list of supported product configurations which allow user-supplied
 // arguments. EMR accepts these arguments and forwards them to the corresponding
 // installation script as bootstrap action arguments.
@@ -2202,7 +2342,7 @@ type SupportedProductConfig struct {
 	Name *string
 }
 
-// A key/value pair containing user-defined metadata that you can associate with an
+// A key-value pair containing user-defined metadata that you can associate with an
 // Amazon EMR resource. Tags make it easier to associate clusters in various ways,
 // such as grouping clusters to track your Amazon EMR resource allocation costs.
 // For more information, see Tag Clusters

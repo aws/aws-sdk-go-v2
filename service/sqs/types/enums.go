@@ -71,6 +71,8 @@ const (
 	QueueAttributeNameContentbaseddeduplication             QueueAttributeName = "ContentBasedDeduplication"
 	QueueAttributeNameKmsmasterkeyid                        QueueAttributeName = "KmsMasterKeyId"
 	QueueAttributeNameKmsdatakeyreuseperiodseconds          QueueAttributeName = "KmsDataKeyReusePeriodSeconds"
+	QueueAttributeNameDeduplicationscope                    QueueAttributeName = "DeduplicationScope"
+	QueueAttributeNameFifothroughputlimit                   QueueAttributeName = "FifoThroughputLimit"
 )
 
 // Values returns all known values for QueueAttributeName. Note that this can be
@@ -96,5 +98,7 @@ func (QueueAttributeName) Values() []QueueAttributeName {
 		"ContentBasedDeduplication",
 		"KmsMasterKeyId",
 		"KmsDataKeyReusePeriodSeconds",
+		"DeduplicationScope",
+		"FifoThroughputLimit",
 	}
 }

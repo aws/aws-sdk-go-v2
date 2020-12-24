@@ -15180,6 +15180,15 @@ func awsAwsjson11_deserializeDocumentMatchmakingConfiguration(v **types.Matchmak
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "FlexMatchMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlexMatchMode to be of type string, got %T instead", value)
+				}
+				sv.FlexMatchMode = types.FlexMatchMode(jtv)
+			}
+
 		case "GameProperties":
 			if err := awsAwsjson11_deserializeDocumentGamePropertyList(&sv.GameProperties, value); err != nil {
 				return err

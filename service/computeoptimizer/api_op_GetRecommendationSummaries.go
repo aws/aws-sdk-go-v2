@@ -33,7 +33,7 @@ func (c *Client) GetRecommendationSummaries(ctx context.Context, params *GetReco
 type GetRecommendationSummariesInput struct {
 
 	// The IDs of the AWS accounts for which to return recommendation summaries. If
-	// your account is the master account of an organization, use this parameter to
+	// your account is the management account of an organization, use this parameter to
 	// specify the member accounts for which you want to return recommendation
 	// summaries. Only one account ID can be specified per request.
 	AccountIds []string

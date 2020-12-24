@@ -48,8 +48,12 @@ type ImportWorkspaceImageInput struct {
 	// This member is required.
 	ImageName *string
 
-	// The ingestion process to be used when importing the image. For non-GPU-enabled
-	// bundles (bundles other than Graphics or GraphicsPro), specify BYOL_REGULAR.
+	// The ingestion process to be used when importing the image, depending on which
+	// protocol you want to use for your BYOL Workspace image, either PCoIP or
+	// WorkSpaces Streaming Protocol (WSP). To use WSP, specify a value that ends in
+	// _WSP. To use PCoIP, specify a value that does not end in _WSP. For
+	// non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify
+	// BYOL_REGULAR or BYOL_REGULAR_WSP, depending on the protocol.
 	//
 	// This member is required.
 	IngestionProcess types.WorkspaceImageIngestionProcess

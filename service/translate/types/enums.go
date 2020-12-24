@@ -62,6 +62,50 @@ func (MergeStrategy) Values() []MergeStrategy {
 	}
 }
 
+type ParallelDataFormat string
+
+// Enum values for ParallelDataFormat
+const (
+	ParallelDataFormatTsv ParallelDataFormat = "TSV"
+	ParallelDataFormatCsv ParallelDataFormat = "CSV"
+	ParallelDataFormatTmx ParallelDataFormat = "TMX"
+)
+
+// Values returns all known values for ParallelDataFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParallelDataFormat) Values() []ParallelDataFormat {
+	return []ParallelDataFormat{
+		"TSV",
+		"CSV",
+		"TMX",
+	}
+}
+
+type ParallelDataStatus string
+
+// Enum values for ParallelDataStatus
+const (
+	ParallelDataStatusCreating ParallelDataStatus = "CREATING"
+	ParallelDataStatusUpdating ParallelDataStatus = "UPDATING"
+	ParallelDataStatusActive   ParallelDataStatus = "ACTIVE"
+	ParallelDataStatusDeleting ParallelDataStatus = "DELETING"
+	ParallelDataStatusFailed   ParallelDataStatus = "FAILED"
+)
+
+// Values returns all known values for ParallelDataStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParallelDataStatus) Values() []ParallelDataStatus {
+	return []ParallelDataStatus{
+		"CREATING",
+		"UPDATING",
+		"ACTIVE",
+		"DELETING",
+		"FAILED",
+	}
+}
+
 type TerminologyDataFormat string
 
 // Enum values for TerminologyDataFormat

@@ -219,6 +219,155 @@ func awsRestjson1_serializeOpDocumentCreateComponentInput(v *CreateComponentInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateContainerRecipe struct {
+}
+
+func (*awsRestjson1_serializeOpCreateContainerRecipe) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateContainerRecipe) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateContainerRecipeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/CreateContainerRecipe")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateContainerRecipeInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateContainerRecipeInput(v *CreateContainerRecipeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateContainerRecipeInput(v *CreateContainerRecipeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Components != nil {
+		ok := object.Key("components")
+		if err := awsRestjson1_serializeDocumentComponentConfigurationList(v.Components, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ContainerType) > 0 {
+		ok := object.Key("containerType")
+		ok.String(string(v.ContainerType))
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.DockerfileTemplateData != nil {
+		ok := object.Key("dockerfileTemplateData")
+		ok.String(*v.DockerfileTemplateData)
+	}
+
+	if v.DockerfileTemplateUri != nil {
+		ok := object.Key("dockerfileTemplateUri")
+		ok.String(*v.DockerfileTemplateUri)
+	}
+
+	if v.ImageOsVersionOverride != nil {
+		ok := object.Key("imageOsVersionOverride")
+		ok.String(*v.ImageOsVersionOverride)
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.ParentImage != nil {
+		ok := object.Key("parentImage")
+		ok.String(*v.ParentImage)
+	}
+
+	if len(v.PlatformOverride) > 0 {
+		ok := object.Key("platformOverride")
+		ok.String(string(v.PlatformOverride))
+	}
+
+	if v.SemanticVersion != nil {
+		ok := object.Key("semanticVersion")
+		ok.String(*v.SemanticVersion)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetRepository != nil {
+		ok := object.Key("targetRepository")
+		if err := awsRestjson1_serializeDocumentTargetContainerRepository(v.TargetRepository, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkingDirectory != nil {
+		ok := object.Key("workingDirectory")
+		ok.String(*v.WorkingDirectory)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateDistributionConfiguration struct {
 }
 
@@ -386,14 +535,19 @@ func awsRestjson1_serializeOpDocumentCreateImageInput(v *CreateImageInput, value
 		ok.String(*v.ClientToken)
 	}
 
+	if v.ContainerRecipeArn != nil {
+		ok := object.Key("containerRecipeArn")
+		ok.String(*v.ContainerRecipeArn)
+	}
+
 	if v.DistributionConfigurationArn != nil {
 		ok := object.Key("distributionConfigurationArn")
 		ok.String(*v.DistributionConfigurationArn)
 	}
 
-	if v.EnhancedImageMetadataEnabled != nil {
+	if v.EnhancedImageMetadataEnabled {
 		ok := object.Key("enhancedImageMetadataEnabled")
-		ok.Boolean(*v.EnhancedImageMetadataEnabled)
+		ok.Boolean(v.EnhancedImageMetadataEnabled)
 	}
 
 	if v.ImageRecipeArn != nil {
@@ -493,6 +647,11 @@ func awsRestjson1_serializeOpDocumentCreateImagePipelineInput(v *CreateImagePipe
 		ok.String(*v.ClientToken)
 	}
 
+	if v.ContainerRecipeArn != nil {
+		ok := object.Key("containerRecipeArn")
+		ok.String(*v.ContainerRecipeArn)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -503,9 +662,9 @@ func awsRestjson1_serializeOpDocumentCreateImagePipelineInput(v *CreateImagePipe
 		ok.String(*v.DistributionConfigurationArn)
 	}
 
-	if v.EnhancedImageMetadataEnabled != nil {
+	if v.EnhancedImageMetadataEnabled {
 		ok := object.Key("enhancedImageMetadataEnabled")
-		ok.Boolean(*v.EnhancedImageMetadataEnabled)
+		ok.Boolean(v.EnhancedImageMetadataEnabled)
 	}
 
 	if v.ImageRecipeArn != nil {
@@ -806,9 +965,9 @@ func awsRestjson1_serializeOpDocumentCreateInfrastructureConfigurationInput(v *C
 		}
 	}
 
-	if v.TerminateInstanceOnFailure != nil {
+	if v.TerminateInstanceOnFailure {
 		ok := object.Key("terminateInstanceOnFailure")
-		ok.Boolean(*v.TerminateInstanceOnFailure)
+		ok.Boolean(v.TerminateInstanceOnFailure)
 	}
 
 	return nil
@@ -867,6 +1026,64 @@ func awsRestjson1_serializeOpHttpBindingsDeleteComponentInput(v *DeleteComponent
 
 	if v.ComponentBuildVersionArn != nil {
 		encoder.SetQuery("componentBuildVersionArn").String(*v.ComponentBuildVersionArn)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteContainerRecipe struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteContainerRecipe) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteContainerRecipe) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteContainerRecipeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/DeleteContainerRecipe")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteContainerRecipeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteContainerRecipeInput(v *DeleteContainerRecipeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ContainerRecipeArn != nil {
+		encoder.SetQuery("containerRecipeArn").String(*v.ContainerRecipeArn)
 	}
 
 	return nil
@@ -1273,6 +1490,122 @@ func awsRestjson1_serializeOpHttpBindingsGetComponentPolicyInput(v *GetComponent
 
 	if v.ComponentArn != nil {
 		encoder.SetQuery("componentArn").String(*v.ComponentArn)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetContainerRecipe struct {
+}
+
+func (*awsRestjson1_serializeOpGetContainerRecipe) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetContainerRecipe) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetContainerRecipeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/GetContainerRecipe")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetContainerRecipeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetContainerRecipeInput(v *GetContainerRecipeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ContainerRecipeArn != nil {
+		encoder.SetQuery("containerRecipeArn").String(*v.ContainerRecipeArn)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetContainerRecipePolicy struct {
+}
+
+func (*awsRestjson1_serializeOpGetContainerRecipePolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetContainerRecipePolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetContainerRecipePolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/GetContainerRecipePolicy")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetContainerRecipePolicyInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetContainerRecipePolicyInput(v *GetContainerRecipePolicyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ContainerRecipeArn != nil {
+		encoder.SetQuery("containerRecipeArn").String(*v.ContainerRecipeArn)
 	}
 
 	return nil
@@ -1962,6 +2295,101 @@ func awsRestjson1_serializeOpDocumentListComponentsInput(v *ListComponentsInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.ByName {
+		ok := object.Key("byName")
+		ok.Boolean(v.ByName)
+	}
+
+	if v.Filters != nil {
+		ok := object.Key("filters")
+		if err := awsRestjson1_serializeDocumentFilterList(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != 0 {
+		ok := object.Key("maxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if len(v.Owner) > 0 {
+		ok := object.Key("owner")
+		ok.String(string(v.Owner))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListContainerRecipes struct {
+}
+
+func (*awsRestjson1_serializeOpListContainerRecipes) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListContainerRecipes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListContainerRecipesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/ListContainerRecipes")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListContainerRecipesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListContainerRecipesInput(v *ListContainerRecipesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListContainerRecipesInput(v *ListContainerRecipesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	if v.Filters != nil {
 		ok := object.Key("filters")
 		if err := awsRestjson1_serializeDocumentFilterList(v.Filters, ok); err != nil {
@@ -2492,11 +2920,21 @@ func awsRestjson1_serializeOpDocumentListImagesInput(v *ListImagesInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.ByName {
+		ok := object.Key("byName")
+		ok.Boolean(v.ByName)
+	}
+
 	if v.Filters != nil {
 		ok := object.Key("filters")
 		if err := awsRestjson1_serializeDocumentFilterList(v.Filters, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.IncludeDeprecated {
+		ok := object.Key("includeDeprecated")
+		ok.Boolean(v.IncludeDeprecated)
 	}
 
 	if v.MaxResults != 0 {
@@ -2733,6 +3171,84 @@ func awsRestjson1_serializeOpDocumentPutComponentPolicyInput(v *PutComponentPoli
 	if v.ComponentArn != nil {
 		ok := object.Key("componentArn")
 		ok.String(*v.ComponentArn)
+	}
+
+	if v.Policy != nil {
+		ok := object.Key("policy")
+		ok.String(*v.Policy)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPutContainerRecipePolicy struct {
+}
+
+func (*awsRestjson1_serializeOpPutContainerRecipePolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutContainerRecipePolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutContainerRecipePolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/PutContainerRecipePolicy")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutContainerRecipePolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutContainerRecipePolicyInput(v *PutContainerRecipePolicyInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutContainerRecipePolicyInput(v *PutContainerRecipePolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContainerRecipeArn != nil {
+		ok := object.Key("containerRecipeArn")
+		ok.String(*v.ContainerRecipeArn)
 	}
 
 	if v.Policy != nil {
@@ -3294,6 +3810,11 @@ func awsRestjson1_serializeOpDocumentUpdateImagePipelineInput(v *UpdateImagePipe
 		ok.String(*v.ClientToken)
 	}
 
+	if v.ContainerRecipeArn != nil {
+		ok := object.Key("containerRecipeArn")
+		ok.String(*v.ContainerRecipeArn)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -3304,9 +3825,9 @@ func awsRestjson1_serializeOpDocumentUpdateImagePipelineInput(v *UpdateImagePipe
 		ok.String(*v.DistributionConfigurationArn)
 	}
 
-	if v.EnhancedImageMetadataEnabled != nil {
+	if v.EnhancedImageMetadataEnabled {
 		ok := object.Key("enhancedImageMetadataEnabled")
-		ok.Boolean(*v.EnhancedImageMetadataEnabled)
+		ok.Boolean(v.EnhancedImageMetadataEnabled)
 	}
 
 	if v.ImagePipelineArn != nil {
@@ -3474,9 +3995,9 @@ func awsRestjson1_serializeOpDocumentUpdateInfrastructureConfigurationInput(v *U
 		ok.String(*v.SubnetId)
 	}
 
-	if v.TerminateInstanceOnFailure != nil {
+	if v.TerminateInstanceOnFailure {
 		ok := object.Key("terminateInstanceOnFailure")
-		ok.Boolean(*v.TerminateInstanceOnFailure)
+		ok.Boolean(v.TerminateInstanceOnFailure)
 	}
 
 	return nil
@@ -3561,6 +4082,32 @@ func awsRestjson1_serializeDocumentComponentConfigurationList(v []types.Componen
 	return nil
 }
 
+func awsRestjson1_serializeDocumentContainerDistributionConfiguration(v *types.ContainerDistributionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContainerTags != nil {
+		ok := object.Key("containerTags")
+		if err := awsRestjson1_serializeDocumentStringList(v.ContainerTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.TargetRepository != nil {
+		ok := object.Key("targetRepository")
+		if err := awsRestjson1_serializeDocumentTargetContainerRepository(v.TargetRepository, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDistribution(v *types.Distribution, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3568,6 +4115,13 @@ func awsRestjson1_serializeDocumentDistribution(v *types.Distribution, value smi
 	if v.AmiDistributionConfiguration != nil {
 		ok := object.Key("amiDistributionConfiguration")
 		if err := awsRestjson1_serializeDocumentAmiDistributionConfiguration(v.AmiDistributionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContainerDistributionConfiguration != nil {
+		ok := object.Key("containerDistributionConfiguration")
+		if err := awsRestjson1_serializeDocumentContainerDistributionConfiguration(v.ContainerDistributionConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -3604,19 +4158,19 @@ func awsRestjson1_serializeDocumentEbsInstanceBlockDeviceSpecification(v *types.
 	object := value.Object()
 	defer object.Close()
 
-	if v.DeleteOnTermination != nil {
+	if v.DeleteOnTermination {
 		ok := object.Key("deleteOnTermination")
-		ok.Boolean(*v.DeleteOnTermination)
+		ok.Boolean(v.DeleteOnTermination)
 	}
 
-	if v.Encrypted != nil {
+	if v.Encrypted {
 		ok := object.Key("encrypted")
-		ok.Boolean(*v.Encrypted)
+		ok.Boolean(v.Encrypted)
 	}
 
-	if v.Iops != nil {
+	if v.Iops != 0 {
 		ok := object.Key("iops")
-		ok.Integer(*v.Iops)
+		ok.Integer(v.Iops)
 	}
 
 	if v.KmsKeyId != nil {
@@ -3629,9 +4183,9 @@ func awsRestjson1_serializeDocumentEbsInstanceBlockDeviceSpecification(v *types.
 		ok.String(*v.SnapshotId)
 	}
 
-	if v.VolumeSize != nil {
+	if v.VolumeSize != 0 {
 		ok := object.Key("volumeSize")
-		ok.Integer(*v.VolumeSize)
+		ok.Integer(v.VolumeSize)
 	}
 
 	if len(v.VolumeType) > 0 {
@@ -3689,14 +4243,14 @@ func awsRestjson1_serializeDocumentImageTestsConfiguration(v *types.ImageTestsCo
 	object := value.Object()
 	defer object.Close()
 
-	if v.ImageTestsEnabled != nil {
+	if v.ImageTestsEnabled {
 		ok := object.Key("imageTestsEnabled")
-		ok.Boolean(*v.ImageTestsEnabled)
+		ok.Boolean(v.ImageTestsEnabled)
 	}
 
-	if v.TimeoutMinutes != nil {
+	if v.TimeoutMinutes != 0 {
 		ok := object.Key("timeoutMinutes")
-		ok.Integer(*v.TimeoutMinutes)
+		ok.Integer(v.TimeoutMinutes)
 	}
 
 	return nil
@@ -3887,5 +4441,22 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTargetContainerRepository(v *types.TargetContainerRepository, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RepositoryName != nil {
+		ok := object.Key("repositoryName")
+		ok.String(*v.RepositoryName)
+	}
+
+	if len(v.Service) > 0 {
+		ok := object.Key("service")
+		ok.String(string(v.Service))
+	}
+
 	return nil
 }

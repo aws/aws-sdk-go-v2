@@ -52,6 +52,29 @@ func (e *CloudTrailARNInvalidException) ErrorMessage() string {
 func (e *CloudTrailARNInvalidException) ErrorCode() string             { return "CloudTrailARNInvalidException" }
 func (e *CloudTrailARNInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This exception is thrown when a call results in the InvalidClientTokenId error
+// code. This can occur when you are creating or updating a trail to send
+// notifications to an Amazon SNS topic that is in a suspended AWS account.
+type CloudTrailInvalidClientTokenIdException struct {
+	Message *string
+}
+
+func (e *CloudTrailInvalidClientTokenIdException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CloudTrailInvalidClientTokenIdException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CloudTrailInvalidClientTokenIdException) ErrorCode() string {
+	return "CloudTrailInvalidClientTokenIdException"
+}
+func (e *CloudTrailInvalidClientTokenIdException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // Cannot set a CloudWatch Logs delivery for this region.
 type CloudWatchLogsDeliveryUnavailableException struct {
 	Message *string
@@ -241,23 +264,29 @@ func (e *InvalidEventCategoryException) ErrorCode() string             { return 
 func (e *InvalidEventCategoryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the PutEventSelectors operation is called with a
-// number of event selectors or data resources that is not valid. The combination
-// of event selectors and data resources is not valid. A trail can have up to 5
-// event selectors. A trail is limited to 250 data resources. These data resources
-// can be distributed across event selectors, but the overall total cannot exceed
-// 250. You can:
+// number of event selectors, advanced event selectors, or data resources that is
+// not valid. The combination of event selectors or advanced event selectors and
+// data resources is not valid. A trail can have up to 5 event selectors. If a
+// trail uses advanced event selectors, a maximum of 500 total values for all
+// conditions in all advanced event selectors is allowed. A trail is limited to 250
+// data resources. These data resources can be distributed across event selectors,
+// but the overall total cannot exceed 250. You can:
 //
-// * Specify a valid number of event selectors (1 to 5) for a
-// trail.
+// * Specify a valid number of
+// event selectors (1 to 5) for a trail.
 //
-// * Specify a valid number of data resources (1 to 250) for an event
-// selector. The limit of number of resources on an individual event selector is
-// configurable up to 250. However, this upper limit is allowed only if the total
-// number of data resources does not exceed 250 across all event selectors for a
-// trail.
+// * Specify a valid number of data
+// resources (1 to 250) for an event selector. The limit of number of resources on
+// an individual event selector is configurable up to 250. However, this upper
+// limit is allowed only if the total number of data resources does not exceed 250
+// across all event selectors for a trail.
 //
-// * Specify a valid value for a parameter. For example, specifying the
-// ReadWriteType parameter with a value of read-only is invalid.
+// * Specify up to 500 values for all
+// conditions in all advanced event selectors for a trail.
+//
+// * Specify a valid value
+// for a parameter. For example, specifying the ReadWriteType parameter with a
+// value of read-only is invalid.
 type InvalidEventSelectorsException struct {
 	Message *string
 }
@@ -579,8 +608,9 @@ func (e *KmsKeyDisabledException) ErrorMessage() string {
 func (e *KmsKeyDisabledException) ErrorCode() string             { return "KmsKeyDisabledException" }
 func (e *KmsKeyDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the KMS key does not exist, or when the S3 bucket
-// and the KMS key are not in the same region.
+// This exception is thrown when the KMS key does not exist, when the S3 bucket and
+// the KMS key are not in the same region, or when the KMS key associated with the
+// SNS topic either does not exist or is not in the same region.
 type KmsKeyNotFoundException struct {
 	Message *string
 }

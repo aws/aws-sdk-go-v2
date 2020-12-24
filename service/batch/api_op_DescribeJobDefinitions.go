@@ -29,6 +29,7 @@ func (c *Client) DescribeJobDefinitions(ctx context.Context, params *DescribeJob
 	return out, nil
 }
 
+// Contains the parameters for DescribeJobDefinitions.
 type DescribeJobDefinitionsInput struct {
 
 	// The name of the job definition to describe.
@@ -43,7 +44,7 @@ type DescribeJobDefinitionsInput struct {
 	// maxResults results in a single page along with a nextToken response element. The
 	// remaining results of the initial request can be seen by sending another
 	// DescribeJobDefinitions request with the returned nextToken value. This value can
-	// be between 1 and 100. If this parameter is not used, then DescribeJobDefinitions
+	// be between 1 and 100. If this parameter isn't used, then DescribeJobDefinitions
 	// returns up to 100 results and a nextToken value if applicable.
 	MaxResults int32
 
@@ -51,12 +52,11 @@ type DescribeJobDefinitionsInput struct {
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
 	// returned the nextToken value. This value is null when there are no more results
-	// to return. This token should be treated as an opaque identifier that is only
-	// used to retrieve the next items in a list and not for other programmatic
-	// purposes.
+	// to return. This token should be treated as an opaque identifier that's only used
+	// to retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
-	// The status with which to filter job definitions.
+	// The status used to filter job definitions.
 	Status *string
 }
 
@@ -148,7 +148,7 @@ type DescribeJobDefinitionsPaginatorOptions struct {
 	// maxResults results in a single page along with a nextToken response element. The
 	// remaining results of the initial request can be seen by sending another
 	// DescribeJobDefinitions request with the returned nextToken value. This value can
-	// be between 1 and 100. If this parameter is not used, then DescribeJobDefinitions
+	// be between 1 and 100. If this parameter isn't used, then DescribeJobDefinitions
 	// returns up to 100 results and a nextToken value if applicable.
 	Limit int32
 

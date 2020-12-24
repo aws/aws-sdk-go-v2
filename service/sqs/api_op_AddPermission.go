@@ -38,7 +38,7 @@ import (
 // are integers starting from 1. For example, a parameter list with two elements
 // looks like this: &AttributeName.1=first&AttributeName.2=second Cross-account
 // permissions don't apply to this action. For more information, see Grant
-// Cross-Account Permissions to a Role and a User Name
+// cross-account permissions to a role and a user name
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 // in the Amazon Simple Queue Service Developer Guide.
 func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, optFns ...func(*Options)) (*AddPermissionOutput, error) {

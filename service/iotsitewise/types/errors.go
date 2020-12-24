@@ -181,3 +181,20 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You are not authorized.
+type UnauthorizedException struct {
+	Message *string
+}
+
+func (e *UnauthorizedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnauthorizedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
+func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

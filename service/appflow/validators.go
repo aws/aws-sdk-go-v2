@@ -410,64 +410,9 @@ func validateConnectorProfileCredentials(v *types.ConnectorProfileCredentials) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConnectorProfileCredentials"}
-	if v.ServiceNow != nil {
-		if err := validateServiceNowConnectorProfileCredentials(v.ServiceNow); err != nil {
-			invalidParams.AddNested("ServiceNow", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Amplitude != nil {
 		if err := validateAmplitudeConnectorProfileCredentials(v.Amplitude); err != nil {
 			invalidParams.AddNested("Amplitude", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Trendmicro != nil {
-		if err := validateTrendmicroConnectorProfileCredentials(v.Trendmicro); err != nil {
-			invalidParams.AddNested("Trendmicro", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Dynatrace != nil {
-		if err := validateDynatraceConnectorProfileCredentials(v.Dynatrace); err != nil {
-			invalidParams.AddNested("Dynatrace", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Zendesk != nil {
-		if err := validateZendeskConnectorProfileCredentials(v.Zendesk); err != nil {
-			invalidParams.AddNested("Zendesk", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.GoogleAnalytics != nil {
-		if err := validateGoogleAnalyticsConnectorProfileCredentials(v.GoogleAnalytics); err != nil {
-			invalidParams.AddNested("GoogleAnalytics", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Singular != nil {
-		if err := validateSingularConnectorProfileCredentials(v.Singular); err != nil {
-			invalidParams.AddNested("Singular", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Snowflake != nil {
-		if err := validateSnowflakeConnectorProfileCredentials(v.Snowflake); err != nil {
-			invalidParams.AddNested("Snowflake", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Redshift != nil {
-		if err := validateRedshiftConnectorProfileCredentials(v.Redshift); err != nil {
-			invalidParams.AddNested("Redshift", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.InforNexus != nil {
-		if err := validateInforNexusConnectorProfileCredentials(v.InforNexus); err != nil {
-			invalidParams.AddNested("InforNexus", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Slack != nil {
-		if err := validateSlackConnectorProfileCredentials(v.Slack); err != nil {
-			invalidParams.AddNested("Slack", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Marketo != nil {
-		if err := validateMarketoConnectorProfileCredentials(v.Marketo); err != nil {
-			invalidParams.AddNested("Marketo", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Datadog != nil {
@@ -475,9 +420,64 @@ func validateConnectorProfileCredentials(v *types.ConnectorProfileCredentials) e
 			invalidParams.AddNested("Datadog", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Dynatrace != nil {
+		if err := validateDynatraceConnectorProfileCredentials(v.Dynatrace); err != nil {
+			invalidParams.AddNested("Dynatrace", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GoogleAnalytics != nil {
+		if err := validateGoogleAnalyticsConnectorProfileCredentials(v.GoogleAnalytics); err != nil {
+			invalidParams.AddNested("GoogleAnalytics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InforNexus != nil {
+		if err := validateInforNexusConnectorProfileCredentials(v.InforNexus); err != nil {
+			invalidParams.AddNested("InforNexus", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Marketo != nil {
+		if err := validateMarketoConnectorProfileCredentials(v.Marketo); err != nil {
+			invalidParams.AddNested("Marketo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Redshift != nil {
+		if err := validateRedshiftConnectorProfileCredentials(v.Redshift); err != nil {
+			invalidParams.AddNested("Redshift", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServiceNow != nil {
+		if err := validateServiceNowConnectorProfileCredentials(v.ServiceNow); err != nil {
+			invalidParams.AddNested("ServiceNow", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Singular != nil {
+		if err := validateSingularConnectorProfileCredentials(v.Singular); err != nil {
+			invalidParams.AddNested("Singular", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Slack != nil {
+		if err := validateSlackConnectorProfileCredentials(v.Slack); err != nil {
+			invalidParams.AddNested("Slack", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Snowflake != nil {
+		if err := validateSnowflakeConnectorProfileCredentials(v.Snowflake); err != nil {
+			invalidParams.AddNested("Snowflake", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Trendmicro != nil {
+		if err := validateTrendmicroConnectorProfileCredentials(v.Trendmicro); err != nil {
+			invalidParams.AddNested("Trendmicro", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Veeva != nil {
 		if err := validateVeevaConnectorProfileCredentials(v.Veeva); err != nil {
 			invalidParams.AddNested("Veeva", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Zendesk != nil {
+		if err := validateZendeskConnectorProfileCredentials(v.Zendesk); err != nil {
+			invalidParams.AddNested("Zendesk", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -492,6 +492,36 @@ func validateConnectorProfileProperties(v *types.ConnectorProfileProperties) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConnectorProfileProperties"}
+	if v.Datadog != nil {
+		if err := validateDatadogConnectorProfileProperties(v.Datadog); err != nil {
+			invalidParams.AddNested("Datadog", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Dynatrace != nil {
+		if err := validateDynatraceConnectorProfileProperties(v.Dynatrace); err != nil {
+			invalidParams.AddNested("Dynatrace", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InforNexus != nil {
+		if err := validateInforNexusConnectorProfileProperties(v.InforNexus); err != nil {
+			invalidParams.AddNested("InforNexus", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Marketo != nil {
+		if err := validateMarketoConnectorProfileProperties(v.Marketo); err != nil {
+			invalidParams.AddNested("Marketo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Redshift != nil {
+		if err := validateRedshiftConnectorProfileProperties(v.Redshift); err != nil {
+			invalidParams.AddNested("Redshift", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServiceNow != nil {
+		if err := validateServiceNowConnectorProfileProperties(v.ServiceNow); err != nil {
+			invalidParams.AddNested("ServiceNow", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Slack != nil {
 		if err := validateSlackConnectorProfileProperties(v.Slack); err != nil {
 			invalidParams.AddNested("Slack", err.(smithy.InvalidParamsError))
@@ -507,39 +537,9 @@ func validateConnectorProfileProperties(v *types.ConnectorProfileProperties) err
 			invalidParams.AddNested("Veeva", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Marketo != nil {
-		if err := validateMarketoConnectorProfileProperties(v.Marketo); err != nil {
-			invalidParams.AddNested("Marketo", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Datadog != nil {
-		if err := validateDatadogConnectorProfileProperties(v.Datadog); err != nil {
-			invalidParams.AddNested("Datadog", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Redshift != nil {
-		if err := validateRedshiftConnectorProfileProperties(v.Redshift); err != nil {
-			invalidParams.AddNested("Redshift", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ServiceNow != nil {
-		if err := validateServiceNowConnectorProfileProperties(v.ServiceNow); err != nil {
-			invalidParams.AddNested("ServiceNow", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.InforNexus != nil {
-		if err := validateInforNexusConnectorProfileProperties(v.InforNexus); err != nil {
-			invalidParams.AddNested("InforNexus", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Zendesk != nil {
 		if err := validateZendeskConnectorProfileProperties(v.Zendesk); err != nil {
 			invalidParams.AddNested("Zendesk", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Dynatrace != nil {
-		if err := validateDynatraceConnectorProfileProperties(v.Dynatrace); err != nil {
-			invalidParams.AddNested("Dynatrace", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -602,19 +602,14 @@ func validateDestinationConnectorProperties(v *types.DestinationConnectorPropert
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DestinationConnectorProperties"}
-	if v.EventBridge != nil {
-		if err := validateEventBridgeDestinationProperties(v.EventBridge); err != nil {
-			invalidParams.AddNested("EventBridge", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Snowflake != nil {
-		if err := validateSnowflakeDestinationProperties(v.Snowflake); err != nil {
-			invalidParams.AddNested("Snowflake", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Redshift != nil {
 		if err := validateRedshiftDestinationProperties(v.Redshift); err != nil {
 			invalidParams.AddNested("Redshift", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3 != nil {
+		if err := validateS3DestinationProperties(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Salesforce != nil {
@@ -622,9 +617,19 @@ func validateDestinationConnectorProperties(v *types.DestinationConnectorPropert
 			invalidParams.AddNested("Salesforce", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.S3 != nil {
-		if err := validateS3DestinationProperties(v.S3); err != nil {
-			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+	if v.Snowflake != nil {
+		if err := validateSnowflakeDestinationProperties(v.Snowflake); err != nil {
+			invalidParams.AddNested("Snowflake", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EventBridge != nil {
+		if err := validateEventBridgeDestinationProperties(v.EventBridge); err != nil {
+			invalidParams.AddNested("EventBridge", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Upsolver != nil {
+		if err := validateUpsolverDestinationProperties(v.Upsolver); err != nil {
+			invalidParams.AddNested("Upsolver", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -639,15 +644,15 @@ func validateDestinationFlowConfig(v *types.DestinationFlowConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DestinationFlowConfig"}
+	if len(v.ConnectorType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorType"))
+	}
 	if v.DestinationConnectorProperties == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationConnectorProperties"))
 	} else if v.DestinationConnectorProperties != nil {
 		if err := validateDestinationConnectorProperties(v.DestinationConnectorProperties); err != nil {
 			invalidParams.AddNested("DestinationConnectorProperties", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.ConnectorType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ConnectorType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -771,17 +776,17 @@ func validateInforNexusConnectorProfileCredentials(v *types.InforNexusConnectorP
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InforNexusConnectorProfileCredentials"}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if v.AccessKeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccessKeyId"))
 	}
-	if v.Datakey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Datakey"))
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if v.SecretAccessKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecretAccessKey"))
+	}
+	if v.Datakey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Datakey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -825,11 +830,11 @@ func validateMarketoConnectorProfileCredentials(v *types.MarketoConnectorProfile
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MarketoConnectorProfileCredentials"}
-	if v.ClientSecret == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
-	}
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.ClientSecret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -891,14 +896,14 @@ func validateRedshiftConnectorProfileProperties(v *types.RedshiftConnectorProfil
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RedshiftConnectorProfileProperties"}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	if v.DatabaseUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseUrl"))
 	}
 	if v.BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
 	}
-	if v.DatabaseUrl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseUrl"))
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1131,11 +1136,11 @@ func validateSnowflakeConnectorProfileCredentials(v *types.SnowflakeConnectorPro
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SnowflakeConnectorProfileCredentials"}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
-	}
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1149,14 +1154,14 @@ func validateSnowflakeConnectorProfileProperties(v *types.SnowflakeConnectorProf
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SnowflakeConnectorProfileProperties"}
+	if v.Warehouse == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Warehouse"))
+	}
 	if v.Stage == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Stage"))
 	}
 	if v.BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
-	}
-	if v.Warehouse == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Warehouse"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1188,29 +1193,14 @@ func validateSourceConnectorProperties(v *types.SourceConnectorProperties) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SourceConnectorProperties"}
-	if v.S3 != nil {
-		if err := validateS3SourceProperties(v.S3); err != nil {
-			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Amplitude != nil {
 		if err := validateAmplitudeSourceProperties(v.Amplitude); err != nil {
 			invalidParams.AddNested("Amplitude", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ServiceNow != nil {
-		if err := validateServiceNowSourceProperties(v.ServiceNow); err != nil {
-			invalidParams.AddNested("ServiceNow", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Zendesk != nil {
-		if err := validateZendeskSourceProperties(v.Zendesk); err != nil {
-			invalidParams.AddNested("Zendesk", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Veeva != nil {
-		if err := validateVeevaSourceProperties(v.Veeva); err != nil {
-			invalidParams.AddNested("Veeva", err.(smithy.InvalidParamsError))
+	if v.Datadog != nil {
+		if err := validateDatadogSourceProperties(v.Datadog); err != nil {
+			invalidParams.AddNested("Datadog", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Dynatrace != nil {
@@ -1218,9 +1208,9 @@ func validateSourceConnectorProperties(v *types.SourceConnectorProperties) error
 			invalidParams.AddNested("Dynatrace", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Trendmicro != nil {
-		if err := validateTrendmicroSourceProperties(v.Trendmicro); err != nil {
-			invalidParams.AddNested("Trendmicro", err.(smithy.InvalidParamsError))
+	if v.GoogleAnalytics != nil {
+		if err := validateGoogleAnalyticsSourceProperties(v.GoogleAnalytics); err != nil {
+			invalidParams.AddNested("GoogleAnalytics", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.InforNexus != nil {
@@ -1233,14 +1223,19 @@ func validateSourceConnectorProperties(v *types.SourceConnectorProperties) error
 			invalidParams.AddNested("Marketo", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Datadog != nil {
-		if err := validateDatadogSourceProperties(v.Datadog); err != nil {
-			invalidParams.AddNested("Datadog", err.(smithy.InvalidParamsError))
+	if v.S3 != nil {
+		if err := validateS3SourceProperties(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Salesforce != nil {
 		if err := validateSalesforceSourceProperties(v.Salesforce); err != nil {
 			invalidParams.AddNested("Salesforce", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServiceNow != nil {
+		if err := validateServiceNowSourceProperties(v.ServiceNow); err != nil {
+			invalidParams.AddNested("ServiceNow", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Singular != nil {
@@ -1253,9 +1248,19 @@ func validateSourceConnectorProperties(v *types.SourceConnectorProperties) error
 			invalidParams.AddNested("Slack", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.GoogleAnalytics != nil {
-		if err := validateGoogleAnalyticsSourceProperties(v.GoogleAnalytics); err != nil {
-			invalidParams.AddNested("GoogleAnalytics", err.(smithy.InvalidParamsError))
+	if v.Trendmicro != nil {
+		if err := validateTrendmicroSourceProperties(v.Trendmicro); err != nil {
+			invalidParams.AddNested("Trendmicro", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Veeva != nil {
+		if err := validateVeevaSourceProperties(v.Veeva); err != nil {
+			invalidParams.AddNested("Veeva", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Zendesk != nil {
+		if err := validateZendeskSourceProperties(v.Zendesk); err != nil {
+			invalidParams.AddNested("Zendesk", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1292,11 +1297,11 @@ func validateTask(v *types.Task) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Task"}
-	if len(v.TaskType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TaskType"))
-	}
 	if v.SourceFields == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceFields"))
+	}
+	if len(v.TaskType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1357,13 +1362,13 @@ func validateTriggerConfig(v *types.TriggerConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TriggerConfig"}
+	if len(v.TriggerType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TriggerType"))
+	}
 	if v.TriggerProperties != nil {
 		if err := validateTriggerProperties(v.TriggerProperties); err != nil {
 			invalidParams.AddNested("TriggerProperties", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.TriggerType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TriggerType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1381,6 +1386,43 @@ func validateTriggerProperties(v *types.TriggerProperties) error {
 		if err := validateScheduledTriggerProperties(v.Scheduled); err != nil {
 			invalidParams.AddNested("Scheduled", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpsolverDestinationProperties(v *types.UpsolverDestinationProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpsolverDestinationProperties"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.S3OutputFormatConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3OutputFormatConfig"))
+	} else if v.S3OutputFormatConfig != nil {
+		if err := validateUpsolverS3OutputFormatConfig(v.S3OutputFormatConfig); err != nil {
+			invalidParams.AddNested("S3OutputFormatConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpsolverS3OutputFormatConfig(v *types.UpsolverS3OutputFormatConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpsolverS3OutputFormatConfig"}
+	if v.PrefixConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrefixConfig"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1496,15 +1538,15 @@ func validateOpCreateConnectorProfileInput(v *CreateConnectorProfileInput) error
 	if len(v.ConnectorType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectorType"))
 	}
+	if len(v.ConnectionMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionMode"))
+	}
 	if v.ConnectorProfileConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectorProfileConfig"))
 	} else if v.ConnectorProfileConfig != nil {
 		if err := validateConnectorProfileConfig(v.ConnectorProfileConfig); err != nil {
 			invalidParams.AddNested("ConnectorProfileConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.ConnectionMode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ConnectionMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1518,11 +1560,14 @@ func validateOpCreateFlowInput(v *CreateFlowInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFlowInput"}
-	if v.DestinationFlowConfigList == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationFlowConfigList"))
-	} else if v.DestinationFlowConfigList != nil {
-		if err := validateDestinationFlowConfigList(v.DestinationFlowConfigList); err != nil {
-			invalidParams.AddNested("DestinationFlowConfigList", err.(smithy.InvalidParamsError))
+	if v.FlowName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowName"))
+	}
+	if v.TriggerConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TriggerConfig"))
+	} else if v.TriggerConfig != nil {
+		if err := validateTriggerConfig(v.TriggerConfig); err != nil {
+			invalidParams.AddNested("TriggerConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SourceFlowConfig == nil {
@@ -1532,15 +1577,12 @@ func validateOpCreateFlowInput(v *CreateFlowInput) error {
 			invalidParams.AddNested("SourceFlowConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.TriggerConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TriggerConfig"))
-	} else if v.TriggerConfig != nil {
-		if err := validateTriggerConfig(v.TriggerConfig); err != nil {
-			invalidParams.AddNested("TriggerConfig", err.(smithy.InvalidParamsError))
+	if v.DestinationFlowConfigList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationFlowConfigList"))
+	} else if v.DestinationFlowConfigList != nil {
+		if err := validateDestinationFlowConfigList(v.DestinationFlowConfigList); err != nil {
+			invalidParams.AddNested("DestinationFlowConfigList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.FlowName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FlowName"))
 	}
 	if v.Tasks == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tasks"))
@@ -1717,6 +1759,9 @@ func validateOpUpdateConnectorProfileInput(v *UpdateConnectorProfileInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectorProfileInput"}
+	if v.ConnectorProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorProfileName"))
+	}
 	if len(v.ConnectionMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionMode"))
 	}
@@ -1726,9 +1771,6 @@ func validateOpUpdateConnectorProfileInput(v *UpdateConnectorProfileInput) error
 		if err := validateConnectorProfileConfig(v.ConnectorProfileConfig); err != nil {
 			invalidParams.AddNested("ConnectorProfileConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ConnectorProfileName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConnectorProfileName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

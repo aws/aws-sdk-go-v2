@@ -49,7 +49,7 @@ type ListTrafficPolicyInstancesByHostedZoneInput struct {
 	// HostedZoneIdMarker, TrafficPolicyInstanceNameMarker, and
 	// TrafficPolicyInstanceTypeMarker represent the first traffic policy instance that
 	// Amazon Route 53 will return if you submit another request.
-	MaxItems *string
+	MaxItems *int32
 
 	// If the value of IsTruncated in the previous response is true, you have more
 	// traffic policy instances. To get more traffic policy instances, submit another
@@ -88,7 +88,7 @@ type ListTrafficPolicyInstancesByHostedZoneOutput struct {
 	// response.
 	//
 	// This member is required.
-	MaxItems *string
+	MaxItems *int32
 
 	// A list that contains one TrafficPolicyInstance element for each traffic policy
 	// instance that matches the elements in the request.

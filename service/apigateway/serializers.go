@@ -99,6 +99,11 @@ func awsRestjson1_serializeOpDocumentCreateApiKeyInput(v *CreateApiKeyInput, val
 		ok.Boolean(v.GenerateDistinctId)
 	}
 
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
 	if v.StageKeys != nil {
 		ok := object.Key("stageKeys")
 		if err := awsRestjson1_serializeDocumentListOfStageKeys(v.StageKeys, ok); err != nil {
@@ -227,6 +232,11 @@ func awsRestjson1_serializeOpDocumentCreateAuthorizerInput(v *CreateAuthorizerIn
 	if v.IdentityValidationExpression != nil {
 		ok := object.Key("identityValidationExpression")
 		ok.String(*v.IdentityValidationExpression)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
 	}
 
 	if v.ProviderARNs != nil {
@@ -876,6 +886,11 @@ func awsRestjson1_serializeOpDocumentCreateModelInput(v *CreateModelInput, value
 		ok.String(*v.Description)
 	}
 
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
 	if v.Schema != nil {
 		ok := object.Key("schema")
 		ok.String(*v.Schema)
@@ -961,6 +976,11 @@ func awsRestjson1_serializeOpHttpBindingsCreateRequestValidatorInput(v *CreateRe
 func awsRestjson1_serializeOpDocumentCreateRequestValidatorInput(v *CreateRequestValidatorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
 
 	if v.ValidateRequestBody {
 		ok := object.Key("validateRequestBody")
@@ -1172,6 +1192,11 @@ func awsRestjson1_serializeOpDocumentCreateRestApiInput(v *CreateRestApiInput, v
 	if v.MinimumCompressionSize != nil {
 		ok := object.Key("minimumCompressionSize")
 		ok.Integer(*v.MinimumCompressionSize)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
 	}
 
 	if v.Policy != nil {
@@ -1408,6 +1433,11 @@ func awsRestjson1_serializeOpDocumentCreateUsagePlanInput(v *CreateUsagePlanInpu
 		ok.String(*v.Description)
 	}
 
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
 	if v.Quota != nil {
 		ok := object.Key("quota")
 		if err := awsRestjson1_serializeDocumentQuotaSettings(v.Quota, ok); err != nil {
@@ -1591,6 +1621,11 @@ func awsRestjson1_serializeOpDocumentCreateVpcLinkInput(v *CreateVpcLinkInput, v
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
 	}
 
 	if v.Tags != nil {

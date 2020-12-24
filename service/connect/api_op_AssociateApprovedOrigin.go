@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Associates an approved origin to an Amazon Connect instance.
 func (c *Client) AssociateApprovedOrigin(ctx context.Context, params *AssociateApprovedOriginInput, optFns ...func(*Options)) (*AssociateApprovedOriginOutput, error) {
 	if params == nil {

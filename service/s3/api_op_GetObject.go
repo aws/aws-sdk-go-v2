@@ -35,9 +35,10 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3Torrent.html). For more
 // information about returning the ACL of an object, see GetObjectAcl
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html). If the
-// object you are retrieving is stored in the GLACIER or DEEP_ARCHIVE storage
-// classes, before you can retrieve the object you must first restore a copy using
-// RestoreObject
+// object you are retrieving is stored in the S3 Glacier or S3 Glacier Deep Archive
+// storage class, or S3 Intelligent-Tiering Archive or S3 Intelligent-Tiering Deep
+// Archive tiers, before you can retrieve the object you must first restore a copy
+// using RestoreObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html).
 // Otherwise, this operation returns an InvalidObjectStateError error. For
 // information about restoring archived objects, see Restoring Archived Objects
@@ -261,6 +262,10 @@ type GetObjectOutput struct {
 
 	// Object data.
 	Body io.ReadCloser
+
+	// Indicates whether the object uses an S3 Bucket Key for server-side encryption
+	// with AWS KMS (SSE-KMS).
+	BucketKeyEnabled bool
 
 	// Specifies caching behavior along the request/reply chain.
 	CacheControl *string

@@ -23,8 +23,7 @@ type AppliedTerminology struct {
 	Terms []Term
 }
 
-// The encryption key used to encrypt the custom terminologies used by Amazon
-// Translate.
+// The encryption key used to encrypt this object.
 type EncryptionKey struct {
 
 	// The Amazon Resource Name (ARN) of the encryption key being used to encrypt the
@@ -104,6 +103,100 @@ type OutputDataConfig struct {
 	//
 	// This member is required.
 	S3Uri *string
+}
+
+// Specifies the format and S3 location of the parallel data input file.
+type ParallelDataConfig struct {
+
+	// The format of the parallel data input file.
+	//
+	// This member is required.
+	Format ParallelDataFormat
+
+	// The URI of the Amazon S3 folder that contains the parallel data input file. The
+	// folder must be in the same Region as the API endpoint you are calling.
+	//
+	// This member is required.
+	S3Uri *string
+}
+
+// The location of the most recent parallel data input file that was successfully
+// imported into Amazon Translate.
+type ParallelDataDataLocation struct {
+
+	// The Amazon S3 location of the parallel data input file. The location is returned
+	// as a presigned URL to that has a 30 minute expiration.
+	//
+	// This member is required.
+	Location *string
+
+	// Describes the repository that contains the parallel data input file.
+	//
+	// This member is required.
+	RepositoryType *string
+}
+
+// The properties of a parallel data resource.
+type ParallelDataProperties struct {
+
+	// The Amazon Resource Name (ARN) of the parallel data resource.
+	Arn *string
+
+	// The time at which the parallel data resource was created.
+	CreatedAt *time.Time
+
+	// The description assigned to the parallel data resource.
+	Description *string
+
+	// The encryption key used to encrypt this object.
+	EncryptionKey *EncryptionKey
+
+	// The number of records unsuccessfully imported from the parallel data input file.
+	FailedRecordCount *int64
+
+	// The number of UTF-8 characters that Amazon Translate imported from the parallel
+	// data input file. This number includes only the characters in your translation
+	// examples. It does not include characters that are used to format your file. For
+	// example, if you provided a Translation Memory Exchange (.tmx) file, this number
+	// does not include the tags.
+	ImportedDataSize *int64
+
+	// The number of records successfully imported from the parallel data input file.
+	ImportedRecordCount *int64
+
+	// The time at which the parallel data resource was last updated.
+	LastUpdatedAt *time.Time
+
+	// The time that the most recent update was attempted.
+	LatestUpdateAttemptAt *time.Time
+
+	// The status of the most recent update attempt for the parallel data resource.
+	LatestUpdateAttemptStatus ParallelDataStatus
+
+	// Additional information from Amazon Translate about the parallel data resource.
+	Message *string
+
+	// The custom name assigned to the parallel data resource.
+	Name *string
+
+	// Specifies the format and S3 location of the parallel data input file.
+	ParallelDataConfig *ParallelDataConfig
+
+	// The number of items in the input file that Amazon Translate skipped when you
+	// created or updated the parallel data resource. For example, Amazon Translate
+	// skips empty records, empty target texts, and empty lines.
+	SkippedRecordCount *int64
+
+	// The source language of the translations in the parallel data file.
+	SourceLanguageCode *string
+
+	// The status of the parallel data resource. When the parallel data is ready for
+	// you to use, the status is ACTIVE.
+	Status ParallelDataStatus
+
+	// The language codes for the target languages available in the parallel data file.
+	// All possible target languages are returned as an array.
+	TargetLanguageCodes []string
 }
 
 // The term being translated by the custom terminology.
@@ -237,6 +330,10 @@ type TextTranslationJobProperties struct {
 	// The output configuration properties that were specified when the job was
 	// requested.
 	OutputDataConfig *OutputDataConfig
+
+	// A list containing the names of the parallel data resources applied to the
+	// translation job.
+	ParallelDataNames []string
 
 	// The language code of the language of the source text. The language must be a
 	// language supported by Amazon Translate.

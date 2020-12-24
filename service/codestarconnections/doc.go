@@ -3,8 +3,7 @@
 // Package codestarconnections provides the API client, operations, and parameter
 // types for AWS CodeStar connections.
 //
-// AWS CodeStar Connections The CodeStar Connections feature is in preview release
-// and is subject to change. This AWS CodeStar Connections API Reference provides
+// AWS CodeStar Connections This AWS CodeStar Connections API Reference provides
 // descriptions and usage examples of the operations and data types for the AWS
 // CodeStar Connections API. You can use the connections API to work with
 // connections and installations. Connections are configurations that you use to
@@ -16,11 +15,11 @@
 // associated with a unique ARN that is used to reference the connection. When you
 // create a connection, the console initiates a third-party connection handshake.
 // Installations are the apps that are used to conduct this handshake. For example,
-// the installation for the Bitbucket provider type is the Bitbucket Cloud app.
-// When you create a connection, you can choose an existing installation or create
-// one. When you want to create a connection to an installed provider type such as
-// GitHub Enterprise Server, you create a host for your connections. You can work
-// with connections by calling:
+// the installation for the Bitbucket provider type is the Bitbucket app. When you
+// create a connection, you can choose an existing installation or create one. When
+// you want to create a connection to an installed provider type such as GitHub
+// Enterprise Server, you create a host for your connections. You can work with
+// connections by calling:
 //
 // * CreateConnection, which creates a uniquely named
 // connection that can be referenced by services such as CodePipeline.

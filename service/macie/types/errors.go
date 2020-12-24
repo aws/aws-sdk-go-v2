@@ -50,8 +50,8 @@ func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type InvalidInputException struct {
 	Message *string
 
-	FieldName  *string
 	ErrorCode_ *string
+	FieldName  *string
 }
 
 func (e *InvalidInputException) Error() string {

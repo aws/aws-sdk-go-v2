@@ -3919,13 +3919,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "WINDOWS"
+                        "value": "WINDOWS",
+                        "name": "WINDOWS"
                     },
                     {
-                        "value": "WINDOWS_SERVER_2016"
+                        "value": "WINDOWS_SERVER_2016",
+                        "name": "WINDOWS_SERVER_2016"
                     },
                     {
-                        "value": "WINDOWS_SERVER_2019"
+                        "value": "WINDOWS_SERVER_2019",
+                        "name": "WINDOWS_SERVER_2019"
                     }
                 ]
             }

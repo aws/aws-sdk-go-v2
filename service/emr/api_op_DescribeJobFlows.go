@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// This API is deprecated and will eventually be removed. We recommend you use
-// ListClusters, DescribeCluster, ListSteps, ListInstanceGroups and
+// This API is no longer supported and will eventually be removed. We recommend you
+// use ListClusters, DescribeCluster, ListSteps, ListInstanceGroups and
 // ListBootstrapActions instead. DescribeJobFlows returns a list of job flows that
 // match all of the supplied parameters. The parameters can include a list of job
 // flow IDs, job flow states, and restrictions on job flow creation date and time.

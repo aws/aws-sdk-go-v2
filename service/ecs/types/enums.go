@@ -87,6 +87,9 @@ const (
 	CapacityProviderUpdateStatusDeleteInProgress CapacityProviderUpdateStatus = "DELETE_IN_PROGRESS"
 	CapacityProviderUpdateStatusDeleteComplete   CapacityProviderUpdateStatus = "DELETE_COMPLETE"
 	CapacityProviderUpdateStatusDeleteFailed     CapacityProviderUpdateStatus = "DELETE_FAILED"
+	CapacityProviderUpdateStatusUpdateInProgress CapacityProviderUpdateStatus = "UPDATE_IN_PROGRESS"
+	CapacityProviderUpdateStatusUpdateComplete   CapacityProviderUpdateStatus = "UPDATE_COMPLETE"
+	CapacityProviderUpdateStatusUpdateFailed     CapacityProviderUpdateStatus = "UPDATE_FAILED"
 )
 
 // Values returns all known values for CapacityProviderUpdateStatus. Note that this
@@ -97,6 +100,9 @@ func (CapacityProviderUpdateStatus) Values() []CapacityProviderUpdateStatus {
 		"DELETE_IN_PROGRESS",
 		"DELETE_COMPLETE",
 		"DELETE_FAILED",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_COMPLETE",
+		"UPDATE_FAILED",
 	}
 }
 
@@ -253,6 +259,26 @@ func (DeploymentControllerType) Values() []DeploymentControllerType {
 		"ECS",
 		"CODE_DEPLOY",
 		"EXTERNAL",
+	}
+}
+
+type DeploymentRolloutState string
+
+// Enum values for DeploymentRolloutState
+const (
+	DeploymentRolloutStateCompleted  DeploymentRolloutState = "COMPLETED"
+	DeploymentRolloutStateFailed     DeploymentRolloutState = "FAILED"
+	DeploymentRolloutStateInProgress DeploymentRolloutState = "IN_PROGRESS"
+)
+
+// Values returns all known values for DeploymentRolloutState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentRolloutState) Values() []DeploymentRolloutState {
+	return []DeploymentRolloutState{
+		"COMPLETED",
+		"FAILED",
+		"IN_PROGRESS",
 	}
 }
 

@@ -1352,19 +1352,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PENDING_UPDATE"
+                        "value": "PENDING_UPDATE",
+                        "name": "PENDING_UPDATE"
                     },
                     {
-                        "value": "IN_PROGRESS"
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
                     },
                     {
-                        "value": "COMPLETED"
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
                     },
                     {
-                        "value": "NOT_ELIGIBLE"
+                        "value": "NOT_ELIGIBLE",
+                        "name": "NOT_ELIGIBLE"
                     },
                     {
-                        "value": "ELIGIBLE"
+                        "value": "ELIGIBLE",
+                        "name": "ELIGIBLE"
                     }
                 ]
             }
@@ -2392,19 +2397,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ASSOCIATING"
+                        "value": "ASSOCIATING",
+                        "name": "ASSOCIATING"
                     },
                     {
-                        "value": "ASSOCIATION_FAILED"
+                        "value": "ASSOCIATION_FAILED",
+                        "name": "ASSOCIATION_FAILED"
                     },
                     {
-                        "value": "ACTIVE"
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
                     },
                     {
-                        "value": "DISSOCIATING"
+                        "value": "DISSOCIATING",
+                        "name": "DISSOCIATING"
                     },
                     {
-                        "value": "DISSOCIATION_FAILED"
+                        "value": "DISSOCIATION_FAILED",
+                        "name": "DISSOCIATION_FAILED"
                     }
                 ]
             }
@@ -2474,178 +2484,236 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "m3.medium.elasticsearch"
+                        "value": "m3.medium.elasticsearch",
+                        "name": "m3_medium_elasticsearch"
                     },
                     {
-                        "value": "m3.large.elasticsearch"
+                        "value": "m3.large.elasticsearch",
+                        "name": "m3_large_elasticsearch"
                     },
                     {
-                        "value": "m3.xlarge.elasticsearch"
+                        "value": "m3.xlarge.elasticsearch",
+                        "name": "m3_xlarge_elasticsearch"
                     },
                     {
-                        "value": "m3.2xlarge.elasticsearch"
+                        "value": "m3.2xlarge.elasticsearch",
+                        "name": "m3_2xlarge_elasticsearch"
                     },
                     {
-                        "value": "m4.large.elasticsearch"
+                        "value": "m4.large.elasticsearch",
+                        "name": "m4_large_elasticsearch"
                     },
                     {
-                        "value": "m4.xlarge.elasticsearch"
+                        "value": "m4.xlarge.elasticsearch",
+                        "name": "m4_xlarge_elasticsearch"
                     },
                     {
-                        "value": "m4.2xlarge.elasticsearch"
+                        "value": "m4.2xlarge.elasticsearch",
+                        "name": "m4_2xlarge_elasticsearch"
                     },
                     {
-                        "value": "m4.4xlarge.elasticsearch"
+                        "value": "m4.4xlarge.elasticsearch",
+                        "name": "m4_4xlarge_elasticsearch"
                     },
                     {
-                        "value": "m4.10xlarge.elasticsearch"
+                        "value": "m4.10xlarge.elasticsearch",
+                        "name": "m4_10xlarge_elasticsearch"
                     },
                     {
-                        "value": "m5.large.elasticsearch"
+                        "value": "m5.large.elasticsearch",
+                        "name": "m5_large_elasticsearch"
                     },
                     {
-                        "value": "m5.xlarge.elasticsearch"
+                        "value": "m5.xlarge.elasticsearch",
+                        "name": "m5_xlarge_elasticsearch"
                     },
                     {
-                        "value": "m5.2xlarge.elasticsearch"
+                        "value": "m5.2xlarge.elasticsearch",
+                        "name": "m5_2xlarge_elasticsearch"
                     },
                     {
-                        "value": "m5.4xlarge.elasticsearch"
+                        "value": "m5.4xlarge.elasticsearch",
+                        "name": "m5_4xlarge_elasticsearch"
                     },
                     {
-                        "value": "m5.12xlarge.elasticsearch"
+                        "value": "m5.12xlarge.elasticsearch",
+                        "name": "m5_12xlarge_elasticsearch"
                     },
                     {
-                        "value": "r5.large.elasticsearch"
+                        "value": "r5.large.elasticsearch",
+                        "name": "r5_large_elasticsearch"
                     },
                     {
-                        "value": "r5.xlarge.elasticsearch"
+                        "value": "r5.xlarge.elasticsearch",
+                        "name": "r5_xlarge_elasticsearch"
                     },
                     {
-                        "value": "r5.2xlarge.elasticsearch"
+                        "value": "r5.2xlarge.elasticsearch",
+                        "name": "r5_2xlarge_elasticsearch"
                     },
                     {
-                        "value": "r5.4xlarge.elasticsearch"
+                        "value": "r5.4xlarge.elasticsearch",
+                        "name": "r5_4xlarge_elasticsearch"
                     },
                     {
-                        "value": "r5.12xlarge.elasticsearch"
+                        "value": "r5.12xlarge.elasticsearch",
+                        "name": "r5_12xlarge_elasticsearch"
                     },
                     {
-                        "value": "c5.large.elasticsearch"
+                        "value": "c5.large.elasticsearch",
+                        "name": "c5_large_elasticsearch"
                     },
                     {
-                        "value": "c5.xlarge.elasticsearch"
+                        "value": "c5.xlarge.elasticsearch",
+                        "name": "c5_xlarge_elasticsearch"
                     },
                     {
-                        "value": "c5.2xlarge.elasticsearch"
+                        "value": "c5.2xlarge.elasticsearch",
+                        "name": "c5_2xlarge_elasticsearch"
                     },
                     {
-                        "value": "c5.4xlarge.elasticsearch"
+                        "value": "c5.4xlarge.elasticsearch",
+                        "name": "c5_4xlarge_elasticsearch"
                     },
                     {
-                        "value": "c5.9xlarge.elasticsearch"
+                        "value": "c5.9xlarge.elasticsearch",
+                        "name": "c5_9xlarge_elasticsearch"
                     },
                     {
-                        "value": "c5.18xlarge.elasticsearch"
+                        "value": "c5.18xlarge.elasticsearch",
+                        "name": "c5_18xlarge_elasticsearch"
                     },
                     {
-                        "value": "ultrawarm1.medium.elasticsearch"
+                        "value": "ultrawarm1.medium.elasticsearch",
+                        "name": "ultrawarm1_medium_elasticsearch"
                     },
                     {
-                        "value": "ultrawarm1.large.elasticsearch"
+                        "value": "ultrawarm1.large.elasticsearch",
+                        "name": "ultrawarm1_large_elasticsearch"
                     },
                     {
-                        "value": "t2.micro.elasticsearch"
+                        "value": "t2.micro.elasticsearch",
+                        "name": "t2_micro_elasticsearch"
                     },
                     {
-                        "value": "t2.small.elasticsearch"
+                        "value": "t2.small.elasticsearch",
+                        "name": "t2_small_elasticsearch"
                     },
                     {
-                        "value": "t2.medium.elasticsearch"
+                        "value": "t2.medium.elasticsearch",
+                        "name": "t2_medium_elasticsearch"
                     },
                     {
-                        "value": "r3.large.elasticsearch"
+                        "value": "r3.large.elasticsearch",
+                        "name": "r3_large_elasticsearch"
                     },
                     {
-                        "value": "r3.xlarge.elasticsearch"
+                        "value": "r3.xlarge.elasticsearch",
+                        "name": "r3_xlarge_elasticsearch"
                     },
                     {
-                        "value": "r3.2xlarge.elasticsearch"
+                        "value": "r3.2xlarge.elasticsearch",
+                        "name": "r3_2xlarge_elasticsearch"
                     },
                     {
-                        "value": "r3.4xlarge.elasticsearch"
+                        "value": "r3.4xlarge.elasticsearch",
+                        "name": "r3_4xlarge_elasticsearch"
                     },
                     {
-                        "value": "r3.8xlarge.elasticsearch"
+                        "value": "r3.8xlarge.elasticsearch",
+                        "name": "r3_8xlarge_elasticsearch"
                     },
                     {
-                        "value": "i2.xlarge.elasticsearch"
+                        "value": "i2.xlarge.elasticsearch",
+                        "name": "i2_xlarge_elasticsearch"
                     },
                     {
-                        "value": "i2.2xlarge.elasticsearch"
+                        "value": "i2.2xlarge.elasticsearch",
+                        "name": "i2_2xlarge_elasticsearch"
                     },
                     {
-                        "value": "d2.xlarge.elasticsearch"
+                        "value": "d2.xlarge.elasticsearch",
+                        "name": "d2_xlarge_elasticsearch"
                     },
                     {
-                        "value": "d2.2xlarge.elasticsearch"
+                        "value": "d2.2xlarge.elasticsearch",
+                        "name": "d2_2xlarge_elasticsearch"
                     },
                     {
-                        "value": "d2.4xlarge.elasticsearch"
+                        "value": "d2.4xlarge.elasticsearch",
+                        "name": "d2_4xlarge_elasticsearch"
                     },
                     {
-                        "value": "d2.8xlarge.elasticsearch"
+                        "value": "d2.8xlarge.elasticsearch",
+                        "name": "d2_8xlarge_elasticsearch"
                     },
                     {
-                        "value": "c4.large.elasticsearch"
+                        "value": "c4.large.elasticsearch",
+                        "name": "c4_large_elasticsearch"
                     },
                     {
-                        "value": "c4.xlarge.elasticsearch"
+                        "value": "c4.xlarge.elasticsearch",
+                        "name": "c4_xlarge_elasticsearch"
                     },
                     {
-                        "value": "c4.2xlarge.elasticsearch"
+                        "value": "c4.2xlarge.elasticsearch",
+                        "name": "c4_2xlarge_elasticsearch"
                     },
                     {
-                        "value": "c4.4xlarge.elasticsearch"
+                        "value": "c4.4xlarge.elasticsearch",
+                        "name": "c4_4xlarge_elasticsearch"
                     },
                     {
-                        "value": "c4.8xlarge.elasticsearch"
+                        "value": "c4.8xlarge.elasticsearch",
+                        "name": "c4_8xlarge_elasticsearch"
                     },
                     {
-                        "value": "r4.large.elasticsearch"
+                        "value": "r4.large.elasticsearch",
+                        "name": "r4_large_elasticsearch"
                     },
                     {
-                        "value": "r4.xlarge.elasticsearch"
+                        "value": "r4.xlarge.elasticsearch",
+                        "name": "r4_xlarge_elasticsearch"
                     },
                     {
-                        "value": "r4.2xlarge.elasticsearch"
+                        "value": "r4.2xlarge.elasticsearch",
+                        "name": "r4_2xlarge_elasticsearch"
                     },
                     {
-                        "value": "r4.4xlarge.elasticsearch"
+                        "value": "r4.4xlarge.elasticsearch",
+                        "name": "r4_4xlarge_elasticsearch"
                     },
                     {
-                        "value": "r4.8xlarge.elasticsearch"
+                        "value": "r4.8xlarge.elasticsearch",
+                        "name": "r4_8xlarge_elasticsearch"
                     },
                     {
-                        "value": "r4.16xlarge.elasticsearch"
+                        "value": "r4.16xlarge.elasticsearch",
+                        "name": "r4_16xlarge_elasticsearch"
                     },
                     {
-                        "value": "i3.large.elasticsearch"
+                        "value": "i3.large.elasticsearch",
+                        "name": "i3_large_elasticsearch"
                     },
                     {
-                        "value": "i3.xlarge.elasticsearch"
+                        "value": "i3.xlarge.elasticsearch",
+                        "name": "i3_xlarge_elasticsearch"
                     },
                     {
-                        "value": "i3.2xlarge.elasticsearch"
+                        "value": "i3.2xlarge.elasticsearch",
+                        "name": "i3_2xlarge_elasticsearch"
                     },
                     {
-                        "value": "i3.4xlarge.elasticsearch"
+                        "value": "i3.4xlarge.elasticsearch",
+                        "name": "i3_4xlarge_elasticsearch"
                     },
                     {
-                        "value": "i3.8xlarge.elasticsearch"
+                        "value": "i3.8xlarge.elasticsearch",
+                        "name": "i3_8xlarge_elasticsearch"
                     },
                     {
-                        "value": "i3.16xlarge.elasticsearch"
+                        "value": "i3.16xlarge.elasticsearch",
+                        "name": "i3_16xlarge_elasticsearch"
                     }
                 ]
             }
@@ -2655,10 +2723,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ultrawarm1.medium.elasticsearch"
+                        "value": "ultrawarm1.medium.elasticsearch",
+                        "name": "ultrawarm1_medium_elasticsearch"
                     },
                     {
-                        "value": "ultrawarm1.large.elasticsearch"
+                        "value": "ultrawarm1.large.elasticsearch",
+                        "name": "ultrawarm1_large_elasticsearch"
                     }
                 ]
             }
@@ -4215,16 +4285,20 @@
                 "smithy.api#documentation": "<p>Type of Log File, it can be one of the following:\n     <ul>\n       <li>INDEX_SLOW_LOGS: Index slow logs contain insert requests that took more time than configured index query log threshold to execute.</li>\n       <li>SEARCH_SLOW_LOGS: Search slow logs contain search queries that took more time than configured search query log threshold to execute.</li>\n       <li>ES_APPLICATION_LOGS: Elasticsearch application logs contain information about errors and warnings raised during the operation of the service and can be useful for troubleshooting.</li>\n       <li>AUDIT_LOGS: Audit logs contain records of user requests for access from the domain.</li>\n     </ul>\n    </p>",
                 "smithy.api#enum": [
                     {
-                        "value": "INDEX_SLOW_LOGS"
+                        "value": "INDEX_SLOW_LOGS",
+                        "name": "INDEX_SLOW_LOGS"
                     },
                     {
-                        "value": "SEARCH_SLOW_LOGS"
+                        "value": "SEARCH_SLOW_LOGS",
+                        "name": "SEARCH_SLOW_LOGS"
                     },
                     {
-                        "value": "ES_APPLICATION_LOGS"
+                        "value": "ES_APPLICATION_LOGS",
+                        "name": "ES_APPLICATION_LOGS"
                     },
                     {
-                        "value": "AUDIT_LOGS"
+                        "value": "AUDIT_LOGS",
+                        "name": "AUDIT_LOGS"
                     }
                 ]
             }
@@ -4332,13 +4406,16 @@
                 "smithy.api#documentation": "<p>The state of a requested change. One of the following:</p>\n    <ul>\n      <li>Processing: The request change is still in-process.</li>\n      <li>Active: The request change is processed and deployed to the Elasticsearch domain.</li>\n    </ul>",
                 "smithy.api#enum": [
                     {
-                        "value": "RequiresIndexDocuments"
+                        "value": "RequiresIndexDocuments",
+                        "name": "RequiresIndexDocuments"
                     },
                     {
-                        "value": "Processing"
+                        "value": "Processing",
+                        "name": "Processing"
                     },
                     {
-                        "value": "Active"
+                        "value": "Active",
+                        "name": "Active"
                     }
                 ]
             }
@@ -4605,28 +4682,36 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "COPYING"
+                        "value": "COPYING",
+                        "name": "COPYING"
                     },
                     {
-                        "value": "COPY_FAILED"
+                        "value": "COPY_FAILED",
+                        "name": "COPY_FAILED"
                     },
                     {
-                        "value": "VALIDATING"
+                        "value": "VALIDATING",
+                        "name": "VALIDATING"
                     },
                     {
-                        "value": "VALIDATION_FAILED"
+                        "value": "VALIDATION_FAILED",
+                        "name": "VALIDATION_FAILED"
                     },
                     {
-                        "value": "AVAILABLE"
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
                     },
                     {
-                        "value": "DELETING"
+                        "value": "DELETING",
+                        "name": "DELETING"
                     },
                     {
-                        "value": "DELETED"
+                        "value": "DELETED",
+                        "name": "DELETED"
                     },
                     {
-                        "value": "DELETE_FAILED"
+                        "value": "DELETE_FAILED",
+                        "name": "DELETE_FAILED"
                     }
                 ]
             }
@@ -4636,7 +4721,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "TXT-DICTIONARY"
+                        "value": "TXT-DICTIONARY",
+                        "name": "TXT_DICTIONARY"
                     }
                 ]
             }
@@ -5084,13 +5170,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ALL_UPFRONT"
+                        "value": "ALL_UPFRONT",
+                        "name": "ALL_UPFRONT"
                     },
                     {
-                        "value": "PARTIAL_UPFRONT"
+                        "value": "PARTIAL_UPFRONT",
+                        "name": "PARTIAL_UPFRONT"
                     },
                     {
-                        "value": "NO_UPFRONT"
+                        "value": "NO_UPFRONT",
+                        "name": "NO_UPFRONT"
                     }
                 ]
             }
@@ -5932,16 +6021,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "IN_PROGRESS"
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
                     },
                     {
-                        "value": "SUCCEEDED"
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
                     },
                     {
-                        "value": "SUCCEEDED_WITH_ISSUES"
+                        "value": "SUCCEEDED_WITH_ISSUES",
+                        "name": "SUCCEEDED_WITH_ISSUES"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     }
                 ]
             }
@@ -5951,13 +6044,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PRE_UPGRADE_CHECK"
+                        "value": "PRE_UPGRADE_CHECK",
+                        "name": "PRE_UPGRADE_CHECK"
                     },
                     {
-                        "value": "SNAPSHOT"
+                        "value": "SNAPSHOT",
+                        "name": "SNAPSHOT"
                     },
                     {
-                        "value": "UPGRADE"
+                        "value": "UPGRADE",
+                        "name": "UPGRADE"
                     }
                 ]
             }
@@ -6126,13 +6222,16 @@
                 "smithy.api#documentation": "<p> The type of EBS volume, standard, gp2, or io1. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs\" target=\"_blank\">Configuring EBS-based Storage</a>for more information.</p>",
                 "smithy.api#enum": [
                     {
-                        "value": "standard"
+                        "value": "standard",
+                        "name": "standard"
                     },
                     {
-                        "value": "gp2"
+                        "value": "gp2",
+                        "name": "gp2"
                     },
                     {
-                        "value": "io1"
+                        "value": "io1",
+                        "name": "io1"
                     }
                 ]
             }

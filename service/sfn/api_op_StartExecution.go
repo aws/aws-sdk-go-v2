@@ -75,7 +75,7 @@ type StartExecutionInput struct {
 
 type StartExecutionOutput struct {
 
-	// The Amazon Resource Name (ARN) that id entifies the execution.
+	// The Amazon Resource Name (ARN) that identifies the execution.
 	//
 	// This member is required.
 	ExecutionArn *string

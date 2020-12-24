@@ -15,7 +15,7 @@ import (
 // Attaches an EBS volume to a running or stopped instance and exposes it to the
 // instance with the specified device name. Encrypted EBS volumes must be attached
 // to instances that support Amazon EBS encryption. For more information, see
-// Amazon EBS Encryption
+// Amazon EBS encryption
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
 // Amazon Elastic Compute Cloud User Guide. After you attach an EBS volume, you
 // must make it available. For more information, see Making an EBS volume available

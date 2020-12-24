@@ -4,6 +4,7 @@ package cloudfront
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
@@ -38,7 +39,7 @@ type ListDistributionsInput struct {
 	Marker *string
 
 	// The maximum number of distributions you want in the response body.
-	MaxItems *string
+	MaxItems *int32
 }
 
 // The returned result of the corresponding request.
@@ -106,6 +107,95 @@ func addOperationListDistributionsMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// ListDistributionsAPIClient is a client that implements the ListDistributions
+// operation.
+type ListDistributionsAPIClient interface {
+	ListDistributions(context.Context, *ListDistributionsInput, ...func(*Options)) (*ListDistributionsOutput, error)
+}
+
+var _ ListDistributionsAPIClient = (*Client)(nil)
+
+// ListDistributionsPaginatorOptions is the paginator options for ListDistributions
+type ListDistributionsPaginatorOptions struct {
+	// The maximum number of distributions you want in the response body.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDistributionsPaginator is a paginator for ListDistributions
+type ListDistributionsPaginator struct {
+	options   ListDistributionsPaginatorOptions
+	client    ListDistributionsAPIClient
+	params    *ListDistributionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDistributionsPaginator returns a new ListDistributionsPaginator
+func NewListDistributionsPaginator(client ListDistributionsAPIClient, params *ListDistributionsInput, optFns ...func(*ListDistributionsPaginatorOptions)) *ListDistributionsPaginator {
+	options := ListDistributionsPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListDistributionsInput{}
+	}
+
+	return &ListDistributionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDistributionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDistributions page.
+func (p *ListDistributionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDistributionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.ListDistributions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = nil
+	if result.DistributionList != nil {
+		p.nextToken = result.DistributionList.NextMarker
+	}
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDistributions(region string) *awsmiddleware.RegisterServiceMetadata {

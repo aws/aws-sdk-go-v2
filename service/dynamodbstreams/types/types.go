@@ -13,35 +13,26 @@ import (
 // in the Amazon DynamoDB Developer Guide.
 //
 // The following types satisfy this interface:
-//  AttributeValueMemberSS
-//  AttributeValueMemberBS
-//  AttributeValueMemberN
-//  AttributeValueMemberL
-//  AttributeValueMemberBOOL
-//  AttributeValueMemberM
-//  AttributeValueMemberNULL
-//  AttributeValueMemberNS
-//  AttributeValueMemberB
 //  AttributeValueMemberS
+//  AttributeValueMemberN
+//  AttributeValueMemberB
+//  AttributeValueMemberSS
+//  AttributeValueMemberNS
+//  AttributeValueMemberBS
+//  AttributeValueMemberM
+//  AttributeValueMemberL
+//  AttributeValueMemberNULL
+//  AttributeValueMemberBOOL
 type AttributeValue interface {
 	isAttributeValue()
 }
 
-// An attribute of type String Set. For example: "SS": ["Giraffe", "Hippo"
-// ,"Zebra"]
-type AttributeValueMemberSS struct {
-	Value []string
+// An attribute of type String. For example: "S": "Hello"
+type AttributeValueMemberS struct {
+	Value string
 }
 
-func (*AttributeValueMemberSS) isAttributeValue() {}
-
-// An attribute of type Binary Set. For example: "BS": ["U3Vubnk=", "UmFpbnk=",
-// "U25vd3k="]
-type AttributeValueMemberBS struct {
-	Value [][]byte
-}
-
-func (*AttributeValueMemberBS) isAttributeValue() {}
+func (*AttributeValueMemberS) isAttributeValue() {}
 
 // An attribute of type Number. For example: "N": "123.45" Numbers are sent across
 // the network to DynamoDB as strings, to maximize compatibility across languages
@@ -53,35 +44,21 @@ type AttributeValueMemberN struct {
 
 func (*AttributeValueMemberN) isAttributeValue() {}
 
-// An attribute of type List. For example: "L": [ {"S": "Cookies"} , {"S":
-// "Coffee"}, {"N", "3.14159"}]
-type AttributeValueMemberL struct {
-	Value []AttributeValue
+// An attribute of type Binary. For example: "B":
+// "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"
+type AttributeValueMemberB struct {
+	Value []byte
 }
 
-func (*AttributeValueMemberL) isAttributeValue() {}
+func (*AttributeValueMemberB) isAttributeValue() {}
 
-// An attribute of type Boolean. For example: "BOOL": true
-type AttributeValueMemberBOOL struct {
-	Value bool
+// An attribute of type String Set. For example: "SS": ["Giraffe", "Hippo"
+// ,"Zebra"]
+type AttributeValueMemberSS struct {
+	Value []string
 }
 
-func (*AttributeValueMemberBOOL) isAttributeValue() {}
-
-// An attribute of type Map. For example: "M": {"Name": {"S": "Joe"}, "Age": {"N":
-// "35"}}
-type AttributeValueMemberM struct {
-	Value map[string]AttributeValue
-}
-
-func (*AttributeValueMemberM) isAttributeValue() {}
-
-// An attribute of type Null. For example: "NULL": true
-type AttributeValueMemberNULL struct {
-	Value bool
-}
-
-func (*AttributeValueMemberNULL) isAttributeValue() {}
+func (*AttributeValueMemberSS) isAttributeValue() {}
 
 // An attribute of type Number Set. For example: "NS": ["42.2", "-19", "7.5",
 // "3.14"] Numbers are sent across the network to DynamoDB as strings, to maximize
@@ -93,20 +70,43 @@ type AttributeValueMemberNS struct {
 
 func (*AttributeValueMemberNS) isAttributeValue() {}
 
-// An attribute of type Binary. For example: "B":
-// "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"
-type AttributeValueMemberB struct {
-	Value []byte
+// An attribute of type Binary Set. For example: "BS": ["U3Vubnk=", "UmFpbnk=",
+// "U25vd3k="]
+type AttributeValueMemberBS struct {
+	Value [][]byte
 }
 
-func (*AttributeValueMemberB) isAttributeValue() {}
+func (*AttributeValueMemberBS) isAttributeValue() {}
 
-// An attribute of type String. For example: "S": "Hello"
-type AttributeValueMemberS struct {
-	Value string
+// An attribute of type Map. For example: "M": {"Name": {"S": "Joe"}, "Age": {"N":
+// "35"}}
+type AttributeValueMemberM struct {
+	Value map[string]AttributeValue
 }
 
-func (*AttributeValueMemberS) isAttributeValue() {}
+func (*AttributeValueMemberM) isAttributeValue() {}
+
+// An attribute of type List. For example: "L": [ {"S": "Cookies"} , {"S":
+// "Coffee"}, {"N", "3.14159"}]
+type AttributeValueMemberL struct {
+	Value []AttributeValue
+}
+
+func (*AttributeValueMemberL) isAttributeValue() {}
+
+// An attribute of type Null. For example: "NULL": true
+type AttributeValueMemberNULL struct {
+	Value bool
+}
+
+func (*AttributeValueMemberNULL) isAttributeValue() {}
+
+// An attribute of type Boolean. For example: "BOOL": true
+type AttributeValueMemberBOOL struct {
+	Value bool
+}
+
+func (*AttributeValueMemberBOOL) isAttributeValue() {}
 
 // Contains details about the type of identity that made the request.
 type Identity struct {

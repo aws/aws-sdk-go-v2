@@ -3881,6 +3881,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The AWS KMS key identifier that is used to encrypt the content on the replication\n         instance. If you don't specify a value for the <code>KmsKeyId</code> parameter, then\n         AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for\n         your AWS account. Your AWS account has a different default encryption key for each AWS\n         Region.</p>"
                     }
+                },
+                "SecretsManagerAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the\n         trusted entity and grants the required permissions to access the value in\n         <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets\n         Manager secret that allows access to the DocumentDB endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify the\n            values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify\n            clear-text values for <code>UserName</code>, <code>Password</code>,\n            <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more\n            information on creating this <code>SecretsManagerSecret</code> and the\n            <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>\n            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service\n               resources</a> in the <i>AWS Database Migration Service User\n                  Guide</i>.</p>\n         </note>"
+                    }
+                },
+                "SecretsManagerSecretId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code>\n         that contains the DocumentDB endpoint connection details.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4366,7 +4378,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Identifies the name and value of a filter object. This filter is used to limit the\n         number and type of AWS DMS objects that are returned for a particular\n         <code>Describe*</code> call or similar operation. Filters are used as an \n         optional parameter to the following APIs. </p>"
+                "smithy.api#documentation": "<p>Identifies the name and value of a filter object. This filter is used to limit the\n         number and type of AWS DMS objects that are returned for a particular\n            <code>Describe*</code> call or similar operation. Filters are used as an optional\n         parameter for certain API operations. </p>"
             }
         },
         "com.amazonaws.databasemigrationservice#FilterList": {
@@ -4436,6 +4448,18 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Endpoint connection user name.</p>"
+                    }
+                },
+                "SecretsManagerAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the\n         trusted entity and grants the required permissions to access the value in\n            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of\n         the AWS Secrets Manager secret that allows access to the Db2 LUW endpoint. </p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify the\n            values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify\n            clear-text values for <code>UserName</code>, <code>Password</code>,\n               <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more\n            information on creating this <code>SecretsManagerSecret</code> and the\n               <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>\n            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service\n               resources</a> in the <i>AWS Database Migration Service User\n               Guide</i>.</p>\n         </note>"
+                    }
+                },
+                "SecretsManagerSecretId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the Db2 LUW endpoint connection details.</p>"
                     }
                 }
             },
@@ -4896,7 +4920,7 @@
                 "ControlTablesFileGroup": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify a filegroup for the AWS DMS internal tables.\n         When the replication task starts, all the internal AWS DMS\n         control tables (awsdms_ apply_exception, awsdms_apply,\n         awsdms_changes) are created on the specified filegroup.</p>"
+                        "smithy.api#documentation": "<p>Specifies a file group for the AWS DMS internal tables. When the replication task\n         starts, all the internal AWS DMS control tables (awsdms_ apply_exception, awsdms_apply,\n         awsdms_changes) are created for the specified file group.</p>"
                     }
                 },
                 "Password": {
@@ -4933,6 +4957,18 @@
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Use this to attribute to transfer data for full-load operations\n         using BCP. When the target table contains an identity\n         column that does not exist in the source table, you must\n         disable the use BCP for loading table option.</p>"
+                    }
+                },
+                "SecretsManagerAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the\n         trusted entity and grants the required permissions to access the value in\n            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets\n         Manager secret that allows access to the SQL Server endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify the\n            values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify\n            clear-text values for <code>UserName</code>, <code>Password</code>,\n               <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more\n            information on creating this <code>SecretsManagerSecret</code> and the\n               <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>\n            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service\n               resources</a> in the <i>AWS Database Migration Service User\n               Guide</i>.</p>\n         </note>"
+                    }
+                },
+                "SecretsManagerSecretId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the SQL Server endpoint connection details.</p>"
                     }
                 }
             },
@@ -5378,7 +5414,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates that minor version upgrades are applied automatically to the\n         replication instance during the maintenance window. Changing this parameter doesn't result\n         in an outage, except in the case dsecribed following. The change is asynchronously applied\n         as soon as possible. </p>\n         <p>An outage does result if these factors apply: </p>\n         <ul>\n            <li>\n               <p>This parameter is set to <code>true</code> during the maintenance window.</p>\n            </li>\n            <li>\n               <p>A newer minor version is available. </p>\n            </li>\n            <li>\n               <p>AWS DMS has enabled automatic patching for the given engine version. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A value that indicates that minor version upgrades are applied automatically to the\n         replication instance during the maintenance window. Changing this parameter doesn't result\n         in an outage, except in the case described following. The change is asynchronously applied\n         as soon as possible. </p>\n         <p>An outage does result if these factors apply: </p>\n         <ul>\n            <li>\n               <p>This parameter is set to <code>true</code> during the maintenance window.</p>\n            </li>\n            <li>\n               <p>A newer minor version is available. </p>\n            </li>\n            <li>\n               <p>AWS DMS has enabled automatic patching for the given engine version. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ReplicationInstanceIdentifier": {
@@ -5657,6 +5693,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The AWS KMS key identifier that is used to encrypt the content on the replication\n         instance. If you don't specify a value for the <code>KmsKeyId</code> parameter, then\n         AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for\n         your AWS account. Your AWS account has a different default encryption key for each AWS\n         Region.</p>"
                     }
+                },
+                "SecretsManagerAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the\n         trusted entity and grants the required permissions to access the value in\n            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets\n         Manager secret that allows access to the MongoDB endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify the\n            values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify\n            clear-text values for <code>UserName</code>, <code>Password</code>,\n               <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more\n            information on creating this <code>SecretsManagerSecret</code> and the\n               <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>\n            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service\n               resources</a> in the <i>AWS Database Migration Service User\n               Guide</i>.</p>\n         </note>"
+                    }
+                },
+                "SecretsManagerSecretId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the MongoDB endpoint connection details.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5758,7 +5806,7 @@
                 "ParallelLoadThreads": {
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Improves performance when loading data into the MySQLcompatible\n         target database. Specifies how many threads\n         to use to load the data into the MySQL-compatible target\n         database. Setting a large number of threads can have an\n         adverse effect on database performance, because a separate\n         connection is required for each thread.</p>\n         <p>Example: <code>parallelLoadThreads=1</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Improves performance when loading data into the MySQL-compatible target database.\n         Specifies how many threads to use to load the data into the MySQL-compatible target\n         database. Setting a large number of threads can have an adverse effect on database\n         performance, because a separate connection is required for each thread.</p>\n         <p>Example: <code>parallelLoadThreads=1</code>\n         </p>"
                     }
                 },
                 "Password": {
@@ -5789,6 +5837,18 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Endpoint connection user name.</p>"
+                    }
+                },
+                "SecretsManagerAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the\n         trusted entity and grants the required permissions to access the value in\n            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets\n         Manager secret that allows access to the MySQL endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify the\n            values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify\n            clear-text values for <code>UserName</code>, <code>Password</code>,\n               <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more\n            information on creating this <code>SecretsManagerSecret</code> and the\n               <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>\n            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service\n               resources</a> in the <i>AWS Database Migration Service User\n               Guide</i>.</p>\n         </note>"
+                    }
+                },
+                "SecretsManagerSecretId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the MySQL endpoint connection details.</p>"
                     }
                 }
             },
@@ -6045,6 +6105,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Endpoint connection user name.</p>"
                     }
+                },
+                "SecretsManagerAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the\n         trusted entity and grants the required permissions to access the value in\n            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets\n         Manager secret that allows access to the Oracle endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify the\n            values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify\n            clear-text values for <code>UserName</code>, <code>Password</code>,\n               <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more\n            information on creating this <code>SecretsManagerSecret</code> and the\n               <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>\n            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service\n               resources</a> in the <i>AWS Database Migration Service User\n               Guide</i>.</p>\n         </note>"
+                    }
+                },
+                "SecretsManagerSecretId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the Oracle endpoint connection details.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6273,6 +6345,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Sets the name of a previously created logical replication slot\n         for a CDC load of the PostgreSQL source instance.</p>\n         <p>When used with the AWS DMS API <code>CdcStartPosition</code>\n         request parameter, this attribute also enables using native\n         CDC start points.</p>"
                     }
+                },
+                "SecretsManagerAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the\n         trusted entity and grants the required permissions to access the value in\n            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets\n         Manager secret that allows access to the PostgreSQL endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify the\n            values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify\n            clear-text values for <code>UserName</code>, <code>Password</code>,\n               <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more\n            information on creating this <code>SecretsManagerSecret</code> and the\n               <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>\n            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service\n               resources</a> in the <i>AWS Database Migration Service User\n               Guide</i>.</p>\n         </note>"
+                    }
+                },
+                "SecretsManagerSecretId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the PostgreSQL endpoint connection details.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6346,7 +6430,7 @@
                 "BucketFolder": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An S3 folder where the comma-separated-value (.csv) files are stored before being \n         uploaded to the target Redshift cluster. </p>\n         <p>For full load mode, AWS DMS converts source records into .csv files and loads them to\n            the <i>BucketFolder/TableID</i> path. AWS DMS uses the Redshift\n            <code>COPY</code> command to upload the .csv files to the target table. The files are\n            deleted once the <code>COPY</code> operation has finished. For more information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html\">Amazon Redshift Database\n            Developer Guide</a>\n         </p>\n         <p>For change-data-capture (CDC) mode, AWS DMS creates a <i>NetChanges</i> table, \n         and loads the .csv files to this <i>BucketFolder/NetChangesTableID</i> path.</p>"
+                        "smithy.api#documentation": "<p>An S3 folder where the comma-separated-value (.csv) files are stored before being \n         uploaded to the target Redshift cluster. </p>\n         <p>For full load mode, AWS DMS converts source records into .csv files and loads them to\n         the <i>BucketFolder/TableID</i> path. AWS DMS uses the Redshift\n            <code>COPY</code> command to upload the .csv files to the target table. The files are\n         deleted once the <code>COPY</code> operation has finished. For more information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html\">COPY</a> in the\n            <i>Amazon Redshift Database Developer Guide</i>.</p>\n         <p>For change-data-capture (CDC) mode, AWS DMS creates a <i>NetChanges</i> table, \n         and loads the .csv files to this <i>BucketFolder/NetChangesTableID</i> path.</p>"
                     }
                 },
                 "BucketName": {
@@ -6497,6 +6581,18 @@
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>The size (in KB) of the in-memory file write buffer used when generating .csv files \n         on the local disk at the DMS replication instance. The default value is 1000 \n         (buffer size is 1000KB).</p>"
+                    }
+                },
+                "SecretsManagerAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the\n         trusted entity and grants the required permissions to access the value in\n            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets\n         Manager secret that allows access to the Amazon Redshift endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify the\n            values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify\n            clear-text values for <code>UserName</code>, <code>Password</code>,\n               <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more\n            information on creating this <code>SecretsManagerSecret</code> and the\n               <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>\n            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service\n               resources</a> in the <i>AWS Database Migration Service User\n               Guide</i>.</p>\n         </note>"
+                    }
+                },
+                "SecretsManagerSecretId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the Amazon Redshift endpoint connection details.</p>"
                     }
                 }
             },
@@ -7720,25 +7816,25 @@
                 "UseCsvNoSupValue": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>This setting applies if the S3 output files during a change data capture (CDC) load are\n         written in .csv format. If set to <code>true</code> for columns not included in the\n         supplemental log, AWS DMS uses the value specified by <a href=\"dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CsvNoSupValue\">\n               <code>CsvNoSupValue</code>\n            </a>. If not set or set to <code>false</code>, AWS DMS\n         uses the null value for these columns.</p>\n         <note>\n            <p>This setting is supported in AWS DMS versions 3.4.1 and later.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>This setting applies if the S3 output files during a change data capture (CDC) load are\n         written in .csv format. If set to <code>true</code> for columns not included in the\n         supplemental log, AWS DMS uses the value specified by <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CsvNoSupValue\">\n               <code>CsvNoSupValue</code>\n            </a>. If not set or set to\n            <code>false</code>, AWS DMS uses the null value for these columns.</p>\n         <note>\n            <p>This setting is supported in AWS DMS versions 3.4.1 and later.</p>\n         </note>"
                     }
                 },
                 "CsvNoSupValue": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>This setting only applies if your Amazon S3 output files during a change data capture\n         (CDC) load are written in .csv format. If <a href=\"dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-UseCsvNoSupValue\">\n               <code>UseCsvNoSupValue</code>\n            </a> is set to true, specify a string value that\n         you want AWS DMS to use for all columns not included in the supplemental log. If you do not\n         specify a string value, AWS DMS uses the null value for these columns regardless of the\n            <code>UseCsvNoSupValue</code> setting.</p>\n         <note>\n            <p>This setting is supported in AWS DMS versions 3.4.1 and later.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>This setting only applies if your Amazon S3 output files during a change data capture\n         (CDC) load are written in .csv format. If <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-UseCsvNoSupValue\">\n               <code>UseCsvNoSupValue</code>\n            </a> is set to true, specify a\n         string value that you want AWS DMS to use for all columns not included in the supplemental\n         log. If you do not specify a string value, AWS DMS uses the null value for these columns\n         regardless of the <code>UseCsvNoSupValue</code> setting.</p>\n         <note>\n            <p>This setting is supported in AWS DMS versions 3.4.1 and later.</p>\n         </note>"
                     }
                 },
                 "PreserveTransactions": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>If set to <code>true</code>, AWS DMS saves the transaction order for a change data\n         capture (CDC) load on the Amazon S3 target specified by <a href=\"dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CdcPath\">\n               <code>CdcPath</code>\n            </a>.</p>\n         <note>\n            <p>This setting is supported in AWS DMS versions 3.4.2 and later.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>If set to <code>true</code>, AWS DMS saves the transaction order for a change data\n         capture (CDC) load on the Amazon S3 target specified by <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CdcPath\">\n               <code>CdcPath</code>\n            </a>. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath\">Capturing data changes (CDC) including transaction order on the S3\n            target</a>.</p>\n         <note>\n            <p>This setting is supported in AWS DMS versions 3.4.2 and later.</p>\n         </note>"
                     }
                 },
                 "CdcPath": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the folder path of CDC files. For an S3 source, this setting is required if a\n         task captures change data; otherwise, it's optional. If <code>CdcPath</code> is set, AWS\n         DMS reads CDC files from this path and replicates the data changes to the target endpoint.\n         For an S3 target, if <code>CdcPath</code>is set, it is the folder path where data changes\n         are replicated. If you set <a href=\"dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-PreserveTransactions\">\n               <code>PreserveTransactions</code>\n            </a> to <code>true</code>, AWS DMS verifies\n         that you have set this parameter to a folder path on your S3 target where AWS DMS can save\n         the transaction order for the CDC load. AWS DMS creates this CDC folder path in either your\n         S3 target working directory or the S3 target location specified by <a href=\"dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketFolder\">\n               <code>BucketFolder</code>\n            </a> and <a href=\"dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketName\">\n               <code>BucketName</code>\n            </a>.</p>\n         <p>For example, if you specify <code>CdcPath</code> as <code>MyChangedData</code>, and you\n         specify <code>BucketName</code> as <code>MyTargetBucket</code> but do not specify\n            <code>BucketFolder</code>, AWS DMS creates the CDC folder path following:\n            <code>MyTargetBucket/MyChangedData</code>.</p>\n         <p>If you specify the same <code>CdcPath</code>, and you specify <code>BucketName</code> as\n            <code>MyTargetBucket</code> and <code>BucketFolder</code> as <code>MyTargetData</code>,\n         AWS DMS creates the CDC folder path following:\n            <code>MyTargetBucket/MyTargetData/MyChangedData</code>.</p>\n         <note>\n            <p>This setting is supported in AWS DMS versions 3.4.2 and later.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the folder path of CDC files. For an S3 source, this setting is required if a\n         task captures change data; otherwise, it's optional. If <code>CdcPath</code> is set, AWS\n         DMS reads CDC files from this path and replicates the data changes to the target endpoint.\n         For an S3 target if you set <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-PreserveTransactions\">\n               <code>PreserveTransactions</code>\n            </a> to <code>true</code>, AWS\n         DMS verifies that you have set this parameter to a folder path on your S3 target where AWS\n         DMS can save the transaction order for the CDC load. AWS DMS creates this CDC folder path\n         in either your S3 target working directory or the S3 target location specified by <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketFolder\">\n               <code>BucketFolder</code>\n            </a> and <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketName\">\n               <code>BucketName</code>\n            </a>.</p>\n         <p>For example, if you specify <code>CdcPath</code> as <code>MyChangedData</code>, and you\n         specify <code>BucketName</code> as <code>MyTargetBucket</code> but do not specify\n            <code>BucketFolder</code>, AWS DMS creates the CDC folder path following:\n            <code>MyTargetBucket/MyChangedData</code>.</p>\n         <p>If you specify the same <code>CdcPath</code>, and you specify <code>BucketName</code> as\n            <code>MyTargetBucket</code> and <code>BucketFolder</code> as <code>MyTargetData</code>,\n         AWS DMS creates the CDC folder path following:\n            <code>MyTargetBucket/MyTargetData/MyChangedData</code>.</p>\n         <p>For more information on CDC including transaction order on an S3 target, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath\">Capturing data changes (CDC) including transaction order on the S3\n            target</a>.</p>\n         <note>\n            <p>This setting is supported in AWS DMS versions 3.4.2 and later.</p>\n         </note>"
                     }
                 }
             },
@@ -7821,7 +7917,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "replication-instance"
+                        "value": "replication-instance",
+                        "name": "replication_instance"
                     }
                 ]
             }
@@ -8305,6 +8402,18 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Endpoint connection user name.</p>"
+                    }
+                },
+                "SecretsManagerAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the\n         trusted entity and grants the required permissions to access the value in\n            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets\n         Manager secret that allows access to the SAP ASE endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify the\n            values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify\n            clear-text values for <code>UserName</code>, <code>Password</code>,\n               <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more\n            information on creating this <code>SecretsManagerSecret</code> and the\n               <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>\n            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service\n               resources</a> in the <i>AWS Database Migration Service User\n               Guide</i>.</p>\n         </note>"
+                    }
+                },
+                "SecretsManagerSecretId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the SAP SAE endpoint connection details.</p>"
                     }
                 }
             },

@@ -11,8 +11,8 @@ import (
 type BadRequestException struct {
 	Message *string
 
-	Code      int32
 	ClassName *string
+	Code      int32
 }
 
 func (e *BadRequestException) Error() string {
@@ -31,8 +31,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type ConcurrentAccessException struct {
 	Message *string
 
-	Code      int32
 	ClassName *string
+	Code      int32
 }
 
 func (e *ConcurrentAccessException) Error() string {
@@ -91,8 +91,8 @@ func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 type InternalServerErrorException struct {
 	Message *string
 
-	Code      int32
 	ClassName *string
+	Code      int32
 }
 
 func (e *InternalServerErrorException) Error() string {
@@ -131,8 +131,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type NotFoundException struct {
 	Message *string
 
-	Code      int32
 	ClassName *string
+	Code      int32
 }
 
 func (e *NotFoundException) Error() string {

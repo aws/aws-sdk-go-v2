@@ -81,18 +81,18 @@ type CopyDBSnapshotInput struct {
 	// the target DB snapshot. By default, tags are not copied.
 	CopyTags *bool
 
-	// The AWS KMS key ID for an encrypted DB snapshot. The KMS key ID is the Amazon
-	// Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS
-	// encryption key. If you copy an encrypted DB snapshot from your AWS account, you
-	// can specify a value for this parameter to encrypt the copy with a new KMS
-	// encryption key. If you don't specify a value for this parameter, then the copy
-	// of the DB snapshot is encrypted with the same KMS key as the source DB snapshot.
-	// If you copy an encrypted DB snapshot that is shared from another AWS account,
-	// then you must specify a value for this parameter. If you specify this parameter
-	// when you copy an unencrypted snapshot, the copy is encrypted. If you copy an
-	// encrypted snapshot to a different AWS Region, then you must specify a KMS key
-	// for the destination AWS Region. KMS encryption keys are specific to the AWS
-	// Region that they are created in, and you can't use encryption keys from one AWS
+	// The AWS KMS key identifier for an encrypted DB snapshot. The AWS KMS key
+	// identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS
+	// customer master key (CMK). If you copy an encrypted DB snapshot from your AWS
+	// account, you can specify a value for this parameter to encrypt the copy with a
+	// new AWS KMS CMK. If you don't specify a value for this parameter, then the copy
+	// of the DB snapshot is encrypted with the same AWS KMS key as the source DB
+	// snapshot. If you copy an encrypted DB snapshot that is shared from another AWS
+	// account, then you must specify a value for this parameter. If you specify this
+	// parameter when you copy an unencrypted snapshot, the copy is encrypted. If you
+	// copy an encrypted snapshot to a different AWS Region, then you must specify a
+	// AWS KMS key identifier for the destination AWS Region. AWS KMS CMKs are specific
+	// to the AWS Region that they are created in, and you can't use CMKs from one AWS
 	// Region in another AWS Region.
 	KmsKeyId *string
 
@@ -101,7 +101,7 @@ type CopyDBSnapshotInput struct {
 	// your DB instance uses a nondefault option group. If your source DB instance uses
 	// Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify
 	// this option when copying across AWS Regions. For more information, see Option
-	// Group Considerations
+	// group considerations
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options)
 	// in the Amazon RDS User Guide.
 	OptionGroupName *string
@@ -126,16 +126,16 @@ type CopyDBSnapshotInput struct {
 	// URL must be set to the us-east-1 AWS Region.
 	//
 	// * KmsKeyId - The AWS KMS key
-	// identifier for the key to use to encrypt the copy of the DB snapshot in the
-	// destination AWS Region. This is the same identifier for both the CopyDBSnapshot
-	// action that is called in the destination AWS Region, and the action contained in
-	// the presigned URL.
+	// identifier for the customer master key (CMK) to use to encrypt the copy of the
+	// DB snapshot in the destination AWS Region. This is the same identifier for both
+	// the CopyDBSnapshot action that is called in the destination AWS Region, and the
+	// action contained in the presigned URL.
 	//
-	// * SourceDBSnapshotIdentifier - The DB snapshot identifier
-	// for the encrypted snapshot to be copied. This identifier must be in the Amazon
-	// Resource Name (ARN) format for the source AWS Region. For example, if you are
-	// copying an encrypted DB snapshot from the us-west-2 AWS Region, then your
-	// SourceDBSnapshotIdentifier looks like the following example:
+	// * SourceDBSnapshotIdentifier - The DB
+	// snapshot identifier for the encrypted snapshot to be copied. This identifier
+	// must be in the Amazon Resource Name (ARN) format for the source AWS Region. For
+	// example, if you are copying an encrypted DB snapshot from the us-west-2 AWS
+	// Region, then your SourceDBSnapshotIdentifier looks like the following example:
 	// arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115.
 	//
 	// To

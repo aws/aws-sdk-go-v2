@@ -26,7 +26,7 @@ import (
 // For more information about backing up Amazon FSx for Lustre
 // file systems, see Working with FSx for Lustre backups
 // (https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html). For
-// more information about backing up Amazon FSx for Lustre file systems, see
+// more information about backing up Amazon FSx for Windows file systems, see
 // Working with FSx for Windows backups
 // (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html). If a
 // backup with the specified client request token exists, and the parameters match,

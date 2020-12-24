@@ -264,7 +264,7 @@ type GetHLSStreamingSessionURLInput struct {
 	// fragments corresponds to more than 16 minutes of video on streams with 1-second
 	// fragments, and more than 2 1/2 hours of video on streams with 10-second
 	// fragments.
-	MaxMediaPlaylistFragmentResults *int64
+	MaxMediaPlaylistFragmentResults *int32
 
 	// Whether to retrieve live, live replay, or archived, on-demand data. Features of
 	// the three types of sessions include the following:

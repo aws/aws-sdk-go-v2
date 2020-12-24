@@ -78,6 +78,30 @@ type Aggregates struct {
 	Sum *float64
 }
 
+// Contains information about a composite model in an asset. This object contains
+// the asset's properties that you define in the composite model.
+type AssetCompositeModel struct {
+
+	// The name of the composite model.
+	//
+	// This member is required.
+	Name *string
+
+	// The asset properties that this composite model defines.
+	//
+	// This member is required.
+	Properties []AssetProperty
+
+	// The type of the composite model. For alarm composite models, this type is
+	// AWS/ALARM.
+	//
+	// This member is required.
+	Type *string
+
+	// The description of the composite model.
+	Description *string
+}
+
 // Contains error details for the requested associate project asset action.
 type AssetErrorDetails struct {
 
@@ -111,6 +135,61 @@ type AssetHierarchy struct {
 
 	// The ID of the hierarchy. This ID is a hierarchyId.
 	Id *string
+}
+
+// Contains information about a parent asset and a child asset that are related
+// through an asset hierarchy.
+type AssetHierarchyInfo struct {
+
+	// The ID of the child asset in this asset relationship.
+	ChildAssetId *string
+
+	// The ID of the parent asset in this asset relationship.
+	ParentAssetId *string
+}
+
+// Contains information about a composite model in an asset model. This object
+// contains the asset property definitions that you define in the composite model.
+type AssetModelCompositeModel struct {
+
+	// The name of the composite model.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of the composite model. For alarm composite models, this type is
+	// AWS/ALARM.
+	//
+	// This member is required.
+	Type *string
+
+	// The description of the composite model.
+	Description *string
+
+	// The asset property definitions for this composite model.
+	Properties []AssetModelProperty
+}
+
+// Contains a composite model definition in an asset model. This composite model
+// definition is applied to all assets created from the asset model.
+type AssetModelCompositeModelDefinition struct {
+
+	// The name of the composite model.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of the composite model. For alarm composite models, this type is
+	// AWS/ALARM.
+	//
+	// This member is required.
+	Type *string
+
+	// The description of the composite model.
+	Description *string
+
+	// The asset property definitions for this composite model.
+	Properties []AssetModelPropertyDefinition
 }
 
 // Describes an asset hierarchy that contains a hierarchy's name, ID, and child
@@ -175,6 +254,10 @@ type AssetModelProperty struct {
 	// This member is required.
 	Type *PropertyType
 
+	// The data type of the structure for this property. This parameter exists on
+	// properties that have the STRUCT data type.
+	DataTypeSpec *string
+
 	// The ID of the asset model property.
 	Id *string
 
@@ -186,7 +269,8 @@ type AssetModelProperty struct {
 // to all assets created from the asset model.
 type AssetModelPropertyDefinition struct {
 
-	// The data type of the property definition.
+	// The data type of the property definition. If you specify STRUCT, you must also
+	// specify dataTypeSpec to identify the type of the structure for this property.
 	//
 	// This member is required.
 	DataType PropertyDataType
@@ -201,6 +285,12 @@ type AssetModelPropertyDefinition struct {
 	//
 	// This member is required.
 	Type *PropertyType
+
+	// The data type of the structure for this property. This parameter is required on
+	// properties that have the STRUCT data type. The options for this parameter depend
+	// on the type of the composite model in which you define this property. Use
+	// AWS/ALARM_STATE for alarm state in alarm composite models.
+	DataTypeSpec *string
 
 	// The unit of the property definition, such as Newtons or RPM.
 	Unit *string
@@ -288,6 +378,10 @@ type AssetProperty struct {
 	// in the AWS IoT SiteWise User Guide.
 	Alias *string
 
+	// The data type of the structure for this property. This parameter exists on
+	// properties that have the STRUCT data type.
+	DataTypeSpec *string
+
 	// The asset property's notification topic and state. For more information, see
 	// UpdateAssetProperty
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
@@ -312,6 +406,24 @@ type AssetPropertyValue struct {
 
 	// The quality of the asset property value.
 	Quality Quality
+}
+
+// Contains information about assets that are related to one another.
+type AssetRelationshipSummary struct {
+
+	// The relationship type of the assets in this relationship. This value is one of
+	// the following:
+	//
+	// * HIERARCHY – The assets are related through an asset hierarchy.
+	// If you specify this relationship type, this asset relationship includes the
+	// hierarchyInfo object.
+	//
+	// This member is required.
+	RelationshipType AssetRelationshipType
+
+	// The assets that are related through an asset hierarchy. This object is present
+	// if the relationshipType is HIERARCHY.
+	HierarchyInfo *AssetHierarchyInfo
 }
 
 // Contains information about the current status of an asset. For more information,
@@ -475,6 +587,51 @@ type BatchPutAssetPropertyErrorEntry struct {
 	Errors []BatchPutAssetPropertyError
 }
 
+// Contains information about a composite model property on an asset.
+type CompositeModelProperty struct {
+
+	// Contains asset property information.
+	//
+	// This member is required.
+	AssetProperty *Property
+
+	// The name of the property.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of the composite model that defines this property.
+	//
+	// This member is required.
+	Type *string
+}
+
+// Contains the details of an AWS IoT SiteWise configuration error.
+type ConfigurationErrorDetails struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code ErrorCode
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+}
+
+// Contains current status information for the configuration.
+type ConfigurationStatus struct {
+
+	// The current state of the configuration.
+	//
+	// This member is required.
+	State ConfigurationState
+
+	// Contains associated error information, if any.
+	Error *ConfigurationErrorDetails
+}
+
 // Contains a dashboard summary.
 type DashboardSummary struct {
 
@@ -627,9 +784,7 @@ type GroupIdentity struct {
 // Contains information about an AWS Identity and Access Management (IAM) user.
 type IAMUserIdentity struct {
 
-	// The ARN of the IAM user. IAM users must have the
-	// iotsitewise:CreatePresignedPortalUrl permission to sign in to the portal. For
-	// more information, see IAM ARNs
+	// The ARN of the IAM user. For more information, see IAM ARNs
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in
 	// the IAM User Guide. If you delete the IAM user, access policies that contain
 	// this identity include an empty arn. You can delete the access policy for the IAM
@@ -804,9 +959,7 @@ type PortalSummary struct {
 
 	// The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access
 	// portals that use AWS SSO for authentication. For portals that use IAM for
-	// authentication, you must use the CreatePresignedPortalUrl
-	// (https://docs.aws.amazon.com/AWS IoT SiteWise API
-	// ReferenceAPI_CreatePresignedPortalUrl.html) operation to create a URL that you
+	// authentication, you must use the AWS IoT SiteWise console to get a URL that you
 	// can use to access the portal.
 	//
 	// This member is required.

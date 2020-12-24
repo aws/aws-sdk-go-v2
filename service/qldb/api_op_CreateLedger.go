@@ -55,7 +55,7 @@ type CreateLedgerInput struct {
 
 	// The key-value pairs to add as tags to the ledger that you want to create. Tag
 	// keys are case sensitive. Tag values are case sensitive and can be null.
-	Tags map[string]string
+	Tags map[string]*string
 }
 
 type CreateLedgerOutput struct {

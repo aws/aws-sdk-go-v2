@@ -271,6 +271,13 @@ type CreateMultipartUploadInput struct {
 	// on Outposts.
 	ACL types.ObjectCannedACL
 
+	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption
+	// with server-side encryption using AWS KMS (SSE-KMS). Setting this header to true
+	// causes Amazon S3 to use an S3 Bucket Key for object encryption with SSE-KMS.
+	// Specifying this header with an object operation doesn’t affect bucket-level
+	// settings for S3 Bucket Key.
+	BucketKeyEnabled bool
+
 	// Specifies caching behavior along the request/reply chain.
 	CacheControl *string
 
@@ -419,6 +426,10 @@ type CreateMultipartUploadOutput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	Bucket *string
+
+	// Indicates whether the multipart upload uses an S3 Bucket Key for server-side
+	// encryption with AWS KMS (SSE-KMS).
+	BucketKeyEnabled bool
 
 	// Object key for which the multipart upload was initiated.
 	Key *string

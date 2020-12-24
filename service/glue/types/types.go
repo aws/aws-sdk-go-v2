@@ -40,6 +40,37 @@ type Action struct {
 	Timeout *int32
 }
 
+// A list of errors that can occur when registering partition indexes for an
+// existing table. These errors give the details about why an index registration
+// failed and provide a limited number of partitions in the response, so that you
+// can fix the partitions at fault and try registering the index again. The most
+// common set of errors that can occur are categorized as follows:
+//
+// *
+// EncryptedPartitionError: The partitions are encrypted.
+//
+// *
+// InvalidPartitionTypeDataError: The partition value doesn't match the data type
+// for that partition column.
+//
+// * MissingPartitionValueError: The partitions are
+// encrypted.
+//
+// * UnsupportedPartitionCharacterError: Characters inside the
+// partition value are not supported. For example: U+0000 , U+0001, U+0002.
+//
+// *
+// InternalError: Any error which does not belong to other error codes.
+type BackfillError struct {
+
+	// The error code for an error that occurred when registering partition indexes for
+	// an existing table.
+	Code BackfillErrorCode
+
+	// A list of a limited number of partitions in the response.
+	Partitions []PartitionValueList
+}
+
 // Records an error that occurred when attempting to stop a specified job run.
 type BatchStopJobRunError struct {
 
@@ -281,6 +312,12 @@ type ColumnError struct {
 
 	// An error message with the reason for the failure of an operation.
 	Error *ErrorDetail
+}
+
+type ColumnImportance struct {
+	ColumnName *string
+
+	Importance *float64
 }
 
 // Represents the generated column-level statistics for a table or partition.
@@ -644,6 +681,9 @@ type Crawler struct {
 
 	// The time that the crawler was last updated.
 	LastUpdated *time.Time
+
+	// A configuration that specifies whether data lineage is enabled for the crawler.
+	LineageConfiguration *LineageConfiguration
 
 	// The name of the crawler.
 	Name *string
@@ -1298,6 +1338,8 @@ type FindMatchesMetrics struct {
 	// precision vs. recall tradeoff. For more information, see Precision and recall
 	// (https://en.wikipedia.org/wiki/Precision_and_recall) in Wikipedia.
 	AreaUnderPRCurve *float64
+
+	ColumnImportances []ColumnImportance
 
 	// The confusion matrix shows you what your transform is predicting accurately and
 	// what types of errors it is making. For more information, see Confusion matrix
@@ -1974,6 +2016,19 @@ type LastCrawlInfo struct {
 	Status LastCrawlStatus
 }
 
+// Specifies data lineage configuration settings for the crawler.
+type LineageConfiguration struct {
+
+	// Specifies whether data lineage is enabled for the crawler. Valid values are:
+	//
+	// *
+	// ENABLE: enables data lineage for the crawler
+	//
+	// * DISABLE: disables data lineage
+	// for the crawler
+	CrawlerLineageSettings CrawlerLineageSettings
+}
+
 // The location of resources.
 type Location struct {
 
@@ -2337,7 +2392,19 @@ type PartitionIndexDescriptor struct {
 	// This member is required.
 	IndexName *string
 
-	// The status of the partition index.
+	// The status of the partition index. The possible statuses are:
+	//
+	// * CREATING: The
+	// index is being created. When an index is in a CREATING state, the index or its
+	// table cannot be deleted.
+	//
+	// * ACTIVE: The index creation succeeds.
+	//
+	// * FAILED: The
+	// index creation fails.
+	//
+	// * DELETING: The index is deleted from the list of
+	// indexes.
 	//
 	// This member is required.
 	IndexStatus PartitionIndexStatus
@@ -2347,6 +2414,10 @@ type PartitionIndexDescriptor struct {
 	//
 	// This member is required.
 	Keys []KeySchemaElement
+
+	// A list of errors that can occur when registering partition indexes for an
+	// existing table.
+	BackfillErrors []BackfillError
 }
 
 // The structure used to create and update a partition.

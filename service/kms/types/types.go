@@ -15,7 +15,15 @@ type AliasListEntry struct {
 	// String that contains the alias. This value begins with alias/.
 	AliasName *string
 
-	// String that contains the key identifier referred to by the alias.
+	// Date and time that the alias was most recently created in the account and
+	// Region. Formatted as Unix time.
+	CreationDate *time.Time
+
+	// Date and time that the alias was most recently associated with a CMK in the
+	// account and Region. Formatted as Unix time.
+	LastUpdatedDate *time.Time
+
+	// String that contains the key identifier of the CMK associated with the alias.
 	TargetKeyId *string
 }
 
@@ -130,16 +138,15 @@ type CustomKeyStoresListEntry struct {
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#symmetric-cmks).
 // Grant constraints are not applied to operations that do not support an
 // encryption context, such as cryptographic operations with asymmetric CMKs and
-// management operations, such as DescribeKey or ScheduleKeyDeletion. In a
-// cryptographic operation, the encryption context in the decryption operation must
-// be an exact, case-sensitive match for the keys and values in the encryption
-// context of the encryption operation. Only the order of the pairs can vary.
-// However, in a grant constraint, the key in each key-value pair is not case
-// sensitive, but the value is case sensitive. To avoid confusion, do not use
-// multiple encryption context pairs that differ only by case. To require a fully
-// case-sensitive encryption context, use the kms:EncryptionContext: and
-// kms:EncryptionContextKeys conditions in an IAM or key policy. For details, see
-// kms:EncryptionContext:
+// management operations, such as DescribeKey or RetireGrant. In a cryptographic
+// operation, the encryption context in the decryption operation must be an exact,
+// case-sensitive match for the keys and values in the encryption context of the
+// encryption operation. Only the order of the pairs can vary. However, in a grant
+// constraint, the key in each key-value pair is not case sensitive, but the value
+// is case sensitive. To avoid confusion, do not use multiple encryption context
+// pairs that differ only by case. To require a fully case-sensitive encryption
+// context, use the kms:EncryptionContext: and kms:EncryptionContextKeys conditions
+// in an IAM or key policy. For details, see kms:EncryptionContext:
 // (https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-context)
 // in the AWS Key Management Service Developer Guide .
 type GrantConstraints struct {

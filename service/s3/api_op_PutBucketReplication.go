@@ -19,29 +19,26 @@ import (
 // operation must have the iam:PassRole
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html)
 // permission. Specify the replication configuration in the request body. In the
-// replication configuration, you provide the name of the destination bucket where
-// you want Amazon S3 to replicate objects, the IAM role that Amazon S3 can assume
-// to replicate objects on your behalf, and other relevant information. A
-// replication configuration must include at least one rule, and can contain a
-// maximum of 1,000. Each rule identifies a subset of objects to replicate by
-// filtering the objects in the source bucket. To choose additional subsets of
-// objects to replicate, add a rule for each subset. All rules must specify the
-// same destination bucket. To specify a subset of the objects in the source bucket
-// to apply a replication rule to, add the Filter element as a child of the Rule
-// element. You can filter objects based on an object key prefix, one or more
-// object tags, or both. When you add the Filter element in the configuration, you
-// must also add the following elements: DeleteMarkerReplication, Status, and
-// Priority. The latest version of the replication configuration XML is V2. XML V2
-// replication configurations are those that contain the Filter element for rules,
-// and rules that specify S3 Replication Time Control (S3 RTC). In XML V2
-// replication configurations, Amazon S3 doesn't replicate delete markers.
-// Therefore, you must set the DeleteMarkerReplication element to Disabled. For
-// backward compatibility, Amazon S3 continues to support the XML V1 replication
-// configuration. For information about enabling versioning on a bucket, see Using
-// Versioning (https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html). By
-// default, a resource owner, in this case the AWS account that created the bucket,
-// can perform this operation. The resource owner can also grant others permissions
-// to perform the operation. For more information about permissions, see Specifying
+// replication configuration, you provide the name of the destination bucket or
+// buckets where you want Amazon S3 to replicate objects, the IAM role that Amazon
+// S3 can assume to replicate objects on your behalf, and other relevant
+// information. A replication configuration must include at least one rule, and can
+// contain a maximum of 1,000. Each rule identifies a subset of objects to
+// replicate by filtering the objects in the source bucket. To choose additional
+// subsets of objects to replicate, add a rule for each subset. To specify a subset
+// of the objects in the source bucket to apply a replication rule to, add the
+// Filter element as a child of the Rule element. You can filter objects based on
+// an object key prefix, one or more object tags, or both. When you add the Filter
+// element in the configuration, you must also add the following elements:
+// DeleteMarkerReplication, Status, and Priority. If you are using an earlier
+// version of the replication configuration, Amazon S3 handles replication of
+// delete markers differently. For more information, see Backward Compatibility
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).
+// For information about enabling versioning on a bucket, see Using Versioning
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html). By default, a
+// resource owner, in this case the AWS account that created the bucket, can
+// perform this operation. The resource owner can also grant others permissions to
+// perform the operation. For more information about permissions, see Specifying
 // Permissions in a Policy
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html) and
 // Managing Access Permissions to Your Amazon S3 Resources
@@ -97,17 +94,15 @@ type PutBucketReplicationInput struct {
 	// The base64-encoded 128-bit MD5 digest of the data. You must use this header as a
 	// message integrity check to verify that the request body was not corrupted in
 	// transit. For more information, see RFC 1864
-	// (http://www.ietf.org/rfc/rfc1864.txt).
-	//
-	// Deprecated: Content-MD5 header will now be automatically computed and injected
-	// in associated operation's Http request.
+	// (http://www.ietf.org/rfc/rfc1864.txt). For requests made using the AWS Command
+	// Line Interface (CLI) or AWS SDKs, this field is calculated automatically.
 	ContentMD5 *string
 
 	// The account id of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 
-	//
+	// A token to allow Object Lock to be enabled for an existing bucket.
 	Token *string
 }
 

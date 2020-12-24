@@ -34,12 +34,14 @@ import (
 // *
 // ds2.8xlarge
 //
+// * ra3.xlplus
+//
 // * ra3.4xlarge
 //
 // * ra3.16xlarge
 //
-// * The type of nodes that you add
-// must match the node type for the cluster.
+// * The type of nodes
+// that you add must match the node type for the cluster.
 func (c *Client) ResizeCluster(ctx context.Context, params *ResizeClusterInput, optFns ...func(*Options)) (*ResizeClusterOutput, error) {
 	if params == nil {
 		params = &ResizeClusterInput{}
@@ -78,7 +80,7 @@ type ResizeClusterInput struct {
 
 	// The new number of nodes for the cluster. If not specified, the cluster's current
 	// number of nodes is used.
-	NumberOfNodes int32
+	NumberOfNodes *int32
 }
 
 type ResizeClusterOutput struct {

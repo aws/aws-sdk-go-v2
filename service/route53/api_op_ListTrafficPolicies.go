@@ -40,7 +40,7 @@ type ListTrafficPoliciesInput struct {
 	// policies, the value of IsTruncated in the response is true, and the value of
 	// TrafficPolicyIdMarker is the ID of the first traffic policy that Route 53 will
 	// return if you submit another request.
-	MaxItems *string
+	MaxItems *int32
 
 	// (Conditional) For your first request to ListTrafficPolicies, don't include the
 	// TrafficPolicyIdMarker parameter. If you have more traffic policies than the
@@ -66,7 +66,7 @@ type ListTrafficPoliciesOutput struct {
 	// ListTrafficPolicies request that produced the current response.
 	//
 	// This member is required.
-	MaxItems *string
+	MaxItems *int32
 
 	// If the value of IsTruncated is true, TrafficPolicyIdMarker is the ID of the
 	// first traffic policy in the next group of MaxItems traffic policies.

@@ -375,7 +375,7 @@
                     }
                 },
                 "MonitorArnList": {
-                    "target": "com.amazonaws.costexplorer#Values",
+                    "target": "com.amazonaws.costexplorer#MonitorArnList",
                     "traits": {
                         "smithy.api#documentation": "<p>\n        A list of cost anomaly monitors.\n    </p>",
                         "smithy.api#required": {}
@@ -3767,6 +3767,12 @@
                 "smithy.api#documentation": "<p> Details on the modification recommendation.</p>"
             }
         },
+        "com.amazonaws.costexplorer#MonitorArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#Arn"
+            }
+        },
         "com.amazonaws.costexplorer#MonitorDimension": {
             "type": "string",
             "traits": {
@@ -4671,6 +4677,12 @@
                     "target": "com.amazonaws.costexplorer#LookbackPeriodInDays",
                     "traits": {
                         "smithy.api#documentation": "<p> How many days of previous usage that AWS considers when making this\n            recommendation.</p>"
+                    }
+                },
+                "AdditionalMetadata": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional metadata that may be applicable to the recommendation.</p>"
                     }
                 }
             },
@@ -5744,9 +5756,9 @@
                     }
                 },
                 "MonitorArnList": {
-                    "target": "com.amazonaws.costexplorer#Values",
+                    "target": "com.amazonaws.costexplorer#MonitorArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A list of cost anomaly subscription ARNs.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      A list of cost anomaly monitor ARNs.\n    </p>"
                     }
                 },
                 "Subscribers": {

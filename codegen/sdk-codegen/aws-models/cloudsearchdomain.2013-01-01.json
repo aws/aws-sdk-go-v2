@@ -116,10 +116,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "application/json"
+                        "value": "application/json",
+                        "name": "application_json"
                     },
                     {
-                        "value": "application/xml"
+                        "value": "application/xml",
+                        "name": "application_xml"
                     }
                 ]
             }
@@ -371,16 +373,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "simple"
+                        "value": "simple",
+                        "name": "simple"
                     },
                     {
-                        "value": "structured"
+                        "value": "structured",
+                        "name": "structured"
                     },
                     {
-                        "value": "lucene"
+                        "value": "lucene",
+                        "name": "lucene"
                     },
                     {
-                        "value": "dismax"
+                        "value": "dismax",
+                        "name": "dismax"
                     }
                 ]
             }

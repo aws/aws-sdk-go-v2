@@ -4,6 +4,7 @@ package glacier
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
@@ -74,7 +75,7 @@ type ListMultipartUploadsInput struct {
 
 	// Specifies the maximum number of uploads returned in the response body. If this
 	// value is not specified, the List Uploads operation returns up to 50 uploads.
-	Limit *string
+	Limit *int32
 
 	// An opaque string used for pagination. This value specifies the upload at which
 	// the listing of uploads should begin. Get the marker value from a previous List
@@ -165,6 +166,94 @@ func addOperationListMultipartUploadsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// ListMultipartUploadsAPIClient is a client that implements the
+// ListMultipartUploads operation.
+type ListMultipartUploadsAPIClient interface {
+	ListMultipartUploads(context.Context, *ListMultipartUploadsInput, ...func(*Options)) (*ListMultipartUploadsOutput, error)
+}
+
+var _ ListMultipartUploadsAPIClient = (*Client)(nil)
+
+// ListMultipartUploadsPaginatorOptions is the paginator options for
+// ListMultipartUploads
+type ListMultipartUploadsPaginatorOptions struct {
+	// Specifies the maximum number of uploads returned in the response body. If this
+	// value is not specified, the List Uploads operation returns up to 50 uploads.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListMultipartUploadsPaginator is a paginator for ListMultipartUploads
+type ListMultipartUploadsPaginator struct {
+	options   ListMultipartUploadsPaginatorOptions
+	client    ListMultipartUploadsAPIClient
+	params    *ListMultipartUploadsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListMultipartUploadsPaginator returns a new ListMultipartUploadsPaginator
+func NewListMultipartUploadsPaginator(client ListMultipartUploadsAPIClient, params *ListMultipartUploadsInput, optFns ...func(*ListMultipartUploadsPaginatorOptions)) *ListMultipartUploadsPaginator {
+	options := ListMultipartUploadsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListMultipartUploadsInput{}
+	}
+
+	return &ListMultipartUploadsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListMultipartUploadsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListMultipartUploads page.
+func (p *ListMultipartUploadsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListMultipartUploadsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListMultipartUploads(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListMultipartUploads(region string) *awsmiddleware.RegisterServiceMetadata {

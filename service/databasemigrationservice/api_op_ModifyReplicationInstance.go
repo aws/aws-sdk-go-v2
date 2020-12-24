@@ -54,7 +54,7 @@ type ModifyReplicationInstanceInput struct {
 
 	// A value that indicates that minor version upgrades are applied automatically to
 	// the replication instance during the maintenance window. Changing this parameter
-	// doesn't result in an outage, except in the case dsecribed following. The change
+	// doesn't result in an outage, except in the case described following. The change
 	// is asynchronously applied as soon as possible. An outage does result if these
 	// factors apply:
 	//

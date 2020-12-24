@@ -19,7 +19,7 @@ type Outpost struct {
 	// AvailabilityZoneId.
 	AvailabilityZoneId *string
 
-	// The Outpost description.
+	// The description of the Outpost.
 	Description *string
 
 	// The life cycle status.
@@ -39,6 +39,9 @@ type Outpost struct {
 
 	// The ID of the site.
 	SiteId *string
+
+	// The Outpost tags.
+	Tags map[string]string
 }
 
 // Information about a site.
@@ -55,4 +58,7 @@ type Site struct {
 
 	// The ID of the site.
 	SiteId *string
+
+	// The site tags.
+	Tags map[string]string
 }

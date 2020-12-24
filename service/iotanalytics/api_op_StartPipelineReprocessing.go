@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -34,10 +35,18 @@ type StartPipelineReprocessingInput struct {
 	// This member is required.
 	PipelineName *string
 
-	// The end time (exclusive) of raw message data that is reprocessed.
+	// Specifies one or more sets of channel messages that you want to reprocess. If
+	// you use the channelMessages object, you must not specify a value for startTime
+	// and endTime.
+	ChannelMessages *types.ChannelMessages
+
+	// The end time (exclusive) of raw message data that is reprocessed. If you specify
+	// a value for the endTime parameter, you must not use the channelMessages object.
 	EndTime *time.Time
 
-	// The start time (inclusive) of raw message data that is reprocessed.
+	// The start time (inclusive) of raw message data that is reprocessed. If you
+	// specify a value for the startTime parameter, you must not use the
+	// channelMessages object.
 	StartTime *time.Time
 }
 

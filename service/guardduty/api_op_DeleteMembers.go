@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes GuardDuty member accounts (to the current GuardDuty master account)
-// specified by the account IDs.
+// Deletes GuardDuty member accounts (to the current GuardDuty administrator
+// account) specified by the account IDs.
 func (c *Client) DeleteMembers(ctx context.Context, params *DeleteMembersInput, optFns ...func(*Options)) (*DeleteMembersOutput, error) {
 	if params == nil {
 		params = &DeleteMembersInput{}

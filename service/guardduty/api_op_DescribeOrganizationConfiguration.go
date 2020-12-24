@@ -46,13 +46,12 @@ type DescribeOrganizationConfigurationOutput struct {
 	AutoEnable bool
 
 	// Indicates whether the maximum number of allowed member accounts are already
-	// associated with the delegated administrator master account.
+	// associated with the delegated administrator account for your organization.
 	//
 	// This member is required.
 	MemberAccountLimitReached bool
 
-	// An object that describes which data sources are enabled automatically for member
-	// accounts.
+	// Describes which data sources are enabled automatically for member accounts.
 	DataSources *types.OrganizationDataSourceConfigurationsResult
 
 	// Metadata pertaining to the operation's result.

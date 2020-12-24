@@ -50,6 +50,14 @@ type ListMonitoringSchedulesInput struct {
 	// The maximum number of jobs to return in the response. The default value is 10.
 	MaxResults *int32
 
+	// Gets a list of the monitoring schedules for the specified monitoring job
+	// definition.
+	MonitoringJobDefinitionName *string
+
+	// A filter that returns only the monitoring schedules for the specified monitoring
+	// type.
+	MonitoringTypeEquals types.MonitoringType
+
 	// Filter for monitoring schedules whose name contains a specified string.
 	NameContains *string
 
@@ -78,7 +86,7 @@ type ListMonitoringSchedulesOutput struct {
 	MonitoringScheduleSummaries []types.MonitoringScheduleSummary
 
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of jobs, use it in the subsequent reques
+	// the next set of jobs, use it in the subsequent request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

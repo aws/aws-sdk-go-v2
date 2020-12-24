@@ -37,6 +37,9 @@ type UpdateLicenseConfigurationInput struct {
 	// New description of the license configuration.
 	Description *string
 
+	// When true, disassociates a resource when software is uninstalled.
+	DisassociateWhenNotFound *bool
+
 	// New status of the license configuration.
 	LicenseConfigurationStatus types.LicenseConfigurationStatus
 

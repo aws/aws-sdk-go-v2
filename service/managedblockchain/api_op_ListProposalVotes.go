@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the listing of votes for a specified proposal, including the value of
-// each vote and the unique identifier of the member that cast the vote.
+// Returns the list of votes for a specified proposal, including the value of each
+// vote and the unique identifier of the member that cast the vote. Applies only to
+// Hyperledger Fabric.
 func (c *Client) ListProposalVotes(ctx context.Context, params *ListProposalVotesInput, optFns ...func(*Options)) (*ListProposalVotesOutput, error) {
 	if params == nil {
 		params = &ListProposalVotesInput{}
@@ -53,7 +54,7 @@ type ListProposalVotesOutput struct {
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
-	// The listing of votes.
+	// The list of votes.
 	ProposalVotes []types.VoteSummary
 
 	// Metadata pertaining to the operation's result.

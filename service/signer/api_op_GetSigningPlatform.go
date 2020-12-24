@@ -53,6 +53,10 @@ type GetSigningPlatformOutput struct {
 	// The ID of the target signing platform.
 	PlatformId *string
 
+	// A flag indicating whether signatures generated for the signing platform can be
+	// revoked.
+	RevocationSupported bool
+
 	// A list of configurations applied to the target platform at signing.
 	SigningConfiguration *types.SigningConfiguration
 

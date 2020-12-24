@@ -50,9 +50,6 @@ type AutoScalingGroupRecommendation struct {
 	// is correctly provisioned to run your workload based on the chosen instance type.
 	// For optimized resources, Compute Optimizer might recommend a new generation
 	// instance type.
-	//
-	// The values that are returned might be NOT_OPTIMIZED or
-	// OPTIMIZED.
 	Finding Finding
 
 	// The time stamp of when the Auto Scaling group recommendation was last refreshed.
@@ -97,6 +94,58 @@ type AutoScalingGroupRecommendationOption struct {
 	Rank int32
 }
 
+// Describes a filter that returns a more specific list of Amazon Elastic Block
+// Store (Amazon EBS) volume recommendations. This filter is used with the
+// GetEBSVolumeRecommendations action.
+type EBSFilter struct {
+
+	// The name of the filter. Specify Finding to return recommendations with a
+	// specific finding classification (e.g., Optimized).
+	Name EBSFilterName
+
+	// The value of the filter. The valid values are Optimized, or NotOptimized.
+	Values []string
+}
+
+// Describes a utilization metric of an Amazon Elastic Block Store (Amazon EBS)
+// volume. Compare the utilization metric data of your resource against its
+// projected utilization metric data to determine the performance difference
+// between your current resource and the recommended option.
+type EBSUtilizationMetric struct {
+
+	// The name of the utilization metric. The following utilization metrics are
+	// available:
+	//
+	// * VolumeReadOpsPerSecond - The completed read operations per second
+	// from the volume in a specified period of time. Unit: Count
+	//
+	// *
+	// VolumeWriteOpsPerSecond - The completed write operations per second to the
+	// volume in a specified period of time. Unit: Count
+	//
+	// * VolumeReadBytesPerSecond -
+	// The bytes read per second from the volume in a specified period of time. Unit:
+	// Bytes
+	//
+	// * VolumeWriteBytesPerSecond - The bytes written to the volume in a
+	// specified period of time. Unit: Bytes
+	Name EBSMetricName
+
+	// The statistic of the utilization metric. The following statistics are
+	// available:
+	//
+	// * Average - This is the value of Sum / SampleCount during the
+	// specified period, or the average value observed during the specified period.
+	//
+	// *
+	// Maximum - The highest value observed during the specified period. Use this value
+	// to determine high volumes of activity for your application.
+	Statistic MetricStatistic
+
+	// The value of the utilization metric.
+	Value float64
+}
+
 // Describes the destination of the recommendations export and metadata files.
 type ExportDestination struct {
 
@@ -106,22 +155,31 @@ type ExportDestination struct {
 	S3 *S3Destination
 }
 
-// Describes a filter that returns a more specific list of recommendations.
+// Describes a filter that returns a more specific list of recommendations. This
+// filter is used with the GetAutoScalingGroupRecommendations and
+// GetEC2InstanceRecommendations actions.
 type Filter struct {
 
 	// The name of the filter. Specify Finding to return recommendations with a
-	// specific findings classification (e.g., Overprovisioned). Specify
+	// specific finding classification (e.g., Overprovisioned). Specify
 	// RecommendationSourceType to return recommendations of a specific resource type
 	// (e.g., AutoScalingGroup).
 	Name FilterName
 
-	// The value of the filter. If you specify the name parameter as Finding, and you
-	// request recommendations for an instance, then the valid values are
-	// Underprovisioned, Overprovisioned, NotOptimized, or Optimized. If you specify
-	// the name parameter as Finding, and you request recommendations for an Auto
-	// Scaling group, then the valid values are Optimized, or NotOptimized. If you
-	// specify the name parameter as RecommendationSourceType, then the valid values
-	// are Ec2Instance, or AutoScalingGroup.
+	// The value of the filter. The valid values for this parameter are as follows,
+	// depending on what you specify for the name parameter and the resource type that
+	// you wish to filter results for:
+	//
+	// * Specify Optimized or NotOptimized if you
+	// specified the name parameter as Finding and you want to filter results for Auto
+	// Scaling groups.
+	//
+	// * Specify Underprovisioned, Overprovisioned, or Optimized if
+	// you specified the name parameter as Finding and you want to filter results for
+	// EC2 instances.
+	//
+	// * Specify Ec2Instance or AutoScalingGroup if you specified the
+	// name parameter as RecommendationSourceType.
 	Values []string
 }
 
@@ -171,9 +229,6 @@ type InstanceRecommendation struct {
 	// optimized instance runs your workloads with optimal performance and
 	// infrastructure cost. For optimized resources, AWS Compute Optimizer might
 	// recommend a new generation instance type.
-	//
-	// The values that are returned might be
-	// UNDER_PROVISIONED, OVER_PROVISIONED, or OPTIMIZED.
 	Finding Finding
 
 	// The Amazon Resource Name (ARN) of the current instance.
@@ -233,16 +288,26 @@ type JobFilter struct {
 	// a specific status (e.g, Complete).
 	Name JobFilterName
 
-	// The value of the filter. If you specify the name parameter as ResourceType, the
-	// valid values are Ec2Instance or AutoScalingGroup. If you specify the name
-	// parameter as JobStatus, the valid values are Queued, InProgress, Complete, or
-	// Failed.
+	// The value of the filter. The valid values for this parameter are as follows,
+	// depending on what you specify for the name parameter:
+	//
+	// * Specify Ec2Instance or
+	// AutoScalingGroup if you specified the name parameter as ResourceType. There is
+	// no filter for EBS volumes because volume recommendations cannot be exported at
+	// this time.
+	//
+	// * Specify Queued, InProgress, Complete, or Failed if you specified
+	// the name parameter as JobStatus.
 	Values []string
 }
 
 // Describes a projected utilization metric of a recommendation option, such as an
-// Amazon EC2 instance. The Cpu and Memory metrics are the only projected
-// utilization metrics returned when you run the
+// Amazon EC2 instance. This represents the projected utilization of a
+// recommendation option had you used that resource during the analyzed period.
+// Compare the utilization metric data of your resource against its projected
+// utilization metric data to determine the performance difference between your
+// current resource and the recommended option. The Cpu and Memory metrics are the
+// only projected utilization metrics returned when you run the
 // GetEC2RecommendationProjectedMetrics action. Additionally, the Memory metric is
 // returned only for resources that have the unified CloudWatch agent installed on
 // them. For more information, see Enabling Memory Utilization with the CloudWatch
@@ -250,7 +315,24 @@ type JobFilter struct {
 // (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
 type ProjectedMetric struct {
 
-	// The name of the projected utilization metric.
+	// The name of the projected utilization metric. The following projected
+	// utilization metrics are returned:
+	//
+	// * Cpu - The projected percentage of allocated
+	// EC2 compute units that would be in use on the recommendation option had you used
+	// that resource during the analyzed period. This metric identifies the processing
+	// power required to run an application on the recommendation option. Depending on
+	// the instance type, tools in your operating system can show a lower percentage
+	// than CloudWatch when the instance is not allocated a full processor core. Units:
+	// Percent
+	//
+	// * Memory - The percentage of memory that would be in use on the
+	// recommendation option had you used that resource during the analyzed period.
+	// This metric identifies the amount of memory required to run an application on
+	// the recommendation option. Units: Percent The Memory metric is returned only for
+	// resources that have the unified CloudWatch agent installed on them. For more
+	// information, see Enabling Memory Utilization with the CloudWatch Agent
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
 	Name MetricName
 
 	// The time stamps of the projected utilization metric.
@@ -383,17 +465,137 @@ type Summary struct {
 }
 
 // Describes a utilization metric of a resource, such as an Amazon EC2 instance.
+// Compare the utilization metric data of your resource against its projected
+// utilization metric data to determine the performance difference between your
+// current resource and the recommended option.
 type UtilizationMetric struct {
 
-	// The name of the utilization metric. The Memory metric is returned only for
-	// resources that have the unified CloudWatch agent installed on them. For more
-	// information, see Enabling Memory Utilization with the CloudWatch Agent
+	// The name of the utilization metric. The following utilization metrics are
+	// available:
+	//
+	// * Cpu - The percentage of allocated EC2 compute units that are
+	// currently in use on the instance. This metric identifies the processing power
+	// required to run an application on the instance. Depending on the instance type,
+	// tools in your operating system can show a lower percentage than CloudWatch when
+	// the instance is not allocated a full processor core. Units: Percent
+	//
+	// * Memory -
+	// The percentage of memory that is currently in use on the instance. This metric
+	// identifies the amount of memory required to run an application on the instance.
+	// Units: Percent The Memory metric is returned only for resources that have the
+	// unified CloudWatch agent installed on them. For more information, see Enabling
+	// Memory Utilization with the CloudWatch Agent
 	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
+	//
+	// *
+	// EBS_READ_OPS_PER_SECOND - The completed read operations from all EBS volumes
+	// attached to the instance in a specified period of time. Unit: Count
+	//
+	// *
+	// EBS_WRITE_OPS_PER_SECOND - The completed write operations to all EBS volumes
+	// attached to the instance in a specified period of time. Unit: Count
+	//
+	// *
+	// EBS_READ_BYTES_PER_SECOND - The bytes read from all EBS volumes attached to the
+	// instance in a specified period of time. Unit: Bytes
+	//
+	// *
+	// EBS_WRITE_BYTES_PER_SECOND - The bytes written to all EBS volumes attached to
+	// the instance in a specified period of time. Unit: Bytes
 	Name MetricName
 
-	// The statistic of the utilization metric.
+	// The statistic of the utilization metric. The following statistics are
+	// available:
+	//
+	// * Average - This is the value of Sum / SampleCount during the
+	// specified period, or the average value observed during the specified period.
+	//
+	// *
+	// Maximum - The highest value observed during the specified period. Use this value
+	// to determine high volumes of activity for your application.
 	Statistic MetricStatistic
 
 	// The value of the utilization metric.
 	Value float64
+}
+
+// Describes the configuration of an Amazon Elastic Block Store (Amazon EBS)
+// volume.
+type VolumeConfiguration struct {
+
+	// The baseline IOPS of the volume.
+	VolumeBaselineIOPS int32
+
+	// The baseline throughput of the volume.
+	VolumeBaselineThroughput int32
+
+	// The burst IOPS of the volume.
+	VolumeBurstIOPS int32
+
+	// The burst throughput of the volume.
+	VolumeBurstThroughput int32
+
+	// The size of the volume, in GiB.
+	VolumeSize int32
+
+	// The volume type. This can be gp2 for General Purpose SSD, io1 or io2 for
+	// Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or
+	// standard for Magnetic volumes.
+	VolumeType *string
+}
+
+// Describes an Amazon Elastic Block Store (Amazon EBS) volume recommendation.
+type VolumeRecommendation struct {
+
+	// The AWS account ID of the volume.
+	AccountId *string
+
+	// An array of objects that describe the current configuration of the volume.
+	CurrentConfiguration *VolumeConfiguration
+
+	// The finding classification for the volume. Findings for volumes include:
+	//
+	// *
+	// NotOptimized —A volume is considered not optimized when AWS Compute Optimizer
+	// identifies a recommendation that can provide better performance for your
+	// workload.
+	//
+	// * Optimized —An volume is considered optimized when Compute Optimizer
+	// determines that the volume is correctly provisioned to run your workload based
+	// on the chosen volume type. For optimized resources, Compute Optimizer might
+	// recommend a new generation volume type.
+	Finding EBSFinding
+
+	// The time stamp of when the volume recommendation was last refreshed.
+	LastRefreshTimestamp *time.Time
+
+	// The number of days for which utilization metrics were analyzed for the volume.
+	LookBackPeriodInDays float64
+
+	// An array of objects that describe the utilization metrics of the volume.
+	UtilizationMetrics []EBSUtilizationMetric
+
+	// The Amazon Resource Name (ARN) of the current volume.
+	VolumeArn *string
+
+	// An array of objects that describe the recommendation options for the volume.
+	VolumeRecommendationOptions []VolumeRecommendationOption
+}
+
+// Describes a recommendation option for an Amazon Elastic Block Store (Amazon EBS)
+// instance.
+type VolumeRecommendationOption struct {
+
+	// An array of objects that describe a volume configuration.
+	Configuration *VolumeConfiguration
+
+	// The performance risk of the volume recommendation option. Performance risk is
+	// the likelihood of the recommended volume type not meeting the performance
+	// requirement of your workload. The lowest performance risk is categorized as 0,
+	// and the highest as 5.
+	PerformanceRisk float64
+
+	// The rank of the volume recommendation option. The top recommendation option is
+	// ranked as 1.
+	Rank int32
 }

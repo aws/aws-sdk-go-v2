@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You do not have sufficient access to perform this action.
+// You do not have sufficient permission to perform this action.
 type AccessDeniedException struct {
 	Message *string
 }
@@ -25,8 +25,7 @@ func (e *AccessDeniedException) ErrorCode() string             { return "AccessD
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The action you attempted is not allowed unless Service Access with Service
-// Quotas is enabled in your organization. To enable, call
-// AssociateServiceQuotaTemplate.
+// Quotas is enabled in your organization.
 type AWSServiceAccessNotEnabledException struct {
 	Message *string
 }
@@ -102,7 +101,7 @@ func (e *InvalidPaginationTokenException) ErrorCode() string {
 }
 func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Invalid input was provided for the .
+// The resource is in an invalid state.
 type InvalidResourceStateException struct {
 	Message *string
 }
@@ -155,9 +154,7 @@ func (e *NoSuchResourceException) ErrorMessage() string {
 func (e *NoSuchResourceException) ErrorCode() string             { return "NoSuchResourceException" }
 func (e *NoSuchResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The organization that your account belongs to, is not in All Features mode. To
-// enable all features mode, see EnableAllFeatures
-// (https://docs.aws.amazon.com/organizations/latest/APIReference/API_EnableAllFeatures.html).
+// The organization that your account belongs to is not in All Features mode.
 type OrganizationNotInAllFeaturesModeException struct {
 	Message *string
 }
@@ -231,8 +228,7 @@ func (e *ServiceException) ErrorMessage() string {
 func (e *ServiceException) ErrorCode() string             { return "ServiceException" }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The quota request template is not associated with your organization. To use the
-// template, call AssociateServiceQuotaTemplate.
+// The quota request template is not associated with your organization.
 type ServiceQuotaTemplateNotInUseException struct {
 	Message *string
 }
@@ -253,8 +249,24 @@ func (e *ServiceQuotaTemplateNotInUseException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The Service Quotas template is not available in the Region where you are making
-// the request. Please make the request in us-east-1.
+// The specified tag is a reserved word and cannot be used.
+type TagPolicyViolationException struct {
+	Message *string
+}
+
+func (e *TagPolicyViolationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TagPolicyViolationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TagPolicyViolationException) ErrorCode() string             { return "TagPolicyViolationException" }
+func (e *TagPolicyViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The Service Quotas template is not available in this AWS Region.
 type TemplatesNotAvailableInRegionException struct {
 	Message *string
 }
@@ -292,3 +304,23 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 }
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You've exceeded the number of tags allowed for a resource. For more information,
+// see Tag restrictions
+// (https://docs.aws.amazon.com/servicequotas/latest/userguide/sq-tagging.html#sq-tagging-restrictions)
+// in the Service Quotas User Guide.
+type TooManyTagsException struct {
+	Message *string
+}
+
+func (e *TooManyTagsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyTagsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

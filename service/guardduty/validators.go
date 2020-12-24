@@ -1311,11 +1311,11 @@ func validateAccountDetail(v *types.AccountDetail) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AccountDetail"}
-	if v.Email == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Email"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Email == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Email"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1419,14 +1419,14 @@ func validateOpAcceptInvitationInput(v *AcceptInvitationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AcceptInvitationInput"}
-	if v.InvitationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InvitationId"))
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
 	if v.MasterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MasterId"))
 	}
-	if v.DetectorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	if v.InvitationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvitationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1440,11 +1440,11 @@ func validateOpArchiveFindingsInput(v *ArchiveFindingsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ArchiveFindingsInput"}
-	if v.FindingIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FindingIds"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.FindingIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1475,11 +1475,11 @@ func validateOpCreateFilterInput(v *CreateFilterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFilterInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.FindingCriteria == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FindingCriteria"))
@@ -1499,14 +1499,14 @@ func validateOpCreateIPSetInput(v *CreateIPSetInput) error {
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
-	if v.Location == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Location"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1542,14 +1542,14 @@ func validateOpCreatePublishingDestinationInput(v *CreatePublishingDestinationIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePublishingDestinationInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
 	if len(v.DestinationType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationType"))
 	}
 	if v.DestinationProperties == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationProperties"))
-	}
-	if v.DetectorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1578,17 +1578,17 @@ func validateOpCreateThreatIntelSetInput(v *CreateThreatIntelSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateThreatIntelSetInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
-	if v.Location == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1632,11 +1632,11 @@ func validateOpDeleteFilterInput(v *DeleteFilterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFilterInput"}
-	if v.FilterName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FilterName"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.FilterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1683,11 +1683,11 @@ func validateOpDeleteMembersInput(v *DeleteMembersInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMembersInput"}
-	if v.AccountIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1701,11 +1701,11 @@ func validateOpDeletePublishingDestinationInput(v *DeletePublishingDestinationIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeletePublishingDestinationInput"}
-	if v.DestinationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationId"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.DestinationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1719,11 +1719,11 @@ func validateOpDeleteThreatIntelSetInput(v *DeleteThreatIntelSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteThreatIntelSetInput"}
-	if v.ThreatIntelSetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ThreatIntelSetId"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.ThreatIntelSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatIntelSetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1866,11 +1866,11 @@ func validateOpGetFindingsInput(v *GetFindingsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetFindingsInput"}
-	if v.FindingIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FindingIds"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.FindingIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1884,11 +1884,11 @@ func validateOpGetFindingsStatisticsInput(v *GetFindingsStatisticsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetFindingsStatisticsInput"}
-	if v.FindingStatisticTypes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FindingStatisticTypes"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.FindingStatisticTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingStatisticTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1971,11 +1971,11 @@ func validateOpGetThreatIntelSetInput(v *GetThreatIntelSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetThreatIntelSetInput"}
-	if v.ThreatIntelSetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ThreatIntelSetId"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.ThreatIntelSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatIntelSetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1989,11 +1989,11 @@ func validateOpGetUsageStatisticsInput(v *GetUsageStatisticsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetUsageStatisticsInput"}
-	if len(v.UsageStatisticType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("UsageStatisticType"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if len(v.UsageStatisticType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("UsageStatisticType"))
 	}
 	if v.UsageCriteria == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UsageCriteria"))
@@ -2014,11 +2014,11 @@ func validateOpInviteMembersInput(v *InviteMembersInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InviteMembersInput"}
-	if v.AccountIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2155,11 +2155,11 @@ func validateOpStopMonitoringMembersInput(v *StopMonitoringMembersInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StopMonitoringMembersInput"}
-	if v.AccountIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2173,11 +2173,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2191,11 +2191,11 @@ func validateOpUnarchiveFindingsInput(v *UnarchiveFindingsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UnarchiveFindingsInput"}
-	if v.FindingIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FindingIds"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.FindingIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2268,11 +2268,11 @@ func validateOpUpdateFindingsFeedbackInput(v *UpdateFindingsFeedbackInput) error
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
-	if len(v.Feedback) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Feedback"))
-	}
 	if v.FindingIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FindingIds"))
+	}
+	if len(v.Feedback) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Feedback"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2286,11 +2286,11 @@ func validateOpUpdateIPSetInput(v *UpdateIPSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateIPSetInput"}
-	if v.IpSetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IpSetId"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.IpSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpSetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2307,13 +2307,13 @@ func validateOpUpdateMemberDetectorsInput(v *UpdateMemberDetectorsInput) error {
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
 	if v.DataSources != nil {
 		if err := validateDataSourceConfigurations(v.DataSources); err != nil {
 			invalidParams.AddNested("DataSources", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.AccountIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2327,13 +2327,13 @@ func validateOpUpdateOrganizationConfigurationInput(v *UpdateOrganizationConfigu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateOrganizationConfigurationInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
 	if v.DataSources != nil {
 		if err := validateOrganizationDataSourceConfigurations(v.DataSources); err != nil {
 			invalidParams.AddNested("DataSources", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DetectorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2365,11 +2365,11 @@ func validateOpUpdateThreatIntelSetInput(v *UpdateThreatIntelSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateThreatIntelSetInput"}
-	if v.ThreatIntelSetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ThreatIntelSetId"))
-	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.ThreatIntelSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreatIntelSetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

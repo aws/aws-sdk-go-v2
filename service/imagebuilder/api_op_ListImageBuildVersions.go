@@ -4,7 +4,6 @@ package imagebuilder
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
@@ -122,89 +121,6 @@ func addOperationListImageBuildVersionsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
-}
-
-// ListImageBuildVersionsAPIClient is a client that implements the
-// ListImageBuildVersions operation.
-type ListImageBuildVersionsAPIClient interface {
-	ListImageBuildVersions(context.Context, *ListImageBuildVersionsInput, ...func(*Options)) (*ListImageBuildVersionsOutput, error)
-}
-
-var _ ListImageBuildVersionsAPIClient = (*Client)(nil)
-
-// ListImageBuildVersionsPaginatorOptions is the paginator options for
-// ListImageBuildVersions
-type ListImageBuildVersionsPaginatorOptions struct {
-	// The maximum items to return in a request.
-	Limit int32
-
-	// Set to true if pagination should stop if the service returns a pagination token
-	// that matches the most recent token provided to the service.
-	StopOnDuplicateToken bool
-}
-
-// ListImageBuildVersionsPaginator is a paginator for ListImageBuildVersions
-type ListImageBuildVersionsPaginator struct {
-	options   ListImageBuildVersionsPaginatorOptions
-	client    ListImageBuildVersionsAPIClient
-	params    *ListImageBuildVersionsInput
-	nextToken *string
-	firstPage bool
-}
-
-// NewListImageBuildVersionsPaginator returns a new ListImageBuildVersionsPaginator
-func NewListImageBuildVersionsPaginator(client ListImageBuildVersionsAPIClient, params *ListImageBuildVersionsInput, optFns ...func(*ListImageBuildVersionsPaginatorOptions)) *ListImageBuildVersionsPaginator {
-	options := ListImageBuildVersionsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
-	}
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListImageBuildVersionsInput{}
-	}
-
-	return &ListImageBuildVersionsPaginator{
-		options:   options,
-		client:    client,
-		params:    params,
-		firstPage: true,
-	}
-}
-
-// HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListImageBuildVersionsPaginator) HasMorePages() bool {
-	return p.firstPage || p.nextToken != nil
-}
-
-// NextPage retrieves the next ListImageBuildVersions page.
-func (p *ListImageBuildVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListImageBuildVersionsOutput, error) {
-	if !p.HasMorePages() {
-		return nil, fmt.Errorf("no more pages available")
-	}
-
-	params := *p.params
-	params.NextToken = p.nextToken
-
-	params.MaxResults = p.options.Limit
-
-	result, err := p.client.ListImageBuildVersions(ctx, &params, optFns...)
-	if err != nil {
-		return nil, err
-	}
-	p.firstPage = false
-
-	prevToken := p.nextToken
-	p.nextToken = result.NextToken
-
-	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
-		p.nextToken = nil
-	}
-
-	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListImageBuildVersions(region string) *awsmiddleware.RegisterServiceMetadata {

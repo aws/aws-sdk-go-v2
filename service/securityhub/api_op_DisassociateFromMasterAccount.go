@@ -11,7 +11,9 @@ import (
 )
 
 // Disassociates the current Security Hub member account from the associated master
-// account.
+// account. This operation is only used by accounts that are not part of an
+// organization. For organization accounts, only the master account (the designated
+// Security Hub administrator) can disassociate a member account.
 func (c *Client) DisassociateFromMasterAccount(ctx context.Context, params *DisassociateFromMasterAccountInput, optFns ...func(*Options)) (*DisassociateFromMasterAccountOutput, error) {
 	if params == nil {
 		params = &DisassociateFromMasterAccountInput{}

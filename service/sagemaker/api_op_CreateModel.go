@@ -78,10 +78,10 @@ type CreateModelInput struct {
 	// model is deployed for predictions.
 	PrimaryContainer *types.ContainerDefinition
 
-	// An array of key-value pairs. For more information, see Using Cost Allocation
-	// Tags
-	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
-	// in the AWS Billing and Cost Management User Guide.
+	// An array of key-value pairs. You can use tags to categorize your AWS resources
+	// in different ways, for example, by purpose, owner, or environment. For more
+	// information, see Tagging AWS Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []types.Tag
 
 	// A VpcConfig object that specifies the VPC that you want your model to connect

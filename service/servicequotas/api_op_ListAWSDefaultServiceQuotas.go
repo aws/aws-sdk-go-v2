@@ -12,17 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all default service quotas for the specified AWS service or all AWS
-// services. ListAWSDefaultServiceQuotas is similar to ListServiceQuotas except for
-// the Value object. The Value object returned by ListAWSDefaultServiceQuotas is
-// the default value assigned by AWS. This request returns a list of all service
-// quotas for the specified service. The listing of each you'll see the default
-// values are the values that AWS provides for the quotas. Always check the
-// NextToken response parameter when calling any of the List* operations. These
-// operations can return an unexpected list of results, even when there are more
-// results available. When this happens, the NextToken response parameter contains
-// a value to pass the next call to the same API to request the next part of the
-// list.
+// Lists the default values for the quotas for the specified AWS service. A default
+// value does not reflect any quota increases.
 func (c *Client) ListAWSDefaultServiceQuotas(ctx context.Context, params *ListAWSDefaultServiceQuotasInput, optFns ...func(*Options)) (*ListAWSDefaultServiceQuotasOutput, error) {
 	if params == nil {
 		params = &ListAWSDefaultServiceQuotasInput{}
@@ -40,40 +31,27 @@ func (c *Client) ListAWSDefaultServiceQuotas(ctx context.Context, params *ListAW
 
 type ListAWSDefaultServiceQuotasInput struct {
 
-	// Specifies the service that you want to use.
+	// The service identifier.
 	//
 	// This member is required.
 	ServiceCode *string
 
-	// (Optional) Limits the number of results that you want to include in the
-	// response. If you don't include this parameter, the response defaults to a value
-	// that's specific to the operation. If additional items exist beyond the specified
-	// maximum, the NextToken element is present and has a value (isn't null). Include
-	// that value as the NextToken request parameter in the call to the operation to
-	// get the next part of the results. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, if any, make another call with the token returned from this
+	// call.
 	MaxResults *int32
 
-	// (Optional) Use this parameter in a request if you receive a NextToken response
-	// in a previous request that indicates that there's more output available. In a
-	// subsequent call, set it to the value of the previous call's NextToken response
-	// to indicate where the output should continue from. If additional items exist
-	// beyond the specified maximum, the NextToken element is present and has a value
-	// (isn't null). Include that value as the NextToken request parameter in the call
-	// to the operation to get the next part of the results. You should check NextToken
-	// after every operation to ensure that you receive all of the results.
+	// The token for the next page of results.
 	NextToken *string
 }
 
 type ListAWSDefaultServiceQuotasOutput struct {
 
-	// (Optional) Use this parameter in a request if you receive a NextToken response
-	// in a previous request that indicates that there's more output available. In a
-	// subsequent call, set it to the value of the previous call's NextToken response
-	// to indicate where the output should continue from.
+	// The token to use to retrieve the next page of results. This value is null when
+	// there are no more results to return.
 	NextToken *string
 
-	// A list of the quotas in the account with the AWS default values.
+	// Information about the quotas.
 	Quotas []types.ServiceQuota
 
 	// Metadata pertaining to the operation's result.
@@ -151,13 +129,9 @@ var _ ListAWSDefaultServiceQuotasAPIClient = (*Client)(nil)
 // ListAWSDefaultServiceQuotasPaginatorOptions is the paginator options for
 // ListAWSDefaultServiceQuotas
 type ListAWSDefaultServiceQuotasPaginatorOptions struct {
-	// (Optional) Limits the number of results that you want to include in the
-	// response. If you don't include this parameter, the response defaults to a value
-	// that's specific to the operation. If additional items exist beyond the specified
-	// maximum, the NextToken element is present and has a value (isn't null). Include
-	// that value as the NextToken request parameter in the call to the operation to
-	// get the next part of the results. You should check NextToken after every
-	// operation to ensure that you receive all of the results.
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, if any, make another call with the token returned from this
+	// call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

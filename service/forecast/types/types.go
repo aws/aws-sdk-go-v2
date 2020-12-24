@@ -56,10 +56,9 @@ type ContinuousParameterRange struct {
 	ScalingType ScalingType
 }
 
-// The destination for an exported forecast, an AWS Identity and Access Management
-// (IAM) role that allows Amazon Forecast to access the location and, optionally,
-// an AWS Key Management Service (KMS) key. This object is submitted in the
-// CreateForecastExportJob request.
+// The destination for an export job, an AWS Identity and Access Management (IAM)
+// role that allows Amazon Forecast to access the location and, optionally, an AWS
+// Key Management Service (KMS) key.
 type DataDestination struct {
 
 	// The path to an Amazon Simple Storage Service (Amazon S3) bucket along with the
@@ -200,8 +199,7 @@ type EncryptionConfig struct {
 // object is part of the Metrics object.
 type ErrorMetric struct {
 
-	// Forecast types can be quantiles from 0.01 to 0.99 (by increments of 0.01), and
-	// the mean.
+	// The Forecast type used to compute WAPE and RMSE.
 	ForecastType *string
 
 	// The root-mean-square error (RMSE).
@@ -577,6 +575,52 @@ type ParameterRanges struct {
 	IntegerParameterRanges []IntegerParameterRange
 }
 
+// Provides a summary of the predictor backtest export job properties used in the
+// ListPredictorBacktestExportJobs operation. To get a complete set of properties,
+// call the DescribePredictorBacktestExportJob operation, and provide the listed
+// PredictorBacktestExportJobArn.
+type PredictorBacktestExportJobSummary struct {
+
+	// When the predictor backtest export job was created.
+	CreationTime *time.Time
+
+	// The destination for an export job, an AWS Identity and Access Management (IAM)
+	// role that allows Amazon Forecast to access the location and, optionally, an AWS
+	// Key Management Service (KMS) key.
+	Destination *DataDestination
+
+	// When the last successful export job finished.
+	LastModificationTime *time.Time
+
+	// Information about any errors that may have occurred during the backtest export.
+	Message *string
+
+	// The Amazon Resource Name (ARN) of the predictor backtest export job.
+	PredictorBacktestExportJobArn *string
+
+	// The name of the predictor backtest export job.
+	PredictorBacktestExportJobName *string
+
+	// The status of the predictor backtest export job. States include:
+	//
+	// * ACTIVE
+	//
+	// *
+	// CREATE_PENDING
+	//
+	// * CREATE_IN_PROGRESS
+	//
+	// * CREATE_FAILED
+	//
+	// * DELETE_PENDING
+	//
+	// *
+	// DELETE_IN_PROGRESS
+	//
+	// * DELETE_FAILED
+	Status *string
+}
+
 // The algorithm used to perform a backtest and the status of those tests.
 type PredictorExecution struct {
 
@@ -649,8 +693,7 @@ type PredictorSummary struct {
 // and an AWS Identity and Access Management (IAM) role that Amazon Forecast can
 // assume to access the file(s). Optionally, includes an AWS Key Management Service
 // (KMS) key. This object is part of the DataSource object that is submitted in the
-// CreateDatasetImportJob request, and part of the DataDestination object that is
-// submitted in the CreateForecastExportJob request.
+// CreateDatasetImportJob request, and part of the DataDestination object.
 type S3Config struct {
 
 	// The path to an Amazon Simple Storage Service (Amazon S3) bucket or file(s) in an

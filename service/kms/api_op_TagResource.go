@@ -11,19 +11,35 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or edits tags for a customer master key (CMK). You cannot perform this
-// operation on a CMK in a different AWS account. Each tag consists of a tag key
-// and a tag value. Tag keys and tag values are both required, but tag values can
-// be empty (null) strings. You can only use a tag key once for each CMK. If you
-// use the tag key again, AWS KMS replaces the current tag value with the specified
-// value. For information about the rules that apply to tag keys and tag values,
-// see User-Defined Tag Restrictions
-// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
-// in the AWS Billing and Cost Management User Guide. The CMK that you use for this
-// operation must be in a compatible key state. For details, see How Key State
-// Affects Use of a Customer Master Key
+// Adds or edits tags on a customer managed CMK
+// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk).
+// Each tag consists of a tag key and a tag value, both of which are case-sensitive
+// strings. The tag value can be an empty (null) string. To add a tag, specify a
+// new tag key and a tag value. To edit a tag, specify an existing tag key and a
+// new tag value. You can use this operation to tag a customer managed CMK
+// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk),
+// but you cannot tag an AWS managed CMK
+// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk),
+// an AWS owned CMK
+// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk),
+// or an alias. For general information about tags, including the format and
+// syntax, see Tagging AWS resources
+// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+// Web Services General Reference. For information about using tags in AWS KMS, see
+// Tagging keys
+// (https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html). The
+// CMK that you use for this operation must be in a compatible key state. For
+// details, see How Key State Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide.
+// AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a CMK in a different AWS account. Required
+// permissions: kms:TagResource
+// (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
+// (key policy) Related operations
+//
+// * UntagResource
+//
+// * ListResourceTags
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -41,8 +57,8 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// A unique identifier for the CMK you are tagging. Specify the key ID or the
-	// Amazon Resource Name (ARN) of the CMK. For example:
+	// Identifies a customer managed CMK in the account and Region. Specify the key ID
+	// or the Amazon Resource Name (ARN) of the CMK. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
@@ -56,7 +72,10 @@ type TagResourceInput struct {
 	// This member is required.
 	KeyId *string
 
-	// One or more tags. Each tag consists of a tag key and a tag value.
+	// One or more tags. Each tag consists of a tag key and a tag value. The tag value
+	// can be an empty (null) string. You cannot have more than one tag on a CMK with
+	// the same tag key. If you specify an existing tag key with a different tag value,
+	// AWS KMS replaces the current tag value with the specified one.
 	//
 	// This member is required.
 	Tags []types.Tag

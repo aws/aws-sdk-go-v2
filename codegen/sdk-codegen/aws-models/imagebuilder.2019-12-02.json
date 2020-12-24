@@ -151,6 +151,9 @@
         "com.amazonaws.imagebuilder#Arn": {
             "type": "string"
         },
+        "com.amazonaws.imagebuilder#Boolean": {
+            "type": "boolean"
+        },
         "com.amazonaws.imagebuilder#CallRateLimitExceededException": {
             "type": "structure",
             "members": {
@@ -585,6 +588,253 @@
                 "target": "com.amazonaws.imagebuilder#ComponentVersion"
             }
         },
+        "com.amazonaws.imagebuilder#Container": {
+            "type": "structure",
+            "members": {
+                "region": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Containers and container images are Region-specific. This is the Region context for the container.</p>"
+                    }
+                },
+                "imageUris": {
+                    "target": "com.amazonaws.imagebuilder#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of URIs for containers created in the context Region.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container encapsulates the runtime environment for an application.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#ContainerDistributionConfiguration": {
+            "type": "structure",
+            "members": {
+                "description": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the container distribution configuration.</p>"
+                    }
+                },
+                "containerTags": {
+                    "target": "com.amazonaws.imagebuilder#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags that are attached to the container distribution configuration.</p>"
+                    }
+                },
+                "targetRepository": {
+                    "target": "com.amazonaws.imagebuilder#TargetContainerRepository",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination repository for the container distribution configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container distribution settings for encryption, licensing, and sharing in a specific Region.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#ContainerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#Container"
+            }
+        },
+        "com.amazonaws.imagebuilder#ContainerRecipe": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.imagebuilder#ImageBuilderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container recipe.</p>"
+                    }
+                },
+                "containerType": {
+                    "target": "com.amazonaws.imagebuilder#ContainerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of container, such as Docker.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the container recipe.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the container recipe.</p>"
+                    }
+                },
+                "platform": {
+                    "target": "com.amazonaws.imagebuilder#Platform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system platform for the container, such as Windows or Linux.</p>"
+                    }
+                },
+                "owner": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the container recipe.</p>"
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.imagebuilder#VersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The semantic version of the container recipe (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).</p>"
+                    }
+                },
+                "components": {
+                    "target": "com.amazonaws.imagebuilder#ComponentConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Components for build and test that are included in the container recipe.</p>"
+                    }
+                },
+                "dockerfileTemplateData": {
+                    "target": "com.amazonaws.imagebuilder#DockerFileTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Dockerfiles are text documents that are used to build Docker containers, and ensure that they contain all of the elements required by the application running inside. The template data consists of contextual variables where Image Builder places build information or scripts, based on your container image recipe.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies which KMS key is used to encrypt the container image for distribution to the target Region.</p>"
+                    }
+                },
+                "encrypted": {
+                    "target": "com.amazonaws.imagebuilder#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A flag that indicates if the target container is encrypted.</p>"
+                    }
+                },
+                "parentImage": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source image for the container recipe.</p>"
+                    }
+                },
+                "dateCreated": {
+                    "target": "com.amazonaws.imagebuilder#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when this container recipe was created.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags that are attached to the container recipe.</p>"
+                    }
+                },
+                "workingDirectory": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The working directory for use during build and test workflows.</p>"
+                    }
+                },
+                "targetRepository": {
+                    "target": "com.amazonaws.imagebuilder#TargetContainerRepository",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination repository for the container image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container recipe.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#ContainerRecipeArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:\\d{12}|aws):container-recipe/[a-z0-9-_]+/\\d+\\.\\d+\\.\\d+$"
+            }
+        },
+        "com.amazonaws.imagebuilder#ContainerRecipeSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.imagebuilder#ImageBuilderArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container recipe.</p>"
+                    }
+                },
+                "containerType": {
+                    "target": "com.amazonaws.imagebuilder#ContainerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of container, such as \"Docker\".</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the container recipe.</p>"
+                    }
+                },
+                "platform": {
+                    "target": "com.amazonaws.imagebuilder#Platform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system platform for the container, such as Windows or Linux.</p>"
+                    }
+                },
+                "owner": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the container recipe.</p>"
+                    }
+                },
+                "parentImage": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source image for the container recipe.</p>"
+                    }
+                },
+                "dateCreated": {
+                    "target": "com.amazonaws.imagebuilder#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when this container recipe was created.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags that are attached to the container recipe.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a container recipe</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#ContainerRecipeSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#ContainerRecipeSummary"
+            }
+        },
+        "com.amazonaws.imagebuilder#ContainerRepositoryService": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ECR",
+                        "name": "ECR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.imagebuilder#ContainerType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DOCKER",
+                        "name": "DOCKER"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.imagebuilder#CreateComponent": {
             "type": "operation",
             "input": {
@@ -732,6 +982,185 @@
                     "target": "com.amazonaws.imagebuilder#ComponentBuildVersionArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the component that was created by this request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#CreateContainerRecipe": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#CreateContainerRecipeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#CreateContainerRecipeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidVersionNumberException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new container recipe. Container recipes define how images are configured, tested, and assessed.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/CreateContainerRecipe",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#CreateContainerRecipeRequest": {
+            "type": "structure",
+            "members": {
+                "containerType": {
+                    "target": "com.amazonaws.imagebuilder#ContainerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of container to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.imagebuilder#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the container recipe.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the container recipe.</p>"
+                    }
+                },
+                "semanticVersion": {
+                    "target": "com.amazonaws.imagebuilder#VersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The semantic version of the container recipe (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "components": {
+                    "target": "com.amazonaws.imagebuilder#ComponentConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Components for build and test that are included in the container recipe.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dockerfileTemplateData": {
+                    "target": "com.amazonaws.imagebuilder#InlineDockerFileTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Dockerfile template used to build your image as an inline data blob.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dockerfileTemplateUri": {
+                    "target": "com.amazonaws.imagebuilder#Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI for the Dockerfile that will be used to build your container image.</p>"
+                    }
+                },
+                "platformOverride": {
+                    "target": "com.amazonaws.imagebuilder#Platform",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the operating system platform when you use a custom source image.</p>"
+                    }
+                },
+                "imageOsVersionOverride": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the operating system version for the source image.</p>"
+                    }
+                },
+                "parentImage": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source image for the container recipe.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags that are attached to the container recipe.</p>"
+                    }
+                },
+                "workingDirectory": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The working directory for use during build and test workflows.</p>"
+                    }
+                },
+                "targetRepository": {
+                    "target": "com.amazonaws.imagebuilder#TargetContainerRepository",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination repository for the container image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies which KMS key is used to encrypt the container image.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.imagebuilder#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token used to make this request idempotent.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#CreateContainerRecipeResponse": {
+            "type": "structure",
+            "members": {
+                "requestId": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID that uniquely identifies this request.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.imagebuilder#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token used to make this request idempotent.</p>"
+                    }
+                },
+                "containerRecipeArn": {
+                    "target": "com.amazonaws.imagebuilder#ContainerRecipeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the Amazon Resource Name (ARN) of the container recipe that the request created.</p>"
                     }
                 }
             }
@@ -964,8 +1393,13 @@
                 "imageRecipeArn": {
                     "target": "com.amazonaws.imagebuilder#ImageRecipeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline. </p>"
+                    }
+                },
+                "containerRecipeArn": {
+                    "target": "com.amazonaws.imagebuilder#ContainerRecipeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container recipe that is used to configure images created by this container pipeline.</p>"
                     }
                 },
                 "infrastructureConfigurationArn": {
@@ -1190,8 +1624,13 @@
                 "imageRecipeArn": {
                     "target": "com.amazonaws.imagebuilder#ImageRecipeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed. </p>"
+                    }
+                },
+                "containerRecipeArn": {
+                    "target": "com.amazonaws.imagebuilder#ContainerRecipeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.</p>"
                     }
                 },
                 "distributionConfigurationArn": {
@@ -1486,6 +1925,76 @@
                     "target": "com.amazonaws.imagebuilder#ComponentBuildVersionArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the component build version that was deleted. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#DeleteContainerRecipe": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#DeleteContainerRecipeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#DeleteContainerRecipeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceDependencyException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a container recipe.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/DeleteContainerRecipe",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#DeleteContainerRecipeRequest": {
+            "type": "structure",
+            "members": {
+                "containerRecipeArn": {
+                    "target": "com.amazonaws.imagebuilder#ContainerRecipeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container recipe to delete.</p>",
+                        "smithy.api#httpQuery": "containerRecipeArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#DeleteContainerRecipeResponse": {
+            "type": "structure",
+            "members": {
+                "requestId": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID that uniquely identifies this request.</p>"
+                    }
+                },
+                "containerRecipeArn": {
+                    "target": "com.amazonaws.imagebuilder#ContainerRecipeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container recipe that was deleted.</p>"
                     }
                 }
             }
@@ -1856,6 +2365,12 @@
                         "smithy.api#documentation": "<p>The specific AMI settings (for example, launch permissions, AMI tags). </p>"
                     }
                 },
+                "containerDistributionConfiguration": {
+                    "target": "com.amazonaws.imagebuilder#ContainerDistributionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container distribution settings for encryption, licensing, and sharing in a specific Region.</p>"
+                    }
+                },
                 "licenseConfigurationArns": {
                     "target": "com.amazonaws.imagebuilder#LicenseConfigurationArnList",
                     "traits": {
@@ -1968,6 +2483,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags associated with the distribution configuration.</p>"
                     }
+                },
+                "regions": {
+                    "target": "com.amazonaws.imagebuilder#RegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Regions where the container image is distributed to.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1994,6 +2515,9 @@
                     "max": 720
                 }
             }
+        },
+        "com.amazonaws.imagebuilder#DockerFileTemplate": {
+            "type": "string"
         },
         "com.amazonaws.imagebuilder#EbsInstanceBlockDeviceSpecification": {
             "type": "structure",
@@ -2305,6 +2829,140 @@
                     "target": "com.amazonaws.imagebuilder#Component",
                     "traits": {
                         "smithy.api#documentation": "<p>The component object associated with the specified ARN. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#GetContainerRecipe": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#GetContainerRecipeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#GetContainerRecipeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a container recipe.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/GetContainerRecipe",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#GetContainerRecipePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#GetContainerRecipePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#GetContainerRecipePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the policy for a container recipe.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/GetContainerRecipePolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#GetContainerRecipePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "containerRecipeArn": {
+                    "target": "com.amazonaws.imagebuilder#ContainerRecipeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container recipe for the policy being requested.</p>",
+                        "smithy.api#httpQuery": "containerRecipeArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#GetContainerRecipePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "requestId": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID that uniquely identifies this request.</p>"
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.imagebuilder#ResourcePolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container recipe policy object that is returned.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#GetContainerRecipeRequest": {
+            "type": "structure",
+            "members": {
+                "containerRecipeArn": {
+                    "target": "com.amazonaws.imagebuilder#ContainerRecipeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container recipe to retrieve.</p>",
+                        "smithy.api#httpQuery": "containerRecipeArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#GetContainerRecipeResponse": {
+            "type": "structure",
+            "members": {
+                "requestId": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID that uniquely identifies this request.</p>"
+                    }
+                },
+                "containerRecipe": {
+                    "target": "com.amazonaws.imagebuilder#ContainerRecipe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container recipe object that is returned.</p>"
                     }
                 }
             }
@@ -2806,6 +3464,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image.</p>"
                     }
                 },
+                "type": {
+                    "target": "com.amazonaws.imagebuilder#ImageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this is an AMI or container image.</p>"
+                    }
+                },
                 "name": {
                     "target": "com.amazonaws.imagebuilder#ResourceName",
                     "traits": {
@@ -2846,6 +3510,12 @@
                     "target": "com.amazonaws.imagebuilder#ImageRecipe",
                     "traits": {
                         "smithy.api#documentation": "<p>The image recipe used when creating the image.</p>"
+                    }
+                },
+                "containerRecipe": {
+                    "target": "com.amazonaws.imagebuilder#ContainerRecipe",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container recipe used to create the container image type.</p>"
                     }
                 },
                 "sourcePipelineName": {
@@ -2910,7 +3580,7 @@
         "com.amazonaws.imagebuilder#ImageBuilderArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:\\d{12}|aws):(?:image-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\\d+)\\.(?:x|\\d+)\\.(?:x|\\d+))(?:/\\d+)?)?$"
+                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:\\d{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\\d+)\\.(?:x|\\d+)\\.(?:x|\\d+))(?:/\\d+)?)?$"
             }
         },
         "com.amazonaws.imagebuilder#ImagePipeline": {
@@ -2950,6 +3620,12 @@
                     "target": "com.amazonaws.imagebuilder#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image recipe associated with this image pipeline.</p>"
+                    }
+                },
+                "containerRecipeArn": {
+                    "target": "com.amazonaws.imagebuilder#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container recipe that is used for this pipeline.</p>"
                     }
                 },
                 "infrastructureConfigurationArn": {
@@ -3036,6 +3712,12 @@
                     "target": "com.amazonaws.imagebuilder#ImageBuilderArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image recipe.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.imagebuilder#ImageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which type of image is created by the recipe - an AMI or a container image.</p>"
                     }
                 },
                 "name": {
@@ -3257,6 +3939,12 @@
                         "smithy.api#documentation": "<p>The name of the image.</p>"
                     }
                 },
+                "type": {
+                    "target": "com.amazonaws.imagebuilder#ImageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this is an AMI or container image.</p>"
+                    }
+                },
                 "version": {
                     "target": "com.amazonaws.imagebuilder#VersionNumber",
                     "traits": {
@@ -3345,6 +4033,21 @@
                 }
             }
         },
+        "com.amazonaws.imagebuilder#ImageType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AMI",
+                        "name": "AMI"
+                    },
+                    {
+                        "value": "DOCKER",
+                        "name": "DOCKER"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.imagebuilder#ImageVersion": {
             "type": "structure",
             "members": {
@@ -3358,6 +4061,12 @@
                     "target": "com.amazonaws.imagebuilder#ResourceName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the image semantic version.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.imagebuilder#ImageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this is an AMI or container image.</p>"
                     }
                 },
                 "version": {
@@ -3735,7 +4444,18 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 16000
-                }
+                },
+                "smithy.api#pattern": "[^\\x00]+"
+            }
+        },
+        "com.amazonaws.imagebuilder#InlineDockerFileTemplate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16000
+                },
+                "smithy.api#pattern": "[^\\x00]+"
             }
         },
         "com.amazonaws.imagebuilder#InstanceBlockDeviceMapping": {
@@ -4044,6 +4764,12 @@
                         "smithy.api#documentation": "<p>The filters. </p>"
                     }
                 },
+                "byName": {
+                    "target": "com.amazonaws.imagebuilder#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the list of component build versions for the specified semantic version.</p>"
+                    }
+                },
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
@@ -4082,6 +4808,99 @@
                 }
             }
         },
+        "com.amazonaws.imagebuilder#ListContainerRecipes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#ListContainerRecipesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#ListContainerRecipesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidPaginationTokenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of container recipes.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListContainerRecipes",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#ListContainerRecipesRequest": {
+            "type": "structure",
+            "members": {
+                "owner": {
+                    "target": "com.amazonaws.imagebuilder#Ownership",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns container recipes belonging to the specified owner, that have been shared with you. You can omit this field to return container recipes belonging to your account.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.imagebuilder#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request filters that are used to narrow the list of container images that are returned.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.imagebuilder#RestrictedInteger",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the list.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a token for pagination, which determines where to begin the next set of results when the current set reaches the maximum for one request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#ListContainerRecipesResponse": {
+            "type": "structure",
+            "members": {
+                "requestId": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID that uniquely identifies this request.</p>"
+                    }
+                },
+                "containerRecipeSummaryList": {
+                    "target": "com.amazonaws.imagebuilder#ContainerRecipeSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of container recipes returned for the request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token field is used for paginated responses. When this is not empty, there are additional container recipes that the service has not included in this response. Use this token with the next request to retrieve additional list items.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.imagebuilder#ListDistributionConfigurations": {
             "type": "operation",
             "input": {
@@ -4114,7 +4933,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns a list of distribution configurations. </p>",
+                "smithy.api#documentation": "<p>Returns a list of distribution configurations. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListDistributionConfigurations",
@@ -4595,6 +5414,12 @@
                         "smithy.api#documentation": "<p>The filters. </p>"
                     }
                 },
+                "byName": {
+                    "target": "com.amazonaws.imagebuilder#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Requests a list of images with a specific recipe name.</p>"
+                    }
+                },
                 "maxResults": {
                     "target": "com.amazonaws.imagebuilder#RestrictedInteger",
                     "traits": {
@@ -4606,6 +5431,12 @@
                     "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the NextToken from a previously truncated response. </p>"
+                    }
+                },
+                "includeDeprecated": {
+                    "target": "com.amazonaws.imagebuilder#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Includes deprecated images in the response list.</p>"
                     }
                 }
             }
@@ -4826,6 +5657,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The EC2 AMIs created by this image. </p>"
                     }
+                },
+                "containers": {
+                    "target": "com.amazonaws.imagebuilder#ContainerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container images that the pipeline has generated and stored in the output repository.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4980,6 +5817,85 @@
                     "target": "com.amazonaws.imagebuilder#ComponentBuildVersionArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the component that this policy was applied to. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#PutContainerRecipePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.imagebuilder#PutContainerRecipePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.imagebuilder#PutContainerRecipePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.imagebuilder#CallRateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API <code>PutContainerImagePolicy</code>, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/PutContainerRecipePolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#PutContainerRecipePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "containerRecipeArn": {
+                    "target": "com.amazonaws.imagebuilder#ContainerRecipeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container recipe that this policy should be applied to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.imagebuilder#ResourcePolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy to apply to the container recipe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#PutContainerRecipePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "requestId": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request ID that uniquely identifies this request.</p>"
+                    }
+                },
+                "containerRecipeArn": {
+                    "target": "com.amazonaws.imagebuilder#ContainerRecipeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container recipe that this policy was applied to.</p>"
                     }
                 }
             }
@@ -5140,6 +6056,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image recipe that this policy was applied to. </p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.imagebuilder#RegionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#NonEmptyString"
             }
         },
         "com.amazonaws.imagebuilder#ResourceAlreadyExistsException": {
@@ -5517,6 +6439,28 @@
                 }
             }
         },
+        "com.amazonaws.imagebuilder#TargetContainerRepository": {
+            "type": "structure",
+            "members": {
+                "service": {
+                    "target": "com.amazonaws.imagebuilder#ContainerRepositoryService",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the service in which this image was registered.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "repositoryName": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the container repository where the output container image is stored. This name is prefixed by the repository location.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container repository where the output container image is stored.</p>"
+            }
+        },
         "com.amazonaws.imagebuilder#UntagResource": {
             "type": "operation",
             "input": {
@@ -5734,8 +6678,13 @@
                 "imageRecipeArn": {
                     "target": "com.amazonaws.imagebuilder#ImageRecipeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image recipe that will be used to configure images updated by this image pipeline. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image recipe that will be used to configure images updated by this image pipeline. </p>"
+                    }
+                },
+                "containerRecipeArn": {
+                    "target": "com.amazonaws.imagebuilder#ContainerRecipeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container pipeline to update.</p>"
                     }
                 },
                 "infrastructureConfigurationArn": {
@@ -5975,6 +6924,9 @@
                     "target": "com.amazonaws.imagebuilder#CreateComponent"
                 },
                 {
+                    "target": "com.amazonaws.imagebuilder#CreateContainerRecipe"
+                },
+                {
                     "target": "com.amazonaws.imagebuilder#CreateDistributionConfiguration"
                 },
                 {
@@ -5991,6 +6943,9 @@
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#DeleteComponent"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#DeleteContainerRecipe"
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#DeleteDistributionConfiguration"
@@ -6012,6 +6967,12 @@
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#GetComponentPolicy"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#GetContainerRecipe"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#GetContainerRecipePolicy"
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#GetDistributionConfiguration"
@@ -6044,6 +7005,9 @@
                     "target": "com.amazonaws.imagebuilder#ListComponents"
                 },
                 {
+                    "target": "com.amazonaws.imagebuilder#ListContainerRecipes"
+                },
+                {
                     "target": "com.amazonaws.imagebuilder#ListDistributionConfigurations"
                 },
                 {
@@ -6069,6 +7033,9 @@
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#PutComponentPolicy"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#PutContainerRecipePolicy"
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#PutImagePolicy"
@@ -6107,7 +7074,7 @@
                     "name": "imagebuilder"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>EC2 Image Builder is a fully managed AWS service that makes it easier to automate the creation, management, and deployment of customized, secure, and up-to-date “golden” server images that are pre-installed and pre-configured with software and settings to meet specific IT standards.</p>",
+                "smithy.api#documentation": "<p>EC2 Image Builder is a fully managed AWS service that makes it easier to automate the creation, management, and deployment of customized, secure, and up-to-date \"golden\" server images that are pre-installed and pre-configured with software and settings to meet specific IT standards.</p>",
                 "smithy.api#title": "EC2 Image Builder"
             }
         }

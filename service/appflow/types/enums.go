@@ -75,6 +75,7 @@ const (
 	ConnectorTypeAmplitude       ConnectorType = "Amplitude"
 	ConnectorTypeVeeva           ConnectorType = "Veeva"
 	ConnectorTypeEventbridge     ConnectorType = "EventBridge"
+	ConnectorTypeUpsolver        ConnectorType = "Upsolver"
 )
 
 // Values returns all known values for ConnectorType. Note that this can be
@@ -99,6 +100,7 @@ func (ConnectorType) Values() []ConnectorType {
 		"Amplitude",
 		"Veeva",
 		"EventBridge",
+		"Upsolver",
 	}
 }
 

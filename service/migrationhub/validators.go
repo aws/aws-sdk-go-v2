@@ -381,11 +381,11 @@ func validateResourceAttribute(v *types.ResourceAttribute) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceAttribute"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -431,6 +431,9 @@ func validateOpAssociateCreatedArtifactInput(v *AssociateCreatedArtifactInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateCreatedArtifactInput"}
+	if v.ProgressUpdateStream == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
+	}
 	if v.MigrationTaskName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
 	}
@@ -440,9 +443,6 @@ func validateOpAssociateCreatedArtifactInput(v *AssociateCreatedArtifactInput) e
 		if err := validateCreatedArtifact(v.CreatedArtifact); err != nil {
 			invalidParams.AddNested("CreatedArtifact", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ProgressUpdateStream == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -526,11 +526,11 @@ func validateOpDescribeMigrationTaskInput(v *DescribeMigrationTaskInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeMigrationTaskInput"}
-	if v.MigrationTaskName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
-	}
 	if v.ProgressUpdateStream == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
+	}
+	if v.MigrationTaskName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -544,14 +544,14 @@ func validateOpDisassociateCreatedArtifactInput(v *DisassociateCreatedArtifactIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateCreatedArtifactInput"}
+	if v.ProgressUpdateStream == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
+	}
 	if v.MigrationTaskName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
 	}
 	if v.CreatedArtifactName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CreatedArtifactName"))
-	}
-	if v.ProgressUpdateStream == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -565,14 +565,14 @@ func validateOpDisassociateDiscoveredResourceInput(v *DisassociateDiscoveredReso
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateDiscoveredResourceInput"}
-	if v.ConfigurationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationId"))
+	if v.ProgressUpdateStream == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
 	}
 	if v.MigrationTaskName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
 	}
-	if v.ProgressUpdateStream == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
+	if v.ConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -586,11 +586,11 @@ func validateOpImportMigrationTaskInput(v *ImportMigrationTaskInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportMigrationTaskInput"}
-	if v.MigrationTaskName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
-	}
 	if v.ProgressUpdateStream == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
+	}
+	if v.MigrationTaskName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -604,11 +604,11 @@ func validateOpListCreatedArtifactsInput(v *ListCreatedArtifactsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListCreatedArtifactsInput"}
-	if v.MigrationTaskName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
-	}
 	if v.ProgressUpdateStream == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
+	}
+	if v.MigrationTaskName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -622,11 +622,11 @@ func validateOpListDiscoveredResourcesInput(v *ListDiscoveredResourcesInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListDiscoveredResourcesInput"}
-	if v.MigrationTaskName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
-	}
 	if v.ProgressUpdateStream == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
+	}
+	if v.MigrationTaskName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -640,11 +640,11 @@ func validateOpNotifyApplicationStateInput(v *NotifyApplicationStateInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NotifyApplicationStateInput"}
-	if len(v.Status) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Status"))
-	}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -658,11 +658,11 @@ func validateOpNotifyMigrationTaskStateInput(v *NotifyMigrationTaskStateInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NotifyMigrationTaskStateInput"}
-	if v.UpdateDateTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UpdateDateTime"))
-	}
 	if v.ProgressUpdateStream == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
+	}
+	if v.MigrationTaskName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
 	}
 	if v.Task == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Task"))
@@ -671,8 +671,8 @@ func validateOpNotifyMigrationTaskStateInput(v *NotifyMigrationTaskStateInput) e
 			invalidParams.AddNested("Task", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.MigrationTaskName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
+	if v.UpdateDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateDateTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -689,15 +689,15 @@ func validateOpPutResourceAttributesInput(v *PutResourceAttributesInput) error {
 	if v.ProgressUpdateStream == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProgressUpdateStream"))
 	}
+	if v.MigrationTaskName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
+	}
 	if v.ResourceAttributeList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceAttributeList"))
 	} else if v.ResourceAttributeList != nil {
 		if err := validateResourceAttributeList(v.ResourceAttributeList); err != nil {
 			invalidParams.AddNested("ResourceAttributeList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.MigrationTaskName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

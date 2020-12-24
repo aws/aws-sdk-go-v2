@@ -52,6 +52,16 @@
                 }
             }
         },
+        "com.amazonaws.outposts#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^(arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:([a-z\\d-]+)/)[a-z]{2,8}-[a-f0-9]{17}$"
+            }
+        },
         "com.amazonaws.outposts#AvailabilityZone": {
             "type": "string",
             "traits": {
@@ -542,6 +552,58 @@
                 }
             }
         },
+        "com.amazonaws.outposts#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags for the specified resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.outposts#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.outposts#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.outposts#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource tags.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.outposts#MaxResults1000": {
             "type": "integer",
             "traits": {
@@ -621,7 +683,7 @@
         "com.amazonaws.outposts#OutpostDescription": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The Outpost description.</p>",
+                "smithy.api#documentation": "<p>The description of the Outpost.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1000
@@ -675,6 +737,15 @@
                 },
                 {
                     "target": "com.amazonaws.outposts#ListSites"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.outposts#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.outposts#UntagResource"
                 }
             ],
             "traits": {
@@ -689,7 +760,7 @@
                     "name": "outposts"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>AWS Outposts is a fully-managed service that extends AWS infrastructure, \n      APIs, and tools to customer premises. By providing local access to AWS-managed \n      infrastructure, AWS Outposts enables customers to build and run applications \n      on premises using the same programming interfaces as in AWS Regions, while \n      using local compute and storage resources for lower latency and local data \n      processing needs.</p>",
+                "smithy.api#documentation": "<p>AWS Outposts is a fully managed service that extends AWS infrastructure, APIs, and tools\n      to customer premises. By providing local access to AWS managed infrastructure, AWS Outposts\n      enables customers to build and run applications on premises using the same programming\n      interfaces as in AWS Regions, while using local compute and storage resources for lower\n      latency and local data processing needs.</p>",
                 "smithy.api#title": "AWS Outposts"
             }
         },
@@ -786,6 +857,18 @@
                 "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
             }
         },
+        "com.amazonaws.outposts#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.outposts#TagMap": {
             "type": "map",
             "key": {
@@ -800,6 +883,58 @@
                     "max": 50
                 }
             }
+        },
+        "com.amazonaws.outposts#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds tags to the specified resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.outposts#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.outposts#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.outposts#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to add to the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.outposts#TagValue": {
             "type": "string",
@@ -821,6 +956,59 @@
                 },
                 "smithy.api#pattern": ".*\\S.*"
             }
+        },
+        "com.amazonaws.outposts#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes tags from the specified resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.outposts#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.outposts#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.outposts#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.outposts#ValidationException": {
             "type": "structure",

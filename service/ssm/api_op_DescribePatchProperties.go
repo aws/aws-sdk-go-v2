@@ -20,11 +20,12 @@ import (
 // used in filters for each major operating system type: AMAZON_LINUX Valid
 // properties: PRODUCT, CLASSIFICATION, SEVERITY AMAZON_LINUX_2 Valid properties:
 // PRODUCT, CLASSIFICATION, SEVERITY CENTOS Valid properties: PRODUCT,
-// CLASSIFICATION, SEVERITY DEBIAN Valid properties: PRODUCT, PRIORITY ORACLE_LINUX
-// Valid properties: PRODUCT, CLASSIFICATION, SEVERITY REDHAT_ENTERPRISE_LINUX
-// Valid properties: PRODUCT, CLASSIFICATION, SEVERITY SUSE Valid properties:
-// PRODUCT, CLASSIFICATION, SEVERITY UBUNTU Valid properties: PRODUCT, PRIORITY
-// WINDOWS Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY
+// CLASSIFICATION, SEVERITY DEBIAN Valid properties: PRODUCT, PRIORITY MACOS Valid
+// properties: PRODUCT, CLASSIFICATION ORACLE_LINUX Valid properties: PRODUCT,
+// CLASSIFICATION, SEVERITY REDHAT_ENTERPRISE_LINUX Valid properties: PRODUCT,
+// CLASSIFICATION, SEVERITY SUSE Valid properties: PRODUCT, CLASSIFICATION,
+// SEVERITY UBUNTU Valid properties: PRODUCT, PRIORITY WINDOWS Valid properties:
+// PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY
 func (c *Client) DescribePatchProperties(ctx context.Context, params *DescribePatchPropertiesInput, optFns ...func(*Options)) (*DescribePatchPropertiesOutput, error) {
 	if params == nil {
 		params = &DescribePatchPropertiesInput{}
@@ -61,7 +62,7 @@ type DescribePatchPropertiesInput struct {
 	NextToken *string
 
 	// Indicates whether to list patches for the Windows operating system or for
-	// Microsoft applications. Not applicable for Linux operating systems.
+	// Microsoft applications. Not applicable for the Linux or macOS operating systems.
 	PatchSet types.PatchSet
 }
 

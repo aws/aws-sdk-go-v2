@@ -194,6 +194,28 @@ type CloudwatchLogsExportConfiguration struct {
 	EnableLogTypes []string
 }
 
+// This data type is used as a response element in the ModifyDBCluster operation
+// and contains changes that will be applied during the next maintenance window.
+type ClusterPendingModifiedValues struct {
+
+	// The DBClusterIdentifier for the DB cluster.
+	DBClusterIdentifier *string
+
+	// The database engine version.
+	EngineVersion *string
+
+	// Whether mapping of AWS Identity and Access Management (IAM) accounts to database
+	// accounts is enabled.
+	IAMDatabaseAuthenticationEnabled *bool
+
+	// The master credentials for the DB cluster.
+	MasterUserPassword *string
+
+	// A list of the log types whose configuration is still pending. In other words,
+	// these log types are in the process of being activated or deactivated.
+	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports
+}
+
 // Specifies the settings that control the size and behavior of the connection pool
 // associated with a DBProxyTargetGroup.
 type ConnectionPoolConfiguration struct {
@@ -303,7 +325,8 @@ type DBCluster struct {
 	ActivityStreamKinesisStreamName *string
 
 	// The AWS KMS key identifier used for encrypting messages in the database activity
-	// stream.
+	// stream. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+	// name for the AWS KMS customer master key (CMK).
 	ActivityStreamKmsKeyId *string
 
 	// The mode of the database activity stream. Database events such as a change or
@@ -394,7 +417,7 @@ type DBCluster struct {
 	DatabaseName *string
 
 	// The AWS Region-unique, immutable identifier for the DB cluster. This identifier
-	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
+	// is found in AWS CloudTrail log entries whenever the AWS KMS CMK for the DB
 	// cluster is accessed.
 	DbClusterResourceId *string
 
@@ -462,7 +485,8 @@ type DBCluster struct {
 	IAMDatabaseAuthenticationEnabled *bool
 
 	// If StorageEncrypted is enabled, the AWS KMS key identifier for the encrypted DB
-	// cluster.
+	// cluster. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+	// name for the AWS KMS customer master key (CMK).
 	KmsKeyId *string
 
 	// Specifies the latest time to which a database can be restored with point-in-time
@@ -474,6 +498,11 @@ type DBCluster struct {
 
 	// Specifies whether the DB cluster has instances in multiple Availability Zones.
 	MultiAZ *bool
+
+	// Specifies that changes to the DB cluster are pending. This element is only
+	// included when changes are pending. Specific changes are identified by
+	// subelements.
+	PendingModifiedValues *ClusterPendingModifiedValues
 
 	// Specifies the progress of the operation as a percentage.
 	PercentProgress *string
@@ -736,7 +765,8 @@ type DBClusterSnapshot struct {
 	IAMDatabaseAuthenticationEnabled bool
 
 	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB
-	// cluster snapshot.
+	// cluster snapshot. The AWS KMS key identifier is the key ARN, key ID, alias ARN,
+	// or alias name for the AWS KMS customer master key (CMK).
 	KmsKeyId *string
 
 	// Provides the license model information for this DB cluster snapshot.
@@ -916,12 +946,28 @@ type DBInstance struct {
 	// the DB cluster setting. For more information, see DBCluster.
 	CopyTagsToSnapshot bool
 
+	// Specifies whether a customer-owned IP address (CoIP) is enabled for an RDS on
+	// Outposts DB instance. A CoIP provides local or external connectivity to
+	// resources in your Outpost subnets through your on-premises network. For some use
+	// cases, a CoIP can provide lower latency for connections to the DB instance from
+	// outside of its virtual private cloud (VPC) on your local network. For more
+	// information about RDS on Outposts, see Working with Amazon RDS on AWS Outposts
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
+	// the Amazon RDS User Guide. For more information about CoIPs, see Customer-owned
+	// IP addresses
+	// (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing)
+	// in the AWS Outposts User Guide.
+	CustomerOwnedIpEnabled *bool
+
 	// If the DB instance is a member of a DB cluster, contains the name of the DB
 	// cluster that the DB instance is a member of.
 	DBClusterIdentifier *string
 
 	// The Amazon Resource Name (ARN) for the DB instance.
 	DBInstanceArn *string
+
+	// The list of replicated automated backups associated with the DB instance.
+	DBInstanceAutomatedBackupsReplications []DBInstanceAutomatedBackupsReplication
 
 	// Contains the name of the compute and memory capacity class of the DB instance.
 	DBInstanceClass *string
@@ -961,8 +1007,8 @@ type DBInstance struct {
 	DbInstancePort int32
 
 	// The AWS Region-unique, immutable identifier for the DB instance. This identifier
-	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
-	// instance is accessed.
+	// is found in AWS CloudTrail log entries whenever the AWS KMS customer master key
+	// (CMK) for the DB instance is accessed.
 	DbiResourceId *string
 
 	// Indicates if the DB instance has deletion protection enabled. The database can't
@@ -1014,7 +1060,8 @@ type DBInstance struct {
 	Iops *int32
 
 	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB
-	// instance.
+	// instance. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias
+	// name for the AWS KMS customer master key (CMK).
 	KmsKeyId *string
 
 	// Specifies the latest time to which a database can be restored with point-in-time
@@ -1062,9 +1109,9 @@ type DBInstance struct {
 	// false.
 	PerformanceInsightsEnabled *bool
 
-	// The AWS KMS key identifier for encryption of Performance Insights data. The KMS
-	// key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
-	// alias for the KMS encryption key.
+	// The AWS KMS key identifier for encryption of Performance Insights data. The AWS
+	// KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS
+	// KMS customer master key (CMK).
 	PerformanceInsightsKMSKeyId *string
 
 	// The amount of time, in days, to retain Performance Insights data. Valid values
@@ -1155,9 +1202,9 @@ type DBInstance struct {
 	VpcSecurityGroups []VpcSecurityGroupMembership
 }
 
-// An automated backup of a DB instance. It it consists of system backups,
-// transaction logs, and the database instance properties that existed at the time
-// you deleted the source instance.
+// An automated backup of a DB instance. It consists of system backups, transaction
+// logs, and the database instance properties that existed at the time you deleted
+// the source instance.
 type DBInstanceAutomatedBackup struct {
 
 	// Specifies the allocated storage size in gibibytes (GiB).
@@ -1168,8 +1215,18 @@ type DBInstanceAutomatedBackup struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
 	AvailabilityZone *string
 
-	// The Amazon Resource Name (ARN) for the automated backup.
+	// The retention period for the automated backups.
+	BackupRetentionPeriod *int32
+
+	// The Amazon Resource Name (ARN) for the automated backups.
 	DBInstanceArn *string
+
+	// The Amazon Resource Name (ARN) for the replicated automated backups.
+	DBInstanceAutomatedBackupsArn *string
+
+	// The list of replications to different AWS Regions associated with the automated
+	// backup.
+	DBInstanceAutomatedBackupsReplications []DBInstanceAutomatedBackupsReplication
 
 	// The customer id of the instance that is/was associated with the automated
 	// backup.
@@ -1198,9 +1255,9 @@ type DBInstanceAutomatedBackup struct {
 	// The IOPS (I/O operations per second) value for the automated backup.
 	Iops *int32
 
-	// The AWS KMS key ID for an automated backup. The KMS key ID is the Amazon
-	// Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS
-	// encryption key.
+	// The AWS KMS key ID for an automated backup. The AWS KMS key identifier is the
+	// key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key
+	// (CMK).
 	KmsKeyId *string
 
 	// License model information for the automated backup.
@@ -1249,6 +1306,14 @@ type DBInstanceAutomatedBackup struct {
 
 	// Provides the VPC ID associated with the DB instance
 	VpcId *string
+}
+
+// Automated backups of a DB instance replicated to another AWS Region. They
+// consist of system backups, transaction logs, and database instance properties.
+type DBInstanceAutomatedBackupsReplication struct {
+
+	// The Amazon Resource Name (ARN) of the replicated automated backups.
+	DBInstanceAutomatedBackupsArn *string
 }
 
 // Describes an AWS Identity and Access Management (IAM) role that is associated
@@ -1568,6 +1633,8 @@ type DBSnapshot struct {
 	Iops *int32
 
 	// If Encrypted is true, the AWS KMS key identifier for the encrypted DB snapshot.
+	// The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for
+	// the AWS KMS customer master key (CMK).
 	KmsKeyId *string
 
 	// License model information for the restored DB instance.
@@ -1899,11 +1966,11 @@ type ExportTask struct {
 	// snapshot.
 	IamRoleArn *string
 
-	// The ID of the AWS KMS key that is used to encrypt the snapshot when it's
-	// exported to Amazon S3. The KMS key ID is the Amazon Resource Name (ARN), the KMS
-	// key identifier, or the KMS key alias for the KMS encryption key. The IAM role
-	// used for the snapshot export must have encryption and decryption permissions to
-	// use this KMS key.
+	// The key identifier of the AWS KMS customer master key (CMK) that is used to
+	// encrypt the snapshot when it's exported to Amazon S3. The AWS KMS CMK identifier
+	// is its key ARN, key ID, alias ARN, or alias name. The IAM role used for the
+	// snapshot export must have encryption and decryption permissions to use this AWS
+	// KMS CMK.
 	KmsKeyId *string
 
 	// The progress of the snapshot export task as a percentage.
@@ -1995,8 +2062,8 @@ type GlobalCluster struct {
 	GlobalClusterMembers []GlobalClusterMember
 
 	// The AWS Region-unique, immutable identifier for the global database cluster.
-	// This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key
-	// for the DB cluster is accessed.
+	// This identifier is found in AWS CloudTrail log entries whenever the AWS KMS
+	// customer master key (CMK) for the DB cluster is accessed.
 	GlobalClusterResourceId *string
 
 	// Specifies the current state of this global database cluster.
@@ -2521,60 +2588,60 @@ type PendingMaintenanceAction struct {
 	OptInStatus *string
 }
 
-// This data type is used as a response element in the ModifyDBInstance action.
+// This data type is used as a response element in the ModifyDBInstance action and
+// contains changes that will be applied during the next maintenance window.
 type PendingModifiedValues struct {
 
-	// Contains the new AllocatedStorage size for the DB instance that will be applied
-	// or is currently being applied.
+	// The allocated storage size for the DB instance specified in gibibytes .
 	AllocatedStorage *int32
 
-	// Specifies the pending number of days for which automated backups are retained.
+	// The number of days for which automated backups are retained.
 	BackupRetentionPeriod *int32
 
-	// Specifies the identifier of the CA certificate for the DB instance.
+	// The identifier of the CA certificate for the DB instance.
 	CACertificateIdentifier *string
 
-	// Contains the new DBInstanceClass for the DB instance that will be applied or is
-	// currently being applied.
+	// The name of the compute and memory capacity class for the DB instance.
 	DBInstanceClass *string
 
-	// Contains the new DBInstanceIdentifier for the DB instance that will be applied
-	// or is currently being applied.
+	// The database identifier for the DB instance.
 	DBInstanceIdentifier *string
 
-	// The new DB subnet group for the DB instance.
+	// The DB subnet group for the DB instance.
 	DBSubnetGroupName *string
 
-	// Indicates the database engine version.
+	// The database engine version.
 	EngineVersion *string
 
-	// Specifies the new Provisioned IOPS value for the DB instance that will be
-	// applied or is currently being applied.
+	// Whether mapping of AWS Identity and Access Management (IAM) accounts to database
+	// accounts is enabled.
+	IAMDatabaseAuthenticationEnabled *bool
+
+	// The Provisioned IOPS value for the DB instance.
 	Iops *int32
 
 	// The license model for the DB instance. Valid values: license-included |
 	// bring-your-own-license | general-public-license
 	LicenseModel *string
 
-	// Contains the pending or currently-in-progress change of the master credentials
-	// for the DB instance.
+	// The master credentials for the DB instance.
 	MasterUserPassword *string
 
-	// Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
+	// Indicates that the Single-AZ DB instance will change to a Multi-AZ deployment.
 	MultiAZ *bool
 
 	// A list of the log types whose configuration is still pending. In other words,
 	// these log types are in the process of being activated or deactivated.
 	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports
 
-	// Specifies the pending port for the DB instance.
+	// The port for the DB instance.
 	Port *int32
 
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance.
 	ProcessorFeatures []ProcessorFeature
 
-	// Specifies the storage type to be associated with the DB instance.
+	// The storage type of the DB instance.
 	StorageType *string
 }
 
@@ -2852,6 +2919,10 @@ type SourceRegion struct {
 
 	// The status of the source AWS Region.
 	Status *string
+
+	// Whether the source AWS Region supports replicating automated backups to the
+	// current AWS Region.
+	SupportsDBInstanceAutomatedBackupsReplication bool
 }
 
 // This data type is used as a response element for the DescribeDBSubnetGroups

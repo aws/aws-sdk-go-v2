@@ -43,8 +43,7 @@ type UpdateThreatIntelSetInput struct {
 	// or not.
 	Activate bool
 
-	// The updated URI of the file that contains the ThreateIntelSet. For example:
-	// https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+	// The updated URI of the file that contains the ThreateIntelSet.
 	Location *string
 
 	// The unique ID that specifies the ThreatIntelSet that you want to update.

@@ -37,6 +37,9 @@
             "version": "2013-04-01",
             "operations": [
                 {
+                    "target": "com.amazonaws.route53#ActivateKeySigningKey"
+                },
+                {
                     "target": "com.amazonaws.route53#AssociateVPCWithHostedZone"
                 },
                 {
@@ -50,6 +53,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53#CreateHostedZone"
+                },
+                {
+                    "target": "com.amazonaws.route53#CreateKeySigningKey"
                 },
                 {
                     "target": "com.amazonaws.route53#CreateQueryLoggingConfig"
@@ -70,10 +76,16 @@
                     "target": "com.amazonaws.route53#CreateVPCAssociationAuthorization"
                 },
                 {
+                    "target": "com.amazonaws.route53#DeactivateKeySigningKey"
+                },
+                {
                     "target": "com.amazonaws.route53#DeleteHealthCheck"
                 },
                 {
                     "target": "com.amazonaws.route53#DeleteHostedZone"
+                },
+                {
+                    "target": "com.amazonaws.route53#DeleteKeySigningKey"
                 },
                 {
                     "target": "com.amazonaws.route53#DeleteQueryLoggingConfig"
@@ -91,7 +103,13 @@
                     "target": "com.amazonaws.route53#DeleteVPCAssociationAuthorization"
                 },
                 {
+                    "target": "com.amazonaws.route53#DisableHostedZoneDNSSEC"
+                },
+                {
                     "target": "com.amazonaws.route53#DisassociateVPCFromHostedZone"
+                },
+                {
+                    "target": "com.amazonaws.route53#EnableHostedZoneDNSSEC"
                 },
                 {
                     "target": "com.amazonaws.route53#GetAccountLimit"
@@ -101,6 +119,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53#GetCheckerIpRanges"
+                },
+                {
+                    "target": "com.amazonaws.route53#GetDNSSEC"
                 },
                 {
                     "target": "com.amazonaws.route53#GetGeoLocation"
@@ -254,21 +275,92 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "MAX_HEALTH_CHECKS_BY_OWNER"
+                        "value": "MAX_HEALTH_CHECKS_BY_OWNER",
+                        "name": "MAX_HEALTH_CHECKS_BY_OWNER"
                     },
                     {
-                        "value": "MAX_HOSTED_ZONES_BY_OWNER"
+                        "value": "MAX_HOSTED_ZONES_BY_OWNER",
+                        "name": "MAX_HOSTED_ZONES_BY_OWNER"
                     },
                     {
-                        "value": "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER"
+                        "value": "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER",
+                        "name": "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER"
                     },
                     {
-                        "value": "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER"
+                        "value": "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER",
+                        "name": "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER"
                     },
                     {
-                        "value": "MAX_TRAFFIC_POLICIES_BY_OWNER"
+                        "value": "MAX_TRAFFIC_POLICIES_BY_OWNER",
+                        "name": "MAX_TRAFFIC_POLICIES_BY_OWNER"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.route53#ActivateKeySigningKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53#ActivateKeySigningKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53#ActivateKeySigningKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53#ConcurrentModification"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidKeySigningKeyStatus"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidKMSArn"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidSigningStatus"
+                },
+                {
+                    "target": "com.amazonaws.route53#NoSuchKeySigningKey"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Activates a key signing key (KSK) so that it can be used for signing by DNSSEC. This operation changes the \n\t\t\tKSK status to <code>ACTIVE</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2013-04-01/keysigningkey/{HostedZoneId}/{Name}/activate",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53#ActivateKeySigningKeyRequest": {
+            "type": "structure",
+            "members": {
+                "HostedZoneId": {
+                    "target": "com.amazonaws.route53#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string used to identify a hosted zone.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53#SigningKeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alphanumeric string used to identify a key signing key (KSK).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53#ActivateKeySigningKeyResponse": {
+            "type": "structure",
+            "members": {
+                "ChangeInfo": {
+                    "target": "com.amazonaws.route53#ChangeInfo",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.route53#AlarmIdentifier": {
@@ -451,13 +543,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CREATE"
+                        "value": "CREATE",
+                        "name": "CREATE"
                     },
                     {
-                        "value": "DELETE"
+                        "value": "DELETE",
+                        "name": "DELETE"
                     },
                     {
-                        "value": "UPSERT"
+                        "value": "UPSERT",
+                        "name": "UPSERT"
                     }
                 ]
             }
@@ -595,10 +690,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PENDING"
+                        "value": "PENDING",
+                        "name": "PENDING"
                     },
                     {
-                        "value": "INSYNC"
+                        "value": "INSYNC",
+                        "name": "INSYNC"
                     }
                 ]
             }
@@ -786,85 +883,112 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "us-east-1"
+                        "value": "us-east-1",
+                        "name": "us_east_1"
                     },
                     {
-                        "value": "us-east-2"
+                        "value": "us-east-2",
+                        "name": "us_east_2"
                     },
                     {
-                        "value": "us-west-1"
+                        "value": "us-west-1",
+                        "name": "us_west_1"
                     },
                     {
-                        "value": "us-west-2"
+                        "value": "us-west-2",
+                        "name": "us_west_2"
                     },
                     {
-                        "value": "ca-central-1"
+                        "value": "ca-central-1",
+                        "name": "ca_central_1"
                     },
                     {
-                        "value": "eu-central-1"
+                        "value": "eu-central-1",
+                        "name": "eu_central_1"
                     },
                     {
-                        "value": "eu-west-1"
+                        "value": "eu-west-1",
+                        "name": "eu_west_1"
                     },
                     {
-                        "value": "eu-west-2"
+                        "value": "eu-west-2",
+                        "name": "eu_west_2"
                     },
                     {
-                        "value": "eu-west-3"
+                        "value": "eu-west-3",
+                        "name": "eu_west_3"
                     },
                     {
-                        "value": "ap-east-1"
+                        "value": "ap-east-1",
+                        "name": "ap_east_1"
                     },
                     {
-                        "value": "me-south-1"
+                        "value": "me-south-1",
+                        "name": "me_south_1"
                     },
                     {
-                        "value": "ap-south-1"
+                        "value": "ap-south-1",
+                        "name": "ap_south_1"
                     },
                     {
-                        "value": "ap-southeast-1"
+                        "value": "ap-southeast-1",
+                        "name": "ap_southeast_1"
                     },
                     {
-                        "value": "ap-southeast-2"
+                        "value": "ap-southeast-2",
+                        "name": "ap_southeast_2"
                     },
                     {
-                        "value": "ap-northeast-1"
+                        "value": "ap-northeast-1",
+                        "name": "ap_northeast_1"
                     },
                     {
-                        "value": "ap-northeast-2"
+                        "value": "ap-northeast-2",
+                        "name": "ap_northeast_2"
                     },
                     {
-                        "value": "ap-northeast-3"
+                        "value": "ap-northeast-3",
+                        "name": "ap_northeast_3"
                     },
                     {
-                        "value": "eu-north-1"
+                        "value": "eu-north-1",
+                        "name": "eu_north_1"
                     },
                     {
-                        "value": "sa-east-1"
+                        "value": "sa-east-1",
+                        "name": "sa_east_1"
                     },
                     {
-                        "value": "cn-northwest-1"
+                        "value": "cn-northwest-1",
+                        "name": "cn_northwest_1"
                     },
                     {
-                        "value": "cn-north-1"
+                        "value": "cn-north-1",
+                        "name": "cn_north_1"
                     },
                     {
-                        "value": "af-south-1"
+                        "value": "af-south-1",
+                        "name": "af_south_1"
                     },
                     {
-                        "value": "eu-south-1"
+                        "value": "eu-south-1",
+                        "name": "eu_south_1"
                     },
                     {
-                        "value": "us-gov-west-1"
+                        "value": "us-gov-west-1",
+                        "name": "us_gov_west_1"
                     },
                     {
-                        "value": "us-gov-east-1"
+                        "value": "us-gov-east-1",
+                        "name": "us_gov_east_1"
                     },
                     {
-                        "value": "us-iso-east-1"
+                        "value": "us-iso-east-1",
+                        "name": "us_iso_east_1"
                     },
                     {
-                        "value": "us-isob-east-1"
+                        "value": "us-isob-east-1",
+                        "name": "us_isob_east_1"
                     }
                 ],
                 "smithy.api#length": {
@@ -878,16 +1002,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "GreaterThanOrEqualToThreshold"
+                        "value": "GreaterThanOrEqualToThreshold",
+                        "name": "GreaterThanOrEqualToThreshold"
                     },
                     {
-                        "value": "GreaterThanThreshold"
+                        "value": "GreaterThanThreshold",
+                        "name": "GreaterThanThreshold"
                     },
                     {
-                        "value": "LessThanThreshold"
+                        "value": "LessThanThreshold",
+                        "name": "LessThanThreshold"
                     },
                     {
-                        "value": "LessThanOrEqualToThreshold"
+                        "value": "LessThanOrEqualToThreshold",
+                        "name": "LessThanOrEqualToThreshold"
                     }
                 ]
             }
@@ -898,7 +1026,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -926,7 +1054,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -1136,6 +1264,121 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A complex type containing the response information for the hosted zone.</p>"
+            }
+        },
+        "com.amazonaws.route53#CreateKeySigningKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53#CreateKeySigningKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53#CreateKeySigningKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53#ConcurrentModification"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidInput"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidKeySigningKeyName"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidKeySigningKeyStatus"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidKMSArn"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidSigningStatus"
+                },
+                {
+                    "target": "com.amazonaws.route53#KeySigningKeyAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.route53#NoSuchHostedZone"
+                },
+                {
+                    "target": "com.amazonaws.route53#TooManyKeySigningKeys"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new key signing key (KSK) associated with a hosted zone. You can only have two KSKs per hosted zone.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2013-04-01/keysigningkey",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.route53#CreateKeySigningKeyRequest": {
+            "type": "structure",
+            "members": {
+                "CallerReference": {
+                    "target": "com.amazonaws.route53#Nonce",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string that identifies the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HostedZoneId": {
+                    "target": "com.amazonaws.route53#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique string (ID) used to identify a hosted zone.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyManagementServiceArn": {
+                    "target": "com.amazonaws.route53#SigningKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS).\n\t\t\tThe <code>KeyManagementServiceArn</code> must be unique for each key signing key (KSK) in a single hosted zone. \n\t\t\tTo see an example of <code>KeyManagementServiceArn</code> that grants the correct permissions for DNSSEC, \n\t\t\tscroll down to <b>Example</b>. </p>\n\t\t       <p>You must configure the CMK as follows:</p>\n\t\t       <dl>\n            <dt>Status</dt>\n            <dd>\n               <p>Enabled</p>\n            </dd>\n            <dt>Key spec</dt>\n            <dd>\n               <p>ECC_NIST_P256</p>\n            </dd>\n            <dt>Key usage</dt>\n            <dd>\n               <p>Sign and verify</p>\n            </dd>\n            <dt>Key policy</dt>\n            <dd>\n               <p>The key policy must give permission for the following actions:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>DescribeKey</p>\n                  </li>\n                  <li>\n                     <p>GetPublicKey</p>\n                  </li>\n                  <li>\n                     <p>Sign</p>\n                  </li>\n               </ul>\n\t\t\t\t\t          <p>The key policy must also include the Amazon Route 53 service in the principal for your account. \n\t\t\t\t\t\tSpecify the following:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>\n                        <code>\"Service\": \"api-service.dnssec.route53.aws.internal\"</code>\n                     </p>\n                  </li>\n               </ul>\n\t\t\t\t        </dd>\n         </dl>\n\t\t       <p>For more information about working with CMK in KMS, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">AWS Key Management Service concepts</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53#SigningKeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alphanumeric string used to identify a key signing key (KSK). <code>Name</code> must be unique for each key signing key in the same \n\t\t\thosted zone.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.route53#SigningKeyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string specifying the initial status of the key signing key (KSK). You can set the value to <code>ACTIVE</code> or <code>INACTIVE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53#CreateKeySigningKeyResponse": {
+            "type": "structure",
+            "members": {
+                "ChangeInfo": {
+                    "target": "com.amazonaws.route53#ChangeInfo",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeySigningKey": {
+                    "target": "com.amazonaws.route53#KeySigningKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key signing key (KSK) that the request creates.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.route53#ResourceURI",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique URL representing the new key signing key (KSK).</p>",
+                        "smithy.api#httpHeader": "Location",
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.route53#CreateQueryLoggingConfig": {
@@ -1651,6 +1894,108 @@
         "com.amazonaws.route53#DNSRCode": {
             "type": "string"
         },
+        "com.amazonaws.route53#DNSSECNotFound": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.route53#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The hosted zone doesn't have any DNSSEC resources.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.route53#DNSSECStatus": {
+            "type": "structure",
+            "members": {
+                "ServeSignature": {
+                    "target": "com.amazonaws.route53#ServeSignature",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates your hosted zone signging status: <code>SIGNING</code>, <code>NOT_SIGNING</code>, or <code>INTERNAL_FAILURE</code>.\n\t\t\tIf the status is <code>INTERNAL_FAILURE</code>, see <code>StatusMessage</code> for information about steps that you can take to\n\t\t\tcorrect the problem.</p>\n\t\t       <p>A status <code>INTERNAL_FAILURE</code> means there was an error during a request. Before you can continue to work with DNSSEC\n\t\t\tsigning, including working with key signing keys (KSKs), you must correct the problem by enabling or disabling DNSSEC \n\t\t\tsigning for the hosted zone.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.route53#SigningKeyStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message provided for the following DNSSEC signing status: <code>INTERNAL_FAILURE</code>. The status message \n\t\t\tincludes information about what the problem might be and steps that you can take to correct the issue.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A string repesenting the status of DNSSEC signing.</p>"
+            }
+        },
+        "com.amazonaws.route53#DeactivateKeySigningKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53#DeactivateKeySigningKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53#DeactivateKeySigningKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53#ConcurrentModification"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidKeySigningKeyStatus"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidSigningStatus"
+                },
+                {
+                    "target": "com.amazonaws.route53#KeySigningKeyInParentDSRecord"
+                },
+                {
+                    "target": "com.amazonaws.route53#KeySigningKeyInUse"
+                },
+                {
+                    "target": "com.amazonaws.route53#NoSuchKeySigningKey"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deactivates a key signing key (KSK) so that it will not be used for signing by DNSSEC. This operation changes the \n\t\t\tKSK status to <code>INACTIVE</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2013-04-01/keysigningkey/{HostedZoneId}/{Name}/deactivate",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53#DeactivateKeySigningKeyRequest": {
+            "type": "structure",
+            "members": {
+                "HostedZoneId": {
+                    "target": "com.amazonaws.route53#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string used to identify a hosted zone.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53#SigningKeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alphanumeric string used to identify a key signing key (KSK).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53#DeactivateKeySigningKeyResponse": {
+            "type": "structure",
+            "members": {
+                "ChangeInfo": {
+                    "target": "com.amazonaws.route53#ChangeInfo",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.route53#DelegationSet": {
             "type": "structure",
             "members": {
@@ -1684,7 +2029,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -1699,7 +2044,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -1714,7 +2059,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -1743,7 +2088,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -1758,7 +2103,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -1890,6 +2235,72 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A complex type that contains the response to a <code>DeleteHostedZone</code> request.</p>"
+            }
+        },
+        "com.amazonaws.route53#DeleteKeySigningKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53#DeleteKeySigningKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53#DeleteKeySigningKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53#ConcurrentModification"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidKeySigningKeyStatus"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidKMSArn"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidSigningStatus"
+                },
+                {
+                    "target": "com.amazonaws.route53#NoSuchKeySigningKey"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a key signing key (KSK). Before you can delete a KSK, you must deactivate it. The KSK must be\n\t\tdeactived before you can delete it regardless of whether the hosted zone is enabled for DNSSEC signing.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2013-04-01/keysigningkey/{HostedZoneId}/{Name}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53#DeleteKeySigningKeyRequest": {
+            "type": "structure",
+            "members": {
+                "HostedZoneId": {
+                    "target": "com.amazonaws.route53#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string used to identify a hosted zone.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53#SigningKeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alphanumeric string used to identify a key signing key (KSK).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53#DeleteKeySigningKeyResponse": {
+            "type": "structure",
+            "members": {
+                "ChangeInfo": {
+                    "target": "com.amazonaws.route53#ChangeInfo",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.route53#DeleteQueryLoggingConfig": {
@@ -2214,6 +2625,70 @@
                 }
             }
         },
+        "com.amazonaws.route53#DisableHostedZoneDNSSEC": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53#DisableHostedZoneDNSSECRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53#DisableHostedZoneDNSSECResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53#ConcurrentModification"
+                },
+                {
+                    "target": "com.amazonaws.route53#DNSSECNotFound"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidKeySigningKeyStatus"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidKMSArn"
+                },
+                {
+                    "target": "com.amazonaws.route53#KeySigningKeyInParentDSRecord"
+                },
+                {
+                    "target": "com.amazonaws.route53#NoSuchHostedZone"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disables DNSSEC signing in a specific hosted zone. This action does not deactivate any key signing keys (KSKs)\n\t\tthat are active in the hosted zone.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2013-04-01/hostedzone/{HostedZoneId}/disable-dnssec",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53#DisableHostedZoneDNSSECRequest": {
+            "type": "structure",
+            "members": {
+                "HostedZoneId": {
+                    "target": "com.amazonaws.route53#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string used to identify a hosted zone.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53#DisableHostedZoneDNSSECResponse": {
+            "type": "structure",
+            "members": {
+                "ChangeInfo": {
+                    "target": "com.amazonaws.route53#ChangeInfo",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.route53#Disabled": {
             "type": "boolean",
             "traits": {
@@ -2299,6 +2774,73 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A complex type that contains the response information for the disassociate request.</p>"
+            }
+        },
+        "com.amazonaws.route53#EnableHostedZoneDNSSEC": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53#EnableHostedZoneDNSSECRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53#EnableHostedZoneDNSSECResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53#ConcurrentModification"
+                },
+                {
+                    "target": "com.amazonaws.route53#DNSSECNotFound"
+                },
+                {
+                    "target": "com.amazonaws.route53#HostedZonePartiallyDelegated"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidKeySigningKeyStatus"
+                },
+                {
+                    "target": "com.amazonaws.route53#InvalidKMSArn"
+                },
+                {
+                    "target": "com.amazonaws.route53#KeySigningKeyWithActiveStatusNotFound"
+                },
+                {
+                    "target": "com.amazonaws.route53#NoSuchHostedZone"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Enables DNSSEC signing in a specific hosted zone.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2013-04-01/hostedzone/{HostedZoneId}/enable-dnssec",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53#EnableHostedZoneDNSSECRequest": {
+            "type": "structure",
+            "members": {
+                "HostedZoneId": {
+                    "target": "com.amazonaws.route53#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string used to identify a hosted zone.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53#EnableHostedZoneDNSSECResponse": {
+            "type": "structure",
+            "members": {
+                "ChangeInfo": {
+                    "target": "com.amazonaws.route53#ChangeInfo",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.route53#EnableSNI": {
@@ -2633,6 +3175,63 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A complex type that contains the <code>CheckerIpRanges</code> element.</p>"
+            }
+        },
+        "com.amazonaws.route53#GetDNSSEC": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53#GetDNSSECRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53#GetDNSSECResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.route53#NoSuchHostedZone"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about DNSSEC for a specific hosted zone, including the key signing keys (KSKs)\n\t\t\tand zone signing keys (ZSKs) in the hosted zone.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2013-04-01/hostedzone/{HostedZoneId}/dnssec",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53#GetDNSSECRequest": {
+            "type": "structure",
+            "members": {
+                "HostedZoneId": {
+                    "target": "com.amazonaws.route53#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string used to identify a hosted zone.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53#GetDNSSECResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.route53#DNSSECStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string repesenting the status of DNSSEC.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeySigningKeys": {
+                    "target": "com.amazonaws.route53#KeySigningKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key signing keys (KSKs) in your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.route53#GetGeoLocation": {
@@ -3493,7 +4092,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -3635,7 +4234,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -3695,28 +4294,36 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "us-east-1"
+                        "value": "us-east-1",
+                        "name": "us_east_1"
                     },
                     {
-                        "value": "us-west-1"
+                        "value": "us-west-1",
+                        "name": "us_west_1"
                     },
                     {
-                        "value": "us-west-2"
+                        "value": "us-west-2",
+                        "name": "us_west_2"
                     },
                     {
-                        "value": "eu-west-1"
+                        "value": "eu-west-1",
+                        "name": "eu_west_1"
                     },
                     {
-                        "value": "ap-southeast-1"
+                        "value": "ap-southeast-1",
+                        "name": "ap_southeast_1"
                     },
                     {
-                        "value": "ap-southeast-2"
+                        "value": "ap-southeast-2",
+                        "name": "ap_southeast_2"
                     },
                     {
-                        "value": "ap-northeast-1"
+                        "value": "ap-northeast-1",
+                        "name": "ap_northeast_1"
                     },
                     {
-                        "value": "sa-east-1"
+                        "value": "sa-east-1",
+                        "name": "sa_east_1"
                     }
                 ],
                 "smithy.api#length": {
@@ -3869,7 +4476,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -3932,10 +4539,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "MAX_RRSETS_BY_ZONE"
+                        "value": "MAX_RRSETS_BY_ZONE",
+                        "name": "MAX_RRSETS_BY_ZONE"
                     },
                     {
-                        "value": "MAX_VPCS_ASSOCIATED_BY_ZONE"
+                        "value": "MAX_VPCS_ASSOCIATED_BY_ZONE",
+                        "name": "MAX_VPCS_ASSOCIATED_BY_ZONE"
                     }
                 ]
             }
@@ -3946,7 +4555,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -3962,7 +4571,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -3977,7 +4586,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -4013,6 +4622,18 @@
                     "min": 0,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.route53#HostedZonePartiallyDelegated": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.route53#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The hosted zone nameservers don't match the parent nameservers. The hosted zone and parent must have the same nameservers.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.route53#HostedZoneRRSetCount": {
@@ -4112,13 +4733,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Healthy"
+                        "value": "Healthy",
+                        "name": "Healthy"
                     },
                     {
-                        "value": "Unhealthy"
+                        "value": "Unhealthy",
+                        "name": "Unhealthy"
                     },
                     {
-                        "value": "LastKnownStatus"
+                        "value": "LastKnownStatus",
+                        "name": "LastKnownStatus"
                     }
                 ]
             }
@@ -4129,12 +4753,12 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Parameter name is invalid.</p>",
+                "smithy.api#documentation": "<p>Parameter name is not valid.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -4144,7 +4768,7 @@
                 "messages": {
                     "target": "com.amazonaws.route53#ErrorMessages",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 },
                 "message": {
@@ -4162,7 +4786,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -4178,12 +4802,50 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The input is not valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.route53#InvalidKMSArn": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.route53#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The KeyManagementServiceArn that you specified isn't valid to use with DNSSEC signing.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.route53#InvalidKeySigningKeyName": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.route53#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The key signing key (KSK) name that you specified isn't a valid name.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.route53#InvalidKeySigningKeyStatus": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.route53#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The key signing key (KSK) status isn't valid or another KSK has the status <code>INTERNAL_FAILURE</code>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4201,18 +4863,30 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.route53#InvalidSigningStatus": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.route53#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Your hosted zone status isn't valid for this operation. In the hosted zone, change the status to enable <code>DNSSEC</code> \n\t\t\tor disable <code>DNSSEC</code>.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.route53#InvalidTrafficPolicyDocument": {
             "type": "structure",
             "members": {
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The format of the traffic policy document that you specified in the <code>Document</code> element is invalid.</p>",
+                "smithy.api#documentation": "<p>The format of the traffic policy document that you specified in the <code>Document</code> element is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4223,7 +4897,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -4242,13 +4916,173 @@
         "com.amazonaws.route53#IsPrivateZone": {
             "type": "boolean"
         },
+        "com.amazonaws.route53#KeySigningKey": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.route53#SigningKeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alphanumeric string used to identify a key signing key (KSK). <code>Name</code> must be unique for each key signing key in the same \n\t\t\thosted zone.</p>"
+                    }
+                },
+                "KmsArn": {
+                    "target": "com.amazonaws.route53#SigningKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) used to identify the customer managed key (CMK) in AWS Key Management Service (KMS).\n\t\t\tThe <code>KmsArn</code> must be unique for each key signing key (KSK) in a single hosted zone.</p>\n\t\t       <p>You must configure the CMK as follows:</p>\n\t\t       <dl>\n            <dt>Status</dt>\n            <dd>\n               <p>Enabled</p>\n            </dd>\n            <dt>Key spec</dt>\n            <dd>\n               <p>ECC_NIST_P256</p>\n            </dd>\n            <dt>Key usage</dt>\n            <dd>\n               <p>Sign and verify</p>\n            </dd>\n            <dt>Key policy</dt>\n            <dd>\n               <p>The key policy must give permission for the following actions:</p>\n\t\t\t\t           <ul>\n                  <li>\n                     <p>DescribeKey</p>\n                  </li>\n                  <li>\n                     <p>GetPublicKey</p>\n                  </li>\n                  <li>\n                     <p>Sign</p>\n                  </li>\n               </ul>\n\t\t\t\t\t          <p>The key policy must also include the Amazon Route 53 service in the principal for your account. \n\t\t\t\t\t\tSpecify the following:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>\n                        <code>\"Service\": \"api-service.dnssec.route53.aws.internal\"</code>\n                     </p>\n                  </li>\n               </ul>\n\t\t\t\t        </dd>\n         </dl>\n\t\t       <p>For more information about working with the customer managed key (CMK) in KMS, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">AWS Key Management Service concepts</a>.</p>"
+                    }
+                },
+                "Flag": {
+                    "target": "com.amazonaws.route53#SigningKeyInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer that specifies how the key is used. For key signing key (KSK), this value is always 257.</p>"
+                    }
+                },
+                "SigningAlgorithmMnemonic": {
+                    "target": "com.amazonaws.route53#SigningKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string used to represent the signing algorithm. This value must follow the guidelines provided by\n\t\t\t<a href=\"https://tools.ietf.org/html/rfc8624#section-3.1\">RFC-8624 Section 3.1</a>.\n\t\t</p>"
+                    }
+                },
+                "SigningAlgorithmType": {
+                    "target": "com.amazonaws.route53#SigningKeyInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer used to represent the signing algorithm. This value must follow the guidelines provided by\n\t\t\t<a href=\"https://tools.ietf.org/html/rfc8624#section-3.1\">RFC-8624 Section 3.1</a>.\n\t\t</p>"
+                    }
+                },
+                "DigestAlgorithmMnemonic": {
+                    "target": "com.amazonaws.route53#SigningKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string used to represent the delegation signer digest algorithm. This value must follow the guidelines provided by\n\t\t\t<a href=\"https://tools.ietf.org/html/rfc8624#section-3.3\">RFC-8624 Section 3.3</a>.\n\t\t</p>"
+                    }
+                },
+                "DigestAlgorithmType": {
+                    "target": "com.amazonaws.route53#SigningKeyInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer used to represent the delegation signer digest algorithm. This value must follow the guidelines provided by\n\t\t\t<a href=\"https://tools.ietf.org/html/rfc8624#section-3.3\">RFC-8624 Section 3.3</a>.</p>"
+                    }
+                },
+                "KeyTag": {
+                    "target": "com.amazonaws.route53#SigningKeyTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer used to identify the DNSSEC record for the domain name. The process used to calculate the value is described in\n\t\t\t<a href=\"https://tools.ietf.org/rfc/rfc4034.txt\">RFC-4034 Appendix B</a>.</p>"
+                    }
+                },
+                "DigestValue": {
+                    "target": "com.amazonaws.route53#SigningKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A cryptographic digest of a DNSKEY resource record (RR). DNSKEY records are used to publish the public key that resolvers \n\t\t\tcan use to verify DNSSEC signatures that are used to secure certain kinds of information provided by the DNS system.</p>"
+                    }
+                },
+                "PublicKey": {
+                    "target": "com.amazonaws.route53#SigningKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key, represented as a Base64 encoding, as required by <a href=\"https://tools.ietf.org/rfc/rfc4034.txt\">\n\t\t\tRFC-4034 Page 5</a>.</p>"
+                    }
+                },
+                "DSRecord": {
+                    "target": "com.amazonaws.route53#SigningKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that represents a delegation signer (DS) record.</p>"
+                    }
+                },
+                "DNSKEYRecord": {
+                    "target": "com.amazonaws.route53#SigningKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that represents a DNSKEY record.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.route53#SigningKeyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that represents the current key signing key (KSK) status.</p>\n\t\t       <p>Status can have one of the following values:</p>\n\t\t       <dl>\n            <dt>ACTIVE</dt>\n            <dd>\n               <p>The KSK is being used for signing.</p>\n            </dd>\n            <dt>INACTIVE</dt>\n            <dd>\n               <p>The KSK is not being used for signing.</p>\n            </dd>\n            <dt>ACTION_NEEDED</dt>\n            <dd>\n               <p>There is an error in the KSK that requires you to take action to resolve.</p>\n            </dd>\n            <dt>INTERNAL_FAILURE</dt>\n            <dd>\n               <p>There was an error during a request. Before you can continue to work with DNSSEC\n\t\t\t\t\tsigning, including actions that involve this KSK, you must correct the problem. For example,\n\t\t\t\t\tyou may need to activate or deactivate the KSK.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.route53#SigningKeyStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message provided for the following key signing key (KSK) statuses: <code>ACTION_NEEDED</code> or \n\t\t\t<code>INTERNAL_FAILURE</code>. The status message includes information about what the problem might be and steps \n\t\t\tthat you can take to correct the issue.</p>"
+                    }
+                },
+                "CreatedDate": {
+                    "target": "com.amazonaws.route53#TimeStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the key signing key (KSK) was created.</p>"
+                    }
+                },
+                "LastModifiedDate": {
+                    "target": "com.amazonaws.route53#TimeStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the key signing key (KSK) was changed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A key signing key (KSK) is a complex type that represents a public/private key pair. The private key is used to generate\n\t\ta digital signature for the zone signing key (ZSK). The public key is stored in the DNS and is used to authenticate the ZSK. \n\t\tA KSK is always associated with a hosted zone; it cannot exist by itself.</p>"
+            }
+        },
+        "com.amazonaws.route53#KeySigningKeyAlreadyExists": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.route53#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You've already created a key signing key (KSK) with this name or with the same customer managed key (CMK) ARN.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.route53#KeySigningKeyInParentDSRecord": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.route53#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The key signing key (KSK) is specified in a parent DS record.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.route53#KeySigningKeyInUse": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.route53#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The key signing key (KSK) that you specified can't be deactivated because it's the only KSK for a\n\t\tcurrently-enabled DNSSEC. Disable DNSSEC signing, or add or enable another KSK.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.route53#KeySigningKeyWithActiveStatusNotFound": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.route53#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A key signing key (KSK) with <code>ACTIVE</code> status wasn't found.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.route53#KeySigningKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53#KeySigningKey"
+            }
+        },
         "com.amazonaws.route53#LastVPCAssociation": {
             "type": "structure",
             "members": {
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -4272,7 +5106,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -5895,7 +6729,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -5910,7 +6744,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -5926,7 +6760,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -5942,12 +6776,25 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>No hosted zone exists with the ID that you specified.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.route53#NoSuchKeySigningKey": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.route53#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified key signing key (KSK) doesn't exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -5971,7 +6818,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -5987,7 +6834,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -6012,7 +6859,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -6081,7 +6928,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -6165,40 +7012,56 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SOA"
+                        "value": "SOA",
+                        "name": "SOA"
                     },
                     {
-                        "value": "A"
+                        "value": "A",
+                        "name": "A"
                     },
                     {
-                        "value": "TXT"
+                        "value": "TXT",
+                        "name": "TXT"
                     },
                     {
-                        "value": "NS"
+                        "value": "NS",
+                        "name": "NS"
                     },
                     {
-                        "value": "CNAME"
+                        "value": "CNAME",
+                        "name": "CNAME"
                     },
                     {
-                        "value": "MX"
+                        "value": "MX",
+                        "name": "MX"
                     },
                     {
-                        "value": "NAPTR"
+                        "value": "NAPTR",
+                        "name": "NAPTR"
                     },
                     {
-                        "value": "PTR"
+                        "value": "PTR",
+                        "name": "PTR"
                     },
                     {
-                        "value": "SRV"
+                        "value": "SRV",
+                        "name": "SRV"
                     },
                     {
-                        "value": "SPF"
+                        "value": "SPF",
+                        "name": "SPF"
                     },
                     {
-                        "value": "AAAA"
+                        "value": "AAAA",
+                        "name": "AAAA"
                     },
                     {
-                        "value": "CAA"
+                        "value": "CAA",
+                        "name": "CAA"
+                    },
+                    {
+                        "value": "DS",
+                        "name": "DS"
                     }
                 ]
             }
@@ -6237,16 +7100,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "FullyQualifiedDomainName"
+                        "value": "FullyQualifiedDomainName",
+                        "name": "FullyQualifiedDomainName"
                     },
                     {
-                        "value": "Regions"
+                        "value": "Regions",
+                        "name": "Regions"
                     },
                     {
-                        "value": "ResourcePath"
+                        "value": "ResourcePath",
+                        "name": "ResourcePath"
                     },
                     {
-                        "value": "ChildHealthChecks"
+                        "value": "ChildHealthChecks",
+                        "name": "ChildHealthChecks"
                     }
                 ],
                 "smithy.api#length": {
@@ -6405,10 +7272,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PRIMARY"
+                        "value": "PRIMARY",
+                        "name": "PRIMARY"
                     },
                     {
-                        "value": "SECONDARY"
+                        "value": "SECONDARY",
+                        "name": "SECONDARY"
                     }
                 ]
             }
@@ -6433,73 +7302,96 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "us-east-1"
+                        "value": "us-east-1",
+                        "name": "us_east_1"
                     },
                     {
-                        "value": "us-east-2"
+                        "value": "us-east-2",
+                        "name": "us_east_2"
                     },
                     {
-                        "value": "us-west-1"
+                        "value": "us-west-1",
+                        "name": "us_west_1"
                     },
                     {
-                        "value": "us-west-2"
+                        "value": "us-west-2",
+                        "name": "us_west_2"
                     },
                     {
-                        "value": "ca-central-1"
+                        "value": "ca-central-1",
+                        "name": "ca_central_1"
                     },
                     {
-                        "value": "eu-west-1"
+                        "value": "eu-west-1",
+                        "name": "eu_west_1"
                     },
                     {
-                        "value": "eu-west-2"
+                        "value": "eu-west-2",
+                        "name": "eu_west_2"
                     },
                     {
-                        "value": "eu-west-3"
+                        "value": "eu-west-3",
+                        "name": "eu_west_3"
                     },
                     {
-                        "value": "eu-central-1"
+                        "value": "eu-central-1",
+                        "name": "eu_central_1"
                     },
                     {
-                        "value": "ap-southeast-1"
+                        "value": "ap-southeast-1",
+                        "name": "ap_southeast_1"
                     },
                     {
-                        "value": "ap-southeast-2"
+                        "value": "ap-southeast-2",
+                        "name": "ap_southeast_2"
                     },
                     {
-                        "value": "ap-northeast-1"
+                        "value": "ap-northeast-1",
+                        "name": "ap_northeast_1"
                     },
                     {
-                        "value": "ap-northeast-2"
+                        "value": "ap-northeast-2",
+                        "name": "ap_northeast_2"
                     },
                     {
-                        "value": "ap-northeast-3"
+                        "value": "ap-northeast-3",
+                        "name": "ap_northeast_3"
                     },
                     {
-                        "value": "eu-north-1"
+                        "value": "eu-north-1",
+                        "name": "eu_north_1"
                     },
                     {
-                        "value": "sa-east-1"
+                        "value": "sa-east-1",
+                        "name": "sa_east_1"
                     },
                     {
-                        "value": "cn-north-1"
+                        "value": "cn-north-1",
+                        "name": "cn_north_1"
                     },
                     {
-                        "value": "cn-northwest-1"
+                        "value": "cn-northwest-1",
+                        "name": "cn_northwest_1"
                     },
                     {
-                        "value": "ap-east-1"
+                        "value": "ap-east-1",
+                        "name": "ap_east_1"
                     },
                     {
-                        "value": "me-south-1"
+                        "value": "me-south-1",
+                        "name": "me_south_1"
                     },
                     {
-                        "value": "ap-south-1"
+                        "value": "ap-south-1",
+                        "name": "ap_south_1"
                     },
                     {
-                        "value": "af-south-1"
+                        "value": "af-south-1",
+                        "name": "af_south_1"
                     },
                     {
-                        "value": "eu-south-1"
+                        "value": "eu-south-1",
+                        "name": "eu_south_1"
                     }
                 ],
                 "smithy.api#length": {
@@ -6612,7 +7504,8 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "MAX_ZONES_BY_REUSABLE_DELEGATION_SET"
+                        "value": "MAX_ZONES_BY_REUSABLE_DELEGATION_SET",
+                        "name": "MAX_ZONES_BY_REUSABLE_DELEGATION_SET"
                     }
                 ]
             }
@@ -6626,6 +7519,15 @@
                 }
             }
         },
+        "com.amazonaws.route53#ServeSignature": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
         "com.amazonaws.route53#ServicePrincipal": {
             "type": "string",
             "traits": {
@@ -6635,24 +7537,71 @@
                 }
             }
         },
+        "com.amazonaws.route53#SigningKeyInteger": {
+            "type": "integer"
+        },
+        "com.amazonaws.route53#SigningKeyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.route53#SigningKeyStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 150
+                }
+            }
+        },
+        "com.amazonaws.route53#SigningKeyStatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.route53#SigningKeyString": {
+            "type": "string"
+        },
+        "com.amazonaws.route53#SigningKeyTag": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 65536
+                }
+            }
+        },
         "com.amazonaws.route53#Statistic": {
             "type": "string",
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "Average"
+                        "value": "Average",
+                        "name": "Average"
                     },
                     {
-                        "value": "Sum"
+                        "value": "Sum",
+                        "name": "Sum"
                     },
                     {
-                        "value": "SampleCount"
+                        "value": "SampleCount",
+                        "name": "SampleCount"
                     },
                     {
-                        "value": "Maximum"
+                        "value": "Maximum",
+                        "name": "Maximum"
                     },
                     {
-                        "value": "Minimum"
+                        "value": "Minimum",
+                        "name": "Minimum"
                     }
                 ]
             }
@@ -6787,10 +7736,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "healthcheck"
+                        "value": "healthcheck",
+                        "name": "healthcheck"
                     },
                     {
-                        "value": "hostedzone"
+                        "value": "hostedzone",
+                        "name": "hostedzone"
                     }
                 ]
             }
@@ -6972,7 +7923,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -6982,13 +7933,25 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.route53#TooManyKeySigningKeys": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.route53#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You've reached the limit for the number of key signing keys (KSKs). Remove at least one KSK, and then try again.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.route53#TooManyTrafficPolicies": {
             "type": "structure",
             "members": {
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -7004,7 +7967,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -7020,7 +7983,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -7036,7 +7999,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -7110,7 +8073,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -7153,7 +8116,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -7240,7 +8203,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -7768,7 +8731,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p></p>"
                     }
                 }
             },
@@ -7784,7 +8747,7 @@
                 "message": {
                     "target": "com.amazonaws.route53#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Descriptive message for the error response.</p>"
+                        "smithy.api#documentation": "<p>The specified VPC or hosted zone weren't found.</p>"
                     }
                 }
             },
@@ -7809,82 +8772,108 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "us-east-1"
+                        "value": "us-east-1",
+                        "name": "us_east_1"
                     },
                     {
-                        "value": "us-east-2"
+                        "value": "us-east-2",
+                        "name": "us_east_2"
                     },
                     {
-                        "value": "us-west-1"
+                        "value": "us-west-1",
+                        "name": "us_west_1"
                     },
                     {
-                        "value": "us-west-2"
+                        "value": "us-west-2",
+                        "name": "us_west_2"
                     },
                     {
-                        "value": "eu-west-1"
+                        "value": "eu-west-1",
+                        "name": "eu_west_1"
                     },
                     {
-                        "value": "eu-west-2"
+                        "value": "eu-west-2",
+                        "name": "eu_west_2"
                     },
                     {
-                        "value": "eu-west-3"
+                        "value": "eu-west-3",
+                        "name": "eu_west_3"
                     },
                     {
-                        "value": "eu-central-1"
+                        "value": "eu-central-1",
+                        "name": "eu_central_1"
                     },
                     {
-                        "value": "ap-east-1"
+                        "value": "ap-east-1",
+                        "name": "ap_east_1"
                     },
                     {
-                        "value": "me-south-1"
+                        "value": "me-south-1",
+                        "name": "me_south_1"
                     },
                     {
-                        "value": "us-gov-west-1"
+                        "value": "us-gov-west-1",
+                        "name": "us_gov_west_1"
                     },
                     {
-                        "value": "us-gov-east-1"
+                        "value": "us-gov-east-1",
+                        "name": "us_gov_east_1"
                     },
                     {
-                        "value": "us-iso-east-1"
+                        "value": "us-iso-east-1",
+                        "name": "us_iso_east_1"
                     },
                     {
-                        "value": "us-isob-east-1"
+                        "value": "us-isob-east-1",
+                        "name": "us_isob_east_1"
                     },
                     {
-                        "value": "ap-southeast-1"
+                        "value": "ap-southeast-1",
+                        "name": "ap_southeast_1"
                     },
                     {
-                        "value": "ap-southeast-2"
+                        "value": "ap-southeast-2",
+                        "name": "ap_southeast_2"
                     },
                     {
-                        "value": "ap-south-1"
+                        "value": "ap-south-1",
+                        "name": "ap_south_1"
                     },
                     {
-                        "value": "ap-northeast-1"
+                        "value": "ap-northeast-1",
+                        "name": "ap_northeast_1"
                     },
                     {
-                        "value": "ap-northeast-2"
+                        "value": "ap-northeast-2",
+                        "name": "ap_northeast_2"
                     },
                     {
-                        "value": "ap-northeast-3"
+                        "value": "ap-northeast-3",
+                        "name": "ap_northeast_3"
                     },
                     {
-                        "value": "eu-north-1"
+                        "value": "eu-north-1",
+                        "name": "eu_north_1"
                     },
                     {
-                        "value": "sa-east-1"
+                        "value": "sa-east-1",
+                        "name": "sa_east_1"
                     },
                     {
-                        "value": "ca-central-1"
+                        "value": "ca-central-1",
+                        "name": "ca_central_1"
                     },
                     {
-                        "value": "cn-north-1"
+                        "value": "cn-north-1",
+                        "name": "cn_north_1"
                     },
                     {
-                        "value": "af-south-1"
+                        "value": "af-south-1",
+                        "name": "af_south_1"
                     },
                     {
-                        "value": "eu-south-1"
+                        "value": "eu-south-1",
+                        "name": "eu_south_1"
                     }
                 ],
                 "smithy.api#length": {

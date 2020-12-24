@@ -34,9 +34,10 @@ func (c *Client) GetAutoScalingGroupRecommendations(ctx context.Context, params 
 type GetAutoScalingGroupRecommendationsInput struct {
 
 	// The IDs of the AWS accounts for which to return Auto Scaling group
-	// recommendations. If your account is the master account of an organization, use
-	// this parameter to specify the member accounts for which you want to return Auto
-	// Scaling group recommendations. Only one account ID can be specified per request.
+	// recommendations. If your account is the management account of an organization,
+	// use this parameter to specify the member accounts for which you want to return
+	// Auto Scaling group recommendations. Only one account ID can be specified per
+	// request.
 	AccountIds []string
 
 	// The Amazon Resource Name (ARN) of the Auto Scaling groups for which to return

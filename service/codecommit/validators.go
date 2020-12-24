@@ -1791,14 +1791,14 @@ func validateConflictResolution(v *types.ConflictResolution) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConflictResolution"}
-	if v.DeleteFiles != nil {
-		if err := validateDeleteFileEntries(v.DeleteFiles); err != nil {
-			invalidParams.AddNested("DeleteFiles", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ReplaceContents != nil {
 		if err := validateReplaceContentEntries(v.ReplaceContents); err != nil {
 			invalidParams.AddNested("ReplaceContents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeleteFiles != nil {
+		if err := validateDeleteFileEntries(v.DeleteFiles); err != nil {
+			invalidParams.AddNested("DeleteFiles", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SetFileModes != nil {
@@ -1867,13 +1867,13 @@ func validatePutFileEntry(v *types.PutFileEntry) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutFileEntry"}
+	if v.FilePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilePath"))
+	}
 	if v.SourceFile != nil {
 		if err := validateSourceFileSpecifier(v.SourceFile); err != nil {
 			invalidParams.AddNested("SourceFile", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.FilePath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FilePath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1922,11 +1922,11 @@ func validateRepositoryTrigger(v *types.RepositoryTrigger) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RepositoryTrigger"}
-	if v.DestinationArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationArn"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DestinationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationArn"))
 	}
 	if v.Events == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Events"))
@@ -1977,11 +1977,11 @@ func validateSetFileModeEntry(v *types.SetFileModeEntry) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetFileModeEntry"}
-	if len(v.FileMode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("FileMode"))
-	}
 	if v.FilePath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FilePath"))
+	}
+	if len(v.FileMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FileMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2045,11 +2045,11 @@ func validateOpAssociateApprovalRuleTemplateWithRepositoryInput(v *AssociateAppr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateApprovalRuleTemplateWithRepositoryInput"}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
-	}
 	if v.ApprovalRuleTemplateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApprovalRuleTemplateName"))
+	}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2063,11 +2063,11 @@ func validateOpBatchAssociateApprovalRuleTemplateWithRepositoriesInput(v *BatchA
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchAssociateApprovalRuleTemplateWithRepositoriesInput"}
-	if v.RepositoryNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryNames"))
-	}
 	if v.ApprovalRuleTemplateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApprovalRuleTemplateName"))
+	}
+	if v.RepositoryNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2081,17 +2081,17 @@ func validateOpBatchDescribeMergeConflictsInput(v *BatchDescribeMergeConflictsIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchDescribeMergeConflictsInput"}
-	if v.SourceCommitSpecifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceCommitSpecifier"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
-	if len(v.MergeOption) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("MergeOption"))
-	}
 	if v.DestinationCommitSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationCommitSpecifier"))
+	}
+	if v.SourceCommitSpecifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceCommitSpecifier"))
+	}
+	if len(v.MergeOption) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MergeOption"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2174,14 +2174,14 @@ func validateOpCreateBranchInput(v *CreateBranchInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateBranchInput"}
-	if v.CommitId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CommitId"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if v.BranchName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
+	}
+	if v.CommitId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CommitId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2195,10 +2195,8 @@ func validateOpCreateCommitInput(v *CreateCommitInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCommitInput"}
-	if v.SetFileModes != nil {
-		if err := validateSetFileModeEntries(v.SetFileModes); err != nil {
-			invalidParams.AddNested("SetFileModes", err.(smithy.InvalidParamsError))
-		}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if v.BranchName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
@@ -2208,12 +2206,14 @@ func validateOpCreateCommitInput(v *CreateCommitInput) error {
 			invalidParams.AddNested("PutFiles", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
-	}
 	if v.DeleteFiles != nil {
 		if err := validateDeleteFileEntries(v.DeleteFiles); err != nil {
 			invalidParams.AddNested("DeleteFiles", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SetFileModes != nil {
+		if err := validateSetFileModeEntries(v.SetFileModes); err != nil {
+			invalidParams.AddNested("SetFileModes", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2228,14 +2228,14 @@ func validateOpCreatePullRequestApprovalRuleInput(v *CreatePullRequestApprovalRu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePullRequestApprovalRuleInput"}
-	if v.ApprovalRuleContent == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApprovalRuleContent"))
-	}
 	if v.PullRequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PullRequestId"))
 	}
 	if v.ApprovalRuleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApprovalRuleName"))
+	}
+	if v.ApprovalRuleContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApprovalRuleContent"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2286,17 +2286,17 @@ func validateOpCreateUnreferencedMergeCommitInput(v *CreateUnreferencedMergeComm
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUnreferencedMergeCommitInput"}
-	if v.SourceCommitSpecifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceCommitSpecifier"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
-	if len(v.MergeOption) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("MergeOption"))
+	if v.SourceCommitSpecifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceCommitSpecifier"))
 	}
 	if v.DestinationCommitSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationCommitSpecifier"))
+	}
+	if len(v.MergeOption) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MergeOption"))
 	}
 	if v.ConflictResolution != nil {
 		if err := validateConflictResolution(v.ConflictResolution); err != nil {
@@ -2330,11 +2330,11 @@ func validateOpDeleteBranchInput(v *DeleteBranchInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBranchInput"}
-	if v.BranchName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.BranchName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2363,14 +2363,14 @@ func validateOpDeleteFileInput(v *DeleteFileInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFileInput"}
-	if v.FilePath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FilePath"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if v.BranchName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
+	}
+	if v.FilePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilePath"))
 	}
 	if v.ParentCommitId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParentCommitId"))
@@ -2420,17 +2420,17 @@ func validateOpDescribeMergeConflictsInput(v *DescribeMergeConflictsInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeMergeConflictsInput"}
-	if v.SourceCommitSpecifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceCommitSpecifier"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
-	if len(v.MergeOption) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("MergeOption"))
-	}
 	if v.DestinationCommitSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationCommitSpecifier"))
+	}
+	if v.SourceCommitSpecifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceCommitSpecifier"))
+	}
+	if len(v.MergeOption) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MergeOption"))
 	}
 	if v.FilePath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FilePath"))
@@ -2462,11 +2462,11 @@ func validateOpDisassociateApprovalRuleTemplateFromRepositoryInput(v *Disassocia
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateApprovalRuleTemplateFromRepositoryInput"}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
-	}
 	if v.ApprovalRuleTemplateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApprovalRuleTemplateName"))
+	}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2480,11 +2480,11 @@ func validateOpEvaluatePullRequestApprovalRulesInput(v *EvaluatePullRequestAppro
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EvaluatePullRequestApprovalRulesInput"}
-	if v.RevisionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
-	}
 	if v.PullRequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PullRequestId"))
+	}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2513,11 +2513,11 @@ func validateOpGetBlobInput(v *GetBlobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetBlobInput"}
-	if v.BlobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BlobId"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.BlobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2561,11 +2561,11 @@ func validateOpGetCommentsForComparedCommitInput(v *GetCommentsForComparedCommit
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetCommentsForComparedCommitInput"}
-	if v.AfterCommitId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AfterCommitId"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.AfterCommitId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AfterCommitId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2612,11 +2612,11 @@ func validateOpGetDifferencesInput(v *GetDifferencesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDifferencesInput"}
-	if v.AfterCommitSpecifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AfterCommitSpecifier"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.AfterCommitSpecifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AfterCommitSpecifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2630,11 +2630,11 @@ func validateOpGetFileInput(v *GetFileInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetFileInput"}
-	if v.FilePath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FilePath"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.FilePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilePath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2648,11 +2648,11 @@ func validateOpGetFolderInput(v *GetFolderInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetFolderInput"}
-	if v.FolderPath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FolderPath"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.FolderPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FolderPath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2666,14 +2666,14 @@ func validateOpGetMergeCommitInput(v *GetMergeCommitInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetMergeCommitInput"}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
 	if v.SourceCommitSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceCommitSpecifier"))
 	}
 	if v.DestinationCommitSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationCommitSpecifier"))
-	}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2687,14 +2687,14 @@ func validateOpGetMergeConflictsInput(v *GetMergeConflictsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetMergeConflictsInput"}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
 	if v.DestinationCommitSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationCommitSpecifier"))
 	}
 	if v.SourceCommitSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceCommitSpecifier"))
-	}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if len(v.MergeOption) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MergeOption"))
@@ -2711,14 +2711,14 @@ func validateOpGetMergeOptionsInput(v *GetMergeOptionsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetMergeOptionsInput"}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
 	if v.SourceCommitSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceCommitSpecifier"))
 	}
 	if v.DestinationCommitSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationCommitSpecifier"))
-	}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2732,11 +2732,11 @@ func validateOpGetPullRequestApprovalStatesInput(v *GetPullRequestApprovalStates
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetPullRequestApprovalStatesInput"}
-	if v.RevisionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
-	}
 	if v.PullRequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PullRequestId"))
+	}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2765,11 +2765,11 @@ func validateOpGetPullRequestOverrideStateInput(v *GetPullRequestOverrideStateIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetPullRequestOverrideStateInput"}
-	if v.RevisionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
-	}
 	if v.PullRequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PullRequestId"))
+	}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2888,14 +2888,14 @@ func validateOpMergeBranchesByFastForwardInput(v *MergeBranchesByFastForwardInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MergeBranchesByFastForwardInput"}
-	if v.DestinationCommitSpecifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationCommitSpecifier"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if v.SourceCommitSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceCommitSpecifier"))
+	}
+	if v.DestinationCommitSpecifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationCommitSpecifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2909,11 +2909,6 @@ func validateOpMergeBranchesBySquashInput(v *MergeBranchesBySquashInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MergeBranchesBySquashInput"}
-	if v.ConflictResolution != nil {
-		if err := validateConflictResolution(v.ConflictResolution); err != nil {
-			invalidParams.AddNested("ConflictResolution", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
@@ -2922,6 +2917,11 @@ func validateOpMergeBranchesBySquashInput(v *MergeBranchesBySquashInput) error {
 	}
 	if v.DestinationCommitSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationCommitSpecifier"))
+	}
+	if v.ConflictResolution != nil {
+		if err := validateConflictResolution(v.ConflictResolution); err != nil {
+			invalidParams.AddNested("ConflictResolution", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2935,19 +2935,19 @@ func validateOpMergeBranchesByThreeWayInput(v *MergeBranchesByThreeWayInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MergeBranchesByThreeWayInput"}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
 	if v.SourceCommitSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceCommitSpecifier"))
+	}
+	if v.DestinationCommitSpecifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationCommitSpecifier"))
 	}
 	if v.ConflictResolution != nil {
 		if err := validateConflictResolution(v.ConflictResolution); err != nil {
 			invalidParams.AddNested("ConflictResolution", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
-	}
-	if v.DestinationCommitSpecifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationCommitSpecifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2979,16 +2979,16 @@ func validateOpMergePullRequestBySquashInput(v *MergePullRequestBySquashInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MergePullRequestBySquashInput"}
-	if v.ConflictResolution != nil {
-		if err := validateConflictResolution(v.ConflictResolution); err != nil {
-			invalidParams.AddNested("ConflictResolution", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.PullRequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PullRequestId"))
 	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
+	if v.ConflictResolution != nil {
+		if err := validateConflictResolution(v.ConflictResolution); err != nil {
+			invalidParams.AddNested("ConflictResolution", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3025,11 +3025,11 @@ func validateOpOverridePullRequestApprovalRulesInput(v *OverridePullRequestAppro
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OverridePullRequestApprovalRulesInput"}
-	if v.RevisionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
-	}
 	if v.PullRequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PullRequestId"))
+	}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
 	}
 	if len(v.OverrideStatus) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("OverrideStatus"))
@@ -3046,14 +3046,14 @@ func validateOpPostCommentForComparedCommitInput(v *PostCommentForComparedCommit
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PostCommentForComparedCommitInput"}
-	if v.Content == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Content"))
-	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if v.AfterCommitId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AfterCommitId"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3067,20 +3067,20 @@ func validateOpPostCommentForPullRequestInput(v *PostCommentForPullRequestInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PostCommentForPullRequestInput"}
-	if v.BeforeCommitId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BeforeCommitId"))
-	}
 	if v.PullRequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PullRequestId"))
 	}
 	if v.RepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
-	if v.Content == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	if v.BeforeCommitId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BeforeCommitId"))
 	}
 	if v.AfterCommitId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AfterCommitId"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3094,11 +3094,11 @@ func validateOpPostCommentReplyInput(v *PostCommentReplyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PostCommentReplyInput"}
-	if v.Content == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Content"))
-	}
 	if v.InReplyTo == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InReplyTo"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3130,14 +3130,14 @@ func validateOpPutFileInput(v *PutFileInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutFileInput"}
-	if v.FileContent == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FileContent"))
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if v.BranchName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
 	}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	if v.FileContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileContent"))
 	}
 	if v.FilePath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FilePath"))
@@ -3154,15 +3154,15 @@ func validateOpPutRepositoryTriggersInput(v *PutRepositoryTriggersInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutRepositoryTriggersInput"}
+	if v.RepositoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
+	}
 	if v.Triggers == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Triggers"))
 	} else if v.Triggers != nil {
 		if err := validateRepositoryTriggersList(v.Triggers); err != nil {
 			invalidParams.AddNested("Triggers", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.RepositoryName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RepositoryName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3176,11 +3176,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3270,11 +3270,11 @@ func validateOpUpdateApprovalRuleTemplateNameInput(v *UpdateApprovalRuleTemplate
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateApprovalRuleTemplateNameInput"}
-	if v.NewApprovalRuleTemplateName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NewApprovalRuleTemplateName"))
-	}
 	if v.OldApprovalRuleTemplateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OldApprovalRuleTemplateName"))
+	}
+	if v.NewApprovalRuleTemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewApprovalRuleTemplateName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3324,14 +3324,14 @@ func validateOpUpdatePullRequestApprovalRuleContentInput(v *UpdatePullRequestApp
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePullRequestApprovalRuleContentInput"}
+	if v.PullRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PullRequestId"))
+	}
 	if v.ApprovalRuleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApprovalRuleName"))
 	}
 	if v.NewRuleContent == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NewRuleContent"))
-	}
-	if v.PullRequestId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PullRequestId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3345,14 +3345,14 @@ func validateOpUpdatePullRequestApprovalStateInput(v *UpdatePullRequestApprovalS
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePullRequestApprovalStateInput"}
+	if v.PullRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PullRequestId"))
+	}
 	if v.RevisionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
 	}
 	if len(v.ApprovalState) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ApprovalState"))
-	}
-	if v.PullRequestId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PullRequestId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3366,11 +3366,11 @@ func validateOpUpdatePullRequestDescriptionInput(v *UpdatePullRequestDescription
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePullRequestDescriptionInput"}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
 	if v.PullRequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PullRequestId"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3435,11 +3435,11 @@ func validateOpUpdateRepositoryNameInput(v *UpdateRepositoryNameInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRepositoryNameInput"}
-	if v.NewName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NewName"))
-	}
 	if v.OldName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OldName"))
+	}
+	if v.NewName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

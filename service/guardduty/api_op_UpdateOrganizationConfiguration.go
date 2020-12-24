@@ -39,7 +39,7 @@ type UpdateOrganizationConfigurationInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// An object describes which data sources will be updated.
+	// Describes which data sources will be updated.
 	DataSources *types.OrganizationDataSourceConfigurations
 }
 

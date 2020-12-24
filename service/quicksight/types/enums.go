@@ -306,6 +306,26 @@ func (Edition) Values() []Edition {
 	}
 }
 
+type EmbeddingIdentityType string
+
+// Enum values for EmbeddingIdentityType
+const (
+	EmbeddingIdentityTypeIam        EmbeddingIdentityType = "IAM"
+	EmbeddingIdentityTypeQuicksight EmbeddingIdentityType = "QUICKSIGHT"
+	EmbeddingIdentityTypeAnonymous  EmbeddingIdentityType = "ANONYMOUS"
+)
+
+// Values returns all known values for EmbeddingIdentityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EmbeddingIdentityType) Values() []EmbeddingIdentityType {
+	return []EmbeddingIdentityType{
+		"IAM",
+		"QUICKSIGHT",
+		"ANONYMOUS",
+	}
+}
+
 type ExceptionResourceType string
 
 // Enum values for ExceptionResourceType

@@ -6,10 +6,11 @@ type AttributeType string
 
 // Enum values for AttributeType
 const (
-	AttributeTypeString    AttributeType = "string"
-	AttributeTypeInteger   AttributeType = "integer"
-	AttributeTypeFloat     AttributeType = "float"
-	AttributeTypeTimestamp AttributeType = "timestamp"
+	AttributeTypeString      AttributeType = "string"
+	AttributeTypeInteger     AttributeType = "integer"
+	AttributeTypeFloat       AttributeType = "float"
+	AttributeTypeTimestamp   AttributeType = "timestamp"
+	AttributeTypeGeolocation AttributeType = "geolocation"
 )
 
 // Values returns all known values for AttributeType. Note that this can be
@@ -21,6 +22,7 @@ func (AttributeType) Values() []AttributeType {
 		"integer",
 		"float",
 		"timestamp",
+		"geolocation",
 	}
 }
 

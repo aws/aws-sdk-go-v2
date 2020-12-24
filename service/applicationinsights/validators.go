@@ -591,11 +591,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -646,11 +646,11 @@ func validateOpCreateComponentInput(v *CreateComponentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateComponentInput"}
-	if v.ComponentName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
-	}
 	if v.ResourceGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
+	}
+	if v.ComponentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
 	}
 	if v.ResourceList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceList"))
@@ -667,8 +667,8 @@ func validateOpCreateLogPatternInput(v *CreateLogPatternInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLogPatternInput"}
-	if v.Pattern == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Pattern"))
+	if v.ResourceGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
 	}
 	if v.PatternSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PatternSetName"))
@@ -676,8 +676,8 @@ func validateOpCreateLogPatternInput(v *CreateLogPatternInput) error {
 	if v.PatternName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PatternName"))
 	}
-	if v.ResourceGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
+	if v.Pattern == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Pattern"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -724,14 +724,14 @@ func validateOpDeleteLogPatternInput(v *DeleteLogPatternInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteLogPatternInput"}
+	if v.ResourceGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
+	}
 	if v.PatternSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PatternSetName"))
 	}
 	if v.PatternName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PatternName"))
-	}
-	if v.ResourceGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -778,14 +778,14 @@ func validateOpDescribeComponentConfigurationRecommendationInput(v *DescribeComp
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeComponentConfigurationRecommendationInput"}
-	if len(v.Tier) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Tier"))
-	}
 	if v.ResourceGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
 	}
 	if v.ComponentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
+	}
+	if len(v.Tier) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Tier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -817,14 +817,14 @@ func validateOpDescribeLogPatternInput(v *DescribeLogPatternInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeLogPatternInput"}
+	if v.ResourceGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
+	}
 	if v.PatternSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PatternSetName"))
 	}
 	if v.PatternName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PatternName"))
-	}
-	if v.ResourceGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -943,15 +943,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -998,11 +998,11 @@ func validateOpUpdateComponentConfigurationInput(v *UpdateComponentConfiguration
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateComponentConfigurationInput"}
-	if v.ComponentName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
-	}
 	if v.ResourceGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
+	}
+	if v.ComponentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1016,11 +1016,11 @@ func validateOpUpdateComponentInput(v *UpdateComponentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateComponentInput"}
-	if v.ComponentName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
-	}
 	if v.ResourceGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
+	}
+	if v.ComponentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1037,11 +1037,11 @@ func validateOpUpdateLogPatternInput(v *UpdateLogPatternInput) error {
 	if v.ResourceGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceGroupName"))
 	}
-	if v.PatternName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PatternName"))
-	}
 	if v.PatternSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PatternSetName"))
+	}
+	if v.PatternName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PatternName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

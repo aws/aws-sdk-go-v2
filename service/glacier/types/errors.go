@@ -13,8 +13,8 @@ import (
 type InsufficientCapacityException struct {
 	Message *string
 
-	Code *string
 	Type *string
+	Code *string
 }
 
 func (e *InsufficientCapacityException) Error() string {
@@ -53,8 +53,8 @@ func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return
 type LimitExceededException struct {
 	Message *string
 
-	Code *string
 	Type *string
+	Code *string
 }
 
 func (e *LimitExceededException) Error() string {
@@ -115,8 +115,8 @@ func (e *PolicyEnforcedException) ErrorFault() smithy.ErrorFault { return smithy
 type RequestTimeoutException struct {
 	Message *string
 
-	Code *string
 	Type *string
+	Code *string
 }
 
 func (e *RequestTimeoutException) Error() string {
@@ -136,8 +136,8 @@ func (e *RequestTimeoutException) ErrorFault() smithy.ErrorFault { return smithy
 type ResourceNotFoundException struct {
 	Message *string
 
-	Code *string
 	Type *string
+	Code *string
 }
 
 func (e *ResourceNotFoundException) Error() string {

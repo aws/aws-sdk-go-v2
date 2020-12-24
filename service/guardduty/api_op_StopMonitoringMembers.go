@@ -35,8 +35,8 @@ type StopMonitoringMembersInput struct {
 	// This member is required.
 	AccountIds []string
 
-	// The unique ID of the detector associated with the GuardDuty master account that
-	// is monitoring member accounts.
+	// The unique ID of the detector associated with the GuardDuty administrator
+	// account that is monitoring member accounts.
 	//
 	// This member is required.
 	DetectorId *string

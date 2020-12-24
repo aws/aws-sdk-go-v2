@@ -18,6 +18,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"strings"
+	"time"
 )
 
 type awsRestjson1_deserializeOpAddFacetToObject struct {
@@ -16292,7 +16293,7 @@ func awsRestjson1_deserializeDocumentTagList(v *[]types.Tag, value interface{}) 
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentTypedAttributeValue(v **types.TypedAttributeValue, value interface{}) error {
+func awsRestjson1_deserializeDocumentTypedAttributeValue(v *types.TypedAttributeValue, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16305,16 +16306,12 @@ func awsRestjson1_deserializeDocumentTypedAttributeValue(v **types.TypedAttribut
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var sv *types.TypedAttributeValue
-	if *v == nil {
-		sv = &types.TypedAttributeValue{}
-	} else {
-		sv = *v
-	}
-
+	var uv types.TypedAttributeValue
+loop:
 	for key, value := range shape {
 		switch key {
 		case "BinaryValue":
+			var mv []byte
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -16324,19 +16321,25 @@ func awsRestjson1_deserializeDocumentTypedAttributeValue(v **types.TypedAttribut
 				if err != nil {
 					return fmt.Errorf("failed to base64 decode BinaryAttributeValue, %w", err)
 				}
-				sv.BinaryValue = dv
+				mv = dv
 			}
+			uv = &types.TypedAttributeValueMemberBinaryValue{Value: mv}
+			break loop
 
 		case "BooleanValue":
+			var mv bool
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
 					return fmt.Errorf("expected BooleanAttributeValue to be of type *bool, got %T instead", value)
 				}
-				sv.BooleanValue = ptr.Bool(jtv)
+				mv = jtv
 			}
+			uv = &types.TypedAttributeValueMemberBooleanValue{Value: mv}
+			break loop
 
 		case "DatetimeValue":
+			var mv time.Time
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
@@ -16346,33 +16349,42 @@ func awsRestjson1_deserializeDocumentTypedAttributeValue(v **types.TypedAttribut
 				if err != nil {
 					return err
 				}
-				sv.DatetimeValue = ptr.Time(smithytime.ParseEpochSeconds(f64))
+				mv = smithytime.ParseEpochSeconds(f64)
 			}
+			uv = &types.TypedAttributeValueMemberDatetimeValue{Value: mv}
+			break loop
 
 		case "NumberValue":
+			var mv string
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected NumberAttributeValue to be of type string, got %T instead", value)
 				}
-				sv.NumberValue = ptr.String(jtv)
+				mv = jtv
 			}
+			uv = &types.TypedAttributeValueMemberNumberValue{Value: mv}
+			break loop
 
 		case "StringValue":
+			var mv string
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected StringAttributeValue to be of type string, got %T instead", value)
 				}
-				sv.StringValue = ptr.String(jtv)
+				mv = jtv
 			}
+			uv = &types.TypedAttributeValueMemberStringValue{Value: mv}
+			break loop
 
 		default:
-			_, _ = key, value
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
 
 		}
 	}
-	*v = sv
+	*v = uv
 	return nil
 }
 

@@ -208,6 +208,8 @@ const (
 	AutomationExecutionFilterKeyAutomationType      AutomationExecutionFilterKey = "AutomationType"
 	AutomationExecutionFilterKeyTagKey              AutomationExecutionFilterKey = "TagKey"
 	AutomationExecutionFilterKeyTargetResourceGroup AutomationExecutionFilterKey = "TargetResourceGroup"
+	AutomationExecutionFilterKeyAutomationSubtype   AutomationExecutionFilterKey = "AutomationSubtype"
+	AutomationExecutionFilterKeyOpsItemId           AutomationExecutionFilterKey = "OpsItemId"
 )
 
 // Values returns all known values for AutomationExecutionFilterKey. Note that this
@@ -225,6 +227,8 @@ func (AutomationExecutionFilterKey) Values() []AutomationExecutionFilterKey {
 		"AutomationType",
 		"TagKey",
 		"TargetResourceGroup",
+		"AutomationSubtype",
+		"OpsItemId",
 	}
 }
 
@@ -232,14 +236,24 @@ type AutomationExecutionStatus string
 
 // Enum values for AutomationExecutionStatus
 const (
-	AutomationExecutionStatusPending    AutomationExecutionStatus = "Pending"
-	AutomationExecutionStatusInprogress AutomationExecutionStatus = "InProgress"
-	AutomationExecutionStatusWaiting    AutomationExecutionStatus = "Waiting"
-	AutomationExecutionStatusSuccess    AutomationExecutionStatus = "Success"
-	AutomationExecutionStatusTimedout   AutomationExecutionStatus = "TimedOut"
-	AutomationExecutionStatusCancelling AutomationExecutionStatus = "Cancelling"
-	AutomationExecutionStatusCancelled  AutomationExecutionStatus = "Cancelled"
-	AutomationExecutionStatusFailed     AutomationExecutionStatus = "Failed"
+	AutomationExecutionStatusPending                        AutomationExecutionStatus = "Pending"
+	AutomationExecutionStatusInprogress                     AutomationExecutionStatus = "InProgress"
+	AutomationExecutionStatusWaiting                        AutomationExecutionStatus = "Waiting"
+	AutomationExecutionStatusSuccess                        AutomationExecutionStatus = "Success"
+	AutomationExecutionStatusTimedout                       AutomationExecutionStatus = "TimedOut"
+	AutomationExecutionStatusCancelling                     AutomationExecutionStatus = "Cancelling"
+	AutomationExecutionStatusCancelled                      AutomationExecutionStatus = "Cancelled"
+	AutomationExecutionStatusFailed                         AutomationExecutionStatus = "Failed"
+	AutomationExecutionStatusPendingApproval                AutomationExecutionStatus = "PendingApproval"
+	AutomationExecutionStatusApproved                       AutomationExecutionStatus = "Approved"
+	AutomationExecutionStatusRejected                       AutomationExecutionStatus = "Rejected"
+	AutomationExecutionStatusScheduled                      AutomationExecutionStatus = "Scheduled"
+	AutomationExecutionStatusRunbookInprogress              AutomationExecutionStatus = "RunbookInProgress"
+	AutomationExecutionStatusPendingChangeCalendarOverride  AutomationExecutionStatus = "PendingChangeCalendarOverride"
+	AutomationExecutionStatusChangeCalendarOverrideApproved AutomationExecutionStatus = "ChangeCalendarOverrideApproved"
+	AutomationExecutionStatusChangeCalendarOverrideRejected AutomationExecutionStatus = "ChangeCalendarOverrideRejected"
+	AutomationExecutionStatusCompletedWithSuccess           AutomationExecutionStatus = "CompletedWithSuccess"
+	AutomationExecutionStatusCompletedWithFailure           AutomationExecutionStatus = "CompletedWithFailure"
 )
 
 // Values returns all known values for AutomationExecutionStatus. Note that this
@@ -255,6 +269,32 @@ func (AutomationExecutionStatus) Values() []AutomationExecutionStatus {
 		"Cancelling",
 		"Cancelled",
 		"Failed",
+		"PendingApproval",
+		"Approved",
+		"Rejected",
+		"Scheduled",
+		"RunbookInProgress",
+		"PendingChangeCalendarOverride",
+		"ChangeCalendarOverrideApproved",
+		"ChangeCalendarOverrideRejected",
+		"CompletedWithSuccess",
+		"CompletedWithFailure",
+	}
+}
+
+type AutomationSubtype string
+
+// Enum values for AutomationSubtype
+const (
+	AutomationSubtypeChangerequest AutomationSubtype = "ChangeRequest"
+)
+
+// Values returns all known values for AutomationSubtype. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutomationSubtype) Values() []AutomationSubtype {
+	return []AutomationSubtype{
+		"ChangeRequest",
 	}
 }
 
@@ -587,6 +627,22 @@ func (DocumentHashType) Values() []DocumentHashType {
 	}
 }
 
+type DocumentMetadataEnum string
+
+// Enum values for DocumentMetadataEnum
+const (
+	DocumentMetadataEnumDocumentreviews DocumentMetadataEnum = "DocumentReviews"
+)
+
+// Values returns all known values for DocumentMetadataEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentMetadataEnum) Values() []DocumentMetadataEnum {
+	return []DocumentMetadataEnum{
+		"DocumentReviews",
+	}
+}
+
 type DocumentParameterType string
 
 // Enum values for DocumentParameterType
@@ -618,6 +674,44 @@ const (
 func (DocumentPermissionType) Values() []DocumentPermissionType {
 	return []DocumentPermissionType{
 		"Share",
+	}
+}
+
+type DocumentReviewAction string
+
+// Enum values for DocumentReviewAction
+const (
+	DocumentReviewActionSendforreview DocumentReviewAction = "SendForReview"
+	DocumentReviewActionUpdatereview  DocumentReviewAction = "UpdateReview"
+	DocumentReviewActionApprove       DocumentReviewAction = "Approve"
+	DocumentReviewActionReject        DocumentReviewAction = "Reject"
+)
+
+// Values returns all known values for DocumentReviewAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentReviewAction) Values() []DocumentReviewAction {
+	return []DocumentReviewAction{
+		"SendForReview",
+		"UpdateReview",
+		"Approve",
+		"Reject",
+	}
+}
+
+type DocumentReviewCommentType string
+
+// Enum values for DocumentReviewCommentType
+const (
+	DocumentReviewCommentTypeComment DocumentReviewCommentType = "Comment"
+)
+
+// Values returns all known values for DocumentReviewCommentType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentReviewCommentType) Values() []DocumentReviewCommentType {
+	return []DocumentReviewCommentType{
+		"Comment",
 	}
 }
 
@@ -658,6 +752,7 @@ const (
 	DocumentTypeApplicationconfigurationschema DocumentType = "ApplicationConfigurationSchema"
 	DocumentTypeDeploymentstrategy             DocumentType = "DeploymentStrategy"
 	DocumentTypeChangecalendar                 DocumentType = "ChangeCalendar"
+	DocumentTypeChangetemplate                 DocumentType = "Automation.ChangeTemplate"
 )
 
 // Values returns all known values for DocumentType. Note that this can be expanded
@@ -674,6 +769,7 @@ func (DocumentType) Values() []DocumentType {
 		"ApplicationConfigurationSchema",
 		"DeploymentStrategy",
 		"ChangeCalendar",
+		"Automation.ChangeTemplate",
 	}
 }
 
@@ -997,6 +1093,7 @@ const (
 	OperatingSystemCentos                OperatingSystem = "CENTOS"
 	OperatingSystemOraclelinux           OperatingSystem = "ORACLE_LINUX"
 	OperatingSystemDebian                OperatingSystem = "DEBIAN"
+	OperatingSystemMacos                 OperatingSystem = "MACOS"
 )
 
 // Values returns all known values for OperatingSystem. Note that this can be
@@ -1013,6 +1110,7 @@ func (OperatingSystem) Values() []OperatingSystem {
 		"CENTOS",
 		"ORACLE_LINUX",
 		"DEBIAN",
+		"MACOS",
 	}
 }
 
@@ -1060,25 +1158,68 @@ func (OpsItemDataType) Values() []OpsItemDataType {
 	}
 }
 
+type OpsItemEventFilterKey string
+
+// Enum values for OpsItemEventFilterKey
+const (
+	OpsItemEventFilterKeyOpsitemId OpsItemEventFilterKey = "OpsItemId"
+)
+
+// Values returns all known values for OpsItemEventFilterKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OpsItemEventFilterKey) Values() []OpsItemEventFilterKey {
+	return []OpsItemEventFilterKey{
+		"OpsItemId",
+	}
+}
+
+type OpsItemEventFilterOperator string
+
+// Enum values for OpsItemEventFilterOperator
+const (
+	OpsItemEventFilterOperatorEqual OpsItemEventFilterOperator = "Equal"
+)
+
+// Values returns all known values for OpsItemEventFilterOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OpsItemEventFilterOperator) Values() []OpsItemEventFilterOperator {
+	return []OpsItemEventFilterOperator{
+		"Equal",
+	}
+}
+
 type OpsItemFilterKey string
 
 // Enum values for OpsItemFilterKey
 const (
-	OpsItemFilterKeyStatus               OpsItemFilterKey = "Status"
-	OpsItemFilterKeyCreatedBy            OpsItemFilterKey = "CreatedBy"
-	OpsItemFilterKeySource               OpsItemFilterKey = "Source"
-	OpsItemFilterKeyPriority             OpsItemFilterKey = "Priority"
-	OpsItemFilterKeyTitle                OpsItemFilterKey = "Title"
-	OpsItemFilterKeyOpsitemId            OpsItemFilterKey = "OpsItemId"
-	OpsItemFilterKeyCreatedTime          OpsItemFilterKey = "CreatedTime"
-	OpsItemFilterKeyLastModifiedTime     OpsItemFilterKey = "LastModifiedTime"
-	OpsItemFilterKeyOperationalData      OpsItemFilterKey = "OperationalData"
-	OpsItemFilterKeyOperationalDataKey   OpsItemFilterKey = "OperationalDataKey"
-	OpsItemFilterKeyOperationalDataValue OpsItemFilterKey = "OperationalDataValue"
-	OpsItemFilterKeyResourceId           OpsItemFilterKey = "ResourceId"
-	OpsItemFilterKeyAutomationId         OpsItemFilterKey = "AutomationId"
-	OpsItemFilterKeyCategory             OpsItemFilterKey = "Category"
-	OpsItemFilterKeySeverity             OpsItemFilterKey = "Severity"
+	OpsItemFilterKeyStatus                            OpsItemFilterKey = "Status"
+	OpsItemFilterKeyCreatedBy                         OpsItemFilterKey = "CreatedBy"
+	OpsItemFilterKeySource                            OpsItemFilterKey = "Source"
+	OpsItemFilterKeyPriority                          OpsItemFilterKey = "Priority"
+	OpsItemFilterKeyTitle                             OpsItemFilterKey = "Title"
+	OpsItemFilterKeyOpsitemId                         OpsItemFilterKey = "OpsItemId"
+	OpsItemFilterKeyCreatedTime                       OpsItemFilterKey = "CreatedTime"
+	OpsItemFilterKeyLastModifiedTime                  OpsItemFilterKey = "LastModifiedTime"
+	OpsItemFilterKeyActualStartTime                   OpsItemFilterKey = "ActualStartTime"
+	OpsItemFilterKeyActualEndTime                     OpsItemFilterKey = "ActualEndTime"
+	OpsItemFilterKeyPlannedStartTime                  OpsItemFilterKey = "PlannedStartTime"
+	OpsItemFilterKeyPlannedEndTime                    OpsItemFilterKey = "PlannedEndTime"
+	OpsItemFilterKeyOperationalData                   OpsItemFilterKey = "OperationalData"
+	OpsItemFilterKeyOperationalDataKey                OpsItemFilterKey = "OperationalDataKey"
+	OpsItemFilterKeyOperationalDataValue              OpsItemFilterKey = "OperationalDataValue"
+	OpsItemFilterKeyResourceId                        OpsItemFilterKey = "ResourceId"
+	OpsItemFilterKeyAutomationId                      OpsItemFilterKey = "AutomationId"
+	OpsItemFilterKeyCategory                          OpsItemFilterKey = "Category"
+	OpsItemFilterKeySeverity                          OpsItemFilterKey = "Severity"
+	OpsItemFilterKeyOpsitemType                       OpsItemFilterKey = "OpsItemType"
+	OpsItemFilterKeyChangeRequestRequesterArn         OpsItemFilterKey = "ChangeRequestByRequesterArn"
+	OpsItemFilterKeyChangeRequestRequesterName        OpsItemFilterKey = "ChangeRequestByRequesterName"
+	OpsItemFilterKeyChangeRequestApproverArn          OpsItemFilterKey = "ChangeRequestByApproverArn"
+	OpsItemFilterKeyChangeRequestApproverName         OpsItemFilterKey = "ChangeRequestByApproverName"
+	OpsItemFilterKeyChangeRequestTemplate             OpsItemFilterKey = "ChangeRequestByTemplate"
+	OpsItemFilterKeyChangeRequestTargetsResourceGroup OpsItemFilterKey = "ChangeRequestByTargetsResourceGroup"
 )
 
 // Values returns all known values for OpsItemFilterKey. Note that this can be
@@ -1094,6 +1235,10 @@ func (OpsItemFilterKey) Values() []OpsItemFilterKey {
 		"OpsItemId",
 		"CreatedTime",
 		"LastModifiedTime",
+		"ActualStartTime",
+		"ActualEndTime",
+		"PlannedStartTime",
+		"PlannedEndTime",
 		"OperationalData",
 		"OperationalDataKey",
 		"OperationalDataValue",
@@ -1101,6 +1246,13 @@ func (OpsItemFilterKey) Values() []OpsItemFilterKey {
 		"AutomationId",
 		"Category",
 		"Severity",
+		"OpsItemType",
+		"ChangeRequestByRequesterArn",
+		"ChangeRequestByRequesterName",
+		"ChangeRequestByApproverArn",
+		"ChangeRequestByApproverName",
+		"ChangeRequestByTemplate",
+		"ChangeRequestByTargetsResourceGroup",
 	}
 }
 
@@ -1130,9 +1282,24 @@ type OpsItemStatus string
 
 // Enum values for OpsItemStatus
 const (
-	OpsItemStatusOpen       OpsItemStatus = "Open"
-	OpsItemStatusInProgress OpsItemStatus = "InProgress"
-	OpsItemStatusResolved   OpsItemStatus = "Resolved"
+	OpsItemStatusOpen                           OpsItemStatus = "Open"
+	OpsItemStatusInProgress                     OpsItemStatus = "InProgress"
+	OpsItemStatusResolved                       OpsItemStatus = "Resolved"
+	OpsItemStatusPending                        OpsItemStatus = "Pending"
+	OpsItemStatusTimedOut                       OpsItemStatus = "TimedOut"
+	OpsItemStatusCancelling                     OpsItemStatus = "Cancelling"
+	OpsItemStatusCancelled                      OpsItemStatus = "Cancelled"
+	OpsItemStatusFailed                         OpsItemStatus = "Failed"
+	OpsItemStatusCompletedWithSuccess           OpsItemStatus = "CompletedWithSuccess"
+	OpsItemStatusCompletedWithFailure           OpsItemStatus = "CompletedWithFailure"
+	OpsItemStatusScheduled                      OpsItemStatus = "Scheduled"
+	OpsItemStatusRunbookInProgress              OpsItemStatus = "RunbookInProgress"
+	OpsItemStatusPendingChangeCalendarOverride  OpsItemStatus = "PendingChangeCalendarOverride"
+	OpsItemStatusChangeCalendarOverrideApproved OpsItemStatus = "ChangeCalendarOverrideApproved"
+	OpsItemStatusChangeCalendarOverrideRejected OpsItemStatus = "ChangeCalendarOverrideRejected"
+	OpsItemStatusPendingApproval                OpsItemStatus = "PendingApproval"
+	OpsItemStatusApproved                       OpsItemStatus = "Approved"
+	OpsItemStatusRejected                       OpsItemStatus = "Rejected"
 )
 
 // Values returns all known values for OpsItemStatus. Note that this can be
@@ -1143,6 +1310,21 @@ func (OpsItemStatus) Values() []OpsItemStatus {
 		"Open",
 		"InProgress",
 		"Resolved",
+		"Pending",
+		"TimedOut",
+		"Cancelling",
+		"Cancelled",
+		"Failed",
+		"CompletedWithSuccess",
+		"CompletedWithFailure",
+		"Scheduled",
+		"RunbookInProgress",
+		"PendingChangeCalendarOverride",
+		"ChangeCalendarOverrideApproved",
+		"ChangeCalendarOverrideRejected",
+		"PendingApproval",
+		"Approved",
+		"Rejected",
 	}
 }
 
@@ -1529,6 +1711,28 @@ func (ResourceTypeForTagging) Values() []ResourceTypeForTagging {
 		"Parameter",
 		"PatchBaseline",
 		"OpsItem",
+	}
+}
+
+type ReviewStatus string
+
+// Enum values for ReviewStatus
+const (
+	ReviewStatusApproved    ReviewStatus = "APPROVED"
+	ReviewStatusNotReviewed ReviewStatus = "NOT_REVIEWED"
+	ReviewStatusPending     ReviewStatus = "PENDING"
+	ReviewStatusRejected    ReviewStatus = "REJECTED"
+)
+
+// Values returns all known values for ReviewStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ReviewStatus) Values() []ReviewStatus {
+	return []ReviewStatus{
+		"APPROVED",
+		"NOT_REVIEWED",
+		"PENDING",
+		"REJECTED",
 	}
 }
 

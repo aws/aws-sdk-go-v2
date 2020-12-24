@@ -84,6 +84,42 @@ func (BackupTypeFilter) Values() []BackupTypeFilter {
 	}
 }
 
+type BatchStatementErrorCodeEnum string
+
+// Enum values for BatchStatementErrorCodeEnum
+const (
+	BatchStatementErrorCodeEnumConditionalcheckfailed          BatchStatementErrorCodeEnum = "ConditionalCheckFailed"
+	BatchStatementErrorCodeEnumItemcollectionsizelimitexceeded BatchStatementErrorCodeEnum = "ItemCollectionSizeLimitExceeded"
+	BatchStatementErrorCodeEnumRequestlimitexceeded            BatchStatementErrorCodeEnum = "RequestLimitExceeded"
+	BatchStatementErrorCodeEnumValidationerror                 BatchStatementErrorCodeEnum = "ValidationError"
+	BatchStatementErrorCodeEnumProvisionedthroughputexceeded   BatchStatementErrorCodeEnum = "ProvisionedThroughputExceeded"
+	BatchStatementErrorCodeEnumTransactionconflict             BatchStatementErrorCodeEnum = "TransactionConflict"
+	BatchStatementErrorCodeEnumThrottlingerror                 BatchStatementErrorCodeEnum = "ThrottlingError"
+	BatchStatementErrorCodeEnumInternalservererror             BatchStatementErrorCodeEnum = "InternalServerError"
+	BatchStatementErrorCodeEnumResourcenotfound                BatchStatementErrorCodeEnum = "ResourceNotFound"
+	BatchStatementErrorCodeEnumAccessdenied                    BatchStatementErrorCodeEnum = "AccessDenied"
+	BatchStatementErrorCodeEnumDuplicateitem                   BatchStatementErrorCodeEnum = "DuplicateItem"
+)
+
+// Values returns all known values for BatchStatementErrorCodeEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchStatementErrorCodeEnum) Values() []BatchStatementErrorCodeEnum {
+	return []BatchStatementErrorCodeEnum{
+		"ConditionalCheckFailed",
+		"ItemCollectionSizeLimitExceeded",
+		"RequestLimitExceeded",
+		"ValidationError",
+		"ProvisionedThroughputExceeded",
+		"TransactionConflict",
+		"ThrottlingError",
+		"InternalServerError",
+		"ResourceNotFound",
+		"AccessDenied",
+		"DuplicateItem",
+	}
+}
+
 type BillingMode string
 
 // Enum values for BillingMode
@@ -217,6 +253,30 @@ func (ContributorInsightsStatus) Values() []ContributorInsightsStatus {
 		"DISABLING",
 		"DISABLED",
 		"FAILED",
+	}
+}
+
+type DestinationStatus string
+
+// Enum values for DestinationStatus
+const (
+	DestinationStatusEnabling     DestinationStatus = "ENABLING"
+	DestinationStatusActive       DestinationStatus = "ACTIVE"
+	DestinationStatusDisabling    DestinationStatus = "DISABLING"
+	DestinationStatusDisabled     DestinationStatus = "DISABLED"
+	DestinationStatusEnableFailed DestinationStatus = "ENABLE_FAILED"
+)
+
+// Values returns all known values for DestinationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DestinationStatus) Values() []DestinationStatus {
+	return []DestinationStatus{
+		"ENABLING",
+		"ACTIVE",
+		"DISABLING",
+		"DISABLED",
+		"ENABLE_FAILED",
 	}
 }
 

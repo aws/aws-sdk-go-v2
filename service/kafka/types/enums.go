@@ -42,11 +42,14 @@ type ClusterState string
 
 // Enum values for ClusterState
 const (
-	ClusterStateActive   ClusterState = "ACTIVE"
-	ClusterStateCreating ClusterState = "CREATING"
-	ClusterStateUpdating ClusterState = "UPDATING"
-	ClusterStateDeleting ClusterState = "DELETING"
-	ClusterStateFailed   ClusterState = "FAILED"
+	ClusterStateActive          ClusterState = "ACTIVE"
+	ClusterStateCreating        ClusterState = "CREATING"
+	ClusterStateDeleting        ClusterState = "DELETING"
+	ClusterStateFailed          ClusterState = "FAILED"
+	ClusterStateHealing         ClusterState = "HEALING"
+	ClusterStateMaintenance     ClusterState = "MAINTENANCE"
+	ClusterStateRebootingBroker ClusterState = "REBOOTING_BROKER"
+	ClusterStateUpdating        ClusterState = "UPDATING"
 )
 
 // Values returns all known values for ClusterState. Note that this can be expanded
@@ -56,9 +59,12 @@ func (ClusterState) Values() []ClusterState {
 	return []ClusterState{
 		"ACTIVE",
 		"CREATING",
-		"UPDATING",
 		"DELETING",
 		"FAILED",
+		"HEALING",
+		"MAINTENANCE",
+		"REBOOTING_BROKER",
+		"UPDATING",
 	}
 }
 

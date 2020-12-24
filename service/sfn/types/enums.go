@@ -207,3 +207,23 @@ func (StateMachineType) Values() []StateMachineType {
 		"EXPRESS",
 	}
 }
+
+type SyncExecutionStatus string
+
+// Enum values for SyncExecutionStatus
+const (
+	SyncExecutionStatusSucceeded SyncExecutionStatus = "SUCCEEDED"
+	SyncExecutionStatusFailed    SyncExecutionStatus = "FAILED"
+	SyncExecutionStatusTimedOut  SyncExecutionStatus = "TIMED_OUT"
+)
+
+// Values returns all known values for SyncExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SyncExecutionStatus) Values() []SyncExecutionStatus {
+	return []SyncExecutionStatus{
+		"SUCCEEDED",
+		"FAILED",
+		"TIMED_OUT",
+	}
+}

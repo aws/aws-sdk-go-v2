@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Updates an existing configuration for a resource type. This API is idempotent.
 func (c *Client) UpdateInstanceStorageConfig(ctx context.Context, params *UpdateInstanceStorageConfigInput, optFns ...func(*Options)) (*UpdateInstanceStorageConfigOutput, error) {
 	if params == nil {

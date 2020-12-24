@@ -1185,6 +1185,23 @@ func validate__listOfCaptionSelector(v []types.CaptionSelector) error {
 	}
 }
 
+func validate__listOfFailoverCondition(v []types.FailoverCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfFailoverCondition"}
+	for i := range v {
+		if err := validateFailoverCondition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validate__listOfInputAttachment(v []types.InputAttachment) error {
 	if v == nil {
 		return nil
@@ -1505,6 +1522,21 @@ func validateAudioSelectorSettings(v *types.AudioSelectorSettings) error {
 	}
 }
 
+func validateAudioSilenceFailoverSettings(v *types.AudioSilenceFailoverSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioSilenceFailoverSettings"}
+	if v.AudioSelectorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AudioSelectorName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAudioTrack(v *types.AudioTrack) error {
 	if v == nil {
 		return nil
@@ -1541,6 +1573,11 @@ func validateAutomaticInputFailoverSettings(v *types.AutomaticInputFailoverSetti
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AutomaticInputFailoverSettings"}
+	if v.FailoverConditions != nil {
+		if err := validate__listOfFailoverCondition(v.FailoverConditions); err != nil {
+			invalidParams.AddNested("FailoverConditions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.SecondaryInputId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecondaryInputId"))
 	}
@@ -1802,6 +1839,40 @@ func validateEncoderSettings(v *types.EncoderSettings) error {
 	} else if v.VideoDescriptions != nil {
 		if err := validate__listOfVideoDescription(v.VideoDescriptions); err != nil {
 			invalidParams.AddNested("VideoDescriptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFailoverCondition(v *types.FailoverCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FailoverCondition"}
+	if v.FailoverConditionSettings != nil {
+		if err := validateFailoverConditionSettings(v.FailoverConditionSettings); err != nil {
+			invalidParams.AddNested("FailoverConditionSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFailoverConditionSettings(v *types.FailoverConditionSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FailoverConditionSettings"}
+	if v.AudioSilenceSettings != nil {
+		if err := validateAudioSilenceFailoverSettings(v.AudioSilenceSettings); err != nil {
+			invalidParams.AddNested("AudioSilenceSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

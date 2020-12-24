@@ -130,6 +130,46 @@ func (m *validateOpCreateSecurityConfiguration) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateStudio struct {
+}
+
+func (*validateOpCreateStudio) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateStudio) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateStudioInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateStudioInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateStudioSessionMapping struct {
+}
+
+func (*validateOpCreateStudioSessionMapping) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateStudioSessionMapping) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateStudioSessionMappingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateStudioSessionMappingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteSecurityConfiguration struct {
 }
 
@@ -145,6 +185,46 @@ func (m *validateOpDeleteSecurityConfiguration) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteSecurityConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteStudio struct {
+}
+
+func (*validateOpDeleteStudio) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteStudio) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteStudioInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteStudioInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteStudioSessionMapping struct {
+}
+
+func (*validateOpDeleteStudioSessionMapping) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteStudioSessionMapping) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteStudioSessionMappingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteStudioSessionMappingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +310,26 @@ func (m *validateOpDescribeStep) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeStudio struct {
+}
+
+func (*validateOpDescribeStudio) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeStudio) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeStudioInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeStudioInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetManagedScalingPolicy struct {
 }
 
@@ -245,6 +345,26 @@ func (m *validateOpGetManagedScalingPolicy) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetManagedScalingPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetStudioSessionMapping struct {
+}
+
+func (*validateOpGetStudioSessionMapping) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetStudioSessionMapping) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetStudioSessionMappingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetStudioSessionMappingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -650,6 +770,26 @@ func (m *validateOpTerminateJobFlows) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateStudioSessionMapping struct {
+}
+
+func (*validateOpUpdateStudioSessionMapping) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateStudioSessionMapping) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateStudioSessionMappingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateStudioSessionMappingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAddInstanceFleetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddInstanceFleet{}, middleware.After)
 }
@@ -674,8 +814,24 @@ func addOpCreateSecurityConfigurationValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpCreateSecurityConfiguration{}, middleware.After)
 }
 
+func addOpCreateStudioValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateStudio{}, middleware.After)
+}
+
+func addOpCreateStudioSessionMappingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateStudioSessionMapping{}, middleware.After)
+}
+
 func addOpDeleteSecurityConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSecurityConfiguration{}, middleware.After)
+}
+
+func addOpDeleteStudioValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteStudio{}, middleware.After)
+}
+
+func addOpDeleteStudioSessionMappingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteStudioSessionMapping{}, middleware.After)
 }
 
 func addOpDescribeClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -694,8 +850,16 @@ func addOpDescribeStepValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeStep{}, middleware.After)
 }
 
+func addOpDescribeStudioValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeStudio{}, middleware.After)
+}
+
 func addOpGetManagedScalingPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetManagedScalingPolicy{}, middleware.After)
+}
+
+func addOpGetStudioSessionMappingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetStudioSessionMapping{}, middleware.After)
 }
 
 func addOpListBootstrapActionsValidationMiddleware(stack *middleware.Stack) error {
@@ -778,23 +942,27 @@ func addOpTerminateJobFlowsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTerminateJobFlows{}, middleware.After)
 }
 
+func addOpUpdateStudioSessionMappingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateStudioSessionMapping{}, middleware.After)
+}
+
 func validateAutoScalingPolicy(v *types.AutoScalingPolicy) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AutoScalingPolicy"}
-	if v.Rules == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
-	} else if v.Rules != nil {
-		if err := validateScalingRuleList(v.Rules); err != nil {
-			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Constraints == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Constraints"))
 	} else if v.Constraints != nil {
 		if err := validateScalingConstraints(v.Constraints); err != nil {
 			invalidParams.AddNested("Constraints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateScalingRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -865,17 +1033,17 @@ func validateCloudWatchAlarmDefinition(v *types.CloudWatchAlarmDefinition) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchAlarmDefinition"}
-	if v.Threshold == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Threshold"))
-	}
-	if v.Period == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Period"))
-	}
 	if len(v.ComparisonOperator) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
 	}
 	if v.MetricName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.Period == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Period"))
+	}
+	if v.Threshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Threshold"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -993,6 +1161,9 @@ func validateInstanceFleetConfig(v *types.InstanceFleetConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InstanceFleetConfig"}
+	if len(v.InstanceFleetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceFleetType"))
+	}
 	if v.InstanceTypeConfigs != nil {
 		if err := validateInstanceTypeConfigList(v.InstanceTypeConfigs); err != nil {
 			invalidParams.AddNested("InstanceTypeConfigs", err.(smithy.InvalidParamsError))
@@ -1002,9 +1173,6 @@ func validateInstanceFleetConfig(v *types.InstanceFleetConfig) error {
 		if err := validateInstanceFleetProvisioningSpecifications(v.LaunchSpecifications); err != nil {
 			invalidParams.AddNested("LaunchSpecifications", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.InstanceFleetType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceFleetType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1072,24 +1240,24 @@ func validateInstanceGroupConfig(v *types.InstanceGroupConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InstanceGroupConfig"}
-	if v.AutoScalingPolicy != nil {
-		if err := validateAutoScalingPolicy(v.AutoScalingPolicy); err != nil {
-			invalidParams.AddNested("AutoScalingPolicy", err.(smithy.InvalidParamsError))
-		}
-	}
 	if len(v.InstanceRole) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceRole"))
 	}
 	if v.InstanceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
 	}
+	if v.InstanceCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceCount"))
+	}
 	if v.EbsConfiguration != nil {
 		if err := validateEbsConfiguration(v.EbsConfiguration); err != nil {
 			invalidParams.AddNested("EbsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.InstanceCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceCount"))
+	if v.AutoScalingPolicy != nil {
+		if err := validateAutoScalingPolicy(v.AutoScalingPolicy); err != nil {
+			invalidParams.AddNested("AutoScalingPolicy", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1344,11 +1512,11 @@ func validateScalingConstraints(v *types.ScalingConstraints) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ScalingConstraints"}
-	if v.MaxCapacity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxCapacity"))
-	}
 	if v.MinCapacity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MinCapacity"))
+	}
+	if v.MaxCapacity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxCapacity"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1362,13 +1530,6 @@ func validateScalingRule(v *types.ScalingRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ScalingRule"}
-	if v.Trigger == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Trigger"))
-	} else if v.Trigger != nil {
-		if err := validateScalingTrigger(v.Trigger); err != nil {
-			invalidParams.AddNested("Trigger", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -1377,6 +1538,13 @@ func validateScalingRule(v *types.ScalingRule) error {
 	} else if v.Action != nil {
 		if err := validateScalingAction(v.Action); err != nil {
 			invalidParams.AddNested("Action", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Trigger == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Trigger"))
+	} else if v.Trigger != nil {
+		if err := validateScalingTrigger(v.Trigger); err != nil {
+			invalidParams.AddNested("Trigger", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1475,15 +1643,15 @@ func validateStepConfig(v *types.StepConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StepConfig"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.HadoopJarStep == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HadoopJarStep"))
 	} else if v.HadoopJarStep != nil {
 		if err := validateHadoopJarStepConfig(v.HadoopJarStep); err != nil {
 			invalidParams.AddNested("HadoopJarStep", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1554,15 +1722,15 @@ func validateOpAddInstanceGroupsInput(v *AddInstanceGroupsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddInstanceGroupsInput"}
-	if v.JobFlowId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobFlowId"))
-	}
 	if v.InstanceGroups == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroups"))
 	} else if v.InstanceGroups != nil {
 		if err := validateInstanceGroupConfigList(v.InstanceGroups); err != nil {
 			invalidParams.AddNested("InstanceGroups", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.JobFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobFlowId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1598,11 +1766,11 @@ func validateOpAddTagsInput(v *AddTagsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddTagsInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1616,11 +1784,11 @@ func validateOpCancelStepsInput(v *CancelStepsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CancelStepsInput"}
-	if v.StepIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StepIds"))
-	}
 	if v.ClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if v.StepIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StepIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1634,11 +1802,68 @@ func validateOpCreateSecurityConfigurationInput(v *CreateSecurityConfigurationIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSecurityConfigurationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.SecurityConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityConfiguration"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateStudioInput(v *CreateStudioInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateStudioInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.AuthMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthMode"))
+	}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if v.ServiceRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceRole"))
+	}
+	if v.UserRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserRole"))
+	}
+	if v.WorkspaceSecurityGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceSecurityGroupId"))
+	}
+	if v.EngineSecurityGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EngineSecurityGroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateStudioSessionMappingInput(v *CreateStudioSessionMappingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateStudioSessionMappingInput"}
+	if v.StudioId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioId"))
+	}
+	if len(v.IdentityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityType"))
+	}
+	if v.SessionPolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionPolicyArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1654,6 +1879,39 @@ func validateOpDeleteSecurityConfigurationInput(v *DeleteSecurityConfigurationIn
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteSecurityConfigurationInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteStudioInput(v *DeleteStudioInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteStudioInput"}
+	if v.StudioId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteStudioSessionMappingInput(v *DeleteStudioSessionMappingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteStudioSessionMappingInput"}
+	if v.StudioId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioId"))
+	}
+	if len(v.IdentityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1725,6 +1983,21 @@ func validateOpDescribeStepInput(v *DescribeStepInput) error {
 	}
 }
 
+func validateOpDescribeStudioInput(v *DescribeStudioInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeStudioInput"}
+	if v.StudioId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetManagedScalingPolicyInput(v *GetManagedScalingPolicyInput) error {
 	if v == nil {
 		return nil
@@ -1732,6 +2005,24 @@ func validateOpGetManagedScalingPolicyInput(v *GetManagedScalingPolicyInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "GetManagedScalingPolicyInput"}
 	if v.ClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetStudioSessionMappingInput(v *GetStudioSessionMappingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetStudioSessionMappingInput"}
+	if v.StudioId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioId"))
+	}
+	if len(v.IdentityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1835,15 +2126,15 @@ func validateOpModifyInstanceFleetInput(v *ModifyInstanceFleetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyInstanceFleetInput"}
+	if v.ClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
 	if v.InstanceFleet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceFleet"))
 	} else if v.InstanceFleet != nil {
 		if err := validateInstanceFleetModifyConfig(v.InstanceFleet); err != nil {
 			invalidParams.AddNested("InstanceFleet", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ClusterId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1874,18 +2165,18 @@ func validateOpPutAutoScalingPolicyInput(v *PutAutoScalingPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutAutoScalingPolicyInput"}
+	if v.ClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if v.InstanceGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroupId"))
+	}
 	if v.AutoScalingPolicy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingPolicy"))
 	} else if v.AutoScalingPolicy != nil {
 		if err := validateAutoScalingPolicy(v.AutoScalingPolicy); err != nil {
 			invalidParams.AddNested("AutoScalingPolicy", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ClusterId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
-	}
-	if v.InstanceGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1940,11 +2231,11 @@ func validateOpRemoveAutoScalingPolicyInput(v *RemoveAutoScalingPolicyInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveAutoScalingPolicyInput"}
-	if v.InstanceGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroupId"))
-	}
 	if v.ClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if v.InstanceGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1991,31 +2282,6 @@ func validateOpRunJobFlowInput(v *RunJobFlowInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RunJobFlowInput"}
-	if v.ManagedScalingPolicy != nil {
-		if err := validateManagedScalingPolicy(v.ManagedScalingPolicy); err != nil {
-			invalidParams.AddNested("ManagedScalingPolicy", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.BootstrapActions != nil {
-		if err := validateBootstrapActionConfigList(v.BootstrapActions); err != nil {
-			invalidParams.AddNested("BootstrapActions", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.PlacementGroupConfigs != nil {
-		if err := validatePlacementGroupConfigList(v.PlacementGroupConfigs); err != nil {
-			invalidParams.AddNested("PlacementGroupConfigs", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Steps != nil {
-		if err := validateStepConfigList(v.Steps); err != nil {
-			invalidParams.AddNested("Steps", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.KerberosAttributes != nil {
-		if err := validateKerberosAttributes(v.KerberosAttributes); err != nil {
-			invalidParams.AddNested("KerberosAttributes", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -2024,6 +2290,31 @@ func validateOpRunJobFlowInput(v *RunJobFlowInput) error {
 	} else if v.Instances != nil {
 		if err := validateJobFlowInstancesConfig(v.Instances); err != nil {
 			invalidParams.AddNested("Instances", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Steps != nil {
+		if err := validateStepConfigList(v.Steps); err != nil {
+			invalidParams.AddNested("Steps", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BootstrapActions != nil {
+		if err := validateBootstrapActionConfigList(v.BootstrapActions); err != nil {
+			invalidParams.AddNested("BootstrapActions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.KerberosAttributes != nil {
+		if err := validateKerberosAttributes(v.KerberosAttributes); err != nil {
+			invalidParams.AddNested("KerberosAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ManagedScalingPolicy != nil {
+		if err := validateManagedScalingPolicy(v.ManagedScalingPolicy); err != nil {
+			invalidParams.AddNested("ManagedScalingPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PlacementGroupConfigs != nil {
+		if err := validatePlacementGroupConfigList(v.PlacementGroupConfigs); err != nil {
+			invalidParams.AddNested("PlacementGroupConfigs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2068,8 +2359,8 @@ func validateOpStartNotebookExecutionInput(v *StartNotebookExecutionInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartNotebookExecutionInput"}
-	if v.ServiceRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceRole"))
+	if v.EditorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EditorId"))
 	}
 	if v.RelativePath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RelativePath"))
@@ -2081,8 +2372,8 @@ func validateOpStartNotebookExecutionInput(v *StartNotebookExecutionInput) error
 			invalidParams.AddNested("ExecutionEngine", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.EditorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EditorId"))
+	if v.ServiceRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceRole"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2113,6 +2404,27 @@ func validateOpTerminateJobFlowsInput(v *TerminateJobFlowsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TerminateJobFlowsInput"}
 	if v.JobFlowIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobFlowIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateStudioSessionMappingInput(v *UpdateStudioSessionMappingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateStudioSessionMappingInput"}
+	if v.StudioId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioId"))
+	}
+	if len(v.IdentityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityType"))
+	}
+	if v.SessionPolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionPolicyArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

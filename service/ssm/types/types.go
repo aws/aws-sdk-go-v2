@@ -97,7 +97,7 @@ type AssociationDescription struct {
 	// By default, when you create a new associations, the system runs it immediately
 	// after it is created and then according to the schedule you specified. Specify
 	// this option if you don't want an association to run immediately after you create
-	// it.
+	// it. This parameter is not supported for rate expressions.
 	ApplyOnlyAtCronInterval bool
 
 	// The association ID.
@@ -186,6 +186,10 @@ type AssociationDescription struct {
 	// direct call to the PutComplianceItems API action. By default, all associations
 	// use AUTO mode.
 	SyncCompliance AssociationSyncCompliance
+
+	// The combination of AWS Regions and AWS accounts where you want to run the
+	// association.
+	TargetLocations []TargetLocation
 
 	// The instances targeted by the request.
 	Targets []Target
@@ -340,7 +344,7 @@ type AssociationVersionInfo struct {
 	// By default, when you create a new associations, the system runs it immediately
 	// after it is created and then according to the schedule you specified. Specify
 	// this option if you don't want an association to run immediately after you create
-	// it.
+	// it. This parameter is not supported for rate expressions.
 	ApplyOnlyAtCronInterval bool
 
 	// The ID created by the system when the association was created.
@@ -412,6 +416,10 @@ type AssociationVersionInfo struct {
 	// use AUTO mode.
 	SyncCompliance AssociationSyncCompliance
 
+	// The combination of AWS Regions and AWS accounts where you wanted to run the
+	// association when this association version was created.
+	TargetLocations []TargetLocation
+
 	// The targets specified for the association when the association version was
 	// created.
 	Targets []Target
@@ -481,11 +489,21 @@ type AttachmentsSource struct {
 // execution.
 type AutomationExecution struct {
 
+	// The ID of a State Manager association used in the Automation operation.
+	AssociationId *string
+
 	// The execution ID.
 	AutomationExecutionId *string
 
 	// The execution status of the Automation.
 	AutomationExecutionStatus AutomationExecutionStatus
+
+	// The subtype of the Automation operation. Currently, the only supported value is
+	// ChangeRequest.
+	AutomationSubtype AutomationSubtype
+
+	// The name of the Change Manager change request.
+	ChangeRequestName *string
 
 	// The action of the step that is currently running.
 	CurrentAction *string
@@ -521,6 +539,10 @@ type AutomationExecution struct {
 	// The automation execution mode.
 	Mode ExecutionMode
 
+	// The ID of an OpsItem that is created to represent a Change Manager change
+	// request.
+	OpsItemId *string
+
 	// The list of execution outputs as defined in the automation document.
 	Outputs map[string][]string
 
@@ -537,6 +559,15 @@ type AutomationExecution struct {
 
 	// A list of resolved targets in the rate control execution.
 	ResolvedTargets *ResolvedTargets
+
+	// Information about the Automation runbooks (Automation documents) that are run as
+	// part of a runbook workflow. The Automation runbooks specified for the runbook
+	// workflow can't run until all required approvals for the change request have been
+	// received.
+	Runbooks []Runbook
+
+	// The date and time the Automation operation is scheduled to start.
+	ScheduledTime *time.Time
 
 	// A list of details about the current state of all steps that comprise an
 	// execution. An Automation document contains a list of steps that are run in
@@ -586,11 +617,18 @@ type AutomationExecutionFilter struct {
 // Details about a specific Automation execution.
 type AutomationExecutionMetadata struct {
 
+	// The ID of a State Manager association used in the Automation operation.
+	AssociationId *string
+
 	// The execution ID.
 	AutomationExecutionId *string
 
 	// The status of the execution.
 	AutomationExecutionStatus AutomationExecutionStatus
+
+	// The subtype of the Automation operation. Currently, the only supported value is
+	// ChangeRequest.
+	AutomationSubtype AutomationSubtype
 
 	// Use this filter with DescribeAutomationExecutions. Specify either Local or
 	// CrossAccount. CrossAccount is an Automation that runs in multiple AWS Regions
@@ -599,6 +637,9 @@ type AutomationExecutionMetadata struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html)
 	// in the AWS Systems Manager User Guide.
 	AutomationType AutomationType
+
+	// The name of the Change Manager change request.
+	ChangeRequestName *string
 
 	// The action of the step that is currently running.
 	CurrentAction *string
@@ -637,6 +678,10 @@ type AutomationExecutionMetadata struct {
 	// The Automation execution mode.
 	Mode ExecutionMode
 
+	// The ID of an OpsItem that is created to represent a Change Manager change
+	// request.
+	OpsItemId *string
+
 	// The list of execution outputs as defined in the Automation document.
 	Outputs map[string][]string
 
@@ -645,6 +690,15 @@ type AutomationExecutionMetadata struct {
 
 	// A list of targets that resolved during the execution.
 	ResolvedTargets *ResolvedTargets
+
+	// Information about the Automation runbooks (Automation documents) that are run
+	// during a runbook workflow in Change Manager. The Automation runbooks specified
+	// for the runbook workflow can't run until all required approvals for the change
+	// request have been received.
+	Runbooks []Runbook
+
+	// The date and time the Automation operation is scheduled to start.
+	ScheduledTime *time.Time
 
 	// The list of execution outputs as defined in the Automation document.
 	Target *string
@@ -1234,7 +1288,7 @@ type CreateAssociationBatchRequestEntry struct {
 	// By default, when you create a new associations, the system runs it immediately
 	// after it is created and then according to the schedule you specified. Specify
 	// this option if you don't want an association to run immediately after you create
-	// it.
+	// it. This parameter is not supported for rate expressions.
 	ApplyOnlyAtCronInterval bool
 
 	// Specify a descriptive name for the association.
@@ -1297,6 +1351,10 @@ type CreateAssociationBatchRequestEntry struct {
 	// use AUTO mode.
 	SyncCompliance AssociationSyncCompliance
 
+	// Use this action to create an association in multiple Regions and multiple
+	// accounts.
+	TargetLocations []TargetLocation
+
 	// The instances targeted by the request.
 	Targets []Target
 }
@@ -1327,9 +1385,15 @@ type DocumentDefaultVersionDescription struct {
 // Describes a Systems Manager document.
 type DocumentDescription struct {
 
+	// The version of the document currently approved for use in the organization.
+	ApprovedVersion *string
+
 	// Details about the document attachments, including names, locations, sizes, and
 	// so on.
 	AttachmentsInformation []AttachmentInformation
+
+	// The user in your organization who created the document.
+	Author *string
 
 	// The date when the document was created.
 	CreatedDate *time.Time
@@ -1369,6 +1433,9 @@ type DocumentDescription struct {
 	// A description of the parameters for a document.
 	Parameters []DocumentParameter
 
+	// The version of the document that is currently under review.
+	PendingReviewVersion *string
+
 	// The list of OS platforms compatible with this Systems Manager document.
 	PlatformTypes []PlatformType
 
@@ -1376,6 +1443,12 @@ type DocumentDescription struct {
 	// ApplicationConfiguration document requires an ApplicationConfigurationSchema
 	// document.
 	Requires []DocumentRequires
+
+	// Details about the review of a document.
+	ReviewInformation []ReviewInformation
+
+	// The current status of the review.
+	ReviewStatus ReviewStatus
 
 	// The schema version.
 	SchemaVersion *string
@@ -1423,6 +1496,9 @@ type DocumentFilter struct {
 // Describes the name of a Systems Manager document.
 type DocumentIdentifier struct {
 
+	// The user in your organization who created the document.
+	Author *string
+
 	// The document format, either JSON or YAML.
 	DocumentFormat DocumentFormat
 
@@ -1445,6 +1521,9 @@ type DocumentIdentifier struct {
 	// ApplicationConfiguration document requires an ApplicationConfigurationSchema
 	// document.
 	Requires []DocumentRequires
+
+	// The current status of a document review.
+	ReviewStatus ReviewStatus
 
 	// The schema version.
 	SchemaVersion *string
@@ -1536,6 +1615,13 @@ type DocumentKeyValuesFilter struct {
 	Values []string
 }
 
+// Details about the response to a document review request.
+type DocumentMetadataResponseInfo struct {
+
+	// Details about a reviewer's response to a document review request.
+	ReviewerResponse []DocumentReviewerResponseSource
+}
+
 // Parameters specified in a System Manager document that run on the server when
 // the command is run.
 type DocumentParameter struct {
@@ -1568,6 +1654,56 @@ type DocumentRequires struct {
 	Version *string
 }
 
+// Information about comments added to a document review request.
+type DocumentReviewCommentSource struct {
+
+	// The content of a comment entered by a user who requests a review of a new
+	// document version, or who reviews the new version.
+	Content *string
+
+	// The type of information added to a review request. Currently, only the value
+	// Comment is supported.
+	Type DocumentReviewCommentType
+}
+
+// Information about a reviewer's response to a document review request.
+type DocumentReviewerResponseSource struct {
+
+	// The comment entered by a reviewer as part of their document review response.
+	Comment []DocumentReviewCommentSource
+
+	// The date and time that a reviewer entered a response to a document review
+	// request.
+	CreateTime *time.Time
+
+	// The current review status of a new custom SSM document created by a member of
+	// your organization, or of the latest version of an existing SSM document. Only
+	// one version of a document can be in the APPROVED state at a time. When a new
+	// version is approved, the status of the previous version changes to REJECTED.
+	// Only one version of a document can be in review, or PENDING, at a time.
+	ReviewStatus ReviewStatus
+
+	// The user in your organization assigned to review a document request.
+	Reviewer *string
+
+	// The date and time that a reviewer last updated a response to a document review
+	// request.
+	UpdatedTime *time.Time
+}
+
+// Information about a document approval review.
+type DocumentReviews struct {
+
+	// The action to take on a document approval review request.
+	//
+	// This member is required.
+	Action DocumentReviewAction
+
+	// A comment entered by a user in your organization about the document review
+	// request.
+	Comment []DocumentReviewCommentSource
+}
+
 // Version information about the document.
 type DocumentVersionInfo struct {
 
@@ -1585,6 +1721,10 @@ type DocumentVersionInfo struct {
 
 	// The document name.
 	Name *string
+
+	// The current status of the approval review for the latest version of the
+	// document.
+	ReviewStatus ReviewStatus
 
 	// The status of the Systems Manager document, such as Creating, Active, Failed,
 	// and Deleting.
@@ -1774,7 +1914,7 @@ type InstanceInformation struct {
 	// The date the association was last run.
 	LastAssociationExecutionDate *time.Time
 
-	// The date and time when agent last pinged Systems Manager service.
+	// The date and time when the agent last pinged the Systems Manager service.
 	LastPingDateTime *time.Time
 
 	// The last date the association was successfully run.
@@ -2643,6 +2783,13 @@ type MaintenanceWindowTaskParameterValueExpression struct {
 	Values []string
 }
 
+// Metadata to assign to an Application Manager application.
+type MetadataValue struct {
+
+	// Metadata value to assign to an Application Manager application.
+	Value *string
+}
+
 // A summary of resources that are not compliant. The summary is organized
 // according to resource type.
 type NonCompliantSummary struct {
@@ -2744,6 +2891,14 @@ type OpsFilter struct {
 // the AWS Systems Manager User Guide.
 type OpsItem struct {
 
+	// The time a runbook workflow ended. Currently reported only for the OpsItem type
+	// /aws/changerequest.
+	ActualEndTime *time.Time
+
+	// The time a runbook workflow started. Currently reported only for the OpsItem
+	// type /aws/changerequest.
+	ActualStartTime *time.Time
+
 	// An OpsItem category. Category options include: Availability, Cost, Performance,
 	// Recovery, Security.
 	Category *string
@@ -2789,6 +2944,18 @@ type OpsItem struct {
 	// The ID of the OpsItem.
 	OpsItemId *string
 
+	// The type of OpsItem. Currently, the only valid values are /aws/changerequest and
+	// /aws/issue.
+	OpsItemType *string
+
+	// The time specified in a change request for a runbook workflow to end. Currently
+	// supported only for the OpsItem type /aws/changerequest.
+	PlannedEndTime *time.Time
+
+	// The time specified in a change request for a runbook workflow to start.
+	// Currently supported only for the OpsItem type /aws/changerequest.
+	PlannedStartTime *time.Time
+
 	// The importance of this OpsItem in relation to other OpsItems in the system.
 	Priority *int32
 
@@ -2830,6 +2997,52 @@ type OpsItemDataValue struct {
 	Value *string
 }
 
+// Describes a filter for a specific list of OpsItem events. You can filter event
+// information by using tags. You specify tags by using a key-value pair mapping.
+type OpsItemEventFilter struct {
+
+	// The name of the filter key. Currently, the only supported value is OpsItemId.
+	//
+	// This member is required.
+	Key OpsItemEventFilterKey
+
+	// The operator used by the filter call. Currently, the only supported value is
+	// Equal.
+	//
+	// This member is required.
+	Operator OpsItemEventFilterOperator
+
+	// The values for the filter, consisting of one or more OpsItem IDs.
+	//
+	// This member is required.
+	Values []string
+}
+
+// Summary information about an OpsItem event.
+type OpsItemEventSummary struct {
+
+	// Information about the user or resource that created the OpsItem event.
+	CreatedBy *OpsItemIdentity
+
+	// The date and time the OpsItem event was created.
+	CreatedTime *time.Time
+
+	// Specific information about the OpsItem event.
+	Detail *string
+
+	// The type of information provided as a detail.
+	DetailType *string
+
+	// The ID of the OpsItem event.
+	EventId *string
+
+	// The ID of the OpsItem.
+	OpsItemId *string
+
+	// The source of the OpsItem event.
+	Source *string
+}
+
 // Describes an OpsItem filter.
 type OpsItemFilter struct {
 
@@ -2849,6 +3062,13 @@ type OpsItemFilter struct {
 	Values []string
 }
 
+// Information about the user or resource that created an OpsItem event.
+type OpsItemIdentity struct {
+
+	// The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem event.
+	Arn *string
+}
+
 // A notification about the OpsItem.
 type OpsItemNotification struct {
 
@@ -2859,6 +3079,14 @@ type OpsItemNotification struct {
 
 // A count of OpsItems.
 type OpsItemSummary struct {
+
+	// The time a runbook workflow ended. Currently reported only for the OpsItem type
+	// /aws/changerequest.
+	ActualEndTime *time.Time
+
+	// The time a runbook workflow started. Currently reported only for the OpsItem
+	// type /aws/changerequest.
+	ActualStartTime *time.Time
 
 	// A list of OpsItems by category.
 	Category *string
@@ -2882,6 +3110,18 @@ type OpsItemSummary struct {
 	// The ID of the OpsItem.
 	OpsItemId *string
 
+	// The type of OpsItem. Currently, the only valid values are /aws/changerequest and
+	// /aws/issue.
+	OpsItemType *string
+
+	// The time specified in a change request for a runbook workflow to end. Currently
+	// supported only for the OpsItem type /aws/changerequest.
+	PlannedEndTime *time.Time
+
+	// The time specified in a change request for a runbook workflow to start.
+	// Currently supported only for the OpsItem type /aws/changerequest.
+	PlannedStartTime *time.Time
+
 	// The importance of this OpsItem in relation to other OpsItems in the system.
 	Priority *int32
 
@@ -2897,6 +3137,39 @@ type OpsItemSummary struct {
 	// A short heading that describes the nature of the OpsItem and the impacted
 	// resource.
 	Title *string
+}
+
+// Operational metadata for an application in Application Manager.
+type OpsMetadata struct {
+
+	// The date the OpsMetadata objects was created.
+	CreationDate *time.Time
+
+	// The date the OpsMetadata object was last updated.
+	LastModifiedDate *time.Time
+
+	// The user name who last updated the OpsMetadata object.
+	LastModifiedUser *string
+
+	// The Amazon Resource Name (ARN) of the OpsMetadata Object or blob.
+	OpsMetadataArn *string
+
+	// The ID of the Application Manager application.
+	ResourceId *string
+}
+
+// A filter to limit the number of OpsMetadata objects displayed.
+type OpsMetadataFilter struct {
+
+	// A filter key.
+	//
+	// This member is required.
+	Key *string
+
+	// A filter value.
+	//
+	// This member is required.
+	Values []string
 }
 
 // The OpsItem data type to return.
@@ -3122,7 +3395,7 @@ type Patch struct {
 	BugzillaIds []string
 
 	// The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example,
-	// CVE-1999-0067. Applies to Linux-based instances only.
+	// CVE-2011-3192. Applies to Linux-based instances only.
 	CVEIds []string
 
 	// The classification of the patch. For example, SecurityUpdates, Updates, or
@@ -3646,6 +3919,62 @@ type ResultAttribute struct {
 	TypeName *string
 }
 
+// Information about the result of a document review request.
+type ReviewInformation struct {
+
+	// The time that the reviewer took action on the document review request.
+	ReviewedTime *time.Time
+
+	// The reviewer assigned to take action on the document review request.
+	Reviewer *string
+
+	// The current status of the document review request.
+	Status ReviewStatus
+}
+
+// Information about an Automation runbook (Automation document) used in a runbook
+// workflow in Change Manager. The Automation runbooks specified for the runbook
+// workflow can't run until all required approvals for the change request have been
+// received.
+type Runbook struct {
+
+	// The name of the Automation runbook (Automation document) used in a runbook
+	// workflow.
+	//
+	// This member is required.
+	DocumentName *string
+
+	// The version of the Automation runbook (Automation document) used in a runbook
+	// workflow.
+	DocumentVersion *string
+
+	// The MaxConcurrency value specified by the user when the operation started,
+	// indicating the maximum number of resources that the runbook operation can run on
+	// at the same time.
+	MaxConcurrency *string
+
+	// The MaxErrors value specified by the user when the execution started, indicating
+	// the maximum number of errors that can occur during the operation before the
+	// updates are stopped or rolled back.
+	MaxErrors *string
+
+	// The key-value map of execution parameters, which were supplied when calling
+	// StartChangeRequestExecution.
+	Parameters map[string][]string
+
+	// Information about the AWS Regions and accounts targeted by the current Runbook
+	// operation.
+	TargetLocations []TargetLocation
+
+	// The name of the parameter used as the target resource for the rate-controlled
+	// runbook workflow. Required if you specify Targets.
+	TargetParameterName *string
+
+	// A key-value mapping to target resources that the Runbook operation performs
+	// tasks on. Required if you specify TargetParameterName.
+	Targets []Target
+}
+
 // An S3 bucket where you want to store the results of this request.
 type S3OutputLocation struct {
 
@@ -3964,7 +4293,14 @@ type Tag struct {
 }
 
 // An array of search criteria that targets instances using a Key,Value combination
-// that you specify. Supported formats include the following.
+// that you specify. One or more targets must be specified for maintenance window
+// Run Command-type tasks. Depending on the task, targets are optional for other
+// maintenance window task types (Automation, AWS Lambda, and AWS Step Functions).
+// For more information about running tasks that do not specify targets, see see
+// Registering maintenance window tasks without targets
+// (https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html)
+// in the AWS Systems Manager User Guide. Supported formats include the
+// following.
 //
 // *
 // Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3
@@ -4039,14 +4375,15 @@ type TargetLocation struct {
 	// The AWS accounts targeted by the current Automation execution.
 	Accounts []string
 
-	// The Automation execution role used by the currently running Automation.
+	// The Automation execution role used by the currently running Automation. If not
+	// specified, the default value is AWS-SystemsManager-AutomationExecutionRole.
 	ExecutionRoleName *string
 
 	// The AWS Regions targeted by the current Automation execution.
 	Regions []string
 
 	// The maximum number of AWS accounts and AWS regions allowed to run the Automation
-	// concurrently
+	// concurrently.
 	TargetLocationMaxConcurrency *string
 
 	// The maximum number of errors allowed before the system stops queueing additional

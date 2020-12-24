@@ -975,14 +975,14 @@ func validateAdditionalAuthenticationProvider(v *types.AdditionalAuthenticationP
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdditionalAuthenticationProvider"}
-	if v.UserPoolConfig != nil {
-		if err := validateCognitoUserPoolConfig(v.UserPoolConfig); err != nil {
-			invalidParams.AddNested("UserPoolConfig", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.OpenIDConnectConfig != nil {
 		if err := validateOpenIDConnectConfig(v.OpenIDConnectConfig); err != nil {
 			invalidParams.AddNested("OpenIDConnectConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UserPoolConfig != nil {
+		if err := validateCognitoUserPoolConfig(v.UserPoolConfig); err != nil {
+			invalidParams.AddNested("UserPoolConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1065,11 +1065,11 @@ func validateElasticsearchDataSourceConfig(v *types.ElasticsearchDataSourceConfi
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ElasticsearchDataSourceConfig"}
-	if v.AwsRegion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AwsRegion"))
-	}
 	if v.Endpoint == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if v.AwsRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsRegion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1115,11 +1115,11 @@ func validateLogConfig(v *types.LogConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LogConfig"}
-	if v.CloudWatchLogsRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CloudWatchLogsRoleArn"))
-	}
 	if len(v.FieldLogLevel) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("FieldLogLevel"))
+	}
+	if v.CloudWatchLogsRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudWatchLogsRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1148,14 +1148,14 @@ func validateUserPoolConfig(v *types.UserPoolConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UserPoolConfig"}
-	if len(v.DefaultAction) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("DefaultAction"))
-	}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
 	if v.AwsRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsRegion"))
+	}
+	if len(v.DefaultAction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultAction"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1205,9 +1205,23 @@ func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDataSourceInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
 	if v.DynamodbConfig != nil {
 		if err := validateDynamodbDataSourceConfig(v.DynamodbConfig); err != nil {
 			invalidParams.AddNested("DynamodbConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaConfig != nil {
+		if err := validateLambdaDataSourceConfig(v.LambdaConfig); err != nil {
+			invalidParams.AddNested("LambdaConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ElasticsearchConfig != nil {
@@ -1219,20 +1233,6 @@ func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 		if err := validateHttpDataSourceConfig(v.HttpConfig); err != nil {
 			invalidParams.AddNested("HttpConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if v.LambdaConfig != nil {
-		if err := validateLambdaDataSourceConfig(v.LambdaConfig); err != nil {
-			invalidParams.AddNested("LambdaConfig", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1246,14 +1246,14 @@ func validateOpCreateFunctionInput(v *CreateFunctionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFunctionInput"}
-	if v.DataSourceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSourceName"))
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.ApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	if v.DataSourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceName"))
 	}
 	if v.FunctionVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionVersion"))
@@ -1270,23 +1270,13 @@ func validateOpCreateGraphqlApiInput(v *CreateGraphqlApiInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateGraphqlApiInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.LogConfig != nil {
 		if err := validateLogConfig(v.LogConfig); err != nil {
 			invalidParams.AddNested("LogConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.AdditionalAuthenticationProviders != nil {
-		if err := validateAdditionalAuthenticationProviders(v.AdditionalAuthenticationProviders); err != nil {
-			invalidParams.AddNested("AdditionalAuthenticationProviders", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.OpenIDConnectConfig != nil {
-		if err := validateOpenIDConnectConfig(v.OpenIDConnectConfig); err != nil {
-			invalidParams.AddNested("OpenIDConnectConfig", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if len(v.AuthenticationType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationType"))
@@ -1294,6 +1284,16 @@ func validateOpCreateGraphqlApiInput(v *CreateGraphqlApiInput) error {
 	if v.UserPoolConfig != nil {
 		if err := validateUserPoolConfig(v.UserPoolConfig); err != nil {
 			invalidParams.AddNested("UserPoolConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OpenIDConnectConfig != nil {
+		if err := validateOpenIDConnectConfig(v.OpenIDConnectConfig); err != nil {
+			invalidParams.AddNested("OpenIDConnectConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AdditionalAuthenticationProviders != nil {
+		if err := validateAdditionalAuthenticationProviders(v.AdditionalAuthenticationProviders); err != nil {
+			invalidParams.AddNested("AdditionalAuthenticationProviders", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1308,11 +1308,11 @@ func validateOpCreateResolverInput(v *CreateResolverInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateResolverInput"}
-	if v.TypeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.TypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
 	}
 	if v.FieldName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FieldName"))
@@ -1332,11 +1332,11 @@ func validateOpCreateTypeInput(v *CreateTypeInput) error {
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
-	if len(v.Format) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Format"))
-	}
 	if v.Definition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1365,11 +1365,11 @@ func validateOpDeleteApiKeyInput(v *DeleteApiKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteApiKeyInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1401,11 +1401,11 @@ func validateOpDeleteFunctionInput(v *DeleteFunctionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFunctionInput"}
-	if v.FunctionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionId"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.FunctionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1434,14 +1434,14 @@ func validateOpDeleteResolverInput(v *DeleteResolverInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteResolverInput"}
-	if v.FieldName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FieldName"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if v.TypeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
+	}
+	if v.FieldName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1503,11 +1503,11 @@ func validateOpGetDataSourceInput(v *GetDataSourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDataSourceInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1572,14 +1572,14 @@ func validateOpGetResolverInput(v *GetResolverInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetResolverInput"}
-	if v.FieldName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FieldName"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if v.TypeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
+	}
+	if v.FieldName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1608,14 +1608,14 @@ func validateOpGetTypeInput(v *GetTypeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTypeInput"}
-	if len(v.Format) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if v.TypeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
 	}
-	if v.ApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1692,11 +1692,11 @@ func validateOpListResolversInput(v *ListResolversInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListResolversInput"}
-	if v.TypeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.TypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1761,11 +1761,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1797,11 +1797,11 @@ func validateOpUpdateApiCacheInput(v *UpdateApiCacheInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateApiCacheInput"}
-	if len(v.ApiCachingBehavior) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiCachingBehavior"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if len(v.ApiCachingBehavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiCachingBehavior"))
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
@@ -1818,11 +1818,11 @@ func validateOpUpdateApiKeyInput(v *UpdateApiKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateApiKeyInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1839,19 +1839,15 @@ func validateOpUpdateDataSourceInput(v *UpdateDataSourceInput) error {
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
-	if v.HttpConfig != nil {
-		if err := validateHttpDataSourceConfig(v.HttpConfig); err != nil {
-			invalidParams.AddNested("HttpConfig", err.(smithy.InvalidParamsError))
-		}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if v.DynamodbConfig != nil {
 		if err := validateDynamodbDataSourceConfig(v.DynamodbConfig); err != nil {
 			invalidParams.AddNested("DynamodbConfig", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ElasticsearchConfig != nil {
-		if err := validateElasticsearchDataSourceConfig(v.ElasticsearchConfig); err != nil {
-			invalidParams.AddNested("ElasticsearchConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.LambdaConfig != nil {
@@ -1859,11 +1855,15 @@ func validateOpUpdateDataSourceInput(v *UpdateDataSourceInput) error {
 			invalidParams.AddNested("LambdaConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	if v.ElasticsearchConfig != nil {
+		if err := validateElasticsearchDataSourceConfig(v.ElasticsearchConfig); err != nil {
+			invalidParams.AddNested("ElasticsearchConfig", err.(smithy.InvalidParamsError))
+		}
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.HttpConfig != nil {
+		if err := validateHttpDataSourceConfig(v.HttpConfig); err != nil {
+			invalidParams.AddNested("HttpConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1877,20 +1877,20 @@ func validateOpUpdateFunctionInput(v *UpdateFunctionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFunctionInput"}
-	if v.DataSourceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSourceName"))
-	}
-	if v.FunctionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionId"))
-	}
-	if v.FunctionVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionVersion"))
-	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.FunctionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionId"))
+	}
+	if v.DataSourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceName"))
+	}
+	if v.FunctionVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1907,17 +1907,17 @@ func validateOpUpdateGraphqlApiInput(v *UpdateGraphqlApiInput) error {
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.LogConfig != nil {
 		if err := validateLogConfig(v.LogConfig); err != nil {
 			invalidParams.AddNested("LogConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.AdditionalAuthenticationProviders != nil {
-		if err := validateAdditionalAuthenticationProviders(v.AdditionalAuthenticationProviders); err != nil {
-			invalidParams.AddNested("AdditionalAuthenticationProviders", err.(smithy.InvalidParamsError))
+	if v.UserPoolConfig != nil {
+		if err := validateUserPoolConfig(v.UserPoolConfig); err != nil {
+			invalidParams.AddNested("UserPoolConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.OpenIDConnectConfig != nil {
@@ -1925,9 +1925,9 @@ func validateOpUpdateGraphqlApiInput(v *UpdateGraphqlApiInput) error {
 			invalidParams.AddNested("OpenIDConnectConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.UserPoolConfig != nil {
-		if err := validateUserPoolConfig(v.UserPoolConfig); err != nil {
-			invalidParams.AddNested("UserPoolConfig", err.(smithy.InvalidParamsError))
+	if v.AdditionalAuthenticationProviders != nil {
+		if err := validateAdditionalAuthenticationProviders(v.AdditionalAuthenticationProviders); err != nil {
+			invalidParams.AddNested("AdditionalAuthenticationProviders", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1942,14 +1942,14 @@ func validateOpUpdateResolverInput(v *UpdateResolverInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateResolverInput"}
-	if v.FieldName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FieldName"))
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if v.TypeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
 	}
-	if v.ApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	if v.FieldName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1963,14 +1963,14 @@ func validateOpUpdateTypeInput(v *UpdateTypeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTypeInput"}
-	if len(v.Format) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
 	if v.TypeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
 	}
-	if v.ApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

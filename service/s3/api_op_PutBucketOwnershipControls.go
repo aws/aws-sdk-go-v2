@@ -13,12 +13,12 @@ import (
 )
 
 // Creates or modifies OwnershipControls for an Amazon S3 bucket. To use this
-// operation, you must have the s3:GetBucketOwnershipControls permission. For more
+// operation, you must have the s3:PutBucketOwnershipControls permission. For more
 // information about Amazon S3 permissions, see Specifying Permissions in a Policy
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html).
 // For information about Amazon S3 Object Ownership, see Using Object Ownership
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html).
-// The following operations are related to GetBucketOwnershipControls:
+// The following operations are related to PutBucketOwnershipControls:
 //
 // *
 // GetBucketOwnershipControls
@@ -52,9 +52,13 @@ type PutBucketOwnershipControlsInput struct {
 	// This member is required.
 	OwnershipControls *types.OwnershipControls
 
-	// The MD5 hash of the OwnershipControls request body.
+	// The MD5 hash of the OwnershipControls request body. For requests made using the
+	// AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated
+	// automatically.
 	ContentMD5 *string
 
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
 
@@ -127,6 +131,9 @@ func addOperationPutBucketOwnershipControlsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
 	return nil

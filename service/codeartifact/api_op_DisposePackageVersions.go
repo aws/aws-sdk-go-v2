@@ -52,6 +52,8 @@ type DisposePackageVersionsInput struct {
 	//
 	// * maven
 	//
+	// * nuget
+	//
 	// This member is required.
 	Format types.PackageFormat
 
@@ -100,6 +102,9 @@ type DisposePackageVersionsInput struct {
 	// * A Python package
 	// does not contain a corresponding component, so Python packages do not have a
 	// namespace.
+	//
+	// * A NuGet package does not contain a corresponding component, so
+	// NuGet packages do not have a namespace.
 	Namespace *string
 
 	// The revisions of the package versions you want to dispose.

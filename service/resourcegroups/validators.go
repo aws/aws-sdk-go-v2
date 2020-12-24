@@ -307,11 +307,11 @@ func validateGroupFilter(v *types.GroupFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GroupFilter"}
-	if v.Values == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Values"))
-	}
 	if len(v.Name) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -359,11 +359,11 @@ func validateResourceFilter(v *types.ResourceFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceFilter"}
-	if v.Values == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Values"))
-	}
 	if len(v.Name) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -412,13 +412,13 @@ func validateOpCreateGroupInput(v *CreateGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateGroupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.ResourceQuery != nil {
 		if err := validateResourceQuery(v.ResourceQuery); err != nil {
 			invalidParams.AddNested("ResourceQuery", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Configuration != nil {
 		if err := validateGroupConfigurationList(v.Configuration); err != nil {

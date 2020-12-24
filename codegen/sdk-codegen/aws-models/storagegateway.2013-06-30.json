@@ -134,25 +134,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ACCESS_DENIED"
+                        "value": "ACCESS_DENIED",
+                        "name": "ACCESS_DENIED"
                     },
                     {
-                        "value": "DETACHED"
+                        "value": "DETACHED",
+                        "name": "DETACHED"
                     },
                     {
-                        "value": "JOINED"
+                        "value": "JOINED",
+                        "name": "JOINED"
                     },
                     {
-                        "value": "JOINING"
+                        "value": "JOINING",
+                        "name": "JOINING"
                     },
                     {
-                        "value": "NETWORK_ERROR"
+                        "value": "NETWORK_ERROR",
+                        "name": "NETWORK_ERROR"
                     },
                     {
-                        "value": "TIMEOUT"
+                        "value": "TIMEOUT",
+                        "name": "TIMEOUT"
                     },
                     {
-                        "value": "UNKNOWN_ERROR"
+                        "value": "UNKNOWN_ERROR",
+                        "name": "UNKNOWN_ERROR"
                     }
                 ]
             }
@@ -595,13 +602,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "COMPLETE"
+                        "value": "COMPLETE",
+                        "name": "COMPLETE"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     },
                     {
-                        "value": "PENDING"
+                        "value": "PENDING",
+                        "name": "PENDING"
                     }
                 ]
             }
@@ -933,10 +943,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ClientSpecified"
+                        "value": "ClientSpecified",
+                        "name": "ClientSpecified"
                     },
                     {
-                        "value": "CaseSensitive"
+                        "value": "CaseSensitive",
+                        "name": "CaseSensitive"
                     }
                 ]
             }
@@ -4095,190 +4107,252 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ActivationKeyExpired"
+                        "value": "ActivationKeyExpired",
+                        "name": "ActivationKeyExpired"
                     },
                     {
-                        "value": "ActivationKeyInvalid"
+                        "value": "ActivationKeyInvalid",
+                        "name": "ActivationKeyInvalid"
                     },
                     {
-                        "value": "ActivationKeyNotFound"
+                        "value": "ActivationKeyNotFound",
+                        "name": "ActivationKeyNotFound"
                     },
                     {
-                        "value": "GatewayInternalError"
+                        "value": "GatewayInternalError",
+                        "name": "GatewayInternalError"
                     },
                     {
-                        "value": "GatewayNotConnected"
+                        "value": "GatewayNotConnected",
+                        "name": "GatewayNotConnected"
                     },
                     {
-                        "value": "GatewayNotFound"
+                        "value": "GatewayNotFound",
+                        "name": "GatewayNotFound"
                     },
                     {
-                        "value": "GatewayProxyNetworkConnectionBusy"
+                        "value": "GatewayProxyNetworkConnectionBusy",
+                        "name": "GatewayProxyNetworkConnectionBusy"
                     },
                     {
-                        "value": "AuthenticationFailure"
+                        "value": "AuthenticationFailure",
+                        "name": "AuthenticationFailure"
                     },
                     {
-                        "value": "BandwidthThrottleScheduleNotFound"
+                        "value": "BandwidthThrottleScheduleNotFound",
+                        "name": "BandwidthThrottleScheduleNotFound"
                     },
                     {
-                        "value": "Blocked"
+                        "value": "Blocked",
+                        "name": "Blocked"
                     },
                     {
-                        "value": "CannotExportSnapshot"
+                        "value": "CannotExportSnapshot",
+                        "name": "CannotExportSnapshot"
                     },
                     {
-                        "value": "ChapCredentialNotFound"
+                        "value": "ChapCredentialNotFound",
+                        "name": "ChapCredentialNotFound"
                     },
                     {
-                        "value": "DiskAlreadyAllocated"
+                        "value": "DiskAlreadyAllocated",
+                        "name": "DiskAlreadyAllocated"
                     },
                     {
-                        "value": "DiskDoesNotExist"
+                        "value": "DiskDoesNotExist",
+                        "name": "DiskDoesNotExist"
                     },
                     {
-                        "value": "DiskSizeGreaterThanVolumeMaxSize"
+                        "value": "DiskSizeGreaterThanVolumeMaxSize",
+                        "name": "DiskSizeGreaterThanVolumeMaxSize"
                     },
                     {
-                        "value": "DiskSizeLessThanVolumeSize"
+                        "value": "DiskSizeLessThanVolumeSize",
+                        "name": "DiskSizeLessThanVolumeSize"
                     },
                     {
-                        "value": "DiskSizeNotGigAligned"
+                        "value": "DiskSizeNotGigAligned",
+                        "name": "DiskSizeNotGigAligned"
                     },
                     {
-                        "value": "DuplicateCertificateInfo"
+                        "value": "DuplicateCertificateInfo",
+                        "name": "DuplicateCertificateInfo"
                     },
                     {
-                        "value": "DuplicateSchedule"
+                        "value": "DuplicateSchedule",
+                        "name": "DuplicateSchedule"
                     },
                     {
-                        "value": "EndpointNotFound"
+                        "value": "EndpointNotFound",
+                        "name": "EndpointNotFound"
                     },
                     {
-                        "value": "IAMNotSupported"
+                        "value": "IAMNotSupported",
+                        "name": "IAMNotSupported"
                     },
                     {
-                        "value": "InitiatorInvalid"
+                        "value": "InitiatorInvalid",
+                        "name": "InitiatorInvalid"
                     },
                     {
-                        "value": "InitiatorNotFound"
+                        "value": "InitiatorNotFound",
+                        "name": "InitiatorNotFound"
                     },
                     {
-                        "value": "InternalError"
+                        "value": "InternalError",
+                        "name": "InternalError"
                     },
                     {
-                        "value": "InvalidGateway"
+                        "value": "InvalidGateway",
+                        "name": "InvalidGateway"
                     },
                     {
-                        "value": "InvalidEndpoint"
+                        "value": "InvalidEndpoint",
+                        "name": "InvalidEndpoint"
                     },
                     {
-                        "value": "InvalidParameters"
+                        "value": "InvalidParameters",
+                        "name": "InvalidParameters"
                     },
                     {
-                        "value": "InvalidSchedule"
+                        "value": "InvalidSchedule",
+                        "name": "InvalidSchedule"
                     },
                     {
-                        "value": "LocalStorageLimitExceeded"
+                        "value": "LocalStorageLimitExceeded",
+                        "name": "LocalStorageLimitExceeded"
                     },
                     {
-                        "value": "LunAlreadyAllocated "
+                        "value": "LunAlreadyAllocated ",
+                        "name": "LunAlreadyAllocated_"
                     },
                     {
-                        "value": "LunInvalid"
+                        "value": "LunInvalid",
+                        "name": "LunInvalid"
                     },
                     {
-                        "value": "JoinDomainInProgress"
+                        "value": "JoinDomainInProgress",
+                        "name": "JoinDomainInProgress"
                     },
                     {
-                        "value": "MaximumContentLengthExceeded"
+                        "value": "MaximumContentLengthExceeded",
+                        "name": "MaximumContentLengthExceeded"
                     },
                     {
-                        "value": "MaximumTapeCartridgeCountExceeded"
+                        "value": "MaximumTapeCartridgeCountExceeded",
+                        "name": "MaximumTapeCartridgeCountExceeded"
                     },
                     {
-                        "value": "MaximumVolumeCountExceeded"
+                        "value": "MaximumVolumeCountExceeded",
+                        "name": "MaximumVolumeCountExceeded"
                     },
                     {
-                        "value": "NetworkConfigurationChanged"
+                        "value": "NetworkConfigurationChanged",
+                        "name": "NetworkConfigurationChanged"
                     },
                     {
-                        "value": "NoDisksAvailable"
+                        "value": "NoDisksAvailable",
+                        "name": "NoDisksAvailable"
                     },
                     {
-                        "value": "NotImplemented"
+                        "value": "NotImplemented",
+                        "name": "NotImplemented"
                     },
                     {
-                        "value": "NotSupported"
+                        "value": "NotSupported",
+                        "name": "NotSupported"
                     },
                     {
-                        "value": "OperationAborted"
+                        "value": "OperationAborted",
+                        "name": "OperationAborted"
                     },
                     {
-                        "value": "OutdatedGateway"
+                        "value": "OutdatedGateway",
+                        "name": "OutdatedGateway"
                     },
                     {
-                        "value": "ParametersNotImplemented"
+                        "value": "ParametersNotImplemented",
+                        "name": "ParametersNotImplemented"
                     },
                     {
-                        "value": "RegionInvalid"
+                        "value": "RegionInvalid",
+                        "name": "RegionInvalid"
                     },
                     {
-                        "value": "RequestTimeout"
+                        "value": "RequestTimeout",
+                        "name": "RequestTimeout"
                     },
                     {
-                        "value": "ServiceUnavailable"
+                        "value": "ServiceUnavailable",
+                        "name": "ServiceUnavailable"
                     },
                     {
-                        "value": "SnapshotDeleted"
+                        "value": "SnapshotDeleted",
+                        "name": "SnapshotDeleted"
                     },
                     {
-                        "value": "SnapshotIdInvalid"
+                        "value": "SnapshotIdInvalid",
+                        "name": "SnapshotIdInvalid"
                     },
                     {
-                        "value": "SnapshotInProgress"
+                        "value": "SnapshotInProgress",
+                        "name": "SnapshotInProgress"
                     },
                     {
-                        "value": "SnapshotNotFound"
+                        "value": "SnapshotNotFound",
+                        "name": "SnapshotNotFound"
                     },
                     {
-                        "value": "SnapshotScheduleNotFound"
+                        "value": "SnapshotScheduleNotFound",
+                        "name": "SnapshotScheduleNotFound"
                     },
                     {
-                        "value": "StagingAreaFull"
+                        "value": "StagingAreaFull",
+                        "name": "StagingAreaFull"
                     },
                     {
-                        "value": "StorageFailure"
+                        "value": "StorageFailure",
+                        "name": "StorageFailure"
                     },
                     {
-                        "value": "TapeCartridgeNotFound"
+                        "value": "TapeCartridgeNotFound",
+                        "name": "TapeCartridgeNotFound"
                     },
                     {
-                        "value": "TargetAlreadyExists"
+                        "value": "TargetAlreadyExists",
+                        "name": "TargetAlreadyExists"
                     },
                     {
-                        "value": "TargetInvalid"
+                        "value": "TargetInvalid",
+                        "name": "TargetInvalid"
                     },
                     {
-                        "value": "TargetNotFound"
+                        "value": "TargetNotFound",
+                        "name": "TargetNotFound"
                     },
                     {
-                        "value": "UnauthorizedOperation"
+                        "value": "UnauthorizedOperation",
+                        "name": "UnauthorizedOperation"
                     },
                     {
-                        "value": "VolumeAlreadyExists"
+                        "value": "VolumeAlreadyExists",
+                        "name": "VolumeAlreadyExists"
                     },
                     {
-                        "value": "VolumeIdInvalid"
+                        "value": "VolumeIdInvalid",
+                        "name": "VolumeIdInvalid"
                     },
                     {
-                        "value": "VolumeInUse"
+                        "value": "VolumeInUse",
+                        "name": "VolumeInUse"
                     },
                     {
-                        "value": "VolumeNotFound"
+                        "value": "VolumeNotFound",
+                        "name": "VolumeNotFound"
                     },
                     {
-                        "value": "VolumeNotReady"
+                        "value": "VolumeNotReady",
+                        "name": "VolumeNotReady"
                     }
                 ]
             }
@@ -4382,10 +4456,12 @@
                 "smithy.api#documentation": "<p>The type of the file share.</p>",
                 "smithy.api#enum": [
                     {
-                        "value": "NFS"
+                        "value": "NFS",
+                        "name": "NFS"
                     },
                     {
-                        "value": "SMB"
+                        "value": "SMB",
+                        "name": "SMB"
                     }
                 ]
             }
@@ -4575,19 +4651,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "VMWARE"
+                        "value": "VMWARE",
+                        "name": "VMWARE"
                     },
                     {
-                        "value": "HYPER-V"
+                        "value": "HYPER-V",
+                        "name": "HYPER_V"
                     },
                     {
-                        "value": "EC2"
+                        "value": "EC2",
+                        "name": "EC2"
                     },
                     {
-                        "value": "KVM"
+                        "value": "KVM",
+                        "name": "KVM"
                     },
                     {
-                        "value": "OTHER"
+                        "value": "OTHER",
+                        "name": "OTHER"
                     }
                 ]
             }
@@ -5716,25 +5797,32 @@
                 "smithy.api#documentation": "<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket\n         that a file gateway puts objects into. The default value is <code>private</code>.</p>",
                 "smithy.api#enum": [
                     {
-                        "value": "private"
+                        "value": "private",
+                        "name": "private"
                     },
                     {
-                        "value": "public-read"
+                        "value": "public-read",
+                        "name": "public_read"
                     },
                     {
-                        "value": "public-read-write"
+                        "value": "public-read-write",
+                        "name": "public_read_write"
                     },
                     {
-                        "value": "authenticated-read"
+                        "value": "authenticated-read",
+                        "name": "authenticated_read"
                     },
                     {
-                        "value": "bucket-owner-read"
+                        "value": "bucket-owner-read",
+                        "name": "bucket_owner_read"
                     },
                     {
-                        "value": "bucket-owner-full-control"
+                        "value": "bucket-owner-full-control",
+                        "name": "bucket_owner_full_control"
                     },
                     {
-                        "value": "aws-exec-read"
+                        "value": "aws-exec-read",
+                        "name": "aws_exec_read"
                     }
                 ]
             }
@@ -5863,10 +5951,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ACTIVE"
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
                     },
                     {
-                        "value": "DELETED"
+                        "value": "DELETED",
+                        "name": "DELETED"
                     }
                 ]
             }
@@ -6079,13 +6169,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "COMPLIANCE"
+                        "value": "COMPLIANCE",
+                        "name": "COMPLIANCE"
                     },
                     {
-                        "value": "GOVERNANCE"
+                        "value": "GOVERNANCE",
+                        "name": "GOVERNANCE"
                     },
                     {
-                        "value": "NONE"
+                        "value": "NONE",
+                        "name": "NONE"
                     }
                 ]
             }
@@ -6371,13 +6464,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ClientSpecified"
+                        "value": "ClientSpecified",
+                        "name": "ClientSpecified"
                     },
                     {
-                        "value": "MandatorySigning"
+                        "value": "MandatorySigning",
+                        "name": "MandatorySigning"
                     },
                     {
-                        "value": "MandatoryEncryption"
+                        "value": "MandatoryEncryption",
+                        "name": "MandatoryEncryption"
                     }
                 ]
             }
@@ -7469,10 +7565,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "DEEP_ARCHIVE"
+                        "value": "DEEP_ARCHIVE",
+                        "name": "DEEP_ARCHIVE"
                     },
                     {
-                        "value": "GLACIER"
+                        "value": "GLACIER",
+                        "name": "GLACIER"
                     }
                 ]
             }

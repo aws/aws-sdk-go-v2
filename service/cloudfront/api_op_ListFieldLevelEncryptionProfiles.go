@@ -39,7 +39,7 @@ type ListFieldLevelEncryptionProfilesInput struct {
 
 	// The maximum number of field-level encryption profiles you want in the response
 	// body.
-	MaxItems *string
+	MaxItems *int32
 }
 
 type ListFieldLevelEncryptionProfilesOutput struct {

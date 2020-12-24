@@ -190,6 +190,26 @@ func (m *validateOpCreateResource) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRestApi struct {
+}
+
+func (*validateOpCreateRestApi) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRestApi) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRestApiInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRestApiInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateStage struct {
 }
 
@@ -205,6 +225,26 @@ func (m *validateOpCreateStage) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateStageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateUsagePlan struct {
+}
+
+func (*validateOpCreateUsagePlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateUsagePlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateUsagePlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateUsagePlanInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2166,8 +2206,16 @@ func addOpCreateResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateResource{}, middleware.After)
 }
 
+func addOpCreateRestApiValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRestApi{}, middleware.After)
+}
+
 func addOpCreateStageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateStage{}, middleware.After)
+}
+
+func addOpCreateUsagePlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateUsagePlan{}, middleware.After)
 }
 
 func addOpCreateUsagePlanKeyValidationMiddleware(stack *middleware.Stack) error {
@@ -2577,6 +2625,9 @@ func validateOpCreateAuthorizerInput(v *CreateAuthorizerInput) error {
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
 	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
@@ -2628,15 +2679,15 @@ func validateOpCreateDocumentationPartInput(v *CreateDocumentationPartInput) err
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
 	}
-	if v.Properties == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Properties"))
-	}
 	if v.Location == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Location"))
 	} else if v.Location != nil {
 		if err := validateDocumentationPartLocation(v.Location); err != nil {
 			invalidParams.AddNested("Location", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Properties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Properties"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2686,6 +2737,9 @@ func validateOpCreateModelInput(v *CreateModelInput) error {
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
 	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.ContentType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
 	}
@@ -2716,14 +2770,29 @@ func validateOpCreateResourceInput(v *CreateResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateResourceInput"}
-	if v.ParentId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ParentId"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
 	}
+	if v.ParentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParentId"))
+	}
 	if v.PathPart == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PathPart"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRestApiInput(v *CreateRestApiInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRestApiInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2745,6 +2814,21 @@ func validateOpCreateStageInput(v *CreateStageInput) error {
 	}
 	if v.DeploymentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateUsagePlanInput(v *CreateUsagePlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateUsagePlanInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2779,6 +2863,9 @@ func validateOpCreateVpcLinkInput(v *CreateVpcLinkInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateVpcLinkInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.TargetArns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetArns"))
 	}
@@ -2809,11 +2896,11 @@ func validateOpDeleteAuthorizerInput(v *DeleteAuthorizerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAuthorizerInput"}
-	if v.AuthorizerId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerId"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.AuthorizerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2896,11 +2983,11 @@ func validateOpDeleteDocumentationVersionInput(v *DeleteDocumentationVersionInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDocumentationVersionInput"}
-	if v.DocumentationVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DocumentationVersion"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.DocumentationVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentationVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2947,14 +3034,14 @@ func validateOpDeleteIntegrationInput(v *DeleteIntegrationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteIntegrationInput"}
-	if v.HttpMethod == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
 	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.HttpMethod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2968,6 +3055,9 @@ func validateOpDeleteIntegrationResponseInput(v *DeleteIntegrationResponseInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteIntegrationResponseInput"}
+	if v.RestApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
@@ -2976,9 +3066,6 @@ func validateOpDeleteIntegrationResponseInput(v *DeleteIntegrationResponseInput)
 	}
 	if v.StatusCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StatusCode"))
-	}
-	if v.RestApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2995,11 +3082,11 @@ func validateOpDeleteMethodInput(v *DeleteMethodInput) error {
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
 	}
-	if v.HttpMethod == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
-	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.HttpMethod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3013,17 +3100,17 @@ func validateOpDeleteMethodResponseInput(v *DeleteMethodResponseInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMethodResponseInput"}
+	if v.RestApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
 	if v.HttpMethod == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
 	}
 	if v.StatusCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StatusCode"))
-	}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
-	if v.RestApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3106,11 +3193,11 @@ func validateOpDeleteStageInput(v *DeleteStageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteStageInput"}
-	if v.StageName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.StageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3139,11 +3226,11 @@ func validateOpDeleteUsagePlanKeyInput(v *DeleteUsagePlanKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteUsagePlanKeyInput"}
-	if v.KeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
-	}
 	if v.UsagePlanId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UsagePlanId"))
+	}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3172,11 +3259,11 @@ func validateOpFlushStageAuthorizersCacheInput(v *FlushStageAuthorizersCacheInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FlushStageAuthorizersCacheInput"}
-	if v.StageName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.StageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3190,11 +3277,11 @@ func validateOpFlushStageCacheInput(v *FlushStageCacheInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FlushStageCacheInput"}
-	if v.StageName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.StageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3223,11 +3310,11 @@ func validateOpGetAuthorizerInput(v *GetAuthorizerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAuthorizerInput"}
-	if v.AuthorizerId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerId"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.AuthorizerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3256,11 +3343,11 @@ func validateOpGetBasePathMappingInput(v *GetBasePathMappingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetBasePathMappingInput"}
-	if v.BasePath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BasePath"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.BasePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BasePath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3337,11 +3424,11 @@ func validateOpGetDocumentationPartInput(v *GetDocumentationPartInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDocumentationPartInput"}
-	if v.DocumentationPartId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DocumentationPartId"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.DocumentationPartId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentationPartId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3418,11 +3505,11 @@ func validateOpGetExportInput(v *GetExportInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetExportInput"}
-	if v.StageName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.StageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
 	}
 	if v.ExportType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExportType"))
@@ -3439,11 +3526,11 @@ func validateOpGetGatewayResponseInput(v *GetGatewayResponseInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetGatewayResponseInput"}
-	if len(v.ResponseType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ResponseType"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if len(v.ResponseType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResponseType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3475,11 +3562,11 @@ func validateOpGetIntegrationInput(v *GetIntegrationInput) error {
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
 	}
-	if v.HttpMethod == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
-	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.HttpMethod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3493,17 +3580,17 @@ func validateOpGetIntegrationResponseInput(v *GetIntegrationResponseInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetIntegrationResponseInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
-	if v.StatusCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StatusCode"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
 	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
 	if v.HttpMethod == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
+	}
+	if v.StatusCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatusCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3517,11 +3604,11 @@ func validateOpGetMethodInput(v *GetMethodInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetMethodInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if v.HttpMethod == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
@@ -3538,17 +3625,17 @@ func validateOpGetMethodResponseInput(v *GetMethodResponseInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetMethodResponseInput"}
+	if v.RestApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
-	if v.StatusCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StatusCode"))
 	}
 	if v.HttpMethod == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
 	}
-	if v.RestApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	if v.StatusCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatusCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3562,11 +3649,11 @@ func validateOpGetModelInput(v *GetModelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetModelInput"}
-	if v.ModelName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3595,11 +3682,11 @@ func validateOpGetModelTemplateInput(v *GetModelTemplateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetModelTemplateInput"}
-	if v.ModelName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3730,11 +3817,11 @@ func validateOpGetStageInput(v *GetStageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetStageInput"}
-	if v.StageName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.StageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3778,14 +3865,14 @@ func validateOpGetUsageInput(v *GetUsageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetUsageInput"}
-	if v.EndDate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndDate"))
-	}
 	if v.UsagePlanId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UsagePlanId"))
 	}
 	if v.StartDate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartDate"))
+	}
+	if v.EndDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndDate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3814,11 +3901,11 @@ func validateOpGetUsagePlanKeyInput(v *GetUsagePlanKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetUsagePlanKeyInput"}
-	if v.KeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
-	}
 	if v.UsagePlanId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UsagePlanId"))
+	}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3892,11 +3979,11 @@ func validateOpPutGatewayResponseInput(v *PutGatewayResponseInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutGatewayResponseInput"}
-	if len(v.ResponseType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ResponseType"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if len(v.ResponseType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResponseType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3910,11 +3997,11 @@ func validateOpPutIntegrationInput(v *PutIntegrationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutIntegrationInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if v.HttpMethod == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
@@ -3934,17 +4021,17 @@ func validateOpPutIntegrationResponseInput(v *PutIntegrationResponseInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutIntegrationResponseInput"}
-	if v.StatusCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StatusCode"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if v.HttpMethod == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
 	}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	if v.StatusCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatusCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3985,14 +4072,14 @@ func validateOpPutMethodResponseInput(v *PutMethodResponseInput) error {
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
 	}
-	if v.StatusCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StatusCode"))
-	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if v.HttpMethod == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
+	}
+	if v.StatusCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatusCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4078,11 +4165,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4129,11 +4216,11 @@ func validateOpUpdateBasePathMappingInput(v *UpdateBasePathMappingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateBasePathMappingInput"}
-	if v.BasePath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BasePath"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.BasePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BasePath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4180,11 +4267,11 @@ func validateOpUpdateDocumentationPartInput(v *UpdateDocumentationPartInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDocumentationPartInput"}
-	if v.DocumentationPartId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DocumentationPartId"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.DocumentationPartId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentationPartId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4198,11 +4285,11 @@ func validateOpUpdateDocumentationVersionInput(v *UpdateDocumentationVersionInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDocumentationVersionInput"}
-	if v.DocumentationVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DocumentationVersion"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.DocumentationVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentationVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4231,11 +4318,11 @@ func validateOpUpdateGatewayResponseInput(v *UpdateGatewayResponseInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateGatewayResponseInput"}
-	if len(v.ResponseType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ResponseType"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if len(v.ResponseType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResponseType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4249,14 +4336,14 @@ func validateOpUpdateIntegrationInput(v *UpdateIntegrationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateIntegrationInput"}
-	if v.HttpMethod == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
 	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.HttpMethod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4270,17 +4357,17 @@ func validateOpUpdateIntegrationResponseInput(v *UpdateIntegrationResponseInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateIntegrationResponseInput"}
-	if v.StatusCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StatusCode"))
+	if v.RestApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
 	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
-	if v.RestApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
-	}
 	if v.HttpMethod == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
+	}
+	if v.StatusCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatusCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4294,14 +4381,14 @@ func validateOpUpdateMethodInput(v *UpdateMethodInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMethodInput"}
-	if v.HttpMethod == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
 	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.HttpMethod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4315,6 +4402,9 @@ func validateOpUpdateMethodResponseInput(v *UpdateMethodResponseInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMethodResponseInput"}
+	if v.RestApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
@@ -4323,9 +4413,6 @@ func validateOpUpdateMethodResponseInput(v *UpdateMethodResponseInput) error {
 	}
 	if v.StatusCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StatusCode"))
-	}
-	if v.RestApiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4339,11 +4426,11 @@ func validateOpUpdateModelInput(v *UpdateModelInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateModelInput"}
-	if v.ModelName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4357,11 +4444,11 @@ func validateOpUpdateRequestValidatorInput(v *UpdateRequestValidatorInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRequestValidatorInput"}
-	if v.RequestValidatorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RequestValidatorId"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.RequestValidatorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestValidatorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4375,11 +4462,11 @@ func validateOpUpdateResourceInput(v *UpdateResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourceInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4408,11 +4495,11 @@ func validateOpUpdateStageInput(v *UpdateStageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateStageInput"}
-	if v.StageName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
-	}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.StageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4426,11 +4513,11 @@ func validateOpUpdateUsageInput(v *UpdateUsageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateUsageInput"}
-	if v.KeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
-	}
 	if v.UsagePlanId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UsagePlanId"))
+	}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

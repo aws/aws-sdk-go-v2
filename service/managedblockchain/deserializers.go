@@ -2923,6 +2923,37 @@ func awsRestjson1_deserializeOpErrorVoteOnProposal(response *smithyhttp.Response
 
 func awsRestjson1_deserializeErrorAccessDeniedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.AccessDeniedException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentAccessDeniedException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
 	return output
 }
 
@@ -3174,6 +3205,15 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 
 	for key, value := range shape {
 		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -4120,6 +4160,46 @@ func awsRestjson1_deserializeDocumentNetwork(v **types.Network, value interface{
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNetworkEthereumAttributes(v **types.NetworkEthereumAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkEthereumAttributes
+	if *v == nil {
+		sv = &types.NetworkEthereumAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ChainId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ChainId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentNetworkFabricAttributes(v **types.NetworkFabricAttributes, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4191,6 +4271,11 @@ func awsRestjson1_deserializeDocumentNetworkFrameworkAttributes(v **types.Networ
 
 	for key, value := range shape {
 		switch key {
+		case "Ethereum":
+			if err := awsRestjson1_deserializeDocumentNetworkEthereumAttributes(&sv.Ethereum, value); err != nil {
+				return err
+			}
+
 		case "Fabric":
 			if err := awsRestjson1_deserializeDocumentNetworkFabricAttributes(&sv.Fabric, value); err != nil {
 				return err
@@ -4454,6 +4539,55 @@ func awsRestjson1_deserializeDocumentNode(v **types.Node, value interface{}) err
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNodeEthereumAttributes(v **types.NodeEthereumAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NodeEthereumAttributes
+	if *v == nil {
+		sv = &types.NodeEthereumAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HttpEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.HttpEndpoint = ptr.String(jtv)
+			}
+
+		case "WebSocketEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.WebSocketEndpoint = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentNodeFabricAttributes(v **types.NodeFabricAttributes, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4566,6 +4700,11 @@ func awsRestjson1_deserializeDocumentNodeFrameworkAttributes(v **types.NodeFrame
 
 	for key, value := range shape {
 		switch key {
+		case "Ethereum":
+			if err := awsRestjson1_deserializeDocumentNodeEthereumAttributes(&sv.Ethereum, value); err != nil {
+				return err
+			}
+
 		case "Fabric":
 			if err := awsRestjson1_deserializeDocumentNodeFabricAttributes(&sv.Fabric, value); err != nil {
 				return err

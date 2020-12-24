@@ -77,7 +77,7 @@ type GetCurrentMetricDataInput struct {
 	// The queues, up to 100, or channels, to use to filter the metrics returned.
 	// Metric data is retrieved only for the resources associated with the queues or
 	// channels included in the filter. You can include both queue IDs and queue ARNs
-	// in the same request. Both VOICE and CHAT channels are supported.
+	// in the same request. VOICE, CHAT, and TASK channels are supported.
 	//
 	// This member is required.
 	Filters *types.Filters
@@ -89,8 +89,8 @@ type GetCurrentMetricDataInput struct {
 
 	// The grouping applied to the metrics returned. For example, when grouped by
 	// QUEUE, the metrics returned apply to each queue rather than aggregated for all
-	// queues. If you group by CHANNEL, you should include a Channels filter. Both
-	// VOICE and CHAT channels are supported. If no Grouping is included in the
+	// queues. If you group by CHANNEL, you should include a Channels filter. VOICE,
+	// CHAT, and TASK channels are supported. If no Grouping is included in the
 	// request, a summary of metrics is returned.
 	Groupings []types.Grouping
 

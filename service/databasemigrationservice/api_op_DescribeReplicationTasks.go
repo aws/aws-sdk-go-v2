@@ -4,12 +4,17 @@ package databasemigrationservice
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	smithywaiter "github.com/aws/smithy-go/waiter"
+	"github.com/jmespath/go-jmespath"
+	"time"
 )
 
 // Returns information about replication tasks for your account in the current
@@ -217,6 +222,1185 @@ func (p *DescribeReplicationTasksPaginator) NextPage(ctx context.Context, optFns
 	}
 
 	return result, nil
+}
+
+// ReplicationTaskDeletedWaiterOptions are waiter options for
+// ReplicationTaskDeletedWaiter
+type ReplicationTaskDeletedWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	APIOptions []func(*middleware.Stack) error
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// ReplicationTaskDeletedWaiter will use default minimum delay of 15 seconds. Note
+	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
+	// to zero, ReplicationTaskDeletedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state. By
+	// default service-modeled logic will populate this option. This option can thus be
+	// used to define a custom waiter state with fall-back to service-modeled waiter
+	// state mutators.The function returns an error in case of a failure state. In case
+	// of retry state, this function returns a bool value of true and nil error, while
+	// in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *DescribeReplicationTasksInput, *DescribeReplicationTasksOutput, error) (bool, error)
+}
+
+// ReplicationTaskDeletedWaiter defines the waiters for ReplicationTaskDeleted
+type ReplicationTaskDeletedWaiter struct {
+	client DescribeReplicationTasksAPIClient
+
+	options ReplicationTaskDeletedWaiterOptions
+}
+
+// NewReplicationTaskDeletedWaiter constructs a ReplicationTaskDeletedWaiter.
+func NewReplicationTaskDeletedWaiter(client DescribeReplicationTasksAPIClient, optFns ...func(*ReplicationTaskDeletedWaiterOptions)) *ReplicationTaskDeletedWaiter {
+	options := ReplicationTaskDeletedWaiterOptions{}
+	options.MinDelay = 15 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = replicationTaskDeletedStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &ReplicationTaskDeletedWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for ReplicationTaskDeleted waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
+func (w *ReplicationTaskDeletedWaiter) Wait(ctx context.Context, params *DescribeReplicationTasksInput, maxWaitDur time.Duration, optFns ...func(*ReplicationTaskDeletedWaiterOptions)) error {
+	if maxWaitDur <= 0 {
+		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.DescribeReplicationTasks(ctx, params, func(o *Options) {
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return err
+		}
+		if !retryable {
+			return nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return fmt.Errorf("exceeded max wait time for ReplicationTaskDeleted waiter")
+}
+
+func replicationTaskDeletedStateRetryable(ctx context.Context, input *DescribeReplicationTasksInput, output *DescribeReplicationTasksOutput, err error) (bool, error) {
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "ready"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "creating"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "stopped"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "running"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "failed"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err != nil {
+		var errorType *types.ResourceNotFoundFault
+		if errors.As(err, &errorType) {
+			return false, nil
+		}
+	}
+
+	return true, nil
+}
+
+// ReplicationTaskReadyWaiterOptions are waiter options for
+// ReplicationTaskReadyWaiter
+type ReplicationTaskReadyWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	APIOptions []func(*middleware.Stack) error
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// ReplicationTaskReadyWaiter will use default minimum delay of 15 seconds. Note
+	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
+	// to zero, ReplicationTaskReadyWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state. By
+	// default service-modeled logic will populate this option. This option can thus be
+	// used to define a custom waiter state with fall-back to service-modeled waiter
+	// state mutators.The function returns an error in case of a failure state. In case
+	// of retry state, this function returns a bool value of true and nil error, while
+	// in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *DescribeReplicationTasksInput, *DescribeReplicationTasksOutput, error) (bool, error)
+}
+
+// ReplicationTaskReadyWaiter defines the waiters for ReplicationTaskReady
+type ReplicationTaskReadyWaiter struct {
+	client DescribeReplicationTasksAPIClient
+
+	options ReplicationTaskReadyWaiterOptions
+}
+
+// NewReplicationTaskReadyWaiter constructs a ReplicationTaskReadyWaiter.
+func NewReplicationTaskReadyWaiter(client DescribeReplicationTasksAPIClient, optFns ...func(*ReplicationTaskReadyWaiterOptions)) *ReplicationTaskReadyWaiter {
+	options := ReplicationTaskReadyWaiterOptions{}
+	options.MinDelay = 15 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = replicationTaskReadyStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &ReplicationTaskReadyWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for ReplicationTaskReady waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
+func (w *ReplicationTaskReadyWaiter) Wait(ctx context.Context, params *DescribeReplicationTasksInput, maxWaitDur time.Duration, optFns ...func(*ReplicationTaskReadyWaiterOptions)) error {
+	if maxWaitDur <= 0 {
+		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.DescribeReplicationTasks(ctx, params, func(o *Options) {
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return err
+		}
+		if !retryable {
+			return nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return fmt.Errorf("exceeded max wait time for ReplicationTaskReady waiter")
+}
+
+func replicationTaskReadyStateRetryable(ctx context.Context, input *DescribeReplicationTasksInput, output *DescribeReplicationTasksOutput, err error) (bool, error) {
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "ready"
+		var match = true
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			if v != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "starting"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "running"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "stopping"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "stopped"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "failed"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "modifying"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "testing"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "deleting"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	return true, nil
+}
+
+// ReplicationTaskRunningWaiterOptions are waiter options for
+// ReplicationTaskRunningWaiter
+type ReplicationTaskRunningWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	APIOptions []func(*middleware.Stack) error
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// ReplicationTaskRunningWaiter will use default minimum delay of 15 seconds. Note
+	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
+	// to zero, ReplicationTaskRunningWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state. By
+	// default service-modeled logic will populate this option. This option can thus be
+	// used to define a custom waiter state with fall-back to service-modeled waiter
+	// state mutators.The function returns an error in case of a failure state. In case
+	// of retry state, this function returns a bool value of true and nil error, while
+	// in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *DescribeReplicationTasksInput, *DescribeReplicationTasksOutput, error) (bool, error)
+}
+
+// ReplicationTaskRunningWaiter defines the waiters for ReplicationTaskRunning
+type ReplicationTaskRunningWaiter struct {
+	client DescribeReplicationTasksAPIClient
+
+	options ReplicationTaskRunningWaiterOptions
+}
+
+// NewReplicationTaskRunningWaiter constructs a ReplicationTaskRunningWaiter.
+func NewReplicationTaskRunningWaiter(client DescribeReplicationTasksAPIClient, optFns ...func(*ReplicationTaskRunningWaiterOptions)) *ReplicationTaskRunningWaiter {
+	options := ReplicationTaskRunningWaiterOptions{}
+	options.MinDelay = 15 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = replicationTaskRunningStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &ReplicationTaskRunningWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for ReplicationTaskRunning waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
+func (w *ReplicationTaskRunningWaiter) Wait(ctx context.Context, params *DescribeReplicationTasksInput, maxWaitDur time.Duration, optFns ...func(*ReplicationTaskRunningWaiterOptions)) error {
+	if maxWaitDur <= 0 {
+		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.DescribeReplicationTasks(ctx, params, func(o *Options) {
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return err
+		}
+		if !retryable {
+			return nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return fmt.Errorf("exceeded max wait time for ReplicationTaskRunning waiter")
+}
+
+func replicationTaskRunningStateRetryable(ctx context.Context, input *DescribeReplicationTasksInput, output *DescribeReplicationTasksOutput, err error) (bool, error) {
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "running"
+		var match = true
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			if v != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "ready"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "creating"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "stopping"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "stopped"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "failed"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "modifying"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "testing"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "deleting"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	return true, nil
+}
+
+// ReplicationTaskStoppedWaiterOptions are waiter options for
+// ReplicationTaskStoppedWaiter
+type ReplicationTaskStoppedWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	APIOptions []func(*middleware.Stack) error
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// ReplicationTaskStoppedWaiter will use default minimum delay of 15 seconds. Note
+	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
+	// to zero, ReplicationTaskStoppedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state. By
+	// default service-modeled logic will populate this option. This option can thus be
+	// used to define a custom waiter state with fall-back to service-modeled waiter
+	// state mutators.The function returns an error in case of a failure state. In case
+	// of retry state, this function returns a bool value of true and nil error, while
+	// in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *DescribeReplicationTasksInput, *DescribeReplicationTasksOutput, error) (bool, error)
+}
+
+// ReplicationTaskStoppedWaiter defines the waiters for ReplicationTaskStopped
+type ReplicationTaskStoppedWaiter struct {
+	client DescribeReplicationTasksAPIClient
+
+	options ReplicationTaskStoppedWaiterOptions
+}
+
+// NewReplicationTaskStoppedWaiter constructs a ReplicationTaskStoppedWaiter.
+func NewReplicationTaskStoppedWaiter(client DescribeReplicationTasksAPIClient, optFns ...func(*ReplicationTaskStoppedWaiterOptions)) *ReplicationTaskStoppedWaiter {
+	options := ReplicationTaskStoppedWaiterOptions{}
+	options.MinDelay = 15 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = replicationTaskStoppedStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &ReplicationTaskStoppedWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for ReplicationTaskStopped waiter. The maxWaitDur
+// is the maximum wait duration the waiter will wait. The maxWaitDur is required
+// and must be greater than zero.
+func (w *ReplicationTaskStoppedWaiter) Wait(ctx context.Context, params *DescribeReplicationTasksInput, maxWaitDur time.Duration, optFns ...func(*ReplicationTaskStoppedWaiterOptions)) error {
+	if maxWaitDur <= 0 {
+		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.DescribeReplicationTasks(ctx, params, func(o *Options) {
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return err
+		}
+		if !retryable {
+			return nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return fmt.Errorf("exceeded max wait time for ReplicationTaskStopped waiter")
+}
+
+func replicationTaskStoppedStateRetryable(ctx context.Context, input *DescribeReplicationTasksInput, output *DescribeReplicationTasksOutput, err error) (bool, error) {
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "stopped"
+		var match = true
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		if len(listOfValues) == 0 {
+			match = false
+		}
+		for _, v := range listOfValues {
+			if v != expectedValue {
+				match = false
+			}
+		}
+
+		if match {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "ready"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "creating"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "starting"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "running"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "failed"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "modifying"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "testing"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "deleting"
+		listOfValues, ok := pathValue.([]string)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+		}
+
+		for _, v := range listOfValues {
+			if v == expectedValue {
+				return false, fmt.Errorf("waiter state transitioned to Failure")
+			}
+		}
+	}
+
+	return true, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeReplicationTasks(region string) *awsmiddleware.RegisterServiceMetadata {

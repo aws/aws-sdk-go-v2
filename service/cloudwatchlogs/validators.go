@@ -842,14 +842,14 @@ func validateMetricTransformation(v *types.MetricTransformation) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricTransformation"}
-	if v.MetricValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricValue"))
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
 	}
 	if v.MetricNamespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricNamespace"))
 	}
-	if v.MetricName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	if v.MetricValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricValue"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -880,11 +880,11 @@ func validateOpAssociateKmsKeyInput(v *AssociateKmsKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateKmsKeyInput"}
-	if v.KmsKeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
-	}
 	if v.LogGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
+	}
+	if v.KmsKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -913,8 +913,8 @@ func validateOpCreateExportTaskInput(v *CreateExportTaskInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateExportTaskInput"}
-	if v.Destination == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	if v.LogGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
 	}
 	if v.From == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("From"))
@@ -922,8 +922,8 @@ func validateOpCreateExportTaskInput(v *CreateExportTaskInput) error {
 	if v.To == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("To"))
 	}
-	if v.LogGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -952,11 +952,11 @@ func validateOpCreateLogStreamInput(v *CreateLogStreamInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLogStreamInput"}
-	if v.LogStreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogStreamName"))
-	}
 	if v.LogGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
+	}
+	if v.LogStreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogStreamName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1000,11 +1000,11 @@ func validateOpDeleteLogStreamInput(v *DeleteLogStreamInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteLogStreamInput"}
-	if v.LogStreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogStreamName"))
-	}
 	if v.LogGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
+	}
+	if v.LogStreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogStreamName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1018,11 +1018,11 @@ func validateOpDeleteMetricFilterInput(v *DeleteMetricFilterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMetricFilterInput"}
-	if v.FilterName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FilterName"))
-	}
 	if v.LogGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
+	}
+	if v.FilterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1144,11 +1144,11 @@ func validateOpGetLogEventsInput(v *GetLogEventsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetLogEventsInput"}
-	if v.LogStreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogStreamName"))
-	}
 	if v.LogGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
+	}
+	if v.LogStreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogStreamName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1222,14 +1222,14 @@ func validateOpPutDestinationInput(v *PutDestinationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutDestinationInput"}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	if v.DestinationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationName"))
 	}
 	if v.TargetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
 	}
-	if v.DestinationName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationName"))
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1261,11 +1261,11 @@ func validateOpPutLogEventsInput(v *PutLogEventsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutLogEventsInput"}
-	if v.LogStreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogStreamName"))
-	}
 	if v.LogGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
+	}
+	if v.LogStreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogStreamName"))
 	}
 	if v.LogEvents == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogEvents"))
@@ -1286,11 +1286,14 @@ func validateOpPutMetricFilterInput(v *PutMetricFilterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutMetricFilterInput"}
+	if v.LogGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
+	}
 	if v.FilterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FilterName"))
 	}
-	if v.LogGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
+	if v.FilterPattern == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterPattern"))
 	}
 	if v.MetricTransformations == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricTransformations"))
@@ -1298,9 +1301,6 @@ func validateOpPutMetricFilterInput(v *PutMetricFilterInput) error {
 		if err := validateMetricTransformations(v.MetricTransformations); err != nil {
 			invalidParams.AddNested("MetricTransformations", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.FilterPattern == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FilterPattern"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1314,11 +1314,11 @@ func validateOpPutQueryDefinitionInput(v *PutQueryDefinitionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutQueryDefinitionInput"}
-	if v.QueryString == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.QueryString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1350,17 +1350,17 @@ func validateOpPutSubscriptionFilterInput(v *PutSubscriptionFilterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutSubscriptionFilterInput"}
-	if v.DestinationArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationArn"))
+	if v.LogGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
 	}
 	if v.FilterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FilterName"))
 	}
-	if v.LogGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
-	}
 	if v.FilterPattern == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FilterPattern"))
+	}
+	if v.DestinationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1374,14 +1374,14 @@ func validateOpStartQueryInput(v *StartQueryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartQueryInput"}
-	if v.QueryString == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
-	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if v.QueryString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

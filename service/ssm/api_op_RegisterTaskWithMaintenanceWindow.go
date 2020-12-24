@@ -30,23 +30,6 @@ func (c *Client) RegisterTaskWithMaintenanceWindow(ctx context.Context, params *
 
 type RegisterTaskWithMaintenanceWindowInput struct {
 
-	// The maximum number of targets this task can be run for in parallel.
-	//
-	// This member is required.
-	MaxConcurrency *string
-
-	// The maximum number of errors allowed before this task stops being scheduled.
-	//
-	// This member is required.
-	MaxErrors *string
-
-	// The targets (either instances or maintenance window targets). Specify instances
-	// using the following format: Key=InstanceIds,Values=, Specify maintenance window
-	// targets using the following format: Key=WindowTargetIds;,Values=,
-	//
-	// This member is required.
-	Targets []types.Target
-
 	// The ARN of the task to run.
 	//
 	// This member is required.
@@ -76,6 +59,18 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// MaintenanceWindowTaskInvocationParameters.
 	LoggingInfo *types.LoggingInfo
 
+	// The maximum number of targets this task can be run for in parallel. For
+	// maintenance window tasks without a target specified, you cannot supply a value
+	// for this option. Instead, the system inserts a placeholder value of 1. This
+	// value does not affect the running of your task.
+	MaxConcurrency *string
+
+	// The maximum number of errors allowed before this task stops being scheduled. For
+	// maintenance window tasks without a target specified, you cannot supply a value
+	// for this option. Instead, the system inserts a placeholder value of 1. This
+	// value does not affect the running of your task.
+	MaxErrors *string
+
 	// An optional name for the task.
 	Name *string
 
@@ -100,6 +95,18 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// window tasks?
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
 	ServiceRoleArn *string
+
+	// The targets (either instances or maintenance window targets). One or more
+	// targets must be specified for maintenance window Run Command-type tasks.
+	// Depending on the task, targets are optional for other maintenance window task
+	// types (Automation, AWS Lambda, and AWS Step Functions). For more information
+	// about running tasks that do not specify targets, see see Registering maintenance
+	// window tasks without targets
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html)
+	// in the AWS Systems Manager User Guide. Specify instances using the following
+	// format: Key=InstanceIds,Values=, Specify maintenance window targets using the
+	// following format: Key=WindowTargetIds,Values=,
+	Targets []types.Target
 
 	// The parameters that the task should use during execution. Populate only the
 	// fields that match the task type. All other fields should be empty.

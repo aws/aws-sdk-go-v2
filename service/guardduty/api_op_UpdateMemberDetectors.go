@@ -34,12 +34,12 @@ type UpdateMemberDetectorsInput struct {
 	// This member is required.
 	AccountIds []string
 
-	// The detector ID of the master account.
+	// The detector ID of the administrator account.
 	//
 	// This member is required.
 	DetectorId *string
 
-	// An object describes which data sources will be updated.
+	// Describes which data sources will be updated.
 	DataSources *types.DataSourceConfigurations
 }
 

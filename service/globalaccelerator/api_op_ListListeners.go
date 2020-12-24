@@ -4,6 +4,7 @@ package globalaccelerator
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
@@ -11,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the listeners for an accelerator. To see an AWS CLI example of listing the
-// listeners for an accelerator, scroll down to Example.
+// List the listeners for an accelerator.
 func (c *Client) ListListeners(ctx context.Context, params *ListListenersInput, optFns ...func(*Options)) (*ListListenersOutput, error) {
 	if params == nil {
 		params = &ListListenersInput{}
@@ -116,6 +116,92 @@ func addOperationListListenersMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	return nil
+}
+
+// ListListenersAPIClient is a client that implements the ListListeners operation.
+type ListListenersAPIClient interface {
+	ListListeners(context.Context, *ListListenersInput, ...func(*Options)) (*ListListenersOutput, error)
+}
+
+var _ ListListenersAPIClient = (*Client)(nil)
+
+// ListListenersPaginatorOptions is the paginator options for ListListeners
+type ListListenersPaginatorOptions struct {
+	// The number of listener objects that you want to return with this call. The
+	// default value is 10.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListListenersPaginator is a paginator for ListListeners
+type ListListenersPaginator struct {
+	options   ListListenersPaginatorOptions
+	client    ListListenersAPIClient
+	params    *ListListenersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListListenersPaginator returns a new ListListenersPaginator
+func NewListListenersPaginator(client ListListenersAPIClient, params *ListListenersInput, optFns ...func(*ListListenersPaginatorOptions)) *ListListenersPaginator {
+	options := ListListenersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if params == nil {
+		params = &ListListenersInput{}
+	}
+
+	return &ListListenersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListListenersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListListeners page.
+func (p *ListListenersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListListenersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListListeners(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListListeners(region string) *awsmiddleware.RegisterServiceMetadata {

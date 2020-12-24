@@ -81,7 +81,7 @@ type GetMaintenanceWindowOutput struct {
 
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format. For example:
-	// "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the
+	// "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the
 	// Time Zone Database (https://www.iana.org/time-zones) on the IANA website.
 	ScheduleTimezone *string
 

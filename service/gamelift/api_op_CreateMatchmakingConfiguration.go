@@ -11,24 +11,30 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Defines a new matchmaking configuration for use with FlexMatch. A matchmaking
-// configuration sets out guidelines for matching players and getting the matches
-// into games. You can set up multiple matchmaking configurations to handle the
-// scenarios needed for your game. Each matchmaking ticket (StartMatchmaking or
-// StartMatchBackfill) specifies a configuration for the match and provides player
-// attributes to support the configuration being used. To create a matchmaking
-// configuration, at a minimum you must specify the following: configuration name;
-// a rule set that governs how to evaluate players and find acceptable matches; a
-// game session queue to use when placing a new game session for the match; and the
-// maximum time allowed for a matchmaking attempt. To track the progress of
-// matchmaking tickets, set up an Amazon Simple Notification Service (SNS) to
-// receive notifications, and provide the topic ARN in the matchmaking
-// configuration. An alternative method, continuously poling ticket status with
-// DescribeMatchmaking, should only be used for games in development with low
-// matchmaking usage. Learn more  Design a FlexMatch Matchmaker
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-configuration.html)
+// Defines a new matchmaking configuration for use with FlexMatch. Whether your are
+// using FlexMatch with GameLift hosting or as a standalone matchmaking service,
+// the matchmaking configuration sets out rules for matching players and forming
+// teams. If you're also using GameLift hosting, it defines how to start game
+// sessions for each match. Your matchmaking system can use multiple configurations
+// to handle different game scenarios. All matchmaking requests (StartMatchmaking
+// or StartMatchBackfill) identify the matchmaking configuration to use and provide
+// player attributes consistent with that configuration. To create a matchmaking
+// configuration, you must provide the following: configuration name and FlexMatch
+// mode (with or without GameLift hosting); a rule set that specifies how to
+// evaluate players and find acceptable matches; whether player acceptance is
+// required; and the maximum time allowed for a matchmaking attempt. When using
+// FlexMatch with GameLift hosting, you also need to identify the game session
+// queue to use when starting a game session for the match. In addition, you must
+// set up an Amazon Simple Notification Service (SNS) to receive matchmaking
+// notifications, and provide the topic ARN in the matchmaking configuration. An
+// alternative method, continuously polling ticket status with DescribeMatchmaking,
+// is only suitable for games in development with low matchmaking usage. Learn more
+// FlexMatch Developer Guide
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/gamelift-match.html)
+// Design a FlexMatch Matchmaker
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-configuration.html)
 // Set Up FlexMatch Event Notification
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html)
+// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html)
 // Related operations
 //
 // * CreateMatchmakingConfiguration
@@ -70,19 +76,11 @@ type CreateMatchmakingConfigurationInput struct {
 
 	// A flag that determines whether a match that was created with this configuration
 	// must be accepted by the matched players. To require acceptance, set to TRUE.
+	// With this option enabled, matchmaking tickets use the status REQUIRES_ACCEPTANCE
+	// to indicate when a completed potential match is waiting for player acceptance.
 	//
 	// This member is required.
 	AcceptanceRequired *bool
-
-	// Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
-	// that is assigned to a GameLift game session queue resource and uniquely
-	// identifies it. ARNs are unique across all Regions. These queues are used when
-	// placing game sessions for matches that are created with this matchmaking
-	// configuration. Queues can be located in any Region.
-	//
-	// This member is required.
-	GameSessionQueueArns []string
 
 	// A unique identifier for a matchmaking configuration. This name is used to
 	// identify the configuration associated with a matchmaking request or ticket.
@@ -104,15 +102,17 @@ type CreateMatchmakingConfigurationInput struct {
 	// This member is required.
 	RuleSetName *string
 
-	// The length of time (in seconds) to wait for players to accept a proposed match.
-	// If any player rejects the match or fails to accept before the timeout, the
-	// ticket continues to look for an acceptable match.
+	// The length of time (in seconds) to wait for players to accept a proposed match,
+	// if acceptance is required. If any player rejects the match or fails to accept
+	// before the timeout, the tickets are returned to the ticket pool and continue to
+	// be evaluated for an acceptable match.
 	AcceptanceTimeoutSeconds *int32
 
 	// The number of player slots in a match to keep open for future players. For
 	// example, assume that the configuration's rule set specifies a match for a single
 	// 12-person team. If the additional player count is set to 2, only 10 players are
-	// initially selected for the match.
+	// initially selected for the match. This parameter is not used if FlexMatchMode is
+	// set to STANDALONE.
 	AdditionalPlayerCount *int32
 
 	// The method used to backfill game sessions that are created with this matchmaking
@@ -121,7 +121,8 @@ type CreateMatchmakingConfigurationInput struct {
 	// create a StartMatchBackfill request whenever a game session has one or more open
 	// slots. Learn more about manual and automatic backfill in  Backfill Existing
 	// Games with FlexMatch
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html).
+	// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html).
+	// Automatic backfill is not available when FlexMatchMode is set to STANDALONE.
 	BackfillMode types.BackfillMode
 
 	// Information to be added to all events related to this matchmaking configuration.
@@ -130,12 +131,26 @@ type CreateMatchmakingConfigurationInput struct {
 	// A human-readable description of the matchmaking configuration.
 	Description *string
 
+	// Indicates whether this matchmaking configuration is being used with GameLift
+	// hosting or as a standalone matchmaking solution.
+	//
+	// * STANDALONE - FlexMatch forms
+	// matches and returns match information, including players and team assignments,
+	// in a  MatchmakingSucceeded
+	// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html#match-events-matchmakingsucceeded)
+	// event.
+	//
+	// * WITH_QUEUE - FlexMatch forms matches and uses the specified GameLift
+	// queue to start a game session for the match.
+	FlexMatchMode types.FlexMatchMode
+
 	// A set of custom properties for a game session, formatted as key-value pairs.
 	// These properties are passed to a game server process in the GameSession object
 	// with a request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// This information is added to the new GameSession object that is created for a
-	// successful match.
+	// successful match. This parameter is not used if FlexMatchMode is set to
+	// STANDALONE.
 	GameProperties []types.GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
@@ -143,8 +158,18 @@ type CreateMatchmakingConfigurationInput struct {
 	// request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// This information is added to the new GameSession object that is created for a
-	// successful match.
+	// successful match. This parameter is not used if FlexMatchMode is set to
+	// STANDALONE.
 	GameSessionData *string
+
+	// Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// that is assigned to a GameLift game session queue resource and uniquely
+	// identifies it. ARNs are unique across all Regions. Queues can be located in any
+	// Region. Queues are used to start new GameLift-hosted game sessions for matches
+	// that are created with this matchmaking configuration. If FlexMatchMode is set to
+	// STANDALONE, do not set this parameter.
+	GameSessionQueueArns []string
 
 	// An SNS topic ARN that is set up to receive matchmaking notifications.
 	NotificationTarget *string

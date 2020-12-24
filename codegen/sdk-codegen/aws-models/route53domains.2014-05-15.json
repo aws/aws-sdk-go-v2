@@ -439,19 +439,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "PERSON"
+                        "value": "PERSON",
+                        "name": "PERSON"
                     },
                     {
-                        "value": "COMPANY"
+                        "value": "COMPANY",
+                        "name": "COMPANY"
                     },
                     {
-                        "value": "ASSOCIATION"
+                        "value": "ASSOCIATION",
+                        "name": "ASSOCIATION"
                     },
                     {
-                        "value": "PUBLIC_BODY"
+                        "value": "PUBLIC_BODY",
+                        "name": "PUBLIC_BODY"
                     },
                     {
-                        "value": "RESELLER"
+                        "value": "RESELLER",
+                        "name": "RESELLER"
                     }
                 ]
             }
@@ -461,691 +466,920 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "AD"
+                        "value": "AD",
+                        "name": "AD"
                     },
                     {
-                        "value": "AE"
+                        "value": "AE",
+                        "name": "AE"
                     },
                     {
-                        "value": "AF"
+                        "value": "AF",
+                        "name": "AF"
                     },
                     {
-                        "value": "AG"
+                        "value": "AG",
+                        "name": "AG"
                     },
                     {
-                        "value": "AI"
+                        "value": "AI",
+                        "name": "AI"
                     },
                     {
-                        "value": "AL"
+                        "value": "AL",
+                        "name": "AL"
                     },
                     {
-                        "value": "AM"
+                        "value": "AM",
+                        "name": "AM"
                     },
                     {
-                        "value": "AN"
+                        "value": "AN",
+                        "name": "AN"
                     },
                     {
-                        "value": "AO"
+                        "value": "AO",
+                        "name": "AO"
                     },
                     {
-                        "value": "AQ"
+                        "value": "AQ",
+                        "name": "AQ"
                     },
                     {
-                        "value": "AR"
+                        "value": "AR",
+                        "name": "AR"
                     },
                     {
-                        "value": "AS"
+                        "value": "AS",
+                        "name": "AS"
                     },
                     {
-                        "value": "AT"
+                        "value": "AT",
+                        "name": "AT"
                     },
                     {
-                        "value": "AU"
+                        "value": "AU",
+                        "name": "AU"
                     },
                     {
-                        "value": "AW"
+                        "value": "AW",
+                        "name": "AW"
                     },
                     {
-                        "value": "AZ"
+                        "value": "AZ",
+                        "name": "AZ"
                     },
                     {
-                        "value": "BA"
+                        "value": "BA",
+                        "name": "BA"
                     },
                     {
-                        "value": "BB"
+                        "value": "BB",
+                        "name": "BB"
                     },
                     {
-                        "value": "BD"
+                        "value": "BD",
+                        "name": "BD"
                     },
                     {
-                        "value": "BE"
+                        "value": "BE",
+                        "name": "BE"
                     },
                     {
-                        "value": "BF"
+                        "value": "BF",
+                        "name": "BF"
                     },
                     {
-                        "value": "BG"
+                        "value": "BG",
+                        "name": "BG"
                     },
                     {
-                        "value": "BH"
+                        "value": "BH",
+                        "name": "BH"
                     },
                     {
-                        "value": "BI"
+                        "value": "BI",
+                        "name": "BI"
                     },
                     {
-                        "value": "BJ"
+                        "value": "BJ",
+                        "name": "BJ"
                     },
                     {
-                        "value": "BL"
+                        "value": "BL",
+                        "name": "BL"
                     },
                     {
-                        "value": "BM"
+                        "value": "BM",
+                        "name": "BM"
                     },
                     {
-                        "value": "BN"
+                        "value": "BN",
+                        "name": "BN"
                     },
                     {
-                        "value": "BO"
+                        "value": "BO",
+                        "name": "BO"
                     },
                     {
-                        "value": "BR"
+                        "value": "BR",
+                        "name": "BR"
                     },
                     {
-                        "value": "BS"
+                        "value": "BS",
+                        "name": "BS"
                     },
                     {
-                        "value": "BT"
+                        "value": "BT",
+                        "name": "BT"
                     },
                     {
-                        "value": "BW"
+                        "value": "BW",
+                        "name": "BW"
                     },
                     {
-                        "value": "BY"
+                        "value": "BY",
+                        "name": "BY"
                     },
                     {
-                        "value": "BZ"
+                        "value": "BZ",
+                        "name": "BZ"
                     },
                     {
-                        "value": "CA"
+                        "value": "CA",
+                        "name": "CA"
                     },
                     {
-                        "value": "CC"
+                        "value": "CC",
+                        "name": "CC"
                     },
                     {
-                        "value": "CD"
+                        "value": "CD",
+                        "name": "CD"
                     },
                     {
-                        "value": "CF"
+                        "value": "CF",
+                        "name": "CF"
                     },
                     {
-                        "value": "CG"
+                        "value": "CG",
+                        "name": "CG"
                     },
                     {
-                        "value": "CH"
+                        "value": "CH",
+                        "name": "CH"
                     },
                     {
-                        "value": "CI"
+                        "value": "CI",
+                        "name": "CI"
                     },
                     {
-                        "value": "CK"
+                        "value": "CK",
+                        "name": "CK"
                     },
                     {
-                        "value": "CL"
+                        "value": "CL",
+                        "name": "CL"
                     },
                     {
-                        "value": "CM"
+                        "value": "CM",
+                        "name": "CM"
                     },
                     {
-                        "value": "CN"
+                        "value": "CN",
+                        "name": "CN"
                     },
                     {
-                        "value": "CO"
+                        "value": "CO",
+                        "name": "CO"
                     },
                     {
-                        "value": "CR"
+                        "value": "CR",
+                        "name": "CR"
                     },
                     {
-                        "value": "CU"
+                        "value": "CU",
+                        "name": "CU"
                     },
                     {
-                        "value": "CV"
+                        "value": "CV",
+                        "name": "CV"
                     },
                     {
-                        "value": "CX"
+                        "value": "CX",
+                        "name": "CX"
                     },
                     {
-                        "value": "CY"
+                        "value": "CY",
+                        "name": "CY"
                     },
                     {
-                        "value": "CZ"
+                        "value": "CZ",
+                        "name": "CZ"
                     },
                     {
-                        "value": "DE"
+                        "value": "DE",
+                        "name": "DE"
                     },
                     {
-                        "value": "DJ"
+                        "value": "DJ",
+                        "name": "DJ"
                     },
                     {
-                        "value": "DK"
+                        "value": "DK",
+                        "name": "DK"
                     },
                     {
-                        "value": "DM"
+                        "value": "DM",
+                        "name": "DM"
                     },
                     {
-                        "value": "DO"
+                        "value": "DO",
+                        "name": "DO"
                     },
                     {
-                        "value": "DZ"
+                        "value": "DZ",
+                        "name": "DZ"
                     },
                     {
-                        "value": "EC"
+                        "value": "EC",
+                        "name": "EC"
                     },
                     {
-                        "value": "EE"
+                        "value": "EE",
+                        "name": "EE"
                     },
                     {
-                        "value": "EG"
+                        "value": "EG",
+                        "name": "EG"
                     },
                     {
-                        "value": "ER"
+                        "value": "ER",
+                        "name": "ER"
                     },
                     {
-                        "value": "ES"
+                        "value": "ES",
+                        "name": "ES"
                     },
                     {
-                        "value": "ET"
+                        "value": "ET",
+                        "name": "ET"
                     },
                     {
-                        "value": "FI"
+                        "value": "FI",
+                        "name": "FI"
                     },
                     {
-                        "value": "FJ"
+                        "value": "FJ",
+                        "name": "FJ"
                     },
                     {
-                        "value": "FK"
+                        "value": "FK",
+                        "name": "FK"
                     },
                     {
-                        "value": "FM"
+                        "value": "FM",
+                        "name": "FM"
                     },
                     {
-                        "value": "FO"
+                        "value": "FO",
+                        "name": "FO"
                     },
                     {
-                        "value": "FR"
+                        "value": "FR",
+                        "name": "FR"
                     },
                     {
-                        "value": "GA"
+                        "value": "GA",
+                        "name": "GA"
                     },
                     {
-                        "value": "GB"
+                        "value": "GB",
+                        "name": "GB"
                     },
                     {
-                        "value": "GD"
+                        "value": "GD",
+                        "name": "GD"
                     },
                     {
-                        "value": "GE"
+                        "value": "GE",
+                        "name": "GE"
                     },
                     {
-                        "value": "GH"
+                        "value": "GH",
+                        "name": "GH"
                     },
                     {
-                        "value": "GI"
+                        "value": "GI",
+                        "name": "GI"
                     },
                     {
-                        "value": "GL"
+                        "value": "GL",
+                        "name": "GL"
                     },
                     {
-                        "value": "GM"
+                        "value": "GM",
+                        "name": "GM"
                     },
                     {
-                        "value": "GN"
+                        "value": "GN",
+                        "name": "GN"
                     },
                     {
-                        "value": "GQ"
+                        "value": "GQ",
+                        "name": "GQ"
                     },
                     {
-                        "value": "GR"
+                        "value": "GR",
+                        "name": "GR"
                     },
                     {
-                        "value": "GT"
+                        "value": "GT",
+                        "name": "GT"
                     },
                     {
-                        "value": "GU"
+                        "value": "GU",
+                        "name": "GU"
                     },
                     {
-                        "value": "GW"
+                        "value": "GW",
+                        "name": "GW"
                     },
                     {
-                        "value": "GY"
+                        "value": "GY",
+                        "name": "GY"
                     },
                     {
-                        "value": "HK"
+                        "value": "HK",
+                        "name": "HK"
                     },
                     {
-                        "value": "HN"
+                        "value": "HN",
+                        "name": "HN"
                     },
                     {
-                        "value": "HR"
+                        "value": "HR",
+                        "name": "HR"
                     },
                     {
-                        "value": "HT"
+                        "value": "HT",
+                        "name": "HT"
                     },
                     {
-                        "value": "HU"
+                        "value": "HU",
+                        "name": "HU"
                     },
                     {
-                        "value": "ID"
+                        "value": "ID",
+                        "name": "ID"
                     },
                     {
-                        "value": "IE"
+                        "value": "IE",
+                        "name": "IE"
                     },
                     {
-                        "value": "IL"
+                        "value": "IL",
+                        "name": "IL"
                     },
                     {
-                        "value": "IM"
+                        "value": "IM",
+                        "name": "IM"
                     },
                     {
-                        "value": "IN"
+                        "value": "IN",
+                        "name": "IN"
                     },
                     {
-                        "value": "IQ"
+                        "value": "IQ",
+                        "name": "IQ"
                     },
                     {
-                        "value": "IR"
+                        "value": "IR",
+                        "name": "IR"
                     },
                     {
-                        "value": "IS"
+                        "value": "IS",
+                        "name": "IS"
                     },
                     {
-                        "value": "IT"
+                        "value": "IT",
+                        "name": "IT"
                     },
                     {
-                        "value": "JM"
+                        "value": "JM",
+                        "name": "JM"
                     },
                     {
-                        "value": "JO"
+                        "value": "JO",
+                        "name": "JO"
                     },
                     {
-                        "value": "JP"
+                        "value": "JP",
+                        "name": "JP"
                     },
                     {
-                        "value": "KE"
+                        "value": "KE",
+                        "name": "KE"
                     },
                     {
-                        "value": "KG"
+                        "value": "KG",
+                        "name": "KG"
                     },
                     {
-                        "value": "KH"
+                        "value": "KH",
+                        "name": "KH"
                     },
                     {
-                        "value": "KI"
+                        "value": "KI",
+                        "name": "KI"
                     },
                     {
-                        "value": "KM"
+                        "value": "KM",
+                        "name": "KM"
                     },
                     {
-                        "value": "KN"
+                        "value": "KN",
+                        "name": "KN"
                     },
                     {
-                        "value": "KP"
+                        "value": "KP",
+                        "name": "KP"
                     },
                     {
-                        "value": "KR"
+                        "value": "KR",
+                        "name": "KR"
                     },
                     {
-                        "value": "KW"
+                        "value": "KW",
+                        "name": "KW"
                     },
                     {
-                        "value": "KY"
+                        "value": "KY",
+                        "name": "KY"
                     },
                     {
-                        "value": "KZ"
+                        "value": "KZ",
+                        "name": "KZ"
                     },
                     {
-                        "value": "LA"
+                        "value": "LA",
+                        "name": "LA"
                     },
                     {
-                        "value": "LB"
+                        "value": "LB",
+                        "name": "LB"
                     },
                     {
-                        "value": "LC"
+                        "value": "LC",
+                        "name": "LC"
                     },
                     {
-                        "value": "LI"
+                        "value": "LI",
+                        "name": "LI"
                     },
                     {
-                        "value": "LK"
+                        "value": "LK",
+                        "name": "LK"
                     },
                     {
-                        "value": "LR"
+                        "value": "LR",
+                        "name": "LR"
                     },
                     {
-                        "value": "LS"
+                        "value": "LS",
+                        "name": "LS"
                     },
                     {
-                        "value": "LT"
+                        "value": "LT",
+                        "name": "LT"
                     },
                     {
-                        "value": "LU"
+                        "value": "LU",
+                        "name": "LU"
                     },
                     {
-                        "value": "LV"
+                        "value": "LV",
+                        "name": "LV"
                     },
                     {
-                        "value": "LY"
+                        "value": "LY",
+                        "name": "LY"
                     },
                     {
-                        "value": "MA"
+                        "value": "MA",
+                        "name": "MA"
                     },
                     {
-                        "value": "MC"
+                        "value": "MC",
+                        "name": "MC"
                     },
                     {
-                        "value": "MD"
+                        "value": "MD",
+                        "name": "MD"
                     },
                     {
-                        "value": "ME"
+                        "value": "ME",
+                        "name": "ME"
                     },
                     {
-                        "value": "MF"
+                        "value": "MF",
+                        "name": "MF"
                     },
                     {
-                        "value": "MG"
+                        "value": "MG",
+                        "name": "MG"
                     },
                     {
-                        "value": "MH"
+                        "value": "MH",
+                        "name": "MH"
                     },
                     {
-                        "value": "MK"
+                        "value": "MK",
+                        "name": "MK"
                     },
                     {
-                        "value": "ML"
+                        "value": "ML",
+                        "name": "ML"
                     },
                     {
-                        "value": "MM"
+                        "value": "MM",
+                        "name": "MM"
                     },
                     {
-                        "value": "MN"
+                        "value": "MN",
+                        "name": "MN"
                     },
                     {
-                        "value": "MO"
+                        "value": "MO",
+                        "name": "MO"
                     },
                     {
-                        "value": "MP"
+                        "value": "MP",
+                        "name": "MP"
                     },
                     {
-                        "value": "MR"
+                        "value": "MR",
+                        "name": "MR"
                     },
                     {
-                        "value": "MS"
+                        "value": "MS",
+                        "name": "MS"
                     },
                     {
-                        "value": "MT"
+                        "value": "MT",
+                        "name": "MT"
                     },
                     {
-                        "value": "MU"
+                        "value": "MU",
+                        "name": "MU"
                     },
                     {
-                        "value": "MV"
+                        "value": "MV",
+                        "name": "MV"
                     },
                     {
-                        "value": "MW"
+                        "value": "MW",
+                        "name": "MW"
                     },
                     {
-                        "value": "MX"
+                        "value": "MX",
+                        "name": "MX"
                     },
                     {
-                        "value": "MY"
+                        "value": "MY",
+                        "name": "MY"
                     },
                     {
-                        "value": "MZ"
+                        "value": "MZ",
+                        "name": "MZ"
                     },
                     {
-                        "value": "NA"
+                        "value": "NA",
+                        "name": "NA"
                     },
                     {
-                        "value": "NC"
+                        "value": "NC",
+                        "name": "NC"
                     },
                     {
-                        "value": "NE"
+                        "value": "NE",
+                        "name": "NE"
                     },
                     {
-                        "value": "NG"
+                        "value": "NG",
+                        "name": "NG"
                     },
                     {
-                        "value": "NI"
+                        "value": "NI",
+                        "name": "NI"
                     },
                     {
-                        "value": "NL"
+                        "value": "NL",
+                        "name": "NL"
                     },
                     {
-                        "value": "NO"
+                        "value": "NO",
+                        "name": "NO"
                     },
                     {
-                        "value": "NP"
+                        "value": "NP",
+                        "name": "NP"
                     },
                     {
-                        "value": "NR"
+                        "value": "NR",
+                        "name": "NR"
                     },
                     {
-                        "value": "NU"
+                        "value": "NU",
+                        "name": "NU"
                     },
                     {
-                        "value": "NZ"
+                        "value": "NZ",
+                        "name": "NZ"
                     },
                     {
-                        "value": "OM"
+                        "value": "OM",
+                        "name": "OM"
                     },
                     {
-                        "value": "PA"
+                        "value": "PA",
+                        "name": "PA"
                     },
                     {
-                        "value": "PE"
+                        "value": "PE",
+                        "name": "PE"
                     },
                     {
-                        "value": "PF"
+                        "value": "PF",
+                        "name": "PF"
                     },
                     {
-                        "value": "PG"
+                        "value": "PG",
+                        "name": "PG"
                     },
                     {
-                        "value": "PH"
+                        "value": "PH",
+                        "name": "PH"
                     },
                     {
-                        "value": "PK"
+                        "value": "PK",
+                        "name": "PK"
                     },
                     {
-                        "value": "PL"
+                        "value": "PL",
+                        "name": "PL"
                     },
                     {
-                        "value": "PM"
+                        "value": "PM",
+                        "name": "PM"
                     },
                     {
-                        "value": "PN"
+                        "value": "PN",
+                        "name": "PN"
                     },
                     {
-                        "value": "PR"
+                        "value": "PR",
+                        "name": "PR"
                     },
                     {
-                        "value": "PT"
+                        "value": "PT",
+                        "name": "PT"
                     },
                     {
-                        "value": "PW"
+                        "value": "PW",
+                        "name": "PW"
                     },
                     {
-                        "value": "PY"
+                        "value": "PY",
+                        "name": "PY"
                     },
                     {
-                        "value": "QA"
+                        "value": "QA",
+                        "name": "QA"
                     },
                     {
-                        "value": "RO"
+                        "value": "RO",
+                        "name": "RO"
                     },
                     {
-                        "value": "RS"
+                        "value": "RS",
+                        "name": "RS"
                     },
                     {
-                        "value": "RU"
+                        "value": "RU",
+                        "name": "RU"
                     },
                     {
-                        "value": "RW"
+                        "value": "RW",
+                        "name": "RW"
                     },
                     {
-                        "value": "SA"
+                        "value": "SA",
+                        "name": "SA"
                     },
                     {
-                        "value": "SB"
+                        "value": "SB",
+                        "name": "SB"
                     },
                     {
-                        "value": "SC"
+                        "value": "SC",
+                        "name": "SC"
                     },
                     {
-                        "value": "SD"
+                        "value": "SD",
+                        "name": "SD"
                     },
                     {
-                        "value": "SE"
+                        "value": "SE",
+                        "name": "SE"
                     },
                     {
-                        "value": "SG"
+                        "value": "SG",
+                        "name": "SG"
                     },
                     {
-                        "value": "SH"
+                        "value": "SH",
+                        "name": "SH"
                     },
                     {
-                        "value": "SI"
+                        "value": "SI",
+                        "name": "SI"
                     },
                     {
-                        "value": "SK"
+                        "value": "SK",
+                        "name": "SK"
                     },
                     {
-                        "value": "SL"
+                        "value": "SL",
+                        "name": "SL"
                     },
                     {
-                        "value": "SM"
+                        "value": "SM",
+                        "name": "SM"
                     },
                     {
-                        "value": "SN"
+                        "value": "SN",
+                        "name": "SN"
                     },
                     {
-                        "value": "SO"
+                        "value": "SO",
+                        "name": "SO"
                     },
                     {
-                        "value": "SR"
+                        "value": "SR",
+                        "name": "SR"
                     },
                     {
-                        "value": "ST"
+                        "value": "ST",
+                        "name": "ST"
                     },
                     {
-                        "value": "SV"
+                        "value": "SV",
+                        "name": "SV"
                     },
                     {
-                        "value": "SY"
+                        "value": "SY",
+                        "name": "SY"
                     },
                     {
-                        "value": "SZ"
+                        "value": "SZ",
+                        "name": "SZ"
                     },
                     {
-                        "value": "TC"
+                        "value": "TC",
+                        "name": "TC"
                     },
                     {
-                        "value": "TD"
+                        "value": "TD",
+                        "name": "TD"
                     },
                     {
-                        "value": "TG"
+                        "value": "TG",
+                        "name": "TG"
                     },
                     {
-                        "value": "TH"
+                        "value": "TH",
+                        "name": "TH"
                     },
                     {
-                        "value": "TJ"
+                        "value": "TJ",
+                        "name": "TJ"
                     },
                     {
-                        "value": "TK"
+                        "value": "TK",
+                        "name": "TK"
                     },
                     {
-                        "value": "TL"
+                        "value": "TL",
+                        "name": "TL"
                     },
                     {
-                        "value": "TM"
+                        "value": "TM",
+                        "name": "TM"
                     },
                     {
-                        "value": "TN"
+                        "value": "TN",
+                        "name": "TN"
                     },
                     {
-                        "value": "TO"
+                        "value": "TO",
+                        "name": "TO"
                     },
                     {
-                        "value": "TR"
+                        "value": "TR",
+                        "name": "TR"
                     },
                     {
-                        "value": "TT"
+                        "value": "TT",
+                        "name": "TT"
                     },
                     {
-                        "value": "TV"
+                        "value": "TV",
+                        "name": "TV"
                     },
                     {
-                        "value": "TW"
+                        "value": "TW",
+                        "name": "TW"
                     },
                     {
-                        "value": "TZ"
+                        "value": "TZ",
+                        "name": "TZ"
                     },
                     {
-                        "value": "UA"
+                        "value": "UA",
+                        "name": "UA"
                     },
                     {
-                        "value": "UG"
+                        "value": "UG",
+                        "name": "UG"
                     },
                     {
-                        "value": "US"
+                        "value": "US",
+                        "name": "US"
                     },
                     {
-                        "value": "UY"
+                        "value": "UY",
+                        "name": "UY"
                     },
                     {
-                        "value": "UZ"
+                        "value": "UZ",
+                        "name": "UZ"
                     },
                     {
-                        "value": "VA"
+                        "value": "VA",
+                        "name": "VA"
                     },
                     {
-                        "value": "VC"
+                        "value": "VC",
+                        "name": "VC"
                     },
                     {
-                        "value": "VE"
+                        "value": "VE",
+                        "name": "VE"
                     },
                     {
-                        "value": "VG"
+                        "value": "VG",
+                        "name": "VG"
                     },
                     {
-                        "value": "VI"
+                        "value": "VI",
+                        "name": "VI"
                     },
                     {
-                        "value": "VN"
+                        "value": "VN",
+                        "name": "VN"
                     },
                     {
-                        "value": "VU"
+                        "value": "VU",
+                        "name": "VU"
                     },
                     {
-                        "value": "WF"
+                        "value": "WF",
+                        "name": "WF"
                     },
                     {
-                        "value": "WS"
+                        "value": "WS",
+                        "name": "WS"
                     },
                     {
-                        "value": "YE"
+                        "value": "YE",
+                        "name": "YE"
                     },
                     {
-                        "value": "YT"
+                        "value": "YT",
+                        "name": "YT"
                     },
                     {
-                        "value": "ZA"
+                        "value": "ZA",
+                        "name": "ZA"
                     },
                     {
-                        "value": "ZM"
+                        "value": "ZM",
+                        "name": "ZM"
                     },
                     {
-                        "value": "ZW"
+                        "value": "ZW",
+                        "name": "ZW"
                     }
                 ]
             }
@@ -1315,28 +1549,36 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "AVAILABLE"
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
                     },
                     {
-                        "value": "AVAILABLE_RESERVED"
+                        "value": "AVAILABLE_RESERVED",
+                        "name": "AVAILABLE_RESERVED"
                     },
                     {
-                        "value": "AVAILABLE_PREORDER"
+                        "value": "AVAILABLE_PREORDER",
+                        "name": "AVAILABLE_PREORDER"
                     },
                     {
-                        "value": "UNAVAILABLE"
+                        "value": "UNAVAILABLE",
+                        "name": "UNAVAILABLE"
                     },
                     {
-                        "value": "UNAVAILABLE_PREMIUM"
+                        "value": "UNAVAILABLE_PREMIUM",
+                        "name": "UNAVAILABLE_PREMIUM"
                     },
                     {
-                        "value": "UNAVAILABLE_RESTRICTED"
+                        "value": "UNAVAILABLE_RESTRICTED",
+                        "name": "UNAVAILABLE_RESTRICTED"
                     },
                     {
-                        "value": "RESERVED"
+                        "value": "RESERVED",
+                        "name": "RESERVED"
                     },
                     {
-                        "value": "DONT_KNOW"
+                        "value": "DONT_KNOW",
+                        "name": "DONT_KNOW"
                     }
                 ]
             }
@@ -2408,19 +2650,24 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SUBMITTED"
+                        "value": "SUBMITTED",
+                        "name": "SUBMITTED"
                     },
                     {
-                        "value": "IN_PROGRESS"
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
                     },
                     {
-                        "value": "ERROR"
+                        "value": "ERROR",
+                        "name": "ERROR"
                     },
                     {
-                        "value": "SUCCESSFUL"
+                        "value": "SUCCESSFUL",
+                        "name": "SUCCESSFUL"
                     },
                     {
-                        "value": "FAILED"
+                        "value": "FAILED",
+                        "name": "FAILED"
                     }
                 ]
             }

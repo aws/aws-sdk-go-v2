@@ -50,7 +50,7 @@ type GetDetectorOutput struct {
 	// The timestamp of when the detector was created.
 	CreatedAt *string
 
-	// An object that describes which data sources are enabled for the detector.
+	// Describes which data sources are enabled for the detector.
 	DataSources *types.DataSourceConfigurationsResult
 
 	// The publishing frequency of the finding.

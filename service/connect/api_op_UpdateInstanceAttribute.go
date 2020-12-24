@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// This API is in preview release for Amazon Connect and is subject to change.
 // Updates the value for the specified attribute type.
 func (c *Client) UpdateInstanceAttribute(ctx context.Context, params *UpdateInstanceAttributeInput, optFns ...func(*Options)) (*UpdateInstanceAttributeOutput, error) {
 	if params == nil {

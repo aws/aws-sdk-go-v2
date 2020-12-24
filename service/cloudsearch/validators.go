@@ -591,11 +591,11 @@ func validateAnalysisScheme(v *types.AnalysisScheme) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AnalysisScheme"}
-	if len(v.AnalysisSchemeLanguage) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("AnalysisSchemeLanguage"))
-	}
 	if v.AnalysisSchemeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AnalysisSchemeName"))
+	}
+	if len(v.AnalysisSchemeLanguage) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisSchemeLanguage"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -624,11 +624,11 @@ func validateExpression(v *types.Expression) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Expression"}
-	if v.ExpressionValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExpressionValue"))
-	}
 	if v.ExpressionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExpressionName"))
+	}
+	if v.ExpressionValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExpressionValue"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -642,11 +642,11 @@ func validateIndexField(v *types.IndexField) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IndexField"}
-	if len(v.IndexFieldType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("IndexFieldType"))
-	}
 	if v.IndexFieldName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexFieldName"))
+	}
+	if len(v.IndexFieldType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexFieldType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -660,15 +660,15 @@ func validateSuggester(v *types.Suggester) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Suggester"}
+	if v.SuggesterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SuggesterName"))
+	}
 	if v.DocumentSuggesterOptions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DocumentSuggesterOptions"))
 	} else if v.DocumentSuggesterOptions != nil {
 		if err := validateDocumentSuggesterOptions(v.DocumentSuggesterOptions); err != nil {
 			invalidParams.AddNested("DocumentSuggesterOptions", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.SuggesterName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SuggesterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -833,11 +833,11 @@ func validateOpDeleteExpressionInput(v *DeleteExpressionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteExpressionInput"}
-	if v.ExpressionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExpressionName"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.ExpressionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExpressionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -869,11 +869,11 @@ func validateOpDeleteSuggesterInput(v *DeleteSuggesterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteSuggesterInput"}
-	if v.SuggesterName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SuggesterName"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.SuggesterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SuggesterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1058,11 +1058,11 @@ func validateOpUpdateScalingParametersInput(v *UpdateScalingParametersInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateScalingParametersInput"}
-	if v.ScalingParameters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ScalingParameters"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.ScalingParameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScalingParameters"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1076,11 +1076,11 @@ func validateOpUpdateServiceAccessPoliciesInput(v *UpdateServiceAccessPoliciesIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateServiceAccessPoliciesInput"}
-	if v.AccessPolicies == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccessPolicies"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.AccessPolicies == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessPolicies"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

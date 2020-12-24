@@ -70,6 +70,22 @@ func (AssetModelState) Values() []AssetModelState {
 	}
 }
 
+type AssetRelationshipType string
+
+// Enum values for AssetRelationshipType
+const (
+	AssetRelationshipTypeHierarchy AssetRelationshipType = "HIERARCHY"
+)
+
+// Values returns all known values for AssetRelationshipType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssetRelationshipType) Values() []AssetRelationshipType {
+	return []AssetRelationshipType{
+		"HIERARCHY",
+	}
+}
+
 type AssetState string
 
 // Enum values for AssetState
@@ -162,6 +178,44 @@ func (CapabilitySyncStatus) Values() []CapabilitySyncStatus {
 		"IN_SYNC",
 		"OUT_OF_SYNC",
 		"SYNC_FAILED",
+	}
+}
+
+type ConfigurationState string
+
+// Enum values for ConfigurationState
+const (
+	ConfigurationStateActive           ConfigurationState = "ACTIVE"
+	ConfigurationStateUpdateInProgress ConfigurationState = "UPDATE_IN_PROGRESS"
+	ConfigurationStateUpdateFailed     ConfigurationState = "UPDATE_FAILED"
+)
+
+// Values returns all known values for ConfigurationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationState) Values() []ConfigurationState {
+	return []ConfigurationState{
+		"ACTIVE",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_FAILED",
+	}
+}
+
+type EncryptionType string
+
+// Enum values for EncryptionType
+const (
+	EncryptionTypeSitewiseDefaultEncryption EncryptionType = "SITEWISE_DEFAULT_ENCRYPTION"
+	EncryptionTypeKmsBasedEncryption        EncryptionType = "KMS_BASED_ENCRYPTION"
+)
+
+// Values returns all known values for EncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionType) Values() []EncryptionType {
+	return []EncryptionType{
+		"SITEWISE_DEFAULT_ENCRYPTION",
+		"KMS_BASED_ENCRYPTION",
 	}
 }
 
@@ -327,6 +381,7 @@ const (
 	PropertyDataTypeInteger PropertyDataType = "INTEGER"
 	PropertyDataTypeDouble  PropertyDataType = "DOUBLE"
 	PropertyDataTypeBoolean PropertyDataType = "BOOLEAN"
+	PropertyDataTypeStruct  PropertyDataType = "STRUCT"
 )
 
 // Values returns all known values for PropertyDataType. Note that this can be
@@ -338,6 +393,7 @@ func (PropertyDataType) Values() []PropertyDataType {
 		"INTEGER",
 		"DOUBLE",
 		"BOOLEAN",
+		"STRUCT",
 	}
 }
 
@@ -430,5 +486,21 @@ func (TraversalDirection) Values() []TraversalDirection {
 	return []TraversalDirection{
 		"PARENT",
 		"CHILD",
+	}
+}
+
+type TraversalType string
+
+// Enum values for TraversalType
+const (
+	TraversalTypePathToRoot TraversalType = "PATH_TO_ROOT"
+)
+
+// Values returns all known values for TraversalType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TraversalType) Values() []TraversalType {
+	return []TraversalType{
+		"PATH_TO_ROOT",
 	}
 }

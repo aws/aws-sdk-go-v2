@@ -206,27 +206,25 @@ type CreateDBClusterInput struct {
 	// the new global database cluster.
 	GlobalClusterIdentifier *string
 
-	// The AWS KMS key identifier for an encrypted DB cluster. The KMS key identifier
-	// is the Amazon Resource Name (ARN) for the KMS encryption key. If you are
-	// creating a DB cluster with the same AWS account that owns the KMS encryption key
-	// used to encrypt the new DB cluster, then you can use the KMS key alias instead
-	// of the ARN for the KMS encryption key. If an encryption key isn't specified in
-	// KmsKeyId:
+	// The AWS KMS key identifier for an encrypted DB cluster. The AWS KMS key
+	// identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS
+	// customer master key (CMK). To use a CMK in a different AWS account, specify the
+	// key ARN or alias ARN. When a CMK isn't specified in KmsKeyId:
 	//
-	// * If ReplicationSourceIdentifier identifies an encrypted source, then
-	// Amazon RDS will use the encryption key used to encrypt the source. Otherwise,
-	// Amazon RDS will use your default encryption key.
+	// * If
+	// ReplicationSourceIdentifier identifies an encrypted source, then Amazon RDS will
+	// use the CMK used to encrypt the source. Otherwise, Amazon RDS will use your
+	// default CMK.
 	//
-	// * If the StorageEncrypted
-	// parameter is enabled and ReplicationSourceIdentifier isn't specified, then
-	// Amazon RDS will use your default encryption key.
+	// * If the StorageEncrypted parameter is enabled and
+	// ReplicationSourceIdentifier isn't specified, then Amazon RDS will use your
+	// default CMK.
 	//
-	// AWS KMS creates the default
-	// encryption key for your AWS account. Your AWS account has a different default
-	// encryption key for each AWS Region. If you create a read replica of an encrypted
-	// DB cluster in another AWS Region, you must set KmsKeyId to a KMS key ID that is
-	// valid in the destination AWS Region. This key is used to encrypt the read
-	// replica in that AWS Region.
+	// There is a default CMK for your AWS account. Your AWS account has
+	// a different default CMK for each AWS Region. If you create a read replica of an
+	// encrypted DB cluster in another AWS Region, you must set KmsKeyId to a AWS KMS
+	// key identifier that is valid in the destination AWS Region. This CMK is used to
+	// encrypt the read replica in that AWS Region.
 	KmsKeyId *string
 
 	// The password for the master database user. This password can contain any
@@ -265,8 +263,8 @@ type CreateDBClusterInput struct {
 	//
 	// * KmsKeyId - The AWS
 	// KMS key identifier for the key to use to encrypt the copy of the DB cluster in
-	// the destination AWS Region. This should refer to the same KMS key for both the
-	// CreateDBCluster action that is called in the destination AWS Region, and the
+	// the destination AWS Region. This should refer to the same AWS KMS CMK for both
+	// the CreateDBCluster action that is called in the destination AWS Region, and the
 	// action contained in the pre-signed URL.
 	//
 	// * DestinationRegion - The name of the

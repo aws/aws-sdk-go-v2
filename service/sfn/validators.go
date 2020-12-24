@@ -329,6 +329,26 @@ func (m *validateOpStartExecution) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartSyncExecution struct {
+}
+
+func (*validateOpStartSyncExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartSyncExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartSyncExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartSyncExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopExecution struct {
 }
 
@@ -471,6 +491,10 @@ func addOpSendTaskSuccessValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartExecution{}, middleware.After)
+}
+
+func addOpStartSyncExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartSyncExecution{}, middleware.After)
 }
 
 func addOpStopExecutionValidationMiddleware(stack *middleware.Stack) error {
@@ -710,11 +734,11 @@ func validateOpSendTaskSuccessInput(v *SendTaskSuccessInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendTaskSuccessInput"}
-	if v.Output == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Output"))
-	}
 	if v.TaskToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskToken"))
+	}
+	if v.Output == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Output"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -728,6 +752,21 @@ func validateOpStartExecutionInput(v *StartExecutionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartExecutionInput"}
+	if v.StateMachineArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StateMachineArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartSyncExecutionInput(v *StartSyncExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSyncExecutionInput"}
 	if v.StateMachineArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StateMachineArn"))
 	}
@@ -758,11 +797,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

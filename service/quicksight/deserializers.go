@@ -10221,6 +10221,9 @@ func awsRestjson1_deserializeOpErrorGetDashboardEmbedUrl(response *smithyhttp.Re
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
+	case strings.EqualFold("UnsupportedPricingPlanException", errorCode):
+		return awsRestjson1_deserializeErrorUnsupportedPricingPlanException(response, errorBody)
+
 	case strings.EqualFold("UnsupportedUserEditionException", errorCode):
 		return awsRestjson1_deserializeErrorUnsupportedUserEditionException(response, errorBody)
 
@@ -20170,6 +20173,42 @@ func awsRestjson1_deserializeErrorThrottlingException(response *smithyhttp.Respo
 	return output
 }
 
+func awsRestjson1_deserializeErrorUnsupportedPricingPlanException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.UnsupportedPricingPlanException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentUnsupportedPricingPlanException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorUnsupportedUserEditionException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.UnsupportedUserEditionException{}
 	var buff [1024]byte
@@ -23322,7 +23361,7 @@ func awsRestjson1_deserializeDocumentDataSourceList(v *[]types.DataSource, value
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentDataSourceParameters(v **types.DataSourceParameters, value interface{}) error {
+func awsRestjson1_deserializeDocumentDataSourceParameters(v *types.DataSourceParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -23335,121 +23374,217 @@ func awsRestjson1_deserializeDocumentDataSourceParameters(v **types.DataSourcePa
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var sv *types.DataSourceParameters
-	if *v == nil {
-		sv = &types.DataSourceParameters{}
-	} else {
-		sv = *v
-	}
-
+	var uv types.DataSourceParameters
+loop:
 	for key, value := range shape {
 		switch key {
 		case "AmazonElasticsearchParameters":
-			if err := awsRestjson1_deserializeDocumentAmazonElasticsearchParameters(&sv.AmazonElasticsearchParameters, value); err != nil {
+			var mv types.AmazonElasticsearchParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAmazonElasticsearchParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberAmazonElasticsearchParameters{Value: mv}
+			break loop
 
 		case "AthenaParameters":
-			if err := awsRestjson1_deserializeDocumentAthenaParameters(&sv.AthenaParameters, value); err != nil {
+			var mv types.AthenaParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAthenaParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberAthenaParameters{Value: mv}
+			break loop
 
 		case "AuroraParameters":
-			if err := awsRestjson1_deserializeDocumentAuroraParameters(&sv.AuroraParameters, value); err != nil {
+			var mv types.AuroraParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAuroraParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberAuroraParameters{Value: mv}
+			break loop
 
 		case "AuroraPostgreSqlParameters":
-			if err := awsRestjson1_deserializeDocumentAuroraPostgreSqlParameters(&sv.AuroraPostgreSqlParameters, value); err != nil {
+			var mv types.AuroraPostgreSqlParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAuroraPostgreSqlParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberAuroraPostgreSqlParameters{Value: mv}
+			break loop
 
 		case "AwsIotAnalyticsParameters":
-			if err := awsRestjson1_deserializeDocumentAwsIotAnalyticsParameters(&sv.AwsIotAnalyticsParameters, value); err != nil {
+			var mv types.AwsIotAnalyticsParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAwsIotAnalyticsParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberAwsIotAnalyticsParameters{Value: mv}
+			break loop
 
 		case "JiraParameters":
-			if err := awsRestjson1_deserializeDocumentJiraParameters(&sv.JiraParameters, value); err != nil {
+			var mv types.JiraParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentJiraParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberJiraParameters{Value: mv}
+			break loop
 
 		case "MariaDbParameters":
-			if err := awsRestjson1_deserializeDocumentMariaDbParameters(&sv.MariaDbParameters, value); err != nil {
+			var mv types.MariaDbParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentMariaDbParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberMariaDbParameters{Value: mv}
+			break loop
 
 		case "MySqlParameters":
-			if err := awsRestjson1_deserializeDocumentMySqlParameters(&sv.MySqlParameters, value); err != nil {
+			var mv types.MySqlParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentMySqlParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberMySqlParameters{Value: mv}
+			break loop
 
 		case "OracleParameters":
-			if err := awsRestjson1_deserializeDocumentOracleParameters(&sv.OracleParameters, value); err != nil {
+			var mv types.OracleParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentOracleParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberOracleParameters{Value: mv}
+			break loop
 
 		case "PostgreSqlParameters":
-			if err := awsRestjson1_deserializeDocumentPostgreSqlParameters(&sv.PostgreSqlParameters, value); err != nil {
+			var mv types.PostgreSqlParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentPostgreSqlParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberPostgreSqlParameters{Value: mv}
+			break loop
 
 		case "PrestoParameters":
-			if err := awsRestjson1_deserializeDocumentPrestoParameters(&sv.PrestoParameters, value); err != nil {
+			var mv types.PrestoParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentPrestoParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberPrestoParameters{Value: mv}
+			break loop
 
 		case "RdsParameters":
-			if err := awsRestjson1_deserializeDocumentRdsParameters(&sv.RdsParameters, value); err != nil {
+			var mv types.RdsParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentRdsParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberRdsParameters{Value: mv}
+			break loop
 
 		case "RedshiftParameters":
-			if err := awsRestjson1_deserializeDocumentRedshiftParameters(&sv.RedshiftParameters, value); err != nil {
+			var mv types.RedshiftParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentRedshiftParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberRedshiftParameters{Value: mv}
+			break loop
 
 		case "S3Parameters":
-			if err := awsRestjson1_deserializeDocumentS3Parameters(&sv.S3Parameters, value); err != nil {
+			var mv types.S3Parameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3Parameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberS3Parameters{Value: mv}
+			break loop
 
 		case "ServiceNowParameters":
-			if err := awsRestjson1_deserializeDocumentServiceNowParameters(&sv.ServiceNowParameters, value); err != nil {
+			var mv types.ServiceNowParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentServiceNowParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberServiceNowParameters{Value: mv}
+			break loop
 
 		case "SnowflakeParameters":
-			if err := awsRestjson1_deserializeDocumentSnowflakeParameters(&sv.SnowflakeParameters, value); err != nil {
+			var mv types.SnowflakeParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSnowflakeParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberSnowflakeParameters{Value: mv}
+			break loop
 
 		case "SparkParameters":
-			if err := awsRestjson1_deserializeDocumentSparkParameters(&sv.SparkParameters, value); err != nil {
+			var mv types.SparkParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSparkParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberSparkParameters{Value: mv}
+			break loop
 
 		case "SqlServerParameters":
-			if err := awsRestjson1_deserializeDocumentSqlServerParameters(&sv.SqlServerParameters, value); err != nil {
+			var mv types.SqlServerParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSqlServerParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberSqlServerParameters{Value: mv}
+			break loop
 
 		case "TeradataParameters":
-			if err := awsRestjson1_deserializeDocumentTeradataParameters(&sv.TeradataParameters, value); err != nil {
+			var mv types.TeradataParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentTeradataParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberTeradataParameters{Value: mv}
+			break loop
 
 		case "TwitterParameters":
-			if err := awsRestjson1_deserializeDocumentTwitterParameters(&sv.TwitterParameters, value); err != nil {
+			var mv types.TwitterParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentTwitterParameters(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberTwitterParameters{Value: mv}
+			break loop
 
 		default:
-			_, _ = key, value
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
 
 		}
 	}
-	*v = sv
+	*v = uv
 	return nil
 }
 
@@ -23475,11 +23610,9 @@ func awsRestjson1_deserializeDocumentDataSourceParametersList(v *[]types.DataSou
 
 	for _, value := range shape {
 		var col types.DataSourceParameters
-		destAddr := &col
-		if err := awsRestjson1_deserializeDocumentDataSourceParameters(&destAddr, value); err != nil {
+		if err := awsRestjson1_deserializeDocumentDataSourceParameters(&col, value); err != nil {
 			return err
 		}
-		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -24642,6 +24775,11 @@ func awsRestjson1_deserializeDocumentJoinInstruction(v **types.JoinInstruction, 
 
 	for key, value := range shape {
 		switch key {
+		case "LeftJoinKeyProperties":
+			if err := awsRestjson1_deserializeDocumentJoinKeyProperties(&sv.LeftJoinKeyProperties, value); err != nil {
+				return err
+			}
+
 		case "LeftOperand":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24660,6 +24798,11 @@ func awsRestjson1_deserializeDocumentJoinInstruction(v **types.JoinInstruction, 
 				sv.OnClause = ptr.String(jtv)
 			}
 
+		case "RightJoinKeyProperties":
+			if err := awsRestjson1_deserializeDocumentJoinKeyProperties(&sv.RightJoinKeyProperties, value); err != nil {
+				return err
+			}
+
 		case "RightOperand":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24676,6 +24819,46 @@ func awsRestjson1_deserializeDocumentJoinInstruction(v **types.JoinInstruction, 
 					return fmt.Errorf("expected JoinType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.JoinType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJoinKeyProperties(v **types.JoinKeyProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JoinKeyProperties
+	if *v == nil {
+		sv = &types.JoinKeyProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "UniqueKey":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.UniqueKey = jtv
 			}
 
 		default:
@@ -25406,7 +25589,7 @@ func awsRestjson1_deserializeDocumentOutputColumnList(v *[]types.OutputColumn, v
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentPhysicalTable(v **types.PhysicalTable, value interface{}) error {
+func awsRestjson1_deserializeDocumentPhysicalTable(v *types.PhysicalTable, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -25419,36 +25602,47 @@ func awsRestjson1_deserializeDocumentPhysicalTable(v **types.PhysicalTable, valu
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var sv *types.PhysicalTable
-	if *v == nil {
-		sv = &types.PhysicalTable{}
-	} else {
-		sv = *v
-	}
-
+	var uv types.PhysicalTable
+loop:
 	for key, value := range shape {
 		switch key {
 		case "CustomSql":
-			if err := awsRestjson1_deserializeDocumentCustomSql(&sv.CustomSql, value); err != nil {
+			var mv types.CustomSql
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCustomSql(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.PhysicalTableMemberCustomSql{Value: mv}
+			break loop
 
 		case "RelationalTable":
-			if err := awsRestjson1_deserializeDocumentRelationalTable(&sv.RelationalTable, value); err != nil {
+			var mv types.RelationalTable
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentRelationalTable(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.PhysicalTableMemberRelationalTable{Value: mv}
+			break loop
 
 		case "S3Source":
-			if err := awsRestjson1_deserializeDocumentS3Source(&sv.S3Source, value); err != nil {
+			var mv types.S3Source
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3Source(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.PhysicalTableMemberS3Source{Value: mv}
+			break loop
 
 		default:
-			_, _ = key, value
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
 
 		}
 	}
-	*v = sv
+	*v = uv
 	return nil
 }
 
@@ -25475,11 +25669,10 @@ func awsRestjson1_deserializeDocumentPhysicalTableMap(v *map[string]types.Physic
 	for key, value := range shape {
 		var parsedVal types.PhysicalTable
 		mapVar := parsedVal
-		destAddr := &mapVar
-		if err := awsRestjson1_deserializeDocumentPhysicalTable(&destAddr, value); err != nil {
+		if err := awsRestjson1_deserializeDocumentPhysicalTable(&mapVar, value); err != nil {
 			return err
 		}
-		parsedVal = *destAddr
+		parsedVal = mapVar
 		mv[key] = parsedVal
 
 	}
@@ -26008,6 +26201,15 @@ func awsRestjson1_deserializeDocumentRelationalTable(v **types.RelationalTable, 
 
 	for key, value := range shape {
 		switch key {
+		case "Catalog":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RelationalTableCatalog to be of type string, got %T instead", value)
+				}
+				sv.Catalog = ptr.String(jtv)
+			}
+
 		case "DataSourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -28594,7 +28796,7 @@ func awsRestjson1_deserializeDocumentTileStyle(v **types.TileStyle, value interf
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentTransformOperation(v **types.TransformOperation, value interface{}) error {
+func awsRestjson1_deserializeDocumentTransformOperation(v *types.TransformOperation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28607,51 +28809,77 @@ func awsRestjson1_deserializeDocumentTransformOperation(v **types.TransformOpera
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var sv *types.TransformOperation
-	if *v == nil {
-		sv = &types.TransformOperation{}
-	} else {
-		sv = *v
-	}
-
+	var uv types.TransformOperation
+loop:
 	for key, value := range shape {
 		switch key {
 		case "CastColumnTypeOperation":
-			if err := awsRestjson1_deserializeDocumentCastColumnTypeOperation(&sv.CastColumnTypeOperation, value); err != nil {
+			var mv types.CastColumnTypeOperation
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCastColumnTypeOperation(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.TransformOperationMemberCastColumnTypeOperation{Value: mv}
+			break loop
 
 		case "CreateColumnsOperation":
-			if err := awsRestjson1_deserializeDocumentCreateColumnsOperation(&sv.CreateColumnsOperation, value); err != nil {
+			var mv types.CreateColumnsOperation
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentCreateColumnsOperation(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.TransformOperationMemberCreateColumnsOperation{Value: mv}
+			break loop
 
 		case "FilterOperation":
-			if err := awsRestjson1_deserializeDocumentFilterOperation(&sv.FilterOperation, value); err != nil {
+			var mv types.FilterOperation
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentFilterOperation(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.TransformOperationMemberFilterOperation{Value: mv}
+			break loop
 
 		case "ProjectOperation":
-			if err := awsRestjson1_deserializeDocumentProjectOperation(&sv.ProjectOperation, value); err != nil {
+			var mv types.ProjectOperation
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentProjectOperation(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.TransformOperationMemberProjectOperation{Value: mv}
+			break loop
 
 		case "RenameColumnOperation":
-			if err := awsRestjson1_deserializeDocumentRenameColumnOperation(&sv.RenameColumnOperation, value); err != nil {
+			var mv types.RenameColumnOperation
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentRenameColumnOperation(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.TransformOperationMemberRenameColumnOperation{Value: mv}
+			break loop
 
 		case "TagColumnOperation":
-			if err := awsRestjson1_deserializeDocumentTagColumnOperation(&sv.TagColumnOperation, value); err != nil {
+			var mv types.TagColumnOperation
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentTagColumnOperation(&destAddr, value); err != nil {
 				return err
 			}
+			mv = *destAddr
+			uv = &types.TransformOperationMemberTagColumnOperation{Value: mv}
+			break loop
 
 		default:
-			_, _ = key, value
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
 
 		}
 	}
-	*v = sv
+	*v = uv
 	return nil
 }
 
@@ -28677,11 +28905,9 @@ func awsRestjson1_deserializeDocumentTransformOperationList(v *[]types.Transform
 
 	for _, value := range shape {
 		var col types.TransformOperation
-		destAddr := &col
-		if err := awsRestjson1_deserializeDocumentTransformOperation(&destAddr, value); err != nil {
+		if err := awsRestjson1_deserializeDocumentTransformOperation(&col, value); err != nil {
 			return err
 		}
-		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -28906,6 +29132,55 @@ func awsRestjson1_deserializeDocumentUIColorPalette(v **types.UIColorPalette, va
 					return fmt.Errorf("expected HexColor to be of type string, got %T instead", value)
 				}
 				sv.WarningForeground = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUnsupportedPricingPlanException(v **types.UnsupportedPricingPlanException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UnsupportedPricingPlanException
+	if *v == nil {
+		sv = &types.UnsupportedPricingPlanException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "RequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RequestId = ptr.String(jtv)
 			}
 
 		default:
