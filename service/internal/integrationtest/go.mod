@@ -1,7 +1,7 @@
 module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
-	github.com/aws/aws-sdk-go-v2 v0.31.0
+	github.com/aws/aws-sdk-go-v2 v0.31.1-0.20210105194811-58b543144e2a
 	github.com/aws/aws-sdk-go-v2/config v0.4.0
 	github.com/aws/aws-sdk-go-v2/service/acm v0.31.0
 	github.com/aws/aws-sdk-go-v2/service/apigateway v0.31.0
@@ -84,13 +84,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/wafregional v0.31.0
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v0.31.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v0.31.0
-	github.com/aws/smithy-go v0.5.0
+	github.com/aws/smithy-go v0.5.1-0.20210104190327-c7045c94c1ec
 	github.com/google/go-cmp v0.5.4
-	github.com/aws/aws-sdk-go-v2/credentials v0.2.0
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v0.1.0
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v0.4.0
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v0.2.0
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v0.4.0
 )
 
 go 1.15

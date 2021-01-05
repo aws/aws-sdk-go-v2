@@ -3,11 +3,10 @@ module github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v0.31.0
+	github.com/aws/aws-sdk-go-v2 v0.31.1-0.20210105194811-58b543144e2a
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v0.31.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v0.31.0
 	github.com/google/go-cmp v0.5.4
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v0.4.0
 )
 
 replace github.com/aws/aws-sdk-go-v2/service/dynamodb => ../../../service/dynamodb/
