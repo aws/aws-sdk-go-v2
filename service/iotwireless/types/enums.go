@@ -6,7 +6,7 @@ type ExpressionType string
 
 // Enum values for ExpressionType
 const (
-	ExpressionTypeRulename ExpressionType = "RuleName"
+	ExpressionTypeRuleName ExpressionType = "RuleName"
 )
 
 // Values returns all known values for ExpressionType. Note that this can be
@@ -38,9 +38,9 @@ type WirelessDeviceIdType string
 
 // Enum values for WirelessDeviceIdType
 const (
-	WirelessDeviceIdTypeWirelessdeviceid WirelessDeviceIdType = "WirelessDeviceId"
-	WirelessDeviceIdTypeDeveui           WirelessDeviceIdType = "DevEui"
-	WirelessDeviceIdTypeThingname        WirelessDeviceIdType = "ThingName"
+	WirelessDeviceIdTypeWirelessDeviceId WirelessDeviceIdType = "WirelessDeviceId"
+	WirelessDeviceIdTypeDevEui           WirelessDeviceIdType = "DevEui"
+	WirelessDeviceIdTypeThingName        WirelessDeviceIdType = "ThingName"
 )
 
 // Values returns all known values for WirelessDeviceIdType. Note that this can be
@@ -59,7 +59,7 @@ type WirelessDeviceType string
 // Enum values for WirelessDeviceType
 const (
 	WirelessDeviceTypeSidewalk WirelessDeviceType = "Sidewalk"
-	WirelessDeviceTypeLorawan  WirelessDeviceType = "LoRaWAN"
+	WirelessDeviceTypeLoRaWAN  WirelessDeviceType = "LoRaWAN"
 )
 
 // Values returns all known values for WirelessDeviceType. Note that this can be
@@ -76,9 +76,9 @@ type WirelessGatewayIdType string
 
 // Enum values for WirelessGatewayIdType
 const (
-	WirelessGatewayIdTypeGatewayeui        WirelessGatewayIdType = "GatewayEui"
-	WirelessGatewayIdTypeWirelessgatewayid WirelessGatewayIdType = "WirelessGatewayId"
-	WirelessGatewayIdTypeThingname         WirelessGatewayIdType = "ThingName"
+	WirelessGatewayIdTypeGatewayEui        WirelessGatewayIdType = "GatewayEui"
+	WirelessGatewayIdTypeWirelessGatewayId WirelessGatewayIdType = "WirelessGatewayId"
+	WirelessGatewayIdTypeThingName         WirelessGatewayIdType = "ThingName"
 )
 
 // Values returns all known values for WirelessGatewayIdType. Note that this can be

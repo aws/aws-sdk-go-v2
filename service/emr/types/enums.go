@@ -211,7 +211,7 @@ type ComputeLimitsUnitType string
 
 // Enum values for ComputeLimitsUnitType
 const (
-	ComputeLimitsUnitTypeInstancefleetunits ComputeLimitsUnitType = "InstanceFleetUnits"
+	ComputeLimitsUnitTypeInstanceFleetUnits ComputeLimitsUnitType = "InstanceFleetUnits"
 	ComputeLimitsUnitTypeInstances          ComputeLimitsUnitType = "Instances"
 	ComputeLimitsUnitTypeVcpu               ComputeLimitsUnitType = "VCPU"
 )

@@ -6,7 +6,7 @@ type AppLaunchConfigurationStatus string
 
 // Enum values for AppLaunchConfigurationStatus
 const (
-	AppLaunchConfigurationStatusNotconfigured AppLaunchConfigurationStatus = "NOT_CONFIGURED"
+	AppLaunchConfigurationStatusNotConfigured AppLaunchConfigurationStatus = "NOT_CONFIGURED"
 	AppLaunchConfigurationStatusConfigured    AppLaunchConfigurationStatus = "CONFIGURED"
 )
 
@@ -24,20 +24,20 @@ type AppLaunchStatus string
 
 // Enum values for AppLaunchStatus
 const (
-	AppLaunchStatusReadyforconfiguration   AppLaunchStatus = "READY_FOR_CONFIGURATION"
-	AppLaunchStatusConfigurationinprogress AppLaunchStatus = "CONFIGURATION_IN_PROGRESS"
-	AppLaunchStatusConfigurationinvalid    AppLaunchStatus = "CONFIGURATION_INVALID"
-	AppLaunchStatusReadyforlaunch          AppLaunchStatus = "READY_FOR_LAUNCH"
-	AppLaunchStatusValidationinprogress    AppLaunchStatus = "VALIDATION_IN_PROGRESS"
-	AppLaunchStatusLaunchpending           AppLaunchStatus = "LAUNCH_PENDING"
-	AppLaunchStatusLaunchinprogress        AppLaunchStatus = "LAUNCH_IN_PROGRESS"
+	AppLaunchStatusReadyForConfiguration   AppLaunchStatus = "READY_FOR_CONFIGURATION"
+	AppLaunchStatusConfigurationInProgress AppLaunchStatus = "CONFIGURATION_IN_PROGRESS"
+	AppLaunchStatusConfigurationInvalid    AppLaunchStatus = "CONFIGURATION_INVALID"
+	AppLaunchStatusReadyForLaunch          AppLaunchStatus = "READY_FOR_LAUNCH"
+	AppLaunchStatusValidationInProgress    AppLaunchStatus = "VALIDATION_IN_PROGRESS"
+	AppLaunchStatusLaunchPending           AppLaunchStatus = "LAUNCH_PENDING"
+	AppLaunchStatusLaunchInProgress        AppLaunchStatus = "LAUNCH_IN_PROGRESS"
 	AppLaunchStatusLaunched                AppLaunchStatus = "LAUNCHED"
-	AppLaunchStatusPartiallylaunched       AppLaunchStatus = "PARTIALLY_LAUNCHED"
-	AppLaunchStatusDeltalaunchinprogress   AppLaunchStatus = "DELTA_LAUNCH_IN_PROGRESS"
-	AppLaunchStatusDeltalaunchfailed       AppLaunchStatus = "DELTA_LAUNCH_FAILED"
-	AppLaunchStatusLaunchfailed            AppLaunchStatus = "LAUNCH_FAILED"
-	AppLaunchStatusTerminateinprogress     AppLaunchStatus = "TERMINATE_IN_PROGRESS"
-	AppLaunchStatusTerminatefailed         AppLaunchStatus = "TERMINATE_FAILED"
+	AppLaunchStatusPartiallyLaunched       AppLaunchStatus = "PARTIALLY_LAUNCHED"
+	AppLaunchStatusDeltaLaunchInProgress   AppLaunchStatus = "DELTA_LAUNCH_IN_PROGRESS"
+	AppLaunchStatusDeltaLaunchFailed       AppLaunchStatus = "DELTA_LAUNCH_FAILED"
+	AppLaunchStatusLaunchFailed            AppLaunchStatus = "LAUNCH_FAILED"
+	AppLaunchStatusTerminateInProgress     AppLaunchStatus = "TERMINATE_IN_PROGRESS"
+	AppLaunchStatusTerminateFailed         AppLaunchStatus = "TERMINATE_FAILED"
 	AppLaunchStatusTerminated              AppLaunchStatus = "TERMINATED"
 )
 
@@ -68,7 +68,7 @@ type AppReplicationConfigurationStatus string
 
 // Enum values for AppReplicationConfigurationStatus
 const (
-	AppReplicationConfigurationStatusNotconfigured AppReplicationConfigurationStatus = "NOT_CONFIGURED"
+	AppReplicationConfigurationStatusNotConfigured AppReplicationConfigurationStatus = "NOT_CONFIGURED"
 	AppReplicationConfigurationStatusConfigured    AppReplicationConfigurationStatus = "CONFIGURED"
 )
 
@@ -87,22 +87,22 @@ type AppReplicationStatus string
 
 // Enum values for AppReplicationStatus
 const (
-	AppReplicationStatusReadyforconfiguration      AppReplicationStatus = "READY_FOR_CONFIGURATION"
-	AppReplicationStatusConfigurationinprogress    AppReplicationStatus = "CONFIGURATION_IN_PROGRESS"
-	AppReplicationStatusConfigurationinvalid       AppReplicationStatus = "CONFIGURATION_INVALID"
-	AppReplicationStatusReadyforreplication        AppReplicationStatus = "READY_FOR_REPLICATION"
-	AppReplicationStatusValidationinprogress       AppReplicationStatus = "VALIDATION_IN_PROGRESS"
-	AppReplicationStatusReplicationpending         AppReplicationStatus = "REPLICATION_PENDING"
-	AppReplicationStatusReplicationinprogress      AppReplicationStatus = "REPLICATION_IN_PROGRESS"
+	AppReplicationStatusReadyForConfiguration      AppReplicationStatus = "READY_FOR_CONFIGURATION"
+	AppReplicationStatusConfigurationInProgress    AppReplicationStatus = "CONFIGURATION_IN_PROGRESS"
+	AppReplicationStatusConfigurationInvalid       AppReplicationStatus = "CONFIGURATION_INVALID"
+	AppReplicationStatusReadyForReplication        AppReplicationStatus = "READY_FOR_REPLICATION"
+	AppReplicationStatusValidationInProgress       AppReplicationStatus = "VALIDATION_IN_PROGRESS"
+	AppReplicationStatusReplicationPending         AppReplicationStatus = "REPLICATION_PENDING"
+	AppReplicationStatusReplicationInProgress      AppReplicationStatus = "REPLICATION_IN_PROGRESS"
 	AppReplicationStatusReplicated                 AppReplicationStatus = "REPLICATED"
-	AppReplicationStatusPartiallyreplicated        AppReplicationStatus = "PARTIALLY_REPLICATED"
-	AppReplicationStatusDeltareplicationinprogress AppReplicationStatus = "DELTA_REPLICATION_IN_PROGRESS"
-	AppReplicationStatusDeltareplicated            AppReplicationStatus = "DELTA_REPLICATED"
-	AppReplicationStatusDeltareplicationfailed     AppReplicationStatus = "DELTA_REPLICATION_FAILED"
-	AppReplicationStatusReplicationfailed          AppReplicationStatus = "REPLICATION_FAILED"
-	AppReplicationStatusReplicationstopping        AppReplicationStatus = "REPLICATION_STOPPING"
-	AppReplicationStatusReplicationstopfailed      AppReplicationStatus = "REPLICATION_STOP_FAILED"
-	AppReplicationStatusReplicationstopped         AppReplicationStatus = "REPLICATION_STOPPED"
+	AppReplicationStatusPartiallyReplicated        AppReplicationStatus = "PARTIALLY_REPLICATED"
+	AppReplicationStatusDeltaReplicationInProgress AppReplicationStatus = "DELTA_REPLICATION_IN_PROGRESS"
+	AppReplicationStatusDeltaReplicated            AppReplicationStatus = "DELTA_REPLICATED"
+	AppReplicationStatusDeltaReplicationFailed     AppReplicationStatus = "DELTA_REPLICATION_FAILED"
+	AppReplicationStatusReplicationFailed          AppReplicationStatus = "REPLICATION_FAILED"
+	AppReplicationStatusReplicationStopping        AppReplicationStatus = "REPLICATION_STOPPING"
+	AppReplicationStatusReplicationStopFailed      AppReplicationStatus = "REPLICATION_STOP_FAILED"
+	AppReplicationStatusReplicationStopped         AppReplicationStatus = "REPLICATION_STOPPED"
 )
 
 // Values returns all known values for AppReplicationStatus. Note that this can be
@@ -175,11 +175,11 @@ type ConnectorCapability string
 
 // Enum values for ConnectorCapability
 const (
-	ConnectorCapabilityVsphere          ConnectorCapability = "VSPHERE"
+	ConnectorCapabilityVSphere          ConnectorCapability = "VSPHERE"
 	ConnectorCapabilityScvmm            ConnectorCapability = "SCVMM"
-	ConnectorCapabilityHypervmanager    ConnectorCapability = "HYPERV-MANAGER"
-	ConnectorCapabilitySnapshotbatching ConnectorCapability = "SNAPSHOT_BATCHING"
-	ConnectorCapabilitySmsoptimized     ConnectorCapability = "SMS_OPTIMIZED"
+	ConnectorCapabilityHyperVManager    ConnectorCapability = "HYPERV-MANAGER"
+	ConnectorCapabilitySnapshotBatching ConnectorCapability = "SNAPSHOT_BATCHING"
+	ConnectorCapabilitySmsOptimized     ConnectorCapability = "SMS_OPTIMIZED"
 )
 
 // Values returns all known values for ConnectorCapability. Note that this can be
@@ -259,7 +259,7 @@ const (
 	ReplicationJobStateDeleting        ReplicationJobState = "DELETING"
 	ReplicationJobStateDeleted         ReplicationJobState = "DELETED"
 	ReplicationJobStateCompleted       ReplicationJobState = "COMPLETED"
-	ReplicationJobStatePausedonfailure ReplicationJobState = "PAUSED_ON_FAILURE"
+	ReplicationJobStatePausedOnFailure ReplicationJobState = "PAUSED_ON_FAILURE"
 	ReplicationJobStateFailing         ReplicationJobState = "FAILING"
 )
 
@@ -311,7 +311,7 @@ type ReplicationRunType string
 
 // Enum values for ReplicationRunType
 const (
-	ReplicationRunTypeOndemand  ReplicationRunType = "ON_DEMAND"
+	ReplicationRunTypeOnDemand  ReplicationRunType = "ON_DEMAND"
 	ReplicationRunTypeAutomatic ReplicationRunType = "AUTOMATIC"
 )
 
@@ -347,7 +347,7 @@ type ServerCatalogStatus string
 
 // Enum values for ServerCatalogStatus
 const (
-	ServerCatalogStatusNotimported ServerCatalogStatus = "NOT_IMPORTED"
+	ServerCatalogStatusNotImported ServerCatalogStatus = "NOT_IMPORTED"
 	ServerCatalogStatusImporting   ServerCatalogStatus = "IMPORTING"
 	ServerCatalogStatusAvailable   ServerCatalogStatus = "AVAILABLE"
 	ServerCatalogStatusDeleted     ServerCatalogStatus = "DELETED"
@@ -371,7 +371,7 @@ type ServerType string
 
 // Enum values for ServerType
 const (
-	ServerTypeVirtualmachine ServerType = "VIRTUAL_MACHINE"
+	ServerTypeVirtualMachine ServerType = "VIRTUAL_MACHINE"
 )
 
 // Values returns all known values for ServerType. Note that this can be expanded
@@ -403,9 +403,9 @@ type ValidationStatus string
 
 // Enum values for ValidationStatus
 const (
-	ValidationStatusReadyforvalidation ValidationStatus = "READY_FOR_VALIDATION"
+	ValidationStatusReadyForValidation ValidationStatus = "READY_FOR_VALIDATION"
 	ValidationStatusPending            ValidationStatus = "PENDING"
-	ValidationStatusInprogress         ValidationStatus = "IN_PROGRESS"
+	ValidationStatusInProgress         ValidationStatus = "IN_PROGRESS"
 	ValidationStatusSucceeded          ValidationStatus = "SUCCEEDED"
 	ValidationStatusFailed             ValidationStatus = "FAILED"
 )
@@ -427,9 +427,9 @@ type VmManagerType string
 
 // Enum values for VmManagerType
 const (
-	VmManagerTypeVsphere       VmManagerType = "VSPHERE"
+	VmManagerTypeVSphere       VmManagerType = "VSPHERE"
 	VmManagerTypeScvmm         VmManagerType = "SCVMM"
-	VmManagerTypeHypervmanager VmManagerType = "HYPERV-MANAGER"
+	VmManagerTypeHyperVManager VmManagerType = "HYPERV-MANAGER"
 )
 
 // Values returns all known values for VmManagerType. Note that this can be

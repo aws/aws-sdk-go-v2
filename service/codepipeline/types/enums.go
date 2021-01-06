@@ -53,7 +53,7 @@ type ActionExecutionStatus string
 
 // Enum values for ActionExecutionStatus
 const (
-	ActionExecutionStatusInprogress ActionExecutionStatus = "InProgress"
+	ActionExecutionStatusInProgress ActionExecutionStatus = "InProgress"
 	ActionExecutionStatusAbandoned  ActionExecutionStatus = "Abandoned"
 	ActionExecutionStatusSucceeded  ActionExecutionStatus = "Succeeded"
 	ActionExecutionStatusFailed     ActionExecutionStatus = "Failed"
@@ -76,7 +76,7 @@ type ActionOwner string
 // Enum values for ActionOwner
 const (
 	ActionOwnerAws        ActionOwner = "AWS"
-	ActionOwnerThirdparty ActionOwner = "ThirdParty"
+	ActionOwnerThirdParty ActionOwner = "ThirdParty"
 	ActionOwnerCustom     ActionOwner = "Custom"
 )
 
@@ -177,12 +177,12 @@ type FailureType string
 
 // Enum values for FailureType
 const (
-	FailureTypeJobfailed           FailureType = "JobFailed"
-	FailureTypeConfigurationerror  FailureType = "ConfigurationError"
-	FailureTypePermissionerror     FailureType = "PermissionError"
-	FailureTypeRevisionoutofsync   FailureType = "RevisionOutOfSync"
-	FailureTypeRevisionunavailable FailureType = "RevisionUnavailable"
-	FailureTypeSystemunavailable   FailureType = "SystemUnavailable"
+	FailureTypeJobFailed           FailureType = "JobFailed"
+	FailureTypeConfigurationError  FailureType = "ConfigurationError"
+	FailureTypePermissionError     FailureType = "PermissionError"
+	FailureTypeRevisionOutOfSync   FailureType = "RevisionOutOfSync"
+	FailureTypeRevisionUnavailable FailureType = "RevisionUnavailable"
+	FailureTypeSystemUnavailable   FailureType = "SystemUnavailable"
 )
 
 // Values returns all known values for FailureType. Note that this can be expanded
@@ -206,8 +206,8 @@ const (
 	JobStatusCreated    JobStatus = "Created"
 	JobStatusQueued     JobStatus = "Queued"
 	JobStatusDispatched JobStatus = "Dispatched"
-	JobStatusInprogress JobStatus = "InProgress"
-	JobStatusTimedout   JobStatus = "TimedOut"
+	JobStatusInProgress JobStatus = "InProgress"
+	JobStatusTimedOut   JobStatus = "TimedOut"
 	JobStatusSucceeded  JobStatus = "Succeeded"
 	JobStatusFailed     JobStatus = "Failed"
 )
@@ -231,7 +231,7 @@ type PipelineExecutionStatus string
 
 // Enum values for PipelineExecutionStatus
 const (
-	PipelineExecutionStatusInprogress PipelineExecutionStatus = "InProgress"
+	PipelineExecutionStatusInProgress PipelineExecutionStatus = "InProgress"
 	PipelineExecutionStatusStopped    PipelineExecutionStatus = "Stopped"
 	PipelineExecutionStatusStopping   PipelineExecutionStatus = "Stopping"
 	PipelineExecutionStatusSucceeded  PipelineExecutionStatus = "Succeeded"
@@ -257,7 +257,7 @@ type StageExecutionStatus string
 
 // Enum values for StageExecutionStatus
 const (
-	StageExecutionStatusInprogress StageExecutionStatus = "InProgress"
+	StageExecutionStatusInProgress StageExecutionStatus = "InProgress"
 	StageExecutionStatusFailed     StageExecutionStatus = "Failed"
 	StageExecutionStatusStopped    StageExecutionStatus = "Stopped"
 	StageExecutionStatusStopping   StageExecutionStatus = "Stopping"
@@ -315,12 +315,12 @@ type TriggerType string
 
 // Enum values for TriggerType
 const (
-	TriggerTypeCreatepipeline         TriggerType = "CreatePipeline"
-	TriggerTypeStartpipelineexecution TriggerType = "StartPipelineExecution"
-	TriggerTypePollforsourcechanges   TriggerType = "PollForSourceChanges"
+	TriggerTypeCreatePipeline         TriggerType = "CreatePipeline"
+	TriggerTypeStartPipelineExecution TriggerType = "StartPipelineExecution"
+	TriggerTypePollForSourceChanges   TriggerType = "PollForSourceChanges"
 	TriggerTypeWebhook                TriggerType = "Webhook"
-	TriggerTypeCloudwatchevent        TriggerType = "CloudWatchEvent"
-	TriggerTypePutactionrevision      TriggerType = "PutActionRevision"
+	TriggerTypeCloudWatchEvent        TriggerType = "CloudWatchEvent"
+	TriggerTypePutActionRevision      TriggerType = "PutActionRevision"
 )
 
 // Values returns all known values for TriggerType. Note that this can be expanded

@@ -376,9 +376,9 @@ type EventType string
 
 // Enum values for EventType
 const (
-	EventTypeSignin         EventType = "SignIn"
-	EventTypeSignup         EventType = "SignUp"
-	EventTypeForgotpassword EventType = "ForgotPassword"
+	EventTypeSignIn         EventType = "SignIn"
+	EventTypeSignUp         EventType = "SignUp"
+	EventTypeForgotPassword EventType = "ForgotPassword"
 )
 
 // Values returns all known values for EventType. Note that this can be expanded in
@@ -447,8 +447,8 @@ const (
 	IdentityProviderTypeTypeSaml            IdentityProviderTypeType = "SAML"
 	IdentityProviderTypeTypeFacebook        IdentityProviderTypeType = "Facebook"
 	IdentityProviderTypeTypeGoogle          IdentityProviderTypeType = "Google"
-	IdentityProviderTypeTypeLoginwithamazon IdentityProviderTypeType = "LoginWithAmazon"
-	IdentityProviderTypeTypeSigninwithapple IdentityProviderTypeType = "SignInWithApple"
+	IdentityProviderTypeTypeLoginWithAmazon IdentityProviderTypeType = "LoginWithAmazon"
+	IdentityProviderTypeTypeSignInWithApple IdentityProviderTypeType = "SignInWithApple"
 	IdentityProviderTypeTypeOidc            IdentityProviderTypeType = "OIDC"
 )
 
@@ -547,8 +547,8 @@ type RiskDecisionType string
 
 // Enum values for RiskDecisionType
 const (
-	RiskDecisionTypeNorisk          RiskDecisionType = "NoRisk"
-	RiskDecisionTypeAccounttakeover RiskDecisionType = "AccountTakeover"
+	RiskDecisionTypeNoRisk          RiskDecisionType = "NoRisk"
+	RiskDecisionTypeAccountTakeover RiskDecisionType = "AccountTakeover"
 	RiskDecisionTypeBlock           RiskDecisionType = "Block"
 )
 
@@ -629,7 +629,7 @@ type UserImportJobStatusType string
 const (
 	UserImportJobStatusTypeCreated    UserImportJobStatusType = "Created"
 	UserImportJobStatusTypePending    UserImportJobStatusType = "Pending"
-	UserImportJobStatusTypeInprogress UserImportJobStatusType = "InProgress"
+	UserImportJobStatusTypeInProgress UserImportJobStatusType = "InProgress"
 	UserImportJobStatusTypeStopping   UserImportJobStatusType = "Stopping"
 	UserImportJobStatusTypeExpired    UserImportJobStatusType = "Expired"
 	UserImportJobStatusTypeStopped    UserImportJobStatusType = "Stopped"

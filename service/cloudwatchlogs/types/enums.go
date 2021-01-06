@@ -7,7 +7,7 @@ type Distribution string
 // Enum values for Distribution
 const (
 	DistributionRandom      Distribution = "Random"
-	DistributionBylogstream Distribution = "ByLogStream"
+	DistributionByLogStream Distribution = "ByLogStream"
 )
 
 // Values returns all known values for Distribution. Note that this can be expanded
@@ -50,8 +50,8 @@ type OrderBy string
 
 // Enum values for OrderBy
 const (
-	OrderByLogstreamname OrderBy = "LogStreamName"
-	OrderByLasteventtime OrderBy = "LastEventTime"
+	OrderByLogStreamName OrderBy = "LogStreamName"
+	OrderByLastEventTime OrderBy = "LastEventTime"
 )
 
 // Values returns all known values for OrderBy. Note that this can be expanded in

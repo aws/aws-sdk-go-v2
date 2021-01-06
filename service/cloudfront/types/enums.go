@@ -8,7 +8,7 @@ type CachePolicyCookieBehavior string
 const (
 	CachePolicyCookieBehaviorNone      CachePolicyCookieBehavior = "none"
 	CachePolicyCookieBehaviorWhitelist CachePolicyCookieBehavior = "whitelist"
-	CachePolicyCookieBehaviorAllexcept CachePolicyCookieBehavior = "allExcept"
+	CachePolicyCookieBehaviorAllExcept CachePolicyCookieBehavior = "allExcept"
 	CachePolicyCookieBehaviorAll       CachePolicyCookieBehavior = "all"
 )
 
@@ -48,7 +48,7 @@ type CachePolicyQueryStringBehavior string
 const (
 	CachePolicyQueryStringBehaviorNone      CachePolicyQueryStringBehavior = "none"
 	CachePolicyQueryStringBehaviorWhitelist CachePolicyQueryStringBehavior = "whitelist"
-	CachePolicyQueryStringBehaviorAllexcept CachePolicyQueryStringBehavior = "allExcept"
+	CachePolicyQueryStringBehaviorAllExcept CachePolicyQueryStringBehavior = "allExcept"
 	CachePolicyQueryStringBehaviorAll       CachePolicyQueryStringBehavior = "all"
 )
 
@@ -129,7 +129,7 @@ type Format string
 
 // Enum values for Format
 const (
-	FormatUrlencoded Format = "URLEncoded"
+	FormatURLEncoded Format = "URLEncoded"
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
@@ -251,12 +251,12 @@ type MinimumProtocolVersion string
 
 // Enum values for MinimumProtocolVersion
 const (
-	MinimumProtocolVersionSslv3      MinimumProtocolVersion = "SSLv3"
-	MinimumProtocolVersionTlsv1      MinimumProtocolVersion = "TLSv1"
-	MinimumProtocolVersionTlsv12016  MinimumProtocolVersion = "TLSv1_2016"
-	MinimumProtocolVersionTlsv112016 MinimumProtocolVersion = "TLSv1.1_2016"
-	MinimumProtocolVersionTlsv122018 MinimumProtocolVersion = "TLSv1.2_2018"
-	MinimumProtocolVersionTlsv122019 MinimumProtocolVersion = "TLSv1.2_2019"
+	MinimumProtocolVersionSSLv3      MinimumProtocolVersion = "SSLv3"
+	MinimumProtocolVersionTLSv1      MinimumProtocolVersion = "TLSv1"
+	MinimumProtocolVersionTLSv12016  MinimumProtocolVersion = "TLSv1_2016"
+	MinimumProtocolVersionTLSv112016 MinimumProtocolVersion = "TLSv1.1_2016"
+	MinimumProtocolVersionTLSv122018 MinimumProtocolVersion = "TLSv1.2_2018"
+	MinimumProtocolVersionTLSv122019 MinimumProtocolVersion = "TLSv1.2_2019"
 )
 
 // Values returns all known values for MinimumProtocolVersion. Note that this can
@@ -320,8 +320,8 @@ type OriginRequestPolicyHeaderBehavior string
 const (
 	OriginRequestPolicyHeaderBehaviorNone                            OriginRequestPolicyHeaderBehavior = "none"
 	OriginRequestPolicyHeaderBehaviorWhitelist                       OriginRequestPolicyHeaderBehavior = "whitelist"
-	OriginRequestPolicyHeaderBehaviorAllviewer                       OriginRequestPolicyHeaderBehavior = "allViewer"
-	OriginRequestPolicyHeaderBehaviorAllviewerandwhitelistcloudfront OriginRequestPolicyHeaderBehavior = "allViewerAndWhitelistCloudFront"
+	OriginRequestPolicyHeaderBehaviorAllViewer                       OriginRequestPolicyHeaderBehavior = "allViewer"
+	OriginRequestPolicyHeaderBehaviorAllViewerAndWhitelistCloudFront OriginRequestPolicyHeaderBehavior = "allViewerAndWhitelistCloudFront"
 )
 
 // Values returns all known values for OriginRequestPolicyHeaderBehavior. Note that
@@ -380,9 +380,9 @@ type PriceClass string
 
 // Enum values for PriceClass
 const (
-	PriceClassPriceclass100 PriceClass = "PriceClass_100"
-	PriceClassPriceclass200 PriceClass = "PriceClass_200"
-	PriceClassPriceclassAll PriceClass = "PriceClass_All"
+	PriceClassPriceClass100 PriceClass = "PriceClass_100"
+	PriceClassPriceClass200 PriceClass = "PriceClass_200"
+	PriceClassPriceClassAll PriceClass = "PriceClass_All"
 )
 
 // Values returns all known values for PriceClass. Note that this can be expanded
@@ -419,10 +419,10 @@ type SslProtocol string
 
 // Enum values for SslProtocol
 const (
-	SslProtocolSslv3  SslProtocol = "SSLv3"
-	SslProtocolTlsv1  SslProtocol = "TLSv1"
-	SslProtocolTlsv11 SslProtocol = "TLSv1.1"
-	SslProtocolTlsv12 SslProtocol = "TLSv1.2"
+	SslProtocolSSLv3  SslProtocol = "SSLv3"
+	SslProtocolTLSv1  SslProtocol = "TLSv1"
+	SslProtocolTLSv11 SslProtocol = "TLSv1.1"
+	SslProtocolTLSv12 SslProtocol = "TLSv1.2"
 )
 
 // Values returns all known values for SslProtocol. Note that this can be expanded

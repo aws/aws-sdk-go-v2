@@ -60,7 +60,7 @@ type FunctionResponseType string
 
 // Enum values for FunctionResponseType
 const (
-	FunctionResponseTypeReportbatchitemfailures FunctionResponseType = "ReportBatchItemFailures"
+	FunctionResponseTypeReportBatchItemFailures FunctionResponseType = "ReportBatchItemFailures"
 )
 
 // Values returns all known values for FunctionResponseType. Note that this can be
@@ -93,8 +93,8 @@ type InvocationType string
 // Enum values for InvocationType
 const (
 	InvocationTypeEvent           InvocationType = "Event"
-	InvocationTypeRequestresponse InvocationType = "RequestResponse"
-	InvocationTypeDryrun          InvocationType = "DryRun"
+	InvocationTypeRequestResponse InvocationType = "RequestResponse"
+	InvocationTypeDryRun          InvocationType = "DryRun"
 )
 
 // Values returns all known values for InvocationType. Note that this can be
@@ -114,7 +114,7 @@ type LastUpdateStatus string
 const (
 	LastUpdateStatusSuccessful LastUpdateStatus = "Successful"
 	LastUpdateStatusFailed     LastUpdateStatus = "Failed"
-	LastUpdateStatusInprogress LastUpdateStatus = "InProgress"
+	LastUpdateStatusInProgress LastUpdateStatus = "InProgress"
 )
 
 // Values returns all known values for LastUpdateStatus. Note that this can be
@@ -132,16 +132,16 @@ type LastUpdateStatusReasonCode string
 
 // Enum values for LastUpdateStatusReasonCode
 const (
-	LastUpdateStatusReasonCodeEnilimitexceeded            LastUpdateStatusReasonCode = "EniLimitExceeded"
-	LastUpdateStatusReasonCodeInsufficientrolepermissions LastUpdateStatusReasonCode = "InsufficientRolePermissions"
-	LastUpdateStatusReasonCodeInvalidconfiguration        LastUpdateStatusReasonCode = "InvalidConfiguration"
-	LastUpdateStatusReasonCodeInternalerror               LastUpdateStatusReasonCode = "InternalError"
-	LastUpdateStatusReasonCodeSubnetoutofipaddresses      LastUpdateStatusReasonCode = "SubnetOutOfIPAddresses"
-	LastUpdateStatusReasonCodeInvalidsubnet               LastUpdateStatusReasonCode = "InvalidSubnet"
-	LastUpdateStatusReasonCodeInvalidsecuritygroup        LastUpdateStatusReasonCode = "InvalidSecurityGroup"
-	LastUpdateStatusReasonCodeImagedeleted                LastUpdateStatusReasonCode = "ImageDeleted"
-	LastUpdateStatusReasonCodeImageaccessdenied           LastUpdateStatusReasonCode = "ImageAccessDenied"
-	LastUpdateStatusReasonCodeInvalidimage                LastUpdateStatusReasonCode = "InvalidImage"
+	LastUpdateStatusReasonCodeEniLimitExceeded            LastUpdateStatusReasonCode = "EniLimitExceeded"
+	LastUpdateStatusReasonCodeInsufficientRolePermissions LastUpdateStatusReasonCode = "InsufficientRolePermissions"
+	LastUpdateStatusReasonCodeInvalidConfiguration        LastUpdateStatusReasonCode = "InvalidConfiguration"
+	LastUpdateStatusReasonCodeInternalError               LastUpdateStatusReasonCode = "InternalError"
+	LastUpdateStatusReasonCodeSubnetOutOfIPAddresses      LastUpdateStatusReasonCode = "SubnetOutOfIPAddresses"
+	LastUpdateStatusReasonCodeInvalidSubnet               LastUpdateStatusReasonCode = "InvalidSubnet"
+	LastUpdateStatusReasonCodeInvalidSecurityGroup        LastUpdateStatusReasonCode = "InvalidSecurityGroup"
+	LastUpdateStatusReasonCodeImageDeleted                LastUpdateStatusReasonCode = "ImageDeleted"
+	LastUpdateStatusReasonCodeImageAccessDenied           LastUpdateStatusReasonCode = "ImageAccessDenied"
+	LastUpdateStatusReasonCodeInvalidImage                LastUpdateStatusReasonCode = "InvalidImage"
 )
 
 // Values returns all known values for LastUpdateStatusReasonCode. Note that this
@@ -332,16 +332,16 @@ const (
 	StateReasonCodeIdle                        StateReasonCode = "Idle"
 	StateReasonCodeCreating                    StateReasonCode = "Creating"
 	StateReasonCodeRestoring                   StateReasonCode = "Restoring"
-	StateReasonCodeEnilimitexceeded            StateReasonCode = "EniLimitExceeded"
-	StateReasonCodeInsufficientrolepermissions StateReasonCode = "InsufficientRolePermissions"
-	StateReasonCodeInvalidconfiguration        StateReasonCode = "InvalidConfiguration"
-	StateReasonCodeInternalerror               StateReasonCode = "InternalError"
-	StateReasonCodeSubnetoutofipaddresses      StateReasonCode = "SubnetOutOfIPAddresses"
-	StateReasonCodeInvalidsubnet               StateReasonCode = "InvalidSubnet"
-	StateReasonCodeInvalidsecuritygroup        StateReasonCode = "InvalidSecurityGroup"
-	StateReasonCodeImagedeleted                StateReasonCode = "ImageDeleted"
-	StateReasonCodeImageaccessdenied           StateReasonCode = "ImageAccessDenied"
-	StateReasonCodeInvalidimage                StateReasonCode = "InvalidImage"
+	StateReasonCodeEniLimitExceeded            StateReasonCode = "EniLimitExceeded"
+	StateReasonCodeInsufficientRolePermissions StateReasonCode = "InsufficientRolePermissions"
+	StateReasonCodeInvalidConfiguration        StateReasonCode = "InvalidConfiguration"
+	StateReasonCodeInternalError               StateReasonCode = "InternalError"
+	StateReasonCodeSubnetOutOfIPAddresses      StateReasonCode = "SubnetOutOfIPAddresses"
+	StateReasonCodeInvalidSubnet               StateReasonCode = "InvalidSubnet"
+	StateReasonCodeInvalidSecurityGroup        StateReasonCode = "InvalidSecurityGroup"
+	StateReasonCodeImageDeleted                StateReasonCode = "ImageDeleted"
+	StateReasonCodeImageAccessDenied           StateReasonCode = "ImageAccessDenied"
+	StateReasonCodeInvalidImage                StateReasonCode = "InvalidImage"
 )
 
 // Values returns all known values for StateReasonCode. Note that this can be
@@ -369,11 +369,11 @@ type ThrottleReason string
 
 // Enum values for ThrottleReason
 const (
-	ThrottleReasonConcurrentinvocationlimitexceeded                 ThrottleReason = "ConcurrentInvocationLimitExceeded"
-	ThrottleReasonFunctioninvocationratelimitexceeded               ThrottleReason = "FunctionInvocationRateLimitExceeded"
-	ThrottleReasonReservedfunctionconcurrentinvocationlimitexceeded ThrottleReason = "ReservedFunctionConcurrentInvocationLimitExceeded"
-	ThrottleReasonReservedfunctioninvocationratelimitexceeded       ThrottleReason = "ReservedFunctionInvocationRateLimitExceeded"
-	ThrottleReasonCallerratelimitexceeded                           ThrottleReason = "CallerRateLimitExceeded"
+	ThrottleReasonConcurrentInvocationLimitExceeded                 ThrottleReason = "ConcurrentInvocationLimitExceeded"
+	ThrottleReasonFunctionInvocationRateLimitExceeded               ThrottleReason = "FunctionInvocationRateLimitExceeded"
+	ThrottleReasonReservedFunctionConcurrentInvocationLimitExceeded ThrottleReason = "ReservedFunctionConcurrentInvocationLimitExceeded"
+	ThrottleReasonReservedFunctionInvocationRateLimitExceeded       ThrottleReason = "ReservedFunctionInvocationRateLimitExceeded"
+	ThrottleReasonCallerRateLimitExceeded                           ThrottleReason = "CallerRateLimitExceeded"
 )
 
 // Values returns all known values for ThrottleReason. Note that this can be
@@ -394,7 +394,7 @@ type TracingMode string
 // Enum values for TracingMode
 const (
 	TracingModeActive      TracingMode = "Active"
-	TracingModePassthrough TracingMode = "PassThrough"
+	TracingModePassThrough TracingMode = "PassThrough"
 )
 
 // Values returns all known values for TracingMode. Note that this can be expanded

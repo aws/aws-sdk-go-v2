@@ -148,10 +148,10 @@ type OptionState string
 
 // Enum values for OptionState
 const (
-	OptionStateRequiresindexdocuments OptionState = "RequiresIndexDocuments"
+	OptionStateRequiresIndexDocuments OptionState = "RequiresIndexDocuments"
 	OptionStateProcessing             OptionState = "Processing"
 	OptionStateActive                 OptionState = "Active"
-	OptionStateFailedtovalidate       OptionState = "FailedToValidate"
+	OptionStateFailedToValidate       OptionState = "FailedToValidate"
 )
 
 // Values returns all known values for OptionState. Note that this can be expanded

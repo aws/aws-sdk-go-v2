@@ -198,18 +198,18 @@ type GrantOperation string
 const (
 	GrantOperationDecrypt                             GrantOperation = "Decrypt"
 	GrantOperationEncrypt                             GrantOperation = "Encrypt"
-	GrantOperationGeneratedatakey                     GrantOperation = "GenerateDataKey"
-	GrantOperationGeneratedatakeywithoutplaintext     GrantOperation = "GenerateDataKeyWithoutPlaintext"
-	GrantOperationReencryptfrom                       GrantOperation = "ReEncryptFrom"
-	GrantOperationReencryptto                         GrantOperation = "ReEncryptTo"
+	GrantOperationGenerateDataKey                     GrantOperation = "GenerateDataKey"
+	GrantOperationGenerateDataKeyWithoutPlaintext     GrantOperation = "GenerateDataKeyWithoutPlaintext"
+	GrantOperationReEncryptFrom                       GrantOperation = "ReEncryptFrom"
+	GrantOperationReEncryptTo                         GrantOperation = "ReEncryptTo"
 	GrantOperationSign                                GrantOperation = "Sign"
 	GrantOperationVerify                              GrantOperation = "Verify"
-	GrantOperationGetpublickey                        GrantOperation = "GetPublicKey"
-	GrantOperationCreategrant                         GrantOperation = "CreateGrant"
-	GrantOperationRetiregrant                         GrantOperation = "RetireGrant"
-	GrantOperationDescribekey                         GrantOperation = "DescribeKey"
-	GrantOperationGeneratedatakeypair                 GrantOperation = "GenerateDataKeyPair"
-	GrantOperationGeneratedatakeypairwithoutplaintext GrantOperation = "GenerateDataKeyPairWithoutPlaintext"
+	GrantOperationGetPublicKey                        GrantOperation = "GetPublicKey"
+	GrantOperationCreateGrant                         GrantOperation = "CreateGrant"
+	GrantOperationRetireGrant                         GrantOperation = "RetireGrant"
+	GrantOperationDescribeKey                         GrantOperation = "DescribeKey"
+	GrantOperationGenerateDataKeyPair                 GrantOperation = "GenerateDataKeyPair"
+	GrantOperationGenerateDataKeyPairWithoutPlaintext GrantOperation = "GenerateDataKeyPairWithoutPlaintext"
 )
 
 // Values returns all known values for GrantOperation. Note that this can be
@@ -258,8 +258,8 @@ type KeyState string
 const (
 	KeyStateEnabled         KeyState = "Enabled"
 	KeyStateDisabled        KeyState = "Disabled"
-	KeyStatePendingdeletion KeyState = "PendingDeletion"
-	KeyStatePendingimport   KeyState = "PendingImport"
+	KeyStatePendingDeletion KeyState = "PendingDeletion"
+	KeyStatePendingImport   KeyState = "PendingImport"
 	KeyStateUnavailable     KeyState = "Unavailable"
 )
 

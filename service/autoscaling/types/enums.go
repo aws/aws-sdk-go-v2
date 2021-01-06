@@ -45,7 +45,7 @@ type InstanceRefreshStatus string
 // Enum values for InstanceRefreshStatus
 const (
 	InstanceRefreshStatusPending    InstanceRefreshStatus = "Pending"
-	InstanceRefreshStatusInprogress InstanceRefreshStatus = "InProgress"
+	InstanceRefreshStatusInProgress InstanceRefreshStatus = "InProgress"
 	InstanceRefreshStatusSuccessful InstanceRefreshStatus = "Successful"
 	InstanceRefreshStatusFailed     InstanceRefreshStatus = "Failed"
 	InstanceRefreshStatusCancelling InstanceRefreshStatus = "Cancelling"
@@ -113,7 +113,7 @@ const (
 	MetricStatisticAverage     MetricStatistic = "Average"
 	MetricStatisticMinimum     MetricStatistic = "Minimum"
 	MetricStatisticMaximum     MetricStatistic = "Maximum"
-	MetricStatisticSamplecount MetricStatistic = "SampleCount"
+	MetricStatisticSampleCount MetricStatistic = "SampleCount"
 	MetricStatisticSum         MetricStatistic = "Sum"
 )
 
@@ -134,10 +134,10 @@ type MetricType string
 
 // Enum values for MetricType
 const (
-	MetricTypeAsgaveragecpuutilization MetricType = "ASGAverageCPUUtilization"
-	MetricTypeAsgaveragenetworkin      MetricType = "ASGAverageNetworkIn"
-	MetricTypeAsgaveragenetworkout     MetricType = "ASGAverageNetworkOut"
-	MetricTypeAlbrequestcountpertarget MetricType = "ALBRequestCountPerTarget"
+	MetricTypeASGAverageCPUUtilization MetricType = "ASGAverageCPUUtilization"
+	MetricTypeASGAverageNetworkIn      MetricType = "ASGAverageNetworkIn"
+	MetricTypeASGAverageNetworkOut     MetricType = "ASGAverageNetworkOut"
+	MetricTypeALBRequestCountPerTarget MetricType = "ALBRequestCountPerTarget"
 )
 
 // Values returns all known values for MetricType. Note that this can be expanded
@@ -172,15 +172,15 @@ type ScalingActivityStatusCode string
 
 // Enum values for ScalingActivityStatusCode
 const (
-	ScalingActivityStatusCodePendingspotbidplacement         ScalingActivityStatusCode = "PendingSpotBidPlacement"
-	ScalingActivityStatusCodeWaitingforspotinstancerequestid ScalingActivityStatusCode = "WaitingForSpotInstanceRequestId"
-	ScalingActivityStatusCodeWaitingforspotinstanceid        ScalingActivityStatusCode = "WaitingForSpotInstanceId"
-	ScalingActivityStatusCodeWaitingforinstanceid            ScalingActivityStatusCode = "WaitingForInstanceId"
-	ScalingActivityStatusCodePreinservice                    ScalingActivityStatusCode = "PreInService"
-	ScalingActivityStatusCodeInprogress                      ScalingActivityStatusCode = "InProgress"
-	ScalingActivityStatusCodeWaitingforelbconnectiondraining ScalingActivityStatusCode = "WaitingForELBConnectionDraining"
-	ScalingActivityStatusCodeMidlifecycleaction              ScalingActivityStatusCode = "MidLifecycleAction"
-	ScalingActivityStatusCodeWaitingforinstancewarmup        ScalingActivityStatusCode = "WaitingForInstanceWarmup"
+	ScalingActivityStatusCodePendingSpotBidPlacement         ScalingActivityStatusCode = "PendingSpotBidPlacement"
+	ScalingActivityStatusCodeWaitingForSpotInstanceRequestId ScalingActivityStatusCode = "WaitingForSpotInstanceRequestId"
+	ScalingActivityStatusCodeWaitingForSpotInstanceId        ScalingActivityStatusCode = "WaitingForSpotInstanceId"
+	ScalingActivityStatusCodeWaitingForInstanceId            ScalingActivityStatusCode = "WaitingForInstanceId"
+	ScalingActivityStatusCodePreInService                    ScalingActivityStatusCode = "PreInService"
+	ScalingActivityStatusCodeInProgress                      ScalingActivityStatusCode = "InProgress"
+	ScalingActivityStatusCodeWaitingForELBConnectionDraining ScalingActivityStatusCode = "WaitingForELBConnectionDraining"
+	ScalingActivityStatusCodeMidLifecycleAction              ScalingActivityStatusCode = "MidLifecycleAction"
+	ScalingActivityStatusCodeWaitingForInstanceWarmup        ScalingActivityStatusCode = "WaitingForInstanceWarmup"
 	ScalingActivityStatusCodeSuccessful                      ScalingActivityStatusCode = "Successful"
 	ScalingActivityStatusCodeFailed                          ScalingActivityStatusCode = "Failed"
 	ScalingActivityStatusCodeCancelled                       ScalingActivityStatusCode = "Cancelled"

@@ -103,7 +103,7 @@ const (
 	JobManifestFieldNameIgnore    JobManifestFieldName = "Ignore"
 	JobManifestFieldNameBucket    JobManifestFieldName = "Bucket"
 	JobManifestFieldNameKey       JobManifestFieldName = "Key"
-	JobManifestFieldNameVersionid JobManifestFieldName = "VersionId"
+	JobManifestFieldNameVersionId JobManifestFieldName = "VersionId"
 )
 
 // Values returns all known values for JobManifestFieldName. Note that this can be
@@ -122,8 +122,8 @@ type JobManifestFormat string
 
 // Enum values for JobManifestFormat
 const (
-	JobManifestFormatS3batchoperationsCsv20180820 JobManifestFormat = "S3BatchOperations_CSV_20180820"
-	JobManifestFormatS3inventoryreportCsv20161130 JobManifestFormat = "S3InventoryReport_CSV_20161130"
+	JobManifestFormatS3BatchOperationsCsv20180820 JobManifestFormat = "S3BatchOperations_CSV_20180820"
+	JobManifestFormatS3InventoryReportCsv20161130 JobManifestFormat = "S3InventoryReport_CSV_20161130"
 )
 
 // Values returns all known values for JobManifestFormat. Note that this can be
@@ -156,8 +156,8 @@ type JobReportScope string
 
 // Enum values for JobReportScope
 const (
-	JobReportScopeAlltasks        JobReportScope = "AllTasks"
-	JobReportScopeFailedtasksonly JobReportScope = "FailedTasksOnly"
+	JobReportScopeAllTasks        JobReportScope = "AllTasks"
+	JobReportScopeFailedTasksOnly JobReportScope = "FailedTasksOnly"
 )
 
 // Values returns all known values for JobReportScope. Note that this can be
@@ -232,13 +232,13 @@ type OperationName string
 
 // Enum values for OperationName
 const (
-	OperationNameLambdainvoke            OperationName = "LambdaInvoke"
-	OperationNameS3putobjectcopy         OperationName = "S3PutObjectCopy"
-	OperationNameS3putobjectacl          OperationName = "S3PutObjectAcl"
-	OperationNameS3putobjecttagging      OperationName = "S3PutObjectTagging"
-	OperationNameS3initiaterestoreobject OperationName = "S3InitiateRestoreObject"
-	OperationNameS3putobjectlegalhold    OperationName = "S3PutObjectLegalHold"
-	OperationNameS3putobjectretention    OperationName = "S3PutObjectRetention"
+	OperationNameLambdaInvoke            OperationName = "LambdaInvoke"
+	OperationNameS3PutObjectCopy         OperationName = "S3PutObjectCopy"
+	OperationNameS3PutObjectAcl          OperationName = "S3PutObjectAcl"
+	OperationNameS3PutObjectTagging      OperationName = "S3PutObjectTagging"
+	OperationNameS3InitiateRestoreObject OperationName = "S3InitiateRestoreObject"
+	OperationNameS3PutObjectLegalHold    OperationName = "S3PutObjectLegalHold"
+	OperationNameS3PutObjectRetention    OperationName = "S3PutObjectRetention"
 )
 
 // Values returns all known values for OperationName. Note that this can be

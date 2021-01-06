@@ -6,10 +6,10 @@ type AppAttributesKeys string
 
 // Enum values for AppAttributesKeys
 const (
-	AppAttributesKeysDocumentroot        AppAttributesKeys = "DocumentRoot"
-	AppAttributesKeysRailsenv            AppAttributesKeys = "RailsEnv"
-	AppAttributesKeysAutobundleondeploy  AppAttributesKeys = "AutoBundleOnDeploy"
-	AppAttributesKeysAwsflowrubysettings AppAttributesKeys = "AwsFlowRubySettings"
+	AppAttributesKeysDocumentRoot        AppAttributesKeys = "DocumentRoot"
+	AppAttributesKeysRailsEnv            AppAttributesKeys = "RailsEnv"
+	AppAttributesKeysAutoBundleOnDeploy  AppAttributesKeys = "AutoBundleOnDeploy"
+	AppAttributesKeysAwsFlowRubySettings AppAttributesKeys = "AwsFlowRubySettings"
 )
 
 // Values returns all known values for AppAttributesKeys. Note that this can be
@@ -365,31 +365,31 @@ type LayerAttributesKeys string
 
 // Enum values for LayerAttributesKeys
 const (
-	LayerAttributesKeysEcsclusterarn               LayerAttributesKeys = "EcsClusterArn"
-	LayerAttributesKeysEnablehaproxystats          LayerAttributesKeys = "EnableHaproxyStats"
-	LayerAttributesKeysHaproxystatsurl             LayerAttributesKeys = "HaproxyStatsUrl"
-	LayerAttributesKeysHaproxystatsuser            LayerAttributesKeys = "HaproxyStatsUser"
-	LayerAttributesKeysHaproxystatspassword        LayerAttributesKeys = "HaproxyStatsPassword"
-	LayerAttributesKeysHaproxyhealthcheckurl       LayerAttributesKeys = "HaproxyHealthCheckUrl"
-	LayerAttributesKeysHaproxyhealthcheckmethod    LayerAttributesKeys = "HaproxyHealthCheckMethod"
-	LayerAttributesKeysMysqlrootpassword           LayerAttributesKeys = "MysqlRootPassword"
-	LayerAttributesKeysMysqlrootpasswordubiquitous LayerAttributesKeys = "MysqlRootPasswordUbiquitous"
-	LayerAttributesKeysGangliaurl                  LayerAttributesKeys = "GangliaUrl"
-	LayerAttributesKeysGangliauser                 LayerAttributesKeys = "GangliaUser"
-	LayerAttributesKeysGangliapassword             LayerAttributesKeys = "GangliaPassword"
-	LayerAttributesKeysMemcachedmemory             LayerAttributesKeys = "MemcachedMemory"
-	LayerAttributesKeysNodejsversion               LayerAttributesKeys = "NodejsVersion"
-	LayerAttributesKeysRubyversion                 LayerAttributesKeys = "RubyVersion"
-	LayerAttributesKeysRubygemsversion             LayerAttributesKeys = "RubygemsVersion"
-	LayerAttributesKeysManagebundler               LayerAttributesKeys = "ManageBundler"
-	LayerAttributesKeysBundlerversion              LayerAttributesKeys = "BundlerVersion"
-	LayerAttributesKeysRailsstack                  LayerAttributesKeys = "RailsStack"
-	LayerAttributesKeysPassengerversion            LayerAttributesKeys = "PassengerVersion"
+	LayerAttributesKeysEcsClusterArn               LayerAttributesKeys = "EcsClusterArn"
+	LayerAttributesKeysEnableHaproxyStats          LayerAttributesKeys = "EnableHaproxyStats"
+	LayerAttributesKeysHaproxyStatsUrl             LayerAttributesKeys = "HaproxyStatsUrl"
+	LayerAttributesKeysHaproxyStatsUser            LayerAttributesKeys = "HaproxyStatsUser"
+	LayerAttributesKeysHaproxyStatsPassword        LayerAttributesKeys = "HaproxyStatsPassword"
+	LayerAttributesKeysHaproxyHealthCheckUrl       LayerAttributesKeys = "HaproxyHealthCheckUrl"
+	LayerAttributesKeysHaproxyHealthCheckMethod    LayerAttributesKeys = "HaproxyHealthCheckMethod"
+	LayerAttributesKeysMysqlRootPassword           LayerAttributesKeys = "MysqlRootPassword"
+	LayerAttributesKeysMysqlRootPasswordUbiquitous LayerAttributesKeys = "MysqlRootPasswordUbiquitous"
+	LayerAttributesKeysGangliaUrl                  LayerAttributesKeys = "GangliaUrl"
+	LayerAttributesKeysGangliaUser                 LayerAttributesKeys = "GangliaUser"
+	LayerAttributesKeysGangliaPassword             LayerAttributesKeys = "GangliaPassword"
+	LayerAttributesKeysMemcachedMemory             LayerAttributesKeys = "MemcachedMemory"
+	LayerAttributesKeysNodejsVersion               LayerAttributesKeys = "NodejsVersion"
+	LayerAttributesKeysRubyVersion                 LayerAttributesKeys = "RubyVersion"
+	LayerAttributesKeysRubygemsVersion             LayerAttributesKeys = "RubygemsVersion"
+	LayerAttributesKeysManageBundler               LayerAttributesKeys = "ManageBundler"
+	LayerAttributesKeysBundlerVersion              LayerAttributesKeys = "BundlerVersion"
+	LayerAttributesKeysRailsStack                  LayerAttributesKeys = "RailsStack"
+	LayerAttributesKeysPassengerVersion            LayerAttributesKeys = "PassengerVersion"
 	LayerAttributesKeysJvm                         LayerAttributesKeys = "Jvm"
-	LayerAttributesKeysJvmversion                  LayerAttributesKeys = "JvmVersion"
-	LayerAttributesKeysJvmoptions                  LayerAttributesKeys = "JvmOptions"
-	LayerAttributesKeysJavaappserver               LayerAttributesKeys = "JavaAppServer"
-	LayerAttributesKeysJavaappserverversion        LayerAttributesKeys = "JavaAppServerVersion"
+	LayerAttributesKeysJvmVersion                  LayerAttributesKeys = "JvmVersion"
+	LayerAttributesKeysJvmOptions                  LayerAttributesKeys = "JvmOptions"
+	LayerAttributesKeysJavaAppServer               LayerAttributesKeys = "JavaAppServer"
+	LayerAttributesKeysJavaAppServerVersion        LayerAttributesKeys = "JavaAppServerVersion"
 )
 
 // Values returns all known values for LayerAttributesKeys. Note that this can be

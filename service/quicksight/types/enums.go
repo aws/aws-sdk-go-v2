@@ -388,7 +388,7 @@ type FilterOperator string
 
 // Enum values for FilterOperator
 const (
-	FilterOperatorStringequals FilterOperator = "StringEquals"
+	FilterOperatorStringEquals FilterOperator = "StringEquals"
 )
 
 // Values returns all known values for FilterOperator. Note that this can be

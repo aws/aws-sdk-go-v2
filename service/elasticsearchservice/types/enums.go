@@ -30,9 +30,9 @@ type DescribePackagesFilterName string
 
 // Enum values for DescribePackagesFilterName
 const (
-	DescribePackagesFilterNamePackageid     DescribePackagesFilterName = "PackageID"
-	DescribePackagesFilterNamePackagename   DescribePackagesFilterName = "PackageName"
-	DescribePackagesFilterNamePackagestatus DescribePackagesFilterName = "PackageStatus"
+	DescribePackagesFilterNamePackageID     DescribePackagesFilterName = "PackageID"
+	DescribePackagesFilterNamePackageName   DescribePackagesFilterName = "PackageName"
+	DescribePackagesFilterNamePackageStatus DescribePackagesFilterName = "PackageStatus"
 )
 
 // Values returns all known values for DescribePackagesFilterName. Note that this
@@ -271,7 +271,7 @@ type OptionState string
 
 // Enum values for OptionState
 const (
-	OptionStateRequiresindexdocuments OptionState = "RequiresIndexDocuments"
+	OptionStateRequiresIndexDocuments OptionState = "RequiresIndexDocuments"
 	OptionStateProcessing             OptionState = "Processing"
 	OptionStateActive                 OptionState = "Active"
 )

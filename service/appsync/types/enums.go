@@ -291,7 +291,7 @@ const (
 	SchemaStatusDeleting      SchemaStatus = "DELETING"
 	SchemaStatusFailed        SchemaStatus = "FAILED"
 	SchemaStatusSuccess       SchemaStatus = "SUCCESS"
-	SchemaStatusNotapplicable SchemaStatus = "NOT_APPLICABLE"
+	SchemaStatusNotApplicable SchemaStatus = "NOT_APPLICABLE"
 )
 
 // Values returns all known values for SchemaStatus. Note that this can be expanded

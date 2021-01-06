@@ -11,7 +11,7 @@ const (
 	FormatCurrency   Format = "CURRENCY"
 	FormatDate       Format = "DATE"
 	FormatTime       Format = "TIME"
-	FormatDatetime   Format = "DATE_TIME"
+	FormatDateTime   Format = "DATE_TIME"
 	FormatPercentage Format = "PERCENTAGE"
 	FormatText       Format = "TEXT"
 	FormatAccounting Format = "ACCOUNTING"
@@ -68,7 +68,7 @@ type ImportSourceDataFormat string
 
 // Enum values for ImportSourceDataFormat
 const (
-	ImportSourceDataFormatDelimitedtext ImportSourceDataFormat = "DELIMITED_TEXT"
+	ImportSourceDataFormatDelimitedText ImportSourceDataFormat = "DELIMITED_TEXT"
 )
 
 // Values returns all known values for ImportSourceDataFormat. Note that this can
@@ -85,7 +85,7 @@ type TableDataImportJobStatus string
 // Enum values for TableDataImportJobStatus
 const (
 	TableDataImportJobStatusSubmitted  TableDataImportJobStatus = "SUBMITTED"
-	TableDataImportJobStatusInprogress TableDataImportJobStatus = "IN_PROGRESS"
+	TableDataImportJobStatusInProgress TableDataImportJobStatus = "IN_PROGRESS"
 	TableDataImportJobStatusCompleted  TableDataImportJobStatus = "COMPLETED"
 	TableDataImportJobStatusFailed     TableDataImportJobStatus = "FAILED"
 )

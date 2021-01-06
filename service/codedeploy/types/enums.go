@@ -6,9 +6,9 @@ type ApplicationRevisionSortBy string
 
 // Enum values for ApplicationRevisionSortBy
 const (
-	ApplicationRevisionSortByRegistertime  ApplicationRevisionSortBy = "registerTime"
-	ApplicationRevisionSortByFirstusedtime ApplicationRevisionSortBy = "firstUsedTime"
-	ApplicationRevisionSortByLastusedtime  ApplicationRevisionSortBy = "lastUsedTime"
+	ApplicationRevisionSortByRegisterTime  ApplicationRevisionSortBy = "registerTime"
+	ApplicationRevisionSortByFirstUsedTime ApplicationRevisionSortBy = "firstUsedTime"
+	ApplicationRevisionSortByLastUsedTime  ApplicationRevisionSortBy = "lastUsedTime"
 )
 
 // Values returns all known values for ApplicationRevisionSortBy. Note that this
@@ -47,7 +47,7 @@ type BundleType string
 // Enum values for BundleType
 const (
 	BundleTypeTar     BundleType = "tar"
-	BundleTypeTargzip BundleType = "tgz"
+	BundleTypeTarGZip BundleType = "tgz"
 	BundleTypeZip     BundleType = "zip"
 	BundleTypeYaml    BundleType = "YAML"
 	BundleTypeJson    BundleType = "JSON"
@@ -92,10 +92,10 @@ type DeploymentCreator string
 const (
 	DeploymentCreatorUser                   DeploymentCreator = "user"
 	DeploymentCreatorAutoscaling            DeploymentCreator = "autoscaling"
-	DeploymentCreatorCodedeployrollback     DeploymentCreator = "codeDeployRollback"
-	DeploymentCreatorCodedeploy             DeploymentCreator = "CodeDeploy"
-	DeploymentCreatorCloudformation         DeploymentCreator = "CloudFormation"
-	DeploymentCreatorCloudformationrollback DeploymentCreator = "CloudFormationRollback"
+	DeploymentCreatorCodeDeployRollback     DeploymentCreator = "codeDeployRollback"
+	DeploymentCreatorCodeDeploy             DeploymentCreator = "CodeDeploy"
+	DeploymentCreatorCloudFormation         DeploymentCreator = "CloudFormation"
+	DeploymentCreatorCloudFormationRollback DeploymentCreator = "CloudFormationRollback"
 )
 
 // Values returns all known values for DeploymentCreator. Note that this can be
@@ -553,9 +553,9 @@ type RevisionLocationType string
 // Enum values for RevisionLocationType
 const (
 	RevisionLocationTypeS3             RevisionLocationType = "S3"
-	RevisionLocationTypeGithub         RevisionLocationType = "GitHub"
+	RevisionLocationTypeGitHub         RevisionLocationType = "GitHub"
 	RevisionLocationTypeString         RevisionLocationType = "String"
-	RevisionLocationTypeAppspeccontent RevisionLocationType = "AppSpecContent"
+	RevisionLocationTypeAppSpecContent RevisionLocationType = "AppSpecContent"
 )
 
 // Values returns all known values for RevisionLocationType. Note that this can be
@@ -694,9 +694,9 @@ type TrafficRoutingType string
 
 // Enum values for TrafficRoutingType
 const (
-	TrafficRoutingTypeTimebasedcanary TrafficRoutingType = "TimeBasedCanary"
-	TrafficRoutingTypeTimebasedlinear TrafficRoutingType = "TimeBasedLinear"
-	TrafficRoutingTypeAllatonce       TrafficRoutingType = "AllAtOnce"
+	TrafficRoutingTypeTimeBasedCanary TrafficRoutingType = "TimeBasedCanary"
+	TrafficRoutingTypeTimeBasedLinear TrafficRoutingType = "TimeBasedLinear"
+	TrafficRoutingTypeAllAtOnce       TrafficRoutingType = "AllAtOnce"
 )
 
 // Values returns all known values for TrafficRoutingType. Note that this can be

@@ -6,8 +6,8 @@ type ActionCode string
 
 // Enum values for ActionCode
 const (
-	ActionCodeArchiveretrieval   ActionCode = "ArchiveRetrieval"
-	ActionCodeInventoryretrieval ActionCode = "InventoryRetrieval"
+	ActionCodeArchiveRetrieval   ActionCode = "ArchiveRetrieval"
+	ActionCodeInventoryRetrieval ActionCode = "InventoryRetrieval"
 	ActionCodeSelect             ActionCode = "Select"
 )
 
@@ -27,12 +27,12 @@ type CannedACL string
 // Enum values for CannedACL
 const (
 	CannedACLPrivate                CannedACL = "private"
-	CannedACLPublicread             CannedACL = "public-read"
-	CannedACLPublicreadwrite        CannedACL = "public-read-write"
-	CannedACLAwsexecread            CannedACL = "aws-exec-read"
-	CannedACLAuthenticatedread      CannedACL = "authenticated-read"
-	CannedACLBucketownerread        CannedACL = "bucket-owner-read"
-	CannedACLBucketownerfullcontrol CannedACL = "bucket-owner-full-control"
+	CannedACLPublicRead             CannedACL = "public-read"
+	CannedACLPublicReadWrite        CannedACL = "public-read-write"
+	CannedACLAwsExecRead            CannedACL = "aws-exec-read"
+	CannedACLAuthenticatedRead      CannedACL = "authenticated-read"
+	CannedACLBucketOwnerRead        CannedACL = "bucket-owner-read"
+	CannedACLBucketOwnerFullControl CannedACL = "bucket-owner-full-control"
 )
 
 // Values returns all known values for CannedACL. Note that this can be expanded in
@@ -133,7 +133,7 @@ type QuoteFields string
 // Enum values for QuoteFields
 const (
 	QuoteFieldsAlways   QuoteFields = "ALWAYS"
-	QuoteFieldsAsneeded QuoteFields = "ASNEEDED"
+	QuoteFieldsAsNeeded QuoteFields = "ASNEEDED"
 )
 
 // Values returns all known values for QuoteFields. Note that this can be expanded
@@ -150,7 +150,7 @@ type StatusCode string
 
 // Enum values for StatusCode
 const (
-	StatusCodeInprogress StatusCode = "InProgress"
+	StatusCodeInProgress StatusCode = "InProgress"
 	StatusCodeSucceeded  StatusCode = "Succeeded"
 	StatusCodeFailed     StatusCode = "Failed"
 )
@@ -171,8 +171,8 @@ type StorageClass string
 // Enum values for StorageClass
 const (
 	StorageClassStandard                 StorageClass = "STANDARD"
-	StorageClassReducedredundancy        StorageClass = "REDUCED_REDUNDANCY"
-	StorageClassStandardinfrequentaccess StorageClass = "STANDARD_IA"
+	StorageClassReducedRedundancy        StorageClass = "REDUCED_REDUNDANCY"
+	StorageClassStandardInfrequentAccess StorageClass = "STANDARD_IA"
 )
 
 // Values returns all known values for StorageClass. Note that this can be expanded
@@ -190,8 +190,8 @@ type Type string
 
 // Enum values for Type
 const (
-	TypeAmazoncustomerbyemail Type = "AmazonCustomerByEmail"
-	TypeCanonicaluser         Type = "CanonicalUser"
+	TypeAmazonCustomerByEmail Type = "AmazonCustomerByEmail"
+	TypeCanonicalUser         Type = "CanonicalUser"
 	TypeGroup                 Type = "Group"
 )
 

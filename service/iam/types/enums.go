@@ -126,8 +126,8 @@ const (
 	EntityTypeUser               EntityType = "User"
 	EntityTypeRole               EntityType = "Role"
 	EntityTypeGroup              EntityType = "Group"
-	EntityTypeLocalmanagedpolicy EntityType = "LocalManagedPolicy"
-	EntityTypeAwsmanagedpolicy   EntityType = "AWSManagedPolicy"
+	EntityTypeLocalManagedPolicy EntityType = "LocalManagedPolicy"
+	EntityTypeAWSManagedPolicy   EntityType = "AWSManagedPolicy"
 )
 
 // Values returns all known values for EntityType. Note that this can be expanded
@@ -147,8 +147,8 @@ type GlobalEndpointTokenVersion string
 
 // Enum values for GlobalEndpointTokenVersion
 const (
-	GlobalEndpointTokenVersionV1token GlobalEndpointTokenVersion = "v1Token"
-	GlobalEndpointTokenVersionV2token GlobalEndpointTokenVersion = "v2Token"
+	GlobalEndpointTokenVersionV1Token GlobalEndpointTokenVersion = "v1Token"
+	GlobalEndpointTokenVersionV2Token GlobalEndpointTokenVersion = "v2Token"
 )
 
 // Values returns all known values for GlobalEndpointTokenVersion. Note that this
@@ -308,8 +308,8 @@ type PolicyUsageType string
 
 // Enum values for PolicyUsageType
 const (
-	PolicyUsageTypePermissionspolicy   PolicyUsageType = "PermissionsPolicy"
-	PolicyUsageTypePermissionsboundary PolicyUsageType = "PermissionsBoundary"
+	PolicyUsageTypePermissionsPolicy   PolicyUsageType = "PermissionsPolicy"
+	PolicyUsageTypePermissionsBoundary PolicyUsageType = "PermissionsBoundary"
 )
 
 // Values returns all known values for PolicyUsageType. Note that this can be
@@ -403,31 +403,31 @@ type SummaryKeyType string
 // Enum values for SummaryKeyType
 const (
 	SummaryKeyTypeUsers                             SummaryKeyType = "Users"
-	SummaryKeyTypeUsersquota                        SummaryKeyType = "UsersQuota"
+	SummaryKeyTypeUsersQuota                        SummaryKeyType = "UsersQuota"
 	SummaryKeyTypeGroups                            SummaryKeyType = "Groups"
-	SummaryKeyTypeGroupsquota                       SummaryKeyType = "GroupsQuota"
-	SummaryKeyTypeServercertificates                SummaryKeyType = "ServerCertificates"
-	SummaryKeyTypeServercertificatesquota           SummaryKeyType = "ServerCertificatesQuota"
-	SummaryKeyTypeUserpolicysizequota               SummaryKeyType = "UserPolicySizeQuota"
-	SummaryKeyTypeGrouppolicysizequota              SummaryKeyType = "GroupPolicySizeQuota"
-	SummaryKeyTypeGroupsperuserquota                SummaryKeyType = "GroupsPerUserQuota"
-	SummaryKeyTypeSigningcertificatesperuserquota   SummaryKeyType = "SigningCertificatesPerUserQuota"
-	SummaryKeyTypeAccesskeysperuserquota            SummaryKeyType = "AccessKeysPerUserQuota"
-	SummaryKeyTypeMfadevices                        SummaryKeyType = "MFADevices"
-	SummaryKeyTypeMfadevicesinuse                   SummaryKeyType = "MFADevicesInUse"
-	SummaryKeyTypeAccountmfaenabled                 SummaryKeyType = "AccountMFAEnabled"
-	SummaryKeyTypeAccountaccesskeyspresent          SummaryKeyType = "AccountAccessKeysPresent"
-	SummaryKeyTypeAccountsigningcertificatespresent SummaryKeyType = "AccountSigningCertificatesPresent"
-	SummaryKeyTypeAttachedpoliciespergroupquota     SummaryKeyType = "AttachedPoliciesPerGroupQuota"
-	SummaryKeyTypeAttachedpoliciesperrolequota      SummaryKeyType = "AttachedPoliciesPerRoleQuota"
-	SummaryKeyTypeAttachedpoliciesperuserquota      SummaryKeyType = "AttachedPoliciesPerUserQuota"
+	SummaryKeyTypeGroupsQuota                       SummaryKeyType = "GroupsQuota"
+	SummaryKeyTypeServerCertificates                SummaryKeyType = "ServerCertificates"
+	SummaryKeyTypeServerCertificatesQuota           SummaryKeyType = "ServerCertificatesQuota"
+	SummaryKeyTypeUserPolicySizeQuota               SummaryKeyType = "UserPolicySizeQuota"
+	SummaryKeyTypeGroupPolicySizeQuota              SummaryKeyType = "GroupPolicySizeQuota"
+	SummaryKeyTypeGroupsPerUserQuota                SummaryKeyType = "GroupsPerUserQuota"
+	SummaryKeyTypeSigningCertificatesPerUserQuota   SummaryKeyType = "SigningCertificatesPerUserQuota"
+	SummaryKeyTypeAccessKeysPerUserQuota            SummaryKeyType = "AccessKeysPerUserQuota"
+	SummaryKeyTypeMFADevices                        SummaryKeyType = "MFADevices"
+	SummaryKeyTypeMFADevicesInUse                   SummaryKeyType = "MFADevicesInUse"
+	SummaryKeyTypeAccountMFAEnabled                 SummaryKeyType = "AccountMFAEnabled"
+	SummaryKeyTypeAccountAccessKeysPresent          SummaryKeyType = "AccountAccessKeysPresent"
+	SummaryKeyTypeAccountSigningCertificatesPresent SummaryKeyType = "AccountSigningCertificatesPresent"
+	SummaryKeyTypeAttachedPoliciesPerGroupQuota     SummaryKeyType = "AttachedPoliciesPerGroupQuota"
+	SummaryKeyTypeAttachedPoliciesPerRoleQuota      SummaryKeyType = "AttachedPoliciesPerRoleQuota"
+	SummaryKeyTypeAttachedPoliciesPerUserQuota      SummaryKeyType = "AttachedPoliciesPerUserQuota"
 	SummaryKeyTypePolicies                          SummaryKeyType = "Policies"
-	SummaryKeyTypePoliciesquota                     SummaryKeyType = "PoliciesQuota"
-	SummaryKeyTypePolicysizequota                   SummaryKeyType = "PolicySizeQuota"
-	SummaryKeyTypePolicyversionsinuse               SummaryKeyType = "PolicyVersionsInUse"
-	SummaryKeyTypePolicyversionsinusequota          SummaryKeyType = "PolicyVersionsInUseQuota"
-	SummaryKeyTypeVersionsperpolicyquota            SummaryKeyType = "VersionsPerPolicyQuota"
-	SummaryKeyTypeGlobalendpointtokenversion        SummaryKeyType = "GlobalEndpointTokenVersion"
+	SummaryKeyTypePoliciesQuota                     SummaryKeyType = "PoliciesQuota"
+	SummaryKeyTypePolicySizeQuota                   SummaryKeyType = "PolicySizeQuota"
+	SummaryKeyTypePolicyVersionsInUse               SummaryKeyType = "PolicyVersionsInUse"
+	SummaryKeyTypePolicyVersionsInUseQuota          SummaryKeyType = "PolicyVersionsInUseQuota"
+	SummaryKeyTypeVersionsPerPolicyQuota            SummaryKeyType = "VersionsPerPolicyQuota"
+	SummaryKeyTypeGlobalEndpointTokenVersion        SummaryKeyType = "GlobalEndpointTokenVersion"
 )
 
 // Values returns all known values for SummaryKeyType. Note that this can be

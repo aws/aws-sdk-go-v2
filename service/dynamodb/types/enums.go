@@ -88,17 +88,17 @@ type BatchStatementErrorCodeEnum string
 
 // Enum values for BatchStatementErrorCodeEnum
 const (
-	BatchStatementErrorCodeEnumConditionalcheckfailed          BatchStatementErrorCodeEnum = "ConditionalCheckFailed"
-	BatchStatementErrorCodeEnumItemcollectionsizelimitexceeded BatchStatementErrorCodeEnum = "ItemCollectionSizeLimitExceeded"
-	BatchStatementErrorCodeEnumRequestlimitexceeded            BatchStatementErrorCodeEnum = "RequestLimitExceeded"
-	BatchStatementErrorCodeEnumValidationerror                 BatchStatementErrorCodeEnum = "ValidationError"
-	BatchStatementErrorCodeEnumProvisionedthroughputexceeded   BatchStatementErrorCodeEnum = "ProvisionedThroughputExceeded"
-	BatchStatementErrorCodeEnumTransactionconflict             BatchStatementErrorCodeEnum = "TransactionConflict"
-	BatchStatementErrorCodeEnumThrottlingerror                 BatchStatementErrorCodeEnum = "ThrottlingError"
-	BatchStatementErrorCodeEnumInternalservererror             BatchStatementErrorCodeEnum = "InternalServerError"
-	BatchStatementErrorCodeEnumResourcenotfound                BatchStatementErrorCodeEnum = "ResourceNotFound"
-	BatchStatementErrorCodeEnumAccessdenied                    BatchStatementErrorCodeEnum = "AccessDenied"
-	BatchStatementErrorCodeEnumDuplicateitem                   BatchStatementErrorCodeEnum = "DuplicateItem"
+	BatchStatementErrorCodeEnumConditionalCheckFailed          BatchStatementErrorCodeEnum = "ConditionalCheckFailed"
+	BatchStatementErrorCodeEnumItemCollectionSizeLimitExceeded BatchStatementErrorCodeEnum = "ItemCollectionSizeLimitExceeded"
+	BatchStatementErrorCodeEnumRequestLimitExceeded            BatchStatementErrorCodeEnum = "RequestLimitExceeded"
+	BatchStatementErrorCodeEnumValidationError                 BatchStatementErrorCodeEnum = "ValidationError"
+	BatchStatementErrorCodeEnumProvisionedThroughputExceeded   BatchStatementErrorCodeEnum = "ProvisionedThroughputExceeded"
+	BatchStatementErrorCodeEnumTransactionConflict             BatchStatementErrorCodeEnum = "TransactionConflict"
+	BatchStatementErrorCodeEnumThrottlingError                 BatchStatementErrorCodeEnum = "ThrottlingError"
+	BatchStatementErrorCodeEnumInternalServerError             BatchStatementErrorCodeEnum = "InternalServerError"
+	BatchStatementErrorCodeEnumResourceNotFound                BatchStatementErrorCodeEnum = "ResourceNotFound"
+	BatchStatementErrorCodeEnumAccessDenied                    BatchStatementErrorCodeEnum = "AccessDenied"
+	BatchStatementErrorCodeEnumDuplicateItem                   BatchStatementErrorCodeEnum = "DuplicateItem"
 )
 
 // Values returns all known values for BatchStatementErrorCodeEnum. Note that this

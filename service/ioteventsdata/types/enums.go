@@ -6,11 +6,11 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeResourcenotfoundexception   ErrorCode = "ResourceNotFoundException"
-	ErrorCodeInvalidrequestexception     ErrorCode = "InvalidRequestException"
-	ErrorCodeInternalfailureexception    ErrorCode = "InternalFailureException"
-	ErrorCodeServiceunavailableexception ErrorCode = "ServiceUnavailableException"
-	ErrorCodeThrottlingexception         ErrorCode = "ThrottlingException"
+	ErrorCodeResourceNotFoundException   ErrorCode = "ResourceNotFoundException"
+	ErrorCodeInvalidRequestException     ErrorCode = "InvalidRequestException"
+	ErrorCodeInternalFailureException    ErrorCode = "InternalFailureException"
+	ErrorCodeServiceUnavailableException ErrorCode = "ServiceUnavailableException"
+	ErrorCodeThrottlingException         ErrorCode = "ThrottlingException"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in

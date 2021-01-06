@@ -367,13 +367,13 @@ type CannedAccessControlList string
 // Enum values for CannedAccessControlList
 const (
 	CannedAccessControlListPrivate                CannedAccessControlList = "private"
-	CannedAccessControlListPublicread             CannedAccessControlList = "public-read"
-	CannedAccessControlListPublicreadwrite        CannedAccessControlList = "public-read-write"
-	CannedAccessControlListAwsexecread            CannedAccessControlList = "aws-exec-read"
-	CannedAccessControlListAuthenticatedread      CannedAccessControlList = "authenticated-read"
-	CannedAccessControlListBucketownerread        CannedAccessControlList = "bucket-owner-read"
-	CannedAccessControlListBucketownerfullcontrol CannedAccessControlList = "bucket-owner-full-control"
-	CannedAccessControlListLogdeliverywrite       CannedAccessControlList = "log-delivery-write"
+	CannedAccessControlListPublicRead             CannedAccessControlList = "public-read"
+	CannedAccessControlListPublicReadWrite        CannedAccessControlList = "public-read-write"
+	CannedAccessControlListAwsExecRead            CannedAccessControlList = "aws-exec-read"
+	CannedAccessControlListAuthenticatedRead      CannedAccessControlList = "authenticated-read"
+	CannedAccessControlListBucketOwnerRead        CannedAccessControlList = "bucket-owner-read"
+	CannedAccessControlListBucketOwnerFullControl CannedAccessControlList = "bucket-owner-full-control"
+	CannedAccessControlListLogDeliveryWrite       CannedAccessControlList = "log-delivery-write"
 )
 
 // Values returns all known values for CannedAccessControlList. Note that this can
@@ -1003,7 +1003,7 @@ type Status string
 
 // Enum values for Status
 const (
-	StatusInprogress Status = "InProgress"
+	StatusInProgress Status = "InProgress"
 	StatusCompleted  Status = "Completed"
 	StatusFailed     Status = "Failed"
 	StatusCancelled  Status = "Cancelled"

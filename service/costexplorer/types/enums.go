@@ -84,7 +84,7 @@ type CostCategoryRuleVersion string
 
 // Enum values for CostCategoryRuleVersion
 const (
-	CostCategoryRuleVersionCostcategoryexpressionv1 CostCategoryRuleVersion = "CostCategoryExpression.v1"
+	CostCategoryRuleVersionCostCategoryExpressionV1 CostCategoryRuleVersion = "CostCategoryExpression.v1"
 )
 
 // Values returns all known values for CostCategoryRuleVersion. Note that this can

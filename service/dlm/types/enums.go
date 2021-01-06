@@ -22,7 +22,7 @@ type EventTypeValues string
 
 // Enum values for EventTypeValues
 const (
-	EventTypeValuesSharesnapshot EventTypeValues = "shareSnapshot"
+	EventTypeValuesShareSnapshot EventTypeValues = "shareSnapshot"
 )
 
 // Values returns all known values for EventTypeValues. Note that this can be

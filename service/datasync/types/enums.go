@@ -100,9 +100,9 @@ type LocationFilterName string
 
 // Enum values for LocationFilterName
 const (
-	LocationFilterNameLocationuri  LocationFilterName = "LocationUri"
-	LocationFilterNameLocationtype LocationFilterName = "LocationType"
-	LocationFilterNameCreationtime LocationFilterName = "CreationTime"
+	LocationFilterNameLocationUri  LocationFilterName = "LocationUri"
+	LocationFilterNameLocationType LocationFilterName = "LocationType"
+	LocationFilterNameCreationTime LocationFilterName = "CreationTime"
 )
 
 // Values returns all known values for LocationFilterName. Note that this can be
@@ -400,8 +400,8 @@ type TaskFilterName string
 
 // Enum values for TaskFilterName
 const (
-	TaskFilterNameLocationid   TaskFilterName = "LocationId"
-	TaskFilterNameCreationtime TaskFilterName = "CreationTime"
+	TaskFilterNameLocationId   TaskFilterName = "LocationId"
+	TaskFilterNameCreationTime TaskFilterName = "CreationTime"
 )
 
 // Values returns all known values for TaskFilterName. Note that this can be

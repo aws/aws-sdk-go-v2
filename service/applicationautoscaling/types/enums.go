@@ -6,9 +6,9 @@ type AdjustmentType string
 
 // Enum values for AdjustmentType
 const (
-	AdjustmentTypeChangeincapacity        AdjustmentType = "ChangeInCapacity"
-	AdjustmentTypePercentchangeincapacity AdjustmentType = "PercentChangeInCapacity"
-	AdjustmentTypeExactcapacity           AdjustmentType = "ExactCapacity"
+	AdjustmentTypeChangeInCapacity        AdjustmentType = "ChangeInCapacity"
+	AdjustmentTypePercentChangeInCapacity AdjustmentType = "PercentChangeInCapacity"
+	AdjustmentTypeExactCapacity           AdjustmentType = "ExactCapacity"
 )
 
 // Values returns all known values for AdjustmentType. Note that this can be
@@ -49,7 +49,7 @@ const (
 	MetricStatisticAverage     MetricStatistic = "Average"
 	MetricStatisticMinimum     MetricStatistic = "Minimum"
 	MetricStatisticMaximum     MetricStatistic = "Maximum"
-	MetricStatisticSamplecount MetricStatistic = "SampleCount"
+	MetricStatisticSampleCount MetricStatistic = "SampleCount"
 	MetricStatisticSum         MetricStatistic = "Sum"
 )
 
@@ -70,23 +70,23 @@ type MetricType string
 
 // Enum values for MetricType
 const (
-	MetricTypeDynamodbreadcapacityutilization          MetricType = "DynamoDBReadCapacityUtilization"
-	MetricTypeDynamodbwritecapacityutilization         MetricType = "DynamoDBWriteCapacityUtilization"
-	MetricTypeAlbrequestcountpertarget                 MetricType = "ALBRequestCountPerTarget"
-	MetricTypeRdsreaderaveragecpuutilization           MetricType = "RDSReaderAverageCPUUtilization"
-	MetricTypeRdsreaderaveragedatabaseconnections      MetricType = "RDSReaderAverageDatabaseConnections"
-	MetricTypeEc2spotfleetrequestaveragecpuutilization MetricType = "EC2SpotFleetRequestAverageCPUUtilization"
-	MetricTypeEc2spotfleetrequestaveragenetworkin      MetricType = "EC2SpotFleetRequestAverageNetworkIn"
-	MetricTypeEc2spotfleetrequestaveragenetworkout     MetricType = "EC2SpotFleetRequestAverageNetworkOut"
-	MetricTypeSagemakervariantinvocationsperinstance   MetricType = "SageMakerVariantInvocationsPerInstance"
-	MetricTypeEcsserviceaveragecpuutilization          MetricType = "ECSServiceAverageCPUUtilization"
-	MetricTypeEcsserviceaveragememoryutilization       MetricType = "ECSServiceAverageMemoryUtilization"
-	MetricTypeAppstreamaveragecapacityutilization      MetricType = "AppStreamAverageCapacityUtilization"
-	MetricTypeComprehendinferenceutilization           MetricType = "ComprehendInferenceUtilization"
-	MetricTypeLambdaprovisionedconcurrencyutilization  MetricType = "LambdaProvisionedConcurrencyUtilization"
-	MetricTypeCassandrareadcapacityutilization         MetricType = "CassandraReadCapacityUtilization"
-	MetricTypeCassandrawritecapacityutilization        MetricType = "CassandraWriteCapacityUtilization"
-	MetricTypeKafkabrokerstorageutilization            MetricType = "KafkaBrokerStorageUtilization"
+	MetricTypeDynamoDBReadCapacityUtilization          MetricType = "DynamoDBReadCapacityUtilization"
+	MetricTypeDynamoDBWriteCapacityUtilization         MetricType = "DynamoDBWriteCapacityUtilization"
+	MetricTypeALBRequestCountPerTarget                 MetricType = "ALBRequestCountPerTarget"
+	MetricTypeRDSReaderAverageCPUUtilization           MetricType = "RDSReaderAverageCPUUtilization"
+	MetricTypeRDSReaderAverageDatabaseConnections      MetricType = "RDSReaderAverageDatabaseConnections"
+	MetricTypeEC2SpotFleetRequestAverageCPUUtilization MetricType = "EC2SpotFleetRequestAverageCPUUtilization"
+	MetricTypeEC2SpotFleetRequestAverageNetworkIn      MetricType = "EC2SpotFleetRequestAverageNetworkIn"
+	MetricTypeEC2SpotFleetRequestAverageNetworkOut     MetricType = "EC2SpotFleetRequestAverageNetworkOut"
+	MetricTypeSageMakerVariantInvocationsPerInstance   MetricType = "SageMakerVariantInvocationsPerInstance"
+	MetricTypeECSServiceAverageCPUUtilization          MetricType = "ECSServiceAverageCPUUtilization"
+	MetricTypeECSServiceAverageMemoryUtilization       MetricType = "ECSServiceAverageMemoryUtilization"
+	MetricTypeAppStreamAverageCapacityUtilization      MetricType = "AppStreamAverageCapacityUtilization"
+	MetricTypeComprehendInferenceUtilization           MetricType = "ComprehendInferenceUtilization"
+	MetricTypeLambdaProvisionedConcurrencyUtilization  MetricType = "LambdaProvisionedConcurrencyUtilization"
+	MetricTypeCassandraReadCapacityUtilization         MetricType = "CassandraReadCapacityUtilization"
+	MetricTypeCassandraWriteCapacityUtilization        MetricType = "CassandraWriteCapacityUtilization"
+	MetricTypeKafkaBrokerStorageUtilization            MetricType = "KafkaBrokerStorageUtilization"
 )
 
 // Values returns all known values for MetricType. Note that this can be expanded
@@ -118,8 +118,8 @@ type PolicyType string
 
 // Enum values for PolicyType
 const (
-	PolicyTypeStepscaling           PolicyType = "StepScaling"
-	PolicyTypeTargettrackingscaling PolicyType = "TargetTrackingScaling"
+	PolicyTypeStepScaling           PolicyType = "StepScaling"
+	PolicyTypeTargetTrackingScaling PolicyType = "TargetTrackingScaling"
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
@@ -136,23 +136,23 @@ type ScalableDimension string
 
 // Enum values for ScalableDimension
 const (
-	ScalableDimensionEcsservicedesiredcount                           ScalableDimension = "ecs:service:DesiredCount"
-	ScalableDimensionEc2spotfleetrequesttargetcapacity                ScalableDimension = "ec2:spot-fleet-request:TargetCapacity"
-	ScalableDimensionEmrinstancegroupinstancecount                    ScalableDimension = "elasticmapreduce:instancegroup:InstanceCount"
-	ScalableDimensionAppstreamfleetdesiredcapacity                    ScalableDimension = "appstream:fleet:DesiredCapacity"
-	ScalableDimensionDynamodbtablereadcapacityunits                   ScalableDimension = "dynamodb:table:ReadCapacityUnits"
-	ScalableDimensionDynamodbtablewritecapacityunits                  ScalableDimension = "dynamodb:table:WriteCapacityUnits"
-	ScalableDimensionDynamodbindexreadcapacityunits                   ScalableDimension = "dynamodb:index:ReadCapacityUnits"
-	ScalableDimensionDynamodbindexwritecapacityunits                  ScalableDimension = "dynamodb:index:WriteCapacityUnits"
-	ScalableDimensionRdsclusterreadreplicacount                       ScalableDimension = "rds:cluster:ReadReplicaCount"
-	ScalableDimensionSagemakervariantdesiredinstancecount             ScalableDimension = "sagemaker:variant:DesiredInstanceCount"
-	ScalableDimensionCustomresourcescalabledimension                  ScalableDimension = "custom-resource:ResourceType:Property"
-	ScalableDimensionComprehenddocclassifierendpointinferenceunits    ScalableDimension = "comprehend:document-classifier-endpoint:DesiredInferenceUnits"
-	ScalableDimensionComprehendentityrecognizerendpointinferenceunits ScalableDimension = "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits"
-	ScalableDimensionLambdafunctionprovisionedconcurrency             ScalableDimension = "lambda:function:ProvisionedConcurrency"
-	ScalableDimensionCassandratablereadcapacityunits                  ScalableDimension = "cassandra:table:ReadCapacityUnits"
-	ScalableDimensionCassandratablewritecapacityunits                 ScalableDimension = "cassandra:table:WriteCapacityUnits"
-	ScalableDimensionKafkabrokerstoragevolumesize                     ScalableDimension = "kafka:broker-storage:VolumeSize"
+	ScalableDimensionECSServiceDesiredCount                           ScalableDimension = "ecs:service:DesiredCount"
+	ScalableDimensionEC2SpotFleetRequestTargetCapacity                ScalableDimension = "ec2:spot-fleet-request:TargetCapacity"
+	ScalableDimensionEMRInstanceGroupInstanceCount                    ScalableDimension = "elasticmapreduce:instancegroup:InstanceCount"
+	ScalableDimensionAppstreamFleetDesiredCapacity                    ScalableDimension = "appstream:fleet:DesiredCapacity"
+	ScalableDimensionDynamoDBTableReadCapacityUnits                   ScalableDimension = "dynamodb:table:ReadCapacityUnits"
+	ScalableDimensionDynamoDBTableWriteCapacityUnits                  ScalableDimension = "dynamodb:table:WriteCapacityUnits"
+	ScalableDimensionDynamoDBIndexReadCapacityUnits                   ScalableDimension = "dynamodb:index:ReadCapacityUnits"
+	ScalableDimensionDynamoDBIndexWriteCapacityUnits                  ScalableDimension = "dynamodb:index:WriteCapacityUnits"
+	ScalableDimensionRDSClusterReadReplicaCount                       ScalableDimension = "rds:cluster:ReadReplicaCount"
+	ScalableDimensionSageMakerVariantDesiredInstanceCount             ScalableDimension = "sagemaker:variant:DesiredInstanceCount"
+	ScalableDimensionCustomResourceScalableDimension                  ScalableDimension = "custom-resource:ResourceType:Property"
+	ScalableDimensionComprehendDocClassifierEndpointInferenceUnits    ScalableDimension = "comprehend:document-classifier-endpoint:DesiredInferenceUnits"
+	ScalableDimensionComprehendEntityRecognizerEndpointInferenceUnits ScalableDimension = "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits"
+	ScalableDimensionLambdaFunctionProvisionedConcurrency             ScalableDimension = "lambda:function:ProvisionedConcurrency"
+	ScalableDimensionCassandraTableReadCapacityUnits                  ScalableDimension = "cassandra:table:ReadCapacityUnits"
+	ScalableDimensionCassandraTableWriteCapacityUnits                 ScalableDimension = "cassandra:table:WriteCapacityUnits"
+	ScalableDimensionKafkaBrokerStorageVolumeSize                     ScalableDimension = "kafka:broker-storage:VolumeSize"
 )
 
 // Values returns all known values for ScalableDimension. Note that this can be
@@ -185,7 +185,7 @@ type ScalingActivityStatusCode string
 // Enum values for ScalingActivityStatusCode
 const (
 	ScalingActivityStatusCodePending     ScalingActivityStatusCode = "Pending"
-	ScalingActivityStatusCodeInprogress  ScalingActivityStatusCode = "InProgress"
+	ScalingActivityStatusCodeInProgress  ScalingActivityStatusCode = "InProgress"
 	ScalingActivityStatusCodeSuccessful  ScalingActivityStatusCode = "Successful"
 	ScalingActivityStatusCodeOverridden  ScalingActivityStatusCode = "Overridden"
 	ScalingActivityStatusCodeUnfulfilled ScalingActivityStatusCode = "Unfulfilled"

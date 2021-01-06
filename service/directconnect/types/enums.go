@@ -6,8 +6,8 @@ type AddressFamily string
 
 // Enum values for AddressFamily
 const (
-	AddressFamilyIpv4 AddressFamily = "ipv4"
-	AddressFamilyIpv6 AddressFamily = "ipv6"
+	AddressFamilyIPv4 AddressFamily = "ipv4"
+	AddressFamilyIPv6 AddressFamily = "ipv6"
 )
 
 // Values returns all known values for AddressFamily. Note that this can be
@@ -169,8 +169,8 @@ type DirectConnectGatewayAttachmentType string
 
 // Enum values for DirectConnectGatewayAttachmentType
 const (
-	DirectConnectGatewayAttachmentTypeTransitvirtualinterface DirectConnectGatewayAttachmentType = "TransitVirtualInterface"
-	DirectConnectGatewayAttachmentTypePrivatevirtualinterface DirectConnectGatewayAttachmentType = "PrivateVirtualInterface"
+	DirectConnectGatewayAttachmentTypeTransitVirtualInterface DirectConnectGatewayAttachmentType = "TransitVirtualInterface"
+	DirectConnectGatewayAttachmentTypePrivateVirtualInterface DirectConnectGatewayAttachmentType = "PrivateVirtualInterface"
 )
 
 // Values returns all known values for DirectConnectGatewayAttachmentType. Note
@@ -210,8 +210,8 @@ type GatewayType string
 
 // Enum values for GatewayType
 const (
-	GatewayTypeVirtualprivategateway GatewayType = "virtualPrivateGateway"
-	GatewayTypeTransitgateway        GatewayType = "transitGateway"
+	GatewayTypeVirtualPrivateGateway GatewayType = "virtualPrivateGateway"
+	GatewayTypeTransitGateway        GatewayType = "transitGateway"
 )
 
 // Values returns all known values for GatewayType. Note that this can be expanded
