@@ -52,16 +52,22 @@ func (m *ARNLookup) HandleInitialize(ctx context.Context, in middleware.Initiali
 
 // arnResourceKey is the key set on context used to identify, retrive an ARN resource
 // if present on the context.
-type arnResourceKey struct {
-}
+type arnResourceKey struct{}
 
-// SetARNResourceOnContext sets arn on context
+// SetARNResourceOnContext sets the S3 ARN on the context.
+//
+// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// to clear all stack values.
 func setARNResourceOnContext(ctx context.Context, value arn.ARN) context.Context {
-	return context.WithValue(ctx, arnResourceKey{}, value)
+	return middleware.WithStackValue(ctx, arnResourceKey{}, value)
 }
 
-// GetARNResourceFromContext returns an ARN from context and a bool indicating presence of ARN on ctx
+// GetARNResourceFromContext returns an ARN from context and a bool indicating
+// presence of ARN on ctx.
+//
+// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// to clear all stack values.
 func GetARNResourceFromContext(ctx context.Context) (arn.ARN, bool) {
-	v, ok := ctx.Value(arnResourceKey{}).(arn.ARN)
+	v, ok := middleware.GetStackValue(ctx, arnResourceKey{}).(arn.ARN)
 	return v, ok
 }

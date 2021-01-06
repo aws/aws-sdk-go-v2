@@ -3,6 +3,7 @@ package customizations
 import (
 	"context"
 	"fmt"
+
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/transport/http"
 )
@@ -39,11 +40,19 @@ type removeBucketKey struct {
 	bucket string
 }
 
+// setBucketToRemoveOnContext sets the bucket name to be removed.
+//
+// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// to clear all stack values.
 func setBucketToRemoveOnContext(ctx context.Context, bucket string) context.Context {
-	return context.WithValue(ctx, removeBucketKey{}, bucket)
+	return middleware.WithStackValue(ctx, removeBucketKey{}, bucket)
 }
 
+// getRemoveBucketFromPath returns the bucket name to remove from the path.
+//
+// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// to clear all stack values.
 func getRemoveBucketFromPath(ctx context.Context) (string, bool) {
-	v, ok := ctx.Value(removeBucketKey{}).(string)
+	v, ok := middleware.GetStackValue(ctx, removeBucketKey{}).(string)
 	return v, ok
 }

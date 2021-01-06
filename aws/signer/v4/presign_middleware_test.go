@@ -181,7 +181,7 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 			ctx = middleware.SetLogger(ctx, logger)
 
 			if len(c.PayloadHash) != 0 {
-				ctx = context.WithValue(ctx, payloadHashKey{}, c.PayloadHash)
+				ctx = SetPayloadHash(ctx, c.PayloadHash)
 			}
 
 			result, _, err := m.HandleFinalize(ctx, middleware.FinalizeInput{
