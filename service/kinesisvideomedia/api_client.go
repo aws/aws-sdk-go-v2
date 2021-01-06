@@ -89,6 +89,14 @@ type Options struct {
 	HTTPClient HTTPClient
 }
 
+// WithAPIOptions returns a functional option for setting the Client's APIOptions
+// option.
+func WithAPIOptions(optFns ...func(*middleware.Stack) error) func(*Options) {
+	return func(o *Options) {
+		o.APIOptions = append(o.APIOptions, optFns...)
+	}
+}
+
 type HTTPClient interface {
 	Do(*http.Request) (*http.Response, error)
 }
