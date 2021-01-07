@@ -490,6 +490,128 @@ func addOpUpdateMissionProfileValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdateMissionProfile{}, middleware.After)
 }
 
+func validateAntennaDownlinkConfig(v *types.AntennaDownlinkConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AntennaDownlinkConfig"}
+	if v.SpectrumConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpectrumConfig"))
+	} else if v.SpectrumConfig != nil {
+		if err := validateSpectrumConfig(v.SpectrumConfig); err != nil {
+			invalidParams.AddNested("SpectrumConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAntennaDownlinkDemodDecodeConfig(v *types.AntennaDownlinkDemodDecodeConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AntennaDownlinkDemodDecodeConfig"}
+	if v.DecodeConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DecodeConfig"))
+	} else if v.DecodeConfig != nil {
+		if err := validateDecodeConfig(v.DecodeConfig); err != nil {
+			invalidParams.AddNested("DecodeConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DemodulationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DemodulationConfig"))
+	} else if v.DemodulationConfig != nil {
+		if err := validateDemodulationConfig(v.DemodulationConfig); err != nil {
+			invalidParams.AddNested("DemodulationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SpectrumConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpectrumConfig"))
+	} else if v.SpectrumConfig != nil {
+		if err := validateSpectrumConfig(v.SpectrumConfig); err != nil {
+			invalidParams.AddNested("SpectrumConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAntennaUplinkConfig(v *types.AntennaUplinkConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AntennaUplinkConfig"}
+	if v.SpectrumConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpectrumConfig"))
+	} else if v.SpectrumConfig != nil {
+		if err := validateUplinkSpectrumConfig(v.SpectrumConfig); err != nil {
+			invalidParams.AddNested("SpectrumConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetEirp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetEirp"))
+	} else if v.TargetEirp != nil {
+		if err := validateEirp(v.TargetEirp); err != nil {
+			invalidParams.AddNested("TargetEirp", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfigTypeData(v types.ConfigTypeData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigTypeData"}
+	switch uv := v.(type) {
+	case *types.ConfigTypeDataMemberAntennaDownlinkConfig:
+		if err := validateAntennaDownlinkConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[antennaDownlinkConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig:
+		if err := validateAntennaDownlinkDemodDecodeConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[antennaDownlinkDemodDecodeConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ConfigTypeDataMemberAntennaUplinkConfig:
+		if err := validateAntennaUplinkConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[antennaUplinkConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ConfigTypeDataMemberDataflowEndpointConfig:
+		if err := validateDataflowEndpointConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[dataflowEndpointConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ConfigTypeDataMemberTrackingConfig:
+		if err := validateTrackingConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[trackingConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ConfigTypeDataMemberUplinkEchoConfig:
+		if err := validateUplinkEchoConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[uplinkEchoConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataflowEndpoint(v *types.DataflowEndpoint) error {
 	if v == nil {
 		return nil
@@ -499,6 +621,69 @@ func validateDataflowEndpoint(v *types.DataflowEndpoint) error {
 		if err := validateSocketAddress(v.Address); err != nil {
 			invalidParams.AddNested("Address", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataflowEndpointConfig(v *types.DataflowEndpointConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataflowEndpointConfig"}
+	if v.DataflowEndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataflowEndpointName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDecodeConfig(v *types.DecodeConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DecodeConfig"}
+	if v.UnvalidatedJSON == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UnvalidatedJSON"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDemodulationConfig(v *types.DemodulationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DemodulationConfig"}
+	if v.UnvalidatedJSON == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UnvalidatedJSON"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEirp(v *types.Eirp) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Eirp"}
+	if len(v.Units) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Units"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -546,6 +731,42 @@ func validateEndpointDetailsList(v []types.EndpointDetails) error {
 	}
 }
 
+func validateFrequency(v *types.Frequency) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Frequency"}
+	if len(v.Units) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Units"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFrequencyBandwidth(v *types.FrequencyBandwidth) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FrequencyBandwidth"}
+	if len(v.Units) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Units"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSecurityDetails(v *types.SecurityDetails) error {
 	if v == nil {
 		return nil
@@ -585,6 +806,84 @@ func validateSocketAddress(v *types.SocketAddress) error {
 	}
 }
 
+func validateSpectrumConfig(v *types.SpectrumConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpectrumConfig"}
+	if v.Bandwidth == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bandwidth"))
+	} else if v.Bandwidth != nil {
+		if err := validateFrequencyBandwidth(v.Bandwidth); err != nil {
+			invalidParams.AddNested("Bandwidth", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CenterFrequency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CenterFrequency"))
+	} else if v.CenterFrequency != nil {
+		if err := validateFrequency(v.CenterFrequency); err != nil {
+			invalidParams.AddNested("CenterFrequency", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrackingConfig(v *types.TrackingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrackingConfig"}
+	if len(v.Autotrack) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Autotrack"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUplinkEchoConfig(v *types.UplinkEchoConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UplinkEchoConfig"}
+	if v.AntennaUplinkConfigArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AntennaUplinkConfigArn"))
+	}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUplinkSpectrumConfig(v *types.UplinkSpectrumConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UplinkSpectrumConfig"}
+	if v.CenterFrequency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CenterFrequency"))
+	} else if v.CenterFrequency != nil {
+		if err := validateFrequency(v.CenterFrequency); err != nil {
+			invalidParams.AddNested("CenterFrequency", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelContactInput(v *CancelContactInput) error {
 	if v == nil {
 		return nil
@@ -607,6 +906,10 @@ func validateOpCreateConfigInput(v *CreateConfigInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateConfigInput"}
 	if v.ConfigData == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigData"))
+	} else if v.ConfigData != nil {
+		if err := validateConfigTypeData(v.ConfigData); err != nil {
+			invalidParams.AddNested("ConfigData", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
@@ -908,6 +1211,10 @@ func validateOpUpdateConfigInput(v *UpdateConfigInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConfigInput"}
 	if v.ConfigData == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigData"))
+	} else if v.ConfigData != nil {
+		if err := validateConfigTypeData(v.ConfigData); err != nil {
+			invalidParams.AddNested("ConfigData", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ConfigId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigId"))

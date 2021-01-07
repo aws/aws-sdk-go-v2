@@ -2178,6 +2178,23 @@ func validateAccessControlTranslation(v *types.AccessControlTranslation) error {
 	}
 }
 
+func validateAnalyticsAndOperator(v *types.AnalyticsAndOperator) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsAndOperator"}
+	if v.Tags != nil {
+		if err := validateTagSet(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAnalyticsConfiguration(v *types.AnalyticsConfiguration) error {
 	if v == nil {
 		return nil
@@ -2185,6 +2202,11 @@ func validateAnalyticsConfiguration(v *types.AnalyticsConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsConfiguration"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Filter != nil {
+		if err := validateAnalyticsFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.StorageClassAnalysis == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StorageClassAnalysis"))
@@ -2211,6 +2233,30 @@ func validateAnalyticsExportDestination(v *types.AnalyticsExportDestination) err
 		if err := validateAnalyticsS3BucketDestination(v.S3BucketDestination); err != nil {
 			invalidParams.AddNested("S3BucketDestination", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsFilter(v types.AnalyticsFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsFilter"}
+	switch uv := v.(type) {
+	case *types.AnalyticsFilterMemberAnd:
+		if err := validateAnalyticsAndOperator(&uv.Value); err != nil {
+			invalidParams.AddNested("[And]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AnalyticsFilterMemberTag:
+		if err := validateTag(&uv.Value); err != nil {
+			invalidParams.AddNested("[Tag]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2735,8 +2781,54 @@ func validateLifecycleRule(v *types.LifecycleRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LifecycleRule"}
+	if v.Filter != nil {
+		if err := validateLifecycleRuleFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLifecycleRuleAndOperator(v *types.LifecycleRuleAndOperator) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LifecycleRuleAndOperator"}
+	if v.Tags != nil {
+		if err := validateTagSet(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLifecycleRuleFilter(v types.LifecycleRuleFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LifecycleRuleFilter"}
+	switch uv := v.(type) {
+	case *types.LifecycleRuleFilterMemberAnd:
+		if err := validateLifecycleRuleAndOperator(&uv.Value); err != nil {
+			invalidParams.AddNested("[And]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.LifecycleRuleFilterMemberTag:
+		if err := validateTag(&uv.Value); err != nil {
+			invalidParams.AddNested("[Tag]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2800,6 +2892,23 @@ func validateMetrics(v *types.Metrics) error {
 	}
 }
 
+func validateMetricsAndOperator(v *types.MetricsAndOperator) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricsAndOperator"}
+	if v.Tags != nil {
+		if err := validateTagSet(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetricsConfiguration(v *types.MetricsConfiguration) error {
 	if v == nil {
 		return nil
@@ -2807,6 +2916,35 @@ func validateMetricsConfiguration(v *types.MetricsConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MetricsConfiguration"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Filter != nil {
+		if err := validateMetricsFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricsFilter(v types.MetricsFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricsFilter"}
+	switch uv := v.(type) {
+	case *types.MetricsFilterMemberAnd:
+		if err := validateMetricsAndOperator(&uv.Value); err != nil {
+			invalidParams.AddNested("[And]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.MetricsFilterMemberTag:
+		if err := validateTag(&uv.Value); err != nil {
+			invalidParams.AddNested("[Tag]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3034,6 +3172,11 @@ func validateReplicationRule(v *types.ReplicationRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicationRule"}
+	if v.Filter != nil {
+		if err := validateReplicationRuleFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
@@ -3053,6 +3196,47 @@ func validateReplicationRule(v *types.ReplicationRule) error {
 		if err := validateDestination(v.Destination); err != nil {
 			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReplicationRuleAndOperator(v *types.ReplicationRuleAndOperator) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplicationRuleAndOperator"}
+	if v.Tags != nil {
+		if err := validateTagSet(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReplicationRuleFilter(v types.ReplicationRuleFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplicationRuleFilter"}
+	switch uv := v.(type) {
+	case *types.ReplicationRuleFilterMemberAnd:
+		if err := validateReplicationRuleAndOperator(&uv.Value); err != nil {
+			invalidParams.AddNested("[And]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ReplicationRuleFilterMemberTag:
+		if err := validateTag(&uv.Value); err != nil {
+			invalidParams.AddNested("[Tag]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
