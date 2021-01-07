@@ -66,13 +66,13 @@ type ImageFailureCode string
 
 // Enum values for ImageFailureCode
 const (
-	ImageFailureCodeInvalidimagedigest            ImageFailureCode = "InvalidImageDigest"
-	ImageFailureCodeInvalidimagetag               ImageFailureCode = "InvalidImageTag"
-	ImageFailureCodeImagetagdoesnotmatchdigest    ImageFailureCode = "ImageTagDoesNotMatchDigest"
-	ImageFailureCodeImagenotfound                 ImageFailureCode = "ImageNotFound"
-	ImageFailureCodeMissingdigestandtag           ImageFailureCode = "MissingDigestAndTag"
-	ImageFailureCodeImagereferencedbymanifestlist ImageFailureCode = "ImageReferencedByManifestList"
-	ImageFailureCodeKmserror                      ImageFailureCode = "KmsError"
+	ImageFailureCodeInvalidImageDigest            ImageFailureCode = "InvalidImageDigest"
+	ImageFailureCodeInvalidImageTag               ImageFailureCode = "InvalidImageTag"
+	ImageFailureCodeImageTagDoesNotMatchDigest    ImageFailureCode = "ImageTagDoesNotMatchDigest"
+	ImageFailureCodeImageNotFound                 ImageFailureCode = "ImageNotFound"
+	ImageFailureCodeMissingDigestAndTag           ImageFailureCode = "MissingDigestAndTag"
+	ImageFailureCodeImageReferencedByManifestList ImageFailureCode = "ImageReferencedByManifestList"
+	ImageFailureCodeKmsError                      ImageFailureCode = "KmsError"
 )
 
 // Values returns all known values for ImageFailureCode. Note that this can be
@@ -130,8 +130,8 @@ type LayerFailureCode string
 
 // Enum values for LayerFailureCode
 const (
-	LayerFailureCodeInvalidlayerdigest LayerFailureCode = "InvalidLayerDigest"
-	LayerFailureCodeMissinglayerdigest LayerFailureCode = "MissingLayerDigest"
+	LayerFailureCodeInvalidLayerDigest LayerFailureCode = "InvalidLayerDigest"
+	LayerFailureCodeMissingLayerDigest LayerFailureCode = "MissingLayerDigest"
 )
 
 // Values returns all known values for LayerFailureCode. Note that this can be

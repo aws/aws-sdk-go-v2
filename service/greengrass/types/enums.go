@@ -32,8 +32,8 @@ type ConfigurationSyncStatus string
 
 // Enum values for ConfigurationSyncStatus
 const (
-	ConfigurationSyncStatusInsync    ConfigurationSyncStatus = "InSync"
-	ConfigurationSyncStatusOutofsync ConfigurationSyncStatus = "OutOfSync"
+	ConfigurationSyncStatusInSync    ConfigurationSyncStatus = "InSync"
+	ConfigurationSyncStatusOutOfSync ConfigurationSyncStatus = "OutOfSync"
 )
 
 // Values returns all known values for ConfigurationSyncStatus. Note that this can
@@ -50,10 +50,10 @@ type DeploymentType string
 
 // Enum values for DeploymentType
 const (
-	DeploymentTypeNewdeployment        DeploymentType = "NewDeployment"
+	DeploymentTypeNewDeployment        DeploymentType = "NewDeployment"
 	DeploymentTypeRedeployment         DeploymentType = "Redeployment"
-	DeploymentTypeResetdeployment      DeploymentType = "ResetDeployment"
-	DeploymentTypeForceresetdeployment DeploymentType = "ForceResetDeployment"
+	DeploymentTypeResetDeployment      DeploymentType = "ResetDeployment"
+	DeploymentTypeForceResetDeployment DeploymentType = "ForceResetDeployment"
 )
 
 // Values returns all known values for DeploymentType. Note that this can be
@@ -90,8 +90,8 @@ type FunctionIsolationMode string
 
 // Enum values for FunctionIsolationMode
 const (
-	FunctionIsolationModeGreengrasscontainer FunctionIsolationMode = "GreengrassContainer"
-	FunctionIsolationModeNocontainer         FunctionIsolationMode = "NoContainer"
+	FunctionIsolationModeGreengrassContainer FunctionIsolationMode = "GreengrassContainer"
+	FunctionIsolationModeNoContainer         FunctionIsolationMode = "NoContainer"
 )
 
 // Values returns all known values for FunctionIsolationMode. Note that this can be
@@ -108,7 +108,7 @@ type LoggerComponent string
 
 // Enum values for LoggerComponent
 const (
-	LoggerComponentGreengrasssystem LoggerComponent = "GreengrassSystem"
+	LoggerComponentGreengrassSystem LoggerComponent = "GreengrassSystem"
 	LoggerComponentLambda           LoggerComponent = "Lambda"
 )
 
@@ -150,8 +150,8 @@ type LoggerType string
 
 // Enum values for LoggerType
 const (
-	LoggerTypeFilesystem    LoggerType = "FileSystem"
-	LoggerTypeAwscloudwatch LoggerType = "AWSCloudWatch"
+	LoggerTypeFileSystem    LoggerType = "FileSystem"
+	LoggerTypeAWSCloudWatch LoggerType = "AWSCloudWatch"
 )
 
 // Values returns all known values for LoggerType. Note that this can be expanded

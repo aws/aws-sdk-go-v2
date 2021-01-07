@@ -100,10 +100,10 @@ type ComparisonOperatorType string
 
 // Enum values for ComparisonOperatorType
 const (
-	ComparisonOperatorTypeGreaterthanorequaltothreshold ComparisonOperatorType = "GreaterThanOrEqualToThreshold"
-	ComparisonOperatorTypeGreaterthanthreshold          ComparisonOperatorType = "GreaterThanThreshold"
-	ComparisonOperatorTypeLessthanthreshold             ComparisonOperatorType = "LessThanThreshold"
-	ComparisonOperatorTypeLessthanorequaltothreshold    ComparisonOperatorType = "LessThanOrEqualToThreshold"
+	ComparisonOperatorTypeGreaterThanOrEqualToThreshold ComparisonOperatorType = "GreaterThanOrEqualToThreshold"
+	ComparisonOperatorTypeGreaterThanThreshold          ComparisonOperatorType = "GreaterThanThreshold"
+	ComparisonOperatorTypeLessThanThreshold             ComparisonOperatorType = "LessThanThreshold"
+	ComparisonOperatorTypeLessThanOrEqualToThreshold    ComparisonOperatorType = "LessThanOrEqualToThreshold"
 )
 
 // Values returns all known values for ComparisonOperatorType. Note that this can
@@ -380,7 +380,7 @@ type FleetAction string
 
 // Enum values for FleetAction
 const (
-	FleetActionAutoscaling FleetAction = "AUTO_SCALING"
+	FleetActionAutoScaling FleetAction = "AUTO_SCALING"
 )
 
 // Values returns all known values for FleetAction. Note that this can be expanded
@@ -428,7 +428,7 @@ type FleetType string
 
 // Enum values for FleetType
 const (
-	FleetTypeOndemand FleetType = "ON_DEMAND"
+	FleetTypeOnDemand FleetType = "ON_DEMAND"
 	FleetTypeSpot     FleetType = "SPOT"
 )
 
@@ -843,17 +843,17 @@ type MetricName string
 
 // Enum values for MetricName
 const (
-	MetricNameActivatinggamesessions       MetricName = "ActivatingGameSessions"
-	MetricNameActivegamesessions           MetricName = "ActiveGameSessions"
-	MetricNameActiveinstances              MetricName = "ActiveInstances"
-	MetricNameAvailablegamesessions        MetricName = "AvailableGameSessions"
-	MetricNameAvailableplayersessions      MetricName = "AvailablePlayerSessions"
-	MetricNameCurrentplayersessions        MetricName = "CurrentPlayerSessions"
-	MetricNameIdleinstances                MetricName = "IdleInstances"
-	MetricNamePercentavailablegamesessions MetricName = "PercentAvailableGameSessions"
-	MetricNamePercentidleinstances         MetricName = "PercentIdleInstances"
-	MetricNameQueuedepth                   MetricName = "QueueDepth"
-	MetricNameWaittime                     MetricName = "WaitTime"
+	MetricNameActivatingGameSessions       MetricName = "ActivatingGameSessions"
+	MetricNameActiveGameSessions           MetricName = "ActiveGameSessions"
+	MetricNameActiveInstances              MetricName = "ActiveInstances"
+	MetricNameAvailableGameSessions        MetricName = "AvailableGameSessions"
+	MetricNameAvailablePlayerSessions      MetricName = "AvailablePlayerSessions"
+	MetricNameCurrentPlayerSessions        MetricName = "CurrentPlayerSessions"
+	MetricNameIdleInstances                MetricName = "IdleInstances"
+	MetricNamePercentAvailableGameSessions MetricName = "PercentAvailableGameSessions"
+	MetricNamePercentIdleInstances         MetricName = "PercentIdleInstances"
+	MetricNameQueueDepth                   MetricName = "QueueDepth"
+	MetricNameWaitTime                     MetricName = "WaitTime"
 )
 
 // Values returns all known values for MetricName. Note that this can be expanded
@@ -939,8 +939,8 @@ type PolicyType string
 
 // Enum values for PolicyType
 const (
-	PolicyTypeRulebased   PolicyType = "RuleBased"
-	PolicyTypeTargetbased PolicyType = "TargetBased"
+	PolicyTypeRuleBased   PolicyType = "RuleBased"
+	PolicyTypeTargetBased PolicyType = "TargetBased"
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
@@ -957,8 +957,8 @@ type ProtectionPolicy string
 
 // Enum values for ProtectionPolicy
 const (
-	ProtectionPolicyNoprotection   ProtectionPolicy = "NoProtection"
-	ProtectionPolicyFullprotection ProtectionPolicy = "FullProtection"
+	ProtectionPolicyNoProtection   ProtectionPolicy = "NoProtection"
+	ProtectionPolicyFullProtection ProtectionPolicy = "FullProtection"
 )
 
 // Values returns all known values for ProtectionPolicy. Note that this can be
@@ -993,9 +993,9 @@ type ScalingAdjustmentType string
 
 // Enum values for ScalingAdjustmentType
 const (
-	ScalingAdjustmentTypeChangeincapacity        ScalingAdjustmentType = "ChangeInCapacity"
-	ScalingAdjustmentTypeExactcapacity           ScalingAdjustmentType = "ExactCapacity"
-	ScalingAdjustmentTypePercentchangeincapacity ScalingAdjustmentType = "PercentChangeInCapacity"
+	ScalingAdjustmentTypeChangeInCapacity        ScalingAdjustmentType = "ChangeInCapacity"
+	ScalingAdjustmentTypeExactCapacity           ScalingAdjustmentType = "ExactCapacity"
+	ScalingAdjustmentTypePercentChangeInCapacity ScalingAdjustmentType = "PercentChangeInCapacity"
 )
 
 // Values returns all known values for ScalingAdjustmentType. Note that this can be

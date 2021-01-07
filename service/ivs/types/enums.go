@@ -6,8 +6,8 @@ type ChannelLatencyMode string
 
 // Enum values for ChannelLatencyMode
 const (
-	ChannelLatencyModeNormallatency ChannelLatencyMode = "NORMAL"
-	ChannelLatencyModeLowlatency    ChannelLatencyMode = "LOW"
+	ChannelLatencyModeNormalLatency ChannelLatencyMode = "NORMAL"
+	ChannelLatencyModeLowLatency    ChannelLatencyMode = "LOW"
 )
 
 // Values returns all known values for ChannelLatencyMode. Note that this can be
@@ -24,8 +24,8 @@ type ChannelType string
 
 // Enum values for ChannelType
 const (
-	ChannelTypeBasicchanneltype    ChannelType = "BASIC"
-	ChannelTypeStandardchanneltype ChannelType = "STANDARD"
+	ChannelTypeBasicChannelType    ChannelType = "BASIC"
+	ChannelTypeStandardChannelType ChannelType = "STANDARD"
 )
 
 // Values returns all known values for ChannelType. Note that this can be expanded
@@ -42,7 +42,7 @@ type StreamHealth string
 
 // Enum values for StreamHealth
 const (
-	StreamHealthStreamhealthy StreamHealth = "HEALTHY"
+	StreamHealthStreamHealthy StreamHealth = "HEALTHY"
 	StreamHealthStarving      StreamHealth = "STARVING"
 	StreamHealthUnknown       StreamHealth = "UNKNOWN"
 )
@@ -62,8 +62,8 @@ type StreamState string
 
 // Enum values for StreamState
 const (
-	StreamStateStreamlive    StreamState = "LIVE"
-	StreamStateStreamoffline StreamState = "OFFLINE"
+	StreamStateStreamLive    StreamState = "LIVE"
+	StreamStateStreamOffline StreamState = "OFFLINE"
 )
 
 // Values returns all known values for StreamState. Note that this can be expanded

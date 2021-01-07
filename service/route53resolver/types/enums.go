@@ -7,15 +7,15 @@ type IpAddressStatus string
 // Enum values for IpAddressStatus
 const (
 	IpAddressStatusCreating               IpAddressStatus = "CREATING"
-	IpAddressStatusFailedcreation         IpAddressStatus = "FAILED_CREATION"
+	IpAddressStatusFailedCreation         IpAddressStatus = "FAILED_CREATION"
 	IpAddressStatusAttaching              IpAddressStatus = "ATTACHING"
 	IpAddressStatusAttached               IpAddressStatus = "ATTACHED"
-	IpAddressStatusRemapdetaching         IpAddressStatus = "REMAP_DETACHING"
-	IpAddressStatusRemapattaching         IpAddressStatus = "REMAP_ATTACHING"
+	IpAddressStatusRemapDetaching         IpAddressStatus = "REMAP_DETACHING"
+	IpAddressStatusRemapAttaching         IpAddressStatus = "REMAP_ATTACHING"
 	IpAddressStatusDetaching              IpAddressStatus = "DETACHING"
-	IpAddressStatusFailedresourcegone     IpAddressStatus = "FAILED_RESOURCE_GONE"
+	IpAddressStatusFailedResourceGone     IpAddressStatus = "FAILED_RESOURCE_GONE"
 	IpAddressStatusDeleting               IpAddressStatus = "DELETING"
-	IpAddressStatusDeletefailedfasexpired IpAddressStatus = "DELETE_FAILED_FAS_EXPIRED"
+	IpAddressStatusDeleteFailedFasExpired IpAddressStatus = "DELETE_FAILED_FAS_EXPIRED"
 )
 
 // Values returns all known values for IpAddressStatus. Note that this can be
@@ -61,8 +61,8 @@ const (
 	ResolverEndpointStatusCreating       ResolverEndpointStatus = "CREATING"
 	ResolverEndpointStatusOperational    ResolverEndpointStatus = "OPERATIONAL"
 	ResolverEndpointStatusUpdating       ResolverEndpointStatus = "UPDATING"
-	ResolverEndpointStatusAutorecovering ResolverEndpointStatus = "AUTO_RECOVERING"
-	ResolverEndpointStatusActionneeded   ResolverEndpointStatus = "ACTION_NEEDED"
+	ResolverEndpointStatusAutoRecovering ResolverEndpointStatus = "AUTO_RECOVERING"
+	ResolverEndpointStatusActionNeeded   ResolverEndpointStatus = "ACTION_NEEDED"
 	ResolverEndpointStatusDeleting       ResolverEndpointStatus = "DELETING"
 )
 
@@ -85,9 +85,9 @@ type ResolverQueryLogConfigAssociationError string
 // Enum values for ResolverQueryLogConfigAssociationError
 const (
 	ResolverQueryLogConfigAssociationErrorNone                 ResolverQueryLogConfigAssociationError = "NONE"
-	ResolverQueryLogConfigAssociationErrorDestinationnotfound  ResolverQueryLogConfigAssociationError = "DESTINATION_NOT_FOUND"
-	ResolverQueryLogConfigAssociationErrorAccessdenied         ResolverQueryLogConfigAssociationError = "ACCESS_DENIED"
-	ResolverQueryLogConfigAssociationErrorInternalserviceerror ResolverQueryLogConfigAssociationError = "INTERNAL_SERVICE_ERROR"
+	ResolverQueryLogConfigAssociationErrorDestinationNotFound  ResolverQueryLogConfigAssociationError = "DESTINATION_NOT_FOUND"
+	ResolverQueryLogConfigAssociationErrorAccessDenied         ResolverQueryLogConfigAssociationError = "ACCESS_DENIED"
+	ResolverQueryLogConfigAssociationErrorInternalServiceError ResolverQueryLogConfigAssociationError = "INTERNAL_SERVICE_ERROR"
 )
 
 // Values returns all known values for ResolverQueryLogConfigAssociationError. Note
@@ -109,7 +109,7 @@ type ResolverQueryLogConfigAssociationStatus string
 const (
 	ResolverQueryLogConfigAssociationStatusCreating     ResolverQueryLogConfigAssociationStatus = "CREATING"
 	ResolverQueryLogConfigAssociationStatusActive       ResolverQueryLogConfigAssociationStatus = "ACTIVE"
-	ResolverQueryLogConfigAssociationStatusActionneeded ResolverQueryLogConfigAssociationStatus = "ACTION_NEEDED"
+	ResolverQueryLogConfigAssociationStatusActionNeeded ResolverQueryLogConfigAssociationStatus = "ACTION_NEEDED"
 	ResolverQueryLogConfigAssociationStatusDeleting     ResolverQueryLogConfigAssociationStatus = "DELETING"
 	ResolverQueryLogConfigAssociationStatusFailed       ResolverQueryLogConfigAssociationStatus = "FAILED"
 )
@@ -221,9 +221,9 @@ type ShareStatus string
 
 // Enum values for ShareStatus
 const (
-	ShareStatusNotshared    ShareStatus = "NOT_SHARED"
-	ShareStatusSharedwithme ShareStatus = "SHARED_WITH_ME"
-	ShareStatusSharedbyme   ShareStatus = "SHARED_BY_ME"
+	ShareStatusNotShared    ShareStatus = "NOT_SHARED"
+	ShareStatusSharedWithMe ShareStatus = "SHARED_WITH_ME"
+	ShareStatusSharedByMe   ShareStatus = "SHARED_BY_ME"
 )
 
 // Values returns all known values for ShareStatus. Note that this can be expanded

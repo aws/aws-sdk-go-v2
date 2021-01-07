@@ -170,8 +170,8 @@ type StateDBType string
 
 // Enum values for StateDBType
 const (
-	StateDBTypeLeveldb StateDBType = "LevelDB"
-	StateDBTypeCouchdb StateDBType = "CouchDB"
+	StateDBTypeLevelDB StateDBType = "LevelDB"
+	StateDBTypeCouchDB StateDBType = "CouchDB"
 )
 
 // Values returns all known values for StateDBType. Note that this can be expanded

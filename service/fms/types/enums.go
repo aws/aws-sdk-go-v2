@@ -8,7 +8,7 @@ type AccountRoleStatus string
 const (
 	AccountRoleStatusReady           AccountRoleStatus = "READY"
 	AccountRoleStatusCreating        AccountRoleStatus = "CREATING"
-	AccountRoleStatusPendingdeletion AccountRoleStatus = "PENDING_DELETION"
+	AccountRoleStatusPendingDeletion AccountRoleStatus = "PENDING_DELETION"
 	AccountRoleStatusDeleting        AccountRoleStatus = "DELETING"
 	AccountRoleStatusDeleted         AccountRoleStatus = "DELETED"
 )
@@ -48,10 +48,10 @@ type DependentServiceName string
 
 // Enum values for DependentServiceName
 const (
-	DependentServiceNameAwsconfig              DependentServiceName = "AWSCONFIG"
+	DependentServiceNameAWSConfig              DependentServiceName = "AWSCONFIG"
 	DependentServiceNameAwswaf                 DependentServiceName = "AWSWAF"
-	DependentServiceNameAwsshieldadvanced      DependentServiceName = "AWSSHIELD_ADVANCED"
-	DependentServiceNameAwsvirtualprivatecloud DependentServiceName = "AWSVPC"
+	DependentServiceNameAWSShieldAdvanced      DependentServiceName = "AWSSHIELD_ADVANCED"
+	DependentServiceNameAWSVirtualPrivateCloud DependentServiceName = "AWSVPC"
 )
 
 // Values returns all known values for DependentServiceName. Note that this can be
@@ -71,7 +71,7 @@ type PolicyComplianceStatusType string
 // Enum values for PolicyComplianceStatusType
 const (
 	PolicyComplianceStatusTypeCompliant    PolicyComplianceStatusType = "COMPLIANT"
-	PolicyComplianceStatusTypeNoncompliant PolicyComplianceStatusType = "NON_COMPLIANT"
+	PolicyComplianceStatusTypeNonCompliant PolicyComplianceStatusType = "NON_COMPLIANT"
 )
 
 // Values returns all known values for PolicyComplianceStatusType. Note that this
@@ -134,19 +134,19 @@ type ViolationReason string
 
 // Enum values for ViolationReason
 const (
-	ViolationReasonWebaclmissingrulegroup                  ViolationReason = "WEB_ACL_MISSING_RULE_GROUP"
-	ViolationReasonResourcemissingwebacl                   ViolationReason = "RESOURCE_MISSING_WEB_ACL"
-	ViolationReasonResourceincorrectwebacl                 ViolationReason = "RESOURCE_INCORRECT_WEB_ACL"
-	ViolationReasonResourcemissingshieldprotection         ViolationReason = "RESOURCE_MISSING_SHIELD_PROTECTION"
-	ViolationReasonResourcemissingwebaclorshieldprotection ViolationReason = "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION"
-	ViolationReasonResourcemissingsecuritygroup            ViolationReason = "RESOURCE_MISSING_SECURITY_GROUP"
-	ViolationReasonResourceviolatesauditsecuritygroup      ViolationReason = "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP"
-	ViolationReasonSecuritygroupunused                     ViolationReason = "SECURITY_GROUP_UNUSED"
-	ViolationReasonSecuritygroupredundant                  ViolationReason = "SECURITY_GROUP_REDUNDANT"
-	ViolationReasonMissingfirewall                         ViolationReason = "MISSING_FIREWALL"
-	ViolationReasonMissingfirewallsubnetinaz               ViolationReason = "MISSING_FIREWALL_SUBNET_IN_AZ"
-	ViolationReasonMissingexpectedroutetable               ViolationReason = "MISSING_EXPECTED_ROUTE_TABLE"
-	ViolationReasonNetworkfirewallpolicymodified           ViolationReason = "NETWORK_FIREWALL_POLICY_MODIFIED"
+	ViolationReasonWebAclMissingRuleGroup                  ViolationReason = "WEB_ACL_MISSING_RULE_GROUP"
+	ViolationReasonResourceMissingWebAcl                   ViolationReason = "RESOURCE_MISSING_WEB_ACL"
+	ViolationReasonResourceIncorrectWebAcl                 ViolationReason = "RESOURCE_INCORRECT_WEB_ACL"
+	ViolationReasonResourceMissingShieldProtection         ViolationReason = "RESOURCE_MISSING_SHIELD_PROTECTION"
+	ViolationReasonResourceMissingWebaclOrShieldProtection ViolationReason = "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION"
+	ViolationReasonResourceMissingSecurityGroup            ViolationReason = "RESOURCE_MISSING_SECURITY_GROUP"
+	ViolationReasonResourceViolatesAuditSecurityGroup      ViolationReason = "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP"
+	ViolationReasonSecurityGroupUnused                     ViolationReason = "SECURITY_GROUP_UNUSED"
+	ViolationReasonSecurityGroupRedundant                  ViolationReason = "SECURITY_GROUP_REDUNDANT"
+	ViolationReasonMissingFirewall                         ViolationReason = "MISSING_FIREWALL"
+	ViolationReasonMissingFirewallSubnetInAZ               ViolationReason = "MISSING_FIREWALL_SUBNET_IN_AZ"
+	ViolationReasonMissingExpectedRouteTable               ViolationReason = "MISSING_EXPECTED_ROUTE_TABLE"
+	ViolationReasonNetworkFirewallPolicyModified           ViolationReason = "NETWORK_FIREWALL_POLICY_MODIFIED"
 )
 
 // Values returns all known values for ViolationReason. Note that this can be

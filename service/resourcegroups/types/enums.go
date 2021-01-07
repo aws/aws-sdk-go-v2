@@ -26,8 +26,8 @@ type GroupFilterName string
 
 // Enum values for GroupFilterName
 const (
-	GroupFilterNameResourcetype      GroupFilterName = "resource-type"
-	GroupFilterNameConfigurationtype GroupFilterName = "configuration-type"
+	GroupFilterNameResourceType      GroupFilterName = "resource-type"
+	GroupFilterNameConfigurationType GroupFilterName = "configuration-type"
 )
 
 // Values returns all known values for GroupFilterName. Note that this can be
@@ -80,7 +80,7 @@ type ResourceFilterName string
 
 // Enum values for ResourceFilterName
 const (
-	ResourceFilterNameResourcetype ResourceFilterName = "resource-type"
+	ResourceFilterNameResourceType ResourceFilterName = "resource-type"
 )
 
 // Values returns all known values for ResourceFilterName. Note that this can be

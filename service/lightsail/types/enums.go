@@ -24,7 +24,7 @@ type AddOnType string
 
 // Enum values for AddOnType
 const (
-	AddOnTypeAutosnapshot AddOnType = "AutoSnapshot"
+	AddOnTypeAutoSnapshot AddOnType = "AutoSnapshot"
 )
 
 // Values returns all known values for AddOnType. Note that this can be expanded in
@@ -82,8 +82,8 @@ type BehaviorEnum string
 
 // Enum values for BehaviorEnum
 const (
-	BehaviorEnumDontcachesetting BehaviorEnum = "dont-cache"
-	BehaviorEnumCachesetting     BehaviorEnum = "cache"
+	BehaviorEnumDontCacheSetting BehaviorEnum = "dont-cache"
+	BehaviorEnumCacheSetting     BehaviorEnum = "cache"
 )
 
 // Values returns all known values for BehaviorEnum. Note that this can be expanded
@@ -118,11 +118,11 @@ type CertificateStatus string
 
 // Enum values for CertificateStatus
 const (
-	CertificateStatusPendingvalidation  CertificateStatus = "PENDING_VALIDATION"
+	CertificateStatusPendingValidation  CertificateStatus = "PENDING_VALIDATION"
 	CertificateStatusIssued             CertificateStatus = "ISSUED"
 	CertificateStatusInactive           CertificateStatus = "INACTIVE"
 	CertificateStatusExpired            CertificateStatus = "EXPIRED"
-	CertificateStatusValidationtimedout CertificateStatus = "VALIDATION_TIMED_OUT"
+	CertificateStatusValidationTimedOut CertificateStatus = "VALIDATION_TIMED_OUT"
 	CertificateStatusRevoked            CertificateStatus = "REVOKED"
 	CertificateStatusFailed             CertificateStatus = "FAILED"
 )
@@ -146,7 +146,7 @@ type CloudFormationStackRecordSourceType string
 
 // Enum values for CloudFormationStackRecordSourceType
 const (
-	CloudFormationStackRecordSourceTypeExportsnapshotrecord CloudFormationStackRecordSourceType = "ExportSnapshotRecord"
+	CloudFormationStackRecordSourceTypeExportSnapshotRecord CloudFormationStackRecordSourceType = "ExportSnapshotRecord"
 )
 
 // Values returns all known values for CloudFormationStackRecordSourceType. Note
@@ -163,10 +163,10 @@ type ComparisonOperator string
 
 // Enum values for ComparisonOperator
 const (
-	ComparisonOperatorGreaterthanorequaltothreshold ComparisonOperator = "GreaterThanOrEqualToThreshold"
-	ComparisonOperatorGreaterthanthreshold          ComparisonOperator = "GreaterThanThreshold"
-	ComparisonOperatorLessthanthreshold             ComparisonOperator = "LessThanThreshold"
-	ComparisonOperatorLessthanorequaltothreshold    ComparisonOperator = "LessThanOrEqualToThreshold"
+	ComparisonOperatorGreaterThanOrEqualToThreshold ComparisonOperator = "GreaterThanOrEqualToThreshold"
+	ComparisonOperatorGreaterThanThreshold          ComparisonOperator = "GreaterThanThreshold"
+	ComparisonOperatorLessThanThreshold             ComparisonOperator = "LessThanThreshold"
+	ComparisonOperatorLessThanOrEqualToThreshold    ComparisonOperator = "LessThanOrEqualToThreshold"
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
@@ -185,7 +185,7 @@ type ContactMethodStatus string
 
 // Enum values for ContactMethodStatus
 const (
-	ContactMethodStatusPendingverification ContactMethodStatus = "PendingVerification"
+	ContactMethodStatusPendingVerification ContactMethodStatus = "PendingVerification"
 	ContactMethodStatusValid               ContactMethodStatus = "Valid"
 	ContactMethodStatusInvalid             ContactMethodStatus = "Invalid"
 )
@@ -263,8 +263,8 @@ type ContainerServiceMetricName string
 
 // Enum values for ContainerServiceMetricName
 const (
-	ContainerServiceMetricNameCpuutilization    ContainerServiceMetricName = "CPUUtilization"
-	ContainerServiceMetricNameMemoryutilization ContainerServiceMetricName = "MemoryUtilization"
+	ContainerServiceMetricNameCPUUtilization    ContainerServiceMetricName = "CPUUtilization"
+	ContainerServiceMetricNameMemoryUtilization ContainerServiceMetricName = "MemoryUtilization"
 )
 
 // Values returns all known values for ContainerServiceMetricName. Note that this
@@ -380,7 +380,7 @@ const (
 	DiskStatePending   DiskState = "pending"
 	DiskStateError     DiskState = "error"
 	DiskStateAvailable DiskState = "available"
-	DiskStateInuse     DiskState = "in-use"
+	DiskStateInUse     DiskState = "in-use"
 	DiskStateUnknown   DiskState = "unknown"
 )
 
@@ -402,11 +402,11 @@ type DistributionMetricName string
 // Enum values for DistributionMetricName
 const (
 	DistributionMetricNameRequests         DistributionMetricName = "Requests"
-	DistributionMetricNameBytesdownloaded  DistributionMetricName = "BytesDownloaded"
-	DistributionMetricNameBytesuploaded    DistributionMetricName = "BytesUploaded"
-	DistributionMetricNameTotalerrorrate   DistributionMetricName = "TotalErrorRate"
-	DistributionMetricNameHttp4xxerrorrate DistributionMetricName = "Http4xxErrorRate"
-	DistributionMetricNameHttp5xxerrorrate DistributionMetricName = "Http5xxErrorRate"
+	DistributionMetricNameBytesDownloaded  DistributionMetricName = "BytesDownloaded"
+	DistributionMetricNameBytesUploaded    DistributionMetricName = "BytesUploaded"
+	DistributionMetricNameTotalErrorRate   DistributionMetricName = "TotalErrorRate"
+	DistributionMetricNameHttp4xxErrorRate DistributionMetricName = "Http4xxErrorRate"
+	DistributionMetricNameHttp5xxErrorRate DistributionMetricName = "Http5xxErrorRate"
 )
 
 // Values returns all known values for DistributionMetricName. Note that this can
@@ -427,8 +427,8 @@ type ExportSnapshotRecordSourceType string
 
 // Enum values for ExportSnapshotRecordSourceType
 const (
-	ExportSnapshotRecordSourceTypeInstancesnapshot ExportSnapshotRecordSourceType = "InstanceSnapshot"
-	ExportSnapshotRecordSourceTypeDisksnapshot     ExportSnapshotRecordSourceType = "DiskSnapshot"
+	ExportSnapshotRecordSourceTypeInstanceSnapshot ExportSnapshotRecordSourceType = "InstanceSnapshot"
+	ExportSnapshotRecordSourceTypeDiskSnapshot     ExportSnapshotRecordSourceType = "DiskSnapshot"
 )
 
 // Values returns all known values for ExportSnapshotRecordSourceType. Note that
@@ -447,7 +447,7 @@ type ForwardValues string
 // Enum values for ForwardValues
 const (
 	ForwardValuesNone      ForwardValues = "none"
-	ForwardValuesAllowlist ForwardValues = "allow-list"
+	ForwardValuesAllowList ForwardValues = "allow-list"
 	ForwardValuesAll       ForwardValues = "all"
 )
 
@@ -467,17 +467,17 @@ type HeaderEnum string
 // Enum values for HeaderEnum
 const (
 	HeaderEnumAccept                    HeaderEnum = "Accept"
-	HeaderEnumAcceptcharset             HeaderEnum = "Accept-Charset"
-	HeaderEnumAcceptdatetime            HeaderEnum = "Accept-Datetime"
-	HeaderEnumAcceptencoding            HeaderEnum = "Accept-Encoding"
-	HeaderEnumAcceptlanguage            HeaderEnum = "Accept-Language"
+	HeaderEnumAcceptCharset             HeaderEnum = "Accept-Charset"
+	HeaderEnumAcceptDatetime            HeaderEnum = "Accept-Datetime"
+	HeaderEnumAcceptEncoding            HeaderEnum = "Accept-Encoding"
+	HeaderEnumAcceptLanguage            HeaderEnum = "Accept-Language"
 	HeaderEnumAuthorization             HeaderEnum = "Authorization"
-	HeaderEnumCloudfrontforwardedproto  HeaderEnum = "CloudFront-Forwarded-Proto"
-	HeaderEnumCloudfrontisdesktopviewer HeaderEnum = "CloudFront-Is-Desktop-Viewer"
-	HeaderEnumCloudfrontismobileviewer  HeaderEnum = "CloudFront-Is-Mobile-Viewer"
-	HeaderEnumCloudfrontissmarttvviewer HeaderEnum = "CloudFront-Is-SmartTV-Viewer"
-	HeaderEnumCloudfrontistabletviewer  HeaderEnum = "CloudFront-Is-Tablet-Viewer"
-	HeaderEnumCloudfrontviewercountry   HeaderEnum = "CloudFront-Viewer-Country"
+	HeaderEnumCloudFrontForwardedProto  HeaderEnum = "CloudFront-Forwarded-Proto"
+	HeaderEnumCloudFrontIsDesktopViewer HeaderEnum = "CloudFront-Is-Desktop-Viewer"
+	HeaderEnumCloudFrontIsMobileViewer  HeaderEnum = "CloudFront-Is-Mobile-Viewer"
+	HeaderEnumCloudFrontIsSmartTVViewer HeaderEnum = "CloudFront-Is-SmartTV-Viewer"
+	HeaderEnumCloudFrontIsTabletViewer  HeaderEnum = "CloudFront-Is-Tablet-Viewer"
+	HeaderEnumCloudFrontViewerCountry   HeaderEnum = "CloudFront-Viewer-Country"
 	HeaderEnumHost                      HeaderEnum = "Host"
 	HeaderEnumOrigin                    HeaderEnum = "Origin"
 	HeaderEnumReferer                   HeaderEnum = "Referer"
@@ -528,17 +528,17 @@ type InstanceHealthReason string
 
 // Enum values for InstanceHealthReason
 const (
-	InstanceHealthReasonLbregistrationinprogress         InstanceHealthReason = "Lb.RegistrationInProgress"
-	InstanceHealthReasonLbinitialhealthchecking          InstanceHealthReason = "Lb.InitialHealthChecking"
-	InstanceHealthReasonLbinternalerror                  InstanceHealthReason = "Lb.InternalError"
-	InstanceHealthReasonInstanceresponsecodemismatch     InstanceHealthReason = "Instance.ResponseCodeMismatch"
-	InstanceHealthReasonInstancetimeout                  InstanceHealthReason = "Instance.Timeout"
-	InstanceHealthReasonInstancefailedhealthchecks       InstanceHealthReason = "Instance.FailedHealthChecks"
-	InstanceHealthReasonInstancenotregistered            InstanceHealthReason = "Instance.NotRegistered"
-	InstanceHealthReasonInstancenotinuse                 InstanceHealthReason = "Instance.NotInUse"
-	InstanceHealthReasonInstancederegistrationinprogress InstanceHealthReason = "Instance.DeregistrationInProgress"
-	InstanceHealthReasonInstanceinvalidstate             InstanceHealthReason = "Instance.InvalidState"
-	InstanceHealthReasonInstanceipunusable               InstanceHealthReason = "Instance.IpUnusable"
+	InstanceHealthReasonLbRegistrationInProgress         InstanceHealthReason = "Lb.RegistrationInProgress"
+	InstanceHealthReasonLbInitialHealthChecking          InstanceHealthReason = "Lb.InitialHealthChecking"
+	InstanceHealthReasonLbInternalError                  InstanceHealthReason = "Lb.InternalError"
+	InstanceHealthReasonInstanceResponseCodeMismatch     InstanceHealthReason = "Instance.ResponseCodeMismatch"
+	InstanceHealthReasonInstanceTimeout                  InstanceHealthReason = "Instance.Timeout"
+	InstanceHealthReasonInstanceFailedHealthChecks       InstanceHealthReason = "Instance.FailedHealthChecks"
+	InstanceHealthReasonInstanceNotRegistered            InstanceHealthReason = "Instance.NotRegistered"
+	InstanceHealthReasonInstanceNotInUse                 InstanceHealthReason = "Instance.NotInUse"
+	InstanceHealthReasonInstanceDeregistrationInProgress InstanceHealthReason = "Instance.DeregistrationInProgress"
+	InstanceHealthReasonInstanceInvalidState             InstanceHealthReason = "Instance.InvalidState"
+	InstanceHealthReasonInstanceIpUnusable               InstanceHealthReason = "Instance.IpUnusable"
 )
 
 // Values returns all known values for InstanceHealthReason. Note that this can be
@@ -590,14 +590,14 @@ type InstanceMetricName string
 
 // Enum values for InstanceMetricName
 const (
-	InstanceMetricNameCpuutilization            InstanceMetricName = "CPUUtilization"
-	InstanceMetricNameNetworkin                 InstanceMetricName = "NetworkIn"
-	InstanceMetricNameNetworkout                InstanceMetricName = "NetworkOut"
-	InstanceMetricNameStatuscheckfailed         InstanceMetricName = "StatusCheckFailed"
-	InstanceMetricNameStatuscheckfailedInstance InstanceMetricName = "StatusCheckFailed_Instance"
-	InstanceMetricNameStatuscheckfailedSystem   InstanceMetricName = "StatusCheckFailed_System"
-	InstanceMetricNameBurstcapacitytime         InstanceMetricName = "BurstCapacityTime"
-	InstanceMetricNameBurstcapacitypercentage   InstanceMetricName = "BurstCapacityPercentage"
+	InstanceMetricNameCPUUtilization            InstanceMetricName = "CPUUtilization"
+	InstanceMetricNameNetworkIn                 InstanceMetricName = "NetworkIn"
+	InstanceMetricNameNetworkOut                InstanceMetricName = "NetworkOut"
+	InstanceMetricNameStatusCheckFailed         InstanceMetricName = "StatusCheckFailed"
+	InstanceMetricNameStatusCheckFailedInstance InstanceMetricName = "StatusCheckFailed_Instance"
+	InstanceMetricNameStatusCheckFailedSystem   InstanceMetricName = "StatusCheckFailed_System"
+	InstanceMetricNameBurstCapacityTime         InstanceMetricName = "BurstCapacityTime"
+	InstanceMetricNameBurstCapacityPercentage   InstanceMetricName = "BurstCapacityPercentage"
 )
 
 // Values returns all known values for InstanceMetricName. Note that this can be
@@ -620,7 +620,7 @@ type InstancePlatform string
 
 // Enum values for InstancePlatform
 const (
-	InstancePlatformLinuxunix InstancePlatform = "LINUX_UNIX"
+	InstancePlatformLinuxUnix InstancePlatform = "LINUX_UNIX"
 	InstancePlatformWindows   InstancePlatform = "WINDOWS"
 )
 
@@ -658,9 +658,9 @@ type LoadBalancerAttributeName string
 
 // Enum values for LoadBalancerAttributeName
 const (
-	LoadBalancerAttributeNameHealthcheckpath                          LoadBalancerAttributeName = "HealthCheckPath"
-	LoadBalancerAttributeNameSessionstickinessenabled                 LoadBalancerAttributeName = "SessionStickinessEnabled"
-	LoadBalancerAttributeNameSessionstickinessLbCookiedurationseconds LoadBalancerAttributeName = "SessionStickiness_LB_CookieDurationSeconds"
+	LoadBalancerAttributeNameHealthCheckPath                          LoadBalancerAttributeName = "HealthCheckPath"
+	LoadBalancerAttributeNameSessionStickinessEnabled                 LoadBalancerAttributeName = "SessionStickinessEnabled"
+	LoadBalancerAttributeNameSessionStickinessLbCookieDurationSeconds LoadBalancerAttributeName = "SessionStickiness_LB_CookieDurationSeconds"
 )
 
 // Values returns all known values for LoadBalancerAttributeName. Note that this
@@ -678,18 +678,18 @@ type LoadBalancerMetricName string
 
 // Enum values for LoadBalancerMetricName
 const (
-	LoadBalancerMetricNameClienttlsnegotiationerrorcount LoadBalancerMetricName = "ClientTLSNegotiationErrorCount"
-	LoadBalancerMetricNameHealthyhostcount               LoadBalancerMetricName = "HealthyHostCount"
-	LoadBalancerMetricNameUnhealthyhostcount             LoadBalancerMetricName = "UnhealthyHostCount"
-	LoadBalancerMetricNameHttpcodeLb4xxCount             LoadBalancerMetricName = "HTTPCode_LB_4XX_Count"
-	LoadBalancerMetricNameHttpcodeLb5xxCount             LoadBalancerMetricName = "HTTPCode_LB_5XX_Count"
-	LoadBalancerMetricNameHttpcodeInstance2xxCount       LoadBalancerMetricName = "HTTPCode_Instance_2XX_Count"
-	LoadBalancerMetricNameHttpcodeInstance3xxCount       LoadBalancerMetricName = "HTTPCode_Instance_3XX_Count"
-	LoadBalancerMetricNameHttpcodeInstance4xxCount       LoadBalancerMetricName = "HTTPCode_Instance_4XX_Count"
-	LoadBalancerMetricNameHttpcodeInstance5xxCount       LoadBalancerMetricName = "HTTPCode_Instance_5XX_Count"
-	LoadBalancerMetricNameInstanceresponsetime           LoadBalancerMetricName = "InstanceResponseTime"
-	LoadBalancerMetricNameRejectedconnectioncount        LoadBalancerMetricName = "RejectedConnectionCount"
-	LoadBalancerMetricNameRequestcount                   LoadBalancerMetricName = "RequestCount"
+	LoadBalancerMetricNameClientTLSNegotiationErrorCount LoadBalancerMetricName = "ClientTLSNegotiationErrorCount"
+	LoadBalancerMetricNameHealthyHostCount               LoadBalancerMetricName = "HealthyHostCount"
+	LoadBalancerMetricNameUnhealthyHostCount             LoadBalancerMetricName = "UnhealthyHostCount"
+	LoadBalancerMetricNameHTTPCodeLb4xxCount             LoadBalancerMetricName = "HTTPCode_LB_4XX_Count"
+	LoadBalancerMetricNameHTTPCodeLb5xxCount             LoadBalancerMetricName = "HTTPCode_LB_5XX_Count"
+	LoadBalancerMetricNameHTTPCodeInstance2xxCount       LoadBalancerMetricName = "HTTPCode_Instance_2XX_Count"
+	LoadBalancerMetricNameHTTPCodeInstance3xxCount       LoadBalancerMetricName = "HTTPCode_Instance_3XX_Count"
+	LoadBalancerMetricNameHTTPCodeInstance4xxCount       LoadBalancerMetricName = "HTTPCode_Instance_4XX_Count"
+	LoadBalancerMetricNameHTTPCodeInstance5xxCount       LoadBalancerMetricName = "HTTPCode_Instance_5XX_Count"
+	LoadBalancerMetricNameInstanceResponseTime           LoadBalancerMetricName = "InstanceResponseTime"
+	LoadBalancerMetricNameRejectedConnectionCount        LoadBalancerMetricName = "RejectedConnectionCount"
+	LoadBalancerMetricNameRequestCount                   LoadBalancerMetricName = "RequestCount"
 )
 
 // Values returns all known values for LoadBalancerMetricName. Note that this can
@@ -736,7 +736,7 @@ type LoadBalancerState string
 const (
 	LoadBalancerStateActive         LoadBalancerState = "active"
 	LoadBalancerStateProvisioning   LoadBalancerState = "provisioning"
-	LoadBalancerStateActiveimpaired LoadBalancerState = "active_impaired"
+	LoadBalancerStateActiveImpaired LoadBalancerState = "active_impaired"
 	LoadBalancerStateFailed         LoadBalancerState = "failed"
 	LoadBalancerStateUnknown        LoadBalancerState = "unknown"
 )
@@ -758,7 +758,7 @@ type LoadBalancerTlsCertificateDomainStatus string
 
 // Enum values for LoadBalancerTlsCertificateDomainStatus
 const (
-	LoadBalancerTlsCertificateDomainStatusPendingvalidation LoadBalancerTlsCertificateDomainStatus = "PENDING_VALIDATION"
+	LoadBalancerTlsCertificateDomainStatusPendingValidation LoadBalancerTlsCertificateDomainStatus = "PENDING_VALIDATION"
 	LoadBalancerTlsCertificateDomainStatusFailed            LoadBalancerTlsCertificateDomainStatus = "FAILED"
 	LoadBalancerTlsCertificateDomainStatusSuccess           LoadBalancerTlsCertificateDomainStatus = "SUCCESS"
 )
@@ -779,10 +779,10 @@ type LoadBalancerTlsCertificateFailureReason string
 
 // Enum values for LoadBalancerTlsCertificateFailureReason
 const (
-	LoadBalancerTlsCertificateFailureReasonNoavailablecontacts            LoadBalancerTlsCertificateFailureReason = "NO_AVAILABLE_CONTACTS"
-	LoadBalancerTlsCertificateFailureReasonAdditionalverificationrequired LoadBalancerTlsCertificateFailureReason = "ADDITIONAL_VERIFICATION_REQUIRED"
-	LoadBalancerTlsCertificateFailureReasonDomainnotallowed               LoadBalancerTlsCertificateFailureReason = "DOMAIN_NOT_ALLOWED"
-	LoadBalancerTlsCertificateFailureReasonInvalidpublicdomain            LoadBalancerTlsCertificateFailureReason = "INVALID_PUBLIC_DOMAIN"
+	LoadBalancerTlsCertificateFailureReasonNoAvailableContacts            LoadBalancerTlsCertificateFailureReason = "NO_AVAILABLE_CONTACTS"
+	LoadBalancerTlsCertificateFailureReasonAdditionalVerificationRequired LoadBalancerTlsCertificateFailureReason = "ADDITIONAL_VERIFICATION_REQUIRED"
+	LoadBalancerTlsCertificateFailureReasonDomainNotAllowed               LoadBalancerTlsCertificateFailureReason = "DOMAIN_NOT_ALLOWED"
+	LoadBalancerTlsCertificateFailureReasonInvalidPublicDomain            LoadBalancerTlsCertificateFailureReason = "INVALID_PUBLIC_DOMAIN"
 	LoadBalancerTlsCertificateFailureReasonOther                          LoadBalancerTlsCertificateFailureReason = "OTHER"
 )
 
@@ -804,8 +804,8 @@ type LoadBalancerTlsCertificateRenewalStatus string
 
 // Enum values for LoadBalancerTlsCertificateRenewalStatus
 const (
-	LoadBalancerTlsCertificateRenewalStatusPendingautorenewal LoadBalancerTlsCertificateRenewalStatus = "PENDING_AUTO_RENEWAL"
-	LoadBalancerTlsCertificateRenewalStatusPendingvalidation  LoadBalancerTlsCertificateRenewalStatus = "PENDING_VALIDATION"
+	LoadBalancerTlsCertificateRenewalStatusPendingAutoRenewal LoadBalancerTlsCertificateRenewalStatus = "PENDING_AUTO_RENEWAL"
+	LoadBalancerTlsCertificateRenewalStatusPendingValidation  LoadBalancerTlsCertificateRenewalStatus = "PENDING_VALIDATION"
 	LoadBalancerTlsCertificateRenewalStatusSuccess            LoadBalancerTlsCertificateRenewalStatus = "SUCCESS"
 	LoadBalancerTlsCertificateRenewalStatusFailed             LoadBalancerTlsCertificateRenewalStatus = "FAILED"
 )
@@ -828,15 +828,15 @@ type LoadBalancerTlsCertificateRevocationReason string
 // Enum values for LoadBalancerTlsCertificateRevocationReason
 const (
 	LoadBalancerTlsCertificateRevocationReasonUnspecified          LoadBalancerTlsCertificateRevocationReason = "UNSPECIFIED"
-	LoadBalancerTlsCertificateRevocationReasonKeycompromise        LoadBalancerTlsCertificateRevocationReason = "KEY_COMPROMISE"
-	LoadBalancerTlsCertificateRevocationReasonCacompromise         LoadBalancerTlsCertificateRevocationReason = "CA_COMPROMISE"
-	LoadBalancerTlsCertificateRevocationReasonAffiliationchanged   LoadBalancerTlsCertificateRevocationReason = "AFFILIATION_CHANGED"
+	LoadBalancerTlsCertificateRevocationReasonKeyCompromise        LoadBalancerTlsCertificateRevocationReason = "KEY_COMPROMISE"
+	LoadBalancerTlsCertificateRevocationReasonCaCompromise         LoadBalancerTlsCertificateRevocationReason = "CA_COMPROMISE"
+	LoadBalancerTlsCertificateRevocationReasonAffiliationChanged   LoadBalancerTlsCertificateRevocationReason = "AFFILIATION_CHANGED"
 	LoadBalancerTlsCertificateRevocationReasonSuperceded           LoadBalancerTlsCertificateRevocationReason = "SUPERCEDED"
-	LoadBalancerTlsCertificateRevocationReasonCessationofoperation LoadBalancerTlsCertificateRevocationReason = "CESSATION_OF_OPERATION"
-	LoadBalancerTlsCertificateRevocationReasonCertificatehold      LoadBalancerTlsCertificateRevocationReason = "CERTIFICATE_HOLD"
-	LoadBalancerTlsCertificateRevocationReasonRemovefromcrl        LoadBalancerTlsCertificateRevocationReason = "REMOVE_FROM_CRL"
-	LoadBalancerTlsCertificateRevocationReasonPrivilegewithdrawn   LoadBalancerTlsCertificateRevocationReason = "PRIVILEGE_WITHDRAWN"
-	LoadBalancerTlsCertificateRevocationReasonAacompromise         LoadBalancerTlsCertificateRevocationReason = "A_A_COMPROMISE"
+	LoadBalancerTlsCertificateRevocationReasonCessationOfOperation LoadBalancerTlsCertificateRevocationReason = "CESSATION_OF_OPERATION"
+	LoadBalancerTlsCertificateRevocationReasonCertificateHold      LoadBalancerTlsCertificateRevocationReason = "CERTIFICATE_HOLD"
+	LoadBalancerTlsCertificateRevocationReasonRemoveFromCrl        LoadBalancerTlsCertificateRevocationReason = "REMOVE_FROM_CRL"
+	LoadBalancerTlsCertificateRevocationReasonPrivilegeWithdrawn   LoadBalancerTlsCertificateRevocationReason = "PRIVILEGE_WITHDRAWN"
+	LoadBalancerTlsCertificateRevocationReasonAACompromise         LoadBalancerTlsCertificateRevocationReason = "A_A_COMPROMISE"
 )
 
 // Values returns all known values for LoadBalancerTlsCertificateRevocationReason.
@@ -862,11 +862,11 @@ type LoadBalancerTlsCertificateStatus string
 
 // Enum values for LoadBalancerTlsCertificateStatus
 const (
-	LoadBalancerTlsCertificateStatusPendingvalidation  LoadBalancerTlsCertificateStatus = "PENDING_VALIDATION"
+	LoadBalancerTlsCertificateStatusPendingValidation  LoadBalancerTlsCertificateStatus = "PENDING_VALIDATION"
 	LoadBalancerTlsCertificateStatusIssued             LoadBalancerTlsCertificateStatus = "ISSUED"
 	LoadBalancerTlsCertificateStatusInactive           LoadBalancerTlsCertificateStatus = "INACTIVE"
 	LoadBalancerTlsCertificateStatusExpired            LoadBalancerTlsCertificateStatus = "EXPIRED"
-	LoadBalancerTlsCertificateStatusValidationtimedout LoadBalancerTlsCertificateStatus = "VALIDATION_TIMED_OUT"
+	LoadBalancerTlsCertificateStatusValidationTimedOut LoadBalancerTlsCertificateStatus = "VALIDATION_TIMED_OUT"
 	LoadBalancerTlsCertificateStatusRevoked            LoadBalancerTlsCertificateStatus = "REVOKED"
 	LoadBalancerTlsCertificateStatusFailed             LoadBalancerTlsCertificateStatus = "FAILED"
 	LoadBalancerTlsCertificateStatusUnknown            LoadBalancerTlsCertificateStatus = "UNKNOWN"
@@ -893,31 +893,31 @@ type MetricName string
 
 // Enum values for MetricName
 const (
-	MetricNameCpuutilization                 MetricName = "CPUUtilization"
-	MetricNameNetworkin                      MetricName = "NetworkIn"
-	MetricNameNetworkout                     MetricName = "NetworkOut"
-	MetricNameStatuscheckfailed              MetricName = "StatusCheckFailed"
-	MetricNameStatuscheckfailedInstance      MetricName = "StatusCheckFailed_Instance"
-	MetricNameStatuscheckfailedSystem        MetricName = "StatusCheckFailed_System"
-	MetricNameClienttlsnegotiationerrorcount MetricName = "ClientTLSNegotiationErrorCount"
-	MetricNameHealthyhostcount               MetricName = "HealthyHostCount"
-	MetricNameUnhealthyhostcount             MetricName = "UnhealthyHostCount"
-	MetricNameHttpcodeLb4xxCount             MetricName = "HTTPCode_LB_4XX_Count"
-	MetricNameHttpcodeLb5xxCount             MetricName = "HTTPCode_LB_5XX_Count"
-	MetricNameHttpcodeInstance2xxCount       MetricName = "HTTPCode_Instance_2XX_Count"
-	MetricNameHttpcodeInstance3xxCount       MetricName = "HTTPCode_Instance_3XX_Count"
-	MetricNameHttpcodeInstance4xxCount       MetricName = "HTTPCode_Instance_4XX_Count"
-	MetricNameHttpcodeInstance5xxCount       MetricName = "HTTPCode_Instance_5XX_Count"
-	MetricNameInstanceresponsetime           MetricName = "InstanceResponseTime"
-	MetricNameRejectedconnectioncount        MetricName = "RejectedConnectionCount"
-	MetricNameRequestcount                   MetricName = "RequestCount"
-	MetricNameDatabaseconnections            MetricName = "DatabaseConnections"
-	MetricNameDiskqueuedepth                 MetricName = "DiskQueueDepth"
-	MetricNameFreestoragespace               MetricName = "FreeStorageSpace"
-	MetricNameNetworkreceivethroughput       MetricName = "NetworkReceiveThroughput"
-	MetricNameNetworktransmitthroughput      MetricName = "NetworkTransmitThroughput"
-	MetricNameBurstcapacitytime              MetricName = "BurstCapacityTime"
-	MetricNameBurstcapacitypercentage        MetricName = "BurstCapacityPercentage"
+	MetricNameCPUUtilization                 MetricName = "CPUUtilization"
+	MetricNameNetworkIn                      MetricName = "NetworkIn"
+	MetricNameNetworkOut                     MetricName = "NetworkOut"
+	MetricNameStatusCheckFailed              MetricName = "StatusCheckFailed"
+	MetricNameStatusCheckFailedInstance      MetricName = "StatusCheckFailed_Instance"
+	MetricNameStatusCheckFailedSystem        MetricName = "StatusCheckFailed_System"
+	MetricNameClientTLSNegotiationErrorCount MetricName = "ClientTLSNegotiationErrorCount"
+	MetricNameHealthyHostCount               MetricName = "HealthyHostCount"
+	MetricNameUnhealthyHostCount             MetricName = "UnhealthyHostCount"
+	MetricNameHTTPCodeLb4xxCount             MetricName = "HTTPCode_LB_4XX_Count"
+	MetricNameHTTPCodeLb5xxCount             MetricName = "HTTPCode_LB_5XX_Count"
+	MetricNameHTTPCodeInstance2xxCount       MetricName = "HTTPCode_Instance_2XX_Count"
+	MetricNameHTTPCodeInstance3xxCount       MetricName = "HTTPCode_Instance_3XX_Count"
+	MetricNameHTTPCodeInstance4xxCount       MetricName = "HTTPCode_Instance_4XX_Count"
+	MetricNameHTTPCodeInstance5xxCount       MetricName = "HTTPCode_Instance_5XX_Count"
+	MetricNameInstanceResponseTime           MetricName = "InstanceResponseTime"
+	MetricNameRejectedConnectionCount        MetricName = "RejectedConnectionCount"
+	MetricNameRequestCount                   MetricName = "RequestCount"
+	MetricNameDatabaseConnections            MetricName = "DatabaseConnections"
+	MetricNameDiskQueueDepth                 MetricName = "DiskQueueDepth"
+	MetricNameFreeStorageSpace               MetricName = "FreeStorageSpace"
+	MetricNameNetworkReceiveThroughput       MetricName = "NetworkReceiveThroughput"
+	MetricNameNetworkTransmitThroughput      MetricName = "NetworkTransmitThroughput"
+	MetricNameBurstCapacityTime              MetricName = "BurstCapacityTime"
+	MetricNameBurstCapacityPercentage        MetricName = "BurstCapacityPercentage"
 )
 
 // Values returns all known values for MetricName. Note that this can be expanded
@@ -961,7 +961,7 @@ const (
 	MetricStatisticMaximum     MetricStatistic = "Maximum"
 	MetricStatisticSum         MetricStatistic = "Sum"
 	MetricStatisticAverage     MetricStatistic = "Average"
-	MetricStatisticSamplecount MetricStatistic = "SampleCount"
+	MetricStatisticSampleCount MetricStatistic = "SampleCount"
 )
 
 // Values returns all known values for MetricStatistic. Note that this can be
@@ -996,17 +996,17 @@ const (
 	MetricUnitTerabits        MetricUnit = "Terabits"
 	MetricUnitPercent         MetricUnit = "Percent"
 	MetricUnitCount           MetricUnit = "Count"
-	MetricUnitBytessecond     MetricUnit = "Bytes/Second"
-	MetricUnitKilobytessecond MetricUnit = "Kilobytes/Second"
-	MetricUnitMegabytessecond MetricUnit = "Megabytes/Second"
-	MetricUnitGigabytessecond MetricUnit = "Gigabytes/Second"
-	MetricUnitTerabytessecond MetricUnit = "Terabytes/Second"
-	MetricUnitBitssecond      MetricUnit = "Bits/Second"
-	MetricUnitKilobitssecond  MetricUnit = "Kilobits/Second"
-	MetricUnitMegabitssecond  MetricUnit = "Megabits/Second"
-	MetricUnitGigabitssecond  MetricUnit = "Gigabits/Second"
-	MetricUnitTerabitssecond  MetricUnit = "Terabits/Second"
-	MetricUnitCountsecond     MetricUnit = "Count/Second"
+	MetricUnitBytesSecond     MetricUnit = "Bytes/Second"
+	MetricUnitKilobytesSecond MetricUnit = "Kilobytes/Second"
+	MetricUnitMegabytesSecond MetricUnit = "Megabytes/Second"
+	MetricUnitGigabytesSecond MetricUnit = "Gigabytes/Second"
+	MetricUnitTerabytesSecond MetricUnit = "Terabytes/Second"
+	MetricUnitBitsSecond      MetricUnit = "Bits/Second"
+	MetricUnitKilobitsSecond  MetricUnit = "Kilobits/Second"
+	MetricUnitMegabitsSecond  MetricUnit = "Megabits/Second"
+	MetricUnitGigabitsSecond  MetricUnit = "Gigabits/Second"
+	MetricUnitTerabitsSecond  MetricUnit = "Terabits/Second"
+	MetricUnitCountSecond     MetricUnit = "Count/Second"
 	MetricUnitNone            MetricUnit = "None"
 )
 
@@ -1071,7 +1071,7 @@ type OperationStatus string
 
 // Enum values for OperationStatus
 const (
-	OperationStatusNotstarted OperationStatus = "NotStarted"
+	OperationStatusNotStarted OperationStatus = "NotStarted"
 	OperationStatusStarted    OperationStatus = "Started"
 	OperationStatusFailed     OperationStatus = "Failed"
 	OperationStatusCompleted  OperationStatus = "Completed"
@@ -1095,77 +1095,77 @@ type OperationType string
 
 // Enum values for OperationType
 const (
-	OperationTypeDeleteknownhostkeys                  OperationType = "DeleteKnownHostKeys"
-	OperationTypeDeleteinstance                       OperationType = "DeleteInstance"
-	OperationTypeCreateinstance                       OperationType = "CreateInstance"
-	OperationTypeStopinstance                         OperationType = "StopInstance"
-	OperationTypeStartinstance                        OperationType = "StartInstance"
-	OperationTypeRebootinstance                       OperationType = "RebootInstance"
-	OperationTypeOpeninstancepublicports              OperationType = "OpenInstancePublicPorts"
-	OperationTypePutinstancepublicports               OperationType = "PutInstancePublicPorts"
-	OperationTypeCloseinstancepublicports             OperationType = "CloseInstancePublicPorts"
-	OperationTypeAllocatestaticip                     OperationType = "AllocateStaticIp"
-	OperationTypeReleasestaticip                      OperationType = "ReleaseStaticIp"
-	OperationTypeAttachstaticip                       OperationType = "AttachStaticIp"
-	OperationTypeDetachstaticip                       OperationType = "DetachStaticIp"
-	OperationTypeUpdatedomainentry                    OperationType = "UpdateDomainEntry"
-	OperationTypeDeletedomainentry                    OperationType = "DeleteDomainEntry"
-	OperationTypeCreatedomain                         OperationType = "CreateDomain"
-	OperationTypeDeletedomain                         OperationType = "DeleteDomain"
-	OperationTypeCreateinstancesnapshot               OperationType = "CreateInstanceSnapshot"
-	OperationTypeDeleteinstancesnapshot               OperationType = "DeleteInstanceSnapshot"
-	OperationTypeCreateinstancesfromsnapshot          OperationType = "CreateInstancesFromSnapshot"
-	OperationTypeCreateloadbalancer                   OperationType = "CreateLoadBalancer"
-	OperationTypeDeleteloadbalancer                   OperationType = "DeleteLoadBalancer"
-	OperationTypeAttachinstancestoloadbalancer        OperationType = "AttachInstancesToLoadBalancer"
-	OperationTypeDetachinstancesfromloadbalancer      OperationType = "DetachInstancesFromLoadBalancer"
-	OperationTypeUpdateloadbalancerattribute          OperationType = "UpdateLoadBalancerAttribute"
-	OperationTypeCreateloadbalancertlscertificate     OperationType = "CreateLoadBalancerTlsCertificate"
-	OperationTypeDeleteloadbalancertlscertificate     OperationType = "DeleteLoadBalancerTlsCertificate"
-	OperationTypeAttachloadbalancertlscertificate     OperationType = "AttachLoadBalancerTlsCertificate"
-	OperationTypeCreatedisk                           OperationType = "CreateDisk"
-	OperationTypeDeletedisk                           OperationType = "DeleteDisk"
-	OperationTypeAttachdisk                           OperationType = "AttachDisk"
-	OperationTypeDetachdisk                           OperationType = "DetachDisk"
-	OperationTypeCreatedisksnapshot                   OperationType = "CreateDiskSnapshot"
-	OperationTypeDeletedisksnapshot                   OperationType = "DeleteDiskSnapshot"
-	OperationTypeCreatediskfromsnapshot               OperationType = "CreateDiskFromSnapshot"
-	OperationTypeCreaterelationaldatabase             OperationType = "CreateRelationalDatabase"
-	OperationTypeUpdaterelationaldatabase             OperationType = "UpdateRelationalDatabase"
-	OperationTypeDeleterelationaldatabase             OperationType = "DeleteRelationalDatabase"
-	OperationTypeCreaterelationaldatabasefromsnapshot OperationType = "CreateRelationalDatabaseFromSnapshot"
-	OperationTypeCreaterelationaldatabasesnapshot     OperationType = "CreateRelationalDatabaseSnapshot"
-	OperationTypeDeleterelationaldatabasesnapshot     OperationType = "DeleteRelationalDatabaseSnapshot"
-	OperationTypeUpdaterelationaldatabaseparameters   OperationType = "UpdateRelationalDatabaseParameters"
-	OperationTypeStartrelationaldatabase              OperationType = "StartRelationalDatabase"
-	OperationTypeRebootrelationaldatabase             OperationType = "RebootRelationalDatabase"
-	OperationTypeStoprelationaldatabase               OperationType = "StopRelationalDatabase"
-	OperationTypeEnableaddon                          OperationType = "EnableAddOn"
-	OperationTypeDisableaddon                         OperationType = "DisableAddOn"
-	OperationTypePutalarm                             OperationType = "PutAlarm"
-	OperationTypeGetalarms                            OperationType = "GetAlarms"
-	OperationTypeDeletealarm                          OperationType = "DeleteAlarm"
-	OperationTypeTestalarm                            OperationType = "TestAlarm"
-	OperationTypeCreatecontactmethod                  OperationType = "CreateContactMethod"
-	OperationTypeGetcontactmethods                    OperationType = "GetContactMethods"
-	OperationTypeSendcontactmethodverification        OperationType = "SendContactMethodVerification"
-	OperationTypeDeletecontactmethod                  OperationType = "DeleteContactMethod"
-	OperationTypeCreatedistribution                   OperationType = "CreateDistribution"
-	OperationTypeUpdatedistribution                   OperationType = "UpdateDistribution"
-	OperationTypeDeletedistribution                   OperationType = "DeleteDistribution"
-	OperationTypeResetdistributioncache               OperationType = "ResetDistributionCache"
-	OperationTypeAttachcertificatetodistribution      OperationType = "AttachCertificateToDistribution"
-	OperationTypeDetachcertificatefromdistribution    OperationType = "DetachCertificateFromDistribution"
-	OperationTypeUpdatedistributionbundle             OperationType = "UpdateDistributionBundle"
-	OperationTypeCreatecertificate                    OperationType = "CreateCertificate"
-	OperationTypeDeletecertificate                    OperationType = "DeleteCertificate"
-	OperationTypeCreatecontainerservice               OperationType = "CreateContainerService"
-	OperationTypeUpdatecontainerservice               OperationType = "UpdateContainerService"
-	OperationTypeDeletecontainerservice               OperationType = "DeleteContainerService"
-	OperationTypeCreatecontainerservicedeployment     OperationType = "CreateContainerServiceDeployment"
-	OperationTypeCreatecontainerserviceregistrylogin  OperationType = "CreateContainerServiceRegistryLogin"
-	OperationTypeRegistercontainerimage               OperationType = "RegisterContainerImage"
-	OperationTypeDeletecontainerimage                 OperationType = "DeleteContainerImage"
+	OperationTypeDeleteKnownHostKeys                  OperationType = "DeleteKnownHostKeys"
+	OperationTypeDeleteInstance                       OperationType = "DeleteInstance"
+	OperationTypeCreateInstance                       OperationType = "CreateInstance"
+	OperationTypeStopInstance                         OperationType = "StopInstance"
+	OperationTypeStartInstance                        OperationType = "StartInstance"
+	OperationTypeRebootInstance                       OperationType = "RebootInstance"
+	OperationTypeOpenInstancePublicPorts              OperationType = "OpenInstancePublicPorts"
+	OperationTypePutInstancePublicPorts               OperationType = "PutInstancePublicPorts"
+	OperationTypeCloseInstancePublicPorts             OperationType = "CloseInstancePublicPorts"
+	OperationTypeAllocateStaticIp                     OperationType = "AllocateStaticIp"
+	OperationTypeReleaseStaticIp                      OperationType = "ReleaseStaticIp"
+	OperationTypeAttachStaticIp                       OperationType = "AttachStaticIp"
+	OperationTypeDetachStaticIp                       OperationType = "DetachStaticIp"
+	OperationTypeUpdateDomainEntry                    OperationType = "UpdateDomainEntry"
+	OperationTypeDeleteDomainEntry                    OperationType = "DeleteDomainEntry"
+	OperationTypeCreateDomain                         OperationType = "CreateDomain"
+	OperationTypeDeleteDomain                         OperationType = "DeleteDomain"
+	OperationTypeCreateInstanceSnapshot               OperationType = "CreateInstanceSnapshot"
+	OperationTypeDeleteInstanceSnapshot               OperationType = "DeleteInstanceSnapshot"
+	OperationTypeCreateInstancesFromSnapshot          OperationType = "CreateInstancesFromSnapshot"
+	OperationTypeCreateLoadBalancer                   OperationType = "CreateLoadBalancer"
+	OperationTypeDeleteLoadBalancer                   OperationType = "DeleteLoadBalancer"
+	OperationTypeAttachInstancesToLoadBalancer        OperationType = "AttachInstancesToLoadBalancer"
+	OperationTypeDetachInstancesFromLoadBalancer      OperationType = "DetachInstancesFromLoadBalancer"
+	OperationTypeUpdateLoadBalancerAttribute          OperationType = "UpdateLoadBalancerAttribute"
+	OperationTypeCreateLoadBalancerTlsCertificate     OperationType = "CreateLoadBalancerTlsCertificate"
+	OperationTypeDeleteLoadBalancerTlsCertificate     OperationType = "DeleteLoadBalancerTlsCertificate"
+	OperationTypeAttachLoadBalancerTlsCertificate     OperationType = "AttachLoadBalancerTlsCertificate"
+	OperationTypeCreateDisk                           OperationType = "CreateDisk"
+	OperationTypeDeleteDisk                           OperationType = "DeleteDisk"
+	OperationTypeAttachDisk                           OperationType = "AttachDisk"
+	OperationTypeDetachDisk                           OperationType = "DetachDisk"
+	OperationTypeCreateDiskSnapshot                   OperationType = "CreateDiskSnapshot"
+	OperationTypeDeleteDiskSnapshot                   OperationType = "DeleteDiskSnapshot"
+	OperationTypeCreateDiskFromSnapshot               OperationType = "CreateDiskFromSnapshot"
+	OperationTypeCreateRelationalDatabase             OperationType = "CreateRelationalDatabase"
+	OperationTypeUpdateRelationalDatabase             OperationType = "UpdateRelationalDatabase"
+	OperationTypeDeleteRelationalDatabase             OperationType = "DeleteRelationalDatabase"
+	OperationTypeCreateRelationalDatabaseFromSnapshot OperationType = "CreateRelationalDatabaseFromSnapshot"
+	OperationTypeCreateRelationalDatabaseSnapshot     OperationType = "CreateRelationalDatabaseSnapshot"
+	OperationTypeDeleteRelationalDatabaseSnapshot     OperationType = "DeleteRelationalDatabaseSnapshot"
+	OperationTypeUpdateRelationalDatabaseParameters   OperationType = "UpdateRelationalDatabaseParameters"
+	OperationTypeStartRelationalDatabase              OperationType = "StartRelationalDatabase"
+	OperationTypeRebootRelationalDatabase             OperationType = "RebootRelationalDatabase"
+	OperationTypeStopRelationalDatabase               OperationType = "StopRelationalDatabase"
+	OperationTypeEnableAddOn                          OperationType = "EnableAddOn"
+	OperationTypeDisableAddOn                         OperationType = "DisableAddOn"
+	OperationTypePutAlarm                             OperationType = "PutAlarm"
+	OperationTypeGetAlarms                            OperationType = "GetAlarms"
+	OperationTypeDeleteAlarm                          OperationType = "DeleteAlarm"
+	OperationTypeTestAlarm                            OperationType = "TestAlarm"
+	OperationTypeCreateContactMethod                  OperationType = "CreateContactMethod"
+	OperationTypeGetContactMethods                    OperationType = "GetContactMethods"
+	OperationTypeSendContactMethodVerification        OperationType = "SendContactMethodVerification"
+	OperationTypeDeleteContactMethod                  OperationType = "DeleteContactMethod"
+	OperationTypeCreateDistribution                   OperationType = "CreateDistribution"
+	OperationTypeUpdateDistribution                   OperationType = "UpdateDistribution"
+	OperationTypeDeleteDistribution                   OperationType = "DeleteDistribution"
+	OperationTypeResetDistributionCache               OperationType = "ResetDistributionCache"
+	OperationTypeAttachCertificateToDistribution      OperationType = "AttachCertificateToDistribution"
+	OperationTypeDetachCertificateFromDistribution    OperationType = "DetachCertificateFromDistribution"
+	OperationTypeUpdateDistributionBundle             OperationType = "UpdateDistributionBundle"
+	OperationTypeCreateCertificate                    OperationType = "CreateCertificate"
+	OperationTypeDeleteCertificate                    OperationType = "DeleteCertificate"
+	OperationTypeCreateContainerService               OperationType = "CreateContainerService"
+	OperationTypeUpdateContainerService               OperationType = "UpdateContainerService"
+	OperationTypeDeleteContainerService               OperationType = "DeleteContainerService"
+	OperationTypeCreateContainerServiceDeployment     OperationType = "CreateContainerServiceDeployment"
+	OperationTypeCreateContainerServiceRegistryLogin  OperationType = "CreateContainerServiceRegistryLogin"
+	OperationTypeRegisterContainerImage               OperationType = "RegisterContainerImage"
+	OperationTypeDeleteContainerImage                 OperationType = "DeleteContainerImage"
 )
 
 // Values returns all known values for OperationType. Note that this can be
@@ -1251,8 +1251,8 @@ type OriginProtocolPolicyEnum string
 
 // Enum values for OriginProtocolPolicyEnum
 const (
-	OriginProtocolPolicyEnumHttponly  OriginProtocolPolicyEnum = "http-only"
-	OriginProtocolPolicyEnumHttpsonly OriginProtocolPolicyEnum = "https-only"
+	OriginProtocolPolicyEnumHTTPOnly  OriginProtocolPolicyEnum = "http-only"
+	OriginProtocolPolicyEnumHTTPSOnly OriginProtocolPolicyEnum = "https-only"
 )
 
 // Values returns all known values for OriginProtocolPolicyEnum. Note that this can
@@ -1405,12 +1405,12 @@ type RelationalDatabaseMetricName string
 
 // Enum values for RelationalDatabaseMetricName
 const (
-	RelationalDatabaseMetricNameCpuutilization            RelationalDatabaseMetricName = "CPUUtilization"
-	RelationalDatabaseMetricNameDatabaseconnections       RelationalDatabaseMetricName = "DatabaseConnections"
-	RelationalDatabaseMetricNameDiskqueuedepth            RelationalDatabaseMetricName = "DiskQueueDepth"
-	RelationalDatabaseMetricNameFreestoragespace          RelationalDatabaseMetricName = "FreeStorageSpace"
-	RelationalDatabaseMetricNameNetworkreceivethroughput  RelationalDatabaseMetricName = "NetworkReceiveThroughput"
-	RelationalDatabaseMetricNameNetworktransmitthroughput RelationalDatabaseMetricName = "NetworkTransmitThroughput"
+	RelationalDatabaseMetricNameCPUUtilization            RelationalDatabaseMetricName = "CPUUtilization"
+	RelationalDatabaseMetricNameDatabaseConnections       RelationalDatabaseMetricName = "DatabaseConnections"
+	RelationalDatabaseMetricNameDiskQueueDepth            RelationalDatabaseMetricName = "DiskQueueDepth"
+	RelationalDatabaseMetricNameFreeStorageSpace          RelationalDatabaseMetricName = "FreeStorageSpace"
+	RelationalDatabaseMetricNameNetworkReceiveThroughput  RelationalDatabaseMetricName = "NetworkReceiveThroughput"
+	RelationalDatabaseMetricNameNetworkTransmitThroughput RelationalDatabaseMetricName = "NetworkTransmitThroughput"
 )
 
 // Values returns all known values for RelationalDatabaseMetricName. Note that this
@@ -1452,8 +1452,8 @@ type RenewalStatus string
 
 // Enum values for RenewalStatus
 const (
-	RenewalStatusPendingautorenewal RenewalStatus = "PendingAutoRenewal"
-	RenewalStatusPendingvalidation  RenewalStatus = "PendingValidation"
+	RenewalStatusPendingAutoRenewal RenewalStatus = "PendingAutoRenewal"
+	RenewalStatusPendingValidation  RenewalStatus = "PendingValidation"
 	RenewalStatusSuccess            RenewalStatus = "Success"
 	RenewalStatusFailed             RenewalStatus = "Failed"
 )
@@ -1474,23 +1474,23 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeContainerservice           ResourceType = "ContainerService"
+	ResourceTypeContainerService           ResourceType = "ContainerService"
 	ResourceTypeInstance                   ResourceType = "Instance"
-	ResourceTypeStaticip                   ResourceType = "StaticIp"
-	ResourceTypeKeypair                    ResourceType = "KeyPair"
-	ResourceTypeInstancesnapshot           ResourceType = "InstanceSnapshot"
+	ResourceTypeStaticIp                   ResourceType = "StaticIp"
+	ResourceTypeKeyPair                    ResourceType = "KeyPair"
+	ResourceTypeInstanceSnapshot           ResourceType = "InstanceSnapshot"
 	ResourceTypeDomain                     ResourceType = "Domain"
-	ResourceTypePeeredvpc                  ResourceType = "PeeredVpc"
-	ResourceTypeLoadbalancer               ResourceType = "LoadBalancer"
-	ResourceTypeLoadbalancertlscertificate ResourceType = "LoadBalancerTlsCertificate"
+	ResourceTypePeeredVpc                  ResourceType = "PeeredVpc"
+	ResourceTypeLoadBalancer               ResourceType = "LoadBalancer"
+	ResourceTypeLoadBalancerTlsCertificate ResourceType = "LoadBalancerTlsCertificate"
 	ResourceTypeDisk                       ResourceType = "Disk"
-	ResourceTypeDisksnapshot               ResourceType = "DiskSnapshot"
-	ResourceTypeRelationaldatabase         ResourceType = "RelationalDatabase"
-	ResourceTypeRelationaldatabasesnapshot ResourceType = "RelationalDatabaseSnapshot"
-	ResourceTypeExportsnapshotrecord       ResourceType = "ExportSnapshotRecord"
-	ResourceTypeCloudformationstackrecord  ResourceType = "CloudFormationStackRecord"
+	ResourceTypeDiskSnapshot               ResourceType = "DiskSnapshot"
+	ResourceTypeRelationalDatabase         ResourceType = "RelationalDatabase"
+	ResourceTypeRelationalDatabaseSnapshot ResourceType = "RelationalDatabaseSnapshot"
+	ResourceTypeExportSnapshotRecord       ResourceType = "ExportSnapshotRecord"
+	ResourceTypeCloudFormationStackRecord  ResourceType = "CloudFormationStackRecord"
 	ResourceTypeAlarm                      ResourceType = "Alarm"
-	ResourceTypeContactmethod              ResourceType = "ContactMethod"
+	ResourceTypeContactMethod              ResourceType = "ContactMethod"
 	ResourceTypeDistribution               ResourceType = "Distribution"
 	ResourceTypeCertificate                ResourceType = "Certificate"
 )
@@ -1527,7 +1527,7 @@ type TreatMissingData string
 // Enum values for TreatMissingData
 const (
 	TreatMissingDataBreaching    TreatMissingData = "breaching"
-	TreatMissingDataNotbreaching TreatMissingData = "notBreaching"
+	TreatMissingDataNotBreaching TreatMissingData = "notBreaching"
 	TreatMissingDataIgnore       TreatMissingData = "ignore"
 	TreatMissingDataMissing      TreatMissingData = "missing"
 )

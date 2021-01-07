@@ -66,7 +66,7 @@ type CopyOption string
 
 // Enum values for CopyOption
 const (
-	CopyOptionCopytags CopyOption = "CopyTags"
+	CopyOptionCopyTags CopyOption = "CopyTags"
 )
 
 // Values returns all known values for CopyOption. Note that this can be expanded
@@ -232,10 +232,10 @@ type ProductViewFilterBy string
 
 // Enum values for ProductViewFilterBy
 const (
-	ProductViewFilterByFulltextsearch  ProductViewFilterBy = "FullTextSearch"
+	ProductViewFilterByFullTextSearch  ProductViewFilterBy = "FullTextSearch"
 	ProductViewFilterByOwner           ProductViewFilterBy = "Owner"
-	ProductViewFilterByProducttype     ProductViewFilterBy = "ProductType"
-	ProductViewFilterBySourceproductid ProductViewFilterBy = "SourceProductId"
+	ProductViewFilterByProductType     ProductViewFilterBy = "ProductType"
+	ProductViewFilterBySourceProductId ProductViewFilterBy = "SourceProductId"
 )
 
 // Values returns all known values for ProductViewFilterBy. Note that this can be
@@ -255,8 +255,8 @@ type ProductViewSortBy string
 // Enum values for ProductViewSortBy
 const (
 	ProductViewSortByTitle        ProductViewSortBy = "Title"
-	ProductViewSortByVersioncount ProductViewSortBy = "VersionCount"
-	ProductViewSortByCreationdate ProductViewSortBy = "CreationDate"
+	ProductViewSortByVersionCount ProductViewSortBy = "VersionCount"
+	ProductViewSortByCreationDate ProductViewSortBy = "CreationDate"
 )
 
 // Values returns all known values for ProductViewSortBy. Note that this can be
@@ -275,7 +275,7 @@ type PropertyKey string
 // Enum values for PropertyKey
 const (
 	PropertyKeyOwner      PropertyKey = "OWNER"
-	PropertyKeyLaunchrole PropertyKey = "LAUNCH_ROLE"
+	PropertyKeyLaunchRole PropertyKey = "LAUNCH_ROLE"
 )
 
 // Values returns all known values for PropertyKey. Note that this can be expanded
@@ -358,7 +358,7 @@ type ProvisionedProductViewFilterBy string
 
 // Enum values for ProvisionedProductViewFilterBy
 const (
-	ProvisionedProductViewFilterBySearchquery ProvisionedProductViewFilterBy = "SearchQuery"
+	ProvisionedProductViewFilterBySearchQuery ProvisionedProductViewFilterBy = "SearchQuery"
 )
 
 // Values returns all known values for ProvisionedProductViewFilterBy. Note that
@@ -520,11 +520,11 @@ type ServiceActionAssociationErrorCode string
 
 // Enum values for ServiceActionAssociationErrorCode
 const (
-	ServiceActionAssociationErrorCodeDuplicateresourceexception ServiceActionAssociationErrorCode = "DUPLICATE_RESOURCE"
-	ServiceActionAssociationErrorCodeInternalfailure            ServiceActionAssociationErrorCode = "INTERNAL_FAILURE"
-	ServiceActionAssociationErrorCodeLimitexceededexception     ServiceActionAssociationErrorCode = "LIMIT_EXCEEDED"
-	ServiceActionAssociationErrorCodeResourcenotfoundexception  ServiceActionAssociationErrorCode = "RESOURCE_NOT_FOUND"
-	ServiceActionAssociationErrorCodeThrottlingexception        ServiceActionAssociationErrorCode = "THROTTLING"
+	ServiceActionAssociationErrorCodeDuplicateResourceException ServiceActionAssociationErrorCode = "DUPLICATE_RESOURCE"
+	ServiceActionAssociationErrorCodeInternalFailure            ServiceActionAssociationErrorCode = "INTERNAL_FAILURE"
+	ServiceActionAssociationErrorCodeLimitExceededException     ServiceActionAssociationErrorCode = "LIMIT_EXCEEDED"
+	ServiceActionAssociationErrorCodeResourceNotFoundException  ServiceActionAssociationErrorCode = "RESOURCE_NOT_FOUND"
+	ServiceActionAssociationErrorCodeThrottlingException        ServiceActionAssociationErrorCode = "THROTTLING"
 )
 
 // Values returns all known values for ServiceActionAssociationErrorCode. Note that
@@ -547,7 +547,7 @@ type ServiceActionDefinitionKey string
 const (
 	ServiceActionDefinitionKeyName       ServiceActionDefinitionKey = "Name"
 	ServiceActionDefinitionKeyVersion    ServiceActionDefinitionKey = "Version"
-	ServiceActionDefinitionKeyAssumerole ServiceActionDefinitionKey = "AssumeRole"
+	ServiceActionDefinitionKeyAssumeRole ServiceActionDefinitionKey = "AssumeRole"
 	ServiceActionDefinitionKeyParameters ServiceActionDefinitionKey = "Parameters"
 )
 
@@ -567,7 +567,7 @@ type ServiceActionDefinitionType string
 
 // Enum values for ServiceActionDefinitionType
 const (
-	ServiceActionDefinitionTypeSsmautomation ServiceActionDefinitionType = "SSM_AUTOMATION"
+	ServiceActionDefinitionTypeSsmAutomation ServiceActionDefinitionType = "SSM_AUTOMATION"
 )
 
 // Values returns all known values for ServiceActionDefinitionType. Note that this

@@ -74,8 +74,8 @@ type AppImageConfigSortKey string
 
 // Enum values for AppImageConfigSortKey
 const (
-	AppImageConfigSortKeyCreationtime     AppImageConfigSortKey = "CreationTime"
-	AppImageConfigSortKeyLastmodifiedtime AppImageConfigSortKey = "LastModifiedTime"
+	AppImageConfigSortKeyCreationTime     AppImageConfigSortKey = "CreationTime"
+	AppImageConfigSortKeyLastModifiedTime AppImageConfigSortKey = "LastModifiedTime"
 	AppImageConfigSortKeyName             AppImageConfigSortKey = "Name"
 )
 
@@ -172,8 +172,8 @@ type AppNetworkAccessType string
 
 // Enum values for AppNetworkAccessType
 const (
-	AppNetworkAccessTypePublicinternetonly AppNetworkAccessType = "PublicInternetOnly"
-	AppNetworkAccessTypeVpconly            AppNetworkAccessType = "VpcOnly"
+	AppNetworkAccessTypePublicInternetOnly AppNetworkAccessType = "PublicInternetOnly"
+	AppNetworkAccessTypeVpcOnly            AppNetworkAccessType = "VpcOnly"
 )
 
 // Values returns all known values for AppNetworkAccessType. Note that this can be
@@ -190,7 +190,7 @@ type AppSortKey string
 
 // Enum values for AppSortKey
 const (
-	AppSortKeyCreationtime AppSortKey = "CreationTime"
+	AppSortKeyCreationTime AppSortKey = "CreationTime"
 )
 
 // Values returns all known values for AppSortKey. Note that this can be expanded
@@ -209,7 +209,7 @@ const (
 	AppStatusDeleted   AppStatus = "Deleted"
 	AppStatusDeleting  AppStatus = "Deleting"
 	AppStatusFailed    AppStatus = "Failed"
-	AppStatusInservice AppStatus = "InService"
+	AppStatusInService AppStatus = "InService"
 	AppStatusPending   AppStatus = "Pending"
 )
 
@@ -230,9 +230,9 @@ type AppType string
 
 // Enum values for AppType
 const (
-	AppTypeJupyterserver AppType = "JupyterServer"
-	AppTypeKernelgateway AppType = "KernelGateway"
-	AppTypeTensorboard   AppType = "TensorBoard"
+	AppTypeJupyterServer AppType = "JupyterServer"
+	AppTypeKernelGateway AppType = "KernelGateway"
+	AppTypeTensorBoard   AppType = "TensorBoard"
 )
 
 // Values returns all known values for AppType. Note that this can be expanded in
@@ -585,9 +585,9 @@ type CandidateSortBy string
 
 // Enum values for CandidateSortBy
 const (
-	CandidateSortByCreationtime              CandidateSortBy = "CreationTime"
+	CandidateSortByCreationTime              CandidateSortBy = "CreationTime"
 	CandidateSortByStatus                    CandidateSortBy = "Status"
-	CandidateSortByFinalobjectivemetricvalue CandidateSortBy = "FinalObjectiveMetricValue"
+	CandidateSortByFinalObjectiveMetricValue CandidateSortBy = "FinalObjectiveMetricValue"
 )
 
 // Values returns all known values for CandidateSortBy. Note that this can be
@@ -921,7 +921,7 @@ type DomainStatus string
 const (
 	DomainStatusDeleting     DomainStatus = "Deleting"
 	DomainStatusFailed       DomainStatus = "Failed"
-	DomainStatusInservice    DomainStatus = "InService"
+	DomainStatusInService    DomainStatus = "InService"
 	DomainStatusPending      DomainStatus = "Pending"
 	DomainStatusUpdating     DomainStatus = "Updating"
 	DomainStatusUpdateFailed DomainStatus = "Update_Failed"
@@ -948,7 +948,7 @@ type EdgePackagingJobStatus string
 // Enum values for EdgePackagingJobStatus
 const (
 	EdgePackagingJobStatusStarting   EdgePackagingJobStatus = "STARTING"
-	EdgePackagingJobStatusInprogress EdgePackagingJobStatus = "INPROGRESS"
+	EdgePackagingJobStatusInProgress EdgePackagingJobStatus = "INPROGRESS"
 	EdgePackagingJobStatusCompleted  EdgePackagingJobStatus = "COMPLETED"
 	EdgePackagingJobStatusFailed     EdgePackagingJobStatus = "FAILED"
 	EdgePackagingJobStatusStopping   EdgePackagingJobStatus = "STOPPING"
@@ -974,7 +974,7 @@ type EndpointConfigSortKey string
 // Enum values for EndpointConfigSortKey
 const (
 	EndpointConfigSortKeyName         EndpointConfigSortKey = "Name"
-	EndpointConfigSortKeyCreationtime EndpointConfigSortKey = "CreationTime"
+	EndpointConfigSortKeyCreationTime EndpointConfigSortKey = "CreationTime"
 )
 
 // Values returns all known values for EndpointConfigSortKey. Note that this can be
@@ -992,7 +992,7 @@ type EndpointSortKey string
 // Enum values for EndpointSortKey
 const (
 	EndpointSortKeyName         EndpointSortKey = "Name"
-	EndpointSortKeyCreationtime EndpointSortKey = "CreationTime"
+	EndpointSortKeyCreationTime EndpointSortKey = "CreationTime"
 	EndpointSortKeyStatus       EndpointSortKey = "Status"
 )
 
@@ -1304,7 +1304,7 @@ type HyperParameterTuningJobSortByOptions string
 const (
 	HyperParameterTuningJobSortByOptionsName         HyperParameterTuningJobSortByOptions = "Name"
 	HyperParameterTuningJobSortByOptionsStatus       HyperParameterTuningJobSortByOptions = "Status"
-	HyperParameterTuningJobSortByOptionsCreationtime HyperParameterTuningJobSortByOptions = "CreationTime"
+	HyperParameterTuningJobSortByOptionsCreationTime HyperParameterTuningJobSortByOptions = "CreationTime"
 )
 
 // Values returns all known values for HyperParameterTuningJobSortByOptions. Note
@@ -1687,8 +1687,8 @@ type ListDeviceFleetsSortBy string
 // Enum values for ListDeviceFleetsSortBy
 const (
 	ListDeviceFleetsSortByName             ListDeviceFleetsSortBy = "NAME"
-	ListDeviceFleetsSortByCreationtime     ListDeviceFleetsSortBy = "CREATION_TIME"
-	ListDeviceFleetsSortByLastmodifiedtime ListDeviceFleetsSortBy = "LAST_MODIFIED_TIME"
+	ListDeviceFleetsSortByCreationTime     ListDeviceFleetsSortBy = "CREATION_TIME"
+	ListDeviceFleetsSortByLastModifiedTime ListDeviceFleetsSortBy = "LAST_MODIFIED_TIME"
 )
 
 // Values returns all known values for ListDeviceFleetsSortBy. Note that this can
@@ -1707,10 +1707,10 @@ type ListEdgePackagingJobsSortBy string
 // Enum values for ListEdgePackagingJobsSortBy
 const (
 	ListEdgePackagingJobsSortByName                   ListEdgePackagingJobsSortBy = "NAME"
-	ListEdgePackagingJobsSortByModelname              ListEdgePackagingJobsSortBy = "MODEL_NAME"
-	ListEdgePackagingJobsSortByCreationtime           ListEdgePackagingJobsSortBy = "CREATION_TIME"
-	ListEdgePackagingJobsSortByLastmodifiedtime       ListEdgePackagingJobsSortBy = "LAST_MODIFIED_TIME"
-	ListEdgePackagingJobsSortByEdgepackagingjobstatus ListEdgePackagingJobsSortBy = "STATUS"
+	ListEdgePackagingJobsSortByModelName              ListEdgePackagingJobsSortBy = "MODEL_NAME"
+	ListEdgePackagingJobsSortByCreationTime           ListEdgePackagingJobsSortBy = "CREATION_TIME"
+	ListEdgePackagingJobsSortByLastModifiedTime       ListEdgePackagingJobsSortBy = "LAST_MODIFIED_TIME"
+	ListEdgePackagingJobsSortByEdgePackagingJobStatus ListEdgePackagingJobsSortBy = "STATUS"
 )
 
 // Values returns all known values for ListEdgePackagingJobsSortBy. Note that this
@@ -1748,7 +1748,7 @@ type ListWorkforcesSortByOptions string
 // Enum values for ListWorkforcesSortByOptions
 const (
 	ListWorkforcesSortByOptionsName       ListWorkforcesSortByOptions = "Name"
-	ListWorkforcesSortByOptionsCreatedate ListWorkforcesSortByOptions = "CreateDate"
+	ListWorkforcesSortByOptionsCreateDate ListWorkforcesSortByOptions = "CreateDate"
 )
 
 // Values returns all known values for ListWorkforcesSortByOptions. Note that this
@@ -1766,7 +1766,7 @@ type ListWorkteamsSortByOptions string
 // Enum values for ListWorkteamsSortByOptions
 const (
 	ListWorkteamsSortByOptionsName       ListWorkteamsSortByOptions = "Name"
-	ListWorkteamsSortByOptionsCreatedate ListWorkteamsSortByOptions = "CreateDate"
+	ListWorkteamsSortByOptionsCreateDate ListWorkteamsSortByOptions = "CreateDate"
 )
 
 // Values returns all known values for ListWorkteamsSortByOptions. Note that this
@@ -1910,7 +1910,7 @@ type ModelSortKey string
 // Enum values for ModelSortKey
 const (
 	ModelSortKeyName         ModelSortKey = "Name"
-	ModelSortKeyCreationtime ModelSortKey = "CreationTime"
+	ModelSortKeyCreationTime ModelSortKey = "CreationTime"
 )
 
 // Values returns all known values for ModelSortKey. Note that this can be expanded
@@ -2134,7 +2134,7 @@ type NotebookInstanceStatus string
 // Enum values for NotebookInstanceStatus
 const (
 	NotebookInstanceStatusPending   NotebookInstanceStatus = "Pending"
-	NotebookInstanceStatusInservice NotebookInstanceStatus = "InService"
+	NotebookInstanceStatusInService NotebookInstanceStatus = "InService"
 	NotebookInstanceStatusStopping  NotebookInstanceStatus = "Stopping"
 	NotebookInstanceStatusStopped   NotebookInstanceStatus = "Stopped"
 	NotebookInstanceStatusFailed    NotebookInstanceStatus = "Failed"
@@ -3661,9 +3661,9 @@ type TrainingJobSortByOptions string
 // Enum values for TrainingJobSortByOptions
 const (
 	TrainingJobSortByOptionsName                      TrainingJobSortByOptions = "Name"
-	TrainingJobSortByOptionsCreationtime              TrainingJobSortByOptions = "CreationTime"
+	TrainingJobSortByOptionsCreationTime              TrainingJobSortByOptions = "CreationTime"
 	TrainingJobSortByOptionsStatus                    TrainingJobSortByOptions = "Status"
-	TrainingJobSortByOptionsFinalobjectivemetricvalue TrainingJobSortByOptions = "FinalObjectiveMetricValue"
+	TrainingJobSortByOptionsFinalObjectiveMetricValue TrainingJobSortByOptions = "FinalObjectiveMetricValue"
 )
 
 // Values returns all known values for TrainingJobSortByOptions. Note that this can
@@ -3820,8 +3820,8 @@ type UserProfileSortKey string
 
 // Enum values for UserProfileSortKey
 const (
-	UserProfileSortKeyCreationtime     UserProfileSortKey = "CreationTime"
-	UserProfileSortKeyLastmodifiedtime UserProfileSortKey = "LastModifiedTime"
+	UserProfileSortKeyCreationTime     UserProfileSortKey = "CreationTime"
+	UserProfileSortKeyLastModifiedTime UserProfileSortKey = "LastModifiedTime"
 )
 
 // Values returns all known values for UserProfileSortKey. Note that this can be
@@ -3840,7 +3840,7 @@ type UserProfileStatus string
 const (
 	UserProfileStatusDeleting     UserProfileStatus = "Deleting"
 	UserProfileStatusFailed       UserProfileStatus = "Failed"
-	UserProfileStatusInservice    UserProfileStatus = "InService"
+	UserProfileStatusInService    UserProfileStatus = "InService"
 	UserProfileStatusPending      UserProfileStatus = "Pending"
 	UserProfileStatusUpdating     UserProfileStatus = "Updating"
 	UserProfileStatusUpdateFailed UserProfileStatus = "Update_Failed"
@@ -3866,9 +3866,9 @@ type VariantPropertyType string
 
 // Enum values for VariantPropertyType
 const (
-	VariantPropertyTypeDesiredinstancecount VariantPropertyType = "DesiredInstanceCount"
-	VariantPropertyTypeDesiredweight        VariantPropertyType = "DesiredWeight"
-	VariantPropertyTypeDatacaptureconfig    VariantPropertyType = "DataCaptureConfig"
+	VariantPropertyTypeDesiredInstanceCount VariantPropertyType = "DesiredInstanceCount"
+	VariantPropertyTypeDesiredWeight        VariantPropertyType = "DesiredWeight"
+	VariantPropertyTypeDataCaptureConfig    VariantPropertyType = "DataCaptureConfig"
 )
 
 // Values returns all known values for VariantPropertyType. Note that this can be

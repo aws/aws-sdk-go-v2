@@ -26,16 +26,16 @@ type Comparator string
 
 // Enum values for Comparator
 const (
-	ComparatorLessthan             Comparator = "LessThan"
-	ComparatorLessthanorequalto    Comparator = "LessThanOrEqualTo"
-	ComparatorGreaterthan          Comparator = "GreaterThan"
-	ComparatorGreaterthanorequalto Comparator = "GreaterThanOrEqualTo"
-	ComparatorEqualto              Comparator = "EqualTo"
-	ComparatorNotequalto           Comparator = "NotEqualTo"
+	ComparatorLessThan             Comparator = "LessThan"
+	ComparatorLessThanOrEqualTo    Comparator = "LessThanOrEqualTo"
+	ComparatorGreaterThan          Comparator = "GreaterThan"
+	ComparatorGreaterThanOrEqualTo Comparator = "GreaterThanOrEqualTo"
+	ComparatorEqualTo              Comparator = "EqualTo"
+	ComparatorNotEqualTo           Comparator = "NotEqualTo"
 	ComparatorExists               Comparator = "Exists"
-	ComparatorDoesnotexist         Comparator = "DoesNotExist"
+	ComparatorDoesNotExist         Comparator = "DoesNotExist"
 	ComparatorIn                   Comparator = "In"
-	ComparatorNotin                Comparator = "NotIn"
+	ComparatorNotIn                Comparator = "NotIn"
 )
 
 // Values returns all known values for Comparator. Note that this can be expanded
@@ -60,17 +60,17 @@ type EventType string
 
 // Enum values for EventType
 const (
-	EventTypeAssignmentaccepted  EventType = "AssignmentAccepted"
-	EventTypeAssignmentabandoned EventType = "AssignmentAbandoned"
-	EventTypeAssignmentreturned  EventType = "AssignmentReturned"
-	EventTypeAssignmentsubmitted EventType = "AssignmentSubmitted"
-	EventTypeAssignmentrejected  EventType = "AssignmentRejected"
-	EventTypeAssignmentapproved  EventType = "AssignmentApproved"
-	EventTypeHitcreated          EventType = "HITCreated"
-	EventTypeHitexpired          EventType = "HITExpired"
-	EventTypeHitreviewable       EventType = "HITReviewable"
-	EventTypeHitextended         EventType = "HITExtended"
-	EventTypeHitdisposed         EventType = "HITDisposed"
+	EventTypeAssignmentAccepted  EventType = "AssignmentAccepted"
+	EventTypeAssignmentAbandoned EventType = "AssignmentAbandoned"
+	EventTypeAssignmentReturned  EventType = "AssignmentReturned"
+	EventTypeAssignmentSubmitted EventType = "AssignmentSubmitted"
+	EventTypeAssignmentRejected  EventType = "AssignmentRejected"
+	EventTypeAssignmentApproved  EventType = "AssignmentApproved"
+	EventTypeHITCreated          EventType = "HITCreated"
+	EventTypeHITExpired          EventType = "HITExpired"
+	EventTypeHITReviewable       EventType = "HITReviewable"
+	EventTypeHITExtended         EventType = "HITExtended"
+	EventTypeHITDisposed         EventType = "HITDisposed"
 	EventTypePing                EventType = "Ping"
 )
 
@@ -99,8 +99,8 @@ type HITAccessActions string
 // Enum values for HITAccessActions
 const (
 	HITAccessActionsAccept                   HITAccessActions = "Accept"
-	HITAccessActionsPreviewandaccept         HITAccessActions = "PreviewAndAccept"
-	HITAccessActionsDiscoverpreviewandaccept HITAccessActions = "DiscoverPreviewAndAccept"
+	HITAccessActionsPreviewAndAccept         HITAccessActions = "PreviewAndAccept"
+	HITAccessActionsDiscoverPreviewAndAccept HITAccessActions = "DiscoverPreviewAndAccept"
 )
 
 // Values returns all known values for HITAccessActions. Note that this can be
@@ -118,10 +118,10 @@ type HITReviewStatus string
 
 // Enum values for HITReviewStatus
 const (
-	HITReviewStatusNotreviewed           HITReviewStatus = "NotReviewed"
-	HITReviewStatusMarkedforreview       HITReviewStatus = "MarkedForReview"
-	HITReviewStatusReviewedappropriate   HITReviewStatus = "ReviewedAppropriate"
-	HITReviewStatusReviewedinappropriate HITReviewStatus = "ReviewedInappropriate"
+	HITReviewStatusNotReviewed           HITReviewStatus = "NotReviewed"
+	HITReviewStatusMarkedForReview       HITReviewStatus = "MarkedForReview"
+	HITReviewStatusReviewedAppropriate   HITReviewStatus = "ReviewedAppropriate"
+	HITReviewStatusReviewedInappropriate HITReviewStatus = "ReviewedInappropriate"
 )
 
 // Values returns all known values for HITReviewStatus. Note that this can be
@@ -184,8 +184,8 @@ type NotifyWorkersFailureCode string
 
 // Enum values for NotifyWorkersFailureCode
 const (
-	NotifyWorkersFailureCodeSoftfailure NotifyWorkersFailureCode = "SoftFailure"
-	NotifyWorkersFailureCodeHardfailure NotifyWorkersFailureCode = "HardFailure"
+	NotifyWorkersFailureCodeSoftFailure NotifyWorkersFailureCode = "SoftFailure"
+	NotifyWorkersFailureCodeHardFailure NotifyWorkersFailureCode = "HardFailure"
 )
 
 // Values returns all known values for NotifyWorkersFailureCode. Note that this can

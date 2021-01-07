@@ -136,10 +136,10 @@ type ComparisonOperator string
 
 // Enum values for ComparisonOperator
 const (
-	ComparisonOperatorGreaterthanorequaltothreshold ComparisonOperator = "GreaterThanOrEqualToThreshold"
-	ComparisonOperatorGreaterthanthreshold          ComparisonOperator = "GreaterThanThreshold"
-	ComparisonOperatorLessthanthreshold             ComparisonOperator = "LessThanThreshold"
-	ComparisonOperatorLessthanorequaltothreshold    ComparisonOperator = "LessThanOrEqualToThreshold"
+	ComparisonOperatorGreaterThanOrEqualToThreshold ComparisonOperator = "GreaterThanOrEqualToThreshold"
+	ComparisonOperatorGreaterThanThreshold          ComparisonOperator = "GreaterThanThreshold"
+	ComparisonOperatorLessThanThreshold             ComparisonOperator = "LessThanThreshold"
+	ComparisonOperatorLessThanOrEqualToThreshold    ComparisonOperator = "LessThanOrEqualToThreshold"
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
@@ -236,7 +236,7 @@ type InsufficientDataHealthStatus string
 const (
 	InsufficientDataHealthStatusHealthy         InsufficientDataHealthStatus = "Healthy"
 	InsufficientDataHealthStatusUnhealthy       InsufficientDataHealthStatus = "Unhealthy"
-	InsufficientDataHealthStatusLastknownstatus InsufficientDataHealthStatus = "LastKnownStatus"
+	InsufficientDataHealthStatusLastKnownStatus InsufficientDataHealthStatus = "LastKnownStatus"
 )
 
 // Values returns all known values for InsufficientDataHealthStatus. Note that this
@@ -254,10 +254,10 @@ type ResettableElementName string
 
 // Enum values for ResettableElementName
 const (
-	ResettableElementNameFullyqualifieddomainname ResettableElementName = "FullyQualifiedDomainName"
+	ResettableElementNameFullyQualifiedDomainName ResettableElementName = "FullyQualifiedDomainName"
 	ResettableElementNameRegions                  ResettableElementName = "Regions"
-	ResettableElementNameResourcepath             ResettableElementName = "ResourcePath"
-	ResettableElementNameChildhealthchecks        ResettableElementName = "ChildHealthChecks"
+	ResettableElementNameResourcePath             ResettableElementName = "ResourcePath"
+	ResettableElementNameChildHealthChecks        ResettableElementName = "ChildHealthChecks"
 )
 
 // Values returns all known values for ResettableElementName. Note that this can be
@@ -413,7 +413,7 @@ type Statistic string
 const (
 	StatisticAverage     Statistic = "Average"
 	StatisticSum         Statistic = "Sum"
-	StatisticSamplecount Statistic = "SampleCount"
+	StatisticSampleCount Statistic = "SampleCount"
 	StatisticMaximum     Statistic = "Maximum"
 	StatisticMinimum     Statistic = "Minimum"
 )

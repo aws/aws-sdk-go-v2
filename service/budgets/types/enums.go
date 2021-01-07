@@ -98,10 +98,10 @@ type BudgetType string
 const (
 	BudgetTypeUsage         BudgetType = "USAGE"
 	BudgetTypeCost          BudgetType = "COST"
-	BudgetTypeRiutilization BudgetType = "RI_UTILIZATION"
-	BudgetTypeRicoverage    BudgetType = "RI_COVERAGE"
-	BudgetTypeSputilization BudgetType = "SAVINGS_PLANS_UTILIZATION"
-	BudgetTypeSpcoverage    BudgetType = "SAVINGS_PLANS_COVERAGE"
+	BudgetTypeRIUtilization BudgetType = "RI_UTILIZATION"
+	BudgetTypeRICoverage    BudgetType = "RI_COVERAGE"
+	BudgetTypeSPUtilization BudgetType = "SAVINGS_PLANS_UTILIZATION"
+	BudgetTypeSPCoverage    BudgetType = "SAVINGS_PLANS_COVERAGE"
 )
 
 // Values returns all known values for BudgetType. Note that this can be expanded
@@ -143,10 +143,10 @@ type EventType string
 // Enum values for EventType
 const (
 	EventTypeSystem        EventType = "SYSTEM"
-	EventTypeCreateaction  EventType = "CREATE_ACTION"
-	EventTypeDeleteaction  EventType = "DELETE_ACTION"
-	EventTypeUpdateaction  EventType = "UPDATE_ACTION"
-	EventTypeExecuteaction EventType = "EXECUTE_ACTION"
+	EventTypeCreateAction  EventType = "CREATE_ACTION"
+	EventTypeDeleteAction  EventType = "DELETE_ACTION"
+	EventTypeUpdateAction  EventType = "UPDATE_ACTION"
+	EventTypeExecuteAction EventType = "EXECUTE_ACTION"
 )
 
 // Values returns all known values for EventType. Note that this can be expanded in
@@ -166,10 +166,10 @@ type ExecutionType string
 
 // Enum values for ExecutionType
 const (
-	ExecutionTypeApprovebudgetaction ExecutionType = "APPROVE_BUDGET_ACTION"
-	ExecutionTypeRetrybudgetaction   ExecutionType = "RETRY_BUDGET_ACTION"
-	ExecutionTypeReversebudgetaction ExecutionType = "REVERSE_BUDGET_ACTION"
-	ExecutionTypeResetbudgetaction   ExecutionType = "RESET_BUDGET_ACTION"
+	ExecutionTypeApproveBudgetAction ExecutionType = "APPROVE_BUDGET_ACTION"
+	ExecutionTypeRetryBudgetAction   ExecutionType = "RETRY_BUDGET_ACTION"
+	ExecutionTypeReverseBudgetAction ExecutionType = "REVERSE_BUDGET_ACTION"
+	ExecutionTypeResetBudgetAction   ExecutionType = "RESET_BUDGET_ACTION"
 )
 
 // Values returns all known values for ExecutionType. Note that this can be

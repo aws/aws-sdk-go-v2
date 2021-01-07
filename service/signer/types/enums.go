@@ -6,7 +6,7 @@ type Category string
 
 // Enum values for Category
 const (
-	CategoryAwsiot Category = "AWSIoT"
+	CategoryAWSIoT Category = "AWSIoT"
 )
 
 // Values returns all known values for Category. Note that this can be expanded in
@@ -59,8 +59,8 @@ type ImageFormat string
 // Enum values for ImageFormat
 const (
 	ImageFormatJson         ImageFormat = "JSON"
-	ImageFormatJsonembedded ImageFormat = "JSONEmbedded"
-	ImageFormatJsondetached ImageFormat = "JSONDetached"
+	ImageFormatJSONEmbedded ImageFormat = "JSONEmbedded"
+	ImageFormatJSONDetached ImageFormat = "JSONDetached"
 )
 
 // Values returns all known values for ImageFormat. Note that this can be expanded
@@ -98,7 +98,7 @@ type SigningStatus string
 
 // Enum values for SigningStatus
 const (
-	SigningStatusInprogress SigningStatus = "InProgress"
+	SigningStatusInProgress SigningStatus = "InProgress"
 	SigningStatusFailed     SigningStatus = "Failed"
 	SigningStatusSucceeded  SigningStatus = "Succeeded"
 )

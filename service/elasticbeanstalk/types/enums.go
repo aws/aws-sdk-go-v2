@@ -48,8 +48,8 @@ type ActionType string
 
 // Enum values for ActionType
 const (
-	ActionTypeInstancerefresh ActionType = "InstanceRefresh"
-	ActionTypePlatformupdate  ActionType = "PlatformUpdate"
+	ActionTypeInstanceRefresh ActionType = "InstanceRefresh"
+	ActionTypePlatformUpdate  ActionType = "PlatformUpdate"
 	ActionTypeUnknown         ActionType = "Unknown"
 )
 
@@ -176,11 +176,11 @@ const (
 	EnvironmentHealthAttributeStatus             EnvironmentHealthAttribute = "Status"
 	EnvironmentHealthAttributeColor              EnvironmentHealthAttribute = "Color"
 	EnvironmentHealthAttributeCauses             EnvironmentHealthAttribute = "Causes"
-	EnvironmentHealthAttributeApplicationmetrics EnvironmentHealthAttribute = "ApplicationMetrics"
-	EnvironmentHealthAttributeInstanceshealth    EnvironmentHealthAttribute = "InstancesHealth"
+	EnvironmentHealthAttributeApplicationMetrics EnvironmentHealthAttribute = "ApplicationMetrics"
+	EnvironmentHealthAttributeInstancesHealth    EnvironmentHealthAttribute = "InstancesHealth"
 	EnvironmentHealthAttributeAll                EnvironmentHealthAttribute = "All"
-	EnvironmentHealthAttributeHealthstatus       EnvironmentHealthAttribute = "HealthStatus"
-	EnvironmentHealthAttributeRefreshedat        EnvironmentHealthAttribute = "RefreshedAt"
+	EnvironmentHealthAttributeHealthStatus       EnvironmentHealthAttribute = "HealthStatus"
+	EnvironmentHealthAttributeRefreshedAt        EnvironmentHealthAttribute = "RefreshedAt"
 )
 
 // Values returns all known values for EnvironmentHealthAttribute. Note that this
@@ -203,7 +203,7 @@ type EnvironmentHealthStatus string
 
 // Enum values for EnvironmentHealthStatus
 const (
-	EnvironmentHealthStatusNodata    EnvironmentHealthStatus = "NoData"
+	EnvironmentHealthStatusNoData    EnvironmentHealthStatus = "NoData"
 	EnvironmentHealthStatusUnknown   EnvironmentHealthStatus = "Unknown"
 	EnvironmentHealthStatusPending   EnvironmentHealthStatus = "Pending"
 	EnvironmentHealthStatusOk        EnvironmentHealthStatus = "Ok"
@@ -256,8 +256,8 @@ const (
 	EnvironmentStatusAborting    EnvironmentStatus = "Aborting"
 	EnvironmentStatusLaunching   EnvironmentStatus = "Launching"
 	EnvironmentStatusUpdating    EnvironmentStatus = "Updating"
-	EnvironmentStatusLinkingfrom EnvironmentStatus = "LinkingFrom"
-	EnvironmentStatusLinkingto   EnvironmentStatus = "LinkingTo"
+	EnvironmentStatusLinkingFrom EnvironmentStatus = "LinkingFrom"
+	EnvironmentStatusLinkingTo   EnvironmentStatus = "LinkingTo"
 	EnvironmentStatusReady       EnvironmentStatus = "Ready"
 	EnvironmentStatusTerminating EnvironmentStatus = "Terminating"
 	EnvironmentStatusTerminated  EnvironmentStatus = "Terminated"
@@ -309,13 +309,13 @@ type FailureType string
 
 // Enum values for FailureType
 const (
-	FailureTypeUpdatecancelled         FailureType = "UpdateCancelled"
-	FailureTypeCancellationfailed      FailureType = "CancellationFailed"
-	FailureTypeRollbackfailed          FailureType = "RollbackFailed"
-	FailureTypeRollbacksuccessful      FailureType = "RollbackSuccessful"
-	FailureTypeInternalfailure         FailureType = "InternalFailure"
-	FailureTypeInvalidenvironmentstate FailureType = "InvalidEnvironmentState"
-	FailureTypePermissionserror        FailureType = "PermissionsError"
+	FailureTypeUpdateCancelled         FailureType = "UpdateCancelled"
+	FailureTypeCancellationFailed      FailureType = "CancellationFailed"
+	FailureTypeRollbackFailed          FailureType = "RollbackFailed"
+	FailureTypeRollbackSuccessful      FailureType = "RollbackSuccessful"
+	FailureTypeInternalFailure         FailureType = "InternalFailure"
+	FailureTypeInvalidEnvironmentState FailureType = "InvalidEnvironmentState"
+	FailureTypePermissionsError        FailureType = "PermissionsError"
 )
 
 // Values returns all known values for FailureType. Note that this can be expanded
@@ -337,16 +337,16 @@ type InstancesHealthAttribute string
 
 // Enum values for InstancesHealthAttribute
 const (
-	InstancesHealthAttributeHealthstatus       InstancesHealthAttribute = "HealthStatus"
+	InstancesHealthAttributeHealthStatus       InstancesHealthAttribute = "HealthStatus"
 	InstancesHealthAttributeColor              InstancesHealthAttribute = "Color"
 	InstancesHealthAttributeCauses             InstancesHealthAttribute = "Causes"
-	InstancesHealthAttributeApplicationmetrics InstancesHealthAttribute = "ApplicationMetrics"
-	InstancesHealthAttributeRefreshedat        InstancesHealthAttribute = "RefreshedAt"
-	InstancesHealthAttributeLaunchedat         InstancesHealthAttribute = "LaunchedAt"
+	InstancesHealthAttributeApplicationMetrics InstancesHealthAttribute = "ApplicationMetrics"
+	InstancesHealthAttributeRefreshedAt        InstancesHealthAttribute = "RefreshedAt"
+	InstancesHealthAttributeLaunchedAt         InstancesHealthAttribute = "LaunchedAt"
 	InstancesHealthAttributeSystem             InstancesHealthAttribute = "System"
 	InstancesHealthAttributeDeployment         InstancesHealthAttribute = "Deployment"
-	InstancesHealthAttributeAvailabilityzone   InstancesHealthAttribute = "AvailabilityZone"
-	InstancesHealthAttributeInstancetype       InstancesHealthAttribute = "InstanceType"
+	InstancesHealthAttributeAvailabilityZone   InstancesHealthAttribute = "AvailabilityZone"
+	InstancesHealthAttributeInstanceType       InstancesHealthAttribute = "InstanceType"
 	InstancesHealthAttributeAll                InstancesHealthAttribute = "All"
 )
 
@@ -397,7 +397,7 @@ type SourceRepository string
 
 // Enum values for SourceRepository
 const (
-	SourceRepositoryCodecommit SourceRepository = "CodeCommit"
+	SourceRepositoryCodeCommit SourceRepository = "CodeCommit"
 	SourceRepositoryS3         SourceRepository = "S3"
 )
 

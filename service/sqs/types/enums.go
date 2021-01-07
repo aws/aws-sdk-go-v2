@@ -6,14 +6,14 @@ type MessageSystemAttributeName string
 
 // Enum values for MessageSystemAttributeName
 const (
-	MessageSystemAttributeNameSenderid                         MessageSystemAttributeName = "SenderId"
-	MessageSystemAttributeNameSenttimestamp                    MessageSystemAttributeName = "SentTimestamp"
-	MessageSystemAttributeNameApproximatereceivecount          MessageSystemAttributeName = "ApproximateReceiveCount"
-	MessageSystemAttributeNameApproximatefirstreceivetimestamp MessageSystemAttributeName = "ApproximateFirstReceiveTimestamp"
-	MessageSystemAttributeNameSequencenumber                   MessageSystemAttributeName = "SequenceNumber"
-	MessageSystemAttributeNameMessagededuplicationid           MessageSystemAttributeName = "MessageDeduplicationId"
-	MessageSystemAttributeNameMessagegroupid                   MessageSystemAttributeName = "MessageGroupId"
-	MessageSystemAttributeNameAwstraceheader                   MessageSystemAttributeName = "AWSTraceHeader"
+	MessageSystemAttributeNameSenderId                         MessageSystemAttributeName = "SenderId"
+	MessageSystemAttributeNameSentTimestamp                    MessageSystemAttributeName = "SentTimestamp"
+	MessageSystemAttributeNameApproximateReceiveCount          MessageSystemAttributeName = "ApproximateReceiveCount"
+	MessageSystemAttributeNameApproximateFirstReceiveTimestamp MessageSystemAttributeName = "ApproximateFirstReceiveTimestamp"
+	MessageSystemAttributeNameSequenceNumber                   MessageSystemAttributeName = "SequenceNumber"
+	MessageSystemAttributeNameMessageDeduplicationId           MessageSystemAttributeName = "MessageDeduplicationId"
+	MessageSystemAttributeNameMessageGroupId                   MessageSystemAttributeName = "MessageGroupId"
+	MessageSystemAttributeNameAWSTraceHeader                   MessageSystemAttributeName = "AWSTraceHeader"
 )
 
 // Values returns all known values for MessageSystemAttributeName. Note that this
@@ -36,7 +36,7 @@ type MessageSystemAttributeNameForSends string
 
 // Enum values for MessageSystemAttributeNameForSends
 const (
-	MessageSystemAttributeNameForSendsAwstraceheader MessageSystemAttributeNameForSends = "AWSTraceHeader"
+	MessageSystemAttributeNameForSendsAWSTraceHeader MessageSystemAttributeNameForSends = "AWSTraceHeader"
 )
 
 // Values returns all known values for MessageSystemAttributeNameForSends. Note
@@ -55,24 +55,24 @@ type QueueAttributeName string
 const (
 	QueueAttributeNameAll                                   QueueAttributeName = "All"
 	QueueAttributeNamePolicy                                QueueAttributeName = "Policy"
-	QueueAttributeNameVisibilitytimeout                     QueueAttributeName = "VisibilityTimeout"
-	QueueAttributeNameMaximummessagesize                    QueueAttributeName = "MaximumMessageSize"
-	QueueAttributeNameMessageretentionperiod                QueueAttributeName = "MessageRetentionPeriod"
-	QueueAttributeNameApproximatenumberofmessages           QueueAttributeName = "ApproximateNumberOfMessages"
-	QueueAttributeNameApproximatenumberofmessagesnotvisible QueueAttributeName = "ApproximateNumberOfMessagesNotVisible"
-	QueueAttributeNameCreatedtimestamp                      QueueAttributeName = "CreatedTimestamp"
-	QueueAttributeNameLastmodifiedtimestamp                 QueueAttributeName = "LastModifiedTimestamp"
-	QueueAttributeNameQueuearn                              QueueAttributeName = "QueueArn"
-	QueueAttributeNameApproximatenumberofmessagesdelayed    QueueAttributeName = "ApproximateNumberOfMessagesDelayed"
-	QueueAttributeNameDelayseconds                          QueueAttributeName = "DelaySeconds"
-	QueueAttributeNameReceivemessagewaittimeseconds         QueueAttributeName = "ReceiveMessageWaitTimeSeconds"
-	QueueAttributeNameRedrivepolicy                         QueueAttributeName = "RedrivePolicy"
-	QueueAttributeNameFifoqueue                             QueueAttributeName = "FifoQueue"
-	QueueAttributeNameContentbaseddeduplication             QueueAttributeName = "ContentBasedDeduplication"
-	QueueAttributeNameKmsmasterkeyid                        QueueAttributeName = "KmsMasterKeyId"
-	QueueAttributeNameKmsdatakeyreuseperiodseconds          QueueAttributeName = "KmsDataKeyReusePeriodSeconds"
-	QueueAttributeNameDeduplicationscope                    QueueAttributeName = "DeduplicationScope"
-	QueueAttributeNameFifothroughputlimit                   QueueAttributeName = "FifoThroughputLimit"
+	QueueAttributeNameVisibilityTimeout                     QueueAttributeName = "VisibilityTimeout"
+	QueueAttributeNameMaximumMessageSize                    QueueAttributeName = "MaximumMessageSize"
+	QueueAttributeNameMessageRetentionPeriod                QueueAttributeName = "MessageRetentionPeriod"
+	QueueAttributeNameApproximateNumberOfMessages           QueueAttributeName = "ApproximateNumberOfMessages"
+	QueueAttributeNameApproximateNumberOfMessagesNotVisible QueueAttributeName = "ApproximateNumberOfMessagesNotVisible"
+	QueueAttributeNameCreatedTimestamp                      QueueAttributeName = "CreatedTimestamp"
+	QueueAttributeNameLastModifiedTimestamp                 QueueAttributeName = "LastModifiedTimestamp"
+	QueueAttributeNameQueueArn                              QueueAttributeName = "QueueArn"
+	QueueAttributeNameApproximateNumberOfMessagesDelayed    QueueAttributeName = "ApproximateNumberOfMessagesDelayed"
+	QueueAttributeNameDelaySeconds                          QueueAttributeName = "DelaySeconds"
+	QueueAttributeNameReceiveMessageWaitTimeSeconds         QueueAttributeName = "ReceiveMessageWaitTimeSeconds"
+	QueueAttributeNameRedrivePolicy                         QueueAttributeName = "RedrivePolicy"
+	QueueAttributeNameFifoQueue                             QueueAttributeName = "FifoQueue"
+	QueueAttributeNameContentBasedDeduplication             QueueAttributeName = "ContentBasedDeduplication"
+	QueueAttributeNameKmsMasterKeyId                        QueueAttributeName = "KmsMasterKeyId"
+	QueueAttributeNameKmsDataKeyReusePeriodSeconds          QueueAttributeName = "KmsDataKeyReusePeriodSeconds"
+	QueueAttributeNameDeduplicationScope                    QueueAttributeName = "DeduplicationScope"
+	QueueAttributeNameFifoThroughputLimit                   QueueAttributeName = "FifoThroughputLimit"
 )
 
 // Values returns all known values for QueueAttributeName. Note that this can be

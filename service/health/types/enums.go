@@ -26,7 +26,7 @@ type EventAggregateField string
 
 // Enum values for EventAggregateField
 const (
-	EventAggregateFieldEventtypecategory EventAggregateField = "eventTypeCategory"
+	EventAggregateFieldEventTypeCategory EventAggregateField = "eventTypeCategory"
 )
 
 // Values returns all known values for EventAggregateField. Note that this can be

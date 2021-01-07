@@ -7,9 +7,9 @@ type AccountType string
 // Enum values for AccountType
 const (
 	AccountTypeTeam                AccountType = "Team"
-	AccountTypeEnterprisedirectory AccountType = "EnterpriseDirectory"
-	AccountTypeEnterpriselwa       AccountType = "EnterpriseLWA"
-	AccountTypeEnterpriseoidc      AccountType = "EnterpriseOIDC"
+	AccountTypeEnterpriseDirectory AccountType = "EnterpriseDirectory"
+	AccountTypeEnterpriseLWA       AccountType = "EnterpriseLWA"
+	AccountTypeEnterpriseOIDC      AccountType = "EnterpriseOIDC"
 )
 
 // Values returns all known values for AccountType. Note that this can be expanded
@@ -29,7 +29,7 @@ type AppInstanceDataType string
 // Enum values for AppInstanceDataType
 const (
 	AppInstanceDataTypeChannel        AppInstanceDataType = "Channel"
-	AppInstanceDataTypeChannelmessage AppInstanceDataType = "ChannelMessage"
+	AppInstanceDataTypeChannelMessage AppInstanceDataType = "ChannelMessage"
 )
 
 // Values returns all known values for AppInstanceDataType. Note that this can be
@@ -46,7 +46,7 @@ type BotType string
 
 // Enum values for BotType
 const (
-	BotTypeChatbot BotType = "ChatBot"
+	BotTypeChatBot BotType = "ChatBot"
 )
 
 // Values returns all known values for BotType. Note that this can be expanded in
@@ -63,9 +63,9 @@ type CallingNameStatus string
 // Enum values for CallingNameStatus
 const (
 	CallingNameStatusUnassigned       CallingNameStatus = "Unassigned"
-	CallingNameStatusUpdateinprogress CallingNameStatus = "UpdateInProgress"
-	CallingNameStatusUpdatesucceeded  CallingNameStatus = "UpdateSucceeded"
-	CallingNameStatusUpdatefailed     CallingNameStatus = "UpdateFailed"
+	CallingNameStatusUpdateInProgress CallingNameStatus = "UpdateInProgress"
+	CallingNameStatusUpdateSucceeded  CallingNameStatus = "UpdateSucceeded"
+	CallingNameStatusUpdateFailed     CallingNameStatus = "UpdateFailed"
 )
 
 // Values returns all known values for CallingNameStatus. Note that this can be
@@ -193,7 +193,7 @@ type EmailStatus string
 
 // Enum values for EmailStatus
 const (
-	EmailStatusNotsent EmailStatus = "NotSent"
+	EmailStatusNotSent EmailStatus = "NotSent"
 	EmailStatusSent    EmailStatus = "Sent"
 	EmailStatusFailed  EmailStatus = "Failed"
 )
@@ -213,21 +213,21 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeBadrequest                           ErrorCode = "BadRequest"
+	ErrorCodeBadRequest                           ErrorCode = "BadRequest"
 	ErrorCodeConflict                             ErrorCode = "Conflict"
 	ErrorCodeForbidden                            ErrorCode = "Forbidden"
-	ErrorCodeNotfound                             ErrorCode = "NotFound"
-	ErrorCodePreconditionfailed                   ErrorCode = "PreconditionFailed"
-	ErrorCodeResourcelimitexceeded                ErrorCode = "ResourceLimitExceeded"
-	ErrorCodeServicefailure                       ErrorCode = "ServiceFailure"
-	ErrorCodeAccessdenied                         ErrorCode = "AccessDenied"
-	ErrorCodeServiceunavailable                   ErrorCode = "ServiceUnavailable"
+	ErrorCodeNotFound                             ErrorCode = "NotFound"
+	ErrorCodePreconditionFailed                   ErrorCode = "PreconditionFailed"
+	ErrorCodeResourceLimitExceeded                ErrorCode = "ResourceLimitExceeded"
+	ErrorCodeServiceFailure                       ErrorCode = "ServiceFailure"
+	ErrorCodeAccessDenied                         ErrorCode = "AccessDenied"
+	ErrorCodeServiceUnavailable                   ErrorCode = "ServiceUnavailable"
 	ErrorCodeThrottled                            ErrorCode = "Throttled"
 	ErrorCodeThrottling                           ErrorCode = "Throttling"
 	ErrorCodeUnauthorized                         ErrorCode = "Unauthorized"
 	ErrorCodeUnprocessable                        ErrorCode = "Unprocessable"
-	ErrorCodeVoiceconnectorgroupassociationsexist ErrorCode = "VoiceConnectorGroupAssociationsExist"
-	ErrorCodePhonenumberassociationsexist         ErrorCode = "PhoneNumberAssociationsExist"
+	ErrorCodeVoiceConnectorGroupAssociationsExist ErrorCode = "VoiceConnectorGroupAssociationsExist"
+	ErrorCodePhoneNumberAssociationsExist         ErrorCode = "PhoneNumberAssociationsExist"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -258,7 +258,7 @@ type GeoMatchLevel string
 // Enum values for GeoMatchLevel
 const (
 	GeoMatchLevelCountry  GeoMatchLevel = "Country"
-	GeoMatchLevelAreacode GeoMatchLevel = "AreaCode"
+	GeoMatchLevelAreaCode GeoMatchLevel = "AreaCode"
 )
 
 // Values returns all known values for GeoMatchLevel. Note that this can be
@@ -298,7 +298,7 @@ const (
 	LicenseBasic    License = "Basic"
 	LicensePlus     License = "Plus"
 	LicensePro      License = "Pro"
-	LicenseProtrial License = "ProTrial"
+	LicenseProTrial License = "ProTrial"
 )
 
 // Values returns all known values for License. Note that this can be expanded in
@@ -337,7 +337,7 @@ type NotificationTarget string
 
 // Enum values for NotificationTarget
 const (
-	NotificationTargetEventbridge NotificationTarget = "EventBridge"
+	NotificationTargetEventBridge NotificationTarget = "EventBridge"
 	NotificationTargetSns         NotificationTarget = "SNS"
 	NotificationTargetSqs         NotificationTarget = "SQS"
 )
@@ -357,8 +357,8 @@ type NumberSelectionBehavior string
 
 // Enum values for NumberSelectionBehavior
 const (
-	NumberSelectionBehaviorPrefersticky NumberSelectionBehavior = "PreferSticky"
-	NumberSelectionBehaviorAvoidsticky  NumberSelectionBehavior = "AvoidSticky"
+	NumberSelectionBehaviorPreferSticky NumberSelectionBehavior = "PreferSticky"
+	NumberSelectionBehaviorAvoidSticky  NumberSelectionBehavior = "AvoidSticky"
 )
 
 // Values returns all known values for NumberSelectionBehavior. Note that this can
@@ -413,11 +413,11 @@ type PhoneNumberAssociationName string
 
 // Enum values for PhoneNumberAssociationName
 const (
-	PhoneNumberAssociationNameAccountid             PhoneNumberAssociationName = "AccountId"
-	PhoneNumberAssociationNameUserid                PhoneNumberAssociationName = "UserId"
-	PhoneNumberAssociationNameVoiceconnectorid      PhoneNumberAssociationName = "VoiceConnectorId"
-	PhoneNumberAssociationNameVoiceconnectorgroupid PhoneNumberAssociationName = "VoiceConnectorGroupId"
-	PhoneNumberAssociationNameSipruleid             PhoneNumberAssociationName = "SipRuleId"
+	PhoneNumberAssociationNameAccountId             PhoneNumberAssociationName = "AccountId"
+	PhoneNumberAssociationNameUserId                PhoneNumberAssociationName = "UserId"
+	PhoneNumberAssociationNameVoiceConnectorId      PhoneNumberAssociationName = "VoiceConnectorId"
+	PhoneNumberAssociationNameVoiceConnectorGroupId PhoneNumberAssociationName = "VoiceConnectorGroupId"
+	PhoneNumberAssociationNameSipRuleId             PhoneNumberAssociationName = "SipRuleId"
 )
 
 // Values returns all known values for PhoneNumberAssociationName. Note that this
@@ -459,8 +459,8 @@ type PhoneNumberProductType string
 
 // Enum values for PhoneNumberProductType
 const (
-	PhoneNumberProductTypeBusinesscalling PhoneNumberProductType = "BusinessCalling"
-	PhoneNumberProductTypeVoiceconnector  PhoneNumberProductType = "VoiceConnector"
+	PhoneNumberProductTypeBusinessCalling PhoneNumberProductType = "BusinessCalling"
+	PhoneNumberProductTypeVoiceConnector  PhoneNumberProductType = "VoiceConnector"
 )
 
 // Values returns all known values for PhoneNumberProductType. Note that this can
@@ -477,14 +477,14 @@ type PhoneNumberStatus string
 
 // Enum values for PhoneNumberStatus
 const (
-	PhoneNumberStatusAcquireinprogress PhoneNumberStatus = "AcquireInProgress"
-	PhoneNumberStatusAcquirefailed     PhoneNumberStatus = "AcquireFailed"
+	PhoneNumberStatusAcquireInProgress PhoneNumberStatus = "AcquireInProgress"
+	PhoneNumberStatusAcquireFailed     PhoneNumberStatus = "AcquireFailed"
 	PhoneNumberStatusUnassigned        PhoneNumberStatus = "Unassigned"
 	PhoneNumberStatusAssigned          PhoneNumberStatus = "Assigned"
-	PhoneNumberStatusReleaseinprogress PhoneNumberStatus = "ReleaseInProgress"
-	PhoneNumberStatusDeleteinprogress  PhoneNumberStatus = "DeleteInProgress"
-	PhoneNumberStatusReleasefailed     PhoneNumberStatus = "ReleaseFailed"
-	PhoneNumberStatusDeletefailed      PhoneNumberStatus = "DeleteFailed"
+	PhoneNumberStatusReleaseInProgress PhoneNumberStatus = "ReleaseInProgress"
+	PhoneNumberStatusDeleteInProgress  PhoneNumberStatus = "DeleteInProgress"
+	PhoneNumberStatusReleaseFailed     PhoneNumberStatus = "ReleaseFailed"
+	PhoneNumberStatusDeleteFailed      PhoneNumberStatus = "DeleteFailed"
 )
 
 // Values returns all known values for PhoneNumberStatus. Note that this can be
@@ -508,7 +508,7 @@ type PhoneNumberType string
 // Enum values for PhoneNumberType
 const (
 	PhoneNumberTypeLocal    PhoneNumberType = "Local"
-	PhoneNumberTypeTollfree PhoneNumberType = "TollFree"
+	PhoneNumberTypeTollFree PhoneNumberType = "TollFree"
 )
 
 // Values returns all known values for PhoneNumberType. Note that this can be
@@ -526,7 +526,7 @@ type ProxySessionStatus string
 // Enum values for ProxySessionStatus
 const (
 	ProxySessionStatusOpen       ProxySessionStatus = "Open"
-	ProxySessionStatusInprogress ProxySessionStatus = "InProgress"
+	ProxySessionStatusInProgress ProxySessionStatus = "InProgress"
 	ProxySessionStatusClosed     ProxySessionStatus = "Closed"
 )
 
@@ -583,8 +583,8 @@ type SipRuleTriggerType string
 
 // Enum values for SipRuleTriggerType
 const (
-	SipRuleTriggerTypeTophonenumber      SipRuleTriggerType = "ToPhoneNumber"
-	SipRuleTriggerTypeRequesturihostname SipRuleTriggerType = "RequestUriHostname"
+	SipRuleTriggerTypeToPhoneNumber      SipRuleTriggerType = "ToPhoneNumber"
+	SipRuleTriggerTypeRequestUriHostname SipRuleTriggerType = "RequestUriHostname"
 )
 
 // Values returns all known values for SipRuleTriggerType. Note that this can be
@@ -619,8 +619,8 @@ type UserType string
 
 // Enum values for UserType
 const (
-	UserTypePrivateuser  UserType = "PrivateUser"
-	UserTypeShareddevice UserType = "SharedDevice"
+	UserTypePrivateUser  UserType = "PrivateUser"
+	UserTypeSharedDevice UserType = "SharedDevice"
 )
 
 // Values returns all known values for UserType. Note that this can be expanded in

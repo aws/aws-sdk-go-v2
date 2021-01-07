@@ -76,8 +76,8 @@ type SamplingStrategyName string
 
 // Enum values for SamplingStrategyName
 const (
-	SamplingStrategyNamePartialscan SamplingStrategyName = "PartialScan"
-	SamplingStrategyNameFixedrate   SamplingStrategyName = "FixedRate"
+	SamplingStrategyNamePartialScan SamplingStrategyName = "PartialScan"
+	SamplingStrategyNameFixedRate   SamplingStrategyName = "FixedRate"
 )
 
 // Values returns all known values for SamplingStrategyName. Note that this can be
@@ -94,7 +94,7 @@ type TimeRangeType string
 
 // Enum values for TimeRangeType
 const (
-	TimeRangeTypeTraceid TimeRangeType = "TraceId"
+	TimeRangeTypeTraceId TimeRangeType = "TraceId"
 	TimeRangeTypeEvent   TimeRangeType = "Event"
 )
 

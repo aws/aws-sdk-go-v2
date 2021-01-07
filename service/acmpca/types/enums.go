@@ -6,9 +6,9 @@ type ActionType string
 
 // Enum values for ActionType
 const (
-	ActionTypeIssuecertificate ActionType = "IssueCertificate"
-	ActionTypeGetcertificate   ActionType = "GetCertificate"
-	ActionTypeListpermissions  ActionType = "ListPermissions"
+	ActionTypeIssueCertificate ActionType = "IssueCertificate"
+	ActionTypeGetCertificate   ActionType = "GetCertificate"
+	ActionTypeListPermissions  ActionType = "ListPermissions"
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded

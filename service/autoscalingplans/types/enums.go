@@ -6,10 +6,10 @@ type ForecastDataType string
 
 // Enum values for ForecastDataType
 const (
-	ForecastDataTypeCapacityforecast           ForecastDataType = "CapacityForecast"
-	ForecastDataTypeLoadforecast               ForecastDataType = "LoadForecast"
-	ForecastDataTypeScheduledactionmincapacity ForecastDataType = "ScheduledActionMinCapacity"
-	ForecastDataTypeScheduledactionmaxcapacity ForecastDataType = "ScheduledActionMaxCapacity"
+	ForecastDataTypeCapacityForecast           ForecastDataType = "CapacityForecast"
+	ForecastDataTypeLoadForecast               ForecastDataType = "LoadForecast"
+	ForecastDataTypeScheduledActionMinCapacity ForecastDataType = "ScheduledActionMinCapacity"
+	ForecastDataTypeScheduledActionMaxCapacity ForecastDataType = "ScheduledActionMaxCapacity"
 )
 
 // Values returns all known values for ForecastDataType. Note that this can be
@@ -28,10 +28,10 @@ type LoadMetricType string
 
 // Enum values for LoadMetricType
 const (
-	LoadMetricTypeAsgtotalcpuutilization     LoadMetricType = "ASGTotalCPUUtilization"
-	LoadMetricTypeAsgtotalnetworkin          LoadMetricType = "ASGTotalNetworkIn"
-	LoadMetricTypeAsgtotalnetworkout         LoadMetricType = "ASGTotalNetworkOut"
-	LoadMetricTypeAlbtargetgrouprequestcount LoadMetricType = "ALBTargetGroupRequestCount"
+	LoadMetricTypeASGTotalCPUUtilization     LoadMetricType = "ASGTotalCPUUtilization"
+	LoadMetricTypeASGTotalNetworkIn          LoadMetricType = "ASGTotalNetworkIn"
+	LoadMetricTypeASGTotalNetworkOut         LoadMetricType = "ASGTotalNetworkOut"
+	LoadMetricTypeALBTargetGroupRequestCount LoadMetricType = "ALBTargetGroupRequestCount"
 )
 
 // Values returns all known values for LoadMetricType. Note that this can be
@@ -53,7 +53,7 @@ const (
 	MetricStatisticAverage     MetricStatistic = "Average"
 	MetricStatisticMinimum     MetricStatistic = "Minimum"
 	MetricStatisticMaximum     MetricStatistic = "Maximum"
-	MetricStatisticSamplecount MetricStatistic = "SampleCount"
+	MetricStatisticSampleCount MetricStatistic = "SampleCount"
 	MetricStatisticSum         MetricStatistic = "Sum"
 )
 
@@ -74,7 +74,7 @@ type PolicyType string
 
 // Enum values for PolicyType
 const (
-	PolicyTypeTargettrackingscaling PolicyType = "TargetTrackingScaling"
+	PolicyTypeTargetTrackingScaling PolicyType = "TargetTrackingScaling"
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
@@ -90,9 +90,9 @@ type PredictiveScalingMaxCapacityBehavior string
 
 // Enum values for PredictiveScalingMaxCapacityBehavior
 const (
-	PredictiveScalingMaxCapacityBehaviorSetforecastcapacitytomaxcapacity    PredictiveScalingMaxCapacityBehavior = "SetForecastCapacityToMaxCapacity"
-	PredictiveScalingMaxCapacityBehaviorSetmaxcapacitytoforecastcapacity    PredictiveScalingMaxCapacityBehavior = "SetMaxCapacityToForecastCapacity"
-	PredictiveScalingMaxCapacityBehaviorSetmaxcapacityaboveforecastcapacity PredictiveScalingMaxCapacityBehavior = "SetMaxCapacityAboveForecastCapacity"
+	PredictiveScalingMaxCapacityBehaviorSetForecastCapacityToMaxCapacity    PredictiveScalingMaxCapacityBehavior = "SetForecastCapacityToMaxCapacity"
+	PredictiveScalingMaxCapacityBehaviorSetMaxCapacityToForecastCapacity    PredictiveScalingMaxCapacityBehavior = "SetMaxCapacityToForecastCapacity"
+	PredictiveScalingMaxCapacityBehaviorSetMaxCapacityAboveForecastCapacity PredictiveScalingMaxCapacityBehavior = "SetMaxCapacityAboveForecastCapacity"
 )
 
 // Values returns all known values for PredictiveScalingMaxCapacityBehavior. Note
@@ -111,8 +111,8 @@ type PredictiveScalingMode string
 
 // Enum values for PredictiveScalingMode
 const (
-	PredictiveScalingModeForecastandscale PredictiveScalingMode = "ForecastAndScale"
-	PredictiveScalingModeForecastonly     PredictiveScalingMode = "ForecastOnly"
+	PredictiveScalingModeForecastAndScale PredictiveScalingMode = "ForecastAndScale"
+	PredictiveScalingModeForecastOnly     PredictiveScalingMode = "ForecastOnly"
 )
 
 // Values returns all known values for PredictiveScalingMode. Note that this can be
@@ -129,14 +129,14 @@ type ScalableDimension string
 
 // Enum values for ScalableDimension
 const (
-	ScalableDimensionAutoscalinggroupdesiredcapacity   ScalableDimension = "autoscaling:autoScalingGroup:DesiredCapacity"
-	ScalableDimensionEcsservicedesiredcount            ScalableDimension = "ecs:service:DesiredCount"
-	ScalableDimensionEc2spotfleetrequesttargetcapacity ScalableDimension = "ec2:spot-fleet-request:TargetCapacity"
-	ScalableDimensionRdsclusterreadreplicacount        ScalableDimension = "rds:cluster:ReadReplicaCount"
-	ScalableDimensionDynamodbtablereadcapacityunits    ScalableDimension = "dynamodb:table:ReadCapacityUnits"
-	ScalableDimensionDynamodbtablewritecapacityunits   ScalableDimension = "dynamodb:table:WriteCapacityUnits"
-	ScalableDimensionDynamodbindexreadcapacityunits    ScalableDimension = "dynamodb:index:ReadCapacityUnits"
-	ScalableDimensionDynamodbindexwritecapacityunits   ScalableDimension = "dynamodb:index:WriteCapacityUnits"
+	ScalableDimensionAutoScalingGroupDesiredCapacity   ScalableDimension = "autoscaling:autoScalingGroup:DesiredCapacity"
+	ScalableDimensionECSServiceDesiredCount            ScalableDimension = "ecs:service:DesiredCount"
+	ScalableDimensionEC2SpotFleetRequestTargetCapacity ScalableDimension = "ec2:spot-fleet-request:TargetCapacity"
+	ScalableDimensionRDSClusterReadReplicaCount        ScalableDimension = "rds:cluster:ReadReplicaCount"
+	ScalableDimensionDynamoDBTableReadCapacityUnits    ScalableDimension = "dynamodb:table:ReadCapacityUnits"
+	ScalableDimensionDynamoDBTableWriteCapacityUnits   ScalableDimension = "dynamodb:table:WriteCapacityUnits"
+	ScalableDimensionDynamoDBIndexReadCapacityUnits    ScalableDimension = "dynamodb:index:ReadCapacityUnits"
+	ScalableDimensionDynamoDBIndexWriteCapacityUnits   ScalableDimension = "dynamodb:index:WriteCapacityUnits"
 )
 
 // Values returns all known values for ScalableDimension. Note that this can be
@@ -159,19 +159,19 @@ type ScalingMetricType string
 
 // Enum values for ScalingMetricType
 const (
-	ScalingMetricTypeAsgaveragecpuutilization                 ScalingMetricType = "ASGAverageCPUUtilization"
-	ScalingMetricTypeAsgaveragenetworkin                      ScalingMetricType = "ASGAverageNetworkIn"
-	ScalingMetricTypeAsgaveragenetworkout                     ScalingMetricType = "ASGAverageNetworkOut"
-	ScalingMetricTypeDynamodbreadcapacityutilization          ScalingMetricType = "DynamoDBReadCapacityUtilization"
-	ScalingMetricTypeDynamodbwritecapacityutilization         ScalingMetricType = "DynamoDBWriteCapacityUtilization"
-	ScalingMetricTypeEcsserviceaveragecpuutilization          ScalingMetricType = "ECSServiceAverageCPUUtilization"
-	ScalingMetricTypeEcsserviceaveragememoryutilization       ScalingMetricType = "ECSServiceAverageMemoryUtilization"
-	ScalingMetricTypeAlbrequestcountpertarget                 ScalingMetricType = "ALBRequestCountPerTarget"
-	ScalingMetricTypeRdsreaderaveragecpuutilization           ScalingMetricType = "RDSReaderAverageCPUUtilization"
-	ScalingMetricTypeRdsreaderaveragedatabaseconnections      ScalingMetricType = "RDSReaderAverageDatabaseConnections"
-	ScalingMetricTypeEc2spotfleetrequestaveragecpuutilization ScalingMetricType = "EC2SpotFleetRequestAverageCPUUtilization"
-	ScalingMetricTypeEc2spotfleetrequestaveragenetworkin      ScalingMetricType = "EC2SpotFleetRequestAverageNetworkIn"
-	ScalingMetricTypeEc2spotfleetrequestaveragenetworkout     ScalingMetricType = "EC2SpotFleetRequestAverageNetworkOut"
+	ScalingMetricTypeASGAverageCPUUtilization                 ScalingMetricType = "ASGAverageCPUUtilization"
+	ScalingMetricTypeASGAverageNetworkIn                      ScalingMetricType = "ASGAverageNetworkIn"
+	ScalingMetricTypeASGAverageNetworkOut                     ScalingMetricType = "ASGAverageNetworkOut"
+	ScalingMetricTypeDynamoDBReadCapacityUtilization          ScalingMetricType = "DynamoDBReadCapacityUtilization"
+	ScalingMetricTypeDynamoDBWriteCapacityUtilization         ScalingMetricType = "DynamoDBWriteCapacityUtilization"
+	ScalingMetricTypeECSServiceAverageCPUUtilization          ScalingMetricType = "ECSServiceAverageCPUUtilization"
+	ScalingMetricTypeECSServiceAverageMemoryUtilization       ScalingMetricType = "ECSServiceAverageMemoryUtilization"
+	ScalingMetricTypeALBRequestCountPerTarget                 ScalingMetricType = "ALBRequestCountPerTarget"
+	ScalingMetricTypeRDSReaderAverageCPUUtilization           ScalingMetricType = "RDSReaderAverageCPUUtilization"
+	ScalingMetricTypeRDSReaderAverageDatabaseConnections      ScalingMetricType = "RDSReaderAverageDatabaseConnections"
+	ScalingMetricTypeEC2SpotFleetRequestAverageCPUUtilization ScalingMetricType = "EC2SpotFleetRequestAverageCPUUtilization"
+	ScalingMetricTypeEC2SpotFleetRequestAverageNetworkIn      ScalingMetricType = "EC2SpotFleetRequestAverageNetworkIn"
+	ScalingMetricTypeEC2SpotFleetRequestAverageNetworkOut     ScalingMetricType = "EC2SpotFleetRequestAverageNetworkOut"
 )
 
 // Values returns all known values for ScalingMetricType. Note that this can be
@@ -200,13 +200,13 @@ type ScalingPlanStatusCode string
 // Enum values for ScalingPlanStatusCode
 const (
 	ScalingPlanStatusCodeActive             ScalingPlanStatusCode = "Active"
-	ScalingPlanStatusCodeActivewithproblems ScalingPlanStatusCode = "ActiveWithProblems"
-	ScalingPlanStatusCodeCreationinprogress ScalingPlanStatusCode = "CreationInProgress"
-	ScalingPlanStatusCodeCreationfailed     ScalingPlanStatusCode = "CreationFailed"
-	ScalingPlanStatusCodeDeletioninprogress ScalingPlanStatusCode = "DeletionInProgress"
-	ScalingPlanStatusCodeDeletionfailed     ScalingPlanStatusCode = "DeletionFailed"
-	ScalingPlanStatusCodeUpdateinprogress   ScalingPlanStatusCode = "UpdateInProgress"
-	ScalingPlanStatusCodeUpdatefailed       ScalingPlanStatusCode = "UpdateFailed"
+	ScalingPlanStatusCodeActiveWithProblems ScalingPlanStatusCode = "ActiveWithProblems"
+	ScalingPlanStatusCodeCreationInProgress ScalingPlanStatusCode = "CreationInProgress"
+	ScalingPlanStatusCodeCreationFailed     ScalingPlanStatusCode = "CreationFailed"
+	ScalingPlanStatusCodeDeletionInProgress ScalingPlanStatusCode = "DeletionInProgress"
+	ScalingPlanStatusCodeDeletionFailed     ScalingPlanStatusCode = "DeletionFailed"
+	ScalingPlanStatusCodeUpdateInProgress   ScalingPlanStatusCode = "UpdateInProgress"
+	ScalingPlanStatusCodeUpdateFailed       ScalingPlanStatusCode = "UpdateFailed"
 )
 
 // Values returns all known values for ScalingPlanStatusCode. Note that this can be
@@ -229,8 +229,8 @@ type ScalingPolicyUpdateBehavior string
 
 // Enum values for ScalingPolicyUpdateBehavior
 const (
-	ScalingPolicyUpdateBehaviorKeepexternalpolicies    ScalingPolicyUpdateBehavior = "KeepExternalPolicies"
-	ScalingPolicyUpdateBehaviorReplaceexternalpolicies ScalingPolicyUpdateBehavior = "ReplaceExternalPolicies"
+	ScalingPolicyUpdateBehaviorKeepExternalPolicies    ScalingPolicyUpdateBehavior = "KeepExternalPolicies"
+	ScalingPolicyUpdateBehaviorReplaceExternalPolicies ScalingPolicyUpdateBehavior = "ReplaceExternalPolicies"
 )
 
 // Values returns all known values for ScalingPolicyUpdateBehavior. Note that this
@@ -248,7 +248,7 @@ type ScalingStatusCode string
 // Enum values for ScalingStatusCode
 const (
 	ScalingStatusCodeInactive        ScalingStatusCode = "Inactive"
-	ScalingStatusCodePartiallyactive ScalingStatusCode = "PartiallyActive"
+	ScalingStatusCodePartiallyActive ScalingStatusCode = "PartiallyActive"
 	ScalingStatusCodeActive          ScalingStatusCode = "Active"
 )
 

@@ -449,16 +449,16 @@ type InventoryOptionalField string
 // Enum values for InventoryOptionalField
 const (
 	InventoryOptionalFieldSize                         InventoryOptionalField = "Size"
-	InventoryOptionalFieldLastmodifieddate             InventoryOptionalField = "LastModifiedDate"
-	InventoryOptionalFieldStorageclass                 InventoryOptionalField = "StorageClass"
-	InventoryOptionalFieldEtag                         InventoryOptionalField = "ETag"
-	InventoryOptionalFieldIsmultipartuploaded          InventoryOptionalField = "IsMultipartUploaded"
-	InventoryOptionalFieldReplicationstatus            InventoryOptionalField = "ReplicationStatus"
-	InventoryOptionalFieldEncryptionstatus             InventoryOptionalField = "EncryptionStatus"
-	InventoryOptionalFieldObjectlockretainuntildate    InventoryOptionalField = "ObjectLockRetainUntilDate"
-	InventoryOptionalFieldObjectlockmode               InventoryOptionalField = "ObjectLockMode"
-	InventoryOptionalFieldObjectlocklegalholdstatus    InventoryOptionalField = "ObjectLockLegalHoldStatus"
-	InventoryOptionalFieldIntelligenttieringaccesstier InventoryOptionalField = "IntelligentTieringAccessTier"
+	InventoryOptionalFieldLastModifiedDate             InventoryOptionalField = "LastModifiedDate"
+	InventoryOptionalFieldStorageClass                 InventoryOptionalField = "StorageClass"
+	InventoryOptionalFieldETag                         InventoryOptionalField = "ETag"
+	InventoryOptionalFieldIsMultipartUploaded          InventoryOptionalField = "IsMultipartUploaded"
+	InventoryOptionalFieldReplicationStatus            InventoryOptionalField = "ReplicationStatus"
+	InventoryOptionalFieldEncryptionStatus             InventoryOptionalField = "EncryptionStatus"
+	InventoryOptionalFieldObjectLockRetainUntilDate    InventoryOptionalField = "ObjectLockRetainUntilDate"
+	InventoryOptionalFieldObjectLockMode               InventoryOptionalField = "ObjectLockMode"
+	InventoryOptionalFieldObjectLockLegalHoldStatus    InventoryOptionalField = "ObjectLockLegalHoldStatus"
+	InventoryOptionalFieldIntelligentTieringAccessTier InventoryOptionalField = "IntelligentTieringAccessTier"
 )
 
 // Values returns all known values for InventoryOptionalField. Note that this can
@@ -672,8 +672,8 @@ type ObjectOwnership string
 
 // Enum values for ObjectOwnership
 const (
-	ObjectOwnershipBucketownerpreferred ObjectOwnership = "BucketOwnerPreferred"
-	ObjectOwnershipObjectwriter         ObjectOwnership = "ObjectWriter"
+	ObjectOwnershipBucketOwnerPreferred ObjectOwnership = "BucketOwnerPreferred"
+	ObjectOwnershipObjectWriter         ObjectOwnership = "ObjectWriter"
 )
 
 // Values returns all known values for ObjectOwnership. Note that this can be
@@ -753,7 +753,7 @@ type Payer string
 // Enum values for Payer
 const (
 	PayerRequester   Payer = "Requester"
-	PayerBucketowner Payer = "BucketOwner"
+	PayerBucketOwner Payer = "BucketOwner"
 )
 
 // Values returns all known values for Payer. Note that this can be expanded in the
@@ -1099,8 +1099,8 @@ type Type string
 
 // Enum values for Type
 const (
-	TypeCanonicaluser         Type = "CanonicalUser"
-	TypeAmazoncustomerbyemail Type = "AmazonCustomerByEmail"
+	TypeCanonicalUser         Type = "CanonicalUser"
+	TypeAmazonCustomerByEmail Type = "AmazonCustomerByEmail"
 	TypeGroup                 Type = "Group"
 )
 

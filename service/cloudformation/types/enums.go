@@ -120,10 +120,10 @@ type ChangeSource string
 
 // Enum values for ChangeSource
 const (
-	ChangeSourceResourcereference  ChangeSource = "ResourceReference"
-	ChangeSourceParameterreference ChangeSource = "ParameterReference"
-	ChangeSourceResourceattribute  ChangeSource = "ResourceAttribute"
-	ChangeSourceDirectmodification ChangeSource = "DirectModification"
+	ChangeSourceResourceReference  ChangeSource = "ResourceReference"
+	ChangeSourceParameterReference ChangeSource = "ParameterReference"
+	ChangeSourceResourceAttribute  ChangeSource = "ResourceAttribute"
+	ChangeSourceDirectModification ChangeSource = "DirectModification"
 	ChangeSourceAutomatic          ChangeSource = "Automatic"
 )
 
@@ -242,20 +242,20 @@ type HandlerErrorCode string
 
 // Enum values for HandlerErrorCode
 const (
-	HandlerErrorCodeNotupdatable            HandlerErrorCode = "NotUpdatable"
-	HandlerErrorCodeInvalidrequest          HandlerErrorCode = "InvalidRequest"
-	HandlerErrorCodeAccessdenied            HandlerErrorCode = "AccessDenied"
-	HandlerErrorCodeInvalidcredentials      HandlerErrorCode = "InvalidCredentials"
-	HandlerErrorCodeAlreadyexists           HandlerErrorCode = "AlreadyExists"
-	HandlerErrorCodeNotfound                HandlerErrorCode = "NotFound"
-	HandlerErrorCodeResourceconflict        HandlerErrorCode = "ResourceConflict"
+	HandlerErrorCodeNotUpdatable            HandlerErrorCode = "NotUpdatable"
+	HandlerErrorCodeInvalidRequest          HandlerErrorCode = "InvalidRequest"
+	HandlerErrorCodeAccessDenied            HandlerErrorCode = "AccessDenied"
+	HandlerErrorCodeInvalidCredentials      HandlerErrorCode = "InvalidCredentials"
+	HandlerErrorCodeAlreadyExists           HandlerErrorCode = "AlreadyExists"
+	HandlerErrorCodeNotFound                HandlerErrorCode = "NotFound"
+	HandlerErrorCodeResourceConflict        HandlerErrorCode = "ResourceConflict"
 	HandlerErrorCodeThrottling              HandlerErrorCode = "Throttling"
-	HandlerErrorCodeServicelimitexceeded    HandlerErrorCode = "ServiceLimitExceeded"
-	HandlerErrorCodeServicetimeout          HandlerErrorCode = "NotStabilized"
-	HandlerErrorCodeGeneralserviceexception HandlerErrorCode = "GeneralServiceException"
-	HandlerErrorCodeServiceinternalerror    HandlerErrorCode = "ServiceInternalError"
-	HandlerErrorCodeNetworkfailure          HandlerErrorCode = "NetworkFailure"
-	HandlerErrorCodeInternalfailure         HandlerErrorCode = "InternalFailure"
+	HandlerErrorCodeServiceLimitExceeded    HandlerErrorCode = "ServiceLimitExceeded"
+	HandlerErrorCodeServiceTimeout          HandlerErrorCode = "NotStabilized"
+	HandlerErrorCodeGeneralServiceException HandlerErrorCode = "GeneralServiceException"
+	HandlerErrorCodeServiceInternalError    HandlerErrorCode = "ServiceInternalError"
+	HandlerErrorCodeNetworkFailure          HandlerErrorCode = "NetworkFailure"
+	HandlerErrorCodeInternalFailure         HandlerErrorCode = "InternalFailure"
 )
 
 // Values returns all known values for HandlerErrorCode. Note that this can be
@@ -444,9 +444,9 @@ type ResourceAttribute string
 const (
 	ResourceAttributeProperties     ResourceAttribute = "Properties"
 	ResourceAttributeMetadata       ResourceAttribute = "Metadata"
-	ResourceAttributeCreationpolicy ResourceAttribute = "CreationPolicy"
-	ResourceAttributeUpdatepolicy   ResourceAttribute = "UpdatePolicy"
-	ResourceAttributeDeletionpolicy ResourceAttribute = "DeletionPolicy"
+	ResourceAttributeCreationPolicy ResourceAttribute = "CreationPolicy"
+	ResourceAttributeUpdatePolicy   ResourceAttribute = "UpdatePolicy"
+	ResourceAttributeDeletionPolicy ResourceAttribute = "DeletionPolicy"
 	ResourceAttributeTags           ResourceAttribute = "Tags"
 )
 

@@ -25,7 +25,7 @@ type SavingsPlanOfferingFilterAttribute string
 // Enum values for SavingsPlanOfferingFilterAttribute
 const (
 	SavingsPlanOfferingFilterAttributeRegion         SavingsPlanOfferingFilterAttribute = "region"
-	SavingsPlanOfferingFilterAttributeInstancefamily SavingsPlanOfferingFilterAttribute = "instanceFamily"
+	SavingsPlanOfferingFilterAttributeInstanceFamily SavingsPlanOfferingFilterAttribute = "instanceFamily"
 )
 
 // Values returns all known values for SavingsPlanOfferingFilterAttribute. Note

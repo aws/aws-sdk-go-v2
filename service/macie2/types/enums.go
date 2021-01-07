@@ -110,8 +110,8 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeClienterror   ErrorCode = "ClientError"
-	ErrorCodeInternalerror ErrorCode = "InternalError"
+	ErrorCodeClientError   ErrorCode = "ClientError"
+	ErrorCodeInternalError ErrorCode = "InternalError"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -200,7 +200,7 @@ type FindingStatisticsSortAttributeName string
 
 // Enum values for FindingStatisticsSortAttributeName
 const (
-	FindingStatisticsSortAttributeNameGroupkey FindingStatisticsSortAttributeName = "groupKey"
+	FindingStatisticsSortAttributeNameGroupKey FindingStatisticsSortAttributeName = "groupKey"
 	FindingStatisticsSortAttributeNameCount    FindingStatisticsSortAttributeName = "count"
 )
 
@@ -219,16 +219,16 @@ type FindingType string
 
 // Enum values for FindingType
 const (
-	FindingTypeSensitivedataS3objectMultiple             FindingType = "SensitiveData:S3Object/Multiple"
-	FindingTypeSensitivedataS3objectFinancial            FindingType = "SensitiveData:S3Object/Financial"
-	FindingTypeSensitivedataS3objectPersonal             FindingType = "SensitiveData:S3Object/Personal"
-	FindingTypeSensitivedataS3objectCredentials          FindingType = "SensitiveData:S3Object/Credentials"
-	FindingTypeSensitivedataS3objectCustomidentifier     FindingType = "SensitiveData:S3Object/CustomIdentifier"
-	FindingTypePolicyIamuserS3bucketpublic               FindingType = "Policy:IAMUser/S3BucketPublic"
-	FindingTypePolicyIamuserS3bucketsharedexternally     FindingType = "Policy:IAMUser/S3BucketSharedExternally"
-	FindingTypePolicyIamuserS3bucketreplicatedexternally FindingType = "Policy:IAMUser/S3BucketReplicatedExternally"
-	FindingTypePolicyIamuserS3bucketencryptiondisabled   FindingType = "Policy:IAMUser/S3BucketEncryptionDisabled"
-	FindingTypePolicyIamuserS3blockpublicaccessdisabled  FindingType = "Policy:IAMUser/S3BlockPublicAccessDisabled"
+	FindingTypeSensitiveDataS3ObjectMultiple             FindingType = "SensitiveData:S3Object/Multiple"
+	FindingTypeSensitiveDataS3ObjectFinancial            FindingType = "SensitiveData:S3Object/Financial"
+	FindingTypeSensitiveDataS3ObjectPersonal             FindingType = "SensitiveData:S3Object/Personal"
+	FindingTypeSensitiveDataS3ObjectCredentials          FindingType = "SensitiveData:S3Object/Credentials"
+	FindingTypeSensitiveDataS3ObjectCustomIdentifier     FindingType = "SensitiveData:S3Object/CustomIdentifier"
+	FindingTypePolicyIAMUserS3BucketPublic               FindingType = "Policy:IAMUser/S3BucketPublic"
+	FindingTypePolicyIAMUserS3BucketSharedExternally     FindingType = "Policy:IAMUser/S3BucketSharedExternally"
+	FindingTypePolicyIAMUserS3BucketReplicatedExternally FindingType = "Policy:IAMUser/S3BucketReplicatedExternally"
+	FindingTypePolicyIAMUserS3BucketEncryptionDisabled   FindingType = "Policy:IAMUser/S3BucketEncryptionDisabled"
+	FindingTypePolicyIAMUserS3BlockPublicAccessDisabled  FindingType = "Policy:IAMUser/S3BlockPublicAccessDisabled"
 )
 
 // Values returns all known values for FindingType. Note that this can be expanded
@@ -253,9 +253,9 @@ type GroupBy string
 
 // Enum values for GroupBy
 const (
-	GroupByResourcesaffectedS3bucketName GroupBy = "resourcesAffected.s3Bucket.name"
+	GroupByResourcesAffectedS3BucketName GroupBy = "resourcesAffected.s3Bucket.name"
 	GroupByType                          GroupBy = "type"
-	GroupByClassificationdetailsJobid    GroupBy = "classificationDetails.jobId"
+	GroupByClassificationDetailsJobId    GroupBy = "classificationDetails.jobId"
 	GroupBySeverityDescription           GroupBy = "severity.description"
 )
 
@@ -405,9 +405,9 @@ type ListJobsFilterKey string
 
 // Enum values for ListJobsFilterKey
 const (
-	ListJobsFilterKeyJobtype   ListJobsFilterKey = "jobType"
-	ListJobsFilterKeyJobstatus ListJobsFilterKey = "jobStatus"
-	ListJobsFilterKeyCreatedat ListJobsFilterKey = "createdAt"
+	ListJobsFilterKeyJobType   ListJobsFilterKey = "jobType"
+	ListJobsFilterKeyJobStatus ListJobsFilterKey = "jobStatus"
+	ListJobsFilterKeyCreatedAt ListJobsFilterKey = "createdAt"
 	ListJobsFilterKeyName      ListJobsFilterKey = "name"
 )
 
@@ -427,10 +427,10 @@ type ListJobsSortAttributeName string
 
 // Enum values for ListJobsSortAttributeName
 const (
-	ListJobsSortAttributeNameCreatedat ListJobsSortAttributeName = "createdAt"
-	ListJobsSortAttributeNameJobstatus ListJobsSortAttributeName = "jobStatus"
+	ListJobsSortAttributeNameCreatedAt ListJobsSortAttributeName = "createdAt"
+	ListJobsSortAttributeNameJobStatus ListJobsSortAttributeName = "jobStatus"
 	ListJobsSortAttributeNameName      ListJobsSortAttributeName = "name"
-	ListJobsSortAttributeNameJobtype   ListJobsSortAttributeName = "jobType"
+	ListJobsSortAttributeNameJobType   ListJobsSortAttributeName = "jobType"
 )
 
 // Values returns all known values for ListJobsSortAttributeName. Note that this
@@ -491,10 +491,10 @@ const (
 	RelationshipStatusCreated                     RelationshipStatus = "Created"
 	RelationshipStatusRemoved                     RelationshipStatus = "Removed"
 	RelationshipStatusResigned                    RelationshipStatus = "Resigned"
-	RelationshipStatusEmailverificationinprogress RelationshipStatus = "EmailVerificationInProgress"
-	RelationshipStatusEmailverificationfailed     RelationshipStatus = "EmailVerificationFailed"
-	RelationshipStatusRegiondisabled              RelationshipStatus = "RegionDisabled"
-	RelationshipStatusAccountsuspended            RelationshipStatus = "AccountSuspended"
+	RelationshipStatusEmailVerificationInProgress RelationshipStatus = "EmailVerificationInProgress"
+	RelationshipStatusEmailVerificationFailed     RelationshipStatus = "EmailVerificationFailed"
+	RelationshipStatusRegionDisabled              RelationshipStatus = "RegionDisabled"
+	RelationshipStatusAccountSuspended            RelationshipStatus = "AccountSuspended"
 )
 
 // Values returns all known values for RelationshipStatus. Note that this can be
@@ -696,9 +696,9 @@ type UsageStatisticsFilterKey string
 
 // Enum values for UsageStatisticsFilterKey
 const (
-	UsageStatisticsFilterKeyAccountid          UsageStatisticsFilterKey = "accountId"
-	UsageStatisticsFilterKeyServicelimit       UsageStatisticsFilterKey = "serviceLimit"
-	UsageStatisticsFilterKeyFreetrialstartdate UsageStatisticsFilterKey = "freeTrialStartDate"
+	UsageStatisticsFilterKeyAccountId          UsageStatisticsFilterKey = "accountId"
+	UsageStatisticsFilterKeyServiceLimit       UsageStatisticsFilterKey = "serviceLimit"
+	UsageStatisticsFilterKeyFreeTrialStartDate UsageStatisticsFilterKey = "freeTrialStartDate"
 	UsageStatisticsFilterKeyTotal              UsageStatisticsFilterKey = "total"
 )
 
@@ -718,10 +718,10 @@ type UsageStatisticsSortKey string
 
 // Enum values for UsageStatisticsSortKey
 const (
-	UsageStatisticsSortKeyAccountid          UsageStatisticsSortKey = "accountId"
+	UsageStatisticsSortKeyAccountId          UsageStatisticsSortKey = "accountId"
 	UsageStatisticsSortKeyTotal              UsageStatisticsSortKey = "total"
-	UsageStatisticsSortKeyServicelimitvalue  UsageStatisticsSortKey = "serviceLimitValue"
-	UsageStatisticsSortKeyFreetrialstartdate UsageStatisticsSortKey = "freeTrialStartDate"
+	UsageStatisticsSortKeyServiceLimitValue  UsageStatisticsSortKey = "serviceLimitValue"
+	UsageStatisticsSortKeyFreeTrialStartDate UsageStatisticsSortKey = "freeTrialStartDate"
 )
 
 // Values returns all known values for UsageStatisticsSortKey. Note that this can
@@ -758,12 +758,12 @@ type UserIdentityType string
 
 // Enum values for UserIdentityType
 const (
-	UserIdentityTypeAssumedrole   UserIdentityType = "AssumedRole"
-	UserIdentityTypeIamuser       UserIdentityType = "IAMUser"
-	UserIdentityTypeFederateduser UserIdentityType = "FederatedUser"
+	UserIdentityTypeAssumedRole   UserIdentityType = "AssumedRole"
+	UserIdentityTypeIAMUser       UserIdentityType = "IAMUser"
+	UserIdentityTypeFederatedUser UserIdentityType = "FederatedUser"
 	UserIdentityTypeRoot          UserIdentityType = "Root"
-	UserIdentityTypeAwsaccount    UserIdentityType = "AWSAccount"
-	UserIdentityTypeAwsservice    UserIdentityType = "AWSService"
+	UserIdentityTypeAWSAccount    UserIdentityType = "AWSAccount"
+	UserIdentityTypeAWSService    UserIdentityType = "AWSService"
 )
 
 // Values returns all known values for UserIdentityType. Note that this can be

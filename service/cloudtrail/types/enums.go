@@ -22,7 +22,7 @@ type InsightType string
 
 // Enum values for InsightType
 const (
-	InsightTypeApicallrateinsight InsightType = "ApiCallRateInsight"
+	InsightTypeApiCallRateInsight InsightType = "ApiCallRateInsight"
 )
 
 // Values returns all known values for InsightType. Note that this can be expanded
@@ -68,8 +68,8 @@ type ReadWriteType string
 
 // Enum values for ReadWriteType
 const (
-	ReadWriteTypeReadonly  ReadWriteType = "ReadOnly"
-	ReadWriteTypeWriteonly ReadWriteType = "WriteOnly"
+	ReadWriteTypeReadOnly  ReadWriteType = "ReadOnly"
+	ReadWriteTypeWriteOnly ReadWriteType = "WriteOnly"
 	ReadWriteTypeAll       ReadWriteType = "All"
 )
 

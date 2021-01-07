@@ -143,8 +143,8 @@ type DeliveryStreamType string
 
 // Enum values for DeliveryStreamType
 const (
-	DeliveryStreamTypeDirectput             DeliveryStreamType = "DirectPut"
-	DeliveryStreamTypeKinesisstreamassource DeliveryStreamType = "KinesisStreamAsSource"
+	DeliveryStreamTypeDirectPut             DeliveryStreamType = "DirectPut"
+	DeliveryStreamTypeKinesisStreamAsSource DeliveryStreamType = "KinesisStreamAsSource"
 )
 
 // Values returns all known values for DeliveryStreamType. Note that this can be
@@ -161,11 +161,11 @@ type ElasticsearchIndexRotationPeriod string
 
 // Enum values for ElasticsearchIndexRotationPeriod
 const (
-	ElasticsearchIndexRotationPeriodNorotation ElasticsearchIndexRotationPeriod = "NoRotation"
-	ElasticsearchIndexRotationPeriodOnehour    ElasticsearchIndexRotationPeriod = "OneHour"
-	ElasticsearchIndexRotationPeriodOneday     ElasticsearchIndexRotationPeriod = "OneDay"
-	ElasticsearchIndexRotationPeriodOneweek    ElasticsearchIndexRotationPeriod = "OneWeek"
-	ElasticsearchIndexRotationPeriodOnemonth   ElasticsearchIndexRotationPeriod = "OneMonth"
+	ElasticsearchIndexRotationPeriodNoRotation ElasticsearchIndexRotationPeriod = "NoRotation"
+	ElasticsearchIndexRotationPeriodOneHour    ElasticsearchIndexRotationPeriod = "OneHour"
+	ElasticsearchIndexRotationPeriodOneDay     ElasticsearchIndexRotationPeriod = "OneDay"
+	ElasticsearchIndexRotationPeriodOneWeek    ElasticsearchIndexRotationPeriod = "OneWeek"
+	ElasticsearchIndexRotationPeriodOneMonth   ElasticsearchIndexRotationPeriod = "OneMonth"
 )
 
 // Values returns all known values for ElasticsearchIndexRotationPeriod. Note that
@@ -186,8 +186,8 @@ type ElasticsearchS3BackupMode string
 
 // Enum values for ElasticsearchS3BackupMode
 const (
-	ElasticsearchS3BackupModeFaileddocumentsonly ElasticsearchS3BackupMode = "FailedDocumentsOnly"
-	ElasticsearchS3BackupModeAlldocuments        ElasticsearchS3BackupMode = "AllDocuments"
+	ElasticsearchS3BackupModeFailedDocumentsOnly ElasticsearchS3BackupMode = "FailedDocumentsOnly"
+	ElasticsearchS3BackupModeAllDocuments        ElasticsearchS3BackupMode = "AllDocuments"
 )
 
 // Values returns all known values for ElasticsearchS3BackupMode. Note that this
@@ -222,8 +222,8 @@ type HttpEndpointS3BackupMode string
 
 // Enum values for HttpEndpointS3BackupMode
 const (
-	HttpEndpointS3BackupModeFaileddataonly HttpEndpointS3BackupMode = "FailedDataOnly"
-	HttpEndpointS3BackupModeAlldata        HttpEndpointS3BackupMode = "AllData"
+	HttpEndpointS3BackupModeFailedDataOnly HttpEndpointS3BackupMode = "FailedDataOnly"
+	HttpEndpointS3BackupModeAllData        HttpEndpointS3BackupMode = "AllData"
 )
 
 // Values returns all known values for HttpEndpointS3BackupMode. Note that this can
@@ -258,7 +258,7 @@ type NoEncryptionConfig string
 
 // Enum values for NoEncryptionConfig
 const (
-	NoEncryptionConfigNoencryption NoEncryptionConfig = "NoEncryption"
+	NoEncryptionConfigNoEncryption NoEncryptionConfig = "NoEncryption"
 )
 
 // Values returns all known values for NoEncryptionConfig. Note that this can be
@@ -426,8 +426,8 @@ type SplunkS3BackupMode string
 
 // Enum values for SplunkS3BackupMode
 const (
-	SplunkS3BackupModeFailedeventsonly SplunkS3BackupMode = "FailedEventsOnly"
-	SplunkS3BackupModeAllevents        SplunkS3BackupMode = "AllEvents"
+	SplunkS3BackupModeFailedEventsOnly SplunkS3BackupMode = "FailedEventsOnly"
+	SplunkS3BackupModeAllEvents        SplunkS3BackupMode = "AllEvents"
 )
 
 // Values returns all known values for SplunkS3BackupMode. Note that this can be

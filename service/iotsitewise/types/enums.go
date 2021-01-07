@@ -132,15 +132,15 @@ type BatchPutAssetPropertyValueErrorCode string
 
 // Enum values for BatchPutAssetPropertyValueErrorCode
 const (
-	BatchPutAssetPropertyValueErrorCodeResourcenotfoundexception     BatchPutAssetPropertyValueErrorCode = "ResourceNotFoundException"
-	BatchPutAssetPropertyValueErrorCodeInvalidrequestexception       BatchPutAssetPropertyValueErrorCode = "InvalidRequestException"
-	BatchPutAssetPropertyValueErrorCodeInternalfailureexception      BatchPutAssetPropertyValueErrorCode = "InternalFailureException"
-	BatchPutAssetPropertyValueErrorCodeServiceunavailableexception   BatchPutAssetPropertyValueErrorCode = "ServiceUnavailableException"
-	BatchPutAssetPropertyValueErrorCodeThrottlingexception           BatchPutAssetPropertyValueErrorCode = "ThrottlingException"
-	BatchPutAssetPropertyValueErrorCodeLimitexceededexception        BatchPutAssetPropertyValueErrorCode = "LimitExceededException"
-	BatchPutAssetPropertyValueErrorCodeConflictingoperationexception BatchPutAssetPropertyValueErrorCode = "ConflictingOperationException"
-	BatchPutAssetPropertyValueErrorCodeTimestampoutofrangeexception  BatchPutAssetPropertyValueErrorCode = "TimestampOutOfRangeException"
-	BatchPutAssetPropertyValueErrorCodeAccessdeniedexception         BatchPutAssetPropertyValueErrorCode = "AccessDeniedException"
+	BatchPutAssetPropertyValueErrorCodeResourceNotFoundException     BatchPutAssetPropertyValueErrorCode = "ResourceNotFoundException"
+	BatchPutAssetPropertyValueErrorCodeInvalidRequestException       BatchPutAssetPropertyValueErrorCode = "InvalidRequestException"
+	BatchPutAssetPropertyValueErrorCodeInternalFailureException      BatchPutAssetPropertyValueErrorCode = "InternalFailureException"
+	BatchPutAssetPropertyValueErrorCodeServiceUnavailableException   BatchPutAssetPropertyValueErrorCode = "ServiceUnavailableException"
+	BatchPutAssetPropertyValueErrorCodeThrottlingException           BatchPutAssetPropertyValueErrorCode = "ThrottlingException"
+	BatchPutAssetPropertyValueErrorCodeLimitExceededException        BatchPutAssetPropertyValueErrorCode = "LimitExceededException"
+	BatchPutAssetPropertyValueErrorCodeConflictingOperationException BatchPutAssetPropertyValueErrorCode = "ConflictingOperationException"
+	BatchPutAssetPropertyValueErrorCodeTimestampOutOfRangeException  BatchPutAssetPropertyValueErrorCode = "TimestampOutOfRangeException"
+	BatchPutAssetPropertyValueErrorCodeAccessDeniedException         BatchPutAssetPropertyValueErrorCode = "AccessDeniedException"
 )
 
 // Values returns all known values for BatchPutAssetPropertyValueErrorCode. Note

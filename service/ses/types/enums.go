@@ -6,8 +6,8 @@ type BehaviorOnMXFailure string
 
 // Enum values for BehaviorOnMXFailure
 const (
-	BehaviorOnMXFailureUsedefaultvalue BehaviorOnMXFailure = "UseDefaultValue"
-	BehaviorOnMXFailureRejectmessage   BehaviorOnMXFailure = "RejectMessage"
+	BehaviorOnMXFailureUseDefaultValue BehaviorOnMXFailure = "UseDefaultValue"
+	BehaviorOnMXFailureRejectMessage   BehaviorOnMXFailure = "RejectMessage"
 )
 
 // Values returns all known values for BehaviorOnMXFailure. Note that this can be
@@ -24,12 +24,12 @@ type BounceType string
 
 // Enum values for BounceType
 const (
-	BounceTypeDoesnotexist     BounceType = "DoesNotExist"
-	BounceTypeMessagetoolarge  BounceType = "MessageTooLarge"
-	BounceTypeExceededquota    BounceType = "ExceededQuota"
-	BounceTypeContentrejected  BounceType = "ContentRejected"
+	BounceTypeDoesNotExist     BounceType = "DoesNotExist"
+	BounceTypeMessageTooLarge  BounceType = "MessageTooLarge"
+	BounceTypeExceededQuota    BounceType = "ExceededQuota"
+	BounceTypeContentRejected  BounceType = "ContentRejected"
 	BounceTypeUndefined        BounceType = "Undefined"
-	BounceTypeTemporaryfailure BounceType = "TemporaryFailure"
+	BounceTypeTemporaryFailure BounceType = "TemporaryFailure"
 )
 
 // Values returns all known values for BounceType. Note that this can be expanded
@@ -51,18 +51,18 @@ type BulkEmailStatus string
 // Enum values for BulkEmailStatus
 const (
 	BulkEmailStatusSuccess                       BulkEmailStatus = "Success"
-	BulkEmailStatusMessagerejected               BulkEmailStatus = "MessageRejected"
-	BulkEmailStatusMailfromdomainnotverified     BulkEmailStatus = "MailFromDomainNotVerified"
-	BulkEmailStatusConfigurationsetdoesnotexist  BulkEmailStatus = "ConfigurationSetDoesNotExist"
-	BulkEmailStatusTemplatedoesnotexist          BulkEmailStatus = "TemplateDoesNotExist"
-	BulkEmailStatusAccountsuspended              BulkEmailStatus = "AccountSuspended"
-	BulkEmailStatusAccountthrottled              BulkEmailStatus = "AccountThrottled"
-	BulkEmailStatusAccountdailyquotaexceeded     BulkEmailStatus = "AccountDailyQuotaExceeded"
-	BulkEmailStatusInvalidsendingpoolname        BulkEmailStatus = "InvalidSendingPoolName"
-	BulkEmailStatusAccountsendingpaused          BulkEmailStatus = "AccountSendingPaused"
-	BulkEmailStatusConfigurationsetsendingpaused BulkEmailStatus = "ConfigurationSetSendingPaused"
-	BulkEmailStatusInvalidparametervalue         BulkEmailStatus = "InvalidParameterValue"
-	BulkEmailStatusTransientfailure              BulkEmailStatus = "TransientFailure"
+	BulkEmailStatusMessageRejected               BulkEmailStatus = "MessageRejected"
+	BulkEmailStatusMailFromDomainNotVerified     BulkEmailStatus = "MailFromDomainNotVerified"
+	BulkEmailStatusConfigurationSetDoesNotExist  BulkEmailStatus = "ConfigurationSetDoesNotExist"
+	BulkEmailStatusTemplateDoesNotExist          BulkEmailStatus = "TemplateDoesNotExist"
+	BulkEmailStatusAccountSuspended              BulkEmailStatus = "AccountSuspended"
+	BulkEmailStatusAccountThrottled              BulkEmailStatus = "AccountThrottled"
+	BulkEmailStatusAccountDailyQuotaExceeded     BulkEmailStatus = "AccountDailyQuotaExceeded"
+	BulkEmailStatusInvalidSendingPoolName        BulkEmailStatus = "InvalidSendingPoolName"
+	BulkEmailStatusAccountSendingPaused          BulkEmailStatus = "AccountSendingPaused"
+	BulkEmailStatusConfigurationSetSendingPaused BulkEmailStatus = "ConfigurationSetSendingPaused"
+	BulkEmailStatusInvalidParameterValue         BulkEmailStatus = "InvalidParameterValue"
+	BulkEmailStatusTransientFailure              BulkEmailStatus = "TransientFailure"
 	BulkEmailStatusFailed                        BulkEmailStatus = "Failed"
 )
 
@@ -117,7 +117,7 @@ const (
 	CustomMailFromStatusPending          CustomMailFromStatus = "Pending"
 	CustomMailFromStatusSuccess          CustomMailFromStatus = "Success"
 	CustomMailFromStatusFailed           CustomMailFromStatus = "Failed"
-	CustomMailFromStatusTemporaryfailure CustomMailFromStatus = "TemporaryFailure"
+	CustomMailFromStatusTemporaryFailure CustomMailFromStatus = "TemporaryFailure"
 )
 
 // Values returns all known values for CustomMailFromStatus. Note that this can be
@@ -210,7 +210,7 @@ type IdentityType string
 
 // Enum values for IdentityType
 const (
-	IdentityTypeEmailaddress IdentityType = "EmailAddress"
+	IdentityTypeEmailAddress IdentityType = "EmailAddress"
 	IdentityTypeDomain       IdentityType = "Domain"
 )
 
@@ -229,7 +229,7 @@ type InvocationType string
 // Enum values for InvocationType
 const (
 	InvocationTypeEvent           InvocationType = "Event"
-	InvocationTypeRequestresponse InvocationType = "RequestResponse"
+	InvocationTypeRequestResponse InvocationType = "RequestResponse"
 )
 
 // Values returns all known values for InvocationType. Note that this can be
@@ -339,8 +339,8 @@ const (
 	VerificationStatusPending          VerificationStatus = "Pending"
 	VerificationStatusSuccess          VerificationStatus = "Success"
 	VerificationStatusFailed           VerificationStatus = "Failed"
-	VerificationStatusTemporaryfailure VerificationStatus = "TemporaryFailure"
-	VerificationStatusNotstarted       VerificationStatus = "NotStarted"
+	VerificationStatusTemporaryFailure VerificationStatus = "TemporaryFailure"
+	VerificationStatusNotStarted       VerificationStatus = "NotStarted"
 )
 
 // Values returns all known values for VerificationStatus. Note that this can be

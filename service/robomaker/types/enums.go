@@ -26,26 +26,26 @@ type DeploymentJobErrorCode string
 
 // Enum values for DeploymentJobErrorCode
 const (
-	DeploymentJobErrorCodeResourcenotfound                    DeploymentJobErrorCode = "ResourceNotFound"
-	DeploymentJobErrorCodeEnvironmentsetuperror               DeploymentJobErrorCode = "EnvironmentSetupError"
-	DeploymentJobErrorCodeEtagmismatch                        DeploymentJobErrorCode = "EtagMismatch"
-	DeploymentJobErrorCodeFailurethresholdbreached            DeploymentJobErrorCode = "FailureThresholdBreached"
-	DeploymentJobErrorCodeRobotdeploymentaborted              DeploymentJobErrorCode = "RobotDeploymentAborted"
-	DeploymentJobErrorCodeRobotdeploymentnoresponse           DeploymentJobErrorCode = "RobotDeploymentNoResponse"
-	DeploymentJobErrorCodeRobotagentconnectiontimeout         DeploymentJobErrorCode = "RobotAgentConnectionTimeout"
-	DeploymentJobErrorCodeGreengrassdeploymentfailed          DeploymentJobErrorCode = "GreengrassDeploymentFailed"
-	DeploymentJobErrorCodeInvalidgreengrassgroup              DeploymentJobErrorCode = "InvalidGreengrassGroup"
-	DeploymentJobErrorCodeMissingrobotarchitecture            DeploymentJobErrorCode = "MissingRobotArchitecture"
-	DeploymentJobErrorCodeMissingrobotapplicationarchitecture DeploymentJobErrorCode = "MissingRobotApplicationArchitecture"
-	DeploymentJobErrorCodeMissingrobotdeploymentresource      DeploymentJobErrorCode = "MissingRobotDeploymentResource"
-	DeploymentJobErrorCodeGreengrassgroupversiondoesnotexist  DeploymentJobErrorCode = "GreengrassGroupVersionDoesNotExist"
-	DeploymentJobErrorCodeLambdadeleted                       DeploymentJobErrorCode = "LambdaDeleted"
-	DeploymentJobErrorCodeExtractingbundlefailure             DeploymentJobErrorCode = "ExtractingBundleFailure"
-	DeploymentJobErrorCodePrelaunchfilefailure                DeploymentJobErrorCode = "PreLaunchFileFailure"
-	DeploymentJobErrorCodePostlaunchfilefailure               DeploymentJobErrorCode = "PostLaunchFileFailure"
-	DeploymentJobErrorCodeBadpermissionerror                  DeploymentJobErrorCode = "BadPermissionError"
-	DeploymentJobErrorCodeDownloadconditionfailed             DeploymentJobErrorCode = "DownloadConditionFailed"
-	DeploymentJobErrorCodeInternalservererror                 DeploymentJobErrorCode = "InternalServerError"
+	DeploymentJobErrorCodeResourceNotFound                    DeploymentJobErrorCode = "ResourceNotFound"
+	DeploymentJobErrorCodeEnvironmentSetupError               DeploymentJobErrorCode = "EnvironmentSetupError"
+	DeploymentJobErrorCodeEtagMismatch                        DeploymentJobErrorCode = "EtagMismatch"
+	DeploymentJobErrorCodeFailureThresholdBreached            DeploymentJobErrorCode = "FailureThresholdBreached"
+	DeploymentJobErrorCodeRobotDeploymentAborted              DeploymentJobErrorCode = "RobotDeploymentAborted"
+	DeploymentJobErrorCodeRobotDeploymentNoResponse           DeploymentJobErrorCode = "RobotDeploymentNoResponse"
+	DeploymentJobErrorCodeRobotAgentConnectionTimeout         DeploymentJobErrorCode = "RobotAgentConnectionTimeout"
+	DeploymentJobErrorCodeGreengrassDeploymentFailed          DeploymentJobErrorCode = "GreengrassDeploymentFailed"
+	DeploymentJobErrorCodeInvalidGreengrassGroup              DeploymentJobErrorCode = "InvalidGreengrassGroup"
+	DeploymentJobErrorCodeMissingRobotArchitecture            DeploymentJobErrorCode = "MissingRobotArchitecture"
+	DeploymentJobErrorCodeMissingRobotApplicationArchitecture DeploymentJobErrorCode = "MissingRobotApplicationArchitecture"
+	DeploymentJobErrorCodeMissingRobotDeploymentResource      DeploymentJobErrorCode = "MissingRobotDeploymentResource"
+	DeploymentJobErrorCodeGreengrassGroupVersionDoesNotExist  DeploymentJobErrorCode = "GreengrassGroupVersionDoesNotExist"
+	DeploymentJobErrorCodeLambdaDeleted                       DeploymentJobErrorCode = "LambdaDeleted"
+	DeploymentJobErrorCodeExtractingBundleFailure             DeploymentJobErrorCode = "ExtractingBundleFailure"
+	DeploymentJobErrorCodePreLaunchFileFailure                DeploymentJobErrorCode = "PreLaunchFileFailure"
+	DeploymentJobErrorCodePostLaunchFileFailure               DeploymentJobErrorCode = "PostLaunchFileFailure"
+	DeploymentJobErrorCodeBadPermissionError                  DeploymentJobErrorCode = "BadPermissionError"
+	DeploymentJobErrorCodeDownloadConditionFailed             DeploymentJobErrorCode = "DownloadConditionFailed"
+	DeploymentJobErrorCodeInternalServerError                 DeploymentJobErrorCode = "InternalServerError"
 )
 
 // Values returns all known values for DeploymentJobErrorCode. Note that this can
@@ -82,7 +82,7 @@ type DeploymentStatus string
 const (
 	DeploymentStatusPending    DeploymentStatus = "Pending"
 	DeploymentStatusPreparing  DeploymentStatus = "Preparing"
-	DeploymentStatusInprogress DeploymentStatus = "InProgress"
+	DeploymentStatusInProgress DeploymentStatus = "InProgress"
 	DeploymentStatusFailed     DeploymentStatus = "Failed"
 	DeploymentStatusSucceeded  DeploymentStatus = "Succeeded"
 	DeploymentStatusCanceled   DeploymentStatus = "Canceled"
@@ -140,13 +140,13 @@ type RobotDeploymentStep string
 
 // Enum values for RobotDeploymentStep
 const (
-	RobotDeploymentStepValidatingstep             RobotDeploymentStep = "Validating"
-	RobotDeploymentStepDownloadingextractingstep  RobotDeploymentStep = "DownloadingExtracting"
-	RobotDeploymentStepExecutingdownloadcondition RobotDeploymentStep = "ExecutingDownloadCondition"
-	RobotDeploymentStepPrelaunchstep              RobotDeploymentStep = "ExecutingPreLaunch"
-	RobotDeploymentStepLaunchingstep              RobotDeploymentStep = "Launching"
-	RobotDeploymentStepPostlaunchstep             RobotDeploymentStep = "ExecutingPostLaunch"
-	RobotDeploymentStepFinishedstep               RobotDeploymentStep = "Finished"
+	RobotDeploymentStepValidatingStep             RobotDeploymentStep = "Validating"
+	RobotDeploymentStepDownloadingExtractingStep  RobotDeploymentStep = "DownloadingExtracting"
+	RobotDeploymentStepExecutingDownloadCondition RobotDeploymentStep = "ExecutingDownloadCondition"
+	RobotDeploymentStepPreLaunchStep              RobotDeploymentStep = "ExecutingPreLaunch"
+	RobotDeploymentStepLaunchingStep              RobotDeploymentStep = "Launching"
+	RobotDeploymentStepPostLaunchStep             RobotDeploymentStep = "ExecutingPostLaunch"
+	RobotDeploymentStepFinishedStep               RobotDeploymentStep = "Finished"
 )
 
 // Values returns all known values for RobotDeploymentStep. Note that this can be
@@ -209,11 +209,11 @@ type RobotStatus string
 const (
 	RobotStatusAvailable            RobotStatus = "Available"
 	RobotStatusRegistered           RobotStatus = "Registered"
-	RobotStatusPendingnewdeployment RobotStatus = "PendingNewDeployment"
+	RobotStatusPendingNewDeployment RobotStatus = "PendingNewDeployment"
 	RobotStatusDeploying            RobotStatus = "Deploying"
 	RobotStatusFailed               RobotStatus = "Failed"
-	RobotStatusInsync               RobotStatus = "InSync"
-	RobotStatusNoresponse           RobotStatus = "NoResponse"
+	RobotStatusInSync               RobotStatus = "InSync"
+	RobotStatusNoResponse           RobotStatus = "NoResponse"
 )
 
 // Values returns all known values for RobotStatus. Note that this can be expanded
@@ -235,7 +235,7 @@ type SimulationJobBatchErrorCode string
 
 // Enum values for SimulationJobBatchErrorCode
 const (
-	SimulationJobBatchErrorCodeInternalserviceerror SimulationJobBatchErrorCode = "InternalServiceError"
+	SimulationJobBatchErrorCodeInternalServiceError SimulationJobBatchErrorCode = "InternalServiceError"
 )
 
 // Values returns all known values for SimulationJobBatchErrorCode. Note that this
@@ -252,14 +252,14 @@ type SimulationJobBatchStatus string
 // Enum values for SimulationJobBatchStatus
 const (
 	SimulationJobBatchStatusPending    SimulationJobBatchStatus = "Pending"
-	SimulationJobBatchStatusInprogress SimulationJobBatchStatus = "InProgress"
+	SimulationJobBatchStatusInProgress SimulationJobBatchStatus = "InProgress"
 	SimulationJobBatchStatusFailed     SimulationJobBatchStatus = "Failed"
 	SimulationJobBatchStatusCompleted  SimulationJobBatchStatus = "Completed"
 	SimulationJobBatchStatusCanceled   SimulationJobBatchStatus = "Canceled"
 	SimulationJobBatchStatusCanceling  SimulationJobBatchStatus = "Canceling"
 	SimulationJobBatchStatusCompleting SimulationJobBatchStatus = "Completing"
-	SimulationJobBatchStatusTimingout  SimulationJobBatchStatus = "TimingOut"
-	SimulationJobBatchStatusTimedout   SimulationJobBatchStatus = "TimedOut"
+	SimulationJobBatchStatusTimingOut  SimulationJobBatchStatus = "TimingOut"
+	SimulationJobBatchStatusTimedOut   SimulationJobBatchStatus = "TimedOut"
 )
 
 // Values returns all known values for SimulationJobBatchStatus. Note that this can
@@ -283,33 +283,33 @@ type SimulationJobErrorCode string
 
 // Enum values for SimulationJobErrorCode
 const (
-	SimulationJobErrorCodeInternalserviceerror                       SimulationJobErrorCode = "InternalServiceError"
-	SimulationJobErrorCodeRobotapplicationcrash                      SimulationJobErrorCode = "RobotApplicationCrash"
-	SimulationJobErrorCodeSimulationapplicationcrash                 SimulationJobErrorCode = "SimulationApplicationCrash"
-	SimulationJobErrorCodeBadpermissionsrobotapplication             SimulationJobErrorCode = "BadPermissionsRobotApplication"
-	SimulationJobErrorCodeBadpermissionssimulationapplication        SimulationJobErrorCode = "BadPermissionsSimulationApplication"
-	SimulationJobErrorCodeBadpermissionss3object                     SimulationJobErrorCode = "BadPermissionsS3Object"
-	SimulationJobErrorCodeBadpermissionss3output                     SimulationJobErrorCode = "BadPermissionsS3Output"
-	SimulationJobErrorCodeBadpermissionscloudwatchlogs               SimulationJobErrorCode = "BadPermissionsCloudwatchLogs"
-	SimulationJobErrorCodeSubnetiplimitexceeded                      SimulationJobErrorCode = "SubnetIpLimitExceeded"
-	SimulationJobErrorCodeEnilimitexceeded                           SimulationJobErrorCode = "ENILimitExceeded"
-	SimulationJobErrorCodeBadpermissionsusercredentials              SimulationJobErrorCode = "BadPermissionsUserCredentials"
-	SimulationJobErrorCodeInvalidbundlerobotapplication              SimulationJobErrorCode = "InvalidBundleRobotApplication"
-	SimulationJobErrorCodeInvalidbundlesimulationapplication         SimulationJobErrorCode = "InvalidBundleSimulationApplication"
-	SimulationJobErrorCodeInvalids3resource                          SimulationJobErrorCode = "InvalidS3Resource"
-	SimulationJobErrorCodeLimitexceeded                              SimulationJobErrorCode = "LimitExceeded"
-	SimulationJobErrorCodeMismatchedetag                             SimulationJobErrorCode = "MismatchedEtag"
-	SimulationJobErrorCodeRobotapplicationversionmismatchedetag      SimulationJobErrorCode = "RobotApplicationVersionMismatchedEtag"
-	SimulationJobErrorCodeSimulationapplicationversionmismatchedetag SimulationJobErrorCode = "SimulationApplicationVersionMismatchedEtag"
-	SimulationJobErrorCodeResourcenotfound                           SimulationJobErrorCode = "ResourceNotFound"
-	SimulationJobErrorCodeRequestthrottled                           SimulationJobErrorCode = "RequestThrottled"
-	SimulationJobErrorCodeBatchtimedout                              SimulationJobErrorCode = "BatchTimedOut"
-	SimulationJobErrorCodeBatchcanceled                              SimulationJobErrorCode = "BatchCanceled"
-	SimulationJobErrorCodeInvalidinput                               SimulationJobErrorCode = "InvalidInput"
-	SimulationJobErrorCodeWrongregions3bucket                        SimulationJobErrorCode = "WrongRegionS3Bucket"
-	SimulationJobErrorCodeWrongregions3output                        SimulationJobErrorCode = "WrongRegionS3Output"
-	SimulationJobErrorCodeWrongregionrobotapplication                SimulationJobErrorCode = "WrongRegionRobotApplication"
-	SimulationJobErrorCodeWrongregionsimulationapplication           SimulationJobErrorCode = "WrongRegionSimulationApplication"
+	SimulationJobErrorCodeInternalServiceError                       SimulationJobErrorCode = "InternalServiceError"
+	SimulationJobErrorCodeRobotApplicationCrash                      SimulationJobErrorCode = "RobotApplicationCrash"
+	SimulationJobErrorCodeSimulationApplicationCrash                 SimulationJobErrorCode = "SimulationApplicationCrash"
+	SimulationJobErrorCodeBadPermissionsRobotApplication             SimulationJobErrorCode = "BadPermissionsRobotApplication"
+	SimulationJobErrorCodeBadPermissionsSimulationApplication        SimulationJobErrorCode = "BadPermissionsSimulationApplication"
+	SimulationJobErrorCodeBadPermissionsS3Object                     SimulationJobErrorCode = "BadPermissionsS3Object"
+	SimulationJobErrorCodeBadPermissionsS3Output                     SimulationJobErrorCode = "BadPermissionsS3Output"
+	SimulationJobErrorCodeBadPermissionsCloudwatchLogs               SimulationJobErrorCode = "BadPermissionsCloudwatchLogs"
+	SimulationJobErrorCodeSubnetIpLimitExceeded                      SimulationJobErrorCode = "SubnetIpLimitExceeded"
+	SimulationJobErrorCodeENILimitExceeded                           SimulationJobErrorCode = "ENILimitExceeded"
+	SimulationJobErrorCodeBadPermissionsUserCredentials              SimulationJobErrorCode = "BadPermissionsUserCredentials"
+	SimulationJobErrorCodeInvalidBundleRobotApplication              SimulationJobErrorCode = "InvalidBundleRobotApplication"
+	SimulationJobErrorCodeInvalidBundleSimulationApplication         SimulationJobErrorCode = "InvalidBundleSimulationApplication"
+	SimulationJobErrorCodeInvalidS3Resource                          SimulationJobErrorCode = "InvalidS3Resource"
+	SimulationJobErrorCodeLimitExceeded                              SimulationJobErrorCode = "LimitExceeded"
+	SimulationJobErrorCodeMismatchedEtag                             SimulationJobErrorCode = "MismatchedEtag"
+	SimulationJobErrorCodeRobotApplicationVersionMismatchedEtag      SimulationJobErrorCode = "RobotApplicationVersionMismatchedEtag"
+	SimulationJobErrorCodeSimulationApplicationVersionMismatchedEtag SimulationJobErrorCode = "SimulationApplicationVersionMismatchedEtag"
+	SimulationJobErrorCodeResourceNotFound                           SimulationJobErrorCode = "ResourceNotFound"
+	SimulationJobErrorCodeRequestThrottled                           SimulationJobErrorCode = "RequestThrottled"
+	SimulationJobErrorCodeBatchTimedOut                              SimulationJobErrorCode = "BatchTimedOut"
+	SimulationJobErrorCodeBatchCanceled                              SimulationJobErrorCode = "BatchCanceled"
+	SimulationJobErrorCodeInvalidInput                               SimulationJobErrorCode = "InvalidInput"
+	SimulationJobErrorCodeWrongRegionS3Bucket                        SimulationJobErrorCode = "WrongRegionS3Bucket"
+	SimulationJobErrorCodeWrongRegionS3Output                        SimulationJobErrorCode = "WrongRegionS3Output"
+	SimulationJobErrorCodeWrongRegionRobotApplication                SimulationJobErrorCode = "WrongRegionRobotApplication"
+	SimulationJobErrorCodeWrongRegionSimulationApplication           SimulationJobErrorCode = "WrongRegionSimulationApplication"
 )
 
 // Values returns all known values for SimulationJobErrorCode. Note that this can
@@ -357,7 +357,7 @@ const (
 	SimulationJobStatusRestarting    SimulationJobStatus = "Restarting"
 	SimulationJobStatusCompleted     SimulationJobStatus = "Completed"
 	SimulationJobStatusFailed        SimulationJobStatus = "Failed"
-	SimulationJobStatusRunningfailed SimulationJobStatus = "RunningFailed"
+	SimulationJobStatusRunningFailed SimulationJobStatus = "RunningFailed"
 	SimulationJobStatusTerminating   SimulationJobStatus = "Terminating"
 	SimulationJobStatusTerminated    SimulationJobStatus = "Terminated"
 	SimulationJobStatusCanceled      SimulationJobStatus = "Canceled"
@@ -386,7 +386,7 @@ type SimulationSoftwareSuiteType string
 // Enum values for SimulationSoftwareSuiteType
 const (
 	SimulationSoftwareSuiteTypeGazebo     SimulationSoftwareSuiteType = "Gazebo"
-	SimulationSoftwareSuiteTypeRosbagplay SimulationSoftwareSuiteType = "RosbagPlay"
+	SimulationSoftwareSuiteTypeRosbagPlay SimulationSoftwareSuiteType = "RosbagPlay"
 )
 
 // Values returns all known values for SimulationSoftwareSuiteType. Note that this
@@ -403,12 +403,12 @@ type WorldExportJobErrorCode string
 
 // Enum values for WorldExportJobErrorCode
 const (
-	WorldExportJobErrorCodeInternalserviceerror WorldExportJobErrorCode = "InternalServiceError"
-	WorldExportJobErrorCodeLimitexceeded        WorldExportJobErrorCode = "LimitExceeded"
-	WorldExportJobErrorCodeResourcenotfound     WorldExportJobErrorCode = "ResourceNotFound"
-	WorldExportJobErrorCodeRequestthrottled     WorldExportJobErrorCode = "RequestThrottled"
-	WorldExportJobErrorCodeInvalidinput         WorldExportJobErrorCode = "InvalidInput"
-	WorldExportJobErrorCodeAccessdenied         WorldExportJobErrorCode = "AccessDenied"
+	WorldExportJobErrorCodeInternalServiceError WorldExportJobErrorCode = "InternalServiceError"
+	WorldExportJobErrorCodeLimitExceeded        WorldExportJobErrorCode = "LimitExceeded"
+	WorldExportJobErrorCodeResourceNotFound     WorldExportJobErrorCode = "ResourceNotFound"
+	WorldExportJobErrorCodeRequestThrottled     WorldExportJobErrorCode = "RequestThrottled"
+	WorldExportJobErrorCodeInvalidInput         WorldExportJobErrorCode = "InvalidInput"
+	WorldExportJobErrorCodeAccessDenied         WorldExportJobErrorCode = "AccessDenied"
 )
 
 // Values returns all known values for WorldExportJobErrorCode. Note that this can
@@ -455,12 +455,12 @@ type WorldGenerationJobErrorCode string
 
 // Enum values for WorldGenerationJobErrorCode
 const (
-	WorldGenerationJobErrorCodeInternalserviceerror     WorldGenerationJobErrorCode = "InternalServiceError"
-	WorldGenerationJobErrorCodeLimitexceeded            WorldGenerationJobErrorCode = "LimitExceeded"
-	WorldGenerationJobErrorCodeResourcenotfound         WorldGenerationJobErrorCode = "ResourceNotFound"
-	WorldGenerationJobErrorCodeRequestthrottled         WorldGenerationJobErrorCode = "RequestThrottled"
-	WorldGenerationJobErrorCodeInvalidinput             WorldGenerationJobErrorCode = "InvalidInput"
-	WorldGenerationJobErrorCodeAllworldgenerationfailed WorldGenerationJobErrorCode = "AllWorldGenerationFailed"
+	WorldGenerationJobErrorCodeInternalServiceError     WorldGenerationJobErrorCode = "InternalServiceError"
+	WorldGenerationJobErrorCodeLimitExceeded            WorldGenerationJobErrorCode = "LimitExceeded"
+	WorldGenerationJobErrorCodeResourceNotFound         WorldGenerationJobErrorCode = "ResourceNotFound"
+	WorldGenerationJobErrorCodeRequestThrottled         WorldGenerationJobErrorCode = "RequestThrottled"
+	WorldGenerationJobErrorCodeInvalidInput             WorldGenerationJobErrorCode = "InvalidInput"
+	WorldGenerationJobErrorCodeAllWorldGenerationFailed WorldGenerationJobErrorCode = "AllWorldGenerationFailed"
 )
 
 // Values returns all known values for WorldGenerationJobErrorCode. Note that this
@@ -485,7 +485,7 @@ const (
 	WorldGenerationJobStatusRunning       WorldGenerationJobStatus = "Running"
 	WorldGenerationJobStatusCompleted     WorldGenerationJobStatus = "Completed"
 	WorldGenerationJobStatusFailed        WorldGenerationJobStatus = "Failed"
-	WorldGenerationJobStatusPartialfailed WorldGenerationJobStatus = "PartialFailed"
+	WorldGenerationJobStatusPartialFailed WorldGenerationJobStatus = "PartialFailed"
 	WorldGenerationJobStatusCanceling     WorldGenerationJobStatus = "Canceling"
 	WorldGenerationJobStatusCanceled      WorldGenerationJobStatus = "Canceled"
 )

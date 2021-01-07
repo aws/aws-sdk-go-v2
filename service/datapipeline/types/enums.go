@@ -7,9 +7,9 @@ type OperatorType string
 // Enum values for OperatorType
 const (
 	OperatorTypeEqual              OperatorType = "EQ"
-	OperatorTypeReferenceequal     OperatorType = "REF_EQ"
-	OperatorTypeLessthanorequal    OperatorType = "LE"
-	OperatorTypeGreaterthanorequal OperatorType = "GE"
+	OperatorTypeReferenceEqual     OperatorType = "REF_EQ"
+	OperatorTypeLessThanOrEqual    OperatorType = "LE"
+	OperatorTypeGreaterThanOrEqual OperatorType = "GE"
 	OperatorTypeBetween            OperatorType = "BETWEEN"
 )
 

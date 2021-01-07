@@ -133,7 +133,7 @@ const (
 	ScalingTypeAuto               ScalingType = "Auto"
 	ScalingTypeLinear             ScalingType = "Linear"
 	ScalingTypeLogarithmic        ScalingType = "Logarithmic"
-	ScalingTypeReverselogarithmic ScalingType = "ReverseLogarithmic"
+	ScalingTypeReverseLogarithmic ScalingType = "ReverseLogarithmic"
 )
 
 // Values returns all known values for ScalingType. Note that this can be expanded

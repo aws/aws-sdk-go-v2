@@ -30,8 +30,8 @@ type FailureCode string
 
 // Enum values for FailureCode
 const (
-	FailureCodeClienterror FailureCode = "CLIENT_ERROR"
-	FailureCodeServerfault FailureCode = "SERVER_FAULT"
+	FailureCodeClientError FailureCode = "CLIENT_ERROR"
+	FailureCodeServerFault FailureCode = "SERVER_FAULT"
 )
 
 // Values returns all known values for FailureCode. Note that this can be expanded

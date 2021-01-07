@@ -44,8 +44,8 @@ type Type string
 
 // Enum values for Type
 const (
-	TypeOpenapi3         Type = "OpenApi3"
-	TypeJsonschemadraft4 Type = "JSONSchemaDraft4"
+	TypeOpenApi3         Type = "OpenApi3"
+	TypeJSONSchemaDraft4 Type = "JSONSchemaDraft4"
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the

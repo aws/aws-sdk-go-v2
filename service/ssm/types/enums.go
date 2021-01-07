@@ -31,9 +31,9 @@ type AssociationExecutionFilterKey string
 
 // Enum values for AssociationExecutionFilterKey
 const (
-	AssociationExecutionFilterKeyExecutionid AssociationExecutionFilterKey = "ExecutionId"
+	AssociationExecutionFilterKeyExecutionId AssociationExecutionFilterKey = "ExecutionId"
 	AssociationExecutionFilterKeyStatus      AssociationExecutionFilterKey = "Status"
-	AssociationExecutionFilterKeyCreatedtime AssociationExecutionFilterKey = "CreatedTime"
+	AssociationExecutionFilterKeyCreatedTime AssociationExecutionFilterKey = "CreatedTime"
 )
 
 // Values returns all known values for AssociationExecutionFilterKey. Note that
@@ -53,8 +53,8 @@ type AssociationExecutionTargetsFilterKey string
 // Enum values for AssociationExecutionTargetsFilterKey
 const (
 	AssociationExecutionTargetsFilterKeyStatus       AssociationExecutionTargetsFilterKey = "Status"
-	AssociationExecutionTargetsFilterKeyResourceid   AssociationExecutionTargetsFilterKey = "ResourceId"
-	AssociationExecutionTargetsFilterKeyResourcetype AssociationExecutionTargetsFilterKey = "ResourceType"
+	AssociationExecutionTargetsFilterKeyResourceId   AssociationExecutionTargetsFilterKey = "ResourceId"
+	AssociationExecutionTargetsFilterKeyResourceType AssociationExecutionTargetsFilterKey = "ResourceType"
 )
 
 // Values returns all known values for AssociationExecutionTargetsFilterKey. Note
@@ -73,14 +73,14 @@ type AssociationFilterKey string
 
 // Enum values for AssociationFilterKey
 const (
-	AssociationFilterKeyInstanceid         AssociationFilterKey = "InstanceId"
+	AssociationFilterKeyInstanceId         AssociationFilterKey = "InstanceId"
 	AssociationFilterKeyName               AssociationFilterKey = "Name"
-	AssociationFilterKeyAssociationid      AssociationFilterKey = "AssociationId"
+	AssociationFilterKeyAssociationId      AssociationFilterKey = "AssociationId"
 	AssociationFilterKeyStatus             AssociationFilterKey = "AssociationStatusName"
-	AssociationFilterKeyLastexecutedbefore AssociationFilterKey = "LastExecutedBefore"
-	AssociationFilterKeyLastexecutedafter  AssociationFilterKey = "LastExecutedAfter"
-	AssociationFilterKeyAssociationname    AssociationFilterKey = "AssociationName"
-	AssociationFilterKeyResourcegroupname  AssociationFilterKey = "ResourceGroupName"
+	AssociationFilterKeyLastExecutedBefore AssociationFilterKey = "LastExecutedBefore"
+	AssociationFilterKeyLastExecutedAfter  AssociationFilterKey = "LastExecutedAfter"
+	AssociationFilterKeyAssociationName    AssociationFilterKey = "AssociationName"
+	AssociationFilterKeyResourceGroupName  AssociationFilterKey = "ResourceGroupName"
 )
 
 // Values returns all known values for AssociationFilterKey. Note that this can be
@@ -104,8 +104,8 @@ type AssociationFilterOperatorType string
 // Enum values for AssociationFilterOperatorType
 const (
 	AssociationFilterOperatorTypeEqual       AssociationFilterOperatorType = "EQUAL"
-	AssociationFilterOperatorTypeLessthan    AssociationFilterOperatorType = "LESS_THAN"
-	AssociationFilterOperatorTypeGreaterthan AssociationFilterOperatorType = "GREATER_THAN"
+	AssociationFilterOperatorTypeLessThan    AssociationFilterOperatorType = "LESS_THAN"
+	AssociationFilterOperatorTypeGreaterThan AssociationFilterOperatorType = "GREATER_THAN"
 )
 
 // Values returns all known values for AssociationFilterOperatorType. Note that
@@ -178,9 +178,9 @@ type AttachmentsSourceKey string
 
 // Enum values for AttachmentsSourceKey
 const (
-	AttachmentsSourceKeySourceurl           AttachmentsSourceKey = "SourceUrl"
-	AttachmentsSourceKeyS3fileurl           AttachmentsSourceKey = "S3FileUrl"
-	AttachmentsSourceKeyAttachmentreference AttachmentsSourceKey = "AttachmentReference"
+	AttachmentsSourceKeySourceUrl           AttachmentsSourceKey = "SourceUrl"
+	AttachmentsSourceKeyS3FileUrl           AttachmentsSourceKey = "S3FileUrl"
+	AttachmentsSourceKeyAttachmentReference AttachmentsSourceKey = "AttachmentReference"
 )
 
 // Values returns all known values for AttachmentsSourceKey. Note that this can be
@@ -286,7 +286,7 @@ type AutomationSubtype string
 
 // Enum values for AutomationSubtype
 const (
-	AutomationSubtypeChangerequest AutomationSubtype = "ChangeRequest"
+	AutomationSubtypeChangeRequest AutomationSubtype = "ChangeRequest"
 )
 
 // Values returns all known values for AutomationSubtype. Note that this can be
@@ -302,7 +302,7 @@ type AutomationType string
 
 // Enum values for AutomationType
 const (
-	AutomationTypeCrossaccount AutomationType = "CrossAccount"
+	AutomationTypeCrossAccount AutomationType = "CrossAccount"
 	AutomationTypeLocal        AutomationType = "Local"
 )
 
@@ -447,10 +447,10 @@ type ComplianceQueryOperatorType string
 // Enum values for ComplianceQueryOperatorType
 const (
 	ComplianceQueryOperatorTypeEqual       ComplianceQueryOperatorType = "EQUAL"
-	ComplianceQueryOperatorTypeNotequal    ComplianceQueryOperatorType = "NOT_EQUAL"
-	ComplianceQueryOperatorTypeBeginwith   ComplianceQueryOperatorType = "BEGIN_WITH"
-	ComplianceQueryOperatorTypeLessthan    ComplianceQueryOperatorType = "LESS_THAN"
-	ComplianceQueryOperatorTypeGreaterthan ComplianceQueryOperatorType = "GREATER_THAN"
+	ComplianceQueryOperatorTypeNotEqual    ComplianceQueryOperatorType = "NOT_EQUAL"
+	ComplianceQueryOperatorTypeBeginWith   ComplianceQueryOperatorType = "BEGIN_WITH"
+	ComplianceQueryOperatorTypeLessThan    ComplianceQueryOperatorType = "LESS_THAN"
+	ComplianceQueryOperatorTypeGreaterThan ComplianceQueryOperatorType = "GREATER_THAN"
 )
 
 // Values returns all known values for ComplianceQueryOperatorType. Note that this
@@ -497,7 +497,7 @@ type ComplianceStatus string
 // Enum values for ComplianceStatus
 const (
 	ComplianceStatusCompliant    ComplianceStatus = "COMPLIANT"
-	ComplianceStatusNoncompliant ComplianceStatus = "NON_COMPLIANT"
+	ComplianceStatusNonCompliant ComplianceStatus = "NON_COMPLIANT"
 )
 
 // Values returns all known values for ComplianceStatus. Note that this can be
@@ -573,8 +573,8 @@ type DocumentFilterKey string
 const (
 	DocumentFilterKeyName          DocumentFilterKey = "Name"
 	DocumentFilterKeyOwner         DocumentFilterKey = "Owner"
-	DocumentFilterKeyPlatformtypes DocumentFilterKey = "PlatformTypes"
-	DocumentFilterKeyDocumenttype  DocumentFilterKey = "DocumentType"
+	DocumentFilterKeyPlatformTypes DocumentFilterKey = "PlatformTypes"
+	DocumentFilterKeyDocumentType  DocumentFilterKey = "DocumentType"
 )
 
 // Values returns all known values for DocumentFilterKey. Note that this can be
@@ -631,7 +631,7 @@ type DocumentMetadataEnum string
 
 // Enum values for DocumentMetadataEnum
 const (
-	DocumentMetadataEnumDocumentreviews DocumentMetadataEnum = "DocumentReviews"
+	DocumentMetadataEnumDocumentReviews DocumentMetadataEnum = "DocumentReviews"
 )
 
 // Values returns all known values for DocumentMetadataEnum. Note that this can be
@@ -648,7 +648,7 @@ type DocumentParameterType string
 // Enum values for DocumentParameterType
 const (
 	DocumentParameterTypeString     DocumentParameterType = "String"
-	DocumentParameterTypeStringlist DocumentParameterType = "StringList"
+	DocumentParameterTypeStringList DocumentParameterType = "StringList"
 )
 
 // Values returns all known values for DocumentParameterType. Note that this can be
@@ -681,8 +681,8 @@ type DocumentReviewAction string
 
 // Enum values for DocumentReviewAction
 const (
-	DocumentReviewActionSendforreview DocumentReviewAction = "SendForReview"
-	DocumentReviewActionUpdatereview  DocumentReviewAction = "UpdateReview"
+	DocumentReviewActionSendForReview DocumentReviewAction = "SendForReview"
+	DocumentReviewActionUpdateReview  DocumentReviewAction = "UpdateReview"
 	DocumentReviewActionApprove       DocumentReviewAction = "Approve"
 	DocumentReviewActionReject        DocumentReviewAction = "Reject"
 )
@@ -748,11 +748,11 @@ const (
 	DocumentTypeAutomation                     DocumentType = "Automation"
 	DocumentTypeSession                        DocumentType = "Session"
 	DocumentTypePackage                        DocumentType = "Package"
-	DocumentTypeApplicationconfiguration       DocumentType = "ApplicationConfiguration"
-	DocumentTypeApplicationconfigurationschema DocumentType = "ApplicationConfigurationSchema"
-	DocumentTypeDeploymentstrategy             DocumentType = "DeploymentStrategy"
-	DocumentTypeChangecalendar                 DocumentType = "ChangeCalendar"
-	DocumentTypeChangetemplate                 DocumentType = "Automation.ChangeTemplate"
+	DocumentTypeApplicationConfiguration       DocumentType = "ApplicationConfiguration"
+	DocumentTypeApplicationConfigurationSchema DocumentType = "ApplicationConfigurationSchema"
+	DocumentTypeDeploymentStrategy             DocumentType = "DeploymentStrategy"
+	DocumentTypeChangeCalendar                 DocumentType = "ChangeCalendar"
+	DocumentTypeChangeTemplate                 DocumentType = "Automation.ChangeTemplate"
 )
 
 // Values returns all known values for DocumentType. Note that this can be expanded
@@ -969,13 +969,13 @@ type MaintenanceWindowExecutionStatus string
 // Enum values for MaintenanceWindowExecutionStatus
 const (
 	MaintenanceWindowExecutionStatusPending            MaintenanceWindowExecutionStatus = "PENDING"
-	MaintenanceWindowExecutionStatusInprogress         MaintenanceWindowExecutionStatus = "IN_PROGRESS"
+	MaintenanceWindowExecutionStatusInProgress         MaintenanceWindowExecutionStatus = "IN_PROGRESS"
 	MaintenanceWindowExecutionStatusSuccess            MaintenanceWindowExecutionStatus = "SUCCESS"
 	MaintenanceWindowExecutionStatusFailed             MaintenanceWindowExecutionStatus = "FAILED"
-	MaintenanceWindowExecutionStatusTimedout           MaintenanceWindowExecutionStatus = "TIMED_OUT"
+	MaintenanceWindowExecutionStatusTimedOut           MaintenanceWindowExecutionStatus = "TIMED_OUT"
 	MaintenanceWindowExecutionStatusCancelling         MaintenanceWindowExecutionStatus = "CANCELLING"
 	MaintenanceWindowExecutionStatusCancelled          MaintenanceWindowExecutionStatus = "CANCELLED"
-	MaintenanceWindowExecutionStatusSkippedoverlapping MaintenanceWindowExecutionStatus = "SKIPPED_OVERLAPPING"
+	MaintenanceWindowExecutionStatusSkippedOverlapping MaintenanceWindowExecutionStatus = "SKIPPED_OVERLAPPING"
 )
 
 // Values returns all known values for MaintenanceWindowExecutionStatus. Note that
@@ -1000,7 +1000,7 @@ type MaintenanceWindowResourceType string
 // Enum values for MaintenanceWindowResourceType
 const (
 	MaintenanceWindowResourceTypeInstance      MaintenanceWindowResourceType = "INSTANCE"
-	MaintenanceWindowResourceTypeResourcegroup MaintenanceWindowResourceType = "RESOURCE_GROUP"
+	MaintenanceWindowResourceTypeResourceGroup MaintenanceWindowResourceType = "RESOURCE_GROUP"
 )
 
 // Values returns all known values for MaintenanceWindowResourceType. Note that
@@ -1018,9 +1018,9 @@ type MaintenanceWindowTaskType string
 
 // Enum values for MaintenanceWindowTaskType
 const (
-	MaintenanceWindowTaskTypeRuncommand    MaintenanceWindowTaskType = "RUN_COMMAND"
+	MaintenanceWindowTaskTypeRunCommand    MaintenanceWindowTaskType = "RUN_COMMAND"
 	MaintenanceWindowTaskTypeAutomation    MaintenanceWindowTaskType = "AUTOMATION"
-	MaintenanceWindowTaskTypeStepfunctions MaintenanceWindowTaskType = "STEP_FUNCTIONS"
+	MaintenanceWindowTaskTypeStepFunctions MaintenanceWindowTaskType = "STEP_FUNCTIONS"
 	MaintenanceWindowTaskTypeLambda        MaintenanceWindowTaskType = "LAMBDA"
 )
 
@@ -1085,15 +1085,15 @@ type OperatingSystem string
 // Enum values for OperatingSystem
 const (
 	OperatingSystemWindows               OperatingSystem = "WINDOWS"
-	OperatingSystemAmazonlinux           OperatingSystem = "AMAZON_LINUX"
-	OperatingSystemAmazonlinux2          OperatingSystem = "AMAZON_LINUX_2"
+	OperatingSystemAmazonLinux           OperatingSystem = "AMAZON_LINUX"
+	OperatingSystemAmazonLinux2          OperatingSystem = "AMAZON_LINUX_2"
 	OperatingSystemUbuntu                OperatingSystem = "UBUNTU"
-	OperatingSystemRedhatenterpriselinux OperatingSystem = "REDHAT_ENTERPRISE_LINUX"
+	OperatingSystemRedhatEnterpriseLinux OperatingSystem = "REDHAT_ENTERPRISE_LINUX"
 	OperatingSystemSuse                  OperatingSystem = "SUSE"
-	OperatingSystemCentos                OperatingSystem = "CENTOS"
-	OperatingSystemOraclelinux           OperatingSystem = "ORACLE_LINUX"
+	OperatingSystemCentOS                OperatingSystem = "CENTOS"
+	OperatingSystemOracleLinux           OperatingSystem = "ORACLE_LINUX"
 	OperatingSystemDebian                OperatingSystem = "DEBIAN"
-	OperatingSystemMacos                 OperatingSystem = "MACOS"
+	OperatingSystemMacOS                 OperatingSystem = "MACOS"
 )
 
 // Values returns all known values for OperatingSystem. Note that this can be
@@ -1392,7 +1392,7 @@ type PatchAction string
 
 // Enum values for PatchAction
 const (
-	PatchActionAllowasdependency PatchAction = "ALLOW_AS_DEPENDENCY"
+	PatchActionAllowAsDependency PatchAction = "ALLOW_AS_DEPENDENCY"
 	PatchActionBlock             PatchAction = "BLOCK"
 )
 
@@ -1411,11 +1411,11 @@ type PatchComplianceDataState string
 // Enum values for PatchComplianceDataState
 const (
 	PatchComplianceDataStateInstalled              PatchComplianceDataState = "INSTALLED"
-	PatchComplianceDataStateInstalledother         PatchComplianceDataState = "INSTALLED_OTHER"
-	PatchComplianceDataStateInstalledpendingreboot PatchComplianceDataState = "INSTALLED_PENDING_REBOOT"
-	PatchComplianceDataStateInstalledrejected      PatchComplianceDataState = "INSTALLED_REJECTED"
+	PatchComplianceDataStateInstalledOther         PatchComplianceDataState = "INSTALLED_OTHER"
+	PatchComplianceDataStateInstalledPendingReboot PatchComplianceDataState = "INSTALLED_PENDING_REBOOT"
+	PatchComplianceDataStateInstalledRejected      PatchComplianceDataState = "INSTALLED_REJECTED"
 	PatchComplianceDataStateMissing                PatchComplianceDataState = "MISSING"
-	PatchComplianceDataStateNotapplicable          PatchComplianceDataState = "NOT_APPLICABLE"
+	PatchComplianceDataStateNotApplicable          PatchComplianceDataState = "NOT_APPLICABLE"
 	PatchComplianceDataStateFailed                 PatchComplianceDataState = "FAILED"
 )
 
@@ -1465,9 +1465,9 @@ type PatchDeploymentStatus string
 // Enum values for PatchDeploymentStatus
 const (
 	PatchDeploymentStatusApproved         PatchDeploymentStatus = "APPROVED"
-	PatchDeploymentStatusPendingapproval  PatchDeploymentStatus = "PENDING_APPROVAL"
-	PatchDeploymentStatusExplicitapproved PatchDeploymentStatus = "EXPLICIT_APPROVED"
-	PatchDeploymentStatusExplicitrejected PatchDeploymentStatus = "EXPLICIT_REJECTED"
+	PatchDeploymentStatusPendingApproval  PatchDeploymentStatus = "PENDING_APPROVAL"
+	PatchDeploymentStatusExplicitApproved PatchDeploymentStatus = "EXPLICIT_APPROVED"
+	PatchDeploymentStatusExplicitRejected PatchDeploymentStatus = "EXPLICIT_REJECTED"
 )
 
 // Values returns all known values for PatchDeploymentStatus. Note that this can be
@@ -1487,17 +1487,17 @@ type PatchFilterKey string
 // Enum values for PatchFilterKey
 const (
 	PatchFilterKeyArch           PatchFilterKey = "ARCH"
-	PatchFilterKeyAdvisoryid     PatchFilterKey = "ADVISORY_ID"
-	PatchFilterKeyBugzillaid     PatchFilterKey = "BUGZILLA_ID"
-	PatchFilterKeyPatchset       PatchFilterKey = "PATCH_SET"
+	PatchFilterKeyAdvisoryId     PatchFilterKey = "ADVISORY_ID"
+	PatchFilterKeyBugzillaId     PatchFilterKey = "BUGZILLA_ID"
+	PatchFilterKeyPatchSet       PatchFilterKey = "PATCH_SET"
 	PatchFilterKeyProduct        PatchFilterKey = "PRODUCT"
-	PatchFilterKeyProductfamily  PatchFilterKey = "PRODUCT_FAMILY"
+	PatchFilterKeyProductFamily  PatchFilterKey = "PRODUCT_FAMILY"
 	PatchFilterKeyClassification PatchFilterKey = "CLASSIFICATION"
-	PatchFilterKeyCveid          PatchFilterKey = "CVE_ID"
+	PatchFilterKeyCVEId          PatchFilterKey = "CVE_ID"
 	PatchFilterKeyEpoch          PatchFilterKey = "EPOCH"
-	PatchFilterKeyMsrcseverity   PatchFilterKey = "MSRC_SEVERITY"
+	PatchFilterKeyMsrcSeverity   PatchFilterKey = "MSRC_SEVERITY"
 	PatchFilterKeyName           PatchFilterKey = "NAME"
-	PatchFilterKeyPatchid        PatchFilterKey = "PATCH_ID"
+	PatchFilterKeyPatchId        PatchFilterKey = "PATCH_ID"
 	PatchFilterKeySection        PatchFilterKey = "SECTION"
 	PatchFilterKeyPriority       PatchFilterKey = "PRIORITY"
 	PatchFilterKeyRepository     PatchFilterKey = "REPOSITORY"
@@ -1557,11 +1557,11 @@ type PatchProperty string
 // Enum values for PatchProperty
 const (
 	PatchPropertyProduct             PatchProperty = "PRODUCT"
-	PatchPropertyPatchproductfamily  PatchProperty = "PRODUCT_FAMILY"
-	PatchPropertyPatchclassification PatchProperty = "CLASSIFICATION"
-	PatchPropertyPatchmsrcseverity   PatchProperty = "MSRC_SEVERITY"
-	PatchPropertyPatchpriority       PatchProperty = "PRIORITY"
-	PatchPropertyPatchseverity       PatchProperty = "SEVERITY"
+	PatchPropertyPatchProductFamily  PatchProperty = "PRODUCT_FAMILY"
+	PatchPropertyPatchClassification PatchProperty = "CLASSIFICATION"
+	PatchPropertyPatchMsrcSeverity   PatchProperty = "MSRC_SEVERITY"
+	PatchPropertyPatchPriority       PatchProperty = "PRIORITY"
+	PatchPropertyPatchSeverity       PatchProperty = "SEVERITY"
 )
 
 // Values returns all known values for PatchProperty. Note that this can be

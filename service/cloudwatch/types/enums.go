@@ -6,8 +6,8 @@ type AlarmType string
 
 // Enum values for AlarmType
 const (
-	AlarmTypeCompositealarm AlarmType = "CompositeAlarm"
-	AlarmTypeMetricalarm    AlarmType = "MetricAlarm"
+	AlarmTypeCompositeAlarm AlarmType = "CompositeAlarm"
+	AlarmTypeMetricAlarm    AlarmType = "MetricAlarm"
 )
 
 // Values returns all known values for AlarmType. Note that this can be expanded in
@@ -44,13 +44,13 @@ type ComparisonOperator string
 
 // Enum values for ComparisonOperator
 const (
-	ComparisonOperatorGreaterthanorequaltothreshold            ComparisonOperator = "GreaterThanOrEqualToThreshold"
-	ComparisonOperatorGreaterthanthreshold                     ComparisonOperator = "GreaterThanThreshold"
-	ComparisonOperatorLessthanthreshold                        ComparisonOperator = "LessThanThreshold"
-	ComparisonOperatorLessthanorequaltothreshold               ComparisonOperator = "LessThanOrEqualToThreshold"
-	ComparisonOperatorLessthanlowerorgreaterthanupperthreshold ComparisonOperator = "LessThanLowerOrGreaterThanUpperThreshold"
-	ComparisonOperatorLessthanlowerthreshold                   ComparisonOperator = "LessThanLowerThreshold"
-	ComparisonOperatorGreaterthanupperthreshold                ComparisonOperator = "GreaterThanUpperThreshold"
+	ComparisonOperatorGreaterThanOrEqualToThreshold            ComparisonOperator = "GreaterThanOrEqualToThreshold"
+	ComparisonOperatorGreaterThanThreshold                     ComparisonOperator = "GreaterThanThreshold"
+	ComparisonOperatorLessThanThreshold                        ComparisonOperator = "LessThanThreshold"
+	ComparisonOperatorLessThanOrEqualToThreshold               ComparisonOperator = "LessThanOrEqualToThreshold"
+	ComparisonOperatorLessThanLowerOrGreaterThanUpperThreshold ComparisonOperator = "LessThanLowerOrGreaterThanUpperThreshold"
+	ComparisonOperatorLessThanLowerThreshold                   ComparisonOperator = "LessThanLowerThreshold"
+	ComparisonOperatorGreaterThanUpperThreshold                ComparisonOperator = "GreaterThanUpperThreshold"
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
@@ -72,8 +72,8 @@ type HistoryItemType string
 
 // Enum values for HistoryItemType
 const (
-	HistoryItemTypeConfigurationupdate HistoryItemType = "ConfigurationUpdate"
-	HistoryItemTypeStateupdate         HistoryItemType = "StateUpdate"
+	HistoryItemTypeConfigurationUpdate HistoryItemType = "ConfigurationUpdate"
+	HistoryItemTypeStateUpdate         HistoryItemType = "StateUpdate"
 	HistoryItemTypeAction              HistoryItemType = "Action"
 )
 
@@ -214,7 +214,7 @@ type Statistic string
 
 // Enum values for Statistic
 const (
-	StatisticSamplecount Statistic = "SampleCount"
+	StatisticSampleCount Statistic = "SampleCount"
 	StatisticAverage     Statistic = "Average"
 	StatisticSum         Statistic = "Sum"
 	StatisticMinimum     Statistic = "Minimum"
