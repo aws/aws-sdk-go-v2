@@ -34,12 +34,12 @@ type Attempt struct {
 	// This will include logging retry attempts, unretryable errors, and when max attempts are reached.
 	LogAttempts bool
 
-	retryer       Retryer
+	retryer       aws.Retryer
 	requestCloner RequestCloner
 }
 
-// NewAttemptMiddleware returns a new Attempt
-func NewAttemptMiddleware(retryer Retryer, requestCloner RequestCloner, optFns ...func(*Attempt)) *Attempt {
+// NewAttemptMiddleware returns a new Attempt retry middleware.
+func NewAttemptMiddleware(retryer aws.Retryer, requestCloner RequestCloner, optFns ...func(*Attempt)) *Attempt {
 	m := &Attempt{retryer: retryer, requestCloner: requestCloner}
 	for _, fn := range optFns {
 		fn(m)
@@ -213,7 +213,7 @@ func setRetryMetadata(ctx context.Context, metadata retryMetadata) context.Conte
 // AddRetryMiddlewaresOptions is the set of options that can be passed to AddRetryMiddlewares for configuring retry
 // associated middleware.
 type AddRetryMiddlewaresOptions struct {
-	Retryer Retryer
+	Retryer aws.Retryer
 
 	// Enable the logging of retry attempts performed by the SDK.
 	// This will include logging retry attempts, unretryable errors, and when max attempts are reached.
