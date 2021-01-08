@@ -23,8 +23,6 @@ import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.utils.ListUtils;
-import sun.jvm.hotspot.debugger.cdbg.Sym;
-
 
 /**
  * This integration generates a custom deserializer for GetBucketLocation response.
@@ -42,7 +40,7 @@ public class S3GetBucketLocation implements GoIntegration {
     /**
      * Return true if service is Amazon S3.
      *
-     * @param model is the generation model.
+     * @param model   is the generation model.
      * @param service is the service shape being audited.
      */
     private static boolean isS3Service(Model model, ServiceShape service) {
@@ -106,14 +104,14 @@ public class S3GetBucketLocation implements GoIntegration {
      * writes helper function to swap deserialization middleware with the generated
      * custom deserializer middleware.
      *
-     * @param writer is the go writer used
+     * @param writer    is the go writer used
      * @param operation is the operation for which swap function is written.
      */
     private void writeDeserializerSwapFunction(
             GoWriter writer,
             OperationShape operation
     ) {
-        writer.writeDocs("$L is helper to swap in a custom deserializer");
+        writer.writeDocs("Helper to swap in a custom deserializer");
         writer.openBlock("func $L(stack *middleware.Stack) error{", "}",
                 swapDeserializerFuncName, () -> {
                     writer.write("_, err := stack.Deserialize.Swap($S, &$L{})",
@@ -128,10 +126,10 @@ public class S3GetBucketLocation implements GoIntegration {
     /**
      * writes a custom deserializer middleware for the provided operation.
      *
-     * @param goWriter is the go writer used.
-     * @param model is the generation model.
+     * @param goWriter       is the go writer used.
+     * @param model          is the generation model.
      * @param symbolProvider is the symbol provider.
-     * @param operation  is the operation shape for which custom deserializer is written.
+     * @param operation      is the operation shape for which custom deserializer is written.
      */
     private void writeCustomDeserializer(
             GoWriter goWriter,
