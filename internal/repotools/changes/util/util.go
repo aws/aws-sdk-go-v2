@@ -40,6 +40,7 @@ func WriteFile(data []byte, path string, appendTo bool) error {
 				return err
 			}
 
+			data = append(data, '\n')
 			data = append(data, existingData...)
 		}
 	}

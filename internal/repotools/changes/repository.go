@@ -87,7 +87,7 @@ func (r *Repository) DoRelease(releaseID string, push, interactive bool) error {
 		return fmt.Errorf("failed to create release metadata: %v", err)
 	}
 
-	err = r.UpdateAllChangelogs(rel, false)
+	err = r.UpdateChangelog(rel, false)
 	if err != nil {
 		return fmt.Errorf("failed to update changelogs: %v", err)
 	}
