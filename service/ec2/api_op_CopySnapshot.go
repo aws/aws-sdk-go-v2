@@ -294,7 +294,6 @@ func (c *PresignClient) PresignCopySnapshot(ctx context.Context, params *CopySna
 	}
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
-	ctx = presignedurlcust.WithIsPresigning(ctx)
 	result, _, err := c.client.invokeOperation(ctx, "CopySnapshot", params, clientOptFns,
 		addOperationCopySnapshotMiddlewares,
 		presignConverter(options).convertToPresignMiddleware,
