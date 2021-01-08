@@ -87,18 +87,9 @@ func TestRepository_DoRelease(t *testing.T) {
 	assertFileContains(t, filepath.Join(repo.RootPath, "b", "go.mod"), []string{"require github.com/aws/aws-sdk-go-v2/a v1.1.0"})
 
 	assertFileContains(t, filepath.Join(repo.RootPath, "CHANGELOG.md"), []string{
-		"* [a](a/CHANGELOG.md#Release-test-release) - v1.1.0\n  * Feature: a feature change",
+		"* `a` - v1.1.0\n  * Feature: a feature change",
 		"Service Client Highlights\n* Bug Fix: all services wildcard bugfix",
 		"Dependency Update: Updated SDK dependencies to their latest versions.",
-	})
-
-	assertFileContains(t, filepath.Join(repo.RootPath, "a", "CHANGELOG.md"), []string{
-		"* Feature: a feature change",
-	})
-
-	assertFileContains(t, filepath.Join(repo.RootPath, "service", "d", "CHANGELOG.md"), []string{
-		"* Bug Fix: all services wildcard bugfix",
-		"v1.100.101",
 	})
 }
 
@@ -405,6 +396,8 @@ go 1.14
 }
 
 func assertFileContains(t *testing.T, path string, substrings []string) bool {
+	t.Helper()
+
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		t.Fatal(err)

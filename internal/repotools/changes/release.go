@@ -28,13 +28,12 @@ func (e changelogModuleEntry) Link() string {
 	return fmt.Sprintf("[%s](%s/CHANGELOG.md#%s)", e.Module, e.Module, anchor)
 }
 
-const changelogModule = `{{- if .TopLevel -}}
-* {{.Link}}{{with .Version}} - {{.}}{{end}}{{else -}}
-## Release {{.ReleaseID}}
-* ` + "`" + `{{.Module}}` + "`" + `{{with .Version}} - {{.}}{{end}}{{end -}}
-{{range $key, $section := .Sections}}{{range $section}}
-  * {{ $key.ChangelogPrefix }}{{.IndentedDescription "  "}}{{end}}{{end}}{{if not .TopLevel}}
-{{end}}`
+const changelogModule = `* ` + "`" + `{{.Module}}` + "`" + `{{with .Version}} - {{.}}{{end}}
+{{- range $key, $section := .Sections -}}
+{{range $section}}
+  * {{ $key.ChangelogPrefix }}{{.IndentedDescription "  "}}
+{{- end -}}
+{{- end -}}`
 
 var changelogTemplate *template.Template
 var rootChangelogTemplate *template.Template
