@@ -52,8 +52,8 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 			c := &computePayloadSHA256{}
 
 			next := middleware.BuildHandlerFunc(func(ctx context.Context, in middleware.BuildInput) (out middleware.BuildOutput, metadata middleware.Metadata, err error) {
-				value, ok := ctx.Value(payloadHashKey{}).(string)
-				if !ok {
+				value := GetPayloadHash(ctx)
+				if len(value) == 0 {
 					t.Fatalf("expected payload hash value to be on context")
 				}
 				if e, a := tt.expectedHash, value; e != a {
@@ -175,7 +175,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 			ctx = middleware.SetLogger(ctx, logger)
 
 			if len(tt.hash) != 0 {
-				ctx = context.WithValue(ctx, payloadHashKey{}, tt.hash)
+				ctx = SetPayloadHash(ctx, tt.hash)
 			}
 
 			_, _, err := c.HandleFinalize(ctx, middleware.FinalizeInput{

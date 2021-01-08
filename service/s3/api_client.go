@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	acceptencodingcust "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding"
+	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
 	s3sharedconfig "github.com/aws/aws-sdk-go-v2/service/internal/s3shared/config"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
@@ -133,6 +134,7 @@ func (o Options) Copy() Options {
 	return to
 }
 func (c *Client) invokeOperation(ctx context.Context, opID string, params interface{}, optFns []func(*Options), stackFns ...func(*middleware.Stack, Options) error) (result interface{}, metadata middleware.Metadata, err error) {
+	ctx = middleware.ClearStackValues(ctx)
 	stack := middleware.NewStack(opID, smithyhttp.NewStackRequest)
 	options := c.options.Copy()
 	for _, fn := range optFns {
@@ -419,6 +421,10 @@ func (c presignConverter) convertToPresignMiddleware(stack *middleware.Stack, op
 	// add middleware to set expiration for s3 presigned url, if expiration is set to
 	// 0, this middleware sets a default expiration of 900 seconds
 	err = stack.Build.Add(&s3cust.AddExpiresOnPresignedURL{Expires: c.Expires}, middleware.After)
+	if err != nil {
+		return err
+	}
+	err = presignedurlcust.AddAsIsPresigingMiddleware(stack)
 	if err != nil {
 		return err
 	}

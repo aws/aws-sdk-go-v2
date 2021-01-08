@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
@@ -118,6 +119,7 @@ func (o Options) Copy() Options {
 	return to
 }
 func (c *Client) invokeOperation(ctx context.Context, opID string, params interface{}, optFns []func(*Options), stackFns ...func(*middleware.Stack, Options) error) (result interface{}, metadata middleware.Metadata, err error) {
+	ctx = middleware.ClearStackValues(ctx)
 	stack := middleware.NewStack(opID, smithyhttp.NewStackRequest)
 	options := c.options.Copy()
 	for _, fn := range optFns {
@@ -350,6 +352,10 @@ func (c presignConverter) convertToPresignMiddleware(stack *middleware.Stack, op
 	}
 	// convert request to a GET request
 	err = query.AddAsGetRequestMiddleware(stack)
+	if err != nil {
+		return err
+	}
+	err = presignedurlcust.AddAsIsPresigingMiddleware(stack)
 	if err != nil {
 		return err
 	}

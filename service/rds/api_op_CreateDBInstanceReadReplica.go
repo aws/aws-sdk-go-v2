@@ -534,7 +534,6 @@ func (c *PresignClient) PresignCreateDBInstanceReadReplica(ctx context.Context, 
 	}
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
-	ctx = presignedurlcust.WithIsPresigning(ctx)
 	result, _, err := c.client.invokeOperation(ctx, "CreateDBInstanceReadReplica", params, clientOptFns,
 		addOperationCreateDBInstanceReadReplicaMiddlewares,
 		presignConverter(options).convertToPresignMiddleware,

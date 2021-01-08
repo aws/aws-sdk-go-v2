@@ -519,7 +519,6 @@ func (c *PresignClient) PresignCreateDBCluster(ctx context.Context, params *Crea
 	}
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
-	ctx = presignedurlcust.WithIsPresigning(ctx)
 	result, _, err := c.client.invokeOperation(ctx, "CreateDBCluster", params, clientOptFns,
 		addOperationCreateDBClusterMiddlewares,
 		presignConverter(options).convertToPresignMiddleware,

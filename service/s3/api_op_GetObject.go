@@ -6,7 +6,6 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/smithy-go/middleware"
@@ -494,7 +493,6 @@ func (c *PresignClient) PresignGetObject(ctx context.Context, params *GetObjectI
 	}
 	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
 
-	ctx = presignedurlcust.WithIsPresigning(ctx)
 	result, _, err := c.client.invokeOperation(ctx, "GetObject", params, clientOptFns,
 		addOperationGetObjectMiddlewares,
 		presignConverter(options).convertToPresignMiddleware,

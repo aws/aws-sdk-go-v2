@@ -11,6 +11,7 @@ import (
 	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/smithy-go/logging"
+	"github.com/aws/smithy-go/middleware"
 	smithymiddle "github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/transport/http"
 )
@@ -25,8 +26,6 @@ type retryMetadata struct {
 	MaxAttempts      int
 	AttemptClockSkew time.Duration
 }
-
-type retryMetadataKey struct{}
 
 // Attempt is a Smithy FinalizeMiddleware that handles retry attempts using the provided
 // Retryer implementation
@@ -191,14 +190,24 @@ func (r MetricsHeader) HandleFinalize(ctx context.Context, in smithymiddle.Final
 	return next.HandleFinalize(ctx, in)
 }
 
-// getRetryMetadata retrieves retryMetadata from the context and a bool indicating if it was set
+type retryMetadataKey struct{}
+
+// getRetryMetadata retrieves retryMetadata from the context and a bool
+// indicating if it was set.
+//
+// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// to clear all stack values.
 func getRetryMetadata(ctx context.Context) (metadata retryMetadata, ok bool) {
-	metadata, ok = ctx.Value(retryMetadataKey{}).(retryMetadata)
+	metadata, ok = middleware.GetStackValue(ctx, retryMetadataKey{}).(retryMetadata)
 	return metadata, ok
 }
 
+// setRetryMetadata sets the retryMetadata on the context.
+//
+// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// to clear all stack values.
 func setRetryMetadata(ctx context.Context, metadata retryMetadata) context.Context {
-	return context.WithValue(ctx, retryMetadataKey{}, metadata)
+	return middleware.WithStackValue(ctx, retryMetadataKey{}, metadata)
 }
 
 // AddRetryMiddlewaresOptions is the set of options that can be passed to AddRetryMiddlewares for configuring retry
