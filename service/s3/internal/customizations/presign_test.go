@@ -40,9 +40,9 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"content-length": []string{"11"},
-				"content-type":   []string{"application/octet-stream"},
-				"host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
+				"Content-Length": []string{"11"},
+				"Content-Type":   []string{"application/octet-stream"},
+				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
 			},
 		},
 		"seekable payload": {
@@ -61,9 +61,9 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"content-length": []string{"11"},
-				"content-type":   []string{"application/octet-stream"},
-				"host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
+				"Content-Length": []string{"11"},
+				"Content-Type":   []string{"application/octet-stream"},
+				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
 			},
 		},
 		"unseekable payload": {
@@ -83,9 +83,9 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"content-length": []string{"11"},
-				"content-type":   []string{"application/octet-stream"},
-				"host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
+				"Content-Length": []string{"11"},
+				"Content-Type":   []string{"application/octet-stream"},
+				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
 			},
 		},
 		"empty body": {
@@ -104,7 +104,7 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"host": []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
+				"Host": []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
 			},
 		},
 		"nil body": {
@@ -122,7 +122,7 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 			expectMethod: "PUT",
 			expectSignedHeader: http.Header{
-				"host": []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
+				"Host": []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
 			},
 		},
 	}
