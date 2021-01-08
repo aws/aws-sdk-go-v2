@@ -1,0 +1,9 @@
+{
+ "ID": "sdk-feature-1609961868237777000",
+ "SchemaVersion": 1,
+ "Module": "/",
+ "Type": "feature",
+ "Description": "Scope operation middleware values to the individual stack",
+ "MinVersion": "",
+ "AffectedModules": null
+}

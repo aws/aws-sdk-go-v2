@@ -1,0 +1,9 @@
+{
+ "ID": "service.internal.s3shared-feature-1609961900472000000",
+ "SchemaVersion": 1,
+ "Module": "service/internal/s3shared",
+ "Type": "feature",
+ "Description": "Scope operation middleware values to the individual stack",
+ "MinVersion": "",
+ "AffectedModules": null
+}
