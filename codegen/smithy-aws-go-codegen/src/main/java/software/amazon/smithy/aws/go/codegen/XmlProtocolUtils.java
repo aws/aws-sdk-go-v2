@@ -24,7 +24,7 @@ import software.amazon.smithy.model.traits.XmlNameTrait;
 import software.amazon.smithy.model.traits.XmlNamespaceTrait;
 import software.amazon.smithy.aws.traits.protocols.RestXmlTrait;
 
-final class XmlProtocolUtils {
+public final class XmlProtocolUtils {
     private XmlProtocolUtils() {
 
     }
