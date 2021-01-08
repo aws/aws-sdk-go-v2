@@ -232,10 +232,6 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                     writer.write("clientOptFns := append(options.ClientOptions, $L)", NOP_HTTP_CLIENT_OPTION_FUNC_NAME);
                     writer.write("");
 
-                    Symbol withIsPresigning = SymbolUtils.createValueSymbolBuilder("WithIsPresigning",
-                            AwsCustomGoDependency.PRESIGNEDURL_CUSTOMIZATION).build();
-
-                    writer.write("ctx = $T(ctx)", withIsPresigning);
                     writer.openBlock("result, _, err := c.client.invokeOperation(ctx, $S, params, clientOptFns,", ")",
                             operationSymbol.getName(), () -> {
                                 writer.write("$L,", OperationGenerator
@@ -384,6 +380,11 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                                 expiresAsHeaderMiddleware);
                         writer.write("if err != nil { return err }");
                     }
+
+                    Symbol addAsPresignMiddlewareSymbol = SymbolUtils.createValueSymbolBuilder("AddAsIsPresigingMiddleware",
+                            AwsCustomGoDependency.PRESIGNEDURL_CUSTOMIZATION).build();
+                    writer.write("err = $T(stack)", addAsPresignMiddlewareSymbol);
+                    writer.write("if err != nil { return err }");
 
                     writer.write("return nil");
                 }).insertTrailingNewline();
