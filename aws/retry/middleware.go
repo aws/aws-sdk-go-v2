@@ -99,7 +99,9 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 
 			if rewindable, ok := in.Request.(interface{ RewindStream() error }); ok {
 				if err := rewindable.RewindStream(); err != nil {
-					return out, metadata, fmt.Errorf("failed to rewind transport stream for retry, %w", err)
+					e := fmt.Errorf("failed to rewind transport stream for retry, %w", err)
+					attemptMetadata.Error = e
+					return out, metadata, e
 				}
 			}
 

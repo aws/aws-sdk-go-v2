@@ -8,6 +8,8 @@ type requestAttemptsKey struct {
 type requestAttempts struct {
 
 	// Attempts is a slice consisting metadata from all request attempts.
+	// Attempts are stored in last in first order i.e. the last attempt
+	// would be at the top.
 	Attempts []requestAttempt
 }
 
