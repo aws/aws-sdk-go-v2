@@ -65,6 +65,10 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 ) {
 	var attemptNum, retryCount int
 	var attemptClockSkew time.Duration
+	var allAttemptMetadata requestAttempts
+	defer func() {
+		addRequestAttemptMetadata(&metadata, allAttemptMetadata)
+	}()
 
 	maxAttempts := r.retryer.MaxAttempts()
 
@@ -75,7 +79,6 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 
 	for {
 		attemptNum++
-
 		attemptInput := in
 		attemptInput.Request = r.requestCloner(attemptInput.Request)
 
@@ -86,7 +89,14 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 			AttemptClockSkew: attemptClockSkew,
 		})
 
+		var attemptMetadata requestAttempt
+		defer func() {
+			allAttemptMetadata.Attempts = append(allAttemptMetadata.Attempts, attemptMetadata)
+		}()
+
 		if attemptNum > 1 {
+			attemptMetadata.Retried = true
+
 			if rewindable, ok := in.Request.(interface{ RewindStream() error }); ok {
 				if err := rewindable.RewindStream(); err != nil {
 					return out, metadata, fmt.Errorf("failed to rewind transport stream for retry, %w", err)
@@ -97,6 +107,10 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 		}
 
 		out, metadata, reqErr := next.HandleFinalize(attemptCtx, attemptInput)
+
+		attemptMetadata.AttemptMetadata = metadata
+		attemptMetadata.Error = reqErr
+		attemptMetadata.Response = out.Result
 
 		if releaseError := relRetryToken(reqErr); releaseError != nil && reqErr != nil {
 			return out, metadata, fmt.Errorf("failed to release token after request error, %v", reqErr)
@@ -138,6 +152,7 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 
 		responseMetadata := awsmiddle.GetResponseMetadata(metadata)
 		attemptClockSkew = responseMetadata.AttemptSkew
+		attemptMetadata.Retryable = true
 
 		retryCount++
 	}
