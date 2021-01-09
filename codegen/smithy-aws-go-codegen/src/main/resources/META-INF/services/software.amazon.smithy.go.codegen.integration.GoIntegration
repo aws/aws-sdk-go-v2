@@ -5,7 +5,6 @@ software.amazon.smithy.aws.go.codegen.AssembleMiddlewareStack
 software.amazon.smithy.aws.go.codegen.AwsEndpointGenerator
 software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4
 software.amazon.smithy.aws.go.codegen.AwsIdempotencyTokenProvider
-software.amazon.smithy.aws.go.codegen.AwsClientUserAgent
 software.amazon.smithy.aws.go.codegen.AwsSdkServiceId
 software.amazon.smithy.aws.go.codegen.AwsRetryMiddlewareHelper
 software.amazon.smithy.aws.go.codegen.AWSRequestIDRetriever
@@ -29,7 +28,7 @@ software.amazon.smithy.aws.go.codegen.customization.S3HeadObjectCustomizations
 software.amazon.smithy.aws.go.codegen.customization.PresignURLAutoFill
 software.amazon.smithy.aws.go.codegen.customization.S3ExportInternalFeatures
 software.amazon.smithy.aws.go.codegen.FilterStreamingOperations
-software.amazon.smithy.aws.go.codegen.RequestResponseLogging
 software.amazon.smithy.aws.go.codegen.customization.S3ControlEndpointResolver
 software.amazon.smithy.aws.go.codegen.AwsHttpPresignURLClientGenerator
 software.amazon.smithy.aws.go.codegen.ResolveClientConfig
+software.amazon.smithy.aws.go.codegen.RequestResponseLogging

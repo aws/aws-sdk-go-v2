@@ -35,7 +35,10 @@ public class AwsClientUserAgent implements GoIntegration {
 
     @Override
     public void writeAdditionalFiles(
-            GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator
+            GoSettings settings,
+            Model model,
+            SymbolProvider symbolProvider,
+            GoDelegator goDelegator
     ) {
         ServiceTrait serviceTrait = settings.getService(model).expectTrait(ServiceTrait.class);
 

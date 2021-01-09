@@ -225,7 +225,7 @@ func (u Uploader) Upload(ctx context.Context, input *s3.PutObjectInput, opts ...
 	// Copy ClientOptions
 	clientOptions := make([]func(*s3.Options), 0, len(i.cfg.ClientOptions)+1)
 	clientOptions = append(clientOptions, func(o *s3.Options) {
-		o.APIOptions = append(o.APIOptions, middleware.AddUserAgentKey(userAgentKey))
+		o.APIOptions = append(o.APIOptions, middleware.AddSDKAgentKey(middleware.FeatureMetadata, userAgentKey))
 	})
 	clientOptions = append(clientOptions, i.cfg.ClientOptions...)
 	i.cfg.ClientOptions = clientOptions
