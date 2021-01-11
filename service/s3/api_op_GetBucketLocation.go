@@ -190,7 +190,7 @@ func (m *awsRestxml_deserializeOpGetBucketLocation_custom) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-// $L is helper to swap in a custom deserializer
+// Helper to swap in a custom deserializer
 func swapDeserializerHelper(stack *middleware.Stack) error {
 	_, err := stack.Deserialize.Swap("OperationDeserializer", &awsRestxml_deserializeOpGetBucketLocation_custom{})
 	if err != nil {
