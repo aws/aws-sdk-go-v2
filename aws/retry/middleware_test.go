@@ -132,11 +132,11 @@ func TestAttemptMiddleware(t *testing.T) {
 	}()
 
 	cases := map[string]struct {
-		Request        testRequest
-		Next           func(retries *[]retryMetadata) middleware.FinalizeHandler
-		Expect         []retryMetadata
-		Err            error
-		ExpectMetadata RequestAttemptsMetadata
+		Request       testRequest
+		Next          func(retries *[]retryMetadata) middleware.FinalizeHandler
+		Expect        []retryMetadata
+		Err           error
+		ExpectResults AttemptResults
 	}{
 		"no error single attempt": {
 			Next: func(retries *[]retryMetadata) middleware.FinalizeHandler {
@@ -155,7 +155,7 @@ func TestAttemptMiddleware(t *testing.T) {
 					MaxAttempts: 3,
 				},
 			},
-			ExpectMetadata: RequestAttemptsMetadata{Attempts: []RequestAttemptMetadata{
+			ExpectResults: AttemptResults{Results: []AttemptResult{
 				{},
 			}},
 		},
@@ -198,7 +198,7 @@ func TestAttemptMiddleware(t *testing.T) {
 					MaxAttempts: 3,
 				},
 			},
-			ExpectMetadata: RequestAttemptsMetadata{Attempts: []RequestAttemptMetadata{
+			ExpectResults: AttemptResults{Results: []AttemptResult{
 				{
 					Err:       mockRetryableError{b: true},
 					Retryable: true,
@@ -231,7 +231,7 @@ func TestAttemptMiddleware(t *testing.T) {
 				})
 			},
 			Err: fmt.Errorf("exceeded maximum number of attempts"),
-			ExpectMetadata: RequestAttemptsMetadata{Attempts: []RequestAttemptMetadata{
+			ExpectResults: AttemptResults{Results: []AttemptResult{
 				{
 					Err:       mockRetryableError{b: true},
 					Retryable: true,
@@ -267,7 +267,7 @@ func TestAttemptMiddleware(t *testing.T) {
 				},
 			},
 			Err: fmt.Errorf("failed to rewind transport stream for retry"),
-			ExpectMetadata: RequestAttemptsMetadata{Attempts: []RequestAttemptMetadata{
+			ExpectResults: AttemptResults{Results: []AttemptResult{
 				{
 					Err:       mockRetryableError{b: true},
 					Retryable: true,
@@ -299,7 +299,7 @@ func TestAttemptMiddleware(t *testing.T) {
 				},
 			},
 			Err: fmt.Errorf("some error"),
-			ExpectMetadata: RequestAttemptsMetadata{Attempts: []RequestAttemptMetadata{
+			ExpectResults: AttemptResults{Results: []AttemptResult{
 				{
 					Err: fmt.Errorf("some error"),
 				},
@@ -344,12 +344,12 @@ func TestAttemptMiddleware(t *testing.T) {
 					MaxAttempts: 3,
 				},
 			},
-			ExpectMetadata: RequestAttemptsMetadata{Attempts: []RequestAttemptMetadata{
+			ExpectResults: AttemptResults{Results: []AttemptResult{
 				{
 					Err:       mockRetryableError{b: true},
 					Retryable: true,
 					Retried:   true,
-					AttemptMetadata: func() middleware.Metadata {
+					ResponseMetadata: func() middleware.Metadata {
 						m := &(middleware.Metadata{})
 						m.Set("testKey", "testValue")
 						return *m
@@ -395,11 +395,11 @@ func TestAttemptMiddleware(t *testing.T) {
 				t.Error(diff)
 			}
 
-			attemptMetadata, err := GetRequestAttemptsMetadata(metadata)
+			attemptResults, err := GetAttemptResults(metadata)
 			if err != nil {
 				t.Fatalf("expected no error, got %v", err)
 			}
-			if e, a := tt.ExpectMetadata, attemptMetadata; !reflect.DeepEqual(e, a) {
+			if e, a := tt.ExpectResults, attemptResults; !reflect.DeepEqual(e, a) {
 				t.Fatalf("expected %v, got %v", e, a)
 			}
 		})

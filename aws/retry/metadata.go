@@ -5,33 +5,31 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// requestAttemptsKey is a metadata accessor key to
-// retrieve metadata for all request attempts.
-type requestAttemptsKey struct {
+// attemptResultsKey is a metadata accessor key to retrieve metadata
+// for all request attempts.
+type attemptResultsKey struct {
 }
 
-// GetRequestAttemptsMetadata retrieves request attempts metadata from middleware metadata.
-func GetRequestAttemptsMetadata(metadata middleware.Metadata) (RequestAttemptsMetadata, error) {
-	m, ok := metadata.Get(requestAttemptsKey{}).(RequestAttemptsMetadata)
+// GetAttemptResults retrieves attempts results from middleware metadata.
+func GetAttemptResults(metadata middleware.Metadata) (AttemptResults, error) {
+	m, ok := metadata.Get(attemptResultsKey{}).(AttemptResults)
 	if !ok {
-		return RequestAttemptsMetadata{},
-			fmt.Errorf("failed to fetch request attempts metadata")
+		return AttemptResults{},
+			fmt.Errorf("failed to fetch attempt results from metadata")
 	}
 	return m, nil
 }
 
-// RequestAttemptsMetadata represents struct containing
-// metadata returned by all request attempts.
-type RequestAttemptsMetadata struct {
+// AttemptResults represents struct containing metadata returned by all request attempts.
+type AttemptResults struct {
 
-	// Attempts is a slice consisting metadata from all request attempts.
-	// Attempts are stored in last in first order i.e. the last attempt
-	// would be at the top.
-	Attempts []RequestAttemptMetadata
+	// Results is a slice consisting attempt result from all request attempts.
+	// Results are stored in order request attempt is made.
+	Results []AttemptResult
 }
 
-// RequestAttemptMetadata represents metadata returned by a request attempt.
-type RequestAttemptMetadata struct {
+// AttemptResult represents attempt result returned by a single request attempt.
+type AttemptResult struct {
 
 	// Response is raw response if received for the request attempt.
 	Response interface{}
@@ -40,17 +38,17 @@ type RequestAttemptMetadata struct {
 	Err error
 
 	// Retryable denotes if request may be retried. This states if an
-	// error was retryable.
+	// error is considered retryable.
 	Retryable bool
 
 	// Retried indicates if this request was retried.
 	Retried bool
 
-	// AttemptMetadata denotes existing metadata for the request attempt.
-	AttemptMetadata middleware.Metadata
+	// ResponseMetadata is any existing metadata passed via the response middlewares.
+	ResponseMetadata middleware.Metadata
 }
 
-// addRequestAttemptMetadata adds request attempts metadata to middleware metadata
-func addRequestAttemptMetadata(metadata *middleware.Metadata, v RequestAttemptsMetadata) {
-	metadata.Set(requestAttemptsKey{}, v)
+// addAttemptResults adds attempt results to middleware metadata
+func addAttemptResults(metadata *middleware.Metadata, v AttemptResults) {
+	metadata.Set(attemptResultsKey{}, v)
 }

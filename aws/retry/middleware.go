@@ -66,7 +66,7 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 	var attemptNum int
 	var attemptClockSkew time.Duration
 	var shouldRetry bool
-	var allAttemptMetadata RequestAttemptsMetadata
+	var attemptResults AttemptResults
 
 	maxAttempts := r.retryer.MaxAttempts()
 
@@ -82,33 +82,33 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 			AttemptClockSkew: attemptClockSkew,
 		})
 
-		var attemptMetadata RequestAttemptMetadata
+		var attemptResult AttemptResult
 
-		out, attemptMetadata, err = r.handleAttempt(attemptCtx, attemptInput, next)
+		out, attemptResult, err = r.handleAttempt(attemptCtx, attemptInput, next)
 
-		responseMetadata := awsmiddle.GetResponseMetadata(attemptMetadata.AttemptMetadata)
+		responseMetadata := awsmiddle.GetResponseMetadata(attemptResult.ResponseMetadata)
 		attemptClockSkew = responseMetadata.AttemptSkew
-		shouldRetry = attemptMetadata.Retried
+		shouldRetry = attemptResult.Retried
 
 		// add attempt metadata to list of all attempt metadata
-		allAttemptMetadata.Attempts = append(allAttemptMetadata.Attempts, attemptMetadata)
+		attemptResults.Results = append(attemptResults.Results, attemptResult)
 
 		if !shouldRetry {
 			break
 		}
 	}
 
-	addRequestAttemptMetadata(&metadata, allAttemptMetadata)
+	addAttemptResults(&metadata, attemptResults)
 	return out, metadata, err
 }
 
 // handleAttempt handles an individual request attempt.
 func (r Attempt) handleAttempt(ctx context.Context, in smithymiddle.FinalizeInput, next smithymiddle.FinalizeHandler) (
-	out smithymiddle.FinalizeOutput, attemptMetadata RequestAttemptMetadata, err error,
+	out smithymiddle.FinalizeOutput, attemptResult AttemptResult, err error,
 ) {
 	defer func() {
-		attemptMetadata.Err = err
-		attemptMetadata.Response = out.Result
+		attemptResult.Err = err
+		attemptResult.Response = out.Result
 	}()
 
 	relRetryToken := r.retryer.GetInitialToken()
@@ -123,7 +123,7 @@ func (r Attempt) handleAttempt(ctx context.Context, in smithymiddle.FinalizeInpu
 		if rewindable, ok := in.Request.(interface{ RewindStream() error }); ok {
 			if rewindErr := rewindable.RewindStream(); rewindErr != nil {
 				err = fmt.Errorf("failed to rewind transport stream for retry, %w", rewindErr)
-				return out, attemptMetadata, err
+				return out, attemptResult, err
 			}
 		}
 
@@ -132,25 +132,25 @@ func (r Attempt) handleAttempt(ctx context.Context, in smithymiddle.FinalizeInpu
 
 	var metadata smithymiddle.Metadata
 	out, metadata, err = next.HandleFinalize(ctx, in)
-	attemptMetadata.AttemptMetadata = metadata
+	attemptResult.ResponseMetadata = metadata
 
 	if releaseError := relRetryToken(err); releaseError != nil && err != nil {
 		err = fmt.Errorf("failed to release token after request error, %w", err)
-		return out, attemptMetadata, err
+		return out, attemptResult, err
 	}
 
 	if err == nil {
-		return out, attemptMetadata, err
+		return out, attemptResult, err
 	}
 
 	retryable := r.retryer.IsErrorRetryable(err)
 	if !retryable {
 		r.logf(logger, logging.Debug, "request failed with unretryable error %v", err)
-		return out, attemptMetadata, err
+		return out, attemptResult, err
 	}
 
 	// set retryable to true
-	attemptMetadata.Retryable = true
+	attemptResult.Retryable = true
 
 	if maxAttempts > 0 && attemptNum >= maxAttempts {
 		r.logf(logger, logging.Debug, "max retry attempts exhausted, max %d", maxAttempts)
@@ -158,27 +158,27 @@ func (r Attempt) handleAttempt(ctx context.Context, in smithymiddle.FinalizeInpu
 			Attempt: attemptNum,
 			Err:     err,
 		}
-		return out, attemptMetadata, err
+		return out, attemptResult, err
 	}
 
 	relRetryToken, reqErr := r.retryer.GetRetryToken(ctx, err)
 	if reqErr != nil {
-		return out, attemptMetadata, reqErr
+		return out, attemptResult, reqErr
 	}
 
 	retryDelay, reqErr := r.retryer.RetryDelay(attemptNum, err)
 	if reqErr != nil {
-		return out, attemptMetadata, reqErr
+		return out, attemptResult, reqErr
 	}
 
 	if reqErr = sdk.SleepWithContext(ctx, retryDelay); reqErr != nil {
 		err = &aws.RequestCanceledError{Err: reqErr}
-		return out, attemptMetadata, err
+		return out, attemptResult, err
 	}
 
-	attemptMetadata.Retried = true
+	attemptResult.Retried = true
 
-	return out, attemptMetadata, err
+	return out, attemptResult, err
 }
 
 // MetricsHeader attaches SDK request metric header for retries to the transport
