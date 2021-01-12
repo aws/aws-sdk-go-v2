@@ -130,7 +130,7 @@ type Options struct {
 
 	// Retryer guides how HTTP requests should be retried in case of recoverable
 	// failures. When nil the API client will use a default retryer.
-	Retryer retry.Retryer
+	Retryer aws.Retryer
 
 	// Changes if the EC2 Instance Metadata client is enabled or not. Client
 	// will default to enabled if not set to ClientDisabled. When the client is
