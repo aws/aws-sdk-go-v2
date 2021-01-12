@@ -1,7 +1,6 @@
 package retry
 
 import (
-	"fmt"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -11,13 +10,9 @@ type attemptResultsKey struct {
 }
 
 // GetAttemptResults retrieves attempts results from middleware metadata.
-func GetAttemptResults(metadata middleware.Metadata) (AttemptResults, error) {
+func GetAttemptResults(metadata middleware.Metadata) (AttemptResults, bool) {
 	m, ok := metadata.Get(attemptResultsKey{}).(AttemptResults)
-	if !ok {
-		return AttemptResults{},
-			fmt.Errorf("failed to fetch attempt results from metadata")
-	}
-	return m, nil
+	return m, ok
 }
 
 // AttemptResults represents struct containing metadata returned by all request attempts.

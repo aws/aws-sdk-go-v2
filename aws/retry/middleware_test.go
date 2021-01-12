@@ -395,9 +395,9 @@ func TestAttemptMiddleware(t *testing.T) {
 				t.Error(diff)
 			}
 
-			attemptResults, err := GetAttemptResults(metadata)
-			if err != nil {
-				t.Fatalf("expected no error, got %v", err)
+			attemptResults, ok := GetAttemptResults(metadata)
+			if !ok {
+				t.Fatalf("expected metadata to contain attempt results, got none")
 			}
 			if e, a := tt.ExpectResults, attemptResults; !reflect.DeepEqual(e, a) {
 				t.Fatalf("expected %v, got %v", e, a)
