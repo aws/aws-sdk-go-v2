@@ -101,7 +101,10 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	opts := Options{
 		APIOptions: append([]func(*middleware.Stack) error{}, cfg.APIOptions...),
 		HTTPClient: cfg.HTTPClient,
-		Retryer:    cfg.Retryer,
+	}
+
+	if cfg.Retryer != nil {
+		opts.Retryer = cfg.Retryer()
 	}
 
 	return New(opts, optFns...)

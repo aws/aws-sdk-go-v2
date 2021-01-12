@@ -51,7 +51,9 @@ func Test_EmptyResponse(t *testing.T) {
 						SigningName: "ec2",
 					}, nil
 				}),
-				Retryer: aws.NopRetryer{},
+				Retryer: func() aws.Retryer {
+					return aws.NopRetryer{}
+				},
 			}
 
 			client := ec2.NewFromConfig(cfg)

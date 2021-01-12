@@ -12,6 +12,6 @@ func LoadDefaultConfig(context.Context, ...func()) (cfg aws.Config, err error) {
 }
 
 // WithRetryer is a mock for config.WithRetryer
-func WithRetryer(v aws.Retryer) (f func()) {
+func WithRetryer(v func() aws.Retryer) (f func()) {
 	return f
 }

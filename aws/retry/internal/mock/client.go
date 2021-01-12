@@ -11,7 +11,7 @@ type Options struct {
 	Retryer aws.Retryer
 }
 
-// Options is a mock Client
+// Client is a mock service client
 type Client struct{}
 
 // GetObjectInput is mock input

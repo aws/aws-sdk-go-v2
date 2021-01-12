@@ -14,9 +14,11 @@ import (
 )
 
 func Example_overrideForAllClients() {
-	custom := retry.AddWithMaxBackoffDelay(retry.NewStandard(), time.Second*5)
-
-	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRetryer(custom))
+	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRetryer(func() aws.Retryer {
+		// Generally you will always want to return new instance of a Retryer. This will avoid a global rate limit
+		// bucket being shared between across all service clients.
+		return retry.AddWithMaxBackoffDelay(retry.NewStandard(), time.Second*5)
+	}))
 	if err != nil {
 		log.Fatal(err)
 		return

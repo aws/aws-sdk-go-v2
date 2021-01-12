@@ -80,7 +80,9 @@ func TestCustomErrorDeserialization(t *testing.T) {
 						SigningName: "route53",
 					}, nil
 				}),
-				Retryer: aws.NopRetryer{},
+				Retryer: func() aws.Retryer {
+					return aws.NopRetryer{}
+				},
 			})
 			resp, err := svc.ChangeResourceRecordSets(context.Background(), &route53.ChangeResourceRecordSetsInput{
 				ChangeBatch: &types.ChangeBatch{

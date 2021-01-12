@@ -51,7 +51,9 @@ func Test_EmptyResponse(t *testing.T) {
 						SigningName: "s3",
 					}, nil
 				}),
-				Retryer: aws.NopRetryer{},
+				Retryer: func() aws.Retryer {
+					return aws.NopRetryer{}
+				},
 			}
 
 			client := s3.NewFromConfig(cfg, func(options *s3.Options) {
