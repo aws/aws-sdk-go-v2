@@ -63,19 +63,12 @@ func (r Attempt) logf(logger logging.Logger, classification logging.Classificati
 func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInput, next smithymiddle.FinalizeHandler) (
 	out smithymiddle.FinalizeOutput, metadata smithymiddle.Metadata, err error,
 ) {
-	var attemptNum, retryCount int
+	var attemptNum int
 	var attemptClockSkew time.Duration
-	var allAttemptMetadata requestAttempts
-	defer func() {
-		addRequestAttemptMetadata(&metadata, allAttemptMetadata)
-	}()
+	var shouldRetry bool
+	var allAttemptMetadata RequestAttemptsMetadata
 
 	maxAttempts := r.retryer.MaxAttempts()
-
-	relRetryToken := r.retryer.GetInitialToken()
-
-	logger := smithymiddle.GetLogger(ctx)
-	service, operation := awsmiddle.GetServiceID(ctx), awsmiddle.GetOperationName(ctx)
 
 	for {
 		attemptNum++
@@ -89,75 +82,103 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 			AttemptClockSkew: attemptClockSkew,
 		})
 
-		var attemptMetadata requestAttempt
-		defer func() {
-			allAttemptMetadata.Attempts = append(allAttemptMetadata.Attempts, attemptMetadata)
-		}()
+		var attemptMetadata RequestAttemptMetadata
 
-		if attemptNum > 1 {
-			attemptMetadata.Retried = true
+		out, attemptMetadata, err = r.handleAttempt(attemptCtx, attemptInput, next)
 
-			if rewindable, ok := in.Request.(interface{ RewindStream() error }); ok {
-				if err := rewindable.RewindStream(); err != nil {
-					e := fmt.Errorf("failed to rewind transport stream for retry, %w", err)
-					attemptMetadata.Error = e
-					return out, metadata, e
-				}
-			}
-
-			r.logf(logger, logging.Debug, "retrying request %s/%s, attempt %d", service, operation, attemptNum)
-		}
-
-		out, metadata, reqErr := next.HandleFinalize(attemptCtx, attemptInput)
-
-		attemptMetadata.AttemptMetadata = metadata
-		attemptMetadata.Error = reqErr
-		attemptMetadata.Response = out.Result
-
-		if releaseError := relRetryToken(reqErr); releaseError != nil && reqErr != nil {
-			return out, metadata, fmt.Errorf("failed to release token after request error, %v", reqErr)
-		}
-
-		if reqErr == nil {
-			return out, metadata, nil
-		}
-
-		retryable := r.retryer.IsErrorRetryable(reqErr)
-		if !retryable {
-			r.logf(logger, logging.Debug, "request failed with unretryable error %v", reqErr)
-			return out, metadata, reqErr
-		}
-
-		if maxAttempts > 0 && attemptNum >= maxAttempts {
-			r.logf(logger, logging.Debug, "max retry attempts exhausted, max %d", maxAttempts)
-			err = &MaxAttemptsError{
-				Attempt: attemptNum,
-				Err:     reqErr,
-			}
-			return out, metadata, err
-		}
-
-		relRetryToken, err = r.retryer.GetRetryToken(ctx, reqErr)
-		if err != nil {
-			return out, metadata, err
-		}
-
-		retryDelay, err := r.retryer.RetryDelay(attemptNum, reqErr)
-		if err != nil {
-			return out, metadata, err
-		}
-
-		if err = sdk.SleepWithContext(ctx, retryDelay); err != nil {
-			err = &aws.RequestCanceledError{Err: err}
-			return out, metadata, err
-		}
-
-		responseMetadata := awsmiddle.GetResponseMetadata(metadata)
+		responseMetadata := awsmiddle.GetResponseMetadata(attemptMetadata.AttemptMetadata)
 		attemptClockSkew = responseMetadata.AttemptSkew
-		attemptMetadata.Retryable = true
+		shouldRetry = attemptMetadata.Retried
 
-		retryCount++
+		// add attempt metadata to list of all attempt metadata
+		allAttemptMetadata.Attempts = append(allAttemptMetadata.Attempts, attemptMetadata)
+
+		if !shouldRetry {
+			break
+		}
 	}
+
+	addRequestAttemptMetadata(&metadata, allAttemptMetadata)
+	return out, metadata, err
+}
+
+// handleAttempt handles an individual request attempt.
+func (r Attempt) handleAttempt(ctx context.Context, in smithymiddle.FinalizeInput, next smithymiddle.FinalizeHandler) (
+	out smithymiddle.FinalizeOutput, attemptMetadata RequestAttemptMetadata, err error,
+) {
+	defer func() {
+		attemptMetadata.Err = err
+		attemptMetadata.Response = out.Result
+	}()
+
+	relRetryToken := r.retryer.GetInitialToken()
+	logger := smithymiddle.GetLogger(ctx)
+	service, operation := awsmiddle.GetServiceID(ctx), awsmiddle.GetOperationName(ctx)
+
+	retryMetadata, _ := getRetryMetadata(ctx)
+	attemptNum := retryMetadata.AttemptNum
+	maxAttempts := retryMetadata.MaxAttempts
+
+	if attemptNum > 1 {
+		if rewindable, ok := in.Request.(interface{ RewindStream() error }); ok {
+			if rewindErr := rewindable.RewindStream(); rewindErr != nil {
+				err = fmt.Errorf("failed to rewind transport stream for retry, %w", rewindErr)
+				return out, attemptMetadata, err
+			}
+		}
+
+		r.logf(logger, logging.Debug, "retrying request %s/%s, attempt %d", service, operation, attemptNum)
+	}
+
+	var metadata smithymiddle.Metadata
+	out, metadata, err = next.HandleFinalize(ctx, in)
+	attemptMetadata.AttemptMetadata = metadata
+
+	if releaseError := relRetryToken(err); releaseError != nil && err != nil {
+		err = fmt.Errorf("failed to release token after request error, %w", err)
+		return out, attemptMetadata, err
+	}
+
+	if err == nil {
+		return out, attemptMetadata, err
+	}
+
+	retryable := r.retryer.IsErrorRetryable(err)
+	if !retryable {
+		r.logf(logger, logging.Debug, "request failed with unretryable error %v", err)
+		return out, attemptMetadata, err
+	}
+
+	// set retryable to true
+	attemptMetadata.Retryable = true
+
+	if maxAttempts > 0 && attemptNum >= maxAttempts {
+		r.logf(logger, logging.Debug, "max retry attempts exhausted, max %d", maxAttempts)
+		err = &MaxAttemptsError{
+			Attempt: attemptNum,
+			Err:     err,
+		}
+		return out, attemptMetadata, err
+	}
+
+	relRetryToken, reqErr := r.retryer.GetRetryToken(ctx, err)
+	if reqErr != nil {
+		return out, attemptMetadata, reqErr
+	}
+
+	retryDelay, reqErr := r.retryer.RetryDelay(attemptNum, err)
+	if reqErr != nil {
+		return out, attemptMetadata, reqErr
+	}
+
+	if reqErr = sdk.SleepWithContext(ctx, retryDelay); reqErr != nil {
+		err = &aws.RequestCanceledError{Err: reqErr}
+		return out, attemptMetadata, err
+	}
+
+	attemptMetadata.Retried = true
+
+	return out, attemptMetadata, err
 }
 
 // MetricsHeader attaches SDK request metric header for retries to the transport

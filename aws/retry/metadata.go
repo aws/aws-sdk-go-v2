@@ -1,30 +1,49 @@
 package retry
 
-import "github.com/aws/smithy-go/middleware"
+import (
+	"fmt"
+	"github.com/aws/smithy-go/middleware"
+)
 
+// requestAttemptsKey is a metadata accessor key to
+// retrieve metadata for all request attempts.
 type requestAttemptsKey struct {
 }
 
-type requestAttempts struct {
+// GetRequestAttemptsMetadata retrieves request attempts metadata from middleware metadata.
+func GetRequestAttemptsMetadata(metadata middleware.Metadata) (RequestAttemptsMetadata, error) {
+	m, ok := metadata.Get(requestAttemptsKey{}).(RequestAttemptsMetadata)
+	if !ok {
+		return RequestAttemptsMetadata{},
+			fmt.Errorf("failed to fetch request attempts metadata")
+	}
+	return m, nil
+}
+
+// RequestAttemptsMetadata represents struct containing
+// metadata returned by all request attempts.
+type RequestAttemptsMetadata struct {
 
 	// Attempts is a slice consisting metadata from all request attempts.
 	// Attempts are stored in last in first order i.e. the last attempt
 	// would be at the top.
-	Attempts []requestAttempt
+	Attempts []RequestAttemptMetadata
 }
 
-type requestAttempt struct {
+// RequestAttemptMetadata represents metadata returned by a request attempt.
+type RequestAttemptMetadata struct {
 
 	// Response is raw response if received for the request attempt.
 	Response interface{}
 
-	// Error is the error if received for the request attempt.
-	Error error
+	// Err is the error if received for the request attempt.
+	Err error
 
-	// Retryable denotes if request will be retried.
+	// Retryable denotes if request may be retried. This states if an
+	// error was retryable.
 	Retryable bool
 
-	// Retried indicates if this request was a retried request.
+	// Retried indicates if this request was retried.
 	Retried bool
 
 	// AttemptMetadata denotes existing metadata for the request attempt.
@@ -32,6 +51,6 @@ type requestAttempt struct {
 }
 
 // addRequestAttemptMetadata adds request attempts metadata to middleware metadata
-func addRequestAttemptMetadata(metadata *middleware.Metadata, v requestAttempts) {
+func addRequestAttemptMetadata(metadata *middleware.Metadata, v RequestAttemptsMetadata) {
 	metadata.Set(requestAttemptsKey{}, v)
 }
