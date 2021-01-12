@@ -325,6 +325,11 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
         // Deserialize member shapes modeled with xml attribute trait
         if (hasXmlAttributeTraitMember(shape)) {
             writer.openBlock("for _, attr := range decoder.StartEl.Attr {", "}", () -> {
+                writer.write("name := attr.Name.Local");
+                writer.openBlock("if len(attr.Name.Space) != 0 {", "}", () -> {
+                    writer.addUseImports(SmithyGoDependency.STRINGS);
+                    writer.write("name = strings.Join([]string{attr.Name.Space, attr.Name.Local}, \":\")");
+                });
                 writer.openBlock("switch {", "}", () -> {
                     Set<MemberShape> members = new TreeSet<>(shape.members());
                     for (MemberShape member : members) {
@@ -336,7 +341,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
                         String memberName = symbolProvider.toMemberName(member);
                         String serializedMemberName = getSerializedMemberName(member);
                         writer.addUseImports(SmithyGoDependency.STRINGS);
-                        writer.openBlock("case strings.EqualFold($S, attr.Name.Local):", "", serializedMemberName, () -> {
+                        writer.openBlock("case strings.EqualFold($S, name):", "", serializedMemberName, () -> {
                             String dest = "sv." + memberName;
                             context.getModel().expectShape(member.getTarget()).accept(
                                     getMemberDeserVisitor(member, dest, true));
