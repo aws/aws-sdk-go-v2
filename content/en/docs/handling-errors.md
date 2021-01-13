@@ -118,7 +118,7 @@ For example:
 
 ```go
 import "log"
-import awshttp "github.com/aws/transport/http"
+import awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 
 // ...
 
