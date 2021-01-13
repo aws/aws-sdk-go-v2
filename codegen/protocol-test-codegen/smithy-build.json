@@ -102,6 +102,23 @@
           "moduleVersion": "1.0"
         }
       }
+    },
+    "aws-restxml-with-namespace": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.restxml.xmlns#RestXmlWithNamespace"]
+          }
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.protocoltests.restxml.xmlns#RestXmlWithNamespace",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxmlwithnamespace",
+          "moduleVersion": "1.0"
+        }
+      }
     }
   }
 }
