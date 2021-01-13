@@ -3414,7 +3414,7 @@ func awsRestxml_deserializeOpDocumentXmlAttributesOutput(v **XmlAttributesOutput
 	for _, attr := range decoder.StartEl.Attr {
 		name := attr.Name.Local
 		if len(attr.Name.Space) != 0 {
-			name = strings.Join([]string{attr.Name.Space, attr.Name.Local}, ":")
+			name = attr.Name.Space + `:` + attr.Name.Local
 		}
 		switch {
 		case strings.EqualFold("test", name):
@@ -6528,7 +6528,7 @@ func awsRestxml_deserializeDocumentXmlAttributesInputOutput(v **types.XmlAttribu
 	for _, attr := range decoder.StartEl.Attr {
 		name := attr.Name.Local
 		if len(attr.Name.Space) != 0 {
-			name = strings.Join([]string{attr.Name.Space, attr.Name.Local}, ":")
+			name = attr.Name.Space + `:` + attr.Name.Local
 		}
 		switch {
 		case strings.EqualFold("test", name):

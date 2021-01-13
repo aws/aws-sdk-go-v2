@@ -328,7 +328,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
                 writer.write("name := attr.Name.Local");
                 writer.openBlock("if len(attr.Name.Space) != 0 {", "}", () -> {
                     writer.addUseImports(SmithyGoDependency.STRINGS);
-                    writer.write("name = strings.Join([]string{attr.Name.Space, attr.Name.Local}, \":\")");
+                    writer.write("name = attr.Name.Space + `:` + attr.Name.Local");
                 });
                 writer.openBlock("switch {", "}", () -> {
                     Set<MemberShape> members = new TreeSet<>(shape.members());
