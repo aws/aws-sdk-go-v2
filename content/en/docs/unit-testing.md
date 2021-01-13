@@ -40,7 +40,7 @@ func GetObjectFromS3(ctx context.Context, api S3GetObjectAPI, bucket, key string
 	if err != nil {
 		return nil, err
 	}
-    defer object.Body.Close()
+	defer object.Body.Close()
 
 	return ioutil.ReadAll(object.Body)
 }
@@ -66,7 +66,7 @@ func TestGetObjectFromS3(t *testing.T) {
 	cases := []struct {
 		client func(t *testing.T) s3GetObjectAPI
 		bucket string
-		key    string
+		key	string
 		expect []byte
 	}{
 		{
@@ -92,14 +92,14 @@ func TestGetObjectFromS3(t *testing.T) {
 				})
 			},
 			bucket: "fooBucket",
-			key:    "barKey",
+			key:	"barKey",
 			expect: []byte("this is the body foo bar baz"),
 		},
 	}
 
 	for i, tt := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
-            ctx := context.TODO()
+			ctx := context.TODO()
 			content, err := GetObjectFromS3(ctx, tt.client(t), tt.bucket, tt.key)
 			if err != nil {
 				t.Fatalf("expect no error, got %v", err)
@@ -115,7 +115,7 @@ func TestGetObjectFromS3(t *testing.T) {
 ## Mocking Paginators
 
 Similar to service clients, paginators can be mocked by defining a Go interface
-for type type. That interface would be used by your application's code. This
+for the paginator. That interface would be used by your application's code. This
 allows the SDK's implementation to be used when your application is running,
 and a mocked implementation for testing.
 
