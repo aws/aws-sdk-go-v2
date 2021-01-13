@@ -195,10 +195,7 @@ func (r *MetricsHeader) ID() string {
 func (r MetricsHeader) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInput, next smithymiddle.FinalizeHandler) (
 	out smithymiddle.FinalizeOutput, metadata smithymiddle.Metadata, err error,
 ) {
-	retryMetadata, ok := getRetryMetadata(ctx)
-	if !ok {
-		return out, metadata, fmt.Errorf("retry metadata value not found on context")
-	}
+	retryMetadata, _ := getRetryMetadata(ctx)
 
 	const retryMetricHeader = "Amz-Sdk-Request"
 	var parts []string

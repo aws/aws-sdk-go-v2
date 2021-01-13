@@ -159,7 +159,7 @@ func (m addRawResponse) HandleDeserialize(ctx context.Context, in middleware.Des
 // AddRawResponseToMetadata adds middleware to the middleware stack that
 // store raw response on to the metadata.
 func AddRawResponseToMetadata(stack *middleware.Stack) error {
-	return stack.Deserialize.Add(&addRawResponse{}, middleware.After)
+	return stack.Deserialize.Add(&addRawResponse{}, middleware.Before)
 }
 
 // GetRawResponse returns raw response set on metadata
