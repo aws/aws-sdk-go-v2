@@ -6,7 +6,6 @@ import (
 	"context"
 	cryptorand "crypto/rand"
 	"github.com/aws/aws-sdk-go-v2/aws"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
@@ -201,10 +200,6 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 		return
 	}
 	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
-}
-
-func addClientUserAgent(stack *middleware.Stack) error {
-	return awsmiddleware.AddUserAgentKey("s3control")(stack)
 }
 
 func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) error {

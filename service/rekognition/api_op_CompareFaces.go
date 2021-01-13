@@ -172,9 +172,6 @@ func addOperationCompareFacesMiddlewares(stack *middleware.Stack, options Option
 	if err = awsmiddleware.AddAttemptClockSkewMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addClientUserAgent(stack); err != nil {
-		return err
-	}
 	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}

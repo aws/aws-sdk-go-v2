@@ -189,10 +189,6 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
-func addClientUserAgent(stack *middleware.Stack) error {
-	return awsmiddleware.AddUserAgentKey("sts")(stack)
-}
-
 func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) error {
 	mw := v4.NewSignHTTPRequestMiddleware(v4.SignHTTPRequestMiddlewareOptions{
 		CredentialsProvider: o.Credentials,
@@ -234,15 +230,6 @@ func addRequestIDRetrieverMiddleware(stack *middleware.Stack) error {
 
 func addResponseErrorMiddleware(stack *middleware.Stack) error {
 	return awshttp.AddResponseErrorMiddleware(stack)
-}
-
-func addRequestResponseLogging(stack *middleware.Stack, o Options) error {
-	return stack.Deserialize.Add(&smithyhttp.RequestResponseLogger{
-		LogRequest:          o.ClientLogMode.IsRequest(),
-		LogRequestWithBody:  o.ClientLogMode.IsRequestWithBody(),
-		LogResponse:         o.ClientLogMode.IsResponse(),
-		LogResponseWithBody: o.ClientLogMode.IsResponseWithBody(),
-	}, middleware.After)
 }
 
 // HTTPPresignerV4 represents presigner interface used by presign url client
@@ -340,4 +327,13 @@ func (c presignConverter) convertToPresignMiddleware(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+func addRequestResponseLogging(stack *middleware.Stack, o Options) error {
+	return stack.Deserialize.Add(&smithyhttp.RequestResponseLogger{
+		LogRequest:          o.ClientLogMode.IsRequest(),
+		LogRequestWithBody:  o.ClientLogMode.IsRequestWithBody(),
+		LogResponse:         o.ClientLogMode.IsResponse(),
+		LogResponseWithBody: o.ClientLogMode.IsResponseWithBody(),
+	}, middleware.After)
 }

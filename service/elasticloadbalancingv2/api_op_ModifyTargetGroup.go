@@ -121,9 +121,6 @@ func addOperationModifyTargetGroupMiddlewares(stack *middleware.Stack, options O
 	if err = awsmiddleware.AddAttemptClockSkewMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addClientUserAgent(stack); err != nil {
-		return err
-	}
 	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}

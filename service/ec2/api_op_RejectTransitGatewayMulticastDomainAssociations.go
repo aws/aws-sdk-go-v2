@@ -88,9 +88,6 @@ func addOperationRejectTransitGatewayMulticastDomainAssociationsMiddlewares(stac
 	if err = awsmiddleware.AddAttemptClockSkewMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addClientUserAgent(stack); err != nil {
-		return err
-	}
 	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
