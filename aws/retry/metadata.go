@@ -26,9 +26,6 @@ type AttemptResults struct {
 // AttemptResult represents attempt result returned by a single request attempt.
 type AttemptResult struct {
 
-	// Response is raw response if received for the request attempt.
-	Response interface{}
-
 	// Err is the error if received for the request attempt.
 	Err error
 

@@ -86,8 +86,12 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 
 		out, attemptResult, err = r.handleAttempt(attemptCtx, attemptInput, next)
 
-		responseMetadata := awsmiddle.GetResponseMetadata(attemptResult.ResponseMetadata)
-		attemptClockSkew = responseMetadata.AttemptSkew
+		var ok bool
+		attemptClockSkew, ok = awsmiddle.GetAttemptSkew(attemptResult.ResponseMetadata)
+		if !ok {
+			attemptClockSkew = 0
+		}
+
 		shouldRetry = attemptResult.Retried
 
 		// add attempt metadata to list of all attempt metadata
@@ -108,7 +112,6 @@ func (r Attempt) handleAttempt(ctx context.Context, in smithymiddle.FinalizeInpu
 ) {
 	defer func() {
 		attemptResult.Err = err
-		attemptResult.Response = out.Result
 	}()
 
 	relRetryToken := r.retryer.GetInitialToken()

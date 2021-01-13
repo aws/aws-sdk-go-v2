@@ -326,8 +326,6 @@ func TestAttemptMiddleware(t *testing.T) {
 
 					if err != nil {
 						metadata.Set("testKey", "testValue")
-					} else {
-						out.Result = "mockResponse"
 					}
 					return out, metadata, err
 				})
@@ -355,9 +353,7 @@ func TestAttemptMiddleware(t *testing.T) {
 						return *m
 					}(),
 				},
-				{
-					Response: "mockResponse",
-				},
+				{},
 			}},
 		},
 	}
