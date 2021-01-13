@@ -138,7 +138,7 @@ func TestAttemptMiddleware(t *testing.T) {
 		Err           error
 		ExpectResults AttemptResults
 	}{
-		"no error single attempt": {
+		"no error, no response in a single attempt": {
 			Next: func(retries *[]retryMetadata) middleware.FinalizeHandler {
 				return middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 					m, ok := getRetryMetadata(ctx)
@@ -157,6 +157,34 @@ func TestAttemptMiddleware(t *testing.T) {
 			},
 			ExpectResults: AttemptResults{Results: []AttemptResult{
 				{},
+			}},
+		},
+		"no error in a single attempt": {
+			Next: func(retries *[]retryMetadata) middleware.FinalizeHandler {
+				return middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+					m, ok := getRetryMetadata(ctx)
+					if ok {
+						*retries = append(*retries, m)
+					}
+					setMockRawResponse(&metadata, "mockResponse")
+					return out, metadata, err
+				})
+			},
+			Expect: []retryMetadata{
+				{
+					AttemptNum:  1,
+					AttemptTime: time.Date(2020, 8, 19, 10, 20, 30, 0, time.UTC),
+					MaxAttempts: 3,
+				},
+			},
+			ExpectResults: AttemptResults{Results: []AttemptResult{
+				{
+					ResponseMetadata: func() middleware.Metadata {
+						m := middleware.Metadata{}
+						setMockRawResponse(&m, "mockResponse")
+						return m
+					}(),
+				},
 			}},
 		},
 		"retries errors": {
@@ -326,6 +354,8 @@ func TestAttemptMiddleware(t *testing.T) {
 
 					if err != nil {
 						metadata.Set("testKey", "testValue")
+					} else {
+						setMockRawResponse(&metadata, "mockResponse")
 					}
 					return out, metadata, err
 				})
@@ -348,12 +378,18 @@ func TestAttemptMiddleware(t *testing.T) {
 					Retryable: true,
 					Retried:   true,
 					ResponseMetadata: func() middleware.Metadata {
-						m := &(middleware.Metadata{})
+						m := middleware.Metadata{}
 						m.Set("testKey", "testValue")
-						return *m
+						return m
 					}(),
 				},
-				{},
+				{
+					ResponseMetadata: func() middleware.Metadata {
+						m := middleware.Metadata{}
+						setMockRawResponse(&m, "mockResponse")
+						return m
+					}(),
+				},
 			}},
 		},
 	}
@@ -400,4 +436,12 @@ func TestAttemptMiddleware(t *testing.T) {
 			}
 		})
 	}
+}
+
+// mockRawResponseKey is used to test the behavior when response metadata is
+// nested within the attempt request.
+type mockRawResponseKey struct{}
+
+func setMockRawResponse(m *middleware.Metadata, v interface{}) {
+	m.Set(mockRawResponseKey{}, v)
 }

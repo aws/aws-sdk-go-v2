@@ -1,6 +1,7 @@
 package retry
 
 import (
+	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,4 +44,9 @@ type AttemptResult struct {
 // addAttemptResults adds attempt results to middleware metadata
 func addAttemptResults(metadata *middleware.Metadata, v AttemptResults) {
 	metadata.Set(attemptResultsKey{}, v)
+}
+
+// GetRawResponse returns raw response recorded for the attempt result
+func (a AttemptResult) GetRawResponse() interface{} {
+	return awsmiddle.GetRawResponse(a.ResponseMetadata)
 }

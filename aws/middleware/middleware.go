@@ -135,8 +135,11 @@ func AddRecordResponseTiming(stack *middleware.Stack) error {
 	return stack.Deserialize.Add(&RecordResponseTiming{}, middleware.After)
 }
 
+// rawResponseKey is the accessor key used to store and access the
+// raw response within the response metadata.
 type rawResponseKey struct{}
 
+// addRawResponse middleware adds raw response on to the metadata
 type addRawResponse struct{}
 
 // ID the identifier for the ClientRequestID
@@ -153,8 +156,13 @@ func (m addRawResponse) HandleDeserialize(ctx context.Context, in middleware.Des
 	return out, metadata, err
 }
 
-// AddResponseMetadata adds middleware to the middleware stack that
+// AddRawResponseToMetadata adds middleware to the middleware stack that
 // store raw response on to the metadata.
 func AddRawResponseToMetadata(stack *middleware.Stack) error {
 	return stack.Deserialize.Add(&addRawResponse{}, middleware.After)
+}
+
+// GetRawResponse returns raw response set on metadata
+func GetRawResponse(metadata middleware.Metadata) interface{} {
+	return metadata.Get(rawResponseKey{})
 }
