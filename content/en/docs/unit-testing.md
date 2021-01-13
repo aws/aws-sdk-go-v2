@@ -5,11 +5,15 @@ description: "How to mock the AWS SDK for Go V2 when unit testing your applicati
 weight: 9
 ---
 
-You can mock out the AWS SDK for Go V2 when unit testing your application by
-using Go interfaces. Using interface definitions you define the set of
-operations required by your application, and provide mock implementations of
-this interface when unit testing. You can follow this pattern to unit testing
-service client operations, paginators, and waiters.
+When using the SDK in your application, you'll want to mock out the SDK for
+your application's unit test. Mocking out the SDK allows your test to be
+focused on what you want to test, not the internals of the SDK.
+
+To support this your application should use Go interfaces instead of the
+concrete service client, paginators, and waiter types, (e.g. `s3.Client`).
+Using a Go interface to specify the methods your application will use, allows
+your application to use patterns such as to dependency injection. Where the
+concrete implementation is passed in, based on the situation, such as testing.
 
 ## Mocking Client Operations
 
@@ -28,20 +32,17 @@ type S3GetObjectAPI interface {
 	GetObject(ctx context.Context, params *s3.GetObjectInput, optFns ...func(*s3.Options)) (*s3.GetObjectOutput, error)
 }
 
-func GetObjectFromS3(api S3GetObjectAPI, bucket, key string) ([]byte, error) {
-	object, err := api.GetObject(context.TODO(), &s3.GetObjectInput{
+func GetObjectFromS3(ctx context.Context, api S3GetObjectAPI, bucket, key string) ([]byte, error) {
+	object, err := api.GetObject(ctx, &s3.GetObjectInput{
 		Bucket: &bucket,
 		Key:    &key,
 	})
 	if err != nil {
 		return nil, err
 	}
+    defer object.Body.Close()
 
-	all, err := ioutil.ReadAll(object.Body)
-	if err != nil {
-		return nil, err
-	}
-	return all, nil
+	return ioutil.ReadAll(object.Body)
 }
 ```
 
@@ -98,7 +99,8 @@ func TestGetObjectFromS3(t *testing.T) {
 
 	for i, tt := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			content, err := GetObjectFromS3(tt.client(t), tt.bucket, tt.key)
+            ctx := context.TODO()
+			content, err := GetObjectFromS3(ctx, tt.client(t), tt.bucket, tt.key)
 			if err != nil {
 				t.Fatalf("expect no error, got %v", err)
 			}
@@ -111,6 +113,11 @@ func TestGetObjectFromS3(t *testing.T) {
 ```
 
 ## Mocking Paginators
+
+Similar to service clients, paginators can be mocked by defining a Go interface
+for type type. That interface would be used by your application's code. This
+allows the SDK's implementation to be used when your application is running,
+and a mocked implementation for testing.
 
 In the following example, `ListObjectsV2Pager` is an interface that defines the
 behaviors for the {{% alias service=S3 %}}
@@ -128,10 +135,10 @@ type ListObjectsV2Pager interface {
 	NextPage(context.Context, ...func(*s3.Options)) (*s3.ListObjectsV2Output, error)
 }
 
-func CountObjects(pager ListObjectsV2Pager) (count int, err error) {
+func CountObjects(ctx context.Context, pager ListObjectsV2Pager) (count int, err error) {
 	for pager.HasMorePages() {
 		var output *s3.ListObjectsV2Output
-		output, err = pager.NextPage(context.TODO())
+		output, err = pager.NextPage(ctx)
 		if err != nil {
 			return count, err
 		}
@@ -186,7 +193,7 @@ func TestCountObjects(t *testing.T) {
 			},
 		},
 	}
-	objects, err := CountObjects(pager)
+	objects, err := CountObjects(context.TODO(), pager)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
