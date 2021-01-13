@@ -129,8 +129,32 @@ func AddClientRequestIDMiddleware(stack *middleware.Stack) error {
 	return stack.Build.Add(&ClientRequestID{}, middleware.After)
 }
 
-// TODO: rename this helper to AddRecordResponseTiming
-// AddAttemptClockSkewMiddleware adds RecordResponseTiming to the middleware stack
-func AddAttemptClockSkewMiddleware(stack *middleware.Stack) error {
+// AddRecordResponseTiming adds RecordResponseTiming middleware to the
+// middleware stack.
+func AddRecordResponseTiming(stack *middleware.Stack) error {
 	return stack.Deserialize.Add(&RecordResponseTiming{}, middleware.After)
+}
+
+type rawResponseKey struct{}
+
+type addRawResponse struct{}
+
+// ID the identifier for the ClientRequestID
+func (m *addRawResponse) ID() string {
+	return "AddRawResponseToMetadata"
+}
+
+// HandleDeserialize adds raw response on the middleware metadata
+func (m addRawResponse) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	metadata.Set(rawResponseKey{}, out.RawResponse)
+	return out, metadata, err
+}
+
+// AddResponseMetadata adds middleware to the middleware stack that
+// store raw response on to the metadata.
+func AddRawResponseToMetadata(stack *middleware.Stack) error {
+	return stack.Deserialize.Add(&addRawResponse{}, middleware.After)
 }

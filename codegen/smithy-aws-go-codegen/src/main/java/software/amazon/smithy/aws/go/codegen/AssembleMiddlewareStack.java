@@ -106,12 +106,20 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 .useClientOptions()
                                 .build())
                         .build(),
-
-                // Add attemptClockSkew middleware to operation stack
+                // Add middleware to store raw response omn metadata
                 RuntimeClientPlugin.builder()
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "AddAttemptClockSkewMiddleware", AwsGoDependency.AWS_MIDDLEWARE)
+                                        "AddRawResponseToMetadata", AwsGoDependency.AWS_MIDDLEWARE)
+                                        .build())
+                                .build())
+                        .build(),
+
+                // Add recordResponseTiming middleware to operation stack
+                RuntimeClientPlugin.builder()
+                        .registerMiddleware(MiddlewareRegistrar.builder()
+                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
+                                        "AddRecordResponseTiming", AwsGoDependency.AWS_MIDDLEWARE)
                                         .build())
                                 .build())
                         .build(),

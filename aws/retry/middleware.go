@@ -65,7 +65,6 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 ) {
 	var attemptNum int
 	var attemptClockSkew time.Duration
-	var shouldRetry bool
 	var attemptResults AttemptResults
 
 	maxAttempts := r.retryer.MaxAttempts()
@@ -92,7 +91,7 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 			attemptClockSkew = 0
 		}
 
-		shouldRetry = attemptResult.Retried
+		shouldRetry := attemptResult.Retried
 
 		// add attempt metadata to list of all attempt metadata
 		attemptResults.Results = append(attemptResults.Results, attemptResult)
