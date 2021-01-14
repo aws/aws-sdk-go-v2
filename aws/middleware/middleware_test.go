@@ -58,9 +58,11 @@ func TestClientRequestID(t *testing.T) {
 
 func TestAttemptClockSkewHandler(t *testing.T) {
 	cases := map[string]struct {
-		Next       smithymiddleware.DeserializeHandlerFunc
-		Expect     middleware.ResponseMetadata
-		ResponseAt func() time.Time
+		Next              smithymiddleware.DeserializeHandlerFunc
+		ResponseAt        func() time.Time
+		ExpectAttemptSkew time.Duration
+		ExpectServerTime  time.Time
+		ExpectResponseAt  time.Time
 	}{
 		"no response": {
 			Next: func(ctx context.Context, in smithymiddleware.DeserializeInput,
@@ -70,9 +72,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 			ResponseAt: func() time.Time {
 				return time.Date(2020, 1, 2, 3, 4, 5, 0, time.UTC)
 			},
-			Expect: middleware.ResponseMetadata{
-				ResponseAt: time.Date(2020, 1, 2, 3, 4, 5, 0, time.UTC),
-			},
+			ExpectResponseAt: time.Date(2020, 1, 2, 3, 4, 5, 0, time.UTC),
 		},
 		"failed response": {
 			Next: func(ctx context.Context, in smithymiddleware.DeserializeInput,
@@ -88,9 +88,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 			ResponseAt: func() time.Time {
 				return time.Date(2020, 6, 7, 8, 9, 10, 0, time.UTC)
 			},
-			Expect: middleware.ResponseMetadata{
-				ResponseAt: time.Date(2020, 6, 7, 8, 9, 10, 0, time.UTC),
-			},
+			ExpectResponseAt: time.Date(2020, 6, 7, 8, 9, 10, 0, time.UTC),
 		},
 		"no date header response": {
 			Next: func(ctx context.Context, in smithymiddleware.DeserializeInput,
@@ -106,9 +104,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 			ResponseAt: func() time.Time {
 				return time.Date(2020, 11, 12, 13, 14, 15, 0, time.UTC)
 			},
-			Expect: middleware.ResponseMetadata{
-				ResponseAt: time.Date(2020, 11, 12, 13, 14, 15, 0, time.UTC),
-			},
+			ExpectResponseAt: time.Date(2020, 11, 12, 13, 14, 15, 0, time.UTC),
 		},
 		"invalid date header response": {
 			Next: func(ctx context.Context, in smithymiddleware.DeserializeInput,
@@ -126,9 +122,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 			ResponseAt: func() time.Time {
 				return time.Date(2020, 1, 2, 16, 17, 18, 0, time.UTC)
 			},
-			Expect: middleware.ResponseMetadata{
-				ResponseAt: time.Date(2020, 1, 2, 16, 17, 18, 0, time.UTC),
-			},
+			ExpectResponseAt: time.Date(2020, 1, 2, 16, 17, 18, 0, time.UTC),
 		},
 		"date response": {
 			Next: func(ctx context.Context, in smithymiddleware.DeserializeInput,
@@ -146,11 +140,9 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 			ResponseAt: func() time.Time {
 				return time.Date(2020, 3, 5, 22, 25, 17, 0, time.UTC)
 			},
-			Expect: middleware.ResponseMetadata{
-				ResponseAt:  time.Date(2020, 3, 5, 22, 25, 17, 0, time.UTC),
-				ServerTime:  time.Date(2020, 3, 5, 22, 25, 15, 0, time.UTC),
-				AttemptSkew: -2 * time.Second,
-			},
+			ExpectResponseAt:  time.Date(2020, 3, 5, 22, 25, 17, 0, time.UTC),
+			ExpectServerTime:  time.Date(2020, 3, 5, 22, 25, 15, 0, time.UTC),
+			ExpectAttemptSkew: -2 * time.Second,
 		},
 	}
 
@@ -163,13 +155,34 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 				}()
 				sdk.NowTime = c.ResponseAt
 			}
-			mw := middleware.AttemptClockSkew{}
+			mw := middleware.RecordResponseTiming{}
 			_, metadata, err := mw.HandleDeserialize(context.Background(), smithymiddleware.DeserializeInput{}, c.Next)
 			if err != nil {
 				t.Errorf("expect no error, got %v", err)
 			}
-			if e, a := c.Expect, middleware.GetResponseMetadata(metadata); !reflect.DeepEqual(e, a) {
-				t.Errorf("expect %v, got %v", e, a)
+
+			if v, ok := middleware.GetResponseAt(metadata); ok {
+				if !reflect.DeepEqual(v, c.ExpectResponseAt) {
+					t.Fatalf("expected %v, got %v", c.ExpectResponseAt, v)
+				}
+			} else if !c.ExpectResponseAt.IsZero() {
+				t.Fatal("expected response at to be set in metadata, was not")
+			}
+
+			if v, ok := middleware.GetServerTime(metadata); ok {
+				if !reflect.DeepEqual(v, c.ExpectServerTime) {
+					t.Fatalf("expected %v, got %v", c.ExpectServerTime, v)
+				}
+			} else if !c.ExpectServerTime.IsZero() {
+				t.Fatal("expected server time to be set in metadata, was not")
+			}
+
+			if v, ok := middleware.GetAttemptSkew(metadata); ok {
+				if !reflect.DeepEqual(v, c.ExpectAttemptSkew) {
+					t.Fatalf("expected %v, got %v", c.ExpectAttemptSkew, v)
+				}
+			} else if c.ExpectAttemptSkew != 0 {
+				t.Fatal("expected attempt skew to be set in metadata, was not")
 			}
 		})
 	}
