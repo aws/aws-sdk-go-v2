@@ -71,7 +71,7 @@ type Options struct {
 
 	// Retryer guides how HTTP requests should be retried in case of recoverable
 	// failures. When nil the API client will use a default retryer.
-	Retryer retry.Retryer
+	Retryer aws.Retryer
 
 	// The HTTP client to invoke API calls with. Defaults to client's default HTTP
 	// implementation if nil.
@@ -144,12 +144,12 @@ func addSetLoggerMiddleware(stack *middleware.Stack, o Options) error {
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	opts := Options{
 		Region:        cfg.Region,
-		Retryer:       cfg.Retryer,
 		HTTPClient:    cfg.HTTPClient,
 		APIOptions:    cfg.APIOptions,
 		Logger:        cfg.Logger,
 		ClientLogMode: cfg.ClientLogMode,
 	}
+	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
@@ -168,15 +168,18 @@ func resolveRetryer(o *Options) {
 	o.Retryer = retry.NewStandard()
 }
 
+func resolveAWSRetryerProvider(cfg aws.Config, o *Options) {
+	if cfg.Retryer == nil {
+		return
+	}
+	o.Retryer = cfg.Retryer()
+}
+
 func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	if cfg.EndpointResolver == nil {
 		return
 	}
 	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
-}
-
-func addClientUserAgent(stack *middleware.Stack) error {
-	return awsmiddleware.AddUserAgentKey("restxmlwithnamespace")(stack)
 }
 
 func addRetryMiddlewares(stack *middleware.Stack, o Options) error {

@@ -7,7 +7,6 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
-	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxmlwithnamespace/types"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithytesting "github.com/aws/smithy-go/testing"
@@ -50,9 +49,6 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 				LongValue:         ptr.Int64(4),
 				FloatValue:        ptr.Float32(5.5),
 				DoubleValue:       ptr.Float64(6.5),
-				Nested: &types.NestedWithNamespace{
-					AttrField: ptr.String("nestedAttrValue"),
-				},
 			},
 			ExpectMethod:  "PUT",
 			ExpectURIPath: "/SimpleScalarProperties",
@@ -73,7 +69,6 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 			    <longValue>4</longValue>
 			    <floatValue>5.5</floatValue>
 			    <DoubleDribble>6.5</DoubleDribble>
-			    <Nested xmlns:xsi="https://example.com" xsi:someName="nestedAttrValue"></Nested>
 			</SimpleScalarPropertiesInputOutput>
 			`))
 			},
@@ -170,7 +165,6 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 			    <longValue>4</longValue>
 			    <floatValue>5.5</floatValue>
 			    <DoubleDribble>6.5</DoubleDribble>
-			    <Nested xmlns:xsi="https://example.com" xsi:someName="nestedAttrValue"></Nested>
 			</SimpleScalarPropertiesInputOutput>
 			`),
 			ExpectResult: &SimpleScalarPropertiesOutput{
@@ -184,9 +178,6 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 				LongValue:         ptr.Int64(4),
 				FloatValue:        ptr.Float32(5.5),
 				DoubleValue:       ptr.Float64(6.5),
-				Nested: &types.NestedWithNamespace{
-					AttrField: ptr.String("nestedAttrValue"),
-				},
 			},
 		},
 	}

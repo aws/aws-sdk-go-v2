@@ -9,7 +9,6 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	awsxml "github.com/aws/aws-sdk-go-v2/aws/protocol/xml"
-	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxmlwithnamespace/types"
 	smithy "github.com/aws/smithy-go"
 	smithyxml "github.com/aws/smithy-go/encoding/xml"
 	smithyio "github.com/aws/smithy-go/io"
@@ -253,12 +252,6 @@ func awsRestxml_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleScal
 				sv.LongValue = ptr.Int64(i64)
 			}
 
-		case strings.EqualFold("Nested", t.Name.Local):
-			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-			if err := awsRestxml_deserializeDocumentNestedWithNamespace(&sv.Nested, nodeDecoder); err != nil {
-				return err
-			}
-
 		case strings.EqualFold("shortValue", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -305,57 +298,6 @@ func awsRestxml_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleScal
 				sv.TrueBooleanValue = ptr.Bool(xtv)
 			}
 
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestxml_deserializeDocumentNestedWithNamespace(v **types.NestedWithNamespace, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *types.NestedWithNamespace
-	if *v == nil {
-		sv = &types.NestedWithNamespace{}
-	} else {
-		sv = *v
-	}
-
-	for _, attr := range decoder.StartEl.Attr {
-		name := attr.Name.Local
-		if len(attr.Name.Space) != 0 {
-			name = attr.Name.Space + `:` + attr.Name.Local
-		}
-		switch {
-		case strings.EqualFold("xsi:someName", name):
-			val := []byte(attr.Value)
-			{
-				xtv := string(val)
-				sv.AttrField = ptr.String(xtv)
-			}
-
-		}
-	}
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()

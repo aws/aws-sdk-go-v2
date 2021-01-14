@@ -6,7 +6,6 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxmlwithnamespace/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyxml "github.com/aws/smithy-go/encoding/xml"
@@ -159,19 +158,6 @@ func awsRestxml_serializeOpDocumentSimpleScalarPropertiesInput(v *SimpleScalarPr
 		el := value.MemberElement(root)
 		el.Long(*v.LongValue)
 	}
-	if v.Nested != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "Nested",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		if err := awsRestxml_serializeDocumentNestedWithNamespace(v.Nested, el); err != nil {
-			return err
-		}
-	}
 	if v.ShortValue != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -205,10 +191,5 @@ func awsRestxml_serializeOpDocumentSimpleScalarPropertiesInput(v *SimpleScalarPr
 		el := value.MemberElement(root)
 		el.Boolean(*v.TrueBooleanValue)
 	}
-	return nil
-}
-
-func awsRestxml_serializeDocumentNestedWithNamespace(v *types.NestedWithNamespace, value smithyxml.Value) error {
-	defer value.Close()
 	return nil
 }
