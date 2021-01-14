@@ -15,6 +15,14 @@ Jump To:
 * [Contributing](#feedback-and-contributing)
 * [More Resources](#resources)
 
+## Maintenance and support for SDK major versions
+
+For information about maintenance and support for SDK major versions and their underlying dependencies, see the
+following in the AWS SDKs and Tools Shared Configuration and Credentials Reference Guide:
+
+* [AWS SDKs and Tools Maintenance Policy](https://docs.aws.amazon.com/credref/latest/refdocs/maint-policy.html)
+* [AWS SDKs and Tools Version Support Matrix](https://docs.aws.amazon.com/credref/latest/refdocs/version-support-matrix.html)
+
 ## Getting started
 To get started working with the SDK setup your project for Go modules, and retrieve the SDK dependencies with `go get`.
 This example shows how you can use the v2 SDK to make an API request using the SDK's [Amazon DynamoDB] client.
