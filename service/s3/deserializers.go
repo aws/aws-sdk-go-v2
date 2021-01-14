@@ -13921,8 +13921,12 @@ func awsRestxml_deserializeDocumentGrantee(v **types.Grantee, decoder smithyxml.
 	}
 
 	for _, attr := range decoder.StartEl.Attr {
+		name := attr.Name.Local
+		if len(attr.Name.Space) != 0 {
+			name = attr.Name.Space + `:` + attr.Name.Local
+		}
 		switch {
-		case strings.EqualFold("xsi:type", attr.Name.Local):
+		case strings.EqualFold("xsi:type", name):
 			val := []byte(attr.Value)
 			{
 				xtv := string(val)

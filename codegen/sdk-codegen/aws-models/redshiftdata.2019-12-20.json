@@ -1,13 +1,6 @@
 {
   "smithy": "1.0",
   "shapes": {
-    "aws.api#ArnNamespace": {
-      "type": "string",
-      "traits": {
-        "smithy.api#pattern": "^[a-z0-9.\\-]{1,63}$",
-        "smithy.api#private": {}
-      }
-    },
     "com.amazonaws.redshiftdata#Blob": {
       "type": "blob"
     },
@@ -70,13 +63,6 @@
             "smithy.api#documentation": "<p>A value that indicates whether the cancel statement succeeded (true). </p>"
           }
         }
-      }
-    },
-    "aws.api#CloudFormationName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#pattern": "^[A-Z][A-Za-z0-9]+$",
-        "smithy.api#private": {}
       }
     },
     "com.amazonaws.redshiftdata#ColumnList": {
@@ -1263,15 +1249,6 @@
     "com.amazonaws.redshiftdata#String": {
       "type": "string"
     },
-    "aws.protocols#StringList": {
-      "type": "list",
-      "member": {
-        "target": "smithy.api#String"
-      },
-      "traits": {
-        "smithy.api#private": {}
-      }
-    },
     "com.amazonaws.redshiftdata#TableList": {
       "type": "list",
       "member": {
@@ -1323,77 +1300,8 @@
         "smithy.api#httpError": 400
       }
     },
-    "aws.protocols#awsJson1_1": {
-      "type": "structure",
-      "members": {
-        "http": {
-          "target": "aws.protocols#StringList"
-        },
-        "eventStreamHttp": {
-          "target": "aws.protocols#StringList"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "An RPC-based protocol that sends JSON payloads. This protocol does not use HTTP binding traits.",
-        "smithy.api#protocolDefinition": {
-          "traits": ["smithy.api#jsonName"]
-        },
-        "smithy.api#trait": {
-          "selector": "service"
-        }
-      }
-    },
     "com.amazonaws.redshiftdata#bool": {
       "type": "boolean"
-    },
-    "aws.api#service": {
-      "type": "structure",
-      "members": {
-        "sdkId": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        },
-        "arnNamespace": {
-          "target": "aws.api#ArnNamespace"
-        },
-        "cloudFormationName": {
-          "target": "aws.api#CloudFormationName"
-        },
-        "cloudTrailEventSource": {
-          "target": "smithy.api#String"
-        }
-      },
-      "traits": {
-        "smithy.api#trait": {
-          "selector": "service"
-        }
-      }
-    },
-    "aws.auth#sigv4": {
-      "type": "structure",
-      "members": {
-        "name": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "The signature version 4 service signing name to use in the credential scope when signing requests. This value SHOULD match the `arnNamespace` property of the `aws.api#service-trait`.",
-            "smithy.api#externalDocumentation": {
-              "Reference": "https://docs.aws.amazon.com/general/latest/gr/sigv4-create-string-to-sign.html"
-            },
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "Signature Version 4 is the process to add authentication information to AWS requests sent by HTTP. For security, most requests to AWS must be signed with an access key, which consists of an access key ID and secret access key. These two keys are commonly referred to as your security credentials.",
-        "smithy.api#externalDocumentation": {
-          "Reference": "https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"
-        },
-        "smithy.api#trait": {
-          "selector": "service"
-        }
-      }
     }
   }
 }
