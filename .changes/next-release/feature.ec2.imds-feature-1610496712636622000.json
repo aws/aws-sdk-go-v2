@@ -1,0 +1,9 @@
+{
+ "ID": "feature.ec2.imds-feature-1610496712636622000",
+ "SchemaVersion": 1,
+ "Module": "feature/ec2/imds",
+ "Type": "feature",
+ "Description": "IMDS Client has been updated to utilize the Retryer provider function from aws.Config",
+ "MinVersion": "",
+ "AffectedModules": null
+}

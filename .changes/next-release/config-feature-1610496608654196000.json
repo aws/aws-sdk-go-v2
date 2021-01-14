@@ -1,0 +1,9 @@
+{
+ "ID": "config-feature-1610496608654196000",
+ "SchemaVersion": 1,
+ "Module": "config",
+ "Type": "feature",
+ "Description": "Breaking Change: WithRetryer and LoadOptions has been updated to make Retryer a provider function",
+ "MinVersion": "",
+ "AffectedModules": null
+}

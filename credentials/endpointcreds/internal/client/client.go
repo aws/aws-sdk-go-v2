@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
@@ -33,7 +34,7 @@ type Options struct {
 
 	// Retryer guides how HTTP requests should be retried in case of recoverable
 	// failures. When nil the API client will use a default retryer.
-	Retryer retry.Retryer
+	Retryer aws.Retryer
 
 	// Set of options to modify how the credentials operation is invoked.
 	APIOptions []func(*smithymiddleware.Stack) error

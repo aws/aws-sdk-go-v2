@@ -133,7 +133,9 @@ func TestPutObject_PresignURL(t *testing.T) {
 			cfg := aws.Config{
 				Region:      "us-west-2",
 				Credentials: unit.StubCredentialsProvider{},
-				Retryer:     aws.NopRetryer{},
+				Retryer: func() aws.Retryer {
+					return aws.NopRetryer{}
+				},
 			}
 			presignClient := s3.NewPresignClient(s3.NewFromConfig(cfg), func(options *s3.PresignOptions) {
 				options = &c.options

@@ -10,6 +10,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -87,10 +88,10 @@ func TestMetricsHeaderMiddleware(t *testing.T) {
 }
 
 type retryProvider struct {
-	Retryer Retryer
+	Retryer aws.Retryer
 }
 
-func (t retryProvider) GetRetryer() Retryer {
+func (t retryProvider) GetRetryer() aws.Retryer {
 	return t.Retryer
 }
 
