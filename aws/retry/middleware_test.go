@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"reflect"
 	"strconv"
 	"strings"
 	"testing"
@@ -131,12 +132,13 @@ func TestAttemptMiddleware(t *testing.T) {
 	}()
 
 	cases := map[string]struct {
-		Request testRequest
-		Next    func(retries *[]retryMetadata) middleware.FinalizeHandler
-		Expect  []retryMetadata
-		Err     error
+		Request       testRequest
+		Next          func(retries *[]retryMetadata) middleware.FinalizeHandler
+		Expect        []retryMetadata
+		Err           error
+		ExpectResults AttemptResults
 	}{
-		"no error single attempt": {
+		"no error, no response in a single attempt": {
 			Next: func(retries *[]retryMetadata) middleware.FinalizeHandler {
 				return middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 					m, ok := getRetryMetadata(ctx)
@@ -153,6 +155,37 @@ func TestAttemptMiddleware(t *testing.T) {
 					MaxAttempts: 3,
 				},
 			},
+			ExpectResults: AttemptResults{Results: []AttemptResult{
+				{},
+			}},
+		},
+		"no error in a single attempt": {
+			Next: func(retries *[]retryMetadata) middleware.FinalizeHandler {
+				return middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+					m, ok := getRetryMetadata(ctx)
+					if ok {
+						*retries = append(*retries, m)
+					}
+					setMockRawResponse(&metadata, "mockResponse")
+					return out, metadata, err
+				})
+			},
+			Expect: []retryMetadata{
+				{
+					AttemptNum:  1,
+					AttemptTime: time.Date(2020, 8, 19, 10, 20, 30, 0, time.UTC),
+					MaxAttempts: 3,
+				},
+			},
+			ExpectResults: AttemptResults{Results: []AttemptResult{
+				{
+					ResponseMetadata: func() middleware.Metadata {
+						m := middleware.Metadata{}
+						setMockRawResponse(&m, "mockResponse")
+						return m
+					}(),
+				},
+			}},
 		},
 		"retries errors": {
 			Next: func(retries *[]retryMetadata) middleware.FinalizeHandler {
@@ -193,6 +226,19 @@ func TestAttemptMiddleware(t *testing.T) {
 					MaxAttempts: 3,
 				},
 			},
+			ExpectResults: AttemptResults{Results: []AttemptResult{
+				{
+					Err:       mockRetryableError{b: true},
+					Retryable: true,
+					Retried:   true,
+				},
+				{
+					Err:       mockRetryableError{b: true},
+					Retryable: true,
+					Retried:   true,
+				},
+				{},
+			}},
 		},
 		"stops after max attempts": {
 			Next: func(retries *[]retryMetadata) middleware.FinalizeHandler {
@@ -213,6 +259,22 @@ func TestAttemptMiddleware(t *testing.T) {
 				})
 			},
 			Err: fmt.Errorf("exceeded maximum number of attempts"),
+			ExpectResults: AttemptResults{Results: []AttemptResult{
+				{
+					Err:       mockRetryableError{b: true},
+					Retryable: true,
+					Retried:   true,
+				},
+				{
+					Err:       mockRetryableError{b: true},
+					Retryable: true,
+					Retried:   true,
+				},
+				{
+					Err:       &MaxAttemptsError{Attempt: 3, Err: mockRetryableError{b: true}},
+					Retryable: true,
+				},
+			}},
 		},
 		"stops on rewind error": {
 			Request: testRequest{DisableRewind: true},
@@ -233,6 +295,19 @@ func TestAttemptMiddleware(t *testing.T) {
 				},
 			},
 			Err: fmt.Errorf("failed to rewind transport stream for retry"),
+			ExpectResults: AttemptResults{Results: []AttemptResult{
+				{
+					Err:       mockRetryableError{b: true},
+					Retryable: true,
+					Retried:   true,
+				},
+				{
+					Err: fmt.Errorf(
+						"failed to rewind transport stream for retry, %w",
+						fmt.Errorf("rewind disabled"),
+					),
+				},
+			}},
 		},
 		"stops on non-retryable errors": {
 			Next: func(retries *[]retryMetadata) middleware.FinalizeHandler {
@@ -252,6 +327,70 @@ func TestAttemptMiddleware(t *testing.T) {
 				},
 			},
 			Err: fmt.Errorf("some error"),
+			ExpectResults: AttemptResults{Results: []AttemptResult{
+				{
+					Err: fmt.Errorf("some error"),
+				},
+			}},
+		},
+		"nested metadata and valid response": {
+			Next: func(retries *[]retryMetadata) middleware.FinalizeHandler {
+				num := 0
+				reqsErrs := []error{
+					mockRetryableError{b: true},
+					nil,
+				}
+				return middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+					m, ok := getRetryMetadata(ctx)
+					if ok {
+						*retries = append(*retries, m)
+					}
+					if num >= len(reqsErrs) {
+						err = fmt.Errorf("more requests then expected")
+					} else {
+						err = reqsErrs[num]
+						num++
+					}
+
+					if err != nil {
+						metadata.Set("testKey", "testValue")
+					} else {
+						setMockRawResponse(&metadata, "mockResponse")
+					}
+					return out, metadata, err
+				})
+			},
+			Expect: []retryMetadata{
+				{
+					AttemptNum:  1,
+					AttemptTime: time.Date(2020, 8, 19, 10, 20, 30, 0, time.UTC),
+					MaxAttempts: 3,
+				},
+				{
+					AttemptNum:  2,
+					AttemptTime: time.Date(2020, 8, 19, 10, 21, 30, 0, time.UTC),
+					MaxAttempts: 3,
+				},
+			},
+			ExpectResults: AttemptResults{Results: []AttemptResult{
+				{
+					Err:       mockRetryableError{b: true},
+					Retryable: true,
+					Retried:   true,
+					ResponseMetadata: func() middleware.Metadata {
+						m := middleware.Metadata{}
+						m.Set("testKey", "testValue")
+						return m
+					}(),
+				},
+				{
+					ResponseMetadata: func() middleware.Metadata {
+						m := middleware.Metadata{}
+						setMockRawResponse(&m, "mockResponse")
+						return m
+					}(),
+				},
+			}},
 		},
 	}
 
@@ -274,7 +413,7 @@ func TestAttemptMiddleware(t *testing.T) {
 			})
 
 			var recorded []retryMetadata
-			_, _, err := am.HandleFinalize(context.Background(), middleware.FinalizeInput{Request: tt.Request}, tt.Next(&recorded))
+			_, metadata, err := am.HandleFinalize(context.Background(), middleware.FinalizeInput{Request: tt.Request}, tt.Next(&recorded))
 			if err != nil && tt.Err == nil {
 				t.Errorf("expect no error, got %v", err)
 			} else if err == nil && tt.Err != nil {
@@ -287,6 +426,22 @@ func TestAttemptMiddleware(t *testing.T) {
 			if diff := cmp.Diff(recorded, tt.Expect); len(diff) > 0 {
 				t.Error(diff)
 			}
+
+			attemptResults, ok := GetAttemptResults(metadata)
+			if !ok {
+				t.Fatalf("expected metadata to contain attempt results, got none")
+			}
+			if e, a := tt.ExpectResults, attemptResults; !reflect.DeepEqual(e, a) {
+				t.Fatalf("expected %v, got %v", e, a)
+			}
 		})
 	}
+}
+
+// mockRawResponseKey is used to test the behavior when response metadata is
+// nested within the attempt request.
+type mockRawResponseKey struct{}
+
+func setMockRawResponse(m *middleware.Metadata, v interface{}) {
+	m.Set(mockRawResponseKey{}, v)
 }
