@@ -3,13 +3,20 @@
 package s3
 
 import (
+	"bytes"
 	"context"
+	"encoding/xml"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
+	smithy "github.com/aws/smithy-go"
+	smithyxml "github.com/aws/smithy-go/encoding/xml"
+	smithyio "github.com/aws/smithy-go/io"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"io"
 )
 
 // Returns the Region the bucket resides in. You set the bucket's Region using the
@@ -109,6 +116,9 @@ func addOperationGetBucketLocationMiddlewares(stack *middleware.Stack, options O
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = swapDeserializerHelper(stack); err != nil {
+		return err
+	}
 	if err = addOpGetBucketLocationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -131,6 +141,62 @@ func addOperationGetBucketLocationMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
+		return err
+	}
+	return nil
+}
+
+type awsRestxml_deserializeOpGetBucketLocation_custom struct {
+}
+
+func (*awsRestxml_deserializeOpGetBucketLocation_custom) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpGetBucketLocation_custom) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketLocation(response, &metadata)
+	}
+	output := &GetBucketLocationOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, xml.StartElement{})
+	err = awsRestxml_deserializeOpDocumentGetBucketLocationOutput(&output, decoder)
+	if err == io.EOF {
+		err = nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+// Helper to swap in a custom deserializer
+func swapDeserializerHelper(stack *middleware.Stack) error {
+	_, err := stack.Deserialize.Swap("OperationDeserializer", &awsRestxml_deserializeOpGetBucketLocation_custom{})
+	if err != nil {
 		return err
 	}
 	return nil
