@@ -9,11 +9,9 @@ When using the SDK in your application, you'll want to mock out the SDK for
 your application's unit test. Mocking out the SDK allows your test to be
 focused on what you want to test, not the internals of the SDK.
 
-To support this your application should use Go interfaces instead of the
-concrete service client, paginators, and waiter types, (e.g. `s3.Client`).
-Using a Go interface to specify the methods your application will use, allows
-your application to use patterns such as to dependency injection. Where the
-concrete implementation is passed in, based on the situation, such as testing.
+To support mocking use Go interfaces instead of concrete service client,
+paginators, and waiter types, (e.g. `s3.Client`). This allows your application
+to use patterns like dependency injection to test your application logic.
 
 ## Mocking Client Operations
 
