@@ -17,7 +17,7 @@ import (
 	"github.com/aws/smithy-go/logging"
 )
 
-const userAgentKey = "S3Manager"
+const userAgentKey = "s3-transfer"
 
 // DefaultDownloadPartSize is the default range of bytes to get at a time when
 // using Download().
@@ -164,7 +164,7 @@ func (d Downloader) Download(ctx context.Context, w io.WriterAt, input *s3.GetOb
 	// Copy ClientOptions
 	clientOptions := make([]func(*s3.Options), 0, len(impl.cfg.ClientOptions)+1)
 	clientOptions = append(clientOptions, func(o *s3.Options) {
-		o.APIOptions = append(o.APIOptions, middleware.AddUserAgentKey(userAgentKey))
+		o.APIOptions = append(o.APIOptions, middleware.AddSDKAgentKey(middleware.FeatureMetadata, userAgentKey))
 	})
 	clientOptions = append(clientOptions, impl.cfg.ClientOptions...)
 	impl.cfg.ClientOptions = clientOptions
