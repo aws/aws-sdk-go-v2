@@ -1,3 +1,53 @@
+# Pending Release
+
+## Breaking Changes
+* `aws`: Updated Config.Retryer member to be a func that returns aws.Retryer ([#1033](https://github.com/aws/aws-sdk-go-v2/pull/1033))
+    * Updates the SDK's references to Config.Retryer to be a function that returns aws.Retryer value. This ensures that custom retry options specified in the `aws.Config` are scoped to individual client instances. 
+    * All API clients created with the config will call the `Config.Retryer` function to get an aws.Retryer.
+    * Removes duplicate `Retryer` interface from `retry` package. Single definition is `aws.Retryer` now.
+* `config`: Updated the `WithRetryer` helper to take a function that returns an aws.Retryer ([#1033](https://github.com/aws/aws-sdk-go-v2/pull/1033))
+    * All API clients created with the config will call the `Config.Retryer` function to get an aws.Retryer.
+* `API Clients`: Fix SDK's API client enum constant name generation to have expected casing ([#1020](https://github.com/aws/aws-sdk-go-v2/pull/1020))
+    * This updates of the generated enum const value names in API client's `types` package to have the expected casing. Prior to this, enum names were being generated with lowercase names instead of camel case. 
+* `API Clients`: Updates SDK's API client request middleware stack values to be scoped to individual operation call ([#1019](https://github.com/aws/aws-sdk-go-v2/pull/1019))
+    * The API client request middleware stack values were mistakenly allowed to escape to nested API operation calls. This broke the SDK's presigners.
+    * Stack values that should not escape are not scoped to the individual operation call.
+
+## New Features
+* `service/sts`: Add support for presigning GetCallerIdentity operation ([#1030](https://github.com/aws/aws-sdk-go-v2/pull/1030))
+    * Adds a PresignClient to the `sts` API client module. Use PresignGetCallerIdentity to obtain presigned URLs for the create presigned URLs for the GetCallerIdentity operation.
+    * Fixes [#1021](https://github.com/aws/aws-sdk-go-v2/issues/1021)
+* `aws/retry`: Add package documentation for retry package ([#1033](https://github.com/aws/aws-sdk-go-v2/pull/1033))
+    * Adds documentation for the retry package 
+
+## Bug Fixes
+* `service/s3`: Fix Tagging parameter not serialized correctly for presigned PutObject requests ([#1017](https://github.com/aws/aws-sdk-go-v2/pull/1017))
+    * Fixes the Tagging parameter incorrectly being serialized to the URL's query string instead of being signed as a HTTP request header.
+    * When using PresignPutObject make sure to add all signed headers returned by the method to your down stream's HTTP client's request. These headers must be included in the request, or the request will fail with signature errors.
+    * Fixes [#1016](https://github.com/aws/aws-sdk-go-v2/issues/1016)
+* `service/s3`: Fix Unmarshaling `GetObjectAcl` operation's Grantee type response ([#1034](https://github.com/aws/aws-sdk-go-v2/pull/1034))
+    * Updates the SDK's codegen for correctly deserializing XML attributes in tags with XML namespaces.
+    * Fixes [#1013](https://github.com/aws/aws-sdk-go-v2/issues/1013)
+
+## Other changes
+
+## Migrating from v2 preview SDK's v0.30.0 to v0.31.0 release candidate
+
+### aws.Config Retryer member
+
+If your application sets the `Config.Retryer` member the application will need
+to be updated to set a function that returns an `aws.Retryer`. In addition, if
+your application used the `config.WithRetryer` helper a function that returns
+an `aws.Retryer` needs to be used.
+
+If your application used the `retry.Retryer` type, update to using the
+`aws.Retryer` type instead.
+
+### API Client enum value names
+
+If your application used the enum values in the API Client's `types` package between v0.31.0 and the latest version of the client module you may need to update the naming of the enum value. The enum value name casing were updated to camel case instead lowercased.
+
+
 # Release 2020-12-23
 
 We’re happy to announce the Release Candidate (RC) of the AWS SDK for Go v2.
