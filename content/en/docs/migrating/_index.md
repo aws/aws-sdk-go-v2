@@ -26,6 +26,10 @@ Module | Description
 `github.com/aws/aws-sdk-go-v2/config` | Shared Configuration Loading
 `github.com/aws/aws-sdk-go-v2/credentials` | AWS Credential Providers
 `github.com/aws/aws-sdk-go-v2/feature/ec2/imds` | {{% alias service=EC2 %}} Instance Metadata Service Client
+
+The SDK's service clients and higher level utilities modules are nested under the following import paths:
+Import Root | Description
+--- | ---
 `github.com/aws/aws-sdk-go-v2/service/` | Service Client Modules
 `github.com/aws/aws-sdk-go-v2/feature/` | High-Level utilities for services, for example the {{% alias service=S3 %}} Transfer Manager
 
@@ -33,10 +37,12 @@ Module | Description
 
 The [session]({{< apiref v1="aws/session" >}}) package and associated functionality are replaced with a simplified
 configuration system provided by the [config]({{< apiref "config" >}}) package. The `config` package is a separate Go
-module, and can be included in your applications dependencies by performing
-`go get github.com/aws/aws-sdk-go-v2/config`.
+module, and can be included in your applications dependencies by with `go get`.
+```sh
+go get github.com/aws/aws-sdk-go-v2/config
+```
 
-[session.New]({{< apiref v1="aws/session#New" >}}), [session.NewSession]({{< apiref v1="aws/session#NewSession" >}}),
+The [session.New]({{< apiref v1="aws/session#New" >}}), [session.NewSession]({{< apiref v1="aws/session#NewSession" >}}),
 [NewSessionWithOptions]({{< apiref v1="aws/session#NewSessionWithOptions" >}}), and
 [session.Must]({{< apiref v1="aws/session#Must" >}}) must be migrated to
 [config.LoadDefaultConfig]({{< apiref "config#LoadDefaultConfig" >}}).
@@ -53,9 +59,9 @@ see [Configuring the {{% alias sdk-go %}}]({{% ref "configuring-sdk" %}}).
 The following example shows how usage of `session.NewSession` without additional argument parameters is migrated to
 `config.LoadDefaultConfig`.
 
-###### V1 NewSession
-
 ```go
+// V1 using NewSession
+
 import "github.com/aws/aws-sdk-go/aws/session"
 
 // ...
@@ -66,8 +72,9 @@ if err != nil {
 }
 ```
 
-###### V2 LoadDefaultConfig
 ```go
+// V2 using LoadDefaultConfig
+
 import "context"
 import "github.com/aws/aws-sdk-go-v2/config"
 
@@ -85,8 +92,9 @@ The example shows how to migrate overriding of `aws.Config` values during config
 values. In this example the AWS Region is overridden to `us-west-2` using the
 [config.WithRegion]({{< apiref "config#WithRegion" >}}) helper function.
 
-###### V1
 ```go
+// V1
+
 import "github.com/aws/aws-sdk-go/aws"
 import "github.com/aws/aws-sdk-go/aws/session"
 
@@ -100,14 +108,15 @@ if err != nil {
 }
 ```
 
-###### V2
 ```go
+// V2
+
 import "context"
 import "github.com/aws/aws-sdk-go-v2/config"
 
 // ...
 
-cfg, err := config.LoadDefaultConfig(context.TODO(), 
+cfg, err := config.LoadDefaultConfig(context.TODO(),
 	config.WithRegion("us-west-2"),
 )
 if err != nil {
@@ -116,13 +125,14 @@ if err != nil {
 ```
 
 #####  Migrating from NewSessionWithOptions
-This example shows how to migrate overriding values during configuration loading. One or more
+This example shows how to migrate overriding values during configuration loading. Zero or more
 `config.With*` helper functions can be provided to `config.LoadDefaultConfig` to override the loaded configuration
 values. In this example we show how to override the target profile that is used when loading the AWS SDK shared
 configuration.
 
-###### V1
 ```go
+// V1
+
 import "github.com/aws/aws-sdk-go/aws"
 import "github.com/aws/aws-sdk-go/aws/session"
 
@@ -136,14 +146,15 @@ if err != nil {
 }
 ```
 
-###### V2
 ```go
+// V2
+
 import "context"
 import "github.com/aws/aws-sdk-go-v2/config"
 
 // ...
 
-cfg, err := config.LoadDefaultConfig(context.TODO(), 
+cfg, err := config.LoadDefaultConfig(context.TODO(),
 	config.WithSharedConfigProfile("my-application-profile"),
 )
 if err != nil {
@@ -154,8 +165,12 @@ if err != nil {
 ## Credentials & Credential Providers
 
 The [aws/credentials]({{< apiref v1="aws/credentials" >}}) package and associated credential providers have been
-relocated to [credentials]({{< apiref "credentials" >}}) package location. The `credentials` package is a Go module that
-you retrieve by using `go get github.com/aws/aws-sdk-go-v2/credentials`.
+relocated to the [credentials]({{< apiref "credentials" >}}) package location. The `credentials` package is a Go module that
+you retrieve by using `go get`.
+
+```sh
+go get github.com/aws/aws-sdk-go-v2/credentials
+```
 
 The {{% alias sdk-go %}} release updates the AWS Credential Providers to provide a consistent interface for retrieving
 AWS Credentials. Each provider implements the [aws.CredentialsProvider]({{< apiref "aws#CredentialsProvider" >}})
@@ -163,7 +178,7 @@ interface, which defines a `Retrieve` method that returns a `(aws.Credentials, e
 [aws.Credentials]({{< apiref "aws#Credentials" >}}) that is analogous to the AWS SDK for Go
 [credentials.Value]({{< apiref "aws/credentials#Value" >}}) type.
 
-You must wrap `aws/CredentialsProvider` objects with [aws.CredentialsCache]({{< apiref "aws#CredentialsCache" >}}) to
+You must wrap `aws.CredentialsProvider` objects with [aws.CredentialsCache]({{< apiref "aws#CredentialsCache" >}}) to
 allow credential caching to occur. You use [NewCredentialsCache]({{< apiref "aws#NewCredentialsCache" >}}) to
 construct a `aws.CredentialsCache` object. By default, credentials configured by `config.LoadDefaultConfig` are wrapped
 with `aws.CredentialsCache`.
@@ -186,9 +201,10 @@ construct static credential programmatically must use
 
 #### Example
 
-##### V1
 
 ```go
+// V1
+
 import "github.com/aws/aws-sdk-go/aws/credentials"
 
 // ...
@@ -200,9 +216,9 @@ if err != nil {
 }
 ```
 
-##### V2
-
 ```go
+// V2
+
 import "context"
 import "github.com/aws/aws-sdk-go-v2/aws"
 import "github.com/aws/aws-sdk-go-v2/credentials"
@@ -222,13 +238,16 @@ You must migrate usage of [NewCredentials]({{< apiref v1="aws/credentials/ec2rol
 [NewCredentialsWithClient]({{< apiref v1="aws/credentials/ec2rolecreds#NewCredentialsWithClient" >}}) to use
 [New]({{< apiref "credentials/ec2rolecreds#New" >}}).
 
-`New` takes [Options]({{< apiref "credentials/ec2rolecreds#Options" >}}) as input, allowing you override the specific
-{{% alias service=EC2 %}} Instance Metadata Service client to use, or to override the credential expiry window.
+The `ec2rolecreds` package's `ec2rolecreds.New` takes functional options of
+[ec2rolecreds.Options]({{< apiref "credentials/ec2rolecreds#Options" >}}) as
+input, allowing you override the specific {{% alias service=EC2 %}} Instance
+Metadata Service client to use, or to override the credential expiry window.
 
 #### Example
 
-##### V1
 ```go
+// V1
+
 import "github.coma/aws/aws-sdk-go/aws/credentials/ec2rolecreds"
 
 // ...
@@ -240,8 +259,9 @@ if err != nil {
 }
 ```
 
-##### V2
 ```go
+// V2
+
 import "context"
 import "github.coma/aws/aws-sdk-go-v2/aws"
 import "github.coma/aws/aws-sdk-go-v2/credentials/ec2rolecreds"
@@ -249,7 +269,7 @@ import "github.coma/aws/aws-sdk-go-v2/credentials/ec2rolecreds"
 // ...
 
 // New returns an object of a type that satisfies the aws.CredentialProvider interface
-appCreds := aws.NewCredentialsCache(ec2rolecreds.New(ec2rolecreds.Options{}))
+appCreds := aws.NewCredentialsCache(ec2rolecreds.New())
 value, err := appCreds.Retrieve(context.TODO())
 if err != nil {
 	// handle error
@@ -262,8 +282,10 @@ You must migrate usage of [NewCredentialsClient]({{< apiref v1="aws/credentials/
 and [NewProviderClient]({{< apiref v1="aws/credentials/endpointcreds#NewProviderClient" >}}) to use
 [New]({{< apiref "credentials/endpointcreds#New" >}}).
 
-`New` takes a string argument containing the URL of an HTTP or HTTPS endpoint to retrieve credentials from, and an
-optional set of functions to mutate the provider [Options]({{< apiref "credentials/endpointcreds#Options" >}}) to
+The `endpointcreds` package's `New` function takes a string argument containing the
+URL of an HTTP or HTTPS endpoint to retrieve credentials from, and functional
+options of [endpointcreds.Options]({{< apiref
+"credentials/endpointcreds#Options" >}}) to mutate the credentials provider and
 override specific configuration settings.
 
 ### Process Credentials
@@ -274,9 +296,10 @@ You must migrate usage of [NewCredentials]({{< apiref v1="aws/credentials/proces
 [NewProvider]({{< apiref "credentials/processcreds#New" >}}) or
 [NewProviderCommand]({{< apiref "credentials/processcreds#NewProviderCommand" >}}).
 
-`NewProvider` takes a string argument that is the command to be executed in the host environment's shell, and an
-optional set of functions to mutate the provider [Options]({{< apiref "credentials/processcreds#Options" >}}) to
-override specific configuration settings.
+The `processcreds` package's `NewProvider` function takes a string argument that is the
+command to be executed in the host environment's shell, and functional options
+of [Options]({{< apiref "credentials/processcreds#Options" >}}) to mutate the
+credentials provider and override specific configuration settings.
 
 `NewProviderCommand` takes an implementation of the
 [NewCommandBuilder]({{< apiref "credentials/processcreds#NewCommandBuilder" >}}) interface that defines
@@ -286,9 +309,10 @@ this interface, and defines a command builder for a process that requires multip
 
 #### Example
 
-##### V1
 
 ```go
+// V1
+
 import "github.coma/aws/aws-sdk-go/aws/credentials/processcreds"
 
 // ...
@@ -296,13 +320,14 @@ import "github.coma/aws/aws-sdk-go/aws/credentials/processcreds"
 appCreds := processcreds.NewCredentials("/path/to/command")
 value, err := appCreds.Get()
 if err != nil {
-    // handle error
+	// handle error
 }
 ```
 
-##### V2
 
 ```go
+// V2
+
 import "context"
 import "github.coma/aws/aws-sdk-go-v2/aws"
 import "github.coma/aws/aws-sdk-go-v2/credentials/processcreds"
@@ -324,17 +349,19 @@ You must migrate usage of [NewCredentials]({{< apiref v1="aws/credentials/stscre
 [NewCredentialsWithClient]({{< apiref v1="aws/credentials/stscreds#NewCredentialsWithClient" >}}) to
 use [NewAssumeRoleProvider]({{< apiref "credentials/stscreds#NewAssumeRoleProvider" >}}).
 
-You must call `NewAssumeRoleProvider` with a [sts.Client]({{< apiref "service/sts#Client" >}}), and the
-{{% alias service=IAMlong %}} Role ARN to be assumed from the provided `sts.Client`'s configured credentials.
-You can also provide a set of functions to mutate the
-[AssumeRoleOptions]({{< apiref "credentials/stscreds#AssumeRoleOptions" >}}) to modify other optional
-settings of the provider.
+The `stscreds` package's `NewAssumeRoleProvider` function must be called with
+a [sts.Client]({{< apiref "service/sts#Client" >}}), and the {{% alias
+service=IAMlong %}} Role ARN to be assumed from the provided `sts.Client`'s
+configured credentials. You can also provide a set of functional options of
+[AssumeRoleOptions]({{< apiref "credentials/stscreds#AssumeRoleOptions" >}}) to
+modify other optional settings of the provider.
 
 ##### Example
 
-###### V1
 
 ```go
+// V1
+
 import "github.com/aws/aws-sdk-go/aws/credentials/stscreds"
 
 // ...
@@ -346,9 +373,10 @@ if err != nil {
 }
 ```
 
-###### V2
 
 ```go
+// V2
+
 import "context"
 import "github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 
@@ -371,21 +399,22 @@ You must migrate usage of
 [NewWebIdentityRoleProviderWithToken]({{< apiref v1="aws/credentials/stscreds#NewWebIdentityRoleProviderWithToken" >}})
 to use [NewWebIdentityRoleProvider]({{< apiref "credentials/stscreds#NewWebIdentityRoleProvider" >}}).
 
-`NewWebIdentityRoleProvider` must be passed a [sts.Client]({{< apiref "service/sts#Client" >}}), and the
+The `stscreds` package's `NewWebIdentityRoleProvider` function must be called with a [sts.Client]({{< apiref "service/sts#Client" >}}), and the
 {{% alias service=IAMlong %}} Role ARN to be assumed using the provided `sts.Client`'s configured credentials, and an
 implementation of a [IdentityTokenRetriever]({{< apiref "credentials/stscreds#IdentityTokenRetriever" >}}) for
 providing the OAuth 2.0 or OpenID Connect ID token.
 [IdentityTokenFile]({{< apiref "credentials/stscreds#IdentityTokenFile" >}}) is an `IdentityTokenRetriever` that can
 be used to provide the web identity token from a file located on the application's host file-system.
-You can also provide a set of functions to mutate the
+You can also provide a set of functional options of
 [WebIdentityRoleOptions]({{< apiref "credentials/stscreds#WebIdentityRoleOptions" >}}) to modify other optional
 settings for the provider.
 
 ##### Example
 
-###### V1
 
 ```go
+// V1
+
 import "github.com/aws/aws-sdk-go/aws/credentials/stscreds"
 
 // ...
@@ -397,9 +426,10 @@ if err != nil {
 }
 ```
 
-###### V2
 
 ```go
+// V2
+
 import "context"
 import "github.coma/aws/aws-sdk-go-v2/aws"
 import "github.com/aws/aws-sdk-go-v2/credentials/stscreds"
@@ -408,9 +438,13 @@ import "github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 
 client := sts.NewFromConfig(cfg)
 
-appCreds := aws.NewCredentialsCache(stscreds.NewWebIdentityRoleProvider(client, "arn:aws:iam::123456789012:role/demo", stscreds.IdentityTokenFile("/path/to/file"), func(o *stscreds.WebIdentityRoleOptions) {
-	o.RoleSessionName = "sessionName"
-}))
+appCreds := aws.NewCredentialsCache(stscreds.NewWebIdentityRoleProvider(
+		client,
+		"arn:aws:iam::123456789012:role/demo",
+		stscreds.IdentityTokenFile("/path/to/file"),
+		func(o *stscreds.WebIdentityRoleOptions) {
+			o.RoleSessionName = "sessionName"
+		}))
 value, err := appCreds.Retrieve(context.TODO())
 if err != nil {
 	// handle error
@@ -419,7 +453,7 @@ if err != nil {
 
 ## Service Clients
 
-{{% alias sdk-go %}} provides service clients rooted under the `github.com/aws/aws-sdk-go-v2/service` import path.
+{{% alias sdk-go %}} provides service client modules nested under the `github.com/aws/aws-sdk-go-v2/service` import path.
 Each service client is contained in a Go package using each service's unique identifier. The following table provides
 some examples of service import paths in the {{% alias sdk-go %}}.
 
@@ -431,21 +465,26 @@ Service Name | V1 Import Path | V2 Import Path
 
 Each service client package is an independently versioned Go module. To add the service client as a dependency of your
 application, use the `go get` command with the service's import path. For example, to add the {{% alias service=S3 %}}
-client to your dependencies use `go get github.com/aws/aws-sdk-go-v2/service/s3`.
+client to your dependencies use
+
+```sh
+go get github.com/aws/aws-sdk-go-v2/service/s3
+```
 
 ### Client Construction
 
-You can construct clients in the {{% alias sdk-go %}} using either the `New` or `NewFromConfig` constructor functions.
-When migrating from the AWS SDK for Go we recommend that you use the `NewFromConfig` variant, which enables construction
-of a service client using the `aws.Config` created while loading the SDK shared configuration using
+You can construct clients in the {{% alias sdk-go %}} using either the `New` or `NewFromConfig` constructor functions in the client's package.
+When migrating from the AWS SDK for Go we recommend that you use the `NewFromConfig` variant, which will return a new
+service client using values from an `aws.Config`. The `aws.Config` value will of been created while loading the SDK shared configuration using
 `config.LoadDefaultConfig`. For details on creating service clients see
 [Using AWS Services]({{% ref "making-requests" %}}).
 
 ##### Example 1
 
-###### V1
 
 ```go
+// V1
+
 import "github.com/aws/aws-sdk-go/aws/session"
 import "github.com/aws/aws-sdk-go/service/s3"
 
@@ -459,9 +498,10 @@ if err != nil {
 client := s3.New(sess)
 ```
 
-###### V2
 
 ```go
+// V2
+
 import "context"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
@@ -479,9 +519,10 @@ client := s3.NewFromConfig(cfg)
 
 ##### Example 2: Overriding Client Settings
 
-###### V1
 
 ```go
+// V1
+
 import "github.com/aws/aws-sdk-go/aws"
 import "github.com/aws/aws-sdk-go/aws/session"
 import "github.com/aws/aws-sdk-go/service/s3"
@@ -498,9 +539,10 @@ client := s3.New(sess, &aws.Connfig{
 })
 ```
 
-###### V2
 
 ```go
+// V2
+
 import "context"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
@@ -537,15 +579,16 @@ For more information on endpoints and implementing a custom resolver, see
 ### Invoking API Operations
 
 The number of service client operation methods have been reduced significantly. The `<OperationName>Request`,
-`<OperationName>dWithContext`, and `<OperationName>` methods have all been consolidated into a single operation method.
+`<OperationName>WithContext`, and `<OperationName>` methods have all been consolidated into single operation method, `<OperationName>`.
 
 #### Example
 
 The following example shows how calls to the {{% alias service=s3 %}} PutObject operation would be migrated from
 AWS SDK for Go to {{% alias sdk-go %}}.
 
-##### V1
 ```go
+// V1
+
 import "context"
 import "github.com/aws/aws-sdk-go/service/s3"
 
@@ -560,19 +603,20 @@ output, err := client.PutObject(&s3.PutObjectInput{
 
 // Pattern 2
 output, err := client.PutObjectWithContext(context.TODO(), &s3.PutObjectInput{
-    // input parameters
+	// input parameters
 })
 
 // Pattern 3
 req, output := client.PutObjectRequest(context.TODO(), &s3.PutObjectInput{
-    // input parameters
+	// input parameters
 })
 err := req.Send()
 ```
 
-##### V2
 
 ```go
+// V2
+
 import "context"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
 
@@ -587,7 +631,7 @@ output, err := client.PutObject(context.TODO(), &s3.PutObjectInput{
 
 ### Service Data Types
 
-The top-level input and output types of an operation are found in the service client package. The input and output shape
+The top-level input and output types of an operation are found in the service client package. The input and output type
 for a given operation follow the pattern of `<OperationName>Input` and `<OperationName>Output`, where `OperationName`
 is the name of the operation you are invoking. For example the input and output shape for the
 {{% alias service=S3 %}} PutObject operation are [PutObjectInput]({{< apiref "service/s3#PutObjectInput" >}}) and
@@ -612,7 +656,7 @@ provides generated constants for the valid enumeration values that can be assign
 
 ### Pointer Parameters
 
-The AWS SDK for Go required pointer references to be passed for all input parameters to service operations. The
+The AWS SDK for Go v1 required pointer references to be passed for all input parameters to service operations. The
 {{% alias sdk-go %}} has simplified the experience with most services by removing the need to pass input values as
 pointers where possible. This change means that many service clients operations no longer require your application
 to pass pointer references for the following types: `uint8`, `uint16`, `uint32`, `int8`, `int16`, `int32`, `float32`,
@@ -644,9 +688,10 @@ handling errors see [Handling Errors]({{< ref "handling-errors" >}}).
 
 #### Example
 
-##### V1
 
 ```go
+// V1
+
 import "github.com/aws/aws-sdk-go/aws/awserr"
 import "github.com/aws/aws-sdk-go/service/s3"
 
@@ -655,24 +700,25 @@ import "github.com/aws/aws-sdk-go/service/s3"
 client := s3.New(sess)
 
 output, err := s3.GetObject(&s3.GetObjectInput{
-    // input parameters
+	// input parameters
 })
 if err != nil {
 	if awsErr, ok := err.(awserr.Error); ok {
 		if awsErr.Code() == "NoSuchKey" {
 			// handle NoSuchKey
-        } else {
-        	// handle other codes
-        }
-        return
-    }
-    // handle a error
+		} else {
+			// handle other codes
+		}
+		return
+	}
+	// handle a error
 }
 ```
 
-##### V2
 
 ```go
+// V2
+
 import "context"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
 import "github.com/aws/aws-sdk-go-v2/service/s3/types"
@@ -682,7 +728,7 @@ import "github.com/aws/smithy-go"
 
 client := s3.NewFromConfig(cfg)
 
-output, err := s3.GetObject(context.TODO(), &s3.GetObjectInput{ 
+output, err := s3.GetObject(context.TODO(), &s3.GetObjectInput{
 	// input parameters
 })
 if err != nil {
@@ -718,9 +764,10 @@ Let's look at an example of how to migrate from a AWS SDK for Go paginator to th
 
 #### Example
 
-##### V1
 
 ```go
+// V1
+
 import "fmt"
 import "github.com/aws/aws-sdk-go/service/s3"
 
@@ -734,7 +781,7 @@ params := &s3.ListObjectsV2Input{
 
 totalObjects := 0
 err := client.ListObjectsV2Pages(params, func(output *s3.ListObjectsV2Output, lastPage bool) bool {
-    totalObjects += len(output.Contents)
+	totalObjects += len(output.Contents)
 	return !lastPage
 })
 if err != nil {
@@ -743,9 +790,10 @@ if err != nil {
 fmt.Println("total objects:", totalObjects)
 ```
 
-##### V2
 
 ```go
+// V2
+
 import "context"
 import "fmt"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
@@ -773,7 +821,7 @@ fmt.Println("total objects:", totalObjects)
 ### Waiters
 
 Service operation waiters are no longer invoked as methods on the service client. To use a waiter you first construct
-the desired waiter type, and then invoke the wait method. For example, 
+the desired waiter type, and then invoke the wait method. For example,
 to wait for a {{% alias service=S3 %}} Bucket to exist, you must construct a `BucketExists` waiter. Use the
 [s3.NewBucketExistsWaiter]({{< apiref "service/s3#NewBucketExistsWaiter" >}}) constructor to create a
 [s3.BucketExistsWaiter]({{< apiref "service/s3#BucketExistsWaiter" >}}). The `s3.BucketExistsWaiter` provides a
@@ -785,14 +833,20 @@ to wait for a {{% alias service=S3 %}} Bucket to exist, you must construct a `Bu
 
 The {{% alias sdk-go %}} provides an {{% alias service=EC2 %}} Instance Metadata Service (IMDS) client that you can use
 to query the local IMDS when executing your application on an {{% alias service=EC2 %}} instance. The IMDS client is
-a separate Go module that can be added to your application by using `go get github.com/aws/aws-sdk-go-v2/feature/ec2/imds`. The
-client constructor and method operations have been updated to match the design of the other SDK service clients.
+a separate Go module that can be added to your application by using
+
+```sh
+go get github.com/aws/aws-sdk-go-v2/feature/ec2/imds
+```
+
+The client constructor and method operations have been updated to match the design of the other SDK service clients.
 
 #### Example
 
-##### V1
 
-````go
+```go
+// V1
+
 import "github.com/aws/aws-sdk-go/aws/ec2metadata"
 
 // ...
@@ -803,11 +857,12 @@ region, err := client.Region()
 if err != nil {
 	// handle error
 }
-````
+```
 
-##### V2
 
-````go
+```go
+// V2
+
 import "context"
 import "github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 
@@ -819,7 +874,7 @@ region, err := client.GetRegion(context.TODO())
 if err != nil {
 	// handle error
 }
-````
+```
 
 ### {{% alias service=S3 %}} Transfer Manager
 
@@ -839,4 +894,8 @@ Dwonload manager client.
 ### {{% alias service=CFlong %}} Signing Utilities
 
 The {{% alias sdk-go %}} provides {{% alias service=CFlong %}} signing utilities in a Go module outside the service
-client import path. This module can be retrieved by using `go get github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign`.
+client import path. This module can be retrieved by using `go get`.
+
+```sh
+go get github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign
+```
