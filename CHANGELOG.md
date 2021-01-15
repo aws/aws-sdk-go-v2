@@ -5,6 +5,8 @@
     * Updates the SDK's references to Config.Retryer to be a function that returns aws.Retryer value. This ensures that custom retry options specified in the `aws.Config` are scoped to individual client instances. 
     * All API clients created with the config will call the `Config.Retryer` function to get an aws.Retryer.
     * Removes duplicate `Retryer` interface from `retry` package. Single definition is `aws.Retryer` now.
+* `aws/middleware`: Updates `AddAttemptClockSkewMiddleware` to use appropriate `AddRecordResponseTiming` naming ([#1031](https://github.com/aws/aws-sdk-go-v2/pull/1031))
+    * Removes `ResponseMetadata` struct type, and adds its members to middleware metadata directly, to improve discoverability.
 * `config`: Updated the `WithRetryer` helper to take a function that returns an aws.Retryer ([#1033](https://github.com/aws/aws-sdk-go-v2/pull/1033))
     * All API clients created with the config will call the `Config.Retryer` function to get an aws.Retryer.
 * `API Clients`: Fix SDK's API client enum constant name generation to have expected casing ([#1020](https://github.com/aws/aws-sdk-go-v2/pull/1020))
@@ -28,6 +30,8 @@
 * `service/s3`: Fix Unmarshaling `GetObjectAcl` operation's Grantee type response ([#1034](https://github.com/aws/aws-sdk-go-v2/pull/1034))
     * Updates the SDK's codegen for correctly deserializing XML attributes in tags with XML namespaces.
     * Fixes [#1013](https://github.com/aws/aws-sdk-go-v2/issues/1013)
+* `service/s3`: Fix Unmarshaling `GetBucketLocation` operation's response ([#1027](https://github.com/aws/aws-sdk-go-v2/pull/1027))
+    * Fixes [#908](https://github.com/aws/aws-sdk-go-v2/issues/908)
 
 ## Other changes
 
