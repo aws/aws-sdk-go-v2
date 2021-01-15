@@ -9,7 +9,7 @@ This example creates an AWS Key Management Service (AWS KMS) customer master key
 
 ## Source code
 
-```
+```go
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0
 package main

@@ -9,7 +9,7 @@ This example lists the topic and subscription Amazon Resource Names (ARNs) for y
 
 ## Source code
 
-```
+```go
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX - License - Identifier: Apache - 2.0
 package main

@@ -9,7 +9,7 @@ This example displays the name, namespace, and dimension name of your Amazon Clo
 
 ## Source code
 
-```
+```go
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX - License - Identifier: Apache - 2.0
 package main
