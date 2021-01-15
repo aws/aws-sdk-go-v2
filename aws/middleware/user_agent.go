@@ -167,6 +167,12 @@ func AddSDKAgentKeyValue(keyType SDKAgentKeyType, key, value string) func(*middl
 	}
 }
 
+// AddRequestUserAgentMiddleware registers a requestUserAgent middleware on the stack if not present.
+func AddRequestUserAgentMiddleware(stack *middleware.Stack) error {
+	_, err := getOrAddRequestUserAgent(stack)
+	return err
+}
+
 func getOrAddRequestUserAgent(stack *middleware.Stack) (*requestUserAgent, error) {
 	id := (*requestUserAgent)(nil).ID()
 	bm, ok := stack.Build.Get(id)

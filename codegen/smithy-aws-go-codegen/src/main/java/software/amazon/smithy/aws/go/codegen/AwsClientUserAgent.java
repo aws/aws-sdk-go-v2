@@ -46,9 +46,8 @@ public class AwsClientUserAgent implements GoIntegration {
             writer.openBlock("func $L(stack $P) error {", "}", MIDDLEWARE_RESOLVER, SymbolUtils.createPointableSymbolBuilder("Stack",
                     SmithyGoDependency.SMITHY_MIDDLEWARE).build(), () -> {
                 // TODO: This should include the module version
-                writer.write("return $T($S)(stack)", SymbolUtils.createValueSymbolBuilder("AddUserAgentKey",
-                        AwsGoDependency.AWS_MIDDLEWARE).build(), CodegenUtils.getDefaultPackageImportName(
-                                settings.getModuleName()));
+                writer.write("return $T(stack)", SymbolUtils.createValueSymbolBuilder("AddRequestUserAgentMiddleware",
+                        AwsGoDependency.AWS_MIDDLEWARE).build());
             });
             writer.write("");
         });
