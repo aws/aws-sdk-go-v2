@@ -194,6 +194,10 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
+func addClientUserAgent(stack *middleware.Stack) error {
+	return awsmiddleware.AddRequestUserAgentMiddleware(stack)
+}
+
 func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) error {
 	mw := v4.NewSignHTTPRequestMiddleware(v4.SignHTTPRequestMiddlewareOptions{
 		CredentialsProvider: o.Credentials,

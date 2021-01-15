@@ -122,9 +122,8 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                         "AddRecordResponseTiming", AwsGoDependency.AWS_MIDDLEWARE)
                                         .build())
                                 .build())
-                        .build()
+                        .build(),
 
-                /* TODO: Enable this when we have the module version available at runtime
                 // Add Client UserAgent
                 RuntimeClientPlugin.builder()
                         .registerMiddleware(MiddlewareRegistrar.builder()
@@ -132,7 +131,6 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                         AwsClientUserAgent.MIDDLEWARE_RESOLVER).build())
                                 .build())
                         .build()
-                 */
         );
     }
 }

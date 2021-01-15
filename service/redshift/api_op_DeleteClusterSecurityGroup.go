@@ -81,6 +81,9 @@ func addOperationDeleteClusterSecurityGroupMiddlewares(stack *middleware.Stack, 
 	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addClientUserAgent(stack); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}

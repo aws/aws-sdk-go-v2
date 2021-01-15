@@ -182,6 +182,10 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
+func addClientUserAgent(stack *middleware.Stack) error {
+	return awsmiddleware.AddRequestUserAgentMiddleware(stack)
+}
+
 func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 	mo := retry.AddRetryMiddlewaresOptions{
 		Retryer:          o.Retryer,
