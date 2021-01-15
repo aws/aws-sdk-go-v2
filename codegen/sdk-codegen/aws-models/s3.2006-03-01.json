@@ -5600,7 +5600,7 @@
             },
             "errors": [
                 {
-                    "target": "com.amazonaws.s3#NoSuchBucket"
+                    "target": "com.amazonaws.s3#NotFound"
                 }
             ],
             "traits": {
@@ -5617,6 +5617,23 @@
                                 "state": "success",
                                 "matcher": {
                                     "success": true
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "NotFound"
+                                }
+                            }
+                        ],
+                        "minDelay": 5
+                    },
+                    "BucketNotExists": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "NotFound"
                                 }
                             }
                         ],
@@ -5655,7 +5672,7 @@
             },
             "errors": [
                 {
-                    "target": "com.amazonaws.s3#NoSuchKey"
+                    "target": "com.amazonaws.s3#NotFound"
                 }
             ],
             "traits": {
@@ -5672,6 +5689,23 @@
                                 "state": "success",
                                 "matcher": {
                                     "success": true
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "NotFound"
+                                }
+                            }
+                        ],
+                        "minDelay": 5
+                    },
+                    "ObjectNotExists": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "NotFound"
                                 }
                             }
                         ],
@@ -8297,6 +8331,14 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.s3#NoncurrentVersionTransition"
+            }
+        },
+        "com.amazonaws.s3#NotFound": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The specified content does not exist.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.s3#NotificationConfiguration": {
@@ -11646,7 +11688,7 @@
                 "target": "com.amazonaws.s3#SelectObjectContentOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>This operation filters the contents of an Amazon S3 object based on a simple structured query\n         language (SQL) statement. In the request, along with the SQL expression, you must also\n         specify a data serialization format (JSON, CSV, or Apache Parquet) of the object. Amazon S3 uses\n         this format to parse object data into records, and returns only records that match the\n         specified SQL expression. You must also specify the data serialization format for the\n         response.</p> \n         <p>This action is not supported by Amazon S3 on Outposts.</p> \n         <p>For more information about Amazon S3 Select,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/selecting-content-from-objects.html\">Selecting Content from\n            Objects</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>\n         <p>For more information about using SQL with Amazon S3 Select, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html\"> SQL Reference for Amazon S3 Select\n            and S3 Glacier Select</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>\n         <p></p>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>You must have <code>s3:GetObject</code> permission for this operation. Amazon S3 Select does\n         not support anonymous access. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html\">Specifying Permissions in a Policy</a>\n         in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>\n         <p></p>\n         <p>\n            <i>Object Data Formats</i>\n         </p>\n         <p>You can use Amazon S3 Select to query objects that have the following format\n         properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>CSV, JSON, and Parquet</i> - Objects must be in CSV, JSON, or\n               Parquet format.</p>\n            </li>\n            <li>\n               <p>\n                  <i>UTF-8</i> - UTF-8 is the only encoding type Amazon S3 Select\n               supports.</p>\n            </li>\n            <li>\n               <p>\n                  <i>GZIP or BZIP2</i> - CSV and JSON files can be compressed using\n               GZIP or BZIP2. GZIP and BZIP2 are the only compression formats that Amazon S3 Select\n               supports for CSV and JSON files. Amazon S3 Select supports columnar compression for\n               Parquet using GZIP or Snappy. Amazon S3 Select does not support whole-object compression\n               for Parquet objects.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Server-side encryption</i> - Amazon S3 Select supports querying\n               objects that are protected with server-side encryption.</p>\n               <p>For objects that are encrypted with customer-provided encryption keys (SSE-C), you\n               must use HTTPS, and you must use the headers that are documented in the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>. For more information about SSE-C, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Server-Side Encryption\n                  (Using Customer-Provided Encryption Keys)</a> in the\n                  <i>Amazon Simple Storage Service Developer Guide</i>.</p>\n               <p>For objects that are encrypted with Amazon S3 managed encryption keys (SSE-S3) and\n               customer master keys (CMKs) stored in AWS Key Management Service (SSE-KMS),\n               server-side encryption is handled transparently, so you don't need to specify\n               anything. For more information about server-side encryption, including SSE-S3 and\n               SSE-KMS, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html\">Protecting Data Using\n                  Server-Side Encryption</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Working with the Response Body</b>\n         </p>\n         <p>Given the response size is unknown, Amazon S3 Select streams the response as a series of\n         messages and includes a <code>Transfer-Encoding</code> header with <code>chunked</code> as\n         its value in the response. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTSelectObjectAppendix.html\">Appendix: SelectObjectContent\n            Response</a>\n         .</p>\n\n         <p></p>\n         <p>\n            <b>GetObject Support</b>\n         </p>\n         <p>The <code>SelectObjectContent</code> operation does not support the following\n            <code>GetObject</code> functionality. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Range</code>: Although you can specify a scan range for an Amazon S3 Select request\n               (see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_SelectObjectContent.html#AmazonS3-SelectObjectContent-request-ScanRange\">SelectObjectContentRequest - ScanRange</a> in the request parameters),\n               you cannot specify the range of bytes of an object to return. </p>\n            </li>\n            <li>\n               <p>GLACIER, DEEP_ARCHIVE and REDUCED_REDUNDANCY storage classes: You cannot specify\n               the GLACIER, DEEP_ARCHIVE, or <code>REDUCED_REDUNDANCY</code> storage classes. For\n               more information, about storage classes see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#storage-class-intro\">Storage Classes</a>\n               in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p></p>\n         <p>\n            <b>Special Errors</b>\n         </p>\n\n         <p>For a list of special errors for this operation, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#SelectObjectContentErrorCodeList\">List of\n            SELECT Object Content Error Codes</a>\n         </p>\n         <p class=\"title\">\n            <b>Related Resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>This operation filters the contents of an Amazon S3 object based on a simple structured query\n         language (SQL) statement. In the request, along with the SQL expression, you must also\n         specify a data serialization format (JSON, CSV, or Apache Parquet) of the object. Amazon S3 uses\n         this format to parse object data into records, and returns only records that match the\n         specified SQL expression. You must also specify the data serialization format for the\n         response.</p> \n         <p>This action is not supported by Amazon S3 on Outposts.</p> \n         <p>For more information about Amazon S3 Select,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/selecting-content-from-objects.html\">Selecting Content from\n            Objects</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>\n         <p>For more information about using SQL with Amazon S3 Select, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html\"> SQL Reference for Amazon S3 Select\n            and S3 Glacier Select</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>\n         <p></p>\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>You must have <code>s3:GetObject</code> permission for this operation. Amazon S3 Select does\n         not support anonymous access. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html\">Specifying Permissions in a Policy</a>\n         in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>\n         <p></p>\n         <p>\n            <i>Object Data Formats</i>\n         </p>\n         <p>You can use Amazon S3 Select to query objects that have the following format\n         properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>CSV, JSON, and Parquet</i> - Objects must be in CSV, JSON, or\n               Parquet format.</p>\n            </li>\n            <li>\n               <p>\n                  <i>UTF-8</i> - UTF-8 is the only encoding type Amazon S3 Select\n               supports.</p>\n            </li>\n            <li>\n               <p>\n                  <i>GZIP or BZIP2</i> - CSV and JSON files can be compressed using\n               GZIP or BZIP2. GZIP and BZIP2 are the only compression formats that Amazon S3 Select\n               supports for CSV and JSON files. Amazon S3 Select supports columnar compression for\n               Parquet using GZIP or Snappy. Amazon S3 Select does not support whole-object compression\n               for Parquet objects.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Server-side encryption</i> - Amazon S3 Select supports querying\n               objects that are protected with server-side encryption.</p>\n               <p>For objects that are encrypted with customer-provided encryption keys (SSE-C), you\n               must use HTTPS, and you must use the headers that are documented in the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>. For more information about SSE-C, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Server-Side Encryption\n                  (Using Customer-Provided Encryption Keys)</a> in the\n                  <i>Amazon Simple Storage Service Developer Guide</i>.</p>\n               <p>For objects that are encrypted with Amazon S3 managed encryption keys (SSE-S3) and\n               customer master keys (CMKs) stored in AWS Key Management Service (SSE-KMS),\n               server-side encryption is handled transparently, so you don't need to specify\n               anything. For more information about server-side encryption, including SSE-S3 and\n               SSE-KMS, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html\">Protecting Data Using\n                  Server-Side Encryption</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Working with the Response Body</b>\n         </p>\n         <p>Given the response size is unknown, Amazon S3 Select streams the response as a series of\n         messages and includes a <code>Transfer-Encoding</code> header with <code>chunked</code> as\n         its value in the response. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTSelectObjectAppendix.html\">Appendix: SelectObjectContent\n            Response</a>\n         .</p>\n\n         <p></p>\n         <p>\n            <b>GetObject Support</b>\n         </p>\n         <p>The <code>SelectObjectContent</code> operation does not support the following\n            <code>GetObject</code> functionality. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Range</code>: Although you can specify a scan range for an Amazon S3 Select request\n               (see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_SelectObjectContent.html#AmazonS3-SelectObjectContent-request-ScanRange\">SelectObjectContentRequest - ScanRange</a> in the request parameters),\n               you cannot specify the range of bytes of an object to return. </p>\n            </li>\n            <li>\n               <p>GLACIER, DEEP_ARCHIVE and REDUCED_REDUNDANCY storage classes: You cannot specify\n               the GLACIER, DEEP_ARCHIVE, or <code>REDUCED_REDUNDANCY</code> storage classes. For\n               more information, about storage classes see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#storage-class-intro\">Storage Classes</a>\n               in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p></p>\n         <p>\n            <b>Special Errors</b>\n         </p>\n\n         <p>For a list of special errors for this operation, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#SelectObjectContentErrorCodeList\">List of\n            SELECT Object Content Error Codes</a>\n         </p>\n         <p class=\"title\">\n            <b>Related Resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/{Bucket}/{Key+}?select&select-type=2",

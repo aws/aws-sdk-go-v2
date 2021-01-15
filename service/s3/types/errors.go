@@ -117,6 +117,23 @@ func (e *NoSuchUpload) ErrorMessage() string {
 func (e *NoSuchUpload) ErrorCode() string             { return "NoSuchUpload" }
 func (e *NoSuchUpload) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified content does not exist.
+type NotFound struct {
+	Message *string
+}
+
+func (e *NotFound) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NotFound) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NotFound) ErrorCode() string             { return "NotFound" }
+func (e *NotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This operation is not allowed against this storage tier.
 type ObjectAlreadyInActiveTierError struct {
 	Message *string
