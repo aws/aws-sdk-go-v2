@@ -237,7 +237,9 @@ public final class XmlProtocolUtils {
         Optional<SyntheticClone> clone = shape.getTrait(SyntheticClone.class);
         if (clone.isPresent()) {
             SyntheticClone cl = clone.get();
-            shapeName = cl.getArchetype().getName();
+            if (cl.getArchetype().isPresent()) {
+                shapeName = cl.getArchetype().get().getName();
+            }
         }
 
         // check if shape is member shape
