@@ -67,8 +67,6 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
 
         // If there are no members then there's nothing to serialize
         if (input.members().size() == 0) {
-            // Prevent warnings caused by input not being used
-            writer.write("_ = input");
             return;
         }
 
