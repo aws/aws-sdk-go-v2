@@ -6,7 +6,7 @@ description: "Use the Error interface to handle errors from the AWS SDK for Go V
 weight: 6
 ---
 
-The {{% alias sdk-go %}} returns errors that satisfy the Go `error` interface type  You can use the `Error()` method to
+The {{% alias sdk-go %}} returns errors that satisfy the Go `error` interface type. You can use the `Error()` method to
 get a formatted string of the SDK error message without any special handling. Errors returned by the SDK may implement
 an `Unwrap` method. The `Unwrap` method is used by the SDK to provide additional contextual information to errors, while
 providing access to the underlying error or chain of errors. The `Unwrap` method should be used with the
@@ -40,7 +40,7 @@ if err != nil {
 
 ## Service Client Errors
 
-The SDK wraps All errors returned by service clients with the
+The SDK wraps all errors returned by service clients with the
 [smithy.OperationError]({{% apiref smithy="#OperationError" %}}) error type. `OperationError` provides contextual
 information about the service name and operation that is associated with an underlying error. This information can be
 useful for applications that perform batches of operations to one or more services, with a centralized error handling
@@ -110,7 +110,7 @@ if err != nil {
 
 ## Retrieving Request Identifiers
 
-When working with AWS Support, you may be asked to provide the request identifier that identifiers the request you
+When working with AWS Support, you may be asked to provide the request identifier that identifies the request you
 are attempting to troubleshoot. You can use [http.ResponseError]({{< apiref "aws/transport/http#ResponseError" >}})
 and use the `ServiceRequestID()` method to retrieve the request identifier associated with error response.
 

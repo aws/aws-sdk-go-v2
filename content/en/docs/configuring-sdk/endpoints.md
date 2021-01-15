@@ -5,15 +5,16 @@ date: "2020-11-12"
 description: Customizing service client endpoints.
 ---
 
-In most cases you use the endpoint that is pre-configured for a service. However, you can specify a custom endpoint,
-such as for pre-release versions of the service.
+The {{% alias sdk-go %}} provides the ability to configure a custom endpoint to be used for a service. In most cases you use a pre-configured 
+endpoint for a service. Configuring custom endpoints, lets you do more, such as working with pre-release versions 
+of a service.
 
 A [EndpointResolver]({{< apiref "aws#EndpointResolver" >}}) can be configured to provide custom endpoint resolution
-logic for service clients. A custom endpoint resolver has the ability to override the resolution of a service's endpoint
-resolution for all endpoints, or a just specific regional endpoint. Custom endpoint resolver have the ability trigger
-the service's endpoint resolution logic to fallback if a custom resolver does not wish to resolve a requested
-endpoint. [EndpointResolverFunc]({{< apiref "aws#EndpointResolverFunc" >}}) can be used to easily wrap functions to
-satisfy the `EndpointResolver` interface.
+logic for service clients. You can use a custom endpoint resolver to override a service's endpoint resolution logic
+for all endpoints, or a just specific regional endpoint. Custom endpoint resolver can trigger the service's endpoint 
+resolution logic to fallback if a custom resolver does not wish to resolve a requested endpoint. 
+[EndpointResolverFunc]({{< apiref "aws#EndpointResolverFunc" >}}) can be used to easily wrap functions to satisfy the 
+`EndpointResolver` interface.
 
 A `EndpointResolver` can be easily configured by passing the resolver wrapped with
 [WithEndpointResolver]({{< apiref "config#WithEndpointResolver" >}}) to
@@ -81,7 +82,7 @@ Setting an endpoint as immutable may prevent some service client features from f
 in undefined behavior. Caution should be taken when defining an endpoint as immutable.
 {{% /pageinfo %}}
 
-Some service clients, such as {{% alias service=S3 %}}, can modify the endpoint returned by the resolver for certain
+Some service clients, such as {{% alias service=S3 %}}, may modify the endpoint returned by the resolver for certain
 service operations. For example, the {{% alias service=S3 %}} will automatically handle
 [Virtual Bucket Addressing](https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html) by mutating the
 resolved endpoint. You can prevent the SDK from mutating your custom endpoints by setting 
