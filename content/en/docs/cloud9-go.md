@@ -6,22 +6,22 @@ weight: 10
 ---
 
 You can use {{% alias service=AC9long %}} with the {{% alias sdk-go %}} to write and run your Go code using just a
-browser. {{% alias service=AC9 %}} includes tools such as a code editor and terminal. Because the {{% alias service=AC9
-%}} IDE is cloud based, you can work on your projects from your office, home, or anywhere using an internet-connected
-machine. For general information about {{% alias service=AC9 %}}, see the {{% alias service=AC9 %}} User Guide.
+browser. {{% alias service=AC9 %}} includes tools such as a code editor and terminal. The {{% alias service=AC9
+%}} IDE is cloud based, so you can work on your projects from your office, home, or anywhere using an internet-connected
+machine. For general information about {{% alias service=AC9 %}}, see the {{% alias service=AC9 %}} 
+[User Guide](https://docs.aws.amazon.com/cloud9/latest/user-guide/welcome.html).
 
-Follow these instructions to set up {{% alias service=AC9 %}} with the {{% alias sdk-go %}}:
+Follow the instructions below to set up {{% alias service=AC9 %}} with the {{% alias sdk-go %}}:
 
 ## Set up Your AWS Account to Use {{% alias service=AC9 %}}
 
-Start to use {{% alias service=AC9 %}} by signing in to the {{% alias service=AC9 %}} console as an {{% alias
+To start using {{% alias service=AC9 %}}, sign in to the {{% alias service=AC9 %}} console as an {{% alias
 service=IAMlong %}} ({{% alias service=IAM %}}) entity (for example, an {{% alias service=IAM %}} user) in your AWS
-account who has access permissions for {{% alias service=AC9 %}}.
+account which has access permissions for {{% alias service=AC9 %}}.
 
-To set up an {{% alias service=IAM %}} entity in your AWS account to access {{% alias service=AC9 %}}, and to sign in to
-the {{% alias service=AC9 %}} console, see
-[Team Setup for AWS Cloud9](https://docs.aws.amazon.com/cloud9/latest/user-guide/setup.html) in the {{% alias
-service=AC9 %}} User Guide.
+Review [Team Setup for AWS Cloud9](https://docs.aws.amazon.com/cloud9/latest/user-guide/setup.html) in the {{% alias
+service=AC9 %}} User Guide, for help with setting up an {{% alias service=IAM %}} entity in your AWS account to access 
+{{% alias service=AC9 %}}, and to sign in to the {{% alias service=AC9 %}} console.
 
 ## Set up Your {{% alias service=AC9 %}} Development Environment
 
