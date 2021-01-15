@@ -190,6 +190,10 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
+func addClientUserAgent(stack *middleware.Stack) error {
+	return awsmiddleware.AddRequestUserAgentMiddleware(stack)
+}
+
 func resolveIdempotencyTokenProvider(o *Options) {
 	if o.IdempotencyTokenProvider != nil {
 		return
