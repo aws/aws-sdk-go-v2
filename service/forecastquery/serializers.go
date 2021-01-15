@@ -29,6 +29,7 @@ func (m *awsAwsjson11_serializeOpQueryForecast) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*QueryForecastInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

@@ -31,6 +31,7 @@ func (m *awsAwsjson11_serializeOpActivatePipeline) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*ActivatePipelineInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -77,6 +78,7 @@ func (m *awsAwsjson11_serializeOpAddTags) HandleSerialize(ctx context.Context, i
 	}
 
 	input, ok := in.Parameters.(*AddTagsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -123,6 +125,7 @@ func (m *awsAwsjson11_serializeOpCreatePipeline) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*CreatePipelineInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -169,6 +172,7 @@ func (m *awsAwsjson11_serializeOpDeactivatePipeline) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*DeactivatePipelineInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -215,6 +219,7 @@ func (m *awsAwsjson11_serializeOpDeletePipeline) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*DeletePipelineInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -261,6 +266,7 @@ func (m *awsAwsjson11_serializeOpDescribeObjects) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*DescribeObjectsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -307,6 +313,7 @@ func (m *awsAwsjson11_serializeOpDescribePipelines) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*DescribePipelinesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -353,6 +360,7 @@ func (m *awsAwsjson11_serializeOpEvaluateExpression) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*EvaluateExpressionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -399,6 +407,7 @@ func (m *awsAwsjson11_serializeOpGetPipelineDefinition) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*GetPipelineDefinitionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -445,6 +454,7 @@ func (m *awsAwsjson11_serializeOpListPipelines) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*ListPipelinesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -491,6 +501,7 @@ func (m *awsAwsjson11_serializeOpPollForTask) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*PollForTaskInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -537,6 +548,7 @@ func (m *awsAwsjson11_serializeOpPutPipelineDefinition) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*PutPipelineDefinitionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -583,6 +595,7 @@ func (m *awsAwsjson11_serializeOpQueryObjects) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*QueryObjectsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -629,6 +642,7 @@ func (m *awsAwsjson11_serializeOpRemoveTags) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*RemoveTagsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -675,6 +689,7 @@ func (m *awsAwsjson11_serializeOpReportTaskProgress) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*ReportTaskProgressInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -721,6 +736,7 @@ func (m *awsAwsjson11_serializeOpReportTaskRunnerHeartbeat) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*ReportTaskRunnerHeartbeatInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -767,6 +783,7 @@ func (m *awsAwsjson11_serializeOpSetStatus) HandleSerialize(ctx context.Context,
 	}
 
 	input, ok := in.Parameters.(*SetStatusInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -813,6 +830,7 @@ func (m *awsAwsjson11_serializeOpSetTaskStatus) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*SetTaskStatusInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -859,6 +877,7 @@ func (m *awsAwsjson11_serializeOpValidatePipelineDefinition) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*ValidatePipelineDefinitionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

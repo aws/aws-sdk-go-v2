@@ -31,6 +31,7 @@ func (m *awsAwsjson11_serializeOpEmptyOperation) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*EmptyOperationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -43,8 +44,6 @@ func (m *awsAwsjson11_serializeOpEmptyOperation) HandleSerialize(ctx context.Con
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonProtocol.EmptyOperation")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -70,6 +69,7 @@ func (m *awsAwsjson11_serializeOpGreetingWithErrors) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*GreetingWithErrorsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -82,8 +82,6 @@ func (m *awsAwsjson11_serializeOpGreetingWithErrors) HandleSerialize(ctx context
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonProtocol.GreetingWithErrors")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -109,6 +107,7 @@ func (m *awsAwsjson11_serializeOpJsonEnums) HandleSerialize(ctx context.Context,
 	}
 
 	input, ok := in.Parameters.(*JsonEnumsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -155,6 +154,7 @@ func (m *awsAwsjson11_serializeOpJsonUnions) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*JsonUnionsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -201,6 +201,7 @@ func (m *awsAwsjson11_serializeOpKitchenSinkOperation) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*KitchenSinkOperationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -247,6 +248,7 @@ func (m *awsAwsjson11_serializeOpNullOperation) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*NullOperationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -293,6 +295,7 @@ func (m *awsAwsjson11_serializeOpOperationWithOptionalInputOutput) HandleSeriali
 	}
 
 	input, ok := in.Parameters.(*OperationWithOptionalInputOutputInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -339,6 +342,7 @@ func (m *awsAwsjson11_serializeOpPutAndGetInlineDocuments) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*PutAndGetInlineDocumentsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -857,20 +861,6 @@ func awsAwsjson11_serializeDocumentStringMap(v map[string]string, value smithyjs
 		om := object.Key(key)
 		om.String(v[key])
 	}
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentEmptyOperationInput(v *EmptyOperationInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentGreetingWithErrorsInput(v *GreetingWithErrorsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
 	return nil
 }
 

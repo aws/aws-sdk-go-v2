@@ -30,6 +30,7 @@ func (m *awsAwsjson11_serializeOpCreateEnvironmentEC2) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*CreateEnvironmentEC2Input)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -76,6 +77,7 @@ func (m *awsAwsjson11_serializeOpCreateEnvironmentMembership) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*CreateEnvironmentMembershipInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -122,6 +124,7 @@ func (m *awsAwsjson11_serializeOpDeleteEnvironment) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*DeleteEnvironmentInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -168,6 +171,7 @@ func (m *awsAwsjson11_serializeOpDeleteEnvironmentMembership) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*DeleteEnvironmentMembershipInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -214,6 +218,7 @@ func (m *awsAwsjson11_serializeOpDescribeEnvironmentMemberships) HandleSerialize
 	}
 
 	input, ok := in.Parameters.(*DescribeEnvironmentMembershipsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -260,6 +265,7 @@ func (m *awsAwsjson11_serializeOpDescribeEnvironments) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*DescribeEnvironmentsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -306,6 +312,7 @@ func (m *awsAwsjson11_serializeOpDescribeEnvironmentStatus) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*DescribeEnvironmentStatusInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -352,6 +359,7 @@ func (m *awsAwsjson11_serializeOpListEnvironments) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*ListEnvironmentsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -398,6 +406,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -444,6 +453,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*TagResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -490,6 +500,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*UntagResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -536,6 +547,7 @@ func (m *awsAwsjson11_serializeOpUpdateEnvironment) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*UpdateEnvironmentInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -582,6 +594,7 @@ func (m *awsAwsjson11_serializeOpUpdateEnvironmentMembership) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*UpdateEnvironmentMembershipInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

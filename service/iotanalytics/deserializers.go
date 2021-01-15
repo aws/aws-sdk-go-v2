@@ -17,6 +17,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
+	"io/ioutil"
 	"strings"
 )
 
@@ -1178,6 +1179,12 @@ func (m *awsRestjson1_deserializeOpDeleteChannel) HandleDeserialize(ctx context.
 	output := &DeleteChannelOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -1272,6 +1279,12 @@ func (m *awsRestjson1_deserializeOpDeleteDataset) HandleDeserialize(ctx context.
 	}
 	output := &DeleteDatasetOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -1368,6 +1381,12 @@ func (m *awsRestjson1_deserializeOpDeleteDatasetContent) HandleDeserialize(ctx c
 	output := &DeleteDatasetContentOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -1463,6 +1482,12 @@ func (m *awsRestjson1_deserializeOpDeleteDatastore) HandleDeserialize(ctx contex
 	output := &DeleteDatastoreOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -1557,6 +1582,12 @@ func (m *awsRestjson1_deserializeOpDeletePipeline) HandleDeserialize(ctx context
 	}
 	output := &DeletePipelineOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -3625,6 +3656,12 @@ func (m *awsRestjson1_deserializeOpPutLoggingOptions) HandleDeserialize(ctx cont
 	output := &PutLoggingOptionsOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -4403,6 +4440,12 @@ func (m *awsRestjson1_deserializeOpUpdateChannel) HandleDeserialize(ctx context.
 	output := &UpdateChannelOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -4497,6 +4540,12 @@ func (m *awsRestjson1_deserializeOpUpdateDataset) HandleDeserialize(ctx context.
 	}
 	output := &UpdateDatasetOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -4593,6 +4642,12 @@ func (m *awsRestjson1_deserializeOpUpdateDatastore) HandleDeserialize(ctx contex
 	output := &UpdateDatastoreOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -4687,6 +4742,12 @@ func (m *awsRestjson1_deserializeOpUpdatePipeline) HandleDeserialize(ctx context
 	}
 	output := &UpdatePipelineOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }

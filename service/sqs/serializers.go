@@ -31,6 +31,7 @@ func (m *awsAwsquery_serializeOpAddPermission) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*AddPermissionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -86,6 +87,7 @@ func (m *awsAwsquery_serializeOpChangeMessageVisibility) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*ChangeMessageVisibilityInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -141,6 +143,7 @@ func (m *awsAwsquery_serializeOpChangeMessageVisibilityBatch) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*ChangeMessageVisibilityBatchInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -196,6 +199,7 @@ func (m *awsAwsquery_serializeOpCreateQueue) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*CreateQueueInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -251,6 +255,7 @@ func (m *awsAwsquery_serializeOpDeleteMessage) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*DeleteMessageInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -306,6 +311,7 @@ func (m *awsAwsquery_serializeOpDeleteMessageBatch) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*DeleteMessageBatchInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -361,6 +367,7 @@ func (m *awsAwsquery_serializeOpDeleteQueue) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*DeleteQueueInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -416,6 +423,7 @@ func (m *awsAwsquery_serializeOpGetQueueAttributes) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*GetQueueAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -471,6 +479,7 @@ func (m *awsAwsquery_serializeOpGetQueueUrl) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*GetQueueUrlInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -526,6 +535,7 @@ func (m *awsAwsquery_serializeOpListDeadLetterSourceQueues) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*ListDeadLetterSourceQueuesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -581,6 +591,7 @@ func (m *awsAwsquery_serializeOpListQueues) HandleSerialize(ctx context.Context,
 	}
 
 	input, ok := in.Parameters.(*ListQueuesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -636,6 +647,7 @@ func (m *awsAwsquery_serializeOpListQueueTags) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*ListQueueTagsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -691,6 +703,7 @@ func (m *awsAwsquery_serializeOpPurgeQueue) HandleSerialize(ctx context.Context,
 	}
 
 	input, ok := in.Parameters.(*PurgeQueueInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -746,6 +759,7 @@ func (m *awsAwsquery_serializeOpReceiveMessage) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*ReceiveMessageInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -801,6 +815,7 @@ func (m *awsAwsquery_serializeOpRemovePermission) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*RemovePermissionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -856,6 +871,7 @@ func (m *awsAwsquery_serializeOpSendMessage) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*SendMessageInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -911,6 +927,7 @@ func (m *awsAwsquery_serializeOpSendMessageBatch) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*SendMessageBatchInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -966,6 +983,7 @@ func (m *awsAwsquery_serializeOpSetQueueAttributes) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*SetQueueAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1021,6 +1039,7 @@ func (m *awsAwsquery_serializeOpTagQueue) HandleSerialize(ctx context.Context, i
 	}
 
 	input, ok := in.Parameters.(*TagQueueInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1076,6 +1095,7 @@ func (m *awsAwsquery_serializeOpUntagQueue) HandleSerialize(ctx context.Context,
 	}
 
 	input, ok := in.Parameters.(*UntagQueueInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

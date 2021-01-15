@@ -18,6 +18,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
+	"io/ioutil"
 	"strconv"
 	"strings"
 )
@@ -513,45 +514,10 @@ func (m *awsAwsquery_deserializeOpCreateCustomVerificationEmailTemplate) HandleD
 	output := &CreateCustomVerificationEmailTemplateOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("CreateCustomVerificationEmailTemplateResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentCreateCustomVerificationEmailTemplateOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1422,45 +1388,10 @@ func (m *awsAwsquery_deserializeOpDeleteCustomVerificationEmailTemplate) HandleD
 	output := &DeleteCustomVerificationEmailTemplateOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("DeleteCustomVerificationEmailTemplateResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteCustomVerificationEmailTemplateOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2163,45 +2094,10 @@ func (m *awsAwsquery_deserializeOpDeleteVerifiedEmailAddress) HandleDeserialize(
 	output := &DeleteVerifiedEmailAddressOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("DeleteVerifiedEmailAddressResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteVerifiedEmailAddressOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -6498,45 +6394,10 @@ func (m *awsAwsquery_deserializeOpUpdateAccountSendingEnabled) HandleDeserialize
 	output := &UpdateAccountSendingEnabledOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("UpdateAccountSendingEnabledResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentUpdateAccountSendingEnabledOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -6723,45 +6584,10 @@ func (m *awsAwsquery_deserializeOpUpdateConfigurationSetReputationMetricsEnabled
 	output := &UpdateConfigurationSetReputationMetricsEnabledOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("UpdateConfigurationSetReputationMetricsEnabledResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentUpdateConfigurationSetReputationMetricsEnabledOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -6831,45 +6657,10 @@ func (m *awsAwsquery_deserializeOpUpdateConfigurationSetSendingEnabled) HandleDe
 	output := &UpdateConfigurationSetSendingEnabledOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("UpdateConfigurationSetSendingEnabledResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentUpdateConfigurationSetSendingEnabledOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -7053,45 +6844,10 @@ func (m *awsAwsquery_deserializeOpUpdateCustomVerificationEmailTemplate) HandleD
 	output := &UpdateCustomVerificationEmailTemplateOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("UpdateCustomVerificationEmailTemplateResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentUpdateCustomVerificationEmailTemplateOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -7611,45 +7367,10 @@ func (m *awsAwsquery_deserializeOpVerifyEmailAddress) HandleDeserialize(ctx cont
 	output := &VerifyEmailAddressOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("VerifyEmailAddressResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentVerifyEmailAddressOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -15406,42 +15127,6 @@ func awsAwsquery_deserializeOpDocumentCreateConfigurationSetTrackingOptionsOutpu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateCustomVerificationEmailTemplateOutput(v **CreateCustomVerificationEmailTemplateOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *CreateCustomVerificationEmailTemplateOutput
-	if *v == nil {
-		sv = &CreateCustomVerificationEmailTemplateOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
 func awsAwsquery_deserializeOpDocumentCreateReceiptFilterOutput(v **CreateReceiptFilterOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15694,42 +15379,6 @@ func awsAwsquery_deserializeOpDocumentDeleteConfigurationSetTrackingOptionsOutpu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteCustomVerificationEmailTemplateOutput(v **DeleteCustomVerificationEmailTemplateOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *DeleteCustomVerificationEmailTemplateOutput
-	if *v == nil {
-		sv = &DeleteCustomVerificationEmailTemplateOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
 func awsAwsquery_deserializeOpDocumentDeleteIdentityOutput(v **DeleteIdentityOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15917,42 +15566,6 @@ func awsAwsquery_deserializeOpDocumentDeleteTemplateOutput(v **DeleteTemplateOut
 	var sv *DeleteTemplateOutput
 	if *v == nil {
 		sv = &DeleteTemplateOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsquery_deserializeDocumentDeleteVerifiedEmailAddressOutput(v **DeleteVerifiedEmailAddressOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *DeleteVerifiedEmailAddressOutput
-	if *v == nil {
-		sv = &DeleteVerifiedEmailAddressOutput{}
 	} else {
 		sv = *v
 	}
@@ -17830,42 +17443,6 @@ func awsAwsquery_deserializeOpDocumentTestRenderTemplateOutput(v **TestRenderTem
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentUpdateAccountSendingEnabledOutput(v **UpdateAccountSendingEnabledOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *UpdateAccountSendingEnabledOutput
-	if *v == nil {
-		sv = &UpdateAccountSendingEnabledOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
 func awsAwsquery_deserializeOpDocumentUpdateConfigurationSetEventDestinationOutput(v **UpdateConfigurationSetEventDestinationOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17902,78 +17479,6 @@ func awsAwsquery_deserializeOpDocumentUpdateConfigurationSetEventDestinationOutp
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentUpdateConfigurationSetReputationMetricsEnabledOutput(v **UpdateConfigurationSetReputationMetricsEnabledOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *UpdateConfigurationSetReputationMetricsEnabledOutput
-	if *v == nil {
-		sv = &UpdateConfigurationSetReputationMetricsEnabledOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsquery_deserializeDocumentUpdateConfigurationSetSendingEnabledOutput(v **UpdateConfigurationSetSendingEnabledOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *UpdateConfigurationSetSendingEnabledOutput
-	if *v == nil {
-		sv = &UpdateConfigurationSetSendingEnabledOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
 func awsAwsquery_deserializeOpDocumentUpdateConfigurationSetTrackingOptionsOutput(v **UpdateConfigurationSetTrackingOptionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17981,42 +17486,6 @@ func awsAwsquery_deserializeOpDocumentUpdateConfigurationSetTrackingOptionsOutpu
 	var sv *UpdateConfigurationSetTrackingOptionsOutput
 	if *v == nil {
 		sv = &UpdateConfigurationSetTrackingOptionsOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsquery_deserializeDocumentUpdateCustomVerificationEmailTemplateOutput(v **UpdateCustomVerificationEmailTemplateOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *UpdateCustomVerificationEmailTemplateOutput
-	if *v == nil {
-		sv = &UpdateCustomVerificationEmailTemplateOutput{}
 	} else {
 		sv = *v
 	}
@@ -18195,42 +17664,6 @@ func awsAwsquery_deserializeOpDocumentVerifyDomainIdentityOutput(v **VerifyDomai
 				sv.VerificationToken = ptr.String(xtv)
 			}
 
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsquery_deserializeDocumentVerifyEmailAddressOutput(v **VerifyEmailAddressOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *VerifyEmailAddressOutput
-	if *v == nil {
-		sv = &VerifyEmailAddressOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()

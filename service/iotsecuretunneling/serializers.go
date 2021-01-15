@@ -30,6 +30,7 @@ func (m *awsAwsjson11_serializeOpCloseTunnel) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*CloseTunnelInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -76,6 +77,7 @@ func (m *awsAwsjson11_serializeOpDescribeTunnel) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*DescribeTunnelInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -122,6 +124,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -168,6 +171,7 @@ func (m *awsAwsjson11_serializeOpListTunnels) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*ListTunnelsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -214,6 +218,7 @@ func (m *awsAwsjson11_serializeOpOpenTunnel) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*OpenTunnelInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -260,6 +265,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*TagResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -306,6 +312,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*UntagResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

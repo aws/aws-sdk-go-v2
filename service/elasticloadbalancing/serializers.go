@@ -30,6 +30,7 @@ func (m *awsAwsquery_serializeOpAddTags) HandleSerialize(ctx context.Context, in
 	}
 
 	input, ok := in.Parameters.(*AddTagsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -85,6 +86,7 @@ func (m *awsAwsquery_serializeOpApplySecurityGroupsToLoadBalancer) HandleSeriali
 	}
 
 	input, ok := in.Parameters.(*ApplySecurityGroupsToLoadBalancerInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -140,6 +142,7 @@ func (m *awsAwsquery_serializeOpAttachLoadBalancerToSubnets) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*AttachLoadBalancerToSubnetsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -195,6 +198,7 @@ func (m *awsAwsquery_serializeOpConfigureHealthCheck) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*ConfigureHealthCheckInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -250,6 +254,7 @@ func (m *awsAwsquery_serializeOpCreateAppCookieStickinessPolicy) HandleSerialize
 	}
 
 	input, ok := in.Parameters.(*CreateAppCookieStickinessPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -305,6 +310,7 @@ func (m *awsAwsquery_serializeOpCreateLBCookieStickinessPolicy) HandleSerialize(
 	}
 
 	input, ok := in.Parameters.(*CreateLBCookieStickinessPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -360,6 +366,7 @@ func (m *awsAwsquery_serializeOpCreateLoadBalancer) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*CreateLoadBalancerInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -415,6 +422,7 @@ func (m *awsAwsquery_serializeOpCreateLoadBalancerListeners) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*CreateLoadBalancerListenersInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -470,6 +478,7 @@ func (m *awsAwsquery_serializeOpCreateLoadBalancerPolicy) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*CreateLoadBalancerPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -525,6 +534,7 @@ func (m *awsAwsquery_serializeOpDeleteLoadBalancer) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*DeleteLoadBalancerInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -580,6 +590,7 @@ func (m *awsAwsquery_serializeOpDeleteLoadBalancerListeners) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*DeleteLoadBalancerListenersInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -635,6 +646,7 @@ func (m *awsAwsquery_serializeOpDeleteLoadBalancerPolicy) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*DeleteLoadBalancerPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -690,6 +702,7 @@ func (m *awsAwsquery_serializeOpDeregisterInstancesFromLoadBalancer) HandleSeria
 	}
 
 	input, ok := in.Parameters.(*DeregisterInstancesFromLoadBalancerInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -745,6 +758,7 @@ func (m *awsAwsquery_serializeOpDescribeAccountLimits) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*DescribeAccountLimitsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -800,6 +814,7 @@ func (m *awsAwsquery_serializeOpDescribeInstanceHealth) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*DescribeInstanceHealthInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -855,6 +870,7 @@ func (m *awsAwsquery_serializeOpDescribeLoadBalancerAttributes) HandleSerialize(
 	}
 
 	input, ok := in.Parameters.(*DescribeLoadBalancerAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -910,6 +926,7 @@ func (m *awsAwsquery_serializeOpDescribeLoadBalancerPolicies) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*DescribeLoadBalancerPoliciesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -965,6 +982,7 @@ func (m *awsAwsquery_serializeOpDescribeLoadBalancerPolicyTypes) HandleSerialize
 	}
 
 	input, ok := in.Parameters.(*DescribeLoadBalancerPolicyTypesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1020,6 +1038,7 @@ func (m *awsAwsquery_serializeOpDescribeLoadBalancers) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*DescribeLoadBalancersInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1075,6 +1094,7 @@ func (m *awsAwsquery_serializeOpDescribeTags) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*DescribeTagsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1130,6 +1150,7 @@ func (m *awsAwsquery_serializeOpDetachLoadBalancerFromSubnets) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*DetachLoadBalancerFromSubnetsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1185,6 +1206,7 @@ func (m *awsAwsquery_serializeOpDisableAvailabilityZonesForLoadBalancer) HandleS
 	}
 
 	input, ok := in.Parameters.(*DisableAvailabilityZonesForLoadBalancerInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1240,6 +1262,7 @@ func (m *awsAwsquery_serializeOpEnableAvailabilityZonesForLoadBalancer) HandleSe
 	}
 
 	input, ok := in.Parameters.(*EnableAvailabilityZonesForLoadBalancerInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1295,6 +1318,7 @@ func (m *awsAwsquery_serializeOpModifyLoadBalancerAttributes) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*ModifyLoadBalancerAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1350,6 +1374,7 @@ func (m *awsAwsquery_serializeOpRegisterInstancesWithLoadBalancer) HandleSeriali
 	}
 
 	input, ok := in.Parameters.(*RegisterInstancesWithLoadBalancerInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1405,6 +1430,7 @@ func (m *awsAwsquery_serializeOpRemoveTags) HandleSerialize(ctx context.Context,
 	}
 
 	input, ok := in.Parameters.(*RemoveTagsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1460,6 +1486,7 @@ func (m *awsAwsquery_serializeOpSetLoadBalancerListenerSSLCertificate) HandleSer
 	}
 
 	input, ok := in.Parameters.(*SetLoadBalancerListenerSSLCertificateInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1515,6 +1542,7 @@ func (m *awsAwsquery_serializeOpSetLoadBalancerPoliciesForBackendServer) HandleS
 	}
 
 	input, ok := in.Parameters.(*SetLoadBalancerPoliciesForBackendServerInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1570,6 +1598,7 @@ func (m *awsAwsquery_serializeOpSetLoadBalancerPoliciesOfListener) HandleSeriali
 	}
 
 	input, ok := in.Parameters.(*SetLoadBalancerPoliciesOfListenerInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

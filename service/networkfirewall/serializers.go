@@ -30,6 +30,7 @@ func (m *awsAwsjson10_serializeOpAssociateFirewallPolicy) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*AssociateFirewallPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -76,6 +77,7 @@ func (m *awsAwsjson10_serializeOpAssociateSubnets) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*AssociateSubnetsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -122,6 +124,7 @@ func (m *awsAwsjson10_serializeOpCreateFirewall) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*CreateFirewallInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -168,6 +171,7 @@ func (m *awsAwsjson10_serializeOpCreateFirewallPolicy) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*CreateFirewallPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -214,6 +218,7 @@ func (m *awsAwsjson10_serializeOpCreateRuleGroup) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*CreateRuleGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -260,6 +265,7 @@ func (m *awsAwsjson10_serializeOpDeleteFirewall) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*DeleteFirewallInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -306,6 +312,7 @@ func (m *awsAwsjson10_serializeOpDeleteFirewallPolicy) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*DeleteFirewallPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -352,6 +359,7 @@ func (m *awsAwsjson10_serializeOpDeleteResourcePolicy) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*DeleteResourcePolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -398,6 +406,7 @@ func (m *awsAwsjson10_serializeOpDeleteRuleGroup) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*DeleteRuleGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -444,6 +453,7 @@ func (m *awsAwsjson10_serializeOpDescribeFirewall) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*DescribeFirewallInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -490,6 +500,7 @@ func (m *awsAwsjson10_serializeOpDescribeFirewallPolicy) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*DescribeFirewallPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -536,6 +547,7 @@ func (m *awsAwsjson10_serializeOpDescribeLoggingConfiguration) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*DescribeLoggingConfigurationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -582,6 +594,7 @@ func (m *awsAwsjson10_serializeOpDescribeResourcePolicy) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*DescribeResourcePolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -628,6 +641,7 @@ func (m *awsAwsjson10_serializeOpDescribeRuleGroup) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*DescribeRuleGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -674,6 +688,7 @@ func (m *awsAwsjson10_serializeOpDisassociateSubnets) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*DisassociateSubnetsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -720,6 +735,7 @@ func (m *awsAwsjson10_serializeOpListFirewallPolicies) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*ListFirewallPoliciesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -766,6 +782,7 @@ func (m *awsAwsjson10_serializeOpListFirewalls) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*ListFirewallsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -812,6 +829,7 @@ func (m *awsAwsjson10_serializeOpListRuleGroups) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*ListRuleGroupsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -858,6 +876,7 @@ func (m *awsAwsjson10_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -904,6 +923,7 @@ func (m *awsAwsjson10_serializeOpPutResourcePolicy) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*PutResourcePolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -950,6 +970,7 @@ func (m *awsAwsjson10_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*TagResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -996,6 +1017,7 @@ func (m *awsAwsjson10_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*UntagResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1042,6 +1064,7 @@ func (m *awsAwsjson10_serializeOpUpdateFirewallDeleteProtection) HandleSerialize
 	}
 
 	input, ok := in.Parameters.(*UpdateFirewallDeleteProtectionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1088,6 +1111,7 @@ func (m *awsAwsjson10_serializeOpUpdateFirewallDescription) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*UpdateFirewallDescriptionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1134,6 +1158,7 @@ func (m *awsAwsjson10_serializeOpUpdateFirewallPolicy) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*UpdateFirewallPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1180,6 +1205,7 @@ func (m *awsAwsjson10_serializeOpUpdateFirewallPolicyChangeProtection) HandleSer
 	}
 
 	input, ok := in.Parameters.(*UpdateFirewallPolicyChangeProtectionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1226,6 +1252,7 @@ func (m *awsAwsjson10_serializeOpUpdateLoggingConfiguration) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*UpdateLoggingConfigurationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1272,6 +1299,7 @@ func (m *awsAwsjson10_serializeOpUpdateRuleGroup) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*UpdateRuleGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1318,6 +1346,7 @@ func (m *awsAwsjson10_serializeOpUpdateSubnetChangeProtection) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*UpdateSubnetChangeProtectionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

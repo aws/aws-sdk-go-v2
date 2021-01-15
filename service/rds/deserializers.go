@@ -18,6 +18,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
+	"io/ioutil"
 	"strconv"
 	"strings"
 )
@@ -48,45 +49,10 @@ func (m *awsAwsquery_deserializeOpAddRoleToDBCluster) HandleDeserialize(ctx cont
 	output := &AddRoleToDBClusterOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("AddRoleToDBClusterResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentAddRoleToDBClusterOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -165,45 +131,10 @@ func (m *awsAwsquery_deserializeOpAddRoleToDBInstance) HandleDeserialize(ctx con
 	output := &AddRoleToDBInstanceOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("AddRoleToDBInstanceResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentAddRoleToDBInstanceOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -393,45 +324,10 @@ func (m *awsAwsquery_deserializeOpAddTagsToResource) HandleDeserialize(ctx conte
 	output := &AddTagsToResourceOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("AddTagsToResourceResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentAddTagsToResourceOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -3780,45 +3676,10 @@ func (m *awsAwsquery_deserializeOpDeleteDBClusterParameterGroup) HandleDeseriali
 	output := &DeleteDBClusterParameterGroupOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("DeleteDBClusterParameterGroupResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteDBClusterParameterGroupOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -4236,45 +4097,10 @@ func (m *awsAwsquery_deserializeOpDeleteDBParameterGroup) HandleDeserialize(ctx 
 	output := &DeleteDBParameterGroupOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("DeleteDBParameterGroupResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteDBParameterGroupOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -4458,45 +4284,10 @@ func (m *awsAwsquery_deserializeOpDeleteDBSecurityGroup) HandleDeserialize(ctx c
 	output := &DeleteDBSecurityGroupOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("DeleteDBSecurityGroupResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteDBSecurityGroupOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -4680,45 +4471,10 @@ func (m *awsAwsquery_deserializeOpDeleteDBSubnetGroup) HandleDeserialize(ctx con
 	output := &DeleteDBSubnetGroupOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("DeleteDBSubnetGroupResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteDBSubnetGroupOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -5124,45 +4880,10 @@ func (m *awsAwsquery_deserializeOpDeleteOptionGroup) HandleDeserialize(ctx conte
 	output := &DeleteOptionGroupOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("DeleteOptionGroupResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteOptionGroupOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -12603,45 +12324,10 @@ func (m *awsAwsquery_deserializeOpRemoveRoleFromDBCluster) HandleDeserialize(ctx
 	output := &RemoveRoleFromDBClusterOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("RemoveRoleFromDBClusterResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentRemoveRoleFromDBClusterOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -12717,45 +12403,10 @@ func (m *awsAwsquery_deserializeOpRemoveRoleFromDBInstance) HandleDeserialize(ct
 	output := &RemoveRoleFromDBInstanceOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("RemoveRoleFromDBInstanceResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentRemoveRoleFromDBInstanceOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -12942,45 +12593,10 @@ func (m *awsAwsquery_deserializeOpRemoveTagsFromResource) HandleDeserialize(ctx 
 	output := &RemoveTagsFromResourceOutput{}
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("RemoveTagsFromResourceResult")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentRemoveTagsFromResourceOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -42605,78 +42221,6 @@ func awsAwsquery_deserializeDocumentVpnDetails(v **types.VpnDetails, decoder smi
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentAddRoleToDBClusterOutput(v **AddRoleToDBClusterOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *AddRoleToDBClusterOutput
-	if *v == nil {
-		sv = &AddRoleToDBClusterOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsquery_deserializeDocumentAddRoleToDBInstanceOutput(v **AddRoleToDBInstanceOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *AddRoleToDBInstanceOutput
-	if *v == nil {
-		sv = &AddRoleToDBInstanceOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
 func awsAwsquery_deserializeOpDocumentAddSourceIdentifierToSubscriptionOutput(v **AddSourceIdentifierToSubscriptionOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -42705,42 +42249,6 @@ func awsAwsquery_deserializeOpDocumentAddSourceIdentifierToSubscriptionOutput(v 
 				return err
 			}
 
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsquery_deserializeDocumentAddTagsToResourceOutput(v **AddTagsToResourceOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *AddTagsToResourceOutput
-	if *v == nil {
-		sv = &AddTagsToResourceOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -44395,42 +43903,6 @@ func awsAwsquery_deserializeOpDocumentDeleteDBClusterOutput(v **DeleteDBClusterO
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteDBClusterParameterGroupOutput(v **DeleteDBClusterParameterGroupOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *DeleteDBClusterParameterGroupOutput
-	if *v == nil {
-		sv = &DeleteDBClusterParameterGroupOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
 func awsAwsquery_deserializeOpDocumentDeleteDBClusterSnapshotOutput(v **DeleteDBClusterSnapshotOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -44557,42 +44029,6 @@ func awsAwsquery_deserializeOpDocumentDeleteDBInstanceOutput(v **DeleteDBInstanc
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteDBParameterGroupOutput(v **DeleteDBParameterGroupOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *DeleteDBParameterGroupOutput
-	if *v == nil {
-		sv = &DeleteDBParameterGroupOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
 func awsAwsquery_deserializeOpDocumentDeleteDBProxyOutput(v **DeleteDBProxyOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -44635,42 +44071,6 @@ func awsAwsquery_deserializeOpDocumentDeleteDBProxyOutput(v **DeleteDBProxyOutpu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteDBSecurityGroupOutput(v **DeleteDBSecurityGroupOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *DeleteDBSecurityGroupOutput
-	if *v == nil {
-		sv = &DeleteDBSecurityGroupOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
 func awsAwsquery_deserializeOpDocumentDeleteDBSnapshotOutput(v **DeleteDBSnapshotOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -44699,42 +44099,6 @@ func awsAwsquery_deserializeOpDocumentDeleteDBSnapshotOutput(v **DeleteDBSnapsho
 				return err
 			}
 
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsquery_deserializeDocumentDeleteDBSubnetGroupOutput(v **DeleteDBSubnetGroupOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *DeleteDBSubnetGroupOutput
-	if *v == nil {
-		sv = &DeleteDBSubnetGroupOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -44952,42 +44316,6 @@ func awsAwsquery_deserializeOpDocumentDeleteInstallationMediaOutput(v **DeleteIn
 				sv.Status = ptr.String(xtv)
 			}
 
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsquery_deserializeDocumentDeleteOptionGroupOutput(v **DeleteOptionGroupOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *DeleteOptionGroupOutput
-	if *v == nil {
-		sv = &DeleteOptionGroupOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -48506,78 +47834,6 @@ func awsAwsquery_deserializeOpDocumentRemoveFromGlobalClusterOutput(v **RemoveFr
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentRemoveRoleFromDBClusterOutput(v **RemoveRoleFromDBClusterOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *RemoveRoleFromDBClusterOutput
-	if *v == nil {
-		sv = &RemoveRoleFromDBClusterOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsquery_deserializeDocumentRemoveRoleFromDBInstanceOutput(v **RemoveRoleFromDBInstanceOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *RemoveRoleFromDBInstanceOutput
-	if *v == nil {
-		sv = &RemoveRoleFromDBInstanceOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
 func awsAwsquery_deserializeOpDocumentRemoveSourceIdentifierFromSubscriptionOutput(v **RemoveSourceIdentifierFromSubscriptionOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -48606,42 +47862,6 @@ func awsAwsquery_deserializeOpDocumentRemoveSourceIdentifierFromSubscriptionOutp
 				return err
 			}
 
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsquery_deserializeDocumentRemoveTagsFromResourceOutput(v **RemoveTagsFromResourceOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *RemoveTagsFromResourceOutput
-	if *v == nil {
-		sv = &RemoveTagsFromResourceOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()

@@ -31,6 +31,7 @@ func (m *awsAwsjson11_serializeOpAssociateDRTLogBucket) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*AssociateDRTLogBucketInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -77,6 +78,7 @@ func (m *awsAwsjson11_serializeOpAssociateDRTRole) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*AssociateDRTRoleInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -123,6 +125,7 @@ func (m *awsAwsjson11_serializeOpAssociateHealthCheck) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*AssociateHealthCheckInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -169,6 +172,7 @@ func (m *awsAwsjson11_serializeOpAssociateProactiveEngagementDetails) HandleSeri
 	}
 
 	input, ok := in.Parameters.(*AssociateProactiveEngagementDetailsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -215,6 +219,7 @@ func (m *awsAwsjson11_serializeOpCreateProtection) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*CreateProtectionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -261,6 +266,7 @@ func (m *awsAwsjson11_serializeOpCreateProtectionGroup) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*CreateProtectionGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -307,6 +313,7 @@ func (m *awsAwsjson11_serializeOpCreateSubscription) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*CreateSubscriptionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -319,8 +326,6 @@ func (m *awsAwsjson11_serializeOpCreateSubscription) HandleSerialize(ctx context
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.CreateSubscription")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -346,6 +351,7 @@ func (m *awsAwsjson11_serializeOpDeleteProtection) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*DeleteProtectionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -392,6 +398,7 @@ func (m *awsAwsjson11_serializeOpDeleteProtectionGroup) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*DeleteProtectionGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -438,6 +445,7 @@ func (m *awsAwsjson11_serializeOpDeleteSubscription) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*DeleteSubscriptionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -450,8 +458,6 @@ func (m *awsAwsjson11_serializeOpDeleteSubscription) HandleSerialize(ctx context
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DeleteSubscription")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -477,6 +483,7 @@ func (m *awsAwsjson11_serializeOpDescribeAttack) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*DescribeAttackInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -523,6 +530,7 @@ func (m *awsAwsjson11_serializeOpDescribeAttackStatistics) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*DescribeAttackStatisticsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -535,8 +543,6 @@ func (m *awsAwsjson11_serializeOpDescribeAttackStatistics) HandleSerialize(ctx c
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DescribeAttackStatistics")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -562,6 +568,7 @@ func (m *awsAwsjson11_serializeOpDescribeDRTAccess) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*DescribeDRTAccessInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -574,8 +581,6 @@ func (m *awsAwsjson11_serializeOpDescribeDRTAccess) HandleSerialize(ctx context.
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DescribeDRTAccess")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -601,6 +606,7 @@ func (m *awsAwsjson11_serializeOpDescribeEmergencyContactSettings) HandleSeriali
 	}
 
 	input, ok := in.Parameters.(*DescribeEmergencyContactSettingsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -613,8 +619,6 @@ func (m *awsAwsjson11_serializeOpDescribeEmergencyContactSettings) HandleSeriali
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DescribeEmergencyContactSettings")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -640,6 +644,7 @@ func (m *awsAwsjson11_serializeOpDescribeProtection) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*DescribeProtectionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -686,6 +691,7 @@ func (m *awsAwsjson11_serializeOpDescribeProtectionGroup) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*DescribeProtectionGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -732,6 +738,7 @@ func (m *awsAwsjson11_serializeOpDescribeSubscription) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*DescribeSubscriptionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -744,8 +751,6 @@ func (m *awsAwsjson11_serializeOpDescribeSubscription) HandleSerialize(ctx conte
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DescribeSubscription")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -771,6 +776,7 @@ func (m *awsAwsjson11_serializeOpDisableProactiveEngagement) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*DisableProactiveEngagementInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -783,8 +789,6 @@ func (m *awsAwsjson11_serializeOpDisableProactiveEngagement) HandleSerialize(ctx
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DisableProactiveEngagement")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -810,6 +814,7 @@ func (m *awsAwsjson11_serializeOpDisassociateDRTLogBucket) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*DisassociateDRTLogBucketInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -856,6 +861,7 @@ func (m *awsAwsjson11_serializeOpDisassociateDRTRole) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*DisassociateDRTRoleInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -868,8 +874,6 @@ func (m *awsAwsjson11_serializeOpDisassociateDRTRole) HandleSerialize(ctx contex
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DisassociateDRTRole")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -895,6 +899,7 @@ func (m *awsAwsjson11_serializeOpDisassociateHealthCheck) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*DisassociateHealthCheckInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -941,6 +946,7 @@ func (m *awsAwsjson11_serializeOpEnableProactiveEngagement) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*EnableProactiveEngagementInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -953,8 +959,6 @@ func (m *awsAwsjson11_serializeOpEnableProactiveEngagement) HandleSerialize(ctx 
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.EnableProactiveEngagement")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -980,6 +984,7 @@ func (m *awsAwsjson11_serializeOpGetSubscriptionState) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*GetSubscriptionStateInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -992,8 +997,6 @@ func (m *awsAwsjson11_serializeOpGetSubscriptionState) HandleSerialize(ctx conte
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.GetSubscriptionState")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -1019,6 +1022,7 @@ func (m *awsAwsjson11_serializeOpListAttacks) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*ListAttacksInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1065,6 +1069,7 @@ func (m *awsAwsjson11_serializeOpListProtectionGroups) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*ListProtectionGroupsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1111,6 +1116,7 @@ func (m *awsAwsjson11_serializeOpListProtections) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*ListProtectionsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1157,6 +1163,7 @@ func (m *awsAwsjson11_serializeOpListResourcesInProtectionGroup) HandleSerialize
 	}
 
 	input, ok := in.Parameters.(*ListResourcesInProtectionGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1203,6 +1210,7 @@ func (m *awsAwsjson11_serializeOpUpdateEmergencyContactSettings) HandleSerialize
 	}
 
 	input, ok := in.Parameters.(*UpdateEmergencyContactSettingsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1249,6 +1257,7 @@ func (m *awsAwsjson11_serializeOpUpdateProtectionGroup) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*UpdateProtectionGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1295,6 +1304,7 @@ func (m *awsAwsjson11_serializeOpUpdateSubscription) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*UpdateSubscriptionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

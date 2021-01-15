@@ -31,6 +31,7 @@ func (m *awsEc2query_serializeOpEmptyInputAndEmptyOutput) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*EmptyInputAndEmptyOutputInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -48,8 +49,6 @@ func (m *awsEc2query_serializeOpEmptyInputAndEmptyOutput) HandleSerialize(ctx co
 	body := bodyEncoder.Object()
 	body.Key("Action").String("EmptyInputAndEmptyOutput")
 	body.Key("Version").String("2020-01-08")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -84,6 +83,7 @@ func (m *awsEc2query_serializeOpGreetingWithErrors) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*GreetingWithErrorsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -101,8 +101,6 @@ func (m *awsEc2query_serializeOpGreetingWithErrors) HandleSerialize(ctx context.
 	body := bodyEncoder.Object()
 	body.Key("Action").String("GreetingWithErrors")
 	body.Key("Version").String("2020-01-08")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -137,6 +135,7 @@ func (m *awsEc2query_serializeOpIgnoresWrappingXmlName) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*IgnoresWrappingXmlNameInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -154,8 +153,6 @@ func (m *awsEc2query_serializeOpIgnoresWrappingXmlName) HandleSerialize(ctx cont
 	body := bodyEncoder.Object()
 	body.Key("Action").String("IgnoresWrappingXmlName")
 	body.Key("Version").String("2020-01-08")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -190,6 +187,7 @@ func (m *awsEc2query_serializeOpNestedStructures) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*NestedStructuresInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -245,6 +243,7 @@ func (m *awsEc2query_serializeOpNoInputAndOutput) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*NoInputAndOutputInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -262,8 +261,6 @@ func (m *awsEc2query_serializeOpNoInputAndOutput) HandleSerialize(ctx context.Co
 	body := bodyEncoder.Object()
 	body.Key("Action").String("NoInputAndOutput")
 	body.Key("Version").String("2020-01-08")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -298,6 +295,7 @@ func (m *awsEc2query_serializeOpQueryIdempotencyTokenAutoFill) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*QueryIdempotencyTokenAutoFillInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -353,6 +351,7 @@ func (m *awsEc2query_serializeOpQueryLists) HandleSerialize(ctx context.Context,
 	}
 
 	input, ok := in.Parameters.(*QueryListsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -408,6 +407,7 @@ func (m *awsEc2query_serializeOpQueryTimestamps) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*QueryTimestampsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -463,6 +463,7 @@ func (m *awsEc2query_serializeOpRecursiveXmlShapes) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*RecursiveXmlShapesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -480,8 +481,6 @@ func (m *awsEc2query_serializeOpRecursiveXmlShapes) HandleSerialize(ctx context.
 	body := bodyEncoder.Object()
 	body.Key("Action").String("RecursiveXmlShapes")
 	body.Key("Version").String("2020-01-08")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -516,6 +515,7 @@ func (m *awsEc2query_serializeOpSimpleInputParams) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*SimpleInputParamsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -571,6 +571,7 @@ func (m *awsEc2query_serializeOpSimpleScalarXmlProperties) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*SimpleScalarXmlPropertiesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -588,8 +589,6 @@ func (m *awsEc2query_serializeOpSimpleScalarXmlProperties) HandleSerialize(ctx c
 	body := bodyEncoder.Object()
 	body.Key("Action").String("SimpleScalarXmlProperties")
 	body.Key("Version").String("2020-01-08")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -624,6 +623,7 @@ func (m *awsEc2query_serializeOpXmlBlobs) HandleSerialize(ctx context.Context, i
 	}
 
 	input, ok := in.Parameters.(*XmlBlobsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -641,8 +641,6 @@ func (m *awsEc2query_serializeOpXmlBlobs) HandleSerialize(ctx context.Context, i
 	body := bodyEncoder.Object()
 	body.Key("Action").String("XmlBlobs")
 	body.Key("Version").String("2020-01-08")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -677,6 +675,7 @@ func (m *awsEc2query_serializeOpXmlEmptyBlobs) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*XmlEmptyBlobsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -694,8 +693,6 @@ func (m *awsEc2query_serializeOpXmlEmptyBlobs) HandleSerialize(ctx context.Conte
 	body := bodyEncoder.Object()
 	body.Key("Action").String("XmlEmptyBlobs")
 	body.Key("Version").String("2020-01-08")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -730,6 +727,7 @@ func (m *awsEc2query_serializeOpXmlEmptyLists) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*XmlEmptyListsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -747,8 +745,6 @@ func (m *awsEc2query_serializeOpXmlEmptyLists) HandleSerialize(ctx context.Conte
 	body := bodyEncoder.Object()
 	body.Key("Action").String("XmlEmptyLists")
 	body.Key("Version").String("2020-01-08")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -783,6 +779,7 @@ func (m *awsEc2query_serializeOpXmlEnums) HandleSerialize(ctx context.Context, i
 	}
 
 	input, ok := in.Parameters.(*XmlEnumsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -800,8 +797,6 @@ func (m *awsEc2query_serializeOpXmlEnums) HandleSerialize(ctx context.Context, i
 	body := bodyEncoder.Object()
 	body.Key("Action").String("XmlEnums")
 	body.Key("Version").String("2020-01-08")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -836,6 +831,7 @@ func (m *awsEc2query_serializeOpXmlLists) HandleSerialize(ctx context.Context, i
 	}
 
 	input, ok := in.Parameters.(*XmlListsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -853,8 +849,6 @@ func (m *awsEc2query_serializeOpXmlLists) HandleSerialize(ctx context.Context, i
 	body := bodyEncoder.Object()
 	body.Key("Action").String("XmlLists")
 	body.Key("Version").String("2020-01-08")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -889,6 +883,7 @@ func (m *awsEc2query_serializeOpXmlNamespaces) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*XmlNamespacesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -906,8 +901,6 @@ func (m *awsEc2query_serializeOpXmlNamespaces) HandleSerialize(ctx context.Conte
 	body := bodyEncoder.Object()
 	body.Key("Action").String("XmlNamespaces")
 	body.Key("Version").String("2020-01-08")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -942,6 +935,7 @@ func (m *awsEc2query_serializeOpXmlTimestamps) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*XmlTimestampsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -959,8 +953,6 @@ func (m *awsEc2query_serializeOpXmlTimestamps) HandleSerialize(ctx context.Conte
 	body := bodyEncoder.Object()
 	body.Key("Action").String("XmlTimestamps")
 	body.Key("Version").String("2020-01-08")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -1062,20 +1054,6 @@ func awsEc2query_serializeOpDocumentEmptyInputAndEmptyOutputInput(v *EmptyInputA
 	return nil
 }
 
-func awsEc2query_serializeDocumentGreetingWithErrorsInput(v *GreetingWithErrorsInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
-func awsEc2query_serializeDocumentIgnoresWrappingXmlNameInput(v *IgnoresWrappingXmlNameInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
 func awsEc2query_serializeOpDocumentNestedStructuresInput(v *NestedStructuresInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -1086,13 +1064,6 @@ func awsEc2query_serializeOpDocumentNestedStructuresInput(v *NestedStructuresInp
 			return err
 		}
 	}
-
-	return nil
-}
-
-func awsEc2query_serializeDocumentNoInputAndOutputInput(v *NoInputAndOutputInput, value query.Value) error {
-	object := value.Object()
-	_ = object
 
 	return nil
 }
@@ -1166,13 +1137,6 @@ func awsEc2query_serializeOpDocumentQueryTimestampsInput(v *QueryTimestampsInput
 	return nil
 }
 
-func awsEc2query_serializeDocumentRecursiveXmlShapesInput(v *RecursiveXmlShapesInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
 func awsEc2query_serializeOpDocumentSimpleInputParamsInput(v *SimpleInputParamsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -1226,62 +1190,6 @@ func awsEc2query_serializeOpDocumentSimpleInputParamsInput(v *SimpleInputParamsI
 		objectKey := object.Key("C")
 		objectKey.String(*v.UsesXmlName)
 	}
-
-	return nil
-}
-
-func awsEc2query_serializeDocumentSimpleScalarXmlPropertiesInput(v *SimpleScalarXmlPropertiesInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
-func awsEc2query_serializeDocumentXmlBlobsInput(v *XmlBlobsInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
-func awsEc2query_serializeDocumentXmlEmptyBlobsInput(v *XmlEmptyBlobsInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
-func awsEc2query_serializeDocumentXmlEmptyListsInput(v *XmlEmptyListsInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
-func awsEc2query_serializeDocumentXmlEnumsInput(v *XmlEnumsInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
-func awsEc2query_serializeDocumentXmlListsInput(v *XmlListsInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
-func awsEc2query_serializeDocumentXmlNamespacesInput(v *XmlNamespacesInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
-func awsEc2query_serializeDocumentXmlTimestampsInput(v *XmlTimestampsInput, value query.Value) error {
-	object := value.Object()
-	_ = object
 
 	return nil
 }

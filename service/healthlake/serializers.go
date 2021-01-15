@@ -31,6 +31,7 @@ func (m *awsAwsjson10_serializeOpCreateFHIRDatastore) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*CreateFHIRDatastoreInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -77,6 +78,7 @@ func (m *awsAwsjson10_serializeOpDeleteFHIRDatastore) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*DeleteFHIRDatastoreInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -123,6 +125,7 @@ func (m *awsAwsjson10_serializeOpDescribeFHIRDatastore) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*DescribeFHIRDatastoreInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -169,6 +172,7 @@ func (m *awsAwsjson10_serializeOpDescribeFHIRImportJob) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*DescribeFHIRImportJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -215,6 +219,7 @@ func (m *awsAwsjson10_serializeOpListFHIRDatastores) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*ListFHIRDatastoresInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -261,6 +266,7 @@ func (m *awsAwsjson10_serializeOpStartFHIRImportJob) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*StartFHIRImportJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

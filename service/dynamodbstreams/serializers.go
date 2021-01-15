@@ -29,6 +29,7 @@ func (m *awsAwsjson10_serializeOpDescribeStream) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*DescribeStreamInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -75,6 +76,7 @@ func (m *awsAwsjson10_serializeOpGetRecords) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*GetRecordsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -121,6 +123,7 @@ func (m *awsAwsjson10_serializeOpGetShardIterator) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*GetShardIteratorInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -167,6 +170,7 @@ func (m *awsAwsjson10_serializeOpListStreams) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*ListStreamsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

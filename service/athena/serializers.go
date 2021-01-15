@@ -30,6 +30,7 @@ func (m *awsAwsjson11_serializeOpBatchGetNamedQuery) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*BatchGetNamedQueryInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -76,6 +77,7 @@ func (m *awsAwsjson11_serializeOpBatchGetQueryExecution) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*BatchGetQueryExecutionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -122,6 +124,7 @@ func (m *awsAwsjson11_serializeOpCreateDataCatalog) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*CreateDataCatalogInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -168,6 +171,7 @@ func (m *awsAwsjson11_serializeOpCreateNamedQuery) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*CreateNamedQueryInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -214,6 +218,7 @@ func (m *awsAwsjson11_serializeOpCreateWorkGroup) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*CreateWorkGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -260,6 +265,7 @@ func (m *awsAwsjson11_serializeOpDeleteDataCatalog) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*DeleteDataCatalogInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -306,6 +312,7 @@ func (m *awsAwsjson11_serializeOpDeleteNamedQuery) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*DeleteNamedQueryInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -352,6 +359,7 @@ func (m *awsAwsjson11_serializeOpDeleteWorkGroup) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*DeleteWorkGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -398,6 +406,7 @@ func (m *awsAwsjson11_serializeOpGetDatabase) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*GetDatabaseInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -444,6 +453,7 @@ func (m *awsAwsjson11_serializeOpGetDataCatalog) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*GetDataCatalogInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -490,6 +500,7 @@ func (m *awsAwsjson11_serializeOpGetNamedQuery) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*GetNamedQueryInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -536,6 +547,7 @@ func (m *awsAwsjson11_serializeOpGetQueryExecution) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*GetQueryExecutionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -582,6 +594,7 @@ func (m *awsAwsjson11_serializeOpGetQueryResults) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*GetQueryResultsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -628,6 +641,7 @@ func (m *awsAwsjson11_serializeOpGetTableMetadata) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*GetTableMetadataInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -674,6 +688,7 @@ func (m *awsAwsjson11_serializeOpGetWorkGroup) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*GetWorkGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -720,6 +735,7 @@ func (m *awsAwsjson11_serializeOpListDatabases) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*ListDatabasesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -766,6 +782,7 @@ func (m *awsAwsjson11_serializeOpListDataCatalogs) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*ListDataCatalogsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -812,6 +829,7 @@ func (m *awsAwsjson11_serializeOpListNamedQueries) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*ListNamedQueriesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -858,6 +876,7 @@ func (m *awsAwsjson11_serializeOpListQueryExecutions) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*ListQueryExecutionsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -904,6 +923,7 @@ func (m *awsAwsjson11_serializeOpListTableMetadata) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*ListTableMetadataInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -950,6 +970,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -996,6 +1017,7 @@ func (m *awsAwsjson11_serializeOpListWorkGroups) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*ListWorkGroupsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1042,6 +1064,7 @@ func (m *awsAwsjson11_serializeOpStartQueryExecution) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*StartQueryExecutionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1088,6 +1111,7 @@ func (m *awsAwsjson11_serializeOpStopQueryExecution) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*StopQueryExecutionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1134,6 +1158,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*TagResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1180,6 +1205,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*UntagResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1226,6 +1252,7 @@ func (m *awsAwsjson11_serializeOpUpdateDataCatalog) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*UpdateDataCatalogInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1272,6 +1299,7 @@ func (m *awsAwsjson11_serializeOpUpdateWorkGroup) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*UpdateWorkGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

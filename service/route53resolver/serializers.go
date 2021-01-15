@@ -30,6 +30,7 @@ func (m *awsAwsjson11_serializeOpAssociateResolverEndpointIpAddress) HandleSeria
 	}
 
 	input, ok := in.Parameters.(*AssociateResolverEndpointIpAddressInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -76,6 +77,7 @@ func (m *awsAwsjson11_serializeOpAssociateResolverQueryLogConfig) HandleSerializ
 	}
 
 	input, ok := in.Parameters.(*AssociateResolverQueryLogConfigInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -122,6 +124,7 @@ func (m *awsAwsjson11_serializeOpAssociateResolverRule) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*AssociateResolverRuleInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -168,6 +171,7 @@ func (m *awsAwsjson11_serializeOpCreateResolverEndpoint) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*CreateResolverEndpointInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -214,6 +218,7 @@ func (m *awsAwsjson11_serializeOpCreateResolverQueryLogConfig) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*CreateResolverQueryLogConfigInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -260,6 +265,7 @@ func (m *awsAwsjson11_serializeOpCreateResolverRule) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*CreateResolverRuleInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -306,6 +312,7 @@ func (m *awsAwsjson11_serializeOpDeleteResolverEndpoint) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*DeleteResolverEndpointInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -352,6 +359,7 @@ func (m *awsAwsjson11_serializeOpDeleteResolverQueryLogConfig) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*DeleteResolverQueryLogConfigInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -398,6 +406,7 @@ func (m *awsAwsjson11_serializeOpDeleteResolverRule) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*DeleteResolverRuleInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -444,6 +453,7 @@ func (m *awsAwsjson11_serializeOpDisassociateResolverEndpointIpAddress) HandleSe
 	}
 
 	input, ok := in.Parameters.(*DisassociateResolverEndpointIpAddressInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -490,6 +500,7 @@ func (m *awsAwsjson11_serializeOpDisassociateResolverQueryLogConfig) HandleSeria
 	}
 
 	input, ok := in.Parameters.(*DisassociateResolverQueryLogConfigInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -536,6 +547,7 @@ func (m *awsAwsjson11_serializeOpDisassociateResolverRule) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*DisassociateResolverRuleInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -582,6 +594,7 @@ func (m *awsAwsjson11_serializeOpGetResolverEndpoint) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*GetResolverEndpointInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -628,6 +641,7 @@ func (m *awsAwsjson11_serializeOpGetResolverQueryLogConfig) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*GetResolverQueryLogConfigInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -674,6 +688,7 @@ func (m *awsAwsjson11_serializeOpGetResolverQueryLogConfigAssociation) HandleSer
 	}
 
 	input, ok := in.Parameters.(*GetResolverQueryLogConfigAssociationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -720,6 +735,7 @@ func (m *awsAwsjson11_serializeOpGetResolverQueryLogConfigPolicy) HandleSerializ
 	}
 
 	input, ok := in.Parameters.(*GetResolverQueryLogConfigPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -766,6 +782,7 @@ func (m *awsAwsjson11_serializeOpGetResolverRule) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*GetResolverRuleInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -812,6 +829,7 @@ func (m *awsAwsjson11_serializeOpGetResolverRuleAssociation) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*GetResolverRuleAssociationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -858,6 +876,7 @@ func (m *awsAwsjson11_serializeOpGetResolverRulePolicy) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*GetResolverRulePolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -904,6 +923,7 @@ func (m *awsAwsjson11_serializeOpListResolverEndpointIpAddresses) HandleSerializ
 	}
 
 	input, ok := in.Parameters.(*ListResolverEndpointIpAddressesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -950,6 +970,7 @@ func (m *awsAwsjson11_serializeOpListResolverEndpoints) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*ListResolverEndpointsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -996,6 +1017,7 @@ func (m *awsAwsjson11_serializeOpListResolverQueryLogConfigAssociations) HandleS
 	}
 
 	input, ok := in.Parameters.(*ListResolverQueryLogConfigAssociationsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1042,6 +1064,7 @@ func (m *awsAwsjson11_serializeOpListResolverQueryLogConfigs) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*ListResolverQueryLogConfigsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1088,6 +1111,7 @@ func (m *awsAwsjson11_serializeOpListResolverRuleAssociations) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*ListResolverRuleAssociationsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1134,6 +1158,7 @@ func (m *awsAwsjson11_serializeOpListResolverRules) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*ListResolverRulesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1180,6 +1205,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1226,6 +1252,7 @@ func (m *awsAwsjson11_serializeOpPutResolverQueryLogConfigPolicy) HandleSerializ
 	}
 
 	input, ok := in.Parameters.(*PutResolverQueryLogConfigPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1272,6 +1299,7 @@ func (m *awsAwsjson11_serializeOpPutResolverRulePolicy) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*PutResolverRulePolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1318,6 +1346,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*TagResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1364,6 +1393,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*UntagResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1410,6 +1440,7 @@ func (m *awsAwsjson11_serializeOpUpdateResolverEndpoint) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*UpdateResolverEndpointInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1456,6 +1487,7 @@ func (m *awsAwsjson11_serializeOpUpdateResolverRule) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*UpdateResolverRuleInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

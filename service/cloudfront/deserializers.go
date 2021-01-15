@@ -18,6 +18,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
+	"io/ioutil"
 	"strconv"
 	"strings"
 )
@@ -2744,6 +2745,12 @@ func (m *awsRestxml_deserializeOpDeleteCachePolicy) HandleDeserialize(ctx contex
 	output := &DeleteCachePolicyOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -2826,6 +2833,12 @@ func (m *awsRestxml_deserializeOpDeleteCloudFrontOriginAccessIdentity) HandleDes
 	output := &DeleteCloudFrontOriginAccessIdentityOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -2904,6 +2917,12 @@ func (m *awsRestxml_deserializeOpDeleteDistribution) HandleDeserialize(ctx conte
 	}
 	output := &DeleteDistributionOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -2984,6 +3003,12 @@ func (m *awsRestxml_deserializeOpDeleteFieldLevelEncryptionConfig) HandleDeseria
 	output := &DeleteFieldLevelEncryptionConfigOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -3063,6 +3088,12 @@ func (m *awsRestxml_deserializeOpDeleteFieldLevelEncryptionProfile) HandleDeseri
 	output := &DeleteFieldLevelEncryptionProfileOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -3141,6 +3172,12 @@ func (m *awsRestxml_deserializeOpDeleteKeyGroup) HandleDeserialize(ctx context.C
 	}
 	output := &DeleteKeyGroupOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -3288,6 +3325,12 @@ func (m *awsRestxml_deserializeOpDeleteOriginRequestPolicy) HandleDeserialize(ct
 	output := &DeleteOriginRequestPolicyOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -3370,6 +3413,12 @@ func (m *awsRestxml_deserializeOpDeletePublicKey) HandleDeserialize(ctx context.
 	output := &DeletePublicKeyOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -3449,6 +3498,12 @@ func (m *awsRestxml_deserializeOpDeleteRealtimeLogConfig) HandleDeserialize(ctx 
 	output := &DeleteRealtimeLogConfigOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -3524,6 +3579,12 @@ func (m *awsRestxml_deserializeOpDeleteStreamingDistribution) HandleDeserialize(
 	}
 	output := &DeleteStreamingDistributionOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -9230,6 +9291,12 @@ func (m *awsRestxml_deserializeOpTagResource) HandleDeserialize(ctx context.Cont
 	output := &TagResourceOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -9305,6 +9372,12 @@ func (m *awsRestxml_deserializeOpUntagResource) HandleDeserialize(ctx context.Co
 	}
 	output := &UntagResourceOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }

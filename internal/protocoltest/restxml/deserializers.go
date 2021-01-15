@@ -51,6 +51,12 @@ func (m *awsRestxml_deserializeOpAllQueryStringTypes) HandleDeserialize(ctx cont
 	output := &AllQueryStringTypesOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -115,6 +121,12 @@ func (m *awsRestxml_deserializeOpConstantAndVariableQueryString) HandleDeseriali
 	output := &ConstantAndVariableQueryStringOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -178,6 +190,12 @@ func (m *awsRestxml_deserializeOpConstantQueryString) HandleDeserialize(ctx cont
 	}
 	output := &ConstantQueryStringOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -1625,6 +1643,12 @@ func (m *awsRestxml_deserializeOpHttpRequestWithGreedyLabelInPath) HandleDeseria
 	output := &HttpRequestWithGreedyLabelInPathOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -1689,6 +1713,12 @@ func (m *awsRestxml_deserializeOpHttpRequestWithLabels) HandleDeserialize(ctx co
 	output := &HttpRequestWithLabelsOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -1752,6 +1782,12 @@ func (m *awsRestxml_deserializeOpHttpRequestWithLabelsAndTimestampFormat) Handle
 	}
 	output := &HttpRequestWithLabelsAndTimestampFormatOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -2304,6 +2340,12 @@ func (m *awsRestxml_deserializeOpNoInputAndNoOutput) HandleDeserialize(ctx conte
 	output := &NoInputAndNoOutputOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -2638,6 +2680,12 @@ func (m *awsRestxml_deserializeOpOmitsNullSerializesEmptyString) HandleDeseriali
 	output := &OmitsNullSerializesEmptyStringOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -2701,6 +2749,12 @@ func (m *awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill) HandleDeserializ
 	}
 	output := &QueryIdempotencyTokenAutoFillOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }

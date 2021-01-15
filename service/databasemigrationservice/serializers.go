@@ -31,6 +31,7 @@ func (m *awsAwsjson11_serializeOpAddTagsToResource) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*AddTagsToResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -77,6 +78,7 @@ func (m *awsAwsjson11_serializeOpApplyPendingMaintenanceAction) HandleSerialize(
 	}
 
 	input, ok := in.Parameters.(*ApplyPendingMaintenanceActionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -123,6 +125,7 @@ func (m *awsAwsjson11_serializeOpCancelReplicationTaskAssessmentRun) HandleSeria
 	}
 
 	input, ok := in.Parameters.(*CancelReplicationTaskAssessmentRunInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -169,6 +172,7 @@ func (m *awsAwsjson11_serializeOpCreateEndpoint) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*CreateEndpointInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -215,6 +219,7 @@ func (m *awsAwsjson11_serializeOpCreateEventSubscription) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*CreateEventSubscriptionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -261,6 +266,7 @@ func (m *awsAwsjson11_serializeOpCreateReplicationInstance) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*CreateReplicationInstanceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -307,6 +313,7 @@ func (m *awsAwsjson11_serializeOpCreateReplicationSubnetGroup) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*CreateReplicationSubnetGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -353,6 +360,7 @@ func (m *awsAwsjson11_serializeOpCreateReplicationTask) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*CreateReplicationTaskInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -399,6 +407,7 @@ func (m *awsAwsjson11_serializeOpDeleteCertificate) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*DeleteCertificateInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -445,6 +454,7 @@ func (m *awsAwsjson11_serializeOpDeleteConnection) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*DeleteConnectionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -491,6 +501,7 @@ func (m *awsAwsjson11_serializeOpDeleteEndpoint) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*DeleteEndpointInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -537,6 +548,7 @@ func (m *awsAwsjson11_serializeOpDeleteEventSubscription) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*DeleteEventSubscriptionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -583,6 +595,7 @@ func (m *awsAwsjson11_serializeOpDeleteReplicationInstance) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*DeleteReplicationInstanceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -629,6 +642,7 @@ func (m *awsAwsjson11_serializeOpDeleteReplicationSubnetGroup) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*DeleteReplicationSubnetGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -675,6 +689,7 @@ func (m *awsAwsjson11_serializeOpDeleteReplicationTask) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*DeleteReplicationTaskInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -721,6 +736,7 @@ func (m *awsAwsjson11_serializeOpDeleteReplicationTaskAssessmentRun) HandleSeria
 	}
 
 	input, ok := in.Parameters.(*DeleteReplicationTaskAssessmentRunInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -767,6 +783,7 @@ func (m *awsAwsjson11_serializeOpDescribeAccountAttributes) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*DescribeAccountAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -779,8 +796,6 @@ func (m *awsAwsjson11_serializeOpDescribeAccountAttributes) HandleSerialize(ctx 
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDMSv20160101.DescribeAccountAttributes")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -806,6 +821,7 @@ func (m *awsAwsjson11_serializeOpDescribeApplicableIndividualAssessments) Handle
 	}
 
 	input, ok := in.Parameters.(*DescribeApplicableIndividualAssessmentsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -852,6 +868,7 @@ func (m *awsAwsjson11_serializeOpDescribeCertificates) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*DescribeCertificatesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -898,6 +915,7 @@ func (m *awsAwsjson11_serializeOpDescribeConnections) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*DescribeConnectionsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -944,6 +962,7 @@ func (m *awsAwsjson11_serializeOpDescribeEndpoints) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*DescribeEndpointsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -990,6 +1009,7 @@ func (m *awsAwsjson11_serializeOpDescribeEndpointTypes) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*DescribeEndpointTypesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1036,6 +1056,7 @@ func (m *awsAwsjson11_serializeOpDescribeEventCategories) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*DescribeEventCategoriesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1082,6 +1103,7 @@ func (m *awsAwsjson11_serializeOpDescribeEvents) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*DescribeEventsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1128,6 +1150,7 @@ func (m *awsAwsjson11_serializeOpDescribeEventSubscriptions) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*DescribeEventSubscriptionsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1174,6 +1197,7 @@ func (m *awsAwsjson11_serializeOpDescribeOrderableReplicationInstances) HandleSe
 	}
 
 	input, ok := in.Parameters.(*DescribeOrderableReplicationInstancesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1220,6 +1244,7 @@ func (m *awsAwsjson11_serializeOpDescribePendingMaintenanceActions) HandleSerial
 	}
 
 	input, ok := in.Parameters.(*DescribePendingMaintenanceActionsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1266,6 +1291,7 @@ func (m *awsAwsjson11_serializeOpDescribeRefreshSchemasStatus) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*DescribeRefreshSchemasStatusInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1312,6 +1338,7 @@ func (m *awsAwsjson11_serializeOpDescribeReplicationInstances) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*DescribeReplicationInstancesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1358,6 +1385,7 @@ func (m *awsAwsjson11_serializeOpDescribeReplicationInstanceTaskLogs) HandleSeri
 	}
 
 	input, ok := in.Parameters.(*DescribeReplicationInstanceTaskLogsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1404,6 +1432,7 @@ func (m *awsAwsjson11_serializeOpDescribeReplicationSubnetGroups) HandleSerializ
 	}
 
 	input, ok := in.Parameters.(*DescribeReplicationSubnetGroupsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1450,6 +1479,7 @@ func (m *awsAwsjson11_serializeOpDescribeReplicationTaskAssessmentResults) Handl
 	}
 
 	input, ok := in.Parameters.(*DescribeReplicationTaskAssessmentResultsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1496,6 +1526,7 @@ func (m *awsAwsjson11_serializeOpDescribeReplicationTaskAssessmentRuns) HandleSe
 	}
 
 	input, ok := in.Parameters.(*DescribeReplicationTaskAssessmentRunsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1542,6 +1573,7 @@ func (m *awsAwsjson11_serializeOpDescribeReplicationTaskIndividualAssessments) H
 	}
 
 	input, ok := in.Parameters.(*DescribeReplicationTaskIndividualAssessmentsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1588,6 +1620,7 @@ func (m *awsAwsjson11_serializeOpDescribeReplicationTasks) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*DescribeReplicationTasksInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1634,6 +1667,7 @@ func (m *awsAwsjson11_serializeOpDescribeSchemas) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*DescribeSchemasInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1680,6 +1714,7 @@ func (m *awsAwsjson11_serializeOpDescribeTableStatistics) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*DescribeTableStatisticsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1726,6 +1761,7 @@ func (m *awsAwsjson11_serializeOpImportCertificate) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*ImportCertificateInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1772,6 +1808,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1818,6 +1855,7 @@ func (m *awsAwsjson11_serializeOpModifyEndpoint) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*ModifyEndpointInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1864,6 +1902,7 @@ func (m *awsAwsjson11_serializeOpModifyEventSubscription) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*ModifyEventSubscriptionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1910,6 +1949,7 @@ func (m *awsAwsjson11_serializeOpModifyReplicationInstance) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*ModifyReplicationInstanceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1956,6 +1996,7 @@ func (m *awsAwsjson11_serializeOpModifyReplicationSubnetGroup) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*ModifyReplicationSubnetGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2002,6 +2043,7 @@ func (m *awsAwsjson11_serializeOpModifyReplicationTask) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*ModifyReplicationTaskInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2048,6 +2090,7 @@ func (m *awsAwsjson11_serializeOpMoveReplicationTask) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*MoveReplicationTaskInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2094,6 +2137,7 @@ func (m *awsAwsjson11_serializeOpRebootReplicationInstance) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*RebootReplicationInstanceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2140,6 +2184,7 @@ func (m *awsAwsjson11_serializeOpRefreshSchemas) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*RefreshSchemasInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2186,6 +2231,7 @@ func (m *awsAwsjson11_serializeOpReloadTables) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*ReloadTablesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2232,6 +2278,7 @@ func (m *awsAwsjson11_serializeOpRemoveTagsFromResource) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*RemoveTagsFromResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2278,6 +2325,7 @@ func (m *awsAwsjson11_serializeOpStartReplicationTask) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*StartReplicationTaskInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2324,6 +2372,7 @@ func (m *awsAwsjson11_serializeOpStartReplicationTaskAssessment) HandleSerialize
 	}
 
 	input, ok := in.Parameters.(*StartReplicationTaskAssessmentInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2370,6 +2419,7 @@ func (m *awsAwsjson11_serializeOpStartReplicationTaskAssessmentRun) HandleSerial
 	}
 
 	input, ok := in.Parameters.(*StartReplicationTaskAssessmentRunInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2416,6 +2466,7 @@ func (m *awsAwsjson11_serializeOpStopReplicationTask) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*StopReplicationTaskInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2462,6 +2513,7 @@ func (m *awsAwsjson11_serializeOpTestConnection) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*TestConnectionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

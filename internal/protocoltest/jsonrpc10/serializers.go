@@ -31,6 +31,7 @@ func (m *awsAwsjson10_serializeOpEmptyInputAndEmptyOutput) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*EmptyInputAndEmptyOutputInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -43,8 +44,6 @@ func (m *awsAwsjson10_serializeOpEmptyInputAndEmptyOutput) HandleSerialize(ctx c
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonRpc10.EmptyInputAndEmptyOutput")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -70,6 +69,7 @@ func (m *awsAwsjson10_serializeOpGreetingWithErrors) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*GreetingWithErrorsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -82,8 +82,6 @@ func (m *awsAwsjson10_serializeOpGreetingWithErrors) HandleSerialize(ctx context
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonRpc10.GreetingWithErrors")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -109,6 +107,7 @@ func (m *awsAwsjson10_serializeOpJsonUnions) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*JsonUnionsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -155,6 +154,7 @@ func (m *awsAwsjson10_serializeOpNoInputAndNoOutput) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*NoInputAndNoOutputInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -167,8 +167,6 @@ func (m *awsAwsjson10_serializeOpNoInputAndNoOutput) HandleSerialize(ctx context
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonRpc10.NoInputAndNoOutput")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -194,6 +192,7 @@ func (m *awsAwsjson10_serializeOpNoInputAndOutput) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*NoInputAndOutputInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -206,8 +205,6 @@ func (m *awsAwsjson10_serializeOpNoInputAndOutput) HandleSerialize(ctx context.C
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonRpc10.NoInputAndOutput")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -311,13 +308,6 @@ func awsAwsjson10_serializeOpDocumentEmptyInputAndEmptyOutputInput(v *EmptyInput
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentGreetingWithErrorsInput(v *GreetingWithErrorsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	return nil
-}
-
 func awsAwsjson10_serializeOpDocumentJsonUnionsInput(v *JsonUnionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -328,20 +318,6 @@ func awsAwsjson10_serializeOpDocumentJsonUnionsInput(v *JsonUnionsInput, value s
 			return err
 		}
 	}
-
-	return nil
-}
-
-func awsAwsjson10_serializeDocumentNoInputAndNoOutputInput(v *NoInputAndNoOutputInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	return nil
-}
-
-func awsAwsjson10_serializeDocumentNoInputAndOutputInput(v *NoInputAndOutputInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
 
 	return nil
 }

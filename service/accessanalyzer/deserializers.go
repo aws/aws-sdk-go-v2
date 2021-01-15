@@ -16,6 +16,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
+	"io/ioutil"
 	"strconv"
 	"strings"
 )
@@ -212,6 +213,12 @@ func (m *awsRestjson1_deserializeOpCreateArchiveRule) HandleDeserialize(ctx cont
 	output := &CreateArchiveRuleOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -313,6 +320,12 @@ func (m *awsRestjson1_deserializeOpDeleteAnalyzer) HandleDeserialize(ctx context
 	output := &DeleteAnalyzerOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -407,6 +420,12 @@ func (m *awsRestjson1_deserializeOpDeleteArchiveRule) HandleDeserialize(ctx cont
 	}
 	output := &DeleteArchiveRuleOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -1964,6 +1983,12 @@ func (m *awsRestjson1_deserializeOpStartResourceScan) HandleDeserialize(ctx cont
 	output := &StartResourceScanOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -2249,6 +2274,12 @@ func (m *awsRestjson1_deserializeOpUpdateArchiveRule) HandleDeserialize(ctx cont
 	output := &UpdateArchiveRuleOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -2343,6 +2374,12 @@ func (m *awsRestjson1_deserializeOpUpdateFindings) HandleDeserialize(ctx context
 	}
 	output := &UpdateFindingsOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }

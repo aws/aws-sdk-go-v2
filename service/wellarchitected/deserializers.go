@@ -16,6 +16,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
+	"io/ioutil"
 	"strings"
 )
 
@@ -44,6 +45,12 @@ func (m *awsRestjson1_deserializeOpAssociateLenses) HandleDeserialize(ctx contex
 	}
 	output := &AssociateLensesOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -678,6 +685,12 @@ func (m *awsRestjson1_deserializeOpDeleteWorkload) HandleDeserialize(ctx context
 	output := &DeleteWorkloadOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -776,6 +789,12 @@ func (m *awsRestjson1_deserializeOpDeleteWorkloadShare) HandleDeserialize(ctx co
 	output := &DeleteWorkloadShareOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -873,6 +892,12 @@ func (m *awsRestjson1_deserializeOpDisassociateLenses) HandleDeserialize(ctx con
 	}
 	output := &DisassociateLensesOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -4484,6 +4509,12 @@ func (m *awsRestjson1_deserializeOpUpgradeLensReview) HandleDeserialize(ctx cont
 	}
 	output := &UpgradeLensReviewOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }

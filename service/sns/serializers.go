@@ -31,6 +31,7 @@ func (m *awsAwsquery_serializeOpAddPermission) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*AddPermissionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -86,6 +87,7 @@ func (m *awsAwsquery_serializeOpCheckIfPhoneNumberIsOptedOut) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*CheckIfPhoneNumberIsOptedOutInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -141,6 +143,7 @@ func (m *awsAwsquery_serializeOpConfirmSubscription) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*ConfirmSubscriptionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -196,6 +199,7 @@ func (m *awsAwsquery_serializeOpCreatePlatformApplication) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*CreatePlatformApplicationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -251,6 +255,7 @@ func (m *awsAwsquery_serializeOpCreatePlatformEndpoint) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*CreatePlatformEndpointInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -306,6 +311,7 @@ func (m *awsAwsquery_serializeOpCreateTopic) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*CreateTopicInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -361,6 +367,7 @@ func (m *awsAwsquery_serializeOpDeleteEndpoint) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*DeleteEndpointInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -416,6 +423,7 @@ func (m *awsAwsquery_serializeOpDeletePlatformApplication) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*DeletePlatformApplicationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -471,6 +479,7 @@ func (m *awsAwsquery_serializeOpDeleteTopic) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*DeleteTopicInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -526,6 +535,7 @@ func (m *awsAwsquery_serializeOpGetEndpointAttributes) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*GetEndpointAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -581,6 +591,7 @@ func (m *awsAwsquery_serializeOpGetPlatformApplicationAttributes) HandleSerializ
 	}
 
 	input, ok := in.Parameters.(*GetPlatformApplicationAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -636,6 +647,7 @@ func (m *awsAwsquery_serializeOpGetSMSAttributes) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*GetSMSAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -691,6 +703,7 @@ func (m *awsAwsquery_serializeOpGetSubscriptionAttributes) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*GetSubscriptionAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -746,6 +759,7 @@ func (m *awsAwsquery_serializeOpGetTopicAttributes) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*GetTopicAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -801,6 +815,7 @@ func (m *awsAwsquery_serializeOpListEndpointsByPlatformApplication) HandleSerial
 	}
 
 	input, ok := in.Parameters.(*ListEndpointsByPlatformApplicationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -856,6 +871,7 @@ func (m *awsAwsquery_serializeOpListPhoneNumbersOptedOut) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*ListPhoneNumbersOptedOutInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -911,6 +927,7 @@ func (m *awsAwsquery_serializeOpListPlatformApplications) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*ListPlatformApplicationsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -966,6 +983,7 @@ func (m *awsAwsquery_serializeOpListSubscriptions) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*ListSubscriptionsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1021,6 +1039,7 @@ func (m *awsAwsquery_serializeOpListSubscriptionsByTopic) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*ListSubscriptionsByTopicInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1076,6 +1095,7 @@ func (m *awsAwsquery_serializeOpListTagsForResource) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1131,6 +1151,7 @@ func (m *awsAwsquery_serializeOpListTopics) HandleSerialize(ctx context.Context,
 	}
 
 	input, ok := in.Parameters.(*ListTopicsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1186,6 +1207,7 @@ func (m *awsAwsquery_serializeOpOptInPhoneNumber) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*OptInPhoneNumberInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1241,6 +1263,7 @@ func (m *awsAwsquery_serializeOpPublish) HandleSerialize(ctx context.Context, in
 	}
 
 	input, ok := in.Parameters.(*PublishInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1296,6 +1319,7 @@ func (m *awsAwsquery_serializeOpRemovePermission) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*RemovePermissionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1351,6 +1375,7 @@ func (m *awsAwsquery_serializeOpSetEndpointAttributes) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*SetEndpointAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1406,6 +1431,7 @@ func (m *awsAwsquery_serializeOpSetPlatformApplicationAttributes) HandleSerializ
 	}
 
 	input, ok := in.Parameters.(*SetPlatformApplicationAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1461,6 +1487,7 @@ func (m *awsAwsquery_serializeOpSetSMSAttributes) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*SetSMSAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1516,6 +1543,7 @@ func (m *awsAwsquery_serializeOpSetSubscriptionAttributes) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*SetSubscriptionAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1571,6 +1599,7 @@ func (m *awsAwsquery_serializeOpSetTopicAttributes) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*SetTopicAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1626,6 +1655,7 @@ func (m *awsAwsquery_serializeOpSubscribe) HandleSerialize(ctx context.Context, 
 	}
 
 	input, ok := in.Parameters.(*SubscribeInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1681,6 +1711,7 @@ func (m *awsAwsquery_serializeOpTagResource) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*TagResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1736,6 +1767,7 @@ func (m *awsAwsquery_serializeOpUnsubscribe) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*UnsubscribeInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1791,6 +1823,7 @@ func (m *awsAwsquery_serializeOpUntagResource) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*UntagResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

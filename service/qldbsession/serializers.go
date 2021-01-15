@@ -30,6 +30,7 @@ func (m *awsAwsjson10_serializeOpSendCommand) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*SendCommandInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

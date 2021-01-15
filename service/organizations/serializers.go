@@ -30,6 +30,7 @@ func (m *awsAwsjson11_serializeOpAcceptHandshake) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*AcceptHandshakeInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -76,6 +77,7 @@ func (m *awsAwsjson11_serializeOpAttachPolicy) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*AttachPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -122,6 +124,7 @@ func (m *awsAwsjson11_serializeOpCancelHandshake) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*CancelHandshakeInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -168,6 +171,7 @@ func (m *awsAwsjson11_serializeOpCreateAccount) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*CreateAccountInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -214,6 +218,7 @@ func (m *awsAwsjson11_serializeOpCreateGovCloudAccount) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*CreateGovCloudAccountInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -260,6 +265,7 @@ func (m *awsAwsjson11_serializeOpCreateOrganization) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*CreateOrganizationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -306,6 +312,7 @@ func (m *awsAwsjson11_serializeOpCreateOrganizationalUnit) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*CreateOrganizationalUnitInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -352,6 +359,7 @@ func (m *awsAwsjson11_serializeOpCreatePolicy) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*CreatePolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -398,6 +406,7 @@ func (m *awsAwsjson11_serializeOpDeclineHandshake) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*DeclineHandshakeInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -444,6 +453,7 @@ func (m *awsAwsjson11_serializeOpDeleteOrganization) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*DeleteOrganizationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -456,8 +466,6 @@ func (m *awsAwsjson11_serializeOpDeleteOrganization) HandleSerialize(ctx context
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.DeleteOrganization")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -483,6 +491,7 @@ func (m *awsAwsjson11_serializeOpDeleteOrganizationalUnit) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*DeleteOrganizationalUnitInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -529,6 +538,7 @@ func (m *awsAwsjson11_serializeOpDeletePolicy) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*DeletePolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -575,6 +585,7 @@ func (m *awsAwsjson11_serializeOpDeregisterDelegatedAdministrator) HandleSeriali
 	}
 
 	input, ok := in.Parameters.(*DeregisterDelegatedAdministratorInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -621,6 +632,7 @@ func (m *awsAwsjson11_serializeOpDescribeAccount) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*DescribeAccountInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -667,6 +679,7 @@ func (m *awsAwsjson11_serializeOpDescribeCreateAccountStatus) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*DescribeCreateAccountStatusInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -713,6 +726,7 @@ func (m *awsAwsjson11_serializeOpDescribeEffectivePolicy) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*DescribeEffectivePolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -759,6 +773,7 @@ func (m *awsAwsjson11_serializeOpDescribeHandshake) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*DescribeHandshakeInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -805,6 +820,7 @@ func (m *awsAwsjson11_serializeOpDescribeOrganization) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*DescribeOrganizationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -817,8 +833,6 @@ func (m *awsAwsjson11_serializeOpDescribeOrganization) HandleSerialize(ctx conte
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.DescribeOrganization")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -844,6 +858,7 @@ func (m *awsAwsjson11_serializeOpDescribeOrganizationalUnit) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*DescribeOrganizationalUnitInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -890,6 +905,7 @@ func (m *awsAwsjson11_serializeOpDescribePolicy) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*DescribePolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -936,6 +952,7 @@ func (m *awsAwsjson11_serializeOpDetachPolicy) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*DetachPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -982,6 +999,7 @@ func (m *awsAwsjson11_serializeOpDisableAWSServiceAccess) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*DisableAWSServiceAccessInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1028,6 +1046,7 @@ func (m *awsAwsjson11_serializeOpDisablePolicyType) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*DisablePolicyTypeInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1074,6 +1093,7 @@ func (m *awsAwsjson11_serializeOpEnableAllFeatures) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*EnableAllFeaturesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1086,8 +1106,6 @@ func (m *awsAwsjson11_serializeOpEnableAllFeatures) HandleSerialize(ctx context.
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.EnableAllFeatures")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -1113,6 +1131,7 @@ func (m *awsAwsjson11_serializeOpEnableAWSServiceAccess) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*EnableAWSServiceAccessInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1159,6 +1178,7 @@ func (m *awsAwsjson11_serializeOpEnablePolicyType) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*EnablePolicyTypeInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1205,6 +1225,7 @@ func (m *awsAwsjson11_serializeOpInviteAccountToOrganization) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*InviteAccountToOrganizationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1251,6 +1272,7 @@ func (m *awsAwsjson11_serializeOpLeaveOrganization) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*LeaveOrganizationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1263,8 +1285,6 @@ func (m *awsAwsjson11_serializeOpLeaveOrganization) HandleSerialize(ctx context.
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.LeaveOrganization")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -1290,6 +1310,7 @@ func (m *awsAwsjson11_serializeOpListAccounts) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*ListAccountsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1336,6 +1357,7 @@ func (m *awsAwsjson11_serializeOpListAccountsForParent) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*ListAccountsForParentInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1382,6 +1404,7 @@ func (m *awsAwsjson11_serializeOpListAWSServiceAccessForOrganization) HandleSeri
 	}
 
 	input, ok := in.Parameters.(*ListAWSServiceAccessForOrganizationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1428,6 +1451,7 @@ func (m *awsAwsjson11_serializeOpListChildren) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*ListChildrenInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1474,6 +1498,7 @@ func (m *awsAwsjson11_serializeOpListCreateAccountStatus) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*ListCreateAccountStatusInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1520,6 +1545,7 @@ func (m *awsAwsjson11_serializeOpListDelegatedAdministrators) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*ListDelegatedAdministratorsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1566,6 +1592,7 @@ func (m *awsAwsjson11_serializeOpListDelegatedServicesForAccount) HandleSerializ
 	}
 
 	input, ok := in.Parameters.(*ListDelegatedServicesForAccountInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1612,6 +1639,7 @@ func (m *awsAwsjson11_serializeOpListHandshakesForAccount) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*ListHandshakesForAccountInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1658,6 +1686,7 @@ func (m *awsAwsjson11_serializeOpListHandshakesForOrganization) HandleSerialize(
 	}
 
 	input, ok := in.Parameters.(*ListHandshakesForOrganizationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1704,6 +1733,7 @@ func (m *awsAwsjson11_serializeOpListOrganizationalUnitsForParent) HandleSeriali
 	}
 
 	input, ok := in.Parameters.(*ListOrganizationalUnitsForParentInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1750,6 +1780,7 @@ func (m *awsAwsjson11_serializeOpListParents) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*ListParentsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1796,6 +1827,7 @@ func (m *awsAwsjson11_serializeOpListPolicies) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*ListPoliciesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1842,6 +1874,7 @@ func (m *awsAwsjson11_serializeOpListPoliciesForTarget) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*ListPoliciesForTargetInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1888,6 +1921,7 @@ func (m *awsAwsjson11_serializeOpListRoots) HandleSerialize(ctx context.Context,
 	}
 
 	input, ok := in.Parameters.(*ListRootsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1934,6 +1968,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1980,6 +2015,7 @@ func (m *awsAwsjson11_serializeOpListTargetsForPolicy) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*ListTargetsForPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2026,6 +2062,7 @@ func (m *awsAwsjson11_serializeOpMoveAccount) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*MoveAccountInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2072,6 +2109,7 @@ func (m *awsAwsjson11_serializeOpRegisterDelegatedAdministrator) HandleSerialize
 	}
 
 	input, ok := in.Parameters.(*RegisterDelegatedAdministratorInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2118,6 +2156,7 @@ func (m *awsAwsjson11_serializeOpRemoveAccountFromOrganization) HandleSerialize(
 	}
 
 	input, ok := in.Parameters.(*RemoveAccountFromOrganizationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2164,6 +2203,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*TagResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2210,6 +2250,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*UntagResourceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2256,6 +2297,7 @@ func (m *awsAwsjson11_serializeOpUpdateOrganizationalUnit) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*UpdateOrganizationalUnitInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2302,6 +2344,7 @@ func (m *awsAwsjson11_serializeOpUpdatePolicy) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*UpdatePolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2620,13 +2663,6 @@ func awsAwsjson11_serializeOpDocumentDeleteOrganizationalUnitInput(v *DeleteOrga
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteOrganizationInput(v *DeleteOrganizationInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	return nil
-}
-
 func awsAwsjson11_serializeOpDocumentDeletePolicyInput(v *DeletePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2717,13 +2753,6 @@ func awsAwsjson11_serializeOpDocumentDescribeOrganizationalUnitInput(v *Describe
 		ok := object.Key("OrganizationalUnitId")
 		ok.String(*v.OrganizationalUnitId)
 	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentDescribeOrganizationInput(v *DescribeOrganizationInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
 
 	return nil
 }
@@ -2844,13 +2873,6 @@ func awsAwsjson11_serializeOpDocumentInviteAccountToOrganizationInput(v *InviteA
 			return err
 		}
 	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentLeaveOrganizationInput(v *LeaveOrganizationInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
 
 	return nil
 }
