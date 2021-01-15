@@ -13,7 +13,7 @@ interface by default.
 
 You can customize {{% alias sdk-go %}} client requests by registering one or more middleware to a service operation's
 [stack]({{< apiref smithy="middleware#Stack" >}}). The stack is composed of a series of steps: Initialize, Serialize,
-Build, Finalize, and Deserialize. Each step contains zero or more middleware that operates on that step's input and
+Build, Finalize, and Deserialize. Each step contains zero or more middleware that operate on that step's input and
 output types. The following diagram and table provide an overview of how an operation's request and response traverses
 the stack.
 
@@ -33,9 +33,9 @@ allows other step middleware to be inserted relative to it.
 
 You attach step middleware by using a step's `Insert` or `Add` methods. You use `Add` to attach a middleware to the 
 beginning of a step by specifying
-[middleware.Before]({{< apiref "middleware#Before" >}}) as the
-[RelativePosition]({{< apiref "middleware#RelativePosition" >}}), and
-[middleware.After]({{< apiref "middleware#After" >}}) to attach to the end of the step.
+[middleware.Before]({{< apiref smithy="middleware#Before" >}}) as the
+[RelativePosition]({{< apiref smithy="middleware#RelativePosition" >}}), and
+[middleware.After]({{< apiref smithy="middleware#After" >}}) to attach to the end of the step.
 You use `Insert` to attach a middleware to a step by inserting the middleware relative to another step middleware.
 
 {{% pageinfo color="warning" %}}
@@ -159,12 +159,14 @@ object, err := client.GetObject(context.TODO(), &s3.GetObjectInput{
 ## Passing Metadata Down the Stack
 
 In certain situations, you may find that you require two or more middleware to function in tandem by sharing information
-or state. You can use the [context.Context](https://golang.org/pkg/context/#Context) to pass this metadata by
-wrapping the `context.Context`using [context.WithValue](https://golang.org/pkg/context/#WithValue). `context.WithValue`
-wraps the provided context and attaches the provided key and value. Values can be retrieved from a context using
-`context.Value` and providing the key used to stored the value previously. Context keys must be comparable, and you must
-define your own types as context keys to avoid collisions. The following examples shows how to middleware steps can
-used `context.Context` to pass information down the stack.
+or state. You can use [context.Context](https://golang.org/pkg/context/#Context) to pass this metadata by using 
+[middleware.WithStackValue]({{< apiref smithy="middleware#WithStackValue" >}}).
+`middleware.WithStackValue` attaches the given key-value pair to the provided context, and safely limits the scope to
+the currently executing stack. These stack-scoped values can be retrieved from a context using
+[middleware.GetStackValue]({{< apiref smithy="middleware#GetStackValue" >}}) and
+providing the key used to stored the corresponding value. Keys must be comparable, and you must define your own
+types as context keys to avoid collisions. The following examples shows how two middleware can use `context.Context` to
+pass information down the stack.
 
 ```go
 import "context"
@@ -175,12 +177,12 @@ import "github.com/aws/smithy-go/middleware"
 type customKey struct {}
 
 func GetCustomKey(ctx context.Context) (v string) {
-	v, _ = ctx.Value(customKey{}).(string)
+	v, _ = middleware.GetStackValue(ctx, customKey{}).(string)
 	return v
 }
 
 func SetCustomKey(ctx context.Context, value string) context.Context {
-	return context.WithValue(ctx, customkey{}, value)
+	return middleware.WithStackValue(ctx, customkey{}, value)
 }
 
 // ...

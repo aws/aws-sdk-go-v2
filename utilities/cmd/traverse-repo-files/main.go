@@ -320,7 +320,7 @@ title: "%s"
 	scanner = bufio.NewScanner(resp.Body)
 
 	// Start of code
-	_, err = f.Write([]byte("```\n"))
+	_, err = f.Write([]byte("```go\n"))
 	if err != nil {
 		fmt.Println("Got an error writing to " + outFileName)
 		return err

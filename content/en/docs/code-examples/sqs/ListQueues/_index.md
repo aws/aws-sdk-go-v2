@@ -9,7 +9,7 @@ This example retrieves a list of your Amazon SQS queues.
 
 ## Source code
 
-```
+```go
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX - License - Identifier: Apache - 2.0
 package main

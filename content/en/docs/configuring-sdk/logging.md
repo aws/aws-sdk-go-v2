@@ -13,8 +13,8 @@ what should be logged by clients.
 ## Logger
 
 When constructing an [Config]({{< apiref "aws#Config" >}}) using
-[LoadDefaultConfig]({{< apiref "config#LoadDefaultConfig" >}}) a default `Logger` will is configured to send log
-messages to process' standard error (stderr). A custom logger that satisfies the 
+[LoadDefaultConfig]({{< apiref "config#LoadDefaultConfig" >}}) a default `Logger` is configured to send log
+messages to the process' standard error (stderr). A custom logger that satisfies the 
 [Logger]({{< apiref smithy="logging#Logger" >}}) interface can be passed as an argument to `LoadDefaultConfig` 
 by wrapping it with [config.WithLogger]({{< apiref "config#WithLogger" >}}).
 

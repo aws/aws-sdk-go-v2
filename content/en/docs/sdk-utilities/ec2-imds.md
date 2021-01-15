@@ -6,11 +6,11 @@ description: "Using the AWS SDK for Go V2 Amazon EC2 Instance Metadata Service C
 
 You can use the {{% alias sdk-go %}} to access the
 [{{% alias service=EC2 %}} Instance Metadata Service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html).
-The [feature/ec2/imds]({{% apiref "feature/ec2/imds" %}}) Go package provide a [Client]({{% apiref "imds#Client" %}}) type that can
-be used to access the {{% alias service=EC2 %}} Instance Metadata Service. The `Client` and associated operations
-can be used similarly to the other AWS service clients provided by the SDK. To learn more information on how to
-configure the SDK, and use service clients see [Configuring the SDK]({{% ref "configuring-sdk" %}}) and
-[Using AWS Services]({{% ref "making-requests.md" %}}).
+The [feature/ec2/imds]({{% apiref "feature/ec2/imds" %}}) Go package provides a
+[Client]({{% apiref "feature/ec2/imds#Client" %}}) type that can be used to access the {{% alias service=EC2 %}}
+Instance Metadata Service. The `Client` and associated operations can be used similar to the other AWS service clients
+provided by the SDK. To learn more information on how to configure the SDK, and use service clients see
+[Configuring the SDK]({{% ref "configuring-sdk" %}}) and [Using AWS Services]({{% ref "making-requests.md" %}}).
 
 The client can help you easily retrieve information about instances on which your applications run, such as its AWS
 Region or local IP address. Typically, you must create and submit HTTP requests to retrieve instance metadata. Instead,
@@ -51,7 +51,7 @@ fmt.Printf("local-ip: %v\n", localip)
 
 For a list of all metadata categories, see
 [Instance Metadata Categories](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-categories.html#dynamic-data-categories)
-in the {{% alias service="ec2" %}} User Guide.
+in the {{% alias service="EC2" %}} User Guide.
 
 ### Retrieving an Instance's Region
 
