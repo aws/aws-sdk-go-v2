@@ -6392,8 +6392,8 @@ func awsRestxml_deserializeOpErrorHeadBucket(response *smithyhttp.Response, meta
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("NoSuchBucket", errorCode):
-		return awsRestxml_deserializeErrorNoSuchBucket(response, errorBody)
+	case strings.EqualFold("NotFound", errorCode):
+		return awsRestxml_deserializeErrorNotFound(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -11300,6 +11300,11 @@ func awsRestxml_deserializeErrorNoSuchKey(response *smithyhttp.Response, errorBo
 
 func awsRestxml_deserializeErrorNoSuchUpload(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NoSuchUpload{}
+	return output
+}
+
+func awsRestxml_deserializeErrorNotFound(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.NotFound{}
 	return output
 }
 
@@ -16386,6 +16391,42 @@ func awsRestxml_deserializeDocumentNoSuchUpload(v **types.NoSuchUpload, decoder 
 	var sv *types.NoSuchUpload
 	if *v == nil {
 		sv = &types.NoSuchUpload{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentNotFound(v **types.NotFound, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.NotFound
+	if *v == nil {
+		sv = &types.NotFound{}
 	} else {
 		sv = *v
 	}
