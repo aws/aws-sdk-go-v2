@@ -52,7 +52,7 @@ public class EndpointGenerator implements Runnable {
     public static final String RESOLVER_OPTIONS = "EndpointResolverOptions";
     public static final String CLIENT_CONFIG_RESOLVER = "resolveDefaultEndpointConfiguration";
     public static final String RESOLVER_CONSTRUCTOR_NAME = "NewDefaultEndpointResolver";
-    public static final String AWS_ENDPOINT_RESOLVER_HELPER = "WithEndpointResolver";
+    public static final String AWS_ENDPOINT_RESOLVER_HELPER = "withEndpointResolver";
 
     private static final int ENDPOINT_MODEL_VERSION = 3;
     private static final String INTERNAL_ENDPOINT_PACKAGE = "internal/endpoints";
