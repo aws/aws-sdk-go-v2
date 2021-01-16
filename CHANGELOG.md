@@ -14,6 +14,8 @@
 * `API Clients`: Updates SDK's API client request middleware stack values to be scoped to individual operation call ([#1019](https://github.com/aws/aws-sdk-go-v2/pull/1019))
     * The API client request middleware stack values were mistakenly allowed to escape to nested API operation calls. This broke the SDK's presigners.
     * Stack values that should not escape are not scoped to the individual operation call.
+* `Multiple API Clients`: Unexported the API client's `WithEndpointResolver` this type wasn't intended to be exported ([#1051](https://github.com/aws/aws-sdk-go-v2/pull/1051))
+    * Using the `aws.Config.EndpointResolver` member for setting custom endpoint resolver instead.
 
 ## New Features
 * `service/sts`: Add support for presigning GetCallerIdentity operation ([#1030](https://github.com/aws/aws-sdk-go-v2/pull/1030))
@@ -23,6 +25,8 @@
     * Adds documentation for the retry package 
 
 ## Bug Fixes
+* `Multiple API Clients`: Fix SDK's generated serde for unmodeled operation input/output ([#1050](https://github.com/aws/aws-sdk-go-v2/pull/1050))
+    * Fixes [#1047](https://github.com/aws/aws-sdk-go-v2/issues/1047) by fixing the how the SDKs generated serialization and deserialization of API operations that did not have modeled input or output types. This caused the SDK to incorrectly attempt to deserialize response documents that were either empty, or contained unexpected data.
 * `service/s3`: Fix Tagging parameter not serialized correctly for presigned PutObject requests ([#1017](https://github.com/aws/aws-sdk-go-v2/pull/1017))
     * Fixes the Tagging parameter incorrectly being serialized to the URL's query string instead of being signed as a HTTP request header.
     * When using PresignPutObject make sure to add all signed headers returned by the method to your down stream's HTTP client's request. These headers must be included in the request, or the request will fail with signature errors.
