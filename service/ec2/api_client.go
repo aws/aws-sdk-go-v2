@@ -201,7 +201,7 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	if cfg.EndpointResolver == nil {
 		return
 	}
-	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
+	o.EndpointResolver = withEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) error {
