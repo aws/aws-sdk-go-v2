@@ -31,6 +31,7 @@ func (m *awsAwsjson11_serializeOpDescribeDimensionKeys) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*DescribeDimensionKeysInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -77,6 +78,7 @@ func (m *awsAwsjson11_serializeOpGetResourceMetrics) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*GetResourceMetricsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

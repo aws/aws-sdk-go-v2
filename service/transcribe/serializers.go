@@ -30,6 +30,7 @@ func (m *awsAwsjson11_serializeOpCreateLanguageModel) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*CreateLanguageModelInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -76,6 +77,7 @@ func (m *awsAwsjson11_serializeOpCreateMedicalVocabulary) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*CreateMedicalVocabularyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -122,6 +124,7 @@ func (m *awsAwsjson11_serializeOpCreateVocabulary) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*CreateVocabularyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -168,6 +171,7 @@ func (m *awsAwsjson11_serializeOpCreateVocabularyFilter) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*CreateVocabularyFilterInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -214,6 +218,7 @@ func (m *awsAwsjson11_serializeOpDeleteLanguageModel) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*DeleteLanguageModelInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -260,6 +265,7 @@ func (m *awsAwsjson11_serializeOpDeleteMedicalTranscriptionJob) HandleSerialize(
 	}
 
 	input, ok := in.Parameters.(*DeleteMedicalTranscriptionJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -306,6 +312,7 @@ func (m *awsAwsjson11_serializeOpDeleteMedicalVocabulary) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*DeleteMedicalVocabularyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -352,6 +359,7 @@ func (m *awsAwsjson11_serializeOpDeleteTranscriptionJob) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*DeleteTranscriptionJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -398,6 +406,7 @@ func (m *awsAwsjson11_serializeOpDeleteVocabulary) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*DeleteVocabularyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -444,6 +453,7 @@ func (m *awsAwsjson11_serializeOpDeleteVocabularyFilter) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*DeleteVocabularyFilterInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -490,6 +500,7 @@ func (m *awsAwsjson11_serializeOpDescribeLanguageModel) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*DescribeLanguageModelInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -536,6 +547,7 @@ func (m *awsAwsjson11_serializeOpGetMedicalTranscriptionJob) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*GetMedicalTranscriptionJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -582,6 +594,7 @@ func (m *awsAwsjson11_serializeOpGetMedicalVocabulary) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*GetMedicalVocabularyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -628,6 +641,7 @@ func (m *awsAwsjson11_serializeOpGetTranscriptionJob) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*GetTranscriptionJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -674,6 +688,7 @@ func (m *awsAwsjson11_serializeOpGetVocabulary) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*GetVocabularyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -720,6 +735,7 @@ func (m *awsAwsjson11_serializeOpGetVocabularyFilter) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*GetVocabularyFilterInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -766,6 +782,7 @@ func (m *awsAwsjson11_serializeOpListLanguageModels) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*ListLanguageModelsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -812,6 +829,7 @@ func (m *awsAwsjson11_serializeOpListMedicalTranscriptionJobs) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*ListMedicalTranscriptionJobsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -858,6 +876,7 @@ func (m *awsAwsjson11_serializeOpListMedicalVocabularies) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*ListMedicalVocabulariesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -904,6 +923,7 @@ func (m *awsAwsjson11_serializeOpListTranscriptionJobs) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*ListTranscriptionJobsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -950,6 +970,7 @@ func (m *awsAwsjson11_serializeOpListVocabularies) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*ListVocabulariesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -996,6 +1017,7 @@ func (m *awsAwsjson11_serializeOpListVocabularyFilters) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*ListVocabularyFiltersInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1042,6 +1064,7 @@ func (m *awsAwsjson11_serializeOpStartMedicalTranscriptionJob) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*StartMedicalTranscriptionJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1088,6 +1111,7 @@ func (m *awsAwsjson11_serializeOpStartTranscriptionJob) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*StartTranscriptionJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1134,6 +1158,7 @@ func (m *awsAwsjson11_serializeOpUpdateMedicalVocabulary) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*UpdateMedicalVocabularyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1180,6 +1205,7 @@ func (m *awsAwsjson11_serializeOpUpdateVocabulary) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*UpdateVocabularyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1226,6 +1252,7 @@ func (m *awsAwsjson11_serializeOpUpdateVocabularyFilter) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*UpdateVocabularyFilterInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

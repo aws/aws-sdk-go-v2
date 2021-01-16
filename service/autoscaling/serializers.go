@@ -31,6 +31,7 @@ func (m *awsAwsquery_serializeOpAttachInstances) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*AttachInstancesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -86,6 +87,7 @@ func (m *awsAwsquery_serializeOpAttachLoadBalancers) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*AttachLoadBalancersInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -141,6 +143,7 @@ func (m *awsAwsquery_serializeOpAttachLoadBalancerTargetGroups) HandleSerialize(
 	}
 
 	input, ok := in.Parameters.(*AttachLoadBalancerTargetGroupsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -196,6 +199,7 @@ func (m *awsAwsquery_serializeOpBatchDeleteScheduledAction) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*BatchDeleteScheduledActionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -251,6 +255,7 @@ func (m *awsAwsquery_serializeOpBatchPutScheduledUpdateGroupAction) HandleSerial
 	}
 
 	input, ok := in.Parameters.(*BatchPutScheduledUpdateGroupActionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -306,6 +311,7 @@ func (m *awsAwsquery_serializeOpCancelInstanceRefresh) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*CancelInstanceRefreshInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -361,6 +367,7 @@ func (m *awsAwsquery_serializeOpCompleteLifecycleAction) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*CompleteLifecycleActionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -416,6 +423,7 @@ func (m *awsAwsquery_serializeOpCreateAutoScalingGroup) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*CreateAutoScalingGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -471,6 +479,7 @@ func (m *awsAwsquery_serializeOpCreateLaunchConfiguration) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*CreateLaunchConfigurationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -526,6 +535,7 @@ func (m *awsAwsquery_serializeOpCreateOrUpdateTags) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*CreateOrUpdateTagsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -581,6 +591,7 @@ func (m *awsAwsquery_serializeOpDeleteAutoScalingGroup) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*DeleteAutoScalingGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -636,6 +647,7 @@ func (m *awsAwsquery_serializeOpDeleteLaunchConfiguration) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*DeleteLaunchConfigurationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -691,6 +703,7 @@ func (m *awsAwsquery_serializeOpDeleteLifecycleHook) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*DeleteLifecycleHookInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -746,6 +759,7 @@ func (m *awsAwsquery_serializeOpDeleteNotificationConfiguration) HandleSerialize
 	}
 
 	input, ok := in.Parameters.(*DeleteNotificationConfigurationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -801,6 +815,7 @@ func (m *awsAwsquery_serializeOpDeletePolicy) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*DeletePolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -856,6 +871,7 @@ func (m *awsAwsquery_serializeOpDeleteScheduledAction) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*DeleteScheduledActionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -911,6 +927,7 @@ func (m *awsAwsquery_serializeOpDeleteTags) HandleSerialize(ctx context.Context,
 	}
 
 	input, ok := in.Parameters.(*DeleteTagsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -966,6 +983,7 @@ func (m *awsAwsquery_serializeOpDescribeAccountLimits) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*DescribeAccountLimitsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -983,8 +1001,6 @@ func (m *awsAwsquery_serializeOpDescribeAccountLimits) HandleSerialize(ctx conte
 	body := bodyEncoder.Object()
 	body.Key("Action").String("DescribeAccountLimits")
 	body.Key("Version").String("2011-01-01")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -1019,6 +1035,7 @@ func (m *awsAwsquery_serializeOpDescribeAdjustmentTypes) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*DescribeAdjustmentTypesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1036,8 +1053,6 @@ func (m *awsAwsquery_serializeOpDescribeAdjustmentTypes) HandleSerialize(ctx con
 	body := bodyEncoder.Object()
 	body.Key("Action").String("DescribeAdjustmentTypes")
 	body.Key("Version").String("2011-01-01")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -1072,6 +1087,7 @@ func (m *awsAwsquery_serializeOpDescribeAutoScalingGroups) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*DescribeAutoScalingGroupsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1127,6 +1143,7 @@ func (m *awsAwsquery_serializeOpDescribeAutoScalingInstances) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*DescribeAutoScalingInstancesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1182,6 +1199,7 @@ func (m *awsAwsquery_serializeOpDescribeAutoScalingNotificationTypes) HandleSeri
 	}
 
 	input, ok := in.Parameters.(*DescribeAutoScalingNotificationTypesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1199,8 +1217,6 @@ func (m *awsAwsquery_serializeOpDescribeAutoScalingNotificationTypes) HandleSeri
 	body := bodyEncoder.Object()
 	body.Key("Action").String("DescribeAutoScalingNotificationTypes")
 	body.Key("Version").String("2011-01-01")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -1235,6 +1251,7 @@ func (m *awsAwsquery_serializeOpDescribeInstanceRefreshes) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*DescribeInstanceRefreshesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1290,6 +1307,7 @@ func (m *awsAwsquery_serializeOpDescribeLaunchConfigurations) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*DescribeLaunchConfigurationsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1345,6 +1363,7 @@ func (m *awsAwsquery_serializeOpDescribeLifecycleHooks) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*DescribeLifecycleHooksInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1400,6 +1419,7 @@ func (m *awsAwsquery_serializeOpDescribeLifecycleHookTypes) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*DescribeLifecycleHookTypesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1417,8 +1437,6 @@ func (m *awsAwsquery_serializeOpDescribeLifecycleHookTypes) HandleSerialize(ctx 
 	body := bodyEncoder.Object()
 	body.Key("Action").String("DescribeLifecycleHookTypes")
 	body.Key("Version").String("2011-01-01")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -1453,6 +1471,7 @@ func (m *awsAwsquery_serializeOpDescribeLoadBalancers) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*DescribeLoadBalancersInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1508,6 +1527,7 @@ func (m *awsAwsquery_serializeOpDescribeLoadBalancerTargetGroups) HandleSerializ
 	}
 
 	input, ok := in.Parameters.(*DescribeLoadBalancerTargetGroupsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1563,6 +1583,7 @@ func (m *awsAwsquery_serializeOpDescribeMetricCollectionTypes) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*DescribeMetricCollectionTypesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1580,8 +1601,6 @@ func (m *awsAwsquery_serializeOpDescribeMetricCollectionTypes) HandleSerialize(c
 	body := bodyEncoder.Object()
 	body.Key("Action").String("DescribeMetricCollectionTypes")
 	body.Key("Version").String("2011-01-01")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -1616,6 +1635,7 @@ func (m *awsAwsquery_serializeOpDescribeNotificationConfigurations) HandleSerial
 	}
 
 	input, ok := in.Parameters.(*DescribeNotificationConfigurationsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1671,6 +1691,7 @@ func (m *awsAwsquery_serializeOpDescribePolicies) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*DescribePoliciesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1726,6 +1747,7 @@ func (m *awsAwsquery_serializeOpDescribeScalingActivities) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*DescribeScalingActivitiesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1781,6 +1803,7 @@ func (m *awsAwsquery_serializeOpDescribeScalingProcessTypes) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*DescribeScalingProcessTypesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1798,8 +1821,6 @@ func (m *awsAwsquery_serializeOpDescribeScalingProcessTypes) HandleSerialize(ctx
 	body := bodyEncoder.Object()
 	body.Key("Action").String("DescribeScalingProcessTypes")
 	body.Key("Version").String("2011-01-01")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -1834,6 +1855,7 @@ func (m *awsAwsquery_serializeOpDescribeScheduledActions) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*DescribeScheduledActionsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1889,6 +1911,7 @@ func (m *awsAwsquery_serializeOpDescribeTags) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*DescribeTagsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1944,6 +1967,7 @@ func (m *awsAwsquery_serializeOpDescribeTerminationPolicyTypes) HandleSerialize(
 	}
 
 	input, ok := in.Parameters.(*DescribeTerminationPolicyTypesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1961,8 +1985,6 @@ func (m *awsAwsquery_serializeOpDescribeTerminationPolicyTypes) HandleSerialize(
 	body := bodyEncoder.Object()
 	body.Key("Action").String("DescribeTerminationPolicyTypes")
 	body.Key("Version").String("2011-01-01")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -1997,6 +2019,7 @@ func (m *awsAwsquery_serializeOpDetachInstances) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*DetachInstancesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2052,6 +2075,7 @@ func (m *awsAwsquery_serializeOpDetachLoadBalancers) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*DetachLoadBalancersInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2107,6 +2131,7 @@ func (m *awsAwsquery_serializeOpDetachLoadBalancerTargetGroups) HandleSerialize(
 	}
 
 	input, ok := in.Parameters.(*DetachLoadBalancerTargetGroupsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2162,6 +2187,7 @@ func (m *awsAwsquery_serializeOpDisableMetricsCollection) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*DisableMetricsCollectionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2217,6 +2243,7 @@ func (m *awsAwsquery_serializeOpEnableMetricsCollection) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*EnableMetricsCollectionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2272,6 +2299,7 @@ func (m *awsAwsquery_serializeOpEnterStandby) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*EnterStandbyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2327,6 +2355,7 @@ func (m *awsAwsquery_serializeOpExecutePolicy) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*ExecutePolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2382,6 +2411,7 @@ func (m *awsAwsquery_serializeOpExitStandby) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*ExitStandbyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2437,6 +2467,7 @@ func (m *awsAwsquery_serializeOpPutLifecycleHook) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*PutLifecycleHookInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2492,6 +2523,7 @@ func (m *awsAwsquery_serializeOpPutNotificationConfiguration) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*PutNotificationConfigurationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2547,6 +2579,7 @@ func (m *awsAwsquery_serializeOpPutScalingPolicy) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*PutScalingPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2602,6 +2635,7 @@ func (m *awsAwsquery_serializeOpPutScheduledUpdateGroupAction) HandleSerialize(c
 	}
 
 	input, ok := in.Parameters.(*PutScheduledUpdateGroupActionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2657,6 +2691,7 @@ func (m *awsAwsquery_serializeOpRecordLifecycleActionHeartbeat) HandleSerialize(
 	}
 
 	input, ok := in.Parameters.(*RecordLifecycleActionHeartbeatInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2712,6 +2747,7 @@ func (m *awsAwsquery_serializeOpResumeProcesses) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*ResumeProcessesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2767,6 +2803,7 @@ func (m *awsAwsquery_serializeOpSetDesiredCapacity) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*SetDesiredCapacityInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2822,6 +2859,7 @@ func (m *awsAwsquery_serializeOpSetInstanceHealth) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*SetInstanceHealthInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2877,6 +2915,7 @@ func (m *awsAwsquery_serializeOpSetInstanceProtection) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*SetInstanceProtectionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2932,6 +2971,7 @@ func (m *awsAwsquery_serializeOpStartInstanceRefresh) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*StartInstanceRefreshInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2987,6 +3027,7 @@ func (m *awsAwsquery_serializeOpSuspendProcesses) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*SuspendProcessesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3042,6 +3083,7 @@ func (m *awsAwsquery_serializeOpTerminateInstanceInAutoScalingGroup) HandleSeria
 	}
 
 	input, ok := in.Parameters.(*TerminateInstanceInAutoScalingGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3097,6 +3139,7 @@ func (m *awsAwsquery_serializeOpUpdateAutoScalingGroup) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*UpdateAutoScalingGroupInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -4514,20 +4557,6 @@ func awsAwsquery_serializeOpDocumentDeleteTagsInput(v *DeleteTagsInput, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeAccountLimitsInput(v *DescribeAccountLimitsInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
-func awsAwsquery_serializeDocumentDescribeAdjustmentTypesInput(v *DescribeAdjustmentTypesInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
 func awsAwsquery_serializeOpDocumentDescribeAutoScalingGroupsInput(v *DescribeAutoScalingGroupsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4572,13 +4601,6 @@ func awsAwsquery_serializeOpDocumentDescribeAutoScalingInstancesInput(v *Describ
 		objectKey := object.Key("NextToken")
 		objectKey.String(*v.NextToken)
 	}
-
-	return nil
-}
-
-func awsAwsquery_serializeDocumentDescribeAutoScalingNotificationTypesInput(v *DescribeAutoScalingNotificationTypesInput, value query.Value) error {
-	object := value.Object()
-	_ = object
 
 	return nil
 }
@@ -4655,13 +4677,6 @@ func awsAwsquery_serializeOpDocumentDescribeLifecycleHooksInput(v *DescribeLifec
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeLifecycleHookTypesInput(v *DescribeLifecycleHookTypesInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
 func awsAwsquery_serializeOpDocumentDescribeLoadBalancersInput(v *DescribeLoadBalancersInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4702,13 +4717,6 @@ func awsAwsquery_serializeOpDocumentDescribeLoadBalancerTargetGroupsInput(v *Des
 		objectKey := object.Key("NextToken")
 		objectKey.String(*v.NextToken)
 	}
-
-	return nil
-}
-
-func awsAwsquery_serializeDocumentDescribeMetricCollectionTypesInput(v *DescribeMetricCollectionTypesInput, value query.Value) error {
-	object := value.Object()
-	_ = object
 
 	return nil
 }
@@ -4802,13 +4810,6 @@ func awsAwsquery_serializeOpDocumentDescribeScalingActivitiesInput(v *DescribeSc
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeScalingProcessTypesInput(v *DescribeScalingProcessTypesInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
 func awsAwsquery_serializeOpDocumentDescribeScheduledActionsInput(v *DescribeScheduledActionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4868,13 +4869,6 @@ func awsAwsquery_serializeOpDocumentDescribeTagsInput(v *DescribeTagsInput, valu
 		objectKey := object.Key("NextToken")
 		objectKey.String(*v.NextToken)
 	}
-
-	return nil
-}
-
-func awsAwsquery_serializeDocumentDescribeTerminationPolicyTypesInput(v *DescribeTerminationPolicyTypesInput, value query.Value) error {
-	object := value.Object()
-	_ = object
 
 	return nil
 }

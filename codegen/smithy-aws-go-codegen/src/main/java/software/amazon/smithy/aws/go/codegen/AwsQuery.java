@@ -68,9 +68,6 @@ class AwsQuery extends HttpRpcProtocolGenerator {
             writer.openBlock("if err := $L(input, bodyEncoder.Value); err != nil {", "}", functionName, () -> {
                 writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
             }).write("");
-        } else {
-            writer.write("_ = input");
-            writer.write("");
         }
 
         writer.write("err = bodyEncoder.Encode()");

@@ -30,6 +30,7 @@ func (m *awsAwsjson11_serializeOpGenerateDataSet) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*GenerateDataSetInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -76,6 +77,7 @@ func (m *awsAwsjson11_serializeOpStartSupportDataExport) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*StartSupportDataExportInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

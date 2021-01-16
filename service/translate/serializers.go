@@ -31,6 +31,7 @@ func (m *awsAwsjson11_serializeOpCreateParallelData) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*CreateParallelDataInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -77,6 +78,7 @@ func (m *awsAwsjson11_serializeOpDeleteParallelData) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*DeleteParallelDataInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -123,6 +125,7 @@ func (m *awsAwsjson11_serializeOpDeleteTerminology) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*DeleteTerminologyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -169,6 +172,7 @@ func (m *awsAwsjson11_serializeOpDescribeTextTranslationJob) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*DescribeTextTranslationJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -215,6 +219,7 @@ func (m *awsAwsjson11_serializeOpGetParallelData) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*GetParallelDataInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -261,6 +266,7 @@ func (m *awsAwsjson11_serializeOpGetTerminology) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*GetTerminologyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -307,6 +313,7 @@ func (m *awsAwsjson11_serializeOpImportTerminology) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*ImportTerminologyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -353,6 +360,7 @@ func (m *awsAwsjson11_serializeOpListParallelData) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*ListParallelDataInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -399,6 +407,7 @@ func (m *awsAwsjson11_serializeOpListTerminologies) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*ListTerminologiesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -445,6 +454,7 @@ func (m *awsAwsjson11_serializeOpListTextTranslationJobs) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*ListTextTranslationJobsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -491,6 +501,7 @@ func (m *awsAwsjson11_serializeOpStartTextTranslationJob) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*StartTextTranslationJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -537,6 +548,7 @@ func (m *awsAwsjson11_serializeOpStopTextTranslationJob) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*StopTextTranslationJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -583,6 +595,7 @@ func (m *awsAwsjson11_serializeOpTranslateText) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*TranslateTextInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -629,6 +642,7 @@ func (m *awsAwsjson11_serializeOpUpdateParallelData) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*UpdateParallelDataInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

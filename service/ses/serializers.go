@@ -31,6 +31,7 @@ func (m *awsAwsquery_serializeOpCloneReceiptRuleSet) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*CloneReceiptRuleSetInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -86,6 +87,7 @@ func (m *awsAwsquery_serializeOpCreateConfigurationSet) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*CreateConfigurationSetInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -141,6 +143,7 @@ func (m *awsAwsquery_serializeOpCreateConfigurationSetEventDestination) HandleSe
 	}
 
 	input, ok := in.Parameters.(*CreateConfigurationSetEventDestinationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -196,6 +199,7 @@ func (m *awsAwsquery_serializeOpCreateConfigurationSetTrackingOptions) HandleSer
 	}
 
 	input, ok := in.Parameters.(*CreateConfigurationSetTrackingOptionsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -251,6 +255,7 @@ func (m *awsAwsquery_serializeOpCreateCustomVerificationEmailTemplate) HandleSer
 	}
 
 	input, ok := in.Parameters.(*CreateCustomVerificationEmailTemplateInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -306,6 +311,7 @@ func (m *awsAwsquery_serializeOpCreateReceiptFilter) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*CreateReceiptFilterInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -361,6 +367,7 @@ func (m *awsAwsquery_serializeOpCreateReceiptRule) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*CreateReceiptRuleInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -416,6 +423,7 @@ func (m *awsAwsquery_serializeOpCreateReceiptRuleSet) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*CreateReceiptRuleSetInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -471,6 +479,7 @@ func (m *awsAwsquery_serializeOpCreateTemplate) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*CreateTemplateInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -526,6 +535,7 @@ func (m *awsAwsquery_serializeOpDeleteConfigurationSet) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*DeleteConfigurationSetInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -581,6 +591,7 @@ func (m *awsAwsquery_serializeOpDeleteConfigurationSetEventDestination) HandleSe
 	}
 
 	input, ok := in.Parameters.(*DeleteConfigurationSetEventDestinationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -636,6 +647,7 @@ func (m *awsAwsquery_serializeOpDeleteConfigurationSetTrackingOptions) HandleSer
 	}
 
 	input, ok := in.Parameters.(*DeleteConfigurationSetTrackingOptionsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -691,6 +703,7 @@ func (m *awsAwsquery_serializeOpDeleteCustomVerificationEmailTemplate) HandleSer
 	}
 
 	input, ok := in.Parameters.(*DeleteCustomVerificationEmailTemplateInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -746,6 +759,7 @@ func (m *awsAwsquery_serializeOpDeleteIdentity) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*DeleteIdentityInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -801,6 +815,7 @@ func (m *awsAwsquery_serializeOpDeleteIdentityPolicy) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*DeleteIdentityPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -856,6 +871,7 @@ func (m *awsAwsquery_serializeOpDeleteReceiptFilter) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*DeleteReceiptFilterInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -911,6 +927,7 @@ func (m *awsAwsquery_serializeOpDeleteReceiptRule) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*DeleteReceiptRuleInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -966,6 +983,7 @@ func (m *awsAwsquery_serializeOpDeleteReceiptRuleSet) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*DeleteReceiptRuleSetInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1021,6 +1039,7 @@ func (m *awsAwsquery_serializeOpDeleteTemplate) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*DeleteTemplateInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1076,6 +1095,7 @@ func (m *awsAwsquery_serializeOpDeleteVerifiedEmailAddress) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*DeleteVerifiedEmailAddressInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1131,6 +1151,7 @@ func (m *awsAwsquery_serializeOpDescribeActiveReceiptRuleSet) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*DescribeActiveReceiptRuleSetInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1148,8 +1169,6 @@ func (m *awsAwsquery_serializeOpDescribeActiveReceiptRuleSet) HandleSerialize(ct
 	body := bodyEncoder.Object()
 	body.Key("Action").String("DescribeActiveReceiptRuleSet")
 	body.Key("Version").String("2010-12-01")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -1184,6 +1203,7 @@ func (m *awsAwsquery_serializeOpDescribeConfigurationSet) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*DescribeConfigurationSetInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1239,6 +1259,7 @@ func (m *awsAwsquery_serializeOpDescribeReceiptRule) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*DescribeReceiptRuleInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1294,6 +1315,7 @@ func (m *awsAwsquery_serializeOpDescribeReceiptRuleSet) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*DescribeReceiptRuleSetInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1349,6 +1371,7 @@ func (m *awsAwsquery_serializeOpGetAccountSendingEnabled) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*GetAccountSendingEnabledInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1366,8 +1389,6 @@ func (m *awsAwsquery_serializeOpGetAccountSendingEnabled) HandleSerialize(ctx co
 	body := bodyEncoder.Object()
 	body.Key("Action").String("GetAccountSendingEnabled")
 	body.Key("Version").String("2010-12-01")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -1402,6 +1423,7 @@ func (m *awsAwsquery_serializeOpGetCustomVerificationEmailTemplate) HandleSerial
 	}
 
 	input, ok := in.Parameters.(*GetCustomVerificationEmailTemplateInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1457,6 +1479,7 @@ func (m *awsAwsquery_serializeOpGetIdentityDkimAttributes) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*GetIdentityDkimAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1512,6 +1535,7 @@ func (m *awsAwsquery_serializeOpGetIdentityMailFromDomainAttributes) HandleSeria
 	}
 
 	input, ok := in.Parameters.(*GetIdentityMailFromDomainAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1567,6 +1591,7 @@ func (m *awsAwsquery_serializeOpGetIdentityNotificationAttributes) HandleSeriali
 	}
 
 	input, ok := in.Parameters.(*GetIdentityNotificationAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1622,6 +1647,7 @@ func (m *awsAwsquery_serializeOpGetIdentityPolicies) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*GetIdentityPoliciesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1677,6 +1703,7 @@ func (m *awsAwsquery_serializeOpGetIdentityVerificationAttributes) HandleSeriali
 	}
 
 	input, ok := in.Parameters.(*GetIdentityVerificationAttributesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1732,6 +1759,7 @@ func (m *awsAwsquery_serializeOpGetSendQuota) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*GetSendQuotaInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1749,8 +1777,6 @@ func (m *awsAwsquery_serializeOpGetSendQuota) HandleSerialize(ctx context.Contex
 	body := bodyEncoder.Object()
 	body.Key("Action").String("GetSendQuota")
 	body.Key("Version").String("2010-12-01")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -1785,6 +1811,7 @@ func (m *awsAwsquery_serializeOpGetSendStatistics) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*GetSendStatisticsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1802,8 +1829,6 @@ func (m *awsAwsquery_serializeOpGetSendStatistics) HandleSerialize(ctx context.C
 	body := bodyEncoder.Object()
 	body.Key("Action").String("GetSendStatistics")
 	body.Key("Version").String("2010-12-01")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -1838,6 +1863,7 @@ func (m *awsAwsquery_serializeOpGetTemplate) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*GetTemplateInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1893,6 +1919,7 @@ func (m *awsAwsquery_serializeOpListConfigurationSets) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*ListConfigurationSetsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -1948,6 +1975,7 @@ func (m *awsAwsquery_serializeOpListCustomVerificationEmailTemplates) HandleSeri
 	}
 
 	input, ok := in.Parameters.(*ListCustomVerificationEmailTemplatesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2003,6 +2031,7 @@ func (m *awsAwsquery_serializeOpListIdentities) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*ListIdentitiesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2058,6 +2087,7 @@ func (m *awsAwsquery_serializeOpListIdentityPolicies) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*ListIdentityPoliciesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2113,6 +2143,7 @@ func (m *awsAwsquery_serializeOpListReceiptFilters) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*ListReceiptFiltersInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2130,8 +2161,6 @@ func (m *awsAwsquery_serializeOpListReceiptFilters) HandleSerialize(ctx context.
 	body := bodyEncoder.Object()
 	body.Key("Action").String("ListReceiptFilters")
 	body.Key("Version").String("2010-12-01")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -2166,6 +2195,7 @@ func (m *awsAwsquery_serializeOpListReceiptRuleSets) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*ListReceiptRuleSetsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2221,6 +2251,7 @@ func (m *awsAwsquery_serializeOpListTemplates) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*ListTemplatesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2276,6 +2307,7 @@ func (m *awsAwsquery_serializeOpListVerifiedEmailAddresses) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*ListVerifiedEmailAddressesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2293,8 +2325,6 @@ func (m *awsAwsquery_serializeOpListVerifiedEmailAddresses) HandleSerialize(ctx 
 	body := bodyEncoder.Object()
 	body.Key("Action").String("ListVerifiedEmailAddresses")
 	body.Key("Version").String("2010-12-01")
-
-	_ = input
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -2329,6 +2359,7 @@ func (m *awsAwsquery_serializeOpPutConfigurationSetDeliveryOptions) HandleSerial
 	}
 
 	input, ok := in.Parameters.(*PutConfigurationSetDeliveryOptionsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2384,6 +2415,7 @@ func (m *awsAwsquery_serializeOpPutIdentityPolicy) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*PutIdentityPolicyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2439,6 +2471,7 @@ func (m *awsAwsquery_serializeOpReorderReceiptRuleSet) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*ReorderReceiptRuleSetInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2494,6 +2527,7 @@ func (m *awsAwsquery_serializeOpSendBounce) HandleSerialize(ctx context.Context,
 	}
 
 	input, ok := in.Parameters.(*SendBounceInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2549,6 +2583,7 @@ func (m *awsAwsquery_serializeOpSendBulkTemplatedEmail) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*SendBulkTemplatedEmailInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2604,6 +2639,7 @@ func (m *awsAwsquery_serializeOpSendCustomVerificationEmail) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*SendCustomVerificationEmailInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2659,6 +2695,7 @@ func (m *awsAwsquery_serializeOpSendEmail) HandleSerialize(ctx context.Context, 
 	}
 
 	input, ok := in.Parameters.(*SendEmailInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2714,6 +2751,7 @@ func (m *awsAwsquery_serializeOpSendRawEmail) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*SendRawEmailInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2769,6 +2807,7 @@ func (m *awsAwsquery_serializeOpSendTemplatedEmail) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*SendTemplatedEmailInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2824,6 +2863,7 @@ func (m *awsAwsquery_serializeOpSetActiveReceiptRuleSet) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*SetActiveReceiptRuleSetInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2879,6 +2919,7 @@ func (m *awsAwsquery_serializeOpSetIdentityDkimEnabled) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*SetIdentityDkimEnabledInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2934,6 +2975,7 @@ func (m *awsAwsquery_serializeOpSetIdentityFeedbackForwardingEnabled) HandleSeri
 	}
 
 	input, ok := in.Parameters.(*SetIdentityFeedbackForwardingEnabledInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -2989,6 +3031,7 @@ func (m *awsAwsquery_serializeOpSetIdentityHeadersInNotificationsEnabled) Handle
 	}
 
 	input, ok := in.Parameters.(*SetIdentityHeadersInNotificationsEnabledInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3044,6 +3087,7 @@ func (m *awsAwsquery_serializeOpSetIdentityMailFromDomain) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*SetIdentityMailFromDomainInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3099,6 +3143,7 @@ func (m *awsAwsquery_serializeOpSetIdentityNotificationTopic) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*SetIdentityNotificationTopicInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3154,6 +3199,7 @@ func (m *awsAwsquery_serializeOpSetReceiptRulePosition) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*SetReceiptRulePositionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3209,6 +3255,7 @@ func (m *awsAwsquery_serializeOpTestRenderTemplate) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*TestRenderTemplateInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3264,6 +3311,7 @@ func (m *awsAwsquery_serializeOpUpdateAccountSendingEnabled) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*UpdateAccountSendingEnabledInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3319,6 +3367,7 @@ func (m *awsAwsquery_serializeOpUpdateConfigurationSetEventDestination) HandleSe
 	}
 
 	input, ok := in.Parameters.(*UpdateConfigurationSetEventDestinationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3374,6 +3423,7 @@ func (m *awsAwsquery_serializeOpUpdateConfigurationSetReputationMetricsEnabled) 
 	}
 
 	input, ok := in.Parameters.(*UpdateConfigurationSetReputationMetricsEnabledInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3429,6 +3479,7 @@ func (m *awsAwsquery_serializeOpUpdateConfigurationSetSendingEnabled) HandleSeri
 	}
 
 	input, ok := in.Parameters.(*UpdateConfigurationSetSendingEnabledInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3484,6 +3535,7 @@ func (m *awsAwsquery_serializeOpUpdateConfigurationSetTrackingOptions) HandleSer
 	}
 
 	input, ok := in.Parameters.(*UpdateConfigurationSetTrackingOptionsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3539,6 +3591,7 @@ func (m *awsAwsquery_serializeOpUpdateCustomVerificationEmailTemplate) HandleSer
 	}
 
 	input, ok := in.Parameters.(*UpdateCustomVerificationEmailTemplateInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3594,6 +3647,7 @@ func (m *awsAwsquery_serializeOpUpdateReceiptRule) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*UpdateReceiptRuleInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3649,6 +3703,7 @@ func (m *awsAwsquery_serializeOpUpdateTemplate) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*UpdateTemplateInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3704,6 +3759,7 @@ func (m *awsAwsquery_serializeOpVerifyDomainDkim) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*VerifyDomainDkimInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3759,6 +3815,7 @@ func (m *awsAwsquery_serializeOpVerifyDomainIdentity) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*VerifyDomainIdentityInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3814,6 +3871,7 @@ func (m *awsAwsquery_serializeOpVerifyEmailAddress) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*VerifyEmailAddressInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -3869,6 +3927,7 @@ func (m *awsAwsquery_serializeOpVerifyEmailIdentity) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*VerifyEmailIdentityInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -5171,13 +5230,6 @@ func awsAwsquery_serializeOpDocumentDescribeReceiptRuleSetInput(v *DescribeRecei
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetAccountSendingEnabledInput(v *GetAccountSendingEnabledInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
 func awsAwsquery_serializeOpDocumentGetCustomVerificationEmailTemplateInput(v *GetCustomVerificationEmailTemplateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -5261,20 +5313,6 @@ func awsAwsquery_serializeOpDocumentGetIdentityVerificationAttributesInput(v *Ge
 			return err
 		}
 	}
-
-	return nil
-}
-
-func awsAwsquery_serializeDocumentGetSendQuotaInput(v *GetSendQuotaInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	return nil
-}
-
-func awsAwsquery_serializeDocumentGetSendStatisticsInput(v *GetSendStatisticsInput, value query.Value) error {
-	object := value.Object()
-	_ = object
 
 	return nil
 }
@@ -5391,13 +5429,6 @@ func awsAwsquery_serializeOpDocumentListTemplatesInput(v *ListTemplatesInput, va
 		objectKey := object.Key("NextToken")
 		objectKey.String(*v.NextToken)
 	}
-
-	return nil
-}
-
-func awsAwsquery_serializeDocumentListVerifiedEmailAddressesInput(v *ListVerifiedEmailAddressesInput, value query.Value) error {
-	object := value.Object()
-	_ = object
 
 	return nil
 }

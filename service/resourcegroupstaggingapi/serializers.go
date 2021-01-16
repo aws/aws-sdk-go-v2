@@ -30,6 +30,7 @@ func (m *awsAwsjson11_serializeOpDescribeReportCreation) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*DescribeReportCreationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -42,8 +43,6 @@ func (m *awsAwsjson11_serializeOpDescribeReportCreation) HandleSerialize(ctx con
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ResourceGroupsTaggingAPI_20170126.DescribeReportCreation")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -69,6 +68,7 @@ func (m *awsAwsjson11_serializeOpGetComplianceSummary) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*GetComplianceSummaryInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -115,6 +115,7 @@ func (m *awsAwsjson11_serializeOpGetResources) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*GetResourcesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -161,6 +162,7 @@ func (m *awsAwsjson11_serializeOpGetTagKeys) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*GetTagKeysInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -207,6 +209,7 @@ func (m *awsAwsjson11_serializeOpGetTagValues) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*GetTagValuesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -253,6 +256,7 @@ func (m *awsAwsjson11_serializeOpStartReportCreation) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*StartReportCreationInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -299,6 +303,7 @@ func (m *awsAwsjson11_serializeOpTagResources) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*TagResourcesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -345,6 +350,7 @@ func (m *awsAwsjson11_serializeOpUntagResources) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*UntagResourcesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

@@ -31,6 +31,7 @@ func (m *awsAwsjson10_serializeOpDescribeRecommendationExportJobs) HandleSeriali
 	}
 
 	input, ok := in.Parameters.(*DescribeRecommendationExportJobsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -77,6 +78,7 @@ func (m *awsAwsjson10_serializeOpExportAutoScalingGroupRecommendations) HandleSe
 	}
 
 	input, ok := in.Parameters.(*ExportAutoScalingGroupRecommendationsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -123,6 +125,7 @@ func (m *awsAwsjson10_serializeOpExportEC2InstanceRecommendations) HandleSeriali
 	}
 
 	input, ok := in.Parameters.(*ExportEC2InstanceRecommendationsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -169,6 +172,7 @@ func (m *awsAwsjson10_serializeOpGetAutoScalingGroupRecommendations) HandleSeria
 	}
 
 	input, ok := in.Parameters.(*GetAutoScalingGroupRecommendationsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -215,6 +219,7 @@ func (m *awsAwsjson10_serializeOpGetEBSVolumeRecommendations) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*GetEBSVolumeRecommendationsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -261,6 +266,7 @@ func (m *awsAwsjson10_serializeOpGetEC2InstanceRecommendations) HandleSerialize(
 	}
 
 	input, ok := in.Parameters.(*GetEC2InstanceRecommendationsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -307,6 +313,7 @@ func (m *awsAwsjson10_serializeOpGetEC2RecommendationProjectedMetrics) HandleSer
 	}
 
 	input, ok := in.Parameters.(*GetEC2RecommendationProjectedMetricsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -353,6 +360,7 @@ func (m *awsAwsjson10_serializeOpGetEnrollmentStatus) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*GetEnrollmentStatusInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -365,8 +373,6 @@ func (m *awsAwsjson10_serializeOpGetEnrollmentStatus) HandleSerialize(ctx contex
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComputeOptimizerService.GetEnrollmentStatus")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -392,6 +398,7 @@ func (m *awsAwsjson10_serializeOpGetRecommendationSummaries) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*GetRecommendationSummariesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -438,6 +445,7 @@ func (m *awsAwsjson10_serializeOpUpdateEnrollmentStatus) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*UpdateEnrollmentStatusInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

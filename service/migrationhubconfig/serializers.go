@@ -30,6 +30,7 @@ func (m *awsAwsjson11_serializeOpCreateHomeRegionControl) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*CreateHomeRegionControlInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -76,6 +77,7 @@ func (m *awsAwsjson11_serializeOpDescribeHomeRegionControls) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*DescribeHomeRegionControlsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -122,6 +124,7 @@ func (m *awsAwsjson11_serializeOpGetHomeRegion) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*GetHomeRegionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -134,8 +137,6 @@ func (m *awsAwsjson11_serializeOpGetHomeRegion) HandleSerialize(ctx context.Cont
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSMigrationHubMultiAccountService.GetHomeRegion")
-
-	_ = input
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}

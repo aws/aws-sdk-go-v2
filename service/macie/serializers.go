@@ -30,6 +30,7 @@ func (m *awsAwsjson11_serializeOpAssociateMemberAccount) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*AssociateMemberAccountInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -76,6 +77,7 @@ func (m *awsAwsjson11_serializeOpAssociateS3Resources) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*AssociateS3ResourcesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -122,6 +124,7 @@ func (m *awsAwsjson11_serializeOpDisassociateMemberAccount) HandleSerialize(ctx 
 	}
 
 	input, ok := in.Parameters.(*DisassociateMemberAccountInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -168,6 +171,7 @@ func (m *awsAwsjson11_serializeOpDisassociateS3Resources) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*DisassociateS3ResourcesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -214,6 +218,7 @@ func (m *awsAwsjson11_serializeOpListMemberAccounts) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*ListMemberAccountsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -260,6 +265,7 @@ func (m *awsAwsjson11_serializeOpListS3Resources) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*ListS3ResourcesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -306,6 +312,7 @@ func (m *awsAwsjson11_serializeOpUpdateS3Resources) HandleSerialize(ctx context.
 	}
 
 	input, ok := in.Parameters.(*UpdateS3ResourcesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

@@ -30,6 +30,7 @@ func (m *awsAwsjson11_serializeOpAnalyzeDocument) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*AnalyzeDocumentInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -76,6 +77,7 @@ func (m *awsAwsjson11_serializeOpDetectDocumentText) HandleSerialize(ctx context
 	}
 
 	input, ok := in.Parameters.(*DetectDocumentTextInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -122,6 +124,7 @@ func (m *awsAwsjson11_serializeOpGetDocumentAnalysis) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*GetDocumentAnalysisInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -168,6 +171,7 @@ func (m *awsAwsjson11_serializeOpGetDocumentTextDetection) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*GetDocumentTextDetectionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -214,6 +218,7 @@ func (m *awsAwsjson11_serializeOpStartDocumentAnalysis) HandleSerialize(ctx cont
 	}
 
 	input, ok := in.Parameters.(*StartDocumentAnalysisInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -260,6 +265,7 @@ func (m *awsAwsjson11_serializeOpStartDocumentTextDetection) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*StartDocumentTextDetectionInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

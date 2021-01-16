@@ -15,6 +15,7 @@ import (
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
+	"io/ioutil"
 	"strings"
 )
 
@@ -43,6 +44,12 @@ func (m *awsRestjson1_deserializeOpAbortMultipartUpload) HandleDeserialize(ctx c
 	}
 	output := &AbortMultipartUploadOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -136,6 +143,12 @@ func (m *awsRestjson1_deserializeOpAbortVaultLock) HandleDeserialize(ctx context
 	output := &AbortVaultLockOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -227,6 +240,12 @@ func (m *awsRestjson1_deserializeOpAddTagsToVault) HandleDeserialize(ctx context
 	}
 	output := &AddTagsToVaultOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -443,6 +462,12 @@ func (m *awsRestjson1_deserializeOpCompleteVaultLock) HandleDeserialize(ctx cont
 	output := &CompleteVaultLockOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -645,6 +670,12 @@ func (m *awsRestjson1_deserializeOpDeleteArchive) HandleDeserialize(ctx context.
 	output := &DeleteArchiveOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -736,6 +767,12 @@ func (m *awsRestjson1_deserializeOpDeleteVault) HandleDeserialize(ctx context.Co
 	}
 	output := &DeleteVaultOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -829,6 +866,12 @@ func (m *awsRestjson1_deserializeOpDeleteVaultAccessPolicy) HandleDeserialize(ct
 	output := &DeleteVaultAccessPolicyOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -920,6 +963,12 @@ func (m *awsRestjson1_deserializeOpDeleteVaultNotifications) HandleDeserialize(c
 	}
 	output := &DeleteVaultNotificationsOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -3838,6 +3887,12 @@ func (m *awsRestjson1_deserializeOpRemoveTagsFromVault) HandleDeserialize(ctx co
 	output := &RemoveTagsFromVaultOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -3930,6 +3985,12 @@ func (m *awsRestjson1_deserializeOpSetDataRetrievalPolicy) HandleDeserialize(ctx
 	output := &SetDataRetrievalPolicyOutput{}
 	out.Result = output
 
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -4018,6 +4079,12 @@ func (m *awsRestjson1_deserializeOpSetVaultAccessPolicy) HandleDeserialize(ctx c
 	}
 	output := &SetVaultAccessPolicyOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }
@@ -4110,6 +4177,12 @@ func (m *awsRestjson1_deserializeOpSetVaultNotifications) HandleDeserialize(ctx 
 	}
 	output := &SetVaultNotificationsOutput{}
 	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
 
 	return out, metadata, err
 }

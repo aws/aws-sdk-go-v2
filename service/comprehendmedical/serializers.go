@@ -31,6 +31,7 @@ func (m *awsAwsjson11_serializeOpDescribeEntitiesDetectionV2Job) HandleSerialize
 	}
 
 	input, ok := in.Parameters.(*DescribeEntitiesDetectionV2JobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -77,6 +78,7 @@ func (m *awsAwsjson11_serializeOpDescribeICD10CMInferenceJob) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*DescribeICD10CMInferenceJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -123,6 +125,7 @@ func (m *awsAwsjson11_serializeOpDescribePHIDetectionJob) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*DescribePHIDetectionJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -169,6 +172,7 @@ func (m *awsAwsjson11_serializeOpDescribeRxNormInferenceJob) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*DescribeRxNormInferenceJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -215,6 +219,7 @@ func (m *awsAwsjson11_serializeOpDetectEntities) HandleSerialize(ctx context.Con
 	}
 
 	input, ok := in.Parameters.(*DetectEntitiesInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -261,6 +266,7 @@ func (m *awsAwsjson11_serializeOpDetectEntitiesV2) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*DetectEntitiesV2Input)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -307,6 +313,7 @@ func (m *awsAwsjson11_serializeOpDetectPHI) HandleSerialize(ctx context.Context,
 	}
 
 	input, ok := in.Parameters.(*DetectPHIInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -353,6 +360,7 @@ func (m *awsAwsjson11_serializeOpInferICD10CM) HandleSerialize(ctx context.Conte
 	}
 
 	input, ok := in.Parameters.(*InferICD10CMInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -399,6 +407,7 @@ func (m *awsAwsjson11_serializeOpInferRxNorm) HandleSerialize(ctx context.Contex
 	}
 
 	input, ok := in.Parameters.(*InferRxNormInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -445,6 +454,7 @@ func (m *awsAwsjson11_serializeOpListEntitiesDetectionV2Jobs) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*ListEntitiesDetectionV2JobsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -491,6 +501,7 @@ func (m *awsAwsjson11_serializeOpListICD10CMInferenceJobs) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*ListICD10CMInferenceJobsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -537,6 +548,7 @@ func (m *awsAwsjson11_serializeOpListPHIDetectionJobs) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*ListPHIDetectionJobsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -583,6 +595,7 @@ func (m *awsAwsjson11_serializeOpListRxNormInferenceJobs) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*ListRxNormInferenceJobsInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -629,6 +642,7 @@ func (m *awsAwsjson11_serializeOpStartEntitiesDetectionV2Job) HandleSerialize(ct
 	}
 
 	input, ok := in.Parameters.(*StartEntitiesDetectionV2JobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -675,6 +689,7 @@ func (m *awsAwsjson11_serializeOpStartICD10CMInferenceJob) HandleSerialize(ctx c
 	}
 
 	input, ok := in.Parameters.(*StartICD10CMInferenceJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -721,6 +736,7 @@ func (m *awsAwsjson11_serializeOpStartPHIDetectionJob) HandleSerialize(ctx conte
 	}
 
 	input, ok := in.Parameters.(*StartPHIDetectionJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -767,6 +783,7 @@ func (m *awsAwsjson11_serializeOpStartRxNormInferenceJob) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*StartRxNormInferenceJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -813,6 +830,7 @@ func (m *awsAwsjson11_serializeOpStopEntitiesDetectionV2Job) HandleSerialize(ctx
 	}
 
 	input, ok := in.Parameters.(*StopEntitiesDetectionV2JobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -859,6 +877,7 @@ func (m *awsAwsjson11_serializeOpStopICD10CMInferenceJob) HandleSerialize(ctx co
 	}
 
 	input, ok := in.Parameters.(*StopICD10CMInferenceJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -905,6 +924,7 @@ func (m *awsAwsjson11_serializeOpStopPHIDetectionJob) HandleSerialize(ctx contex
 	}
 
 	input, ok := in.Parameters.(*StopPHIDetectionJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -951,6 +971,7 @@ func (m *awsAwsjson11_serializeOpStopRxNormInferenceJob) HandleSerialize(ctx con
 	}
 
 	input, ok := in.Parameters.(*StopRxNormInferenceJobInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

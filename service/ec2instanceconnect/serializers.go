@@ -29,6 +29,7 @@ func (m *awsAwsjson11_serializeOpSendSSHPublicKey) HandleSerialize(ctx context.C
 	}
 
 	input, ok := in.Parameters.(*SendSSHPublicKeyInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}

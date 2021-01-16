@@ -31,6 +31,7 @@ func (m *awsAwsjson11_serializeOpBatchMeterUsage) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*BatchMeterUsageInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -77,6 +78,7 @@ func (m *awsAwsjson11_serializeOpMeterUsage) HandleSerialize(ctx context.Context
 	}
 
 	input, ok := in.Parameters.(*MeterUsageInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -123,6 +125,7 @@ func (m *awsAwsjson11_serializeOpRegisterUsage) HandleSerialize(ctx context.Cont
 	}
 
 	input, ok := in.Parameters.(*RegisterUsageInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
@@ -169,6 +172,7 @@ func (m *awsAwsjson11_serializeOpResolveCustomer) HandleSerialize(ctx context.Co
 	}
 
 	input, ok := in.Parameters.(*ResolveCustomerInput)
+	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
