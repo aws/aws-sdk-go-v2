@@ -28,11 +28,8 @@ func TestInteg_PresignURL(t *testing.T) {
 		expectedSignedHeader http.Header
 	}{
 		"standard": {
-			body: bytes.NewReader([]byte("Hello-world")),
-			expectedSignedHeader: http.Header{
-				"content-type":   {"application/octet-stream"},
-				"content-length": {"11"},
-			},
+			body:                 bytes.NewReader([]byte("Hello-world")),
+			expectedSignedHeader: http.Header{},
 		},
 		"special characters": {
 			key: "some_value_(1).foo",
