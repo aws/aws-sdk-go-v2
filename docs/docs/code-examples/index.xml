@@ -1,0 +1,158 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AWS SDK for Go V2 – Code Examples</title>
+    <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/</link>
+    <description>Recent content in Code Examples on AWS SDK for Go V2</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 14 Jan 2021 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://aws.github.io/aws-sdk-go-v2/docs/code-examples/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Amazon CloudWatch Examples</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section contains code examples for Amazon CloudWatch using version 2 of the AWS SDK for Go.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Amazon DynamoDB Examples</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/dynamodb/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/dynamodb/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section contains code examples for Amazon DynamoDB using version 2 of the AWS SDK for Go.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Amazon EC2 Examples</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ec2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ec2/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section contains code examples for Amazon EC2 using version 2 of the AWS SDK for Go.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Amazon S3 Examples</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section contains code examples for Amazon S3 using version 2 of the AWS SDK for Go.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Amazon SNS Examples</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section contains code examples for Amazon SNS using version 2 of the AWS SDK for Go.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Amazon SQS Examples</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section contains code examples for Amazon SQS using version 2 of the AWS SDK for Go.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: AWS KMS Examples</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section contains code examples for AWS KMS using version 2 of the AWS SDK for Go.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: AWS STS Examples</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sts/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section contains code examples for AWS STS using version 2 of the AWS SDK for Go.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: AWS Systems Manager Examples</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ssm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ssm/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section contains code examples for AWS Systems Manager using version 2 of the AWS SDK for Go.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: IAM Examples</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This section contains code examples for IAM using version 2 of the AWS SDK for Go.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
