@@ -1,9 +1,0 @@
-{
- "ID": "service.internal.presign-url-feature-1609961884778858000",
- "SchemaVersion": 1,
- "Module": "service/internal/presign-url",
- "Type": "feature",
- "Description": "Scope operation middleware values to the individual stack",
- "MinVersion": "",
- "AffectedModules": null
-}

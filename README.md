@@ -3,11 +3,12 @@
 [![Build Status](https://travis-ci.org/aws/aws-sdk-go-v2.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-go-v2) [![SDK Documentation](https://img.shields.io/badge/SDK-Documentation-blue)](https://aws.github.io/aws-sdk-go-v2/docs/) [![API Reference](https://img.shields.io/badge/api-reference-blue.svg)](https://pkg.go.dev/mod/github.com/aws/aws-sdk-go-v2) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-blue.svg)](https://github.com/aws/aws-sdk-go/blob/master/LICENSE.txt)
 
 
-`aws-sdk-go-v2` is the **Release Candidate** for the v2 AWS SDK for the Go programming language. This Release Candidate is provided to receive feedback from the language community on SDK changes prior to reaching General Availability (GA) status. As such, users should expect the SDK to release minor version releases that break backwards compatibility before reaching GA status. The release notes for the breaking change will include information about the breaking change, and how you can migrate to the latest version.
+`aws-sdk-go-v2` is the v2 AWS SDK for the Go programming language.
 
-Check out the [Issues] and [Projects] for design and updates being made to the SDK. The v2 SDK requires a minimum version of `Go 1.15`.
+The v2 SDK requires a minimum version of `Go 1.15`.
 
-We'll be expanding out the [Issues] and [Projects] sections with additional changes to the SDK based on your feedback, and SDK's core's improvements. Check the the SDK's [CHANGELOG] for information about the latest updates to the SDK.
+Checkout out the [release notes](https://github.com/aws/aws-sdk-go-v2/releases) for information about the latest bug
+fixes, updates, and features added to the SDK.
 
 Jump To:
 * [Getting Started](#getting-started)
@@ -127,6 +128,9 @@ The v2 SDK will use GitHub [Issues] to track feature requests and issues with th
 **Contributing**. You can open pull requests for fixes or additions to the AWS SDK for Go 2.0 Developer Preview release. All pull requests must be submitted under the Apache 2.0 license and will be reviewed by an SDK team member before being merged in. Accompanying unit tests, where possible, are appreciated.
 
 ## Resources
+
+[SDK Developer Guide](https://aws.github.io/aws-sdk-go-v2/docs/) - Use this document to learn how to get started and
+use the AWS SDK for Go V2.
 
 [SDK API Reference Documentation](https://pkg.go.dev/mod/github.com/aws/aws-sdk-go-v2) - Use this
 document to look up all API operation input and output parameters for AWS

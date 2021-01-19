@@ -1,4 +1,9 @@
-# Pending Release
+# Release 2021-01-19
+
+We are excited to announce the [General Availability](https://aws.amazon.com/blogs/developer/aws-sdk-for-go-version-2-general-availability/)
+(GA) release of the [AWS SDK for Go version 2 (v2)](https://github.com/aws/aws-sdk-go-v2).
+This release follows the [Release candidate](https://aws.amazon.com/blogs/developer/aws-sdk-for-go-version-2-v2-release-candidate)
+of the AWS SDK for Go v2. Version 2 incorporates customer feedback from version 1 and takes advantage of modern Go language features.
 
 ## Breaking Changes
 * `aws`: Updated Config.Retryer member to be a func that returns aws.Retryer ([#1033](https://github.com/aws/aws-sdk-go-v2/pull/1033))
@@ -37,9 +42,7 @@
 * `service/s3`: Fix Unmarshaling `GetBucketLocation` operation's response ([#1027](https://github.com/aws/aws-sdk-go-v2/pull/1027))
     * Fixes [#908](https://github.com/aws/aws-sdk-go-v2/issues/908)
 
-## Other changes
-
-## Migrating from v2 preview SDK's v0.30.0 to v0.31.0 release candidate
+## Migrating from v2 preview SDK's v0.31.0 to v1.0.0
 
 ### aws.Config Retryer member
 
@@ -54,7 +57,6 @@ If your application used the `retry.Retryer` type, update to using the
 ### API Client enum value names
 
 If your application used the enum values in the API Client's `types` package between v0.31.0 and the latest version of the client module you may need to update the naming of the enum value. The enum value name casing were updated to camel case instead lowercased.
-
 
 # Release 2020-12-23
 
