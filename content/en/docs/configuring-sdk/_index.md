@@ -348,12 +348,12 @@ with this type using [NewCredentialsCache]({{< apiref "aws#NewCredentialsCache" 
 
 #### Static Credentials
 
-You can hard-code credentials in your application by using the [credentials.StaticCredentialsProvider]({{< apiref "credentials#StaticCredentialsProvider" >}})
+You can hard-code credentials in your application by using the [credentials.NewStaticCredentialsProvider]({{< apiref "credentials#NewStaticCredentialsProvider" >}})
 credential provider to explicitly set the access keys to be used. For example:
 
 ```go
 cfg, err := config.LoadDefaultConfig(context.TODO(), 
-	config.WithCredentialsProvider(aws.StaticCredentialsProvider("AKID", "SECRET_KEY", "TOKEN")),
+	config.WithCredentialsProvider(credentials.NewStaticCredentialsProvider("AKID", "SECRET_KEY", "TOKEN")),
 )
 ```
 
