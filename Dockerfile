@@ -1,5 +1,7 @@
 FROM public.ecr.aws/amazonlinux/amazonlinux:latest
 
+ARG SITE_ENV=production
+
 RUN yum update -y && yum install -y tar xz gzip git coreutils
 RUN curl -L -o nodejs.tar.xz https://nodejs.org/dist/v14.15.1/node-v14.15.1-linux-x64.tar.xz && \
     mkdir -p /opt/nodejs && \
@@ -16,4 +18,4 @@ ENV PATH /opt/nodejs/bin:${PATH}
 
 RUN npm install && \
     git submodule update --init --recursive themes/docsy && \
-    HUGO_ENV=production hugo -d docs --gc
+    hugo --environment ${SITE_ENV} -d docs --gc
