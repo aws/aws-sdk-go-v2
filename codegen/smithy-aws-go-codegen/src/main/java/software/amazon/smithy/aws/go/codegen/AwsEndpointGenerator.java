@@ -33,6 +33,7 @@ import software.amazon.smithy.utils.SetUtils;
  * Generates an endpoint resolver from endpoints.json.
  */
 public final class AwsEndpointGenerator implements GoIntegration {
+    public static final String ENDPOINT_RESOLVER_CONFIG_NAME = "EndpointResolver";
 
     @Override
     public void writeAdditionalFiles(
@@ -49,10 +50,11 @@ public final class AwsEndpointGenerator implements GoIntegration {
         return ListUtils.of(RuntimeClientPlugin.builder()
                 .configFields(SetUtils.of(
                         ConfigField.builder()
-                                .name("EndpointResolver")
+                                .name(ENDPOINT_RESOLVER_CONFIG_NAME)
                                 .type(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.RESOLVER_INTERFACE_NAME)
                                         .build())
                                 .documentation("The service endpoint resolver.")
+                                .withHelper(true)
                                 .build(),
                         ConfigField.builder()
                                 .name("EndpointOptions")

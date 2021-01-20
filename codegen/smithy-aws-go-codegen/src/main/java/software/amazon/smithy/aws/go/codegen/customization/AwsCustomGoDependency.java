@@ -48,8 +48,8 @@ public final class AwsCustomGoDependency extends AwsGoDependency {
     }
 
     private static final class Versions {
-        private static final String INTERNAL_S3SHARED = "v0.4.1-0.20210108204630-4822f3195720";
-        private static final String INTERNAL_ACCEPTENCODING = "v0.4.1-0.20210108204630-4822f3195720";
-        private static final String INTERNAL_PRESIGNURL = "v0.2.1-0.20210108204630-4822f3195720";
+        private static final String INTERNAL_S3SHARED = "v1.0.0";
+        private static final String INTERNAL_ACCEPTENCODING = "v1.0.0";
+        private static final String INTERNAL_PRESIGNURL = "v1.0.0";
     }
 }
