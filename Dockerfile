@@ -2,7 +2,7 @@ FROM public.ecr.aws/amazonlinux/amazonlinux:latest
 
 ARG SITE_ENV=production
 
-RUN yum update -y && yum install -y tar xz gzip git coreutils
+RUN yum update -y && yum install -y tar xz gzip git coreutils make
 RUN curl -L -o nodejs.tar.xz https://nodejs.org/dist/v14.15.1/node-v14.15.1-linux-x64.tar.xz && \
     mkdir -p /opt/nodejs && \
     tar --strip-components=1 -xJf nodejs.tar.xz -C /opt/nodejs && rm -f nodejs.tar.xz
@@ -16,6 +16,4 @@ WORKDIR /aws-sdk-go-v2-docs
 
 ENV PATH /opt/nodejs/bin:${PATH}
 
-RUN npm install && \
-    git submodule update --init --recursive themes/docsy && \
-    hugo --environment ${SITE_ENV} -d docs --gc
+RUN make setup generate SITE_ENV=${SITE_ENV}
