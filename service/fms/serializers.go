@@ -139,6 +139,15 @@ func (m *awsAwsjson11_serializeOpDeleteNotificationChannel) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.DeleteNotificationChannel")
 
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteNotificationChannelInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -271,6 +280,15 @@ func (m *awsAwsjson11_serializeOpDisassociateAdminAccount) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.DisassociateAdminAccount")
 
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDisassociateAdminAccountInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -308,6 +326,15 @@ func (m *awsAwsjson11_serializeOpGetAdminAccount) HandleSerialize(ctx context.Co
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.GetAdminAccount")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetAdminAccountInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -440,6 +467,15 @@ func (m *awsAwsjson11_serializeOpGetNotificationChannel) HandleSerialize(ctx con
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.GetNotificationChannel")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetNotificationChannelInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}

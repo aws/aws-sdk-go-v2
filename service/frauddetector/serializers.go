@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"strings"
 )
 
 type awsAwsjson11_serializeOpBatchCreateVariable struct {
@@ -1312,6 +1313,10 @@ func (m *awsAwsjson11_serializeOpGetKMSEncryptionKey) HandleSerialize(ctx contex
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.GetKMSEncryptionKey")
+
+	if request, err = request.SetStream(strings.NewReader(`{}`)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}

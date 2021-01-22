@@ -327,6 +327,15 @@ func (m *awsAwsjson11_serializeOpCreateSubscription) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.CreateSubscription")
 
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateSubscriptionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -459,6 +468,15 @@ func (m *awsAwsjson11_serializeOpDeleteSubscription) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DeleteSubscription")
 
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteSubscriptionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -544,6 +562,15 @@ func (m *awsAwsjson11_serializeOpDescribeAttackStatistics) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DescribeAttackStatistics")
 
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeAttackStatisticsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -582,6 +609,15 @@ func (m *awsAwsjson11_serializeOpDescribeDRTAccess) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DescribeDRTAccess")
 
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeDRTAccessInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -619,6 +655,15 @@ func (m *awsAwsjson11_serializeOpDescribeEmergencyContactSettings) HandleSeriali
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DescribeEmergencyContactSettings")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeEmergencyContactSettingsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -752,6 +797,15 @@ func (m *awsAwsjson11_serializeOpDescribeSubscription) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DescribeSubscription")
 
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeSubscriptionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -789,6 +843,15 @@ func (m *awsAwsjson11_serializeOpDisableProactiveEngagement) HandleSerialize(ctx
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DisableProactiveEngagement")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDisableProactiveEngagementInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -875,6 +938,15 @@ func (m *awsAwsjson11_serializeOpDisassociateDRTRole) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.DisassociateDRTRole")
 
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDisassociateDRTRoleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -960,6 +1032,15 @@ func (m *awsAwsjson11_serializeOpEnableProactiveEngagement) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.EnableProactiveEngagement")
 
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentEnableProactiveEngagementInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -997,6 +1078,15 @@ func (m *awsAwsjson11_serializeOpGetSubscriptionState) HandleSerialize(ctx conte
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShield_20160616.GetSubscriptionState")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetSubscriptionStateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}

@@ -326,6 +326,15 @@ func (m *awsAwsjson11_serializeOpDeleteRegistryPolicy) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.DeleteRegistryPolicy")
 
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteRegistryPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -551,6 +560,15 @@ func (m *awsAwsjson11_serializeOpDescribeRegistry) HandleSerialize(ctx context.C
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.DescribeRegistry")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeRegistryInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -824,6 +842,15 @@ func (m *awsAwsjson11_serializeOpGetRegistryPolicy) HandleSerialize(ctx context.
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.GetRegistryPolicy")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetRegistryPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}

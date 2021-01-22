@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"strings"
 )
 
 type awsAwsjson11_serializeOpBatchGetAggregateResourceConfig struct {
@@ -2253,6 +2254,10 @@ func (m *awsAwsjson11_serializeOpGetComplianceSummaryByConfigRule) HandleSeriali
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("StarlingDoveService.GetComplianceSummaryByConfigRule")
+
+	if request, err = request.SetStream(strings.NewReader(`{}`)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}

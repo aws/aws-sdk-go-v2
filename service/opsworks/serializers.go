@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"strings"
 )
 
 type awsAwsjson11_serializeOpAssignInstance struct {
@@ -1501,6 +1502,10 @@ func (m *awsAwsjson11_serializeOpDescribeMyUserProfile) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OpsWorks_20130218.DescribeMyUserProfile")
 
+	if request, err = request.SetStream(strings.NewReader(`{}`)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1538,6 +1543,10 @@ func (m *awsAwsjson11_serializeOpDescribeOperatingSystems) HandleSerialize(ctx c
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OpsWorks_20130218.DescribeOperatingSystems")
+
+	if request, err = request.SetStream(strings.NewReader(`{}`)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
