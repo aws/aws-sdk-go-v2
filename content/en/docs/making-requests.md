@@ -478,7 +478,7 @@ maxWaitTime := 5 * time.Minutes
 // Wait will poll until it gets the resource status, or max wait time 
 // expires.
 err := waiter.Wait(context.TODO(), params, maxWaitTime)  
-if err == nil {
+if err != nil {
     log.Printf("error: %v", err)
     return 
 }
@@ -549,7 +549,7 @@ err := waiter.Wait(context.TODO(), params, maxWaitTime, func (o *dynamodb.TableE
     // override maximum default delay to 120 seconds
     o.MaxDelay = 120 * time.Second
 })
-if err == nil {
+if err != nil {
     log.Printf("error: %v", err)
     return 
 }
