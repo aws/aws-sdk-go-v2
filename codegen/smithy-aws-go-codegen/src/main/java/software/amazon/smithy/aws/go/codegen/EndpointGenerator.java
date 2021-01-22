@@ -54,6 +54,7 @@ public class EndpointGenerator implements Runnable {
     public static final String RESOLVER_CONSTRUCTOR_NAME = "NewDefaultEndpointResolver";
     public static final String AWS_ENDPOINT_RESOLVER_HELPER = "withEndpointResolver";
     private static final String EndpointResolverFromURL = "EndpointResolverFromURL";
+    private static final String ENDPOINT_SOURCE_CUSTOM = "EndpointSourceCustom";
     private static final Symbol AWS_ENDPOINT = SymbolUtils.createPointableSymbolBuilder(
             "Endpoint", AwsGoDependency.AWS_CORE).build();
 
@@ -375,12 +376,16 @@ public class EndpointGenerator implements Runnable {
 
         // Generate EndpointResolverFromURL helper
         writer.writeDocs(String.format("%s returns an EndpointResolver configured using the provided endpoint url. "
-                + "By default, the resolved endpoint resolver uses the client region as signing region. "
+                + "By default, the resolved endpoint resolver uses the client region as signing region, and  "
+                + "the endpoint source is set to EndpointSourceCustom."
                 + "You can provide functional options to configure endpoint values for the resolved endpoint.",
                 EndpointResolverFromURL));
         writer.openBlock("func $L(url string, optFns ...func($P)) EndpointResolver {", "}",
                 EndpointResolverFromURL, AWS_ENDPOINT, () -> {
-                    writer.write("e := $T{ URL : url, }", AWS_ENDPOINT);
+                    Symbol customEndpointSource = SymbolUtils.createValueSymbolBuilder(
+                            ENDPOINT_SOURCE_CUSTOM, AwsGoDependency.AWS_CORE
+                    ).build();
+                    writer.write("e := $T{ URL : url, Source : $T }", AWS_ENDPOINT, customEndpointSource);
                     writer.write("for _, fn := range optFns { fn(&e) }");
                     writer.write("");
 
