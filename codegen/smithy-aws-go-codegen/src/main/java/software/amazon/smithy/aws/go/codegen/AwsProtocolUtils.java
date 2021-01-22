@@ -137,6 +137,13 @@ final class AwsProtocolUtils {
                         .operation(ShapeId.from("aws.protocoltests.json#PutAndGetInlineDocuments"))
                         .build(),
 
+                // JSON RPC serialize empty modeled input should always serialize something
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
+                        .operation(ShapeId.from("aws.protocoltests.json10#EmptyInputAndEmptyOutput"))
+                        .addTestName("AwsJson10EmptyInputAndEmptyOutput")
+                        .build(),
+
                 // Rest XML namespaced attributes. This needs to be fixed, but can be punted
                 // temporarily since this is only used in an output in a single service.
                 // TODO: fix serializing namespaced xml attributes
