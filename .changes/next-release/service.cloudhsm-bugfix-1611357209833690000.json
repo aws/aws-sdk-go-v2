@@ -1,0 +1,9 @@
+{
+ "ID": "service.cloudhsm-bugfix-1611357209833690000",
+ "SchemaVersion": 1,
+ "Module": "service/cloudhsm",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

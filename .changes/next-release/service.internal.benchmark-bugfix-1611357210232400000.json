@@ -1,0 +1,9 @@
+{
+ "ID": "service.internal.benchmark-bugfix-1611357210232400000",
+ "SchemaVersion": 1,
+ "Module": "service/internal/benchmark",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

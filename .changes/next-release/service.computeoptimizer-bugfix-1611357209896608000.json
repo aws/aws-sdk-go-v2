@@ -1,0 +1,9 @@
+{
+ "ID": "service.computeoptimizer-bugfix-1611357209896608000",
+ "SchemaVersion": 1,
+ "Module": "service/computeoptimizer",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

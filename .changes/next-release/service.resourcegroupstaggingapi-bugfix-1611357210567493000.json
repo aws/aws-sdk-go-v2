@@ -1,0 +1,9 @@
+{
+ "ID": "service.resourcegroupstaggingapi-bugfix-1611357210567493000",
+ "SchemaVersion": 1,
+ "Module": "service/resourcegroupstaggingapi",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

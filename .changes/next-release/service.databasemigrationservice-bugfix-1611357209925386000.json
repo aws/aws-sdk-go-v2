@@ -1,0 +1,9 @@
+{
+ "ID": "service.databasemigrationservice-bugfix-1611357209925386000",
+ "SchemaVersion": 1,
+ "Module": "service/databasemigrationservice",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

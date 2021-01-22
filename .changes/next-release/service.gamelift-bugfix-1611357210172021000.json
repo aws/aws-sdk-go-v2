@@ -1,0 +1,9 @@
+{
+ "ID": "service.gamelift-bugfix-1611357210172021000",
+ "SchemaVersion": 1,
+ "Module": "service/gamelift",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

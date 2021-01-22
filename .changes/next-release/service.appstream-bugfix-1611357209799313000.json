@@ -1,0 +1,9 @@
+{
+ "ID": "service.appstream-bugfix-1611357209799313000",
+ "SchemaVersion": 1,
+ "Module": "service/appstream",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

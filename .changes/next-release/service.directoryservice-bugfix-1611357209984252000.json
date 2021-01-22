@@ -1,0 +1,9 @@
+{
+ "ID": "service.directoryservice-bugfix-1611357209984252000",
+ "SchemaVersion": 1,
+ "Module": "service/directoryservice",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

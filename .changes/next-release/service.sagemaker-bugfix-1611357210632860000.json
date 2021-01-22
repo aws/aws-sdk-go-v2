@@ -1,0 +1,9 @@
+{
+ "ID": "service.sagemaker-bugfix-1611357210632860000",
+ "SchemaVersion": 1,
+ "Module": "service/sagemaker",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

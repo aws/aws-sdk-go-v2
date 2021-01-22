@@ -1,0 +1,9 @@
+{
+ "ID": "service.wafregional-bugfix-1611357210954801000",
+ "SchemaVersion": 1,
+ "Module": "service/wafregional",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

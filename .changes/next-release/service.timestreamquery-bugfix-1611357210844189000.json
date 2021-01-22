@@ -1,0 +1,9 @@
+{
+ "ID": "service.timestreamquery-bugfix-1611357210844189000",
+ "SchemaVersion": 1,
+ "Module": "service/timestreamquery",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}
