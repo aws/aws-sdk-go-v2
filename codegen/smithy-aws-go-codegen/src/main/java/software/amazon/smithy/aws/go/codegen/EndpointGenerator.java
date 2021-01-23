@@ -297,6 +297,10 @@ public class EndpointGenerator implements Runnable {
             });
             w.write("ctx = awsmiddleware.SetSigningName(ctx, signingName)");
         });
+
+        // set endoint source on context
+        w.write("ctx = awsmiddleware.SetEndpointSource(ctx, endpoint.Source)");
+        // set host-name immutable on context
         w.write("ctx = smithyhttp.SetHostnameImmutable(ctx, endpoint.HostnameImmutable)");
         // set signing region on context
         w.write("ctx = awsmiddleware.SetSigningRegion(ctx, endpoint.SigningRegion)");
