@@ -45,12 +45,13 @@ func (r ResourceRequest) AllowCrossRegion() bool {
 }
 
 // IsCrossPartition returns true if request is configured for region of another partition, than
-// the partition that resource ARN region resolves to.
+// the partition that resource ARN region resolves to. IsCrossPartition will not return an error,
+// if request is not configured with a specific partition id. This might happen if customer provides
+// custom endpoint url, but does not associate a partition id with it.
 func (r ResourceRequest) IsCrossPartition() (bool, error) {
-	// These error checks should never be triggered, unless validations are turned off
 	rv := r.PartitionID
 	if len(rv) == 0 {
-		return false, fmt.Errorf("partition id was not found for provided request region")
+		return false, nil
 	}
 
 	av := r.Resource.GetARN().Partition
