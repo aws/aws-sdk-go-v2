@@ -99,6 +99,14 @@ func WithAPIOptions(optFns ...func(*middleware.Stack) error) func(*Options) {
 	}
 }
 
+// WithEndpointResolver returns a functional option for setting the Client's
+// EndpointResolver option.
+func WithEndpointResolver(v EndpointResolver) func(*Options) {
+	return func(o *Options) {
+		o.EndpointResolver = v
+	}
+}
+
 type HTTPClient interface {
 	Do(*http.Request) (*http.Response, error)
 }

@@ -108,17 +108,6 @@ public class AddAwsConfigFields implements GoIntegration {
                     .build()
     );
 
-    /**
-     * Gets the sort order of the customization from -128 to 127, with lowest
-     * executed first.
-     *
-     * @return Returns the sort order, defaults to -50.
-     */
-    @Override
-    public byte getOrder() {
-        return -50;
-    }
-
     private static Symbol getAwsCoreSymbol(String symbolName) {
         return SymbolUtils.createValueSymbolBuilder(symbolName,
                 AwsGoDependency.AWS_CORE).build();
@@ -137,6 +126,17 @@ public class AddAwsConfigFields implements GoIntegration {
     private static Symbol getAwsRetrySymbol(String symbolName) {
         return SymbolUtils.createValueSymbolBuilder(symbolName,
                 AwsGoDependency.AWS_RETRY).build();
+    }
+
+    /**
+     * Gets the sort order of the customization from -128 to 127, with lowest
+     * executed first.
+     *
+     * @return Returns the sort order, defaults to -50.
+     */
+    @Override
+    public byte getOrder() {
+        return -50;
     }
 
     @Override
@@ -178,7 +178,8 @@ public class AddAwsConfigFields implements GoIntegration {
         writer.openBlock("func $L(o *Options) {", "}", RESOLVE_HTTP_CLIENT, () -> {
             writer.openBlock("if o.$L != nil {", "}", HTTP_CLIENT_CONFIG_NAME, () -> writer.write("return"));
             writer.write("o.$L = $T()", HTTP_CLIENT_CONFIG_NAME,
-                    SymbolUtils.createValueSymbolBuilder("NewBuildableClient", AwsGoDependency.AWS_HTTP_TRANSPORT).build());
+                    SymbolUtils.createValueSymbolBuilder("NewBuildableClient",
+                            AwsGoDependency.AWS_HTTP_TRANSPORT).build());
         });
         writer.write("");
     }
@@ -305,6 +306,14 @@ public class AddAwsConfigFields implements GoIntegration {
                 super();
             }
 
+            /**
+             * This sets the Config field on Client Options structure. By default this is true.
+             * If set to false, this field won't be generated on the Client options, but will be used by
+             * the NewFromConfig (to copy values from the aws config to client options).
+             *
+             * @param generatedOnClient bool indicating config field generation on client option structure
+             * @return
+             */
             public Builder generatedOnClient(boolean generatedOnClient) {
                 this.generatedOnClient = generatedOnClient;
                 return this;
@@ -345,6 +354,18 @@ public class AddAwsConfigFields implements GoIntegration {
             @Override
             public Builder documentation(String documentation) {
                 super.documentation(documentation);
+                return this;
+            }
+
+            @Override
+            public Builder withHelper(Boolean withHelper) {
+                super.withHelper(withHelper);
+                return this;
+            }
+
+            @Override
+            public Builder withHelper() {
+                super.withHelper();
                 return this;
             }
         }
