@@ -7,17 +7,15 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
+	smithyhttp "github.com/aws/smithy-go/transport/http"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-	"github.com/aws/aws-sdk-go-v2/service/s3/internal/endpoints"
-
-	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
-
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/internal/endpoints"
 )
 
 type s3BucketTest struct {
@@ -240,14 +238,7 @@ func TestUpdateEndpointBuild(t *testing.T) {
 
 func TestEndpointWithARN(t *testing.T) {
 	// test cases
-	cases := map[string]struct {
-		options               s3.Options
-		bucket                string
-		expectedErr           string
-		expectedReqURL        string
-		expectedSigningName   string
-		expectedSigningRegion string
-	}{
+	cases := map[string]testCaseForEndpointCustomization{
 		"Outpost AccessPoint with no S3UseARNRegion flag set": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3.Options{
@@ -503,7 +494,9 @@ func TestEndpointWithARN(t *testing.T) {
 					return aws.Endpoint{}, nil
 				}),
 			},
-			expectedErr: "partition id was not found for provided request region",
+			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com/testkey?x-id=GetObject",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
 		},
 		"Custom Resolver Without PartitionID in Cross-Region Target": {
 			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
@@ -531,7 +524,9 @@ func TestEndpointWithARN(t *testing.T) {
 					return aws.Endpoint{}, nil
 				}),
 			},
-			expectedErr: "partition id was not found for provided request region",
+			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com/testkey?x-id=GetObject",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
 		},
 		"bucket host-style": {
 			bucket: "mock-bucket",
@@ -618,64 +613,227 @@ func TestEndpointWithARN(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-
-			// options
-			opts := c.options.Copy()
-			opts.Credentials = unit.StubCredentialsProvider{}
-			opts.HTTPClient = smithyhttp.NopClient{}
-			opts.Retryer = aws.NopRetryer{}
-
-			// build an s3 client
-			svc := s3.New(opts)
-			// setup a request retriever middleware
-			fm := requestRetrieverMiddleware{}
-
-			ctx := context.Background()
-
-			// call an operation
-			_, err := svc.GetObject(ctx, &s3.GetObjectInput{
-				Bucket: ptr.String(c.bucket),
-				Key:    ptr.String("testkey"),
-			}, func(options *s3.Options) {
-				// append request retriever middleware for request inspection
-				options.APIOptions = append(options.APIOptions,
-					func(stack *middleware.Stack) error {
-						// adds AFTER operation serializer middleware
-						stack.Serialize.Insert(&fm, "OperationSerializer", middleware.After)
-						return nil
-					})
+			runValidations(t, c, func(ctx context.Context, svc *s3.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.GetObject(ctx, &s3.GetObjectInput{
+					Bucket: ptr.String(c.bucket),
+					Key:    ptr.String("testkey"),
+				}, addRequestRetriever(fm))
 			})
-
-			// inspect any errors
-			if len(c.expectedErr) != 0 {
-				if err == nil {
-					t.Fatalf("expected error, got none")
-				}
-				if a, e := err.Error(), c.expectedErr; !strings.Contains(a, e) {
-					t.Fatalf("expect error code to contain %q, got %q", e, a)
-				}
-				return
-			}
-			if err != nil {
-				t.Fatalf("expect no error, got %v", err)
-			}
-
-			// build the captured request
-			req := fm.request.Build(ctx)
-			// verify the built request is as expected
-			if e, a := c.expectedReqURL, req.URL.String(); e != a {
-				t.Fatalf("expect url %s, got %s", e, a)
-			}
-
-			if e, a := c.expectedSigningRegion, fm.signingRegion; !strings.EqualFold(e, a) {
-				t.Fatalf("expect signing region as %s, got %s", e, a)
-			}
-
-			if e, a := c.expectedSigningName, fm.signingName; !strings.EqualFold(e, a) {
-				t.Fatalf("expect signing name as %s, got %s", e, a)
-			}
 		})
+	}
+}
 
+type testCaseForEndpointCustomization struct {
+	options               s3.Options
+	bucket                string
+	operation             func(ctx context.Context, svc *s3.Client, fm *requestRetrieverMiddleware) (interface{}, error)
+	expectedErr           string
+	expectedReqURL        string
+	expectedSigningName   string
+	expectedSigningRegion string
+}
+
+var addRequestRetriever = func(fm *requestRetrieverMiddleware) func(options *s3.Options) {
+	return func(options *s3.Options) {
+		// append request retriever middleware for request inspection
+		options.APIOptions = append(options.APIOptions,
+			func(stack *middleware.Stack) error {
+				// adds AFTER operation serializer middleware
+				stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
+				return nil
+			})
+	}
+}
+
+func TestVPC_CustomEndpoint(t *testing.T) {
+	cases := map[string]testCaseForEndpointCustomization{
+		"standard custom endpoint url": {
+			bucket: "bucketname",
+			options: s3.Options{
+				EndpointResolver: s3.EndpointResolverFromURL("https://beta.example.com", func(endpoint *aws.Endpoint) {
+					endpoint.SigningRegion = "us-west-2"
+				}),
+				Region: "us-west-2",
+			},
+			expectedReqURL:        "https://bucketname.beta.example.com/",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
+		},
+		"AccessPoint with custom endpoint url": {
+			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+			options: s3.Options{
+				EndpointResolver: s3.EndpointResolverFromURL("https://beta.example.com", func(endpoint *aws.Endpoint) {
+					endpoint.SigningRegion = "us-west-2"
+				}),
+				Region: "us-west-2",
+			},
+			expectedReqURL:        "https://myendpoint-123456789012.beta.example.com/",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
+		},
+		"Outpost AccessPoint with custom endpoint url": {
+			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3.Options{
+				EndpointResolver: s3.EndpointResolverFromURL("https://beta.example.com", func(endpoint *aws.Endpoint) {
+					endpoint.SigningRegion = "us-west-2"
+				}),
+				Region: "us-west-2",
+			},
+			expectedReqURL:        "https://myaccesspoint-123456789012.op-01234567890123456.beta.example.com/",
+			expectedSigningName:   "s3-outposts",
+			expectedSigningRegion: "us-west-2",
+		},
+		"ListBucket with custom endpoint url": {
+			options: s3.Options{
+				EndpointResolver: s3.EndpointResolverFromURL("https://bucket.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com", func(endpoint *aws.Endpoint) {
+					endpoint.SigningRegion = "us-west-2"
+				}),
+				Region: "us-west-2",
+			},
+			operation: func(ctx context.Context, svc *s3.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.ListBuckets(ctx, &s3.ListBucketsInput{}, addRequestRetriever(fm))
+			},
+			expectedReqURL:        "https://bucket.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com/",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
+		},
+		"Path-style addressing with custom endpoint url": {
+			bucket: "bucketname",
+			options: s3.Options{
+				EndpointResolver: s3.EndpointResolverFromURL("https://bucket.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com", func(endpoint *aws.Endpoint) {
+					endpoint.SigningRegion = "us-west-2"
+				}),
+				Region:       "us-west-2",
+				UsePathStyle: true,
+			},
+			expectedReqURL:        "https://bucket.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com/bucketname",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
+		},
+		"Virtual host addressing with custom endpoint url": {
+			bucket: "bucketname",
+			options: s3.Options{
+				EndpointResolver: s3.EndpointResolverFromURL("https://bucket.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com", func(endpoint *aws.Endpoint) {
+					endpoint.SigningRegion = "us-west-2"
+				}),
+				Region: "us-west-2",
+			},
+			expectedReqURL:        "https://bucketname.bucket.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com/",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
+		},
+		"Access-point with custom endpoint url and use_arn_region set": {
+			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
+			options: s3.Options{
+				EndpointResolver: s3.EndpointResolverFromURL("https://accesspoint.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com", func(endpoint *aws.Endpoint) {
+					endpoint.SigningRegion = "us-west-2"
+				}),
+				Region:       "eu-west-1",
+				UseARNRegion: true,
+			},
+			expectedReqURL:        "https://myendpoint-123456789012.accesspoint.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com/",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
+		},
+		"Custom endpoint url with Dualstack": {
+			bucket: "bucketname",
+			options: s3.Options{
+				EndpointResolver: s3.EndpointResolverFromURL("https://beta.example.com", func(endpoint *aws.Endpoint) {
+					endpoint.SigningRegion = "us-west-2"
+				}),
+				Region:       "us-west-2",
+				UseDualstack: true,
+			},
+			expectedReqURL:        "https://bucketname.beta.example.com/",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
+		},
+		"Outpost with custom endpoint url and Dualstack": {
+			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3.Options{
+				EndpointResolver: s3.EndpointResolverFromURL("https://beta.example.com", func(endpoint *aws.Endpoint) {
+					endpoint.SigningRegion = "us-west-2"
+				}),
+				Region:       "us-west-2",
+				UseDualstack: true,
+			},
+			expectedErr: "client configured for S3 Dual-stack but is not supported with resource ARN",
+		},
+		"Standard custom endpoint url with Immutable Host": {
+			bucket: "bucketname",
+			options: s3.Options{
+				EndpointResolver: s3.EndpointResolverFromURL("https://beta.example.com", func(endpoint *aws.Endpoint) {
+					endpoint.SigningRegion = "us-west-2"
+					endpoint.HostnameImmutable = true
+				}),
+				Region: "us-west-2",
+			},
+			expectedReqURL:        "https://beta.example.com/bucketname",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			runValidations(t, c, func(ctx context.Context, svc *s3.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				if c.operation != nil {
+					return c.operation(ctx, svc, fm)
+				}
+
+				return svc.ListObjects(ctx, &s3.ListObjectsInput{
+					Bucket: ptr.String(c.bucket),
+				}, addRequestRetriever(fm))
+			})
+		})
+	}
+}
+
+func runValidations(t *testing.T, c testCaseForEndpointCustomization, operation func(
+	context.Context, *s3.Client, *requestRetrieverMiddleware) (interface{}, error)) {
+	// options
+	opts := c.options.Copy()
+	opts.Credentials = unit.StubCredentialsProvider{}
+	opts.HTTPClient = smithyhttp.NopClient{}
+	opts.Retryer = aws.NopRetryer{}
+
+	// build an s3 client
+	svc := s3.New(opts)
+	// setup a request retriever middleware
+	fm := requestRetrieverMiddleware{}
+
+	ctx := context.Background()
+
+	// call an operation
+	_, err := operation(ctx, svc, &fm)
+
+	// inspect any errors
+	if len(c.expectedErr) != 0 {
+		if err == nil {
+			t.Fatalf("expected error, got none")
+		}
+		if a, e := err.Error(), c.expectedErr; !strings.Contains(a, e) {
+			t.Fatalf("expect error code to contain %q, got %q", e, a)
+		}
+		return
+	}
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	// build the captured request
+	req := fm.request.Build(ctx)
+	// verify the built request is as expected
+	if e, a := c.expectedReqURL, req.URL.String(); e != a {
+		t.Fatalf("expect url %s, got %s", e, a)
+	}
+
+	if e, a := c.expectedSigningRegion, fm.signingRegion; !strings.EqualFold(e, a) {
+		t.Fatalf("expect signing region as %s, got %s", e, a)
+	}
+
+	if e, a := c.expectedSigningName, fm.signingName; !strings.EqualFold(e, a) {
+		t.Fatalf("expect signing name as %s, got %s", e, a)
 	}
 }
 
