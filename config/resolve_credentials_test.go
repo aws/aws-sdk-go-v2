@@ -107,7 +107,7 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 	}{
 		"credential source and source profile": {
 			envProfile:    "invalid_source_and_credential_source",
-			expectedError: "only source profile or credential source can be specified",
+			expectedError: "only one credential type may be specified per profile",
 			init: func() {
 				os.Setenv("AWS_ACCESS_KEY", "access_key")
 				os.Setenv("AWS_SECRET_KEY", "secret_key")

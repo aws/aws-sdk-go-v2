@@ -218,6 +218,33 @@ func TestNewSharedConfig(t *testing.T) {
 				},
 			},
 		},
+		"AWS SSO Profile": {
+			Filenames: []string{testConfigFilename},
+			Profile:   "sso_creds",
+			Expected: SharedConfig{
+				Profile:      "sso_creds",
+				SSOAccountID: "012345678901",
+				SSORegion:    "us-west-2",
+				SSORoleName:  "TestRole",
+				SSOStartURL:  "https://127.0.0.1/start",
+			},
+		},
+		"Assume Role with AWS SSO Credentials": {
+			Filenames: []string{testConfigFilename},
+			Profile:   "source_sso_creds",
+			Expected: SharedConfig{
+				Profile:           "source_sso_creds",
+				RoleARN:           "source_sso_creds_arn",
+				SourceProfileName: "sso_creds",
+				Source: &SharedConfig{
+					Profile:      "sso_creds",
+					SSOAccountID: "012345678901",
+					SSORegion:    "us-west-2",
+					SSORoleName:  "TestRole",
+					SSOStartURL:  "https://127.0.0.1/start",
+				},
+			},
+		},
 	}
 
 	for name, c := range cases {

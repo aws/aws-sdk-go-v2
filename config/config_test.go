@@ -2,11 +2,11 @@ package config
 
 import (
 	"context"
-	"github.com/google/go-cmp/cmp"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/credentials"
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestConfigs_SharedConfigOptions(t *testing.T) {

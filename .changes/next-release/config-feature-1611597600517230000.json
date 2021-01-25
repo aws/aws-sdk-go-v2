@@ -1,0 +1,9 @@
+{
+ "ID": "config-feature-1611597600517230000",
+ "SchemaVersion": 1,
+ "Module": "config",
+ "Type": "feature",
+ "Description": "Add Support for AWS Single Sign-On (SSO) credential provider",
+ "MinVersion": "",
+ "AffectedModules": null
+}
