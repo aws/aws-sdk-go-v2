@@ -1,0 +1,9 @@
+{
+ "ID": "service.emr-bugfix-1611357210103086000",
+ "SchemaVersion": 1,
+ "Module": "service/emr",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"strings"
 )
 
 type awsAwsjson10_serializeOpEmptyInputAndEmptyOutput struct {
@@ -44,6 +45,15 @@ func (m *awsAwsjson10_serializeOpEmptyInputAndEmptyOutput) HandleSerialize(ctx c
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonRpc10.EmptyInputAndEmptyOutput")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentEmptyInputAndEmptyOutputInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -82,6 +92,10 @@ func (m *awsAwsjson10_serializeOpGreetingWithErrors) HandleSerialize(ctx context
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonRpc10.GreetingWithErrors")
+
+	if request, err = request.SetStream(strings.NewReader(`{}`)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -168,6 +182,10 @@ func (m *awsAwsjson10_serializeOpNoInputAndNoOutput) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonRpc10.NoInputAndNoOutput")
 
+	if request, err = request.SetStream(strings.NewReader(`{}`)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -205,6 +223,10 @@ func (m *awsAwsjson10_serializeOpNoInputAndOutput) HandleSerialize(ctx context.C
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonRpc10.NoInputAndOutput")
+
+	if request, err = request.SetStream(strings.NewReader(`{}`)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}

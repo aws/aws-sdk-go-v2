@@ -1,0 +1,9 @@
+{
+ "ID": "service.ecr-bugfix-1611357210042346000",
+ "SchemaVersion": 1,
+ "Module": "service/ecr",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

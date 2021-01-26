@@ -1,0 +1,9 @@
+{
+ "ID": "service.mturk-bugfix-1611357210457906000",
+ "SchemaVersion": 1,
+ "Module": "service/mturk",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

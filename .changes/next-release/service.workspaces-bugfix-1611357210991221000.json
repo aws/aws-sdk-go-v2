@@ -1,0 +1,9 @@
+{
+ "ID": "service.workspaces-bugfix-1611357210991221000",
+ "SchemaVersion": 1,
+ "Module": "service/workspaces",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

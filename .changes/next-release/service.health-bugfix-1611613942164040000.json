@@ -1,0 +1,9 @@
+{
+ "ID": "service.health-bugfix-1611613942164040000",
+ "SchemaVersion": 1,
+ "Module": "service/health",
+ "Type": "bugfix",
+ "Description": "fix serialization bug",
+ "MinVersion": "",
+ "AffectedModules": null
+}

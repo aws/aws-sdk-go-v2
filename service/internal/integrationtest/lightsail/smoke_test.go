@@ -27,3 +27,20 @@ func TestInteg_00_GetActiveNames(t *testing.T) {
 		t.Errorf("expect no error, got %v", err)
 	}
 }
+
+func TestInteg_00_GetContainerServicePowers(t *testing.T) {
+	ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancelFn()
+
+	cfg, err := integrationtest.LoadConfigWithDefaultRegion("us-west-2")
+	if err != nil {
+		t.Fatalf("failed to load config, %v", err)
+	}
+
+	client := lightsail.NewFromConfig(cfg)
+	params := &lightsail.GetContainerServicePowersInput{}
+	_, err = client.GetContainerServicePowers(ctx, params)
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+}

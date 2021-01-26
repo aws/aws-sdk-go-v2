@@ -374,6 +374,15 @@ func (m *awsAwsjson10_serializeOpGetEnrollmentStatus) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComputeOptimizerService.GetEnrollmentStatus")
 
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetEnrollmentStatusInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}

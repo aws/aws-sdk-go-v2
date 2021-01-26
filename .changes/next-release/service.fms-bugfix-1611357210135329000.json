@@ -1,0 +1,9 @@
+{
+ "ID": "service.fms-bugfix-1611357210135329000",
+ "SchemaVersion": 1,
+ "Module": "service/fms",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

@@ -1,0 +1,9 @@
+{
+ "ID": "service.servicequotas-bugfix-1611357210699908000",
+ "SchemaVersion": 1,
+ "Module": "service/servicequotas",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

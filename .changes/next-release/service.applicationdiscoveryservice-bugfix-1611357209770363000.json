@@ -1,0 +1,9 @@
+{
+ "ID": "service.applicationdiscoveryservice-bugfix-1611357209770363000",
+ "SchemaVersion": 1,
+ "Module": "service/applicationdiscoveryservice",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

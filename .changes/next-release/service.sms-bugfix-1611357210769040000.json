@@ -1,0 +1,9 @@
+{
+ "ID": "service.sms-bugfix-1611357210769040000",
+ "SchemaVersion": 1,
+ "Module": "service/sms",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

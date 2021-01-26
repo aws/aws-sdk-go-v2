@@ -1,0 +1,9 @@
+{
+ "ID": "service.dynamodb-bugfix-1611357210012367000",
+ "SchemaVersion": 1,
+ "Module": "service/dynamodb",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

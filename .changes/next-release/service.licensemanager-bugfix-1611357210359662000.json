@@ -1,0 +1,9 @@
+{
+ "ID": "service.licensemanager-bugfix-1611357210359662000",
+ "SchemaVersion": 1,
+ "Module": "service/licensemanager",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}

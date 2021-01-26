@@ -21,6 +21,7 @@ import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.writeJsonEr
 
 import java.util.Set;
 import software.amazon.smithy.codegen.core.Symbol;
+import software.amazon.smithy.go.codegen.CodegenUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.HttpRpcProtocolGenerator;
@@ -34,7 +35,6 @@ import software.amazon.smithy.model.shapes.StructureShape;
  * Handles generating the aws.rest-json protocol for services.
  *
  * @inheritDoc
- *
  * @see HttpRpcProtocolGenerator
  */
 abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
@@ -61,14 +61,20 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     @Override
     protected void serializeInputDocument(GenerationContext context, OperationShape operation) {
         GoWriter writer = context.getWriter();
-        StructureShape input = ProtocolUtils.expectInput(context.getModel(), operation);
-        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(input, getProtocolName());
-        writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
 
-        // If there are no members then there's nothing to serialize
-        if (input.members().size() == 0) {
+        // Stub synthetic clone inputs mean there never was an input modeled, always serialize empty JSON object
+        // as place holder.
+        if (CodegenUtils.isStubSyntheticClone(ProtocolUtils.expectInput(context.getModel(), operation))) {
+            writer.addUseImports(SmithyGoDependency.STRINGS);
+            writer.openBlock("if request, err = request.SetStream(strings.NewReader(`{}`)); err != nil {",
+                    "}", () -> {
+                        writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+                    });
             return;
         }
+
+        StructureShape input = ProtocolUtils.expectInput(context.getModel(), operation);
+        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(input, getProtocolName());
 
         writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
         writer.write("jsonEncoder := smithyjson.NewEncoder()");

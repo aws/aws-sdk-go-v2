@@ -609,6 +609,15 @@ func (m *awsAwsjson10_serializeOpDescribeEndpoints) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.DescribeEndpoints")
 
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDescribeEndpointsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -834,6 +843,15 @@ func (m *awsAwsjson10_serializeOpDescribeLimits) HandleSerialize(ctx context.Con
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.DescribeLimits")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDescribeLimitsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}

@@ -1,0 +1,9 @@
+{
+ "ID": "service.devicefarm-bugfix-1611357209954528000",
+ "SchemaVersion": 1,
+ "Module": "service/devicefarm",
+ "Type": "bugfix",
+ "Description": "fix serialize input",
+ "MinVersion": "",
+ "AffectedModules": null
+}
