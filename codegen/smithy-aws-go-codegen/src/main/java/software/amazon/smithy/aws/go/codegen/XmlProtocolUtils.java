@@ -1,8 +1,10 @@
 package software.amazon.smithy.aws.go.codegen;
 
+import java.util.Collection;
 import java.util.Optional;
 import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency;
 import software.amazon.smithy.aws.traits.ServiceTrait;
+import software.amazon.smithy.aws.traits.protocols.RestXmlTrait;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
@@ -12,17 +14,15 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.SyntheticClone;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
-import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.go.codegen.knowledge.GoPointableIndex;
-import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
+import software.amazon.smithy.model.traits.EnumTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.XmlAttributeTrait;
 import software.amazon.smithy.model.traits.XmlNameTrait;
 import software.amazon.smithy.model.traits.XmlNamespaceTrait;
-import software.amazon.smithy.aws.traits.protocols.RestXmlTrait;
 
 public final class XmlProtocolUtils {
     private XmlProtocolUtils() {
@@ -74,7 +74,7 @@ public final class XmlProtocolUtils {
                 String name = memberShape.getMemberName();
                 if (targetShape.isStructureShape()) {
                     if (memberShape.hasTrait(XmlNameTrait.class)) {
-                       name = getSerializedXMLMemberName(memberShape);
+                        name = getSerializedXMLMemberName(memberShape);
                     } else {
                         name = getSerializedXMLShapeName(context, targetShape);
                     }
@@ -112,7 +112,25 @@ public final class XmlProtocolUtils {
         }
 
         // Traverse member shapes to get attributes
-        shape.members().stream().forEach(memberShape -> {
+        if (shape.isMemberShape()) {
+            MemberShape memberShape = shape.asMemberShape().get();
+            Shape target = context.getModel().expectShape(memberShape.getTarget());
+            String memberName = context.getSymbolProvider().toMemberName(memberShape);
+            String operand = inputSrc + "." + memberName;
+            generateXmlAttributes(context, target.members(), operand, dst);
+        } else {
+            generateXmlAttributes(context, shape.members(), inputSrc, dst);
+        }
+    }
+
+    private static void generateXmlAttributes(
+            ProtocolGenerator.GenerationContext context,
+            Collection<MemberShape> members,
+            String inputSrc,
+            String dst
+    ) {
+        GoWriter writer = context.getWriter();
+        members.forEach(memberShape -> {
             if (memberShape.hasTrait(XmlAttributeTrait.class)) {
                 GoValueAccessUtils.writeIfNonZeroValueMember(context.getModel(), context.getSymbolProvider(),
                         writer, memberShape, inputSrc, true, memberShape.isRequired(), (operand) -> {
@@ -125,8 +143,6 @@ public final class XmlProtocolUtils {
             }
         });
     }
-
-
 
     // generates code to format xml attributes. If a shape type is timestamp, number, or boolean
     // it will be formatted into a string.
@@ -146,7 +162,10 @@ public final class XmlProtocolUtils {
             derefSource = "*" + src;
         }
 
-        if (target.isStringShape()) {
+        if (target.hasTrait(EnumTrait.class)) {
+            writer.write("$L = string($L)", dest, derefSource);
+            return;
+        } else if (target.isStringShape()) {
             // create dereferenced copy of pointed to value.
             writer.write("$L = $L", dest, derefSource);
             return;
@@ -403,5 +422,3 @@ public final class XmlProtocolUtils {
         return serviceId.equalsIgnoreCase("S3");
     }
 }
-
-
