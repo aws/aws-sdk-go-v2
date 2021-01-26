@@ -110,9 +110,6 @@ func resolveCredentialChain(ctx context.Context, cfg *aws.Config, configs config
 func resolveCredsFromProfile(ctx context.Context, cfg *aws.Config, envConfig *EnvConfig, sharedConfig *SharedConfig, configs configs) (err error) {
 
 	switch {
-	case sharedConfig.hasSSOConfiguration():
-		err = resolveSSOCredentials(ctx, cfg, sharedConfig, configs)
-
 	case sharedConfig.Source != nil:
 		// Assume IAM role with credentials source from a different profile.
 		err = resolveCredsFromProfile(ctx, cfg, envConfig, sharedConfig.Source, configs)
@@ -122,6 +119,9 @@ func resolveCredsFromProfile(ctx context.Context, cfg *aws.Config, envConfig *En
 		cfg.Credentials = credentials.StaticCredentialsProvider{
 			Value: sharedConfig.Credentials,
 		}
+
+	case sharedConfig.hasSSOConfiguration():
+		err = resolveSSOCredentials(ctx, cfg, sharedConfig, configs)
 
 	case len(sharedConfig.CredentialProcess) != 0:
 		// Get credentials from CredentialProcess
@@ -166,7 +166,7 @@ func resolveSSOCredentials(ctx context.Context, cfg *aws.Config, sharedConfig *S
 		options = append(options, v)
 	}
 
-	cfgCopy := *cfg
+	cfgCopy := cfg.Copy()
 	cfgCopy.Region = sharedConfig.SSORegion
 
 	cfg.Credentials = ssocreds.New(sso.NewFromConfig(cfgCopy), sharedConfig.SSOAccountID, sharedConfig.SSORoleName, sharedConfig.SSOStartURL, options...)

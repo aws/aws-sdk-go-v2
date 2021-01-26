@@ -19,7 +19,15 @@ import (
 // ProviderName is the name of the provider used to specify the source of credentials.
 const ProviderName = "SSOProvider"
 
-var defaultCacheLocation = filepath.Join(getHomeDirectory(), ".aws", "sso", "cache")
+var defaultCacheLocation func() string
+
+func defaultCacheLocationImpl() string {
+	return filepath.Join(getHomeDirectory(), ".aws", "sso", "cache")
+}
+
+func init() {
+	defaultCacheLocation = defaultCacheLocationImpl
+}
 
 // GetRoleCredentialsAPIClient is a API client that implements the GetRoleCredentials operation.
 type GetRoleCredentialsAPIClient interface {
@@ -155,7 +163,7 @@ func loadTokenFile(startURL string) (t token, err error) {
 		return token{}, &InvalidTokenError{Err: err}
 	}
 
-	fileBytes, err := ioutil.ReadFile(filepath.Join(defaultCacheLocation, key))
+	fileBytes, err := ioutil.ReadFile(filepath.Join(defaultCacheLocation(), key))
 	if err != nil {
 		return token{}, &InvalidTokenError{Err: err}
 	}

@@ -55,19 +55,11 @@ func (m mockClient) GetRoleCredentials(ctx context.Context, params *sso.GetRoleC
 
 func swapCacheLocation(dir string) func() {
 	original := defaultCacheLocation
-	defaultCacheLocation = dir
+	defaultCacheLocation = func() string {
+		return dir
+	}
 	return func() {
 		defaultCacheLocation = original
-	}
-}
-
-func swapNowTime(referenceTime time.Time) func() {
-	original := sdk.NowTime
-	sdk.NowTime = func() time.Time {
-		return referenceTime
-	}
-	return func() {
-		sdk.NowTime = original
 	}
 }
 
@@ -75,7 +67,7 @@ func TestProvider(t *testing.T) {
 	restoreCache := swapCacheLocation("testdata")
 	defer restoreCache()
 
-	restoreTime := swapNowTime(time.Date(2021, 01, 19, 19, 50, 0, 0, time.UTC))
+	restoreTime := sdk.TestingUseReferenceTime(time.Date(2021, 01, 19, 19, 50, 0, 0, time.UTC))
 	defer restoreTime()
 
 	cases := map[string]struct {

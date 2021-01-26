@@ -759,15 +759,15 @@ func (c *SharedConfig) setFromIniSections(profiles map[string]struct{}, profile 
 		c.clearAssumeRoleOptions()
 	} else {
 		// First time a profile has been seen, It must either be a assume role
-		// or credentials. Assert if the credential type requires a role ARN,
-		// the ARN is also set.
+		// credentials, or SSO. Assert if the credential type requires a role ARN,
+		// the ARN is also set, or validate that the SSO configuration is complete.
 		if err := c.validateCredentialsConfig(profile); err != nil {
 			return err
 		}
 	}
 
 	// if not top level profile and has credentials, return with credentials.
-	if len(profiles) != 0 && (c.Credentials.HasKeys() || c.hasSSOConfiguration()) {
+	if len(profiles) != 0 && c.Credentials.HasKeys() {
 		return nil
 	}
 
@@ -798,7 +798,7 @@ func (c *SharedConfig) setFromIniSections(profiles map[string]struct{}, profile 
 			return err
 		}
 
-		if !srcCfg.hasCredentials() && !srcCfg.hasSSOConfiguration() {
+		if !srcCfg.hasCredentials() {
 			return SharedConfigAssumeRoleError{
 				RoleARN: c.RoleARN,
 				Profile: c.SourceProfileName,
@@ -951,7 +951,7 @@ func (c *SharedConfig) validateSSOConfiguration(profile string) error {
 
 	if len(missing) > 0 {
 		return fmt.Errorf("profile %q is configured to use SSO but is missing required configuration: %s",
-			profile, strings.Join(missing, ","))
+			profile, strings.Join(missing, ", "))
 	}
 
 	return nil
@@ -963,6 +963,7 @@ func (c *SharedConfig) hasCredentials() bool {
 	case len(c.CredentialSource) != 0:
 	case len(c.CredentialProcess) != 0:
 	case len(c.WebIdentityTokenFile) != 0:
+	case c.hasSSOConfiguration():
 	case c.Credentials.HasKeys():
 	default:
 		return false

@@ -14,6 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/ini"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/ptr"
+	"github.com/google/go-cmp/cmp"
 )
 
 var _ regionProvider = (*SharedConfig)(nil)
@@ -245,6 +246,33 @@ func TestNewSharedConfig(t *testing.T) {
 				},
 			},
 		},
+		"AWS SSO Invalid Profile": {
+			Filenames: []string{testConfigFilename},
+			Profile:   "invalid_sso_creds",
+			Err:       fmt.Errorf("profile \"invalid_sso_creds\" is configured to use SSO but is missing required configuration: sso_region, sso_role_name, sso_start_url"),
+		},
+		"AWS SSO Profile and Static Credentials": {
+			Filenames: []string{testConfigFilename},
+			Profile:   "sso_and_static",
+			Expected: SharedConfig{
+				Profile: "sso_and_static",
+				Credentials: aws.Credentials{
+					AccessKeyID:     "sso_and_static_akid",
+					SecretAccessKey: "sso_and_static_secret",
+					SessionToken:    "sso_and_static_token",
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+				},
+				SSOAccountID: "012345678901",
+				SSORegion:    "us-west-2",
+				SSORoleName:  "TestRole",
+				SSOStartURL:  "https://THIS_SHOULD_NOT_BE_IN_TESTDATA_CACHE/start",
+			},
+		},
+		"Assume Role with AWS SSO Configuration and Source Profile": {
+			Filenames: []string{testConfigFilename},
+			Profile:   "source_sso_and_assume",
+			Err:       fmt.Errorf("only one credential type may be specified per profile"),
+		},
 	}
 
 	for name, c := range cases {
@@ -265,8 +293,8 @@ func TestNewSharedConfig(t *testing.T) {
 			if c.Err != nil {
 				t.Errorf("expect error: %v, got none", c.Err)
 			}
-			if e, a := c.Expected, cfg; !reflect.DeepEqual(e, a) {
-				t.Errorf(" expect %v, got %v", e, a)
+			if diff := cmp.Diff(c.Expected, cfg); len(diff) > 0 {
+				t.Error(diff)
 			}
 		})
 	}

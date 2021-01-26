@@ -47,6 +47,20 @@ const assumeRoleRespMsg = `
 </AssumeRoleResponse>
 `
 
+const getRoleCredentialsResponse = `{
+  "roleCredentials": {
+    "accessKeyId": "SSO_AKID",
+    "secretAccessKey": "SSO_SECRET_KEY",
+    "sessionToken": "SSO_SESSION_TOKEN",
+    "expiration": %d
+  }
+}`
+
+const ssoTokenCacheFile = `{
+  "accessToken": "ssoAccessToken",
+  "expiresAt": "%s"
+}`
+
 type mockHTTPClient func(*http.Request) (*http.Response, error)
 
 func (m mockHTTPClient) Do(r *http.Request) (*http.Response, error) {
