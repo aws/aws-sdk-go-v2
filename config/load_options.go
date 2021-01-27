@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials/ec2rolecreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/endpointcreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/processcreds"
+	"github.com/aws/aws-sdk-go-v2/credentials/ssocreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/smithy-go/logging"
@@ -109,6 +110,10 @@ type LoadOptions struct {
 	// AssumeRoleCredentialOptions is a function for setting the
 	// stscreds.AssumeRoleOptions
 	AssumeRoleCredentialOptions func(*stscreds.AssumeRoleOptions)
+
+	// SSOProviderOptions is a function for setting
+	// the ssocreds.Options
+	SSOProviderOptions func(options *ssocreds.Options)
 
 	// LogConfigurationWarnings when set to true, enables logging
 	// configuration warnings
@@ -592,3 +597,27 @@ func WithS3UseARNRegion(v bool) LoadOptionsFunc {
 		return nil
 	}
 }
+
+
+// getSSOProviderOptions returns AssumeRoleCredentialOptions from LoadOptions
+func (o LoadOptions) getSSOProviderOptions(context.Context) (func(options *ssocreds.Options), bool, error) {
+	if o.SSOProviderOptions == nil {
+		return nil, false, nil
+	}
+
+	return o.SSOProviderOptions, true, nil
+}
+
+// WithSSOProviderOptions is a helper function to construct
+// functional options that sets a function to use ssocreds.Options
+// on config's LoadOptions. If the SSO credential provider options is set to nil,
+// the sso provider options value will be ignored. If multiple
+// WithSSOProviderOptions calls are made, the last call overrides
+// the previous call values.
+func WithSSOProviderOptions(v func(*ssocreds.Options)) LoadOptionsFunc {
+	return func(o *LoadOptions) error {
+		o.SSOProviderOptions = v
+		return nil
+	}
+}
+
