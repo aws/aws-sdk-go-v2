@@ -351,12 +351,12 @@ func notebookInstanceInServiceStateRetryable(ctx context.Context, input *Describ
 		}
 
 		expectedValue := "InService"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.NotebookInstanceStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.NotebookInstanceStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -368,12 +368,12 @@ func notebookInstanceInServiceStateRetryable(ctx context.Context, input *Describ
 		}
 
 		expectedValue := "Failed"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.NotebookInstanceStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.NotebookInstanceStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -521,12 +521,12 @@ func notebookInstanceStoppedStateRetryable(ctx context.Context, input *DescribeN
 		}
 
 		expectedValue := "Stopped"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.NotebookInstanceStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.NotebookInstanceStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -538,12 +538,12 @@ func notebookInstanceStoppedStateRetryable(ctx context.Context, input *DescribeN
 		}
 
 		expectedValue := "Failed"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.NotebookInstanceStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.NotebookInstanceStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

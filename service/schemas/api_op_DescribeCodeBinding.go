@@ -281,12 +281,12 @@ func codeBindingExistsStateRetryable(ctx context.Context, input *DescribeCodeBin
 		}
 
 		expectedValue := "CREATE_COMPLETE"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.CodeGenerationStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.CodeGenerationStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -298,12 +298,12 @@ func codeBindingExistsStateRetryable(ctx context.Context, input *DescribeCodeBin
 		}
 
 		expectedValue := "CREATE_IN_PROGRESS"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.CodeGenerationStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.CodeGenerationStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}
@@ -315,12 +315,12 @@ func codeBindingExistsStateRetryable(ctx context.Context, input *DescribeCodeBin
 		}
 
 		expectedValue := "CREATE_FAILED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.CodeGenerationStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.CodeGenerationStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

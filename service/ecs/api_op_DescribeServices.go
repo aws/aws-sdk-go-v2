@@ -273,13 +273,18 @@ func servicesInactiveStateRetryable(ctx context.Context, input *DescribeServices
 		}
 
 		expectedValue := "MISSING"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(*string)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
+			}
+
+			if string(*value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}
@@ -292,13 +297,18 @@ func servicesInactiveStateRetryable(ctx context.Context, input *DescribeServices
 		}
 
 		expectedValue := "INACTIVE"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(*string)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
+			}
+
+			if string(*value) == expectedValue {
 				return false, nil
 			}
 		}

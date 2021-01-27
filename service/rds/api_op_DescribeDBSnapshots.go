@@ -441,16 +441,21 @@ func dBSnapshotAvailableStateRetryable(ctx context.Context, input *DescribeDBSna
 
 		expectedValue := "available"
 		var match = true
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		if len(listOfValues) == 0 {
 			match = false
 		}
 		for _, v := range listOfValues {
-			if v != expectedValue {
+			value, ok := v.(*string)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
+			}
+
+			if string(*value) != expectedValue {
 				match = false
 			}
 		}
@@ -467,13 +472,18 @@ func dBSnapshotAvailableStateRetryable(ctx context.Context, input *DescribeDBSna
 		}
 
 		expectedValue := "deleted"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(*string)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
+			}
+
+			if string(*value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}
@@ -486,13 +496,18 @@ func dBSnapshotAvailableStateRetryable(ctx context.Context, input *DescribeDBSna
 		}
 
 		expectedValue := "deleting"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(*string)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
+			}
+
+			if string(*value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}
@@ -505,13 +520,18 @@ func dBSnapshotAvailableStateRetryable(ctx context.Context, input *DescribeDBSna
 		}
 
 		expectedValue := "failed"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(*string)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
+			}
+
+			if string(*value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}
@@ -524,13 +544,18 @@ func dBSnapshotAvailableStateRetryable(ctx context.Context, input *DescribeDBSna
 		}
 
 		expectedValue := "incompatible-restore"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(*string)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
+			}
+
+			if string(*value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}
@@ -543,13 +568,18 @@ func dBSnapshotAvailableStateRetryable(ctx context.Context, input *DescribeDBSna
 		}
 
 		expectedValue := "incompatible-parameters"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(*string)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
+			}
+
+			if string(*value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}

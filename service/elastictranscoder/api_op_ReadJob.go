@@ -259,12 +259,12 @@ func jobCompleteStateRetryable(ctx context.Context, input *ReadJobInput, output 
 		}
 
 		expectedValue := "Complete"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(*string)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(*value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -276,12 +276,12 @@ func jobCompleteStateRetryable(ctx context.Context, input *ReadJobInput, output 
 		}
 
 		expectedValue := "Canceled"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(*string)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(*value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -293,12 +293,12 @@ func jobCompleteStateRetryable(ctx context.Context, input *ReadJobInput, output 
 		}
 
 		expectedValue := "Error"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(*string)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(*value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

@@ -266,16 +266,21 @@ func certificateValidatedStateRetryable(ctx context.Context, input *DescribeCert
 
 		expectedValue := "SUCCESS"
 		var match = true
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		if len(listOfValues) == 0 {
 			match = false
 		}
 		for _, v := range listOfValues {
-			if v != expectedValue {
+			value, ok := v.(types.DomainStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.DomainStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
 				match = false
 			}
 		}
@@ -292,13 +297,18 @@ func certificateValidatedStateRetryable(ctx context.Context, input *DescribeCert
 		}
 
 		expectedValue := "PENDING_VALIDATION"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(types.DomainStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.DomainStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
 				return true, nil
 			}
 		}
@@ -311,12 +321,12 @@ func certificateValidatedStateRetryable(ctx context.Context, input *DescribeCert
 		}
 
 		expectedValue := "FAILED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.CertificateStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.CertificateStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

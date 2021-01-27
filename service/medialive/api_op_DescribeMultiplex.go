@@ -288,12 +288,12 @@ func multiplexCreatedStateRetryable(ctx context.Context, input *DescribeMultiple
 		}
 
 		expectedValue := "IDLE"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.MultiplexState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.MultiplexState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -305,12 +305,12 @@ func multiplexCreatedStateRetryable(ctx context.Context, input *DescribeMultiple
 		}
 
 		expectedValue := "CREATING"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.MultiplexState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.MultiplexState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}
@@ -329,12 +329,12 @@ func multiplexCreatedStateRetryable(ctx context.Context, input *DescribeMultiple
 		}
 
 		expectedValue := "CREATE_FAILED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.MultiplexState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.MultiplexState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -480,12 +480,12 @@ func multiplexDeletedStateRetryable(ctx context.Context, input *DescribeMultiple
 		}
 
 		expectedValue := "DELETED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.MultiplexState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.MultiplexState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -497,12 +497,12 @@ func multiplexDeletedStateRetryable(ctx context.Context, input *DescribeMultiple
 		}
 
 		expectedValue := "DELETING"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.MultiplexState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.MultiplexState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}
@@ -655,12 +655,12 @@ func multiplexRunningStateRetryable(ctx context.Context, input *DescribeMultiple
 		}
 
 		expectedValue := "RUNNING"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.MultiplexState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.MultiplexState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -672,12 +672,12 @@ func multiplexRunningStateRetryable(ctx context.Context, input *DescribeMultiple
 		}
 
 		expectedValue := "STARTING"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.MultiplexState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.MultiplexState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}
@@ -830,12 +830,12 @@ func multiplexStoppedStateRetryable(ctx context.Context, input *DescribeMultiple
 		}
 
 		expectedValue := "IDLE"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.MultiplexState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.MultiplexState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -847,12 +847,12 @@ func multiplexStoppedStateRetryable(ctx context.Context, input *DescribeMultiple
 		}
 
 		expectedValue := "STOPPING"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.MultiplexState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.MultiplexState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}

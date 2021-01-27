@@ -264,12 +264,12 @@ func stepCompleteStateRetryable(ctx context.Context, input *DescribeStepInput, o
 		}
 
 		expectedValue := "COMPLETED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.StepState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.StepState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -281,12 +281,12 @@ func stepCompleteStateRetryable(ctx context.Context, input *DescribeStepInput, o
 		}
 
 		expectedValue := "FAILED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.StepState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.StepState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -298,12 +298,12 @@ func stepCompleteStateRetryable(ctx context.Context, input *DescribeStepInput, o
 		}
 
 		expectedValue := "CANCELLED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.StepState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.StepState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

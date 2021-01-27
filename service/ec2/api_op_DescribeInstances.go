@@ -668,16 +668,21 @@ func instanceStoppedStateRetryable(ctx context.Context, input *DescribeInstances
 
 		expectedValue := "stopped"
 		var match = true
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		if len(listOfValues) == 0 {
 			match = false
 		}
 		for _, v := range listOfValues {
-			if v != expectedValue {
+			value, ok := v.(types.InstanceStateName)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.InstanceStateName value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
 				match = false
 			}
 		}
@@ -694,13 +699,18 @@ func instanceStoppedStateRetryable(ctx context.Context, input *DescribeInstances
 		}
 
 		expectedValue := "pending"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(types.InstanceStateName)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.InstanceStateName value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}
@@ -713,13 +723,18 @@ func instanceStoppedStateRetryable(ctx context.Context, input *DescribeInstances
 		}
 
 		expectedValue := "terminated"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(types.InstanceStateName)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.InstanceStateName value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}
@@ -867,16 +882,21 @@ func instanceTerminatedStateRetryable(ctx context.Context, input *DescribeInstan
 
 		expectedValue := "terminated"
 		var match = true
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		if len(listOfValues) == 0 {
 			match = false
 		}
 		for _, v := range listOfValues {
-			if v != expectedValue {
+			value, ok := v.(types.InstanceStateName)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.InstanceStateName value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
 				match = false
 			}
 		}
@@ -893,13 +913,18 @@ func instanceTerminatedStateRetryable(ctx context.Context, input *DescribeInstan
 		}
 
 		expectedValue := "pending"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(types.InstanceStateName)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.InstanceStateName value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}
@@ -912,13 +937,18 @@ func instanceTerminatedStateRetryable(ctx context.Context, input *DescribeInstan
 		}
 
 		expectedValue := "stopping"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(types.InstanceStateName)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.InstanceStateName value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}

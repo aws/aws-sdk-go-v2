@@ -309,12 +309,12 @@ func channelCreatedStateRetryable(ctx context.Context, input *DescribeChannelInp
 		}
 
 		expectedValue := "IDLE"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ChannelState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -326,12 +326,12 @@ func channelCreatedStateRetryable(ctx context.Context, input *DescribeChannelInp
 		}
 
 		expectedValue := "CREATING"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ChannelState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}
@@ -350,12 +350,12 @@ func channelCreatedStateRetryable(ctx context.Context, input *DescribeChannelInp
 		}
 
 		expectedValue := "CREATE_FAILED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ChannelState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -501,12 +501,12 @@ func channelDeletedStateRetryable(ctx context.Context, input *DescribeChannelInp
 		}
 
 		expectedValue := "DELETED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ChannelState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -518,12 +518,12 @@ func channelDeletedStateRetryable(ctx context.Context, input *DescribeChannelInp
 		}
 
 		expectedValue := "DELETING"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ChannelState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}
@@ -676,12 +676,12 @@ func channelRunningStateRetryable(ctx context.Context, input *DescribeChannelInp
 		}
 
 		expectedValue := "RUNNING"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ChannelState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -693,12 +693,12 @@ func channelRunningStateRetryable(ctx context.Context, input *DescribeChannelInp
 		}
 
 		expectedValue := "STARTING"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ChannelState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}
@@ -851,12 +851,12 @@ func channelStoppedStateRetryable(ctx context.Context, input *DescribeChannelInp
 		}
 
 		expectedValue := "IDLE"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ChannelState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -868,12 +868,12 @@ func channelStoppedStateRetryable(ctx context.Context, input *DescribeChannelInp
 		}
 
 		expectedValue := "STOPPING"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ChannelState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ChannelState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}

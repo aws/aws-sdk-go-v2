@@ -281,12 +281,12 @@ func nodeAssociatedStateRetryable(ctx context.Context, input *DescribeNodeAssoci
 		}
 
 		expectedValue := "SUCCESS"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.NodeAssociationStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.NodeAssociationStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -298,12 +298,12 @@ func nodeAssociatedStateRetryable(ctx context.Context, input *DescribeNodeAssoci
 		}
 
 		expectedValue := "FAILED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.NodeAssociationStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.NodeAssociationStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

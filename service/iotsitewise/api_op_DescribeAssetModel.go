@@ -342,12 +342,12 @@ func assetModelActiveStateRetryable(ctx context.Context, input *DescribeAssetMod
 		}
 
 		expectedValue := "ACTIVE"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.AssetModelState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.AssetModelState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -359,12 +359,12 @@ func assetModelActiveStateRetryable(ctx context.Context, input *DescribeAssetMod
 		}
 
 		expectedValue := "FAILED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.AssetModelState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.AssetModelState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

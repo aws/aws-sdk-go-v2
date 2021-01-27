@@ -264,12 +264,12 @@ func nodegroupActiveStateRetryable(ctx context.Context, input *DescribeNodegroup
 		}
 
 		expectedValue := "CREATE_FAILED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.NodegroupStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.NodegroupStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -281,12 +281,12 @@ func nodegroupActiveStateRetryable(ctx context.Context, input *DescribeNodegroup
 		}
 
 		expectedValue := "ACTIVE"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.NodegroupStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.NodegroupStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -432,12 +432,12 @@ func nodegroupDeletedStateRetryable(ctx context.Context, input *DescribeNodegrou
 		}
 
 		expectedValue := "DELETE_FAILED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.NodegroupStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.NodegroupStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
