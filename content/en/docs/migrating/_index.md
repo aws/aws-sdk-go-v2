@@ -534,7 +534,7 @@ if err != nil {
 	// handle error
 }
 
-client := s3.New(sess, &aws.Connfig{
+client := s3.New(sess, &aws.Config{
 	Region: aws.String("us-west-2"),
 })
 ```
