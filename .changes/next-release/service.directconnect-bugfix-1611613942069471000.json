@@ -1,9 +1,0 @@
-{
- "ID": "service.directconnect-bugfix-1611613942069471000",
- "SchemaVersion": 1,
- "Module": "service/directconnect",
- "Type": "bugfix",
- "Description": "fix serialization bug",
- "MinVersion": "",
- "AffectedModules": null
-}

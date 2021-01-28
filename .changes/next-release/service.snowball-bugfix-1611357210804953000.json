@@ -1,9 +1,0 @@
-{
- "ID": "service.snowball-bugfix-1611357210804953000",
- "SchemaVersion": 1,
- "Module": "service/snowball",
- "Type": "bugfix",
- "Description": "fix serialize input",
- "MinVersion": "",
- "AffectedModules": null
-}

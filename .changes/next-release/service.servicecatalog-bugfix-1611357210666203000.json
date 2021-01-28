@@ -1,9 +1,0 @@
-{
- "ID": "service.servicecatalog-bugfix-1611357210666203000",
- "SchemaVersion": 1,
- "Module": "service/servicecatalog",
- "Type": "bugfix",
- "Description": "fix serialize input",
- "MinVersion": "",
- "AffectedModules": null
-}

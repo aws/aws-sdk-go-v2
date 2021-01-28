@@ -1,9 +1,0 @@
-{
- "ID": "service.lightsail-bugfix-1611357210391396000",
- "SchemaVersion": 1,
- "Module": "service/lightsail",
- "Type": "bugfix",
- "Description": "fix serialize input",
- "MinVersion": "",
- "AffectedModules": null
-}

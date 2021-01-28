@@ -1,9 +1,0 @@
-{
- "ID": "internal.protocoltest.jsonrpc10-bugfix-1611357209709451000",
- "SchemaVersion": 1,
- "Module": "internal/protocoltest/jsonrpc10",
- "Type": "bugfix",
- "Description": "fix serialize input",
- "MinVersion": "",
- "AffectedModules": null
-}

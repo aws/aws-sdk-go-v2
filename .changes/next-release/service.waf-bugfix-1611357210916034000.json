@@ -1,9 +1,0 @@
-{
- "ID": "service.waf-bugfix-1611357210916034000",
- "SchemaVersion": 1,
- "Module": "service/waf",
- "Type": "bugfix",
- "Description": "fix serialize input",
- "MinVersion": "",
- "AffectedModules": null
-}

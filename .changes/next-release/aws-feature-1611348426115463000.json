@@ -1,9 +1,0 @@
-{
- "ID": "aws-feature-1611348426115463000",
- "SchemaVersion": 1,
- "Module": "aws",
- "Type": "feature",
- "Description": "updates aws module to include endpoint source for aws Endpoint",
- "MinVersion": "",
- "AffectedModules": null
-}

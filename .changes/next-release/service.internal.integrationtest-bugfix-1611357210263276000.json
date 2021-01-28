@@ -1,9 +1,0 @@
-{
- "ID": "service.internal.integrationtest-bugfix-1611357210263276000",
- "SchemaVersion": 1,
- "Module": "service/internal/integrationtest",
- "Type": "bugfix",
- "Description": "fix serialize input",
- "MinVersion": "",
- "AffectedModules": null
-}

@@ -1,9 +1,0 @@
-{
- "ID": "service.shield-bugfix-1611357210733298000",
- "SchemaVersion": 1,
- "Module": "service/shield",
- "Type": "bugfix",
- "Description": "fix serialize input",
- "MinVersion": "",
- "AffectedModules": null
-}
