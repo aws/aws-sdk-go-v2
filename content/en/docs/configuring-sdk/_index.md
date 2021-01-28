@@ -362,6 +362,62 @@ Do not embed credentials inside an application. Use this
 method only for testing purposes.
 {{% /pageinfo %}}
 
+#### {{% alias service=SSOlong %}} Credentials
+
+The SDK provides a credential provider for retrieving temporary AWS credentials using {{% alias service=SSOlong %}}.
+Using the {{% alias service=CLI %}} you authenticate with the {{% alias service=SSO %}} user portal and authorize access to temporary
+AWS credentials. You then configure your application to load the {{% alias service=SSO %}} profile, and the SDK uses your
+{{% alias service=SSO %}} credentials to retrieve temporary AWS credentials that will be automatically renewed if expired.
+If your {{% alias service=SSO %}} credentials expire, you must explicitly renew them by logging in to your
+{{% alias service=SSO %}} account again using the {{% alias CLI %}}.
+
+For example, you can create a profile `dev-profile`, authenticate and authorize that profile using the
+{{% alias service=CLI %}}, and configure your application as shown below.
+
+1. First create the `dev-profile`
+```
+[profile dev-profile]
+sso_start_url = https://company-sso-portal.awsapps.com/start
+sso_region = us-west-2
+sso_account_id = 012345678901
+sso_role_name = Developer
+region = us-east-1
+```
+2. Login using the {{% alias service=CLI %}} to authenticate and authorize the {{% alias service=SSO %}} profile.
+```
+$ aws login --profile dev-profile
+Attempting to automatically open the SSO authorization page in your default browser.
+If the browser does not open or you wish to use a different device to authorize this request, open the following URL:
+
+https://device.sso.us-west-2.amazonaws.com/
+
+Then enter the code:
+
+ABCD-EFGH
+Successully logged into Start URL: https://company-sso-portal.awsapps.com/start
+```
+3. Next configure your application to use the {{% alias service=SSO %}} profile.
+```go
+import "github.com/aws/aws-sdk-go-v2/config"
+
+// ...
+
+cfg, err := config.LoadDefaultConfig(
+	context.Background(),
+	config.WithSharedConfigProfile("dev-profile"),
+)
+if err != nil {
+	return err
+}
+```
+
+For more information on configuring
+{{% alias service=SSO %}} profiles and authenticating using the {{% alias service=CLI %}} see
+[Configuring the {{% alias service=CLI %}} use {{% alias service=SSOlong %}}](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html)
+in the {{% alias service=CLI %}} User Guide. For more information on programmatically constructing the
+{{% alias service=SSO %}} credential provider see the [ssocreds]({{< apiref "credentials/ssocreds" >}}) API reference
+documentation.
+
 #### Other Credentials Providers
 
 The SDK provides other methods for retrieving credentials in the
