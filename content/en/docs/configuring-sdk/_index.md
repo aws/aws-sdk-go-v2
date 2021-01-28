@@ -362,7 +362,7 @@ Do not embed credentials inside an application. Use this
 method only for testing purposes.
 {{% /pageinfo %}}
 
-#### AWS Single Sign-On Credentials
+#### {{% alias service=SSOlong %}} Credentials
 
 The SDK provides a credential provider for retrieving temporary AWS credentials using {{% alias service=SSOlong %}}.
 Using the {{% alias service=CLI %}} you authenticate with the {{% alias service=SSO %}} user portal and authorize access to temporary
