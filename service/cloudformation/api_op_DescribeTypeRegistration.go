@@ -278,12 +278,12 @@ func typeRegistrationCompleteStateRetryable(ctx context.Context, input *Describe
 		}
 
 		expectedValue := "COMPLETE"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.RegistrationStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.RegistrationStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -295,12 +295,12 @@ func typeRegistrationCompleteStateRetryable(ctx context.Context, input *Describe
 		}
 
 		expectedValue := "FAILED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.RegistrationStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.RegistrationStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

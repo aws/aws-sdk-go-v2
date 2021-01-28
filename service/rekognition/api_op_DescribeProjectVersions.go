@@ -370,16 +370,21 @@ func projectVersionRunningStateRetryable(ctx context.Context, input *DescribePro
 
 		expectedValue := "RUNNING"
 		var match = true
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		if len(listOfValues) == 0 {
 			match = false
 		}
 		for _, v := range listOfValues {
-			if v != expectedValue {
+			value, ok := v.(types.ProjectVersionStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.ProjectVersionStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
 				match = false
 			}
 		}
@@ -396,13 +401,18 @@ func projectVersionRunningStateRetryable(ctx context.Context, input *DescribePro
 		}
 
 		expectedValue := "FAILED"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(types.ProjectVersionStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.ProjectVersionStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}
@@ -555,16 +565,21 @@ func projectVersionTrainingCompletedStateRetryable(ctx context.Context, input *D
 
 		expectedValue := "TRAINING_COMPLETED"
 		var match = true
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		if len(listOfValues) == 0 {
 			match = false
 		}
 		for _, v := range listOfValues {
-			if v != expectedValue {
+			value, ok := v.(types.ProjectVersionStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.ProjectVersionStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
 				match = false
 			}
 		}
@@ -581,13 +596,18 @@ func projectVersionTrainingCompletedStateRetryable(ctx context.Context, input *D
 		}
 
 		expectedValue := "TRAINING_FAILED"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(types.ProjectVersionStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.ProjectVersionStatus value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}

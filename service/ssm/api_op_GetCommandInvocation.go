@@ -391,12 +391,12 @@ func commandExecutedStateRetryable(ctx context.Context, input *GetCommandInvocat
 		}
 
 		expectedValue := "Pending"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.CommandInvocationStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.CommandInvocationStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}
@@ -408,12 +408,12 @@ func commandExecutedStateRetryable(ctx context.Context, input *GetCommandInvocat
 		}
 
 		expectedValue := "InProgress"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.CommandInvocationStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.CommandInvocationStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}
@@ -425,12 +425,12 @@ func commandExecutedStateRetryable(ctx context.Context, input *GetCommandInvocat
 		}
 
 		expectedValue := "Delayed"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.CommandInvocationStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.CommandInvocationStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}
@@ -442,12 +442,12 @@ func commandExecutedStateRetryable(ctx context.Context, input *GetCommandInvocat
 		}
 
 		expectedValue := "Success"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.CommandInvocationStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.CommandInvocationStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -459,12 +459,12 @@ func commandExecutedStateRetryable(ctx context.Context, input *GetCommandInvocat
 		}
 
 		expectedValue := "Cancelled"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.CommandInvocationStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.CommandInvocationStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -476,12 +476,12 @@ func commandExecutedStateRetryable(ctx context.Context, input *GetCommandInvocat
 		}
 
 		expectedValue := "TimedOut"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.CommandInvocationStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.CommandInvocationStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -493,12 +493,12 @@ func commandExecutedStateRetryable(ctx context.Context, input *GetCommandInvocat
 		}
 
 		expectedValue := "Failed"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.CommandInvocationStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.CommandInvocationStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -510,12 +510,12 @@ func commandExecutedStateRetryable(ctx context.Context, input *GetCommandInvocat
 		}
 
 		expectedValue := "Cancelling"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.CommandInvocationStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.CommandInvocationStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

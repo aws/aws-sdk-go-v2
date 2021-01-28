@@ -261,12 +261,12 @@ func clusterRunningStateRetryable(ctx context.Context, input *DescribeClusterInp
 		}
 
 		expectedValue := "RUNNING"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ClusterState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ClusterState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -278,12 +278,12 @@ func clusterRunningStateRetryable(ctx context.Context, input *DescribeClusterInp
 		}
 
 		expectedValue := "WAITING"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ClusterState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ClusterState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -295,12 +295,12 @@ func clusterRunningStateRetryable(ctx context.Context, input *DescribeClusterInp
 		}
 
 		expectedValue := "TERMINATING"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ClusterState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ClusterState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -312,12 +312,12 @@ func clusterRunningStateRetryable(ctx context.Context, input *DescribeClusterInp
 		}
 
 		expectedValue := "TERMINATED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ClusterState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ClusterState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -329,12 +329,12 @@ func clusterRunningStateRetryable(ctx context.Context, input *DescribeClusterInp
 		}
 
 		expectedValue := "TERMINATED_WITH_ERRORS"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ClusterState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ClusterState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -480,12 +480,12 @@ func clusterTerminatedStateRetryable(ctx context.Context, input *DescribeCluster
 		}
 
 		expectedValue := "TERMINATED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ClusterState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ClusterState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -497,12 +497,12 @@ func clusterTerminatedStateRetryable(ctx context.Context, input *DescribeCluster
 		}
 
 		expectedValue := "TERMINATED_WITH_ERRORS"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.ClusterState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.ClusterState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

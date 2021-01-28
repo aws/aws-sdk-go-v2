@@ -265,12 +265,12 @@ func addonActiveStateRetryable(ctx context.Context, input *DescribeAddonInput, o
 		}
 
 		expectedValue := "CREATE_FAILED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.AddonStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.AddonStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -282,12 +282,12 @@ func addonActiveStateRetryable(ctx context.Context, input *DescribeAddonInput, o
 		}
 
 		expectedValue := "ACTIVE"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.AddonStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.AddonStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -433,12 +433,12 @@ func addonDeletedStateRetryable(ctx context.Context, input *DescribeAddonInput, 
 		}
 
 		expectedValue := "DELETE_FAILED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.AddonStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.AddonStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

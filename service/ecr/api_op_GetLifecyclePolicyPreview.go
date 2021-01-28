@@ -405,12 +405,12 @@ func lifecyclePolicyPreviewCompleteStateRetryable(ctx context.Context, input *Ge
 		}
 
 		expectedValue := "COMPLETE"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.LifecyclePolicyPreviewStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.LifecyclePolicyPreviewStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -422,12 +422,12 @@ func lifecyclePolicyPreviewCompleteStateRetryable(ctx context.Context, input *Ge
 		}
 
 		expectedValue := "FAILED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.LifecyclePolicyPreviewStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.LifecyclePolicyPreviewStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}

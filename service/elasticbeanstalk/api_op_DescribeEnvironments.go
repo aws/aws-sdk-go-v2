@@ -293,16 +293,21 @@ func environmentExistsStateRetryable(ctx context.Context, input *DescribeEnviron
 
 		expectedValue := "Ready"
 		var match = true
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		if len(listOfValues) == 0 {
 			match = false
 		}
 		for _, v := range listOfValues {
-			if v != expectedValue {
+			value, ok := v.(types.EnvironmentStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.EnvironmentStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
 				match = false
 			}
 		}
@@ -320,16 +325,21 @@ func environmentExistsStateRetryable(ctx context.Context, input *DescribeEnviron
 
 		expectedValue := "Launching"
 		var match = true
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		if len(listOfValues) == 0 {
 			match = false
 		}
 		for _, v := range listOfValues {
-			if v != expectedValue {
+			value, ok := v.(types.EnvironmentStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.EnvironmentStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
 				match = false
 			}
 		}
@@ -482,16 +492,21 @@ func environmentTerminatedStateRetryable(ctx context.Context, input *DescribeEnv
 
 		expectedValue := "Terminated"
 		var match = true
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		if len(listOfValues) == 0 {
 			match = false
 		}
 		for _, v := range listOfValues {
-			if v != expectedValue {
+			value, ok := v.(types.EnvironmentStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.EnvironmentStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
 				match = false
 			}
 		}
@@ -509,16 +524,21 @@ func environmentTerminatedStateRetryable(ctx context.Context, input *DescribeEnv
 
 		expectedValue := "Terminating"
 		var match = true
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		if len(listOfValues) == 0 {
 			match = false
 		}
 		for _, v := range listOfValues {
-			if v != expectedValue {
+			value, ok := v.(types.EnvironmentStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.EnvironmentStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
 				match = false
 			}
 		}
@@ -670,16 +690,21 @@ func environmentUpdatedStateRetryable(ctx context.Context, input *DescribeEnviro
 
 		expectedValue := "Ready"
 		var match = true
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		if len(listOfValues) == 0 {
 			match = false
 		}
 		for _, v := range listOfValues {
-			if v != expectedValue {
+			value, ok := v.(types.EnvironmentStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.EnvironmentStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
 				match = false
 			}
 		}
@@ -697,16 +722,21 @@ func environmentUpdatedStateRetryable(ctx context.Context, input *DescribeEnviro
 
 		expectedValue := "Updating"
 		var match = true
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		if len(listOfValues) == 0 {
 			match = false
 		}
 		for _, v := range listOfValues {
-			if v != expectedValue {
+			value, ok := v.(types.EnvironmentStatus)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.EnvironmentStatus value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
 				match = false
 			}
 		}

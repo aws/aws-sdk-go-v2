@@ -272,12 +272,12 @@ func tableExistsStateRetryable(ctx context.Context, input *DescribeTableInput, o
 		}
 
 		expectedValue := "ACTIVE"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.TableStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.TableStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}

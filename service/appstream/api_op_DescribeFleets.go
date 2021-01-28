@@ -263,16 +263,21 @@ func fleetStartedStateRetryable(ctx context.Context, input *DescribeFleetsInput,
 
 		expectedValue := "ACTIVE"
 		var match = true
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		if len(listOfValues) == 0 {
 			match = false
 		}
 		for _, v := range listOfValues {
-			if v != expectedValue {
+			value, ok := v.(types.FleetState)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.FleetState value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
 				match = false
 			}
 		}
@@ -289,13 +294,18 @@ func fleetStartedStateRetryable(ctx context.Context, input *DescribeFleetsInput,
 		}
 
 		expectedValue := "PENDING_DEACTIVATE"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(types.FleetState)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.FleetState value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}
@@ -308,13 +318,18 @@ func fleetStartedStateRetryable(ctx context.Context, input *DescribeFleetsInput,
 		}
 
 		expectedValue := "INACTIVE"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(types.FleetState)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.FleetState value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}
@@ -462,16 +477,21 @@ func fleetStoppedStateRetryable(ctx context.Context, input *DescribeFleetsInput,
 
 		expectedValue := "INACTIVE"
 		var match = true
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		if len(listOfValues) == 0 {
 			match = false
 		}
 		for _, v := range listOfValues {
-			if v != expectedValue {
+			value, ok := v.(types.FleetState)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.FleetState value, got %T", pathValue)
+			}
+
+			if string(value) != expectedValue {
 				match = false
 			}
 		}
@@ -488,13 +508,18 @@ func fleetStoppedStateRetryable(ctx context.Context, input *DescribeFleetsInput,
 		}
 
 		expectedValue := "PENDING_ACTIVATE"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(types.FleetState)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.FleetState value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}
@@ -507,13 +532,18 @@ func fleetStoppedStateRetryable(ctx context.Context, input *DescribeFleetsInput,
 		}
 
 		expectedValue := "ACTIVE"
-		listOfValues, ok := pathValue.([]string)
+		listOfValues, ok := pathValue.([]interface{})
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected []string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
 		}
 
 		for _, v := range listOfValues {
-			if v == expectedValue {
+			value, ok := v.(types.FleetState)
+			if !ok {
+				return false, fmt.Errorf("waiter comparator expected types.FleetState value, got %T", pathValue)
+			}
+
+			if string(value) == expectedValue {
 				return false, fmt.Errorf("waiter state transitioned to Failure")
 			}
 		}

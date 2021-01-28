@@ -377,12 +377,12 @@ func functionActiveStateRetryable(ctx context.Context, input *GetFunctionConfigu
 		}
 
 		expectedValue := "Active"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.State)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.State value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -394,12 +394,12 @@ func functionActiveStateRetryable(ctx context.Context, input *GetFunctionConfigu
 		}
 
 		expectedValue := "Failed"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.State)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.State value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -411,12 +411,12 @@ func functionActiveStateRetryable(ctx context.Context, input *GetFunctionConfigu
 		}
 
 		expectedValue := "Pending"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.State)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.State value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}
@@ -562,12 +562,12 @@ func functionUpdatedStateRetryable(ctx context.Context, input *GetFunctionConfig
 		}
 
 		expectedValue := "Successful"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.LastUpdateStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.LastUpdateStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -579,12 +579,12 @@ func functionUpdatedStateRetryable(ctx context.Context, input *GetFunctionConfig
 		}
 
 		expectedValue := "Failed"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.LastUpdateStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.LastUpdateStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
@@ -596,12 +596,12 @@ func functionUpdatedStateRetryable(ctx context.Context, input *GetFunctionConfig
 		}
 
 		expectedValue := "InProgress"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.LastUpdateStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.LastUpdateStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}

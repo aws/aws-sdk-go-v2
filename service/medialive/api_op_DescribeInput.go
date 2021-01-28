@@ -312,12 +312,12 @@ func inputAttachedStateRetryable(ctx context.Context, input *DescribeInputInput,
 		}
 
 		expectedValue := "ATTACHED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.InputState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.InputState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -329,12 +329,12 @@ func inputAttachedStateRetryable(ctx context.Context, input *DescribeInputInput,
 		}
 
 		expectedValue := "DETACHED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.InputState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.InputState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}
@@ -487,12 +487,12 @@ func inputDeletedStateRetryable(ctx context.Context, input *DescribeInputInput, 
 		}
 
 		expectedValue := "DELETED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.InputState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.InputState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -504,12 +504,12 @@ func inputDeletedStateRetryable(ctx context.Context, input *DescribeInputInput, 
 		}
 
 		expectedValue := "DELETING"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.InputState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.InputState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}
@@ -662,12 +662,12 @@ func inputDetachedStateRetryable(ctx context.Context, input *DescribeInputInput,
 		}
 
 		expectedValue := "DETACHED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.InputState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.InputState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -679,12 +679,12 @@ func inputDetachedStateRetryable(ctx context.Context, input *DescribeInputInput,
 		}
 
 		expectedValue := "CREATING"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.InputState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.InputState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}
@@ -696,12 +696,12 @@ func inputDetachedStateRetryable(ctx context.Context, input *DescribeInputInput,
 		}
 
 		expectedValue := "ATTACHED"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.InputState)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.InputState value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return true, nil
 		}
 	}

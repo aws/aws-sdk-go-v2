@@ -319,12 +319,12 @@ func successfulSigningJobStateRetryable(ctx context.Context, input *DescribeSign
 		}
 
 		expectedValue := "Succeeded"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.SigningStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.SigningStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, nil
 		}
 	}
@@ -336,12 +336,12 @@ func successfulSigningJobStateRetryable(ctx context.Context, input *DescribeSign
 		}
 
 		expectedValue := "Failed"
-		value, ok := pathValue.(string)
+		value, ok := pathValue.(types.SigningStatus)
 		if !ok {
-			return false, fmt.Errorf("waiter comparator expected string value got %T", pathValue)
+			return false, fmt.Errorf("waiter comparator expected types.SigningStatus value, got %T", pathValue)
 		}
 
-		if value == expectedValue {
+		if string(value) == expectedValue {
 			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
