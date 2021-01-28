@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.79.0" /><META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+<meta name="generator" content="Hugo 0.80.0" /><META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 
 
 <link rel="shortcut icon" href="/aws-sdk-go-v2/favicons/favicon.ico" >
@@ -112,7 +112,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.27cd3298df115135275cfe2bb43b4a21.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.0c91c5bf5e6ccef00187ce8e3d383c6d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -144,7 +144,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.27cd3298df115135275cfe2bb43b4a21.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.0c91c5bf5e6ccef00187ce8e3d383c6d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -2623,7 +2623,7 @@ the application. For example:</p>
 <span style="color:#000;font-weight:bold">}</span>
 </code></pre></div><h2 id="service-client-errors">Service Client Errors</h2>
 <p>The SDK wraps all errors returned by service clients with the
-<a href="https://pkg.go.dev/github.com/awslabs/smithy-go/#OperationError">smithy.OperationError</a> error type. <code>OperationError</code> provides contextual
+<a href="https://pkg.go.dev/github.com/aws/smithy-go/#OperationError">smithy.OperationError</a> error type. <code>OperationError</code> provides contextual
 information about the service name and operation that is associated with an underlying error. This information can be
 useful for applications that perform batches of operations to one or more services, with a centralized error handling
 mechanism. Your application can use <code>errors.As</code> to access this <code>OperationError</code> metadata.</p>
@@ -2659,7 +2659,7 @@ already exists.</p>
     <span style="color:#000;font-weight:bold">}</span>
     <span style="color:#204a87;font-weight:bold">return</span>
 <span style="color:#000;font-weight:bold">}</span>
-</code></pre></div><p>All service API response errors implement the <a href="https://pkg.go.dev/github.com/awslabs/smithy-go/#APIError">smithy.APIError</a> interface type.
+</code></pre></div><p>All service API response errors implement the <a href="https://pkg.go.dev/github.com/aws/smithy-go/#APIError">smithy.APIError</a> interface type.
 This interface can be used to handle both modeled or un-modeled service error responses. This type provides
 access to the error code and message returned by the service. Additionally, this type provides indication of whether
 the fault of the error was due to the client or server if known. For example:</p>

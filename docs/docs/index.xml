@@ -343,7 +343,7 @@ whose &lt;code&gt;Body&lt;/code&gt; member is an &lt;code&gt;io.ReadCloser&lt;/c
 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;response-metadata&#34;&gt;Response Metadata&lt;/h4&gt;
 &lt;p&gt;All service operation output structs include a &lt;code&gt;ResultMetadata&lt;/code&gt; member of type
-&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#Metadata&#34;&gt;middleware.Metadata&lt;/a&gt;. &lt;code&gt;middleware.Metadata&lt;/code&gt; is used by the SDK middleware
+&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#Metadata&#34;&gt;middleware.Metadata&lt;/a&gt;. &lt;code&gt;middleware.Metadata&lt;/code&gt; is used by the SDK middleware
 to provide additional information from a service response that is not modeled by the service. This includes metadata
 like the &lt;code&gt;RequestID&lt;/code&gt;. For example to retrieve the &lt;code&gt;RequestID&lt;/code&gt; associated with a service response to assit AWS Support in
 troubleshooting a request:&lt;/p&gt;
@@ -534,7 +534,7 @@ is created and ready for a write operation.&lt;/p&gt;
 &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// Wait will poll until it gets the resource status, or max wait time 
 &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// expires.
 &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;waiter&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Wait&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TODO&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(),&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;params&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;maxWaitTime&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;  
-&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
     &lt;span style=&#34;color:#000&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Printf&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;error: %v&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
     &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; 
 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
@@ -595,7 +595,7 @@ Similar to the above example, you can override waiter configuration per &lt;code
     &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// override maximum default delay to 120 seconds
 &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#000&#34;&gt;o&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;MaxDelay&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;120&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;time&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Second&lt;/span&gt;
 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;})&lt;/span&gt;
-&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
     &lt;span style=&#34;color:#000&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Printf&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;error: %v&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
     &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt; 
 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
@@ -682,7 +682,7 @@ the application. For example:&lt;/p&gt;
 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;service-client-errors&#34;&gt;Service Client Errors&lt;/h2&gt;
 &lt;p&gt;The SDK wraps all errors returned by service clients with the
-&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/#OperationError&#34;&gt;smithy.OperationError&lt;/a&gt; error type. &lt;code&gt;OperationError&lt;/code&gt; provides contextual
+&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/#OperationError&#34;&gt;smithy.OperationError&lt;/a&gt; error type. &lt;code&gt;OperationError&lt;/code&gt; provides contextual
 information about the service name and operation that is associated with an underlying error. This information can be
 useful for applications that perform batches of operations to one or more services, with a centralized error handling
 mechanism. Your application can use &lt;code&gt;errors.As&lt;/code&gt; to access this &lt;code&gt;OperationError&lt;/code&gt; metadata.&lt;/p&gt;
@@ -718,7 +718,7 @@ already exists.&lt;/p&gt;
     &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
     &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt;
 &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All service API response errors implement the &lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/#APIError&#34;&gt;smithy.APIError&lt;/a&gt; interface type.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All service API response errors implement the &lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/#APIError&#34;&gt;smithy.APIError&lt;/a&gt; interface type.
 This interface can be used to handle both modeled or un-modeled service error responses. This type provides
 access to the error code and message returned by the service. Additionally, this type provides indication of whether
 the fault of the error was due to the client or server if known. For example:&lt;/p&gt;
@@ -793,7 +793,7 @@ interface by default.&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;p&gt;You can customize AWS SDK for Go V2 client requests by registering one or more middleware to a service operation&amp;rsquo;s
-&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#Stack&#34;&gt;stack&lt;/a&gt;. The stack is composed of a series of steps: Initialize, Serialize,
+&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#Stack&#34;&gt;stack&lt;/a&gt;. The stack is composed of a series of steps: Initialize, Serialize,
 Build, Finalize, and Deserialize. Each step contains zero or more middleware that operate on that step&amp;rsquo;s input and
 output types. The following diagram and table provide an overview of how an operation&amp;rsquo;s request and response traverses
 the stack.&lt;/p&gt;
@@ -833,9 +833,9 @@ the stack.&lt;/p&gt;
 allows other step middleware to be inserted relative to it.&lt;/p&gt;
 &lt;p&gt;You attach step middleware by using a step&amp;rsquo;s &lt;code&gt;Insert&lt;/code&gt; or &lt;code&gt;Add&lt;/code&gt; methods. You use &lt;code&gt;Add&lt;/code&gt; to attach a middleware to the
 beginning of a step by specifying
-&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#Before&#34;&gt;middleware.Before&lt;/a&gt; as the
-&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#RelativePosition&#34;&gt;RelativePosition&lt;/a&gt;, and
-&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#After&#34;&gt;middleware.After&lt;/a&gt; to attach to the end of the step.
+&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#Before&#34;&gt;middleware.Before&lt;/a&gt; as the
+&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#RelativePosition&#34;&gt;RelativePosition&lt;/a&gt;, and
+&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#After&#34;&gt;middleware.After&lt;/a&gt; to attach to the end of the step.
 You use &lt;code&gt;Insert&lt;/code&gt; to attach a middleware to a step by inserting the middleware relative to another step middleware.&lt;/p&gt;
 
 
@@ -861,28 +861,28 @@ their interface, and the helper function that can be used to satisfy the interfa
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;Initialize&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#InitializeMiddleware&#34;&gt;InitializeMiddleware&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#InitializeMiddlewareFunc&#34;&gt;InitializeMiddlewareFunc&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#InitializeMiddleware&#34;&gt;InitializeMiddleware&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#InitializeMiddlewareFunc&#34;&gt;InitializeMiddlewareFunc&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Build&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#BuildMiddleware&#34;&gt;BuildMiddleware&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#BuildMiddlewareFunc&#34;&gt;BuildMiddlewareFunc&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#BuildMiddleware&#34;&gt;BuildMiddleware&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#BuildMiddlewareFunc&#34;&gt;BuildMiddlewareFunc&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Serialize&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#SerializeMiddleware&#34;&gt;SerializeMiddleware&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#SerializeMiddlewareFunc&#34;&gt;SerializeMiddlewareFunc&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#SerializeMiddleware&#34;&gt;SerializeMiddleware&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#SerializeMiddlewareFunc&#34;&gt;SerializeMiddlewareFunc&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Finalize&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#FinalizeMiddleware&#34;&gt;FinalizeMiddleware&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#FinalizeMiddlewareFunc&#34;&gt;FinalizeMiddlewareFunc&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#FinalizeMiddleware&#34;&gt;FinalizeMiddleware&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#FinalizeMiddlewareFunc&#34;&gt;FinalizeMiddlewareFunc&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Deserialize&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#DeserializeMiddleware&#34;&gt;DeserializeMiddleware&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#DeserializeMiddlewareFunc&#34;&gt;DeserializeMiddlewareFunc&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#DeserializeMiddleware&#34;&gt;DeserializeMiddleware&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#DeserializeMiddlewareFunc&#34;&gt;DeserializeMiddlewareFunc&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -973,10 +973,10 @@ to a specific Amazon S3 &lt;code&gt;GetObject&lt;/code&gt; operation invocation:
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;passing-metadata-down-the-stack&#34;&gt;Passing Metadata Down the Stack&lt;/h2&gt;
 &lt;p&gt;In certain situations, you may find that you require two or more middleware to function in tandem by sharing information
 or state. You can use &lt;a href=&#34;https://golang.org/pkg/context/#Context&#34;&gt;context.Context&lt;/a&gt; to pass this metadata by using
-&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#WithStackValue&#34;&gt;middleware.WithStackValue&lt;/a&gt;.
+&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#WithStackValue&#34;&gt;middleware.WithStackValue&lt;/a&gt;.
 &lt;code&gt;middleware.WithStackValue&lt;/code&gt; attaches the given key-value pair to the provided context, and safely limits the scope to
 the currently executing stack. These stack-scoped values can be retrieved from a context using
-&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#GetStackValue&#34;&gt;middleware.GetStackValue&lt;/a&gt; and
+&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#GetStackValue&#34;&gt;middleware.GetStackValue&lt;/a&gt; and
 providing the key used to stored the corresponding value. Keys must be comparable, and you must define your own
 types as context keys to avoid collisions. The following examples shows how two middleware can use &lt;code&gt;context.Context&lt;/code&gt; to
 pass information down the stack.&lt;/p&gt;
@@ -1044,14 +1044,14 @@ target region. A few of the available keys are provided in the table below:&lt;/
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Logger&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#GetLogger&#34;&gt;GetLogger&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#GetLogger&#34;&gt;GetLogger&lt;/a&gt;&lt;/td&gt;
 &lt;td&gt;Retrieve the logger that can be used for logging message from the middleware.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h2 id=&#34;passing-metadata-up-the-stack&#34;&gt;Passing Metadata Up the Stack&lt;/h2&gt;
 &lt;p&gt;You can pass metadata up through the stack by adding metadata key and value pairs using the
-&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#Metadata&#34;&gt;middleware.Metadata&lt;/a&gt;. Each middleware step returns an output structure,
+&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/middleware#Metadata&#34;&gt;middleware.Metadata&lt;/a&gt;. Each middleware step returns an output structure,
 metadata, and an error. Your custom middleware must return the metadata received from calling the next handler in the
 step. This ensures that metadata added by downstream middleware propagates to the application invoking the
 service operation. The resulting metadata is accessible to the invoking application by either the operation&amp;rsquo;s
@@ -1760,20 +1760,20 @@ whitepaper.&lt;/p&gt;
         
         
         &lt;p&gt;The AWS SDK for Go V2 has logging facilities available that allow your application to enable debugging information
-for debugging and diagnosing request issues or failures. The &lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/logging#Logger&#34;&gt;Logger&lt;/a&gt; interface
+for debugging and diagnosing request issues or failures. The &lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/logging#Logger&#34;&gt;Logger&lt;/a&gt; interface
 and &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#ClientLogMode&#34;&gt;ClientLogMode&lt;/a&gt; are the main components available to you for determining how and
 what should be logged by clients.&lt;/p&gt;
 &lt;h2 id=&#34;logger&#34;&gt;Logger&lt;/h2&gt;
 &lt;p&gt;When constructing an &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Config&#34;&gt;Config&lt;/a&gt; using
 &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#LoadDefaultConfig&#34;&gt;LoadDefaultConfig&lt;/a&gt; a default &lt;code&gt;Logger&lt;/code&gt; is configured to send log
 messages to the process&#39; standard error (stderr). A custom logger that satisfies the
-&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/logging#Logger&#34;&gt;Logger&lt;/a&gt; interface can be passed as an argument to &lt;code&gt;LoadDefaultConfig&lt;/code&gt;
+&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/logging#Logger&#34;&gt;Logger&lt;/a&gt; interface can be passed as an argument to &lt;code&gt;LoadDefaultConfig&lt;/code&gt;
 by wrapping it with &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#WithLogger&#34;&gt;config.WithLogger&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;For example to configure our clients to use our &lt;code&gt;applicationLogger&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;cfg&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;LoadDefaultConfig&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TODO&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(),&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;WithLogger&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;applicationLogger&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now clients configured using the constructed &lt;code&gt;aws.Config&lt;/code&gt; will send log messages to &lt;code&gt;applicationLogger&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;context-aware-loggers&#34;&gt;Context-Aware Loggers&lt;/h3&gt;
-&lt;p&gt;A Logger implementation may implement the optional &lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/logging#ContextLogger&#34;&gt;ContextLogger&lt;/a&gt;
+&lt;p&gt;A Logger implementation may implement the optional &lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/logging#ContextLogger&#34;&gt;ContextLogger&lt;/a&gt;
 interface. Loggers that implement this interface will have their &lt;code&gt;WithContext&lt;/code&gt; methods invoked with the current context.
 This allows your logging implementations to return a new &lt;code&gt;Logger&lt;/code&gt; that can write additional logging metadata based
 on values present in the context.&lt;/p&gt;

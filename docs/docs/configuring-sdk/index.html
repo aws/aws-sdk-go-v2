@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.79.0" /><link rel="alternate" type="application/rss&#43;xml" href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/index.xml">
+<meta name="generator" content="Hugo 0.80.0" /><link rel="alternate" type="application/rss&#43;xml" href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/index.xml">
 <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 
 
@@ -105,7 +105,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.27cd3298df115135275cfe2bb43b4a21.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.0c91c5bf5e6ccef00187ce8e3d383c6d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -137,7 +137,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.27cd3298df115135275cfe2bb43b4a21.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.0c91c5bf5e6ccef00187ce8e3d383c6d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -2882,6 +2882,57 @@ method only for testing purposes.</p>
 
 </div>
 
+<h4 id="aws-single-sign-on-credentials">AWS Single Sign-On Credentials</h4>
+<p>The SDK provides a credential provider for retrieving temporary AWS credentials using AWS Single Sign-On.
+Using the AWS CLI you authenticate with the AWS SSO user portal and authorize access to temporary
+AWS credentials. You then configure your application to load the AWS SSO profile, and the SDK uses your
+AWS SSO credentials to retrieve temporary AWS credentials that will be automatically renewed if expired.
+If your AWS SSO credentials expire, you must explicitly renew them by logging in to your
+AWS SSO account again using the &lt;nil&gt;.</p>
+<p>For example, you can create a profile <code>dev-profile</code>, authenticate and authorize that profile using the
+AWS CLI, and configure your application as shown below.</p>
+<ol>
+<li>First create the <code>dev-profile</code></li>
+</ol>
+<pre><code>[profile dev-profile]
+sso_start_url = https://company-sso-portal.awsapps.com/start
+sso_region = us-west-2
+sso_account_id = 012345678901
+sso_role_name = Developer
+region = us-east-1
+</code></pre><ol start="2">
+<li>Login using the AWS CLI to authenticate and authorize the AWS SSO profile.</li>
+</ol>
+<pre><code>$ aws login --profile dev-profile
+Attempting to automatically open the SSO authorization page in your default browser.
+If the browser does not open or you wish to use a different device to authorize this request, open the following URL:
+
+https://device.sso.us-west-2.amazonaws.com/
+
+Then enter the code:
+
+ABCD-EFGH
+Successully logged into Start URL: https://company-sso-portal.awsapps.com/start
+</code></pre><ol start="3">
+<li>Next configure your application to use the AWS SSO profile.</li>
+</ol>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+
+<span style="color:#8f5902;font-style:italic">// ...
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span>
+	<span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">(),</span>
+	<span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithSharedConfigProfile</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;dev-profile&#34;</span><span style="color:#000;font-weight:bold">),</span>
+<span style="color:#000;font-weight:bold">)</span>
+<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">err</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>For more information on configuring
+AWS SSO profiles and authenticating using the AWS CLI see
+<a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html">Configuring the AWS CLI use AWS Single Sign-On</a>
+in the AWS CLI User Guide. For more information on programmatically constructing the
+AWS SSO credential provider see the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/credentials/ssocreds">ssocreds</a> API reference
+documentation.</p>
 <h4 id="other-credentials-providers">Other Credentials Providers</h4>
 <p>The SDK provides other methods for retrieving credentials in the
 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/credentials">credentials</a> module. For example, you can retrieve temporary security credentials from AWS Security Token Service or credentials from encrypted storage.</p>
@@ -3159,7 +3210,7 @@ will be invoked by the host environment&rsquo;s shell.</p>
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified January 19, 2021: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/8b890626670e53271ceeefc039d7cf2527c4534a">Update _index.md (#1054) (8b8906266)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified January 28, 2021: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/620e49f6c22a33e2cdbd3a5eebd27d47b8e1efa9">AWS SSO Developer Guide Documentation (#1085) (620e49f6c)</a>
 </div>
 </div>
 

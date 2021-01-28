@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.79.0" /><META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+<meta name="generator" content="Hugo 0.80.0" /><META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 
 
 <link rel="shortcut icon" href="/aws-sdk-go-v2/favicons/favicon.ico" >
@@ -112,7 +112,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.27cd3298df115135275cfe2bb43b4a21.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.0c91c5bf5e6ccef00187ce8e3d383c6d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -144,7 +144,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.27cd3298df115135275cfe2bb43b4a21.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.0c91c5bf5e6ccef00187ce8e3d383c6d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -2605,20 +2605,20 @@
     <div class="lead">Using Logging facilities for debugging SDK requests.</div>
 	       
 	<p>The AWS SDK for Go V2 has logging facilities available that allow your application to enable debugging information
-for debugging and diagnosing request issues or failures. The <a href="https://pkg.go.dev/github.com/awslabs/smithy-go/logging#Logger">Logger</a> interface
+for debugging and diagnosing request issues or failures. The <a href="https://pkg.go.dev/github.com/aws/smithy-go/logging#Logger">Logger</a> interface
 and <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#ClientLogMode">ClientLogMode</a> are the main components available to you for determining how and
 what should be logged by clients.</p>
 <h2 id="logger">Logger</h2>
 <p>When constructing an <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Config">Config</a> using
 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#LoadDefaultConfig">LoadDefaultConfig</a> a default <code>Logger</code> is configured to send log
 messages to the process' standard error (stderr). A custom logger that satisfies the
-<a href="https://pkg.go.dev/github.com/awslabs/smithy-go/logging#Logger">Logger</a> interface can be passed as an argument to <code>LoadDefaultConfig</code>
+<a href="https://pkg.go.dev/github.com/aws/smithy-go/logging#Logger">Logger</a> interface can be passed as an argument to <code>LoadDefaultConfig</code>
 by wrapping it with <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#WithLogger">config.WithLogger</a>.</p>
 <p>For example to configure our clients to use our <code>applicationLogger</code>:</p>
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithLogger</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">applicationLogger</span><span style="color:#000;font-weight:bold">))</span>
 </code></pre></div><p>Now clients configured using the constructed <code>aws.Config</code> will send log messages to <code>applicationLogger</code>.</p>
 <h3 id="context-aware-loggers">Context-Aware Loggers</h3>
-<p>A Logger implementation may implement the optional <a href="https://pkg.go.dev/github.com/awslabs/smithy-go/logging#ContextLogger">ContextLogger</a>
+<p>A Logger implementation may implement the optional <a href="https://pkg.go.dev/github.com/aws/smithy-go/logging#ContextLogger">ContextLogger</a>
 interface. Loggers that implement this interface will have their <code>WithContext</code> methods invoked with the current context.
 This allows your logging implementations to return a new <code>Logger</code> that can write additional logging metadata based
 on values present in the context.</p>
