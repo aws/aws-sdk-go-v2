@@ -1,9 +1,0 @@
-{
- "ID": "service.inspector-bugfix-1611613942206631000",
- "SchemaVersion": 1,
- "Module": "service/inspector",
- "Type": "bugfix",
- "Description": "fix serialization bug",
- "MinVersion": "",
- "AffectedModules": null
-}

@@ -1,9 +1,0 @@
-{
- "ID": "service.kinesis-bugfix-1611357210327390000",
- "SchemaVersion": 1,
- "Module": "service/kinesis",
- "Type": "bugfix",
- "Description": "fix serialize input",
- "MinVersion": "",
- "AffectedModules": null
-}

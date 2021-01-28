@@ -1,9 +1,0 @@
-{
- "ID": "service.migrationhubconfig-bugfix-1611357210424805000",
- "SchemaVersion": 1,
- "Module": "service/migrationhubconfig",
- "Type": "bugfix",
- "Description": "fix serialize input",
- "MinVersion": "",
- "AffectedModules": null
-}

@@ -1,9 +1,0 @@
-{
- "ID": "service.organizations-bugfix-1611357210532236000",
- "SchemaVersion": 1,
- "Module": "service/organizations",
- "Type": "bugfix",
- "Description": "fix serialize input",
- "MinVersion": "",
- "AffectedModules": null
-}

@@ -1,9 +1,0 @@
-{
- "ID": "service.opsworks-bugfix-1611613958948628000",
- "SchemaVersion": 1,
- "Module": "service/opsworks",
- "Type": "bugfix",
- "Description": "fix serialization bug",
- "MinVersion": "",
- "AffectedModules": null
-}

@@ -1,9 +1,0 @@
-{
- "ID": "service.iotthingsgraph-bugfix-1611357210295391000",
- "SchemaVersion": 1,
- "Module": "service/iotthingsgraph",
- "Type": "bugfix",
- "Description": "fix serialize input",
- "MinVersion": "",
- "AffectedModules": null
-}

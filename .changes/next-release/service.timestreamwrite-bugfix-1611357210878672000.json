@@ -1,9 +1,0 @@
-{
- "ID": "service.timestreamwrite-bugfix-1611357210878672000",
- "SchemaVersion": 1,
- "Module": "service/timestreamwrite",
- "Type": "bugfix",
- "Description": "fix serialize input",
- "MinVersion": "",
- "AffectedModules": null
-}

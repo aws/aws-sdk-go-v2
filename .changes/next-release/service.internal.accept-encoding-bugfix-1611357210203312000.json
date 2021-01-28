@@ -1,9 +1,0 @@
-{
- "ID": "service.internal.accept-encoding-bugfix-1611357210203312000",
- "SchemaVersion": 1,
- "Module": "service/internal/accept-encoding",
- "Type": "bugfix",
- "Description": "fix serialize input",
- "MinVersion": "",
- "AffectedModules": null
-}

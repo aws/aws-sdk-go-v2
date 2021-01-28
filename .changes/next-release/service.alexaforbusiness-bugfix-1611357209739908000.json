@@ -1,9 +1,0 @@
-{
- "ID": "service.alexaforbusiness-bugfix-1611357209739908000",
- "SchemaVersion": 1,
- "Module": "service/alexaforbusiness",
- "Type": "bugfix",
- "Description": "fix serialize input",
- "MinVersion": "",
- "AffectedModules": null
-}

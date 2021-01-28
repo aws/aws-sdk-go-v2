@@ -1,0 +1,9 @@
+{
+ "ID": "sdk-feature-1611865988784860000",
+ "SchemaVersion": 1,
+ "Module": "/",
+ "Type": "feature",
+ "Description": "Add support for specifying the EndpointSource on aws.Endpoint types",
+ "MinVersion": "",
+ "AffectedModules": null
+}

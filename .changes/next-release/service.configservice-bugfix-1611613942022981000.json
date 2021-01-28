@@ -1,9 +1,0 @@
-{
- "ID": "service.configservice-bugfix-1611613942022981000",
- "SchemaVersion": 1,
- "Module": "service/configservice",
- "Type": "bugfix",
- "Description": "fix serialization bug",
- "MinVersion": "",
- "AffectedModules": null
-}
