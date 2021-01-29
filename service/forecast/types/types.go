@@ -56,9 +56,9 @@ type ContinuousParameterRange struct {
 	ScalingType ScalingType
 }
 
-// The destination for an export job, an AWS Identity and Access Management (IAM)
-// role that allows Amazon Forecast to access the location and, optionally, an AWS
-// Key Management Service (KMS) key.
+// The destination for an export job. Provide an S3 path, an AWS Identity and
+// Access Management (IAM) role that allows Amazon Forecast to access the location,
+// and an AWS Key Management Service (KMS) key (optional).
 type DataDestination struct {
 
 	// The path to an Amazon Simple Storage Service (Amazon S3) bucket along with the
@@ -584,9 +584,9 @@ type PredictorBacktestExportJobSummary struct {
 	// When the predictor backtest export job was created.
 	CreationTime *time.Time
 
-	// The destination for an export job, an AWS Identity and Access Management (IAM)
-	// role that allows Amazon Forecast to access the location and, optionally, an AWS
-	// Key Management Service (KMS) key.
+	// The destination for an export job. Provide an S3 path, an AWS Identity and
+	// Access Management (IAM) role that allows Amazon Forecast to access the location,
+	// and an AWS Key Management Service (KMS) key (optional).
 	Destination *DataDestination
 
 	// When the last successful export job finished.
@@ -765,164 +765,175 @@ type Statistics struct {
 }
 
 // Describes a supplementary feature of a dataset group. This object is part of the
-// InputDataConfig object. The only supported feature is Holidays. If you use the
-// calendar, all data in the datasets should belong to the same country as the
-// calendar. For the holiday calendar data, see the Jollyday
-// (http://jollyday.sourceforge.net/data.html) website.
+// InputDataConfig object. Forecast supports the Weather Index and Holidays
+// built-in featurizations. Weather Index The Amazon Forecast Weather Index is a
+// built-in featurization that incorporates historical and projected weather
+// information into your model. The Weather Index supplements your datasets with
+// over two years of historical weather data and up to 14 days of projected weather
+// data. For more information, see Amazon Forecast Weather Index
+// (https://docs.aws.amazon.com/forecast/latest/dg/weather.html). Holidays Holidays
+// is a built-in featurization that incorporates a feature-engineered dataset of
+// national holiday information into your model. It provides native support for the
+// holiday calendars of 66 countries. To view the holiday calendars, refer to the
+// Jollyday (http://jollyday.sourceforge.net/data.html) library. For more
+// information, see Holidays Featurization
+// (https://docs.aws.amazon.com/forecast/latest/dg/holidays.html).
 type SupplementaryFeature struct {
 
-	// The name of the feature. This must be "holiday".
+	// The name of the feature. Valid values: "holiday" and "weather".
 	//
 	// This member is required.
 	Name *string
 
-	// One of the following 2 letter country codes:
+	// Weather Index To enable the Weather Index, set the value to "true" Holidays To
+	// enable Holidays, specify a country with one of the following two-letter country
+	// codes:
 	//
 	// * "AL" - ALBANIA
 	//
-	// * "AR" -
-	// ARGENTINA
+	// * "AR" - ARGENTINA
 	//
 	// * "AT" - AUSTRIA
 	//
-	// * "AU" - AUSTRALIA
+	// * "AU" -
+	// AUSTRALIA
 	//
 	// * "BA" - BOSNIA HERZEGOVINA
 	//
-	// *
-	// "BE" - BELGIUM
+	// * "BE" - BELGIUM
 	//
 	// * "BG" - BULGARIA
 	//
-	// * "BO" - BOLIVIA
+	// *
+	// "BO" - BOLIVIA
 	//
 	// * "BR" - BRAZIL
 	//
-	// * "BY" -
-	// BELARUS
+	// * "BY" - BELARUS
 	//
 	// * "CA" - CANADA
 	//
-	// * "CL" - CHILE
+	// * "CL" -
+	// CHILE
 	//
 	// * "CO" - COLOMBIA
 	//
-	// * "CR" - COSTA
-	// RICA
+	// * "CR" - COSTA RICA
 	//
 	// * "HR" - CROATIA
 	//
-	// * "CZ" - CZECH REPUBLIC
+	// * "CZ" - CZECH
+	// REPUBLIC
 	//
 	// * "DK" - DENMARK
 	//
-	// * "EC" -
-	// ECUADOR
+	// * "EC" - ECUADOR
 	//
 	// * "EE" - ESTONIA
 	//
-	// * "ET" - ETHIOPIA
+	// * "ET" -
+	// ETHIOPIA
 	//
 	// * "FI" - FINLAND
 	//
-	// * "FR" -
-	// FRANCE
+	// * "FR" - FRANCE
 	//
 	// * "DE" - GERMANY
 	//
-	// * "GR" - GREECE
+	// * "GR" -
+	// GREECE
 	//
 	// * "HU" - HUNGARY
 	//
 	// * "IS" - ICELAND
 	//
-	// *
-	// "IN" - INDIA
+	// * "IN" - INDIA
 	//
 	// * "IE" - IRELAND
 	//
-	// * "IT" - ITALY
+	// *
+	// "IT" - ITALY
 	//
 	// * "JP" - JAPAN
 	//
-	// * "KZ" -
-	// KAZAKHSTAN
+	// * "KZ" - KAZAKHSTAN
 	//
 	// * "KR" - KOREA
 	//
-	// * "LV" - LATVIA
+	// * "LV" -
+	// LATVIA
 	//
 	// * "LI" - LIECHTENSTEIN
 	//
-	// * "LT" -
-	// LITHUANIA
+	// * "LT" - LITHUANIA
 	//
 	// * "LU" - LUXEMBOURG
 	//
-	// * "MK" - MACEDONIA
+	// * "MK"
+	// - MACEDONIA
 	//
 	// * "MT" - MALTA
 	//
-	// * "MX" -
-	// MEXICO
+	// * "MX" - MEXICO
 	//
 	// * "MD" - MOLDOVA
 	//
-	// * "ME" - MONTENEGRO
+	// * "ME" -
+	// MONTENEGRO
 	//
 	// * "NL" - NETHERLANDS
 	//
-	// * "NZ" -
-	// NEW ZEALAND
+	// * "NZ" - NEW ZEALAND
 	//
 	// * "NI" - NICARAGUA
 	//
-	// * "NG" - NIGERIA
+	// *
+	// "NG" - NIGERIA
 	//
 	// * "NO" - NORWAY
 	//
-	// * "PA" -
-	// PANAMA
+	// * "PA" - PANAMA
 	//
 	// * "PY" - PARAGUAY
 	//
-	// * "PE" - PERU
+	// * "PE" -
+	// PERU
 	//
 	// * "PL" - POLAND
 	//
 	// * "PT" - PORTUGAL
 	//
-	// *
-	// "RO" - ROMANIA
+	// * "RO" - ROMANIA
 	//
 	// * "RU" - RUSSIA
 	//
-	// * "RS" - SERBIA
+	// *
+	// "RS" - SERBIA
 	//
 	// * "SK" - SLOVAKIA
 	//
-	// * "SI" -
-	// SLOVENIA
+	// * "SI" - SLOVENIA
 	//
 	// * "ZA" - SOUTH AFRICA
 	//
-	// * "ES" - SPAIN
+	// *
+	// "ES" - SPAIN
 	//
 	// * "SE" - SWEDEN
 	//
-	// * "CH" -
-	// SWITZERLAND
+	// * "CH" - SWITZERLAND
 	//
 	// * "UA" - UKRAINE
 	//
-	// * "AE" - UNITED ARAB EMIRATES
+	// * "AE" -
+	// UNITED ARAB EMIRATES
 	//
-	// * "US" - UNITED
-	// STATES
+	// * "US" - UNITED STATES
 	//
 	// * "UK" - UNITED KINGDOM
 	//
-	// * "UY" - URUGUAY
+	// * "UY" -
+	// URUGUAY
 	//
 	// * "VE" - VENEZUELA
 	//

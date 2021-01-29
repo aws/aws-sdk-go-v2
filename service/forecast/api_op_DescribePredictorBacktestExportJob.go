@@ -53,9 +53,9 @@ type DescribePredictorBacktestExportJobOutput struct {
 	// When the predictor backtest export job was created.
 	CreationTime *time.Time
 
-	// The destination for an export job, an AWS Identity and Access Management (IAM)
-	// role that allows Amazon Forecast to access the location and, optionally, an AWS
-	// Key Management Service (KMS) key.
+	// The destination for an export job. Provide an S3 path, an AWS Identity and
+	// Access Management (IAM) role that allows Amazon Forecast to access the location,
+	// and an AWS Key Management Service (KMS) key (optional).
 	Destination *types.DataDestination
 
 	// When the last successful export job finished.

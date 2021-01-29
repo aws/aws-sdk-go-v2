@@ -68,6 +68,14 @@ type CreateDatasetImportJobInput struct {
 	// This member is required.
 	DatasetImportJobName *string
 
+	// The format of the geolocation attribute. The geolocation attribute can be
+	// formatted in one of two ways:
+	//
+	// * LAT_LONG - the latitude and longitude in
+	// decimal format (Example: 47.61_-122.33).
+	//
+	// * CC_POSTALCODE (US Only) - the
+	// country code (US), followed by the 5-digit ZIP code (Example: US_98121).
 	GeolocationFormat *string
 
 	// The optional metadata that you apply to the dataset import job to help you
@@ -103,6 +111,11 @@ type CreateDatasetImportJobInput struct {
 	// limit.
 	Tags []types.Tag
 
+	// A single time zone for every item in your dataset. This option is ideal for
+	// datasets with all timestamps within a single time zone, or if all timestamps are
+	// normalized to a single time zone. Refer to the Joda-Time API
+	// (http://joda-time.sourceforge.net/timezones.html) for a complete list of valid
+	// time zone names.
 	TimeZone *string
 
 	// The format of timestamps in the dataset. The format that you specify depends on
@@ -119,6 +132,9 @@ type CreateDatasetImportJobInput struct {
 	// Amazon Forecast expects the format to be "yyyy-MM-dd HH:mm:ss".
 	TimestampFormat *string
 
+	// Automatically derive time zone information from the geolocation attribute. This
+	// option is ideal for datasets that contain timestamps in multiple time zones and
+	// those timestamps are expressed in local time.
 	UseGeolocationForTimeZone bool
 }
 

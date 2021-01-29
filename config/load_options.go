@@ -598,7 +598,6 @@ func WithS3UseARNRegion(v bool) LoadOptionsFunc {
 	}
 }
 
-
 // getSSOProviderOptions returns AssumeRoleCredentialOptions from LoadOptions
 func (o LoadOptions) getSSOProviderOptions(context.Context) (func(options *ssocreds.Options), bool, error) {
 	if o.SSOProviderOptions == nil {
@@ -620,4 +619,3 @@ func WithSSOProviderOptions(v func(*ssocreds.Options)) LoadOptionsFunc {
 		return nil
 	}
 }
-
