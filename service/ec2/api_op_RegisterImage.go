@@ -90,8 +90,6 @@ type RegisterImageInput struct {
 	// The block device mapping entries.
 	BlockDeviceMappings []types.BlockDeviceMapping
 
-	BootMode types.BootModeValues
-
 	// A description for your AMI.
 	Description *string
 

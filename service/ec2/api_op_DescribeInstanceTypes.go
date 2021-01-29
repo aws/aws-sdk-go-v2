@@ -183,9 +183,9 @@ type DescribeInstanceTypesInput struct {
 	// configured for the instance type. For example, "1" or "1,2".
 	Filters []types.Filter
 
-	// The instance types. For more information, see Instance Types
+	// The instance types. For more information, see Instance types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
-	// Amazon Elastic Compute Cloud User Guide.
+	// Amazon EC2 User Guide.
 	InstanceTypes []types.InstanceType
 
 	// The maximum number of results to return for the request in a single page. The
@@ -199,9 +199,9 @@ type DescribeInstanceTypesInput struct {
 
 type DescribeInstanceTypesOutput struct {
 
-	// The instance type. For more information, see Instance Types
+	// The instance type. For more information, see Instance types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
-	// Amazon Elastic Compute Cloud User Guide.
+	// Amazon EC2 User Guide.
 	InstanceTypes []types.InstanceTypeInfo
 
 	// The token to use to retrieve the next page of results. This value is null when

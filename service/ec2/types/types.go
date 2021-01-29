@@ -103,16 +103,6 @@ type Address struct {
 	Tags []Tag
 }
 
-type AddressAttribute struct {
-	AllocationId *string
-
-	PtrRecord *string
-
-	PtrRecordUpdate *PtrUpdateStatus
-
-	PublicIp *string
-}
-
 // Describes a principal.
 type AllowedPrincipal struct {
 
@@ -446,7 +436,7 @@ type BlockDeviceMapping struct {
 	// launched.
 	Ebs *EbsBlockDevice
 
-	// Suppresses the specified device included in the block device mapping of the AMI.
+	// To omit the device from the block device mapping, specify an empty string.
 	NoDevice *string
 
 	// The virtual device name (ephemeralN). Instance store volumes are numbered
@@ -635,6 +625,9 @@ type CapacityReservation struct {
 	// The ID of the AWS account that owns the Capacity Reservation.
 	OwnerId *string
 
+	// The date and time at which the Capacity Reservation was started.
+	StartDate *time.Time
+
 	// The current state of the Capacity Reservation. A Capacity Reservation can be in
 	// one of the following states:
 	//
@@ -646,16 +639,16 @@ type CapacityReservation struct {
 	// reserved capacity is no longer available for your use.
 	//
 	// * cancelled - The
-	// Capacity Reservation was manually cancelled. The reserved capacity is no longer
-	// available for your use.
+	// Capacity Reservation was cancelled. The reserved capacity is no longer available
+	// for your use.
 	//
-	// * pending - The Capacity Reservation request was
-	// successful but the capacity provisioning is still pending.
+	// * pending - The Capacity Reservation request was successful but
+	// the capacity provisioning is still pending.
 	//
-	// * failed - The
-	// Capacity Reservation request has failed. A request might fail due to invalid
-	// request parameters, capacity constraints, or instance limit constraints. Failed
-	// requests are retained for 60 minutes.
+	// * failed - The Capacity Reservation
+	// request has failed. A request might fail due to invalid request parameters,
+	// capacity constraints, or instance limit constraints. Failed requests are
+	// retained for 60 minutes.
 	State CapacityReservationState
 
 	// Any tags assigned to the Capacity Reservation.
@@ -692,10 +685,10 @@ type CapacityReservationGroup struct {
 // instant. For more information about Capacity Reservations, see On-Demand
 // Capacity Reservations
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html)
-// in the Amazon Elastic Compute Cloud User Guide. For examples of using Capacity
-// Reservations in an EC2 Fleet, see EC2 Fleet example configurations
+// in the Amazon EC2 User Guide. For examples of using Capacity Reservations in an
+// EC2 Fleet, see EC2 Fleet example configurations
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-examples.html) in
-// the Amazon Elastic Compute Cloud User Guide.
+// the Amazon EC2 User Guide.
 type CapacityReservationOptions struct {
 
 	// Indicates whether to use unused Capacity Reservations for fulfilling On-Demand
@@ -716,10 +709,10 @@ type CapacityReservationOptions struct {
 // instant. For more information about Capacity Reservations, see On-Demand
 // Capacity Reservations
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html)
-// in the Amazon Elastic Compute Cloud User Guide. For examples of using Capacity
-// Reservations in an EC2 Fleet, see EC2 Fleet example configurations
+// in the Amazon EC2 User Guide. For examples of using Capacity Reservations in an
+// EC2 Fleet, see EC2 Fleet example configurations
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-examples.html) in
-// the Amazon Elastic Compute Cloud User Guide.
+// the Amazon EC2 User Guide.
 type CapacityReservationOptionsRequest struct {
 
 	// Indicates whether to use unused Capacity Reservations for fulfilling On-Demand
@@ -1924,19 +1917,19 @@ type EbsBlockDevice struct {
 	// Indicates whether the EBS volume is deleted on instance termination. For more
 	// information, see Preserving Amazon EBS volumes on instance termination
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html#preserving-volumes-on-termination)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// in the Amazon EC2 User Guide.
 	DeleteOnTermination bool
 
 	// Indicates whether the encryption state of an EBS volume is changed while being
 	// restored from a backing snapshot. The effect of setting the encryption state to
 	// true depends on the volume origin (new or from a snapshot), starting encryption
 	// state, ownership, and whether encryption by default is enabled. For more
-	// information, see Amazon EBS Encryption
+	// information, see Amazon EBS encryption
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters)
-	// in the Amazon Elastic Compute Cloud User Guide. In no case can you remove
-	// encryption from an encrypted volume. Encrypted volumes can only be attached to
-	// instances that support Amazon EBS encryption. For more information, see
-	// Supported instance types
+	// in the Amazon EC2 User Guide. In no case can you remove encryption from an
+	// encrypted volume. Encrypted volumes can only be attached to instances that
+	// support Amazon EBS encryption. For more information, see Supported instance
+	// types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).
 	// This parameter is not returned by .
 	Encrypted bool
@@ -1972,8 +1965,6 @@ type EbsBlockDevice struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html).
 	KmsKeyId *string
 
-	OutpostArn *string
-
 	// The ID of the snapshot.
 	SnapshotId *string
 
@@ -1991,18 +1982,16 @@ type EbsBlockDevice struct {
 	//
 	// * io1 and io2: 4-16,384
 	//
-	// * st1: 500-16,384
+	// * st1 and sc1: 125-16,384
 	//
-	// * sc1: 500-16,384
-	//
-	// *
-	// standard: 1-1,024
+	// * standard:
+	// 1-1,024
 	VolumeSize int32
 
 	// The volume type. For more information, see Amazon EBS volume types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
-	// Amazon Elastic Compute Cloud User Guide. If the volume type is io1 or io2, you
-	// must specify the IOPS that the volume supports.
+	// Amazon EC2 User Guide. If the volume type is io1 or io2, you must specify the
+	// IOPS that the volume supports.
 	VolumeType VolumeType
 }
 
@@ -2013,9 +2002,9 @@ type EbsInfo struct {
 	EbsOptimizedInfo *EbsOptimizedInfo
 
 	// Indicates whether the instance type is Amazon EBS-optimized. For more
-	// information, see Amazon EBS-Optimized Instances
+	// information, see Amazon EBS-optimized instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html) in
-	// Amazon EC2 User Guide for Linux Instances.
+	// Amazon EC2 User Guide.
 	EbsOptimizedSupport EbsOptimizedSupport
 
 	// Indicates whether Amazon EBS encryption is supported.
@@ -2905,7 +2894,7 @@ type FleetLaunchTemplateSpecification struct {
 // can be used by an EC2 Fleet to configure Amazon EC2 instances. For information
 // about launch templates, see Launching an instance from a launch template
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon EC2 User Guide.
 type FleetLaunchTemplateSpecificationRequest struct {
 
 	// The ID of the launch template. If you specify the template ID, you can't specify
@@ -2940,7 +2929,7 @@ type FleetSpotCapacityRebalance struct {
 // that your Spot Instance is at an elevated risk of being interrupted. For more
 // information, see Capacity rebalancing
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-capacity-rebalance)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon EC2 User Guide.
 type FleetSpotCapacityRebalanceRequest struct {
 
 	// The replacement strategy to use. Only available for fleets of type maintain. To
@@ -3206,7 +3195,7 @@ type GroupIdentifier struct {
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites).
 // For more information, see Hibernate your instance
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html) in the
-// Amazon Elastic Compute Cloud User Guide.
+// Amazon EC2 User Guide.
 type HibernationOptions struct {
 
 	// If this parameter is set to true, your instance is enabled for hibernation;
@@ -3219,7 +3208,7 @@ type HibernationOptions struct {
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites).
 // For more information, see Hibernate your instance
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html) in the
-// Amazon Elastic Compute Cloud User Guide.
+// Amazon EC2 User Guide.
 type HibernationOptionsRequest struct {
 
 	// If you set this parameter to true, your instance is enabled for hibernation.
@@ -3273,9 +3262,9 @@ type Host struct {
 	AllocationTime *time.Time
 
 	// Indicates whether the Dedicated Host supports multiple instance types of the
-	// same instance family, or a specific instance type only. one indicates that the
-	// Dedicated Host supports multiple instance types in the instance family. off
-	// indicates that the Dedicated Host supports a single instance type only.
+	// same instance family. If the value is on, the Dedicated Host supports multiple
+	// instance types in the instance family. If the value is off, the Dedicated Host
+	// supports a single instance type only.
 	AllowsMultipleInstanceTypes AllowsMultipleInstanceTypes
 
 	// Whether auto-placement is on or off.
@@ -3291,7 +3280,7 @@ type Host struct {
 	AvailableCapacity *AvailableCapacity
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to Ensure Idempotency
+	// the request. For more information, see Ensuring Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
 
@@ -3524,8 +3513,6 @@ type Image struct {
 
 	// Any block device mapping entries.
 	BlockDeviceMappings []BlockDeviceMapping
-
-	BootMode BootModeValues
 
 	// The date and time the image was created.
 	CreationDate *string
@@ -3858,8 +3845,6 @@ type Instance struct {
 	// Any block device mapping entries for the instance.
 	BlockDeviceMappings []InstanceBlockDeviceMapping
 
-	BootMode BootModeValues
-
 	// The ID of the Capacity Reservation.
 	CapacityReservationId *string
 
@@ -3987,9 +3972,9 @@ type Instance struct {
 	// controls whether source/destination checking is enabled on the instance. A value
 	// of true means that checking is enabled, and false means that checking is
 	// disabled. The value must be false for the instance to perform NAT. For more
-	// information, see NAT Instances
+	// information, see NAT instances
 	// (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html)
-	// in the Amazon Virtual Private Cloud User Guide.
+	// in the Amazon VPC User Guide.
 	SourceDestCheck bool
 
 	// If the request is a Spot Instance request, the ID of the request.
@@ -4614,9 +4599,9 @@ type InstanceTypeInfo struct {
 	// Indicates whether instance storage is supported.
 	InstanceStorageSupported *bool
 
-	// The instance type. For more information, see Instance Types
+	// The instance type. For more information, see Instance types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
-	// Amazon Elastic Compute Cloud User Guide.
+	// Amazon EC2 User Guide.
 	InstanceType InstanceType
 
 	// Describes the memory for the instance type.
@@ -4630,8 +4615,6 @@ type InstanceTypeInfo struct {
 
 	// Describes the processor.
 	ProcessorInfo *ProcessorInfo
-
-	SupportedBootModes []BootModeType
 
 	// The supported root device types.
 	SupportedRootDeviceTypes []RootDeviceType
@@ -4649,9 +4632,9 @@ type InstanceTypeInfo struct {
 // The instance types offered.
 type InstanceTypeOffering struct {
 
-	// The instance type. For more information, see Instance Types
+	// The instance type. For more information, see Instance types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
-	// Amazon Elastic Compute Cloud User Guide.
+	// Amazon EC2 User Guide.
 	InstanceType InstanceType
 
 	// The identifier for the location. This depends on the location type. For example,
@@ -7178,14 +7161,6 @@ type ProvisionedBandwidth struct {
 	Status *string
 }
 
-type PtrUpdateStatus struct {
-	Reason *string
-
-	Status *string
-
-	Value *string
-}
-
 // Describes an IPv4 address pool.
 type PublicIpv4Pool struct {
 
@@ -8227,7 +8202,7 @@ type ScheduledInstancesBlockDeviceMapping struct {
 	// launched.
 	Ebs *ScheduledInstancesEbs
 
-	// Suppresses the specified device included in the block device mapping of the AMI.
+	// To omit the device from the block device mapping, specify an empty string.
 	NoDevice *string
 
 	// The virtual device name (ephemeralN). Instance store volumes are numbered
@@ -8254,13 +8229,13 @@ type ScheduledInstancesEbs struct {
 	// The number of I/O operations per second (IOPS) to provision for an io1 or io2
 	// volume, with a maximum ratio of 50 IOPS/GiB for io1, and 500 IOPS/GiB for io2.
 	// Range is 100 to 64,000 IOPS for volumes in most Regions. Maximum IOPS of 64,000
-	// is guaranteed only on Nitro-based instances
+	// is guaranteed only on instances built on the Nitro System
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
 	// Other instance families guarantee performance up to 32,000 IOPS. For more
-	// information, see Amazon EBS Volume Types
+	// information, see Amazon EBS volume types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
-	// Amazon Elastic Compute Cloud User Guide. This parameter is valid only for
-	// Provisioned IOPS SSD (io1 and io2) volumes.
+	// Amazon EC2 User Guide. This parameter is valid only for Provisioned IOPS SSD
+	// (io1 and io2) volumes.
 	Iops int32
 
 	// The ID of the snapshot.
@@ -9255,8 +9230,8 @@ type SpotMarketOptions struct {
 
 	// The Spot Instance request type. For RunInstances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances),
-	// persistent Spot Instance requests are only supported when
-	// InstanceInterruptionBehavior is set to either hibernate or stop.
+	// persistent Spot Instance requests are only supported when the instance
+	// interruption behavior is either hibernate or stop.
 	SpotInstanceType SpotInstanceType
 
 	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported
@@ -9687,7 +9662,7 @@ type TagSpecification struct {
 // OnDemandOptions
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_OnDemandOptions.html)
 // and SpotOptions
-// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptions)
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptions).
 type TargetCapacitySpecification struct {
 
 	// The default TotalTargetCapacity, which is either Spot or On-Demand.

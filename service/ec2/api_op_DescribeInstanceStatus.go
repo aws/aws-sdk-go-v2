@@ -27,20 +27,20 @@ import (
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html)
 // and Troubleshooting instances with failed status checks
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon EC2 User Guide.
 //
-// * Scheduled events - Amazon EC2
-// can schedule events (such as reboot, stop, or terminate) for your instances
-// related to hardware issues, software updates, or system maintenance. For more
-// information, see Scheduled events for your instances
+// * Scheduled events - Amazon EC2 can schedule
+// events (such as reboot, stop, or terminate) for your instances related to
+// hardware issues, software updates, or system maintenance. For more information,
+// see Scheduled events for your instances
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon EC2 User Guide.
 //
-// * Instance state - You can
-// manage your instances from the moment you launch them through their termination.
-// For more information, see Instance lifecycle
+// * Instance state - You can manage your instances
+// from the moment you launch them through their termination. For more information,
+// see Instance lifecycle
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon EC2 User Guide.
 func (c *Client) DescribeInstanceStatus(ctx context.Context, params *DescribeInstanceStatusInput, optFns ...func(*Options)) (*DescribeInstanceStatusOutput, error) {
 	if params == nil {
 		params = &DescribeInstanceStatusInput{}

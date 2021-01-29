@@ -16,7 +16,7 @@ import (
 // launch specifications that vary by instance type, AMI, Availability Zone, or
 // subnet. For more information, see Launching an EC2 Fleet
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html) in the
-// Amazon Elastic Compute Cloud User Guide.
+// Amazon EC2 User Guide.
 func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optFns ...func(*Options)) (*CreateFleetOutput, error) {
 	if params == nil {
 		params = &CreateFleetInput{}
@@ -83,7 +83,7 @@ type CreateFleetInput struct {
 	// The type of request. The default value is maintain.
 	//
 	// * maintain - The EC2 Fleet
-	// plaees an asynchronous request for your desired capacity, and continues to
+	// places an asynchronous request for your desired capacity, and continues to
 	// maintain your desired Spot capacity by replenishing interrupted Spot
 	// Instances.
 	//
@@ -98,7 +98,7 @@ type CreateFleetInput struct {
 	//
 	// For more information, see EC2 Fleet request types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// in the Amazon EC2 User Guide.
 	Type types.FleetType
 
 	// The start date and time of the request, in UTC format (for example,

@@ -29,7 +29,7 @@ import (
 // zone, the call works normally. For more information, see Burstable performance
 // instances
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon EC2 User Guide.
 func (c *Client) DescribeInstanceCreditSpecifications(ctx context.Context, params *DescribeInstanceCreditSpecificationsInput, optFns ...func(*Options)) (*DescribeInstanceCreditSpecificationsOutput, error) {
 	if params == nil {
 		params = &DescribeInstanceCreditSpecificationsInput{}
