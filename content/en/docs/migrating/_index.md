@@ -475,7 +475,7 @@ go get github.com/aws/aws-sdk-go-v2/service/s3
 
 You can construct clients in the {{% alias sdk-go %}} using either the `New` or `NewFromConfig` constructor functions in the client's package.
 When migrating from the AWS SDK for Go we recommend that you use the `NewFromConfig` variant, which will return a new
-service client using values from an `aws.Config`. The `aws.Config` value will of been created while loading the SDK shared configuration using
+service client using values from an `aws.Config`. The `aws.Config` value will have been created while loading the SDK shared configuration using
 `config.LoadDefaultConfig`. For details on creating service clients see
 [Using AWS Services]({{% ref "making-requests" %}}).
 
