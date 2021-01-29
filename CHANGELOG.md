@@ -1,3 +1,17 @@
+# Release 2021-01-29
+## Service Client Highlights
+* Bug Fix: A serialization bug has been fixed that caused some service operations with empty inputs to not be serialized correctly ([#1071](https://github.com/aws/aws-sdk-go-v2/pull/1071))
+* Bug Fix: Fixes a bug that could cause a waiter to fail when comparing types ([#1083](https://github.com/aws/aws-sdk-go-v2/pull/1083))
+## Core SDK Highlights
+* Feature: EndpointResolverFromURL helpers have been added for constructing a service EndpointResolver type ([#1066](https://github.com/aws/aws-sdk-go-v2/pull/1066))
+* Dependency Update: Updated SDK dependencies to their latest versions.
+* `aws` - v1.1.0
+  * Feature: Add support for specifying the EndpointSource on aws.Endpoint types ([#1070](https://github.com/aws/aws-sdk-go-v2/pull/1070/))
+* `config` - v1.1.0
+  * Feature: Add Support for AWS Single Sign-On (SSO) credential provider ([#1072](https://github.com/aws/aws-sdk-go-v2/pull/1072))
+* `credentials` - v1.1.0
+  * Feature: Add AWS Single Sign-On (SSO) credential provider ([#1072](https://github.com/aws/aws-sdk-go-v2/pull/1072))
+
 # Release 2021-01-19
 
 We are excited to announce the [General Availability](https://aws.amazon.com/blogs/developer/aws-sdk-for-go-version-2-general-availability/)
