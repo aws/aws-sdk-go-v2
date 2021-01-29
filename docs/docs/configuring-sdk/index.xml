@@ -252,20 +252,20 @@ InvokeAsync** API operation.&lt;/p&gt;
         
         
         &lt;p&gt;The AWS SDK for Go V2 has logging facilities available that allow your application to enable debugging information
-for debugging and diagnosing request issues or failures. The &lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/logging#Logger&#34;&gt;Logger&lt;/a&gt; interface
+for debugging and diagnosing request issues or failures. The &lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/logging#Logger&#34;&gt;Logger&lt;/a&gt; interface
 and &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#ClientLogMode&#34;&gt;ClientLogMode&lt;/a&gt; are the main components available to you for determining how and
 what should be logged by clients.&lt;/p&gt;
 &lt;h2 id=&#34;logger&#34;&gt;Logger&lt;/h2&gt;
 &lt;p&gt;When constructing an &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Config&#34;&gt;Config&lt;/a&gt; using
 &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#LoadDefaultConfig&#34;&gt;LoadDefaultConfig&lt;/a&gt; a default &lt;code&gt;Logger&lt;/code&gt; is configured to send log
 messages to the process&#39; standard error (stderr). A custom logger that satisfies the
-&lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/logging#Logger&#34;&gt;Logger&lt;/a&gt; interface can be passed as an argument to &lt;code&gt;LoadDefaultConfig&lt;/code&gt;
+&lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/logging#Logger&#34;&gt;Logger&lt;/a&gt; interface can be passed as an argument to &lt;code&gt;LoadDefaultConfig&lt;/code&gt;
 by wrapping it with &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#WithLogger&#34;&gt;config.WithLogger&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;For example to configure our clients to use our &lt;code&gt;applicationLogger&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#000&#34;&gt;cfg&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;LoadDefaultConfig&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TODO&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(),&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;WithLogger&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;applicationLogger&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now clients configured using the constructed &lt;code&gt;aws.Config&lt;/code&gt; will send log messages to &lt;code&gt;applicationLogger&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;context-aware-loggers&#34;&gt;Context-Aware Loggers&lt;/h3&gt;
-&lt;p&gt;A Logger implementation may implement the optional &lt;a href=&#34;https://pkg.go.dev/github.com/awslabs/smithy-go/logging#ContextLogger&#34;&gt;ContextLogger&lt;/a&gt;
+&lt;p&gt;A Logger implementation may implement the optional &lt;a href=&#34;https://pkg.go.dev/github.com/aws/smithy-go/logging#ContextLogger&#34;&gt;ContextLogger&lt;/a&gt;
 interface. Loggers that implement this interface will have their &lt;code&gt;WithContext&lt;/code&gt; methods invoked with the current context.
 This allows your logging implementations to return a new &lt;code&gt;Logger&lt;/code&gt; that can write additional logging metadata based
 on values present in the context.&lt;/p&gt;

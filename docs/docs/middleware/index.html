@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="generator" content="Hugo 0.79.0" /><META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+<meta name="generator" content="Hugo 0.80.0" /><META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 
 
 <link rel="shortcut icon" href="/aws-sdk-go-v2/favicons/favicon.ico" >
@@ -110,7 +110,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.27cd3298df115135275cfe2bb43b4a21.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.0c91c5bf5e6ccef00187ce8e3d383c6d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -142,7 +142,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.27cd3298df115135275cfe2bb43b4a21.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.0c91c5bf5e6ccef00187ce8e3d383c6d.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -2605,7 +2605,7 @@ interface by default.</p>
 </div>
 
 <p>You can customize AWS SDK for Go V2 client requests by registering one or more middleware to a service operation&rsquo;s
-<a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#Stack">stack</a>. The stack is composed of a series of steps: Initialize, Serialize,
+<a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#Stack">stack</a>. The stack is composed of a series of steps: Initialize, Serialize,
 Build, Finalize, and Deserialize. Each step contains zero or more middleware that operate on that step&rsquo;s input and
 output types. The following diagram and table provide an overview of how an operation&rsquo;s request and response traverses
 the stack.</p>
@@ -2645,9 +2645,9 @@ the stack.</p>
 allows other step middleware to be inserted relative to it.</p>
 <p>You attach step middleware by using a step&rsquo;s <code>Insert</code> or <code>Add</code> methods. You use <code>Add</code> to attach a middleware to the
 beginning of a step by specifying
-<a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#Before">middleware.Before</a> as the
-<a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#RelativePosition">RelativePosition</a>, and
-<a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#After">middleware.After</a> to attach to the end of the step.
+<a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#Before">middleware.Before</a> as the
+<a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#RelativePosition">RelativePosition</a>, and
+<a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#After">middleware.After</a> to attach to the end of the step.
 You use <code>Insert</code> to attach a middleware to a step by inserting the middleware relative to another step middleware.</p>
 
 
@@ -2673,28 +2673,28 @@ their interface, and the helper function that can be used to satisfy the interfa
 <tbody>
 <tr>
 <td>Initialize</td>
-<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#InitializeMiddleware">InitializeMiddleware</a></td>
-<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#InitializeMiddlewareFunc">InitializeMiddlewareFunc</a></td>
+<td><a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#InitializeMiddleware">InitializeMiddleware</a></td>
+<td><a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#InitializeMiddlewareFunc">InitializeMiddlewareFunc</a></td>
 </tr>
 <tr>
 <td>Build</td>
-<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#BuildMiddleware">BuildMiddleware</a></td>
-<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#BuildMiddlewareFunc">BuildMiddlewareFunc</a></td>
+<td><a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#BuildMiddleware">BuildMiddleware</a></td>
+<td><a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#BuildMiddlewareFunc">BuildMiddlewareFunc</a></td>
 </tr>
 <tr>
 <td>Serialize</td>
-<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#SerializeMiddleware">SerializeMiddleware</a></td>
-<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#SerializeMiddlewareFunc">SerializeMiddlewareFunc</a></td>
+<td><a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#SerializeMiddleware">SerializeMiddleware</a></td>
+<td><a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#SerializeMiddlewareFunc">SerializeMiddlewareFunc</a></td>
 </tr>
 <tr>
 <td>Finalize</td>
-<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#FinalizeMiddleware">FinalizeMiddleware</a></td>
-<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#FinalizeMiddlewareFunc">FinalizeMiddlewareFunc</a></td>
+<td><a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#FinalizeMiddleware">FinalizeMiddleware</a></td>
+<td><a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#FinalizeMiddlewareFunc">FinalizeMiddlewareFunc</a></td>
 </tr>
 <tr>
 <td>Deserialize</td>
-<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#DeserializeMiddleware">DeserializeMiddleware</a></td>
-<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#DeserializeMiddlewareFunc">DeserializeMiddlewareFunc</a></td>
+<td><a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#DeserializeMiddleware">DeserializeMiddleware</a></td>
+<td><a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#DeserializeMiddlewareFunc">DeserializeMiddlewareFunc</a></td>
 </tr>
 </tbody>
 </table>
@@ -2785,10 +2785,10 @@ to a specific Amazon S3 <code>GetObject</code> operation invocation:</p>
 </code></pre></div><h2 id="passing-metadata-down-the-stack">Passing Metadata Down the Stack</h2>
 <p>In certain situations, you may find that you require two or more middleware to function in tandem by sharing information
 or state. You can use <a href="https://golang.org/pkg/context/#Context">context.Context</a> to pass this metadata by using
-<a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#WithStackValue">middleware.WithStackValue</a>.
+<a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#WithStackValue">middleware.WithStackValue</a>.
 <code>middleware.WithStackValue</code> attaches the given key-value pair to the provided context, and safely limits the scope to
 the currently executing stack. These stack-scoped values can be retrieved from a context using
-<a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#GetStackValue">middleware.GetStackValue</a> and
+<a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#GetStackValue">middleware.GetStackValue</a> and
 providing the key used to stored the corresponding value. Keys must be comparable, and you must define your own
 types as context keys to avoid collisions. The following examples shows how two middleware can use <code>context.Context</code> to
 pass information down the stack.</p>
@@ -2856,14 +2856,14 @@ target region. A few of the available keys are provided in the table below:</p>
 </tr>
 <tr>
 <td>Logger</td>
-<td><a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#GetLogger">GetLogger</a></td>
+<td><a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#GetLogger">GetLogger</a></td>
 <td>Retrieve the logger that can be used for logging message from the middleware.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="passing-metadata-up-the-stack">Passing Metadata Up the Stack</h2>
 <p>You can pass metadata up through the stack by adding metadata key and value pairs using the
-<a href="https://pkg.go.dev/github.com/awslabs/smithy-go/middleware#Metadata">middleware.Metadata</a>. Each middleware step returns an output structure,
+<a href="https://pkg.go.dev/github.com/aws/smithy-go/middleware#Metadata">middleware.Metadata</a>. Each middleware step returns an output structure,
 metadata, and an error. Your custom middleware must return the metadata received from calling the next handler in the
 step. This ensures that metadata added by downstream middleware propagates to the application invoking the
 service operation. The resulting metadata is accessible to the invoking application by either the operation&rsquo;s
