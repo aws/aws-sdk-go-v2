@@ -80,11 +80,11 @@ type DescribeCapacityReservationsInput struct {
 	// capacity is no longer available for your use.
 	//
 	// * cancelled - The Capacity
-	// Reservation was manually cancelled. The reserved capacity is no longer available
-	// for your use.
+	// Reservation was cancelled. The reserved capacity is no longer available for your
+	// use.
 	//
-	// * pending - The Capacity Reservation request was successful but
-	// the capacity provisioning is still pending.
+	// * pending - The Capacity Reservation request was successful but the
+	// capacity provisioning is still pending.
 	//
 	// * failed - The Capacity Reservation
 	// request has failed. A request might fail due to invalid request parameters,

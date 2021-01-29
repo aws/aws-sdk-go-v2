@@ -20,7 +20,7 @@ import (
 // modify some attributes, the instance must be stopped. For more information, see
 // Modifying attributes of a stopped instance
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon EC2 User Guide.
 func (c *Client) ModifyInstanceAttribute(ctx context.Context, params *ModifyInstanceAttributeInput, optFns ...func(*Options)) (*ModifyInstanceAttributeOutput, error) {
 	if params == nil {
 		params = &ModifyInstanceAttributeInput{}
@@ -53,7 +53,7 @@ type ModifyInstanceAttributeInput struct {
 	// instance, you must add them when you launch the instance. For more information,
 	// see Updating the block device mapping when launching an instance
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// in the Amazon EC2 User Guide.
 	BlockDeviceMappings []types.InstanceBlockDeviceMappingSpecification
 
 	// If the value is true, you can't terminate the instance using the Amazon EC2
@@ -90,8 +90,8 @@ type ModifyInstanceAttributeInput struct {
 
 	// Changes the instance type to the specified value. For more information, see
 	// Instance types
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html). If
-	// the instance type is not valid, the error returned is
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
+	// Amazon EC2 User Guide. If the instance type is not valid, the error returned is
 	// InvalidInstanceAttributeValue.
 	InstanceType *types.AttributeValue
 

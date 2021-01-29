@@ -57,9 +57,6 @@ type DescribeImageAttributeOutput struct {
 	// The block device mapping entries.
 	BlockDeviceMappings []types.BlockDeviceMapping
 
-	// Describes a value for a resource attribute that is a String.
-	BootMode *types.AttributeValue
-
 	// A description for the AMI.
 	Description *types.AttributeValue
 
