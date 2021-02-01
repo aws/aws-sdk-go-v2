@@ -248,7 +248,7 @@ Metadata Service client to use, or to override the credential expiry window.
 ```go
 // V1
 
-import "github.coma/aws/aws-sdk-go/aws/credentials/ec2rolecreds"
+import "github.com/aws/aws-sdk-go/aws/credentials/ec2rolecreds"
 
 // ...
 
@@ -263,8 +263,8 @@ if err != nil {
 // V2
 
 import "context"
-import "github.coma/aws/aws-sdk-go-v2/aws"
-import "github.coma/aws/aws-sdk-go-v2/credentials/ec2rolecreds"
+import "github.com/aws/aws-sdk-go-v2/aws"
+import "github.com/aws/aws-sdk-go-v2/credentials/ec2rolecreds"
 
 // ...
 
@@ -313,7 +313,7 @@ this interface, and defines a command builder for a process that requires multip
 ```go
 // V1
 
-import "github.coma/aws/aws-sdk-go/aws/credentials/processcreds"
+import "github.com/aws/aws-sdk-go/aws/credentials/processcreds"
 
 // ...
 
@@ -329,8 +329,8 @@ if err != nil {
 // V2
 
 import "context"
-import "github.coma/aws/aws-sdk-go-v2/aws"
-import "github.coma/aws/aws-sdk-go-v2/credentials/processcreds"
+import "github.com/aws/aws-sdk-go-v2/aws"
+import "github.com/aws/aws-sdk-go-v2/credentials/processcreds"
 
 // ...
 
@@ -431,7 +431,7 @@ if err != nil {
 // V2
 
 import "context"
-import "github.coma/aws/aws-sdk-go-v2/aws"
+import "github.com/aws/aws-sdk-go-v2/aws"
 import "github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 
 // ...
