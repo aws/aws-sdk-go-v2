@@ -71,7 +71,7 @@ func (a RecordResponseTiming) HandleDeserialize(ctx context.Context, in middlewa
 		serverTime, parseErr = http.ParseTime(respDateHeader)
 		if parseErr != nil {
 			logger := middleware.GetLogger(ctx)
-			logger.Logf(logging.Warn, "failed to parse response 	Date header value, got %v",
+			logger.Logf(logging.Warn, "failed to parse response Date header value, got %v",
 				parseErr.Error())
 			break
 		}
