@@ -3,6 +3,7 @@ package middleware
 import (
 	"context"
 	"fmt"
+	"github.com/aws/smithy-go/logging"
 	"net/http"
 	"time"
 
@@ -70,7 +71,7 @@ func (a RecordResponseTiming) HandleDeserialize(ctx context.Context, in middlewa
 		serverTime, parseErr = http.ParseTime(respDateHeader)
 		if parseErr != nil {
 			logger := middleware.GetLogger(ctx)
-			logger.Logf("failed to parse response Date Header value, got %v",
+			logger.Logf(logging.Warn, "failed to parse response 	Date header value, got %v",
 				parseErr.Error())
 			break
 		}
