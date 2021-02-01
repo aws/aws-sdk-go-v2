@@ -3,12 +3,12 @@ package middleware
 import (
 	"context"
 	"fmt"
-	"github.com/aws/smithy-go/logging"
 	"net/http"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/internal/rand"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
+	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
