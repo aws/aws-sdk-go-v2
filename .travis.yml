@@ -26,6 +26,13 @@ matrix:
 
   include:
     - language: go
+      os: linux
+      go: 1.15.x
+      script:
+        - make go-build-modules-.
+
+  include:
+    - language: go
       os: windows
       go: 1.15.x
       env:
