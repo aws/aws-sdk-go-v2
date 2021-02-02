@@ -86,7 +86,7 @@ tidy-modules-%:
 	@# module testing will start from. Strips off the "tidy-modules-" and
 	@# replaces all "_" with "/".
 	@#
-	@# e.g. build-modules-internal_protocoltest
+	@# e.g. tidy-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst tidy-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go mod tidy"
@@ -182,6 +182,18 @@ build-modules-%:
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst build-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..."
+
+go-build-modules-%:
+	@# build command that uses the pattern to define the root path that the
+	@# module testing will start from. Strips off the "build-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# Validates that all modules in the repo have buildable Go files.
+	@#
+	@# e.g. go-build-modules-internal_protocoltest
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst go-build-modules-,,$@)) ${EACHMODULE_FLAGS} \
+		"go build ${BUILD_TAGS} ./..."
 
 test: test-modules-.
 
