@@ -31,7 +31,6 @@ matrix:
       script:
         - make go-build-modules-.
 
-  include:
     - language: go
       os: windows
       go: 1.15.x
