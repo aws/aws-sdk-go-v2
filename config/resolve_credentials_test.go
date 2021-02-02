@@ -296,6 +296,20 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 				"assume_sso_and_static_arn",
 			},
 		},
+		"invalid sso configuration": {
+			envProfile:    "sso_invalid",
+			expectedError: "profile \"sso_invalid\" is configured to use SSO but is missing required configuration: sso_region, sso_start_url",
+		},
+		"environment credentials with invalid sso": {
+			envProfile:        "sso_invalid",
+			expectedAccessKey: "access_key",
+			expectedSecretKey: "secret_key",
+			init: func() (func(), error) {
+				os.Setenv("AWS_ACCESS_KEY", "access_key")
+				os.Setenv("AWS_SECRET_KEY", "secret_key")
+				return func() {}, nil
+			},
+		},
 	}
 
 	for name, c := range cases {

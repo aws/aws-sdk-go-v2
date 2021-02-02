@@ -1,0 +1,9 @@
+{
+ "ID": "config-bugfix-1612292652982606000",
+ "SchemaVersion": 1,
+ "Module": "config",
+ "Type": "bugfix",
+ "Description": "Only Validate SSO profile configuration when attempting to use SSO credentials",
+ "MinVersion": "",
+ "AffectedModules": null
+}

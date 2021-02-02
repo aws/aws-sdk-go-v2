@@ -115,9 +115,6 @@ sso_start_url = https://127.0.0.1/start
 role_arn = source_sso_creds_arn
 source_profile = sso_creds
 
-[profile invalid_sso_creds]
-sso_account_id = 012345678901
-
 [profile sso_and_static]
 aws_access_key_id = sso_and_static_akid
 aws_secret_access_key = sso_and_static_secret

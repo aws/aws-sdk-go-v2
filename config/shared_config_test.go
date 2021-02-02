@@ -246,11 +246,6 @@ func TestNewSharedConfig(t *testing.T) {
 				},
 			},
 		},
-		"AWS SSO Invalid Profile": {
-			Filenames: []string{testConfigFilename},
-			Profile:   "invalid_sso_creds",
-			Err:       fmt.Errorf("profile \"invalid_sso_creds\" is configured to use SSO but is missing required configuration: sso_region, sso_role_name, sso_start_url"),
-		},
 		"AWS SSO Profile and Static Credentials": {
 			Filenames: []string{testConfigFilename},
 			Profile:   "sso_and_static",
