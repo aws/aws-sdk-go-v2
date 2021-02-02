@@ -190,9 +190,9 @@ go-build-modules-%:
 	@#
 	@# Validates that all modules in the repo have buildable Go files.
 	@#
-	@# e.g. build-modules-internal_protocoltest
+	@# e.g. go-build-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst build-modules-,,$@)) ${EACHMODULE_FLAGS} \
+		&& go run . -p $(subst _,/,$(subst go-build-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go build ${BUILD_TAGS} ./..."
 
 test: test-modules-.
