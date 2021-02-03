@@ -883,10 +883,6 @@ func (c *SharedConfig) validateCredentialsConfig(profile string) error {
 		return err
 	}
 
-	if err := c.validateSSOConfiguration(profile); err != nil {
-		return err
-	}
-
 	return nil
 }
 
@@ -927,7 +923,7 @@ func (c *SharedConfig) validateCredentialType() error {
 	return nil
 }
 
-func (c *SharedConfig) validateSSOConfiguration(profile string) error {
+func (c *SharedConfig) validateSSOConfiguration() error {
 	if !c.hasSSOConfiguration() {
 		return nil
 	}
@@ -951,7 +947,7 @@ func (c *SharedConfig) validateSSOConfiguration(profile string) error {
 
 	if len(missing) > 0 {
 		return fmt.Errorf("profile %q is configured to use SSO but is missing required configuration: %s",
-			profile, strings.Join(missing, ", "))
+			c.Profile, strings.Join(missing, ", "))
 	}
 
 	return nil

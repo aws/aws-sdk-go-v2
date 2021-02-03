@@ -1,0 +1,9 @@
+{
+ "ID": "config-bugfix-1612293019330574000",
+ "SchemaVersion": 1,
+ "Module": "config",
+ "Type": "bugfix",
+ "Description": "Environment credentials were not taking precedence over AWS_PROFILE",
+ "MinVersion": "",
+ "AffectedModules": null
+}

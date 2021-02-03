@@ -80,12 +80,15 @@ func resolveCredentialProvider(ctx context.Context, cfg *aws.Config, cfgs config
 // credentials are only refreshed when needed. This also protects the
 // credential provider to be used concurrently.
 func resolveCredentialChain(ctx context.Context, cfg *aws.Config, configs configs) (err error) {
-	_, sharedProfileSet, err := getSharedConfigProfile(ctx, configs)
+	envConfig, sharedConfig, other := getAWSConfigSources(configs)
+
+	// When checking if a profile was specified programmatically we should only consider the "other"
+	// configuration sources that have been provided. This ensures we correctly honor the expected credential
+	// hierarchy.
+	_, sharedProfileSet, err := getSharedConfigProfile(ctx, other)
 	if err != nil {
 		return err
 	}
-
-	envConfig, sharedConfig, other := getAWSConfigSources(configs)
 
 	switch {
 	case sharedProfileSet:
@@ -157,6 +160,10 @@ func resolveCredsFromProfile(ctx context.Context, cfg *aws.Config, envConfig *En
 }
 
 func resolveSSOCredentials(ctx context.Context, cfg *aws.Config, sharedConfig *SharedConfig, configs configs) error {
+	if err := sharedConfig.validateSSOConfiguration(); err != nil {
+		return err
+	}
+
 	var options []func(*ssocreds.Options)
 	v, found, err := getSSOProviderOptions(ctx, configs)
 	if err != nil {
