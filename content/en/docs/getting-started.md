@@ -106,13 +106,13 @@ import (
 
 func main() {
 	// Load the Shared AWS Configuration (~/.aws/config)
-	config, err := config.LoadDefaultConfig(context.TODO())
+	cfg, err := config.LoadDefaultConfig(context.TODO())
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// Create an Amazon S3 service client
-	client := s3.NewFromConfig(config)
+	client := s3.NewFromConfig(cfg)
 
 	// Get the first page of results for ListObjectsV2 for a bucket
 	output, err := client.ListObjectsV2(context.TODO(), &s3.ListObjectsV2Input{
