@@ -403,7 +403,7 @@ params := &s3.ListObjectsV2Input{
 	Bucket: aws.String("my-bucket"),
 }
 
-paginator := s3.NewListObjectsV2Paginator(client, params, func(o *ListObjectsV2PaginatorOptions) {
+paginator := s3.NewListObjectsV2Paginator(client, params, func(o *s3.ListObjectsV2PaginatorOptions) {
 	o.Limit = 10
 })
 
@@ -414,7 +414,7 @@ for paginator.HasMorePages() && pageNum < 3 {
     	log.Printf("error: %v", err)
     	return
     }
-    for _, value := range page.Contents {
+    for _, value := range output.Contents {
         fmt.Println(*value.Key)
     }
     pageNum++
