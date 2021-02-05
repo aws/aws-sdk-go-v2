@@ -37,7 +37,6 @@ const (
 )
 
 func main() {
-	flag.Parse()
 	if len(bucketName) == 0 {
 		flag.PrintDefaults()
 		log.Fatalf("invalid parameters, bucket name required")

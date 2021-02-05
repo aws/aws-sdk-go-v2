@@ -274,7 +274,7 @@ func buildOutpostAccessPointRequest(ctx context.Context, options outpostAccessPo
 	var endpoint aws.Endpoint
 	var err error
 	endpointSource := awsmiddleware.GetEndpointSource(ctx)
-	if endpointsID == "s3" && endpointSource != aws.EndpointSourceCustom {
+	if endpointsID == "s3" && endpointSource == aws.EndpointSourceServiceMetadata {
 		// use s3 endpoint resolver
 		endpoint, err = s3endpoints.New().ResolveEndpoint(resolveRegion, s3endpoints.Options{
 			DisableHTTPS: options.EndpointResolverOptions.DisableHTTPS,

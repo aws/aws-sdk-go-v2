@@ -38,5 +38,5 @@ of the appropriate vpc endpoint, Bucket, Object Key, and Access Point that will 
 created by the example.
 
 ```sh
- AWS_REGION=<region> go run -tags example usingPrivateLink.go
+ AWS_REGION=<region> go run usingPrivateLink.go
  ```
