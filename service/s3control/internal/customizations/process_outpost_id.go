@@ -8,6 +8,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
 )
@@ -55,7 +56,6 @@ func (m *processOutpostIDMiddleware) HandleSerialize(
 		return out, metadata, fmt.Errorf("unknown request type %T", req)
 	}
 
-	serviceEndpointLabel := "s3-outposts."
 	requestRegion := awsmiddleware.GetRegion(ctx)
 
 	// validate if fips
@@ -67,8 +67,14 @@ func (m *processOutpostIDMiddleware) HandleSerialize(
 		return out, metadata, fmt.Errorf("dualstack is not supported for outposts request")
 	}
 
-	// set request url
-	req.URL.Host = serviceEndpointLabel + requestRegion + ".amazonaws.com"
+	// if endpoint source is a custom endpoint source, do not modify host prefix.
+	// This is a requirement for s3 vpc interface endpoints.
+	if v := awsmiddleware.GetEndpointSource(ctx); v != aws.EndpointSourceCustom {
+		serviceEndpointLabel := "s3-outposts."
+
+		// set request url
+		req.URL.Host = serviceEndpointLabel + requestRegion + ".amazonaws.com"
+	}
 
 	// Disable endpoint host prefix for s3-control
 	ctx = smithyhttp.DisableEndpointHostPrefix(ctx, true)

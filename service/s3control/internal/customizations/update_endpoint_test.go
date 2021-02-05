@@ -472,16 +472,7 @@ type requestRetrieverMiddleware struct {
 }
 
 func TestCustomEndpoint_SpecialOperations(t *testing.T) {
-	cases := map[string]struct {
-		options                    s3control.Options
-		operation                  func(context.Context, *s3control.Client, *requestRetrieverMiddleware) (interface{}, error)
-		expectedReqURL             string
-		expectedSigningName        string
-		expectedSigningRegion      string
-		expectedHeaderForOutpostID string
-		expectedErr                string
-		expectedHeaderForAccountID bool
-	}{
+	cases := map[string]testCaseForEndpointCustomization{
 		"CreateBucketOperation": {
 			options: s3control.Options{
 				Region: "us-west-2",
@@ -579,61 +570,208 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			runValidations(t, c)
+		})
+	}
+}
 
-			// options
-			opts := c.options.Copy()
-			opts.Credentials = unit.StubCredentialsProvider{}
-			opts.HTTPClient = smithyhttp.NopClient{}
-			opts.Retryer = aws.NopRetryer{}
+func runValidations(t *testing.T, c testCaseForEndpointCustomization) {
+	// options
+	opts := c.options.Copy()
+	opts.Credentials = unit.StubCredentialsProvider{}
+	opts.HTTPClient = smithyhttp.NopClient{}
+	opts.Retryer = aws.NopRetryer{}
 
-			// build an s3control client
-			svc := s3control.New(opts)
-			// setup a request retriever middleware
-			fm := requestRetrieverMiddleware{}
+	// build an s3control client
+	svc := s3control.New(opts)
+	// setup a request retriever middleware
+	fm := requestRetrieverMiddleware{}
 
-			ctx := context.Background()
+	ctx := context.Background()
 
-			// call an operation
-			_, err := c.operation(ctx, svc, &fm)
+	// call an operation
+	_, err := c.operation(ctx, svc, &fm)
 
-			// inspect any errors
-			if len(c.expectedErr) != 0 {
-				if err == nil {
-					t.Fatalf("expected error, got none")
-				}
-				if a, e := err.Error(), c.expectedErr; !strings.Contains(a, e) {
-					t.Fatalf("expect error code to contain %q, got %q", e, a)
-				}
-				return
-			}
-			if err != nil {
-				t.Fatalf("expect no error, got %v", err)
-			}
+	// inspect any errors
+	if len(c.expectedErr) != 0 {
+		if err == nil {
+			t.Fatalf("expected error, got none")
+		}
+		if a, e := err.Error(), c.expectedErr; !strings.Contains(a, e) {
+			t.Fatalf("expect error code to contain %q, got %q", e, a)
+		}
+		return
+	}
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
 
-			// build the captured request
-			req := fm.request
-			// verify the built request is as expected
-			if e, a := c.expectedReqURL, req.URL.String(); e != a {
-				t.Fatalf("expect url %s, got %s", e, a)
-			}
+	// build the captured request
+	req := fm.request.Build(ctx)
+	// verify the built request is as expected
+	if e, a := c.expectedReqURL, req.URL.String(); e != a {
+		t.Fatalf("expect url %s, got %s", e, a)
+	}
 
-			if e, a := c.expectedSigningRegion, fm.signingRegion; !strings.EqualFold(e, a) {
-				t.Fatalf("expect signing region as %s, got %s", e, a)
-			}
+	if e, a := c.expectedSigningRegion, fm.signingRegion; !strings.EqualFold(e, a) {
+		t.Fatalf("expect signing region as %s, got %s", e, a)
+	}
 
-			if e, a := c.expectedSigningName, fm.signingName; !strings.EqualFold(e, a) {
-				t.Fatalf("expect signing name as %s, got %s", e, a)
-			}
+	if e, a := c.expectedSigningName, fm.signingName; !strings.EqualFold(e, a) {
+		t.Fatalf("expect signing name as %s, got %s", e, a)
+	}
 
-			if c.expectedHeaderForAccountID {
-				if e, a := "123456789012", req.Header.Get("x-amz-account-id"); e != a {
-					t.Fatalf("expect account id header value to be %v, got %v", e, a)
-				}
-			}
+	if c.expectedHeaderForAccountID {
+		if e, a := "123456789012", req.Header.Get("x-amz-account-id"); e != a {
+			t.Fatalf("expect account id header value to be %v, got %v", e, a)
+		}
+	}
 
-			if e, a := c.expectedHeaderForOutpostID, req.Header.Get("x-amz-outpost-id"); e != a {
-				t.Fatalf("expect outpost id header value to be %v, got %v", e, a)
-			}
+	if e, a := c.expectedHeaderForOutpostID, req.Header.Get("x-amz-outpost-id"); e != a {
+		t.Fatalf("expect outpost id header value to be %v, got %v", e, a)
+	}
+}
+
+type testCaseForEndpointCustomization struct {
+	options                    s3control.Options
+	operation                  func(context.Context, *s3control.Client, *requestRetrieverMiddleware) (interface{}, error)
+	expectedReqURL             string
+	expectedSigningName        string
+	expectedSigningRegion      string
+	expectedHeaderForOutpostID string
+	expectedErr                string
+	expectedHeaderForAccountID bool
+}
+
+func TestVPC_CustomEndpoint(t *testing.T) {
+	account := "123456789012"
+	cases := map[string]testCaseForEndpointCustomization{
+		"standard GetAccesspoint with custom endpoint url": {
+			options: s3control.Options{
+				EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
+				Region:           "us-west-2",
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.GetAccessPoint(ctx, &s3control.GetAccessPointInput{
+					AccountId: aws.String(account),
+					Name:      aws.String("apname"),
+				}, addRequestRetriever(fm))
+			},
+			expectedReqURL:        "https://123456789012.beta.example.com/v20180820/accesspoint/apname",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
+		},
+		"Outpost Accesspoint ARN with GetAccesspoint and custom endpoint url": {
+			options: s3control.Options{
+				EndpointResolver: s3control.EndpointResolverFromURL(
+					"https://beta.example.com",
+				),
+				Region: "us-west-2",
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.GetAccessPoint(ctx, &s3control.GetAccessPointInput{
+					AccountId: aws.String(account),
+					Name:      aws.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
+				}, addRequestRetriever(fm))
+			},
+			expectedReqURL:             "https://beta.example.com/v20180820/accesspoint/myaccesspoint",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-west-2",
+			expectedHeaderForOutpostID: "op-01234567890123456",
+		},
+		"standard CreateBucket with custom endpoint url": {
+			options: s3control.Options{
+				EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
+				Region:           "us-west-2",
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.CreateBucket(ctx, &s3control.CreateBucketInput{
+					Bucket:    aws.String("bucketname"),
+					OutpostId: aws.String("op-01234567890123456"),
+				}, addRequestRetriever(fm))
+			},
+			expectedReqURL:             "https://beta.example.com/v20180820/bucket/bucketname",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-west-2",
+			expectedHeaderForOutpostID: "op-01234567890123456",
+		},
+		"Outpost Accesspoint for GetBucket with custom endpoint url": {
+			options: s3control.Options{
+				EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
+				Region:           "us-west-2",
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.GetBucket(ctx, &s3control.GetBucketInput{
+					Bucket: aws.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"),
+				}, addRequestRetriever(fm))
+			},
+			expectedReqURL:             "https://beta.example.com/v20180820/bucket/mybucket",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-west-2",
+			expectedHeaderForOutpostID: "op-01234567890123456",
+		},
+		"GetAccesspoint with dualstack and custom endpoint url": {
+			options: s3control.Options{
+				EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
+				Region:           "us-west-2",
+				UseDualstack:     true,
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.GetAccessPoint(ctx, &s3control.GetAccessPointInput{
+					AccountId: aws.String(account),
+					Name:      aws.String("apname"),
+				}, addRequestRetriever(fm))
+			},
+			expectedReqURL:        "https://123456789012.beta.example.com/v20180820/accesspoint/apname",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
+		},
+		"GetAccesspoint with Outposts accesspoint ARN and dualstack": {
+			options: s3control.Options{
+				EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
+				Region:           "us-west-2",
+				UseDualstack:     true,
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.GetAccessPoint(ctx, &s3control.GetAccessPointInput{
+					AccountId: aws.String(account),
+					Name:      aws.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
+				}, addRequestRetriever(fm))
+			},
+			expectedErr: "client configured for S3 Dual-stack but is not supported with resource ARN",
+		},
+		"standard CreateBucket with dualstack": {
+			options: s3control.Options{
+				EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
+				Region:           "us-west-2",
+				UseDualstack:     true,
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.CreateBucket(ctx, &s3control.CreateBucketInput{
+					Bucket:    aws.String("bucketname"),
+					OutpostId: aws.String("op-1234567890123456"),
+				}, addRequestRetriever(fm))
+			},
+			expectedErr: " dualstack is not supported for outposts request",
+		},
+		"GetBucket with Outpost bucket ARN": {
+			options: s3control.Options{
+				EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
+				Region:           "us-west-2",
+				UseDualstack:     true,
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.GetBucket(ctx, &s3control.GetBucketInput{
+					Bucket: aws.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"),
+				}, addRequestRetriever(fm))
+			},
+			expectedErr: "client configured for S3 Dual-stack but is not supported with resource ARN",
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			runValidations(t, c)
 		})
 	}
 }
@@ -704,4 +842,16 @@ func (rm *requestRetrieverMiddleware) HandleSerialize(
 	rm.signingRegion = awsmiddleware.GetSigningRegion(ctx)
 
 	return next.HandleSerialize(ctx, in)
+}
+
+var addRequestRetriever = func(fm *requestRetrieverMiddleware) func(options *s3control.Options) {
+	return func(options *s3control.Options) {
+		// append request retriever middleware for request inspection
+		options.APIOptions = append(options.APIOptions,
+			func(stack *middleware.Stack) error {
+				// adds AFTER operation serializer middleware
+				stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
+				return nil
+			})
+	}
 }
