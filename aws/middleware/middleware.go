@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/internal/rand"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
+	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -70,7 +71,7 @@ func (a RecordResponseTiming) HandleDeserialize(ctx context.Context, in middlewa
 		serverTime, parseErr = http.ParseTime(respDateHeader)
 		if parseErr != nil {
 			logger := middleware.GetLogger(ctx)
-			logger.Logf("failed to parse response Date Header value, got %v",
+			logger.Logf(logging.Warn, "failed to parse response Date header value, got %v",
 				parseErr.Error())
 			break
 		}
