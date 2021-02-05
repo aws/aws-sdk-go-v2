@@ -1,8 +1,6 @@
 // Package sdk is the official AWS SDK v2 for the Go programming language.
 //
-// aws-sdk-go-v2 is the Developer Preview for the v2 of the AWS SDK for the Go
-// programming language. Look for additional documentation and examples to be
-// added.
+// aws-sdk-go-v2 is the the v2 of the AWS SDK for the Go programming language.
 //
 // Getting started
 //

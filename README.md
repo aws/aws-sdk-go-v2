@@ -98,7 +98,6 @@ Please use these community resources for getting help. We use the GitHub issues
 for tracking bugs and feature requests.
 
 * Ask a question on [StackOverflow](http://stackoverflow.com/) and tag it with the [`aws-sdk-go`](http://stackoverflow.com/questions/tagged/aws-sdk-go) tag.
-* Come join the AWS SDK for Go community chat on [gitter][Gitter channel].
 * Open a support ticket with [AWS Support](http://docs.aws.amazon.com/awssupport/latest/user/getting-started.html).
 * If you think you may have found a bug, please open an [issue](https://github.com/aws/aws-sdk-go-v2/issues/new/choose).
 
@@ -123,9 +122,7 @@ The v2 SDK will use GitHub [Issues] to track feature requests and issues with th
 
 **GitHub issues**. To provide feedback or report bugs, file GitHub [Issues] on the SDK. This is the preferred mechanism to give feedback so that other users can engage in the conversation, +1 issues, etc. Issues you open will be evaluated, and included in our roadmap for the GA launch.
 
-**Gitter channel**. For more informal discussions or general feedback, check out our [Gitter channel] for the SDK. The [Gitter channel] is also a great place to ask general questions, and find help to get started with the 2.0 SDK Developer Preview.
-
-**Contributing**. You can open pull requests for fixes or additions to the AWS SDK for Go 2.0 Developer Preview release. All pull requests must be submitted under the Apache 2.0 license and will be reviewed by an SDK team member before being merged in. Accompanying unit tests, where possible, are appreciated.
+**Contributing**. You can open pull requests for fixes or additions to the AWS SDK for Go 2.0. All pull requests must be submitted under the Apache 2.0 license and will be reviewed by an SDK team member before being merged in. Accompanying unit tests, where possible, are appreciated.
 
 ## Resources
 
@@ -154,6 +151,5 @@ services may supply helpful samples to look out for.
 [Projects]: https://github.com/aws/aws-sdk-go-v2/projects
 [CHANGELOG]: https://github.com/aws/aws-sdk-go-v2/blob/master/CHANGELOG.md
 [Amazon DynamoDB]: https://aws.amazon.com/dynamodb/
-[Gitter channel]: https://gitter.im/aws/aws-sdk-go-v2
 [design]: https://github.com/aws/aws-sdk-go-v2/blob/master/DESIGN.md  
 [license]: http://aws.amazon.com/apache2.0/
