@@ -1,0 +1,9 @@
+{
+ "ID": "service.s3-feature-1612549083735299000",
+ "SchemaVersion": 1,
+ "Module": "service/s3",
+ "Type": "feature",
+ "Description": "adds support for s3 vpc endpoint interface",
+ "MinVersion": "",
+ "AffectedModules": null
+}
