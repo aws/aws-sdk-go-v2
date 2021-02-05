@@ -217,6 +217,18 @@ test-modules-%:
 		&& go run . -p $(subst _,/,$(subst test-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} ./..."
 
+cachedep: cachedep-modules-.
+
+cachedep-modules-%:
+	@# build command that uses the pattern to define the root path that the
+	@# module caching will start from. Strips off the "cachedep-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# e.g. cachedep-modules-internal_protocoltest
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst cachedep-modules-,,$@)) ${EACHMODULE_FLAGS} \
+		"go mod download"
+
 ##############
 # CI Testing #
 ##############
