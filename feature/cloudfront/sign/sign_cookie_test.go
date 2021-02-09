@@ -91,7 +91,7 @@ func TestSignCookie_WithCookieOptions(t *testing.T) {
 		o.Path = "/"
 		o.Domain = ".example.com"
 		o.Secure = true
-
+		o.Expires = expires
 	})
 
 	if err != nil {
@@ -116,6 +116,9 @@ func TestSignCookie_WithCookieOptions(t *testing.T) {
 		}
 		if !c.Secure {
 			t.Errorf("expect to be true")
+		}
+		if e, a := expires, c.Expires; e != a {
+			t.Errorf("expect %v, got %v", e, a)
 		}
 	}
 }
