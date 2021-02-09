@@ -1,0 +1,9 @@
+{
+ "ID": "service.detective-bugfix-1612895472309414000",
+ "SchemaVersion": 1,
+ "Module": "service/detective",
+ "Type": "bugfix",
+ "Description": "Fix deserialization of API response timestamp member.",
+ "MinVersion": "",
+ "AffectedModules": null
+}
