@@ -1,9 +1,0 @@
-{
- "ID": "service.internal.s3shared-feature-1612556486110454000",
- "SchemaVersion": 1,
- "Module": "service/internal/s3shared",
- "Type": "feature",
- "Description": "adds support for s3 vpc endpoint interface",
- "MinVersion": "",
- "AffectedModules": null
-}

@@ -1,3 +1,17 @@
+# Release 2021-02-09
+## Service Client Highlights
+* `service/s3` - v1.2.0
+  * Feature: adds support for s3 vpc endpoint interface [#1113](https://github.com/aws/aws-sdk-go-v2/pull/1113)
+* `service/s3control` - v1.2.0
+  * Feature: adds support for s3 vpc endpoint interface [#1113](https://github.com/aws/aws-sdk-go-v2/pull/1113)
+## Core SDK Highlights
+* Dependency Update: Updated SDK dependencies to their latest versions.
+* `aws` - v1.2.0
+  * Feature: support to add endpoint source on context. Adds getter/setter for the endpoint source [#1113](https://github.com/aws/aws-sdk-go-v2/pull/1113)
+* `config` - v1.1.1
+  * Bug Fix: Only Validate SSO profile configuration when attempting to use SSO credentials [#1103](https://github.com/aws/aws-sdk-go-v2/pull/1103)
+  * Bug Fix: Environment credentials were not taking precedence over AWS_PROFILE [#1103](https://github.com/aws/aws-sdk-go-v2/pull/1103)
+
 # Release 2021-01-29
 ## Service Client Highlights
 * Bug Fix: A serialization bug has been fixed that caused some service operations with empty inputs to not be serialized correctly ([#1071](https://github.com/aws/aws-sdk-go-v2/pull/1071))

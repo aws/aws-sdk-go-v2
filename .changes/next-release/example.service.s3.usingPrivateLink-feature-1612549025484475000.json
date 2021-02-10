@@ -1,9 +1,0 @@
-{
- "ID": "example.service.s3.usingPrivateLink-feature-1612549025484475000",
- "SchemaVersion": 1,
- "Module": "example/service/s3/usingPrivateLink",
- "Type": "feature",
- "Description": "adds example to use s3 vpc endpoint interface",
- "MinVersion": "",
- "AffectedModules": null
-}

@@ -1,9 +1,0 @@
-{
- "ID": "sdk-feature-1612548857119143000",
- "SchemaVersion": 1,
- "Module": "/",
- "Type": "feature",
- "Description": "support to add endpoint source on context. Adds getter/setter for the same",
- "MinVersion": "",
- "AffectedModules": null
-}
