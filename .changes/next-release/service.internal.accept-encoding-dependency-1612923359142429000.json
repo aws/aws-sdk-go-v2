@@ -1,0 +1,9 @@
+{
+ "ID": "service.internal.accept-encoding-dependency-1612923359142429000",
+ "SchemaVersion": 1,
+ "Module": "service/internal/accept-encoding",
+ "Type": "dependency",
+ "Description": "patch",
+ "MinVersion": "",
+ "AffectedModules": null
+}

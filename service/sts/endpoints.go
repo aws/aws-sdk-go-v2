@@ -105,6 +105,7 @@ func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.Ser
 		}
 		ctx = awsmiddleware.SetSigningName(ctx, signingName)
 	}
+	ctx = awsmiddleware.SetEndpointSource(ctx, endpoint.Source)
 	ctx = smithyhttp.SetHostnameImmutable(ctx, endpoint.HostnameImmutable)
 	ctx = awsmiddleware.SetSigningRegion(ctx, endpoint.SigningRegion)
 	ctx = awsmiddleware.SetPartitionID(ctx, endpoint.PartitionID)
