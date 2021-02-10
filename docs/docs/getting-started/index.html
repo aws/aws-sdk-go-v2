@@ -24,13 +24,13 @@ Get an Amazon Account Before you can use the AWS SDK for Go V2, you must have an
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/getting-started/" />
 <meta property="article:published_time" content="2020-11-12T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-12-15T19:19:42-08:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
+<meta property="article:modified_time" content="2021-02-03T10:18:34-08:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
 <meta itemprop="name" content="Getting Started with the AWS SDK for Go V2">
 <meta itemprop="description" content="The AWS SDK for Go requires Go 1.15 or later. You can view your current version of Go by running the following command.
 go version For information about installing or upgrading your version of Go, see https://golang.org/doc/install.
 Get an Amazon Account Before you can use the AWS SDK for Go V2, you must have an Amazon account. See How do I create and activate a new AWS account? for details.">
 <meta itemprop="datePublished" content="2020-11-12T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2020-12-15T19:19:42-08:00" />
+<meta itemprop="dateModified" content="2021-02-03T10:18:34-08:00" />
 <meta itemprop="wordCount" content="655">
 
 
@@ -118,7 +118,7 @@ Get an Amazon Account Before you can use the AWS SDK for Go V2, you must have an
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.0c91c5bf5e6ccef00187ce8e3d383c6d.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.086f389c648c501e66434700a9f547a4.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -150,7 +150,7 @@ Get an Amazon Account Before you can use the AWS SDK for Go V2, you must have an
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.0c91c5bf5e6ccef00187ce8e3d383c6d.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.086f389c648c501e66434700a9f547a4.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -2690,13 +2690,13 @@ AWS SDK Shared Configuration is loaded, a client is constructed, and an API oper
 
 <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
 	<span style="color:#8f5902;font-style:italic">// Load the Shared AWS Configuration (~/.aws/config)
-</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">config</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">())</span>
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">())</span>
 	<span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
 		<span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Fatal</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
 	<span style="color:#000;font-weight:bold">}</span>
 
 	<span style="color:#8f5902;font-style:italic">// Create an Amazon S3 service client
-</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">config</span><span style="color:#000;font-weight:bold">)</span>
+</span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">)</span>
 
 	<span style="color:#8f5902;font-style:italic">// Get the first page of results for ListObjectsV2 for a bucket
 </span><span style="color:#8f5902;font-style:italic"></span>	<span style="color:#000">output</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ListObjectsV2</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ListObjectsV2Input</span><span style="color:#000;font-weight:bold">{</span>
@@ -2714,7 +2714,7 @@ AWS SDK Shared Configuration is loaded, a client is constructed, and an API oper
 </code></pre></div>
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified December 15, 2020: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/b1bf7d180c4d7697386db7391ab3eb87c5c2b081">Add Full Example to Getting Started (#980) (b1bf7d180)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified February 3, 2021: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/5abd61114ec9db4fdf62d8a50ed9867380d7a882">Update getting-started.md (#1105) (5abd61114)</a>
 </div>
 </div>
 
