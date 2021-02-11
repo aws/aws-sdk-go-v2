@@ -1215,7 +1215,7 @@ func awsAwsjson11_serializeDocumentCrlConfiguration(v *types.CrlConfiguration, v
 		ok.String(*v.CustomCname)
 	}
 
-	if v.Enabled {
+	{
 		ok := object.Key("Enabled")
 		ok.Boolean(v.Enabled)
 	}

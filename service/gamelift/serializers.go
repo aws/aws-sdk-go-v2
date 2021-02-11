@@ -4941,7 +4941,7 @@ func awsAwsjson11_serializeDocumentTargetConfiguration(v *types.TargetConfigurat
 	object := value.Object()
 	defer object.Close()
 
-	if v.TargetValue != 0 {
+	{
 		ok := object.Key("TargetValue")
 		ok.Double(v.TargetValue)
 	}

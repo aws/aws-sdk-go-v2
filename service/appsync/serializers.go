@@ -107,7 +107,7 @@ func awsRestjson1_serializeOpDocumentCreateApiCacheInput(v *CreateApiCacheInput,
 		ok.Boolean(v.TransitEncryptionEnabled)
 	}
 
-	if v.Ttl != 0 {
+	{
 		ok := object.Key("ttl")
 		ok.Long(v.Ttl)
 	}
@@ -2821,7 +2821,7 @@ func awsRestjson1_serializeOpDocumentUpdateApiCacheInput(v *UpdateApiCacheInput,
 		ok.String(string(v.ApiCachingBehavior))
 	}
 
-	if v.Ttl != 0 {
+	{
 		ok := object.Key("ttl")
 		ok.Long(v.Ttl)
 	}

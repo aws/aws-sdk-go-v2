@@ -4528,7 +4528,7 @@ func awsAwsjson11_serializeOpDocumentCreateCachediSCSIVolumeInput(v *CreateCache
 		ok.String(*v.TargetName)
 	}
 
-	if v.VolumeSizeInBytes != 0 {
+	{
 		ok := object.Key("VolumeSizeInBytes")
 		ok.Long(v.VolumeSizeInBytes)
 	}
@@ -4850,7 +4850,7 @@ func awsAwsjson11_serializeOpDocumentCreateStorediSCSIVolumeInput(v *CreateStore
 		ok.String(*v.NetworkInterfaceId)
 	}
 
-	if v.PreserveExistingData {
+	{
 		ok := object.Key("PreserveExistingData")
 		ok.Boolean(v.PreserveExistingData)
 	}

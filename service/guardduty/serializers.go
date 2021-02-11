@@ -270,7 +270,7 @@ func awsRestjson1_serializeOpDocumentCreateDetectorInput(v *CreateDetectorInput,
 		}
 	}
 
-	if v.Enable {
+	{
 		ok := object.Key("enable")
 		ok.Boolean(v.Enable)
 	}
@@ -488,7 +488,7 @@ func awsRestjson1_serializeOpDocumentCreateIPSetInput(v *CreateIPSetInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.Activate {
+	{
 		ok := object.Key("activate")
 		ok.Boolean(v.Activate)
 	}
@@ -875,7 +875,7 @@ func awsRestjson1_serializeOpDocumentCreateThreatIntelSetInput(v *CreateThreatIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.Activate {
+	{
 		ok := object.Key("activate")
 		ok.Boolean(v.Activate)
 	}
@@ -4615,7 +4615,7 @@ func awsRestjson1_serializeOpDocumentUpdateOrganizationConfigurationInput(v *Upd
 	object := value.Object()
 	defer object.Close()
 
-	if v.AutoEnable {
+	{
 		ok := object.Key("autoEnable")
 		ok.Boolean(v.AutoEnable)
 	}
@@ -5113,7 +5113,7 @@ func awsRestjson1_serializeDocumentOrganizationS3LogsConfiguration(v *types.Orga
 	object := value.Object()
 	defer object.Close()
 
-	if v.AutoEnable {
+	{
 		ok := object.Key("autoEnable")
 		ok.Boolean(v.AutoEnable)
 	}
@@ -5136,7 +5136,7 @@ func awsRestjson1_serializeDocumentS3LogsConfiguration(v *types.S3LogsConfigurat
 	object := value.Object()
 	defer object.Close()
 
-	if v.Enable {
+	{
 		ok := object.Key("enable")
 		ok.Boolean(v.Enable)
 	}

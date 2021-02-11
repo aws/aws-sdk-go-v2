@@ -6330,7 +6330,7 @@ func awsAwsquery_serializeOpDocumentCreateUsageLimitInput(v *CreateUsageLimitInp
 	object := value.Object()
 	_ = object
 
-	if v.Amount != 0 {
+	{
 		objectKey := object.Key("Amount")
 		objectKey.Long(v.Amount)
 	}
@@ -7996,7 +7996,7 @@ func awsAwsquery_serializeOpDocumentModifySnapshotCopyRetentionPeriodInput(v *Mo
 		objectKey.Boolean(v.Manual)
 	}
 
-	if v.RetentionPeriod != 0 {
+	{
 		objectKey := object.Key("RetentionPeriod")
 		objectKey.Integer(v.RetentionPeriod)
 	}

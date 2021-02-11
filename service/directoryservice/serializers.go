@@ -4465,7 +4465,7 @@ func awsAwsjson11_serializeOpDocumentStartSchemaExtensionInput(v *StartSchemaExt
 	object := value.Object()
 	defer object.Close()
 
-	if v.CreateSnapshotBeforeSchemaExtension {
+	{
 		ok := object.Key("CreateSnapshotBeforeSchemaExtension")
 		ok.Boolean(v.CreateSnapshotBeforeSchemaExtension)
 	}
@@ -4535,7 +4535,7 @@ func awsAwsjson11_serializeOpDocumentUpdateNumberOfDomainControllersInput(v *Upd
 	object := value.Object()
 	defer object.Close()
 
-	if v.DesiredNumber != 0 {
+	{
 		ok := object.Key("DesiredNumber")
 		ok.Integer(v.DesiredNumber)
 	}

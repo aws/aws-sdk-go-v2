@@ -17009,7 +17009,7 @@ func awsRestjson1_serializeDocumentAwsJobExponentialRolloutRate(v *types.AwsJobE
 		ok.Integer(*v.BaseRatePerMinute)
 	}
 
-	if v.IncrementFactor != 0 {
+	{
 		ok := object.Key("incrementFactor")
 		ok.Double(v.IncrementFactor)
 	}
@@ -17536,7 +17536,7 @@ func awsRestjson1_serializeDocumentExponentialRolloutRate(v *types.ExponentialRo
 		ok.Integer(*v.BaseRatePerMinute)
 	}
 
-	if v.IncrementFactor != 0 {
+	{
 		ok := object.Key("incrementFactor")
 		ok.Double(v.IncrementFactor)
 	}

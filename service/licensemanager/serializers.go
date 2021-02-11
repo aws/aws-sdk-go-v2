@@ -2243,7 +2243,7 @@ func awsAwsjson11_serializeDocumentOrganizationConfiguration(v *types.Organizati
 	object := value.Object()
 	defer object.Close()
 
-	if v.EnableIntegration {
+	{
 		ok := object.Key("EnableIntegration")
 		ok.Boolean(v.EnableIntegration)
 	}

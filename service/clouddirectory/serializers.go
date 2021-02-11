@@ -1006,7 +1006,7 @@ func awsRestjson1_serializeOpDocumentCreateIndexInput(v *CreateIndexInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.IsUnique {
+	{
 		ok := object.Key("IsUnique")
 		ok.Boolean(v.IsUnique)
 	}
@@ -6059,7 +6059,7 @@ func awsRestjson1_serializeDocumentBatchCreateIndex(v *types.BatchCreateIndex, v
 		ok.String(*v.BatchReferenceName)
 	}
 
-	if v.IsUnique {
+	{
 		ok := object.Key("IsUnique")
 		ok.Boolean(v.IsUnique)
 	}

@@ -1207,7 +1207,7 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		ok.String(*v.PreferredMaintenanceWindow)
 	}
 
-	if v.ReplicationFactor != 0 {
+	{
 		ok := object.Key("ReplicationFactor")
 		ok.Integer(v.ReplicationFactor)
 	}
@@ -1298,7 +1298,7 @@ func awsAwsjson11_serializeOpDocumentDecreaseReplicationFactorInput(v *DecreaseR
 		ok.String(*v.ClusterName)
 	}
 
-	if v.NewReplicationFactor != 0 {
+	{
 		ok := object.Key("NewReplicationFactor")
 		ok.Integer(v.NewReplicationFactor)
 	}
@@ -1523,7 +1523,7 @@ func awsAwsjson11_serializeOpDocumentIncreaseReplicationFactorInput(v *IncreaseR
 		ok.String(*v.ClusterName)
 	}
 
-	if v.NewReplicationFactor != 0 {
+	{
 		ok := object.Key("NewReplicationFactor")
 		ok.Integer(v.NewReplicationFactor)
 	}

@@ -1749,12 +1749,12 @@ func awsRestjson1_serializeDocumentIoTJobAbortCriteria(v *types.IoTJobAbortCrite
 		ok.String(string(v.FailureType))
 	}
 
-	if v.MinNumberOfExecutedThings != 0 {
+	{
 		ok := object.Key("minNumberOfExecutedThings")
 		ok.Integer(v.MinNumberOfExecutedThings)
 	}
 
-	if v.ThresholdPercentage != 0 {
+	{
 		ok := object.Key("thresholdPercentage")
 		ok.Double(v.ThresholdPercentage)
 	}
@@ -1798,12 +1798,12 @@ func awsRestjson1_serializeDocumentIoTJobExponentialRolloutRate(v *types.IoTJobE
 	object := value.Object()
 	defer object.Close()
 
-	if v.BaseRatePerMinute != 0 {
+	{
 		ok := object.Key("baseRatePerMinute")
 		ok.Integer(v.BaseRatePerMinute)
 	}
 
-	if v.IncrementFactor != 0 {
+	{
 		ok := object.Key("incrementFactor")
 		ok.Double(v.IncrementFactor)
 	}

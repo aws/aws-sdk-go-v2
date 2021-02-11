@@ -934,7 +934,7 @@ func awsAwsjson10_serializeOpDocumentGetEC2RecommendationProjectedMetricsInput(v
 		ok.String(*v.InstanceArn)
 	}
 
-	if v.Period != 0 {
+	{
 		ok := object.Key("period")
 		ok.Integer(v.Period)
 	}

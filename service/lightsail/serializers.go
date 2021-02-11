@@ -8138,7 +8138,7 @@ func awsAwsjson11_serializeOpDocumentCreateLoadBalancerInput(v *CreateLoadBalanc
 		ok.String(*v.HealthCheckPath)
 	}
 
-	if v.InstancePort != 0 {
+	{
 		ok := object.Key("instancePort")
 		ok.Integer(v.InstancePort)
 	}
@@ -8933,7 +8933,7 @@ func awsAwsjson11_serializeOpDocumentGetContainerServiceMetricDataInput(v *GetCo
 		ok.String(string(v.MetricName))
 	}
 
-	if v.Period != 0 {
+	{
 		ok := object.Key("period")
 		ok.Integer(v.Period)
 	}
@@ -9063,7 +9063,7 @@ func awsAwsjson11_serializeOpDocumentGetDistributionMetricDataInput(v *GetDistri
 		ok.String(string(v.MetricName))
 	}
 
-	if v.Period != 0 {
+	{
 		ok := object.Key("period")
 		ok.Integer(v.Period)
 	}
@@ -9189,7 +9189,7 @@ func awsAwsjson11_serializeOpDocumentGetInstanceMetricDataInput(v *GetInstanceMe
 		ok.String(string(v.MetricName))
 	}
 
-	if v.Period != 0 {
+	{
 		ok := object.Key("period")
 		ok.Integer(v.Period)
 	}
@@ -9329,7 +9329,7 @@ func awsAwsjson11_serializeOpDocumentGetLoadBalancerMetricDataInput(v *GetLoadBa
 		ok.String(string(v.MetricName))
 	}
 
-	if v.Period != 0 {
+	{
 		ok := object.Key("period")
 		ok.Integer(v.Period)
 	}
@@ -9574,7 +9574,7 @@ func awsAwsjson11_serializeOpDocumentGetRelationalDatabaseMetricDataInput(v *Get
 		ok.String(string(v.MetricName))
 	}
 
-	if v.Period != 0 {
+	{
 		ok := object.Key("period")
 		ok.Integer(v.Period)
 	}

@@ -3944,7 +3944,7 @@ func awsRestjson1_serializeDocumentHealthCheckPolicy(v *types.HealthCheckPolicy,
 	object := value.Object()
 	defer object.Close()
 
-	if v.HealthyThreshold != 0 {
+	{
 		ok := object.Key("healthyThreshold")
 		ok.Integer(v.HealthyThreshold)
 	}
@@ -3974,7 +3974,7 @@ func awsRestjson1_serializeDocumentHealthCheckPolicy(v *types.HealthCheckPolicy,
 		ok.Long(*v.TimeoutMillis)
 	}
 
-	if v.UnhealthyThreshold != 0 {
+	{
 		ok := object.Key("unhealthyThreshold")
 		ok.Integer(v.UnhealthyThreshold)
 	}
@@ -4414,7 +4414,7 @@ func awsRestjson1_serializeDocumentPortMapping(v *types.PortMapping, value smith
 	object := value.Object()
 	defer object.Close()
 
-	if v.Port != 0 {
+	{
 		ok := object.Key("port")
 		ok.Integer(v.Port)
 	}
@@ -4766,7 +4766,7 @@ func awsRestjson1_serializeDocumentVirtualGatewayHealthCheckPolicy(v *types.Virt
 	object := value.Object()
 	defer object.Close()
 
-	if v.HealthyThreshold != 0 {
+	{
 		ok := object.Key("healthyThreshold")
 		ok.Integer(v.HealthyThreshold)
 	}
@@ -4796,7 +4796,7 @@ func awsRestjson1_serializeDocumentVirtualGatewayHealthCheckPolicy(v *types.Virt
 		ok.Long(*v.TimeoutMillis)
 	}
 
-	if v.UnhealthyThreshold != 0 {
+	{
 		ok := object.Key("unhealthyThreshold")
 		ok.Integer(v.UnhealthyThreshold)
 	}
@@ -4935,7 +4935,7 @@ func awsRestjson1_serializeDocumentVirtualGatewayPortMapping(v *types.VirtualGat
 	object := value.Object()
 	defer object.Close()
 
-	if v.Port != 0 {
+	{
 		ok := object.Key("port")
 		ok.Integer(v.Port)
 	}
@@ -5213,7 +5213,7 @@ func awsRestjson1_serializeDocumentWeightedTarget(v *types.WeightedTarget, value
 		ok.String(*v.VirtualNode)
 	}
 
-	if v.Weight != 0 {
+	{
 		ok := object.Key("weight")
 		ok.Integer(v.Weight)
 	}

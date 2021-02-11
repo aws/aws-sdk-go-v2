@@ -1235,7 +1235,7 @@ func awsAwsjson11_serializeOpDocumentCreateIdentityPoolInput(v *CreateIdentityPo
 		ok.Boolean(*v.AllowClassicFlow)
 	}
 
-	if v.AllowUnauthenticatedIdentities {
+	{
 		ok := object.Key("AllowUnauthenticatedIdentities")
 		ok.Boolean(v.AllowUnauthenticatedIdentities)
 	}
@@ -1460,7 +1460,7 @@ func awsAwsjson11_serializeOpDocumentListIdentitiesInput(v *ListIdentitiesInput,
 		ok.String(*v.IdentityPoolId)
 	}
 
-	if v.MaxResults != 0 {
+	{
 		ok := object.Key("MaxResults")
 		ok.Integer(v.MaxResults)
 	}
@@ -1477,7 +1477,7 @@ func awsAwsjson11_serializeOpDocumentListIdentityPoolsInput(v *ListIdentityPools
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	{
 		ok := object.Key("MaxResults")
 		ok.Integer(v.MaxResults)
 	}
@@ -1687,7 +1687,7 @@ func awsAwsjson11_serializeOpDocumentUpdateIdentityPoolInput(v *UpdateIdentityPo
 		ok.Boolean(*v.AllowClassicFlow)
 	}
 
-	if v.AllowUnauthenticatedIdentities {
+	{
 		ok := object.Key("AllowUnauthenticatedIdentities")
 		ok.Boolean(v.AllowUnauthenticatedIdentities)
 	}

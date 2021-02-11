@@ -1576,7 +1576,7 @@ func awsAwsquery_serializeOpDocumentChangeMessageVisibilityInput(v *ChangeMessag
 		objectKey.String(*v.ReceiptHandle)
 	}
 
-	if v.VisibilityTimeout != 0 {
+	{
 		objectKey := object.Key("VisibilityTimeout")
 		objectKey.Integer(v.VisibilityTimeout)
 	}

@@ -305,7 +305,7 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		}
 	}
 
-	if v.NumberOfBrokerNodes != 0 {
+	{
 		ok := object.Key("numberOfBrokerNodes")
 		ok.Integer(v.NumberOfBrokerNodes)
 	}
@@ -796,10 +796,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeConfigurationRevisionInput(v *D
 		}
 	}
 
-	if v.Revision == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Revision must not be empty")}
-	}
-	if v.Revision != 0 {
+	{
 		if err := encoder.SetURI("Revision").Long(v.Revision); err != nil {
 			return err
 		}
@@ -1794,7 +1791,7 @@ func awsRestjson1_serializeOpDocumentUpdateBrokerCountInput(v *UpdateBrokerCount
 		ok.String(*v.CurrentVersion)
 	}
 
-	if v.TargetNumberOfBrokerNodes != 0 {
+	{
 		ok := object.Key("targetNumberOfBrokerNodes")
 		ok.Integer(v.TargetNumberOfBrokerNodes)
 	}
@@ -2326,7 +2323,7 @@ func awsRestjson1_serializeDocumentBrokerEBSVolumeInfo(v *types.BrokerEBSVolumeI
 		ok.String(*v.KafkaBrokerNodeId)
 	}
 
-	if v.VolumeSizeGB != 0 {
+	{
 		ok := object.Key("volumeSizeGB")
 		ok.Integer(v.VolumeSizeGB)
 	}
@@ -2425,7 +2422,7 @@ func awsRestjson1_serializeDocumentCloudWatchLogs(v *types.CloudWatchLogs, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.Enabled {
+	{
 		ok := object.Key("enabled")
 		ok.Boolean(v.Enabled)
 	}
@@ -2447,7 +2444,7 @@ func awsRestjson1_serializeDocumentConfigurationInfo(v *types.ConfigurationInfo,
 		ok.String(*v.Arn)
 	}
 
-	if v.Revision != 0 {
+	{
 		ok := object.Key("revision")
 		ok.Long(v.Revision)
 	}
@@ -2526,7 +2523,7 @@ func awsRestjson1_serializeDocumentFirehose(v *types.Firehose, value smithyjson.
 		ok.String(*v.DeliveryStream)
 	}
 
-	if v.Enabled {
+	{
 		ok := object.Key("enabled")
 		ok.Boolean(v.Enabled)
 	}
@@ -2538,7 +2535,7 @@ func awsRestjson1_serializeDocumentJmxExporterInfo(v *types.JmxExporterInfo, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.EnabledInBroker {
+	{
 		ok := object.Key("enabledInBroker")
 		ok.Boolean(v.EnabledInBroker)
 	}
@@ -2564,7 +2561,7 @@ func awsRestjson1_serializeDocumentNodeExporterInfo(v *types.NodeExporterInfo, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.EnabledInBroker {
+	{
 		ok := object.Key("enabledInBroker")
 		ok.Boolean(v.EnabledInBroker)
 	}
@@ -2616,7 +2613,7 @@ func awsRestjson1_serializeDocumentS3(v *types.S3, value smithyjson.Value) error
 		ok.String(*v.Bucket)
 	}
 
-	if v.Enabled {
+	{
 		ok := object.Key("enabled")
 		ok.Boolean(v.Enabled)
 	}

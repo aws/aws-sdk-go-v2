@@ -3094,7 +3094,7 @@ func awsRestjson1_serializeOpDocumentPurchaseOfferingInput(v *PurchaseOfferingIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.Count != 0 {
+	{
 		ok := object.Key("count")
 		ok.Integer(v.Count)
 	}
@@ -4904,7 +4904,7 @@ func awsRestjson1_serializeDocumentAudioChannelMapping(v *types.AudioChannelMapp
 		}
 	}
 
-	if v.OutputChannel != 0 {
+	{
 		ok := object.Key("outputChannel")
 		ok.Integer(v.OutputChannel)
 	}
@@ -5096,7 +5096,7 @@ func awsRestjson1_serializeDocumentAudioPidSelection(v *types.AudioPidSelection,
 	object := value.Object()
 	defer object.Close()
 
-	if v.Pid != 0 {
+	{
 		ok := object.Key("pid")
 		ok.Integer(v.Pid)
 	}
@@ -5172,7 +5172,7 @@ func awsRestjson1_serializeDocumentAudioTrack(v *types.AudioTrack, value smithyj
 	object := value.Object()
 	defer object.Close()
 
-	if v.Track != 0 {
+	{
 		ok := object.Key("track")
 		ok.Integer(v.Track)
 	}
@@ -5571,7 +5571,7 @@ func awsRestjson1_serializeDocumentCaptionLanguageMapping(v *types.CaptionLangua
 	object := value.Object()
 	defer object.Close()
 
-	if v.CaptionChannel != 0 {
+	{
 		ok := object.Key("captionChannel")
 		ok.Integer(v.CaptionChannel)
 	}
@@ -5692,7 +5692,7 @@ func awsRestjson1_serializeDocumentDvbNitSettings(v *types.DvbNitSettings, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.NetworkId != 0 {
+	{
 		ok := object.Key("networkId")
 		ok.Integer(v.NetworkId)
 	}
@@ -6266,7 +6266,7 @@ func awsRestjson1_serializeDocumentFrameCaptureSettings(v *types.FrameCaptureSet
 	object := value.Object()
 	defer object.Close()
 
-	if v.CaptureInterval != 0 {
+	{
 		ok := object.Key("captureInterval")
 		ok.Integer(v.CaptureInterval)
 	}
@@ -6683,12 +6683,12 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 		ok.String(string(v.FlickerAq))
 	}
 
-	if v.FramerateDenominator != 0 {
+	{
 		ok := object.Key("framerateDenominator")
 		ok.Integer(v.FramerateDenominator)
 	}
 
-	if v.FramerateNumerator != 0 {
+	{
 		ok := object.Key("framerateNumerator")
 		ok.Integer(v.FramerateNumerator)
 	}
@@ -7343,12 +7343,12 @@ func awsRestjson1_serializeDocumentInputChannelLevel(v *types.InputChannelLevel,
 	object := value.Object()
 	defer object.Close()
 
-	if v.Gain != 0 {
+	{
 		ok := object.Key("gain")
 		ok.Integer(v.Gain)
 	}
 
-	if v.InputChannel != 0 {
+	{
 		ok := object.Key("inputChannel")
 		ok.Integer(v.InputChannel)
 	}
@@ -8173,12 +8173,12 @@ func awsRestjson1_serializeDocumentMpeg2Settings(v *types.Mpeg2Settings, value s
 		ok.String(string(v.FixedAfd))
 	}
 
-	if v.FramerateDenominator != 0 {
+	{
 		ok := object.Key("framerateDenominator")
 		ok.Integer(v.FramerateDenominator)
 	}
 
-	if v.FramerateNumerator != 0 {
+	{
 		ok := object.Key("framerateNumerator")
 		ok.Integer(v.FramerateNumerator)
 	}
@@ -8406,7 +8406,7 @@ func awsRestjson1_serializeDocumentMultiplexProgramSettings(v *types.MultiplexPr
 		ok.String(string(v.PreferredChannelPipeline))
 	}
 
-	if v.ProgramNumber != 0 {
+	{
 		ok := object.Key("programNumber")
 		ok.Integer(v.ProgramNumber)
 	}
@@ -8437,12 +8437,12 @@ func awsRestjson1_serializeDocumentMultiplexSettings(v *types.MultiplexSettings,
 		ok.Integer(v.MaximumVideoBufferDelayMilliseconds)
 	}
 
-	if v.TransportStreamBitrate != 0 {
+	{
 		ok := object.Key("transportStreamBitrate")
 		ok.Integer(v.TransportStreamBitrate)
 	}
 
-	if v.TransportStreamId != 0 {
+	{
 		ok := object.Key("transportStreamId")
 		ok.Integer(v.TransportStreamId)
 	}
@@ -9185,7 +9185,7 @@ func awsRestjson1_serializeDocumentScte35ReturnToNetworkScheduleActionSettings(v
 	object := value.Object()
 	defer object.Close()
 
-	if v.SpliceEventId != 0 {
+	{
 		ok := object.Key("spliceEventId")
 		ok.Long(v.SpliceEventId)
 	}
@@ -9214,7 +9214,7 @@ func awsRestjson1_serializeDocumentScte35SegmentationDescriptor(v *types.Scte35S
 		ok.Long(v.SegmentationDuration)
 	}
 
-	if v.SegmentationEventId != 0 {
+	{
 		ok := object.Key("segmentationEventId")
 		ok.Long(v.SegmentationEventId)
 	}
@@ -9288,7 +9288,7 @@ func awsRestjson1_serializeDocumentScte35SpliceInsertScheduleActionSettings(v *t
 		ok.Long(v.Duration)
 	}
 
-	if v.SpliceEventId != 0 {
+	{
 		ok := object.Key("spliceEventId")
 		ok.Long(v.SpliceEventId)
 	}

@@ -1773,7 +1773,7 @@ func awsAwsjson11_serializeDocumentActionConfigurationProperty(v *types.ActionCo
 		ok.String(*v.Description)
 	}
 
-	if v.Key {
+	{
 		ok := object.Key("key")
 		ok.Boolean(v.Key)
 	}
@@ -1788,12 +1788,12 @@ func awsAwsjson11_serializeDocumentActionConfigurationProperty(v *types.ActionCo
 		ok.Boolean(v.Queryable)
 	}
 
-	if v.Required {
+	{
 		ok := object.Key("required")
 		ok.Boolean(v.Required)
 	}
 
-	if v.Secret {
+	{
 		ok := object.Key("secret")
 		ok.Boolean(v.Secret)
 	}
@@ -1988,12 +1988,12 @@ func awsAwsjson11_serializeDocumentArtifactDetails(v *types.ArtifactDetails, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaximumCount != 0 {
+	{
 		ok := object.Key("maximumCount")
 		ok.Integer(v.MaximumCount)
 	}
 
-	if v.MinimumCount != 0 {
+	{
 		ok := object.Key("minimumCount")
 		ok.Integer(v.MinimumCount)
 	}

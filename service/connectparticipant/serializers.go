@@ -723,7 +723,7 @@ func awsRestjson1_serializeOpDocumentStartAttachmentUploadInput(v *StartAttachme
 		ok.String(*v.AttachmentName)
 	}
 
-	if v.AttachmentSizeInBytes != 0 {
+	{
 		ok := object.Key("AttachmentSizeInBytes")
 		ok.Long(v.AttachmentSizeInBytes)
 	}

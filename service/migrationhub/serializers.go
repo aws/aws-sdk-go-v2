@@ -1265,7 +1265,7 @@ func awsAwsjson11_serializeOpDocumentNotifyMigrationTaskStateInput(v *NotifyMigr
 		ok.String(*v.MigrationTaskName)
 	}
 
-	if v.NextUpdateSeconds != 0 {
+	{
 		ok := object.Key("NextUpdateSeconds")
 		ok.Integer(v.NextUpdateSeconds)
 	}

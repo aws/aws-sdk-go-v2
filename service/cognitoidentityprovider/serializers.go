@@ -4764,7 +4764,7 @@ func awsAwsjson11_serializeDocumentAccountTakeoverActionType(v *types.AccountTak
 		ok.String(string(v.EventAction))
 	}
 
-	if v.Notify {
+	{
 		ok := object.Key("Notify")
 		ok.Boolean(v.Notify)
 	}
@@ -5580,7 +5580,7 @@ func awsAwsjson11_serializeDocumentRecoveryOptionType(v *types.RecoveryOptionTyp
 		ok.String(string(v.Name))
 	}
 
-	if v.Priority != 0 {
+	{
 		ok := object.Key("Priority")
 		ok.Integer(v.Priority)
 	}
@@ -7902,7 +7902,7 @@ func awsAwsjson11_serializeOpDocumentListUserImportJobsInput(v *ListUserImportJo
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	{
 		ok := object.Key("MaxResults")
 		ok.Integer(v.MaxResults)
 	}
@@ -7946,7 +7946,7 @@ func awsAwsjson11_serializeOpDocumentListUserPoolsInput(v *ListUserPoolsInput, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	{
 		ok := object.Key("MaxResults")
 		ok.Integer(v.MaxResults)
 	}

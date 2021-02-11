@@ -1057,7 +1057,7 @@ func awsAwsjson11_serializeDocumentActionThreshold(v *types.ActionThreshold, val
 		ok.String(string(v.ActionThresholdType))
 	}
 
-	if v.ActionThresholdValue != 0 {
+	{
 		ok := object.Key("ActionThresholdValue")
 		ok.Double(v.ActionThresholdValue)
 	}
@@ -1346,7 +1346,7 @@ func awsAwsjson11_serializeDocumentNotification(v *types.Notification, value smi
 		ok.String(string(v.NotificationType))
 	}
 
-	if v.Threshold != 0 {
+	{
 		ok := object.Key("Threshold")
 		ok.Double(v.Threshold)
 	}

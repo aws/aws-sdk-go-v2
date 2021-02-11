@@ -14593,7 +14593,7 @@ func awsAwsjson11_serializeDocumentMonitoringStoppingCondition(v *types.Monitori
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxRuntimeInSeconds != 0 {
+	{
 		ok := object.Key("MaxRuntimeInSeconds")
 		ok.Integer(v.MaxRuntimeInSeconds)
 	}
@@ -15230,7 +15230,7 @@ func awsAwsjson11_serializeDocumentProcessingStoppingCondition(v *types.Processi
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxRuntimeInSeconds != 0 {
+	{
 		ok := object.Key("MaxRuntimeInSeconds")
 		ok.Integer(v.MaxRuntimeInSeconds)
 	}
@@ -15544,7 +15544,7 @@ func awsAwsjson11_serializeDocumentResourceConfig(v *types.ResourceConfig, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.InstanceCount != 0 {
+	{
 		ok := object.Key("InstanceCount")
 		ok.Integer(v.InstanceCount)
 	}
@@ -15559,7 +15559,7 @@ func awsAwsjson11_serializeDocumentResourceConfig(v *types.ResourceConfig, value
 		ok.String(*v.VolumeKmsKeyId)
 	}
 
-	if v.VolumeSizeInGB != 0 {
+	{
 		ok := object.Key("VolumeSizeInGB")
 		ok.Integer(v.VolumeSizeInGB)
 	}
@@ -15571,12 +15571,12 @@ func awsAwsjson11_serializeDocumentResourceLimits(v *types.ResourceLimits, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxNumberOfTrainingJobs != 0 {
+	{
 		ok := object.Key("MaxNumberOfTrainingJobs")
 		ok.Integer(v.MaxNumberOfTrainingJobs)
 	}
 
-	if v.MaxParallelTrainingJobs != 0 {
+	{
 		ok := object.Key("MaxParallelTrainingJobs")
 		ok.Integer(v.MaxParallelTrainingJobs)
 	}
@@ -15810,7 +15810,7 @@ func awsAwsjson11_serializeDocumentShuffleConfig(v *types.ShuffleConfig, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.Seed != 0 {
+	{
 		ok := object.Key("Seed")
 		ok.Long(v.Seed)
 	}

@@ -7128,7 +7128,7 @@ func awsRestjson1_serializeDocumentReservationPlanSettings(v *types.ReservationP
 		ok.String(string(v.RenewalType))
 	}
 
-	if v.ReservedSlots != 0 {
+	{
 		ok := object.Key("reservedSlots")
 		ok.Integer(v.ReservedSlots)
 	}

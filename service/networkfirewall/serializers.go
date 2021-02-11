@@ -1716,12 +1716,12 @@ func awsAwsjson10_serializeDocumentPortRange(v *types.PortRange, value smithyjso
 	object := value.Object()
 	defer object.Close()
 
-	if v.FromPort != 0 {
+	{
 		ok := object.Key("FromPort")
 		ok.Integer(v.FromPort)
 	}
 
-	if v.ToPort != 0 {
+	{
 		ok := object.Key("ToPort")
 		ok.Integer(v.ToPort)
 	}
@@ -2050,7 +2050,7 @@ func awsAwsjson10_serializeDocumentStatelessRule(v *types.StatelessRule, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.Priority != 0 {
+	{
 		ok := object.Key("Priority")
 		ok.Integer(v.Priority)
 	}
@@ -2069,7 +2069,7 @@ func awsAwsjson10_serializeDocumentStatelessRuleGroupReference(v *types.Stateles
 	object := value.Object()
 	defer object.Close()
 
-	if v.Priority != 0 {
+	{
 		ok := object.Key("Priority")
 		ok.Integer(v.Priority)
 	}
@@ -2782,7 +2782,7 @@ func awsAwsjson10_serializeOpDocumentUpdateFirewallDeleteProtectionInput(v *Upda
 	object := value.Object()
 	defer object.Close()
 
-	if v.DeleteProtection {
+	{
 		ok := object.Key("DeleteProtection")
 		ok.Boolean(v.DeleteProtection)
 	}
@@ -2846,7 +2846,7 @@ func awsAwsjson10_serializeOpDocumentUpdateFirewallPolicyChangeProtectionInput(v
 		ok.String(*v.FirewallName)
 	}
 
-	if v.FirewallPolicyChangeProtection {
+	{
 		ok := object.Key("FirewallPolicyChangeProtection")
 		ok.Boolean(v.FirewallPolicyChangeProtection)
 	}
@@ -2985,7 +2985,7 @@ func awsAwsjson10_serializeOpDocumentUpdateSubnetChangeProtectionInput(v *Update
 		ok.String(*v.FirewallName)
 	}
 
-	if v.SubnetChangeProtection {
+	{
 		ok := object.Key("SubnetChangeProtection")
 		ok.Boolean(v.SubnetChangeProtection)
 	}

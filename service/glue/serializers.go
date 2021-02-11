@@ -7555,17 +7555,17 @@ func awsAwsjson11_serializeDocumentBinaryColumnStatisticsData(v *types.BinaryCol
 	object := value.Object()
 	defer object.Close()
 
-	if v.AverageLength != 0 {
+	{
 		ok := object.Key("AverageLength")
 		ok.Double(v.AverageLength)
 	}
 
-	if v.MaximumLength != 0 {
+	{
 		ok := object.Key("MaximumLength")
 		ok.Long(v.MaximumLength)
 	}
 
-	if v.NumberOfNulls != 0 {
+	{
 		ok := object.Key("NumberOfNulls")
 		ok.Long(v.NumberOfNulls)
 	}
@@ -7577,17 +7577,17 @@ func awsAwsjson11_serializeDocumentBooleanColumnStatisticsData(v *types.BooleanC
 	object := value.Object()
 	defer object.Close()
 
-	if v.NumberOfFalses != 0 {
+	{
 		ok := object.Key("NumberOfFalses")
 		ok.Long(v.NumberOfFalses)
 	}
 
-	if v.NumberOfNulls != 0 {
+	{
 		ok := object.Key("NumberOfNulls")
 		ok.Long(v.NumberOfNulls)
 	}
 
-	if v.NumberOfTrues != 0 {
+	{
 		ok := object.Key("NumberOfTrues")
 		ok.Long(v.NumberOfTrues)
 	}
@@ -8033,7 +8033,7 @@ func awsAwsjson11_serializeDocumentConnectionPasswordEncryption(v *types.Connect
 		ok.String(*v.AwsKmsKeyId)
 	}
 
-	if v.ReturnConnectionPasswordEncrypted {
+	{
 		ok := object.Key("ReturnConnectionPasswordEncrypted")
 		ok.Boolean(v.ReturnConnectionPasswordEncrypted)
 	}
@@ -8373,12 +8373,12 @@ func awsAwsjson11_serializeDocumentDateColumnStatisticsData(v *types.DateColumnS
 		ok.Double(smithytime.FormatEpochSeconds(*v.MinimumValue))
 	}
 
-	if v.NumberOfDistinctValues != 0 {
+	{
 		ok := object.Key("NumberOfDistinctValues")
 		ok.Long(v.NumberOfDistinctValues)
 	}
 
-	if v.NumberOfNulls != 0 {
+	{
 		ok := object.Key("NumberOfNulls")
 		ok.Long(v.NumberOfNulls)
 	}
@@ -8404,12 +8404,12 @@ func awsAwsjson11_serializeDocumentDecimalColumnStatisticsData(v *types.DecimalC
 		}
 	}
 
-	if v.NumberOfDistinctValues != 0 {
+	{
 		ok := object.Key("NumberOfDistinctValues")
 		ok.Long(v.NumberOfDistinctValues)
 	}
 
-	if v.NumberOfNulls != 0 {
+	{
 		ok := object.Key("NumberOfNulls")
 		ok.Long(v.NumberOfNulls)
 	}
@@ -8421,7 +8421,7 @@ func awsAwsjson11_serializeDocumentDecimalNumber(v *types.DecimalNumber, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.Scale != 0 {
+	{
 		ok := object.Key("Scale")
 		ok.Integer(v.Scale)
 	}
@@ -8487,12 +8487,12 @@ func awsAwsjson11_serializeDocumentDoubleColumnStatisticsData(v *types.DoubleCol
 		ok.Double(v.MinimumValue)
 	}
 
-	if v.NumberOfDistinctValues != 0 {
+	{
 		ok := object.Key("NumberOfDistinctValues")
 		ok.Long(v.NumberOfDistinctValues)
 	}
 
-	if v.NumberOfNulls != 0 {
+	{
 		ok := object.Key("NumberOfNulls")
 		ok.Long(v.NumberOfNulls)
 	}
@@ -8967,12 +8967,12 @@ func awsAwsjson11_serializeDocumentLongColumnStatisticsData(v *types.LongColumnS
 		ok.Long(v.MinimumValue)
 	}
 
-	if v.NumberOfDistinctValues != 0 {
+	{
 		ok := object.Key("NumberOfDistinctValues")
 		ok.Long(v.NumberOfDistinctValues)
 	}
 
-	if v.NumberOfNulls != 0 {
+	{
 		ok := object.Key("NumberOfNulls")
 		ok.Long(v.NumberOfNulls)
 	}
@@ -9188,7 +9188,7 @@ func awsAwsjson11_serializeDocumentOrder(v *types.Order, value smithyjson.Value)
 		ok.String(*v.Column)
 	}
 
-	if v.SortOrder != 0 {
+	{
 		ok := object.Key("SortOrder")
 		ok.Integer(v.SortOrder)
 	}
@@ -9700,12 +9700,12 @@ func awsAwsjson11_serializeDocumentSegment(v *types.Segment, value smithyjson.Va
 	object := value.Object()
 	defer object.Close()
 
-	if v.SegmentNumber != 0 {
+	{
 		ok := object.Key("SegmentNumber")
 		ok.Integer(v.SegmentNumber)
 	}
 
-	if v.TotalSegments != 0 {
+	{
 		ok := object.Key("TotalSegments")
 		ok.Integer(v.TotalSegments)
 	}
@@ -9885,22 +9885,22 @@ func awsAwsjson11_serializeDocumentStringColumnStatisticsData(v *types.StringCol
 	object := value.Object()
 	defer object.Close()
 
-	if v.AverageLength != 0 {
+	{
 		ok := object.Key("AverageLength")
 		ok.Double(v.AverageLength)
 	}
 
-	if v.MaximumLength != 0 {
+	{
 		ok := object.Key("MaximumLength")
 		ok.Long(v.MaximumLength)
 	}
 
-	if v.NumberOfDistinctValues != 0 {
+	{
 		ok := object.Key("NumberOfDistinctValues")
 		ok.Long(v.NumberOfDistinctValues)
 	}
 
-	if v.NumberOfNulls != 0 {
+	{
 		ok := object.Key("NumberOfNulls")
 		ok.Long(v.NumberOfNulls)
 	}

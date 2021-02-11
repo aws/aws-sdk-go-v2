@@ -3264,7 +3264,7 @@ func awsRestjson1_serializeDocumentLoggingOptions(v *types.LoggingOptions, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.Enabled {
+	{
 		ok := object.Key("enabled")
 		ok.Boolean(v.Enabled)
 	}
@@ -3529,7 +3529,7 @@ func awsRestjson1_serializeDocumentResourceConfiguration(v *types.ResourceConfig
 		ok.String(string(v.ComputeType))
 	}
 
-	if v.VolumeSizeInGB != 0 {
+	{
 		ok := object.Key("volumeSizeInGB")
 		ok.Integer(v.VolumeSizeInGB)
 	}

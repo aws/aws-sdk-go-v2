@@ -5226,7 +5226,7 @@ func awsRestxml_serializeDocumentAliasTarget(v *types.AliasTarget, value smithyx
 		el := value.MemberElement(root)
 		el.String(*v.DNSName)
 	}
-	if v.EvaluateTargetHealth {
+	{
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{

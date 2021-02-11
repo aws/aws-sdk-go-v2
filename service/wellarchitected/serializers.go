@@ -1022,10 +1022,7 @@ func awsRestjson1_serializeOpHttpBindingsGetMilestoneInput(v *GetMilestoneInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MilestoneNumber == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member MilestoneNumber must not be empty")}
-	}
-	if v.MilestoneNumber != 0 {
+	{
 		if err := encoder.SetURI("MilestoneNumber").Integer(v.MilestoneNumber); err != nil {
 			return err
 		}

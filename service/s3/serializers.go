@@ -8002,7 +8002,7 @@ func awsRestxml_serializeOpHttpBindingsUploadPartInput(v *UploadPartInput, encod
 		}
 	}
 
-	if v.PartNumber != 0 {
+	{
 		encoder.SetQuery("partNumber").Integer(v.PartNumber)
 	}
 
@@ -8157,7 +8157,7 @@ func awsRestxml_serializeOpHttpBindingsUploadPartCopyInput(v *UploadPartCopyInpu
 		}
 	}
 
-	if v.PartNumber != 0 {
+	{
 		encoder.SetQuery("partNumber").Integer(v.PartNumber)
 	}
 
@@ -9561,7 +9561,7 @@ func awsRestxml_serializeDocumentInventoryConfiguration(v *types.InventoryConfig
 		el := value.MemberElement(root)
 		el.String(string(v.IncludedObjectVersions))
 	}
-	if v.IsEnabled {
+	{
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -11855,7 +11855,7 @@ func awsRestxml_serializeDocumentTiering(v *types.Tiering, value smithyxml.Value
 		el := value.MemberElement(root)
 		el.String(string(v.AccessTier))
 	}
-	if v.Days != 0 {
+	{
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{

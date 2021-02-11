@@ -989,7 +989,7 @@ func awsRestjson1_serializeOpDocumentCreateWirelessGatewayTaskDefinitionInput(v 
 	object := value.Object()
 	defer object.Close()
 
-	if v.AutoCreateTasks {
+	{
 		ok := object.Key("AutoCreateTasks")
 		ok.Boolean(v.AutoCreateTasks)
 	}

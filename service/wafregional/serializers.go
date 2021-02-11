@@ -4303,7 +4303,7 @@ func awsAwsjson11_serializeDocumentSizeConstraint(v *types.SizeConstraint, value
 		}
 	}
 
-	if v.Size != 0 {
+	{
 		ok := object.Key("Size")
 		ok.Long(v.Size)
 	}
@@ -4656,7 +4656,7 @@ func awsAwsjson11_serializeOpDocumentCreateRateBasedRuleInput(v *CreateRateBased
 		ok.String(string(v.RateKey))
 	}
 
-	if v.RateLimit != 0 {
+	{
 		ok := object.Key("RateLimit")
 		ok.Long(v.RateLimit)
 	}
@@ -5272,7 +5272,7 @@ func awsAwsjson11_serializeOpDocumentGetSampledRequestsInput(v *GetSampledReques
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxItems != 0 {
+	{
 		ok := object.Key("MaxItems")
 		ok.Long(v.MaxItems)
 	}
@@ -5806,7 +5806,7 @@ func awsAwsjson11_serializeOpDocumentUpdateRateBasedRuleInput(v *UpdateRateBased
 		ok.String(*v.ChangeToken)
 	}
 
-	if v.RateLimit != 0 {
+	{
 		ok := object.Key("RateLimit")
 		ok.Long(v.RateLimit)
 	}

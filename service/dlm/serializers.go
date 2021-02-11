@@ -784,7 +784,7 @@ func awsRestjson1_serializeDocumentCrossRegionCopyRule(v *types.CrossRegionCopyR
 		ok.Boolean(v.CopyTags)
 	}
 
-	if v.Encrypted {
+	{
 		ok := object.Key("Encrypted")
 		ok.Boolean(v.Encrypted)
 	}
@@ -826,7 +826,7 @@ func awsRestjson1_serializeDocumentEncryptionConfiguration(v *types.EncryptionCo
 		ok.String(*v.CmkArn)
 	}
 
-	if v.Encrypted {
+	{
 		ok := object.Key("Encrypted")
 		ok.Boolean(v.Encrypted)
 	}

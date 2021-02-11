@@ -9174,7 +9174,7 @@ func awsAwsjson11_serializeOpDocumentCreateMaintenanceWindowInput(v *CreateMaint
 	object := value.Object()
 	defer object.Close()
 
-	if v.AllowUnassociatedTargets {
+	{
 		ok := object.Key("AllowUnassociatedTargets")
 		ok.Boolean(v.AllowUnassociatedTargets)
 	}
@@ -9184,7 +9184,7 @@ func awsAwsjson11_serializeOpDocumentCreateMaintenanceWindowInput(v *CreateMaint
 		ok.String(*v.ClientToken)
 	}
 
-	if v.Cutoff != 0 {
+	{
 		ok := object.Key("Cutoff")
 		ok.Integer(v.Cutoff)
 	}
@@ -9194,7 +9194,7 @@ func awsAwsjson11_serializeOpDocumentCreateMaintenanceWindowInput(v *CreateMaint
 		ok.String(*v.Description)
 	}
 
-	if v.Duration != 0 {
+	{
 		ok := object.Key("Duration")
 		ok.Integer(v.Duration)
 	}

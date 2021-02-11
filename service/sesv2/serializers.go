@@ -4637,7 +4637,7 @@ func awsRestjson1_serializeOpDocumentPutDeliverabilityDashboardOptionInput(v *Pu
 	object := value.Object()
 	defer object.Close()
 
-	if v.DashboardEnabled {
+	{
 		ok := object.Key("DashboardEnabled")
 		ok.Boolean(v.DashboardEnabled)
 	}

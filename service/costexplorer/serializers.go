@@ -1735,7 +1735,7 @@ func awsAwsjson11_serializeDocumentRightsizingRecommendationConfiguration(v *typ
 	object := value.Object()
 	defer object.Close()
 
-	if v.BenefitsConsidered {
+	{
 		ok := object.Key("BenefitsConsidered")
 		ok.Boolean(v.BenefitsConsidered)
 	}
@@ -1837,7 +1837,7 @@ func awsAwsjson11_serializeDocumentTotalImpactFilter(v *types.TotalImpactFilter,
 		ok.String(string(v.NumericOperator))
 	}
 
-	if v.StartValue != 0 {
+	{
 		ok := object.Key("StartValue")
 		ok.Double(v.StartValue)
 	}

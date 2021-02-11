@@ -2245,7 +2245,7 @@ func awsAwsjson11_serializeDocumentBlockPublicAccessConfiguration(v *types.Block
 	object := value.Object()
 	defer object.Close()
 
-	if v.BlockPublicSecurityGroupRules {
+	{
 		ok := object.Key("BlockPublicSecurityGroupRules")
 		ok.Boolean(v.BlockPublicSecurityGroupRules)
 	}
@@ -4585,7 +4585,7 @@ func awsAwsjson11_serializeOpDocumentSetTerminationProtectionInput(v *SetTermina
 		}
 	}
 
-	if v.TerminationProtected {
+	{
 		ok := object.Key("TerminationProtected")
 		ok.Boolean(v.TerminationProtected)
 	}
@@ -4604,7 +4604,7 @@ func awsAwsjson11_serializeOpDocumentSetVisibleToAllUsersInput(v *SetVisibleToAl
 		}
 	}
 
-	if v.VisibleToAllUsers {
+	{
 		ok := object.Key("VisibleToAllUsers")
 		ok.Boolean(v.VisibleToAllUsers)
 	}

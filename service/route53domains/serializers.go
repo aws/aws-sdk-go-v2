@@ -1691,7 +1691,7 @@ func awsAwsjson11_serializeOpDocumentGetDomainSuggestionsInput(v *GetDomainSugge
 		ok.Boolean(*v.OnlyAvailable)
 	}
 
-	if v.SuggestionCount != 0 {
+	{
 		ok := object.Key("SuggestionCount")
 		ok.Integer(v.SuggestionCount)
 	}
@@ -1841,7 +1841,7 @@ func awsAwsjson11_serializeOpDocumentRenewDomainInput(v *RenewDomainInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.CurrentExpiryYear != 0 {
+	{
 		ok := object.Key("CurrentExpiryYear")
 		ok.Integer(v.CurrentExpiryYear)
 	}

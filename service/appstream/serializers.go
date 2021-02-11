@@ -2256,7 +2256,7 @@ func awsAwsjson11_serializeDocumentApplicationSettings(v *types.ApplicationSetti
 	object := value.Object()
 	defer object.Close()
 
-	if v.Enabled {
+	{
 		ok := object.Key("Enabled")
 		ok.Boolean(v.Enabled)
 	}
