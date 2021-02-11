@@ -16316,6 +16316,9 @@ func awsRestjson1_deserializeDocumentTypedAttributeValue(v *types.TypedAttribute
 	var uv types.TypedAttributeValue
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "BinaryValue":
 			var mv []byte

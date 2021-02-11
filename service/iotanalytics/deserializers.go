@@ -7173,6 +7173,9 @@ func awsRestjson1_deserializeDocumentDatastoreStorage(v *types.DatastoreStorage,
 	var uv types.DatastoreStorage
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "customerManagedS3":
 			var mv types.CustomerManagedDatastoreS3Storage

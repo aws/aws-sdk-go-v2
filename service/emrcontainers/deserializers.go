@@ -2607,6 +2607,9 @@ func awsRestjson1_deserializeDocumentContainerInfo(v *types.ContainerInfo, value
 	var uv types.ContainerInfo
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "eksInfo":
 			var mv types.EksInfo

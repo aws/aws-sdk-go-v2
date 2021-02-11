@@ -6600,6 +6600,9 @@ func awsRestjson1_deserializeDocumentAccessLog(v *types.AccessLog, value interfa
 	var uv types.AccessLog
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "file":
 			var mv types.FileAccessLog
@@ -6774,6 +6777,9 @@ func awsRestjson1_deserializeDocumentBackend(v *types.Backend, value interface{}
 	var uv types.Backend
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "virtualService":
 			var mv types.VirtualServiceBackend
@@ -8133,6 +8139,9 @@ func awsRestjson1_deserializeDocumentGrpcRouteMetadataMatchMethod(v *types.GrpcR
 	var uv types.GrpcRouteMetadataMatchMethod
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "exact":
 			var mv string
@@ -8259,6 +8268,9 @@ func awsRestjson1_deserializeDocumentHeaderMatchMethod(v *types.HeaderMatchMetho
 	var uv types.HeaderMatchMethod
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "exact":
 			var mv string
@@ -9114,6 +9126,9 @@ func awsRestjson1_deserializeDocumentListenerTimeout(v *types.ListenerTimeout, v
 	var uv types.ListenerTimeout
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "grpc":
 			var mv types.GrpcTimeout
@@ -9266,6 +9281,9 @@ func awsRestjson1_deserializeDocumentListenerTlsCertificate(v *types.ListenerTls
 	var uv types.ListenerTlsCertificate
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "acm":
 			var mv types.ListenerTlsAcmCertificate
@@ -10340,6 +10358,9 @@ func awsRestjson1_deserializeDocumentServiceDiscovery(v *types.ServiceDiscovery,
 	var uv types.ServiceDiscovery
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "awsCloudMap":
 			var mv types.AwsCloudMapServiceDiscovery
@@ -10771,6 +10792,9 @@ func awsRestjson1_deserializeDocumentTlsValidationContextTrust(v *types.TlsValid
 	var uv types.TlsValidationContextTrust
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "acm":
 			var mv types.TlsValidationContextAcmTrust
@@ -10898,6 +10922,9 @@ func awsRestjson1_deserializeDocumentVirtualGatewayAccessLog(v *types.VirtualGat
 	var uv types.VirtualGatewayAccessLog
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "file":
 			var mv types.VirtualGatewayFileAccessLog
@@ -11510,6 +11537,9 @@ func awsRestjson1_deserializeDocumentVirtualGatewayListenerTlsCertificate(v *typ
 	var uv types.VirtualGatewayListenerTlsCertificate
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "acm":
 			var mv types.VirtualGatewayListenerTlsAcmCertificate
@@ -12008,6 +12038,9 @@ func awsRestjson1_deserializeDocumentVirtualGatewayTlsValidationContextTrust(v *
 	var uv types.VirtualGatewayTlsValidationContextTrust
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "acm":
 			var mv types.VirtualGatewayTlsValidationContextAcmTrust
@@ -12946,6 +12979,9 @@ func awsRestjson1_deserializeDocumentVirtualServiceProvider(v *types.VirtualServ
 	var uv types.VirtualServiceProvider
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "virtualNode":
 			var mv types.VirtualNodeServiceProvider

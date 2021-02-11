@@ -7330,6 +7330,9 @@ func awsAwsjson10_deserializeDocumentAttributeValue(v *types.AttributeValue, val
 	var uv types.AttributeValue
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "B":
 			var mv []byte

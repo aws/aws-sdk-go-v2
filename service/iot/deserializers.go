@@ -33919,6 +33919,9 @@ func awsRestjson1_deserializeDocumentAssetPropertyVariant(v *types.AssetProperty
 	var uv types.AssetPropertyVariant
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "booleanValue":
 			var mv string

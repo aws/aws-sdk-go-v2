@@ -1213,6 +1213,9 @@ func awsRestjson1_deserializeDocumentArrayValue(v *types.ArrayValue, value inter
 	var uv types.ArrayValue
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "arrayValues":
 			var mv []types.ArrayValue
@@ -1605,6 +1608,9 @@ func awsRestjson1_deserializeDocumentField(v *types.Field, value interface{}) er
 	var uv types.Field
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "arrayValue":
 			var mv types.ArrayValue
@@ -2474,6 +2480,9 @@ func awsRestjson1_deserializeDocumentValue(v *types.Value, value interface{}) er
 	var uv types.Value
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "arrayValues":
 			var mv []types.Value

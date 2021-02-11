@@ -367,6 +367,9 @@ func awsAwsjson11_deserializeDocumentEntitlementValue(v *types.EntitlementValue,
 	var uv types.EntitlementValue
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "BooleanValue":
 			var mv bool
