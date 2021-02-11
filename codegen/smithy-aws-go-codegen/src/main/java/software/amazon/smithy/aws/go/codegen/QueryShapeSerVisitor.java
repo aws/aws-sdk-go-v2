@@ -156,7 +156,7 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
             Shape target = context.getModel().expectShape(member.getTarget());
 
             GoValueAccessUtils.writeIfNonZeroValueMember(context.getModel(), context.getSymbolProvider(), writer,
-                    member, "v", (operand) -> {
+                    member, "v", true, member.isRequired(), (operand) -> {
                         String locationName = getSerializedLocationName(member, member.getMemberName());
                         if (isFlattened(context, member)) {
                             writer.write("objectKey := object.FlatKey($S)", locationName);

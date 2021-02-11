@@ -181,7 +181,7 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
             String serializedMemberName = getSerializedMemberName(member);
 
             GoValueAccessUtils.writeIfNonZeroValueMember(context.getModel(), context.getSymbolProvider(), writer,
-                    member, "v", (operand) -> {
+                    member, "v", true, member.isRequired(), (operand) -> {
                         writer.write("ok := object.Key($S)", serializedMemberName);
                         target.accept(getMemberSerVisitor(member, operand, "ok"));
                     });
