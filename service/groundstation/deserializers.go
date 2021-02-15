@@ -4620,6 +4620,9 @@ func awsRestjson1_deserializeDocumentConfigTypeData(v *types.ConfigTypeData, val
 	var uv types.ConfigTypeData
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "antennaDownlinkConfig":
 			var mv types.AntennaDownlinkConfig

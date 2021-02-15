@@ -5982,6 +5982,9 @@ func awsAwsjson11_deserializeDocumentDocumentAttributeValue(v *types.DocumentAtt
 	var uv types.DocumentAttributeValue
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "DateValue":
 			var mv time.Time

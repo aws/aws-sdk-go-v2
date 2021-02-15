@@ -23377,6 +23377,9 @@ func awsRestjson1_deserializeDocumentDataSourceParameters(v *types.DataSourcePar
 	var uv types.DataSourceParameters
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "AmazonElasticsearchParameters":
 			var mv types.AmazonElasticsearchParameters
@@ -25605,6 +25608,9 @@ func awsRestjson1_deserializeDocumentPhysicalTable(v *types.PhysicalTable, value
 	var uv types.PhysicalTable
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "CustomSql":
 			var mv types.CustomSql
@@ -28812,6 +28818,9 @@ func awsRestjson1_deserializeDocumentTransformOperation(v *types.TransformOperat
 	var uv types.TransformOperation
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "CastColumnTypeOperation":
 			var mv types.CastColumnTypeOperation

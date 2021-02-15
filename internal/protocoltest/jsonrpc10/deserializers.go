@@ -826,6 +826,9 @@ func awsAwsjson10_deserializeDocumentMyUnion(v *types.MyUnion, value interface{}
 	var uv types.MyUnion
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "blobValue":
 			var mv []byte

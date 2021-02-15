@@ -48557,6 +48557,9 @@ func awsAwsjson11_deserializeDocumentTrialComponentParameterValue(v *types.Trial
 	var uv types.TrialComponentParameterValue
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "NumberValue":
 			var mv float64

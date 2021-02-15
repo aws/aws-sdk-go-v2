@@ -1301,6 +1301,9 @@ func awsAwsjson10_deserializeDocumentInputDataConfig(v *types.InputDataConfig, v
 	var uv types.InputDataConfig
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "S3Uri":
 			var mv string

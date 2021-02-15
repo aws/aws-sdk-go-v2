@@ -212,6 +212,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
         writer.write("var uv $P", symbol);
 
         writer.openBlock("loop: for key, value := range shape {", "}", () -> {
+            writer.openBlock("if value == nil {", "}", () -> writer.write("continue"));
             writer.openBlock("switch key {", "}", () -> {
                 Set<MemberShape> members = new TreeSet<>(shape.members());
                 for (MemberShape member : members) {

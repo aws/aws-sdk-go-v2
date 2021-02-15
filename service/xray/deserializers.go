@@ -4444,6 +4444,9 @@ func awsRestjson1_deserializeDocumentAnnotationValue(v *types.AnnotationValue, v
 	var uv types.AnnotationValue
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "BooleanValue":
 			var mv bool

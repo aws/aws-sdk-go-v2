@@ -1525,6 +1525,9 @@ func awsAwsjson11_deserializeDocumentField(v *types.Field, value interface{}) er
 	var uv types.Field
 loop:
 	for key, value := range shape {
+		if value == nil {
+			continue
+		}
 		switch key {
 		case "blobValue":
 			var mv []byte
