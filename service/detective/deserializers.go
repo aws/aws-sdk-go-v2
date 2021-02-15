@@ -1916,15 +1916,15 @@ func awsRestjson1_deserializeDocumentGraph(v **types.Graph, value interface{}) e
 
 		case "CreatedTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
-				f64, err := jtv.Float64()
+				t, err := smithytime.ParseDateTime(jtv)
 				if err != nil {
 					return err
 				}
-				sv.CreatedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+				sv.CreatedTime = ptr.Time(t)
 			}
 
 		default:
@@ -2070,15 +2070,15 @@ func awsRestjson1_deserializeDocumentMemberDetail(v **types.MemberDetail, value 
 
 		case "InvitedTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
-				f64, err := jtv.Float64()
+				t, err := smithytime.ParseDateTime(jtv)
 				if err != nil {
 					return err
 				}
-				sv.InvitedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+				sv.InvitedTime = ptr.Time(t)
 			}
 
 		case "MasterId":
@@ -2105,15 +2105,15 @@ func awsRestjson1_deserializeDocumentMemberDetail(v **types.MemberDetail, value 
 
 		case "PercentOfGraphUtilizationUpdatedTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
-				f64, err := jtv.Float64()
+				t, err := smithytime.ParseDateTime(jtv)
 				if err != nil {
 					return err
 				}
-				sv.PercentOfGraphUtilizationUpdatedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+				sv.PercentOfGraphUtilizationUpdatedTime = ptr.Time(t)
 			}
 
 		case "Status":
@@ -2127,15 +2127,15 @@ func awsRestjson1_deserializeDocumentMemberDetail(v **types.MemberDetail, value 
 
 		case "UpdatedTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
 				}
-				f64, err := jtv.Float64()
+				t, err := smithytime.ParseDateTime(jtv)
 				if err != nil {
 					return err
 				}
-				sv.UpdatedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+				sv.UpdatedTime = ptr.Time(t)
 			}
 
 		default:

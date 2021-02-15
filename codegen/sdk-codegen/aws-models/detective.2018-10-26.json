@@ -1039,7 +1039,10 @@
             }
         },
         "com.amazonaws.detective#Timestamp": {
-            "type": "timestamp"
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
         },
         "com.amazonaws.detective#UnprocessedAccount": {
             "type": "structure",
