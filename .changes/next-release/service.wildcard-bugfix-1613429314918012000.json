@@ -1,0 +1,26 @@
+{
+ "ID": "service.wildcard-bugfix-1613429314918012000",
+ "SchemaVersion": 1,
+ "Module": "service/...",
+ "Type": "bugfix",
+ "Description": "Fixed a bug that could union shape types to be deserialized incorrectly",
+ "MinVersion": "",
+ "AffectedModules": [
+  "service/appmesh",
+  "service/clouddirectory",
+  "service/dynamodb",
+  "service/dynamodbstreams",
+  "service/emrcontainers",
+  "service/groundstation",
+  "service/healthlake",
+  "service/iot",
+  "service/iotanalytics",
+  "service/kendra",
+  "service/marketplaceentitlementservice",
+  "service/quicksight",
+  "service/rdsdata",
+  "service/redshiftdata",
+  "service/sagemaker",
+  "service/xray"
+ ]
+}

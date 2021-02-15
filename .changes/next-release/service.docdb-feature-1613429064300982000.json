@@ -1,0 +1,9 @@
+{
+ "ID": "service.docdb-feature-1613429064300982000",
+ "SchemaVersion": 1,
+ "Module": "service/docdb",
+ "Type": "feature",
+ "Description": "Client now support presigned URL generation for CopyDBClusterSnapshot and CreateDBCluster operations by specifying the target SourceRegion",
+ "MinVersion": "",
+ "AffectedModules": null
+}
