@@ -3962,6 +3962,11 @@ func awsAwsquery_serializeOpDocumentCopyDBClusterSnapshotInput(v *CopyDBClusterS
 		objectKey.Boolean(*v.CopyTags)
 	}
 
+	if v.destinationRegion != nil {
+		objectKey := object.Key("DestinationRegion")
+		objectKey.String(*v.destinationRegion)
+	}
+
 	if v.KmsKeyId != nil {
 		objectKey := object.Key("KmsKeyId")
 		objectKey.String(*v.KmsKeyId)
@@ -4108,6 +4113,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 	if v.DeletionProtection != nil {
 		objectKey := object.Key("DeletionProtection")
 		objectKey.Boolean(*v.DeletionProtection)
+	}
+
+	if v.destinationRegion != nil {
+		objectKey := object.Key("DestinationRegion")
+		objectKey.String(*v.destinationRegion)
 	}
 
 	if v.EnableCloudwatchLogsExports != nil {
