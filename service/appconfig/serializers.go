@@ -279,7 +279,7 @@ func awsRestjson1_serializeOpDocumentCreateDeploymentStrategyInput(v *CreateDepl
 	object := value.Object()
 	defer object.Close()
 
-	if v.DeploymentDurationInMinutes != 0 {
+	{
 		ok := object.Key("DeploymentDurationInMinutes")
 		ok.Integer(v.DeploymentDurationInMinutes)
 	}
@@ -294,7 +294,7 @@ func awsRestjson1_serializeOpDocumentCreateDeploymentStrategyInput(v *CreateDepl
 		ok.Integer(v.FinalBakeTimeInMinutes)
 	}
 
-	if v.GrowthFactor != 0 {
+	{
 		ok := object.Key("GrowthFactor")
 		ok.Float(v.GrowthFactor)
 	}
@@ -866,10 +866,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteHostedConfigurationVersionInput(v
 		}
 	}
 
-	if v.VersionNumber == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionNumber must not be empty")}
-	}
-	if v.VersionNumber != 0 {
+	{
 		if err := encoder.SetURI("VersionNumber").Integer(v.VersionNumber); err != nil {
 			return err
 		}
@@ -1162,10 +1159,7 @@ func awsRestjson1_serializeOpHttpBindingsGetDeploymentInput(v *GetDeploymentInpu
 		}
 	}
 
-	if v.DeploymentNumber == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member DeploymentNumber must not be empty")}
-	}
-	if v.DeploymentNumber != 0 {
+	{
 		if err := encoder.SetURI("DeploymentNumber").Integer(v.DeploymentNumber); err != nil {
 			return err
 		}
@@ -1387,10 +1381,7 @@ func awsRestjson1_serializeOpHttpBindingsGetHostedConfigurationVersionInput(v *G
 		}
 	}
 
-	if v.VersionNumber == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member VersionNumber must not be empty")}
-	}
-	if v.VersionNumber != 0 {
+	{
 		if err := encoder.SetURI("VersionNumber").Integer(v.VersionNumber); err != nil {
 			return err
 		}
@@ -2065,10 +2056,7 @@ func awsRestjson1_serializeOpHttpBindingsStopDeploymentInput(v *StopDeploymentIn
 		}
 	}
 
-	if v.DeploymentNumber == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member DeploymentNumber must not be empty")}
-	}
-	if v.DeploymentNumber != 0 {
+	{
 		if err := encoder.SetURI("DeploymentNumber").Integer(v.DeploymentNumber); err != nil {
 			return err
 		}

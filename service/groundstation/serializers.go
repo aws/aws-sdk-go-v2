@@ -329,7 +329,7 @@ func awsRestjson1_serializeOpDocumentCreateMissionProfileInput(v *CreateMissionP
 		}
 	}
 
-	if v.MinimumViableContactDurationSeconds != 0 {
+	{
 		ok := object.Key("minimumViableContactDurationSeconds")
 		ok.Integer(v.MinimumViableContactDurationSeconds)
 	}

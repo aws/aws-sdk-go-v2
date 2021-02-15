@@ -7750,7 +7750,7 @@ func awsRestjson1_serializeDocumentKinesisVideoStreamConfig(v *types.KinesisVide
 		ok.String(*v.Prefix)
 	}
 
-	if v.RetentionPeriodHours != 0 {
+	{
 		ok := object.Key("RetentionPeriodHours")
 		ok.Integer(v.RetentionPeriodHours)
 	}
@@ -7797,7 +7797,7 @@ func awsRestjson1_serializeDocumentMediaConcurrency(v *types.MediaConcurrency, v
 		ok.String(string(v.Channel))
 	}
 
-	if v.Concurrency != 0 {
+	{
 		ok := object.Key("Concurrency")
 		ok.Integer(v.Concurrency)
 	}
@@ -7911,12 +7911,12 @@ func awsRestjson1_serializeDocumentRoutingProfileQueueConfig(v *types.RoutingPro
 	object := value.Object()
 	defer object.Close()
 
-	if v.Delay != 0 {
+	{
 		ok := object.Key("Delay")
 		ok.Integer(v.Delay)
 	}
 
-	if v.Priority != 0 {
+	{
 		ok := object.Key("Priority")
 		ok.Integer(v.Priority)
 	}

@@ -407,7 +407,7 @@ func awsRestxml_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smith
 			return err
 		}
 	}
-	if v.Priority != 0 {
+	{
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -3078,7 +3078,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateJobPriorityInput(v *UpdateJobPriori
 		}
 	}
 
-	if v.Priority != 0 {
+	{
 		encoder.SetQuery("priority").Integer(v.Priority)
 	}
 
@@ -3573,7 +3573,7 @@ func awsRestxml_serializeDocumentJobReport(v *types.JobReport, value smithyxml.V
 		el := value.MemberElement(root)
 		el.String(*v.Bucket)
 	}
-	if v.Enabled {
+	{
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -5004,7 +5004,7 @@ func awsRestxml_serializeDocumentStorageLensConfiguration(v *types.StorageLensCo
 			return err
 		}
 	}
-	if v.IsEnabled {
+	{
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{

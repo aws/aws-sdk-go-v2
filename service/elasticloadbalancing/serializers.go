@@ -1646,7 +1646,7 @@ func awsAwsquery_serializeDocumentAccessLog(v *types.AccessLog, value query.Valu
 		objectKey.Integer(*v.EmitInterval)
 	}
 
-	if v.Enabled {
+	{
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(v.Enabled)
 	}
@@ -1713,7 +1713,7 @@ func awsAwsquery_serializeDocumentConnectionDraining(v *types.ConnectionDraining
 	object := value.Object()
 	_ = object
 
-	if v.Enabled {
+	{
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(v.Enabled)
 	}
@@ -1742,7 +1742,7 @@ func awsAwsquery_serializeDocumentCrossZoneLoadBalancing(v *types.CrossZoneLoadB
 	object := value.Object()
 	_ = object
 
-	if v.Enabled {
+	{
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(v.Enabled)
 	}
@@ -1754,12 +1754,12 @@ func awsAwsquery_serializeDocumentHealthCheck(v *types.HealthCheck, value query.
 	object := value.Object()
 	_ = object
 
-	if v.HealthyThreshold != 0 {
+	{
 		objectKey := object.Key("HealthyThreshold")
 		objectKey.Integer(v.HealthyThreshold)
 	}
 
-	if v.Interval != 0 {
+	{
 		objectKey := object.Key("Interval")
 		objectKey.Integer(v.Interval)
 	}
@@ -1769,12 +1769,12 @@ func awsAwsquery_serializeDocumentHealthCheck(v *types.HealthCheck, value query.
 		objectKey.String(*v.Target)
 	}
 
-	if v.Timeout != 0 {
+	{
 		objectKey := object.Key("Timeout")
 		objectKey.Integer(v.Timeout)
 	}
 
-	if v.UnhealthyThreshold != 0 {
+	{
 		objectKey := object.Key("UnhealthyThreshold")
 		objectKey.Integer(v.UnhealthyThreshold)
 	}
@@ -1813,7 +1813,7 @@ func awsAwsquery_serializeDocumentListener(v *types.Listener, value query.Value)
 	object := value.Object()
 	_ = object
 
-	if v.InstancePort != 0 {
+	{
 		objectKey := object.Key("InstancePort")
 		objectKey.Integer(v.InstancePort)
 	}
@@ -1823,7 +1823,7 @@ func awsAwsquery_serializeDocumentListener(v *types.Listener, value query.Value)
 		objectKey.String(*v.InstanceProtocol)
 	}
 
-	if v.LoadBalancerPort != 0 {
+	{
 		objectKey := object.Key("LoadBalancerPort")
 		objectKey.Integer(v.LoadBalancerPort)
 	}
@@ -2613,7 +2613,7 @@ func awsAwsquery_serializeOpDocumentSetLoadBalancerListenerSSLCertificateInput(v
 		objectKey.String(*v.LoadBalancerName)
 	}
 
-	if v.LoadBalancerPort != 0 {
+	{
 		objectKey := object.Key("LoadBalancerPort")
 		objectKey.Integer(v.LoadBalancerPort)
 	}
@@ -2659,7 +2659,7 @@ func awsAwsquery_serializeOpDocumentSetLoadBalancerPoliciesOfListenerInput(v *Se
 		objectKey.String(*v.LoadBalancerName)
 	}
 
-	if v.LoadBalancerPort != 0 {
+	{
 		objectKey := object.Key("LoadBalancerPort")
 		objectKey.Integer(v.LoadBalancerPort)
 	}

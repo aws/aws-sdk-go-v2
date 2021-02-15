@@ -3710,7 +3710,7 @@ func awsAwsquery_serializeDocumentConfigureShard(v *types.ConfigureShard, value 
 	object := value.Object()
 	_ = object
 
-	if v.NewReplicaCount != 0 {
+	{
 		objectKey := object.Key("NewReplicaCount")
 		objectKey.Integer(v.NewReplicaCount)
 	}
@@ -4926,7 +4926,7 @@ func awsAwsquery_serializeOpDocumentDecreaseNodeGroupsInGlobalReplicationGroupIn
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately {
+	{
 		objectKey := object.Key("ApplyImmediately")
 		objectKey.Boolean(v.ApplyImmediately)
 	}
@@ -4950,7 +4950,7 @@ func awsAwsquery_serializeOpDocumentDecreaseNodeGroupsInGlobalReplicationGroupIn
 		objectKey.String(*v.GlobalReplicationGroupId)
 	}
 
-	if v.NodeGroupCount != 0 {
+	{
 		objectKey := object.Key("NodeGroupCount")
 		objectKey.Integer(v.NodeGroupCount)
 	}
@@ -4962,7 +4962,7 @@ func awsAwsquery_serializeOpDocumentDecreaseReplicaCountInput(v *DecreaseReplica
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately {
+	{
 		objectKey := object.Key("ApplyImmediately")
 		objectKey.Boolean(v.ApplyImmediately)
 	}
@@ -5056,7 +5056,7 @@ func awsAwsquery_serializeOpDocumentDeleteGlobalReplicationGroupInput(v *DeleteG
 		objectKey.String(*v.GlobalReplicationGroupId)
 	}
 
-	if v.RetainPrimaryReplicationGroup {
+	{
 		objectKey := object.Key("RetainPrimaryReplicationGroup")
 		objectKey.Boolean(v.RetainPrimaryReplicationGroup)
 	}
@@ -5728,7 +5728,7 @@ func awsAwsquery_serializeOpDocumentIncreaseNodeGroupsInGlobalReplicationGroupIn
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately {
+	{
 		objectKey := object.Key("ApplyImmediately")
 		objectKey.Boolean(v.ApplyImmediately)
 	}
@@ -5738,7 +5738,7 @@ func awsAwsquery_serializeOpDocumentIncreaseNodeGroupsInGlobalReplicationGroupIn
 		objectKey.String(*v.GlobalReplicationGroupId)
 	}
 
-	if v.NodeGroupCount != 0 {
+	{
 		objectKey := object.Key("NodeGroupCount")
 		objectKey.Integer(v.NodeGroupCount)
 	}
@@ -5757,7 +5757,7 @@ func awsAwsquery_serializeOpDocumentIncreaseReplicaCountInput(v *IncreaseReplica
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately {
+	{
 		objectKey := object.Key("ApplyImmediately")
 		objectKey.Boolean(v.ApplyImmediately)
 	}
@@ -5968,7 +5968,7 @@ func awsAwsquery_serializeOpDocumentModifyGlobalReplicationGroupInput(v *ModifyG
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately {
+	{
 		objectKey := object.Key("ApplyImmediately")
 		objectKey.Boolean(v.ApplyImmediately)
 	}
@@ -6140,12 +6140,12 @@ func awsAwsquery_serializeOpDocumentModifyReplicationGroupShardConfigurationInpu
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately {
+	{
 		objectKey := object.Key("ApplyImmediately")
 		objectKey.Boolean(v.ApplyImmediately)
 	}
 
-	if v.NodeGroupCount != 0 {
+	{
 		objectKey := object.Key("NodeGroupCount")
 		objectKey.Integer(v.NodeGroupCount)
 	}
@@ -6265,7 +6265,7 @@ func awsAwsquery_serializeOpDocumentRebalanceSlotsInGlobalReplicationGroupInput(
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately {
+	{
 		objectKey := object.Key("ApplyImmediately")
 		objectKey.Boolean(v.ApplyImmediately)
 	}

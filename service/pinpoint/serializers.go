@@ -10204,12 +10204,12 @@ func awsRestjson1_serializeDocumentGPSCoordinates(v *types.GPSCoordinates, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.Latitude != 0 {
+	{
 		ok := object.Key("Latitude")
 		ok.Double(v.Latitude)
 	}
 
-	if v.Longitude != 0 {
+	{
 		ok := object.Key("Longitude")
 		ok.Double(v.Longitude)
 	}
@@ -10245,7 +10245,7 @@ func awsRestjson1_serializeDocumentHoldoutActivity(v *types.HoldoutActivity, val
 		ok.String(*v.NextActivity)
 	}
 
-	if v.Percentage != 0 {
+	{
 		ok := object.Key("Percentage")
 		ok.Integer(v.Percentage)
 	}
@@ -10857,7 +10857,7 @@ func awsRestjson1_serializeDocumentMetricDimension(v *types.MetricDimension, val
 		ok.String(*v.ComparisonOperator)
 	}
 
-	if v.Value != 0 {
+	{
 		ok := object.Key("Value")
 		ok.Double(v.Value)
 	}
@@ -12301,7 +12301,7 @@ func awsRestjson1_serializeDocumentWriteTreatmentResource(v *types.WriteTreatmen
 		}
 	}
 
-	if v.SizePercent != 0 {
+	{
 		ok := object.Key("SizePercent")
 		ok.Integer(v.SizePercent)
 	}

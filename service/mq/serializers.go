@@ -1879,7 +1879,7 @@ func awsRestjson1_serializeDocumentEncryptionOptions(v *types.EncryptionOptions,
 		ok.String(*v.KmsKeyId)
 	}
 
-	if v.UseAwsOwnedKey {
+	{
 		ok := object.Key("useAwsOwnedKey")
 		ok.Boolean(v.UseAwsOwnedKey)
 	}

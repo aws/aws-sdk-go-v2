@@ -271,7 +271,7 @@ func awsRestjson1_serializeOpDocumentCreateJobQueueInput(v *CreateJobQueueInput,
 		ok.String(*v.JobQueueName)
 	}
 
-	if v.Priority != 0 {
+	{
 		ok := object.Key("priority")
 		ok.Integer(v.Priority)
 	}
@@ -1723,7 +1723,7 @@ func awsRestjson1_serializeDocumentComputeEnvironmentOrder(v *types.ComputeEnvir
 		ok.String(*v.ComputeEnvironment)
 	}
 
-	if v.Order != 0 {
+	{
 		ok := object.Key("order")
 		ok.Integer(v.Order)
 	}
@@ -1799,7 +1799,7 @@ func awsRestjson1_serializeDocumentComputeResource(v *types.ComputeResource, val
 		}
 	}
 
-	if v.MaxvCpus != 0 {
+	{
 		ok := object.Key("maxvCpus")
 		ok.Integer(v.MaxvCpus)
 	}
@@ -2440,7 +2440,7 @@ func awsRestjson1_serializeDocumentNodeProperties(v *types.NodeProperties, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.MainNode != 0 {
+	{
 		ok := object.Key("mainNode")
 		ok.Integer(v.MainNode)
 	}
@@ -2452,7 +2452,7 @@ func awsRestjson1_serializeDocumentNodeProperties(v *types.NodeProperties, value
 		}
 	}
 
-	if v.NumNodes != 0 {
+	{
 		ok := object.Key("numNodes")
 		ok.Integer(v.NumNodes)
 	}
@@ -2674,7 +2674,7 @@ func awsRestjson1_serializeDocumentTmpfs(v *types.Tmpfs, value smithyjson.Value)
 		}
 	}
 
-	if v.Size != 0 {
+	{
 		ok := object.Key("size")
 		ok.Integer(v.Size)
 	}
@@ -2699,7 +2699,7 @@ func awsRestjson1_serializeDocumentUlimit(v *types.Ulimit, value smithyjson.Valu
 	object := value.Object()
 	defer object.Close()
 
-	if v.HardLimit != 0 {
+	{
 		ok := object.Key("hardLimit")
 		ok.Integer(v.HardLimit)
 	}
@@ -2709,7 +2709,7 @@ func awsRestjson1_serializeDocumentUlimit(v *types.Ulimit, value smithyjson.Valu
 		ok.String(*v.Name)
 	}
 
-	if v.SoftLimit != 0 {
+	{
 		ok := object.Key("softLimit")
 		ok.Integer(v.SoftLimit)
 	}

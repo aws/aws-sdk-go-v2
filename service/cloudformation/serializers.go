@@ -4007,7 +4007,7 @@ func awsAwsquery_serializeOpDocumentDeleteStackInstancesInput(v *DeleteStackInst
 		}
 	}
 
-	if v.RetainStacks {
+	{
 		objectKey := object.Key("RetainStacks")
 		objectKey.Boolean(v.RetainStacks)
 	}

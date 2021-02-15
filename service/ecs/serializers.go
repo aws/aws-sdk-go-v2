@@ -3032,12 +3032,12 @@ func awsAwsjson11_serializeDocumentDeploymentCircuitBreaker(v *types.DeploymentC
 	object := value.Object()
 	defer object.Close()
 
-	if v.Enable {
+	{
 		ok := object.Key("enable")
 		ok.Boolean(v.Enable)
 	}
 
-	if v.Rollback {
+	{
 		ok := object.Key("rollback")
 		ok.Boolean(v.Rollback)
 	}
@@ -4328,7 +4328,7 @@ func awsAwsjson11_serializeDocumentTmpfs(v *types.Tmpfs, value smithyjson.Value)
 		}
 	}
 
-	if v.Size != 0 {
+	{
 		ok := object.Key("size")
 		ok.Integer(v.Size)
 	}
@@ -4353,7 +4353,7 @@ func awsAwsjson11_serializeDocumentUlimit(v *types.Ulimit, value smithyjson.Valu
 	object := value.Object()
 	defer object.Close()
 
-	if v.HardLimit != 0 {
+	{
 		ok := object.Key("hardLimit")
 		ok.Integer(v.HardLimit)
 	}
@@ -4363,7 +4363,7 @@ func awsAwsjson11_serializeDocumentUlimit(v *types.Ulimit, value smithyjson.Valu
 		ok.String(string(v.Name))
 	}
 
-	if v.SoftLimit != 0 {
+	{
 		ok := object.Key("softLimit")
 		ok.Integer(v.SoftLimit)
 	}

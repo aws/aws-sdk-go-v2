@@ -2315,7 +2315,7 @@ func awsRestjson1_serializeDocumentSamplingRule(v *types.SamplingRule, value smi
 		}
 	}
 
-	if v.FixedRate != 0 {
+	{
 		ok := object.Key("FixedRate")
 		ok.Double(v.FixedRate)
 	}
@@ -2330,12 +2330,12 @@ func awsRestjson1_serializeDocumentSamplingRule(v *types.SamplingRule, value smi
 		ok.String(*v.HTTPMethod)
 	}
 
-	if v.Priority != 0 {
+	{
 		ok := object.Key("Priority")
 		ok.Integer(v.Priority)
 	}
 
-	if v.ReservoirSize != 0 {
+	{
 		ok := object.Key("ReservoirSize")
 		ok.Integer(v.ReservoirSize)
 	}
@@ -2370,7 +2370,7 @@ func awsRestjson1_serializeDocumentSamplingRule(v *types.SamplingRule, value smi
 		ok.String(*v.URLPath)
 	}
 
-	if v.Version != 0 {
+	{
 		ok := object.Key("Version")
 		ok.Integer(v.Version)
 	}
@@ -2461,7 +2461,7 @@ func awsRestjson1_serializeDocumentSamplingStatisticsDocument(v *types.SamplingS
 		ok.String(*v.ClientID)
 	}
 
-	if v.RequestCount != 0 {
+	{
 		ok := object.Key("RequestCount")
 		ok.Integer(v.RequestCount)
 	}
@@ -2471,7 +2471,7 @@ func awsRestjson1_serializeDocumentSamplingStatisticsDocument(v *types.SamplingS
 		ok.String(*v.RuleName)
 	}
 
-	if v.SampledCount != 0 {
+	{
 		ok := object.Key("SampledCount")
 		ok.Integer(v.SampledCount)
 	}

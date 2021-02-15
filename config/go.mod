@@ -10,7 +10,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.1.1
 	github.com/aws/smithy-go v1.1.0
 	github.com/google/go-cmp v0.5.4
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.0.2
 )
 
 replace (

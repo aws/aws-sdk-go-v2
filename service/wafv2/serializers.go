@@ -2329,7 +2329,7 @@ func awsAwsjson11_serializeDocumentRateBasedStatement(v *types.RateBasedStatemen
 		}
 	}
 
-	if v.Limit != 0 {
+	{
 		ok := object.Key("Limit")
 		ok.Long(v.Limit)
 	}
@@ -2431,7 +2431,7 @@ func awsAwsjson11_serializeDocumentRule(v *types.Rule, value smithyjson.Value) e
 		}
 	}
 
-	if v.Priority != 0 {
+	{
 		ok := object.Key("Priority")
 		ok.Integer(v.Priority)
 	}
@@ -2553,7 +2553,7 @@ func awsAwsjson11_serializeDocumentSizeConstraintStatement(v *types.SizeConstrai
 		}
 	}
 
-	if v.Size != 0 {
+	{
 		ok := object.Key("Size")
 		ok.Long(v.Size)
 	}
@@ -2745,7 +2745,7 @@ func awsAwsjson11_serializeDocumentTextTransformation(v *types.TextTransformatio
 	object := value.Object()
 	defer object.Close()
 
-	if v.Priority != 0 {
+	{
 		ok := object.Key("Priority")
 		ok.Integer(v.Priority)
 	}
@@ -2799,7 +2799,7 @@ func awsAwsjson11_serializeDocumentVisibilityConfig(v *types.VisibilityConfig, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.CloudWatchMetricsEnabled {
+	{
 		ok := object.Key("CloudWatchMetricsEnabled")
 		ok.Boolean(v.CloudWatchMetricsEnabled)
 	}
@@ -2809,7 +2809,7 @@ func awsAwsjson11_serializeDocumentVisibilityConfig(v *types.VisibilityConfig, v
 		ok.String(*v.MetricName)
 	}
 
-	if v.SampledRequestsEnabled {
+	{
 		ok := object.Key("SampledRequestsEnabled")
 		ok.Boolean(v.SampledRequestsEnabled)
 	}
@@ -2955,7 +2955,7 @@ func awsAwsjson11_serializeOpDocumentCreateRuleGroupInput(v *CreateRuleGroupInpu
 	object := value.Object()
 	defer object.Close()
 
-	if v.Capacity != 0 {
+	{
 		ok := object.Key("Capacity")
 		ok.Long(v.Capacity)
 	}
@@ -3353,7 +3353,7 @@ func awsAwsjson11_serializeOpDocumentGetSampledRequestsInput(v *GetSampledReques
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxItems != 0 {
+	{
 		ok := object.Key("MaxItems")
 		ok.Long(v.MaxItems)
 	}

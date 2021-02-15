@@ -9028,7 +9028,7 @@ func awsRestjson1_serializeDocumentAuroraParameters(v *types.AuroraParameters, v
 		ok.String(*v.Host)
 	}
 
-	if v.Port != 0 {
+	{
 		ok := object.Key("Port")
 		ok.Integer(v.Port)
 	}
@@ -9050,7 +9050,7 @@ func awsRestjson1_serializeDocumentAuroraPostgreSqlParameters(v *types.AuroraPos
 		ok.String(*v.Host)
 	}
 
-	if v.Port != 0 {
+	{
 		ok := object.Key("Port")
 		ok.Integer(v.Port)
 	}
@@ -10065,7 +10065,7 @@ func awsRestjson1_serializeDocumentMariaDbParameters(v *types.MariaDbParameters,
 		ok.String(*v.Host)
 	}
 
-	if v.Port != 0 {
+	{
 		ok := object.Key("Port")
 		ok.Integer(v.Port)
 	}
@@ -10087,7 +10087,7 @@ func awsRestjson1_serializeDocumentMySqlParameters(v *types.MySqlParameters, val
 		ok.String(*v.Host)
 	}
 
-	if v.Port != 0 {
+	{
 		ok := object.Key("Port")
 		ok.Integer(v.Port)
 	}
@@ -10109,7 +10109,7 @@ func awsRestjson1_serializeDocumentOracleParameters(v *types.OracleParameters, v
 		ok.String(*v.Host)
 	}
 
-	if v.Port != 0 {
+	{
 		ok := object.Key("Port")
 		ok.Integer(v.Port)
 	}
@@ -10212,7 +10212,7 @@ func awsRestjson1_serializeDocumentPostgreSqlParameters(v *types.PostgreSqlParam
 		ok.String(*v.Host)
 	}
 
-	if v.Port != 0 {
+	{
 		ok := object.Key("Port")
 		ok.Integer(v.Port)
 	}
@@ -10234,7 +10234,7 @@ func awsRestjson1_serializeDocumentPrestoParameters(v *types.PrestoParameters, v
 		ok.String(*v.Host)
 	}
 
-	if v.Port != 0 {
+	{
 		ok := object.Key("Port")
 		ok.Integer(v.Port)
 	}
@@ -10543,7 +10543,7 @@ func awsRestjson1_serializeDocumentSparkParameters(v *types.SparkParameters, val
 		ok.String(*v.Host)
 	}
 
-	if v.Port != 0 {
+	{
 		ok := object.Key("Port")
 		ok.Integer(v.Port)
 	}
@@ -10565,7 +10565,7 @@ func awsRestjson1_serializeDocumentSqlServerParameters(v *types.SqlServerParamet
 		ok.String(*v.Host)
 	}
 
-	if v.Port != 0 {
+	{
 		ok := object.Key("Port")
 		ok.Integer(v.Port)
 	}
@@ -10743,7 +10743,7 @@ func awsRestjson1_serializeDocumentTeradataParameters(v *types.TeradataParameter
 		ok.String(*v.Host)
 	}
 
-	if v.Port != 0 {
+	{
 		ok := object.Key("Port")
 		ok.Integer(v.Port)
 	}
@@ -10893,7 +10893,7 @@ func awsRestjson1_serializeDocumentTwitterParameters(v *types.TwitterParameters,
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxRows != 0 {
+	{
 		ok := object.Key("MaxRows")
 		ok.Integer(v.MaxRows)
 	}

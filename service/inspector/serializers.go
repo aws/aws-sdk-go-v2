@@ -2268,7 +2268,7 @@ func awsAwsjson11_serializeOpDocumentCreateAssessmentTemplateInput(v *CreateAsse
 		ok.String(*v.AssessmentTemplateName)
 	}
 
-	if v.DurationInSeconds != 0 {
+	{
 		ok := object.Key("durationInSeconds")
 		ok.Integer(v.DurationInSeconds)
 	}

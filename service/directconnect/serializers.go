@@ -2693,7 +2693,7 @@ func awsAwsjson11_serializeDocumentNewPrivateVirtualInterface(v *types.NewPrivat
 		ok.String(*v.AmazonAddress)
 	}
 
-	if v.Asn != 0 {
+	{
 		ok := object.Key("asn")
 		ok.Integer(v.Asn)
 	}
@@ -2735,7 +2735,7 @@ func awsAwsjson11_serializeDocumentNewPrivateVirtualInterface(v *types.NewPrivat
 		ok.String(*v.VirtualInterfaceName)
 	}
 
-	if v.Vlan != 0 {
+	{
 		ok := object.Key("vlan")
 		ok.Integer(v.Vlan)
 	}
@@ -2757,7 +2757,7 @@ func awsAwsjson11_serializeDocumentNewPrivateVirtualInterfaceAllocation(v *types
 		ok.String(*v.AmazonAddress)
 	}
 
-	if v.Asn != 0 {
+	{
 		ok := object.Key("asn")
 		ok.Integer(v.Asn)
 	}
@@ -2789,7 +2789,7 @@ func awsAwsjson11_serializeDocumentNewPrivateVirtualInterfaceAllocation(v *types
 		ok.String(*v.VirtualInterfaceName)
 	}
 
-	if v.Vlan != 0 {
+	{
 		ok := object.Key("vlan")
 		ok.Integer(v.Vlan)
 	}
@@ -2811,7 +2811,7 @@ func awsAwsjson11_serializeDocumentNewPublicVirtualInterface(v *types.NewPublicV
 		ok.String(*v.AmazonAddress)
 	}
 
-	if v.Asn != 0 {
+	{
 		ok := object.Key("asn")
 		ok.Integer(v.Asn)
 	}
@@ -2845,7 +2845,7 @@ func awsAwsjson11_serializeDocumentNewPublicVirtualInterface(v *types.NewPublicV
 		ok.String(*v.VirtualInterfaceName)
 	}
 
-	if v.Vlan != 0 {
+	{
 		ok := object.Key("vlan")
 		ok.Integer(v.Vlan)
 	}
@@ -2867,7 +2867,7 @@ func awsAwsjson11_serializeDocumentNewPublicVirtualInterfaceAllocation(v *types.
 		ok.String(*v.AmazonAddress)
 	}
 
-	if v.Asn != 0 {
+	{
 		ok := object.Key("asn")
 		ok.Integer(v.Asn)
 	}
@@ -2901,7 +2901,7 @@ func awsAwsjson11_serializeDocumentNewPublicVirtualInterfaceAllocation(v *types.
 		ok.String(*v.VirtualInterfaceName)
 	}
 
-	if v.Vlan != 0 {
+	{
 		ok := object.Key("vlan")
 		ok.Integer(v.Vlan)
 	}
@@ -3152,7 +3152,7 @@ func awsAwsjson11_serializeOpDocumentAllocateConnectionOnInterconnectInput(v *Al
 		ok.String(*v.OwnerAccount)
 	}
 
-	if v.Vlan != 0 {
+	{
 		ok := object.Key("vlan")
 		ok.Integer(v.Vlan)
 	}
@@ -3191,7 +3191,7 @@ func awsAwsjson11_serializeOpDocumentAllocateHostedConnectionInput(v *AllocateHo
 		}
 	}
 
-	if v.Vlan != 0 {
+	{
 		ok := object.Key("vlan")
 		ok.Integer(v.Vlan)
 	}
@@ -3595,7 +3595,7 @@ func awsAwsjson11_serializeOpDocumentCreateLagInput(v *CreateLagInput, value smi
 		ok.String(*v.Location)
 	}
 
-	if v.NumberOfConnections != 0 {
+	{
 		ok := object.Key("numberOfConnections")
 		ok.Integer(v.NumberOfConnections)
 	}

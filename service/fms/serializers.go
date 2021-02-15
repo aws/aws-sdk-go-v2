@@ -1355,7 +1355,7 @@ func awsAwsjson11_serializeDocumentPolicy(v *types.Policy, value smithyjson.Valu
 		}
 	}
 
-	if v.ExcludeResourceTags {
+	{
 		ok := object.Key("ExcludeResourceTags")
 		ok.Boolean(v.ExcludeResourceTags)
 	}
@@ -1382,7 +1382,7 @@ func awsAwsjson11_serializeDocumentPolicy(v *types.Policy, value smithyjson.Valu
 		ok.String(*v.PolicyUpdateToken)
 	}
 
-	if v.RemediationEnabled {
+	{
 		ok := object.Key("RemediationEnabled")
 		ok.Boolean(v.RemediationEnabled)
 	}

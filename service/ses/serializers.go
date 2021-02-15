@@ -5821,7 +5821,7 @@ func awsAwsquery_serializeOpDocumentSetIdentityDkimEnabledInput(v *SetIdentityDk
 	object := value.Object()
 	_ = object
 
-	if v.DkimEnabled {
+	{
 		objectKey := object.Key("DkimEnabled")
 		objectKey.Boolean(v.DkimEnabled)
 	}
@@ -5838,7 +5838,7 @@ func awsAwsquery_serializeOpDocumentSetIdentityFeedbackForwardingEnabledInput(v 
 	object := value.Object()
 	_ = object
 
-	if v.ForwardingEnabled {
+	{
 		objectKey := object.Key("ForwardingEnabled")
 		objectKey.Boolean(v.ForwardingEnabled)
 	}
@@ -5855,7 +5855,7 @@ func awsAwsquery_serializeOpDocumentSetIdentityHeadersInNotificationsEnabledInpu
 	object := value.Object()
 	_ = object
 
-	if v.Enabled {
+	{
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(v.Enabled)
 	}
@@ -5996,7 +5996,7 @@ func awsAwsquery_serializeOpDocumentUpdateConfigurationSetReputationMetricsEnabl
 		objectKey.String(*v.ConfigurationSetName)
 	}
 
-	if v.Enabled {
+	{
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(v.Enabled)
 	}
@@ -6013,7 +6013,7 @@ func awsAwsquery_serializeOpDocumentUpdateConfigurationSetSendingEnabledInput(v 
 		objectKey.String(*v.ConfigurationSetName)
 	}
 
-	if v.Enabled {
+	{
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(v.Enabled)
 	}

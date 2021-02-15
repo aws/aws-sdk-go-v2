@@ -1412,7 +1412,7 @@ func awsAwsjson11_serializeOpDocumentCreateLogPatternInput(v *CreateLogPatternIn
 		ok.String(*v.PatternSetName)
 	}
 
-	if v.Rank != 0 {
+	{
 		ok := object.Key("Rank")
 		ok.Integer(v.Rank)
 	}

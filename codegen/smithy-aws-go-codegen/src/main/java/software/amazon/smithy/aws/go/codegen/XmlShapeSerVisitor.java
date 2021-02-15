@@ -151,7 +151,7 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
             writer.addUseImports(SmithyGoDependency.SMITHY_XML);
 
             GoValueAccessUtils.writeIfNonZeroValueMember(context.getModel(), context.getSymbolProvider(), writer,
-                    member, "v", (operand) -> {
+                    member, "v", true, member.isRequired(), (operand) -> {
                         XmlProtocolUtils.generateXMLStartElement(context, member, "root", "v");
 
                         // check if member shape has flattened trait

@@ -2768,7 +2768,7 @@ func awsAwsjson11_serializeOpDocumentDeleteOrganizationInput(v *DeleteOrganizati
 		ok.String(*v.ClientToken)
 	}
 
-	if v.DeleteDirectory {
+	{
 		ok := object.Key("DeleteDirectory")
 		ok.Boolean(v.DeleteDirectory)
 	}

@@ -115,7 +115,7 @@ public final class XmlProtocolUtils {
         shape.members().stream().forEach(memberShape -> {
             if (memberShape.hasTrait(XmlAttributeTrait.class)) {
                 GoValueAccessUtils.writeIfNonZeroValueMember(context.getModel(), context.getSymbolProvider(),
-                        writer, memberShape, inputSrc, (operand) -> {
+                        writer, memberShape, inputSrc, true, memberShape.isRequired(), (operand) -> {
                             // xml attributes should always be string
                             String dest = "av";
                             formatXmlAttributeValueAsString(context, memberShape, operand, dest);

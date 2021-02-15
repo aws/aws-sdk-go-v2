@@ -1712,7 +1712,7 @@ func awsRestjson1_serializeDocumentLoggingOptions(v *types.LoggingOptions, value
 		}
 	}
 
-	if v.Enabled {
+	{
 		ok := object.Key("enabled")
 		ok.Boolean(v.Enabled)
 	}

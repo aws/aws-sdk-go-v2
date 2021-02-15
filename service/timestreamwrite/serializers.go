@@ -814,12 +814,12 @@ func awsAwsjson10_serializeDocumentRetentionProperties(v *types.RetentionPropert
 	object := value.Object()
 	defer object.Close()
 
-	if v.MagneticStoreRetentionPeriodInDays != 0 {
+	{
 		ok := object.Key("MagneticStoreRetentionPeriodInDays")
 		ok.Long(v.MagneticStoreRetentionPeriodInDays)
 	}
 
-	if v.MemoryStoreRetentionPeriodInHours != 0 {
+	{
 		ok := object.Key("MemoryStoreRetentionPeriodInHours")
 		ok.Long(v.MemoryStoreRetentionPeriodInHours)
 	}

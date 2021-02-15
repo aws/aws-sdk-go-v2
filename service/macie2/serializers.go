@@ -3789,7 +3789,7 @@ func awsRestjson1_serializeOpDocumentUpdateOrganizationConfigurationInput(v *Upd
 	object := value.Object()
 	defer object.Close()
 
-	if v.AutoEnable {
+	{
 		ok := object.Key("autoEnable")
 		ok.Boolean(v.AutoEnable)
 	}

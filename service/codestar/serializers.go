@@ -936,7 +936,7 @@ func awsAwsjson11_serializeDocumentGitHubCodeDestination(v *types.GitHubCodeDest
 		ok.String(*v.Description)
 	}
 
-	if v.IssuesEnabled {
+	{
 		ok := object.Key("issuesEnabled")
 		ok.Boolean(v.IssuesEnabled)
 	}
@@ -951,7 +951,7 @@ func awsAwsjson11_serializeDocumentGitHubCodeDestination(v *types.GitHubCodeDest
 		ok.String(*v.Owner)
 	}
 
-	if v.PrivateRepository {
+	{
 		ok := object.Key("privateRepository")
 		ok.Boolean(v.PrivateRepository)
 	}
