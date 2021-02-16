@@ -69,6 +69,14 @@ public class PresignURLAutoFill implements GoIntegration {
                     ShapeId.from("com.amazonaws.rds#CopyDBClusterSnapshot"),
                     ShapeId.from("com.amazonaws.rds#CreateDBCluster")),
 
+            ShapeId.from("com.amazonaws.neptune#AmazonRDSv19"), SetUtils.of(
+                    ShapeId.from("com.amazonaws.neptune#CopyDBClusterSnapshot"),
+                    ShapeId.from("com.amazonaws.neptune#CreateDBCluster")),
+
+            ShapeId.from("com.amazonaws.docdb#AmazonRDSv19"), SetUtils.of(
+                    ShapeId.from("com.amazonaws.docdb#CopyDBClusterSnapshot"),
+                    ShapeId.from("com.amazonaws.docdb#CreateDBCluster")),
+
             ShapeId.from("com.amazonaws.ec2#AmazonEC2"), SetUtils.of(
                     ShapeId.from("com.amazonaws.ec2#CopySnapshot"))
 

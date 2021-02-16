@@ -4,9 +4,11 @@ package docdb
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -151,6 +153,10 @@ type CreateDBClusterInput struct {
 	// Fri, Sat, Sun Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
+	// The AWS region the resource is in. The presigned URL will be created with this
+	// region, if the PresignURL member is empty set.
+	SourceRegion *string
+
 	// Specifies whether the cluster is encrypted.
 	StorageEncrypted *bool
 
@@ -159,6 +165,10 @@ type CreateDBClusterInput struct {
 
 	// A list of EC2 VPC security groups to associate with this cluster.
 	VpcSecurityGroupIds []string
+
+	// Used by the SDK's PresignURL autofill customization to specify the region the of
+	// the client's request.
+	destinationRegion *string
 }
 
 type CreateDBClusterOutput struct {
@@ -215,6 +225,9 @@ func addOperationCreateDBClusterMiddlewares(stack *middleware.Stack, options Opt
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addCreateDBClusterPresignURLMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateDBClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -233,6 +246,85 @@ func addOperationCreateDBClusterMiddlewares(stack *middleware.Stack, options Opt
 	return nil
 }
 
+func copyCreateDBClusterInputForPresign(params interface{}) (interface{}, error) {
+	input, ok := params.(*CreateDBClusterInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *CreateDBClusterInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getCreateDBClusterPreSignedUrl(params interface{}) (string, bool, error) {
+	input, ok := params.(*CreateDBClusterInput)
+	if !ok {
+		return ``, false, fmt.Errorf("expect *CreateDBClusterInput type, got %T", params)
+	}
+	if input.PreSignedUrl == nil || len(*input.PreSignedUrl) == 0 {
+		return ``, false, nil
+	}
+	return *input.PreSignedUrl, true, nil
+}
+func getCreateDBClusterSourceRegion(params interface{}) (string, bool, error) {
+	input, ok := params.(*CreateDBClusterInput)
+	if !ok {
+		return ``, false, fmt.Errorf("expect *CreateDBClusterInput type, got %T", params)
+	}
+	if input.SourceRegion == nil || len(*input.SourceRegion) == 0 {
+		return ``, false, nil
+	}
+	return *input.SourceRegion, true, nil
+}
+func setCreateDBClusterPreSignedUrl(params interface{}, value string) error {
+	input, ok := params.(*CreateDBClusterInput)
+	if !ok {
+		return fmt.Errorf("expect *CreateDBClusterInput type, got %T", params)
+	}
+	input.PreSignedUrl = &value
+	return nil
+}
+func setCreateDBClusterdestinationRegion(params interface{}, value string) error {
+	input, ok := params.(*CreateDBClusterInput)
+	if !ok {
+		return fmt.Errorf("expect *CreateDBClusterInput type, got %T", params)
+	}
+	input.destinationRegion = &value
+	return nil
+}
+func addCreateDBClusterPresignURLMiddleware(stack *middleware.Stack, options Options) error {
+	return presignedurlcust.AddMiddleware(stack, presignedurlcust.Options{
+		Accessor: presignedurlcust.ParameterAccessor{
+			GetPresignedURL: getCreateDBClusterPreSignedUrl,
+
+			GetSourceRegion: getCreateDBClusterSourceRegion,
+
+			CopyInput: copyCreateDBClusterInputForPresign,
+
+			SetDestinationRegion: setCreateDBClusterdestinationRegion,
+
+			SetPresignedURL: setCreateDBClusterPreSignedUrl,
+		},
+		Presigner: &presignAutoFillCreateDBClusterClient{client: NewPresignClient(New(options))},
+	})
+}
+
+type presignAutoFillCreateDBClusterClient struct {
+	client *PresignClient
+}
+
+// PresignURL is a middleware accessor that satisfies URLPresigner interface.
+func (c *presignAutoFillCreateDBClusterClient) PresignURL(ctx context.Context, srcRegion string, params interface{}) (*v4.PresignedHTTPRequest, error) {
+	input, ok := params.(*CreateDBClusterInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *CreateDBClusterInput type, got %T", params)
+	}
+	optFn := func(o *Options) {
+		o.Region = srcRegion
+		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
+	}
+	presignOptFn := WithPresignClientFromClientOptions(optFn)
+	return c.client.PresignCreateDBCluster(ctx, input, presignOptFn)
+}
+
 func newServiceMetadataMiddleware_opCreateDBCluster(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
@@ -240,4 +332,28 @@ func newServiceMetadataMiddleware_opCreateDBCluster(region string) *awsmiddlewar
 		SigningName:   "rds",
 		OperationName: "CreateDBCluster",
 	}
+}
+
+// PresignCreateDBCluster is used to generate a presigned HTTP Request which
+// contains presigned URL, signed headers and HTTP method used.
+func (c *PresignClient) PresignCreateDBCluster(ctx context.Context, params *CreateDBClusterInput, optFns ...func(*PresignOptions)) (*v4.PresignedHTTPRequest, error) {
+	if params == nil {
+		params = &CreateDBClusterInput{}
+	}
+	options := c.options.copy()
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	clientOptFns := append(options.ClientOptions, withNopHTTPClientAPIOption)
+
+	result, _, err := c.client.invokeOperation(ctx, "CreateDBCluster", params, clientOptFns,
+		addOperationCreateDBClusterMiddlewares,
+		presignConverter(options).convertToPresignMiddleware,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	out := result.(*v4.PresignedHTTPRequest)
+	return out, nil
 }
