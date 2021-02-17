@@ -22,8 +22,8 @@ import (
 	"strings"
 	"time"
 
-	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
-	signerCrypto "github.com/aws/aws-sdk-go-v2/aws/signer/v4a/internal/crypto"
+	signerCrypto "github.com/aws/aws-sdk-go-v2/service/s3/internal/v4a/internal/crypto"
+	v4Internal "github.com/aws/aws-sdk-go-v2/service/s3/internal/v4a/internal/v4"
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	"github.com/aws/smithy-go/logging"
 )

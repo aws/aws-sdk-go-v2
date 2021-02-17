@@ -3,6 +3,7 @@ package v4a
 import (
 	"context"
 	"encoding/hex"
+	"fmt"
 	"math/big"
 	"net/http"
 	"net/url"
@@ -12,8 +13,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4a/internal/crypto"
-	"github.com/aws/aws-sdk-go-v2/credentials"
+	"github.com/aws/aws-sdk-go-v2/service/s3/internal/v4a/internal/crypto"
 	"github.com/aws/smithy-go/logging"
 )
 
@@ -321,7 +321,7 @@ func buildSigner(t *testing.T, withToken bool) (*Signer, CredentialsProvider) {
 				t.Logf(format, v...)
 			})
 		}), &SymmetricCredentialAdaptor{
-			SymmetricProvider: credentials.StaticCredentialsProvider{
+			SymmetricProvider: staticCredentialsProvider{
 				Value: creds,
 			},
 		}
@@ -331,4 +331,23 @@ type loggerFunc func(format string, v ...interface{})
 
 func (l loggerFunc) Logf(_ logging.Classification, format string, v ...interface{}) {
 	l(format, v...)
+}
+
+type staticCredentialsProvider struct {
+	Value aws.Credentials
+}
+
+func (s staticCredentialsProvider) Retrieve(_ context.Context) (aws.Credentials, error) {
+	v := s.Value
+	if v.AccessKeyID == "" || v.SecretAccessKey == "" {
+		return aws.Credentials{
+			Source: "Source Name",
+		}, fmt.Errorf("static credentials are empty")
+	}
+
+	if len(v.Source) == 0 {
+		v.Source = "Source Name"
+	}
+
+	return v, nil
 }

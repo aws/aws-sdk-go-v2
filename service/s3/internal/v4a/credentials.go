@@ -43,21 +43,48 @@ func (v Credentials) HasKeys() bool {
 type SymmetricCredentialAdaptor struct {
 	SymmetricProvider aws.CredentialsProvider
 
-	creds atomic.Value
-	m     sync.Mutex
+	asymmetric atomic.Value
+	m          sync.Mutex
 }
 
-// RetrievePrivateKey returns credentials suitable for SigV4a signing
-func (s *SymmetricCredentialAdaptor) RetrievePrivateKey(ctx context.Context) (Credentials, error) {
-	if creds := s.getCreds(); creds != nil {
-		return *creds, nil
+// Retrieve retrieves symmetric credentials from the underlying provider.
+func (s *SymmetricCredentialAdaptor) Retrieve(ctx context.Context) (aws.Credentials, error) {
+	symCreds, err := s.retrieveFromSymmetricProvider(ctx)
+	if err != nil {
+		return aws.Credentials{}, nil
+	}
+
+	if asymCreds := s.getCreds(); asymCreds == nil {
+		return symCreds, nil
 	}
 
 	s.m.Lock()
 	defer s.m.Unlock()
 
-	if creds := s.getCreds(); creds != nil {
-		return *creds, nil
+	asymCreds := s.getCreds()
+	if asymCreds == nil {
+		return symCreds, nil
+	}
+
+	// if the context does not match the access key id clear it
+	if asymCreds.Context != symCreds.AccessKeyID {
+		s.asymmetric.Store((*Credentials)(nil))
+	}
+
+	return symCreds, nil
+}
+
+// RetrievePrivateKey returns credentials suitable for SigV4a signing
+func (s *SymmetricCredentialAdaptor) RetrievePrivateKey(ctx context.Context) (Credentials, error) {
+	if asymCreds := s.getCreds(); asymCreds != nil {
+		return *asymCreds, nil
+	}
+
+	s.m.Lock()
+	defer s.m.Unlock()
+
+	if asymCreds := s.getCreds(); asymCreds != nil {
+		return *asymCreds, nil
 	}
 
 	symmetricCreds, err := s.retrieveFromSymmetricProvider(ctx)
@@ -78,13 +105,13 @@ func (s *SymmetricCredentialAdaptor) RetrievePrivateKey(ctx context.Context) (Cr
 		Expires:      symmetricCreds.Expires,
 	}
 
-	s.creds.Store(&creds)
+	s.asymmetric.Store(&creds)
 
 	return creds, nil
 }
 
 func (s *SymmetricCredentialAdaptor) getCreds() *Credentials {
-	v := s.creds.Load()
+	v := s.asymmetric.Load()
 
 	if v == nil {
 		return nil

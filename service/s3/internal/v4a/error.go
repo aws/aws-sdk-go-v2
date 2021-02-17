@@ -15,4 +15,3 @@ func (e *SigningError) Error() string {
 func (e *SigningError) Unwrap() error {
 	return e.Err
 }
-
