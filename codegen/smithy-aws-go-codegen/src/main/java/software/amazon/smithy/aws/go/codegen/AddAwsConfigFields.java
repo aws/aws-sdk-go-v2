@@ -16,10 +16,14 @@
 package software.amazon.smithy.aws.go.codegen;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.logging.Logger;
+
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
@@ -28,6 +32,7 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
+import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
@@ -66,7 +71,10 @@ public class AddAwsConfigFields implements GoIntegration {
                     .documentation("Retryer guides how HTTP requests should be retried in case of\n"
                             + "recoverable failures. When nil the API client will use a default\n"
                             + "retryer.")
-                    .resolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_RETRYER).build())
+                    .addConfigFieldResolvers(getClientInitializationResolver(
+                            SymbolUtils.createValueSymbolBuilder(RESOLVE_RETRYER).build())
+                            .build()
+                    )
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_AWS_CONFIG_RETRYER_PROVIDER)
                             .build())
                     .build(),
@@ -74,7 +82,9 @@ public class AddAwsConfigFields implements GoIntegration {
                     .name(HTTP_CLIENT_CONFIG_NAME)
                     .type(SymbolUtils.createValueSymbolBuilder("HTTPClient").build())
                     .generatedOnClient(false)
-                    .resolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_HTTP_CLIENT).build())
+                    .addConfigFieldResolvers(getClientInitializationResolver(
+                            SymbolUtils.createValueSymbolBuilder(RESOLVE_HTTP_CLIENT).build())
+                            .build())
                     .build(),
             AwsConfigField.builder()
                     .name(CREDENTIALS_CONFIG_NAME)
@@ -154,6 +164,13 @@ public class AddAwsConfigFields implements GoIntegration {
         });
     }
 
+    private static ConfigFieldResolver.Builder getClientInitializationResolver(Symbol resolver) {
+        return ConfigFieldResolver.builder()
+                .location(ConfigFieldResolver.Location.CLIENT)
+                .target(ConfigFieldResolver.Target.INITIALIZATION)
+                .resolver(resolver);
+    }
+
     private void writeAwsDefaultResolvers(GoWriter writer) {
         writeHttpClientResolver(writer);
         writeRetryerResolvers(writer);
@@ -200,13 +217,11 @@ public class AddAwsConfigFields implements GoIntegration {
         AWS_CONFIG_FIELDS.forEach(awsConfigField -> {
             RuntimeClientPlugin.Builder builder = RuntimeClientPlugin.builder();
             awsConfigField.getServicePredicate().ifPresent(
-                    modelServiceShapeBiPredicate -> builder.servicePredicate(modelServiceShapeBiPredicate));
+                    builder::servicePredicate);
             if (awsConfigField.isGeneratedOnClient()) {
                 builder.addConfigField(awsConfigField);
             }
-            awsConfigField.getResolverFunction().ifPresent(symbol -> {
-                builder.resolveFunction(symbol);
-            });
+            builder.configFieldResolvers(awsConfigField.getConfigFieldResolvers());
             plugins.add(builder.build());
         });
 
@@ -262,14 +277,14 @@ public class AddAwsConfigFields implements GoIntegration {
     public static class AwsConfigField extends ConfigField {
         private final boolean generatedOnClient;
         private final BiPredicate<Model, ServiceShape> servicePredicate;
-        private final Symbol resolveFunction;
+        private final Set<ConfigFieldResolver> configFieldResolvers;
         private final Symbol awsResolveFunction;
 
         private AwsConfigField(Builder builder) {
             super(builder);
             this.generatedOnClient = builder.generatedOnClient;
             this.servicePredicate = builder.servicePredicate;
-            this.resolveFunction = builder.resolveFunction;
+            this.configFieldResolvers = builder.configFieldResolvers;
             this.awsResolveFunction = builder.awsResolveFunction;
         }
 
@@ -281,8 +296,8 @@ public class AddAwsConfigFields implements GoIntegration {
             return Optional.ofNullable(servicePredicate);
         }
 
-        public Optional<Symbol> getResolverFunction() {
-            return Optional.ofNullable(resolveFunction);
+        public Set<ConfigFieldResolver> getConfigFieldResolvers() {
+            return this.configFieldResolvers;
         }
 
         public Optional<Symbol> getAwsResolverFunction() {
@@ -299,7 +314,7 @@ public class AddAwsConfigFields implements GoIntegration {
         public static class Builder extends ConfigField.Builder {
             private boolean generatedOnClient = true;
             private BiPredicate<Model, ServiceShape> servicePredicate = null;
-            private Symbol resolveFunction = null;
+            private Set<ConfigFieldResolver> configFieldResolvers = new HashSet<>();
             private Symbol awsResolveFunction = null;
 
             private Builder() {
@@ -324,8 +339,13 @@ public class AddAwsConfigFields implements GoIntegration {
                 return this;
             }
 
-            public Builder resolveFunction(Symbol resolveFunction) {
-                this.resolveFunction = resolveFunction;
+            public Builder configFieldResolvers(Collection<ConfigFieldResolver> configFieldResolvers) {
+                this.configFieldResolvers = new HashSet<>(configFieldResolvers);
+                return this;
+            }
+
+            public Builder addConfigFieldResolvers(ConfigFieldResolver configFieldResolver) {
+                this.configFieldResolvers.add(configFieldResolver);
                 return this;
             }
 

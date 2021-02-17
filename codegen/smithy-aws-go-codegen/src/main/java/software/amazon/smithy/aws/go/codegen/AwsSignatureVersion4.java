@@ -26,6 +26,7 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
+import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
@@ -92,6 +93,7 @@ public final class AwsSignatureVersion4 implements GoIntegration {
         });
         writer.write("");
     }
+
     private void writeNewV4SignerFunc(GoWriter writer, ServiceShape serviceShape) {
         Symbol signerSymbol = SymbolUtils.createValueSymbolBuilder("Signer",
                 AwsGoDependency.AWS_SIGNER_V4).build();
@@ -101,13 +103,13 @@ public final class AwsSignatureVersion4 implements GoIntegration {
                 AwsGoDependency.AWS_SIGNER_V4).build();
 
         writer.openBlock("func $L(o Options) *$T {", "}", NEW_SIGNER_FUNC_NAME, signerSymbol, () -> {
-           writer.openBlock("return $T(func(so $P) {", "})", newSignerSymbol, signerOptionsSymbol, () -> {
-               writer.write("so.Logger = o.$L", AddAwsConfigFields.LOGGER_CONFIG_NAME);
-               writer.write("so.LogSigning = o.$L.IsSigning()", AddAwsConfigFields.LOG_MODE_CONFIG_NAME);
-               if (DISABLE_URI_PATH_ESCAPE.contains(serviceShape.getId().toString())) {
-                   writer.write("so.DisableURIPathEscaping = true");
-               }
-           });
+            writer.openBlock("return $T(func(so $P) {", "})", newSignerSymbol, signerOptionsSymbol, () -> {
+                writer.write("so.Logger = o.$L", AddAwsConfigFields.LOGGER_CONFIG_NAME);
+                writer.write("so.LogSigning = o.$L.IsSigning()", AddAwsConfigFields.LOG_MODE_CONFIG_NAME);
+                if (DISABLE_URI_PATH_ESCAPE.contains(serviceShape.getId().toString())) {
+                    writer.write("so.DisableURIPathEscaping = true");
+                }
+            });
         });
     }
 
@@ -120,7 +122,12 @@ public final class AwsSignatureVersion4 implements GoIntegration {
                         .type(SymbolUtils.createValueSymbolBuilder(SIGNER_INTERFACE_NAME).build())
                         .documentation("Signature Version 4 (SigV4) Signer")
                         .build())
-                .resolveFunction(SymbolUtils.createValueSymbolBuilder(SIGNER_RESOLVER).build())
+                .addConfigFieldResolver(
+                        ConfigFieldResolver.builder()
+                                .location(ConfigFieldResolver.Location.CLIENT)
+                                .target(ConfigFieldResolver.Target.INITIALIZATION)
+                                .resolver(SymbolUtils.createValueSymbolBuilder(SIGNER_RESOLVER).build())
+                                .build())
                 .build());
     }
 

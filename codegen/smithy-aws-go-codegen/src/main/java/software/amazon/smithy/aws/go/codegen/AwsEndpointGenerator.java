@@ -23,6 +23,7 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.TriConsumer;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
+import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
@@ -64,7 +65,11 @@ public final class AwsEndpointGenerator implements GoIntegration {
                                         + "to resolve an endpoint.")
                                 .build()
                 ))
-                .resolveFunction(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.CLIENT_CONFIG_RESOLVER)
+                .addConfigFieldResolver(ConfigFieldResolver.builder()
+                        .location(ConfigFieldResolver.Location.CLIENT)
+                        .target(ConfigFieldResolver.Target.INITIALIZATION)
+                        .resolver(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.CLIENT_CONFIG_RESOLVER)
+                                .build())
                         .build())
                 .build());
     }
