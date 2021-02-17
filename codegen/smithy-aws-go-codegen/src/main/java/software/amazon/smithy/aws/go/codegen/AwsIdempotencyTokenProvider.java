@@ -24,6 +24,7 @@ import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
+import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.IdempotencyTokenMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
@@ -82,7 +83,11 @@ public final class AwsIdempotencyTokenProvider implements GoIntegration {
         }
 
         return ListUtils.of(RuntimeClientPlugin.builder()
-                .resolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVER_FUNCTION).build())
+                .addConfigFieldResolver(ConfigFieldResolver.builder()
+                        .location(ConfigFieldResolver.Location.CLIENT)
+                        .target(ConfigFieldResolver.Target.INITIALIZATION)
+                        .resolver(SymbolUtils.createValueSymbolBuilder(RESOLVER_FUNCTION).build())
+                        .build())
                 .build());
     }
 }
