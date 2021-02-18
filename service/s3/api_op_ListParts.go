@@ -343,6 +343,12 @@ func (p *ListPartsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 		p.nextToken = nil
 	}
 
+	// HACK (tmorse): this code is auto-generated so this manual block shouldn't be added but there is a pretty
+	// major bug that causes this paginator to loop forever.
+	if p.nextToken != nil && *p.nextToken == "0" {
+		p.nextToken = nil
+	}
+
 	return result, nil
 }
 

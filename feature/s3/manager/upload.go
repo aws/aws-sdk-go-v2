@@ -3,10 +3,13 @@ package manager
 import (
 	"bytes"
 	"context"
+	"crypto/md5"
+	"encoding/hex"
 	"fmt"
 	"io"
 	"net/http"
 	"sort"
+	"strconv"
 	"sync"
 
 	"github.com/aws/aws-sdk-go-v2/aws/middleware"
@@ -117,6 +120,11 @@ func WithUploaderRequestOptions(opts ...func(*s3.Options)) func(*Uploader) {
 // on this structure for multiple objects and across concurrent goroutines.
 // Mutating the Uploader's properties is not safe to be done concurrently.
 type Uploader struct {
+	// If true the uploader will check for any in-progress multipart uploads
+	// for each upload's key and if there one and only one multipart upload
+	// it will pick up where that upload left off.
+	AutoRecover bool
+
 	// The buffer size (in bytes) to use when buffering data into chunks and
 	// sending them as parts to S3. The minimum allowed part size is 5MB, and
 	// if this value is set to zero, the DefaultUploadPartSize value will be used.
@@ -475,23 +483,59 @@ func (a completedParts) Less(i, j int) bool { return a[i].PartNumber < a[j].Part
 // upload will perform a multipart upload using the firstBuf buffer containing
 // the first chunk of data.
 func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadOutput, error) {
-	params := &s3.CreateMultipartUploadInput{}
-	awsutil.Copy(params, u.in)
-
-	// Create the multipart
+	var err error
 	var locationRecorder recordLocationClient
-	resp, err := u.cfg.S3.CreateMultipartUpload(u.ctx, params, append(u.cfg.ClientOptions, locationRecorder.WrapClient())...)
-	if err != nil {
-		cleanup()
-		return nil, err
+	eTagByPartNumber := make(map[int32]string)
+	if u.cfg.AutoRecover {
+		params := &s3.ListMultipartUploadsInput{}
+		awsutil.Copy(params, u.in)
+		params.Prefix = u.in.Key
+		// No paging is needed here since we only ever use the first multipart upload
+		list, err := u.cfg.S3.ListMultipartUploads(u.ctx, params, u.cfg.ClientOptions...)
+		if err != nil {
+			return nil, err
+		}
+		if len(list.Uploads) == 1 {
+			u.uploadID = *list.Uploads[0].UploadId
+			params := &s3.ListPartsInput{}
+			awsutil.Copy(params, u.in)
+			params.UploadId = &u.uploadID
+			paginator := s3.NewListPartsPaginator(u.cfg.S3, params)
+			for paginator.HasMorePages() {
+				parts, err := paginator.NextPage(u.ctx, append(u.cfg.ClientOptions, locationRecorder.WrapClient())...)
+				if err != nil {
+					return nil, err
+				}
+				for _, part := range parts.Parts {
+					eTag, err := strconv.Unquote(*part.ETag)
+					if err != nil {
+						return nil, err
+					}
+					eTagByPartNumber[part.PartNumber] = eTag
+				}
+			}
+		} else if len(list.Uploads) > 1 {
+			return nil, fmt.Errorf("more than one multipart upload found for key %s, cannot automatically recover", *u.in.Key)
+		}
 	}
-	u.uploadID = *resp.UploadId
+	if u.uploadID == "" {
+		params := &s3.CreateMultipartUploadInput{}
+		awsutil.Copy(params, u.in)
+
+		// Create the multipart
+		resp, err := u.cfg.S3.CreateMultipartUpload(u.ctx, params, append(u.cfg.ClientOptions, locationRecorder.WrapClient())...)
+		if err != nil {
+			cleanup()
+			return nil, err
+		}
+		u.uploadID = *resp.UploadId
+	}
 
 	// Create the workers
 	ch := make(chan chunk, u.cfg.Concurrency)
 	for i := 0; i < u.cfg.Concurrency; i++ {
 		u.wg.Add(1)
-		go u.readChunk(ch)
+		go u.readChunk(ch, &eTagByPartNumber)
 	}
 
 	// Send part 1 to the workers
@@ -571,7 +615,7 @@ func (u *multiuploader) shouldContinue(part int32, nextChunkLen int, err error) 
 
 // readChunk runs in worker goroutines to pull chunks off of the ch channel
 // and send() them as UploadPart requests.
-func (u *multiuploader) readChunk(ch chan chunk) {
+func (u *multiuploader) readChunk(ch chan chunk, eTagByPartNumber *map[int32]string) {
 	defer u.wg.Done()
 	for {
 		data, ok := <-ch
@@ -580,7 +624,11 @@ func (u *multiuploader) readChunk(ch chan chunk) {
 			break
 		}
 
-		if u.geterr() == nil {
+		if eTag, present := (*eTagByPartNumber)[data.num]; present {
+			if err := u.check(data, &eTag); err != nil {
+				u.seterr(err)
+			}
+		} else if u.geterr() == nil {
 			if err := u.send(data); err != nil {
 				u.seterr(err)
 			}
@@ -588,6 +636,30 @@ func (u *multiuploader) readChunk(ch chan chunk) {
 
 		data.cleanup()
 	}
+}
+
+// completePart keeps track of completed part information
+func (u *multiuploader) completePart(c chunk, eTag *string) {
+	n := c.num
+	completed := types.CompletedPart{ETag: eTag, PartNumber: n}
+
+	u.m.Lock()
+	u.parts = append(u.parts, completed)
+	u.m.Unlock()
+}
+
+// check checks if a chunk's checksum matches it's parts ETAG
+// and keeps track of the completed part information
+func (u *multiuploader) check(c chunk, eTag *string) error {
+	summer := md5.New()
+	io.Copy(summer, c.buf)
+	sum := hex.EncodeToString(summer.Sum([]byte{}))
+	if sum != *eTag {
+		return fmt.Errorf("checksum did not match for chunk %d, multipart upload out of sync with local file", c.num)
+	}
+
+	u.completePart(c, eTag)
+	return nil
 }
 
 // send performs an UploadPart request and keeps track of the completed
@@ -608,12 +680,7 @@ func (u *multiuploader) send(c chunk) error {
 		return err
 	}
 
-	n := c.num
-	completed := types.CompletedPart{ETag: resp.ETag, PartNumber: n}
-
-	u.m.Lock()
-	u.parts = append(u.parts, completed)
-	u.m.Unlock()
+	u.completePart(c, resp.ETag)
 
 	return nil
 }
