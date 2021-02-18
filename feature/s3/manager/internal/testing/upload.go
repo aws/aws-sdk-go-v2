@@ -193,7 +193,6 @@ func (u *UploadLoggingClient) ListMultipartUploads(ctx context.Context, params *
 		return u.ListMultipartUploadsFn(u, params)
 	}
 
-	// TODO: mock input
 	return &s3.ListMultipartUploadsOutput{}, nil
 }
 
@@ -211,7 +210,6 @@ func (u *UploadLoggingClient) ListParts(ctx context.Context, params *s3.ListPart
 		return u.ListPartsFn(u, params)
 	}
 
-	// TODO: mock input
 	return &s3.ListPartsOutput{}, nil
 }
 
