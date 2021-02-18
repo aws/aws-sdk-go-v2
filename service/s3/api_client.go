@@ -15,6 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
 	s3sharedconfig "github.com/aws/aws-sdk-go-v2/service/internal/s3shared/config"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/s3/internal/v4a"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
@@ -52,6 +53,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	for _, fn := range optFns {
 		fn(&options)
 	}
+
+	resolveCredentialProvider(&options)
 
 	client := &Client{
 		options: options,
@@ -149,6 +152,8 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	for _, fn := range optFns {
 		fn(&options)
 	}
+
+	resolveCredentialProvider(&options)
 
 	for _, fn := range stackFns {
 		if err := fn(stack, options); err != nil {
@@ -284,6 +289,23 @@ func resolveUseARNRegion(cfg aws.Config, o *Options) error {
 		o.UseARNRegion = value
 	}
 	return nil
+}
+
+func resolveCredentialProvider(o *Options) {
+	if o.Credentials == nil {
+		return
+	}
+	if _, ok := o.Credentials.(v4a.CredentialsProvider); ok {
+		return
+	}
+
+	switch o.Credentials.(type) {
+	case aws.AnonymousCredentials, *aws.AnonymousCredentials:
+		return
+
+	}
+
+	o.Credentials = &v4a.SymmetricCredentialAdaptor{SymmetricProvider: o.Credentials}
 }
 
 func addMetadataRetrieverMiddleware(stack *middleware.Stack) error {
