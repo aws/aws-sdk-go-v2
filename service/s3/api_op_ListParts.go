@@ -334,7 +334,10 @@ func (p *ListPartsPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	p.firstPage = false
 
 	prevToken := p.nextToken
-	p.nextToken = result.NextPartNumberMarker
+	p.nextToken = nil
+	if result.IsTruncated {
+		p.nextToken = result.NextPartNumberMarker
+	}
 
 	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
 		p.nextToken = nil

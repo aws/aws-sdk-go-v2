@@ -344,7 +344,10 @@ func (p *ListObjectsV2Paginator) NextPage(ctx context.Context, optFns ...func(*O
 	p.firstPage = false
 
 	prevToken := p.nextToken
-	p.nextToken = result.NextContinuationToken
+	p.nextToken = nil
+	if result.IsTruncated {
+		p.nextToken = result.NextContinuationToken
+	}
 
 	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
 		p.nextToken = nil
