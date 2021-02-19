@@ -966,21 +966,39 @@ func TestUploadBufferStrategy(t *testing.T) {
 
 func TestAutomaticRecovery(tt *testing.T) {
 	oneFailed := "upload multipart failed, upload id: 123, cause: checksum did not match for chunk 1, multipart upload out of sync with local file"
+	tooManyUploads := "more than one multipart upload found for key key, cannot automatically recover"
 	cases := map[string]struct {
-		parts         map[int32]string
+		uploads       []multipartUpload
 		expectedError *string
 	}{
 		"BadChecksum": {
-			parts: map[int32]string{
-				1: "junk",
-			},
+			uploads: []multipartUpload{{
+				key:      "key",
+				uploadId: "123",
+				parts: map[int32]string{
+					1: "junk",
+				},
+			}},
 			expectedError: &oneFailed,
 		},
 		"GoodChecksums": {
-			parts: map[int32]string{
-				1: "5f363e0e58a95f06cbe9bbc662c5dfb6",
-				4: "5f363e0e58a95f06cbe9bbc662c5dfb6",
-			},
+			uploads: []multipartUpload{{
+				key:      "key",
+				uploadId: "123",
+				parts: map[int32]string{
+					1: "5f363e0e58a95f06cbe9bbc662c5dfb6",
+					4: "5f363e0e58a95f06cbe9bbc662c5dfb6",
+				},
+			}},
+		},
+		"NoUploads": {},
+		"TooManyUploads": {
+			uploads: []multipartUpload{{
+				key: "key",
+			}, {
+				key: "key",
+			}},
+			expectedError: &tooManyUploads,
 		},
 	}
 
@@ -996,11 +1014,7 @@ func TestAutomaticRecovery(tt *testing.T) {
 			}
 			defer testFileCleanup(tt)
 
-			mux := newMockS3UploadServer(t, buildFailHandlers(t, partCount, 0), multipartUpload{
-				key:      "key",
-				uploadId: "123",
-				parts:    tCase.parts,
-			})
+			mux := newMockS3UploadServer(t, buildFailHandlers(t, partCount, 0), tCase.uploads...)
 			server := httptest.NewServer(mux)
 			defer server.Close()
 
