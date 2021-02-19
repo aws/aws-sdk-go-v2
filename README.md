@@ -1,6 +1,6 @@
 # AWS SDK for Go v2
 
-[![Build Status](https://travis-ci.org/aws/aws-sdk-go-v2.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-go-v2) [![SDK Documentation](https://img.shields.io/badge/SDK-Documentation-blue)](https://aws.github.io/aws-sdk-go-v2/docs/) [![API Reference](https://img.shields.io/badge/api-reference-blue.svg)](https://pkg.go.dev/mod/github.com/aws/aws-sdk-go-v2) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-blue.svg)](https://github.com/aws/aws-sdk-go/blob/master/LICENSE.txt)
+[![Build Status](https://travis-ci.com/aws/aws-sdk-go-v2.svg?branch=master)](https://travis-ci.com/aws/aws-sdk-go-v2) [![SDK Documentation](https://img.shields.io/badge/SDK-Documentation-blue)](https://aws.github.io/aws-sdk-go-v2/docs/) [![API Reference](https://img.shields.io/badge/api-reference-blue.svg)](https://pkg.go.dev/mod/github.com/aws/aws-sdk-go-v2) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-blue.svg)](https://github.com/aws/aws-sdk-go/blob/master/LICENSE.txt)
 
 
 `aws-sdk-go-v2` is the v2 AWS SDK for the Go programming language.
