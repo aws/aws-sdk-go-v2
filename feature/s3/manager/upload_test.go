@@ -9,7 +9,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
-	"path"
 	"reflect"
 	"regexp"
 	"sort"
@@ -966,39 +965,21 @@ func TestUploadBufferStrategy(t *testing.T) {
 
 func TestAutomaticRecovery(tt *testing.T) {
 	oneFailed := "upload multipart failed, upload id: 123, cause: checksum did not match for chunk 1, multipart upload out of sync with local file"
-	tooManyUploads := "more than one multipart upload found for key key, cannot automatically recover"
 	cases := map[string]struct {
-		uploads       []multipartUpload
+		parts         map[int32]string
 		expectedError *string
 	}{
 		"BadChecksum": {
-			uploads: []multipartUpload{{
-				key:      "key",
-				uploadId: "123",
-				parts: map[int32]string{
-					1: "junk",
-				},
-			}},
+			parts: map[int32]string{
+				1: "junk",
+			},
 			expectedError: &oneFailed,
 		},
 		"GoodChecksums": {
-			uploads: []multipartUpload{{
-				key:      "key",
-				uploadId: "123",
-				parts: map[int32]string{
-					1: "5f363e0e58a95f06cbe9bbc662c5dfb6",
-					4: "5f363e0e58a95f06cbe9bbc662c5dfb6",
-				},
-			}},
-		},
-		"NoUploads": {},
-		"TooManyUploads": {
-			uploads: []multipartUpload{{
-				key: "key",
-			}, {
-				key: "key",
-			}},
-			expectedError: &tooManyUploads,
+			parts: map[int32]string{
+				1: "5f363e0e58a95f06cbe9bbc662c5dfb6",
+				4: "5f363e0e58a95f06cbe9bbc662c5dfb6",
+			},
 		},
 	}
 
@@ -1014,7 +995,7 @@ func TestAutomaticRecovery(tt *testing.T) {
 			}
 			defer testFileCleanup(tt)
 
-			mux := newMockS3UploadServer(t, buildFailHandlers(t, partCount, 0), tCase.uploads...)
+			mux := newMockS3UploadServer(t, buildFailHandlers(t, partCount, 0), tCase.parts)
 			server := httptest.NewServer(mux)
 			defer server.Close()
 
@@ -1027,9 +1008,10 @@ func TestAutomaticRecovery(tt *testing.T) {
 				UsePathStyle: true,
 			})
 
+			uploadId := "123"
 			uploader := manager.NewUploader(client, func(u *manager.Uploader) {
 				u.PartSize = int64(partSize)
-				u.AutoRecover = true
+				u.UploadID = &uploadId
 			})
 
 			_, err = uploader.Upload(context.Background(), &s3.PutObjectInput{
@@ -1055,17 +1037,21 @@ func TestAutomaticRecovery(tt *testing.T) {
 type mockS3UploadServer struct {
 	*http.ServeMux
 
-	tb              testing.TB
-	partHandler     []http.Handler
-	existingUploads []multipartUpload
+	tb          testing.TB
+	partHandler []http.Handler
+	parts       map[int32]string
 }
 
-func newMockS3UploadServer(tb testing.TB, partHandler []http.Handler, existingUploads ...multipartUpload) *mockS3UploadServer {
+func newMockS3UploadServer(tb testing.TB, partHandler []http.Handler, parts ...map[int32]string) *mockS3UploadServer {
 	s := &mockS3UploadServer{
-		ServeMux:        http.NewServeMux(),
-		partHandler:     partHandler,
-		tb:              tb,
-		existingUploads: existingUploads,
+		ServeMux:    http.NewServeMux(),
+		partHandler: partHandler,
+		tb:          tb,
+		parts:       make(map[int32]string),
+	}
+
+	if len(parts) > 0 {
+		s.parts = parts[0]
 	}
 
 	s.HandleFunc("/", s.handleRequest)
@@ -1078,47 +1064,20 @@ func (s mockS3UploadServer) handleRequest(w http.ResponseWriter, r *http.Request
 
 	query := r.URL.Query()
 	_, hasUploads := query["uploads"]
+	_, hasUploadId := query["uploadId"]
 
 	switch {
-	case r.Method == "GET" && hasUploads:
-		prefix, hasPrefix := query["prefix"]
-		uploads := make([]string, 0)
-		for _, upload := range s.existingUploads {
-			if !hasPrefix || strings.HasPrefix(upload.key, prefix[0]) {
-				uploads = append(uploads, fmt.Sprintf(`<Upload>
-					<UploadId>%s</UploadId>
-				</Upload>`, upload.uploadId))
-			}
+	case r.Method == "GET" && hasUploadId:
+		parts := make([]string, 0)
+		for num, eTag := range s.parts {
+			parts = append(parts, fmt.Sprintf(`<Part>
+				<ETag>"%s"</ETag>
+				<PartNumber>%d</PartNumber>
+			</Part>`, eTag, num))
 		}
-		response := fmt.Sprintf(listUploadsResp, strings.Join(uploads, ""))
+		response := fmt.Sprintf(listPartsResp, strings.Join(parts, ""))
 		w.Header().Set("Content-Length", strconv.Itoa(len(response)))
 		w.Write([]byte(response))
-	case r.Method == "GET":
-		key := path.Base(r.URL.Path)
-		uploadId := r.URL.Query()["uploadId"]
-
-		var upload *multipartUpload
-		for _, u := range s.existingUploads {
-			if u.key == key && u.uploadId == uploadId[0] {
-				upload = &u
-				break
-			}
-		}
-
-		if upload != nil {
-			parts := make([]string, 0)
-			for num, eTag := range upload.parts {
-				parts = append(parts, fmt.Sprintf(`<Part>
-					<ETag>"%s"</ETag>
-					<PartNumber>%d</PartNumber>
-				</Part>`, eTag, num))
-			}
-			response := fmt.Sprintf(listPartsResp, strings.Join(parts, ""))
-			w.Header().Set("Content-Length", strconv.Itoa(len(response)))
-			w.Write([]byte(response))
-		} else {
-			failRequest(w, 404, "NotFound", fmt.Sprintf("upload for key: %s not found", key))
-		}
 	case r.Method == "POST" && hasUploads:
 		// CreateMultipartUpload
 		w.Header().Set("Content-Length", strconv.Itoa(len(createUploadResp)))
@@ -1239,12 +1198,6 @@ func (r *recordedBufferProvider) GetWriteTo(seeker io.ReadSeeker) (manager.ReadS
 	}
 }
 
-type multipartUpload struct {
-	key      string
-	uploadId string
-	parts    map[int32]string
-}
-
 const createUploadResp = `<CreateMultipartUploadResponse>
   <Bucket>bucket</Bucket>
   <Key>key</Key>
@@ -1270,7 +1223,5 @@ const completeUploadResp = `<CompleteMultipartUploadResponse>
 </CompleteMultipartUploadResponse>`
 
 const abortUploadResp = `<AbortMultipartUploadResponse></AbortMultipartUploadResponse>`
-
-const listUploadsResp = `<ListMultipartUploadsResult>%s</ListMultipartUploadsResult>`
 
 const listPartsResp = `<ListPartsResult>%s</ListPartsResult>`

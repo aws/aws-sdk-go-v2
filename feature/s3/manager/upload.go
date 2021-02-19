@@ -120,11 +120,6 @@ func WithUploaderRequestOptions(opts ...func(*s3.Options)) func(*Uploader) {
 // on this structure for multiple objects and across concurrent goroutines.
 // Mutating the Uploader's properties is not safe to be done concurrently.
 type Uploader struct {
-	// If true the uploader will check for any in-progress multipart uploads
-	// for each upload's key and if there one and only one multipart upload
-	// it will pick up where that upload left off.
-	AutoRecover bool
-
 	// The buffer size (in bytes) to use when buffering data into chunks and
 	// sending them as parts to S3. The minimum allowed part size is 5MB, and
 	// if this value is set to zero, the DefaultUploadPartSize value will be used.
@@ -158,6 +153,9 @@ type Uploader struct {
 	//
 	// Defaults to package const's MaxUploadParts value.
 	MaxUploadParts int32
+
+	// If an upload ID is provided the uploader will resume that upload ID
+	UploadID *string
 
 	// The client to use when uploading to S3.
 	S3 UploadAPIClient
@@ -486,39 +484,26 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 	var err error
 	var locationRecorder recordLocationClient
 	eTagByPartNumber := make(map[int32]string)
-	if u.cfg.AutoRecover {
-		params := &s3.ListMultipartUploadsInput{}
+	if u.cfg.UploadID != nil {
+		u.uploadID = *u.cfg.UploadID
+		params := &s3.ListPartsInput{}
 		awsutil.Copy(params, u.in)
-		params.Prefix = u.in.Key
-		// No paging is needed here since we only ever use the first multipart upload
-		list, err := u.cfg.S3.ListMultipartUploads(u.ctx, params, u.cfg.ClientOptions...)
-		if err != nil {
-			return nil, err
-		}
-		if len(list.Uploads) == 1 {
-			u.uploadID = *list.Uploads[0].UploadId
-			params := &s3.ListPartsInput{}
-			awsutil.Copy(params, u.in)
-			params.UploadId = &u.uploadID
-			paginator := s3.NewListPartsPaginator(u.cfg.S3, params)
-			for paginator.HasMorePages() {
-				parts, err := paginator.NextPage(u.ctx, append(u.cfg.ClientOptions, locationRecorder.WrapClient())...)
+		params.UploadId = u.cfg.UploadID
+		paginator := s3.NewListPartsPaginator(u.cfg.S3, params)
+		for paginator.HasMorePages() {
+			parts, err := paginator.NextPage(u.ctx, append(u.cfg.ClientOptions, locationRecorder.WrapClient())...)
+			if err != nil {
+				return nil, err
+			}
+			for _, part := range parts.Parts {
+				eTag, err := strconv.Unquote(*part.ETag)
 				if err != nil {
 					return nil, err
 				}
-				for _, part := range parts.Parts {
-					eTag, err := strconv.Unquote(*part.ETag)
-					if err != nil {
-						return nil, err
-					}
-					eTagByPartNumber[part.PartNumber] = eTag
-				}
+				eTagByPartNumber[part.PartNumber] = eTag
 			}
-		} else if len(list.Uploads) > 1 {
-			return nil, fmt.Errorf("more than one multipart upload found for key %s, cannot automatically recover", *u.in.Key)
 		}
-	}
-	if u.uploadID == "" {
+	} else {
 		params := &s3.CreateMultipartUploadInput{}
 		awsutil.Copy(params, u.in)
 
