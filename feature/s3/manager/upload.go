@@ -155,7 +155,7 @@ type Uploader struct {
 	MaxUploadParts int32
 
 	// If an upload ID is found for a key the uploader will resume that upload ID
-	UploadIDsByKey map[string]string
+	UploadIDsByBucketAndKey map[string]map[string]string
 
 	// The client to use when uploading to S3.
 	S3 UploadAPIClient
@@ -484,7 +484,7 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 	var err error
 	var locationRecorder recordLocationClient
 	eTagByPartNumber := make(map[int32]string)
-	if uploadID, hasUploadID := u.cfg.UploadIDsByKey[*u.in.Key]; hasUploadID {
+	if uploadID, hasUploadID := u.cfg.UploadIDsByBucketAndKey[*u.in.Bucket][*u.in.Key]; hasUploadID {
 		u.uploadID = uploadID
 		params := &s3.ListPartsInput{}
 		awsutil.Copy(params, u.in)

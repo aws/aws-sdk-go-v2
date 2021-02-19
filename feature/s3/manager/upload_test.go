@@ -1010,8 +1010,8 @@ func TestAutomaticRecovery(tt *testing.T) {
 
 			uploader := manager.NewUploader(client, func(u *manager.Uploader) {
 				u.PartSize = int64(partSize)
-				u.UploadIDsByKey = map[string]string{
-					"key": "123",
+				u.UploadIDsByBucketAndKey = map[string]map[string]string{
+					"bucket": { "key": "123" },
 				}
 			})
 
