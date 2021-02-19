@@ -40,7 +40,7 @@ public class S3PaginationExtensions implements GoIntegration {
             Model model, GoSettings settings
     ) {
         ServiceShape service = settings.getService(model);
-        if (!service.expectTrait(ServiceTrait.class).getSdkId().equalsIgnoreCase("S3")) {
+        if (!S3ModelUtils.isServiceS3(model, service)) {
             return model;
         }
 

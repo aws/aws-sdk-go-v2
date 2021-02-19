@@ -2,7 +2,6 @@ package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.function.Consumer;
 import software.amazon.smithy.aws.go.codegen.EndpointGenerator;
-import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
@@ -23,8 +22,7 @@ public class S3ControlEndpointResolver implements GoIntegration  {
             SymbolProvider symbolProvider,
             TriConsumer<String, String, Consumer<GoWriter>> writerFactory
     ) {
-        if (!settings.getService(model).expectTrait(ServiceTrait.class).getSdkId().equalsIgnoreCase(
-                "S3 Control")){
+        if (!S3ModelUtils.isServiceS3Control(model, settings.getService(model))){
            return;
         }
 
