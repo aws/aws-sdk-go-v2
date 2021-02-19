@@ -307,7 +307,7 @@ sdkv1check:
 ###################
 # Sandbox Testing #
 ###################
-sandbox-tests: sandbox-test-go1.15 sandbox-test-gotip
+sandbox-tests: sandbox-test-go1.15 sandbox-test-go1.16 sandbox-test-gotip
 
 sandbox-build-go1.15:
 	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.15 -t "aws-sdk-go-v2-1.15" .
@@ -315,6 +315,13 @@ sandbox-go1.15: sandbox-build-go1.15
 	docker run -i -t aws-sdk-go-v2-1.15 bash
 sandbox-test-go1.15: sandbox-build-go1.15
 	docker run -t aws-sdk-go-v2-1.15
+
+sandbox-build-go1.16:
+	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.16 -t "aws-sdk-go-v2-1.16" .
+sandbox-go1.16: sandbox-build-go1.16
+	docker run -i -t aws-sdk-go-v2-1.16 bash
+sandbox-test-go1.16: sandbox-build-go1.16
+	docker run -t aws-sdk-go-v2-1.16
 
 sandbox-build-gotip:
 	@echo "Run make update-aws-golang-tip, if this test fails because missing aws-golang:tip container"
