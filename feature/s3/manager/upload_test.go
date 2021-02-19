@@ -964,52 +964,78 @@ func TestUploadBufferStrategy(t *testing.T) {
 	}
 }
 
-func TestAutomaticRecoveryWithBadChecksum(t *testing.T) {
-	chunkSize := 52428800
-	chunkNum := 10
-	fileSize := chunkSize * chunkNum
-	f, testFileCleanup, err := createTempFile(t, int64(fileSize))
-	if err != nil {
-		t.Error(err)
-	}
-	defer testFileCleanup(t)
-
-	mux := newMockS3UploadServer(t, buildFailHandlers(t, chunkNum, 0), multipartUpload{
-		key:      "key",
-		uploadId: "123",
-		parts: map[int32]string{
-			1: "junk",
+func TestAutomaticRecovery(tt *testing.T) {
+	oneFailed := "upload multipart failed, upload id: 123, cause: checksum did not match for chunk 1, multipart upload out of sync with local file"
+	cases := map[string]struct {
+		parts         map[int32]string
+		expectedError *string
+	}{
+		"BadChecksum": {
+			parts: map[int32]string{
+				1: "junk",
+			},
+			expectedError: &oneFailed,
 		},
-	})
-	server := httptest.NewServer(mux)
-	defer server.Close()
-
-	client := s3.New(s3.Options{
-		EndpointResolver: s3testing.EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
-			return aws.Endpoint{
-				URL: server.URL,
-			}, nil
-		}),
-		UsePathStyle: true,
-	})
-
-	uploader := manager.NewUploader(client, func(u *manager.Uploader) {
-		u.PartSize = 5242880
-		u.AutoRecover = true
-	})
-
-	_, err = uploader.Upload(context.Background(), &s3.PutObjectInput{
-		Bucket: aws.String("bucket"),
-		Key:    aws.String("key"),
-		Body:   f,
-	})
-
-	expectedError := "upload multipart failed, upload id: 123, cause: checksum did not match for chunk 1, multipart upload out of sync with local file"
-	if err == nil {
-		t.Errorf("expected error: '%s' but error was nil", expectedError)
-	} else if err.Error() != expectedError {
-		t.Errorf("expected error: '%s' but got: '%s'", expectedError, err.Error())
+		"GoodChecksums": {
+			parts: map[int32]string{
+				1: "5f363e0e58a95f06cbe9bbc662c5dfb6",
+				4: "5f363e0e58a95f06cbe9bbc662c5dfb6",
+			},
+		},
 	}
+
+	for name, tCase := range cases {
+		tt.Run(name, func(t *testing.T) {
+			partSize := 5242880
+			partCount := 10
+			fileSize := partSize * partCount
+
+			f, testFileCleanup, err := createTempFile(tt, int64(fileSize))
+			if err != nil {
+				t.Error(err)
+			}
+			defer testFileCleanup(tt)
+
+			mux := newMockS3UploadServer(t, buildFailHandlers(t, partCount, 0), multipartUpload{
+				key:      "key",
+				uploadId: "123",
+				parts:    tCase.parts,
+			})
+			server := httptest.NewServer(mux)
+			defer server.Close()
+
+			client := s3.New(s3.Options{
+				EndpointResolver: s3testing.EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
+					return aws.Endpoint{
+						URL: server.URL,
+					}, nil
+				}),
+				UsePathStyle: true,
+			})
+
+			uploader := manager.NewUploader(client, func(u *manager.Uploader) {
+				u.PartSize = int64(partSize)
+				u.AutoRecover = true
+			})
+
+			_, err = uploader.Upload(context.Background(), &s3.PutObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
+				Body:   f,
+			})
+
+			if err != nil && tCase.expectedError == nil {
+				t.Errorf("expected error to be nil but error was: %s", err)
+			}
+			if err == nil && tCase.expectedError != nil {
+				t.Errorf("expected error: '%s' but it was nil", *tCase.expectedError)
+			}
+			if err != nil && tCase.expectedError != nil && err.Error() != *tCase.expectedError {
+				t.Errorf("expected error: '%s' but got error: '%s'", *tCase.expectedError, err.Error())
+			}
+		})
+	}
+
 }
 
 type mockS3UploadServer struct {
