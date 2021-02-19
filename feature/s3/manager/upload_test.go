@@ -1008,10 +1008,11 @@ func TestAutomaticRecovery(tt *testing.T) {
 				UsePathStyle: true,
 			})
 
-			uploadId := "123"
 			uploader := manager.NewUploader(client, func(u *manager.Uploader) {
 				u.PartSize = int64(partSize)
-				u.UploadID = &uploadId
+				u.UploadIDsByKey = map[string]string{
+					"key": "123",
+				}
 			})
 
 			_, err = uploader.Upload(context.Background(), &s3.PutObjectInput{

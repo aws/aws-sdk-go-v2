@@ -154,8 +154,8 @@ type Uploader struct {
 	// Defaults to package const's MaxUploadParts value.
 	MaxUploadParts int32
 
-	// If an upload ID is provided the uploader will resume that upload ID
-	UploadID *string
+	// If an upload ID is found for a key the uploader will resume that upload ID
+	UploadIDsByKey map[string]string
 
 	// The client to use when uploading to S3.
 	S3 UploadAPIClient
@@ -484,11 +484,11 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 	var err error
 	var locationRecorder recordLocationClient
 	eTagByPartNumber := make(map[int32]string)
-	if u.cfg.UploadID != nil {
-		u.uploadID = *u.cfg.UploadID
+	if uploadID, hasUploadID := u.cfg.UploadIDsByKey[*u.in.Key]; hasUploadID {
+		u.uploadID = uploadID
 		params := &s3.ListPartsInput{}
 		awsutil.Copy(params, u.in)
-		params.UploadId = u.cfg.UploadID
+		params.UploadId = &uploadID
 		paginator := s3.NewListPartsPaginator(u.cfg.S3, params)
 		repeat := false
 		for paginator.HasMorePages() && !repeat {
