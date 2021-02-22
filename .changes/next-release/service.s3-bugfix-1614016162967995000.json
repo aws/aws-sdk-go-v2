@@ -1,0 +1,9 @@
+{
+ "ID": "service.s3-bugfix-1614016162967995000",
+ "SchemaVersion": 1,
+ "Module": "service/s3",
+ "Type": "bugfix",
+ "Description": "Fixed an issue where ListObjectsV2 and ListParts paginators could loop infinitely",
+ "MinVersion": "",
+ "AffectedModules": null
+}
