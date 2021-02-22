@@ -963,7 +963,7 @@ func TestUploadBufferStrategy(t *testing.T) {
 	}
 }
 
-func TestAutomaticRecovery(tt *testing.T) {
+func TestUploadRecovery(tt *testing.T) {
 	oneFailed := "upload multipart failed, upload id: 123, cause: checksum did not match for chunk 1, multipart upload out of sync with local file"
 	cases := map[string]struct {
 		parts         map[int32]string
@@ -1010,16 +1010,14 @@ func TestAutomaticRecovery(tt *testing.T) {
 
 			uploader := manager.NewUploader(client, func(u *manager.Uploader) {
 				u.PartSize = int64(partSize)
-				u.UploadIDsByBucketAndKey = map[string]map[string]string{
-					"bucket": { "key": "123" },
-				}
 			})
 
-			_, err = uploader.Upload(context.Background(), &s3.PutObjectInput{
+			uploadID := "123"
+			_, err = uploader.ResumeUpload(context.Background(), &s3.PutObjectInput{
 				Bucket: aws.String("bucket"),
 				Key:    aws.String("key"),
 				Body:   f,
-			})
+			}, &uploadID)
 
 			if err != nil && tCase.expectedError == nil {
 				t.Errorf("expected error to be nil but error was: %s", err)

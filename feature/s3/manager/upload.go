@@ -154,9 +154,6 @@ type Uploader struct {
 	// Defaults to package const's MaxUploadParts value.
 	MaxUploadParts int32
 
-	// If an upload ID is found for a key the uploader will resume that upload ID
-	UploadIDsByBucketAndKey map[string]map[string]string
-
 	// The client to use when uploading to S3.
 	S3 UploadAPIClient
 
@@ -212,22 +209,7 @@ func NewUploader(client UploadAPIClient, options ...func(*Uploader)) *Uploader {
 	return u
 }
 
-// Upload uploads an object to S3, intelligently buffering large
-// files into smaller chunks and sending them in parallel across multiple
-// goroutines. You can configure the buffer size and concurrency through the
-// Uploader parameters.
-//
-// Additional functional options can be provided to configure the individual
-// upload. These options are copies of the Uploader instance Upload is called from.
-// Modifying the options will not impact the original Uploader instance.
-//
-// Use the WithUploaderRequestOptions helper function to pass in request
-// options that will be applied to all API operations made with this uploader.
-//
-// It is safe to call this method concurrently across goroutines.
-func (u Uploader) Upload(ctx context.Context, input *s3.PutObjectInput, opts ...func(*Uploader)) (*UploadOutput, error) {
-	i := uploader{in: input, cfg: u, ctx: ctx}
-
+func (u Uploader) uploadWithSingleUploader(i uploader, opts ...func(*Uploader)) (*UploadOutput, error) {
 	// Copy ClientOptions
 	clientOptions := make([]func(*s3.Options), 0, len(i.cfg.ClientOptions)+1)
 	clientOptions = append(clientOptions, func(o *s3.Options) {
@@ -243,12 +225,52 @@ func (u Uploader) Upload(ctx context.Context, input *s3.PutObjectInput, opts ...
 	return i.upload()
 }
 
+// Upload uploads an object to S3, intelligently buffering large
+// files into smaller chunks and sending them in parallel across multiple
+// goroutines. You can configure the buffer size and concurrency through the
+// Uploader parameters.
+//
+// Additional functional options can be provided to configure the individual
+// upload. These options are copies of the Uploader instance Upload is called from.
+// Modifying the options will not impact the original Uploader instance.
+//
+// Use the WithUploaderRequestOptions helper function to pass in request
+// options that will be applied to all API operations made with this uploader.
+//
+// It is safe to call this method concurrently across goroutines.
+func (u Uploader) Upload(ctx context.Context, input *s3.PutObjectInput, opts ...func(*Uploader)) (*UploadOutput, error) {
+	return u.uploadWithSingleUploader(uploader{in: input, cfg: u, ctx: ctx}, opts...)
+
+}
+
+// ResumeUpload resumes an existing multipart upload to S3, intelligently buffering
+// large files into smaller chunks and sending them in parallel across multiple
+// goroutines. You can configure the buffer size and concurrency through the
+// Uploader parameters. The parts that are already uploaded have their md5
+// checkums computed locally and compared with their uploaded ETag. If these do
+// not match the upload fails. This is to ensure the integrity of the resumed
+// multipart upload in case the data or part size differs from the original
+// multipart upload.
+//
+// Additional functional options can be provided to configure the individual
+// upload. These options are copies of the Uploader instance Upload is called from.
+// Modifying the options will not impact the original Uploader instance.
+//
+// Use the WithUploaderRequestOptions helper function to pass in request
+// options that will be applied to all API operations made with this uploader.
+//
+// It is safe to call this method concurrently across goroutines.
+func (u Uploader) ResumeUpload(ctx context.Context, input *s3.PutObjectInput, uploadID *string, opts ...func(*Uploader)) (*UploadOutput, error) {
+	return u.uploadWithSingleUploader(uploader{in: input, cfg: u, existingUploadID: uploadID, ctx: ctx}, opts...)
+}
+
 // internal structure to manage an upload to S3.
 type uploader struct {
 	ctx context.Context
 	cfg Uploader
 
-	in *s3.PutObjectInput
+	in               *s3.PutObjectInput
+	existingUploadID *string
 
 	readerPos int64 // current reader position
 	totalSize int64 // set to -1 if the size is not known
@@ -484,11 +506,11 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 	var err error
 	var locationRecorder recordLocationClient
 	eTagByPartNumber := make(map[int32]string)
-	if uploadID, hasUploadID := u.cfg.UploadIDsByBucketAndKey[*u.in.Bucket][*u.in.Key]; hasUploadID {
-		u.uploadID = uploadID
+	if u.uploader.existingUploadID != nil {
+		u.uploadID = *u.uploader.existingUploadID
 		params := &s3.ListPartsInput{}
 		awsutil.Copy(params, u.in)
-		params.UploadId = &uploadID
+		params.UploadId = u.uploader.existingUploadID
 		paginator := s3.NewListPartsPaginator(u.cfg.S3, params)
 		repeat := false
 		for paginator.HasMorePages() && !repeat {
@@ -640,7 +662,7 @@ func (u *multiuploader) completePart(c chunk, eTag *string) {
 	u.m.Unlock()
 }
 
-// check checks if a chunk's checksum matches it's parts ETAG
+// check checks if a chunk's checksum matches its parts ETAG
 // and keeps track of the completed part information
 func (u *multiuploader) check(c chunk, eTag *string) error {
 	summer := md5.New()
