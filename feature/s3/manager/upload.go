@@ -297,7 +297,7 @@ func (u *uploader) upload() (*UploadOutput, error) {
 		return nil, fmt.Errorf("read upload data failed: %w", err)
 	}
 
-	mu := multiuploader{uploader: u}
+	mu := multiuploader{uploader: u, eTagByPartNumber: make(map[int32]string)}
 	return mu.upload(reader, cleanup)
 }
 
@@ -478,11 +478,12 @@ func (c *recordLocationClient) Do(r *http.Request) (resp *http.Response, err err
 // internal structure to manage a specific multipart upload to S3.
 type multiuploader struct {
 	*uploader
-	wg       sync.WaitGroup
-	m        sync.Mutex
-	err      error
-	uploadID string
-	parts    completedParts
+	wg               sync.WaitGroup
+	m                sync.Mutex
+	err              error
+	uploadID         string
+	parts            completedParts
+	eTagByPartNumber map[int32]string
 }
 
 // keeps track of a single chunk of data being sent to S3.
@@ -505,7 +506,6 @@ func (a completedParts) Less(i, j int) bool { return a[i].PartNumber < a[j].Part
 func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadOutput, error) {
 	var err error
 	var locationRecorder recordLocationClient
-	eTagByPartNumber := make(map[int32]string)
 	if u.uploader.existingUploadID != nil {
 		u.uploadID = *u.uploader.existingUploadID
 		params := &s3.ListPartsInput{}
@@ -522,14 +522,14 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 				// HACK: currently the paginator will loop, paginating forever
 				// This logic stops the infinite loop when we see the same part again
 				// This can be removed when https://github.com/aws/aws-sdk-go-v2/issues/1140 is resolved
-				if _, repeat = eTagByPartNumber[part.PartNumber]; repeat {
+				if _, repeat = u.eTagByPartNumber[part.PartNumber]; repeat {
 					break
 				}
 				eTag, err := strconv.Unquote(*part.ETag)
 				if err != nil {
 					return nil, err
 				}
-				eTagByPartNumber[part.PartNumber] = eTag
+				u.eTagByPartNumber[part.PartNumber] = eTag
 			}
 		}
 	} else {
@@ -549,7 +549,7 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 	ch := make(chan chunk, u.cfg.Concurrency)
 	for i := 0; i < u.cfg.Concurrency; i++ {
 		u.wg.Add(1)
-		go u.readChunk(ch, &eTagByPartNumber)
+		go u.readChunk(ch)
 	}
 
 	// Send part 1 to the workers
@@ -629,7 +629,7 @@ func (u *multiuploader) shouldContinue(part int32, nextChunkLen int, err error) 
 
 // readChunk runs in worker goroutines to pull chunks off of the ch channel
 // and send() them as UploadPart requests.
-func (u *multiuploader) readChunk(ch chan chunk, eTagByPartNumber *map[int32]string) {
+func (u *multiuploader) readChunk(ch chan chunk) {
 	defer u.wg.Done()
 	for {
 		data, ok := <-ch
@@ -638,7 +638,7 @@ func (u *multiuploader) readChunk(ch chan chunk, eTagByPartNumber *map[int32]str
 			break
 		}
 
-		if eTag, present := (*eTagByPartNumber)[data.num]; present {
+		if eTag, present := u.eTagByPartNumber[data.num]; present {
 			if err := u.check(data, &eTag); err != nil {
 				u.seterr(err)
 			}
