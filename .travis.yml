@@ -7,18 +7,21 @@ os:
     - osx
 go:
     - 1.15.x
+    - 1.16.x
     - tip
-
-script:
-  - go get -u golang.org/x/lint/golint
-  - make ci-test-no-generate;
 
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install make; fi
 
+install:
+  - (cd /tmp/; go get golang.org/x/lint/golint)
+
 env:
   - EACHMODULE_CONCURRENCY=4
     #- EACHMODULE_FAILFAST=false
+
+script:
+  - make ci-test-no-generate;
 
 matrix:
   allow_failures:
@@ -27,13 +30,13 @@ matrix:
   include:
     - language: go
       os: linux
-      go: 1.15.x
+      go: 1.16.x
       script:
         - make go-build-modules-.
 
     - language: go
       os: windows
-      go: 1.15.x
+      go: 1.16.x
       env:
         - EACHMODULE_CONCURRENCY=4
         - EACHMODULE_SKIP="internal\repotools\changes"
