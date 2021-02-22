@@ -512,19 +512,12 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker, cleanup func()) (*UploadO
 		awsutil.Copy(params, u.in)
 		params.UploadId = u.uploader.existingUploadID
 		paginator := s3.NewListPartsPaginator(u.cfg.S3, params)
-		repeat := false
-		for paginator.HasMorePages() && !repeat {
+		for paginator.HasMorePages() {
 			parts, err := paginator.NextPage(u.ctx, append(u.cfg.ClientOptions, locationRecorder.WrapClient())...)
 			if err != nil {
 				return nil, err
 			}
 			for _, part := range parts.Parts {
-				// HACK: currently the paginator will loop, paginating forever
-				// This logic stops the infinite loop when we see the same part again
-				// This can be removed when https://github.com/aws/aws-sdk-go-v2/issues/1140 is resolved
-				if _, repeat = u.eTagByPartNumber[part.PartNumber]; repeat {
-					break
-				}
 				eTag, err := strconv.Unquote(*part.ETag)
 				if err != nil {
 					return nil, err
