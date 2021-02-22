@@ -2,7 +2,6 @@ package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.List;
 import java.util.Set;
-import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
@@ -55,7 +54,6 @@ public class S3ErrorWith200Status implements GoIntegration {
 
     // returns true if service is s3
     private static boolean isS3Service(Model model, ServiceShape service) {
-        String serviceId= service.expectTrait(ServiceTrait.class).getSdkId();
-        return serviceId.equalsIgnoreCase("S3");
+        return S3ModelUtils.isServiceS3(model, service);
     }
 }

@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
-import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
@@ -65,16 +64,8 @@ public class S3UpdateEndpoint implements GoIntegration {
     // list of runtime-client plugins
     private final List<RuntimeClientPlugin> runtimeClientPlugins = new ArrayList<>();
 
-    private static boolean isS3Service(Model model, ServiceShape service) {
-        return service.expectTrait(ServiceTrait.class).getSdkId().equalsIgnoreCase("S3");
-    }
-
-    private static boolean isS3ControlService(Model model, ServiceShape service) {
-        return service.expectTrait(ServiceTrait.class).getSdkId().equalsIgnoreCase("S3 Control");
-    }
-
     private static boolean isS3SharedService(Model model, ServiceShape service) {
-        return isS3Service(model, service) || isS3ControlService(model, service);
+        return S3ModelUtils.isServiceS3(model, service) || S3ModelUtils.isServiceS3Control(model, service);
     }
 
     private static String copyInputFuncName(String inputName) {
@@ -114,13 +105,13 @@ public class S3UpdateEndpoint implements GoIntegration {
         ServiceShape service = settings.getService(model);
 
         // if service is s3control
-        if (isS3ControlService(model, service)) {
+        if (S3ModelUtils.isServiceS3Control(model, service)) {
             S3control s3control = new S3control(service);
             s3control.writeAdditionalFiles(settings, model, symbolProvider, goDelegator);
         }
 
         // check if service is s3
-        if (isS3Service(model, service)) {
+        if (S3ModelUtils.isServiceS3(model, service)) {
             S3 s3 = new S3(service);
             s3.writeAdditionalFiles(settings, model, symbolProvider, goDelegator);
         }
@@ -218,7 +209,7 @@ public class S3UpdateEndpoint implements GoIntegration {
             List<RuntimeClientPlugin> list = ListUtils.of(
                     // Add S3 config to use path style host addressing.
                     RuntimeClientPlugin.builder()
-                            .servicePredicate(S3UpdateEndpoint::isS3Service)
+                            .servicePredicate((model, service1) -> S3ModelUtils.isServiceS3(model, service1))
                             .configFields(ListUtils.of(
                                     ConfigField.builder()
                                             .name(USE_PATH_STYLE_OPTION)

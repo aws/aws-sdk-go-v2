@@ -3,18 +3,15 @@ package software.amazon.smithy.aws.go.codegen.customization;
 import java.util.List;
 import java.util.logging.Logger;
 import software.amazon.smithy.aws.go.codegen.AddAwsConfigFields;
-import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SymbolUtils;
-import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
-import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.utils.ListUtils;
 
 /**
@@ -51,7 +48,7 @@ public class S3AcceptEncodingGzip implements GoIntegration {
             SymbolProvider symbolProvider,
             GoDelegator goDelegator
     ) {
-        if (!isServiceS3(model, settings.getService(model))) {
+        if (!S3ModelUtils.isServiceS3(model, settings.getService(model))) {
             return;
         }
 
@@ -75,7 +72,7 @@ public class S3AcceptEncodingGzip implements GoIntegration {
         return ListUtils.of(
                 // register disableAcceptEncodingGzip middleware
                 RuntimeClientPlugin.builder()
-                        .servicePredicate(S3AcceptEncodingGzip::isServiceS3)
+                        .servicePredicate(S3ModelUtils::isServiceS3)
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(GZIP_DISABLE)
                                         .build())
@@ -85,14 +82,5 @@ public class S3AcceptEncodingGzip implements GoIntegration {
         );
     }
 
-    /**
-     * Return true if service is S3.
-     *
-     * @param model the model used for generation.
-     * @param service the service shape for which default HTTP Client is generated.
-     * @return true if service is S3
-     */
-    private static boolean isServiceS3(Model model, ServiceShape service) {
-        return service.expectTrait(ServiceTrait.class).getSdkId().equalsIgnoreCase("S3");
-    }
+
 }

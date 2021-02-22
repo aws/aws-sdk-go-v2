@@ -1,6 +1,5 @@
 package software.amazon.smithy.aws.go.codegen.customization;
 
-import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.Model;
@@ -24,7 +23,7 @@ public class S3HeadObjectCustomizations implements GoIntegration {
             Model model, GoSettings settings
     ) {
         ServiceShape service = model.expectShape(settings.getService(), ServiceShape.class);
-        if (!isS3Service(model, service)) {
+        if (!S3ModelUtils.isServiceS3(model, service)) {
             return model;
         }
 
@@ -44,8 +43,4 @@ public class S3HeadObjectCustomizations implements GoIntegration {
     }
 
     // returns true if service is s3
-    private static boolean isS3Service(Model model, ServiceShape service) {
-        String serviceId= service.expectTrait(ServiceTrait.class).getSdkId();
-        return serviceId.equalsIgnoreCase("S3");
-    }
 }

@@ -1,7 +1,6 @@
 package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.List;
-import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -72,7 +71,6 @@ public class S3MetadataRetriever implements GoIntegration {
 
     // returns true if service is either s3 or s3 control and needs s3 customization
     private static boolean requiresS3Customization(Model model, ServiceShape service) {
-        String serviceId= service.expectTrait(ServiceTrait.class).getSdkId();
-        return serviceId.equalsIgnoreCase("S3") || serviceId.equalsIgnoreCase("S3 Control");
+        return S3ModelUtils.isServiceS3(model, service) || S3ModelUtils.isServiceS3Control(model, service);
     }
 }

@@ -30,6 +30,7 @@ software.amazon.smithy.aws.go.codegen.customization.PresignURLAutoFill
 software.amazon.smithy.aws.go.codegen.customization.S3ExportInternalFeatures
 software.amazon.smithy.aws.go.codegen.FilterStreamingOperations
 software.amazon.smithy.aws.go.codegen.customization.S3ControlEndpointResolver
+software.amazon.smithy.aws.go.codegen.customization.S3PaginationExtensions
 software.amazon.smithy.aws.go.codegen.AwsHttpPresignURLClientGenerator
 software.amazon.smithy.aws.go.codegen.ResolveClientConfig
 software.amazon.smithy.aws.go.codegen.customization.S3GetBucketLocation

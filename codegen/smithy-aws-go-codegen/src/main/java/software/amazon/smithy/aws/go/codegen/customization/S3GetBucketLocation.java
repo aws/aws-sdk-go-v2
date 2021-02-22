@@ -2,7 +2,6 @@ package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.List;
 import software.amazon.smithy.aws.go.codegen.XmlProtocolUtils;
-import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
@@ -44,8 +43,7 @@ public class S3GetBucketLocation implements GoIntegration {
      * @param service is the service shape being audited.
      */
     private static boolean isS3Service(Model model, ServiceShape service) {
-        String serviceId = service.expectTrait(ServiceTrait.class).getSdkId();
-        return serviceId.equalsIgnoreCase("S3");
+        return S3ModelUtils.isServiceS3(model, service);
     }
 
     /**
