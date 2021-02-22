@@ -10,16 +10,19 @@ go:
     - 1.16.x
     - tip
 
-script:
-  - go get -u golang.org/x/lint/golint
-  - make ci-test-no-generate;
-
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install make; fi
+
+install:
+  - go get -u golang.org/x/lint/golint
 
 env:
   - EACHMODULE_CONCURRENCY=4
     #- EACHMODULE_FAILFAST=false
+
+script:
+  - go get -u golang.org/x/lint/golint
+  - make ci-test-no-generate;
 
 matrix:
   allow_failures:
