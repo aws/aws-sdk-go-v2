@@ -17,6 +17,7 @@ package software.amazon.smithy.aws.go.codegen;
 
 import java.util.List;
 import java.util.function.Consumer;
+import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
@@ -43,7 +44,16 @@ public final class AwsEndpointGenerator implements GoIntegration {
             SymbolProvider symbolProvider,
             TriConsumer<String, String, Consumer<GoWriter>> writerFactory
     ) {
-        new EndpointGenerator(settings, model, writerFactory).run();
+        String serviceId = settings.getService(model).expectTrait(ServiceTrait.class).getSdkId();
+        boolean generateQueryHelpers = serviceId.equalsIgnoreCase("S3");
+
+        EndpointGenerator.builder()
+                .settings(settings)
+                .model(model)
+                .writerFactory(writerFactory)
+                .modelQueryHelpers(generateQueryHelpers)
+                .build()
+                .run();
     }
 
     @Override
