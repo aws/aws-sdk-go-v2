@@ -963,6 +963,57 @@ func TestUploadBufferStrategy(t *testing.T) {
 	}
 }
 
+func TestUploaderValidARN(t *testing.T) {
+	cases := map[string]struct {
+		input   s3.PutObjectInput
+		wantErr bool
+	}{
+		"standard bucket": {
+			input: s3.PutObjectInput{
+				Bucket: aws.String("test-bucket"),
+				Key:    aws.String("test-key"),
+				Body:   bytes.NewReader([]byte("test body content")),
+			},
+		},
+		"accesspoint": {
+			input: s3.PutObjectInput{
+				Bucket: aws.String("arn:aws:s3:us-west-2:123456789012:accesspoint/myap"),
+				Key:    aws.String("test-key"),
+				Body:   bytes.NewReader([]byte("test body content")),
+			},
+		},
+		"outpost accesspoint": {
+			input: s3.PutObjectInput{
+				Bucket: aws.String("arn:aws:s3-outposts:us-west-2:012345678901:outpost/op-1234567890123456/accesspoint/myaccesspoint"),
+				Key:    aws.String("test-key"),
+				Body:   bytes.NewReader([]byte("test body content")),
+			},
+		},
+		"s3-object-lambda accesspoint": {
+			input: s3.PutObjectInput{
+				Bucket: aws.String("arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint/myap"),
+				Key:    aws.String("test-key"),
+				Body:   bytes.NewReader([]byte("test body content")),
+			},
+			wantErr: true,
+		},
+	}
+
+	for name, tt := range cases {
+		t.Run(name, func(t *testing.T) {
+			client, _, _ := s3testing.NewUploadLoggingClient(nil)
+			client.ConsumeBody = true
+
+			uploader := manager.NewUploader(client)
+
+			_, err := uploader.Upload(context.Background(), &tt.input)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("err: %v, wantErr: %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
 type mockS3UploadServer struct {
 	*http.ServeMux
 

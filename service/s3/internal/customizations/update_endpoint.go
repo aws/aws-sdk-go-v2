@@ -56,6 +56,10 @@ type UpdateEndpointOptions struct {
 	// use ARN region
 	UseARNRegion bool
 
+	// Indicates that the operation should target the s3-object-lambda endpoint.
+	// Used to direct operations that do not route based on an input ARN.
+	TargetS3ObjectLambda bool
+
 	// EndpointResolver used to resolve endpoints. This may be a custom endpoint resolver
 	EndpointResolver EndpointResolver
 
@@ -76,6 +80,20 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 	// process arn
 	err = stack.Serialize.Insert(&processARNResource{
 		UseARNRegion:            options.UseARNRegion,
+		UseAccelerate:           options.UseAccelerate,
+		UseDualstack:            options.UseDualstack,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointResolverOptions,
+	}, "OperationSerializer", middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	// process whether the operation requires the s3-object-lambda endpoint
+	// Occurs before operation serializer so that hostPrefix mutations
+	// can be handled correctly.
+	err = stack.Serialize.Insert(&s3ObjectLambdaEndpoint{
+		UseEndpoint:             options.TargetS3ObjectLambda,
 		UseAccelerate:           options.UseAccelerate,
 		UseDualstack:            options.UseDualstack,
 		EndpointResolver:        options.EndpointResolver,

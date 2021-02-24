@@ -3,6 +3,7 @@ package customizations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"net/url"
 	"strings"
 
@@ -13,6 +14,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared/arn"
 	s3arn "github.com/aws/aws-sdk-go-v2/service/s3/internal/arn"
+)
+
+const (
+	s3AccessPoint  = "s3-accesspoint"
+	s3ObjectLambda = "s3-object-lambda"
 )
 
 // processARNResource is used to process an ARN resource.
@@ -117,6 +123,54 @@ func (m *processARNResource) HandleSerialize(
 			return out, metadata, err
 		}
 
+	case arn.S3ObjectLambdaAccessPointARN:
+		// check if accelerate
+		if m.UseAccelerate {
+			return out, metadata, s3shared.NewClientConfiguredForAccelerateError(tv,
+				resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
+		}
+
+		// check if dualstack
+		if m.UseDualstack {
+			return out, metadata, s3shared.NewClientConfiguredForDualStackError(tv,
+				resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
+		}
+
+		// fetch arn region to resolve request
+		resolveRegion := tv.Region
+
+		if resourceRequest.UseFips() {
+			// if use arn region is enabled and request signing region is not same as arn region
+			if m.UseARNRegion && resourceRequest.IsCrossRegion() {
+				// FIPS with cross region is not supported, the SDK must fail
+				// because there is no well defined method for SDK to construct a
+				// correct FIPS endpoint.
+				return out, metadata,
+					s3shared.NewClientConfiguredForCrossRegionFIPSError(
+						tv,
+						resourceRequest.PartitionID,
+						resourceRequest.RequestRegion,
+						nil,
+					)
+			}
+
+			// if use arn region is NOT set, we should use the request region
+			resolveRegion = resourceRequest.RequestRegion
+		}
+
+		// build access point request
+		ctx, err = buildS3ObjectLambdaAccessPointRequest(ctx, accesspointOptions{
+			processARNResource: *m,
+			request:            req,
+			resource:           tv.AccessPointARN,
+			resolveRegion:      resolveRegion,
+			partitionID:        resourceRequest.PartitionID,
+			requestRegion:      resourceRequest.RequestRegion,
+		})
+		if err != nil {
+			return out, metadata, err
+		}
+
 	// process outpost accesspoint ARN
 	case arn.OutpostAccessPointARN:
 		// check if accelerate
@@ -213,9 +267,10 @@ func buildAccessPointRequest(ctx context.Context, options accesspointOptions) (c
 		return ctx, fmt.Errorf("failed to parse endpoint URL: %w", err)
 	}
 
-	if len(endpoint.SigningName) != 0 {
+	if len(endpoint.SigningName) != 0 && endpoint.Source == aws.EndpointSourceCustom {
 		ctx = awsmiddleware.SetSigningName(ctx, endpoint.SigningName)
 	} else {
+		// Must sign with s3-object-lambda
 		ctx = awsmiddleware.SetSigningName(ctx, resolveService)
 	}
 
@@ -225,22 +280,95 @@ func buildAccessPointRequest(ctx context.Context, options accesspointOptions) (c
 		ctx = awsmiddleware.SetSigningRegion(ctx, resolveRegion)
 	}
 
+	// update serviceID to "s3-accesspoint"
+	ctx = awsmiddleware.SetServiceID(ctx, s3AccessPoint)
+
+	// disable host prefix behavior
+	ctx = http.DisableEndpointHostPrefix(ctx, true)
+
+	// remove the serialized arn in place of /{Bucket}
+	ctx = setBucketToRemoveOnContext(ctx, tv.String())
+
 	// skip arn processing, if arn region resolves to a immutable endpoint
 	if endpoint.HostnameImmutable {
 		return ctx, nil
 	}
 
-	const serviceEndpointLabel = "s3-accesspoint"
-	cfgHost := req.URL.Host
-	if strings.HasPrefix(cfgHost, "s3") {
-		// replace service hostlabel "s3" to "s3-accesspoint"
-		req.URL.Host = serviceEndpointLabel + cfgHost[len("s3"):]
+	updateS3HostForS3AccessPoint(req)
 
-		// update serviceID to "s3-accesspoint"
-		ctx = awsmiddleware.SetServiceID(ctx, serviceEndpointLabel)
+	ctx, err = buildAccessPointHostPrefix(ctx, req, tv)
+	if err != nil {
+		return ctx, err
 	}
 
-	// add host prefix for s3-accesspoint
+	return ctx, nil
+}
+
+func buildS3ObjectLambdaAccessPointRequest(ctx context.Context, options accesspointOptions) (context.Context, error) {
+	tv := options.resource
+	req := options.request
+	resolveRegion := options.resolveRegion
+
+	resolveService := tv.Service
+
+	// resolve endpoint
+	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, options.EndpointResolverOptions)
+	if err != nil {
+		return ctx, s3shared.NewFailedToResolveEndpointError(
+			tv,
+			options.partitionID,
+			options.requestRegion,
+			err,
+		)
+	}
+
+	// assign resolved endpoint url to request url
+	req.URL, err = url.Parse(endpoint.URL)
+	if err != nil {
+		return ctx, fmt.Errorf("failed to parse endpoint URL: %w", err)
+	}
+
+	if len(endpoint.SigningName) != 0 && endpoint.Source == aws.EndpointSourceCustom {
+		ctx = awsmiddleware.SetSigningName(ctx, endpoint.SigningName)
+	} else {
+		// Must sign with s3-object-lambda
+		ctx = awsmiddleware.SetSigningName(ctx, resolveService)
+	}
+
+	if len(endpoint.SigningRegion) != 0 {
+		ctx = awsmiddleware.SetSigningRegion(ctx, endpoint.SigningRegion)
+	} else {
+		ctx = awsmiddleware.SetSigningRegion(ctx, resolveRegion)
+	}
+
+	// update serviceID to "s3-object-lambda"
+	ctx = awsmiddleware.SetServiceID(ctx, s3ObjectLambda)
+
+	// disable host prefix behavior
+	ctx = http.DisableEndpointHostPrefix(ctx, true)
+
+	// remove the serialized arn in place of /{Bucket}
+	ctx = setBucketToRemoveOnContext(ctx, tv.String())
+
+	// skip arn processing, if arn region resolves to a immutable endpoint
+	if endpoint.HostnameImmutable {
+		return ctx, nil
+	}
+
+	if endpoint.Source == aws.EndpointSourceServiceMetadata {
+		updateS3HostForS3ObjectLambda(req)
+	}
+
+	ctx, err = buildAccessPointHostPrefix(ctx, req, tv)
+	if err != nil {
+		return ctx, err
+	}
+
+	return ctx, nil
+}
+
+func buildAccessPointHostPrefix(ctx context.Context, req *http.Request, tv arn.AccessPointARN) (context.Context, error) {
+	// add host prefix for access point
 	accessPointHostPrefix := tv.AccessPointName + "-" + tv.AccountID + "."
 	req.URL.Host = accessPointHostPrefix + req.URL.Host
 	if len(req.Host) > 0 {
@@ -251,12 +379,6 @@ func buildAccessPointRequest(ctx context.Context, options accesspointOptions) (c
 	if err := http.ValidateEndpointHost(req.URL.Host); err != nil {
 		return ctx, s3shared.NewInvalidARNError(tv, err)
 	}
-
-	// disable host prefix behavior
-	ctx = http.DisableEndpointHostPrefix(ctx, true)
-
-	// remove the serialized arn in place of /{Bucket}
-	ctx = setBucketToRemoveOnContext(ctx, tv.String())
 
 	return ctx, nil
 }
@@ -300,10 +422,10 @@ func buildOutpostAccessPointRequest(ctx context.Context, options outpostAccessPo
 		return ctx, fmt.Errorf("failed to parse endpoint URL: %w", err)
 	}
 
-	if len(endpoint.SigningName) != 0 {
+	// assign resolved service from arn as signing name
+	if len(endpoint.SigningName) != 0 && endpoint.Source == aws.EndpointSourceCustom {
 		ctx = awsmiddleware.SetSigningName(ctx, endpoint.SigningName)
 	} else {
-		// assign resolved service from arn as signing name
 		ctx = awsmiddleware.SetSigningName(ctx, resolveService)
 	}
 
@@ -314,18 +436,21 @@ func buildOutpostAccessPointRequest(ctx context.Context, options outpostAccessPo
 		ctx = awsmiddleware.SetSigningRegion(ctx, resolveRegion)
 	}
 
+	// update serviceID to resolved service id
+	ctx = awsmiddleware.SetServiceID(ctx, resolveService)
+
+	// disable host prefix behavior
+	ctx = http.DisableEndpointHostPrefix(ctx, true)
+
+	// remove the serialized arn in place of /{Bucket}
+	ctx = setBucketToRemoveOnContext(ctx, tv.String())
+
 	// skip further customizations, if arn region resolves to a immutable endpoint
 	if endpoint.HostnameImmutable {
 		return ctx, nil
 	}
 
-	cfgHost := req.URL.Host
-	if strings.HasPrefix(cfgHost, endpointsID) {
-		// replace service endpointID label with resolved service
-		req.URL.Host = resolveService + cfgHost[len(endpointsID):]
-		// update serviceID to resolved service id
-		ctx = awsmiddleware.SetServiceID(ctx, resolveService)
-	}
+	updateHostPrefix(req, endpointsID, resolveService)
 
 	// add host prefix for s3-outposts
 	outpostAPHostPrefix := tv.AccessPointName + "-" + tv.AccountID + "." + tv.OutpostID + "."
@@ -339,10 +464,5 @@ func buildOutpostAccessPointRequest(ctx context.Context, options outpostAccessPo
 		return ctx, s3shared.NewInvalidARNError(tv, err)
 	}
 
-	// disable host prefix behavior
-	ctx = http.DisableEndpointHostPrefix(ctx, true)
-
-	// remove the serialized arn in place of /{Bucket}
-	ctx = setBucketToRemoveOnContext(ctx, tv.String())
 	return ctx, nil
 }

@@ -172,6 +172,10 @@ func NewDownloader(c DownloadAPIClient, options ...func(*Downloader)) *Downloade
 // to perform a single GetObjectInput request for that object's range. This will
 // caused the part size, and concurrency configurations to be ignored.
 func (d Downloader) Download(ctx context.Context, w io.WriterAt, input *s3.GetObjectInput, options ...func(*Downloader)) (n int64, err error) {
+	if err := validateSupportedARNType(aws.ToString(input.Bucket)); err != nil {
+		return 0, err
+	}
+
 	impl := downloader{w: w, in: input, cfg: d, ctx: ctx}
 
 	// Copy ClientOptions
