@@ -12,21 +12,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the default encryption configuration for an Amazon S3 bucket. For
-// information about the Amazon S3 default encryption feature, see Amazon S3
-// Default Bucket Encryption
+// Returns the default encryption configuration for an Amazon S3 bucket. If the
+// bucket does not have a default encryption configuration, GetBucketEncryption
+// returns ServerSideEncryptionConfigurationNotFoundError. For information about
+// the Amazon S3 default encryption feature, see Amazon S3 Default Bucket
+// Encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html). To use
 // this operation, you must have permission to perform the
 // s3:GetEncryptionConfiguration action. The bucket owner has this permission by
 // default. The bucket owner can grant this permission to others. For more
 // information about permissions, see Permissions Related to Bucket Subresource
 // Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html). The
-// following operations are related to GetBucketEncryption:
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+// The following operations are related to GetBucketEncryption:
 //
-// * PutBucketEncryption
+// *
+// PutBucketEncryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketEncryption.html)
 //
 // *
@@ -55,7 +58,7 @@ type GetBucketEncryptionInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -168,6 +171,7 @@ func addGetBucketEncryptionUpdateEndpoint(stack *middleware.Stack, options Optio
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

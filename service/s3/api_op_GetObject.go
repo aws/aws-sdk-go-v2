@@ -39,8 +39,8 @@ import (
 // Archive tiers, before you can retrieve the object you must first restore a copy
 // using RestoreObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html).
-// Otherwise, this operation returns an InvalidObjectStateError error. For
-// information about restoring archived objects, see Restoring Archived Objects
+// Otherwise, this action returns an InvalidObjectStateError error. For information
+// about restoring archived objects, see Restoring Archived Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html).
 // Encryption request headers, like x-amz-server-side-encryption, should not be
 // sent for GET requests if your object uses server-side encryption with CMKs
@@ -82,8 +82,8 @@ import (
 // permission, Amazon S3 will return an HTTP status code 403 ("access denied")
 // error.
 //
-// Versioning By default, the GET operation returns the current version of
-// an object. To return a different version, use the versionId subresource. If the
+// Versioning By default, the GET action returns the current version of an
+// object. To return a different version, use the versionId subresource. If the
 // current version of the object is a delete marker, Amazon S3 behaves as if the
 // object was deleted and includes x-amz-delete-marker: true in the response. For
 // more information about versioning, see PutBucketVersioning
@@ -151,21 +151,22 @@ func (c *Client) GetObject(ctx context.Context, params *GetObjectInput, optFns .
 
 type GetObjectInput struct {
 
-	// The bucket name containing the object. When using this API with an access point,
-	// you must direct requests to the access point hostname. The access point hostname
-	// takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com.
-	// When using this operation with an access point through the AWS SDKs, you provide
-	// the access point ARN in place of the bucket name. For more information about
-	// access point ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide. When using this API with
-	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
-	// The S3 on Outposts hostname takes the form
+	// The bucket name containing the object. When using this action with an access
+	// point, you must direct requests to the access point hostname. The access point
+	// hostname takes the form
+	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
+	// action with an access point through the AWS SDKs, you provide the access point
+	// ARN in place of the bucket name. For more information about access point ARNs,
+	// see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide. When using this action
+	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
+	// hostname. The S3 on Outposts hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this operation using S3 on Outposts through the AWS SDKs, you provide the
-	// Outposts bucket ARN in place of the bucket name. For more information about S3
-	// on Outposts ARNs, see Using S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
+	// bucket ARN in place of the bucket name. For more information about S3 on
+	// Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
@@ -176,7 +177,7 @@ type GetObjectInput struct {
 	// This member is required.
 	Key *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 
@@ -234,15 +235,15 @@ type GetObjectInput struct {
 	// Sets the Expires header of the response.
 	ResponseExpires *time.Time
 
-	// Specifies the algorithm to use to when encrypting the object (for example,
+	// Specifies the algorithm to use to when decrypting the object (for example,
 	// AES256).
 	SSECustomerAlgorithm *string
 
-	// Specifies the customer-provided encryption key for Amazon S3 to use in
-	// encrypting data. This value is used to store the object and then it is
-	// discarded; Amazon S3 does not store the encryption key. The key must be
-	// appropriate for use with the algorithm specified in the
-	// x-amz-server-side-encryption-customer-algorithm header.
+	// Specifies the customer-provided encryption key for Amazon S3 used to encrypt the
+	// data. This value is used to decrypt the object when recovering it and must match
+	// the one used when storing the data. The key must be appropriate for use with the
+	// algorithm specified in the x-amz-server-side-encryption-customer-algorithm
+	// header.
 	SSECustomerKey *string
 
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
@@ -306,7 +307,7 @@ type GetObjectOutput struct {
 	// The date and time at which the object is no longer cacheable.
 	Expires *time.Time
 
-	// Last modified date of the object
+	// Creation date of the object.
 	LastModified *time.Time
 
 	// A map of metadata to store with the object in S3.
@@ -341,8 +342,8 @@ type GetObjectOutput struct {
 	// request.
 	RequestCharged types.RequestCharged
 
-	// Provides information about object restoration operation and expiration time of
-	// the restored object copy.
+	// Provides information about object restoration action and expiration time of the
+	// restored object copy.
 	Restore *string
 
 	// If server-side encryption with a customer-provided encryption key was requested,
@@ -477,6 +478,7 @@ func addGetObjectUpdateEndpoint(stack *middleware.Stack, options Options) error 
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This implementation of the PUT operation adds an inventory configuration
+// This implementation of the PUT action adds an inventory configuration
 // (identified by the inventory ID) to the bucket. You can have up to 1,000
 // inventory configurations per bucket. Amazon S3 inventory generates inventories
 // of the objects in the bucket on a daily or weekly basis, and the results are
@@ -25,48 +25,48 @@ import (
 // metadata to include and whether to inventory all object versions or only current
 // versions. For more information, see Amazon S3 Inventory
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html) in the
-// Amazon Simple Storage Service Developer Guide. You must create a bucket policy
-// on the destination bucket to grant permissions to Amazon S3 to write objects to
-// the bucket in the defined location. For an example policy, see  Granting
-// Permissions for Amazon S3 Inventory and Storage Class Analysis
+// Amazon S3 User Guide. You must create a bucket policy on the destination bucket
+// to grant permissions to Amazon S3 to write objects to the bucket in the defined
+// location. For an example policy, see  Granting Permissions for Amazon S3
+// Inventory and Storage Class Analysis
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html#example-bucket-policies-use-case-9).
 // To use this operation, you must have permissions to perform the
 // s3:PutInventoryConfiguration action. The bucket owner has this permission by
 // default and can grant this permission to others. For more information about
 // permissions, see Permissions Related to Bucket Subresource Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) in the
-// Amazon Simple Storage Service Developer Guide. Special Errors
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
+// in the Amazon S3 User Guide. Special Errors
 //
-// * HTTP 400 Bad
-// Request Error
+// * HTTP 400 Bad Request Error
 //
-// * Code: InvalidArgument
+// *
+// Code: InvalidArgument
 //
 // * Cause: Invalid Argument
 //
-// * HTTP 400
-// Bad Request Error
+// * HTTP 400 Bad Request
+// Error
 //
 // * Code: TooManyConfigurations
 //
-// * Cause: You are attempting to
-// create a new configuration but have already reached the 1,000-configuration
-// limit.
+// * Cause: You are attempting to create a
+// new configuration but have already reached the 1,000-configuration limit.
 //
-// * HTTP 403 Forbidden Error
+// *
+// HTTP 403 Forbidden Error
 //
 // * Code: AccessDenied
 //
-// * Cause: You are not
-// the owner of the specified bucket, or you do not have the
-// s3:PutInventoryConfiguration bucket permission to set the configuration on the
-// bucket.
+// * Cause: You are not the owner
+// of the specified bucket, or you do not have the s3:PutInventoryConfiguration
+// bucket permission to set the configuration on the bucket.
 //
 // Related Resources
 //
-// * GetBucketInventoryConfiguration
+// *
+// GetBucketInventoryConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketInventoryConfiguration.html)
 //
 // *
@@ -108,7 +108,7 @@ type PutBucketInventoryConfigurationInput struct {
 	// This member is required.
 	InventoryConfiguration *types.InventoryConfiguration
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -217,6 +217,7 @@ func addPutBucketInventoryConfigurationUpdateEndpoint(stack *middleware.Stack, o
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

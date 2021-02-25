@@ -14,13 +14,13 @@ import (
 	"strings"
 )
 
-// This operation deletes an Amazon S3 on Outposts bucket's tags. To delete an S3
+// This action deletes an Amazon S3 on Outposts bucket's tags. To delete an S3
 // bucket tags, see DeleteBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html)
 // in the Amazon Simple Storage Service API. Deletes the tags from the Outposts
 // bucket. For more information, see Using Amazon S3 on Outposts
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in Amazon
-// Simple Storage Service Developer Guide. To use this operation, you must have
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in
+// Amazon Simple Storage Service User Guide. To use this action, you must have
 // permission to perform the PutBucketTagging action. By default, the bucket owner
 // has this permission and can grant this permission to others. All Amazon S3 on
 // Outposts REST API requests for this action require an additional parameter of

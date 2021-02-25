@@ -28,9 +28,9 @@ import (
 // action. The bucket owner has this permission by default and can grant this
 // permission to others. For more information about permissions, see Permissions
 // Related to Bucket Subresource Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 // PutBucketTagging has the following special errors:
 //
 // * Error code:
@@ -52,7 +52,7 @@ import (
 // * Error code: OperationAbortedError
 //
 // * Description: A conflicting
-// conditional operation is currently in progress against this resource. Please try
+// conditional action is currently in progress against this resource. Please try
 // again.
 //
 // * Error code: InternalError
@@ -103,7 +103,7 @@ type PutBucketTaggingInput struct {
 	// Line Interface (CLI) or AWS SDKs, this field is calculated automatically.
 	ContentMD5 *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -215,6 +215,7 @@ func addPutBucketTaggingUpdateEndpoint(stack *middleware.Stack, options Options)
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

@@ -17,18 +17,19 @@ import (
 // request parameters as selection criteria to return a subset of the objects in a
 // bucket. A 200 OK response can contain valid or invalid XML. Make sure to design
 // your application to parse the contents of the response and handle it
-// appropriately. To use this operation, you must have READ access to the bucket.
-// To use this operation in an AWS Identity and Access Management (IAM) policy, you
-// must have permissions to perform the s3:ListBucket action. The bucket owner has
-// this permission by default and can grant this permission to others. For more
-// information about permissions, see Permissions Related to Bucket Subresource
-// Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// appropriately. Objects are returned sorted in an ascending order of the
+// respective key names in the list. To use this operation, you must have READ
+// access to the bucket. To use this action in an AWS Identity and Access
+// Management (IAM) policy, you must have permissions to perform the s3:ListBucket
+// action. The bucket owner has this permission by default and can grant this
+// permission to others. For more information about permissions, see Permissions
+// Related to Bucket Subresource Operations
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html). This
-// section describes the latest revision of the API. We recommend that you use this
-// revised API for application development. For backward compatibility, Amazon S3
-// continues to support the prior version of this API, ListObjects
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+// This section describes the latest revision of this action. We recommend that you
+// use this revised API for application development. For backward compatibility,
+// Amazon S3 continues to support the prior version of this API, ListObjects
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html). To get a
 // list of your buckets, see ListBuckets
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html). The
@@ -61,21 +62,21 @@ func (c *Client) ListObjectsV2(ctx context.Context, params *ListObjectsV2Input, 
 
 type ListObjectsV2Input struct {
 
-	// Bucket name to list. When using this API with an access point, you must direct
-	// requests to the access point hostname. The access point hostname takes the form
-	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation with an access point through the AWS SDKs, you provide the access
-	// point ARN in place of the bucket name. For more information about access point
-	// ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide. When using this API with
-	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
-	// The S3 on Outposts hostname takes the form
+	// Bucket name to list. When using this action with an access point, you must
+	// direct requests to the access point hostname. The access point hostname takes
+	// the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When
+	// using this action with an access point through the AWS SDKs, you provide the
+	// access point ARN in place of the bucket name. For more information about access
+	// point ARNs, see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide. When using this action
+	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
+	// hostname. The S3 on Outposts hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this operation using S3 on Outposts through the AWS SDKs, you provide the
-	// Outposts bucket ARN in place of the bucket name. For more information about S3
-	// on Outposts ARNs, see Using S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
+	// bucket ARN in place of the bucket name. For more information about S3 on
+	// Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
@@ -91,7 +92,7 @@ type ListObjectsV2Input struct {
 	// Encoding type used by Amazon S3 to encode object keys in the response.
 	EncodingType types.EncodingType
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 
@@ -99,7 +100,7 @@ type ListObjectsV2Input struct {
 	// field with each key in the result then set the fetch owner field to true.
 	FetchOwner bool
 
-	// Sets the maximum number of keys returned in the response. By default the API
+	// Sets the maximum number of keys returned in the response. By default the action
 	// returns up to 1,000 key names. The response might contain fewer keys but will
 	// never contain more.
 	MaxKeys int32
@@ -119,15 +120,15 @@ type ListObjectsV2Input struct {
 
 type ListObjectsV2Output struct {
 
-	// All of the keys rolled up into a common prefix count as a single return when
-	// calculating the number of returns. A response can contain CommonPrefixes only if
-	// you specify a delimiter. CommonPrefixes contains all (if there are any) keys
-	// between Prefix and the next occurrence of the string specified by a delimiter.
-	// CommonPrefixes lists keys that act like subdirectories in the directory
-	// specified by Prefix. For example, if the prefix is notes/ and the delimiter is a
-	// slash (/) as in notes/summer/july, the common prefix is notes/summer/. All of
-	// the keys that roll up into a common prefix count as a single return when
-	// calculating the number of returns.
+	// All of the keys (up to 1,000) rolled up into a common prefix count as a single
+	// return when calculating the number of returns. A response can contain
+	// CommonPrefixes only if you specify a delimiter. CommonPrefixes contains all (if
+	// there are any) keys between Prefix and the next occurrence of the string
+	// specified by a delimiter. CommonPrefixes lists keys that act like subdirectories
+	// in the directory specified by Prefix. For example, if the prefix is notes/ and
+	// the delimiter is a slash (/) as in notes/summer/july, the common prefix is
+	// notes/summer/. All of the keys that roll up into a common prefix count as a
+	// single return when calculating the number of returns.
 	CommonPrefixes []types.CommonPrefix
 
 	// Metadata about each object returned.
@@ -155,30 +156,30 @@ type ListObjectsV2Output struct {
 	IsTruncated bool
 
 	// KeyCount is the number of keys returned with this request. KeyCount will always
-	// be less than equals to MaxKeys field. Say you ask for 50 keys, your result will
-	// include less than equals 50 keys
+	// be less than or equals to MaxKeys field. Say you ask for 50 keys, your result
+	// will include less than equals 50 keys
 	KeyCount int32
 
-	// Sets the maximum number of keys returned in the response. By default the API
+	// Sets the maximum number of keys returned in the response. By default the action
 	// returns up to 1,000 key names. The response might contain fewer keys but will
 	// never contain more.
 	MaxKeys int32
 
-	// The bucket name. When using this API with an access point, you must direct
+	// The bucket name. When using this action with an access point, you must direct
 	// requests to the access point hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation with an access point through the AWS SDKs, you provide the access
-	// point ARN in place of the bucket name. For more information about access point
-	// ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide. When using this API with
-	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
-	// The S3 on Outposts hostname takes the form
+	// action with an access point through the AWS SDKs, you provide the access point
+	// ARN in place of the bucket name. For more information about access point ARNs,
+	// see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide. When using this action
+	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
+	// hostname. The S3 on Outposts hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this operation using S3 on Outposts through the AWS SDKs, you provide the
-	// Outposts bucket ARN in place of the bucket name. For more information about S3
-	// on Outposts ARNs, see Using S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
+	// bucket ARN in place of the bucket name. For more information about S3 on
+	// Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	Name *string
 
@@ -279,7 +280,7 @@ var _ ListObjectsV2APIClient = (*Client)(nil)
 
 // ListObjectsV2PaginatorOptions is the paginator options for ListObjectsV2
 type ListObjectsV2PaginatorOptions struct {
-	// Sets the maximum number of keys returned in the response. By default the API
+	// Sets the maximum number of keys returned in the response. By default the action
 	// returns up to 1,000 key names. The response might contain fewer keys but will
 	// never contain more.
 	Limit int32
@@ -383,6 +384,7 @@ func addListObjectsV2UpdateEndpoint(stack *middleware.Stack, options Options) er
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

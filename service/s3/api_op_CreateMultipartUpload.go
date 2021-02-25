@@ -13,10 +13,10 @@ import (
 	"time"
 )
 
-// This operation initiates a multipart upload and returns an upload ID. This
-// upload ID is used to associate all of the parts in the specific multipart
-// upload. You specify this upload ID in each of your subsequent upload part
-// requests (see UploadPart
+// This action initiates a multipart upload and returns an upload ID. This upload
+// ID is used to associate all of the parts in the specific multipart upload. You
+// specify this upload ID in each of your subsequent upload part requests (see
+// UploadPart
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)). You also
 // include this upload ID in the final request to either complete or abort the
 // multipart upload request. For more information about multipart uploads, see
@@ -25,12 +25,11 @@ import (
 // configured a lifecycle rule to abort incomplete multipart uploads, the upload
 // must complete within the number of days specified in the bucket lifecycle
 // configuration. Otherwise, the incomplete multipart upload becomes eligible for
-// an abort operation and Amazon S3 aborts the multipart upload. For more
-// information, see Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle
-// Policy
+// an abort action and Amazon S3 aborts the multipart upload. For more information,
+// see Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Policy
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config).
 // For information about the permissions required to use the multipart upload API,
-// see Multipart Upload API and Permissions
+// see Multipart Upload and Permissions
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html). For
 // request signing, multipart upload is just a series of regular requests. You
 // initiate a multipart upload, send one or more requests to upload parts, and then
@@ -47,7 +46,9 @@ import (
 // its data centers and decrypts it when you access it. You can provide your own
 // encryption key, or use AWS Key Management Service (AWS KMS) customer master keys
 // (CMKs) or Amazon S3-managed encryption keys. If you choose to provide your own
-// encryption key, the request headers you provide in UploadPart and UploadPartCopy
+// encryption key, the request headers you provide in UploadPart
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html) and
+// UploadPartCopy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html)
 // requests must match the headers you used in the request to initiate the upload
 // by using CreateMultipartUpload. To perform a multipart upload with encryption
@@ -241,22 +242,22 @@ func (c *Client) CreateMultipartUpload(ctx context.Context, params *CreateMultip
 
 type CreateMultipartUploadInput struct {
 
-	// The name of the bucket to which to initiate the upload When using this API with
-	// an access point, you must direct requests to the access point hostname. The
+	// The name of the bucket to which to initiate the upload When using this action
+	// with an access point, you must direct requests to the access point hostname. The
 	// access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation with an access point through the AWS SDKs, you provide the access
-	// point ARN in place of the bucket name. For more information about access point
-	// ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide. When using this API with
-	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
-	// The S3 on Outposts hostname takes the form
+	// action with an access point through the AWS SDKs, you provide the access point
+	// ARN in place of the bucket name. For more information about access point ARNs,
+	// see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide. When using this action
+	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
+	// hostname. The S3 on Outposts hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this operation using S3 on Outposts through the AWS SDKs, you provide the
-	// Outposts bucket ARN in place of the bucket name. For more information about S3
-	// on Outposts ARNs, see Using S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
+	// bucket ARN in place of the bucket name. For more information about S3 on
+	// Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
@@ -274,7 +275,7 @@ type CreateMultipartUploadInput struct {
 	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption
 	// with server-side encryption using AWS KMS (SSE-KMS). Setting this header to true
 	// causes Amazon S3 to use an S3 Bucket Key for object encryption with SSE-KMS.
-	// Specifying this header with an object operation doesn’t affect bucket-level
+	// Specifying this header with an object action doesn’t affect bucket-level
 	// settings for S3 Bucket Key.
 	BucketKeyEnabled bool
 
@@ -295,7 +296,7 @@ type CreateMultipartUploadInput struct {
 	// A standard MIME type describing the format of the object data.
 	ContentType *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 
@@ -364,7 +365,7 @@ type CreateMultipartUploadInput struct {
 	// fail if not made via SSL or using SigV4. For information about configuring using
 	// any of the officially supported AWS SDKs and AWS CLI, see Specifying the
 	// Signature Version in Request Authentication
-	// (https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version)
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version)
 	// in the Amazon S3 Developer Guide.
 	SSEKMSKeyId *string
 
@@ -409,21 +410,21 @@ type CreateMultipartUploadOutput struct {
 	AbortRuleId *string
 
 	// The name of the bucket to which the multipart upload was initiated. When using
-	// this API with an access point, you must direct requests to the access point
+	// this action with an access point, you must direct requests to the access point
 	// hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation with an access point through the AWS SDKs, you provide the access
-	// point ARN in place of the bucket name. For more information about access point
-	// ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide. When using this API with
-	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
-	// The S3 on Outposts hostname takes the form
+	// action with an access point through the AWS SDKs, you provide the access point
+	// ARN in place of the bucket name. For more information about access point ARNs,
+	// see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide. When using this action
+	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
+	// hostname. The S3 on Outposts hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this operation using S3 on Outposts through the AWS SDKs, you provide the
-	// Outposts bucket ARN in place of the bucket name. For more information about S3
-	// on Outposts ARNs, see Using S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
+	// bucket ARN in place of the bucket name. For more information about S3 on
+	// Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	Bucket *string
 
@@ -567,6 +568,7 @@ func addCreateMultipartUploadUpdateEndpoint(stack *middleware.Stack, options Opt
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

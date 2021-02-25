@@ -14,9 +14,8 @@ import (
 	"strings"
 )
 
-// This API action deletes an Amazon S3 on Outposts bucket's lifecycle
-// configuration. To delete an S3 bucket's lifecycle configuration, see
-// DeleteBucketLifecycle
+// This action deletes an Amazon S3 on Outposts bucket's lifecycle configuration.
+// To delete an S3 bucket's lifecycle configuration, see DeleteBucketLifecycle
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html)
 // in the Amazon Simple Storage Service API. Deletes the lifecycle configuration
 // from the specified Outposts bucket. Amazon S3 on Outposts removes all the
@@ -24,8 +23,8 @@ import (
 // bucket. Your objects never expire, and Amazon S3 on Outposts no longer
 // automatically deletes any objects on the basis of rules contained in the deleted
 // lifecycle configuration. For more information, see Using Amazon S3 on Outposts
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in Amazon
-// Simple Storage Service Developer Guide. To use this operation, you must have
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in
+// Amazon Simple Storage Service User Guide. To use this action, you must have
 // permission to perform the s3-outposts:DeleteLifecycleConfiguration action. By
 // default, the bucket owner has this permission and the Outposts bucket owner can
 // grant this permission to others. All Amazon S3 on Outposts REST API requests for
@@ -35,7 +34,7 @@ import (
 // uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id
 // derived using the access point ARN, see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples)
-// section. For more information about object expiration, see  Elements to Describe
+// section. For more information about object expiration, see Elements to Describe
 // Lifecycle Actions
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions).
 // Related actions include:

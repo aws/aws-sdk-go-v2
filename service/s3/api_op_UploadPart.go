@@ -41,26 +41,25 @@ import (
 // upload, Amazon S3 frees up the parts storage and stops charging you for the
 // parts storage. For more information on multipart uploads, go to Multipart Upload
 // Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html) in
-// the Amazon Simple Storage Service Developer Guide . For information on the
-// permissions required to use the multipart upload API, go to Multipart Upload API
-// and Permissions
+// the Amazon S3 User Guide . For information on the permissions required to use
+// the multipart upload API, go to Multipart Upload and Permissions
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html) in the
-// Amazon Simple Storage Service Developer Guide. You can optionally request
-// server-side encryption where Amazon S3 encrypts your data as it writes it to
-// disks in its data centers and decrypts it for you when you access it. You have
-// the option of providing your own encryption key, or you can use the AWS managed
-// encryption keys. If you choose to provide your own encryption key, the request
-// headers you provide in the request must match the headers you used in the
-// request to initiate the upload by using CreateMultipartUpload
+// Amazon S3 User Guide. You can optionally request server-side encryption where
+// Amazon S3 encrypts your data as it writes it to disks in its data centers and
+// decrypts it for you when you access it. You have the option of providing your
+// own encryption key, or you can use the AWS managed encryption keys. If you
+// choose to provide your own encryption key, the request headers you provide in
+// the request must match the headers you used in the request to initiate the
+// upload by using CreateMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html).
 // For more information, go to Using Server-Side Encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)
-// in the Amazon Simple Storage Service Developer Guide. Server-side encryption is
-// supported by the S3 Multipart Upload actions. Unless you are using a
-// customer-provided encryption key, you don't need to specify the encryption
-// parameters in each UploadPart request. Instead, you only need to specify the
-// server-side encryption parameters in the initial Initiate Multipart request. For
-// more information, see CreateMultipartUpload
+// in the Amazon S3 User Guide. Server-side encryption is supported by the S3
+// Multipart Upload actions. Unless you are using a customer-provided encryption
+// key, you don't need to specify the encryption parameters in each UploadPart
+// request. Instead, you only need to specify the server-side encryption parameters
+// in the initial Initiate Multipart request. For more information, see
+// CreateMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html).
 // If you requested server-side encryption using a customer-provided encryption key
 // in your initiate multipart upload request, you must provide identical encryption
@@ -127,21 +126,21 @@ func (c *Client) UploadPart(ctx context.Context, params *UploadPartInput, optFns
 type UploadPartInput struct {
 
 	// The name of the bucket to which the multipart upload was initiated. When using
-	// this API with an access point, you must direct requests to the access point
+	// this action with an access point, you must direct requests to the access point
 	// hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation with an access point through the AWS SDKs, you provide the access
-	// point ARN in place of the bucket name. For more information about access point
-	// ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide. When using this API with
-	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
-	// The S3 on Outposts hostname takes the form
+	// action with an access point through the AWS SDKs, you provide the access point
+	// ARN in place of the bucket name. For more information about access point ARNs,
+	// see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide. When using this action
+	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
+	// hostname. The S3 on Outposts hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this operation using S3 on Outposts through the AWS SDKs, you provide the
-	// Outposts bucket ARN in place of the bucket name. For more information about S3
-	// on Outposts ARNs, see Using S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
+	// bucket ARN in place of the bucket name. For more information about S3 on
+	// Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
@@ -178,7 +177,7 @@ type UploadPartInput struct {
 	// if object lock parameters are specified.
 	ContentMD5 *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 
@@ -340,6 +339,7 @@ func addUploadPartUpdateEndpoint(stack *middleware.Stack, options Options) error
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

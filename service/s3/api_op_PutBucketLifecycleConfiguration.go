@@ -15,12 +15,13 @@ import (
 // Creates a new lifecycle configuration for the bucket or replaces an existing
 // lifecycle configuration. For information about lifecycle configuration, see
 // Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html). Bucket
-// lifecycle configuration now supports specifying a lifecycle rule using an object
-// key name prefix, one or more object tags, or a combination of both. Accordingly,
-// this section describes the latest API. The previous version of the API supported
-// filtering based only on an object key name prefix, which is supported for
-// backward compatibility. For the related API description, see PutBucketLifecycle
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+// Bucket lifecycle configuration now supports specifying a lifecycle rule using an
+// object key name prefix, one or more object tags, or a combination of both.
+// Accordingly, this section describes the latest API. The previous version of the
+// API supported filtering based only on an object key name prefix, which is
+// supported for backward compatibility. For the related API description, see
+// PutBucketLifecycle
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html).
 // Rules You specify the lifecycle configuration in your request body. The
 // lifecycle configuration is specified as XML consisting of one or more rules.
@@ -64,8 +65,8 @@ import (
 //
 // For more information about permissions, see
 // Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html). The
-// following are related to PutBucketLifecycleConfiguration:
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+// The following are related to PutBucketLifecycleConfiguration:
 //
 // * Examples of
 // Lifecycle Configuration
@@ -100,7 +101,7 @@ type PutBucketLifecycleConfigurationInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 
@@ -215,6 +216,7 @@ func addPutBucketLifecycleConfigurationUpdateEndpoint(stack *middleware.Stack, o
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

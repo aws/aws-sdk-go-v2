@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Puts a S3 Intelligent-Tiering configuration to the specified bucket. The S3
+// Puts a S3 Intelligent-Tiering configuration to the specified bucket. You can
+// have up to 1,000 S3 Intelligent-Tiering configurations per bucket. The S3
 // Intelligent-Tiering storage class is designed to optimize storage costs by
 // automatically moving data to the most cost-effective storage access tier,
 // without additional operational overhead. S3 Intelligent-Tiering delivers
@@ -39,6 +40,36 @@ import (
 // *
 // ListBucketIntelligentTieringConfigurations
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html)
+//
+// You
+// only need S3 Intelligent-Tiering enabled on a bucket if you want to
+// automatically move objects stored in the S3 Intelligent-Tiering storage class to
+// the Archive Access or Deep Archive Access tier. Special Errors
+//
+// * HTTP 400 Bad
+// Request Error
+//
+// * Code: InvalidArgument
+//
+// * Cause: Invalid Argument
+//
+// * HTTP 400
+// Bad Request Error
+//
+// * Code: TooManyConfigurations
+//
+// * Cause: You are attempting to
+// create a new configuration but have already reached the 1,000-configuration
+// limit.
+//
+// * HTTP 403 Forbidden Error
+//
+// * Code: AccessDenied
+//
+// * Cause: You are not
+// the owner of the specified bucket, or you do not have the
+// s3:PutIntelligentTieringConfiguration bucket permission to set the configuration
+// on the bucket.
 func (c *Client) PutBucketIntelligentTieringConfiguration(ctx context.Context, params *PutBucketIntelligentTieringConfigurationInput, optFns ...func(*Options)) (*PutBucketIntelligentTieringConfigurationOutput, error) {
 	if params == nil {
 		params = &PutBucketIntelligentTieringConfigurationInput{}
@@ -177,6 +208,7 @@ func addPutBucketIntelligentTieringConfigurationUpdateEndpoint(stack *middleware
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

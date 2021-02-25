@@ -17,7 +17,7 @@ import (
 // Accordingly, this section describes the latest API. The response describes the
 // new filter element that you can use to specify a filter to select a subset of
 // objects to which the rule applies. If you are using a previous version of the
-// lifecycle configuration, it still works. For the earlier API description, see
+// lifecycle configuration, it still works. For the earlier action, see
 // GetBucketLifecycle
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycle.html).
 // Returns the lifecycle configuration information set on the bucket. For
@@ -28,9 +28,9 @@ import (
 // default. The bucket owner can grant this permission to others. For more
 // information about permissions, see Permissions Related to Bucket Subresource
 // Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 // GetBucketLifecycleConfiguration has the following special error:
 //
 // * Error code:
@@ -79,7 +79,7 @@ type GetBucketLifecycleConfigurationInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -192,6 +192,7 @@ func addGetBucketLifecycleConfigurationUpdateEndpoint(stack *middleware.Stack, o
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

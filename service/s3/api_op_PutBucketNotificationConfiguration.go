@@ -20,13 +20,13 @@ import (
 // S3 to publish and the destination where you want Amazon S3 to publish an event
 // notification when it detects an event of the specified type. By default, your
 // bucket has no event notifications configured. That is, the notification
-// configuration will be an empty NotificationConfiguration.  This operation
-// replaces the existing notification configuration with the configuration you
-// include in the request body. After Amazon S3 receives this request, it first
-// verifies that any Amazon Simple Notification Service (Amazon SNS) or Amazon
-// Simple Queue Service (Amazon SQS) destination exists, and that the bucket owner
-// has permission to publish to it by sending a test notification. In the case of
-// AWS Lambda destinations, Amazon S3 verifies that the Lambda function permissions
+// configuration will be an empty NotificationConfiguration.  This action replaces
+// the existing notification configuration with the configuration you include in
+// the request body. After Amazon S3 receives this request, it first verifies that
+// any Amazon Simple Notification Service (Amazon SNS) or Amazon Simple Queue
+// Service (Amazon SQS) destination exists, and that the bucket owner has
+// permission to publish to it by sending a test notification. In the case of AWS
+// Lambda destinations, Amazon S3 verifies that the Lambda function permissions
 // grant Amazon S3 permission to invoke the function from the Amazon S3 bucket. For
 // more information, see Configuring Notifications for Amazon S3 Events
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html). You
@@ -37,12 +37,12 @@ import (
 // PUT notification is an atomic operation. For example, suppose your notification
 // configuration includes SNS topic, SQS queue, and Lambda function configurations.
 // When you send a PUT request with this configuration, Amazon S3 sends test
-// messages to your SNS topic. If the message fails, the entire PUT operation will
+// messages to your SNS topic. If the message fails, the entire PUT action will
 // fail, and Amazon S3 will not add the configuration to your bucket. Responses If
 // the configuration in the request body includes only one TopicConfiguration
 // specifying only the s3:ReducedRedundancyLostObject event type, the response will
 // also include the x-amz-sns-test-message-id header containing the message ID of
-// the test notification sent to the topic. The following operation is related to
+// the test notification sent to the topic. The following action is related to
 // PutBucketNotificationConfiguration:
 //
 // * GetBucketNotificationConfiguration
@@ -75,7 +75,7 @@ type PutBucketNotificationConfigurationInput struct {
 	// This member is required.
 	NotificationConfiguration *types.NotificationConfiguration
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -184,6 +184,7 @@ func addPutBucketNotificationConfigurationUpdateEndpoint(stack *middleware.Stack
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

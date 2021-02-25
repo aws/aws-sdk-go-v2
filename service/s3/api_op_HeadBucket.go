@@ -17,17 +17,19 @@ import (
 	"time"
 )
 
-// This operation is useful to determine if a bucket exists and you have permission
-// to access it. The operation returns a 200 OK if the bucket exists and you have
-// permission to access it. Otherwise, the operation might return responses such as
-// 404 Not Found and 403 Forbidden. To use this operation, you must have
+// This action is useful to determine if a bucket exists and you have permission to
+// access it. The action returns a 200 OK if the bucket exists and you have
+// permission to access it. If the bucket does not exist or you do not have
+// permission to access it, the HEAD request returns a generic 404 Not Found or 403
+// Forbidden code. A message body is not included, so you cannot determine the
+// exception beyond these error codes. To use this operation, you must have
 // permissions to perform the s3:ListBucket action. The bucket owner has this
 // permission by default and can grant this permission to others. For more
 // information about permissions, see Permissions Related to Bucket Subresource
 // Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 func (c *Client) HeadBucket(ctx context.Context, params *HeadBucketInput, optFns ...func(*Options)) (*HeadBucketOutput, error) {
 	if params == nil {
 		params = &HeadBucketInput{}
@@ -45,27 +47,27 @@ func (c *Client) HeadBucket(ctx context.Context, params *HeadBucketInput, optFns
 
 type HeadBucketInput struct {
 
-	// The bucket name. When using this API with an access point, you must direct
+	// The bucket name. When using this action with an access point, you must direct
 	// requests to the access point hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation with an access point through the AWS SDKs, you provide the access
-	// point ARN in place of the bucket name. For more information about access point
-	// ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide. When using this API with
-	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
-	// The S3 on Outposts hostname takes the form
+	// action with an access point through the AWS SDKs, you provide the access point
+	// ARN in place of the bucket name. For more information about access point ARNs,
+	// see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide. When using this action
+	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
+	// hostname. The S3 on Outposts hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this operation using S3 on Outposts through the AWS SDKs, you provide the
-	// Outposts bucket ARN in place of the bucket name. For more information about S3
-	// on Outposts ARNs, see Using S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
+	// bucket ARN in place of the bucket name. For more information about S3 on
+	// Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -466,6 +468,7 @@ func addHeadBucketUpdateEndpoint(stack *middleware.Stack, options Options) error
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

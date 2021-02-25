@@ -16,7 +16,7 @@ import (
 // information, see Replication
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the Amazon
 // S3 Developer Guide. To perform this operation, the user or role performing the
-// operation must have the iam:PassRole
+// action must have the iam:PassRole
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html)
 // permission. Specify the replication configuration in the request body. In the
 // replication configuration, you provide the name of the destination bucket or
@@ -42,7 +42,7 @@ import (
 // Permissions in a Policy
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html) and
 // Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 // Handling Replication of Encrypted Objects By default, Amazon S3 doesn't
 // replicate objects that are stored at rest using server-side encryption with CMKs
 // stored in AWS KMS. To replicate AWS KMS-encrypted objects, add the following:
@@ -98,7 +98,7 @@ type PutBucketReplicationInput struct {
 	// Line Interface (CLI) or AWS SDKs, this field is calculated automatically.
 	ContentMD5 *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 
@@ -213,6 +213,7 @@ func addPutBucketReplicationUpdateEndpoint(stack *middleware.Stack, options Opti
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

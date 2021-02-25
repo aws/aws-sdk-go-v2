@@ -16,12 +16,13 @@ import (
 )
 
 // Gets an Amazon S3 on Outposts bucket. For more information, see  Using Amazon S3
-// on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html)
-// in the Amazon Simple Storage Service Developer Guide. If you are using an
-// identity other than the root user of the AWS account that owns the bucket, the
-// calling identity must have the s3-outposts:GetBucket permissions on the
-// specified bucket and belong to the bucket owner's account in order to use this
-// operation. Only users from Outposts bucket owner account with the right
+// on Outposts
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
+// Amazon Simple Storage Service User Guide. If you are using an identity other
+// than the root user of the AWS account that owns the Outposts bucket, the calling
+// identity must have the s3-outposts:GetBucket permissions on the specified
+// Outposts bucket and belong to the Outposts bucket owner's account in order to
+// use this action. Only users from Outposts bucket owner account with the right
 // permissions can perform actions on an Outposts bucket. If you don't have
 // s3-outposts:GetBucket permissions or you're not using an identity that belongs
 // to the bucket owner's account, Amazon S3 returns a 403 Access Denied error. The

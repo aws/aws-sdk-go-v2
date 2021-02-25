@@ -17,9 +17,9 @@ import (
 // systems. Therefore, a get request soon after put or delete can return a wrong
 // result. For information about replication configuration, see Replication
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the Amazon
-// Simple Storage Service Developer Guide. This operation requires permissions for
-// the s3:GetReplicationConfiguration action. For more information about
-// permissions, see Using Bucket Policies and User Policies
+// S3 User Guide. This action requires permissions for the
+// s3:GetReplicationConfiguration action. For more information about permissions,
+// see Using Bucket Policies and User Policies
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html). If
 // you include the Filter element in a replication configuration, you must also
 // include the DeleteMarkerReplication and Priority elements. The response also
@@ -57,7 +57,7 @@ type GetBucketReplicationInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -171,6 +171,7 @@ func addGetBucketReplicationUpdateEndpoint(stack *middleware.Stack, options Opti
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

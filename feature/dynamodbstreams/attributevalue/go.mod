@@ -6,7 +6,6 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.2.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.1.2
 	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.1.2
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.0.2
 	github.com/google/go-cmp v0.5.4
 )
 

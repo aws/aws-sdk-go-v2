@@ -15,13 +15,13 @@ import (
 // operation, you must have the s3:PutBucketPublicAccessBlock permission. For more
 // information about permissions, see Permissions Related to Bucket Subresource
 // Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html). The
-// following operations are related to DeletePublicAccessBlock:
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+// The following operations are related to DeletePublicAccessBlock:
 //
-// * Using Amazon S3
-// Block Public Access
+// * Using Amazon
+// S3 Block Public Access
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
 //
 // *
@@ -57,7 +57,7 @@ type DeletePublicAccessBlockInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -166,6 +166,7 @@ func addDeletePublicAccessBlockUpdateEndpoint(stack *middleware.Stack, options O
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This implementation of the GET operation uses the acl subresource to return the
+// This implementation of the GET action uses the acl subresource to return the
 // access control list (ACL) of a bucket. To use GET to return the ACL of the
 // bucket, you must have READ_ACP access to the bucket. If READ_ACP permission is
 // granted to the anonymous user, you can return the ACL of the bucket without
@@ -42,7 +42,7 @@ type GetBucketAclInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -158,6 +158,7 @@ func addGetBucketAclUpdateEndpoint(stack *middleware.Stack, options Options) err
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

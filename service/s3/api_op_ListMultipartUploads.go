@@ -12,24 +12,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation lists in-progress multipart uploads. An in-progress multipart
-// upload is a multipart upload that has been initiated using the Initiate
-// Multipart Upload request, but has not yet been completed or aborted. This
-// operation returns at most 1,000 multipart uploads in the response. 1,000
-// multipart uploads is the maximum number of uploads a response can include, which
-// is also the default value. You can further limit the number of uploads in a
-// response by specifying the max-uploads parameter in the response. If additional
-// multipart uploads satisfy the list criteria, the response will contain an
-// IsTruncated element with the value true. To list the additional multipart
-// uploads, use the key-marker and upload-id-marker request parameters. In the
-// response, the uploads are sorted by key. If your application has initiated more
-// than one multipart upload using the same object key, then uploads in the
-// response are first sorted by key. Additionally, uploads are sorted in ascending
-// order within each key by the upload initiation time. For more information on
-// multipart uploads, see Uploading Objects Using Multipart Upload
+// This action lists in-progress multipart uploads. An in-progress multipart upload
+// is a multipart upload that has been initiated using the Initiate Multipart
+// Upload request, but has not yet been completed or aborted. This action returns
+// at most 1,000 multipart uploads in the response. 1,000 multipart uploads is the
+// maximum number of uploads a response can include, which is also the default
+// value. You can further limit the number of uploads in a response by specifying
+// the max-uploads parameter in the response. If additional multipart uploads
+// satisfy the list criteria, the response will contain an IsTruncated element with
+// the value true. To list the additional multipart uploads, use the key-marker and
+// upload-id-marker request parameters. In the response, the uploads are sorted by
+// key. If your application has initiated more than one multipart upload using the
+// same object key, then uploads in the response are first sorted by key.
+// Additionally, uploads are sorted in ascending order within each key by the
+// upload initiation time. For more information on multipart uploads, see Uploading
+// Objects Using Multipart Upload
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html). For
 // information on permissions required to use the multipart upload API, see
-// Multipart Upload API and Permissions
+// Multipart Upload and Permissions
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html). The
 // following operations are related to ListMultipartUploads:
 //
@@ -70,21 +70,21 @@ func (c *Client) ListMultipartUploads(ctx context.Context, params *ListMultipart
 type ListMultipartUploadsInput struct {
 
 	// The name of the bucket to which the multipart upload was initiated. When using
-	// this API with an access point, you must direct requests to the access point
+	// this action with an access point, you must direct requests to the access point
 	// hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation with an access point through the AWS SDKs, you provide the access
-	// point ARN in place of the bucket name. For more information about access point
-	// ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide. When using this API with
-	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
-	// The S3 on Outposts hostname takes the form
+	// action with an access point through the AWS SDKs, you provide the access point
+	// ARN in place of the bucket name. For more information about access point ARNs,
+	// see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide. When using this action
+	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
+	// hostname. The S3 on Outposts hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this operation using S3 on Outposts through the AWS SDKs, you provide the
-	// Outposts bucket ARN in place of the bucket name. For more information about S3
-	// on Outposts ARNs, see Using S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
+	// bucket ARN in place of the bucket name. For more information about S3 on
+	// Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
@@ -106,7 +106,7 @@ type ListMultipartUploadsInput struct {
 	// response.
 	EncodingType types.EncodingType
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 
@@ -292,6 +292,7 @@ func addListMultipartUploadsUpdateEndpoint(stack *middleware.Stack, options Opti
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

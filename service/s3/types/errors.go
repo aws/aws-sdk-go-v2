@@ -134,7 +134,7 @@ func (e *NotFound) ErrorMessage() string {
 func (e *NotFound) ErrorCode() string             { return "NotFound" }
 func (e *NotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This operation is not allowed against this storage tier.
+// This action is not allowed against this storage tier.
 type ObjectAlreadyInActiveTierError struct {
 	Message *string
 }
@@ -151,7 +151,7 @@ func (e *ObjectAlreadyInActiveTierError) ErrorMessage() string {
 func (e *ObjectAlreadyInActiveTierError) ErrorCode() string             { return "ObjectAlreadyInActiveTierError" }
 func (e *ObjectAlreadyInActiveTierError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The source object of the COPY operation is not in the active tier and is only
+// The source object of the COPY action is not in the active tier and is only
 // stored in Amazon S3 Glacier.
 type ObjectNotInActiveTierError struct {
 	Message *string

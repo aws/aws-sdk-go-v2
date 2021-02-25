@@ -19,11 +19,11 @@ import (
 // permission by default. The bucket owner can grant this permission to others. For
 // more information about permissions, see Permissions Related to Bucket
 // Subresource Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html). The
-// Transfer Acceleration state of a bucket can be set to one of the following two
-// values:
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+// The Transfer Acceleration state of a bucket can be set to one of the following
+// two values:
 //
 // * Enabled – Enables accelerated data transfers to the bucket.
 //
@@ -33,7 +33,7 @@ import (
 // The
 // GetBucketAccelerateConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAccelerateConfiguration.html)
-// operation returns the transfer acceleration state of a bucket. After setting the
+// action returns the transfer acceleration state of a bucket. After setting the
 // Transfer Acceleration state of a bucket to Enabled, it might take up to thirty
 // minutes before the data transfer rates to the bucket increase. The name of the
 // bucket used for Transfer Acceleration must be DNS-compliant and must not contain
@@ -76,7 +76,7 @@ type PutBucketAccelerateConfigurationInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -185,6 +185,7 @@ func addPutBucketAccelerateConfigurationUpdateEndpoint(stack *middleware.Stack, 
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

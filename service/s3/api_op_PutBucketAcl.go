@@ -178,7 +178,7 @@ type PutBucketAclInput struct {
 	// Line Interface (CLI) or AWS SDKs, this field is calculated automatically.
 	ContentMD5 *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 
@@ -306,6 +306,7 @@ func addPutBucketAclUpdateEndpoint(stack *middleware.Stack, options Options) err
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

@@ -18,10 +18,10 @@ import (
 // has this permission by default. The bucket owner can grant this permission to
 // others. For more information about permissions, see Permissions Related to
 // Bucket Subresource Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html). For
-// information about CloudWatch request metrics for Amazon S3, see Monitoring
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+// For information about CloudWatch request metrics for Amazon S3, see Monitoring
 // Metrics with Amazon CloudWatch
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html).
 // The following operations are related to DeleteBucketMetricsConfiguration:
@@ -68,7 +68,7 @@ type DeleteBucketMetricsConfigurationInput struct {
 	// This member is required.
 	Id *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -177,6 +177,7 @@ func addDeleteBucketMetricsConfigurationUpdateEndpoint(stack *middleware.Stack, 
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

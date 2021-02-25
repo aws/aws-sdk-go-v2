@@ -14,24 +14,24 @@ import (
 	"strings"
 )
 
-// This API operation deletes an Amazon S3 on Outposts bucket policy. To delete an
-// S3 bucket policy, see DeleteBucketPolicy
+// This action deletes an Amazon S3 on Outposts bucket policy. To delete an S3
+// bucket policy, see DeleteBucketPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html) in
-// the Amazon Simple Storage Service API. This implementation of the DELETE
-// operation uses the policy subresource to delete the policy of a specified Amazon
-// S3 on Outposts bucket. If you are using an identity other than the root user of
-// the AWS account that owns the bucket, the calling identity must have the
+// the Amazon Simple Storage Service API. This implementation of the DELETE action
+// uses the policy subresource to delete the policy of a specified Amazon S3 on
+// Outposts bucket. If you are using an identity other than the root user of the
+// AWS account that owns the bucket, the calling identity must have the
 // s3-outposts:DeleteBucketPolicy permissions on the specified Outposts bucket and
-// belong to the bucket owner's account to use this operation. For more
-// information, see Using Amazon S3 on Outposts
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in Amazon
-// Simple Storage Service Developer Guide. If you don't have DeleteBucketPolicy
+// belong to the bucket owner's account to use this action. For more information,
+// see Using Amazon S3 on Outposts
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in
+// Amazon Simple Storage Service User Guide. If you don't have DeleteBucketPolicy
 // permissions, Amazon S3 returns a 403 Access Denied error. If you have the
 // correct permissions, but you're not using an identity that belongs to the bucket
 // owner's account, Amazon S3 returns a 405 Method Not Allowed error. As a security
 // precaution, the root user of the AWS account that owns a bucket can always use
-// this operation, even if the policy explicitly denies the root user the ability
-// to perform this action. For more information about bucket policies, see Using
+// this action, even if the policy explicitly denies the root user the ability to
+// perform this action. For more information about bucket policies, see Using
 // Bucket Policies and User Policies
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html). All
 // Amazon S3 on Outposts REST API requests for this action require an additional

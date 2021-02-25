@@ -12,19 +12,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This implementation of the GET operation uses the accelerate subresource to
-// return the Transfer Acceleration state of a bucket, which is either Enabled or
+// This implementation of the GET action uses the accelerate subresource to return
+// the Transfer Acceleration state of a bucket, which is either Enabled or
 // Suspended. Amazon S3 Transfer Acceleration is a bucket-level feature that
 // enables you to perform faster data transfers to and from Amazon S3. To use this
 // operation, you must have permission to perform the s3:GetAccelerateConfiguration
 // action. The bucket owner has this permission by default. The bucket owner can
 // grant this permission to others. For more information about permissions, see
 // Permissions Related to Bucket Subresource Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) in the
-// Amazon Simple Storage Service Developer Guide. You set the Transfer Acceleration
-// state of an existing bucket to Enabled or Suspended by using the
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
+// in the Amazon S3 User Guide. You set the Transfer Acceleration state of an
+// existing bucket to Enabled or Suspended by using the
 // PutBucketAccelerateConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAccelerateConfiguration.html)
 // operation. A GET accelerate request does not return a state value for a bucket
@@ -32,10 +32,9 @@ import (
 // state if a state has never been set on the bucket. For more information about
 // transfer acceleration, see Transfer Acceleration
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html) in
-// the Amazon Simple Storage Service Developer Guide. Related Resources
+// the Amazon S3 User Guide. Related Resources
 //
-// *
-// PutBucketAccelerateConfiguration
+// * PutBucketAccelerateConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAccelerateConfiguration.html)
 func (c *Client) GetBucketAccelerateConfiguration(ctx context.Context, params *GetBucketAccelerateConfigurationInput, optFns ...func(*Options)) (*GetBucketAccelerateConfigurationOutput, error) {
 	if params == nil {
@@ -59,7 +58,7 @@ type GetBucketAccelerateConfigurationInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -172,6 +171,7 @@ func addGetBucketAccelerateConfigurationUpdateEndpoint(stack *middleware.Stack, 
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,
