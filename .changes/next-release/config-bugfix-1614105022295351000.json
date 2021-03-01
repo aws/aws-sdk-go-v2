@@ -1,0 +1,9 @@
+{
+ "ID": "config-bugfix-1614105022295351000",
+ "SchemaVersion": 1,
+ "Module": "config",
+ "Type": "bugfix",
+ "Description": "Fixed a panic when using WithEC2IMDSRegion without a specified IMDS client",
+ "MinVersion": "",
+ "AffectedModules": null
+}

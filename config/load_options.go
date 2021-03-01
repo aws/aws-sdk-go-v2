@@ -273,7 +273,7 @@ func (p *UseEC2IMDSRegion) getRegion(ctx context.Context) (string, bool, error) 
 		client = imds.New(imds.Options{})
 	}
 
-	result, err := p.Client.GetRegion(ctx, nil)
+	result, err := client.GetRegion(ctx, nil)
 	if err != nil {
 		return "", false, err
 	}
