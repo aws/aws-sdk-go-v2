@@ -132,14 +132,14 @@ type GetSamplingRulesPaginator struct {
 
 // NewGetSamplingRulesPaginator returns a new GetSamplingRulesPaginator
 func NewGetSamplingRulesPaginator(client GetSamplingRulesAPIClient, params *GetSamplingRulesInput, optFns ...func(*GetSamplingRulesPaginatorOptions)) *GetSamplingRulesPaginator {
+	if params == nil {
+		params = &GetSamplingRulesInput{}
+	}
+
 	options := GetSamplingRulesPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetSamplingRulesInput{}
 	}
 
 	return &GetSamplingRulesPaginator{

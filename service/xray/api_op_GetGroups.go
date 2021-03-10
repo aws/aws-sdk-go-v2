@@ -131,14 +131,14 @@ type GetGroupsPaginator struct {
 
 // NewGetGroupsPaginator returns a new GetGroupsPaginator
 func NewGetGroupsPaginator(client GetGroupsAPIClient, params *GetGroupsInput, optFns ...func(*GetGroupsPaginatorOptions)) *GetGroupsPaginator {
+	if params == nil {
+		params = &GetGroupsInput{}
+	}
+
 	options := GetGroupsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetGroupsInput{}
 	}
 
 	return &GetGroupsPaginator{

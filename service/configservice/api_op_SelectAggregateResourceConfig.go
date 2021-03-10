@@ -170,6 +170,10 @@ type SelectAggregateResourceConfigPaginator struct {
 // NewSelectAggregateResourceConfigPaginator returns a new
 // SelectAggregateResourceConfigPaginator
 func NewSelectAggregateResourceConfigPaginator(client SelectAggregateResourceConfigAPIClient, params *SelectAggregateResourceConfigInput, optFns ...func(*SelectAggregateResourceConfigPaginatorOptions)) *SelectAggregateResourceConfigPaginator {
+	if params == nil {
+		params = &SelectAggregateResourceConfigInput{}
+	}
+
 	options := SelectAggregateResourceConfigPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -177,10 +181,6 @@ func NewSelectAggregateResourceConfigPaginator(client SelectAggregateResourceCon
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SelectAggregateResourceConfigInput{}
 	}
 
 	return &SelectAggregateResourceConfigPaginator{

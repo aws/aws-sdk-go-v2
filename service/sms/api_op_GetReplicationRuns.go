@@ -155,6 +155,10 @@ type GetReplicationRunsPaginator struct {
 
 // NewGetReplicationRunsPaginator returns a new GetReplicationRunsPaginator
 func NewGetReplicationRunsPaginator(client GetReplicationRunsAPIClient, params *GetReplicationRunsInput, optFns ...func(*GetReplicationRunsPaginatorOptions)) *GetReplicationRunsPaginator {
+	if params == nil {
+		params = &GetReplicationRunsInput{}
+	}
+
 	options := GetReplicationRunsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewGetReplicationRunsPaginator(client GetReplicationRunsAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetReplicationRunsInput{}
 	}
 
 	return &GetReplicationRunsPaginator{

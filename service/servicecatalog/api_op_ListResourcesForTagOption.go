@@ -157,6 +157,10 @@ type ListResourcesForTagOptionPaginator struct {
 // NewListResourcesForTagOptionPaginator returns a new
 // ListResourcesForTagOptionPaginator
 func NewListResourcesForTagOptionPaginator(client ListResourcesForTagOptionAPIClient, params *ListResourcesForTagOptionInput, optFns ...func(*ListResourcesForTagOptionPaginatorOptions)) *ListResourcesForTagOptionPaginator {
+	if params == nil {
+		params = &ListResourcesForTagOptionInput{}
+	}
+
 	options := ListResourcesForTagOptionPaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -164,10 +168,6 @@ func NewListResourcesForTagOptionPaginator(client ListResourcesForTagOptionAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListResourcesForTagOptionInput{}
 	}
 
 	return &ListResourcesForTagOptionPaginator{

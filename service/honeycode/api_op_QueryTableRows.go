@@ -179,6 +179,10 @@ type QueryTableRowsPaginator struct {
 
 // NewQueryTableRowsPaginator returns a new QueryTableRowsPaginator
 func NewQueryTableRowsPaginator(client QueryTableRowsAPIClient, params *QueryTableRowsInput, optFns ...func(*QueryTableRowsPaginatorOptions)) *QueryTableRowsPaginator {
+	if params == nil {
+		params = &QueryTableRowsInput{}
+	}
+
 	options := QueryTableRowsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -186,10 +190,6 @@ func NewQueryTableRowsPaginator(client QueryTableRowsAPIClient, params *QueryTab
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &QueryTableRowsInput{}
 	}
 
 	return &QueryTableRowsPaginator{

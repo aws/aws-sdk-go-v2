@@ -153,6 +153,10 @@ type DescribeLaunchConfigurationsPaginator struct {
 // NewDescribeLaunchConfigurationsPaginator returns a new
 // DescribeLaunchConfigurationsPaginator
 func NewDescribeLaunchConfigurationsPaginator(client DescribeLaunchConfigurationsAPIClient, params *DescribeLaunchConfigurationsInput, optFns ...func(*DescribeLaunchConfigurationsPaginatorOptions)) *DescribeLaunchConfigurationsPaginator {
+	if params == nil {
+		params = &DescribeLaunchConfigurationsInput{}
+	}
+
 	options := DescribeLaunchConfigurationsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -160,10 +164,6 @@ func NewDescribeLaunchConfigurationsPaginator(client DescribeLaunchConfiguration
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeLaunchConfigurationsInput{}
 	}
 
 	return &DescribeLaunchConfigurationsPaginator{

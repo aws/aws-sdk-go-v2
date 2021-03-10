@@ -144,6 +144,10 @@ type DescribeAddressesPaginator struct {
 
 // NewDescribeAddressesPaginator returns a new DescribeAddressesPaginator
 func NewDescribeAddressesPaginator(client DescribeAddressesAPIClient, params *DescribeAddressesInput, optFns ...func(*DescribeAddressesPaginatorOptions)) *DescribeAddressesPaginator {
+	if params == nil {
+		params = &DescribeAddressesInput{}
+	}
+
 	options := DescribeAddressesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -151,10 +155,6 @@ func NewDescribeAddressesPaginator(client DescribeAddressesAPIClient, params *De
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeAddressesInput{}
 	}
 
 	return &DescribeAddressesPaginator{

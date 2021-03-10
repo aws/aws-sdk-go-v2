@@ -169,6 +169,10 @@ type ListRealtimeContactAnalysisSegmentsPaginator struct {
 // NewListRealtimeContactAnalysisSegmentsPaginator returns a new
 // ListRealtimeContactAnalysisSegmentsPaginator
 func NewListRealtimeContactAnalysisSegmentsPaginator(client ListRealtimeContactAnalysisSegmentsAPIClient, params *ListRealtimeContactAnalysisSegmentsInput, optFns ...func(*ListRealtimeContactAnalysisSegmentsPaginatorOptions)) *ListRealtimeContactAnalysisSegmentsPaginator {
+	if params == nil {
+		params = &ListRealtimeContactAnalysisSegmentsInput{}
+	}
+
 	options := ListRealtimeContactAnalysisSegmentsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -176,10 +180,6 @@ func NewListRealtimeContactAnalysisSegmentsPaginator(client ListRealtimeContactA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRealtimeContactAnalysisSegmentsInput{}
 	}
 
 	return &ListRealtimeContactAnalysisSegmentsPaginator{

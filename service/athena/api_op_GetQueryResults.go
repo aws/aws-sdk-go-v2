@@ -164,6 +164,10 @@ type GetQueryResultsPaginator struct {
 
 // NewGetQueryResultsPaginator returns a new GetQueryResultsPaginator
 func NewGetQueryResultsPaginator(client GetQueryResultsAPIClient, params *GetQueryResultsInput, optFns ...func(*GetQueryResultsPaginatorOptions)) *GetQueryResultsPaginator {
+	if params == nil {
+		params = &GetQueryResultsInput{}
+	}
+
 	options := GetQueryResultsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -171,10 +175,6 @@ func NewGetQueryResultsPaginator(client GetQueryResultsAPIClient, params *GetQue
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetQueryResultsInput{}
 	}
 
 	return &GetQueryResultsPaginator{

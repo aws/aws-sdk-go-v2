@@ -146,6 +146,10 @@ type ListSentimentDetectionJobsPaginator struct {
 // NewListSentimentDetectionJobsPaginator returns a new
 // ListSentimentDetectionJobsPaginator
 func NewListSentimentDetectionJobsPaginator(client ListSentimentDetectionJobsAPIClient, params *ListSentimentDetectionJobsInput, optFns ...func(*ListSentimentDetectionJobsPaginatorOptions)) *ListSentimentDetectionJobsPaginator {
+	if params == nil {
+		params = &ListSentimentDetectionJobsInput{}
+	}
+
 	options := ListSentimentDetectionJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -153,10 +157,6 @@ func NewListSentimentDetectionJobsPaginator(client ListSentimentDetectionJobsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSentimentDetectionJobsInput{}
 	}
 
 	return &ListSentimentDetectionJobsPaginator{

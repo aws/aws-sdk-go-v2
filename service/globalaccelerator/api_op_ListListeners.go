@@ -150,6 +150,10 @@ type ListListenersPaginator struct {
 
 // NewListListenersPaginator returns a new ListListenersPaginator
 func NewListListenersPaginator(client ListListenersAPIClient, params *ListListenersInput, optFns ...func(*ListListenersPaginatorOptions)) *ListListenersPaginator {
+	if params == nil {
+		params = &ListListenersInput{}
+	}
+
 	options := ListListenersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -157,10 +161,6 @@ func NewListListenersPaginator(client ListListenersAPIClient, params *ListListen
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListListenersInput{}
 	}
 
 	return &ListListenersPaginator{

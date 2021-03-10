@@ -153,6 +153,10 @@ type SearchSchemasPaginator struct {
 
 // NewSearchSchemasPaginator returns a new SearchSchemasPaginator
 func NewSearchSchemasPaginator(client SearchSchemasAPIClient, params *SearchSchemasInput, optFns ...func(*SearchSchemasPaginatorOptions)) *SearchSchemasPaginator {
+	if params == nil {
+		params = &SearchSchemasInput{}
+	}
+
 	options := SearchSchemasPaginatorOptions{}
 	if params.Limit != 0 {
 		options.Limit = params.Limit
@@ -160,10 +164,6 @@ func NewSearchSchemasPaginator(client SearchSchemasAPIClient, params *SearchSche
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchSchemasInput{}
 	}
 
 	return &SearchSchemasPaginator{

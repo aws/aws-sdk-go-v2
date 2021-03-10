@@ -148,6 +148,10 @@ type ListAttendeesPaginator struct {
 
 // NewListAttendeesPaginator returns a new ListAttendeesPaginator
 func NewListAttendeesPaginator(client ListAttendeesAPIClient, params *ListAttendeesInput, optFns ...func(*ListAttendeesPaginatorOptions)) *ListAttendeesPaginator {
+	if params == nil {
+		params = &ListAttendeesInput{}
+	}
+
 	options := ListAttendeesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -155,10 +159,6 @@ func NewListAttendeesPaginator(client ListAttendeesAPIClient, params *ListAttend
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAttendeesInput{}
 	}
 
 	return &ListAttendeesPaginator{

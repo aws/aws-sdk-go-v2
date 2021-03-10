@@ -167,6 +167,10 @@ type DescribeInboundCrossClusterSearchConnectionsPaginator struct {
 // NewDescribeInboundCrossClusterSearchConnectionsPaginator returns a new
 // DescribeInboundCrossClusterSearchConnectionsPaginator
 func NewDescribeInboundCrossClusterSearchConnectionsPaginator(client DescribeInboundCrossClusterSearchConnectionsAPIClient, params *DescribeInboundCrossClusterSearchConnectionsInput, optFns ...func(*DescribeInboundCrossClusterSearchConnectionsPaginatorOptions)) *DescribeInboundCrossClusterSearchConnectionsPaginator {
+	if params == nil {
+		params = &DescribeInboundCrossClusterSearchConnectionsInput{}
+	}
+
 	options := DescribeInboundCrossClusterSearchConnectionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -174,10 +178,6 @@ func NewDescribeInboundCrossClusterSearchConnectionsPaginator(client DescribeInb
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeInboundCrossClusterSearchConnectionsInput{}
 	}
 
 	return &DescribeInboundCrossClusterSearchConnectionsPaginator{

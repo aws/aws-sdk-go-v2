@@ -162,6 +162,10 @@ type GetSlotTypeVersionsPaginator struct {
 
 // NewGetSlotTypeVersionsPaginator returns a new GetSlotTypeVersionsPaginator
 func NewGetSlotTypeVersionsPaginator(client GetSlotTypeVersionsAPIClient, params *GetSlotTypeVersionsInput, optFns ...func(*GetSlotTypeVersionsPaginatorOptions)) *GetSlotTypeVersionsPaginator {
+	if params == nil {
+		params = &GetSlotTypeVersionsInput{}
+	}
+
 	options := GetSlotTypeVersionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -169,10 +173,6 @@ func NewGetSlotTypeVersionsPaginator(client GetSlotTypeVersionsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetSlotTypeVersionsInput{}
 	}
 
 	return &GetSlotTypeVersionsPaginator{

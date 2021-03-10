@@ -168,6 +168,10 @@ type ListTrainingJobsForHyperParameterTuningJobPaginator struct {
 // NewListTrainingJobsForHyperParameterTuningJobPaginator returns a new
 // ListTrainingJobsForHyperParameterTuningJobPaginator
 func NewListTrainingJobsForHyperParameterTuningJobPaginator(client ListTrainingJobsForHyperParameterTuningJobAPIClient, params *ListTrainingJobsForHyperParameterTuningJobInput, optFns ...func(*ListTrainingJobsForHyperParameterTuningJobPaginatorOptions)) *ListTrainingJobsForHyperParameterTuningJobPaginator {
+	if params == nil {
+		params = &ListTrainingJobsForHyperParameterTuningJobInput{}
+	}
+
 	options := ListTrainingJobsForHyperParameterTuningJobPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -175,10 +179,6 @@ func NewListTrainingJobsForHyperParameterTuningJobPaginator(client ListTrainingJ
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTrainingJobsForHyperParameterTuningJobInput{}
 	}
 
 	return &ListTrainingJobsForHyperParameterTuningJobPaginator{

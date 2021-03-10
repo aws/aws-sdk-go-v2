@@ -151,6 +151,10 @@ type ListSubscribedWorkteamsPaginator struct {
 // NewListSubscribedWorkteamsPaginator returns a new
 // ListSubscribedWorkteamsPaginator
 func NewListSubscribedWorkteamsPaginator(client ListSubscribedWorkteamsAPIClient, params *ListSubscribedWorkteamsInput, optFns ...func(*ListSubscribedWorkteamsPaginatorOptions)) *ListSubscribedWorkteamsPaginator {
+	if params == nil {
+		params = &ListSubscribedWorkteamsInput{}
+	}
+
 	options := ListSubscribedWorkteamsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -158,10 +162,6 @@ func NewListSubscribedWorkteamsPaginator(client ListSubscribedWorkteamsAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSubscribedWorkteamsInput{}
 	}
 
 	return &ListSubscribedWorkteamsPaginator{

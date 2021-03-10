@@ -181,6 +181,10 @@ type ListSigningCertificatesPaginator struct {
 // NewListSigningCertificatesPaginator returns a new
 // ListSigningCertificatesPaginator
 func NewListSigningCertificatesPaginator(client ListSigningCertificatesAPIClient, params *ListSigningCertificatesInput, optFns ...func(*ListSigningCertificatesPaginatorOptions)) *ListSigningCertificatesPaginator {
+	if params == nil {
+		params = &ListSigningCertificatesInput{}
+	}
+
 	options := ListSigningCertificatesPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -188,10 +192,6 @@ func NewListSigningCertificatesPaginator(client ListSigningCertificatesAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSigningCertificatesInput{}
 	}
 
 	return &ListSigningCertificatesPaginator{

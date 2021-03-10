@@ -167,6 +167,10 @@ type DescribeDBProxyTargetGroupsPaginator struct {
 // NewDescribeDBProxyTargetGroupsPaginator returns a new
 // DescribeDBProxyTargetGroupsPaginator
 func NewDescribeDBProxyTargetGroupsPaginator(client DescribeDBProxyTargetGroupsAPIClient, params *DescribeDBProxyTargetGroupsInput, optFns ...func(*DescribeDBProxyTargetGroupsPaginatorOptions)) *DescribeDBProxyTargetGroupsPaginator {
+	if params == nil {
+		params = &DescribeDBProxyTargetGroupsInput{}
+	}
+
 	options := DescribeDBProxyTargetGroupsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -174,10 +178,6 @@ func NewDescribeDBProxyTargetGroupsPaginator(client DescribeDBProxyTargetGroupsA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeDBProxyTargetGroupsInput{}
 	}
 
 	return &DescribeDBProxyTargetGroupsPaginator{

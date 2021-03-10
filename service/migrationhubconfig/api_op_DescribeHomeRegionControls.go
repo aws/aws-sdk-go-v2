@@ -159,6 +159,10 @@ type DescribeHomeRegionControlsPaginator struct {
 // NewDescribeHomeRegionControlsPaginator returns a new
 // DescribeHomeRegionControlsPaginator
 func NewDescribeHomeRegionControlsPaginator(client DescribeHomeRegionControlsAPIClient, params *DescribeHomeRegionControlsInput, optFns ...func(*DescribeHomeRegionControlsPaginatorOptions)) *DescribeHomeRegionControlsPaginator {
+	if params == nil {
+		params = &DescribeHomeRegionControlsInput{}
+	}
+
 	options := DescribeHomeRegionControlsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewDescribeHomeRegionControlsPaginator(client DescribeHomeRegionControlsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeHomeRegionControlsInput{}
 	}
 
 	return &DescribeHomeRegionControlsPaginator{

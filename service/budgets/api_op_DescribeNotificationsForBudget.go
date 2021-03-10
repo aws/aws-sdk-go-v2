@@ -161,6 +161,10 @@ type DescribeNotificationsForBudgetPaginator struct {
 // NewDescribeNotificationsForBudgetPaginator returns a new
 // DescribeNotificationsForBudgetPaginator
 func NewDescribeNotificationsForBudgetPaginator(client DescribeNotificationsForBudgetAPIClient, params *DescribeNotificationsForBudgetInput, optFns ...func(*DescribeNotificationsForBudgetPaginatorOptions)) *DescribeNotificationsForBudgetPaginator {
+	if params == nil {
+		params = &DescribeNotificationsForBudgetInput{}
+	}
+
 	options := DescribeNotificationsForBudgetPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -168,10 +172,6 @@ func NewDescribeNotificationsForBudgetPaginator(client DescribeNotificationsForB
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeNotificationsForBudgetInput{}
 	}
 
 	return &DescribeNotificationsForBudgetPaginator{

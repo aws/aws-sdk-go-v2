@@ -172,6 +172,10 @@ type ListAppImageConfigsPaginator struct {
 
 // NewListAppImageConfigsPaginator returns a new ListAppImageConfigsPaginator
 func NewListAppImageConfigsPaginator(client ListAppImageConfigsAPIClient, params *ListAppImageConfigsInput, optFns ...func(*ListAppImageConfigsPaginatorOptions)) *ListAppImageConfigsPaginator {
+	if params == nil {
+		params = &ListAppImageConfigsInput{}
+	}
+
 	options := ListAppImageConfigsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -179,10 +183,6 @@ func NewListAppImageConfigsPaginator(client ListAppImageConfigsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAppImageConfigsInput{}
 	}
 
 	return &ListAppImageConfigsPaginator{

@@ -143,14 +143,14 @@ type ListDashboardsPaginator struct {
 
 // NewListDashboardsPaginator returns a new ListDashboardsPaginator
 func NewListDashboardsPaginator(client ListDashboardsAPIClient, params *ListDashboardsInput, optFns ...func(*ListDashboardsPaginatorOptions)) *ListDashboardsPaginator {
+	if params == nil {
+		params = &ListDashboardsInput{}
+	}
+
 	options := ListDashboardsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDashboardsInput{}
 	}
 
 	return &ListDashboardsPaginator{

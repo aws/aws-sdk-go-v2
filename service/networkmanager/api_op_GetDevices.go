@@ -151,6 +151,10 @@ type GetDevicesPaginator struct {
 
 // NewGetDevicesPaginator returns a new GetDevicesPaginator
 func NewGetDevicesPaginator(client GetDevicesAPIClient, params *GetDevicesInput, optFns ...func(*GetDevicesPaginatorOptions)) *GetDevicesPaginator {
+	if params == nil {
+		params = &GetDevicesInput{}
+	}
+
 	options := GetDevicesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -158,10 +162,6 @@ func NewGetDevicesPaginator(client GetDevicesAPIClient, params *GetDevicesInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetDevicesInput{}
 	}
 
 	return &GetDevicesPaginator{

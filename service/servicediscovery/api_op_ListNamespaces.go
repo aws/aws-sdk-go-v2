@@ -164,6 +164,10 @@ type ListNamespacesPaginator struct {
 
 // NewListNamespacesPaginator returns a new ListNamespacesPaginator
 func NewListNamespacesPaginator(client ListNamespacesAPIClient, params *ListNamespacesInput, optFns ...func(*ListNamespacesPaginatorOptions)) *ListNamespacesPaginator {
+	if params == nil {
+		params = &ListNamespacesInput{}
+	}
+
 	options := ListNamespacesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -171,10 +175,6 @@ func NewListNamespacesPaginator(client ListNamespacesAPIClient, params *ListName
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListNamespacesInput{}
 	}
 
 	return &ListNamespacesPaginator{

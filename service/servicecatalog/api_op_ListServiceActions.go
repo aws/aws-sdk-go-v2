@@ -151,6 +151,10 @@ type ListServiceActionsPaginator struct {
 
 // NewListServiceActionsPaginator returns a new ListServiceActionsPaginator
 func NewListServiceActionsPaginator(client ListServiceActionsAPIClient, params *ListServiceActionsInput, optFns ...func(*ListServiceActionsPaginatorOptions)) *ListServiceActionsPaginator {
+	if params == nil {
+		params = &ListServiceActionsInput{}
+	}
+
 	options := ListServiceActionsPaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -158,10 +162,6 @@ func NewListServiceActionsPaginator(client ListServiceActionsAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListServiceActionsInput{}
 	}
 
 	return &ListServiceActionsPaginator{

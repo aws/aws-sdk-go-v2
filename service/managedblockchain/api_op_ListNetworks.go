@@ -150,6 +150,10 @@ type ListNetworksPaginator struct {
 
 // NewListNetworksPaginator returns a new ListNetworksPaginator
 func NewListNetworksPaginator(client ListNetworksAPIClient, params *ListNetworksInput, optFns ...func(*ListNetworksPaginatorOptions)) *ListNetworksPaginator {
+	if params == nil {
+		params = &ListNetworksInput{}
+	}
+
 	options := ListNetworksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -157,10 +161,6 @@ func NewListNetworksPaginator(client ListNetworksAPIClient, params *ListNetworks
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListNetworksInput{}
 	}
 
 	return &ListNetworksPaginator{

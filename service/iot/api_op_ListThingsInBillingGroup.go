@@ -149,6 +149,10 @@ type ListThingsInBillingGroupPaginator struct {
 // NewListThingsInBillingGroupPaginator returns a new
 // ListThingsInBillingGroupPaginator
 func NewListThingsInBillingGroupPaginator(client ListThingsInBillingGroupAPIClient, params *ListThingsInBillingGroupInput, optFns ...func(*ListThingsInBillingGroupPaginatorOptions)) *ListThingsInBillingGroupPaginator {
+	if params == nil {
+		params = &ListThingsInBillingGroupInput{}
+	}
+
 	options := ListThingsInBillingGroupPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -156,10 +160,6 @@ func NewListThingsInBillingGroupPaginator(client ListThingsInBillingGroupAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListThingsInBillingGroupInput{}
 	}
 
 	return &ListThingsInBillingGroupPaginator{

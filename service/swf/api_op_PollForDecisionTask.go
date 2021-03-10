@@ -250,6 +250,10 @@ type PollForDecisionTaskPaginator struct {
 
 // NewPollForDecisionTaskPaginator returns a new PollForDecisionTaskPaginator
 func NewPollForDecisionTaskPaginator(client PollForDecisionTaskAPIClient, params *PollForDecisionTaskInput, optFns ...func(*PollForDecisionTaskPaginatorOptions)) *PollForDecisionTaskPaginator {
+	if params == nil {
+		params = &PollForDecisionTaskInput{}
+	}
+
 	options := PollForDecisionTaskPaginatorOptions{}
 	if params.MaximumPageSize != 0 {
 		options.Limit = params.MaximumPageSize
@@ -257,10 +261,6 @@ func NewPollForDecisionTaskPaginator(client PollForDecisionTaskAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &PollForDecisionTaskInput{}
 	}
 
 	return &PollForDecisionTaskPaginator{

@@ -145,14 +145,14 @@ type DescribeListenersPaginator struct {
 
 // NewDescribeListenersPaginator returns a new DescribeListenersPaginator
 func NewDescribeListenersPaginator(client DescribeListenersAPIClient, params *DescribeListenersInput, optFns ...func(*DescribeListenersPaginatorOptions)) *DescribeListenersPaginator {
+	if params == nil {
+		params = &DescribeListenersInput{}
+	}
+
 	options := DescribeListenersPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeListenersInput{}
 	}
 
 	return &DescribeListenersPaginator{

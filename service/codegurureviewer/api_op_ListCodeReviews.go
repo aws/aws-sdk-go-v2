@@ -172,6 +172,10 @@ type ListCodeReviewsPaginator struct {
 
 // NewListCodeReviewsPaginator returns a new ListCodeReviewsPaginator
 func NewListCodeReviewsPaginator(client ListCodeReviewsAPIClient, params *ListCodeReviewsInput, optFns ...func(*ListCodeReviewsPaginatorOptions)) *ListCodeReviewsPaginator {
+	if params == nil {
+		params = &ListCodeReviewsInput{}
+	}
+
 	options := ListCodeReviewsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -179,10 +183,6 @@ func NewListCodeReviewsPaginator(client ListCodeReviewsAPIClient, params *ListCo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCodeReviewsInput{}
 	}
 
 	return &ListCodeReviewsPaginator{

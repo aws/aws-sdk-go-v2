@@ -142,6 +142,10 @@ type ListBundlesPaginator struct {
 
 // NewListBundlesPaginator returns a new ListBundlesPaginator
 func NewListBundlesPaginator(client ListBundlesAPIClient, params *ListBundlesInput, optFns ...func(*ListBundlesPaginatorOptions)) *ListBundlesPaginator {
+	if params == nil {
+		params = &ListBundlesInput{}
+	}
+
 	options := ListBundlesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -149,10 +153,6 @@ func NewListBundlesPaginator(client ListBundlesAPIClient, params *ListBundlesInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListBundlesInput{}
 	}
 
 	return &ListBundlesPaginator{

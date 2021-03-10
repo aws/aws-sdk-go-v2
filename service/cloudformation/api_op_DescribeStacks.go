@@ -149,14 +149,14 @@ type DescribeStacksPaginator struct {
 
 // NewDescribeStacksPaginator returns a new DescribeStacksPaginator
 func NewDescribeStacksPaginator(client DescribeStacksAPIClient, params *DescribeStacksInput, optFns ...func(*DescribeStacksPaginatorOptions)) *DescribeStacksPaginator {
+	if params == nil {
+		params = &DescribeStacksInput{}
+	}
+
 	options := DescribeStacksPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeStacksInput{}
 	}
 
 	return &DescribeStacksPaginator{

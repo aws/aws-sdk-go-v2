@@ -152,6 +152,10 @@ type GetInsightEventsPaginator struct {
 
 // NewGetInsightEventsPaginator returns a new GetInsightEventsPaginator
 func NewGetInsightEventsPaginator(client GetInsightEventsAPIClient, params *GetInsightEventsInput, optFns ...func(*GetInsightEventsPaginatorOptions)) *GetInsightEventsPaginator {
+	if params == nil {
+		params = &GetInsightEventsInput{}
+	}
+
 	options := GetInsightEventsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -159,10 +163,6 @@ func NewGetInsightEventsPaginator(client GetInsightEventsAPIClient, params *GetI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetInsightEventsInput{}
 	}
 
 	return &GetInsightEventsPaginator{

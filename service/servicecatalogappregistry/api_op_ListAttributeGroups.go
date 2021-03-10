@@ -141,6 +141,10 @@ type ListAttributeGroupsPaginator struct {
 
 // NewListAttributeGroupsPaginator returns a new ListAttributeGroupsPaginator
 func NewListAttributeGroupsPaginator(client ListAttributeGroupsAPIClient, params *ListAttributeGroupsInput, optFns ...func(*ListAttributeGroupsPaginatorOptions)) *ListAttributeGroupsPaginator {
+	if params == nil {
+		params = &ListAttributeGroupsInput{}
+	}
+
 	options := ListAttributeGroupsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -148,10 +152,6 @@ func NewListAttributeGroupsPaginator(client ListAttributeGroupsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAttributeGroupsInput{}
 	}
 
 	return &ListAttributeGroupsPaginator{

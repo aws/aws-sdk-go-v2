@@ -165,6 +165,10 @@ type DescribeMaintenanceWindowExecutionTaskInvocationsPaginator struct {
 // NewDescribeMaintenanceWindowExecutionTaskInvocationsPaginator returns a new
 // DescribeMaintenanceWindowExecutionTaskInvocationsPaginator
 func NewDescribeMaintenanceWindowExecutionTaskInvocationsPaginator(client DescribeMaintenanceWindowExecutionTaskInvocationsAPIClient, params *DescribeMaintenanceWindowExecutionTaskInvocationsInput, optFns ...func(*DescribeMaintenanceWindowExecutionTaskInvocationsPaginatorOptions)) *DescribeMaintenanceWindowExecutionTaskInvocationsPaginator {
+	if params == nil {
+		params = &DescribeMaintenanceWindowExecutionTaskInvocationsInput{}
+	}
+
 	options := DescribeMaintenanceWindowExecutionTaskInvocationsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -172,10 +176,6 @@ func NewDescribeMaintenanceWindowExecutionTaskInvocationsPaginator(client Descri
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeMaintenanceWindowExecutionTaskInvocationsInput{}
 	}
 
 	return &DescribeMaintenanceWindowExecutionTaskInvocationsPaginator{

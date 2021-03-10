@@ -181,6 +181,10 @@ type ListConfigurationHistoryPaginator struct {
 // NewListConfigurationHistoryPaginator returns a new
 // ListConfigurationHistoryPaginator
 func NewListConfigurationHistoryPaginator(client ListConfigurationHistoryAPIClient, params *ListConfigurationHistoryInput, optFns ...func(*ListConfigurationHistoryPaginatorOptions)) *ListConfigurationHistoryPaginator {
+	if params == nil {
+		params = &ListConfigurationHistoryInput{}
+	}
+
 	options := ListConfigurationHistoryPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -188,10 +192,6 @@ func NewListConfigurationHistoryPaginator(client ListConfigurationHistoryAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListConfigurationHistoryInput{}
 	}
 
 	return &ListConfigurationHistoryPaginator{

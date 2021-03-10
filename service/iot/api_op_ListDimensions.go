@@ -139,6 +139,10 @@ type ListDimensionsPaginator struct {
 
 // NewListDimensionsPaginator returns a new ListDimensionsPaginator
 func NewListDimensionsPaginator(client ListDimensionsAPIClient, params *ListDimensionsInput, optFns ...func(*ListDimensionsPaginatorOptions)) *ListDimensionsPaginator {
+	if params == nil {
+		params = &ListDimensionsInput{}
+	}
+
 	options := ListDimensionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -146,10 +150,6 @@ func NewListDimensionsPaginator(client ListDimensionsAPIClient, params *ListDime
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDimensionsInput{}
 	}
 
 	return &ListDimensionsPaginator{

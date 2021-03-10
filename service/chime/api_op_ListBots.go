@@ -146,6 +146,10 @@ type ListBotsPaginator struct {
 
 // NewListBotsPaginator returns a new ListBotsPaginator
 func NewListBotsPaginator(client ListBotsAPIClient, params *ListBotsInput, optFns ...func(*ListBotsPaginatorOptions)) *ListBotsPaginator {
+	if params == nil {
+		params = &ListBotsInput{}
+	}
+
 	options := ListBotsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -153,10 +157,6 @@ func NewListBotsPaginator(client ListBotsAPIClient, params *ListBotsInput, optFn
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListBotsInput{}
 	}
 
 	return &ListBotsPaginator{

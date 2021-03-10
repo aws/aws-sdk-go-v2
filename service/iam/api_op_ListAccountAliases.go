@@ -170,6 +170,10 @@ type ListAccountAliasesPaginator struct {
 
 // NewListAccountAliasesPaginator returns a new ListAccountAliasesPaginator
 func NewListAccountAliasesPaginator(client ListAccountAliasesAPIClient, params *ListAccountAliasesInput, optFns ...func(*ListAccountAliasesPaginatorOptions)) *ListAccountAliasesPaginator {
+	if params == nil {
+		params = &ListAccountAliasesInput{}
+	}
+
 	options := ListAccountAliasesPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -177,10 +181,6 @@ func NewListAccountAliasesPaginator(client ListAccountAliasesAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAccountAliasesInput{}
 	}
 
 	return &ListAccountAliasesPaginator{

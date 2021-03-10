@@ -175,6 +175,10 @@ type ListMFADevicesPaginator struct {
 
 // NewListMFADevicesPaginator returns a new ListMFADevicesPaginator
 func NewListMFADevicesPaginator(client ListMFADevicesAPIClient, params *ListMFADevicesInput, optFns ...func(*ListMFADevicesPaginatorOptions)) *ListMFADevicesPaginator {
+	if params == nil {
+		params = &ListMFADevicesInput{}
+	}
+
 	options := ListMFADevicesPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -182,10 +186,6 @@ func NewListMFADevicesPaginator(client ListMFADevicesAPIClient, params *ListMFAD
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListMFADevicesInput{}
 	}
 
 	return &ListMFADevicesPaginator{

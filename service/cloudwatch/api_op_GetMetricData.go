@@ -248,6 +248,10 @@ type GetMetricDataPaginator struct {
 
 // NewGetMetricDataPaginator returns a new GetMetricDataPaginator
 func NewGetMetricDataPaginator(client GetMetricDataAPIClient, params *GetMetricDataInput, optFns ...func(*GetMetricDataPaginatorOptions)) *GetMetricDataPaginator {
+	if params == nil {
+		params = &GetMetricDataInput{}
+	}
+
 	options := GetMetricDataPaginatorOptions{}
 	if params.MaxDatapoints != nil {
 		options.Limit = *params.MaxDatapoints
@@ -255,10 +259,6 @@ func NewGetMetricDataPaginator(client GetMetricDataAPIClient, params *GetMetricD
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetMetricDataInput{}
 	}
 
 	return &GetMetricDataPaginator{

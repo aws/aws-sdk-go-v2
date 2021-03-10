@@ -135,14 +135,14 @@ type GetTagKeysPaginator struct {
 
 // NewGetTagKeysPaginator returns a new GetTagKeysPaginator
 func NewGetTagKeysPaginator(client GetTagKeysAPIClient, params *GetTagKeysInput, optFns ...func(*GetTagKeysPaginatorOptions)) *GetTagKeysPaginator {
+	if params == nil {
+		params = &GetTagKeysInput{}
+	}
+
 	options := GetTagKeysPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetTagKeysInput{}
 	}
 
 	return &GetTagKeysPaginator{

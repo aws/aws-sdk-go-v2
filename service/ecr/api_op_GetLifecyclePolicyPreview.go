@@ -205,6 +205,10 @@ type GetLifecyclePolicyPreviewPaginator struct {
 // NewGetLifecyclePolicyPreviewPaginator returns a new
 // GetLifecyclePolicyPreviewPaginator
 func NewGetLifecyclePolicyPreviewPaginator(client GetLifecyclePolicyPreviewAPIClient, params *GetLifecyclePolicyPreviewInput, optFns ...func(*GetLifecyclePolicyPreviewPaginatorOptions)) *GetLifecyclePolicyPreviewPaginator {
+	if params == nil {
+		params = &GetLifecyclePolicyPreviewInput{}
+	}
+
 	options := GetLifecyclePolicyPreviewPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -212,10 +216,6 @@ func NewGetLifecyclePolicyPreviewPaginator(client GetLifecyclePolicyPreviewAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetLifecyclePolicyPreviewInput{}
 	}
 
 	return &GetLifecyclePolicyPreviewPaginator{

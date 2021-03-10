@@ -139,6 +139,10 @@ type ListLensesPaginator struct {
 
 // NewListLensesPaginator returns a new ListLensesPaginator
 func NewListLensesPaginator(client ListLensesAPIClient, params *ListLensesInput, optFns ...func(*ListLensesPaginatorOptions)) *ListLensesPaginator {
+	if params == nil {
+		params = &ListLensesInput{}
+	}
+
 	options := ListLensesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -146,10 +150,6 @@ func NewListLensesPaginator(client ListLensesAPIClient, params *ListLensesInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListLensesInput{}
 	}
 
 	return &ListLensesPaginator{

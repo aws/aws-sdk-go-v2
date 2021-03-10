@@ -145,6 +145,10 @@ type ListRecipesPaginator struct {
 
 // NewListRecipesPaginator returns a new ListRecipesPaginator
 func NewListRecipesPaginator(client ListRecipesAPIClient, params *ListRecipesInput, optFns ...func(*ListRecipesPaginatorOptions)) *ListRecipesPaginator {
+	if params == nil {
+		params = &ListRecipesInput{}
+	}
+
 	options := ListRecipesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewListRecipesPaginator(client ListRecipesAPIClient, params *ListRecipesInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRecipesInput{}
 	}
 
 	return &ListRecipesPaginator{

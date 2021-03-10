@@ -149,6 +149,10 @@ type ListIdentityProvidersPaginator struct {
 
 // NewListIdentityProvidersPaginator returns a new ListIdentityProvidersPaginator
 func NewListIdentityProvidersPaginator(client ListIdentityProvidersAPIClient, params *ListIdentityProvidersInput, optFns ...func(*ListIdentityProvidersPaginatorOptions)) *ListIdentityProvidersPaginator {
+	if params == nil {
+		params = &ListIdentityProvidersInput{}
+	}
+
 	options := ListIdentityProvidersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -156,10 +160,6 @@ func NewListIdentityProvidersPaginator(client ListIdentityProvidersAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListIdentityProvidersInput{}
 	}
 
 	return &ListIdentityProvidersPaginator{

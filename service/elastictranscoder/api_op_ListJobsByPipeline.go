@@ -153,14 +153,14 @@ type ListJobsByPipelinePaginator struct {
 
 // NewListJobsByPipelinePaginator returns a new ListJobsByPipelinePaginator
 func NewListJobsByPipelinePaginator(client ListJobsByPipelineAPIClient, params *ListJobsByPipelineInput, optFns ...func(*ListJobsByPipelinePaginatorOptions)) *ListJobsByPipelinePaginator {
+	if params == nil {
+		params = &ListJobsByPipelineInput{}
+	}
+
 	options := ListJobsByPipelinePaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListJobsByPipelineInput{}
 	}
 
 	return &ListJobsByPipelinePaginator{

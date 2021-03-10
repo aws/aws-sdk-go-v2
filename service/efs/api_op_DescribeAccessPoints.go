@@ -158,6 +158,10 @@ type DescribeAccessPointsPaginator struct {
 
 // NewDescribeAccessPointsPaginator returns a new DescribeAccessPointsPaginator
 func NewDescribeAccessPointsPaginator(client DescribeAccessPointsAPIClient, params *DescribeAccessPointsInput, optFns ...func(*DescribeAccessPointsPaginatorOptions)) *DescribeAccessPointsPaginator {
+	if params == nil {
+		params = &DescribeAccessPointsInput{}
+	}
+
 	options := DescribeAccessPointsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -165,10 +169,6 @@ func NewDescribeAccessPointsPaginator(client DescribeAccessPointsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeAccessPointsInput{}
 	}
 
 	return &DescribeAccessPointsPaginator{

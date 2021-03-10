@@ -166,6 +166,10 @@ type DescribeBudgetPerformanceHistoryPaginator struct {
 // NewDescribeBudgetPerformanceHistoryPaginator returns a new
 // DescribeBudgetPerformanceHistoryPaginator
 func NewDescribeBudgetPerformanceHistoryPaginator(client DescribeBudgetPerformanceHistoryAPIClient, params *DescribeBudgetPerformanceHistoryInput, optFns ...func(*DescribeBudgetPerformanceHistoryPaginatorOptions)) *DescribeBudgetPerformanceHistoryPaginator {
+	if params == nil {
+		params = &DescribeBudgetPerformanceHistoryInput{}
+	}
+
 	options := DescribeBudgetPerformanceHistoryPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -173,10 +177,6 @@ func NewDescribeBudgetPerformanceHistoryPaginator(client DescribeBudgetPerforman
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeBudgetPerformanceHistoryInput{}
 	}
 
 	return &DescribeBudgetPerformanceHistoryPaginator{

@@ -165,6 +165,10 @@ type DescribeDataRepositoryTasksPaginator struct {
 // NewDescribeDataRepositoryTasksPaginator returns a new
 // DescribeDataRepositoryTasksPaginator
 func NewDescribeDataRepositoryTasksPaginator(client DescribeDataRepositoryTasksAPIClient, params *DescribeDataRepositoryTasksInput, optFns ...func(*DescribeDataRepositoryTasksPaginatorOptions)) *DescribeDataRepositoryTasksPaginator {
+	if params == nil {
+		params = &DescribeDataRepositoryTasksInput{}
+	}
+
 	options := DescribeDataRepositoryTasksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -172,10 +176,6 @@ func NewDescribeDataRepositoryTasksPaginator(client DescribeDataRepositoryTasksA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeDataRepositoryTasksInput{}
 	}
 
 	return &DescribeDataRepositoryTasksPaginator{

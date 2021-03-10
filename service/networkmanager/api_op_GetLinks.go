@@ -159,6 +159,10 @@ type GetLinksPaginator struct {
 
 // NewGetLinksPaginator returns a new GetLinksPaginator
 func NewGetLinksPaginator(client GetLinksAPIClient, params *GetLinksInput, optFns ...func(*GetLinksPaginatorOptions)) *GetLinksPaginator {
+	if params == nil {
+		params = &GetLinksInput{}
+	}
+
 	options := GetLinksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewGetLinksPaginator(client GetLinksAPIClient, params *GetLinksInput, optFn
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetLinksInput{}
 	}
 
 	return &GetLinksPaginator{

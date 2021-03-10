@@ -139,6 +139,10 @@ type ListSatellitesPaginator struct {
 
 // NewListSatellitesPaginator returns a new ListSatellitesPaginator
 func NewListSatellitesPaginator(client ListSatellitesAPIClient, params *ListSatellitesInput, optFns ...func(*ListSatellitesPaginatorOptions)) *ListSatellitesPaginator {
+	if params == nil {
+		params = &ListSatellitesInput{}
+	}
+
 	options := ListSatellitesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -146,10 +150,6 @@ func NewListSatellitesPaginator(client ListSatellitesAPIClient, params *ListSate
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSatellitesInput{}
 	}
 
 	return &ListSatellitesPaginator{

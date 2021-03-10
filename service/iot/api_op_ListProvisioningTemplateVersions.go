@@ -149,6 +149,10 @@ type ListProvisioningTemplateVersionsPaginator struct {
 // NewListProvisioningTemplateVersionsPaginator returns a new
 // ListProvisioningTemplateVersionsPaginator
 func NewListProvisioningTemplateVersionsPaginator(client ListProvisioningTemplateVersionsAPIClient, params *ListProvisioningTemplateVersionsInput, optFns ...func(*ListProvisioningTemplateVersionsPaginatorOptions)) *ListProvisioningTemplateVersionsPaginator {
+	if params == nil {
+		params = &ListProvisioningTemplateVersionsInput{}
+	}
+
 	options := ListProvisioningTemplateVersionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -156,10 +160,6 @@ func NewListProvisioningTemplateVersionsPaginator(client ListProvisioningTemplat
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListProvisioningTemplateVersionsInput{}
 	}
 
 	return &ListProvisioningTemplateVersionsPaginator{

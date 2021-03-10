@@ -157,6 +157,10 @@ type ListInstanceStorageConfigsPaginator struct {
 // NewListInstanceStorageConfigsPaginator returns a new
 // ListInstanceStorageConfigsPaginator
 func NewListInstanceStorageConfigsPaginator(client ListInstanceStorageConfigsAPIClient, params *ListInstanceStorageConfigsInput, optFns ...func(*ListInstanceStorageConfigsPaginatorOptions)) *ListInstanceStorageConfigsPaginator {
+	if params == nil {
+		params = &ListInstanceStorageConfigsInput{}
+	}
+
 	options := ListInstanceStorageConfigsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -164,10 +168,6 @@ func NewListInstanceStorageConfigsPaginator(client ListInstanceStorageConfigsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListInstanceStorageConfigsInput{}
 	}
 
 	return &ListInstanceStorageConfigsPaginator{

@@ -148,6 +148,10 @@ type ListApplicationVersionsPaginator struct {
 // NewListApplicationVersionsPaginator returns a new
 // ListApplicationVersionsPaginator
 func NewListApplicationVersionsPaginator(client ListApplicationVersionsAPIClient, params *ListApplicationVersionsInput, optFns ...func(*ListApplicationVersionsPaginatorOptions)) *ListApplicationVersionsPaginator {
+	if params == nil {
+		params = &ListApplicationVersionsInput{}
+	}
+
 	options := ListApplicationVersionsPaginatorOptions{}
 	if params.MaxItems != 0 {
 		options.Limit = params.MaxItems
@@ -155,10 +159,6 @@ func NewListApplicationVersionsPaginator(client ListApplicationVersionsAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListApplicationVersionsInput{}
 	}
 
 	return &ListApplicationVersionsPaginator{

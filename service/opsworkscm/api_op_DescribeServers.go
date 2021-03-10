@@ -153,6 +153,10 @@ type DescribeServersPaginator struct {
 
 // NewDescribeServersPaginator returns a new DescribeServersPaginator
 func NewDescribeServersPaginator(client DescribeServersAPIClient, params *DescribeServersInput, optFns ...func(*DescribeServersPaginatorOptions)) *DescribeServersPaginator {
+	if params == nil {
+		params = &DescribeServersInput{}
+	}
+
 	options := DescribeServersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -160,10 +164,6 @@ func NewDescribeServersPaginator(client DescribeServersAPIClient, params *Descri
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeServersInput{}
 	}
 
 	return &DescribeServersPaginator{

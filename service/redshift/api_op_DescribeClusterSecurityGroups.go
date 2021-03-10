@@ -193,6 +193,10 @@ type DescribeClusterSecurityGroupsPaginator struct {
 // NewDescribeClusterSecurityGroupsPaginator returns a new
 // DescribeClusterSecurityGroupsPaginator
 func NewDescribeClusterSecurityGroupsPaginator(client DescribeClusterSecurityGroupsAPIClient, params *DescribeClusterSecurityGroupsInput, optFns ...func(*DescribeClusterSecurityGroupsPaginatorOptions)) *DescribeClusterSecurityGroupsPaginator {
+	if params == nil {
+		params = &DescribeClusterSecurityGroupsInput{}
+	}
+
 	options := DescribeClusterSecurityGroupsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -200,10 +204,6 @@ func NewDescribeClusterSecurityGroupsPaginator(client DescribeClusterSecurityGro
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeClusterSecurityGroupsInput{}
 	}
 
 	return &DescribeClusterSecurityGroupsPaginator{

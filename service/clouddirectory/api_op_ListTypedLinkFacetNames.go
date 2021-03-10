@@ -150,6 +150,10 @@ type ListTypedLinkFacetNamesPaginator struct {
 // NewListTypedLinkFacetNamesPaginator returns a new
 // ListTypedLinkFacetNamesPaginator
 func NewListTypedLinkFacetNamesPaginator(client ListTypedLinkFacetNamesAPIClient, params *ListTypedLinkFacetNamesInput, optFns ...func(*ListTypedLinkFacetNamesPaginatorOptions)) *ListTypedLinkFacetNamesPaginator {
+	if params == nil {
+		params = &ListTypedLinkFacetNamesInput{}
+	}
+
 	options := ListTypedLinkFacetNamesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -157,10 +161,6 @@ func NewListTypedLinkFacetNamesPaginator(client ListTypedLinkFacetNamesAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTypedLinkFacetNamesInput{}
 	}
 
 	return &ListTypedLinkFacetNamesPaginator{

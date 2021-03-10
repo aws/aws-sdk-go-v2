@@ -212,6 +212,10 @@ type ListRegionalBucketsPaginator struct {
 
 // NewListRegionalBucketsPaginator returns a new ListRegionalBucketsPaginator
 func NewListRegionalBucketsPaginator(client ListRegionalBucketsAPIClient, params *ListRegionalBucketsInput, optFns ...func(*ListRegionalBucketsPaginatorOptions)) *ListRegionalBucketsPaginator {
+	if params == nil {
+		params = &ListRegionalBucketsInput{}
+	}
+
 	options := ListRegionalBucketsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -219,10 +223,6 @@ func NewListRegionalBucketsPaginator(client ListRegionalBucketsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRegionalBucketsInput{}
 	}
 
 	return &ListRegionalBucketsPaginator{

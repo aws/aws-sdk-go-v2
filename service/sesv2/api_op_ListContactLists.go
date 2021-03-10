@@ -149,6 +149,10 @@ type ListContactListsPaginator struct {
 
 // NewListContactListsPaginator returns a new ListContactListsPaginator
 func NewListContactListsPaginator(client ListContactListsAPIClient, params *ListContactListsInput, optFns ...func(*ListContactListsPaginatorOptions)) *ListContactListsPaginator {
+	if params == nil {
+		params = &ListContactListsInput{}
+	}
+
 	options := ListContactListsPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -156,10 +160,6 @@ func NewListContactListsPaginator(client ListContactListsAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListContactListsInput{}
 	}
 
 	return &ListContactListsPaginator{

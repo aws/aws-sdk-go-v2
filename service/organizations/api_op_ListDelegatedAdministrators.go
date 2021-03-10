@@ -172,6 +172,10 @@ type ListDelegatedAdministratorsPaginator struct {
 // NewListDelegatedAdministratorsPaginator returns a new
 // ListDelegatedAdministratorsPaginator
 func NewListDelegatedAdministratorsPaginator(client ListDelegatedAdministratorsAPIClient, params *ListDelegatedAdministratorsInput, optFns ...func(*ListDelegatedAdministratorsPaginatorOptions)) *ListDelegatedAdministratorsPaginator {
+	if params == nil {
+		params = &ListDelegatedAdministratorsInput{}
+	}
+
 	options := ListDelegatedAdministratorsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -179,10 +183,6 @@ func NewListDelegatedAdministratorsPaginator(client ListDelegatedAdministratorsA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDelegatedAdministratorsInput{}
 	}
 
 	return &ListDelegatedAdministratorsPaginator{

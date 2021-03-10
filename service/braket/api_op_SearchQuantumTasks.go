@@ -151,6 +151,10 @@ type SearchQuantumTasksPaginator struct {
 
 // NewSearchQuantumTasksPaginator returns a new SearchQuantumTasksPaginator
 func NewSearchQuantumTasksPaginator(client SearchQuantumTasksAPIClient, params *SearchQuantumTasksInput, optFns ...func(*SearchQuantumTasksPaginatorOptions)) *SearchQuantumTasksPaginator {
+	if params == nil {
+		params = &SearchQuantumTasksInput{}
+	}
+
 	options := SearchQuantumTasksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -158,10 +162,6 @@ func NewSearchQuantumTasksPaginator(client SearchQuantumTasksAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchQuantumTasksInput{}
 	}
 
 	return &SearchQuantumTasksPaginator{

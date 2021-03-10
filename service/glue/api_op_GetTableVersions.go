@@ -158,6 +158,10 @@ type GetTableVersionsPaginator struct {
 
 // NewGetTableVersionsPaginator returns a new GetTableVersionsPaginator
 func NewGetTableVersionsPaginator(client GetTableVersionsAPIClient, params *GetTableVersionsInput, optFns ...func(*GetTableVersionsPaginatorOptions)) *GetTableVersionsPaginator {
+	if params == nil {
+		params = &GetTableVersionsInput{}
+	}
+
 	options := GetTableVersionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -165,10 +169,6 @@ func NewGetTableVersionsPaginator(client GetTableVersionsAPIClient, params *GetT
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetTableVersionsInput{}
 	}
 
 	return &GetTableVersionsPaginator{

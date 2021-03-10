@@ -154,6 +154,10 @@ type ListRoutingProfileQueuesPaginator struct {
 // NewListRoutingProfileQueuesPaginator returns a new
 // ListRoutingProfileQueuesPaginator
 func NewListRoutingProfileQueuesPaginator(client ListRoutingProfileQueuesAPIClient, params *ListRoutingProfileQueuesInput, optFns ...func(*ListRoutingProfileQueuesPaginatorOptions)) *ListRoutingProfileQueuesPaginator {
+	if params == nil {
+		params = &ListRoutingProfileQueuesInput{}
+	}
+
 	options := ListRoutingProfileQueuesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -161,10 +165,6 @@ func NewListRoutingProfileQueuesPaginator(client ListRoutingProfileQueuesAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRoutingProfileQueuesInput{}
 	}
 
 	return &ListRoutingProfileQueuesPaginator{

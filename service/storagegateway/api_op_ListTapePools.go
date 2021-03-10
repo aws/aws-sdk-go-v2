@@ -154,6 +154,10 @@ type ListTapePoolsPaginator struct {
 
 // NewListTapePoolsPaginator returns a new ListTapePoolsPaginator
 func NewListTapePoolsPaginator(client ListTapePoolsAPIClient, params *ListTapePoolsInput, optFns ...func(*ListTapePoolsPaginatorOptions)) *ListTapePoolsPaginator {
+	if params == nil {
+		params = &ListTapePoolsInput{}
+	}
+
 	options := ListTapePoolsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -161,10 +165,6 @@ func NewListTapePoolsPaginator(client ListTapePoolsAPIClient, params *ListTapePo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTapePoolsInput{}
 	}
 
 	return &ListTapePoolsPaginator{

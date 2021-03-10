@@ -145,6 +145,10 @@ type ListControlsPaginator struct {
 
 // NewListControlsPaginator returns a new ListControlsPaginator
 func NewListControlsPaginator(client ListControlsAPIClient, params *ListControlsInput, optFns ...func(*ListControlsPaginatorOptions)) *ListControlsPaginator {
+	if params == nil {
+		params = &ListControlsInput{}
+	}
+
 	options := ListControlsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewListControlsPaginator(client ListControlsAPIClient, params *ListControls
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListControlsInput{}
 	}
 
 	return &ListControlsPaginator{

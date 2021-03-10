@@ -145,14 +145,14 @@ type DescribeLoadBalancersPaginator struct {
 
 // NewDescribeLoadBalancersPaginator returns a new DescribeLoadBalancersPaginator
 func NewDescribeLoadBalancersPaginator(client DescribeLoadBalancersAPIClient, params *DescribeLoadBalancersInput, optFns ...func(*DescribeLoadBalancersPaginatorOptions)) *DescribeLoadBalancersPaginator {
+	if params == nil {
+		params = &DescribeLoadBalancersInput{}
+	}
+
 	options := DescribeLoadBalancersPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeLoadBalancersInput{}
 	}
 
 	return &DescribeLoadBalancersPaginator{

@@ -149,6 +149,10 @@ type ListSpeechSynthesisTasksPaginator struct {
 // NewListSpeechSynthesisTasksPaginator returns a new
 // ListSpeechSynthesisTasksPaginator
 func NewListSpeechSynthesisTasksPaginator(client ListSpeechSynthesisTasksAPIClient, params *ListSpeechSynthesisTasksInput, optFns ...func(*ListSpeechSynthesisTasksPaginatorOptions)) *ListSpeechSynthesisTasksPaginator {
+	if params == nil {
+		params = &ListSpeechSynthesisTasksInput{}
+	}
+
 	options := ListSpeechSynthesisTasksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -156,10 +160,6 @@ func NewListSpeechSynthesisTasksPaginator(client ListSpeechSynthesisTasksAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSpeechSynthesisTasksInput{}
 	}
 
 	return &ListSpeechSynthesisTasksPaginator{

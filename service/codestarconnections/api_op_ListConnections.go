@@ -151,6 +151,10 @@ type ListConnectionsPaginator struct {
 
 // NewListConnectionsPaginator returns a new ListConnectionsPaginator
 func NewListConnectionsPaginator(client ListConnectionsAPIClient, params *ListConnectionsInput, optFns ...func(*ListConnectionsPaginatorOptions)) *ListConnectionsPaginator {
+	if params == nil {
+		params = &ListConnectionsInput{}
+	}
+
 	options := ListConnectionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -158,10 +162,6 @@ func NewListConnectionsPaginator(client ListConnectionsAPIClient, params *ListCo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListConnectionsInput{}
 	}
 
 	return &ListConnectionsPaginator{

@@ -192,6 +192,10 @@ type ListAssetRelationshipsPaginator struct {
 
 // NewListAssetRelationshipsPaginator returns a new ListAssetRelationshipsPaginator
 func NewListAssetRelationshipsPaginator(client ListAssetRelationshipsAPIClient, params *ListAssetRelationshipsInput, optFns ...func(*ListAssetRelationshipsPaginatorOptions)) *ListAssetRelationshipsPaginator {
+	if params == nil {
+		params = &ListAssetRelationshipsInput{}
+	}
+
 	options := ListAssetRelationshipsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -199,10 +203,6 @@ func NewListAssetRelationshipsPaginator(client ListAssetRelationshipsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAssetRelationshipsInput{}
 	}
 
 	return &ListAssetRelationshipsPaginator{

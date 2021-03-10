@@ -146,6 +146,10 @@ type ListDocumentClassificationJobsPaginator struct {
 // NewListDocumentClassificationJobsPaginator returns a new
 // ListDocumentClassificationJobsPaginator
 func NewListDocumentClassificationJobsPaginator(client ListDocumentClassificationJobsAPIClient, params *ListDocumentClassificationJobsInput, optFns ...func(*ListDocumentClassificationJobsPaginatorOptions)) *ListDocumentClassificationJobsPaginator {
+	if params == nil {
+		params = &ListDocumentClassificationJobsInput{}
+	}
+
 	options := ListDocumentClassificationJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -153,10 +157,6 @@ func NewListDocumentClassificationJobsPaginator(client ListDocumentClassificatio
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDocumentClassificationJobsInput{}
 	}
 
 	return &ListDocumentClassificationJobsPaginator{

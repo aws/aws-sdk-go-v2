@@ -171,6 +171,10 @@ type ListTransformJobsPaginator struct {
 
 // NewListTransformJobsPaginator returns a new ListTransformJobsPaginator
 func NewListTransformJobsPaginator(client ListTransformJobsAPIClient, params *ListTransformJobsInput, optFns ...func(*ListTransformJobsPaginatorOptions)) *ListTransformJobsPaginator {
+	if params == nil {
+		params = &ListTransformJobsInput{}
+	}
+
 	options := ListTransformJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -178,10 +182,6 @@ func NewListTransformJobsPaginator(client ListTransformJobsAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTransformJobsInput{}
 	}
 
 	return &ListTransformJobsPaginator{

@@ -149,6 +149,10 @@ type ListInstanceAttributesPaginator struct {
 
 // NewListInstanceAttributesPaginator returns a new ListInstanceAttributesPaginator
 func NewListInstanceAttributesPaginator(client ListInstanceAttributesAPIClient, params *ListInstanceAttributesInput, optFns ...func(*ListInstanceAttributesPaginatorOptions)) *ListInstanceAttributesPaginator {
+	if params == nil {
+		params = &ListInstanceAttributesInput{}
+	}
+
 	options := ListInstanceAttributesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -156,10 +160,6 @@ func NewListInstanceAttributesPaginator(client ListInstanceAttributesAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListInstanceAttributesInput{}
 	}
 
 	return &ListInstanceAttributesPaginator{

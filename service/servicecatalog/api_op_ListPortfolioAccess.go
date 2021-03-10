@@ -164,6 +164,10 @@ type ListPortfolioAccessPaginator struct {
 
 // NewListPortfolioAccessPaginator returns a new ListPortfolioAccessPaginator
 func NewListPortfolioAccessPaginator(client ListPortfolioAccessAPIClient, params *ListPortfolioAccessInput, optFns ...func(*ListPortfolioAccessPaginatorOptions)) *ListPortfolioAccessPaginator {
+	if params == nil {
+		params = &ListPortfolioAccessInput{}
+	}
+
 	options := ListPortfolioAccessPaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -171,10 +175,6 @@ func NewListPortfolioAccessPaginator(client ListPortfolioAccessAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPortfolioAccessInput{}
 	}
 
 	return &ListPortfolioAccessPaginator{

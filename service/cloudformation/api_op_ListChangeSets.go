@@ -148,14 +148,14 @@ type ListChangeSetsPaginator struct {
 
 // NewListChangeSetsPaginator returns a new ListChangeSetsPaginator
 func NewListChangeSetsPaginator(client ListChangeSetsAPIClient, params *ListChangeSetsInput, optFns ...func(*ListChangeSetsPaginatorOptions)) *ListChangeSetsPaginator {
+	if params == nil {
+		params = &ListChangeSetsInput{}
+	}
+
 	options := ListChangeSetsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListChangeSetsInput{}
 	}
 
 	return &ListChangeSetsPaginator{

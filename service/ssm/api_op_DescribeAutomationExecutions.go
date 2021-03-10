@@ -152,6 +152,10 @@ type DescribeAutomationExecutionsPaginator struct {
 // NewDescribeAutomationExecutionsPaginator returns a new
 // DescribeAutomationExecutionsPaginator
 func NewDescribeAutomationExecutionsPaginator(client DescribeAutomationExecutionsAPIClient, params *DescribeAutomationExecutionsInput, optFns ...func(*DescribeAutomationExecutionsPaginatorOptions)) *DescribeAutomationExecutionsPaginator {
+	if params == nil {
+		params = &DescribeAutomationExecutionsInput{}
+	}
+
 	options := DescribeAutomationExecutionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -159,10 +163,6 @@ func NewDescribeAutomationExecutionsPaginator(client DescribeAutomationExecution
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeAutomationExecutionsInput{}
 	}
 
 	return &DescribeAutomationExecutionsPaginator{

@@ -147,6 +147,10 @@ type GetReplicationJobsPaginator struct {
 
 // NewGetReplicationJobsPaginator returns a new GetReplicationJobsPaginator
 func NewGetReplicationJobsPaginator(client GetReplicationJobsAPIClient, params *GetReplicationJobsInput, optFns ...func(*GetReplicationJobsPaginatorOptions)) *GetReplicationJobsPaginator {
+	if params == nil {
+		params = &GetReplicationJobsInput{}
+	}
+
 	options := GetReplicationJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -154,10 +158,6 @@ func NewGetReplicationJobsPaginator(client GetReplicationJobsAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetReplicationJobsInput{}
 	}
 
 	return &GetReplicationJobsPaginator{

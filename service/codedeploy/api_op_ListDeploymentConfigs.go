@@ -138,14 +138,14 @@ type ListDeploymentConfigsPaginator struct {
 
 // NewListDeploymentConfigsPaginator returns a new ListDeploymentConfigsPaginator
 func NewListDeploymentConfigsPaginator(client ListDeploymentConfigsAPIClient, params *ListDeploymentConfigsInput, optFns ...func(*ListDeploymentConfigsPaginatorOptions)) *ListDeploymentConfigsPaginator {
+	if params == nil {
+		params = &ListDeploymentConfigsInput{}
+	}
+
 	options := ListDeploymentConfigsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDeploymentConfigsInput{}
 	}
 
 	return &ListDeploymentConfigsPaginator{

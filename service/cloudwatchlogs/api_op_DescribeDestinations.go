@@ -145,6 +145,10 @@ type DescribeDestinationsPaginator struct {
 
 // NewDescribeDestinationsPaginator returns a new DescribeDestinationsPaginator
 func NewDescribeDestinationsPaginator(client DescribeDestinationsAPIClient, params *DescribeDestinationsInput, optFns ...func(*DescribeDestinationsPaginatorOptions)) *DescribeDestinationsPaginator {
+	if params == nil {
+		params = &DescribeDestinationsInput{}
+	}
+
 	options := DescribeDestinationsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -152,10 +156,6 @@ func NewDescribeDestinationsPaginator(client DescribeDestinationsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeDestinationsInput{}
 	}
 
 	return &DescribeDestinationsPaginator{

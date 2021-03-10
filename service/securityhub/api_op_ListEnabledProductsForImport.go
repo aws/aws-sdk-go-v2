@@ -145,6 +145,10 @@ type ListEnabledProductsForImportPaginator struct {
 // NewListEnabledProductsForImportPaginator returns a new
 // ListEnabledProductsForImportPaginator
 func NewListEnabledProductsForImportPaginator(client ListEnabledProductsForImportAPIClient, params *ListEnabledProductsForImportInput, optFns ...func(*ListEnabledProductsForImportPaginatorOptions)) *ListEnabledProductsForImportPaginator {
+	if params == nil {
+		params = &ListEnabledProductsForImportInput{}
+	}
+
 	options := ListEnabledProductsForImportPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -152,10 +156,6 @@ func NewListEnabledProductsForImportPaginator(client ListEnabledProductsForImpor
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEnabledProductsForImportInput{}
 	}
 
 	return &ListEnabledProductsForImportPaginator{

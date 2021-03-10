@@ -154,6 +154,10 @@ type ListS3ResourcesPaginator struct {
 
 // NewListS3ResourcesPaginator returns a new ListS3ResourcesPaginator
 func NewListS3ResourcesPaginator(client ListS3ResourcesAPIClient, params *ListS3ResourcesInput, optFns ...func(*ListS3ResourcesPaginatorOptions)) *ListS3ResourcesPaginator {
+	if params == nil {
+		params = &ListS3ResourcesInput{}
+	}
+
 	options := ListS3ResourcesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -161,10 +165,6 @@ func NewListS3ResourcesPaginator(client ListS3ResourcesAPIClient, params *ListS3
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListS3ResourcesInput{}
 	}
 
 	return &ListS3ResourcesPaginator{

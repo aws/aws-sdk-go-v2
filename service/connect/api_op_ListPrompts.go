@@ -147,6 +147,10 @@ type ListPromptsPaginator struct {
 
 // NewListPromptsPaginator returns a new ListPromptsPaginator
 func NewListPromptsPaginator(client ListPromptsAPIClient, params *ListPromptsInput, optFns ...func(*ListPromptsPaginatorOptions)) *ListPromptsPaginator {
+	if params == nil {
+		params = &ListPromptsInput{}
+	}
+
 	options := ListPromptsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -154,10 +158,6 @@ func NewListPromptsPaginator(client ListPromptsAPIClient, params *ListPromptsInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPromptsInput{}
 	}
 
 	return &ListPromptsPaginator{

@@ -164,6 +164,10 @@ type ListAcceptedPortfolioSharesPaginator struct {
 // NewListAcceptedPortfolioSharesPaginator returns a new
 // ListAcceptedPortfolioSharesPaginator
 func NewListAcceptedPortfolioSharesPaginator(client ListAcceptedPortfolioSharesAPIClient, params *ListAcceptedPortfolioSharesInput, optFns ...func(*ListAcceptedPortfolioSharesPaginatorOptions)) *ListAcceptedPortfolioSharesPaginator {
+	if params == nil {
+		params = &ListAcceptedPortfolioSharesInput{}
+	}
+
 	options := ListAcceptedPortfolioSharesPaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -171,10 +175,6 @@ func NewListAcceptedPortfolioSharesPaginator(client ListAcceptedPortfolioSharesA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAcceptedPortfolioSharesInput{}
 	}
 
 	return &ListAcceptedPortfolioSharesPaginator{

@@ -144,6 +144,10 @@ type ListRegistriesPaginator struct {
 
 // NewListRegistriesPaginator returns a new ListRegistriesPaginator
 func NewListRegistriesPaginator(client ListRegistriesAPIClient, params *ListRegistriesInput, optFns ...func(*ListRegistriesPaginatorOptions)) *ListRegistriesPaginator {
+	if params == nil {
+		params = &ListRegistriesInput{}
+	}
+
 	options := ListRegistriesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -151,10 +155,6 @@ func NewListRegistriesPaginator(client ListRegistriesAPIClient, params *ListRegi
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRegistriesInput{}
 	}
 
 	return &ListRegistriesPaginator{

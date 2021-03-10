@@ -163,6 +163,10 @@ type ListDeliverabilityTestReportsPaginator struct {
 // NewListDeliverabilityTestReportsPaginator returns a new
 // ListDeliverabilityTestReportsPaginator
 func NewListDeliverabilityTestReportsPaginator(client ListDeliverabilityTestReportsAPIClient, params *ListDeliverabilityTestReportsInput, optFns ...func(*ListDeliverabilityTestReportsPaginatorOptions)) *ListDeliverabilityTestReportsPaginator {
+	if params == nil {
+		params = &ListDeliverabilityTestReportsInput{}
+	}
+
 	options := ListDeliverabilityTestReportsPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -170,10 +174,6 @@ func NewListDeliverabilityTestReportsPaginator(client ListDeliverabilityTestRepo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDeliverabilityTestReportsInput{}
 	}
 
 	return &ListDeliverabilityTestReportsPaginator{

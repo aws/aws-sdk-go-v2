@@ -156,6 +156,10 @@ type GetIntentsPaginator struct {
 
 // NewGetIntentsPaginator returns a new GetIntentsPaginator
 func NewGetIntentsPaginator(client GetIntentsAPIClient, params *GetIntentsInput, optFns ...func(*GetIntentsPaginatorOptions)) *GetIntentsPaginator {
+	if params == nil {
+		params = &GetIntentsInput{}
+	}
+
 	options := GetIntentsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -163,10 +167,6 @@ func NewGetIntentsPaginator(client GetIntentsAPIClient, params *GetIntentsInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetIntentsInput{}
 	}
 
 	return &GetIntentsPaginator{

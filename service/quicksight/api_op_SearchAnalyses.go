@@ -157,6 +157,10 @@ type SearchAnalysesPaginator struct {
 
 // NewSearchAnalysesPaginator returns a new SearchAnalysesPaginator
 func NewSearchAnalysesPaginator(client SearchAnalysesAPIClient, params *SearchAnalysesInput, optFns ...func(*SearchAnalysesPaginatorOptions)) *SearchAnalysesPaginator {
+	if params == nil {
+		params = &SearchAnalysesInput{}
+	}
+
 	options := SearchAnalysesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -164,10 +168,6 @@ func NewSearchAnalysesPaginator(client SearchAnalysesAPIClient, params *SearchAn
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchAnalysesInput{}
 	}
 
 	return &SearchAnalysesPaginator{

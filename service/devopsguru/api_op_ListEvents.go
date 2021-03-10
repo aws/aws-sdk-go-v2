@@ -152,6 +152,10 @@ type ListEventsPaginator struct {
 
 // NewListEventsPaginator returns a new ListEventsPaginator
 func NewListEventsPaginator(client ListEventsAPIClient, params *ListEventsInput, optFns ...func(*ListEventsPaginatorOptions)) *ListEventsPaginator {
+	if params == nil {
+		params = &ListEventsInput{}
+	}
+
 	options := ListEventsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -159,10 +163,6 @@ func NewListEventsPaginator(client ListEventsAPIClient, params *ListEventsInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEventsInput{}
 	}
 
 	return &ListEventsPaginator{

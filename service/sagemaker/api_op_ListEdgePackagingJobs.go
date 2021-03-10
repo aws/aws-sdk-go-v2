@@ -170,6 +170,10 @@ type ListEdgePackagingJobsPaginator struct {
 
 // NewListEdgePackagingJobsPaginator returns a new ListEdgePackagingJobsPaginator
 func NewListEdgePackagingJobsPaginator(client ListEdgePackagingJobsAPIClient, params *ListEdgePackagingJobsInput, optFns ...func(*ListEdgePackagingJobsPaginatorOptions)) *ListEdgePackagingJobsPaginator {
+	if params == nil {
+		params = &ListEdgePackagingJobsInput{}
+	}
+
 	options := ListEdgePackagingJobsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -177,10 +181,6 @@ func NewListEdgePackagingJobsPaginator(client ListEdgePackagingJobsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEdgePackagingJobsInput{}
 	}
 
 	return &ListEdgePackagingJobsPaginator{

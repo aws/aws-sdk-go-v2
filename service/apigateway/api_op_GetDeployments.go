@@ -163,6 +163,10 @@ type GetDeploymentsPaginator struct {
 
 // NewGetDeploymentsPaginator returns a new GetDeploymentsPaginator
 func NewGetDeploymentsPaginator(client GetDeploymentsAPIClient, params *GetDeploymentsInput, optFns ...func(*GetDeploymentsPaginatorOptions)) *GetDeploymentsPaginator {
+	if params == nil {
+		params = &GetDeploymentsInput{}
+	}
+
 	options := GetDeploymentsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -170,10 +174,6 @@ func NewGetDeploymentsPaginator(client GetDeploymentsAPIClient, params *GetDeplo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetDeploymentsInput{}
 	}
 
 	return &GetDeploymentsPaginator{

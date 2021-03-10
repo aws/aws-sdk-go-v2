@@ -260,6 +260,10 @@ type DescribeSecurityGroupsPaginator struct {
 
 // NewDescribeSecurityGroupsPaginator returns a new DescribeSecurityGroupsPaginator
 func NewDescribeSecurityGroupsPaginator(client DescribeSecurityGroupsAPIClient, params *DescribeSecurityGroupsInput, optFns ...func(*DescribeSecurityGroupsPaginatorOptions)) *DescribeSecurityGroupsPaginator {
+	if params == nil {
+		params = &DescribeSecurityGroupsInput{}
+	}
+
 	options := DescribeSecurityGroupsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -267,10 +271,6 @@ func NewDescribeSecurityGroupsPaginator(client DescribeSecurityGroupsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeSecurityGroupsInput{}
 	}
 
 	return &DescribeSecurityGroupsPaginator{

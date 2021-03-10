@@ -156,6 +156,10 @@ type DescribeDomainControllersPaginator struct {
 // NewDescribeDomainControllersPaginator returns a new
 // DescribeDomainControllersPaginator
 func NewDescribeDomainControllersPaginator(client DescribeDomainControllersAPIClient, params *DescribeDomainControllersInput, optFns ...func(*DescribeDomainControllersPaginatorOptions)) *DescribeDomainControllersPaginator {
+	if params == nil {
+		params = &DescribeDomainControllersInput{}
+	}
+
 	options := DescribeDomainControllersPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -163,10 +167,6 @@ func NewDescribeDomainControllersPaginator(client DescribeDomainControllersAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeDomainControllersInput{}
 	}
 
 	return &DescribeDomainControllersPaginator{

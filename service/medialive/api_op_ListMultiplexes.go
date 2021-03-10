@@ -140,6 +140,10 @@ type ListMultiplexesPaginator struct {
 
 // NewListMultiplexesPaginator returns a new ListMultiplexesPaginator
 func NewListMultiplexesPaginator(client ListMultiplexesAPIClient, params *ListMultiplexesInput, optFns ...func(*ListMultiplexesPaginatorOptions)) *ListMultiplexesPaginator {
+	if params == nil {
+		params = &ListMultiplexesInput{}
+	}
+
 	options := ListMultiplexesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -147,10 +151,6 @@ func NewListMultiplexesPaginator(client ListMultiplexesAPIClient, params *ListMu
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListMultiplexesInput{}
 	}
 
 	return &ListMultiplexesPaginator{

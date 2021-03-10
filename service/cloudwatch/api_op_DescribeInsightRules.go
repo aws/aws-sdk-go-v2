@@ -146,6 +146,10 @@ type DescribeInsightRulesPaginator struct {
 
 // NewDescribeInsightRulesPaginator returns a new DescribeInsightRulesPaginator
 func NewDescribeInsightRulesPaginator(client DescribeInsightRulesAPIClient, params *DescribeInsightRulesInput, optFns ...func(*DescribeInsightRulesPaginatorOptions)) *DescribeInsightRulesPaginator {
+	if params == nil {
+		params = &DescribeInsightRulesInput{}
+	}
+
 	options := DescribeInsightRulesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -153,10 +157,6 @@ func NewDescribeInsightRulesPaginator(client DescribeInsightRulesAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeInsightRulesInput{}
 	}
 
 	return &DescribeInsightRulesPaginator{

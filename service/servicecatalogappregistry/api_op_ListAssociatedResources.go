@@ -151,6 +151,10 @@ type ListAssociatedResourcesPaginator struct {
 // NewListAssociatedResourcesPaginator returns a new
 // ListAssociatedResourcesPaginator
 func NewListAssociatedResourcesPaginator(client ListAssociatedResourcesAPIClient, params *ListAssociatedResourcesInput, optFns ...func(*ListAssociatedResourcesPaginatorOptions)) *ListAssociatedResourcesPaginator {
+	if params == nil {
+		params = &ListAssociatedResourcesInput{}
+	}
+
 	options := ListAssociatedResourcesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -158,10 +162,6 @@ func NewListAssociatedResourcesPaginator(client ListAssociatedResourcesAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAssociatedResourcesInput{}
 	}
 
 	return &ListAssociatedResourcesPaginator{

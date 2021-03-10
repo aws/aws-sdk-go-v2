@@ -154,6 +154,10 @@ type ListIPSetsPaginator struct {
 
 // NewListIPSetsPaginator returns a new ListIPSetsPaginator
 func NewListIPSetsPaginator(client ListIPSetsAPIClient, params *ListIPSetsInput, optFns ...func(*ListIPSetsPaginatorOptions)) *ListIPSetsPaginator {
+	if params == nil {
+		params = &ListIPSetsInput{}
+	}
+
 	options := ListIPSetsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -161,10 +165,6 @@ func NewListIPSetsPaginator(client ListIPSetsAPIClient, params *ListIPSetsInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListIPSetsInput{}
 	}
 
 	return &ListIPSetsPaginator{

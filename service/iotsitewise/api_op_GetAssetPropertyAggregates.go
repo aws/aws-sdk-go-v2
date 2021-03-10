@@ -231,6 +231,10 @@ type GetAssetPropertyAggregatesPaginator struct {
 // NewGetAssetPropertyAggregatesPaginator returns a new
 // GetAssetPropertyAggregatesPaginator
 func NewGetAssetPropertyAggregatesPaginator(client GetAssetPropertyAggregatesAPIClient, params *GetAssetPropertyAggregatesInput, optFns ...func(*GetAssetPropertyAggregatesPaginatorOptions)) *GetAssetPropertyAggregatesPaginator {
+	if params == nil {
+		params = &GetAssetPropertyAggregatesInput{}
+	}
+
 	options := GetAssetPropertyAggregatesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -238,10 +242,6 @@ func NewGetAssetPropertyAggregatesPaginator(client GetAssetPropertyAggregatesAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetAssetPropertyAggregatesInput{}
 	}
 
 	return &GetAssetPropertyAggregatesPaginator{

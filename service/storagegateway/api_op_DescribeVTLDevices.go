@@ -169,6 +169,10 @@ type DescribeVTLDevicesPaginator struct {
 
 // NewDescribeVTLDevicesPaginator returns a new DescribeVTLDevicesPaginator
 func NewDescribeVTLDevicesPaginator(client DescribeVTLDevicesAPIClient, params *DescribeVTLDevicesInput, optFns ...func(*DescribeVTLDevicesPaginatorOptions)) *DescribeVTLDevicesPaginator {
+	if params == nil {
+		params = &DescribeVTLDevicesInput{}
+	}
+
 	options := DescribeVTLDevicesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -176,10 +180,6 @@ func NewDescribeVTLDevicesPaginator(client DescribeVTLDevicesAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeVTLDevicesInput{}
 	}
 
 	return &DescribeVTLDevicesPaginator{

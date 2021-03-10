@@ -158,6 +158,10 @@ type ListRecoveryPointsByResourcePaginator struct {
 // NewListRecoveryPointsByResourcePaginator returns a new
 // ListRecoveryPointsByResourcePaginator
 func NewListRecoveryPointsByResourcePaginator(client ListRecoveryPointsByResourceAPIClient, params *ListRecoveryPointsByResourceInput, optFns ...func(*ListRecoveryPointsByResourcePaginatorOptions)) *ListRecoveryPointsByResourcePaginator {
+	if params == nil {
+		params = &ListRecoveryPointsByResourceInput{}
+	}
+
 	options := ListRecoveryPointsByResourcePaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -165,10 +169,6 @@ func NewListRecoveryPointsByResourcePaginator(client ListRecoveryPointsByResourc
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRecoveryPointsByResourceInput{}
 	}
 
 	return &ListRecoveryPointsByResourcePaginator{

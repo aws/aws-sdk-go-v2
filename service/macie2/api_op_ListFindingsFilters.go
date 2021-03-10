@@ -141,6 +141,10 @@ type ListFindingsFiltersPaginator struct {
 
 // NewListFindingsFiltersPaginator returns a new ListFindingsFiltersPaginator
 func NewListFindingsFiltersPaginator(client ListFindingsFiltersAPIClient, params *ListFindingsFiltersInput, optFns ...func(*ListFindingsFiltersPaginatorOptions)) *ListFindingsFiltersPaginator {
+	if params == nil {
+		params = &ListFindingsFiltersInput{}
+	}
+
 	options := ListFindingsFiltersPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -148,10 +152,6 @@ func NewListFindingsFiltersPaginator(client ListFindingsFiltersAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListFindingsFiltersInput{}
 	}
 
 	return &ListFindingsFiltersPaginator{

@@ -157,6 +157,10 @@ type SearchRoomsPaginator struct {
 
 // NewSearchRoomsPaginator returns a new SearchRoomsPaginator
 func NewSearchRoomsPaginator(client SearchRoomsAPIClient, params *SearchRoomsInput, optFns ...func(*SearchRoomsPaginatorOptions)) *SearchRoomsPaginator {
+	if params == nil {
+		params = &SearchRoomsInput{}
+	}
+
 	options := SearchRoomsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -164,10 +168,6 @@ func NewSearchRoomsPaginator(client SearchRoomsAPIClient, params *SearchRoomsInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchRoomsInput{}
 	}
 
 	return &SearchRoomsPaginator{

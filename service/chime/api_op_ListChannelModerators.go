@@ -182,6 +182,10 @@ type ListChannelModeratorsPaginator struct {
 
 // NewListChannelModeratorsPaginator returns a new ListChannelModeratorsPaginator
 func NewListChannelModeratorsPaginator(client ListChannelModeratorsAPIClient, params *ListChannelModeratorsInput, optFns ...func(*ListChannelModeratorsPaginatorOptions)) *ListChannelModeratorsPaginator {
+	if params == nil {
+		params = &ListChannelModeratorsInput{}
+	}
+
 	options := ListChannelModeratorsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -189,10 +193,6 @@ func NewListChannelModeratorsPaginator(client ListChannelModeratorsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListChannelModeratorsInput{}
 	}
 
 	return &ListChannelModeratorsPaginator{

@@ -161,6 +161,10 @@ type GetAttributeValuesPaginator struct {
 
 // NewGetAttributeValuesPaginator returns a new GetAttributeValuesPaginator
 func NewGetAttributeValuesPaginator(client GetAttributeValuesAPIClient, params *GetAttributeValuesInput, optFns ...func(*GetAttributeValuesPaginatorOptions)) *GetAttributeValuesPaginator {
+	if params == nil {
+		params = &GetAttributeValuesInput{}
+	}
+
 	options := GetAttributeValuesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -168,10 +172,6 @@ func NewGetAttributeValuesPaginator(client GetAttributeValuesAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetAttributeValuesInput{}
 	}
 
 	return &GetAttributeValuesPaginator{

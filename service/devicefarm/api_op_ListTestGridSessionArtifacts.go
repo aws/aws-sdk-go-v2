@@ -152,6 +152,10 @@ type ListTestGridSessionArtifactsPaginator struct {
 // NewListTestGridSessionArtifactsPaginator returns a new
 // ListTestGridSessionArtifactsPaginator
 func NewListTestGridSessionArtifactsPaginator(client ListTestGridSessionArtifactsAPIClient, params *ListTestGridSessionArtifactsInput, optFns ...func(*ListTestGridSessionArtifactsPaginatorOptions)) *ListTestGridSessionArtifactsPaginator {
+	if params == nil {
+		params = &ListTestGridSessionArtifactsInput{}
+	}
+
 	options := ListTestGridSessionArtifactsPaginatorOptions{}
 	if params.MaxResult != nil {
 		options.Limit = *params.MaxResult
@@ -159,10 +163,6 @@ func NewListTestGridSessionArtifactsPaginator(client ListTestGridSessionArtifact
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTestGridSessionArtifactsInput{}
 	}
 
 	return &ListTestGridSessionArtifactsPaginator{

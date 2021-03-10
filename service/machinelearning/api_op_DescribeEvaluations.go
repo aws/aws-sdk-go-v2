@@ -219,6 +219,10 @@ type DescribeEvaluationsPaginator struct {
 
 // NewDescribeEvaluationsPaginator returns a new DescribeEvaluationsPaginator
 func NewDescribeEvaluationsPaginator(client DescribeEvaluationsAPIClient, params *DescribeEvaluationsInput, optFns ...func(*DescribeEvaluationsPaginatorOptions)) *DescribeEvaluationsPaginator {
+	if params == nil {
+		params = &DescribeEvaluationsInput{}
+	}
+
 	options := DescribeEvaluationsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -226,10 +230,6 @@ func NewDescribeEvaluationsPaginator(client DescribeEvaluationsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeEvaluationsInput{}
 	}
 
 	return &DescribeEvaluationsPaginator{

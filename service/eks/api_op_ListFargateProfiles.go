@@ -166,6 +166,10 @@ type ListFargateProfilesPaginator struct {
 
 // NewListFargateProfilesPaginator returns a new ListFargateProfilesPaginator
 func NewListFargateProfilesPaginator(client ListFargateProfilesAPIClient, params *ListFargateProfilesInput, optFns ...func(*ListFargateProfilesPaginatorOptions)) *ListFargateProfilesPaginator {
+	if params == nil {
+		params = &ListFargateProfilesInput{}
+	}
+
 	options := ListFargateProfilesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -173,10 +177,6 @@ func NewListFargateProfilesPaginator(client ListFargateProfilesAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListFargateProfilesInput{}
 	}
 
 	return &ListFargateProfilesPaginator{

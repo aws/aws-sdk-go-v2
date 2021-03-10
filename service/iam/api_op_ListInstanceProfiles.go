@@ -181,6 +181,10 @@ type ListInstanceProfilesPaginator struct {
 
 // NewListInstanceProfilesPaginator returns a new ListInstanceProfilesPaginator
 func NewListInstanceProfilesPaginator(client ListInstanceProfilesAPIClient, params *ListInstanceProfilesInput, optFns ...func(*ListInstanceProfilesPaginatorOptions)) *ListInstanceProfilesPaginator {
+	if params == nil {
+		params = &ListInstanceProfilesInput{}
+	}
+
 	options := ListInstanceProfilesPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -188,10 +192,6 @@ func NewListInstanceProfilesPaginator(client ListInstanceProfilesAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListInstanceProfilesInput{}
 	}
 
 	return &ListInstanceProfilesPaginator{

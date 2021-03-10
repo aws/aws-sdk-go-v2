@@ -166,6 +166,10 @@ type GetProvisionedProductOutputsPaginator struct {
 // NewGetProvisionedProductOutputsPaginator returns a new
 // GetProvisionedProductOutputsPaginator
 func NewGetProvisionedProductOutputsPaginator(client GetProvisionedProductOutputsAPIClient, params *GetProvisionedProductOutputsInput, optFns ...func(*GetProvisionedProductOutputsPaginatorOptions)) *GetProvisionedProductOutputsPaginator {
+	if params == nil {
+		params = &GetProvisionedProductOutputsInput{}
+	}
+
 	options := GetProvisionedProductOutputsPaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -173,10 +177,6 @@ func NewGetProvisionedProductOutputsPaginator(client GetProvisionedProductOutput
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetProvisionedProductOutputsInput{}
 	}
 
 	return &GetProvisionedProductOutputsPaginator{

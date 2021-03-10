@@ -145,14 +145,14 @@ type ListStudioSessionMappingsPaginator struct {
 // NewListStudioSessionMappingsPaginator returns a new
 // ListStudioSessionMappingsPaginator
 func NewListStudioSessionMappingsPaginator(client ListStudioSessionMappingsAPIClient, params *ListStudioSessionMappingsInput, optFns ...func(*ListStudioSessionMappingsPaginatorOptions)) *ListStudioSessionMappingsPaginator {
+	if params == nil {
+		params = &ListStudioSessionMappingsInput{}
+	}
+
 	options := ListStudioSessionMappingsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListStudioSessionMappingsInput{}
 	}
 
 	return &ListStudioSessionMappingsPaginator{

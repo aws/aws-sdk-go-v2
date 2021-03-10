@@ -158,6 +158,10 @@ type ListBudgetsForResourcePaginator struct {
 
 // NewListBudgetsForResourcePaginator returns a new ListBudgetsForResourcePaginator
 func NewListBudgetsForResourcePaginator(client ListBudgetsForResourceAPIClient, params *ListBudgetsForResourceInput, optFns ...func(*ListBudgetsForResourcePaginatorOptions)) *ListBudgetsForResourcePaginator {
+	if params == nil {
+		params = &ListBudgetsForResourceInput{}
+	}
+
 	options := ListBudgetsForResourcePaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -165,10 +169,6 @@ func NewListBudgetsForResourcePaginator(client ListBudgetsForResourceAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListBudgetsForResourceInput{}
 	}
 
 	return &ListBudgetsForResourcePaginator{

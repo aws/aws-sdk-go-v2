@@ -166,6 +166,10 @@ type ListAddonsPaginator struct {
 
 // NewListAddonsPaginator returns a new ListAddonsPaginator
 func NewListAddonsPaginator(client ListAddonsAPIClient, params *ListAddonsInput, optFns ...func(*ListAddonsPaginatorOptions)) *ListAddonsPaginator {
+	if params == nil {
+		params = &ListAddonsInput{}
+	}
+
 	options := ListAddonsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -173,10 +177,6 @@ func NewListAddonsPaginator(client ListAddonsAPIClient, params *ListAddonsInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAddonsInput{}
 	}
 
 	return &ListAddonsPaginator{

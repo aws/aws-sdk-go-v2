@@ -178,6 +178,10 @@ type SearchTablesPaginator struct {
 
 // NewSearchTablesPaginator returns a new SearchTablesPaginator
 func NewSearchTablesPaginator(client SearchTablesAPIClient, params *SearchTablesInput, optFns ...func(*SearchTablesPaginatorOptions)) *SearchTablesPaginator {
+	if params == nil {
+		params = &SearchTablesInput{}
+	}
+
 	options := SearchTablesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -185,10 +189,6 @@ func NewSearchTablesPaginator(client SearchTablesAPIClient, params *SearchTables
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchTablesInput{}
 	}
 
 	return &SearchTablesPaginator{

@@ -156,14 +156,14 @@ type ListStackResourcesPaginator struct {
 
 // NewListStackResourcesPaginator returns a new ListStackResourcesPaginator
 func NewListStackResourcesPaginator(client ListStackResourcesAPIClient, params *ListStackResourcesInput, optFns ...func(*ListStackResourcesPaginatorOptions)) *ListStackResourcesPaginator {
+	if params == nil {
+		params = &ListStackResourcesInput{}
+	}
+
 	options := ListStackResourcesPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListStackResourcesInput{}
 	}
 
 	return &ListStackResourcesPaginator{

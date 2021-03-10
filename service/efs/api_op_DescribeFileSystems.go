@@ -175,6 +175,10 @@ type DescribeFileSystemsPaginator struct {
 
 // NewDescribeFileSystemsPaginator returns a new DescribeFileSystemsPaginator
 func NewDescribeFileSystemsPaginator(client DescribeFileSystemsAPIClient, params *DescribeFileSystemsInput, optFns ...func(*DescribeFileSystemsPaginatorOptions)) *DescribeFileSystemsPaginator {
+	if params == nil {
+		params = &DescribeFileSystemsInput{}
+	}
+
 	options := DescribeFileSystemsPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -182,10 +186,6 @@ func NewDescribeFileSystemsPaginator(client DescribeFileSystemsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeFileSystemsInput{}
 	}
 
 	return &DescribeFileSystemsPaginator{

@@ -150,6 +150,10 @@ type DescribeReservedElasticsearchInstanceOfferingsPaginator struct {
 // NewDescribeReservedElasticsearchInstanceOfferingsPaginator returns a new
 // DescribeReservedElasticsearchInstanceOfferingsPaginator
 func NewDescribeReservedElasticsearchInstanceOfferingsPaginator(client DescribeReservedElasticsearchInstanceOfferingsAPIClient, params *DescribeReservedElasticsearchInstanceOfferingsInput, optFns ...func(*DescribeReservedElasticsearchInstanceOfferingsPaginatorOptions)) *DescribeReservedElasticsearchInstanceOfferingsPaginator {
+	if params == nil {
+		params = &DescribeReservedElasticsearchInstanceOfferingsInput{}
+	}
+
 	options := DescribeReservedElasticsearchInstanceOfferingsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -157,10 +161,6 @@ func NewDescribeReservedElasticsearchInstanceOfferingsPaginator(client DescribeR
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeReservedElasticsearchInstanceOfferingsInput{}
 	}
 
 	return &DescribeReservedElasticsearchInstanceOfferingsPaginator{

@@ -142,6 +142,10 @@ type GetDevEndpointsPaginator struct {
 
 // NewGetDevEndpointsPaginator returns a new GetDevEndpointsPaginator
 func NewGetDevEndpointsPaginator(client GetDevEndpointsAPIClient, params *GetDevEndpointsInput, optFns ...func(*GetDevEndpointsPaginatorOptions)) *GetDevEndpointsPaginator {
+	if params == nil {
+		params = &GetDevEndpointsInput{}
+	}
+
 	options := GetDevEndpointsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -149,10 +153,6 @@ func NewGetDevEndpointsPaginator(client GetDevEndpointsAPIClient, params *GetDev
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetDevEndpointsInput{}
 	}
 
 	return &GetDevEndpointsPaginator{

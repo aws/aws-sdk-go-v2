@@ -194,6 +194,10 @@ type DescribeClusterParameterGroupsPaginator struct {
 // NewDescribeClusterParameterGroupsPaginator returns a new
 // DescribeClusterParameterGroupsPaginator
 func NewDescribeClusterParameterGroupsPaginator(client DescribeClusterParameterGroupsAPIClient, params *DescribeClusterParameterGroupsInput, optFns ...func(*DescribeClusterParameterGroupsPaginatorOptions)) *DescribeClusterParameterGroupsPaginator {
+	if params == nil {
+		params = &DescribeClusterParameterGroupsInput{}
+	}
+
 	options := DescribeClusterParameterGroupsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -201,10 +205,6 @@ func NewDescribeClusterParameterGroupsPaginator(client DescribeClusterParameterG
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeClusterParameterGroupsInput{}
 	}
 
 	return &DescribeClusterParameterGroupsPaginator{

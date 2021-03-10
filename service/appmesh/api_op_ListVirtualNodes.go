@@ -171,6 +171,10 @@ type ListVirtualNodesPaginator struct {
 
 // NewListVirtualNodesPaginator returns a new ListVirtualNodesPaginator
 func NewListVirtualNodesPaginator(client ListVirtualNodesAPIClient, params *ListVirtualNodesInput, optFns ...func(*ListVirtualNodesPaginatorOptions)) *ListVirtualNodesPaginator {
+	if params == nil {
+		params = &ListVirtualNodesInput{}
+	}
+
 	options := ListVirtualNodesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -178,10 +182,6 @@ func NewListVirtualNodesPaginator(client ListVirtualNodesAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListVirtualNodesInput{}
 	}
 
 	return &ListVirtualNodesPaginator{

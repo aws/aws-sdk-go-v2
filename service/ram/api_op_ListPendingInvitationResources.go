@@ -153,6 +153,10 @@ type ListPendingInvitationResourcesPaginator struct {
 // NewListPendingInvitationResourcesPaginator returns a new
 // ListPendingInvitationResourcesPaginator
 func NewListPendingInvitationResourcesPaginator(client ListPendingInvitationResourcesAPIClient, params *ListPendingInvitationResourcesInput, optFns ...func(*ListPendingInvitationResourcesPaginatorOptions)) *ListPendingInvitationResourcesPaginator {
+	if params == nil {
+		params = &ListPendingInvitationResourcesInput{}
+	}
+
 	options := ListPendingInvitationResourcesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -160,10 +164,6 @@ func NewListPendingInvitationResourcesPaginator(client ListPendingInvitationReso
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPendingInvitationResourcesInput{}
 	}
 
 	return &ListPendingInvitationResourcesPaginator{

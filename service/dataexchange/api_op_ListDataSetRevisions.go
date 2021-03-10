@@ -150,6 +150,10 @@ type ListDataSetRevisionsPaginator struct {
 
 // NewListDataSetRevisionsPaginator returns a new ListDataSetRevisionsPaginator
 func NewListDataSetRevisionsPaginator(client ListDataSetRevisionsAPIClient, params *ListDataSetRevisionsInput, optFns ...func(*ListDataSetRevisionsPaginatorOptions)) *ListDataSetRevisionsPaginator {
+	if params == nil {
+		params = &ListDataSetRevisionsInput{}
+	}
+
 	options := ListDataSetRevisionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -157,10 +161,6 @@ func NewListDataSetRevisionsPaginator(client ListDataSetRevisionsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDataSetRevisionsInput{}
 	}
 
 	return &ListDataSetRevisionsPaginator{

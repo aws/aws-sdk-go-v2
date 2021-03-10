@@ -153,6 +153,10 @@ type ListWirelessDevicesPaginator struct {
 
 // NewListWirelessDevicesPaginator returns a new ListWirelessDevicesPaginator
 func NewListWirelessDevicesPaginator(client ListWirelessDevicesAPIClient, params *ListWirelessDevicesInput, optFns ...func(*ListWirelessDevicesPaginatorOptions)) *ListWirelessDevicesPaginator {
+	if params == nil {
+		params = &ListWirelessDevicesInput{}
+	}
+
 	options := ListWirelessDevicesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -160,10 +164,6 @@ func NewListWirelessDevicesPaginator(client ListWirelessDevicesAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListWirelessDevicesInput{}
 	}
 
 	return &ListWirelessDevicesPaginator{

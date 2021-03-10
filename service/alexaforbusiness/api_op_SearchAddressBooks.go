@@ -160,6 +160,10 @@ type SearchAddressBooksPaginator struct {
 
 // NewSearchAddressBooksPaginator returns a new SearchAddressBooksPaginator
 func NewSearchAddressBooksPaginator(client SearchAddressBooksAPIClient, params *SearchAddressBooksInput, optFns ...func(*SearchAddressBooksPaginatorOptions)) *SearchAddressBooksPaginator {
+	if params == nil {
+		params = &SearchAddressBooksInput{}
+	}
+
 	options := SearchAddressBooksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -167,10 +171,6 @@ func NewSearchAddressBooksPaginator(client SearchAddressBooksAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchAddressBooksInput{}
 	}
 
 	return &SearchAddressBooksPaginator{

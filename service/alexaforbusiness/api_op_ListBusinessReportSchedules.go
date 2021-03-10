@@ -143,6 +143,10 @@ type ListBusinessReportSchedulesPaginator struct {
 // NewListBusinessReportSchedulesPaginator returns a new
 // ListBusinessReportSchedulesPaginator
 func NewListBusinessReportSchedulesPaginator(client ListBusinessReportSchedulesAPIClient, params *ListBusinessReportSchedulesInput, optFns ...func(*ListBusinessReportSchedulesPaginatorOptions)) *ListBusinessReportSchedulesPaginator {
+	if params == nil {
+		params = &ListBusinessReportSchedulesInput{}
+	}
+
 	options := ListBusinessReportSchedulesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -150,10 +154,6 @@ func NewListBusinessReportSchedulesPaginator(client ListBusinessReportSchedulesA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListBusinessReportSchedulesInput{}
 	}
 
 	return &ListBusinessReportSchedulesPaginator{

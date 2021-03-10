@@ -154,6 +154,10 @@ type GetTablesPaginator struct {
 
 // NewGetTablesPaginator returns a new GetTablesPaginator
 func NewGetTablesPaginator(client GetTablesAPIClient, params *GetTablesInput, optFns ...func(*GetTablesPaginatorOptions)) *GetTablesPaginator {
+	if params == nil {
+		params = &GetTablesInput{}
+	}
+
 	options := GetTablesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -161,10 +165,6 @@ func NewGetTablesPaginator(client GetTablesAPIClient, params *GetTablesInput, op
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetTablesInput{}
 	}
 
 	return &GetTablesPaginator{

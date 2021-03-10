@@ -143,14 +143,14 @@ type ListInstanceFleetsPaginator struct {
 
 // NewListInstanceFleetsPaginator returns a new ListInstanceFleetsPaginator
 func NewListInstanceFleetsPaginator(client ListInstanceFleetsAPIClient, params *ListInstanceFleetsInput, optFns ...func(*ListInstanceFleetsPaginatorOptions)) *ListInstanceFleetsPaginator {
+	if params == nil {
+		params = &ListInstanceFleetsInput{}
+	}
+
 	options := ListInstanceFleetsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListInstanceFleetsInput{}
 	}
 
 	return &ListInstanceFleetsPaginator{

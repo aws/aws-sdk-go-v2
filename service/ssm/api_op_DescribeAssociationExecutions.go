@@ -156,6 +156,10 @@ type DescribeAssociationExecutionsPaginator struct {
 // NewDescribeAssociationExecutionsPaginator returns a new
 // DescribeAssociationExecutionsPaginator
 func NewDescribeAssociationExecutionsPaginator(client DescribeAssociationExecutionsAPIClient, params *DescribeAssociationExecutionsInput, optFns ...func(*DescribeAssociationExecutionsPaginatorOptions)) *DescribeAssociationExecutionsPaginator {
+	if params == nil {
+		params = &DescribeAssociationExecutionsInput{}
+	}
+
 	options := DescribeAssociationExecutionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -163,10 +167,6 @@ func NewDescribeAssociationExecutionsPaginator(client DescribeAssociationExecuti
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeAssociationExecutionsInput{}
 	}
 
 	return &DescribeAssociationExecutionsPaginator{

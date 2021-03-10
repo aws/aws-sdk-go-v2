@@ -157,6 +157,10 @@ type ListPermissionSetProvisioningStatusPaginator struct {
 // NewListPermissionSetProvisioningStatusPaginator returns a new
 // ListPermissionSetProvisioningStatusPaginator
 func NewListPermissionSetProvisioningStatusPaginator(client ListPermissionSetProvisioningStatusAPIClient, params *ListPermissionSetProvisioningStatusInput, optFns ...func(*ListPermissionSetProvisioningStatusPaginatorOptions)) *ListPermissionSetProvisioningStatusPaginator {
+	if params == nil {
+		params = &ListPermissionSetProvisioningStatusInput{}
+	}
+
 	options := ListPermissionSetProvisioningStatusPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -164,10 +168,6 @@ func NewListPermissionSetProvisioningStatusPaginator(client ListPermissionSetPro
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPermissionSetProvisioningStatusInput{}
 	}
 
 	return &ListPermissionSetProvisioningStatusPaginator{

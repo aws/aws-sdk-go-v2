@@ -145,6 +145,10 @@ type ListSolutionsPaginator struct {
 
 // NewListSolutionsPaginator returns a new ListSolutionsPaginator
 func NewListSolutionsPaginator(client ListSolutionsAPIClient, params *ListSolutionsInput, optFns ...func(*ListSolutionsPaginatorOptions)) *ListSolutionsPaginator {
+	if params == nil {
+		params = &ListSolutionsInput{}
+	}
+
 	options := ListSolutionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewListSolutionsPaginator(client ListSolutionsAPIClient, params *ListSoluti
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSolutionsInput{}
 	}
 
 	return &ListSolutionsPaginator{

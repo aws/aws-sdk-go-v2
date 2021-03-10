@@ -140,6 +140,10 @@ type ListMissionProfilesPaginator struct {
 
 // NewListMissionProfilesPaginator returns a new ListMissionProfilesPaginator
 func NewListMissionProfilesPaginator(client ListMissionProfilesAPIClient, params *ListMissionProfilesInput, optFns ...func(*ListMissionProfilesPaginatorOptions)) *ListMissionProfilesPaginator {
+	if params == nil {
+		params = &ListMissionProfilesInput{}
+	}
+
 	options := ListMissionProfilesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -147,10 +151,6 @@ func NewListMissionProfilesPaginator(client ListMissionProfilesAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListMissionProfilesInput{}
 	}
 
 	return &ListMissionProfilesPaginator{

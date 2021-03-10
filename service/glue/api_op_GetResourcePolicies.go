@@ -145,6 +145,10 @@ type GetResourcePoliciesPaginator struct {
 
 // NewGetResourcePoliciesPaginator returns a new GetResourcePoliciesPaginator
 func NewGetResourcePoliciesPaginator(client GetResourcePoliciesAPIClient, params *GetResourcePoliciesInput, optFns ...func(*GetResourcePoliciesPaginatorOptions)) *GetResourcePoliciesPaginator {
+	if params == nil {
+		params = &GetResourcePoliciesInput{}
+	}
+
 	options := GetResourcePoliciesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewGetResourcePoliciesPaginator(client GetResourcePoliciesAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetResourcePoliciesInput{}
 	}
 
 	return &GetResourcePoliciesPaginator{

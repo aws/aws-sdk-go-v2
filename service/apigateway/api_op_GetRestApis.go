@@ -147,6 +147,10 @@ type GetRestApisPaginator struct {
 
 // NewGetRestApisPaginator returns a new GetRestApisPaginator
 func NewGetRestApisPaginator(client GetRestApisAPIClient, params *GetRestApisInput, optFns ...func(*GetRestApisPaginatorOptions)) *GetRestApisPaginator {
+	if params == nil {
+		params = &GetRestApisInput{}
+	}
+
 	options := GetRestApisPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -154,10 +158,6 @@ func NewGetRestApisPaginator(client GetRestApisAPIClient, params *GetRestApisInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetRestApisInput{}
 	}
 
 	return &GetRestApisPaginator{

@@ -139,6 +139,10 @@ type ListSuiteDefinitionsPaginator struct {
 
 // NewListSuiteDefinitionsPaginator returns a new ListSuiteDefinitionsPaginator
 func NewListSuiteDefinitionsPaginator(client ListSuiteDefinitionsAPIClient, params *ListSuiteDefinitionsInput, optFns ...func(*ListSuiteDefinitionsPaginatorOptions)) *ListSuiteDefinitionsPaginator {
+	if params == nil {
+		params = &ListSuiteDefinitionsInput{}
+	}
+
 	options := ListSuiteDefinitionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -146,10 +150,6 @@ func NewListSuiteDefinitionsPaginator(client ListSuiteDefinitionsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSuiteDefinitionsInput{}
 	}
 
 	return &ListSuiteDefinitionsPaginator{

@@ -158,6 +158,10 @@ type DescribeAcceleratorsPaginator struct {
 
 // NewDescribeAcceleratorsPaginator returns a new DescribeAcceleratorsPaginator
 func NewDescribeAcceleratorsPaginator(client DescribeAcceleratorsAPIClient, params *DescribeAcceleratorsInput, optFns ...func(*DescribeAcceleratorsPaginatorOptions)) *DescribeAcceleratorsPaginator {
+	if params == nil {
+		params = &DescribeAcceleratorsInput{}
+	}
+
 	options := DescribeAcceleratorsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -165,10 +169,6 @@ func NewDescribeAcceleratorsPaginator(client DescribeAcceleratorsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeAcceleratorsInput{}
 	}
 
 	return &DescribeAcceleratorsPaginator{

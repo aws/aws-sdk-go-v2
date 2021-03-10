@@ -214,6 +214,10 @@ type GetAssetPropertyValueHistoryPaginator struct {
 // NewGetAssetPropertyValueHistoryPaginator returns a new
 // GetAssetPropertyValueHistoryPaginator
 func NewGetAssetPropertyValueHistoryPaginator(client GetAssetPropertyValueHistoryAPIClient, params *GetAssetPropertyValueHistoryInput, optFns ...func(*GetAssetPropertyValueHistoryPaginatorOptions)) *GetAssetPropertyValueHistoryPaginator {
+	if params == nil {
+		params = &GetAssetPropertyValueHistoryInput{}
+	}
+
 	options := GetAssetPropertyValueHistoryPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -221,10 +225,6 @@ func NewGetAssetPropertyValueHistoryPaginator(client GetAssetPropertyValueHistor
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetAssetPropertyValueHistoryInput{}
 	}
 
 	return &GetAssetPropertyValueHistoryPaginator{

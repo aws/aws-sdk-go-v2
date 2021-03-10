@@ -172,6 +172,10 @@ type ListVirtualRoutersPaginator struct {
 
 // NewListVirtualRoutersPaginator returns a new ListVirtualRoutersPaginator
 func NewListVirtualRoutersPaginator(client ListVirtualRoutersAPIClient, params *ListVirtualRoutersInput, optFns ...func(*ListVirtualRoutersPaginatorOptions)) *ListVirtualRoutersPaginator {
+	if params == nil {
+		params = &ListVirtualRoutersInput{}
+	}
+
 	options := ListVirtualRoutersPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -179,10 +183,6 @@ func NewListVirtualRoutersPaginator(client ListVirtualRoutersAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListVirtualRoutersInput{}
 	}
 
 	return &ListVirtualRoutersPaginator{

@@ -144,6 +144,10 @@ type ListProgressUpdateStreamsPaginator struct {
 // NewListProgressUpdateStreamsPaginator returns a new
 // ListProgressUpdateStreamsPaginator
 func NewListProgressUpdateStreamsPaginator(client ListProgressUpdateStreamsAPIClient, params *ListProgressUpdateStreamsInput, optFns ...func(*ListProgressUpdateStreamsPaginatorOptions)) *ListProgressUpdateStreamsPaginator {
+	if params == nil {
+		params = &ListProgressUpdateStreamsInput{}
+	}
+
 	options := ListProgressUpdateStreamsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -151,10 +155,6 @@ func NewListProgressUpdateStreamsPaginator(client ListProgressUpdateStreamsAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListProgressUpdateStreamsInput{}
 	}
 
 	return &ListProgressUpdateStreamsPaginator{

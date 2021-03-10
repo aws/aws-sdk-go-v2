@@ -166,6 +166,10 @@ type DescribeCustomAvailabilityZonesPaginator struct {
 // NewDescribeCustomAvailabilityZonesPaginator returns a new
 // DescribeCustomAvailabilityZonesPaginator
 func NewDescribeCustomAvailabilityZonesPaginator(client DescribeCustomAvailabilityZonesAPIClient, params *DescribeCustomAvailabilityZonesInput, optFns ...func(*DescribeCustomAvailabilityZonesPaginatorOptions)) *DescribeCustomAvailabilityZonesPaginator {
+	if params == nil {
+		params = &DescribeCustomAvailabilityZonesInput{}
+	}
+
 	options := DescribeCustomAvailabilityZonesPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -173,10 +177,6 @@ func NewDescribeCustomAvailabilityZonesPaginator(client DescribeCustomAvailabili
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeCustomAvailabilityZonesInput{}
 	}
 
 	return &DescribeCustomAvailabilityZonesPaginator{

@@ -244,6 +244,10 @@ type ListAccessPointsPaginator struct {
 
 // NewListAccessPointsPaginator returns a new ListAccessPointsPaginator
 func NewListAccessPointsPaginator(client ListAccessPointsAPIClient, params *ListAccessPointsInput, optFns ...func(*ListAccessPointsPaginatorOptions)) *ListAccessPointsPaginator {
+	if params == nil {
+		params = &ListAccessPointsInput{}
+	}
+
 	options := ListAccessPointsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -251,10 +255,6 @@ func NewListAccessPointsPaginator(client ListAccessPointsAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAccessPointsInput{}
 	}
 
 	return &ListAccessPointsPaginator{

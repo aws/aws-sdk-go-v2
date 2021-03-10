@@ -167,6 +167,10 @@ type DescribeSourceRegionsPaginator struct {
 
 // NewDescribeSourceRegionsPaginator returns a new DescribeSourceRegionsPaginator
 func NewDescribeSourceRegionsPaginator(client DescribeSourceRegionsAPIClient, params *DescribeSourceRegionsInput, optFns ...func(*DescribeSourceRegionsPaginatorOptions)) *DescribeSourceRegionsPaginator {
+	if params == nil {
+		params = &DescribeSourceRegionsInput{}
+	}
+
 	options := DescribeSourceRegionsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -174,10 +178,6 @@ func NewDescribeSourceRegionsPaginator(client DescribeSourceRegionsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeSourceRegionsInput{}
 	}
 
 	return &DescribeSourceRegionsPaginator{

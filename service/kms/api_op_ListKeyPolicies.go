@@ -182,6 +182,10 @@ type ListKeyPoliciesPaginator struct {
 
 // NewListKeyPoliciesPaginator returns a new ListKeyPoliciesPaginator
 func NewListKeyPoliciesPaginator(client ListKeyPoliciesAPIClient, params *ListKeyPoliciesInput, optFns ...func(*ListKeyPoliciesPaginatorOptions)) *ListKeyPoliciesPaginator {
+	if params == nil {
+		params = &ListKeyPoliciesInput{}
+	}
+
 	options := ListKeyPoliciesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -189,10 +193,6 @@ func NewListKeyPoliciesPaginator(client ListKeyPoliciesAPIClient, params *ListKe
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListKeyPoliciesInput{}
 	}
 
 	return &ListKeyPoliciesPaginator{

@@ -146,14 +146,14 @@ type ListRepositoriesPaginator struct {
 
 // NewListRepositoriesPaginator returns a new ListRepositoriesPaginator
 func NewListRepositoriesPaginator(client ListRepositoriesAPIClient, params *ListRepositoriesInput, optFns ...func(*ListRepositoriesPaginatorOptions)) *ListRepositoriesPaginator {
+	if params == nil {
+		params = &ListRepositoriesInput{}
+	}
+
 	options := ListRepositoriesPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRepositoriesInput{}
 	}
 
 	return &ListRepositoriesPaginator{

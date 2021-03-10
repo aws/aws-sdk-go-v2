@@ -178,6 +178,10 @@ type DescribeExportTasksPaginator struct {
 
 // NewDescribeExportTasksPaginator returns a new DescribeExportTasksPaginator
 func NewDescribeExportTasksPaginator(client DescribeExportTasksAPIClient, params *DescribeExportTasksInput, optFns ...func(*DescribeExportTasksPaginatorOptions)) *DescribeExportTasksPaginator {
+	if params == nil {
+		params = &DescribeExportTasksInput{}
+	}
+
 	options := DescribeExportTasksPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -185,10 +189,6 @@ func NewDescribeExportTasksPaginator(client DescribeExportTasksAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeExportTasksInput{}
 	}
 
 	return &DescribeExportTasksPaginator{

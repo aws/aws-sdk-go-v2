@@ -175,6 +175,10 @@ type ListAttacksPaginator struct {
 
 // NewListAttacksPaginator returns a new ListAttacksPaginator
 func NewListAttacksPaginator(client ListAttacksAPIClient, params *ListAttacksInput, optFns ...func(*ListAttacksPaginatorOptions)) *ListAttacksPaginator {
+	if params == nil {
+		params = &ListAttacksInput{}
+	}
+
 	options := ListAttacksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -182,10 +186,6 @@ func NewListAttacksPaginator(client ListAttacksAPIClient, params *ListAttacksInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAttacksInput{}
 	}
 
 	return &ListAttacksPaginator{

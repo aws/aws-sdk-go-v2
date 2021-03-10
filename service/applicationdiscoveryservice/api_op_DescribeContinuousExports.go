@@ -147,6 +147,10 @@ type DescribeContinuousExportsPaginator struct {
 // NewDescribeContinuousExportsPaginator returns a new
 // DescribeContinuousExportsPaginator
 func NewDescribeContinuousExportsPaginator(client DescribeContinuousExportsAPIClient, params *DescribeContinuousExportsInput, optFns ...func(*DescribeContinuousExportsPaginatorOptions)) *DescribeContinuousExportsPaginator {
+	if params == nil {
+		params = &DescribeContinuousExportsInput{}
+	}
+
 	options := DescribeContinuousExportsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -154,10 +158,6 @@ func NewDescribeContinuousExportsPaginator(client DescribeContinuousExportsAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeContinuousExportsInput{}
 	}
 
 	return &DescribeContinuousExportsPaginator{

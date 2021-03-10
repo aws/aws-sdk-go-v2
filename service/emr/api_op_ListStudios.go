@@ -134,14 +134,14 @@ type ListStudiosPaginator struct {
 
 // NewListStudiosPaginator returns a new ListStudiosPaginator
 func NewListStudiosPaginator(client ListStudiosAPIClient, params *ListStudiosInput, optFns ...func(*ListStudiosPaginatorOptions)) *ListStudiosPaginator {
+	if params == nil {
+		params = &ListStudiosInput{}
+	}
+
 	options := ListStudiosPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListStudiosInput{}
 	}
 
 	return &ListStudiosPaginator{

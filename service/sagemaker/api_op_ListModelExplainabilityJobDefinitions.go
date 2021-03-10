@@ -168,6 +168,10 @@ type ListModelExplainabilityJobDefinitionsPaginator struct {
 // NewListModelExplainabilityJobDefinitionsPaginator returns a new
 // ListModelExplainabilityJobDefinitionsPaginator
 func NewListModelExplainabilityJobDefinitionsPaginator(client ListModelExplainabilityJobDefinitionsAPIClient, params *ListModelExplainabilityJobDefinitionsInput, optFns ...func(*ListModelExplainabilityJobDefinitionsPaginatorOptions)) *ListModelExplainabilityJobDefinitionsPaginator {
+	if params == nil {
+		params = &ListModelExplainabilityJobDefinitionsInput{}
+	}
+
 	options := ListModelExplainabilityJobDefinitionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -175,10 +179,6 @@ func NewListModelExplainabilityJobDefinitionsPaginator(client ListModelExplainab
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListModelExplainabilityJobDefinitionsInput{}
 	}
 
 	return &ListModelExplainabilityJobDefinitionsPaginator{

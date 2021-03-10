@@ -171,6 +171,10 @@ type ListAssetModelsPaginator struct {
 
 // NewListAssetModelsPaginator returns a new ListAssetModelsPaginator
 func NewListAssetModelsPaginator(client ListAssetModelsAPIClient, params *ListAssetModelsInput, optFns ...func(*ListAssetModelsPaginatorOptions)) *ListAssetModelsPaginator {
+	if params == nil {
+		params = &ListAssetModelsInput{}
+	}
+
 	options := ListAssetModelsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -178,10 +182,6 @@ func NewListAssetModelsPaginator(client ListAssetModelsAPIClient, params *ListAs
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAssetModelsInput{}
 	}
 
 	return &ListAssetModelsPaginator{

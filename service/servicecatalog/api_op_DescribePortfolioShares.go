@@ -165,6 +165,10 @@ type DescribePortfolioSharesPaginator struct {
 // NewDescribePortfolioSharesPaginator returns a new
 // DescribePortfolioSharesPaginator
 func NewDescribePortfolioSharesPaginator(client DescribePortfolioSharesAPIClient, params *DescribePortfolioSharesInput, optFns ...func(*DescribePortfolioSharesPaginatorOptions)) *DescribePortfolioSharesPaginator {
+	if params == nil {
+		params = &DescribePortfolioSharesInput{}
+	}
+
 	options := DescribePortfolioSharesPaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -172,10 +176,6 @@ func NewDescribePortfolioSharesPaginator(client DescribePortfolioSharesAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribePortfolioSharesInput{}
 	}
 
 	return &DescribePortfolioSharesPaginator{

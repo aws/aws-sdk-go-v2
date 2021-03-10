@@ -155,6 +155,10 @@ type ListQualificationRequestsPaginator struct {
 // NewListQualificationRequestsPaginator returns a new
 // ListQualificationRequestsPaginator
 func NewListQualificationRequestsPaginator(client ListQualificationRequestsAPIClient, params *ListQualificationRequestsInput, optFns ...func(*ListQualificationRequestsPaginatorOptions)) *ListQualificationRequestsPaginator {
+	if params == nil {
+		params = &ListQualificationRequestsInput{}
+	}
+
 	options := ListQualificationRequestsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewListQualificationRequestsPaginator(client ListQualificationRequestsAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListQualificationRequestsInput{}
 	}
 
 	return &ListQualificationRequestsPaginator{

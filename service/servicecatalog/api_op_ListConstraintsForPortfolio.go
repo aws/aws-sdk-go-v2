@@ -163,6 +163,10 @@ type ListConstraintsForPortfolioPaginator struct {
 // NewListConstraintsForPortfolioPaginator returns a new
 // ListConstraintsForPortfolioPaginator
 func NewListConstraintsForPortfolioPaginator(client ListConstraintsForPortfolioAPIClient, params *ListConstraintsForPortfolioInput, optFns ...func(*ListConstraintsForPortfolioPaginatorOptions)) *ListConstraintsForPortfolioPaginator {
+	if params == nil {
+		params = &ListConstraintsForPortfolioInput{}
+	}
+
 	options := ListConstraintsForPortfolioPaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -170,10 +174,6 @@ func NewListConstraintsForPortfolioPaginator(client ListConstraintsForPortfolioA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListConstraintsForPortfolioInput{}
 	}
 
 	return &ListConstraintsForPortfolioPaginator{

@@ -159,6 +159,10 @@ type ListEntitiesPaginator struct {
 
 // NewListEntitiesPaginator returns a new ListEntitiesPaginator
 func NewListEntitiesPaginator(client ListEntitiesAPIClient, params *ListEntitiesInput, optFns ...func(*ListEntitiesPaginatorOptions)) *ListEntitiesPaginator {
+	if params == nil {
+		params = &ListEntitiesInput{}
+	}
+
 	options := ListEntitiesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewListEntitiesPaginator(client ListEntitiesAPIClient, params *ListEntities
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEntitiesInput{}
 	}
 
 	return &ListEntitiesPaginator{

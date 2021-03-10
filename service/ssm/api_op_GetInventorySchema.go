@@ -155,6 +155,10 @@ type GetInventorySchemaPaginator struct {
 
 // NewGetInventorySchemaPaginator returns a new GetInventorySchemaPaginator
 func NewGetInventorySchemaPaginator(client GetInventorySchemaAPIClient, params *GetInventorySchemaInput, optFns ...func(*GetInventorySchemaPaginatorOptions)) *GetInventorySchemaPaginator {
+	if params == nil {
+		params = &GetInventorySchemaInput{}
+	}
+
 	options := GetInventorySchemaPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -162,10 +166,6 @@ func NewGetInventorySchemaPaginator(client GetInventorySchemaAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetInventorySchemaInput{}
 	}
 
 	return &GetInventorySchemaPaginator{

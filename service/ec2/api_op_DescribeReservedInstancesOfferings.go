@@ -249,6 +249,10 @@ type DescribeReservedInstancesOfferingsPaginator struct {
 // NewDescribeReservedInstancesOfferingsPaginator returns a new
 // DescribeReservedInstancesOfferingsPaginator
 func NewDescribeReservedInstancesOfferingsPaginator(client DescribeReservedInstancesOfferingsAPIClient, params *DescribeReservedInstancesOfferingsInput, optFns ...func(*DescribeReservedInstancesOfferingsPaginatorOptions)) *DescribeReservedInstancesOfferingsPaginator {
+	if params == nil {
+		params = &DescribeReservedInstancesOfferingsInput{}
+	}
+
 	options := DescribeReservedInstancesOfferingsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -256,10 +260,6 @@ func NewDescribeReservedInstancesOfferingsPaginator(client DescribeReservedInsta
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeReservedInstancesOfferingsInput{}
 	}
 
 	return &DescribeReservedInstancesOfferingsPaginator{

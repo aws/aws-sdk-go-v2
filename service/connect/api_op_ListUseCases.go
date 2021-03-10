@@ -154,6 +154,10 @@ type ListUseCasesPaginator struct {
 
 // NewListUseCasesPaginator returns a new ListUseCasesPaginator
 func NewListUseCasesPaginator(client ListUseCasesAPIClient, params *ListUseCasesInput, optFns ...func(*ListUseCasesPaginatorOptions)) *ListUseCasesPaginator {
+	if params == nil {
+		params = &ListUseCasesInput{}
+	}
+
 	options := ListUseCasesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -161,10 +165,6 @@ func NewListUseCasesPaginator(client ListUseCasesAPIClient, params *ListUseCases
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListUseCasesInput{}
 	}
 
 	return &ListUseCasesPaginator{

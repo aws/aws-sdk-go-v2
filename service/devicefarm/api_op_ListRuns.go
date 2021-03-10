@@ -144,14 +144,14 @@ type ListRunsPaginator struct {
 
 // NewListRunsPaginator returns a new ListRunsPaginator
 func NewListRunsPaginator(client ListRunsAPIClient, params *ListRunsInput, optFns ...func(*ListRunsPaginatorOptions)) *ListRunsPaginator {
+	if params == nil {
+		params = &ListRunsInput{}
+	}
+
 	options := ListRunsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRunsInput{}
 	}
 
 	return &ListRunsPaginator{

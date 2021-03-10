@@ -162,14 +162,14 @@ type GetStatementResultPaginator struct {
 
 // NewGetStatementResultPaginator returns a new GetStatementResultPaginator
 func NewGetStatementResultPaginator(client GetStatementResultAPIClient, params *GetStatementResultInput, optFns ...func(*GetStatementResultPaginatorOptions)) *GetStatementResultPaginator {
+	if params == nil {
+		params = &GetStatementResultInput{}
+	}
+
 	options := GetStatementResultPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetStatementResultInput{}
 	}
 
 	return &GetStatementResultPaginator{

@@ -162,6 +162,10 @@ type ListAnomaliesForInsightPaginator struct {
 // NewListAnomaliesForInsightPaginator returns a new
 // ListAnomaliesForInsightPaginator
 func NewListAnomaliesForInsightPaginator(client ListAnomaliesForInsightAPIClient, params *ListAnomaliesForInsightInput, optFns ...func(*ListAnomaliesForInsightPaginatorOptions)) *ListAnomaliesForInsightPaginator {
+	if params == nil {
+		params = &ListAnomaliesForInsightInput{}
+	}
+
 	options := ListAnomaliesForInsightPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -169,10 +173,6 @@ func NewListAnomaliesForInsightPaginator(client ListAnomaliesForInsightAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAnomaliesForInsightInput{}
 	}
 
 	return &ListAnomaliesForInsightPaginator{

@@ -194,6 +194,10 @@ type DescribeApplicableIndividualAssessmentsPaginator struct {
 // NewDescribeApplicableIndividualAssessmentsPaginator returns a new
 // DescribeApplicableIndividualAssessmentsPaginator
 func NewDescribeApplicableIndividualAssessmentsPaginator(client DescribeApplicableIndividualAssessmentsAPIClient, params *DescribeApplicableIndividualAssessmentsInput, optFns ...func(*DescribeApplicableIndividualAssessmentsPaginatorOptions)) *DescribeApplicableIndividualAssessmentsPaginator {
+	if params == nil {
+		params = &DescribeApplicableIndividualAssessmentsInput{}
+	}
+
 	options := DescribeApplicableIndividualAssessmentsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -201,10 +205,6 @@ func NewDescribeApplicableIndividualAssessmentsPaginator(client DescribeApplicab
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeApplicableIndividualAssessmentsInput{}
 	}
 
 	return &DescribeApplicableIndividualAssessmentsPaginator{

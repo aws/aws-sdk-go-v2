@@ -145,14 +145,14 @@ type GetOfferingStatusPaginator struct {
 
 // NewGetOfferingStatusPaginator returns a new GetOfferingStatusPaginator
 func NewGetOfferingStatusPaginator(client GetOfferingStatusAPIClient, params *GetOfferingStatusInput, optFns ...func(*GetOfferingStatusPaginatorOptions)) *GetOfferingStatusPaginator {
+	if params == nil {
+		params = &GetOfferingStatusInput{}
+	}
+
 	options := GetOfferingStatusPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetOfferingStatusInput{}
 	}
 
 	return &GetOfferingStatusPaginator{

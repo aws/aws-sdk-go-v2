@@ -185,6 +185,10 @@ type ListProfileTimesPaginator struct {
 
 // NewListProfileTimesPaginator returns a new ListProfileTimesPaginator
 func NewListProfileTimesPaginator(client ListProfileTimesAPIClient, params *ListProfileTimesInput, optFns ...func(*ListProfileTimesPaginatorOptions)) *ListProfileTimesPaginator {
+	if params == nil {
+		params = &ListProfileTimesInput{}
+	}
+
 	options := ListProfileTimesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -192,10 +196,6 @@ func NewListProfileTimesPaginator(client ListProfileTimesAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListProfileTimesInput{}
 	}
 
 	return &ListProfileTimesPaginator{

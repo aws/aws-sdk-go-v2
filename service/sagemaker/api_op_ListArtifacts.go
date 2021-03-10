@@ -159,6 +159,10 @@ type ListArtifactsPaginator struct {
 
 // NewListArtifactsPaginator returns a new ListArtifactsPaginator
 func NewListArtifactsPaginator(client ListArtifactsAPIClient, params *ListArtifactsInput, optFns ...func(*ListArtifactsPaginatorOptions)) *ListArtifactsPaginator {
+	if params == nil {
+		params = &ListArtifactsInput{}
+	}
+
 	options := ListArtifactsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewListArtifactsPaginator(client ListArtifactsAPIClient, params *ListArtifa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListArtifactsInput{}
 	}
 
 	return &ListArtifactsPaginator{

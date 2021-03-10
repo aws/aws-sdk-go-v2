@@ -142,6 +142,10 @@ type GetCrawlerMetricsPaginator struct {
 
 // NewGetCrawlerMetricsPaginator returns a new GetCrawlerMetricsPaginator
 func NewGetCrawlerMetricsPaginator(client GetCrawlerMetricsAPIClient, params *GetCrawlerMetricsInput, optFns ...func(*GetCrawlerMetricsPaginatorOptions)) *GetCrawlerMetricsPaginator {
+	if params == nil {
+		params = &GetCrawlerMetricsInput{}
+	}
+
 	options := GetCrawlerMetricsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -149,10 +153,6 @@ func NewGetCrawlerMetricsPaginator(client GetCrawlerMetricsAPIClient, params *Ge
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetCrawlerMetricsInput{}
 	}
 
 	return &GetCrawlerMetricsPaginator{

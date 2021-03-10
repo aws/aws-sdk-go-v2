@@ -197,6 +197,10 @@ type GetWorkflowExecutionHistoryPaginator struct {
 // NewGetWorkflowExecutionHistoryPaginator returns a new
 // GetWorkflowExecutionHistoryPaginator
 func NewGetWorkflowExecutionHistoryPaginator(client GetWorkflowExecutionHistoryAPIClient, params *GetWorkflowExecutionHistoryInput, optFns ...func(*GetWorkflowExecutionHistoryPaginatorOptions)) *GetWorkflowExecutionHistoryPaginator {
+	if params == nil {
+		params = &GetWorkflowExecutionHistoryInput{}
+	}
+
 	options := GetWorkflowExecutionHistoryPaginatorOptions{}
 	if params.MaximumPageSize != 0 {
 		options.Limit = params.MaximumPageSize
@@ -204,10 +208,6 @@ func NewGetWorkflowExecutionHistoryPaginator(client GetWorkflowExecutionHistoryA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetWorkflowExecutionHistoryInput{}
 	}
 
 	return &GetWorkflowExecutionHistoryPaginator{

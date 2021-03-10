@@ -148,14 +148,14 @@ type ListBuildsPaginator struct {
 
 // NewListBuildsPaginator returns a new ListBuildsPaginator
 func NewListBuildsPaginator(client ListBuildsAPIClient, params *ListBuildsInput, optFns ...func(*ListBuildsPaginatorOptions)) *ListBuildsPaginator {
+	if params == nil {
+		params = &ListBuildsInput{}
+	}
+
 	options := ListBuildsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListBuildsInput{}
 	}
 
 	return &ListBuildsPaginator{

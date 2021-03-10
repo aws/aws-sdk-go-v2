@@ -156,6 +156,10 @@ type ListDiscoveredResourcesPaginator struct {
 // NewListDiscoveredResourcesPaginator returns a new
 // ListDiscoveredResourcesPaginator
 func NewListDiscoveredResourcesPaginator(client ListDiscoveredResourcesAPIClient, params *ListDiscoveredResourcesInput, optFns ...func(*ListDiscoveredResourcesPaginatorOptions)) *ListDiscoveredResourcesPaginator {
+	if params == nil {
+		params = &ListDiscoveredResourcesInput{}
+	}
+
 	options := ListDiscoveredResourcesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -163,10 +167,6 @@ func NewListDiscoveredResourcesPaginator(client ListDiscoveredResourcesAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDiscoveredResourcesInput{}
 	}
 
 	return &ListDiscoveredResourcesPaginator{

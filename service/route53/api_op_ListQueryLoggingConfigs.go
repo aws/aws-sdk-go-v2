@@ -182,6 +182,10 @@ type ListQueryLoggingConfigsPaginator struct {
 // NewListQueryLoggingConfigsPaginator returns a new
 // ListQueryLoggingConfigsPaginator
 func NewListQueryLoggingConfigsPaginator(client ListQueryLoggingConfigsAPIClient, params *ListQueryLoggingConfigsInput, optFns ...func(*ListQueryLoggingConfigsPaginatorOptions)) *ListQueryLoggingConfigsPaginator {
+	if params == nil {
+		params = &ListQueryLoggingConfigsInput{}
+	}
+
 	options := ListQueryLoggingConfigsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -189,10 +193,6 @@ func NewListQueryLoggingConfigsPaginator(client ListQueryLoggingConfigsAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListQueryLoggingConfigsInput{}
 	}
 
 	return &ListQueryLoggingConfigsPaginator{

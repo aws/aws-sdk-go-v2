@@ -167,6 +167,10 @@ type ListKeysPaginator struct {
 
 // NewListKeysPaginator returns a new ListKeysPaginator
 func NewListKeysPaginator(client ListKeysAPIClient, params *ListKeysInput, optFns ...func(*ListKeysPaginatorOptions)) *ListKeysPaginator {
+	if params == nil {
+		params = &ListKeysInput{}
+	}
+
 	options := ListKeysPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -174,10 +178,6 @@ func NewListKeysPaginator(client ListKeysAPIClient, params *ListKeysInput, optFn
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListKeysInput{}
 	}
 
 	return &ListKeysPaginator{

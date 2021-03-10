@@ -152,6 +152,10 @@ type ListResourceComplianceSummariesPaginator struct {
 // NewListResourceComplianceSummariesPaginator returns a new
 // ListResourceComplianceSummariesPaginator
 func NewListResourceComplianceSummariesPaginator(client ListResourceComplianceSummariesAPIClient, params *ListResourceComplianceSummariesInput, optFns ...func(*ListResourceComplianceSummariesPaginatorOptions)) *ListResourceComplianceSummariesPaginator {
+	if params == nil {
+		params = &ListResourceComplianceSummariesInput{}
+	}
+
 	options := ListResourceComplianceSummariesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -159,10 +163,6 @@ func NewListResourceComplianceSummariesPaginator(client ListResourceComplianceSu
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListResourceComplianceSummariesInput{}
 	}
 
 	return &ListResourceComplianceSummariesPaginator{

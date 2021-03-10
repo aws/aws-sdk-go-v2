@@ -156,6 +156,10 @@ type ListFileSharesPaginator struct {
 
 // NewListFileSharesPaginator returns a new ListFileSharesPaginator
 func NewListFileSharesPaginator(client ListFileSharesAPIClient, params *ListFileSharesInput, optFns ...func(*ListFileSharesPaginatorOptions)) *ListFileSharesPaginator {
+	if params == nil {
+		params = &ListFileSharesInput{}
+	}
+
 	options := ListFileSharesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -163,10 +167,6 @@ func NewListFileSharesPaginator(client ListFileSharesAPIClient, params *ListFile
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListFileSharesInput{}
 	}
 
 	return &ListFileSharesPaginator{

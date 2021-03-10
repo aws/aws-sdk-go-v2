@@ -172,6 +172,10 @@ type DescribeFolderContentsPaginator struct {
 
 // NewDescribeFolderContentsPaginator returns a new DescribeFolderContentsPaginator
 func NewDescribeFolderContentsPaginator(client DescribeFolderContentsAPIClient, params *DescribeFolderContentsInput, optFns ...func(*DescribeFolderContentsPaginatorOptions)) *DescribeFolderContentsPaginator {
+	if params == nil {
+		params = &DescribeFolderContentsInput{}
+	}
+
 	options := DescribeFolderContentsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -179,10 +183,6 @@ func NewDescribeFolderContentsPaginator(client DescribeFolderContentsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeFolderContentsInput{}
 	}
 
 	return &DescribeFolderContentsPaginator{

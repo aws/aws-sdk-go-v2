@@ -155,6 +155,10 @@ type ListEventSubscriptionsPaginator struct {
 
 // NewListEventSubscriptionsPaginator returns a new ListEventSubscriptionsPaginator
 func NewListEventSubscriptionsPaginator(client ListEventSubscriptionsAPIClient, params *ListEventSubscriptionsInput, optFns ...func(*ListEventSubscriptionsPaginatorOptions)) *ListEventSubscriptionsPaginator {
+	if params == nil {
+		params = &ListEventSubscriptionsInput{}
+	}
+
 	options := ListEventSubscriptionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewListEventSubscriptionsPaginator(client ListEventSubscriptionsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEventSubscriptionsInput{}
 	}
 
 	return &ListEventSubscriptionsPaginator{

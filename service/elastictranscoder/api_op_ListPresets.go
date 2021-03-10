@@ -142,14 +142,14 @@ type ListPresetsPaginator struct {
 
 // NewListPresetsPaginator returns a new ListPresetsPaginator
 func NewListPresetsPaginator(client ListPresetsAPIClient, params *ListPresetsInput, optFns ...func(*ListPresetsPaginatorOptions)) *ListPresetsPaginator {
+	if params == nil {
+		params = &ListPresetsInput{}
+	}
+
 	options := ListPresetsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPresetsInput{}
 	}
 
 	return &ListPresetsPaginator{

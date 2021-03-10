@@ -145,6 +145,10 @@ type ListEventTrackersPaginator struct {
 
 // NewListEventTrackersPaginator returns a new ListEventTrackersPaginator
 func NewListEventTrackersPaginator(client ListEventTrackersAPIClient, params *ListEventTrackersInput, optFns ...func(*ListEventTrackersPaginatorOptions)) *ListEventTrackersPaginator {
+	if params == nil {
+		params = &ListEventTrackersInput{}
+	}
+
 	options := ListEventTrackersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewListEventTrackersPaginator(client ListEventTrackersAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEventTrackersInput{}
 	}
 
 	return &ListEventTrackersPaginator{

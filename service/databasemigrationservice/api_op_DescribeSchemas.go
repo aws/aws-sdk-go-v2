@@ -157,6 +157,10 @@ type DescribeSchemasPaginator struct {
 
 // NewDescribeSchemasPaginator returns a new DescribeSchemasPaginator
 func NewDescribeSchemasPaginator(client DescribeSchemasAPIClient, params *DescribeSchemasInput, optFns ...func(*DescribeSchemasPaginatorOptions)) *DescribeSchemasPaginator {
+	if params == nil {
+		params = &DescribeSchemasInput{}
+	}
+
 	options := DescribeSchemasPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -164,10 +168,6 @@ func NewDescribeSchemasPaginator(client DescribeSchemasAPIClient, params *Descri
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeSchemasInput{}
 	}
 
 	return &DescribeSchemasPaginator{

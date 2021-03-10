@@ -145,6 +145,10 @@ type GetJobRunsPaginator struct {
 
 // NewGetJobRunsPaginator returns a new GetJobRunsPaginator
 func NewGetJobRunsPaginator(client GetJobRunsAPIClient, params *GetJobRunsInput, optFns ...func(*GetJobRunsPaginatorOptions)) *GetJobRunsPaginator {
+	if params == nil {
+		params = &GetJobRunsInput{}
+	}
+
 	options := GetJobRunsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewGetJobRunsPaginator(client GetJobRunsAPIClient, params *GetJobRunsInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetJobRunsInput{}
 	}
 
 	return &GetJobRunsPaginator{

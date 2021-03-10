@@ -148,6 +148,10 @@ type ListKeywordsForDataSourcePaginator struct {
 // NewListKeywordsForDataSourcePaginator returns a new
 // ListKeywordsForDataSourcePaginator
 func NewListKeywordsForDataSourcePaginator(client ListKeywordsForDataSourceAPIClient, params *ListKeywordsForDataSourceInput, optFns ...func(*ListKeywordsForDataSourcePaginatorOptions)) *ListKeywordsForDataSourcePaginator {
+	if params == nil {
+		params = &ListKeywordsForDataSourceInput{}
+	}
+
 	options := ListKeywordsForDataSourcePaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -155,10 +159,6 @@ func NewListKeywordsForDataSourcePaginator(client ListKeywordsForDataSourceAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListKeywordsForDataSourceInput{}
 	}
 
 	return &ListKeywordsForDataSourcePaginator{

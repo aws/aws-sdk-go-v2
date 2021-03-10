@@ -164,6 +164,10 @@ type ListFunctionEventInvokeConfigsPaginator struct {
 // NewListFunctionEventInvokeConfigsPaginator returns a new
 // ListFunctionEventInvokeConfigsPaginator
 func NewListFunctionEventInvokeConfigsPaginator(client ListFunctionEventInvokeConfigsAPIClient, params *ListFunctionEventInvokeConfigsInput, optFns ...func(*ListFunctionEventInvokeConfigsPaginatorOptions)) *ListFunctionEventInvokeConfigsPaginator {
+	if params == nil {
+		params = &ListFunctionEventInvokeConfigsInput{}
+	}
+
 	options := ListFunctionEventInvokeConfigsPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -171,10 +175,6 @@ func NewListFunctionEventInvokeConfigsPaginator(client ListFunctionEventInvokeCo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListFunctionEventInvokeConfigsInput{}
 	}
 
 	return &ListFunctionEventInvokeConfigsPaginator{

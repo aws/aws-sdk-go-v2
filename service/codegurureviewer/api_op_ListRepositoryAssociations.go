@@ -220,6 +220,10 @@ type ListRepositoryAssociationsPaginator struct {
 // NewListRepositoryAssociationsPaginator returns a new
 // ListRepositoryAssociationsPaginator
 func NewListRepositoryAssociationsPaginator(client ListRepositoryAssociationsAPIClient, params *ListRepositoryAssociationsInput, optFns ...func(*ListRepositoryAssociationsPaginatorOptions)) *ListRepositoryAssociationsPaginator {
+	if params == nil {
+		params = &ListRepositoryAssociationsInput{}
+	}
+
 	options := ListRepositoryAssociationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -227,10 +231,6 @@ func NewListRepositoryAssociationsPaginator(client ListRepositoryAssociationsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRepositoryAssociationsInput{}
 	}
 
 	return &ListRepositoryAssociationsPaginator{

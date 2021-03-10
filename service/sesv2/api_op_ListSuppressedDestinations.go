@@ -170,6 +170,10 @@ type ListSuppressedDestinationsPaginator struct {
 // NewListSuppressedDestinationsPaginator returns a new
 // ListSuppressedDestinationsPaginator
 func NewListSuppressedDestinationsPaginator(client ListSuppressedDestinationsAPIClient, params *ListSuppressedDestinationsInput, optFns ...func(*ListSuppressedDestinationsPaginatorOptions)) *ListSuppressedDestinationsPaginator {
+	if params == nil {
+		params = &ListSuppressedDestinationsInput{}
+	}
+
 	options := ListSuppressedDestinationsPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -177,10 +181,6 @@ func NewListSuppressedDestinationsPaginator(client ListSuppressedDestinationsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSuppressedDestinationsInput{}
 	}
 
 	return &ListSuppressedDestinationsPaginator{

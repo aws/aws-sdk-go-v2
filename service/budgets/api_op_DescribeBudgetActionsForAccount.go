@@ -153,6 +153,10 @@ type DescribeBudgetActionsForAccountPaginator struct {
 // NewDescribeBudgetActionsForAccountPaginator returns a new
 // DescribeBudgetActionsForAccountPaginator
 func NewDescribeBudgetActionsForAccountPaginator(client DescribeBudgetActionsForAccountAPIClient, params *DescribeBudgetActionsForAccountInput, optFns ...func(*DescribeBudgetActionsForAccountPaginatorOptions)) *DescribeBudgetActionsForAccountPaginator {
+	if params == nil {
+		params = &DescribeBudgetActionsForAccountInput{}
+	}
+
 	options := DescribeBudgetActionsForAccountPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -160,10 +164,6 @@ func NewDescribeBudgetActionsForAccountPaginator(client DescribeBudgetActionsFor
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeBudgetActionsForAccountInput{}
 	}
 
 	return &DescribeBudgetActionsForAccountPaginator{

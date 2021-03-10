@@ -151,6 +151,10 @@ type ListFunctionsByCodeSigningConfigPaginator struct {
 // NewListFunctionsByCodeSigningConfigPaginator returns a new
 // ListFunctionsByCodeSigningConfigPaginator
 func NewListFunctionsByCodeSigningConfigPaginator(client ListFunctionsByCodeSigningConfigAPIClient, params *ListFunctionsByCodeSigningConfigInput, optFns ...func(*ListFunctionsByCodeSigningConfigPaginatorOptions)) *ListFunctionsByCodeSigningConfigPaginator {
+	if params == nil {
+		params = &ListFunctionsByCodeSigningConfigInput{}
+	}
+
 	options := ListFunctionsByCodeSigningConfigPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -158,10 +162,6 @@ func NewListFunctionsByCodeSigningConfigPaginator(client ListFunctionsByCodeSign
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListFunctionsByCodeSigningConfigInput{}
 	}
 
 	return &ListFunctionsByCodeSigningConfigPaginator{

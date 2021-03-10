@@ -176,6 +176,10 @@ type DescribeCacheEngineVersionsPaginator struct {
 // NewDescribeCacheEngineVersionsPaginator returns a new
 // DescribeCacheEngineVersionsPaginator
 func NewDescribeCacheEngineVersionsPaginator(client DescribeCacheEngineVersionsAPIClient, params *DescribeCacheEngineVersionsInput, optFns ...func(*DescribeCacheEngineVersionsPaginatorOptions)) *DescribeCacheEngineVersionsPaginator {
+	if params == nil {
+		params = &DescribeCacheEngineVersionsInput{}
+	}
+
 	options := DescribeCacheEngineVersionsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -183,10 +187,6 @@ func NewDescribeCacheEngineVersionsPaginator(client DescribeCacheEngineVersionsA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeCacheEngineVersionsInput{}
 	}
 
 	return &DescribeCacheEngineVersionsPaginator{

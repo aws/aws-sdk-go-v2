@@ -142,14 +142,14 @@ type ListPipelinesPaginator struct {
 
 // NewListPipelinesPaginator returns a new ListPipelinesPaginator
 func NewListPipelinesPaginator(client ListPipelinesAPIClient, params *ListPipelinesInput, optFns ...func(*ListPipelinesPaginatorOptions)) *ListPipelinesPaginator {
+	if params == nil {
+		params = &ListPipelinesInput{}
+	}
+
 	options := ListPipelinesPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPipelinesInput{}
 	}
 
 	return &ListPipelinesPaginator{

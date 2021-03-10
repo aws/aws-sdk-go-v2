@@ -196,6 +196,10 @@ type GetPersonTrackingPaginator struct {
 
 // NewGetPersonTrackingPaginator returns a new GetPersonTrackingPaginator
 func NewGetPersonTrackingPaginator(client GetPersonTrackingAPIClient, params *GetPersonTrackingInput, optFns ...func(*GetPersonTrackingPaginatorOptions)) *GetPersonTrackingPaginator {
+	if params == nil {
+		params = &GetPersonTrackingInput{}
+	}
+
 	options := GetPersonTrackingPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -203,10 +207,6 @@ func NewGetPersonTrackingPaginator(client GetPersonTrackingAPIClient, params *Ge
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetPersonTrackingInput{}
 	}
 
 	return &GetPersonTrackingPaginator{

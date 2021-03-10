@@ -163,6 +163,10 @@ type SearchNetworkProfilesPaginator struct {
 
 // NewSearchNetworkProfilesPaginator returns a new SearchNetworkProfilesPaginator
 func NewSearchNetworkProfilesPaginator(client SearchNetworkProfilesAPIClient, params *SearchNetworkProfilesInput, optFns ...func(*SearchNetworkProfilesPaginatorOptions)) *SearchNetworkProfilesPaginator {
+	if params == nil {
+		params = &SearchNetworkProfilesInput{}
+	}
+
 	options := SearchNetworkProfilesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -170,10 +174,6 @@ func NewSearchNetworkProfilesPaginator(client SearchNetworkProfilesAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchNetworkProfilesInput{}
 	}
 
 	return &SearchNetworkProfilesPaginator{

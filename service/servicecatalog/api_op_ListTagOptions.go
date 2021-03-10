@@ -144,6 +144,10 @@ type ListTagOptionsPaginator struct {
 
 // NewListTagOptionsPaginator returns a new ListTagOptionsPaginator
 func NewListTagOptionsPaginator(client ListTagOptionsAPIClient, params *ListTagOptionsInput, optFns ...func(*ListTagOptionsPaginatorOptions)) *ListTagOptionsPaginator {
+	if params == nil {
+		params = &ListTagOptionsInput{}
+	}
+
 	options := ListTagOptionsPaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -151,10 +155,6 @@ func NewListTagOptionsPaginator(client ListTagOptionsAPIClient, params *ListTagO
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTagOptionsInput{}
 	}
 
 	return &ListTagOptionsPaginator{

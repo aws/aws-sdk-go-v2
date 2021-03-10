@@ -168,6 +168,10 @@ type ListDeadLetterSourceQueuesPaginator struct {
 // NewListDeadLetterSourceQueuesPaginator returns a new
 // ListDeadLetterSourceQueuesPaginator
 func NewListDeadLetterSourceQueuesPaginator(client ListDeadLetterSourceQueuesAPIClient, params *ListDeadLetterSourceQueuesInput, optFns ...func(*ListDeadLetterSourceQueuesPaginatorOptions)) *ListDeadLetterSourceQueuesPaginator {
+	if params == nil {
+		params = &ListDeadLetterSourceQueuesInput{}
+	}
+
 	options := ListDeadLetterSourceQueuesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -175,10 +179,6 @@ func NewListDeadLetterSourceQueuesPaginator(client ListDeadLetterSourceQueuesAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDeadLetterSourceQueuesInput{}
 	}
 
 	return &ListDeadLetterSourceQueuesPaginator{

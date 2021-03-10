@@ -155,6 +155,10 @@ type GetBuiltinIntentsPaginator struct {
 
 // NewGetBuiltinIntentsPaginator returns a new GetBuiltinIntentsPaginator
 func NewGetBuiltinIntentsPaginator(client GetBuiltinIntentsAPIClient, params *GetBuiltinIntentsInput, optFns ...func(*GetBuiltinIntentsPaginatorOptions)) *GetBuiltinIntentsPaginator {
+	if params == nil {
+		params = &GetBuiltinIntentsInput{}
+	}
+
 	options := GetBuiltinIntentsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewGetBuiltinIntentsPaginator(client GetBuiltinIntentsAPIClient, params *Ge
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetBuiltinIntentsInput{}
 	}
 
 	return &GetBuiltinIntentsPaginator{

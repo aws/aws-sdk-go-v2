@@ -158,6 +158,10 @@ type ListHostedConfigurationVersionsPaginator struct {
 // NewListHostedConfigurationVersionsPaginator returns a new
 // ListHostedConfigurationVersionsPaginator
 func NewListHostedConfigurationVersionsPaginator(client ListHostedConfigurationVersionsAPIClient, params *ListHostedConfigurationVersionsInput, optFns ...func(*ListHostedConfigurationVersionsPaginatorOptions)) *ListHostedConfigurationVersionsPaginator {
+	if params == nil {
+		params = &ListHostedConfigurationVersionsInput{}
+	}
+
 	options := ListHostedConfigurationVersionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -165,10 +169,6 @@ func NewListHostedConfigurationVersionsPaginator(client ListHostedConfigurationV
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListHostedConfigurationVersionsInput{}
 	}
 
 	return &ListHostedConfigurationVersionsPaginator{

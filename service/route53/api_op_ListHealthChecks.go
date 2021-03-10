@@ -178,6 +178,10 @@ type ListHealthChecksPaginator struct {
 
 // NewListHealthChecksPaginator returns a new ListHealthChecksPaginator
 func NewListHealthChecksPaginator(client ListHealthChecksAPIClient, params *ListHealthChecksInput, optFns ...func(*ListHealthChecksPaginatorOptions)) *ListHealthChecksPaginator {
+	if params == nil {
+		params = &ListHealthChecksInput{}
+	}
+
 	options := ListHealthChecksPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -185,10 +189,6 @@ func NewListHealthChecksPaginator(client ListHealthChecksAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListHealthChecksInput{}
 	}
 
 	return &ListHealthChecksPaginator{

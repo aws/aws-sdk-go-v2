@@ -141,6 +141,10 @@ type ListNotificationsPaginator struct {
 
 // NewListNotificationsPaginator returns a new ListNotificationsPaginator
 func NewListNotificationsPaginator(client ListNotificationsAPIClient, params *ListNotificationsInput, optFns ...func(*ListNotificationsPaginatorOptions)) *ListNotificationsPaginator {
+	if params == nil {
+		params = &ListNotificationsInput{}
+	}
+
 	options := ListNotificationsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -148,10 +152,6 @@ func NewListNotificationsPaginator(client ListNotificationsAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListNotificationsInput{}
 	}
 
 	return &ListNotificationsPaginator{

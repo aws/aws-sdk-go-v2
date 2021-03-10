@@ -192,6 +192,10 @@ type GetComplianceSummaryPaginator struct {
 
 // NewGetComplianceSummaryPaginator returns a new GetComplianceSummaryPaginator
 func NewGetComplianceSummaryPaginator(client GetComplianceSummaryAPIClient, params *GetComplianceSummaryInput, optFns ...func(*GetComplianceSummaryPaginatorOptions)) *GetComplianceSummaryPaginator {
+	if params == nil {
+		params = &GetComplianceSummaryInput{}
+	}
+
 	options := GetComplianceSummaryPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -199,10 +203,6 @@ func NewGetComplianceSummaryPaginator(client GetComplianceSummaryAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetComplianceSummaryInput{}
 	}
 
 	return &GetComplianceSummaryPaginator{

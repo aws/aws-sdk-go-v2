@@ -179,6 +179,10 @@ type ListCompilationJobsPaginator struct {
 
 // NewListCompilationJobsPaginator returns a new ListCompilationJobsPaginator
 func NewListCompilationJobsPaginator(client ListCompilationJobsAPIClient, params *ListCompilationJobsInput, optFns ...func(*ListCompilationJobsPaginatorOptions)) *ListCompilationJobsPaginator {
+	if params == nil {
+		params = &ListCompilationJobsInput{}
+	}
+
 	options := ListCompilationJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -186,10 +190,6 @@ func NewListCompilationJobsPaginator(client ListCompilationJobsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCompilationJobsInput{}
 	}
 
 	return &ListCompilationJobsPaginator{

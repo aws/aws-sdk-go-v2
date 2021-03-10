@@ -154,6 +154,10 @@ type ListAssociationsPaginator struct {
 
 // NewListAssociationsPaginator returns a new ListAssociationsPaginator
 func NewListAssociationsPaginator(client ListAssociationsAPIClient, params *ListAssociationsInput, optFns ...func(*ListAssociationsPaginatorOptions)) *ListAssociationsPaginator {
+	if params == nil {
+		params = &ListAssociationsInput{}
+	}
+
 	options := ListAssociationsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -161,10 +165,6 @@ func NewListAssociationsPaginator(client ListAssociationsAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAssociationsInput{}
 	}
 
 	return &ListAssociationsPaginator{

@@ -145,6 +145,10 @@ type ListProposalsPaginator struct {
 
 // NewListProposalsPaginator returns a new ListProposalsPaginator
 func NewListProposalsPaginator(client ListProposalsAPIClient, params *ListProposalsInput, optFns ...func(*ListProposalsPaginatorOptions)) *ListProposalsPaginator {
+	if params == nil {
+		params = &ListProposalsInput{}
+	}
+
 	options := ListProposalsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewListProposalsPaginator(client ListProposalsAPIClient, params *ListPropos
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListProposalsInput{}
 	}
 
 	return &ListProposalsPaginator{

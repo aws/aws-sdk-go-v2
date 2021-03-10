@@ -185,6 +185,10 @@ type ListGroupPoliciesPaginator struct {
 
 // NewListGroupPoliciesPaginator returns a new ListGroupPoliciesPaginator
 func NewListGroupPoliciesPaginator(client ListGroupPoliciesAPIClient, params *ListGroupPoliciesInput, optFns ...func(*ListGroupPoliciesPaginatorOptions)) *ListGroupPoliciesPaginator {
+	if params == nil {
+		params = &ListGroupPoliciesInput{}
+	}
+
 	options := ListGroupPoliciesPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -192,10 +196,6 @@ func NewListGroupPoliciesPaginator(client ListGroupPoliciesAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListGroupPoliciesInput{}
 	}
 
 	return &ListGroupPoliciesPaginator{

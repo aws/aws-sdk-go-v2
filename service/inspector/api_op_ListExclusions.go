@@ -156,6 +156,10 @@ type ListExclusionsPaginator struct {
 
 // NewListExclusionsPaginator returns a new ListExclusionsPaginator
 func NewListExclusionsPaginator(client ListExclusionsAPIClient, params *ListExclusionsInput, optFns ...func(*ListExclusionsPaginatorOptions)) *ListExclusionsPaginator {
+	if params == nil {
+		params = &ListExclusionsInput{}
+	}
+
 	options := ListExclusionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -163,10 +167,6 @@ func NewListExclusionsPaginator(client ListExclusionsAPIClient, params *ListExcl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListExclusionsInput{}
 	}
 
 	return &ListExclusionsPaginator{

@@ -240,6 +240,10 @@ type DescribeCapacityReservationsPaginator struct {
 // NewDescribeCapacityReservationsPaginator returns a new
 // DescribeCapacityReservationsPaginator
 func NewDescribeCapacityReservationsPaginator(client DescribeCapacityReservationsAPIClient, params *DescribeCapacityReservationsInput, optFns ...func(*DescribeCapacityReservationsPaginatorOptions)) *DescribeCapacityReservationsPaginator {
+	if params == nil {
+		params = &DescribeCapacityReservationsInput{}
+	}
+
 	options := DescribeCapacityReservationsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -247,10 +251,6 @@ func NewDescribeCapacityReservationsPaginator(client DescribeCapacityReservation
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeCapacityReservationsInput{}
 	}
 
 	return &DescribeCapacityReservationsPaginator{

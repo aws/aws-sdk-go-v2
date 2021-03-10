@@ -150,6 +150,10 @@ type ListContributorInsightsPaginator struct {
 // NewListContributorInsightsPaginator returns a new
 // ListContributorInsightsPaginator
 func NewListContributorInsightsPaginator(client ListContributorInsightsAPIClient, params *ListContributorInsightsInput, optFns ...func(*ListContributorInsightsPaginatorOptions)) *ListContributorInsightsPaginator {
+	if params == nil {
+		params = &ListContributorInsightsInput{}
+	}
+
 	options := ListContributorInsightsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -157,10 +161,6 @@ func NewListContributorInsightsPaginator(client ListContributorInsightsAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListContributorInsightsInput{}
 	}
 
 	return &ListContributorInsightsPaginator{

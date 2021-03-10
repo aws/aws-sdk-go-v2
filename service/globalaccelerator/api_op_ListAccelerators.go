@@ -142,6 +142,10 @@ type ListAcceleratorsPaginator struct {
 
 // NewListAcceleratorsPaginator returns a new ListAcceleratorsPaginator
 func NewListAcceleratorsPaginator(client ListAcceleratorsAPIClient, params *ListAcceleratorsInput, optFns ...func(*ListAcceleratorsPaginatorOptions)) *ListAcceleratorsPaginator {
+	if params == nil {
+		params = &ListAcceleratorsInput{}
+	}
+
 	options := ListAcceleratorsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -149,10 +153,6 @@ func NewListAcceleratorsPaginator(client ListAcceleratorsAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAcceleratorsInput{}
 	}
 
 	return &ListAcceleratorsPaginator{

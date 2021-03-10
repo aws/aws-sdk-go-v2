@@ -167,6 +167,10 @@ type ListServiceActionsForProvisioningArtifactPaginator struct {
 // NewListServiceActionsForProvisioningArtifactPaginator returns a new
 // ListServiceActionsForProvisioningArtifactPaginator
 func NewListServiceActionsForProvisioningArtifactPaginator(client ListServiceActionsForProvisioningArtifactAPIClient, params *ListServiceActionsForProvisioningArtifactInput, optFns ...func(*ListServiceActionsForProvisioningArtifactPaginatorOptions)) *ListServiceActionsForProvisioningArtifactPaginator {
+	if params == nil {
+		params = &ListServiceActionsForProvisioningArtifactInput{}
+	}
+
 	options := ListServiceActionsForProvisioningArtifactPaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -174,10 +178,6 @@ func NewListServiceActionsForProvisioningArtifactPaginator(client ListServiceAct
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListServiceActionsForProvisioningArtifactInput{}
 	}
 
 	return &ListServiceActionsForProvisioningArtifactPaginator{

@@ -158,6 +158,10 @@ type DescribeCacheSecurityGroupsPaginator struct {
 // NewDescribeCacheSecurityGroupsPaginator returns a new
 // DescribeCacheSecurityGroupsPaginator
 func NewDescribeCacheSecurityGroupsPaginator(client DescribeCacheSecurityGroupsAPIClient, params *DescribeCacheSecurityGroupsInput, optFns ...func(*DescribeCacheSecurityGroupsPaginatorOptions)) *DescribeCacheSecurityGroupsPaginator {
+	if params == nil {
+		params = &DescribeCacheSecurityGroupsInput{}
+	}
+
 	options := DescribeCacheSecurityGroupsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -165,10 +169,6 @@ func NewDescribeCacheSecurityGroupsPaginator(client DescribeCacheSecurityGroupsA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeCacheSecurityGroupsInput{}
 	}
 
 	return &DescribeCacheSecurityGroupsPaginator{

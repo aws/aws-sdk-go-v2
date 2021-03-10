@@ -173,6 +173,10 @@ type ListNotebookInstanceLifecycleConfigsPaginator struct {
 // NewListNotebookInstanceLifecycleConfigsPaginator returns a new
 // ListNotebookInstanceLifecycleConfigsPaginator
 func NewListNotebookInstanceLifecycleConfigsPaginator(client ListNotebookInstanceLifecycleConfigsAPIClient, params *ListNotebookInstanceLifecycleConfigsInput, optFns ...func(*ListNotebookInstanceLifecycleConfigsPaginatorOptions)) *ListNotebookInstanceLifecycleConfigsPaginator {
+	if params == nil {
+		params = &ListNotebookInstanceLifecycleConfigsInput{}
+	}
+
 	options := ListNotebookInstanceLifecycleConfigsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -180,10 +184,6 @@ func NewListNotebookInstanceLifecycleConfigsPaginator(client ListNotebookInstanc
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListNotebookInstanceLifecycleConfigsInput{}
 	}
 
 	return &ListNotebookInstanceLifecycleConfigsPaginator{

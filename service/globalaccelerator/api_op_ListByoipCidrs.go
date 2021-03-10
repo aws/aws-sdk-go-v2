@@ -142,6 +142,10 @@ type ListByoipCidrsPaginator struct {
 
 // NewListByoipCidrsPaginator returns a new ListByoipCidrsPaginator
 func NewListByoipCidrsPaginator(client ListByoipCidrsAPIClient, params *ListByoipCidrsInput, optFns ...func(*ListByoipCidrsPaginatorOptions)) *ListByoipCidrsPaginator {
+	if params == nil {
+		params = &ListByoipCidrsInput{}
+	}
+
 	options := ListByoipCidrsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -149,10 +153,6 @@ func NewListByoipCidrsPaginator(client ListByoipCidrsAPIClient, params *ListByoi
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListByoipCidrsInput{}
 	}
 
 	return &ListByoipCidrsPaginator{

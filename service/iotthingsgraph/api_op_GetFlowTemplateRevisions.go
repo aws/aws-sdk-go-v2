@@ -153,6 +153,10 @@ type GetFlowTemplateRevisionsPaginator struct {
 // NewGetFlowTemplateRevisionsPaginator returns a new
 // GetFlowTemplateRevisionsPaginator
 func NewGetFlowTemplateRevisionsPaginator(client GetFlowTemplateRevisionsAPIClient, params *GetFlowTemplateRevisionsInput, optFns ...func(*GetFlowTemplateRevisionsPaginatorOptions)) *GetFlowTemplateRevisionsPaginator {
+	if params == nil {
+		params = &GetFlowTemplateRevisionsInput{}
+	}
+
 	options := GetFlowTemplateRevisionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -160,10 +164,6 @@ func NewGetFlowTemplateRevisionsPaginator(client GetFlowTemplateRevisionsAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetFlowTemplateRevisionsInput{}
 	}
 
 	return &GetFlowTemplateRevisionsPaginator{

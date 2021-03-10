@@ -148,6 +148,10 @@ type SearchFlowTemplatesPaginator struct {
 
 // NewSearchFlowTemplatesPaginator returns a new SearchFlowTemplatesPaginator
 func NewSearchFlowTemplatesPaginator(client SearchFlowTemplatesAPIClient, params *SearchFlowTemplatesInput, optFns ...func(*SearchFlowTemplatesPaginatorOptions)) *SearchFlowTemplatesPaginator {
+	if params == nil {
+		params = &SearchFlowTemplatesInput{}
+	}
+
 	options := SearchFlowTemplatesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -155,10 +159,6 @@ func NewSearchFlowTemplatesPaginator(client SearchFlowTemplatesAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchFlowTemplatesInput{}
 	}
 
 	return &SearchFlowTemplatesPaginator{

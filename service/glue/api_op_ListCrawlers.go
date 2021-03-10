@@ -146,6 +146,10 @@ type ListCrawlersPaginator struct {
 
 // NewListCrawlersPaginator returns a new ListCrawlersPaginator
 func NewListCrawlersPaginator(client ListCrawlersAPIClient, params *ListCrawlersInput, optFns ...func(*ListCrawlersPaginatorOptions)) *ListCrawlersPaginator {
+	if params == nil {
+		params = &ListCrawlersInput{}
+	}
+
 	options := ListCrawlersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -153,10 +157,6 @@ func NewListCrawlersPaginator(client ListCrawlersAPIClient, params *ListCrawlers
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCrawlersInput{}
 	}
 
 	return &ListCrawlersPaginator{

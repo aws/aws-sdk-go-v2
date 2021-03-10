@@ -161,6 +161,10 @@ type GetEvidenceFoldersByAssessmentControlPaginator struct {
 // NewGetEvidenceFoldersByAssessmentControlPaginator returns a new
 // GetEvidenceFoldersByAssessmentControlPaginator
 func NewGetEvidenceFoldersByAssessmentControlPaginator(client GetEvidenceFoldersByAssessmentControlAPIClient, params *GetEvidenceFoldersByAssessmentControlInput, optFns ...func(*GetEvidenceFoldersByAssessmentControlPaginatorOptions)) *GetEvidenceFoldersByAssessmentControlPaginator {
+	if params == nil {
+		params = &GetEvidenceFoldersByAssessmentControlInput{}
+	}
+
 	options := GetEvidenceFoldersByAssessmentControlPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -168,10 +172,6 @@ func NewGetEvidenceFoldersByAssessmentControlPaginator(client GetEvidenceFolders
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetEvidenceFoldersByAssessmentControlInput{}
 	}
 
 	return &GetEvidenceFoldersByAssessmentControlPaginator{

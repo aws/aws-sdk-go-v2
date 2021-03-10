@@ -153,6 +153,10 @@ type GetMLTransformsPaginator struct {
 
 // NewGetMLTransformsPaginator returns a new GetMLTransformsPaginator
 func NewGetMLTransformsPaginator(client GetMLTransformsAPIClient, params *GetMLTransformsInput, optFns ...func(*GetMLTransformsPaginatorOptions)) *GetMLTransformsPaginator {
+	if params == nil {
+		params = &GetMLTransformsInput{}
+	}
+
 	options := GetMLTransformsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -160,10 +164,6 @@ func NewGetMLTransformsPaginator(client GetMLTransformsAPIClient, params *GetMLT
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetMLTransformsInput{}
 	}
 
 	return &GetMLTransformsPaginator{

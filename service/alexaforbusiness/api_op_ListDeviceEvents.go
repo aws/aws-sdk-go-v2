@@ -160,6 +160,10 @@ type ListDeviceEventsPaginator struct {
 
 // NewListDeviceEventsPaginator returns a new ListDeviceEventsPaginator
 func NewListDeviceEventsPaginator(client ListDeviceEventsAPIClient, params *ListDeviceEventsInput, optFns ...func(*ListDeviceEventsPaginatorOptions)) *ListDeviceEventsPaginator {
+	if params == nil {
+		params = &ListDeviceEventsInput{}
+	}
+
 	options := ListDeviceEventsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -167,10 +171,6 @@ func NewListDeviceEventsPaginator(client ListDeviceEventsAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDeviceEventsInput{}
 	}
 
 	return &ListDeviceEventsPaginator{

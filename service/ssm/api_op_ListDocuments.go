@@ -156,6 +156,10 @@ type ListDocumentsPaginator struct {
 
 // NewListDocumentsPaginator returns a new ListDocumentsPaginator
 func NewListDocumentsPaginator(client ListDocumentsAPIClient, params *ListDocumentsInput, optFns ...func(*ListDocumentsPaginatorOptions)) *ListDocumentsPaginator {
+	if params == nil {
+		params = &ListDocumentsInput{}
+	}
+
 	options := ListDocumentsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -163,10 +167,6 @@ func NewListDocumentsPaginator(client ListDocumentsAPIClient, params *ListDocume
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDocumentsInput{}
 	}
 
 	return &ListDocumentsPaginator{

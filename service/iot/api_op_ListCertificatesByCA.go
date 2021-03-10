@@ -155,6 +155,10 @@ type ListCertificatesByCAPaginator struct {
 
 // NewListCertificatesByCAPaginator returns a new ListCertificatesByCAPaginator
 func NewListCertificatesByCAPaginator(client ListCertificatesByCAAPIClient, params *ListCertificatesByCAInput, optFns ...func(*ListCertificatesByCAPaginatorOptions)) *ListCertificatesByCAPaginator {
+	if params == nil {
+		params = &ListCertificatesByCAInput{}
+	}
+
 	options := ListCertificatesByCAPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -162,10 +166,6 @@ func NewListCertificatesByCAPaginator(client ListCertificatesByCAAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCertificatesByCAInput{}
 	}
 
 	return &ListCertificatesByCAPaginator{

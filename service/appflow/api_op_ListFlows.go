@@ -137,6 +137,10 @@ type ListFlowsPaginator struct {
 
 // NewListFlowsPaginator returns a new ListFlowsPaginator
 func NewListFlowsPaginator(client ListFlowsAPIClient, params *ListFlowsInput, optFns ...func(*ListFlowsPaginatorOptions)) *ListFlowsPaginator {
+	if params == nil {
+		params = &ListFlowsInput{}
+	}
+
 	options := ListFlowsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -144,10 +148,6 @@ func NewListFlowsPaginator(client ListFlowsAPIClient, params *ListFlowsInput, op
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListFlowsInput{}
 	}
 
 	return &ListFlowsPaginator{

@@ -151,14 +151,14 @@ type GetPartitionIndexesPaginator struct {
 
 // NewGetPartitionIndexesPaginator returns a new GetPartitionIndexesPaginator
 func NewGetPartitionIndexesPaginator(client GetPartitionIndexesAPIClient, params *GetPartitionIndexesInput, optFns ...func(*GetPartitionIndexesPaginatorOptions)) *GetPartitionIndexesPaginator {
+	if params == nil {
+		params = &GetPartitionIndexesInput{}
+	}
+
 	options := GetPartitionIndexesPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetPartitionIndexesInput{}
 	}
 
 	return &GetPartitionIndexesPaginator{

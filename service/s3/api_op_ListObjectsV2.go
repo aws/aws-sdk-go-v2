@@ -300,6 +300,10 @@ type ListObjectsV2Paginator struct {
 
 // NewListObjectsV2Paginator returns a new ListObjectsV2Paginator
 func NewListObjectsV2Paginator(client ListObjectsV2APIClient, params *ListObjectsV2Input, optFns ...func(*ListObjectsV2PaginatorOptions)) *ListObjectsV2Paginator {
+	if params == nil {
+		params = &ListObjectsV2Input{}
+	}
+
 	options := ListObjectsV2PaginatorOptions{}
 	if params.MaxKeys != 0 {
 		options.Limit = params.MaxKeys
@@ -307,10 +311,6 @@ func NewListObjectsV2Paginator(client ListObjectsV2APIClient, params *ListObject
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListObjectsV2Input{}
 	}
 
 	return &ListObjectsV2Paginator{

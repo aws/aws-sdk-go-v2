@@ -162,6 +162,10 @@ type ListTrialsPaginator struct {
 
 // NewListTrialsPaginator returns a new ListTrialsPaginator
 func NewListTrialsPaginator(client ListTrialsAPIClient, params *ListTrialsInput, optFns ...func(*ListTrialsPaginatorOptions)) *ListTrialsPaginator {
+	if params == nil {
+		params = &ListTrialsInput{}
+	}
+
 	options := ListTrialsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -169,10 +173,6 @@ func NewListTrialsPaginator(client ListTrialsAPIClient, params *ListTrialsInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTrialsInput{}
 	}
 
 	return &ListTrialsPaginator{

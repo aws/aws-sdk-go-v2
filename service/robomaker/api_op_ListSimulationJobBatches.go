@@ -158,6 +158,10 @@ type ListSimulationJobBatchesPaginator struct {
 // NewListSimulationJobBatchesPaginator returns a new
 // ListSimulationJobBatchesPaginator
 func NewListSimulationJobBatchesPaginator(client ListSimulationJobBatchesAPIClient, params *ListSimulationJobBatchesInput, optFns ...func(*ListSimulationJobBatchesPaginatorOptions)) *ListSimulationJobBatchesPaginator {
+	if params == nil {
+		params = &ListSimulationJobBatchesInput{}
+	}
+
 	options := ListSimulationJobBatchesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -165,10 +169,6 @@ func NewListSimulationJobBatchesPaginator(client ListSimulationJobBatchesAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSimulationJobBatchesInput{}
 	}
 
 	return &ListSimulationJobBatchesPaginator{

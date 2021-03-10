@@ -159,6 +159,10 @@ type GetBotVersionsPaginator struct {
 
 // NewGetBotVersionsPaginator returns a new GetBotVersionsPaginator
 func NewGetBotVersionsPaginator(client GetBotVersionsAPIClient, params *GetBotVersionsInput, optFns ...func(*GetBotVersionsPaginatorOptions)) *GetBotVersionsPaginator {
+	if params == nil {
+		params = &GetBotVersionsInput{}
+	}
+
 	options := GetBotVersionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewGetBotVersionsPaginator(client GetBotVersionsAPIClient, params *GetBotVe
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetBotVersionsInput{}
 	}
 
 	return &GetBotVersionsPaginator{

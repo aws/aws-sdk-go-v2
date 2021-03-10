@@ -163,6 +163,10 @@ type DescribeTableRestoreStatusPaginator struct {
 // NewDescribeTableRestoreStatusPaginator returns a new
 // DescribeTableRestoreStatusPaginator
 func NewDescribeTableRestoreStatusPaginator(client DescribeTableRestoreStatusAPIClient, params *DescribeTableRestoreStatusInput, optFns ...func(*DescribeTableRestoreStatusPaginatorOptions)) *DescribeTableRestoreStatusPaginator {
+	if params == nil {
+		params = &DescribeTableRestoreStatusInput{}
+	}
+
 	options := DescribeTableRestoreStatusPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -170,10 +174,6 @@ func NewDescribeTableRestoreStatusPaginator(client DescribeTableRestoreStatusAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeTableRestoreStatusInput{}
 	}
 
 	return &DescribeTableRestoreStatusPaginator{

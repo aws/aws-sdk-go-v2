@@ -152,6 +152,10 @@ type DescribeUserGroupsPaginator struct {
 
 // NewDescribeUserGroupsPaginator returns a new DescribeUserGroupsPaginator
 func NewDescribeUserGroupsPaginator(client DescribeUserGroupsAPIClient, params *DescribeUserGroupsInput, optFns ...func(*DescribeUserGroupsPaginatorOptions)) *DescribeUserGroupsPaginator {
+	if params == nil {
+		params = &DescribeUserGroupsInput{}
+	}
+
 	options := DescribeUserGroupsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -159,10 +163,6 @@ func NewDescribeUserGroupsPaginator(client DescribeUserGroupsAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeUserGroupsInput{}
 	}
 
 	return &DescribeUserGroupsPaginator{

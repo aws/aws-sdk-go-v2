@@ -152,6 +152,10 @@ type ListElasticsearchVersionsPaginator struct {
 // NewListElasticsearchVersionsPaginator returns a new
 // ListElasticsearchVersionsPaginator
 func NewListElasticsearchVersionsPaginator(client ListElasticsearchVersionsAPIClient, params *ListElasticsearchVersionsInput, optFns ...func(*ListElasticsearchVersionsPaginatorOptions)) *ListElasticsearchVersionsPaginator {
+	if params == nil {
+		params = &ListElasticsearchVersionsInput{}
+	}
+
 	options := ListElasticsearchVersionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -159,10 +163,6 @@ func NewListElasticsearchVersionsPaginator(client ListElasticsearchVersionsAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListElasticsearchVersionsInput{}
 	}
 
 	return &ListElasticsearchVersionsPaginator{

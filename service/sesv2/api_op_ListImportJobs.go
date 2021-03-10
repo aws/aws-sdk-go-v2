@@ -156,6 +156,10 @@ type ListImportJobsPaginator struct {
 
 // NewListImportJobsPaginator returns a new ListImportJobsPaginator
 func NewListImportJobsPaginator(client ListImportJobsAPIClient, params *ListImportJobsInput, optFns ...func(*ListImportJobsPaginatorOptions)) *ListImportJobsPaginator {
+	if params == nil {
+		params = &ListImportJobsInput{}
+	}
+
 	options := ListImportJobsPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -163,10 +167,6 @@ func NewListImportJobsPaginator(client ListImportJobsAPIClient, params *ListImpo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListImportJobsInput{}
 	}
 
 	return &ListImportJobsPaginator{

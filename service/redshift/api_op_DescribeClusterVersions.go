@@ -177,6 +177,10 @@ type DescribeClusterVersionsPaginator struct {
 // NewDescribeClusterVersionsPaginator returns a new
 // DescribeClusterVersionsPaginator
 func NewDescribeClusterVersionsPaginator(client DescribeClusterVersionsAPIClient, params *DescribeClusterVersionsInput, optFns ...func(*DescribeClusterVersionsPaginatorOptions)) *DescribeClusterVersionsPaginator {
+	if params == nil {
+		params = &DescribeClusterVersionsInput{}
+	}
+
 	options := DescribeClusterVersionsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -184,10 +188,6 @@ func NewDescribeClusterVersionsPaginator(client DescribeClusterVersionsAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeClusterVersionsInput{}
 	}
 
 	return &DescribeClusterVersionsPaginator{

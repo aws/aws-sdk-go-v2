@@ -141,6 +141,10 @@ type ListVoiceConnectorGroupsPaginator struct {
 // NewListVoiceConnectorGroupsPaginator returns a new
 // ListVoiceConnectorGroupsPaginator
 func NewListVoiceConnectorGroupsPaginator(client ListVoiceConnectorGroupsAPIClient, params *ListVoiceConnectorGroupsInput, optFns ...func(*ListVoiceConnectorGroupsPaginatorOptions)) *ListVoiceConnectorGroupsPaginator {
+	if params == nil {
+		params = &ListVoiceConnectorGroupsInput{}
+	}
+
 	options := ListVoiceConnectorGroupsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -148,10 +152,6 @@ func NewListVoiceConnectorGroupsPaginator(client ListVoiceConnectorGroupsAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListVoiceConnectorGroupsInput{}
 	}
 
 	return &ListVoiceConnectorGroupsPaginator{

@@ -179,6 +179,10 @@ type ListChannelBansPaginator struct {
 
 // NewListChannelBansPaginator returns a new ListChannelBansPaginator
 func NewListChannelBansPaginator(client ListChannelBansAPIClient, params *ListChannelBansInput, optFns ...func(*ListChannelBansPaginatorOptions)) *ListChannelBansPaginator {
+	if params == nil {
+		params = &ListChannelBansInput{}
+	}
+
 	options := ListChannelBansPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -186,10 +190,6 @@ func NewListChannelBansPaginator(client ListChannelBansAPIClient, params *ListCh
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListChannelBansInput{}
 	}
 
 	return &ListChannelBansPaginator{

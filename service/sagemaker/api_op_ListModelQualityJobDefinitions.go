@@ -172,6 +172,10 @@ type ListModelQualityJobDefinitionsPaginator struct {
 // NewListModelQualityJobDefinitionsPaginator returns a new
 // ListModelQualityJobDefinitionsPaginator
 func NewListModelQualityJobDefinitionsPaginator(client ListModelQualityJobDefinitionsAPIClient, params *ListModelQualityJobDefinitionsInput, optFns ...func(*ListModelQualityJobDefinitionsPaginatorOptions)) *ListModelQualityJobDefinitionsPaginator {
+	if params == nil {
+		params = &ListModelQualityJobDefinitionsInput{}
+	}
+
 	options := ListModelQualityJobDefinitionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -179,10 +183,6 @@ func NewListModelQualityJobDefinitionsPaginator(client ListModelQualityJobDefini
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListModelQualityJobDefinitionsInput{}
 	}
 
 	return &ListModelQualityJobDefinitionsPaginator{

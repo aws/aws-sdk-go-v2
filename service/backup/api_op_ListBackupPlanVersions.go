@@ -155,6 +155,10 @@ type ListBackupPlanVersionsPaginator struct {
 
 // NewListBackupPlanVersionsPaginator returns a new ListBackupPlanVersionsPaginator
 func NewListBackupPlanVersionsPaginator(client ListBackupPlanVersionsAPIClient, params *ListBackupPlanVersionsInput, optFns ...func(*ListBackupPlanVersionsPaginatorOptions)) *ListBackupPlanVersionsPaginator {
+	if params == nil {
+		params = &ListBackupPlanVersionsInput{}
+	}
+
 	options := ListBackupPlanVersionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewListBackupPlanVersionsPaginator(client ListBackupPlanVersionsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListBackupPlanVersionsInput{}
 	}
 
 	return &ListBackupPlanVersionsPaginator{

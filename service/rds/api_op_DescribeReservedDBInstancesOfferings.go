@@ -188,6 +188,10 @@ type DescribeReservedDBInstancesOfferingsPaginator struct {
 // NewDescribeReservedDBInstancesOfferingsPaginator returns a new
 // DescribeReservedDBInstancesOfferingsPaginator
 func NewDescribeReservedDBInstancesOfferingsPaginator(client DescribeReservedDBInstancesOfferingsAPIClient, params *DescribeReservedDBInstancesOfferingsInput, optFns ...func(*DescribeReservedDBInstancesOfferingsPaginatorOptions)) *DescribeReservedDBInstancesOfferingsPaginator {
+	if params == nil {
+		params = &DescribeReservedDBInstancesOfferingsInput{}
+	}
+
 	options := DescribeReservedDBInstancesOfferingsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -195,10 +199,6 @@ func NewDescribeReservedDBInstancesOfferingsPaginator(client DescribeReservedDBI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeReservedDBInstancesOfferingsInput{}
 	}
 
 	return &DescribeReservedDBInstancesOfferingsPaginator{

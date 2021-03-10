@@ -147,6 +147,10 @@ type ListArchiveRulesPaginator struct {
 
 // NewListArchiveRulesPaginator returns a new ListArchiveRulesPaginator
 func NewListArchiveRulesPaginator(client ListArchiveRulesAPIClient, params *ListArchiveRulesInput, optFns ...func(*ListArchiveRulesPaginatorOptions)) *ListArchiveRulesPaginator {
+	if params == nil {
+		params = &ListArchiveRulesInput{}
+	}
+
 	options := ListArchiveRulesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -154,10 +158,6 @@ func NewListArchiveRulesPaginator(client ListArchiveRulesAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListArchiveRulesInput{}
 	}
 
 	return &ListArchiveRulesPaginator{

@@ -155,6 +155,10 @@ type ListBackupSelectionsPaginator struct {
 
 // NewListBackupSelectionsPaginator returns a new ListBackupSelectionsPaginator
 func NewListBackupSelectionsPaginator(client ListBackupSelectionsAPIClient, params *ListBackupSelectionsInput, optFns ...func(*ListBackupSelectionsPaginatorOptions)) *ListBackupSelectionsPaginator {
+	if params == nil {
+		params = &ListBackupSelectionsInput{}
+	}
+
 	options := ListBackupSelectionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewListBackupSelectionsPaginator(client ListBackupSelectionsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListBackupSelectionsInput{}
 	}
 
 	return &ListBackupSelectionsPaginator{

@@ -203,6 +203,10 @@ type FilterLogEventsPaginator struct {
 
 // NewFilterLogEventsPaginator returns a new FilterLogEventsPaginator
 func NewFilterLogEventsPaginator(client FilterLogEventsAPIClient, params *FilterLogEventsInput, optFns ...func(*FilterLogEventsPaginatorOptions)) *FilterLogEventsPaginator {
+	if params == nil {
+		params = &FilterLogEventsInput{}
+	}
+
 	options := FilterLogEventsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -210,10 +214,6 @@ func NewFilterLogEventsPaginator(client FilterLogEventsAPIClient, params *Filter
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &FilterLogEventsInput{}
 	}
 
 	return &FilterLogEventsPaginator{

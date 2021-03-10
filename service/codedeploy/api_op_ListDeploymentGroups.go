@@ -150,14 +150,14 @@ type ListDeploymentGroupsPaginator struct {
 
 // NewListDeploymentGroupsPaginator returns a new ListDeploymentGroupsPaginator
 func NewListDeploymentGroupsPaginator(client ListDeploymentGroupsAPIClient, params *ListDeploymentGroupsInput, optFns ...func(*ListDeploymentGroupsPaginatorOptions)) *ListDeploymentGroupsPaginator {
+	if params == nil {
+		params = &ListDeploymentGroupsInput{}
+	}
+
 	options := ListDeploymentGroupsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDeploymentGroupsInput{}
 	}
 
 	return &ListDeploymentGroupsPaginator{

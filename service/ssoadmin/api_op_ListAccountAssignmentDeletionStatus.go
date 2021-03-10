@@ -157,6 +157,10 @@ type ListAccountAssignmentDeletionStatusPaginator struct {
 // NewListAccountAssignmentDeletionStatusPaginator returns a new
 // ListAccountAssignmentDeletionStatusPaginator
 func NewListAccountAssignmentDeletionStatusPaginator(client ListAccountAssignmentDeletionStatusAPIClient, params *ListAccountAssignmentDeletionStatusInput, optFns ...func(*ListAccountAssignmentDeletionStatusPaginatorOptions)) *ListAccountAssignmentDeletionStatusPaginator {
+	if params == nil {
+		params = &ListAccountAssignmentDeletionStatusInput{}
+	}
+
 	options := ListAccountAssignmentDeletionStatusPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -164,10 +168,6 @@ func NewListAccountAssignmentDeletionStatusPaginator(client ListAccountAssignmen
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAccountAssignmentDeletionStatusInput{}
 	}
 
 	return &ListAccountAssignmentDeletionStatusPaginator{

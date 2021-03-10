@@ -172,6 +172,10 @@ type ListVirtualServicesPaginator struct {
 
 // NewListVirtualServicesPaginator returns a new ListVirtualServicesPaginator
 func NewListVirtualServicesPaginator(client ListVirtualServicesAPIClient, params *ListVirtualServicesInput, optFns ...func(*ListVirtualServicesPaginatorOptions)) *ListVirtualServicesPaginator {
+	if params == nil {
+		params = &ListVirtualServicesInput{}
+	}
+
 	options := ListVirtualServicesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -179,10 +183,6 @@ func NewListVirtualServicesPaginator(client ListVirtualServicesAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListVirtualServicesInput{}
 	}
 
 	return &ListVirtualServicesPaginator{

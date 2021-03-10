@@ -171,6 +171,10 @@ type ListSimulationApplicationsPaginator struct {
 // NewListSimulationApplicationsPaginator returns a new
 // ListSimulationApplicationsPaginator
 func NewListSimulationApplicationsPaginator(client ListSimulationApplicationsAPIClient, params *ListSimulationApplicationsInput, optFns ...func(*ListSimulationApplicationsPaginatorOptions)) *ListSimulationApplicationsPaginator {
+	if params == nil {
+		params = &ListSimulationApplicationsInput{}
+	}
+
 	options := ListSimulationApplicationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -178,10 +182,6 @@ func NewListSimulationApplicationsPaginator(client ListSimulationApplicationsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSimulationApplicationsInput{}
 	}
 
 	return &ListSimulationApplicationsPaginator{

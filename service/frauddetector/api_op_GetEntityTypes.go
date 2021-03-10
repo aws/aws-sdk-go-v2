@@ -146,6 +146,10 @@ type GetEntityTypesPaginator struct {
 
 // NewGetEntityTypesPaginator returns a new GetEntityTypesPaginator
 func NewGetEntityTypesPaginator(client GetEntityTypesAPIClient, params *GetEntityTypesInput, optFns ...func(*GetEntityTypesPaginatorOptions)) *GetEntityTypesPaginator {
+	if params == nil {
+		params = &GetEntityTypesInput{}
+	}
+
 	options := GetEntityTypesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -153,10 +157,6 @@ func NewGetEntityTypesPaginator(client GetEntityTypesAPIClient, params *GetEntit
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetEntityTypesInput{}
 	}
 
 	return &GetEntityTypesPaginator{

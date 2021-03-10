@@ -143,6 +143,10 @@ type ListCustomDataIdentifiersPaginator struct {
 // NewListCustomDataIdentifiersPaginator returns a new
 // ListCustomDataIdentifiersPaginator
 func NewListCustomDataIdentifiersPaginator(client ListCustomDataIdentifiersAPIClient, params *ListCustomDataIdentifiersInput, optFns ...func(*ListCustomDataIdentifiersPaginatorOptions)) *ListCustomDataIdentifiersPaginator {
+	if params == nil {
+		params = &ListCustomDataIdentifiersInput{}
+	}
+
 	options := ListCustomDataIdentifiersPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -150,10 +154,6 @@ func NewListCustomDataIdentifiersPaginator(client ListCustomDataIdentifiersAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCustomDataIdentifiersInput{}
 	}
 
 	return &ListCustomDataIdentifiersPaginator{

@@ -158,6 +158,10 @@ type DescribeInstancePatchStatesForPatchGroupPaginator struct {
 // NewDescribeInstancePatchStatesForPatchGroupPaginator returns a new
 // DescribeInstancePatchStatesForPatchGroupPaginator
 func NewDescribeInstancePatchStatesForPatchGroupPaginator(client DescribeInstancePatchStatesForPatchGroupAPIClient, params *DescribeInstancePatchStatesForPatchGroupInput, optFns ...func(*DescribeInstancePatchStatesForPatchGroupPaginatorOptions)) *DescribeInstancePatchStatesForPatchGroupPaginator {
+	if params == nil {
+		params = &DescribeInstancePatchStatesForPatchGroupInput{}
+	}
+
 	options := DescribeInstancePatchStatesForPatchGroupPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -165,10 +169,6 @@ func NewDescribeInstancePatchStatesForPatchGroupPaginator(client DescribeInstanc
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeInstancePatchStatesForPatchGroupInput{}
 	}
 
 	return &DescribeInstancePatchStatesForPatchGroupPaginator{

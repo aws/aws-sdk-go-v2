@@ -153,6 +153,10 @@ type DescribeNotificationConfigurationsPaginator struct {
 // NewDescribeNotificationConfigurationsPaginator returns a new
 // DescribeNotificationConfigurationsPaginator
 func NewDescribeNotificationConfigurationsPaginator(client DescribeNotificationConfigurationsAPIClient, params *DescribeNotificationConfigurationsInput, optFns ...func(*DescribeNotificationConfigurationsPaginatorOptions)) *DescribeNotificationConfigurationsPaginator {
+	if params == nil {
+		params = &DescribeNotificationConfigurationsInput{}
+	}
+
 	options := DescribeNotificationConfigurationsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -160,10 +164,6 @@ func NewDescribeNotificationConfigurationsPaginator(client DescribeNotificationC
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeNotificationConfigurationsInput{}
 	}
 
 	return &DescribeNotificationConfigurationsPaginator{

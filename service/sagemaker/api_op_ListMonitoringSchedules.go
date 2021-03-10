@@ -184,6 +184,10 @@ type ListMonitoringSchedulesPaginator struct {
 // NewListMonitoringSchedulesPaginator returns a new
 // ListMonitoringSchedulesPaginator
 func NewListMonitoringSchedulesPaginator(client ListMonitoringSchedulesAPIClient, params *ListMonitoringSchedulesInput, optFns ...func(*ListMonitoringSchedulesPaginatorOptions)) *ListMonitoringSchedulesPaginator {
+	if params == nil {
+		params = &ListMonitoringSchedulesInput{}
+	}
+
 	options := ListMonitoringSchedulesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -191,10 +195,6 @@ func NewListMonitoringSchedulesPaginator(client ListMonitoringSchedulesAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListMonitoringSchedulesInput{}
 	}
 
 	return &ListMonitoringSchedulesPaginator{

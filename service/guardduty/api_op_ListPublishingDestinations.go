@@ -159,6 +159,10 @@ type ListPublishingDestinationsPaginator struct {
 // NewListPublishingDestinationsPaginator returns a new
 // ListPublishingDestinationsPaginator
 func NewListPublishingDestinationsPaginator(client ListPublishingDestinationsAPIClient, params *ListPublishingDestinationsInput, optFns ...func(*ListPublishingDestinationsPaginatorOptions)) *ListPublishingDestinationsPaginator {
+	if params == nil {
+		params = &ListPublishingDestinationsInput{}
+	}
+
 	options := ListPublishingDestinationsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -166,10 +170,6 @@ func NewListPublishingDestinationsPaginator(client ListPublishingDestinationsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPublishingDestinationsInput{}
 	}
 
 	return &ListPublishingDestinationsPaginator{

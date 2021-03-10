@@ -184,6 +184,10 @@ type DescribeSnapshotCopyGrantsPaginator struct {
 // NewDescribeSnapshotCopyGrantsPaginator returns a new
 // DescribeSnapshotCopyGrantsPaginator
 func NewDescribeSnapshotCopyGrantsPaginator(client DescribeSnapshotCopyGrantsAPIClient, params *DescribeSnapshotCopyGrantsInput, optFns ...func(*DescribeSnapshotCopyGrantsPaginatorOptions)) *DescribeSnapshotCopyGrantsPaginator {
+	if params == nil {
+		params = &DescribeSnapshotCopyGrantsInput{}
+	}
+
 	options := DescribeSnapshotCopyGrantsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -191,10 +195,6 @@ func NewDescribeSnapshotCopyGrantsPaginator(client DescribeSnapshotCopyGrantsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeSnapshotCopyGrantsInput{}
 	}
 
 	return &DescribeSnapshotCopyGrantsPaginator{

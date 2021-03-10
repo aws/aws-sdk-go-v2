@@ -160,6 +160,10 @@ type ListPullRequestsPaginator struct {
 
 // NewListPullRequestsPaginator returns a new ListPullRequestsPaginator
 func NewListPullRequestsPaginator(client ListPullRequestsAPIClient, params *ListPullRequestsInput, optFns ...func(*ListPullRequestsPaginatorOptions)) *ListPullRequestsPaginator {
+	if params == nil {
+		params = &ListPullRequestsInput{}
+	}
+
 	options := ListPullRequestsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -167,10 +171,6 @@ func NewListPullRequestsPaginator(client ListPullRequestsAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPullRequestsInput{}
 	}
 
 	return &ListPullRequestsPaginator{

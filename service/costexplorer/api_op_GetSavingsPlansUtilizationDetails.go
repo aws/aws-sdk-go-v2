@@ -194,6 +194,10 @@ type GetSavingsPlansUtilizationDetailsPaginator struct {
 // NewGetSavingsPlansUtilizationDetailsPaginator returns a new
 // GetSavingsPlansUtilizationDetailsPaginator
 func NewGetSavingsPlansUtilizationDetailsPaginator(client GetSavingsPlansUtilizationDetailsAPIClient, params *GetSavingsPlansUtilizationDetailsInput, optFns ...func(*GetSavingsPlansUtilizationDetailsPaginatorOptions)) *GetSavingsPlansUtilizationDetailsPaginator {
+	if params == nil {
+		params = &GetSavingsPlansUtilizationDetailsInput{}
+	}
+
 	options := GetSavingsPlansUtilizationDetailsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -201,10 +205,6 @@ func NewGetSavingsPlansUtilizationDetailsPaginator(client GetSavingsPlansUtiliza
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetSavingsPlansUtilizationDetailsInput{}
 	}
 
 	return &GetSavingsPlansUtilizationDetailsPaginator{

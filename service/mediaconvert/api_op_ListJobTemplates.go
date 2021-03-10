@@ -156,6 +156,10 @@ type ListJobTemplatesPaginator struct {
 
 // NewListJobTemplatesPaginator returns a new ListJobTemplatesPaginator
 func NewListJobTemplatesPaginator(client ListJobTemplatesAPIClient, params *ListJobTemplatesInput, optFns ...func(*ListJobTemplatesPaginatorOptions)) *ListJobTemplatesPaginator {
+	if params == nil {
+		params = &ListJobTemplatesInput{}
+	}
+
 	options := ListJobTemplatesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -163,10 +167,6 @@ func NewListJobTemplatesPaginator(client ListJobTemplatesAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListJobTemplatesInput{}
 	}
 
 	return &ListJobTemplatesPaginator{

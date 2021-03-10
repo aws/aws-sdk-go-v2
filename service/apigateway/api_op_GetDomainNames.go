@@ -146,6 +146,10 @@ type GetDomainNamesPaginator struct {
 
 // NewGetDomainNamesPaginator returns a new GetDomainNamesPaginator
 func NewGetDomainNamesPaginator(client GetDomainNamesAPIClient, params *GetDomainNamesInput, optFns ...func(*GetDomainNamesPaginatorOptions)) *GetDomainNamesPaginator {
+	if params == nil {
+		params = &GetDomainNamesInput{}
+	}
+
 	options := GetDomainNamesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -153,10 +157,6 @@ func NewGetDomainNamesPaginator(client GetDomainNamesAPIClient, params *GetDomai
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetDomainNamesInput{}
 	}
 
 	return &GetDomainNamesPaginator{

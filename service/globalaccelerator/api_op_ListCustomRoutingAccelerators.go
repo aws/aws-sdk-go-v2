@@ -145,6 +145,10 @@ type ListCustomRoutingAcceleratorsPaginator struct {
 // NewListCustomRoutingAcceleratorsPaginator returns a new
 // ListCustomRoutingAcceleratorsPaginator
 func NewListCustomRoutingAcceleratorsPaginator(client ListCustomRoutingAcceleratorsAPIClient, params *ListCustomRoutingAcceleratorsInput, optFns ...func(*ListCustomRoutingAcceleratorsPaginatorOptions)) *ListCustomRoutingAcceleratorsPaginator {
+	if params == nil {
+		params = &ListCustomRoutingAcceleratorsInput{}
+	}
+
 	options := ListCustomRoutingAcceleratorsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewListCustomRoutingAcceleratorsPaginator(client ListCustomRoutingAccelerat
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCustomRoutingAcceleratorsInput{}
 	}
 
 	return &ListCustomRoutingAcceleratorsPaginator{

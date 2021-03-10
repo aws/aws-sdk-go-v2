@@ -149,14 +149,14 @@ type GetResourceCollectionPaginator struct {
 
 // NewGetResourceCollectionPaginator returns a new GetResourceCollectionPaginator
 func NewGetResourceCollectionPaginator(client GetResourceCollectionAPIClient, params *GetResourceCollectionInput, optFns ...func(*GetResourceCollectionPaginatorOptions)) *GetResourceCollectionPaginator {
+	if params == nil {
+		params = &GetResourceCollectionInput{}
+	}
+
 	options := GetResourceCollectionPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetResourceCollectionInput{}
 	}
 
 	return &GetResourceCollectionPaginator{

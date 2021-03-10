@@ -154,6 +154,10 @@ type ListAttachedPoliciesPaginator struct {
 
 // NewListAttachedPoliciesPaginator returns a new ListAttachedPoliciesPaginator
 func NewListAttachedPoliciesPaginator(client ListAttachedPoliciesAPIClient, params *ListAttachedPoliciesInput, optFns ...func(*ListAttachedPoliciesPaginatorOptions)) *ListAttachedPoliciesPaginator {
+	if params == nil {
+		params = &ListAttachedPoliciesInput{}
+	}
+
 	options := ListAttachedPoliciesPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -161,10 +165,6 @@ func NewListAttachedPoliciesPaginator(client ListAttachedPoliciesAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAttachedPoliciesInput{}
 	}
 
 	return &ListAttachedPoliciesPaginator{

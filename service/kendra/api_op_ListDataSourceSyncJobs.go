@@ -167,6 +167,10 @@ type ListDataSourceSyncJobsPaginator struct {
 
 // NewListDataSourceSyncJobsPaginator returns a new ListDataSourceSyncJobsPaginator
 func NewListDataSourceSyncJobsPaginator(client ListDataSourceSyncJobsAPIClient, params *ListDataSourceSyncJobsInput, optFns ...func(*ListDataSourceSyncJobsPaginatorOptions)) *ListDataSourceSyncJobsPaginator {
+	if params == nil {
+		params = &ListDataSourceSyncJobsInput{}
+	}
+
 	options := ListDataSourceSyncJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -174,10 +178,6 @@ func NewListDataSourceSyncJobsPaginator(client ListDataSourceSyncJobsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDataSourceSyncJobsInput{}
 	}
 
 	return &ListDataSourceSyncJobsPaginator{

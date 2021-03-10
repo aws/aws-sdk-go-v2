@@ -162,6 +162,10 @@ type GetResourceSharesPaginator struct {
 
 // NewGetResourceSharesPaginator returns a new GetResourceSharesPaginator
 func NewGetResourceSharesPaginator(client GetResourceSharesAPIClient, params *GetResourceSharesInput, optFns ...func(*GetResourceSharesPaginatorOptions)) *GetResourceSharesPaginator {
+	if params == nil {
+		params = &GetResourceSharesInput{}
+	}
+
 	options := GetResourceSharesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -169,10 +173,6 @@ func NewGetResourceSharesPaginator(client GetResourceSharesAPIClient, params *Ge
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetResourceSharesInput{}
 	}
 
 	return &GetResourceSharesPaginator{

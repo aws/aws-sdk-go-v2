@@ -167,6 +167,10 @@ type ListAutoMLJobsPaginator struct {
 
 // NewListAutoMLJobsPaginator returns a new ListAutoMLJobsPaginator
 func NewListAutoMLJobsPaginator(client ListAutoMLJobsAPIClient, params *ListAutoMLJobsInput, optFns ...func(*ListAutoMLJobsPaginatorOptions)) *ListAutoMLJobsPaginator {
+	if params == nil {
+		params = &ListAutoMLJobsInput{}
+	}
+
 	options := ListAutoMLJobsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -174,10 +178,6 @@ func NewListAutoMLJobsPaginator(client ListAutoMLJobsAPIClient, params *ListAuto
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAutoMLJobsInput{}
 	}
 
 	return &ListAutoMLJobsPaginator{

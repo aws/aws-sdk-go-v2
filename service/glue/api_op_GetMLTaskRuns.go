@@ -156,6 +156,10 @@ type GetMLTaskRunsPaginator struct {
 
 // NewGetMLTaskRunsPaginator returns a new GetMLTaskRunsPaginator
 func NewGetMLTaskRunsPaginator(client GetMLTaskRunsAPIClient, params *GetMLTaskRunsInput, optFns ...func(*GetMLTaskRunsPaginatorOptions)) *GetMLTaskRunsPaginator {
+	if params == nil {
+		params = &GetMLTaskRunsInput{}
+	}
+
 	options := GetMLTaskRunsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -163,10 +167,6 @@ func NewGetMLTaskRunsPaginator(client GetMLTaskRunsAPIClient, params *GetMLTaskR
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetMLTaskRunsInput{}
 	}
 
 	return &GetMLTaskRunsPaginator{

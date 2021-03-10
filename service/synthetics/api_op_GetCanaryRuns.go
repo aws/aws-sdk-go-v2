@@ -150,6 +150,10 @@ type GetCanaryRunsPaginator struct {
 
 // NewGetCanaryRunsPaginator returns a new GetCanaryRunsPaginator
 func NewGetCanaryRunsPaginator(client GetCanaryRunsAPIClient, params *GetCanaryRunsInput, optFns ...func(*GetCanaryRunsPaginatorOptions)) *GetCanaryRunsPaginator {
+	if params == nil {
+		params = &GetCanaryRunsInput{}
+	}
+
 	options := GetCanaryRunsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -157,10 +161,6 @@ func NewGetCanaryRunsPaginator(client GetCanaryRunsAPIClient, params *GetCanaryR
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetCanaryRunsInput{}
 	}
 
 	return &GetCanaryRunsPaginator{

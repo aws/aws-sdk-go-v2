@@ -140,14 +140,14 @@ type ListOfferingsPaginator struct {
 
 // NewListOfferingsPaginator returns a new ListOfferingsPaginator
 func NewListOfferingsPaginator(client ListOfferingsAPIClient, params *ListOfferingsInput, optFns ...func(*ListOfferingsPaginatorOptions)) *ListOfferingsPaginator {
+	if params == nil {
+		params = &ListOfferingsInput{}
+	}
+
 	options := ListOfferingsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListOfferingsInput{}
 	}
 
 	return &ListOfferingsPaginator{

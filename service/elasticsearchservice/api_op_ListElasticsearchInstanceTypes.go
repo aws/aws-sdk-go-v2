@@ -165,6 +165,10 @@ type ListElasticsearchInstanceTypesPaginator struct {
 // NewListElasticsearchInstanceTypesPaginator returns a new
 // ListElasticsearchInstanceTypesPaginator
 func NewListElasticsearchInstanceTypesPaginator(client ListElasticsearchInstanceTypesAPIClient, params *ListElasticsearchInstanceTypesInput, optFns ...func(*ListElasticsearchInstanceTypesPaginatorOptions)) *ListElasticsearchInstanceTypesPaginator {
+	if params == nil {
+		params = &ListElasticsearchInstanceTypesInput{}
+	}
+
 	options := ListElasticsearchInstanceTypesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -172,10 +176,6 @@ func NewListElasticsearchInstanceTypesPaginator(client ListElasticsearchInstance
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListElasticsearchInstanceTypesInput{}
 	}
 
 	return &ListElasticsearchInstanceTypesPaginator{

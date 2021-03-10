@@ -155,6 +155,10 @@ type ListAWSDefaultServiceQuotasPaginator struct {
 // NewListAWSDefaultServiceQuotasPaginator returns a new
 // ListAWSDefaultServiceQuotasPaginator
 func NewListAWSDefaultServiceQuotasPaginator(client ListAWSDefaultServiceQuotasAPIClient, params *ListAWSDefaultServiceQuotasInput, optFns ...func(*ListAWSDefaultServiceQuotasPaginatorOptions)) *ListAWSDefaultServiceQuotasPaginator {
+	if params == nil {
+		params = &ListAWSDefaultServiceQuotasInput{}
+	}
+
 	options := ListAWSDefaultServiceQuotasPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewListAWSDefaultServiceQuotasPaginator(client ListAWSDefaultServiceQuotasA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAWSDefaultServiceQuotasInput{}
 	}
 
 	return &ListAWSDefaultServiceQuotasPaginator{

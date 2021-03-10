@@ -148,6 +148,10 @@ type ListCollectionsPaginator struct {
 
 // NewListCollectionsPaginator returns a new ListCollectionsPaginator
 func NewListCollectionsPaginator(client ListCollectionsAPIClient, params *ListCollectionsInput, optFns ...func(*ListCollectionsPaginatorOptions)) *ListCollectionsPaginator {
+	if params == nil {
+		params = &ListCollectionsInput{}
+	}
+
 	options := ListCollectionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -155,10 +159,6 @@ func NewListCollectionsPaginator(client ListCollectionsAPIClient, params *ListCo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCollectionsInput{}
 	}
 
 	return &ListCollectionsPaginator{

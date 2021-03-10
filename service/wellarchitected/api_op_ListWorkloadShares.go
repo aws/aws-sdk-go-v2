@@ -155,6 +155,10 @@ type ListWorkloadSharesPaginator struct {
 
 // NewListWorkloadSharesPaginator returns a new ListWorkloadSharesPaginator
 func NewListWorkloadSharesPaginator(client ListWorkloadSharesAPIClient, params *ListWorkloadSharesInput, optFns ...func(*ListWorkloadSharesPaginatorOptions)) *ListWorkloadSharesPaginator {
+	if params == nil {
+		params = &ListWorkloadSharesInput{}
+	}
+
 	options := ListWorkloadSharesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -162,10 +166,6 @@ func NewListWorkloadSharesPaginator(client ListWorkloadSharesAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListWorkloadSharesInput{}
 	}
 
 	return &ListWorkloadSharesPaginator{

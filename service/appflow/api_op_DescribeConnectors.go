@@ -140,14 +140,14 @@ type DescribeConnectorsPaginator struct {
 
 // NewDescribeConnectorsPaginator returns a new DescribeConnectorsPaginator
 func NewDescribeConnectorsPaginator(client DescribeConnectorsAPIClient, params *DescribeConnectorsInput, optFns ...func(*DescribeConnectorsPaginatorOptions)) *DescribeConnectorsPaginator {
+	if params == nil {
+		params = &DescribeConnectorsInput{}
+	}
+
 	options := DescribeConnectorsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeConnectorsInput{}
 	}
 
 	return &DescribeConnectorsPaginator{

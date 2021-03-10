@@ -159,6 +159,10 @@ type ListContextsPaginator struct {
 
 // NewListContextsPaginator returns a new ListContextsPaginator
 func NewListContextsPaginator(client ListContextsAPIClient, params *ListContextsInput, optFns ...func(*ListContextsPaginatorOptions)) *ListContextsPaginator {
+	if params == nil {
+		params = &ListContextsInput{}
+	}
+
 	options := ListContextsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewListContextsPaginator(client ListContextsAPIClient, params *ListContexts
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListContextsInput{}
 	}
 
 	return &ListContextsPaginator{

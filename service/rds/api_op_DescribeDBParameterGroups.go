@@ -167,6 +167,10 @@ type DescribeDBParameterGroupsPaginator struct {
 // NewDescribeDBParameterGroupsPaginator returns a new
 // DescribeDBParameterGroupsPaginator
 func NewDescribeDBParameterGroupsPaginator(client DescribeDBParameterGroupsAPIClient, params *DescribeDBParameterGroupsInput, optFns ...func(*DescribeDBParameterGroupsPaginatorOptions)) *DescribeDBParameterGroupsPaginator {
+	if params == nil {
+		params = &DescribeDBParameterGroupsInput{}
+	}
+
 	options := DescribeDBParameterGroupsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -174,10 +178,6 @@ func NewDescribeDBParameterGroupsPaginator(client DescribeDBParameterGroupsAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeDBParameterGroupsInput{}
 	}
 
 	return &DescribeDBParameterGroupsPaginator{

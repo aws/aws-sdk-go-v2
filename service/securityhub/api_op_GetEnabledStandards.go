@@ -146,6 +146,10 @@ type GetEnabledStandardsPaginator struct {
 
 // NewGetEnabledStandardsPaginator returns a new GetEnabledStandardsPaginator
 func NewGetEnabledStandardsPaginator(client GetEnabledStandardsAPIClient, params *GetEnabledStandardsInput, optFns ...func(*GetEnabledStandardsPaginatorOptions)) *GetEnabledStandardsPaginator {
+	if params == nil {
+		params = &GetEnabledStandardsInput{}
+	}
+
 	options := GetEnabledStandardsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -153,10 +157,6 @@ func NewGetEnabledStandardsPaginator(client GetEnabledStandardsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetEnabledStandardsInput{}
 	}
 
 	return &GetEnabledStandardsPaginator{

@@ -203,6 +203,10 @@ type DescribeFleetEventsPaginator struct {
 
 // NewDescribeFleetEventsPaginator returns a new DescribeFleetEventsPaginator
 func NewDescribeFleetEventsPaginator(client DescribeFleetEventsAPIClient, params *DescribeFleetEventsInput, optFns ...func(*DescribeFleetEventsPaginatorOptions)) *DescribeFleetEventsPaginator {
+	if params == nil {
+		params = &DescribeFleetEventsInput{}
+	}
+
 	options := DescribeFleetEventsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -210,10 +214,6 @@ func NewDescribeFleetEventsPaginator(client DescribeFleetEventsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeFleetEventsInput{}
 	}
 
 	return &DescribeFleetEventsPaginator{

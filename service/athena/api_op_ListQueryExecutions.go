@@ -151,6 +151,10 @@ type ListQueryExecutionsPaginator struct {
 
 // NewListQueryExecutionsPaginator returns a new ListQueryExecutionsPaginator
 func NewListQueryExecutionsPaginator(client ListQueryExecutionsAPIClient, params *ListQueryExecutionsInput, optFns ...func(*ListQueryExecutionsPaginatorOptions)) *ListQueryExecutionsPaginator {
+	if params == nil {
+		params = &ListQueryExecutionsInput{}
+	}
+
 	options := ListQueryExecutionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -158,10 +162,6 @@ func NewListQueryExecutionsPaginator(client ListQueryExecutionsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListQueryExecutionsInput{}
 	}
 
 	return &ListQueryExecutionsPaginator{

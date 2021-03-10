@@ -155,6 +155,10 @@ type ListCustomRoutingEndpointGroupsPaginator struct {
 // NewListCustomRoutingEndpointGroupsPaginator returns a new
 // ListCustomRoutingEndpointGroupsPaginator
 func NewListCustomRoutingEndpointGroupsPaginator(client ListCustomRoutingEndpointGroupsAPIClient, params *ListCustomRoutingEndpointGroupsInput, optFns ...func(*ListCustomRoutingEndpointGroupsPaginatorOptions)) *ListCustomRoutingEndpointGroupsPaginator {
+	if params == nil {
+		params = &ListCustomRoutingEndpointGroupsInput{}
+	}
+
 	options := ListCustomRoutingEndpointGroupsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewListCustomRoutingEndpointGroupsPaginator(client ListCustomRoutingEndpoin
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCustomRoutingEndpointGroupsInput{}
 	}
 
 	return &ListCustomRoutingEndpointGroupsPaginator{

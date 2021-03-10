@@ -140,6 +140,10 @@ type GetSecurityConfigurationsPaginator struct {
 // NewGetSecurityConfigurationsPaginator returns a new
 // GetSecurityConfigurationsPaginator
 func NewGetSecurityConfigurationsPaginator(client GetSecurityConfigurationsAPIClient, params *GetSecurityConfigurationsInput, optFns ...func(*GetSecurityConfigurationsPaginatorOptions)) *GetSecurityConfigurationsPaginator {
+	if params == nil {
+		params = &GetSecurityConfigurationsInput{}
+	}
+
 	options := GetSecurityConfigurationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -147,10 +151,6 @@ func NewGetSecurityConfigurationsPaginator(client GetSecurityConfigurationsAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetSecurityConfigurationsInput{}
 	}
 
 	return &GetSecurityConfigurationsPaginator{

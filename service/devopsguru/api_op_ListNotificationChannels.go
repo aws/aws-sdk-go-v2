@@ -140,14 +140,14 @@ type ListNotificationChannelsPaginator struct {
 // NewListNotificationChannelsPaginator returns a new
 // ListNotificationChannelsPaginator
 func NewListNotificationChannelsPaginator(client ListNotificationChannelsAPIClient, params *ListNotificationChannelsInput, optFns ...func(*ListNotificationChannelsPaginatorOptions)) *ListNotificationChannelsPaginator {
+	if params == nil {
+		params = &ListNotificationChannelsInput{}
+	}
+
 	options := ListNotificationChannelsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListNotificationChannelsInput{}
 	}
 
 	return &ListNotificationChannelsPaginator{

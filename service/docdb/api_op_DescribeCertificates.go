@@ -173,6 +173,10 @@ type DescribeCertificatesPaginator struct {
 
 // NewDescribeCertificatesPaginator returns a new DescribeCertificatesPaginator
 func NewDescribeCertificatesPaginator(client DescribeCertificatesAPIClient, params *DescribeCertificatesInput, optFns ...func(*DescribeCertificatesPaginatorOptions)) *DescribeCertificatesPaginator {
+	if params == nil {
+		params = &DescribeCertificatesInput{}
+	}
+
 	options := DescribeCertificatesPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -180,10 +184,6 @@ func NewDescribeCertificatesPaginator(client DescribeCertificatesAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeCertificatesInput{}
 	}
 
 	return &DescribeCertificatesPaginator{

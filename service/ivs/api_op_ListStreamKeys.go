@@ -150,6 +150,10 @@ type ListStreamKeysPaginator struct {
 
 // NewListStreamKeysPaginator returns a new ListStreamKeysPaginator
 func NewListStreamKeysPaginator(client ListStreamKeysAPIClient, params *ListStreamKeysInput, optFns ...func(*ListStreamKeysPaginatorOptions)) *ListStreamKeysPaginator {
+	if params == nil {
+		params = &ListStreamKeysInput{}
+	}
+
 	options := ListStreamKeysPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -157,10 +161,6 @@ func NewListStreamKeysPaginator(client ListStreamKeysAPIClient, params *ListStre
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListStreamKeysInput{}
 	}
 
 	return &ListStreamKeysPaginator{

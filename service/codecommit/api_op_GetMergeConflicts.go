@@ -202,6 +202,10 @@ type GetMergeConflictsPaginator struct {
 
 // NewGetMergeConflictsPaginator returns a new GetMergeConflictsPaginator
 func NewGetMergeConflictsPaginator(client GetMergeConflictsAPIClient, params *GetMergeConflictsInput, optFns ...func(*GetMergeConflictsPaginatorOptions)) *GetMergeConflictsPaginator {
+	if params == nil {
+		params = &GetMergeConflictsInput{}
+	}
+
 	options := GetMergeConflictsPaginatorOptions{}
 	if params.MaxConflictFiles != nil {
 		options.Limit = *params.MaxConflictFiles
@@ -209,10 +213,6 @@ func NewGetMergeConflictsPaginator(client GetMergeConflictsAPIClient, params *Ge
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetMergeConflictsInput{}
 	}
 
 	return &GetMergeConflictsPaginator{

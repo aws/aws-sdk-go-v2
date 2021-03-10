@@ -194,6 +194,10 @@ type ListTypesPaginator struct {
 
 // NewListTypesPaginator returns a new ListTypesPaginator
 func NewListTypesPaginator(client ListTypesAPIClient, params *ListTypesInput, optFns ...func(*ListTypesPaginatorOptions)) *ListTypesPaginator {
+	if params == nil {
+		params = &ListTypesInput{}
+	}
+
 	options := ListTypesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -201,10 +205,6 @@ func NewListTypesPaginator(client ListTypesAPIClient, params *ListTypesInput, op
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTypesInput{}
 	}
 
 	return &ListTypesPaginator{

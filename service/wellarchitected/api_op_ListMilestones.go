@@ -151,6 +151,10 @@ type ListMilestonesPaginator struct {
 
 // NewListMilestonesPaginator returns a new ListMilestonesPaginator
 func NewListMilestonesPaginator(client ListMilestonesAPIClient, params *ListMilestonesInput, optFns ...func(*ListMilestonesPaginatorOptions)) *ListMilestonesPaginator {
+	if params == nil {
+		params = &ListMilestonesInput{}
+	}
+
 	options := ListMilestonesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -158,10 +162,6 @@ func NewListMilestonesPaginator(client ListMilestonesAPIClient, params *ListMile
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListMilestonesInput{}
 	}
 
 	return &ListMilestonesPaginator{

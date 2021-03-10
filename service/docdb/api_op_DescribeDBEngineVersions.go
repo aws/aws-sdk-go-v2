@@ -184,6 +184,10 @@ type DescribeDBEngineVersionsPaginator struct {
 // NewDescribeDBEngineVersionsPaginator returns a new
 // DescribeDBEngineVersionsPaginator
 func NewDescribeDBEngineVersionsPaginator(client DescribeDBEngineVersionsAPIClient, params *DescribeDBEngineVersionsInput, optFns ...func(*DescribeDBEngineVersionsPaginatorOptions)) *DescribeDBEngineVersionsPaginator {
+	if params == nil {
+		params = &DescribeDBEngineVersionsInput{}
+	}
+
 	options := DescribeDBEngineVersionsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -191,10 +195,6 @@ func NewDescribeDBEngineVersionsPaginator(client DescribeDBEngineVersionsAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeDBEngineVersionsInput{}
 	}
 
 	return &DescribeDBEngineVersionsPaginator{

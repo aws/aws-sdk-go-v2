@@ -168,6 +168,10 @@ type ListReportGroupsPaginator struct {
 
 // NewListReportGroupsPaginator returns a new ListReportGroupsPaginator
 func NewListReportGroupsPaginator(client ListReportGroupsAPIClient, params *ListReportGroupsInput, optFns ...func(*ListReportGroupsPaginatorOptions)) *ListReportGroupsPaginator {
+	if params == nil {
+		params = &ListReportGroupsInput{}
+	}
+
 	options := ListReportGroupsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -175,10 +179,6 @@ func NewListReportGroupsPaginator(client ListReportGroupsAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListReportGroupsInput{}
 	}
 
 	return &ListReportGroupsPaginator{

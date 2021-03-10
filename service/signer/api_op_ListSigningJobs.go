@@ -178,6 +178,10 @@ type ListSigningJobsPaginator struct {
 
 // NewListSigningJobsPaginator returns a new ListSigningJobsPaginator
 func NewListSigningJobsPaginator(client ListSigningJobsAPIClient, params *ListSigningJobsInput, optFns ...func(*ListSigningJobsPaginatorOptions)) *ListSigningJobsPaginator {
+	if params == nil {
+		params = &ListSigningJobsInput{}
+	}
+
 	options := ListSigningJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -185,10 +189,6 @@ func NewListSigningJobsPaginator(client ListSigningJobsAPIClient, params *ListSi
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSigningJobsInput{}
 	}
 
 	return &ListSigningJobsPaginator{

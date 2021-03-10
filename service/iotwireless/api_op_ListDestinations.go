@@ -140,6 +140,10 @@ type ListDestinationsPaginator struct {
 
 // NewListDestinationsPaginator returns a new ListDestinationsPaginator
 func NewListDestinationsPaginator(client ListDestinationsAPIClient, params *ListDestinationsInput, optFns ...func(*ListDestinationsPaginatorOptions)) *ListDestinationsPaginator {
+	if params == nil {
+		params = &ListDestinationsInput{}
+	}
+
 	options := ListDestinationsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -147,10 +151,6 @@ func NewListDestinationsPaginator(client ListDestinationsAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDestinationsInput{}
 	}
 
 	return &ListDestinationsPaginator{

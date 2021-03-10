@@ -164,14 +164,14 @@ type DescribeObjectsPaginator struct {
 
 // NewDescribeObjectsPaginator returns a new DescribeObjectsPaginator
 func NewDescribeObjectsPaginator(client DescribeObjectsAPIClient, params *DescribeObjectsInput, optFns ...func(*DescribeObjectsPaginatorOptions)) *DescribeObjectsPaginator {
+	if params == nil {
+		params = &DescribeObjectsInput{}
+	}
+
 	options := DescribeObjectsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeObjectsInput{}
 	}
 
 	return &DescribeObjectsPaginator{

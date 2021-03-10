@@ -162,6 +162,10 @@ type DescribeReplicationTaskAssessmentResultsPaginator struct {
 // NewDescribeReplicationTaskAssessmentResultsPaginator returns a new
 // DescribeReplicationTaskAssessmentResultsPaginator
 func NewDescribeReplicationTaskAssessmentResultsPaginator(client DescribeReplicationTaskAssessmentResultsAPIClient, params *DescribeReplicationTaskAssessmentResultsInput, optFns ...func(*DescribeReplicationTaskAssessmentResultsPaginatorOptions)) *DescribeReplicationTaskAssessmentResultsPaginator {
+	if params == nil {
+		params = &DescribeReplicationTaskAssessmentResultsInput{}
+	}
+
 	options := DescribeReplicationTaskAssessmentResultsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -169,10 +173,6 @@ func NewDescribeReplicationTaskAssessmentResultsPaginator(client DescribeReplica
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeReplicationTaskAssessmentResultsInput{}
 	}
 
 	return &DescribeReplicationTaskAssessmentResultsPaginator{

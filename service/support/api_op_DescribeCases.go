@@ -192,6 +192,10 @@ type DescribeCasesPaginator struct {
 
 // NewDescribeCasesPaginator returns a new DescribeCasesPaginator
 func NewDescribeCasesPaginator(client DescribeCasesAPIClient, params *DescribeCasesInput, optFns ...func(*DescribeCasesPaginatorOptions)) *DescribeCasesPaginator {
+	if params == nil {
+		params = &DescribeCasesInput{}
+	}
+
 	options := DescribeCasesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -199,10 +203,6 @@ func NewDescribeCasesPaginator(client DescribeCasesAPIClient, params *DescribeCa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeCasesInput{}
 	}
 
 	return &DescribeCasesPaginator{

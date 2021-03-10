@@ -167,6 +167,10 @@ type GetTranscriptPaginator struct {
 
 // NewGetTranscriptPaginator returns a new GetTranscriptPaginator
 func NewGetTranscriptPaginator(client GetTranscriptAPIClient, params *GetTranscriptInput, optFns ...func(*GetTranscriptPaginatorOptions)) *GetTranscriptPaginator {
+	if params == nil {
+		params = &GetTranscriptInput{}
+	}
+
 	options := GetTranscriptPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -174,10 +178,6 @@ func NewGetTranscriptPaginator(client GetTranscriptAPIClient, params *GetTranscr
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetTranscriptInput{}
 	}
 
 	return &GetTranscriptPaginator{

@@ -143,6 +143,10 @@ type ListOriginEndpointsPaginator struct {
 
 // NewListOriginEndpointsPaginator returns a new ListOriginEndpointsPaginator
 func NewListOriginEndpointsPaginator(client ListOriginEndpointsAPIClient, params *ListOriginEndpointsInput, optFns ...func(*ListOriginEndpointsPaginatorOptions)) *ListOriginEndpointsPaginator {
+	if params == nil {
+		params = &ListOriginEndpointsInput{}
+	}
+
 	options := ListOriginEndpointsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -150,10 +154,6 @@ func NewListOriginEndpointsPaginator(client ListOriginEndpointsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListOriginEndpointsInput{}
 	}
 
 	return &ListOriginEndpointsPaginator{

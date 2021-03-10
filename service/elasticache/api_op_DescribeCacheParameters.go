@@ -166,6 +166,10 @@ type DescribeCacheParametersPaginator struct {
 // NewDescribeCacheParametersPaginator returns a new
 // DescribeCacheParametersPaginator
 func NewDescribeCacheParametersPaginator(client DescribeCacheParametersAPIClient, params *DescribeCacheParametersInput, optFns ...func(*DescribeCacheParametersPaginatorOptions)) *DescribeCacheParametersPaginator {
+	if params == nil {
+		params = &DescribeCacheParametersInput{}
+	}
+
 	options := DescribeCacheParametersPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -173,10 +177,6 @@ func NewDescribeCacheParametersPaginator(client DescribeCacheParametersAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeCacheParametersInput{}
 	}
 
 	return &DescribeCacheParametersPaginator{

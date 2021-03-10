@@ -147,6 +147,10 @@ type ListActiveViolationsPaginator struct {
 
 // NewListActiveViolationsPaginator returns a new ListActiveViolationsPaginator
 func NewListActiveViolationsPaginator(client ListActiveViolationsAPIClient, params *ListActiveViolationsInput, optFns ...func(*ListActiveViolationsPaginatorOptions)) *ListActiveViolationsPaginator {
+	if params == nil {
+		params = &ListActiveViolationsInput{}
+	}
+
 	options := ListActiveViolationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -154,10 +158,6 @@ func NewListActiveViolationsPaginator(client ListActiveViolationsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListActiveViolationsInput{}
 	}
 
 	return &ListActiveViolationsPaginator{

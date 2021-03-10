@@ -157,6 +157,10 @@ type ListScriptsPaginator struct {
 
 // NewListScriptsPaginator returns a new ListScriptsPaginator
 func NewListScriptsPaginator(client ListScriptsAPIClient, params *ListScriptsInput, optFns ...func(*ListScriptsPaginatorOptions)) *ListScriptsPaginator {
+	if params == nil {
+		params = &ListScriptsInput{}
+	}
+
 	options := ListScriptsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -164,10 +168,6 @@ func NewListScriptsPaginator(client ListScriptsAPIClient, params *ListScriptsInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListScriptsInput{}
 	}
 
 	return &ListScriptsPaginator{

@@ -169,6 +169,10 @@ type ListImageVersionsPaginator struct {
 
 // NewListImageVersionsPaginator returns a new ListImageVersionsPaginator
 func NewListImageVersionsPaginator(client ListImageVersionsAPIClient, params *ListImageVersionsInput, optFns ...func(*ListImageVersionsPaginatorOptions)) *ListImageVersionsPaginator {
+	if params == nil {
+		params = &ListImageVersionsInput{}
+	}
+
 	options := ListImageVersionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -176,10 +180,6 @@ func NewListImageVersionsPaginator(client ListImageVersionsAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListImageVersionsInput{}
 	}
 
 	return &ListImageVersionsPaginator{

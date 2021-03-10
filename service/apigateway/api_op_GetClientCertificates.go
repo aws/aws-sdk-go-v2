@@ -148,6 +148,10 @@ type GetClientCertificatesPaginator struct {
 
 // NewGetClientCertificatesPaginator returns a new GetClientCertificatesPaginator
 func NewGetClientCertificatesPaginator(client GetClientCertificatesAPIClient, params *GetClientCertificatesInput, optFns ...func(*GetClientCertificatesPaginatorOptions)) *GetClientCertificatesPaginator {
+	if params == nil {
+		params = &GetClientCertificatesInput{}
+	}
+
 	options := GetClientCertificatesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -155,10 +159,6 @@ func NewGetClientCertificatesPaginator(client GetClientCertificatesAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetClientCertificatesInput{}
 	}
 
 	return &GetClientCertificatesPaginator{

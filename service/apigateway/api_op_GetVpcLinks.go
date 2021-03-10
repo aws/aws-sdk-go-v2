@@ -148,6 +148,10 @@ type GetVpcLinksPaginator struct {
 
 // NewGetVpcLinksPaginator returns a new GetVpcLinksPaginator
 func NewGetVpcLinksPaginator(client GetVpcLinksAPIClient, params *GetVpcLinksInput, optFns ...func(*GetVpcLinksPaginatorOptions)) *GetVpcLinksPaginator {
+	if params == nil {
+		params = &GetVpcLinksInput{}
+	}
+
 	options := GetVpcLinksPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -155,10 +159,6 @@ func NewGetVpcLinksPaginator(client GetVpcLinksAPIClient, params *GetVpcLinksInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetVpcLinksInput{}
 	}
 
 	return &GetVpcLinksPaginator{

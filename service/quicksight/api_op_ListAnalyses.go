@@ -151,6 +151,10 @@ type ListAnalysesPaginator struct {
 
 // NewListAnalysesPaginator returns a new ListAnalysesPaginator
 func NewListAnalysesPaginator(client ListAnalysesAPIClient, params *ListAnalysesInput, optFns ...func(*ListAnalysesPaginatorOptions)) *ListAnalysesPaginator {
+	if params == nil {
+		params = &ListAnalysesInput{}
+	}
+
 	options := ListAnalysesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -158,10 +162,6 @@ func NewListAnalysesPaginator(client ListAnalysesAPIClient, params *ListAnalyses
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAnalysesInput{}
 	}
 
 	return &ListAnalysesPaginator{

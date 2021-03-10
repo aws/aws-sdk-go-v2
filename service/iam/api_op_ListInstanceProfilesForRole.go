@@ -183,6 +183,10 @@ type ListInstanceProfilesForRolePaginator struct {
 // NewListInstanceProfilesForRolePaginator returns a new
 // ListInstanceProfilesForRolePaginator
 func NewListInstanceProfilesForRolePaginator(client ListInstanceProfilesForRoleAPIClient, params *ListInstanceProfilesForRoleInput, optFns ...func(*ListInstanceProfilesForRolePaginatorOptions)) *ListInstanceProfilesForRolePaginator {
+	if params == nil {
+		params = &ListInstanceProfilesForRoleInput{}
+	}
+
 	options := ListInstanceProfilesForRolePaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -190,10 +194,6 @@ func NewListInstanceProfilesForRolePaginator(client ListInstanceProfilesForRoleA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListInstanceProfilesForRoleInput{}
 	}
 
 	return &ListInstanceProfilesForRolePaginator{

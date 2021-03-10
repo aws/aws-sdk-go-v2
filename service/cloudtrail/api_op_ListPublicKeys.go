@@ -152,14 +152,14 @@ type ListPublicKeysPaginator struct {
 
 // NewListPublicKeysPaginator returns a new ListPublicKeysPaginator
 func NewListPublicKeysPaginator(client ListPublicKeysAPIClient, params *ListPublicKeysInput, optFns ...func(*ListPublicKeysPaginatorOptions)) *ListPublicKeysPaginator {
+	if params == nil {
+		params = &ListPublicKeysInput{}
+	}
+
 	options := ListPublicKeysPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPublicKeysInput{}
 	}
 
 	return &ListPublicKeysPaginator{

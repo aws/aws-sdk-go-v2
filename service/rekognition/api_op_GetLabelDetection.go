@@ -196,6 +196,10 @@ type GetLabelDetectionPaginator struct {
 
 // NewGetLabelDetectionPaginator returns a new GetLabelDetectionPaginator
 func NewGetLabelDetectionPaginator(client GetLabelDetectionAPIClient, params *GetLabelDetectionInput, optFns ...func(*GetLabelDetectionPaginatorOptions)) *GetLabelDetectionPaginator {
+	if params == nil {
+		params = &GetLabelDetectionInput{}
+	}
+
 	options := GetLabelDetectionPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -203,10 +207,6 @@ func NewGetLabelDetectionPaginator(client GetLabelDetectionAPIClient, params *Ge
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetLabelDetectionInput{}
 	}
 
 	return &GetLabelDetectionPaginator{

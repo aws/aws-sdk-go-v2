@@ -157,6 +157,10 @@ type ListFirewallPoliciesPaginator struct {
 
 // NewListFirewallPoliciesPaginator returns a new ListFirewallPoliciesPaginator
 func NewListFirewallPoliciesPaginator(client ListFirewallPoliciesAPIClient, params *ListFirewallPoliciesInput, optFns ...func(*ListFirewallPoliciesPaginatorOptions)) *ListFirewallPoliciesPaginator {
+	if params == nil {
+		params = &ListFirewallPoliciesInput{}
+	}
+
 	options := ListFirewallPoliciesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -164,10 +168,6 @@ func NewListFirewallPoliciesPaginator(client ListFirewallPoliciesAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListFirewallPoliciesInput{}
 	}
 
 	return &ListFirewallPoliciesPaginator{

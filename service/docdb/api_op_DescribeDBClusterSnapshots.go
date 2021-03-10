@@ -215,6 +215,10 @@ type DescribeDBClusterSnapshotsPaginator struct {
 // NewDescribeDBClusterSnapshotsPaginator returns a new
 // DescribeDBClusterSnapshotsPaginator
 func NewDescribeDBClusterSnapshotsPaginator(client DescribeDBClusterSnapshotsAPIClient, params *DescribeDBClusterSnapshotsInput, optFns ...func(*DescribeDBClusterSnapshotsPaginatorOptions)) *DescribeDBClusterSnapshotsPaginator {
+	if params == nil {
+		params = &DescribeDBClusterSnapshotsInput{}
+	}
+
 	options := DescribeDBClusterSnapshotsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -222,10 +226,6 @@ func NewDescribeDBClusterSnapshotsPaginator(client DescribeDBClusterSnapshotsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeDBClusterSnapshotsInput{}
 	}
 
 	return &DescribeDBClusterSnapshotsPaginator{

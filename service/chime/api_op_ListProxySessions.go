@@ -149,6 +149,10 @@ type ListProxySessionsPaginator struct {
 
 // NewListProxySessionsPaginator returns a new ListProxySessionsPaginator
 func NewListProxySessionsPaginator(client ListProxySessionsAPIClient, params *ListProxySessionsInput, optFns ...func(*ListProxySessionsPaginatorOptions)) *ListProxySessionsPaginator {
+	if params == nil {
+		params = &ListProxySessionsInput{}
+	}
+
 	options := ListProxySessionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -156,10 +160,6 @@ func NewListProxySessionsPaginator(client ListProxySessionsAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListProxySessionsInput{}
 	}
 
 	return &ListProxySessionsPaginator{

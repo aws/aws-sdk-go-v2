@@ -160,6 +160,10 @@ type ListTagsForResourcePaginator struct {
 
 // NewListTagsForResourcePaginator returns a new ListTagsForResourcePaginator
 func NewListTagsForResourcePaginator(client ListTagsForResourceAPIClient, params *ListTagsForResourceInput, optFns ...func(*ListTagsForResourcePaginatorOptions)) *ListTagsForResourcePaginator {
+	if params == nil {
+		params = &ListTagsForResourceInput{}
+	}
+
 	options := ListTagsForResourcePaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -167,10 +171,6 @@ func NewListTagsForResourcePaginator(client ListTagsForResourceAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTagsForResourceInput{}
 	}
 
 	return &ListTagsForResourcePaginator{

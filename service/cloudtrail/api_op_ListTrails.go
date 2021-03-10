@@ -139,14 +139,14 @@ type ListTrailsPaginator struct {
 
 // NewListTrailsPaginator returns a new ListTrailsPaginator
 func NewListTrailsPaginator(client ListTrailsAPIClient, params *ListTrailsInput, optFns ...func(*ListTrailsPaginatorOptions)) *ListTrailsPaginator {
+	if params == nil {
+		params = &ListTrailsInput{}
+	}
+
 	options := ListTrailsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTrailsInput{}
 	}
 
 	return &ListTrailsPaginator{

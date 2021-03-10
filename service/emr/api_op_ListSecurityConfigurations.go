@@ -140,14 +140,14 @@ type ListSecurityConfigurationsPaginator struct {
 // NewListSecurityConfigurationsPaginator returns a new
 // ListSecurityConfigurationsPaginator
 func NewListSecurityConfigurationsPaginator(client ListSecurityConfigurationsAPIClient, params *ListSecurityConfigurationsInput, optFns ...func(*ListSecurityConfigurationsPaginatorOptions)) *ListSecurityConfigurationsPaginator {
+	if params == nil {
+		params = &ListSecurityConfigurationsInput{}
+	}
+
 	options := ListSecurityConfigurationsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSecurityConfigurationsInput{}
 	}
 
 	return &ListSecurityConfigurationsPaginator{

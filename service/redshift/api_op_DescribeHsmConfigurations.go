@@ -187,6 +187,10 @@ type DescribeHsmConfigurationsPaginator struct {
 // NewDescribeHsmConfigurationsPaginator returns a new
 // DescribeHsmConfigurationsPaginator
 func NewDescribeHsmConfigurationsPaginator(client DescribeHsmConfigurationsAPIClient, params *DescribeHsmConfigurationsInput, optFns ...func(*DescribeHsmConfigurationsPaginatorOptions)) *DescribeHsmConfigurationsPaginator {
+	if params == nil {
+		params = &DescribeHsmConfigurationsInput{}
+	}
+
 	options := DescribeHsmConfigurationsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -194,10 +198,6 @@ func NewDescribeHsmConfigurationsPaginator(client DescribeHsmConfigurationsAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeHsmConfigurationsInput{}
 	}
 
 	return &DescribeHsmConfigurationsPaginator{

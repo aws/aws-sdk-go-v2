@@ -144,14 +144,14 @@ type ListSamplesPaginator struct {
 
 // NewListSamplesPaginator returns a new ListSamplesPaginator
 func NewListSamplesPaginator(client ListSamplesAPIClient, params *ListSamplesInput, optFns ...func(*ListSamplesPaginatorOptions)) *ListSamplesPaginator {
+	if params == nil {
+		params = &ListSamplesInput{}
+	}
+
 	options := ListSamplesPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSamplesInput{}
 	}
 
 	return &ListSamplesPaginator{

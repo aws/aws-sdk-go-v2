@@ -166,6 +166,10 @@ type ListJournalKinesisStreamsForLedgerPaginator struct {
 // NewListJournalKinesisStreamsForLedgerPaginator returns a new
 // ListJournalKinesisStreamsForLedgerPaginator
 func NewListJournalKinesisStreamsForLedgerPaginator(client ListJournalKinesisStreamsForLedgerAPIClient, params *ListJournalKinesisStreamsForLedgerInput, optFns ...func(*ListJournalKinesisStreamsForLedgerPaginatorOptions)) *ListJournalKinesisStreamsForLedgerPaginator {
+	if params == nil {
+		params = &ListJournalKinesisStreamsForLedgerInput{}
+	}
+
 	options := ListJournalKinesisStreamsForLedgerPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -173,10 +177,6 @@ func NewListJournalKinesisStreamsForLedgerPaginator(client ListJournalKinesisStr
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListJournalKinesisStreamsForLedgerInput{}
 	}
 
 	return &ListJournalKinesisStreamsForLedgerPaginator{

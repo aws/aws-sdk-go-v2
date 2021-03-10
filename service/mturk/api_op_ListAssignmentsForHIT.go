@@ -167,6 +167,10 @@ type ListAssignmentsForHITPaginator struct {
 
 // NewListAssignmentsForHITPaginator returns a new ListAssignmentsForHITPaginator
 func NewListAssignmentsForHITPaginator(client ListAssignmentsForHITAPIClient, params *ListAssignmentsForHITInput, optFns ...func(*ListAssignmentsForHITPaginatorOptions)) *ListAssignmentsForHITPaginator {
+	if params == nil {
+		params = &ListAssignmentsForHITInput{}
+	}
+
 	options := ListAssignmentsForHITPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -174,10 +178,6 @@ func NewListAssignmentsForHITPaginator(client ListAssignmentsForHITAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAssignmentsForHITInput{}
 	}
 
 	return &ListAssignmentsForHITPaginator{

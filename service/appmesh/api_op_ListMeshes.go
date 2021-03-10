@@ -157,6 +157,10 @@ type ListMeshesPaginator struct {
 
 // NewListMeshesPaginator returns a new ListMeshesPaginator
 func NewListMeshesPaginator(client ListMeshesAPIClient, params *ListMeshesInput, optFns ...func(*ListMeshesPaginatorOptions)) *ListMeshesPaginator {
+	if params == nil {
+		params = &ListMeshesInput{}
+	}
+
 	options := ListMeshesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -164,10 +168,6 @@ func NewListMeshesPaginator(client ListMeshesAPIClient, params *ListMeshesInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListMeshesInput{}
 	}
 
 	return &ListMeshesPaginator{

@@ -184,6 +184,10 @@ type ListFragmentsPaginator struct {
 
 // NewListFragmentsPaginator returns a new ListFragmentsPaginator
 func NewListFragmentsPaginator(client ListFragmentsAPIClient, params *ListFragmentsInput, optFns ...func(*ListFragmentsPaginatorOptions)) *ListFragmentsPaginator {
+	if params == nil {
+		params = &ListFragmentsInput{}
+	}
+
 	options := ListFragmentsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -191,10 +195,6 @@ func NewListFragmentsPaginator(client ListFragmentsAPIClient, params *ListFragme
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListFragmentsInput{}
 	}
 
 	return &ListFragmentsPaginator{

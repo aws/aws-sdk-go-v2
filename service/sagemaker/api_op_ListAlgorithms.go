@@ -162,6 +162,10 @@ type ListAlgorithmsPaginator struct {
 
 // NewListAlgorithmsPaginator returns a new ListAlgorithmsPaginator
 func NewListAlgorithmsPaginator(client ListAlgorithmsAPIClient, params *ListAlgorithmsInput, optFns ...func(*ListAlgorithmsPaginatorOptions)) *ListAlgorithmsPaginator {
+	if params == nil {
+		params = &ListAlgorithmsInput{}
+	}
+
 	options := ListAlgorithmsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -169,10 +173,6 @@ func NewListAlgorithmsPaginator(client ListAlgorithmsAPIClient, params *ListAlgo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAlgorithmsInput{}
 	}
 
 	return &ListAlgorithmsPaginator{

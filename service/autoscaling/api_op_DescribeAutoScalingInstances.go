@@ -152,6 +152,10 @@ type DescribeAutoScalingInstancesPaginator struct {
 // NewDescribeAutoScalingInstancesPaginator returns a new
 // DescribeAutoScalingInstancesPaginator
 func NewDescribeAutoScalingInstancesPaginator(client DescribeAutoScalingInstancesAPIClient, params *DescribeAutoScalingInstancesInput, optFns ...func(*DescribeAutoScalingInstancesPaginatorOptions)) *DescribeAutoScalingInstancesPaginator {
+	if params == nil {
+		params = &DescribeAutoScalingInstancesInput{}
+	}
+
 	options := DescribeAutoScalingInstancesPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -159,10 +163,6 @@ func NewDescribeAutoScalingInstancesPaginator(client DescribeAutoScalingInstance
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeAutoScalingInstancesInput{}
 	}
 
 	return &DescribeAutoScalingInstancesPaginator{

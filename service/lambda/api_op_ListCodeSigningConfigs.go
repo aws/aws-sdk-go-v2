@@ -143,6 +143,10 @@ type ListCodeSigningConfigsPaginator struct {
 
 // NewListCodeSigningConfigsPaginator returns a new ListCodeSigningConfigsPaginator
 func NewListCodeSigningConfigsPaginator(client ListCodeSigningConfigsAPIClient, params *ListCodeSigningConfigsInput, optFns ...func(*ListCodeSigningConfigsPaginatorOptions)) *ListCodeSigningConfigsPaginator {
+	if params == nil {
+		params = &ListCodeSigningConfigsInput{}
+	}
+
 	options := ListCodeSigningConfigsPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -150,10 +154,6 @@ func NewListCodeSigningConfigsPaginator(client ListCodeSigningConfigsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCodeSigningConfigsInput{}
 	}
 
 	return &ListCodeSigningConfigsPaginator{

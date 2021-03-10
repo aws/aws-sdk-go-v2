@@ -182,6 +182,10 @@ type DescribeCacheClustersPaginator struct {
 
 // NewDescribeCacheClustersPaginator returns a new DescribeCacheClustersPaginator
 func NewDescribeCacheClustersPaginator(client DescribeCacheClustersAPIClient, params *DescribeCacheClustersInput, optFns ...func(*DescribeCacheClustersPaginatorOptions)) *DescribeCacheClustersPaginator {
+	if params == nil {
+		params = &DescribeCacheClustersInput{}
+	}
+
 	options := DescribeCacheClustersPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -189,10 +193,6 @@ func NewDescribeCacheClustersPaginator(client DescribeCacheClustersAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeCacheClustersInput{}
 	}
 
 	return &DescribeCacheClustersPaginator{

@@ -152,6 +152,10 @@ type ListWebsiteAuthorizationProvidersPaginator struct {
 // NewListWebsiteAuthorizationProvidersPaginator returns a new
 // ListWebsiteAuthorizationProvidersPaginator
 func NewListWebsiteAuthorizationProvidersPaginator(client ListWebsiteAuthorizationProvidersAPIClient, params *ListWebsiteAuthorizationProvidersInput, optFns ...func(*ListWebsiteAuthorizationProvidersPaginatorOptions)) *ListWebsiteAuthorizationProvidersPaginator {
+	if params == nil {
+		params = &ListWebsiteAuthorizationProvidersInput{}
+	}
+
 	options := ListWebsiteAuthorizationProvidersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -159,10 +163,6 @@ func NewListWebsiteAuthorizationProvidersPaginator(client ListWebsiteAuthorizati
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListWebsiteAuthorizationProvidersInput{}
 	}
 
 	return &ListWebsiteAuthorizationProvidersPaginator{

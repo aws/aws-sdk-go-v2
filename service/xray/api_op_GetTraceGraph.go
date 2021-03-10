@@ -139,14 +139,14 @@ type GetTraceGraphPaginator struct {
 
 // NewGetTraceGraphPaginator returns a new GetTraceGraphPaginator
 func NewGetTraceGraphPaginator(client GetTraceGraphAPIClient, params *GetTraceGraphInput, optFns ...func(*GetTraceGraphPaginatorOptions)) *GetTraceGraphPaginator {
+	if params == nil {
+		params = &GetTraceGraphInput{}
+	}
+
 	options := GetTraceGraphPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetTraceGraphInput{}
 	}
 
 	return &GetTraceGraphPaginator{

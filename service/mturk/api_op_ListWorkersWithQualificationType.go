@@ -159,6 +159,10 @@ type ListWorkersWithQualificationTypePaginator struct {
 // NewListWorkersWithQualificationTypePaginator returns a new
 // ListWorkersWithQualificationTypePaginator
 func NewListWorkersWithQualificationTypePaginator(client ListWorkersWithQualificationTypeAPIClient, params *ListWorkersWithQualificationTypeInput, optFns ...func(*ListWorkersWithQualificationTypePaginatorOptions)) *ListWorkersWithQualificationTypePaginator {
+	if params == nil {
+		params = &ListWorkersWithQualificationTypeInput{}
+	}
+
 	options := ListWorkersWithQualificationTypePaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewListWorkersWithQualificationTypePaginator(client ListWorkersWithQualific
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListWorkersWithQualificationTypeInput{}
 	}
 
 	return &ListWorkersWithQualificationTypePaginator{

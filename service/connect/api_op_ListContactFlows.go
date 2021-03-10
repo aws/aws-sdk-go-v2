@@ -156,6 +156,10 @@ type ListContactFlowsPaginator struct {
 
 // NewListContactFlowsPaginator returns a new ListContactFlowsPaginator
 func NewListContactFlowsPaginator(client ListContactFlowsAPIClient, params *ListContactFlowsInput, optFns ...func(*ListContactFlowsPaginatorOptions)) *ListContactFlowsPaginator {
+	if params == nil {
+		params = &ListContactFlowsInput{}
+	}
+
 	options := ListContactFlowsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -163,10 +167,6 @@ func NewListContactFlowsPaginator(client ListContactFlowsAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListContactFlowsInput{}
 	}
 
 	return &ListContactFlowsPaginator{

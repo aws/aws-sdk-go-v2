@@ -148,6 +148,10 @@ type DescribeCanariesLastRunPaginator struct {
 // NewDescribeCanariesLastRunPaginator returns a new
 // DescribeCanariesLastRunPaginator
 func NewDescribeCanariesLastRunPaginator(client DescribeCanariesLastRunAPIClient, params *DescribeCanariesLastRunInput, optFns ...func(*DescribeCanariesLastRunPaginatorOptions)) *DescribeCanariesLastRunPaginator {
+	if params == nil {
+		params = &DescribeCanariesLastRunInput{}
+	}
+
 	options := DescribeCanariesLastRunPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -155,10 +159,6 @@ func NewDescribeCanariesLastRunPaginator(client DescribeCanariesLastRunAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeCanariesLastRunInput{}
 	}
 
 	return &DescribeCanariesLastRunPaginator{

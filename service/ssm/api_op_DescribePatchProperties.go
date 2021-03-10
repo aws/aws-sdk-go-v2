@@ -174,6 +174,10 @@ type DescribePatchPropertiesPaginator struct {
 // NewDescribePatchPropertiesPaginator returns a new
 // DescribePatchPropertiesPaginator
 func NewDescribePatchPropertiesPaginator(client DescribePatchPropertiesAPIClient, params *DescribePatchPropertiesInput, optFns ...func(*DescribePatchPropertiesPaginatorOptions)) *DescribePatchPropertiesPaginator {
+	if params == nil {
+		params = &DescribePatchPropertiesInput{}
+	}
+
 	options := DescribePatchPropertiesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -181,10 +185,6 @@ func NewDescribePatchPropertiesPaginator(client DescribePatchPropertiesAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribePatchPropertiesInput{}
 	}
 
 	return &DescribePatchPropertiesPaginator{

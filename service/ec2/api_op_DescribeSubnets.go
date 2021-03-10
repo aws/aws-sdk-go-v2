@@ -212,6 +212,10 @@ type DescribeSubnetsPaginator struct {
 
 // NewDescribeSubnetsPaginator returns a new DescribeSubnetsPaginator
 func NewDescribeSubnetsPaginator(client DescribeSubnetsAPIClient, params *DescribeSubnetsInput, optFns ...func(*DescribeSubnetsPaginatorOptions)) *DescribeSubnetsPaginator {
+	if params == nil {
+		params = &DescribeSubnetsInput{}
+	}
+
 	options := DescribeSubnetsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -219,10 +223,6 @@ func NewDescribeSubnetsPaginator(client DescribeSubnetsAPIClient, params *Descri
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeSubnetsInput{}
 	}
 
 	return &DescribeSubnetsPaginator{

@@ -146,6 +146,10 @@ type ListSuiteRunsPaginator struct {
 
 // NewListSuiteRunsPaginator returns a new ListSuiteRunsPaginator
 func NewListSuiteRunsPaginator(client ListSuiteRunsAPIClient, params *ListSuiteRunsInput, optFns ...func(*ListSuiteRunsPaginatorOptions)) *ListSuiteRunsPaginator {
+	if params == nil {
+		params = &ListSuiteRunsInput{}
+	}
+
 	options := ListSuiteRunsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -153,10 +157,6 @@ func NewListSuiteRunsPaginator(client ListSuiteRunsAPIClient, params *ListSuiteR
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSuiteRunsInput{}
 	}
 
 	return &ListSuiteRunsPaginator{

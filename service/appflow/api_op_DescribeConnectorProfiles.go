@@ -154,6 +154,10 @@ type DescribeConnectorProfilesPaginator struct {
 // NewDescribeConnectorProfilesPaginator returns a new
 // DescribeConnectorProfilesPaginator
 func NewDescribeConnectorProfilesPaginator(client DescribeConnectorProfilesAPIClient, params *DescribeConnectorProfilesInput, optFns ...func(*DescribeConnectorProfilesPaginatorOptions)) *DescribeConnectorProfilesPaginator {
+	if params == nil {
+		params = &DescribeConnectorProfilesInput{}
+	}
+
 	options := DescribeConnectorProfilesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -161,10 +165,6 @@ func NewDescribeConnectorProfilesPaginator(client DescribeConnectorProfilesAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeConnectorProfilesInput{}
 	}
 
 	return &DescribeConnectorProfilesPaginator{

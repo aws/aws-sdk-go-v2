@@ -205,6 +205,10 @@ type GetPartitionsPaginator struct {
 
 // NewGetPartitionsPaginator returns a new GetPartitionsPaginator
 func NewGetPartitionsPaginator(client GetPartitionsAPIClient, params *GetPartitionsInput, optFns ...func(*GetPartitionsPaginatorOptions)) *GetPartitionsPaginator {
+	if params == nil {
+		params = &GetPartitionsInput{}
+	}
+
 	options := GetPartitionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -212,10 +216,6 @@ func NewGetPartitionsPaginator(client GetPartitionsAPIClient, params *GetPartiti
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetPartitionsInput{}
 	}
 
 	return &GetPartitionsPaginator{

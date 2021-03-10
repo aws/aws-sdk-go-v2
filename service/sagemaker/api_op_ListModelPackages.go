@@ -182,6 +182,10 @@ type ListModelPackagesPaginator struct {
 
 // NewListModelPackagesPaginator returns a new ListModelPackagesPaginator
 func NewListModelPackagesPaginator(client ListModelPackagesAPIClient, params *ListModelPackagesInput, optFns ...func(*ListModelPackagesPaginatorOptions)) *ListModelPackagesPaginator {
+	if params == nil {
+		params = &ListModelPackagesInput{}
+	}
+
 	options := ListModelPackagesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -189,10 +193,6 @@ func NewListModelPackagesPaginator(client ListModelPackagesAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListModelPackagesInput{}
 	}
 
 	return &ListModelPackagesPaginator{

@@ -161,14 +161,14 @@ type ListTableColumnsPaginator struct {
 
 // NewListTableColumnsPaginator returns a new ListTableColumnsPaginator
 func NewListTableColumnsPaginator(client ListTableColumnsAPIClient, params *ListTableColumnsInput, optFns ...func(*ListTableColumnsPaginatorOptions)) *ListTableColumnsPaginator {
+	if params == nil {
+		params = &ListTableColumnsInput{}
+	}
+
 	options := ListTableColumnsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTableColumnsInput{}
 	}
 
 	return &ListTableColumnsPaginator{

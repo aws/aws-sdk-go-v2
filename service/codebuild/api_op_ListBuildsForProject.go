@@ -160,14 +160,14 @@ type ListBuildsForProjectPaginator struct {
 
 // NewListBuildsForProjectPaginator returns a new ListBuildsForProjectPaginator
 func NewListBuildsForProjectPaginator(client ListBuildsForProjectAPIClient, params *ListBuildsForProjectInput, optFns ...func(*ListBuildsForProjectPaginatorOptions)) *ListBuildsForProjectPaginator {
+	if params == nil {
+		params = &ListBuildsForProjectInput{}
+	}
+
 	options := ListBuildsForProjectPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListBuildsForProjectInput{}
 	}
 
 	return &ListBuildsForProjectPaginator{

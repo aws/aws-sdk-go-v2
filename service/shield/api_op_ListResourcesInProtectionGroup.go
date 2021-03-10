@@ -168,6 +168,10 @@ type ListResourcesInProtectionGroupPaginator struct {
 // NewListResourcesInProtectionGroupPaginator returns a new
 // ListResourcesInProtectionGroupPaginator
 func NewListResourcesInProtectionGroupPaginator(client ListResourcesInProtectionGroupAPIClient, params *ListResourcesInProtectionGroupInput, optFns ...func(*ListResourcesInProtectionGroupPaginatorOptions)) *ListResourcesInProtectionGroupPaginator {
+	if params == nil {
+		params = &ListResourcesInProtectionGroupInput{}
+	}
+
 	options := ListResourcesInProtectionGroupPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -175,10 +179,6 @@ func NewListResourcesInProtectionGroupPaginator(client ListResourcesInProtection
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListResourcesInProtectionGroupInput{}
 	}
 
 	return &ListResourcesInProtectionGroupPaginator{

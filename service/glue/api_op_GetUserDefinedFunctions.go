@@ -158,6 +158,10 @@ type GetUserDefinedFunctionsPaginator struct {
 // NewGetUserDefinedFunctionsPaginator returns a new
 // GetUserDefinedFunctionsPaginator
 func NewGetUserDefinedFunctionsPaginator(client GetUserDefinedFunctionsAPIClient, params *GetUserDefinedFunctionsInput, optFns ...func(*GetUserDefinedFunctionsPaginatorOptions)) *GetUserDefinedFunctionsPaginator {
+	if params == nil {
+		params = &GetUserDefinedFunctionsInput{}
+	}
+
 	options := GetUserDefinedFunctionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -165,10 +169,6 @@ func NewGetUserDefinedFunctionsPaginator(client GetUserDefinedFunctionsAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetUserDefinedFunctionsInput{}
 	}
 
 	return &GetUserDefinedFunctionsPaginator{

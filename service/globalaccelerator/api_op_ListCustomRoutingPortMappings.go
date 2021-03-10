@@ -170,6 +170,10 @@ type ListCustomRoutingPortMappingsPaginator struct {
 // NewListCustomRoutingPortMappingsPaginator returns a new
 // ListCustomRoutingPortMappingsPaginator
 func NewListCustomRoutingPortMappingsPaginator(client ListCustomRoutingPortMappingsAPIClient, params *ListCustomRoutingPortMappingsInput, optFns ...func(*ListCustomRoutingPortMappingsPaginatorOptions)) *ListCustomRoutingPortMappingsPaginator {
+	if params == nil {
+		params = &ListCustomRoutingPortMappingsInput{}
+	}
+
 	options := ListCustomRoutingPortMappingsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -177,10 +181,6 @@ func NewListCustomRoutingPortMappingsPaginator(client ListCustomRoutingPortMappi
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCustomRoutingPortMappingsInput{}
 	}
 
 	return &ListCustomRoutingPortMappingsPaginator{

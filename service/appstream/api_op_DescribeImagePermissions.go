@@ -159,6 +159,10 @@ type DescribeImagePermissionsPaginator struct {
 // NewDescribeImagePermissionsPaginator returns a new
 // DescribeImagePermissionsPaginator
 func NewDescribeImagePermissionsPaginator(client DescribeImagePermissionsAPIClient, params *DescribeImagePermissionsInput, optFns ...func(*DescribeImagePermissionsPaginatorOptions)) *DescribeImagePermissionsPaginator {
+	if params == nil {
+		params = &DescribeImagePermissionsInput{}
+	}
+
 	options := DescribeImagePermissionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewDescribeImagePermissionsPaginator(client DescribeImagePermissionsAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeImagePermissionsInput{}
 	}
 
 	return &DescribeImagePermissionsPaginator{

@@ -143,6 +143,10 @@ type ListDeploymentStrategiesPaginator struct {
 // NewListDeploymentStrategiesPaginator returns a new
 // ListDeploymentStrategiesPaginator
 func NewListDeploymentStrategiesPaginator(client ListDeploymentStrategiesAPIClient, params *ListDeploymentStrategiesInput, optFns ...func(*ListDeploymentStrategiesPaginatorOptions)) *ListDeploymentStrategiesPaginator {
+	if params == nil {
+		params = &ListDeploymentStrategiesInput{}
+	}
+
 	options := ListDeploymentStrategiesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -150,10 +154,6 @@ func NewListDeploymentStrategiesPaginator(client ListDeploymentStrategiesAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDeploymentStrategiesInput{}
 	}
 
 	return &ListDeploymentStrategiesPaginator{

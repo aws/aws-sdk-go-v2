@@ -144,6 +144,10 @@ type ListAuthorizersPaginator struct {
 
 // NewListAuthorizersPaginator returns a new ListAuthorizersPaginator
 func NewListAuthorizersPaginator(client ListAuthorizersAPIClient, params *ListAuthorizersInput, optFns ...func(*ListAuthorizersPaginatorOptions)) *ListAuthorizersPaginator {
+	if params == nil {
+		params = &ListAuthorizersInput{}
+	}
+
 	options := ListAuthorizersPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -151,10 +155,6 @@ func NewListAuthorizersPaginator(client ListAuthorizersAPIClient, params *ListAu
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAuthorizersInput{}
 	}
 
 	return &ListAuthorizersPaginator{

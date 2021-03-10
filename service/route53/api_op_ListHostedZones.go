@@ -189,6 +189,10 @@ type ListHostedZonesPaginator struct {
 
 // NewListHostedZonesPaginator returns a new ListHostedZonesPaginator
 func NewListHostedZonesPaginator(client ListHostedZonesAPIClient, params *ListHostedZonesInput, optFns ...func(*ListHostedZonesPaginatorOptions)) *ListHostedZonesPaginator {
+	if params == nil {
+		params = &ListHostedZonesInput{}
+	}
+
 	options := ListHostedZonesPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -196,10 +200,6 @@ func NewListHostedZonesPaginator(client ListHostedZonesAPIClient, params *ListHo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListHostedZonesInput{}
 	}
 
 	return &ListHostedZonesPaginator{

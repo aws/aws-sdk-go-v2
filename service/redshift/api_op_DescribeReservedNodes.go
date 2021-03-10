@@ -160,6 +160,10 @@ type DescribeReservedNodesPaginator struct {
 
 // NewDescribeReservedNodesPaginator returns a new DescribeReservedNodesPaginator
 func NewDescribeReservedNodesPaginator(client DescribeReservedNodesAPIClient, params *DescribeReservedNodesInput, optFns ...func(*DescribeReservedNodesPaginatorOptions)) *DescribeReservedNodesPaginator {
+	if params == nil {
+		params = &DescribeReservedNodesInput{}
+	}
+
 	options := DescribeReservedNodesPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -167,10 +171,6 @@ func NewDescribeReservedNodesPaginator(client DescribeReservedNodesAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeReservedNodesInput{}
 	}
 
 	return &DescribeReservedNodesPaginator{

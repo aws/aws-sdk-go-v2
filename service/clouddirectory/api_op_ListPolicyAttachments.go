@@ -159,6 +159,10 @@ type ListPolicyAttachmentsPaginator struct {
 
 // NewListPolicyAttachmentsPaginator returns a new ListPolicyAttachmentsPaginator
 func NewListPolicyAttachmentsPaginator(client ListPolicyAttachmentsAPIClient, params *ListPolicyAttachmentsInput, optFns ...func(*ListPolicyAttachmentsPaginatorOptions)) *ListPolicyAttachmentsPaginator {
+	if params == nil {
+		params = &ListPolicyAttachmentsInput{}
+	}
+
 	options := ListPolicyAttachmentsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewListPolicyAttachmentsPaginator(client ListPolicyAttachmentsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPolicyAttachmentsInput{}
 	}
 
 	return &ListPolicyAttachmentsPaginator{

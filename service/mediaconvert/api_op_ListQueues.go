@@ -149,6 +149,10 @@ type ListQueuesPaginator struct {
 
 // NewListQueuesPaginator returns a new ListQueuesPaginator
 func NewListQueuesPaginator(client ListQueuesAPIClient, params *ListQueuesInput, optFns ...func(*ListQueuesPaginatorOptions)) *ListQueuesPaginator {
+	if params == nil {
+		params = &ListQueuesInput{}
+	}
+
 	options := ListQueuesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -156,10 +160,6 @@ func NewListQueuesPaginator(client ListQueuesAPIClient, params *ListQueuesInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListQueuesInput{}
 	}
 
 	return &ListQueuesPaginator{

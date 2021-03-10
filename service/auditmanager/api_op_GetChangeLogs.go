@@ -151,6 +151,10 @@ type GetChangeLogsPaginator struct {
 
 // NewGetChangeLogsPaginator returns a new GetChangeLogsPaginator
 func NewGetChangeLogsPaginator(client GetChangeLogsAPIClient, params *GetChangeLogsInput, optFns ...func(*GetChangeLogsPaginatorOptions)) *GetChangeLogsPaginator {
+	if params == nil {
+		params = &GetChangeLogsInput{}
+	}
+
 	options := GetChangeLogsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -158,10 +162,6 @@ func NewGetChangeLogsPaginator(client GetChangeLogsAPIClient, params *GetChangeL
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetChangeLogsInput{}
 	}
 
 	return &GetChangeLogsPaginator{

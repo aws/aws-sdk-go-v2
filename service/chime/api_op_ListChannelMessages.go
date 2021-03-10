@@ -197,6 +197,10 @@ type ListChannelMessagesPaginator struct {
 
 // NewListChannelMessagesPaginator returns a new ListChannelMessagesPaginator
 func NewListChannelMessagesPaginator(client ListChannelMessagesAPIClient, params *ListChannelMessagesInput, optFns ...func(*ListChannelMessagesPaginatorOptions)) *ListChannelMessagesPaginator {
+	if params == nil {
+		params = &ListChannelMessagesInput{}
+	}
+
 	options := ListChannelMessagesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -204,10 +208,6 @@ func NewListChannelMessagesPaginator(client ListChannelMessagesAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListChannelMessagesInput{}
 	}
 
 	return &ListChannelMessagesPaginator{

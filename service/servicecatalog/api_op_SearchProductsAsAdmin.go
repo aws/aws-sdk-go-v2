@@ -166,6 +166,10 @@ type SearchProductsAsAdminPaginator struct {
 
 // NewSearchProductsAsAdminPaginator returns a new SearchProductsAsAdminPaginator
 func NewSearchProductsAsAdminPaginator(client SearchProductsAsAdminAPIClient, params *SearchProductsAsAdminInput, optFns ...func(*SearchProductsAsAdminPaginatorOptions)) *SearchProductsAsAdminPaginator {
+	if params == nil {
+		params = &SearchProductsAsAdminInput{}
+	}
+
 	options := SearchProductsAsAdminPaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -173,10 +177,6 @@ func NewSearchProductsAsAdminPaginator(client SearchProductsAsAdminAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchProductsAsAdminInput{}
 	}
 
 	return &SearchProductsAsAdminPaginator{

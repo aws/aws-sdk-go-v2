@@ -144,6 +144,10 @@ type ListDetectorsPaginator struct {
 
 // NewListDetectorsPaginator returns a new ListDetectorsPaginator
 func NewListDetectorsPaginator(client ListDetectorsAPIClient, params *ListDetectorsInput, optFns ...func(*ListDetectorsPaginatorOptions)) *ListDetectorsPaginator {
+	if params == nil {
+		params = &ListDetectorsInput{}
+	}
+
 	options := ListDetectorsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -151,10 +155,6 @@ func NewListDetectorsPaginator(client ListDetectorsAPIClient, params *ListDetect
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDetectorsInput{}
 	}
 
 	return &ListDetectorsPaginator{

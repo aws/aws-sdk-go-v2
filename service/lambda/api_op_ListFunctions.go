@@ -151,6 +151,10 @@ type ListFunctionsPaginator struct {
 
 // NewListFunctionsPaginator returns a new ListFunctionsPaginator
 func NewListFunctionsPaginator(client ListFunctionsAPIClient, params *ListFunctionsInput, optFns ...func(*ListFunctionsPaginatorOptions)) *ListFunctionsPaginator {
+	if params == nil {
+		params = &ListFunctionsInput{}
+	}
+
 	options := ListFunctionsPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -158,10 +162,6 @@ func NewListFunctionsPaginator(client ListFunctionsAPIClient, params *ListFuncti
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListFunctionsInput{}
 	}
 
 	return &ListFunctionsPaginator{

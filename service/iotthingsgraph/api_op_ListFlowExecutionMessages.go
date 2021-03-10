@@ -151,6 +151,10 @@ type ListFlowExecutionMessagesPaginator struct {
 // NewListFlowExecutionMessagesPaginator returns a new
 // ListFlowExecutionMessagesPaginator
 func NewListFlowExecutionMessagesPaginator(client ListFlowExecutionMessagesAPIClient, params *ListFlowExecutionMessagesInput, optFns ...func(*ListFlowExecutionMessagesPaginatorOptions)) *ListFlowExecutionMessagesPaginator {
+	if params == nil {
+		params = &ListFlowExecutionMessagesInput{}
+	}
+
 	options := ListFlowExecutionMessagesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -158,10 +162,6 @@ func NewListFlowExecutionMessagesPaginator(client ListFlowExecutionMessagesAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListFlowExecutionMessagesInput{}
 	}
 
 	return &ListFlowExecutionMessagesPaginator{

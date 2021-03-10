@@ -169,6 +169,10 @@ type GetInsightSummariesPaginator struct {
 
 // NewGetInsightSummariesPaginator returns a new GetInsightSummariesPaginator
 func NewGetInsightSummariesPaginator(client GetInsightSummariesAPIClient, params *GetInsightSummariesInput, optFns ...func(*GetInsightSummariesPaginatorOptions)) *GetInsightSummariesPaginator {
+	if params == nil {
+		params = &GetInsightSummariesInput{}
+	}
+
 	options := GetInsightSummariesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -176,10 +180,6 @@ func NewGetInsightSummariesPaginator(client GetInsightSummariesAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetInsightSummariesInput{}
 	}
 
 	return &GetInsightSummariesPaginator{

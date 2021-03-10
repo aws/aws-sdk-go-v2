@@ -157,14 +157,14 @@ type ListEndpointsByPlatformApplicationPaginator struct {
 // NewListEndpointsByPlatformApplicationPaginator returns a new
 // ListEndpointsByPlatformApplicationPaginator
 func NewListEndpointsByPlatformApplicationPaginator(client ListEndpointsByPlatformApplicationAPIClient, params *ListEndpointsByPlatformApplicationInput, optFns ...func(*ListEndpointsByPlatformApplicationPaginatorOptions)) *ListEndpointsByPlatformApplicationPaginator {
+	if params == nil {
+		params = &ListEndpointsByPlatformApplicationInput{}
+	}
+
 	options := ListEndpointsByPlatformApplicationPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEndpointsByPlatformApplicationInput{}
 	}
 
 	return &ListEndpointsByPlatformApplicationPaginator{

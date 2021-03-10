@@ -212,6 +212,10 @@ type DescribeScalingPoliciesPaginator struct {
 // NewDescribeScalingPoliciesPaginator returns a new
 // DescribeScalingPoliciesPaginator
 func NewDescribeScalingPoliciesPaginator(client DescribeScalingPoliciesAPIClient, params *DescribeScalingPoliciesInput, optFns ...func(*DescribeScalingPoliciesPaginatorOptions)) *DescribeScalingPoliciesPaginator {
+	if params == nil {
+		params = &DescribeScalingPoliciesInput{}
+	}
+
 	options := DescribeScalingPoliciesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -219,10 +223,6 @@ func NewDescribeScalingPoliciesPaginator(client DescribeScalingPoliciesAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeScalingPoliciesInput{}
 	}
 
 	return &DescribeScalingPoliciesPaginator{

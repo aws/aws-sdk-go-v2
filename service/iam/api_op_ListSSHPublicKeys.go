@@ -180,6 +180,10 @@ type ListSSHPublicKeysPaginator struct {
 
 // NewListSSHPublicKeysPaginator returns a new ListSSHPublicKeysPaginator
 func NewListSSHPublicKeysPaginator(client ListSSHPublicKeysAPIClient, params *ListSSHPublicKeysInput, optFns ...func(*ListSSHPublicKeysPaginatorOptions)) *ListSSHPublicKeysPaginator {
+	if params == nil {
+		params = &ListSSHPublicKeysInput{}
+	}
+
 	options := ListSSHPublicKeysPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -187,10 +191,6 @@ func NewListSSHPublicKeysPaginator(client ListSSHPublicKeysAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSSHPublicKeysInput{}
 	}
 
 	return &ListSSHPublicKeysPaginator{

@@ -158,6 +158,10 @@ type DescribeGlobalReplicationGroupsPaginator struct {
 // NewDescribeGlobalReplicationGroupsPaginator returns a new
 // DescribeGlobalReplicationGroupsPaginator
 func NewDescribeGlobalReplicationGroupsPaginator(client DescribeGlobalReplicationGroupsAPIClient, params *DescribeGlobalReplicationGroupsInput, optFns ...func(*DescribeGlobalReplicationGroupsPaginatorOptions)) *DescribeGlobalReplicationGroupsPaginator {
+	if params == nil {
+		params = &DescribeGlobalReplicationGroupsInput{}
+	}
+
 	options := DescribeGlobalReplicationGroupsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -165,10 +169,6 @@ func NewDescribeGlobalReplicationGroupsPaginator(client DescribeGlobalReplicatio
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeGlobalReplicationGroupsInput{}
 	}
 
 	return &DescribeGlobalReplicationGroupsPaginator{

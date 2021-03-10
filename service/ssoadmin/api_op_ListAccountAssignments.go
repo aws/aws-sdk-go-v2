@@ -162,6 +162,10 @@ type ListAccountAssignmentsPaginator struct {
 
 // NewListAccountAssignmentsPaginator returns a new ListAccountAssignmentsPaginator
 func NewListAccountAssignmentsPaginator(client ListAccountAssignmentsAPIClient, params *ListAccountAssignmentsInput, optFns ...func(*ListAccountAssignmentsPaginatorOptions)) *ListAccountAssignmentsPaginator {
+	if params == nil {
+		params = &ListAccountAssignmentsInput{}
+	}
+
 	options := ListAccountAssignmentsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -169,10 +173,6 @@ func NewListAccountAssignmentsPaginator(client ListAccountAssignmentsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAccountAssignmentsInput{}
 	}
 
 	return &ListAccountAssignmentsPaginator{

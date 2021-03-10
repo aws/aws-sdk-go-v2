@@ -159,6 +159,10 @@ type GetEffectivePermissionsForPathPaginator struct {
 // NewGetEffectivePermissionsForPathPaginator returns a new
 // GetEffectivePermissionsForPathPaginator
 func NewGetEffectivePermissionsForPathPaginator(client GetEffectivePermissionsForPathAPIClient, params *GetEffectivePermissionsForPathInput, optFns ...func(*GetEffectivePermissionsForPathPaginatorOptions)) *GetEffectivePermissionsForPathPaginator {
+	if params == nil {
+		params = &GetEffectivePermissionsForPathInput{}
+	}
+
 	options := GetEffectivePermissionsForPathPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewGetEffectivePermissionsForPathPaginator(client GetEffectivePermissionsFo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetEffectivePermissionsForPathInput{}
 	}
 
 	return &GetEffectivePermissionsForPathPaginator{

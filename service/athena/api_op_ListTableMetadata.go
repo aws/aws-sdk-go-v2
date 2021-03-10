@@ -159,6 +159,10 @@ type ListTableMetadataPaginator struct {
 
 // NewListTableMetadataPaginator returns a new ListTableMetadataPaginator
 func NewListTableMetadataPaginator(client ListTableMetadataAPIClient, params *ListTableMetadataInput, optFns ...func(*ListTableMetadataPaginatorOptions)) *ListTableMetadataPaginator {
+	if params == nil {
+		params = &ListTableMetadataInput{}
+	}
+
 	options := ListTableMetadataPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewListTableMetadataPaginator(client ListTableMetadataAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTableMetadataInput{}
 	}
 
 	return &ListTableMetadataPaginator{

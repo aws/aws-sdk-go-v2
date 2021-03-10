@@ -151,6 +151,10 @@ type ListNamedQueriesPaginator struct {
 
 // NewListNamedQueriesPaginator returns a new ListNamedQueriesPaginator
 func NewListNamedQueriesPaginator(client ListNamedQueriesAPIClient, params *ListNamedQueriesInput, optFns ...func(*ListNamedQueriesPaginatorOptions)) *ListNamedQueriesPaginator {
+	if params == nil {
+		params = &ListNamedQueriesInput{}
+	}
+
 	options := ListNamedQueriesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -158,10 +162,6 @@ func NewListNamedQueriesPaginator(client ListNamedQueriesAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListNamedQueriesInput{}
 	}
 
 	return &ListNamedQueriesPaginator{

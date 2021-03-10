@@ -154,6 +154,10 @@ type ListWorkteamsPaginator struct {
 
 // NewListWorkteamsPaginator returns a new ListWorkteamsPaginator
 func NewListWorkteamsPaginator(client ListWorkteamsAPIClient, params *ListWorkteamsInput, optFns ...func(*ListWorkteamsPaginatorOptions)) *ListWorkteamsPaginator {
+	if params == nil {
+		params = &ListWorkteamsInput{}
+	}
+
 	options := ListWorkteamsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -161,10 +165,6 @@ func NewListWorkteamsPaginator(client ListWorkteamsAPIClient, params *ListWorkte
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListWorkteamsInput{}
 	}
 
 	return &ListWorkteamsPaginator{

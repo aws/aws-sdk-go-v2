@@ -224,6 +224,10 @@ type DescribeMLModelsPaginator struct {
 
 // NewDescribeMLModelsPaginator returns a new DescribeMLModelsPaginator
 func NewDescribeMLModelsPaginator(client DescribeMLModelsAPIClient, params *DescribeMLModelsInput, optFns ...func(*DescribeMLModelsPaginatorOptions)) *DescribeMLModelsPaginator {
+	if params == nil {
+		params = &DescribeMLModelsInput{}
+	}
+
 	options := DescribeMLModelsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -231,10 +235,6 @@ func NewDescribeMLModelsPaginator(client DescribeMLModelsAPIClient, params *Desc
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeMLModelsInput{}
 	}
 
 	return &DescribeMLModelsPaginator{

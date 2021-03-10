@@ -158,6 +158,10 @@ type GetCommentReactionsPaginator struct {
 
 // NewGetCommentReactionsPaginator returns a new GetCommentReactionsPaginator
 func NewGetCommentReactionsPaginator(client GetCommentReactionsAPIClient, params *GetCommentReactionsInput, optFns ...func(*GetCommentReactionsPaginatorOptions)) *GetCommentReactionsPaginator {
+	if params == nil {
+		params = &GetCommentReactionsInput{}
+	}
+
 	options := GetCommentReactionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -165,10 +169,6 @@ func NewGetCommentReactionsPaginator(client GetCommentReactionsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetCommentReactionsInput{}
 	}
 
 	return &GetCommentReactionsPaginator{

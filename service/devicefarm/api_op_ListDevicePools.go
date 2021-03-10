@@ -154,14 +154,14 @@ type ListDevicePoolsPaginator struct {
 
 // NewListDevicePoolsPaginator returns a new ListDevicePoolsPaginator
 func NewListDevicePoolsPaginator(client ListDevicePoolsAPIClient, params *ListDevicePoolsInput, optFns ...func(*ListDevicePoolsPaginatorOptions)) *ListDevicePoolsPaginator {
+	if params == nil {
+		params = &ListDevicePoolsInput{}
+	}
+
 	options := ListDevicePoolsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDevicePoolsInput{}
 	}
 
 	return &ListDevicePoolsPaginator{

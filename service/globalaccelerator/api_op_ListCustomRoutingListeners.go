@@ -153,6 +153,10 @@ type ListCustomRoutingListenersPaginator struct {
 // NewListCustomRoutingListenersPaginator returns a new
 // ListCustomRoutingListenersPaginator
 func NewListCustomRoutingListenersPaginator(client ListCustomRoutingListenersAPIClient, params *ListCustomRoutingListenersInput, optFns ...func(*ListCustomRoutingListenersPaginatorOptions)) *ListCustomRoutingListenersPaginator {
+	if params == nil {
+		params = &ListCustomRoutingListenersInput{}
+	}
+
 	options := ListCustomRoutingListenersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -160,10 +164,6 @@ func NewListCustomRoutingListenersPaginator(client ListCustomRoutingListenersAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCustomRoutingListenersInput{}
 	}
 
 	return &ListCustomRoutingListenersPaginator{

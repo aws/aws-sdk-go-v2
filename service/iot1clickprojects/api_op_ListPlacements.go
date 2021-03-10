@@ -151,6 +151,10 @@ type ListPlacementsPaginator struct {
 
 // NewListPlacementsPaginator returns a new ListPlacementsPaginator
 func NewListPlacementsPaginator(client ListPlacementsAPIClient, params *ListPlacementsInput, optFns ...func(*ListPlacementsPaginatorOptions)) *ListPlacementsPaginator {
+	if params == nil {
+		params = &ListPlacementsInput{}
+	}
+
 	options := ListPlacementsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -158,10 +162,6 @@ func NewListPlacementsPaginator(client ListPlacementsAPIClient, params *ListPlac
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPlacementsInput{}
 	}
 
 	return &ListPlacementsPaginator{

@@ -174,6 +174,10 @@ type GetDifferencesPaginator struct {
 
 // NewGetDifferencesPaginator returns a new GetDifferencesPaginator
 func NewGetDifferencesPaginator(client GetDifferencesAPIClient, params *GetDifferencesInput, optFns ...func(*GetDifferencesPaginatorOptions)) *GetDifferencesPaginator {
+	if params == nil {
+		params = &GetDifferencesInput{}
+	}
+
 	options := GetDifferencesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -181,10 +185,6 @@ func NewGetDifferencesPaginator(client GetDifferencesAPIClient, params *GetDiffe
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetDifferencesInput{}
 	}
 
 	return &GetDifferencesPaginator{

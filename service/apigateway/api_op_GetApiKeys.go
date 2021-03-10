@@ -161,6 +161,10 @@ type GetApiKeysPaginator struct {
 
 // NewGetApiKeysPaginator returns a new GetApiKeysPaginator
 func NewGetApiKeysPaginator(client GetApiKeysAPIClient, params *GetApiKeysInput, optFns ...func(*GetApiKeysPaginatorOptions)) *GetApiKeysPaginator {
+	if params == nil {
+		params = &GetApiKeysInput{}
+	}
+
 	options := GetApiKeysPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -168,10 +172,6 @@ func NewGetApiKeysPaginator(client GetApiKeysAPIClient, params *GetApiKeysInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetApiKeysInput{}
 	}
 
 	return &GetApiKeysPaginator{

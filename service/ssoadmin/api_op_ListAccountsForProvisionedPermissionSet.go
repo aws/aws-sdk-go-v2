@@ -162,6 +162,10 @@ type ListAccountsForProvisionedPermissionSetPaginator struct {
 // NewListAccountsForProvisionedPermissionSetPaginator returns a new
 // ListAccountsForProvisionedPermissionSetPaginator
 func NewListAccountsForProvisionedPermissionSetPaginator(client ListAccountsForProvisionedPermissionSetAPIClient, params *ListAccountsForProvisionedPermissionSetInput, optFns ...func(*ListAccountsForProvisionedPermissionSetPaginatorOptions)) *ListAccountsForProvisionedPermissionSetPaginator {
+	if params == nil {
+		params = &ListAccountsForProvisionedPermissionSetInput{}
+	}
+
 	options := ListAccountsForProvisionedPermissionSetPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -169,10 +173,6 @@ func NewListAccountsForProvisionedPermissionSetPaginator(client ListAccountsForP
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAccountsForProvisionedPermissionSetInput{}
 	}
 
 	return &ListAccountsForProvisionedPermissionSetPaginator{

@@ -166,6 +166,10 @@ type DescribeSubscribersForNotificationPaginator struct {
 // NewDescribeSubscribersForNotificationPaginator returns a new
 // DescribeSubscribersForNotificationPaginator
 func NewDescribeSubscribersForNotificationPaginator(client DescribeSubscribersForNotificationAPIClient, params *DescribeSubscribersForNotificationInput, optFns ...func(*DescribeSubscribersForNotificationPaginatorOptions)) *DescribeSubscribersForNotificationPaginator {
+	if params == nil {
+		params = &DescribeSubscribersForNotificationInput{}
+	}
+
 	options := DescribeSubscribersForNotificationPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -173,10 +177,6 @@ func NewDescribeSubscribersForNotificationPaginator(client DescribeSubscribersFo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeSubscribersForNotificationInput{}
 	}
 
 	return &DescribeSubscribersForNotificationPaginator{

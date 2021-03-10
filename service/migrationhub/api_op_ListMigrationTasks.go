@@ -157,6 +157,10 @@ type ListMigrationTasksPaginator struct {
 
 // NewListMigrationTasksPaginator returns a new ListMigrationTasksPaginator
 func NewListMigrationTasksPaginator(client ListMigrationTasksAPIClient, params *ListMigrationTasksInput, optFns ...func(*ListMigrationTasksPaginatorOptions)) *ListMigrationTasksPaginator {
+	if params == nil {
+		params = &ListMigrationTasksInput{}
+	}
+
 	options := ListMigrationTasksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -164,10 +168,6 @@ func NewListMigrationTasksPaginator(client ListMigrationTasksAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListMigrationTasksInput{}
 	}
 
 	return &ListMigrationTasksPaginator{

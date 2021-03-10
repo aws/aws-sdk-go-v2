@@ -169,6 +169,10 @@ type DescribeEcsClustersPaginator struct {
 
 // NewDescribeEcsClustersPaginator returns a new DescribeEcsClustersPaginator
 func NewDescribeEcsClustersPaginator(client DescribeEcsClustersAPIClient, params *DescribeEcsClustersInput, optFns ...func(*DescribeEcsClustersPaginatorOptions)) *DescribeEcsClustersPaginator {
+	if params == nil {
+		params = &DescribeEcsClustersInput{}
+	}
+
 	options := DescribeEcsClustersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -176,10 +180,6 @@ func NewDescribeEcsClustersPaginator(client DescribeEcsClustersAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeEcsClustersInput{}
 	}
 
 	return &DescribeEcsClustersPaginator{

@@ -157,6 +157,10 @@ type DescribeDBProxiesPaginator struct {
 
 // NewDescribeDBProxiesPaginator returns a new DescribeDBProxiesPaginator
 func NewDescribeDBProxiesPaginator(client DescribeDBProxiesAPIClient, params *DescribeDBProxiesInput, optFns ...func(*DescribeDBProxiesPaginatorOptions)) *DescribeDBProxiesPaginator {
+	if params == nil {
+		params = &DescribeDBProxiesInput{}
+	}
+
 	options := DescribeDBProxiesPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -164,10 +168,6 @@ func NewDescribeDBProxiesPaginator(client DescribeDBProxiesAPIClient, params *De
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeDBProxiesInput{}
 	}
 
 	return &DescribeDBProxiesPaginator{

@@ -162,6 +162,10 @@ type ListMedicalVocabulariesPaginator struct {
 // NewListMedicalVocabulariesPaginator returns a new
 // ListMedicalVocabulariesPaginator
 func NewListMedicalVocabulariesPaginator(client ListMedicalVocabulariesAPIClient, params *ListMedicalVocabulariesInput, optFns ...func(*ListMedicalVocabulariesPaginatorOptions)) *ListMedicalVocabulariesPaginator {
+	if params == nil {
+		params = &ListMedicalVocabulariesInput{}
+	}
+
 	options := ListMedicalVocabulariesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -169,10 +173,6 @@ func NewListMedicalVocabulariesPaginator(client ListMedicalVocabulariesAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListMedicalVocabulariesInput{}
 	}
 
 	return &ListMedicalVocabulariesPaginator{

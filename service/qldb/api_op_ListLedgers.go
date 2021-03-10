@@ -152,6 +152,10 @@ type ListLedgersPaginator struct {
 
 // NewListLedgersPaginator returns a new ListLedgersPaginator
 func NewListLedgersPaginator(client ListLedgersAPIClient, params *ListLedgersInput, optFns ...func(*ListLedgersPaginatorOptions)) *ListLedgersPaginator {
+	if params == nil {
+		params = &ListLedgersInput{}
+	}
+
 	options := ListLedgersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -159,10 +163,6 @@ func NewListLedgersPaginator(client ListLedgersAPIClient, params *ListLedgersInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListLedgersInput{}
 	}
 
 	return &ListLedgersPaginator{

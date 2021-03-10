@@ -171,14 +171,14 @@ type ListMetricsPaginator struct {
 
 // NewListMetricsPaginator returns a new ListMetricsPaginator
 func NewListMetricsPaginator(client ListMetricsAPIClient, params *ListMetricsInput, optFns ...func(*ListMetricsPaginatorOptions)) *ListMetricsPaginator {
+	if params == nil {
+		params = &ListMetricsInput{}
+	}
+
 	options := ListMetricsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListMetricsInput{}
 	}
 
 	return &ListMetricsPaginator{

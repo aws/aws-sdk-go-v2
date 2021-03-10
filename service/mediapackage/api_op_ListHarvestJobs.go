@@ -145,6 +145,10 @@ type ListHarvestJobsPaginator struct {
 
 // NewListHarvestJobsPaginator returns a new ListHarvestJobsPaginator
 func NewListHarvestJobsPaginator(client ListHarvestJobsAPIClient, params *ListHarvestJobsInput, optFns ...func(*ListHarvestJobsPaginatorOptions)) *ListHarvestJobsPaginator {
+	if params == nil {
+		params = &ListHarvestJobsInput{}
+	}
+
 	options := ListHarvestJobsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -152,10 +156,6 @@ func NewListHarvestJobsPaginator(client ListHarvestJobsAPIClient, params *ListHa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListHarvestJobsInput{}
 	}
 
 	return &ListHarvestJobsPaginator{

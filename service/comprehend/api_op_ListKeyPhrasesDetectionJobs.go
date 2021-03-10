@@ -146,6 +146,10 @@ type ListKeyPhrasesDetectionJobsPaginator struct {
 // NewListKeyPhrasesDetectionJobsPaginator returns a new
 // ListKeyPhrasesDetectionJobsPaginator
 func NewListKeyPhrasesDetectionJobsPaginator(client ListKeyPhrasesDetectionJobsAPIClient, params *ListKeyPhrasesDetectionJobsInput, optFns ...func(*ListKeyPhrasesDetectionJobsPaginatorOptions)) *ListKeyPhrasesDetectionJobsPaginator {
+	if params == nil {
+		params = &ListKeyPhrasesDetectionJobsInput{}
+	}
+
 	options := ListKeyPhrasesDetectionJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -153,10 +157,6 @@ func NewListKeyPhrasesDetectionJobsPaginator(client ListKeyPhrasesDetectionJobsA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListKeyPhrasesDetectionJobsInput{}
 	}
 
 	return &ListKeyPhrasesDetectionJobsPaginator{

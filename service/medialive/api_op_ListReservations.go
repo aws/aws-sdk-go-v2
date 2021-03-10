@@ -164,6 +164,10 @@ type ListReservationsPaginator struct {
 
 // NewListReservationsPaginator returns a new ListReservationsPaginator
 func NewListReservationsPaginator(client ListReservationsAPIClient, params *ListReservationsInput, optFns ...func(*ListReservationsPaginatorOptions)) *ListReservationsPaginator {
+	if params == nil {
+		params = &ListReservationsInput{}
+	}
+
 	options := ListReservationsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -171,10 +175,6 @@ func NewListReservationsPaginator(client ListReservationsAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListReservationsInput{}
 	}
 
 	return &ListReservationsPaginator{
