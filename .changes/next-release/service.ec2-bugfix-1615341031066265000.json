@@ -1,0 +1,9 @@
+{
+ "ID": "service.ec2-bugfix-1615341031066265000",
+ "SchemaVersion": 1,
+ "Module": "service/ec2",
+ "Type": "bugfix",
+ "Description": "Fixes Amazon EC2 serialization of unboxed members, to serialize zero values in request messages.",
+ "MinVersion": "",
+ "AffectedModules": null
+}
