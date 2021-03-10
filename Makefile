@@ -229,6 +229,21 @@ cachedep-modules-%:
 		&& go run . -p $(subst _,/,$(subst cachedep-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go mod download"
 
+api-diff-modules-%:
+	@# Command that uses the pattern to define the root path that the
+	@# module testing will start from. Strips off the "api-diff-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# Requires golang.org/x/exp/cmd/gorelease to be available in the GOPATH.
+	@#
+	@# e.g. api-diff-modules-internal_protocoltest
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst api-diff-modules-,,$@)) \
+			-fail-fast=true \
+			-c 1 \
+			-skip="internal/repotools" \
+			"$$(go env GOPATH)/bin/gorelease"
+
 ##############
 # CI Testing #
 ##############
