@@ -15,7 +15,6 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeSerVisitor;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
-import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.go.codegen.knowledge.GoPointableIndex;
 import software.amazon.smithy.go.codegen.trait.NoSerializeTrait;
 import software.amazon.smithy.model.shapes.CollectionShape;
@@ -25,7 +24,6 @@ import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
-import software.amazon.smithy.model.traits.EnumTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait.Format;
 import software.amazon.smithy.model.traits.XmlFlattenedTrait;
@@ -46,14 +44,20 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
     private static final Logger LOGGER = Logger.getLogger(QueryShapeSerVisitor.class.getName());
 
     private final Predicate<MemberShape> memberFilter;
+    private final boolean serializeZeroUnboxedMember;
 
     public QueryShapeSerVisitor(GenerationContext context) {
         this(context, NoSerializeTrait.excludeNoSerializeMembers().and(FunctionalUtils.alwaysTrue()));
     }
 
     public QueryShapeSerVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
+        this(context, memberFilter, false);
+    }
+
+    public QueryShapeSerVisitor(GenerationContext context, Predicate<MemberShape> memberFilter, boolean serializeZeroUnboxedMember) {
         super(context);
         this.memberFilter = NoSerializeTrait.excludeNoSerializeMembers().and(memberFilter);
+        this.serializeZeroUnboxedMember = serializeZeroUnboxedMember;
     }
 
     private DocumentMemberSerVisitor getMemberSerVisitor(MemberShape member, String source, String dest) {
@@ -156,7 +160,7 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
             Shape target = context.getModel().expectShape(member.getTarget());
 
             GoValueAccessUtils.writeIfNonZeroValueMember(context.getModel(), context.getSymbolProvider(), writer,
-                    member, "v", true, member.isRequired(), (operand) -> {
+                    member, "v", true, member.isRequired() || this.serializeZeroUnboxedMember, (operand) -> {
                         String locationName = getSerializedLocationName(member, member.getMemberName());
                         if (isFlattened(context, member)) {
                             writer.write("objectKey := object.FlatKey($S)", locationName);

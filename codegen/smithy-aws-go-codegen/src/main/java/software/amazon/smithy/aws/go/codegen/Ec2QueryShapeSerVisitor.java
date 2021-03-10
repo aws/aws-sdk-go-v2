@@ -4,10 +4,12 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import software.amazon.smithy.aws.traits.protocols.Ec2QueryNameTrait;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
+import software.amazon.smithy.go.codegen.trait.NoSerializeTrait;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.ShapeType;
 import software.amazon.smithy.model.traits.TimestampFormatTrait.Format;
 import software.amazon.smithy.model.traits.XmlNameTrait;
+import software.amazon.smithy.utils.FunctionalUtils;
 import software.amazon.smithy.utils.StringUtils;
 
 /**
@@ -29,11 +31,11 @@ import software.amazon.smithy.utils.StringUtils;
  */
 final class Ec2QueryShapeSerVisitor extends QueryShapeSerVisitor {
     public Ec2QueryShapeSerVisitor(GenerationContext context) {
-        super(context);
+        this(context, NoSerializeTrait.excludeNoSerializeMembers().and(FunctionalUtils.alwaysTrue()));
     }
 
     public Ec2QueryShapeSerVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
-        super(context, memberFilter);
+        super(context, memberFilter, true);
     }
 
     @Override
