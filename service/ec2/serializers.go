@@ -24574,7 +24574,7 @@ func awsEc2query_serializeDocumentAttributeBooleanValue(v *types.AttributeBoolea
 	object := value.Object()
 	_ = object
 
-	if v.Value {
+	{
 		objectKey := object.Key("Value")
 		objectKey.Boolean(v.Value)
 	}
@@ -24852,7 +24852,7 @@ func awsEc2query_serializeDocumentClientConnectOptions(v *types.ClientConnectOpt
 	object := value.Object()
 	_ = object
 
-	if v.Enabled {
+	{
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(v.Enabled)
 	}
@@ -24879,7 +24879,7 @@ func awsEc2query_serializeDocumentClientData(v *types.ClientData, value query.Va
 		objectKey.String(smithytime.FormatDateTime(*v.UploadEnd))
 	}
 
-	if v.UploadSize != 0 {
+	{
 		objectKey := object.Key("UploadSize")
 		objectKey.Double(v.UploadSize)
 	}
@@ -24993,7 +24993,7 @@ func awsEc2query_serializeDocumentConnectionLogOptions(v *types.ConnectionLogOpt
 		objectKey.String(*v.CloudwatchLogStream)
 	}
 
-	if v.Enabled {
+	{
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(v.Enabled)
 	}
@@ -25031,12 +25031,12 @@ func awsEc2query_serializeDocumentCpuOptionsRequest(v *types.CpuOptionsRequest, 
 	object := value.Object()
 	_ = object
 
-	if v.CoreCount != 0 {
+	{
 		objectKey := object.Key("CoreCount")
 		objectKey.Integer(v.CoreCount)
 	}
 
-	if v.ThreadsPerCore != 0 {
+	{
 		objectKey := object.Key("ThreadsPerCore")
 		objectKey.Integer(v.ThreadsPerCore)
 	}
@@ -25195,7 +25195,7 @@ func awsEc2query_serializeDocumentDeregisterInstanceTagAttributeRequest(v *types
 	object := value.Object()
 	_ = object
 
-	if v.IncludeAllTagsOfInstance {
+	{
 		objectKey := object.Key("IncludeAllTagsOfInstance")
 		objectKey.Boolean(v.IncludeAllTagsOfInstance)
 	}
@@ -25309,7 +25309,7 @@ func awsEc2query_serializeDocumentDnsServersOptionsModifyStructure(v *types.DnsS
 		}
 	}
 
-	if v.Enabled {
+	{
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(v.Enabled)
 	}
@@ -25321,17 +25321,17 @@ func awsEc2query_serializeDocumentEbsBlockDevice(v *types.EbsBlockDevice, value 
 	object := value.Object()
 	_ = object
 
-	if v.DeleteOnTermination {
+	{
 		objectKey := object.Key("DeleteOnTermination")
 		objectKey.Boolean(v.DeleteOnTermination)
 	}
 
-	if v.Encrypted {
+	{
 		objectKey := object.Key("Encrypted")
 		objectKey.Boolean(v.Encrypted)
 	}
 
-	if v.Iops != 0 {
+	{
 		objectKey := object.Key("Iops")
 		objectKey.Integer(v.Iops)
 	}
@@ -25346,12 +25346,12 @@ func awsEc2query_serializeDocumentEbsBlockDevice(v *types.EbsBlockDevice, value 
 		objectKey.String(*v.SnapshotId)
 	}
 
-	if v.Throughput != 0 {
+	{
 		objectKey := object.Key("Throughput")
 		objectKey.Integer(v.Throughput)
 	}
 
-	if v.VolumeSize != 0 {
+	{
 		objectKey := object.Key("VolumeSize")
 		objectKey.Integer(v.VolumeSize)
 	}
@@ -25368,7 +25368,7 @@ func awsEc2query_serializeDocumentEbsInstanceBlockDeviceSpecification(v *types.E
 	object := value.Object()
 	_ = object
 
-	if v.DeleteOnTermination {
+	{
 		objectKey := object.Key("DeleteOnTermination")
 		objectKey.Boolean(v.DeleteOnTermination)
 	}
@@ -25453,7 +25453,7 @@ func awsEc2query_serializeDocumentElasticInferenceAccelerator(v *types.ElasticIn
 	object := value.Object()
 	_ = object
 
-	if v.Count != 0 {
+	{
 		objectKey := object.Key("Count")
 		objectKey.Integer(v.Count)
 	}
@@ -25485,7 +25485,7 @@ func awsEc2query_serializeDocumentEnclaveOptionsRequest(v *types.EnclaveOptionsR
 	object := value.Object()
 	_ = object
 
-	if v.Enabled {
+	{
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(v.Enabled)
 	}
@@ -25717,7 +25717,7 @@ func awsEc2query_serializeDocumentFleetLaunchTemplateOverridesRequest(v *types.F
 		}
 	}
 
-	if v.Priority != 0 {
+	{
 		objectKey := object.Key("Priority")
 		objectKey.Double(v.Priority)
 	}
@@ -25727,7 +25727,7 @@ func awsEc2query_serializeDocumentFleetLaunchTemplateOverridesRequest(v *types.F
 		objectKey.String(*v.SubnetId)
 	}
 
-	if v.WeightedCapacity != 0 {
+	{
 		objectKey := object.Key("WeightedCapacity")
 		objectKey.Double(v.WeightedCapacity)
 	}
@@ -25919,7 +25919,7 @@ func awsEc2query_serializeDocumentHibernationOptionsRequest(v *types.Hibernation
 	object := value.Object()
 	_ = object
 
-	if v.Configured {
+	{
 		objectKey := object.Key("Configured")
 		objectKey.Boolean(v.Configured)
 	}
@@ -25961,12 +25961,12 @@ func awsEc2query_serializeDocumentIcmpTypeCode(v *types.IcmpTypeCode, value quer
 	object := value.Object()
 	_ = object
 
-	if v.Code != 0 {
+	{
 		objectKey := object.Key("Code")
 		objectKey.Integer(v.Code)
 	}
 
-	if v.Type != 0 {
+	{
 		objectKey := object.Key("Type")
 		objectKey.Integer(v.Type)
 	}
@@ -26133,7 +26133,7 @@ func awsEc2query_serializeDocumentImportInstanceLaunchSpecification(v *types.Imp
 		objectKey.String(string(v.InstanceType))
 	}
 
-	if v.Monitoring {
+	{
 		objectKey := object.Key("Monitoring")
 		objectKey.Boolean(v.Monitoring)
 	}
@@ -26375,7 +26375,7 @@ func awsEc2query_serializeDocumentInstanceMetadataOptionsRequest(v *types.Instan
 		objectKey.String(string(v.HttpEndpoint))
 	}
 
-	if v.HttpPutResponseHopLimit != 0 {
+	{
 		objectKey := object.Key("HttpPutResponseHopLimit")
 		objectKey.Integer(v.HttpPutResponseHopLimit)
 	}
@@ -26392,17 +26392,17 @@ func awsEc2query_serializeDocumentInstanceNetworkInterfaceSpecification(v *types
 	object := value.Object()
 	_ = object
 
-	if v.AssociateCarrierIpAddress {
+	{
 		objectKey := object.Key("AssociateCarrierIpAddress")
 		objectKey.Boolean(v.AssociateCarrierIpAddress)
 	}
 
-	if v.AssociatePublicIpAddress {
+	{
 		objectKey := object.Key("AssociatePublicIpAddress")
 		objectKey.Boolean(v.AssociatePublicIpAddress)
 	}
 
-	if v.DeleteOnTermination {
+	{
 		objectKey := object.Key("DeleteOnTermination")
 		objectKey.Boolean(v.DeleteOnTermination)
 	}
@@ -26412,7 +26412,7 @@ func awsEc2query_serializeDocumentInstanceNetworkInterfaceSpecification(v *types
 		objectKey.String(*v.Description)
 	}
 
-	if v.DeviceIndex != 0 {
+	{
 		objectKey := object.Key("DeviceIndex")
 		objectKey.Integer(v.DeviceIndex)
 	}
@@ -26429,7 +26429,7 @@ func awsEc2query_serializeDocumentInstanceNetworkInterfaceSpecification(v *types
 		objectKey.String(*v.InterfaceType)
 	}
 
-	if v.Ipv6AddressCount != 0 {
+	{
 		objectKey := object.Key("Ipv6AddressCount")
 		objectKey.Integer(v.Ipv6AddressCount)
 	}
@@ -26441,7 +26441,7 @@ func awsEc2query_serializeDocumentInstanceNetworkInterfaceSpecification(v *types
 		}
 	}
 
-	if v.NetworkCardIndex != 0 {
+	{
 		objectKey := object.Key("NetworkCardIndex")
 		objectKey.Integer(v.NetworkCardIndex)
 	}
@@ -26463,7 +26463,7 @@ func awsEc2query_serializeDocumentInstanceNetworkInterfaceSpecification(v *types
 		}
 	}
 
-	if v.SecondaryPrivateIpAddressCount != 0 {
+	{
 		objectKey := object.Key("SecondaryPrivateIpAddressCount")
 		objectKey.Integer(v.SecondaryPrivateIpAddressCount)
 	}
@@ -26495,7 +26495,7 @@ func awsEc2query_serializeDocumentInstanceSpecification(v *types.InstanceSpecifi
 	object := value.Object()
 	_ = object
 
-	if v.ExcludeBootVolume {
+	{
 		objectKey := object.Key("ExcludeBootVolume")
 		objectKey.Boolean(v.ExcludeBootVolume)
 	}
@@ -26551,7 +26551,7 @@ func awsEc2query_serializeDocumentIpPermission(v *types.IpPermission, value quer
 	object := value.Object()
 	_ = object
 
-	if v.FromPort != 0 {
+	{
 		objectKey := object.Key("FromPort")
 		objectKey.Integer(v.FromPort)
 	}
@@ -26582,7 +26582,7 @@ func awsEc2query_serializeDocumentIpPermission(v *types.IpPermission, value quer
 		}
 	}
 
-	if v.ToPort != 0 {
+	{
 		objectKey := object.Key("ToPort")
 		objectKey.Integer(v.ToPort)
 	}
@@ -26899,12 +26899,12 @@ func awsEc2query_serializeDocumentLaunchTemplateCpuOptionsRequest(v *types.Launc
 	object := value.Object()
 	_ = object
 
-	if v.CoreCount != 0 {
+	{
 		objectKey := object.Key("CoreCount")
 		objectKey.Integer(v.CoreCount)
 	}
 
-	if v.ThreadsPerCore != 0 {
+	{
 		objectKey := object.Key("ThreadsPerCore")
 		objectKey.Integer(v.ThreadsPerCore)
 	}
@@ -26916,17 +26916,17 @@ func awsEc2query_serializeDocumentLaunchTemplateEbsBlockDeviceRequest(v *types.L
 	object := value.Object()
 	_ = object
 
-	if v.DeleteOnTermination {
+	{
 		objectKey := object.Key("DeleteOnTermination")
 		objectKey.Boolean(v.DeleteOnTermination)
 	}
 
-	if v.Encrypted {
+	{
 		objectKey := object.Key("Encrypted")
 		objectKey.Boolean(v.Encrypted)
 	}
 
-	if v.Iops != 0 {
+	{
 		objectKey := object.Key("Iops")
 		objectKey.Integer(v.Iops)
 	}
@@ -26941,12 +26941,12 @@ func awsEc2query_serializeDocumentLaunchTemplateEbsBlockDeviceRequest(v *types.L
 		objectKey.String(*v.SnapshotId)
 	}
 
-	if v.Throughput != 0 {
+	{
 		objectKey := object.Key("Throughput")
 		objectKey.Integer(v.Throughput)
 	}
 
-	if v.VolumeSize != 0 {
+	{
 		objectKey := object.Key("VolumeSize")
 		objectKey.Integer(v.VolumeSize)
 	}
@@ -26963,7 +26963,7 @@ func awsEc2query_serializeDocumentLaunchTemplateElasticInferenceAccelerator(v *t
 	object := value.Object()
 	_ = object
 
-	if v.Count != 0 {
+	{
 		objectKey := object.Key("Count")
 		objectKey.Integer(v.Count)
 	}
@@ -26995,7 +26995,7 @@ func awsEc2query_serializeDocumentLaunchTemplateEnclaveOptionsRequest(v *types.L
 	object := value.Object()
 	_ = object
 
-	if v.Enabled {
+	{
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(v.Enabled)
 	}
@@ -27007,7 +27007,7 @@ func awsEc2query_serializeDocumentLaunchTemplateHibernationOptionsRequest(v *typ
 	object := value.Object()
 	_ = object
 
-	if v.Configured {
+	{
 		objectKey := object.Key("Configured")
 		objectKey.Boolean(v.Configured)
 	}
@@ -27073,7 +27073,7 @@ func awsEc2query_serializeDocumentLaunchTemplateInstanceMetadataOptionsRequest(v
 		objectKey.String(string(v.HttpEndpoint))
 	}
 
-	if v.HttpPutResponseHopLimit != 0 {
+	{
 		objectKey := object.Key("HttpPutResponseHopLimit")
 		objectKey.Integer(v.HttpPutResponseHopLimit)
 	}
@@ -27090,17 +27090,17 @@ func awsEc2query_serializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecific
 	object := value.Object()
 	_ = object
 
-	if v.AssociateCarrierIpAddress {
+	{
 		objectKey := object.Key("AssociateCarrierIpAddress")
 		objectKey.Boolean(v.AssociateCarrierIpAddress)
 	}
 
-	if v.AssociatePublicIpAddress {
+	{
 		objectKey := object.Key("AssociatePublicIpAddress")
 		objectKey.Boolean(v.AssociatePublicIpAddress)
 	}
 
-	if v.DeleteOnTermination {
+	{
 		objectKey := object.Key("DeleteOnTermination")
 		objectKey.Boolean(v.DeleteOnTermination)
 	}
@@ -27110,7 +27110,7 @@ func awsEc2query_serializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecific
 		objectKey.String(*v.Description)
 	}
 
-	if v.DeviceIndex != 0 {
+	{
 		objectKey := object.Key("DeviceIndex")
 		objectKey.Integer(v.DeviceIndex)
 	}
@@ -27127,7 +27127,7 @@ func awsEc2query_serializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecific
 		objectKey.String(*v.InterfaceType)
 	}
 
-	if v.Ipv6AddressCount != 0 {
+	{
 		objectKey := object.Key("Ipv6AddressCount")
 		objectKey.Integer(v.Ipv6AddressCount)
 	}
@@ -27139,7 +27139,7 @@ func awsEc2query_serializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecific
 		}
 	}
 
-	if v.NetworkCardIndex != 0 {
+	{
 		objectKey := object.Key("NetworkCardIndex")
 		objectKey.Integer(v.NetworkCardIndex)
 	}
@@ -27161,7 +27161,7 @@ func awsEc2query_serializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecific
 		}
 	}
 
-	if v.SecondaryPrivateIpAddressCount != 0 {
+	{
 		objectKey := object.Key("SecondaryPrivateIpAddressCount")
 		objectKey.Integer(v.SecondaryPrivateIpAddressCount)
 	}
@@ -27243,7 +27243,7 @@ func awsEc2query_serializeDocumentLaunchTemplateOverrides(v *types.LaunchTemplat
 		objectKey.String(string(v.InstanceType))
 	}
 
-	if v.Priority != 0 {
+	{
 		objectKey := object.Key("Priority")
 		objectKey.Double(v.Priority)
 	}
@@ -27258,7 +27258,7 @@ func awsEc2query_serializeDocumentLaunchTemplateOverrides(v *types.LaunchTemplat
 		objectKey.String(*v.SubnetId)
 	}
 
-	if v.WeightedCapacity != 0 {
+	{
 		objectKey := object.Key("WeightedCapacity")
 		objectKey.Double(v.WeightedCapacity)
 	}
@@ -27310,7 +27310,7 @@ func awsEc2query_serializeDocumentLaunchTemplatePlacementRequest(v *types.Launch
 		objectKey.String(*v.HostResourceGroupArn)
 	}
 
-	if v.PartitionNumber != 0 {
+	{
 		objectKey := object.Key("PartitionNumber")
 		objectKey.Integer(v.PartitionNumber)
 	}
@@ -27332,7 +27332,7 @@ func awsEc2query_serializeDocumentLaunchTemplatesMonitoringRequest(v *types.Laun
 	object := value.Object()
 	_ = object
 
-	if v.Enabled {
+	{
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(v.Enabled)
 	}
@@ -27366,7 +27366,7 @@ func awsEc2query_serializeDocumentLaunchTemplateSpotMarketOptionsRequest(v *type
 	object := value.Object()
 	_ = object
 
-	if v.BlockDurationMinutes != 0 {
+	{
 		objectKey := object.Key("BlockDurationMinutes")
 		objectKey.Integer(v.BlockDurationMinutes)
 	}
@@ -27694,7 +27694,7 @@ func awsEc2query_serializeDocumentModifyVpnTunnelOptionsSpecification(v *types.M
 		objectKey.String(*v.DPDTimeoutAction)
 	}
 
-	if v.DPDTimeoutSeconds != 0 {
+	{
 		objectKey := object.Key("DPDTimeoutSeconds")
 		objectKey.Integer(v.DPDTimeoutSeconds)
 	}
@@ -27727,7 +27727,7 @@ func awsEc2query_serializeDocumentModifyVpnTunnelOptionsSpecification(v *types.M
 		}
 	}
 
-	if v.Phase1LifetimeSeconds != 0 {
+	{
 		objectKey := object.Key("Phase1LifetimeSeconds")
 		objectKey.Integer(v.Phase1LifetimeSeconds)
 	}
@@ -27753,7 +27753,7 @@ func awsEc2query_serializeDocumentModifyVpnTunnelOptionsSpecification(v *types.M
 		}
 	}
 
-	if v.Phase2LifetimeSeconds != 0 {
+	{
 		objectKey := object.Key("Phase2LifetimeSeconds")
 		objectKey.Integer(v.Phase2LifetimeSeconds)
 	}
@@ -27763,17 +27763,17 @@ func awsEc2query_serializeDocumentModifyVpnTunnelOptionsSpecification(v *types.M
 		objectKey.String(*v.PreSharedKey)
 	}
 
-	if v.RekeyFuzzPercentage != 0 {
+	{
 		objectKey := object.Key("RekeyFuzzPercentage")
 		objectKey.Integer(v.RekeyFuzzPercentage)
 	}
 
-	if v.RekeyMarginTimeSeconds != 0 {
+	{
 		objectKey := object.Key("RekeyMarginTimeSeconds")
 		objectKey.Integer(v.RekeyMarginTimeSeconds)
 	}
 
-	if v.ReplayWindowSize != 0 {
+	{
 		objectKey := object.Key("ReplayWindowSize")
 		objectKey.Integer(v.ReplayWindowSize)
 	}
@@ -27857,7 +27857,7 @@ func awsEc2query_serializeDocumentNetworkInterfaceAttachmentChanges(v *types.Net
 		objectKey.String(*v.AttachmentId)
 	}
 
-	if v.DeleteOnTermination {
+	{
 		objectKey := object.Key("DeleteOnTermination")
 		objectKey.Boolean(v.DeleteOnTermination)
 	}
@@ -27959,17 +27959,17 @@ func awsEc2query_serializeDocumentOnDemandOptionsRequest(v *types.OnDemandOption
 		objectKey.String(*v.MaxTotalPrice)
 	}
 
-	if v.MinTargetCapacity != 0 {
+	{
 		objectKey := object.Key("MinTargetCapacity")
 		objectKey.Integer(v.MinTargetCapacity)
 	}
 
-	if v.SingleAvailabilityZone {
+	{
 		objectKey := object.Key("SingleAvailabilityZone")
 		objectKey.Boolean(v.SingleAvailabilityZone)
 	}
 
-	if v.SingleInstanceType {
+	{
 		objectKey := object.Key("SingleInstanceType")
 		objectKey.Boolean(v.SingleInstanceType)
 	}
@@ -27994,17 +27994,17 @@ func awsEc2query_serializeDocumentPeeringConnectionOptionsRequest(v *types.Peeri
 	object := value.Object()
 	_ = object
 
-	if v.AllowDnsResolutionFromRemoteVpc {
+	{
 		objectKey := object.Key("AllowDnsResolutionFromRemoteVpc")
 		objectKey.Boolean(v.AllowDnsResolutionFromRemoteVpc)
 	}
 
-	if v.AllowEgressFromLocalClassicLinkToRemoteVpc {
+	{
 		objectKey := object.Key("AllowEgressFromLocalClassicLinkToRemoteVpc")
 		objectKey.Boolean(v.AllowEgressFromLocalClassicLinkToRemoteVpc)
 	}
 
-	if v.AllowEgressFromLocalVpcToRemoteClassicLink {
+	{
 		objectKey := object.Key("AllowEgressFromLocalVpcToRemoteClassicLink")
 		objectKey.Boolean(v.AllowEgressFromLocalVpcToRemoteClassicLink)
 	}
@@ -28031,7 +28031,7 @@ func awsEc2query_serializeDocumentPhase1DHGroupNumbersRequestListValue(v *types.
 	object := value.Object()
 	_ = object
 
-	if v.Value != 0 {
+	{
 		objectKey := object.Key("Value")
 		objectKey.Integer(v.Value)
 	}
@@ -28112,7 +28112,7 @@ func awsEc2query_serializeDocumentPhase2DHGroupNumbersRequestListValue(v *types.
 	object := value.Object()
 	_ = object
 
-	if v.Value != 0 {
+	{
 		objectKey := object.Key("Value")
 		objectKey.Integer(v.Value)
 	}
@@ -28203,7 +28203,7 @@ func awsEc2query_serializeDocumentPlacement(v *types.Placement, value query.Valu
 		objectKey.String(*v.HostResourceGroupArn)
 	}
 
-	if v.PartitionNumber != 0 {
+	{
 		objectKey := object.Key("PartitionNumber")
 		objectKey.Integer(v.PartitionNumber)
 	}
@@ -28251,12 +28251,12 @@ func awsEc2query_serializeDocumentPortRange(v *types.PortRange, value query.Valu
 	object := value.Object()
 	_ = object
 
-	if v.From != 0 {
+	{
 		objectKey := object.Key("From")
 		objectKey.Integer(v.From)
 	}
 
-	if v.To != 0 {
+	{
 		objectKey := object.Key("To")
 		objectKey.Integer(v.To)
 	}
@@ -28318,12 +28318,12 @@ func awsEc2query_serializeDocumentPriceScheduleSpecification(v *types.PriceSched
 		objectKey.String(string(v.CurrencyCode))
 	}
 
-	if v.Price != 0 {
+	{
 		objectKey := object.Key("Price")
 		objectKey.Double(v.Price)
 	}
 
-	if v.Term != 0 {
+	{
 		objectKey := object.Key("Term")
 		objectKey.Long(v.Term)
 	}
@@ -28365,7 +28365,7 @@ func awsEc2query_serializeDocumentPrivateIpAddressSpecification(v *types.Private
 	object := value.Object()
 	_ = object
 
-	if v.Primary {
+	{
 		objectKey := object.Key("Primary")
 		objectKey.Boolean(v.Primary)
 	}
@@ -28520,7 +28520,7 @@ func awsEc2query_serializeDocumentRegisterInstanceTagAttributeRequest(v *types.R
 	object := value.Object()
 	_ = object
 
-	if v.IncludeAllTagsOfInstance {
+	{
 		objectKey := object.Key("IncludeAllTagsOfInstance")
 		objectKey.Boolean(v.IncludeAllTagsOfInstance)
 	}
@@ -28633,12 +28633,12 @@ func awsEc2query_serializeDocumentRequestLaunchTemplateData(v *types.RequestLaun
 		}
 	}
 
-	if v.DisableApiTermination {
+	{
 		objectKey := object.Key("DisableApiTermination")
 		objectKey.Boolean(v.DisableApiTermination)
 	}
 
-	if v.EbsOptimized {
+	{
 		objectKey := object.Key("EbsOptimized")
 		objectKey.Boolean(v.EbsOptimized)
 	}
@@ -28795,7 +28795,7 @@ func awsEc2query_serializeDocumentRequestSpotLaunchSpecification(v *types.Reques
 		}
 	}
 
-	if v.EbsOptimized {
+	{
 		objectKey := object.Key("EbsOptimized")
 		objectKey.Boolean(v.EbsOptimized)
 	}
@@ -28923,7 +28923,7 @@ func awsEc2query_serializeDocumentReservedInstanceLimitPrice(v *types.ReservedIn
 	object := value.Object()
 	_ = object
 
-	if v.Amount != 0 {
+	{
 		objectKey := object.Key("Amount")
 		objectKey.Double(v.Amount)
 	}
@@ -28945,7 +28945,7 @@ func awsEc2query_serializeDocumentReservedInstancesConfiguration(v *types.Reserv
 		objectKey.String(*v.AvailabilityZone)
 	}
 
-	if v.InstanceCount != 0 {
+	{
 		objectKey := object.Key("InstanceCount")
 		objectKey.Integer(v.InstanceCount)
 	}
@@ -29140,7 +29140,7 @@ func awsEc2query_serializeDocumentScheduledInstanceRecurrenceRequest(v *types.Sc
 		objectKey.String(*v.Frequency)
 	}
 
-	if v.Interval != 0 {
+	{
 		objectKey := object.Key("Interval")
 		objectKey.Integer(v.Interval)
 	}
@@ -29152,7 +29152,7 @@ func awsEc2query_serializeDocumentScheduledInstanceRecurrenceRequest(v *types.Sc
 		}
 	}
 
-	if v.OccurrenceRelativeToEnd {
+	{
 		objectKey := object.Key("OccurrenceRelativeToEnd")
 		objectKey.Boolean(v.OccurrenceRelativeToEnd)
 	}
@@ -29213,17 +29213,17 @@ func awsEc2query_serializeDocumentScheduledInstancesEbs(v *types.ScheduledInstan
 	object := value.Object()
 	_ = object
 
-	if v.DeleteOnTermination {
+	{
 		objectKey := object.Key("DeleteOnTermination")
 		objectKey.Boolean(v.DeleteOnTermination)
 	}
 
-	if v.Encrypted {
+	{
 		objectKey := object.Key("Encrypted")
 		objectKey.Boolean(v.Encrypted)
 	}
 
-	if v.Iops != 0 {
+	{
 		objectKey := object.Key("Iops")
 		objectKey.Integer(v.Iops)
 	}
@@ -29233,7 +29233,7 @@ func awsEc2query_serializeDocumentScheduledInstancesEbs(v *types.ScheduledInstan
 		objectKey.String(*v.SnapshotId)
 	}
 
-	if v.VolumeSize != 0 {
+	{
 		objectKey := object.Key("VolumeSize")
 		objectKey.Integer(v.VolumeSize)
 	}
@@ -29301,7 +29301,7 @@ func awsEc2query_serializeDocumentScheduledInstancesLaunchSpecification(v *types
 		}
 	}
 
-	if v.EbsOptimized {
+	{
 		objectKey := object.Key("EbsOptimized")
 		objectKey.Boolean(v.EbsOptimized)
 	}
@@ -29383,7 +29383,7 @@ func awsEc2query_serializeDocumentScheduledInstancesMonitoring(v *types.Schedule
 	object := value.Object()
 	_ = object
 
-	if v.Enabled {
+	{
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(v.Enabled)
 	}
@@ -29395,12 +29395,12 @@ func awsEc2query_serializeDocumentScheduledInstancesNetworkInterface(v *types.Sc
 	object := value.Object()
 	_ = object
 
-	if v.AssociatePublicIpAddress {
+	{
 		objectKey := object.Key("AssociatePublicIpAddress")
 		objectKey.Boolean(v.AssociatePublicIpAddress)
 	}
 
-	if v.DeleteOnTermination {
+	{
 		objectKey := object.Key("DeleteOnTermination")
 		objectKey.Boolean(v.DeleteOnTermination)
 	}
@@ -29410,7 +29410,7 @@ func awsEc2query_serializeDocumentScheduledInstancesNetworkInterface(v *types.Sc
 		objectKey.String(*v.Description)
 	}
 
-	if v.DeviceIndex != 0 {
+	{
 		objectKey := object.Key("DeviceIndex")
 		objectKey.Integer(v.DeviceIndex)
 	}
@@ -29422,7 +29422,7 @@ func awsEc2query_serializeDocumentScheduledInstancesNetworkInterface(v *types.Sc
 		}
 	}
 
-	if v.Ipv6AddressCount != 0 {
+	{
 		objectKey := object.Key("Ipv6AddressCount")
 		objectKey.Integer(v.Ipv6AddressCount)
 	}
@@ -29451,7 +29451,7 @@ func awsEc2query_serializeDocumentScheduledInstancesNetworkInterface(v *types.Sc
 		}
 	}
 
-	if v.SecondaryPrivateIpAddressCount != 0 {
+	{
 		objectKey := object.Key("SecondaryPrivateIpAddressCount")
 		objectKey.Integer(v.SecondaryPrivateIpAddressCount)
 	}
@@ -29500,7 +29500,7 @@ func awsEc2query_serializeDocumentScheduledInstancesPrivateIpAddressConfig(v *ty
 	object := value.Object()
 	_ = object
 
-	if v.Primary {
+	{
 		objectKey := object.Key("Primary")
 		objectKey.Boolean(v.Primary)
 	}
@@ -29656,7 +29656,7 @@ func awsEc2query_serializeDocumentSpotFleetLaunchSpecification(v *types.SpotFlee
 		}
 	}
 
-	if v.EbsOptimized {
+	{
 		objectKey := object.Key("EbsOptimized")
 		objectKey.Boolean(v.EbsOptimized)
 	}
@@ -29743,7 +29743,7 @@ func awsEc2query_serializeDocumentSpotFleetLaunchSpecification(v *types.SpotFlee
 		objectKey.String(*v.UserData)
 	}
 
-	if v.WeightedCapacity != 0 {
+	{
 		objectKey := object.Key("WeightedCapacity")
 		objectKey.Double(v.WeightedCapacity)
 	}
@@ -29755,7 +29755,7 @@ func awsEc2query_serializeDocumentSpotFleetMonitoring(v *types.SpotFleetMonitori
 	object := value.Object()
 	_ = object
 
-	if v.Enabled {
+	{
 		objectKey := object.Key("Enabled")
 		objectKey.Boolean(v.Enabled)
 	}
@@ -29782,7 +29782,7 @@ func awsEc2query_serializeDocumentSpotFleetRequestConfigData(v *types.SpotFleetR
 		objectKey.String(string(v.ExcessCapacityTerminationPolicy))
 	}
 
-	if v.FulfilledCapacity != 0 {
+	{
 		objectKey := object.Key("FulfilledCapacity")
 		objectKey.Double(v.FulfilledCapacity)
 	}
@@ -29797,7 +29797,7 @@ func awsEc2query_serializeDocumentSpotFleetRequestConfigData(v *types.SpotFleetR
 		objectKey.String(string(v.InstanceInterruptionBehavior))
 	}
 
-	if v.InstancePoolsToUseCount != 0 {
+	{
 		objectKey := object.Key("InstancePoolsToUseCount")
 		objectKey.Integer(v.InstancePoolsToUseCount)
 	}
@@ -29828,7 +29828,7 @@ func awsEc2query_serializeDocumentSpotFleetRequestConfigData(v *types.SpotFleetR
 		objectKey.String(string(v.OnDemandAllocationStrategy))
 	}
 
-	if v.OnDemandFulfilledCapacity != 0 {
+	{
 		objectKey := object.Key("OnDemandFulfilledCapacity")
 		objectKey.Double(v.OnDemandFulfilledCapacity)
 	}
@@ -29838,12 +29838,12 @@ func awsEc2query_serializeDocumentSpotFleetRequestConfigData(v *types.SpotFleetR
 		objectKey.String(*v.OnDemandMaxTotalPrice)
 	}
 
-	if v.OnDemandTargetCapacity != 0 {
+	{
 		objectKey := object.Key("OnDemandTargetCapacity")
 		objectKey.Integer(v.OnDemandTargetCapacity)
 	}
 
-	if v.ReplaceUnhealthyInstances {
+	{
 		objectKey := object.Key("ReplaceUnhealthyInstances")
 		objectKey.Boolean(v.ReplaceUnhealthyInstances)
 	}
@@ -29877,7 +29877,7 @@ func awsEc2query_serializeDocumentSpotFleetRequestConfigData(v *types.SpotFleetR
 		objectKey.Integer(v.TargetCapacity)
 	}
 
-	if v.TerminateInstancesWithExpiration {
+	{
 		objectKey := object.Key("TerminateInstancesWithExpiration")
 		objectKey.Boolean(v.TerminateInstancesWithExpiration)
 	}
@@ -29978,7 +29978,7 @@ func awsEc2query_serializeDocumentSpotMarketOptions(v *types.SpotMarketOptions, 
 	object := value.Object()
 	_ = object
 
-	if v.BlockDurationMinutes != 0 {
+	{
 		objectKey := object.Key("BlockDurationMinutes")
 		objectKey.Integer(v.BlockDurationMinutes)
 	}
@@ -30020,7 +30020,7 @@ func awsEc2query_serializeDocumentSpotOptionsRequest(v *types.SpotOptionsRequest
 		objectKey.String(string(v.InstanceInterruptionBehavior))
 	}
 
-	if v.InstancePoolsToUseCount != 0 {
+	{
 		objectKey := object.Key("InstancePoolsToUseCount")
 		objectKey.Integer(v.InstancePoolsToUseCount)
 	}
@@ -30037,17 +30037,17 @@ func awsEc2query_serializeDocumentSpotOptionsRequest(v *types.SpotOptionsRequest
 		objectKey.String(*v.MaxTotalPrice)
 	}
 
-	if v.MinTargetCapacity != 0 {
+	{
 		objectKey := object.Key("MinTargetCapacity")
 		objectKey.Integer(v.MinTargetCapacity)
 	}
 
-	if v.SingleAvailabilityZone {
+	{
 		objectKey := object.Key("SingleAvailabilityZone")
 		objectKey.Boolean(v.SingleAvailabilityZone)
 	}
 
-	if v.SingleInstanceType {
+	{
 		objectKey := object.Key("SingleInstanceType")
 		objectKey.Boolean(v.SingleInstanceType)
 	}
@@ -30196,12 +30196,12 @@ func awsEc2query_serializeDocumentTargetCapacitySpecificationRequest(v *types.Ta
 		objectKey.String(string(v.DefaultTargetCapacityType))
 	}
 
-	if v.OnDemandTargetCapacity != 0 {
+	{
 		objectKey := object.Key("OnDemandTargetCapacity")
 		objectKey.Integer(v.OnDemandTargetCapacity)
 	}
 
-	if v.SpotTargetCapacity != 0 {
+	{
 		objectKey := object.Key("SpotTargetCapacity")
 		objectKey.Integer(v.SpotTargetCapacity)
 	}
@@ -30218,7 +30218,7 @@ func awsEc2query_serializeDocumentTargetConfigurationRequest(v *types.TargetConf
 	object := value.Object()
 	_ = object
 
-	if v.InstanceCount != 0 {
+	{
 		objectKey := object.Key("InstanceCount")
 		objectKey.Integer(v.InstanceCount)
 	}
@@ -30330,12 +30330,12 @@ func awsEc2query_serializeDocumentTrafficMirrorPortRangeRequest(v *types.Traffic
 	object := value.Object()
 	_ = object
 
-	if v.FromPort != 0 {
+	{
 		objectKey := object.Key("FromPort")
 		objectKey.Integer(v.FromPort)
 	}
 
-	if v.ToPort != 0 {
+	{
 		objectKey := object.Key("ToPort")
 		objectKey.Integer(v.ToPort)
 	}
@@ -30425,7 +30425,7 @@ func awsEc2query_serializeDocumentTransitGatewayConnectRequestBgpOptions(v *type
 	object := value.Object()
 	_ = object
 
-	if v.PeerAsn != 0 {
+	{
 		objectKey := object.Key("PeerAsn")
 		objectKey.Long(v.PeerAsn)
 	}
@@ -30476,7 +30476,7 @@ func awsEc2query_serializeDocumentTransitGatewayRequestOptions(v *types.TransitG
 	object := value.Object()
 	_ = object
 
-	if v.AmazonSideAsn != 0 {
+	{
 		objectKey := object.Key("AmazonSideAsn")
 		objectKey.Long(v.AmazonSideAsn)
 	}
@@ -30831,7 +30831,7 @@ func awsEc2query_serializeDocumentVpnConnectionOptionsSpecification(v *types.Vpn
 	object := value.Object()
 	_ = object
 
-	if v.EnableAcceleration {
+	{
 		objectKey := object.Key("EnableAcceleration")
 		objectKey.Boolean(v.EnableAcceleration)
 	}
@@ -30856,7 +30856,7 @@ func awsEc2query_serializeDocumentVpnConnectionOptionsSpecification(v *types.Vpn
 		objectKey.String(*v.RemoteIpv6NetworkCidr)
 	}
 
-	if v.StaticRoutesOnly {
+	{
 		objectKey := object.Key("StaticRoutesOnly")
 		objectKey.Boolean(v.StaticRoutesOnly)
 	}
@@ -30898,7 +30898,7 @@ func awsEc2query_serializeDocumentVpnTunnelOptionsSpecification(v *types.VpnTunn
 		objectKey.String(*v.DPDTimeoutAction)
 	}
 
-	if v.DPDTimeoutSeconds != 0 {
+	{
 		objectKey := object.Key("DPDTimeoutSeconds")
 		objectKey.Integer(v.DPDTimeoutSeconds)
 	}
@@ -30931,7 +30931,7 @@ func awsEc2query_serializeDocumentVpnTunnelOptionsSpecification(v *types.VpnTunn
 		}
 	}
 
-	if v.Phase1LifetimeSeconds != 0 {
+	{
 		objectKey := object.Key("Phase1LifetimeSeconds")
 		objectKey.Integer(v.Phase1LifetimeSeconds)
 	}
@@ -30957,7 +30957,7 @@ func awsEc2query_serializeDocumentVpnTunnelOptionsSpecification(v *types.VpnTunn
 		}
 	}
 
-	if v.Phase2LifetimeSeconds != 0 {
+	{
 		objectKey := object.Key("Phase2LifetimeSeconds")
 		objectKey.Integer(v.Phase2LifetimeSeconds)
 	}
@@ -30967,17 +30967,17 @@ func awsEc2query_serializeDocumentVpnTunnelOptionsSpecification(v *types.VpnTunn
 		objectKey.String(*v.PreSharedKey)
 	}
 
-	if v.RekeyFuzzPercentage != 0 {
+	{
 		objectKey := object.Key("RekeyFuzzPercentage")
 		objectKey.Integer(v.RekeyFuzzPercentage)
 	}
 
-	if v.RekeyMarginTimeSeconds != 0 {
+	{
 		objectKey := object.Key("RekeyMarginTimeSeconds")
 		objectKey.Integer(v.RekeyMarginTimeSeconds)
 	}
 
-	if v.ReplayWindowSize != 0 {
+	{
 		objectKey := object.Key("ReplayWindowSize")
 		objectKey.Integer(v.ReplayWindowSize)
 	}
@@ -31045,7 +31045,7 @@ func awsEc2query_serializeOpDocumentAcceptReservedInstancesExchangeQuoteInput(v 
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31071,7 +31071,7 @@ func awsEc2query_serializeOpDocumentAcceptTransitGatewayMulticastDomainAssociati
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31100,7 +31100,7 @@ func awsEc2query_serializeOpDocumentAcceptTransitGatewayPeeringAttachmentInput(v
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31117,7 +31117,7 @@ func awsEc2query_serializeOpDocumentAcceptTransitGatewayVpcAttachmentInput(v *Ac
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31134,7 +31134,7 @@ func awsEc2query_serializeOpDocumentAcceptVpcEndpointConnectionsInput(v *AcceptV
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31158,7 +31158,7 @@ func awsEc2query_serializeOpDocumentAcceptVpcPeeringConnectionInput(v *AcceptVpc
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31180,7 +31180,7 @@ func awsEc2query_serializeOpDocumentAdvertiseByoipCidrInput(v *AdvertiseByoipCid
 		objectKey.String(*v.Cidr)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31207,7 +31207,7 @@ func awsEc2query_serializeOpDocumentAllocateAddressInput(v *AllocateAddressInput
 		objectKey.String(string(v.Domain))
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31290,7 +31290,7 @@ func awsEc2query_serializeOpDocumentApplySecurityGroupsToClientVpnTargetNetworkI
 		objectKey.String(*v.ClientVpnEndpointId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31314,7 +31314,7 @@ func awsEc2query_serializeOpDocumentAssignIpv6AddressesInput(v *AssignIpv6Addres
 	object := value.Object()
 	_ = object
 
-	if v.Ipv6AddressCount != 0 {
+	{
 		objectKey := object.Key("Ipv6AddressCount")
 		objectKey.Integer(v.Ipv6AddressCount)
 	}
@@ -31338,7 +31338,7 @@ func awsEc2query_serializeOpDocumentAssignPrivateIpAddressesInput(v *AssignPriva
 	object := value.Object()
 	_ = object
 
-	if v.AllowReassignment {
+	{
 		objectKey := object.Key("AllowReassignment")
 		objectKey.Boolean(v.AllowReassignment)
 	}
@@ -31355,7 +31355,7 @@ func awsEc2query_serializeOpDocumentAssignPrivateIpAddressesInput(v *AssignPriva
 		}
 	}
 
-	if v.SecondaryPrivateIpAddressCount != 0 {
+	{
 		objectKey := object.Key("SecondaryPrivateIpAddressCount")
 		objectKey.Integer(v.SecondaryPrivateIpAddressCount)
 	}
@@ -31372,12 +31372,12 @@ func awsEc2query_serializeOpDocumentAssociateAddressInput(v *AssociateAddressInp
 		objectKey.String(*v.AllocationId)
 	}
 
-	if v.AllowReassociation {
+	{
 		objectKey := object.Key("AllowReassociation")
 		objectKey.Boolean(v.AllowReassociation)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31419,7 +31419,7 @@ func awsEc2query_serializeOpDocumentAssociateClientVpnTargetNetworkInput(v *Asso
 		objectKey.String(*v.ClientVpnEndpointId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31441,7 +31441,7 @@ func awsEc2query_serializeOpDocumentAssociateDhcpOptionsInput(v *AssociateDhcpOp
 		objectKey.String(*v.DhcpOptionsId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31463,7 +31463,7 @@ func awsEc2query_serializeOpDocumentAssociateEnclaveCertificateIamRoleInput(v *A
 		objectKey.String(*v.CertificateArn)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31499,7 +31499,7 @@ func awsEc2query_serializeOpDocumentAssociateRouteTableInput(v *AssociateRouteTa
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31543,7 +31543,7 @@ func awsEc2query_serializeOpDocumentAssociateTransitGatewayMulticastDomainInput(
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31572,7 +31572,7 @@ func awsEc2query_serializeOpDocumentAssociateTransitGatewayRouteTableInput(v *As
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31594,7 +31594,7 @@ func awsEc2query_serializeOpDocumentAssociateVpcCidrBlockInput(v *AssociateVpcCi
 	object := value.Object()
 	_ = object
 
-	if v.AmazonProvidedIpv6CidrBlock {
+	{
 		objectKey := object.Key("AmazonProvidedIpv6CidrBlock")
 		objectKey.Boolean(v.AmazonProvidedIpv6CidrBlock)
 	}
@@ -31631,7 +31631,7 @@ func awsEc2query_serializeOpDocumentAttachClassicLinkVpcInput(v *AttachClassicLi
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31660,7 +31660,7 @@ func awsEc2query_serializeOpDocumentAttachInternetGatewayInput(v *AttachInternet
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31687,7 +31687,7 @@ func awsEc2query_serializeOpDocumentAttachNetworkInterfaceInput(v *AttachNetwork
 		objectKey.Integer(v.DeviceIndex)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31697,7 +31697,7 @@ func awsEc2query_serializeOpDocumentAttachNetworkInterfaceInput(v *AttachNetwork
 		objectKey.String(*v.InstanceId)
 	}
 
-	if v.NetworkCardIndex != 0 {
+	{
 		objectKey := object.Key("NetworkCardIndex")
 		objectKey.Integer(v.NetworkCardIndex)
 	}
@@ -31719,7 +31719,7 @@ func awsEc2query_serializeOpDocumentAttachVolumeInput(v *AttachVolumeInput, valu
 		objectKey.String(*v.Device)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31741,7 +31741,7 @@ func awsEc2query_serializeOpDocumentAttachVpnGatewayInput(v *AttachVpnGatewayInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31768,7 +31768,7 @@ func awsEc2query_serializeOpDocumentAuthorizeClientVpnIngressInput(v *AuthorizeC
 		objectKey.String(*v.AccessGroupId)
 	}
 
-	if v.AuthorizeAllGroups {
+	{
 		objectKey := object.Key("AuthorizeAllGroups")
 		objectKey.Boolean(v.AuthorizeAllGroups)
 	}
@@ -31788,7 +31788,7 @@ func awsEc2query_serializeOpDocumentAuthorizeClientVpnIngressInput(v *AuthorizeC
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31810,12 +31810,12 @@ func awsEc2query_serializeOpDocumentAuthorizeSecurityGroupEgressInput(v *Authori
 		objectKey.String(*v.CidrIp)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.FromPort != 0 {
+	{
 		objectKey := object.Key("FromPort")
 		objectKey.Integer(v.FromPort)
 	}
@@ -31847,7 +31847,7 @@ func awsEc2query_serializeOpDocumentAuthorizeSecurityGroupEgressInput(v *Authori
 		objectKey.String(*v.SourceSecurityGroupOwnerId)
 	}
 
-	if v.ToPort != 0 {
+	{
 		objectKey := object.Key("ToPort")
 		objectKey.Integer(v.ToPort)
 	}
@@ -31864,12 +31864,12 @@ func awsEc2query_serializeOpDocumentAuthorizeSecurityGroupIngressInput(v *Author
 		objectKey.String(*v.CidrIp)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.FromPort != 0 {
+	{
 		objectKey := object.Key("FromPort")
 		objectKey.Integer(v.FromPort)
 	}
@@ -31906,7 +31906,7 @@ func awsEc2query_serializeOpDocumentAuthorizeSecurityGroupIngressInput(v *Author
 		objectKey.String(*v.SourceSecurityGroupOwnerId)
 	}
 
-	if v.ToPort != 0 {
+	{
 		objectKey := object.Key("ToPort")
 		objectKey.Integer(v.ToPort)
 	}
@@ -31918,7 +31918,7 @@ func awsEc2query_serializeOpDocumentBundleInstanceInput(v *BundleInstanceInput, 
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31947,7 +31947,7 @@ func awsEc2query_serializeOpDocumentCancelBundleTaskInput(v *CancelBundleTaskInp
 		objectKey.String(*v.BundleId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31964,7 +31964,7 @@ func awsEc2query_serializeOpDocumentCancelCapacityReservationInput(v *CancelCapa
 		objectKey.String(*v.CapacityReservationId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -31981,7 +31981,7 @@ func awsEc2query_serializeOpDocumentCancelConversionTaskInput(v *CancelConversio
 		objectKey.String(*v.ConversionTaskId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32015,7 +32015,7 @@ func awsEc2query_serializeOpDocumentCancelImportTaskInput(v *CancelImportTaskInp
 		objectKey.String(*v.CancelReason)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32044,7 +32044,7 @@ func awsEc2query_serializeOpDocumentCancelSpotFleetRequestsInput(v *CancelSpotFl
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32068,7 +32068,7 @@ func awsEc2query_serializeOpDocumentCancelSpotInstanceRequestsInput(v *CancelSpo
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32087,7 +32087,7 @@ func awsEc2query_serializeOpDocumentConfirmProductInstanceInput(v *ConfirmProduc
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32119,7 +32119,7 @@ func awsEc2query_serializeOpDocumentCopyFpgaImageInput(v *CopyFpgaImageInput, va
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32156,12 +32156,12 @@ func awsEc2query_serializeOpDocumentCopyImageInput(v *CopyImageInput, value quer
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.Encrypted {
+	{
 		objectKey := object.Key("Encrypted")
 		objectKey.Boolean(v.Encrypted)
 	}
@@ -32203,12 +32203,12 @@ func awsEc2query_serializeOpDocumentCopySnapshotInput(v *CopySnapshotInput, valu
 		objectKey.String(*v.destinationRegion)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.Encrypted {
+	{
 		objectKey := object.Key("Encrypted")
 		objectKey.Boolean(v.Encrypted)
 	}
@@ -32262,12 +32262,12 @@ func awsEc2query_serializeOpDocumentCreateCapacityReservationInput(v *CreateCapa
 		objectKey.String(*v.ClientToken)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.EbsOptimized {
+	{
 		objectKey := object.Key("EbsOptimized")
 		objectKey.Boolean(v.EbsOptimized)
 	}
@@ -32282,7 +32282,7 @@ func awsEc2query_serializeOpDocumentCreateCapacityReservationInput(v *CreateCapa
 		objectKey.String(string(v.EndDateType))
 	}
 
-	if v.EphemeralStorage {
+	{
 		objectKey := object.Key("EphemeralStorage")
 		objectKey.Boolean(v.EphemeralStorage)
 	}
@@ -32331,7 +32331,7 @@ func awsEc2query_serializeOpDocumentCreateCarrierGatewayInput(v *CreateCarrierGa
 		objectKey.String(*v.ClientToken)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32398,7 +32398,7 @@ func awsEc2query_serializeOpDocumentCreateClientVpnEndpointInput(v *CreateClient
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32420,7 +32420,7 @@ func awsEc2query_serializeOpDocumentCreateClientVpnEndpointInput(v *CreateClient
 		objectKey.String(*v.ServerCertificateArn)
 	}
 
-	if v.SplitTunnel {
+	{
 		objectKey := object.Key("SplitTunnel")
 		objectKey.Boolean(v.SplitTunnel)
 	}
@@ -32442,7 +32442,7 @@ func awsEc2query_serializeOpDocumentCreateClientVpnEndpointInput(v *CreateClient
 		objectKey.String(*v.VpcId)
 	}
 
-	if v.VpnPort != 0 {
+	{
 		objectKey := object.Key("VpnPort")
 		objectKey.Integer(v.VpnPort)
 	}
@@ -32474,7 +32474,7 @@ func awsEc2query_serializeOpDocumentCreateClientVpnRouteInput(v *CreateClientVpn
 		objectKey.String(*v.DestinationCidrBlock)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32506,7 +32506,7 @@ func awsEc2query_serializeOpDocumentCreateCustomerGatewayInput(v *CreateCustomer
 		objectKey.String(*v.DeviceName)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32540,7 +32540,7 @@ func awsEc2query_serializeOpDocumentCreateDefaultSubnetInput(v *CreateDefaultSub
 		objectKey.String(*v.AvailabilityZone)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32552,7 +32552,7 @@ func awsEc2query_serializeOpDocumentCreateDefaultVpcInput(v *CreateDefaultVpcInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32571,7 +32571,7 @@ func awsEc2query_serializeOpDocumentCreateDhcpOptionsInput(v *CreateDhcpOptionsI
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32595,7 +32595,7 @@ func awsEc2query_serializeOpDocumentCreateEgressOnlyInternetGatewayInput(v *Crea
 		objectKey.String(*v.ClientToken)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32624,7 +32624,7 @@ func awsEc2query_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value 
 		objectKey.String(*v.ClientToken)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32648,7 +32648,7 @@ func awsEc2query_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value 
 		}
 	}
 
-	if v.ReplaceUnhealthyInstances {
+	{
 		objectKey := object.Key("ReplaceUnhealthyInstances")
 		objectKey.Boolean(v.ReplaceUnhealthyInstances)
 	}
@@ -32674,7 +32674,7 @@ func awsEc2query_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value 
 		}
 	}
 
-	if v.TerminateInstancesWithExpiration {
+	{
 		objectKey := object.Key("TerminateInstancesWithExpiration")
 		objectKey.Boolean(v.TerminateInstancesWithExpiration)
 	}
@@ -32711,7 +32711,7 @@ func awsEc2query_serializeOpDocumentCreateFlowLogsInput(v *CreateFlowLogsInput, 
 		objectKey.String(*v.DeliverLogsPermissionArn)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32736,7 +32736,7 @@ func awsEc2query_serializeOpDocumentCreateFlowLogsInput(v *CreateFlowLogsInput, 
 		objectKey.String(*v.LogGroupName)
 	}
 
-	if v.MaxAggregationInterval != 0 {
+	{
 		objectKey := object.Key("MaxAggregationInterval")
 		objectKey.Integer(v.MaxAggregationInterval)
 	}
@@ -32782,7 +32782,7 @@ func awsEc2query_serializeOpDocumentCreateFpgaImageInput(v *CreateFpgaImageInput
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32832,7 +32832,7 @@ func awsEc2query_serializeOpDocumentCreateImageInput(v *CreateImageInput, value 
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32847,7 +32847,7 @@ func awsEc2query_serializeOpDocumentCreateImageInput(v *CreateImageInput, value 
 		objectKey.String(*v.Name)
 	}
 
-	if v.NoReboot {
+	{
 		objectKey := object.Key("NoReboot")
 		objectKey.Boolean(v.NoReboot)
 	}
@@ -32902,7 +32902,7 @@ func awsEc2query_serializeOpDocumentCreateInternetGatewayInput(v *CreateInternet
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32921,7 +32921,7 @@ func awsEc2query_serializeOpDocumentCreateKeyPairInput(v *CreateKeyPairInput, va
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32950,7 +32950,7 @@ func awsEc2query_serializeOpDocumentCreateLaunchTemplateInput(v *CreateLaunchTem
 		objectKey.String(*v.ClientToken)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -32991,7 +32991,7 @@ func awsEc2query_serializeOpDocumentCreateLaunchTemplateVersionInput(v *CreateLa
 		objectKey.String(*v.ClientToken)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33035,7 +33035,7 @@ func awsEc2query_serializeOpDocumentCreateLocalGatewayRouteInput(v *CreateLocalG
 		objectKey.String(*v.DestinationCidrBlock)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33057,7 +33057,7 @@ func awsEc2query_serializeOpDocumentCreateLocalGatewayRouteTableVpcAssociationIn
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33096,7 +33096,7 @@ func awsEc2query_serializeOpDocumentCreateManagedPrefixListInput(v *CreateManage
 		objectKey.String(*v.ClientToken)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33142,7 +33142,7 @@ func awsEc2query_serializeOpDocumentCreateNatGatewayInput(v *CreateNatGatewayInp
 		objectKey.String(*v.ClientToken)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33171,7 +33171,7 @@ func awsEc2query_serializeOpDocumentCreateNetworkAclEntryInput(v *CreateNetworkA
 		objectKey.String(*v.CidrBlock)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33227,7 +33227,7 @@ func awsEc2query_serializeOpDocumentCreateNetworkAclInput(v *CreateNetworkAclInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33266,12 +33266,12 @@ func awsEc2query_serializeOpDocumentCreateNetworkInsightsPathInput(v *CreateNetw
 		objectKey.String(*v.DestinationIp)
 	}
 
-	if v.DestinationPort != 0 {
+	{
 		objectKey := object.Key("DestinationPort")
 		objectKey.Integer(v.DestinationPort)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33310,7 +33310,7 @@ func awsEc2query_serializeOpDocumentCreateNetworkInterfaceInput(v *CreateNetwork
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33327,7 +33327,7 @@ func awsEc2query_serializeOpDocumentCreateNetworkInterfaceInput(v *CreateNetwork
 		objectKey.String(string(v.InterfaceType))
 	}
 
-	if v.Ipv6AddressCount != 0 {
+	{
 		objectKey := object.Key("Ipv6AddressCount")
 		objectKey.Integer(v.Ipv6AddressCount)
 	}
@@ -33351,7 +33351,7 @@ func awsEc2query_serializeOpDocumentCreateNetworkInterfaceInput(v *CreateNetwork
 		}
 	}
 
-	if v.SecondaryPrivateIpAddressCount != 0 {
+	{
 		objectKey := object.Key("SecondaryPrivateIpAddressCount")
 		objectKey.Integer(v.SecondaryPrivateIpAddressCount)
 	}
@@ -33385,7 +33385,7 @@ func awsEc2query_serializeOpDocumentCreateNetworkInterfacePermissionInput(v *Cre
 		objectKey.String(*v.AwsService)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33407,7 +33407,7 @@ func awsEc2query_serializeOpDocumentCreatePlacementGroupInput(v *CreatePlacement
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33417,7 +33417,7 @@ func awsEc2query_serializeOpDocumentCreatePlacementGroupInput(v *CreatePlacement
 		objectKey.String(*v.GroupName)
 	}
 
-	if v.PartitionCount != 0 {
+	{
 		objectKey := object.Key("PartitionCount")
 		objectKey.Integer(v.PartitionCount)
 	}
@@ -33490,7 +33490,7 @@ func awsEc2query_serializeOpDocumentCreateRouteInput(v *CreateRouteInput, value 
 		objectKey.String(*v.DestinationPrefixListId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33552,7 +33552,7 @@ func awsEc2query_serializeOpDocumentCreateRouteTableInput(v *CreateRouteTableInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33581,7 +33581,7 @@ func awsEc2query_serializeOpDocumentCreateSecurityGroupInput(v *CreateSecurityGr
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33615,7 +33615,7 @@ func awsEc2query_serializeOpDocumentCreateSnapshotInput(v *CreateSnapshotInput, 
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33649,7 +33649,7 @@ func awsEc2query_serializeOpDocumentCreateSnapshotsInput(v *CreateSnapshotsInput
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33680,7 +33680,7 @@ func awsEc2query_serializeOpDocumentCreateSpotDatafeedSubscriptionInput(v *Creat
 		objectKey.String(*v.Bucket)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33712,7 +33712,7 @@ func awsEc2query_serializeOpDocumentCreateSubnetInput(v *CreateSubnetInput, valu
 		objectKey.String(*v.CidrBlock)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33746,7 +33746,7 @@ func awsEc2query_serializeOpDocumentCreateTagsInput(v *CreateTagsInput, value qu
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33782,7 +33782,7 @@ func awsEc2query_serializeOpDocumentCreateTrafficMirrorFilterInput(v *CreateTraf
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33823,12 +33823,12 @@ func awsEc2query_serializeOpDocumentCreateTrafficMirrorFilterRuleInput(v *Create
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.Protocol != 0 {
+	{
 		objectKey := object.Key("Protocol")
 		objectKey.Integer(v.Protocol)
 	}
@@ -33882,7 +33882,7 @@ func awsEc2query_serializeOpDocumentCreateTrafficMirrorSessionInput(v *CreateTra
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33892,7 +33892,7 @@ func awsEc2query_serializeOpDocumentCreateTrafficMirrorSessionInput(v *CreateTra
 		objectKey.String(*v.NetworkInterfaceId)
 	}
 
-	if v.PacketLength != 0 {
+	{
 		objectKey := object.Key("PacketLength")
 		objectKey.Integer(v.PacketLength)
 	}
@@ -33919,7 +33919,7 @@ func awsEc2query_serializeOpDocumentCreateTrafficMirrorSessionInput(v *CreateTra
 		objectKey.String(*v.TrafficMirrorTargetId)
 	}
 
-	if v.VirtualNetworkId != 0 {
+	{
 		objectKey := object.Key("VirtualNetworkId")
 		objectKey.Integer(v.VirtualNetworkId)
 	}
@@ -33941,7 +33941,7 @@ func awsEc2query_serializeOpDocumentCreateTrafficMirrorTargetInput(v *CreateTraf
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -33970,7 +33970,7 @@ func awsEc2query_serializeOpDocumentCreateTransitGatewayConnectInput(v *CreateTr
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34008,7 +34008,7 @@ func awsEc2query_serializeOpDocumentCreateTransitGatewayConnectPeerInput(v *Crea
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34054,7 +34054,7 @@ func awsEc2query_serializeOpDocumentCreateTransitGatewayInput(v *CreateTransitGa
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34080,7 +34080,7 @@ func awsEc2query_serializeOpDocumentCreateTransitGatewayMulticastDomainInput(v *
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34111,7 +34111,7 @@ func awsEc2query_serializeOpDocumentCreateTransitGatewayPeeringAttachmentInput(v
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34150,12 +34150,12 @@ func awsEc2query_serializeOpDocumentCreateTransitGatewayPrefixListReferenceInput
 	object := value.Object()
 	_ = object
 
-	if v.Blackhole {
+	{
 		objectKey := object.Key("Blackhole")
 		objectKey.Boolean(v.Blackhole)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34182,7 +34182,7 @@ func awsEc2query_serializeOpDocumentCreateTransitGatewayRouteInput(v *CreateTran
 	object := value.Object()
 	_ = object
 
-	if v.Blackhole {
+	{
 		objectKey := object.Key("Blackhole")
 		objectKey.Boolean(v.Blackhole)
 	}
@@ -34192,7 +34192,7 @@ func awsEc2query_serializeOpDocumentCreateTransitGatewayRouteInput(v *CreateTran
 		objectKey.String(*v.DestinationCidrBlock)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34214,7 +34214,7 @@ func awsEc2query_serializeOpDocumentCreateTransitGatewayRouteTableInput(v *Creat
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34238,7 +34238,7 @@ func awsEc2query_serializeOpDocumentCreateTransitGatewayVpcAttachmentInput(v *Cr
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34286,17 +34286,17 @@ func awsEc2query_serializeOpDocumentCreateVolumeInput(v *CreateVolumeInput, valu
 		objectKey.String(*v.AvailabilityZone)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.Encrypted {
+	{
 		objectKey := object.Key("Encrypted")
 		objectKey.Boolean(v.Encrypted)
 	}
 
-	if v.Iops != 0 {
+	{
 		objectKey := object.Key("Iops")
 		objectKey.Integer(v.Iops)
 	}
@@ -34306,7 +34306,7 @@ func awsEc2query_serializeOpDocumentCreateVolumeInput(v *CreateVolumeInput, valu
 		objectKey.String(*v.KmsKeyId)
 	}
 
-	if v.MultiAttachEnabled {
+	{
 		objectKey := object.Key("MultiAttachEnabled")
 		objectKey.Boolean(v.MultiAttachEnabled)
 	}
@@ -34316,7 +34316,7 @@ func awsEc2query_serializeOpDocumentCreateVolumeInput(v *CreateVolumeInput, valu
 		objectKey.String(*v.OutpostArn)
 	}
 
-	if v.Size != 0 {
+	{
 		objectKey := object.Key("Size")
 		objectKey.Integer(v.Size)
 	}
@@ -34333,7 +34333,7 @@ func awsEc2query_serializeOpDocumentCreateVolumeInput(v *CreateVolumeInput, valu
 		}
 	}
 
-	if v.Throughput != 0 {
+	{
 		objectKey := object.Key("Throughput")
 		objectKey.Integer(v.Throughput)
 	}
@@ -34367,7 +34367,7 @@ func awsEc2query_serializeOpDocumentCreateVpcEndpointConnectionNotificationInput
 		objectKey.String(*v.ConnectionNotificationArn)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34394,7 +34394,7 @@ func awsEc2query_serializeOpDocumentCreateVpcEndpointInput(v *CreateVpcEndpointI
 		objectKey.String(*v.ClientToken)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34404,7 +34404,7 @@ func awsEc2query_serializeOpDocumentCreateVpcEndpointInput(v *CreateVpcEndpointI
 		objectKey.String(*v.PolicyDocument)
 	}
 
-	if v.PrivateDnsEnabled {
+	{
 		objectKey := object.Key("PrivateDnsEnabled")
 		objectKey.Boolean(v.PrivateDnsEnabled)
 	}
@@ -34459,7 +34459,7 @@ func awsEc2query_serializeOpDocumentCreateVpcEndpointServiceConfigurationInput(v
 	object := value.Object()
 	_ = object
 
-	if v.AcceptanceRequired {
+	{
 		objectKey := object.Key("AcceptanceRequired")
 		objectKey.Boolean(v.AcceptanceRequired)
 	}
@@ -34469,7 +34469,7 @@ func awsEc2query_serializeOpDocumentCreateVpcEndpointServiceConfigurationInput(v
 		objectKey.String(*v.ClientToken)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34507,7 +34507,7 @@ func awsEc2query_serializeOpDocumentCreateVpcInput(v *CreateVpcInput, value quer
 	object := value.Object()
 	_ = object
 
-	if v.AmazonProvidedIpv6CidrBlock {
+	{
 		objectKey := object.Key("AmazonProvidedIpv6CidrBlock")
 		objectKey.Boolean(v.AmazonProvidedIpv6CidrBlock)
 	}
@@ -34517,7 +34517,7 @@ func awsEc2query_serializeOpDocumentCreateVpcInput(v *CreateVpcInput, value quer
 		objectKey.String(*v.CidrBlock)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34556,7 +34556,7 @@ func awsEc2query_serializeOpDocumentCreateVpcPeeringConnectionInput(v *CreateVpc
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34600,7 +34600,7 @@ func awsEc2query_serializeOpDocumentCreateVpnConnectionInput(v *CreateVpnConnect
 		objectKey.String(*v.CustomerGatewayId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34658,7 +34658,7 @@ func awsEc2query_serializeOpDocumentCreateVpnGatewayInput(v *CreateVpnGatewayInp
 	object := value.Object()
 	_ = object
 
-	if v.AmazonSideAsn != 0 {
+	{
 		objectKey := object.Key("AmazonSideAsn")
 		objectKey.Long(v.AmazonSideAsn)
 	}
@@ -34668,7 +34668,7 @@ func awsEc2query_serializeOpDocumentCreateVpnGatewayInput(v *CreateVpnGatewayInp
 		objectKey.String(*v.AvailabilityZone)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34697,7 +34697,7 @@ func awsEc2query_serializeOpDocumentDeleteCarrierGatewayInput(v *DeleteCarrierGa
 		objectKey.String(*v.CarrierGatewayId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34714,7 +34714,7 @@ func awsEc2query_serializeOpDocumentDeleteClientVpnEndpointInput(v *DeleteClient
 		objectKey.String(*v.ClientVpnEndpointId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34736,7 +34736,7 @@ func awsEc2query_serializeOpDocumentDeleteClientVpnRouteInput(v *DeleteClientVpn
 		objectKey.String(*v.DestinationCidrBlock)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34758,7 +34758,7 @@ func awsEc2query_serializeOpDocumentDeleteCustomerGatewayInput(v *DeleteCustomer
 		objectKey.String(*v.CustomerGatewayId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34775,7 +34775,7 @@ func awsEc2query_serializeOpDocumentDeleteDhcpOptionsInput(v *DeleteDhcpOptionsI
 		objectKey.String(*v.DhcpOptionsId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34787,7 +34787,7 @@ func awsEc2query_serializeOpDocumentDeleteEgressOnlyInternetGatewayInput(v *Dele
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34804,7 +34804,7 @@ func awsEc2query_serializeOpDocumentDeleteFleetsInput(v *DeleteFleetsInput, valu
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34828,7 +34828,7 @@ func awsEc2query_serializeOpDocumentDeleteFlowLogsInput(v *DeleteFlowLogsInput, 
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34847,7 +34847,7 @@ func awsEc2query_serializeOpDocumentDeleteFpgaImageInput(v *DeleteFpgaImageInput
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34864,7 +34864,7 @@ func awsEc2query_serializeOpDocumentDeleteInternetGatewayInput(v *DeleteInternet
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34881,7 +34881,7 @@ func awsEc2query_serializeOpDocumentDeleteKeyPairInput(v *DeleteKeyPairInput, va
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34903,7 +34903,7 @@ func awsEc2query_serializeOpDocumentDeleteLaunchTemplateInput(v *DeleteLaunchTem
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34925,7 +34925,7 @@ func awsEc2query_serializeOpDocumentDeleteLaunchTemplateVersionsInput(v *DeleteL
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34959,7 +34959,7 @@ func awsEc2query_serializeOpDocumentDeleteLocalGatewayRouteInput(v *DeleteLocalG
 		objectKey.String(*v.DestinationCidrBlock)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34976,7 +34976,7 @@ func awsEc2query_serializeOpDocumentDeleteLocalGatewayRouteTableVpcAssociationIn
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -34993,7 +34993,7 @@ func awsEc2query_serializeOpDocumentDeleteManagedPrefixListInput(v *DeleteManage
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35010,7 +35010,7 @@ func awsEc2query_serializeOpDocumentDeleteNatGatewayInput(v *DeleteNatGatewayInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35027,7 +35027,7 @@ func awsEc2query_serializeOpDocumentDeleteNetworkAclEntryInput(v *DeleteNetworkA
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35054,7 +35054,7 @@ func awsEc2query_serializeOpDocumentDeleteNetworkAclInput(v *DeleteNetworkAclInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35071,7 +35071,7 @@ func awsEc2query_serializeOpDocumentDeleteNetworkInsightsAnalysisInput(v *Delete
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35088,7 +35088,7 @@ func awsEc2query_serializeOpDocumentDeleteNetworkInsightsPathInput(v *DeleteNetw
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35105,7 +35105,7 @@ func awsEc2query_serializeOpDocumentDeleteNetworkInterfaceInput(v *DeleteNetwork
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35122,12 +35122,12 @@ func awsEc2query_serializeOpDocumentDeleteNetworkInterfacePermissionInput(v *Del
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.Force {
+	{
 		objectKey := object.Key("Force")
 		objectKey.Boolean(v.Force)
 	}
@@ -35144,7 +35144,7 @@ func awsEc2query_serializeOpDocumentDeletePlacementGroupInput(v *DeletePlacement
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35161,7 +35161,7 @@ func awsEc2query_serializeOpDocumentDeleteQueuedReservedInstancesInput(v *Delete
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35195,7 +35195,7 @@ func awsEc2query_serializeOpDocumentDeleteRouteInput(v *DeleteRouteInput, value 
 		objectKey.String(*v.DestinationPrefixListId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35212,7 +35212,7 @@ func awsEc2query_serializeOpDocumentDeleteRouteTableInput(v *DeleteRouteTableInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35229,7 +35229,7 @@ func awsEc2query_serializeOpDocumentDeleteSecurityGroupInput(v *DeleteSecurityGr
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35251,7 +35251,7 @@ func awsEc2query_serializeOpDocumentDeleteSnapshotInput(v *DeleteSnapshotInput, 
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35268,7 +35268,7 @@ func awsEc2query_serializeOpDocumentDeleteSpotDatafeedSubscriptionInput(v *Delet
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35280,7 +35280,7 @@ func awsEc2query_serializeOpDocumentDeleteSubnetInput(v *DeleteSubnetInput, valu
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35297,7 +35297,7 @@ func awsEc2query_serializeOpDocumentDeleteTagsInput(v *DeleteTagsInput, value qu
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35323,7 +35323,7 @@ func awsEc2query_serializeOpDocumentDeleteTrafficMirrorFilterInput(v *DeleteTraf
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35340,7 +35340,7 @@ func awsEc2query_serializeOpDocumentDeleteTrafficMirrorFilterRuleInput(v *Delete
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35357,7 +35357,7 @@ func awsEc2query_serializeOpDocumentDeleteTrafficMirrorSessionInput(v *DeleteTra
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35374,7 +35374,7 @@ func awsEc2query_serializeOpDocumentDeleteTrafficMirrorTargetInput(v *DeleteTraf
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35391,7 +35391,7 @@ func awsEc2query_serializeOpDocumentDeleteTransitGatewayConnectInput(v *DeleteTr
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35408,7 +35408,7 @@ func awsEc2query_serializeOpDocumentDeleteTransitGatewayConnectPeerInput(v *Dele
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35425,7 +35425,7 @@ func awsEc2query_serializeOpDocumentDeleteTransitGatewayInput(v *DeleteTransitGa
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35442,7 +35442,7 @@ func awsEc2query_serializeOpDocumentDeleteTransitGatewayMulticastDomainInput(v *
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35459,7 +35459,7 @@ func awsEc2query_serializeOpDocumentDeleteTransitGatewayPeeringAttachmentInput(v
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35476,7 +35476,7 @@ func awsEc2query_serializeOpDocumentDeleteTransitGatewayPrefixListReferenceInput
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35503,7 +35503,7 @@ func awsEc2query_serializeOpDocumentDeleteTransitGatewayRouteInput(v *DeleteTran
 		objectKey.String(*v.DestinationCidrBlock)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35520,7 +35520,7 @@ func awsEc2query_serializeOpDocumentDeleteTransitGatewayRouteTableInput(v *Delet
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35537,7 +35537,7 @@ func awsEc2query_serializeOpDocumentDeleteTransitGatewayVpcAttachmentInput(v *De
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35554,7 +35554,7 @@ func awsEc2query_serializeOpDocumentDeleteVolumeInput(v *DeleteVolumeInput, valu
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35578,7 +35578,7 @@ func awsEc2query_serializeOpDocumentDeleteVpcEndpointConnectionNotificationsInpu
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35590,7 +35590,7 @@ func awsEc2query_serializeOpDocumentDeleteVpcEndpointServiceConfigurationsInput(
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35609,7 +35609,7 @@ func awsEc2query_serializeOpDocumentDeleteVpcEndpointsInput(v *DeleteVpcEndpoint
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35628,7 +35628,7 @@ func awsEc2query_serializeOpDocumentDeleteVpcInput(v *DeleteVpcInput, value quer
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35645,7 +35645,7 @@ func awsEc2query_serializeOpDocumentDeleteVpcPeeringConnectionInput(v *DeleteVpc
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35662,7 +35662,7 @@ func awsEc2query_serializeOpDocumentDeleteVpnConnectionInput(v *DeleteVpnConnect
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35696,7 +35696,7 @@ func awsEc2query_serializeOpDocumentDeleteVpnGatewayInput(v *DeleteVpnGatewayInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35718,7 +35718,7 @@ func awsEc2query_serializeOpDocumentDeprovisionByoipCidrInput(v *DeprovisionByoi
 		objectKey.String(*v.Cidr)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35730,7 +35730,7 @@ func awsEc2query_serializeOpDocumentDeregisterImageInput(v *DeregisterImageInput
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35747,7 +35747,7 @@ func awsEc2query_serializeOpDocumentDeregisterInstanceEventNotificationAttribute
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35766,7 +35766,7 @@ func awsEc2query_serializeOpDocumentDeregisterTransitGatewayMulticastGroupMember
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35795,7 +35795,7 @@ func awsEc2query_serializeOpDocumentDeregisterTransitGatewayMulticastGroupSource
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35831,7 +35831,7 @@ func awsEc2query_serializeOpDocumentDescribeAccountAttributesInput(v *DescribeAc
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35850,7 +35850,7 @@ func awsEc2query_serializeOpDocumentDescribeAddressesInput(v *DescribeAddressesI
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35876,7 +35876,7 @@ func awsEc2query_serializeOpDocumentDescribeAggregateIdFormatInput(v *DescribeAg
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35888,12 +35888,12 @@ func awsEc2query_serializeOpDocumentDescribeAvailabilityZonesInput(v *DescribeAv
 	object := value.Object()
 	_ = object
 
-	if v.AllAvailabilityZones {
+	{
 		objectKey := object.Key("AllAvailabilityZones")
 		objectKey.Boolean(v.AllAvailabilityZones)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35933,7 +35933,7 @@ func awsEc2query_serializeOpDocumentDescribeBundleTasksInput(v *DescribeBundleTa
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35952,7 +35952,7 @@ func awsEc2query_serializeOpDocumentDescribeByoipCidrsInput(v *DescribeByoipCidr
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35981,7 +35981,7 @@ func awsEc2query_serializeOpDocumentDescribeCapacityReservationsInput(v *Describ
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -35993,7 +35993,7 @@ func awsEc2query_serializeOpDocumentDescribeCapacityReservationsInput(v *Describ
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36017,7 +36017,7 @@ func awsEc2query_serializeOpDocumentDescribeCarrierGatewaysInput(v *DescribeCarr
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36029,7 +36029,7 @@ func awsEc2query_serializeOpDocumentDescribeCarrierGatewaysInput(v *DescribeCarr
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36046,7 +36046,7 @@ func awsEc2query_serializeOpDocumentDescribeClassicLinkInstancesInput(v *Describ
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36065,7 +36065,7 @@ func awsEc2query_serializeOpDocumentDescribeClassicLinkInstancesInput(v *Describ
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36087,7 +36087,7 @@ func awsEc2query_serializeOpDocumentDescribeClientVpnAuthorizationRulesInput(v *
 		objectKey.String(*v.ClientVpnEndpointId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36099,7 +36099,7 @@ func awsEc2query_serializeOpDocumentDescribeClientVpnAuthorizationRulesInput(v *
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36121,7 +36121,7 @@ func awsEc2query_serializeOpDocumentDescribeClientVpnConnectionsInput(v *Describ
 		objectKey.String(*v.ClientVpnEndpointId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36133,7 +36133,7 @@ func awsEc2query_serializeOpDocumentDescribeClientVpnConnectionsInput(v *Describ
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36157,7 +36157,7 @@ func awsEc2query_serializeOpDocumentDescribeClientVpnEndpointsInput(v *DescribeC
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36169,7 +36169,7 @@ func awsEc2query_serializeOpDocumentDescribeClientVpnEndpointsInput(v *DescribeC
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36191,7 +36191,7 @@ func awsEc2query_serializeOpDocumentDescribeClientVpnRoutesInput(v *DescribeClie
 		objectKey.String(*v.ClientVpnEndpointId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36203,7 +36203,7 @@ func awsEc2query_serializeOpDocumentDescribeClientVpnRoutesInput(v *DescribeClie
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36232,7 +36232,7 @@ func awsEc2query_serializeOpDocumentDescribeClientVpnTargetNetworksInput(v *Desc
 		objectKey.String(*v.ClientVpnEndpointId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36244,7 +36244,7 @@ func awsEc2query_serializeOpDocumentDescribeClientVpnTargetNetworksInput(v *Desc
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36261,7 +36261,7 @@ func awsEc2query_serializeOpDocumentDescribeCoipPoolsInput(v *DescribeCoipPoolsI
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36273,7 +36273,7 @@ func awsEc2query_serializeOpDocumentDescribeCoipPoolsInput(v *DescribeCoipPoolsI
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36304,7 +36304,7 @@ func awsEc2query_serializeOpDocumentDescribeConversionTasksInput(v *DescribeConv
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36323,7 +36323,7 @@ func awsEc2query_serializeOpDocumentDescribeCustomerGatewaysInput(v *DescribeCus
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36349,7 +36349,7 @@ func awsEc2query_serializeOpDocumentDescribeDhcpOptionsInput(v *DescribeDhcpOpti
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36361,7 +36361,7 @@ func awsEc2query_serializeOpDocumentDescribeDhcpOptionsInput(v *DescribeDhcpOpti
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36378,7 +36378,7 @@ func awsEc2query_serializeOpDocumentDescribeEgressOnlyInternetGatewaysInput(v *D
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36397,7 +36397,7 @@ func awsEc2query_serializeOpDocumentDescribeEgressOnlyInternetGatewaysInput(v *D
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36414,7 +36414,7 @@ func awsEc2query_serializeOpDocumentDescribeElasticGpusInput(v *DescribeElasticG
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36433,7 +36433,7 @@ func awsEc2query_serializeOpDocumentDescribeElasticGpusInput(v *DescribeElasticG
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36450,7 +36450,7 @@ func awsEc2query_serializeOpDocumentDescribeExportImageTasksInput(v *DescribeExp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36469,7 +36469,7 @@ func awsEc2query_serializeOpDocumentDescribeExportImageTasksInput(v *DescribeExp
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36507,7 +36507,7 @@ func awsEc2query_serializeOpDocumentDescribeFastSnapshotRestoresInput(v *Describ
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36536,7 +36536,7 @@ func awsEc2query_serializeOpDocumentDescribeFleetHistoryInput(v *DescribeFleetHi
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36551,7 +36551,7 @@ func awsEc2query_serializeOpDocumentDescribeFleetHistoryInput(v *DescribeFleetHi
 		objectKey.String(*v.FleetId)
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36573,7 +36573,7 @@ func awsEc2query_serializeOpDocumentDescribeFleetInstancesInput(v *DescribeFleet
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36590,7 +36590,7 @@ func awsEc2query_serializeOpDocumentDescribeFleetInstancesInput(v *DescribeFleet
 		objectKey.String(*v.FleetId)
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36607,7 +36607,7 @@ func awsEc2query_serializeOpDocumentDescribeFleetsInput(v *DescribeFleetsInput, 
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36626,7 +36626,7 @@ func awsEc2query_serializeOpDocumentDescribeFleetsInput(v *DescribeFleetsInput, 
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36643,7 +36643,7 @@ func awsEc2query_serializeOpDocumentDescribeFlowLogsInput(v *DescribeFlowLogsInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36662,7 +36662,7 @@ func awsEc2query_serializeOpDocumentDescribeFlowLogsInput(v *DescribeFlowLogsInp
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36684,7 +36684,7 @@ func awsEc2query_serializeOpDocumentDescribeFpgaImageAttributeInput(v *DescribeF
 		objectKey.String(string(v.Attribute))
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36701,7 +36701,7 @@ func awsEc2query_serializeOpDocumentDescribeFpgaImagesInput(v *DescribeFpgaImage
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36720,7 +36720,7 @@ func awsEc2query_serializeOpDocumentDescribeFpgaImagesInput(v *DescribeFpgaImage
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36751,17 +36751,17 @@ func awsEc2query_serializeOpDocumentDescribeHostReservationOfferingsInput(v *Des
 		}
 	}
 
-	if v.MaxDuration != 0 {
+	{
 		objectKey := object.Key("MaxDuration")
 		objectKey.Integer(v.MaxDuration)
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
 
-	if v.MinDuration != 0 {
+	{
 		objectKey := object.Key("MinDuration")
 		objectKey.Integer(v.MinDuration)
 	}
@@ -36797,7 +36797,7 @@ func awsEc2query_serializeOpDocumentDescribeHostReservationsInput(v *DescribeHos
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36828,7 +36828,7 @@ func awsEc2query_serializeOpDocumentDescribeHostsInput(v *DescribeHostsInput, va
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36859,7 +36859,7 @@ func awsEc2query_serializeOpDocumentDescribeIamInstanceProfileAssociationsInput(
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -36910,7 +36910,7 @@ func awsEc2query_serializeOpDocumentDescribeImageAttributeInput(v *DescribeImage
 		objectKey.String(string(v.Attribute))
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36927,7 +36927,7 @@ func awsEc2query_serializeOpDocumentDescribeImagesInput(v *DescribeImagesInput, 
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36967,7 +36967,7 @@ func awsEc2query_serializeOpDocumentDescribeImportImageTasksInput(v *DescribeImp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -36986,7 +36986,7 @@ func awsEc2query_serializeOpDocumentDescribeImportImageTasksInput(v *DescribeImp
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37003,7 +37003,7 @@ func awsEc2query_serializeOpDocumentDescribeImportSnapshotTasksInput(v *Describe
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37022,7 +37022,7 @@ func awsEc2query_serializeOpDocumentDescribeImportSnapshotTasksInput(v *Describe
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37044,7 +37044,7 @@ func awsEc2query_serializeOpDocumentDescribeInstanceAttributeInput(v *DescribeIn
 		objectKey.String(string(v.Attribute))
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37061,7 +37061,7 @@ func awsEc2query_serializeOpDocumentDescribeInstanceCreditSpecificationsInput(v 
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37080,7 +37080,7 @@ func awsEc2query_serializeOpDocumentDescribeInstanceCreditSpecificationsInput(v 
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37097,7 +37097,7 @@ func awsEc2query_serializeOpDocumentDescribeInstanceEventNotificationAttributesI
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37109,7 +37109,7 @@ func awsEc2query_serializeOpDocumentDescribeInstancesInput(v *DescribeInstancesI
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37128,7 +37128,7 @@ func awsEc2query_serializeOpDocumentDescribeInstancesInput(v *DescribeInstancesI
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37145,7 +37145,7 @@ func awsEc2query_serializeOpDocumentDescribeInstanceStatusInput(v *DescribeInsta
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37157,7 +37157,7 @@ func awsEc2query_serializeOpDocumentDescribeInstanceStatusInput(v *DescribeInsta
 		}
 	}
 
-	if v.IncludeAllInstances {
+	{
 		objectKey := object.Key("IncludeAllInstances")
 		objectKey.Boolean(v.IncludeAllInstances)
 	}
@@ -37169,7 +37169,7 @@ func awsEc2query_serializeOpDocumentDescribeInstanceStatusInput(v *DescribeInsta
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37186,7 +37186,7 @@ func awsEc2query_serializeOpDocumentDescribeInstanceTypeOfferingsInput(v *Descri
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37220,7 +37220,7 @@ func awsEc2query_serializeOpDocumentDescribeInstanceTypesInput(v *DescribeInstan
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37256,7 +37256,7 @@ func awsEc2query_serializeOpDocumentDescribeInternetGatewaysInput(v *DescribeInt
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37275,7 +37275,7 @@ func awsEc2query_serializeOpDocumentDescribeInternetGatewaysInput(v *DescribeInt
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37292,7 +37292,7 @@ func awsEc2query_serializeOpDocumentDescribeIpv6PoolsInput(v *DescribeIpv6PoolsI
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37304,7 +37304,7 @@ func awsEc2query_serializeOpDocumentDescribeIpv6PoolsInput(v *DescribeIpv6PoolsI
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37328,7 +37328,7 @@ func awsEc2query_serializeOpDocumentDescribeKeyPairsInput(v *DescribeKeyPairsInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37361,7 +37361,7 @@ func awsEc2query_serializeOpDocumentDescribeLaunchTemplatesInput(v *DescribeLaun
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37387,7 +37387,7 @@ func awsEc2query_serializeOpDocumentDescribeLaunchTemplatesInput(v *DescribeLaun
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37404,7 +37404,7 @@ func awsEc2query_serializeOpDocumentDescribeLaunchTemplateVersionsInput(v *Descr
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37426,7 +37426,7 @@ func awsEc2query_serializeOpDocumentDescribeLaunchTemplateVersionsInput(v *Descr
 		objectKey.String(*v.LaunchTemplateName)
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37460,7 +37460,7 @@ func awsEc2query_serializeOpDocumentDescribeLocalGatewayRouteTablesInput(v *Desc
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37479,7 +37479,7 @@ func awsEc2query_serializeOpDocumentDescribeLocalGatewayRouteTablesInput(v *Desc
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37496,7 +37496,7 @@ func awsEc2query_serializeOpDocumentDescribeLocalGatewayRouteTableVirtualInterfa
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37515,7 +37515,7 @@ func awsEc2query_serializeOpDocumentDescribeLocalGatewayRouteTableVirtualInterfa
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37532,7 +37532,7 @@ func awsEc2query_serializeOpDocumentDescribeLocalGatewayRouteTableVpcAssociation
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37551,7 +37551,7 @@ func awsEc2query_serializeOpDocumentDescribeLocalGatewayRouteTableVpcAssociation
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37568,7 +37568,7 @@ func awsEc2query_serializeOpDocumentDescribeLocalGatewaysInput(v *DescribeLocalG
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37587,7 +37587,7 @@ func awsEc2query_serializeOpDocumentDescribeLocalGatewaysInput(v *DescribeLocalG
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37604,7 +37604,7 @@ func awsEc2query_serializeOpDocumentDescribeLocalGatewayVirtualInterfaceGroupsIn
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37623,7 +37623,7 @@ func awsEc2query_serializeOpDocumentDescribeLocalGatewayVirtualInterfaceGroupsIn
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37640,7 +37640,7 @@ func awsEc2query_serializeOpDocumentDescribeLocalGatewayVirtualInterfacesInput(v
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37659,7 +37659,7 @@ func awsEc2query_serializeOpDocumentDescribeLocalGatewayVirtualInterfacesInput(v
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37676,7 +37676,7 @@ func awsEc2query_serializeOpDocumentDescribeManagedPrefixListsInput(v *DescribeM
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37688,7 +37688,7 @@ func awsEc2query_serializeOpDocumentDescribeManagedPrefixListsInput(v *DescribeM
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37712,7 +37712,7 @@ func awsEc2query_serializeOpDocumentDescribeMovingAddressesInput(v *DescribeMovi
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37724,7 +37724,7 @@ func awsEc2query_serializeOpDocumentDescribeMovingAddressesInput(v *DescribeMovi
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37748,7 +37748,7 @@ func awsEc2query_serializeOpDocumentDescribeNatGatewaysInput(v *DescribeNatGatew
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37760,7 +37760,7 @@ func awsEc2query_serializeOpDocumentDescribeNatGatewaysInput(v *DescribeNatGatew
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37784,7 +37784,7 @@ func awsEc2query_serializeOpDocumentDescribeNetworkAclsInput(v *DescribeNetworkA
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37796,7 +37796,7 @@ func awsEc2query_serializeOpDocumentDescribeNetworkAclsInput(v *DescribeNetworkA
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37830,7 +37830,7 @@ func awsEc2query_serializeOpDocumentDescribeNetworkInsightsAnalysesInput(v *Desc
 		objectKey.String(smithytime.FormatDateTime(*v.AnalysisStartTime))
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37842,7 +37842,7 @@ func awsEc2query_serializeOpDocumentDescribeNetworkInsightsAnalysesInput(v *Desc
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37871,7 +37871,7 @@ func awsEc2query_serializeOpDocumentDescribeNetworkInsightsPathsInput(v *Describ
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37883,7 +37883,7 @@ func awsEc2query_serializeOpDocumentDescribeNetworkInsightsPathsInput(v *Describ
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37912,7 +37912,7 @@ func awsEc2query_serializeOpDocumentDescribeNetworkInterfaceAttributeInput(v *De
 		objectKey.String(string(v.Attribute))
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37936,7 +37936,7 @@ func awsEc2query_serializeOpDocumentDescribeNetworkInterfacePermissionsInput(v *
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37960,7 +37960,7 @@ func awsEc2query_serializeOpDocumentDescribeNetworkInterfacesInput(v *DescribeNe
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -37972,7 +37972,7 @@ func awsEc2query_serializeOpDocumentDescribeNetworkInterfacesInput(v *DescribeNe
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -37996,7 +37996,7 @@ func awsEc2query_serializeOpDocumentDescribePlacementGroupsInput(v *DescribePlac
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38029,7 +38029,7 @@ func awsEc2query_serializeOpDocumentDescribePrefixListsInput(v *DescribePrefixLi
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38041,7 +38041,7 @@ func awsEc2query_serializeOpDocumentDescribePrefixListsInput(v *DescribePrefixLi
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38065,12 +38065,12 @@ func awsEc2query_serializeOpDocumentDescribePrincipalIdFormatInput(v *DescribePr
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38101,7 +38101,7 @@ func awsEc2query_serializeOpDocumentDescribePublicIpv4PoolsInput(v *DescribePubl
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38125,12 +38125,12 @@ func awsEc2query_serializeOpDocumentDescribeRegionsInput(v *DescribeRegionsInput
 	object := value.Object()
 	_ = object
 
-	if v.AllRegions {
+	{
 		objectKey := object.Key("AllRegions")
 		objectKey.Boolean(v.AllRegions)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38156,7 +38156,7 @@ func awsEc2query_serializeOpDocumentDescribeReservedInstancesInput(v *DescribeRe
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38247,7 +38247,7 @@ func awsEc2query_serializeOpDocumentDescribeReservedInstancesOfferingsInput(v *D
 		objectKey.String(*v.AvailabilityZone)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38259,7 +38259,7 @@ func awsEc2query_serializeOpDocumentDescribeReservedInstancesOfferingsInput(v *D
 		}
 	}
 
-	if v.IncludeMarketplace {
+	{
 		objectKey := object.Key("IncludeMarketplace")
 		objectKey.Boolean(v.IncludeMarketplace)
 	}
@@ -38274,22 +38274,22 @@ func awsEc2query_serializeOpDocumentDescribeReservedInstancesOfferingsInput(v *D
 		objectKey.String(string(v.InstanceType))
 	}
 
-	if v.MaxDuration != 0 {
+	{
 		objectKey := object.Key("MaxDuration")
 		objectKey.Long(v.MaxDuration)
 	}
 
-	if v.MaxInstanceCount != 0 {
+	{
 		objectKey := object.Key("MaxInstanceCount")
 		objectKey.Integer(v.MaxInstanceCount)
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
 
-	if v.MinDuration != 0 {
+	{
 		objectKey := object.Key("MinDuration")
 		objectKey.Long(v.MinDuration)
 	}
@@ -38328,7 +38328,7 @@ func awsEc2query_serializeOpDocumentDescribeRouteTablesInput(v *DescribeRouteTab
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38340,7 +38340,7 @@ func awsEc2query_serializeOpDocumentDescribeRouteTablesInput(v *DescribeRouteTab
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38364,7 +38364,7 @@ func awsEc2query_serializeOpDocumentDescribeScheduledInstanceAvailabilityInput(v
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38383,17 +38383,17 @@ func awsEc2query_serializeOpDocumentDescribeScheduledInstanceAvailabilityInput(v
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
 
-	if v.MaxSlotDurationInHours != 0 {
+	{
 		objectKey := object.Key("MaxSlotDurationInHours")
 		objectKey.Integer(v.MaxSlotDurationInHours)
 	}
 
-	if v.MinSlotDurationInHours != 0 {
+	{
 		objectKey := object.Key("MinSlotDurationInHours")
 		objectKey.Integer(v.MinSlotDurationInHours)
 	}
@@ -38417,7 +38417,7 @@ func awsEc2query_serializeOpDocumentDescribeScheduledInstancesInput(v *DescribeS
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38429,7 +38429,7 @@ func awsEc2query_serializeOpDocumentDescribeScheduledInstancesInput(v *DescribeS
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38460,7 +38460,7 @@ func awsEc2query_serializeOpDocumentDescribeSecurityGroupReferencesInput(v *Desc
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38479,7 +38479,7 @@ func awsEc2query_serializeOpDocumentDescribeSecurityGroupsInput(v *DescribeSecur
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38505,7 +38505,7 @@ func awsEc2query_serializeOpDocumentDescribeSecurityGroupsInput(v *DescribeSecur
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38527,7 +38527,7 @@ func awsEc2query_serializeOpDocumentDescribeSnapshotAttributeInput(v *DescribeSn
 		objectKey.String(string(v.Attribute))
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38544,7 +38544,7 @@ func awsEc2query_serializeOpDocumentDescribeSnapshotsInput(v *DescribeSnapshotsI
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38556,7 +38556,7 @@ func awsEc2query_serializeOpDocumentDescribeSnapshotsInput(v *DescribeSnapshotsI
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38594,7 +38594,7 @@ func awsEc2query_serializeOpDocumentDescribeSpotDatafeedSubscriptionInput(v *Des
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38606,12 +38606,12 @@ func awsEc2query_serializeOpDocumentDescribeSpotFleetInstancesInput(v *DescribeS
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38633,7 +38633,7 @@ func awsEc2query_serializeOpDocumentDescribeSpotFleetRequestHistoryInput(v *Desc
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38643,7 +38643,7 @@ func awsEc2query_serializeOpDocumentDescribeSpotFleetRequestHistoryInput(v *Desc
 		objectKey.String(string(v.EventType))
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38670,12 +38670,12 @@ func awsEc2query_serializeOpDocumentDescribeSpotFleetRequestsInput(v *DescribeSp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38699,7 +38699,7 @@ func awsEc2query_serializeOpDocumentDescribeSpotInstanceRequestsInput(v *Describ
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38711,7 +38711,7 @@ func awsEc2query_serializeOpDocumentDescribeSpotInstanceRequestsInput(v *Describ
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38740,7 +38740,7 @@ func awsEc2query_serializeOpDocumentDescribeSpotPriceHistoryInput(v *DescribeSpo
 		objectKey.String(*v.AvailabilityZone)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38764,7 +38764,7 @@ func awsEc2query_serializeOpDocumentDescribeSpotPriceHistoryInput(v *DescribeSpo
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38793,12 +38793,12 @@ func awsEc2query_serializeOpDocumentDescribeStaleSecurityGroupsInput(v *Describe
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38820,7 +38820,7 @@ func awsEc2query_serializeOpDocumentDescribeSubnetsInput(v *DescribeSubnetsInput
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38832,7 +38832,7 @@ func awsEc2query_serializeOpDocumentDescribeSubnetsInput(v *DescribeSubnetsInput
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38856,7 +38856,7 @@ func awsEc2query_serializeOpDocumentDescribeTagsInput(v *DescribeTagsInput, valu
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38868,7 +38868,7 @@ func awsEc2query_serializeOpDocumentDescribeTagsInput(v *DescribeTagsInput, valu
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38885,7 +38885,7 @@ func awsEc2query_serializeOpDocumentDescribeTrafficMirrorFiltersInput(v *Describ
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38897,7 +38897,7 @@ func awsEc2query_serializeOpDocumentDescribeTrafficMirrorFiltersInput(v *Describ
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38921,7 +38921,7 @@ func awsEc2query_serializeOpDocumentDescribeTrafficMirrorSessionsInput(v *Descri
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38933,7 +38933,7 @@ func awsEc2query_serializeOpDocumentDescribeTrafficMirrorSessionsInput(v *Descri
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38957,7 +38957,7 @@ func awsEc2query_serializeOpDocumentDescribeTrafficMirrorTargetsInput(v *Describ
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -38969,7 +38969,7 @@ func awsEc2query_serializeOpDocumentDescribeTrafficMirrorTargetsInput(v *Describ
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -38993,7 +38993,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewayAttachmentsInput(v *De
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39005,7 +39005,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewayAttachmentsInput(v *De
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39029,7 +39029,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewayConnectPeersInput(v *D
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39041,7 +39041,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewayConnectPeersInput(v *D
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39065,7 +39065,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewayConnectsInput(v *Descr
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39077,7 +39077,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewayConnectsInput(v *Descr
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39101,7 +39101,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewayMulticastDomainsInput(
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39113,7 +39113,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewayMulticastDomainsInput(
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39137,7 +39137,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewayPeeringAttachmentsInpu
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39149,7 +39149,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewayPeeringAttachmentsInpu
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39173,7 +39173,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewayRouteTablesInput(v *De
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39185,7 +39185,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewayRouteTablesInput(v *De
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39209,7 +39209,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewaysInput(v *DescribeTran
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39221,7 +39221,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewaysInput(v *DescribeTran
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39245,7 +39245,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewayVpcAttachmentsInput(v 
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39257,7 +39257,7 @@ func awsEc2query_serializeOpDocumentDescribeTransitGatewayVpcAttachmentsInput(v 
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39286,7 +39286,7 @@ func awsEc2query_serializeOpDocumentDescribeVolumeAttributeInput(v *DescribeVolu
 		objectKey.String(string(v.Attribute))
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39303,7 +39303,7 @@ func awsEc2query_serializeOpDocumentDescribeVolumesInput(v *DescribeVolumesInput
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39315,7 +39315,7 @@ func awsEc2query_serializeOpDocumentDescribeVolumesInput(v *DescribeVolumesInput
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39339,7 +39339,7 @@ func awsEc2query_serializeOpDocumentDescribeVolumesModificationsInput(v *Describ
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39351,7 +39351,7 @@ func awsEc2query_serializeOpDocumentDescribeVolumesModificationsInput(v *Describ
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39375,7 +39375,7 @@ func awsEc2query_serializeOpDocumentDescribeVolumeStatusInput(v *DescribeVolumeS
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39387,7 +39387,7 @@ func awsEc2query_serializeOpDocumentDescribeVolumeStatusInput(v *DescribeVolumeS
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39416,7 +39416,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcAttributeInput(v *DescribeVpcAttr
 		objectKey.String(string(v.Attribute))
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39433,7 +39433,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcClassicLinkDnsSupportInput(v *Des
 	object := value.Object()
 	_ = object
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39457,7 +39457,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcClassicLinkInput(v *DescribeVpcCl
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39488,7 +39488,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcEndpointConnectionNotificationsIn
 		objectKey.String(*v.ConnectionNotificationId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39500,7 +39500,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcEndpointConnectionNotificationsIn
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39517,7 +39517,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcEndpointConnectionsInput(v *Descr
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39529,7 +39529,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcEndpointConnectionsInput(v *Descr
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39546,7 +39546,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcEndpointServiceConfigurationsInpu
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39558,7 +39558,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcEndpointServiceConfigurationsInpu
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39582,7 +39582,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcEndpointServicePermissionsInput(v
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39594,7 +39594,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcEndpointServicePermissionsInput(v
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39616,7 +39616,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcEndpointServicesInput(v *Describe
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39628,7 +39628,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcEndpointServicesInput(v *Describe
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39652,7 +39652,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcEndpointsInput(v *DescribeVpcEndp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39664,7 +39664,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcEndpointsInput(v *DescribeVpcEndp
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39688,7 +39688,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcPeeringConnectionsInput(v *Descri
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39700,7 +39700,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcPeeringConnectionsInput(v *Descri
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39724,7 +39724,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcsInput(v *DescribeVpcsInput, valu
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39736,7 +39736,7 @@ func awsEc2query_serializeOpDocumentDescribeVpcsInput(v *DescribeVpcsInput, valu
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -39760,7 +39760,7 @@ func awsEc2query_serializeOpDocumentDescribeVpnConnectionsInput(v *DescribeVpnCo
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39786,7 +39786,7 @@ func awsEc2query_serializeOpDocumentDescribeVpnGatewaysInput(v *DescribeVpnGatew
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39812,7 +39812,7 @@ func awsEc2query_serializeOpDocumentDetachClassicLinkVpcInput(v *DetachClassicLi
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39834,7 +39834,7 @@ func awsEc2query_serializeOpDocumentDetachInternetGatewayInput(v *DetachInternet
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39861,12 +39861,12 @@ func awsEc2query_serializeOpDocumentDetachNetworkInterfaceInput(v *DetachNetwork
 		objectKey.String(*v.AttachmentId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.Force {
+	{
 		objectKey := object.Key("Force")
 		objectKey.Boolean(v.Force)
 	}
@@ -39883,12 +39883,12 @@ func awsEc2query_serializeOpDocumentDetachVolumeInput(v *DetachVolumeInput, valu
 		objectKey.String(*v.Device)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.Force {
+	{
 		objectKey := object.Key("Force")
 		objectKey.Boolean(v.Force)
 	}
@@ -39910,7 +39910,7 @@ func awsEc2query_serializeOpDocumentDetachVpnGatewayInput(v *DetachVpnGatewayInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39932,7 +39932,7 @@ func awsEc2query_serializeOpDocumentDisableEbsEncryptionByDefaultInput(v *Disabl
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39951,7 +39951,7 @@ func awsEc2query_serializeOpDocumentDisableFastSnapshotRestoresInput(v *DisableF
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39970,7 +39970,7 @@ func awsEc2query_serializeOpDocumentDisableTransitGatewayRouteTablePropagationIn
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -39992,7 +39992,7 @@ func awsEc2query_serializeOpDocumentDisableVgwRoutePropagationInput(v *DisableVg
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40026,7 +40026,7 @@ func awsEc2query_serializeOpDocumentDisableVpcClassicLinkInput(v *DisableVpcClas
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40048,7 +40048,7 @@ func awsEc2query_serializeOpDocumentDisassociateAddressInput(v *DisassociateAddr
 		objectKey.String(*v.AssociationId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40075,7 +40075,7 @@ func awsEc2query_serializeOpDocumentDisassociateClientVpnTargetNetworkInput(v *D
 		objectKey.String(*v.ClientVpnEndpointId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40092,7 +40092,7 @@ func awsEc2query_serializeOpDocumentDisassociateEnclaveCertificateIamRoleInput(v
 		objectKey.String(*v.CertificateArn)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40126,7 +40126,7 @@ func awsEc2query_serializeOpDocumentDisassociateRouteTableInput(v *DisassociateR
 		objectKey.String(*v.AssociationId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40150,7 +40150,7 @@ func awsEc2query_serializeOpDocumentDisassociateTransitGatewayMulticastDomainInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40179,7 +40179,7 @@ func awsEc2query_serializeOpDocumentDisassociateTransitGatewayRouteTableInput(v 
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40213,7 +40213,7 @@ func awsEc2query_serializeOpDocumentEnableEbsEncryptionByDefaultInput(v *EnableE
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40232,7 +40232,7 @@ func awsEc2query_serializeOpDocumentEnableFastSnapshotRestoresInput(v *EnableFas
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40251,7 +40251,7 @@ func awsEc2query_serializeOpDocumentEnableTransitGatewayRouteTablePropagationInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40273,7 +40273,7 @@ func awsEc2query_serializeOpDocumentEnableVgwRoutePropagationInput(v *EnableVgwR
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40295,7 +40295,7 @@ func awsEc2query_serializeOpDocumentEnableVolumeIOInput(v *EnableVolumeIOInput, 
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40324,7 +40324,7 @@ func awsEc2query_serializeOpDocumentEnableVpcClassicLinkInput(v *EnableVpcClassi
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40346,7 +40346,7 @@ func awsEc2query_serializeOpDocumentExportClientVpnClientCertificateRevocationLi
 		objectKey.String(*v.ClientVpnEndpointId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40363,7 +40363,7 @@ func awsEc2query_serializeOpDocumentExportClientVpnClientConfigurationInput(v *E
 		objectKey.String(*v.ClientVpnEndpointId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40390,7 +40390,7 @@ func awsEc2query_serializeOpDocumentExportImageInput(v *ExportImageInput, value 
 		objectKey.String(string(v.DiskImageFormat))
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40426,7 +40426,7 @@ func awsEc2query_serializeOpDocumentExportTransitGatewayRoutesInput(v *ExportTra
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40460,7 +40460,7 @@ func awsEc2query_serializeOpDocumentGetAssociatedEnclaveCertificateIamRolesInput
 		objectKey.String(*v.CertificateArn)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40472,12 +40472,12 @@ func awsEc2query_serializeOpDocumentGetAssociatedIpv6PoolCidrsInput(v *GetAssoci
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -40504,12 +40504,12 @@ func awsEc2query_serializeOpDocumentGetCapacityReservationUsageInput(v *GetCapac
 		objectKey.String(*v.CapacityReservationId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -40526,7 +40526,7 @@ func awsEc2query_serializeOpDocumentGetCoipPoolUsageInput(v *GetCoipPoolUsageInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40538,7 +40538,7 @@ func awsEc2query_serializeOpDocumentGetCoipPoolUsageInput(v *GetCoipPoolUsageInp
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -40560,7 +40560,7 @@ func awsEc2query_serializeOpDocumentGetConsoleOutputInput(v *GetConsoleOutputInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40570,7 +40570,7 @@ func awsEc2query_serializeOpDocumentGetConsoleOutputInput(v *GetConsoleOutputInp
 		objectKey.String(*v.InstanceId)
 	}
 
-	if v.Latest {
+	{
 		objectKey := object.Key("Latest")
 		objectKey.Boolean(v.Latest)
 	}
@@ -40582,7 +40582,7 @@ func awsEc2query_serializeOpDocumentGetConsoleScreenshotInput(v *GetConsoleScree
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40592,7 +40592,7 @@ func awsEc2query_serializeOpDocumentGetConsoleScreenshotInput(v *GetConsoleScree
 		objectKey.String(*v.InstanceId)
 	}
 
-	if v.WakeUp {
+	{
 		objectKey := object.Key("WakeUp")
 		objectKey.Boolean(v.WakeUp)
 	}
@@ -40604,7 +40604,7 @@ func awsEc2query_serializeOpDocumentGetDefaultCreditSpecificationInput(v *GetDef
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40621,7 +40621,7 @@ func awsEc2query_serializeOpDocumentGetEbsDefaultKmsKeyIdInput(v *GetEbsDefaultK
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40633,7 +40633,7 @@ func awsEc2query_serializeOpDocumentGetEbsEncryptionByDefaultInput(v *GetEbsEncr
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40650,12 +40650,12 @@ func awsEc2query_serializeOpDocumentGetGroupsForCapacityReservationInput(v *GetG
 		objectKey.String(*v.CapacityReservationId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -40691,7 +40691,7 @@ func awsEc2query_serializeOpDocumentGetLaunchTemplateDataInput(v *GetLaunchTempl
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40708,12 +40708,12 @@ func awsEc2query_serializeOpDocumentGetManagedPrefixListAssociationsInput(v *Get
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -40735,12 +40735,12 @@ func awsEc2query_serializeOpDocumentGetManagedPrefixListEntriesInput(v *GetManag
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -40755,7 +40755,7 @@ func awsEc2query_serializeOpDocumentGetManagedPrefixListEntriesInput(v *GetManag
 		objectKey.String(*v.PrefixListId)
 	}
 
-	if v.TargetVersion != 0 {
+	{
 		objectKey := object.Key("TargetVersion")
 		objectKey.Long(v.TargetVersion)
 	}
@@ -40767,7 +40767,7 @@ func awsEc2query_serializeOpDocumentGetPasswordDataInput(v *GetPasswordDataInput
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40784,7 +40784,7 @@ func awsEc2query_serializeOpDocumentGetReservedInstancesExchangeQuoteInput(v *Ge
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40810,7 +40810,7 @@ func awsEc2query_serializeOpDocumentGetTransitGatewayAttachmentPropagationsInput
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40822,7 +40822,7 @@ func awsEc2query_serializeOpDocumentGetTransitGatewayAttachmentPropagationsInput
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -40844,7 +40844,7 @@ func awsEc2query_serializeOpDocumentGetTransitGatewayMulticastDomainAssociations
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40856,7 +40856,7 @@ func awsEc2query_serializeOpDocumentGetTransitGatewayMulticastDomainAssociations
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -40878,7 +40878,7 @@ func awsEc2query_serializeOpDocumentGetTransitGatewayPrefixListReferencesInput(v
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40890,7 +40890,7 @@ func awsEc2query_serializeOpDocumentGetTransitGatewayPrefixListReferencesInput(v
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -40912,7 +40912,7 @@ func awsEc2query_serializeOpDocumentGetTransitGatewayRouteTableAssociationsInput
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40924,7 +40924,7 @@ func awsEc2query_serializeOpDocumentGetTransitGatewayRouteTableAssociationsInput
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -40946,7 +40946,7 @@ func awsEc2query_serializeOpDocumentGetTransitGatewayRouteTablePropagationsInput
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -40958,7 +40958,7 @@ func awsEc2query_serializeOpDocumentGetTransitGatewayRouteTablePropagationsInput
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -40990,7 +40990,7 @@ func awsEc2query_serializeOpDocumentImportClientVpnClientCertificateRevocationLi
 		objectKey.String(*v.ClientVpnEndpointId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41031,12 +41031,12 @@ func awsEc2query_serializeOpDocumentImportImageInput(v *ImportImageInput, value 
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.Encrypted {
+	{
 		objectKey := object.Key("Encrypted")
 		objectKey.Boolean(v.Encrypted)
 	}
@@ -41099,7 +41099,7 @@ func awsEc2query_serializeOpDocumentImportInstanceInput(v *ImportInstanceInput, 
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41123,7 +41123,7 @@ func awsEc2query_serializeOpDocumentImportKeyPairInput(v *ImportKeyPairInput, va
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41176,12 +41176,12 @@ func awsEc2query_serializeOpDocumentImportSnapshotInput(v *ImportSnapshotInput, 
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.Encrypted {
+	{
 		objectKey := object.Key("Encrypted")
 		objectKey.Boolean(v.Encrypted)
 	}
@@ -41220,7 +41220,7 @@ func awsEc2query_serializeOpDocumentImportVolumeInput(v *ImportVolumeInput, valu
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41246,7 +41246,7 @@ func awsEc2query_serializeOpDocumentModifyAvailabilityZoneGroupInput(v *ModifyAv
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41268,7 +41268,7 @@ func awsEc2query_serializeOpDocumentModifyCapacityReservationInput(v *ModifyCapa
 	object := value.Object()
 	_ = object
 
-	if v.Accept {
+	{
 		objectKey := object.Key("Accept")
 		objectKey.Boolean(v.Accept)
 	}
@@ -41278,7 +41278,7 @@ func awsEc2query_serializeOpDocumentModifyCapacityReservationInput(v *ModifyCapa
 		objectKey.String(*v.CapacityReservationId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41293,7 +41293,7 @@ func awsEc2query_serializeOpDocumentModifyCapacityReservationInput(v *ModifyCapa
 		objectKey.String(string(v.EndDateType))
 	}
 
-	if v.InstanceCount != 0 {
+	{
 		objectKey := object.Key("InstanceCount")
 		objectKey.Integer(v.InstanceCount)
 	}
@@ -41336,7 +41336,7 @@ func awsEc2query_serializeOpDocumentModifyClientVpnEndpointInput(v *ModifyClient
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41358,7 +41358,7 @@ func awsEc2query_serializeOpDocumentModifyClientVpnEndpointInput(v *ModifyClient
 		objectKey.String(*v.ServerCertificateArn)
 	}
 
-	if v.SplitTunnel {
+	{
 		objectKey := object.Key("SplitTunnel")
 		objectKey.Boolean(v.SplitTunnel)
 	}
@@ -41368,7 +41368,7 @@ func awsEc2query_serializeOpDocumentModifyClientVpnEndpointInput(v *ModifyClient
 		objectKey.String(*v.VpcId)
 	}
 
-	if v.VpnPort != 0 {
+	{
 		objectKey := object.Key("VpnPort")
 		objectKey.Integer(v.VpnPort)
 	}
@@ -41385,7 +41385,7 @@ func awsEc2query_serializeOpDocumentModifyDefaultCreditSpecificationInput(v *Mod
 		objectKey.String(*v.CpuCredits)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41402,7 +41402,7 @@ func awsEc2query_serializeOpDocumentModifyEbsDefaultKmsKeyIdInput(v *ModifyEbsDe
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41419,7 +41419,7 @@ func awsEc2query_serializeOpDocumentModifyFleetInput(v *ModifyFleetInput, value 
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41465,7 +41465,7 @@ func awsEc2query_serializeOpDocumentModifyFpgaImageAttributeInput(v *ModifyFpgaI
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41605,7 +41605,7 @@ func awsEc2query_serializeOpDocumentModifyImageAttributeInput(v *ModifyImageAttr
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41679,7 +41679,7 @@ func awsEc2query_serializeOpDocumentModifyInstanceAttributeInput(v *ModifyInstan
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41778,7 +41778,7 @@ func awsEc2query_serializeOpDocumentModifyInstanceCapacityReservationAttributesI
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41800,7 +41800,7 @@ func awsEc2query_serializeOpDocumentModifyInstanceCreditSpecificationInput(v *Mo
 		objectKey.String(*v.ClientToken)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41819,7 +41819,7 @@ func awsEc2query_serializeOpDocumentModifyInstanceEventStartTimeInput(v *ModifyI
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41846,7 +41846,7 @@ func awsEc2query_serializeOpDocumentModifyInstanceMetadataOptionsInput(v *Modify
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41856,7 +41856,7 @@ func awsEc2query_serializeOpDocumentModifyInstanceMetadataOptionsInput(v *Modify
 		objectKey.String(string(v.HttpEndpoint))
 	}
 
-	if v.HttpPutResponseHopLimit != 0 {
+	{
 		objectKey := object.Key("HttpPutResponseHopLimit")
 		objectKey.Integer(v.HttpPutResponseHopLimit)
 	}
@@ -41903,7 +41903,7 @@ func awsEc2query_serializeOpDocumentModifyInstancePlacementInput(v *ModifyInstan
 		objectKey.String(*v.InstanceId)
 	}
 
-	if v.PartitionNumber != 0 {
+	{
 		objectKey := object.Key("PartitionNumber")
 		objectKey.Integer(v.PartitionNumber)
 	}
@@ -41930,7 +41930,7 @@ func awsEc2query_serializeOpDocumentModifyLaunchTemplateInput(v *ModifyLaunchTem
 		objectKey.String(*v.DefaultVersion)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -41959,12 +41959,12 @@ func awsEc2query_serializeOpDocumentModifyManagedPrefixListInput(v *ModifyManage
 		}
 	}
 
-	if v.CurrentVersion != 0 {
+	{
 		objectKey := object.Key("CurrentVersion")
 		objectKey.Long(v.CurrentVersion)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42007,7 +42007,7 @@ func awsEc2query_serializeOpDocumentModifyNetworkInterfaceAttributeInput(v *Modi
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42076,7 +42076,7 @@ func awsEc2query_serializeOpDocumentModifySnapshotAttributeInput(v *ModifySnapsh
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42124,7 +42124,7 @@ func awsEc2query_serializeOpDocumentModifySpotFleetRequestInput(v *ModifySpotFle
 		}
 	}
 
-	if v.OnDemandTargetCapacity != 0 {
+	{
 		objectKey := object.Key("OnDemandTargetCapacity")
 		objectKey.Integer(v.OnDemandTargetCapacity)
 	}
@@ -42134,7 +42134,7 @@ func awsEc2query_serializeOpDocumentModifySpotFleetRequestInput(v *ModifySpotFle
 		objectKey.String(*v.SpotFleetRequestId)
 	}
 
-	if v.TargetCapacity != 0 {
+	{
 		objectKey := object.Key("TargetCapacity")
 		objectKey.Integer(v.TargetCapacity)
 	}
@@ -42191,7 +42191,7 @@ func awsEc2query_serializeOpDocumentModifyTrafficMirrorFilterNetworkServicesInpu
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42232,12 +42232,12 @@ func awsEc2query_serializeOpDocumentModifyTrafficMirrorFilterRuleInput(v *Modify
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.Protocol != 0 {
+	{
 		objectKey := object.Key("Protocol")
 		objectKey.Integer(v.Protocol)
 	}
@@ -42254,7 +42254,7 @@ func awsEc2query_serializeOpDocumentModifyTrafficMirrorFilterRuleInput(v *Modify
 		objectKey.String(string(v.RuleAction))
 	}
 
-	if v.RuleNumber != 0 {
+	{
 		objectKey := object.Key("RuleNumber")
 		objectKey.Integer(v.RuleNumber)
 	}
@@ -42293,12 +42293,12 @@ func awsEc2query_serializeOpDocumentModifyTrafficMirrorSessionInput(v *ModifyTra
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.PacketLength != 0 {
+	{
 		objectKey := object.Key("PacketLength")
 		objectKey.Integer(v.PacketLength)
 	}
@@ -42310,7 +42310,7 @@ func awsEc2query_serializeOpDocumentModifyTrafficMirrorSessionInput(v *ModifyTra
 		}
 	}
 
-	if v.SessionNumber != 0 {
+	{
 		objectKey := object.Key("SessionNumber")
 		objectKey.Integer(v.SessionNumber)
 	}
@@ -42330,7 +42330,7 @@ func awsEc2query_serializeOpDocumentModifyTrafficMirrorSessionInput(v *ModifyTra
 		objectKey.String(*v.TrafficMirrorTargetId)
 	}
 
-	if v.VirtualNetworkId != 0 {
+	{
 		objectKey := object.Key("VirtualNetworkId")
 		objectKey.Integer(v.VirtualNetworkId)
 	}
@@ -42347,7 +42347,7 @@ func awsEc2query_serializeOpDocumentModifyTransitGatewayInput(v *ModifyTransitGa
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42371,12 +42371,12 @@ func awsEc2query_serializeOpDocumentModifyTransitGatewayPrefixListReferenceInput
 	object := value.Object()
 	_ = object
 
-	if v.Blackhole {
+	{
 		objectKey := object.Key("Blackhole")
 		objectKey.Boolean(v.Blackhole)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42410,7 +42410,7 @@ func awsEc2query_serializeOpDocumentModifyTransitGatewayVpcAttachmentInput(v *Mo
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42448,7 +42448,7 @@ func awsEc2query_serializeOpDocumentModifyVolumeAttributeInput(v *ModifyVolumeAt
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42465,27 +42465,27 @@ func awsEc2query_serializeOpDocumentModifyVolumeInput(v *ModifyVolumeInput, valu
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.Iops != 0 {
+	{
 		objectKey := object.Key("Iops")
 		objectKey.Integer(v.Iops)
 	}
 
-	if v.MultiAttachEnabled {
+	{
 		objectKey := object.Key("MultiAttachEnabled")
 		objectKey.Boolean(v.MultiAttachEnabled)
 	}
 
-	if v.Size != 0 {
+	{
 		objectKey := object.Key("Size")
 		objectKey.Integer(v.Size)
 	}
 
-	if v.Throughput != 0 {
+	{
 		objectKey := object.Key("Throughput")
 		objectKey.Integer(v.Throughput)
 	}
@@ -42550,7 +42550,7 @@ func awsEc2query_serializeOpDocumentModifyVpcEndpointConnectionNotificationInput
 		objectKey.String(*v.ConnectionNotificationId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42583,7 +42583,7 @@ func awsEc2query_serializeOpDocumentModifyVpcEndpointInput(v *ModifyVpcEndpointI
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42593,7 +42593,7 @@ func awsEc2query_serializeOpDocumentModifyVpcEndpointInput(v *ModifyVpcEndpointI
 		objectKey.String(*v.PolicyDocument)
 	}
 
-	if v.PrivateDnsEnabled {
+	{
 		objectKey := object.Key("PrivateDnsEnabled")
 		objectKey.Boolean(v.PrivateDnsEnabled)
 	}
@@ -42619,7 +42619,7 @@ func awsEc2query_serializeOpDocumentModifyVpcEndpointInput(v *ModifyVpcEndpointI
 		}
 	}
 
-	if v.ResetPolicy {
+	{
 		objectKey := object.Key("ResetPolicy")
 		objectKey.Boolean(v.ResetPolicy)
 	}
@@ -42636,7 +42636,7 @@ func awsEc2query_serializeOpDocumentModifyVpcEndpointServiceConfigurationInput(v
 	object := value.Object()
 	_ = object
 
-	if v.AcceptanceRequired {
+	{
 		objectKey := object.Key("AcceptanceRequired")
 		objectKey.Boolean(v.AcceptanceRequired)
 	}
@@ -42655,7 +42655,7 @@ func awsEc2query_serializeOpDocumentModifyVpcEndpointServiceConfigurationInput(v
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42679,7 +42679,7 @@ func awsEc2query_serializeOpDocumentModifyVpcEndpointServiceConfigurationInput(v
 		}
 	}
 
-	if v.RemovePrivateDnsName {
+	{
 		objectKey := object.Key("RemovePrivateDnsName")
 		objectKey.Boolean(v.RemovePrivateDnsName)
 	}
@@ -42703,7 +42703,7 @@ func awsEc2query_serializeOpDocumentModifyVpcEndpointServicePermissionsInput(v *
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42734,7 +42734,7 @@ func awsEc2query_serializeOpDocumentModifyVpcPeeringConnectionOptionsInput(v *Mo
 		}
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42758,7 +42758,7 @@ func awsEc2query_serializeOpDocumentModifyVpcTenancyInput(v *ModifyVpcTenancyInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42785,7 +42785,7 @@ func awsEc2query_serializeOpDocumentModifyVpnConnectionInput(v *ModifyVpnConnect
 		objectKey.String(*v.CustomerGatewayId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42812,7 +42812,7 @@ func awsEc2query_serializeOpDocumentModifyVpnConnectionOptionsInput(v *ModifyVpn
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42849,7 +42849,7 @@ func awsEc2query_serializeOpDocumentModifyVpnTunnelCertificateInput(v *ModifyVpn
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42871,7 +42871,7 @@ func awsEc2query_serializeOpDocumentModifyVpnTunnelOptionsInput(v *ModifyVpnTunn
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42900,7 +42900,7 @@ func awsEc2query_serializeOpDocumentMonitorInstancesInput(v *MonitorInstancesInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42919,7 +42919,7 @@ func awsEc2query_serializeOpDocumentMoveAddressToVpcInput(v *MoveAddressToVpcInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42953,7 +42953,7 @@ func awsEc2query_serializeOpDocumentProvisionByoipCidrInput(v *ProvisionByoipCid
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -42965,7 +42965,7 @@ func awsEc2query_serializeOpDocumentProvisionByoipCidrInput(v *ProvisionByoipCid
 		}
 	}
 
-	if v.PubliclyAdvertisable {
+	{
 		objectKey := object.Key("PubliclyAdvertisable")
 		objectKey.Boolean(v.PubliclyAdvertisable)
 	}
@@ -43018,7 +43018,7 @@ func awsEc2query_serializeOpDocumentPurchaseReservedInstancesOfferingInput(v *Pu
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43057,7 +43057,7 @@ func awsEc2query_serializeOpDocumentPurchaseScheduledInstancesInput(v *PurchaseS
 		objectKey.String(*v.ClientToken)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43076,7 +43076,7 @@ func awsEc2query_serializeOpDocumentRebootInstancesInput(v *RebootInstancesInput
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43119,12 +43119,12 @@ func awsEc2query_serializeOpDocumentRegisterImageInput(v *RegisterImageInput, va
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.EnaSupport {
+	{
 		objectKey := object.Key("EnaSupport")
 		objectKey.Boolean(v.EnaSupport)
 	}
@@ -43171,7 +43171,7 @@ func awsEc2query_serializeOpDocumentRegisterInstanceEventNotificationAttributesI
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43190,7 +43190,7 @@ func awsEc2query_serializeOpDocumentRegisterTransitGatewayMulticastGroupMembersI
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43219,7 +43219,7 @@ func awsEc2query_serializeOpDocumentRegisterTransitGatewayMulticastGroupSourcesI
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43248,7 +43248,7 @@ func awsEc2query_serializeOpDocumentRejectTransitGatewayMulticastDomainAssociati
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43277,7 +43277,7 @@ func awsEc2query_serializeOpDocumentRejectTransitGatewayPeeringAttachmentInput(v
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43294,7 +43294,7 @@ func awsEc2query_serializeOpDocumentRejectTransitGatewayVpcAttachmentInput(v *Re
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43311,7 +43311,7 @@ func awsEc2query_serializeOpDocumentRejectVpcEndpointConnectionsInput(v *RejectV
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43335,7 +43335,7 @@ func awsEc2query_serializeOpDocumentRejectVpcPeeringConnectionInput(v *RejectVpc
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43357,7 +43357,7 @@ func awsEc2query_serializeOpDocumentReleaseAddressInput(v *ReleaseAddressInput, 
 		objectKey.String(*v.AllocationId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43417,7 +43417,7 @@ func awsEc2query_serializeOpDocumentReplaceNetworkAclAssociationInput(v *Replace
 		objectKey.String(*v.AssociationId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43439,7 +43439,7 @@ func awsEc2query_serializeOpDocumentReplaceNetworkAclEntryInput(v *ReplaceNetwor
 		objectKey.String(*v.CidrBlock)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43515,7 +43515,7 @@ func awsEc2query_serializeOpDocumentReplaceRouteInput(v *ReplaceRouteInput, valu
 		objectKey.String(*v.DestinationPrefixListId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43540,7 +43540,7 @@ func awsEc2query_serializeOpDocumentReplaceRouteInput(v *ReplaceRouteInput, valu
 		objectKey.String(*v.LocalGatewayId)
 	}
 
-	if v.LocalTarget {
+	{
 		objectKey := object.Key("LocalTarget")
 		objectKey.Boolean(v.LocalTarget)
 	}
@@ -43587,7 +43587,7 @@ func awsEc2query_serializeOpDocumentReplaceRouteTableAssociationInput(v *Replace
 		objectKey.String(*v.AssociationId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43604,7 +43604,7 @@ func awsEc2query_serializeOpDocumentReplaceTransitGatewayRouteInput(v *ReplaceTr
 	object := value.Object()
 	_ = object
 
-	if v.Blackhole {
+	{
 		objectKey := object.Key("Blackhole")
 		objectKey.Boolean(v.Blackhole)
 	}
@@ -43614,7 +43614,7 @@ func awsEc2query_serializeOpDocumentReplaceTransitGatewayRouteInput(v *ReplaceTr
 		objectKey.String(*v.DestinationCidrBlock)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43641,7 +43641,7 @@ func awsEc2query_serializeOpDocumentReportInstanceStatusInput(v *ReportInstanceS
 		objectKey.String(*v.Description)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43682,7 +43682,7 @@ func awsEc2query_serializeOpDocumentRequestSpotFleetInput(v *RequestSpotFleetInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43706,7 +43706,7 @@ func awsEc2query_serializeOpDocumentRequestSpotInstancesInput(v *RequestSpotInst
 		objectKey.String(*v.AvailabilityZoneGroup)
 	}
 
-	if v.BlockDurationMinutes != 0 {
+	{
 		objectKey := object.Key("BlockDurationMinutes")
 		objectKey.Integer(v.BlockDurationMinutes)
 	}
@@ -43716,12 +43716,12 @@ func awsEc2query_serializeOpDocumentRequestSpotInstancesInput(v *RequestSpotInst
 		objectKey.String(*v.ClientToken)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.InstanceCount != 0 {
+	{
 		objectKey := object.Key("InstanceCount")
 		objectKey.Integer(v.InstanceCount)
 	}
@@ -43777,7 +43777,7 @@ func awsEc2query_serializeOpDocumentResetEbsDefaultKmsKeyIdInput(v *ResetEbsDefa
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43794,7 +43794,7 @@ func awsEc2query_serializeOpDocumentResetFpgaImageAttributeInput(v *ResetFpgaIma
 		objectKey.String(string(v.Attribute))
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43816,7 +43816,7 @@ func awsEc2query_serializeOpDocumentResetImageAttributeInput(v *ResetImageAttrib
 		objectKey.String(string(v.Attribute))
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43838,7 +43838,7 @@ func awsEc2query_serializeOpDocumentResetInstanceAttributeInput(v *ResetInstance
 		objectKey.String(string(v.Attribute))
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43855,7 +43855,7 @@ func awsEc2query_serializeOpDocumentResetNetworkInterfaceAttributeInput(v *Reset
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43882,7 +43882,7 @@ func awsEc2query_serializeOpDocumentResetSnapshotAttributeInput(v *ResetSnapshot
 		objectKey.String(string(v.Attribute))
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43899,7 +43899,7 @@ func awsEc2query_serializeOpDocumentRestoreAddressToClassicInput(v *RestoreAddre
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43921,7 +43921,7 @@ func awsEc2query_serializeOpDocumentRestoreManagedPrefixListVersionInput(v *Rest
 		objectKey.Long(v.CurrentVersion)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -43953,12 +43953,12 @@ func awsEc2query_serializeOpDocumentRevokeClientVpnIngressInput(v *RevokeClientV
 		objectKey.String(*v.ClientVpnEndpointId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.RevokeAllGroups {
+	{
 		objectKey := object.Key("RevokeAllGroups")
 		objectKey.Boolean(v.RevokeAllGroups)
 	}
@@ -43980,12 +43980,12 @@ func awsEc2query_serializeOpDocumentRevokeSecurityGroupEgressInput(v *RevokeSecu
 		objectKey.String(*v.CidrIp)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.FromPort != 0 {
+	{
 		objectKey := object.Key("FromPort")
 		objectKey.Integer(v.FromPort)
 	}
@@ -44017,7 +44017,7 @@ func awsEc2query_serializeOpDocumentRevokeSecurityGroupEgressInput(v *RevokeSecu
 		objectKey.String(*v.SourceSecurityGroupOwnerId)
 	}
 
-	if v.ToPort != 0 {
+	{
 		objectKey := object.Key("ToPort")
 		objectKey.Integer(v.ToPort)
 	}
@@ -44034,12 +44034,12 @@ func awsEc2query_serializeOpDocumentRevokeSecurityGroupIngressInput(v *RevokeSec
 		objectKey.String(*v.CidrIp)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.FromPort != 0 {
+	{
 		objectKey := object.Key("FromPort")
 		objectKey.Integer(v.FromPort)
 	}
@@ -44076,7 +44076,7 @@ func awsEc2query_serializeOpDocumentRevokeSecurityGroupIngressInput(v *RevokeSec
 		objectKey.String(*v.SourceSecurityGroupOwnerId)
 	}
 
-	if v.ToPort != 0 {
+	{
 		objectKey := object.Key("ToPort")
 		objectKey.Integer(v.ToPort)
 	}
@@ -44126,17 +44126,17 @@ func awsEc2query_serializeOpDocumentRunInstancesInput(v *RunInstancesInput, valu
 		}
 	}
 
-	if v.DisableApiTermination {
+	{
 		objectKey := object.Key("DisableApiTermination")
 		objectKey.Boolean(v.DisableApiTermination)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.EbsOptimized {
+	{
 		objectKey := object.Key("EbsOptimized")
 		objectKey.Boolean(v.EbsOptimized)
 	}
@@ -44198,7 +44198,7 @@ func awsEc2query_serializeOpDocumentRunInstancesInput(v *RunInstancesInput, valu
 		objectKey.String(string(v.InstanceType))
 	}
 
-	if v.Ipv6AddressCount != 0 {
+	{
 		objectKey := object.Key("Ipv6AddressCount")
 		objectKey.Integer(v.Ipv6AddressCount)
 	}
@@ -44325,12 +44325,12 @@ func awsEc2query_serializeOpDocumentRunScheduledInstancesInput(v *RunScheduledIn
 		objectKey.String(*v.ClientToken)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.InstanceCount != 0 {
+	{
 		objectKey := object.Key("InstanceCount")
 		objectKey.Integer(v.InstanceCount)
 	}
@@ -44354,7 +44354,7 @@ func awsEc2query_serializeOpDocumentSearchLocalGatewayRoutesInput(v *SearchLocal
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -44388,7 +44388,7 @@ func awsEc2query_serializeOpDocumentSearchTransitGatewayMulticastGroupsInput(v *
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -44400,7 +44400,7 @@ func awsEc2query_serializeOpDocumentSearchTransitGatewayMulticastGroupsInput(v *
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -44422,7 +44422,7 @@ func awsEc2query_serializeOpDocumentSearchTransitGatewayRoutesInput(v *SearchTra
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -44434,7 +44434,7 @@ func awsEc2query_serializeOpDocumentSearchTransitGatewayRoutesInput(v *SearchTra
 		}
 	}
 
-	if v.MaxResults != 0 {
+	{
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(v.MaxResults)
 	}
@@ -44451,7 +44451,7 @@ func awsEc2query_serializeOpDocumentSendDiagnosticInterruptInput(v *SendDiagnost
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -44473,7 +44473,7 @@ func awsEc2query_serializeOpDocumentStartInstancesInput(v *StartInstancesInput, 
 		objectKey.String(*v.AdditionalInfo)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -44497,7 +44497,7 @@ func awsEc2query_serializeOpDocumentStartNetworkInsightsAnalysisInput(v *StartNe
 		objectKey.String(*v.ClientToken)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -44528,7 +44528,7 @@ func awsEc2query_serializeOpDocumentStartVpcEndpointServicePrivateDnsVerificatio
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -44545,17 +44545,17 @@ func awsEc2query_serializeOpDocumentStopInstancesInput(v *StopInstancesInput, va
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
 
-	if v.Force {
+	{
 		objectKey := object.Key("Force")
 		objectKey.Boolean(v.Force)
 	}
 
-	if v.Hibernate {
+	{
 		objectKey := object.Key("Hibernate")
 		objectKey.Boolean(v.Hibernate)
 	}
@@ -44584,7 +44584,7 @@ func awsEc2query_serializeOpDocumentTerminateClientVpnConnectionsInput(v *Termin
 		objectKey.String(*v.ConnectionId)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -44601,7 +44601,7 @@ func awsEc2query_serializeOpDocumentTerminateInstancesInput(v *TerminateInstance
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -44658,7 +44658,7 @@ func awsEc2query_serializeOpDocumentUnmonitorInstancesInput(v *UnmonitorInstance
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -44677,7 +44677,7 @@ func awsEc2query_serializeOpDocumentUpdateSecurityGroupRuleDescriptionsEgressInp
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -44706,7 +44706,7 @@ func awsEc2query_serializeOpDocumentUpdateSecurityGroupRuleDescriptionsIngressIn
 	object := value.Object()
 	_ = object
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
@@ -44740,7 +44740,7 @@ func awsEc2query_serializeOpDocumentWithdrawByoipCidrInput(v *WithdrawByoipCidrI
 		objectKey.String(*v.Cidr)
 	}
 
-	if v.DryRun {
+	{
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(v.DryRun)
 	}
