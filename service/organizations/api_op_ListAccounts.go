@@ -167,6 +167,10 @@ type ListAccountsPaginator struct {
 
 // NewListAccountsPaginator returns a new ListAccountsPaginator
 func NewListAccountsPaginator(client ListAccountsAPIClient, params *ListAccountsInput, optFns ...func(*ListAccountsPaginatorOptions)) *ListAccountsPaginator {
+	if params == nil {
+		params = &ListAccountsInput{}
+	}
+
 	options := ListAccountsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -174,10 +178,6 @@ func NewListAccountsPaginator(client ListAccountsAPIClient, params *ListAccounts
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAccountsInput{}
 	}
 
 	return &ListAccountsPaginator{

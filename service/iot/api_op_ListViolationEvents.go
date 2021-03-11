@@ -165,6 +165,10 @@ type ListViolationEventsPaginator struct {
 
 // NewListViolationEventsPaginator returns a new ListViolationEventsPaginator
 func NewListViolationEventsPaginator(client ListViolationEventsAPIClient, params *ListViolationEventsInput, optFns ...func(*ListViolationEventsPaginatorOptions)) *ListViolationEventsPaginator {
+	if params == nil {
+		params = &ListViolationEventsInput{}
+	}
+
 	options := ListViolationEventsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -172,10 +176,6 @@ func NewListViolationEventsPaginator(client ListViolationEventsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListViolationEventsInput{}
 	}
 
 	return &ListViolationEventsPaginator{

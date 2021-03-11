@@ -154,6 +154,10 @@ type ListQuickConnectsPaginator struct {
 
 // NewListQuickConnectsPaginator returns a new ListQuickConnectsPaginator
 func NewListQuickConnectsPaginator(client ListQuickConnectsAPIClient, params *ListQuickConnectsInput, optFns ...func(*ListQuickConnectsPaginatorOptions)) *ListQuickConnectsPaginator {
+	if params == nil {
+		params = &ListQuickConnectsInput{}
+	}
+
 	options := ListQuickConnectsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -161,10 +165,6 @@ func NewListQuickConnectsPaginator(client ListQuickConnectsAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListQuickConnectsInput{}
 	}
 
 	return &ListQuickConnectsPaginator{

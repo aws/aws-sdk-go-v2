@@ -155,6 +155,10 @@ type GetDatabasesPaginator struct {
 
 // NewGetDatabasesPaginator returns a new GetDatabasesPaginator
 func NewGetDatabasesPaginator(client GetDatabasesAPIClient, params *GetDatabasesInput, optFns ...func(*GetDatabasesPaginatorOptions)) *GetDatabasesPaginator {
+	if params == nil {
+		params = &GetDatabasesInput{}
+	}
+
 	options := GetDatabasesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewGetDatabasesPaginator(client GetDatabasesAPIClient, params *GetDatabases
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetDatabasesInput{}
 	}
 
 	return &GetDatabasesPaginator{

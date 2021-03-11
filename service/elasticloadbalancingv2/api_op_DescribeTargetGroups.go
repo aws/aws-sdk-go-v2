@@ -150,14 +150,14 @@ type DescribeTargetGroupsPaginator struct {
 
 // NewDescribeTargetGroupsPaginator returns a new DescribeTargetGroupsPaginator
 func NewDescribeTargetGroupsPaginator(client DescribeTargetGroupsAPIClient, params *DescribeTargetGroupsInput, optFns ...func(*DescribeTargetGroupsPaginatorOptions)) *DescribeTargetGroupsPaginator {
+	if params == nil {
+		params = &DescribeTargetGroupsInput{}
+	}
+
 	options := DescribeTargetGroupsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeTargetGroupsInput{}
 	}
 
 	return &DescribeTargetGroupsPaginator{

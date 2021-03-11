@@ -157,6 +157,10 @@ type ListConfigurationSetsPaginator struct {
 
 // NewListConfigurationSetsPaginator returns a new ListConfigurationSetsPaginator
 func NewListConfigurationSetsPaginator(client ListConfigurationSetsAPIClient, params *ListConfigurationSetsInput, optFns ...func(*ListConfigurationSetsPaginatorOptions)) *ListConfigurationSetsPaginator {
+	if params == nil {
+		params = &ListConfigurationSetsInput{}
+	}
+
 	options := ListConfigurationSetsPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -164,10 +168,6 @@ func NewListConfigurationSetsPaginator(client ListConfigurationSetsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListConfigurationSetsInput{}
 	}
 
 	return &ListConfigurationSetsPaginator{

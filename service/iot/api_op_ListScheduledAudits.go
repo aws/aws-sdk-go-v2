@@ -140,6 +140,10 @@ type ListScheduledAuditsPaginator struct {
 
 // NewListScheduledAuditsPaginator returns a new ListScheduledAuditsPaginator
 func NewListScheduledAuditsPaginator(client ListScheduledAuditsAPIClient, params *ListScheduledAuditsInput, optFns ...func(*ListScheduledAuditsPaginatorOptions)) *ListScheduledAuditsPaginator {
+	if params == nil {
+		params = &ListScheduledAuditsInput{}
+	}
+
 	options := ListScheduledAuditsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -147,10 +151,6 @@ func NewListScheduledAuditsPaginator(client ListScheduledAuditsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListScheduledAuditsInput{}
 	}
 
 	return &ListScheduledAuditsPaginator{

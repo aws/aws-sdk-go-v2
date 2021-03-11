@@ -151,6 +151,10 @@ type ListTargetsForSecurityProfilePaginator struct {
 // NewListTargetsForSecurityProfilePaginator returns a new
 // ListTargetsForSecurityProfilePaginator
 func NewListTargetsForSecurityProfilePaginator(client ListTargetsForSecurityProfileAPIClient, params *ListTargetsForSecurityProfileInput, optFns ...func(*ListTargetsForSecurityProfilePaginatorOptions)) *ListTargetsForSecurityProfilePaginator {
+	if params == nil {
+		params = &ListTargetsForSecurityProfileInput{}
+	}
+
 	options := ListTargetsForSecurityProfilePaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -158,10 +162,6 @@ func NewListTargetsForSecurityProfilePaginator(client ListTargetsForSecurityProf
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTargetsForSecurityProfileInput{}
 	}
 
 	return &ListTargetsForSecurityProfilePaginator{

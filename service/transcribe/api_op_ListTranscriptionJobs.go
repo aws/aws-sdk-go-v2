@@ -159,6 +159,10 @@ type ListTranscriptionJobsPaginator struct {
 
 // NewListTranscriptionJobsPaginator returns a new ListTranscriptionJobsPaginator
 func NewListTranscriptionJobsPaginator(client ListTranscriptionJobsAPIClient, params *ListTranscriptionJobsInput, optFns ...func(*ListTranscriptionJobsPaginatorOptions)) *ListTranscriptionJobsPaginator {
+	if params == nil {
+		params = &ListTranscriptionJobsInput{}
+	}
+
 	options := ListTranscriptionJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewListTranscriptionJobsPaginator(client ListTranscriptionJobsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTranscriptionJobsInput{}
 	}
 
 	return &ListTranscriptionJobsPaginator{

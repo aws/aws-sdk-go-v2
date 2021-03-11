@@ -145,6 +145,10 @@ type GetLabelsPaginator struct {
 
 // NewGetLabelsPaginator returns a new GetLabelsPaginator
 func NewGetLabelsPaginator(client GetLabelsAPIClient, params *GetLabelsInput, optFns ...func(*GetLabelsPaginatorOptions)) *GetLabelsPaginator {
+	if params == nil {
+		params = &GetLabelsInput{}
+	}
+
 	options := GetLabelsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewGetLabelsPaginator(client GetLabelsAPIClient, params *GetLabelsInput, op
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetLabelsInput{}
 	}
 
 	return &GetLabelsPaginator{

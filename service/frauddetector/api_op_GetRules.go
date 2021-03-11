@@ -158,6 +158,10 @@ type GetRulesPaginator struct {
 
 // NewGetRulesPaginator returns a new GetRulesPaginator
 func NewGetRulesPaginator(client GetRulesAPIClient, params *GetRulesInput, optFns ...func(*GetRulesPaginatorOptions)) *GetRulesPaginator {
+	if params == nil {
+		params = &GetRulesInput{}
+	}
+
 	options := GetRulesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -165,10 +169,6 @@ func NewGetRulesPaginator(client GetRulesAPIClient, params *GetRulesInput, optFn
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetRulesInput{}
 	}
 
 	return &GetRulesPaginator{

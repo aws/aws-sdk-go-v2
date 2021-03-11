@@ -183,6 +183,10 @@ type ListHandshakesForOrganizationPaginator struct {
 // NewListHandshakesForOrganizationPaginator returns a new
 // ListHandshakesForOrganizationPaginator
 func NewListHandshakesForOrganizationPaginator(client ListHandshakesForOrganizationAPIClient, params *ListHandshakesForOrganizationInput, optFns ...func(*ListHandshakesForOrganizationPaginatorOptions)) *ListHandshakesForOrganizationPaginator {
+	if params == nil {
+		params = &ListHandshakesForOrganizationInput{}
+	}
+
 	options := ListHandshakesForOrganizationPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -190,10 +194,6 @@ func NewListHandshakesForOrganizationPaginator(client ListHandshakesForOrganizat
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListHandshakesForOrganizationInput{}
 	}
 
 	return &ListHandshakesForOrganizationPaginator{

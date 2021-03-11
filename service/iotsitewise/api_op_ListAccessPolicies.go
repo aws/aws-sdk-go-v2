@@ -195,6 +195,10 @@ type ListAccessPoliciesPaginator struct {
 
 // NewListAccessPoliciesPaginator returns a new ListAccessPoliciesPaginator
 func NewListAccessPoliciesPaginator(client ListAccessPoliciesAPIClient, params *ListAccessPoliciesInput, optFns ...func(*ListAccessPoliciesPaginatorOptions)) *ListAccessPoliciesPaginator {
+	if params == nil {
+		params = &ListAccessPoliciesInput{}
+	}
+
 	options := ListAccessPoliciesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -202,10 +206,6 @@ func NewListAccessPoliciesPaginator(client ListAccessPoliciesAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAccessPoliciesInput{}
 	}
 
 	return &ListAccessPoliciesPaginator{

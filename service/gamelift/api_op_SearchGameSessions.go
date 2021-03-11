@@ -291,6 +291,10 @@ type SearchGameSessionsPaginator struct {
 
 // NewSearchGameSessionsPaginator returns a new SearchGameSessionsPaginator
 func NewSearchGameSessionsPaginator(client SearchGameSessionsAPIClient, params *SearchGameSessionsInput, optFns ...func(*SearchGameSessionsPaginatorOptions)) *SearchGameSessionsPaginator {
+	if params == nil {
+		params = &SearchGameSessionsInput{}
+	}
+
 	options := SearchGameSessionsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -298,10 +302,6 @@ func NewSearchGameSessionsPaginator(client SearchGameSessionsAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchGameSessionsInput{}
 	}
 
 	return &SearchGameSessionsPaginator{

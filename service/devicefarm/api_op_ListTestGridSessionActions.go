@@ -149,6 +149,10 @@ type ListTestGridSessionActionsPaginator struct {
 // NewListTestGridSessionActionsPaginator returns a new
 // ListTestGridSessionActionsPaginator
 func NewListTestGridSessionActionsPaginator(client ListTestGridSessionActionsAPIClient, params *ListTestGridSessionActionsInput, optFns ...func(*ListTestGridSessionActionsPaginatorOptions)) *ListTestGridSessionActionsPaginator {
+	if params == nil {
+		params = &ListTestGridSessionActionsInput{}
+	}
+
 	options := ListTestGridSessionActionsPaginatorOptions{}
 	if params.MaxResult != nil {
 		options.Limit = *params.MaxResult
@@ -156,10 +160,6 @@ func NewListTestGridSessionActionsPaginator(client ListTestGridSessionActionsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTestGridSessionActionsInput{}
 	}
 
 	return &ListTestGridSessionActionsPaginator{

@@ -195,6 +195,10 @@ type DescribeImageScanFindingsPaginator struct {
 // NewDescribeImageScanFindingsPaginator returns a new
 // DescribeImageScanFindingsPaginator
 func NewDescribeImageScanFindingsPaginator(client DescribeImageScanFindingsAPIClient, params *DescribeImageScanFindingsInput, optFns ...func(*DescribeImageScanFindingsPaginatorOptions)) *DescribeImageScanFindingsPaginator {
+	if params == nil {
+		params = &DescribeImageScanFindingsInput{}
+	}
+
 	options := DescribeImageScanFindingsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -202,10 +206,6 @@ func NewDescribeImageScanFindingsPaginator(client DescribeImageScanFindingsAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeImageScanFindingsInput{}
 	}
 
 	return &DescribeImageScanFindingsPaginator{

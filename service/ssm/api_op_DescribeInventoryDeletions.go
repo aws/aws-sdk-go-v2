@@ -148,6 +148,10 @@ type DescribeInventoryDeletionsPaginator struct {
 // NewDescribeInventoryDeletionsPaginator returns a new
 // DescribeInventoryDeletionsPaginator
 func NewDescribeInventoryDeletionsPaginator(client DescribeInventoryDeletionsAPIClient, params *DescribeInventoryDeletionsInput, optFns ...func(*DescribeInventoryDeletionsPaginatorOptions)) *DescribeInventoryDeletionsPaginator {
+	if params == nil {
+		params = &DescribeInventoryDeletionsInput{}
+	}
+
 	options := DescribeInventoryDeletionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -155,10 +159,6 @@ func NewDescribeInventoryDeletionsPaginator(client DescribeInventoryDeletionsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeInventoryDeletionsInput{}
 	}
 
 	return &DescribeInventoryDeletionsPaginator{

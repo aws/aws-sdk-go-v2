@@ -156,6 +156,10 @@ type ListThreatIntelSetsPaginator struct {
 
 // NewListThreatIntelSetsPaginator returns a new ListThreatIntelSetsPaginator
 func NewListThreatIntelSetsPaginator(client ListThreatIntelSetsAPIClient, params *ListThreatIntelSetsInput, optFns ...func(*ListThreatIntelSetsPaginatorOptions)) *ListThreatIntelSetsPaginator {
+	if params == nil {
+		params = &ListThreatIntelSetsInput{}
+	}
+
 	options := ListThreatIntelSetsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -163,10 +167,6 @@ func NewListThreatIntelSetsPaginator(client ListThreatIntelSetsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListThreatIntelSetsInput{}
 	}
 
 	return &ListThreatIntelSetsPaginator{

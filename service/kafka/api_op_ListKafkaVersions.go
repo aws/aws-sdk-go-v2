@@ -139,6 +139,10 @@ type ListKafkaVersionsPaginator struct {
 
 // NewListKafkaVersionsPaginator returns a new ListKafkaVersionsPaginator
 func NewListKafkaVersionsPaginator(client ListKafkaVersionsAPIClient, params *ListKafkaVersionsInput, optFns ...func(*ListKafkaVersionsPaginatorOptions)) *ListKafkaVersionsPaginator {
+	if params == nil {
+		params = &ListKafkaVersionsInput{}
+	}
+
 	options := ListKafkaVersionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -146,10 +150,6 @@ func NewListKafkaVersionsPaginator(client ListKafkaVersionsAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListKafkaVersionsInput{}
 	}
 
 	return &ListKafkaVersionsPaginator{

@@ -145,6 +145,10 @@ type ListDocumentClassifiersPaginator struct {
 // NewListDocumentClassifiersPaginator returns a new
 // ListDocumentClassifiersPaginator
 func NewListDocumentClassifiersPaginator(client ListDocumentClassifiersAPIClient, params *ListDocumentClassifiersInput, optFns ...func(*ListDocumentClassifiersPaginatorOptions)) *ListDocumentClassifiersPaginator {
+	if params == nil {
+		params = &ListDocumentClassifiersInput{}
+	}
+
 	options := ListDocumentClassifiersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewListDocumentClassifiersPaginator(client ListDocumentClassifiersAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDocumentClassifiersInput{}
 	}
 
 	return &ListDocumentClassifiersPaginator{

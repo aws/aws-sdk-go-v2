@@ -143,6 +143,10 @@ type ListMitigationActionsPaginator struct {
 
 // NewListMitigationActionsPaginator returns a new ListMitigationActionsPaginator
 func NewListMitigationActionsPaginator(client ListMitigationActionsAPIClient, params *ListMitigationActionsInput, optFns ...func(*ListMitigationActionsPaginatorOptions)) *ListMitigationActionsPaginator {
+	if params == nil {
+		params = &ListMitigationActionsInput{}
+	}
+
 	options := ListMitigationActionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -150,10 +154,6 @@ func NewListMitigationActionsPaginator(client ListMitigationActionsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListMitigationActionsInput{}
 	}
 
 	return &ListMitigationActionsPaginator{

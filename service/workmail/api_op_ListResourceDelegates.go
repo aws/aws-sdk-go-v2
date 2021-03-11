@@ -156,6 +156,10 @@ type ListResourceDelegatesPaginator struct {
 
 // NewListResourceDelegatesPaginator returns a new ListResourceDelegatesPaginator
 func NewListResourceDelegatesPaginator(client ListResourceDelegatesAPIClient, params *ListResourceDelegatesInput, optFns ...func(*ListResourceDelegatesPaginatorOptions)) *ListResourceDelegatesPaginator {
+	if params == nil {
+		params = &ListResourceDelegatesInput{}
+	}
+
 	options := ListResourceDelegatesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -163,10 +167,6 @@ func NewListResourceDelegatesPaginator(client ListResourceDelegatesAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListResourceDelegatesInput{}
 	}
 
 	return &ListResourceDelegatesPaginator{

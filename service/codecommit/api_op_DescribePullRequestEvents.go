@@ -166,6 +166,10 @@ type DescribePullRequestEventsPaginator struct {
 // NewDescribePullRequestEventsPaginator returns a new
 // DescribePullRequestEventsPaginator
 func NewDescribePullRequestEventsPaginator(client DescribePullRequestEventsAPIClient, params *DescribePullRequestEventsInput, optFns ...func(*DescribePullRequestEventsPaginatorOptions)) *DescribePullRequestEventsPaginator {
+	if params == nil {
+		params = &DescribePullRequestEventsInput{}
+	}
+
 	options := DescribePullRequestEventsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -173,10 +177,6 @@ func NewDescribePullRequestEventsPaginator(client DescribePullRequestEventsAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribePullRequestEventsInput{}
 	}
 
 	return &DescribePullRequestEventsPaginator{

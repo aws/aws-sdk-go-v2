@@ -171,6 +171,10 @@ type QueryObjectsPaginator struct {
 
 // NewQueryObjectsPaginator returns a new QueryObjectsPaginator
 func NewQueryObjectsPaginator(client QueryObjectsAPIClient, params *QueryObjectsInput, optFns ...func(*QueryObjectsPaginatorOptions)) *QueryObjectsPaginator {
+	if params == nil {
+		params = &QueryObjectsInput{}
+	}
+
 	options := QueryObjectsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -178,10 +182,6 @@ func NewQueryObjectsPaginator(client QueryObjectsAPIClient, params *QueryObjects
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &QueryObjectsInput{}
 	}
 
 	return &QueryObjectsPaginator{

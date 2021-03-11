@@ -176,6 +176,10 @@ type ListChannelsModeratedByAppInstanceUserPaginator struct {
 // NewListChannelsModeratedByAppInstanceUserPaginator returns a new
 // ListChannelsModeratedByAppInstanceUserPaginator
 func NewListChannelsModeratedByAppInstanceUserPaginator(client ListChannelsModeratedByAppInstanceUserAPIClient, params *ListChannelsModeratedByAppInstanceUserInput, optFns ...func(*ListChannelsModeratedByAppInstanceUserPaginatorOptions)) *ListChannelsModeratedByAppInstanceUserPaginator {
+	if params == nil {
+		params = &ListChannelsModeratedByAppInstanceUserInput{}
+	}
+
 	options := ListChannelsModeratedByAppInstanceUserPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -183,10 +187,6 @@ func NewListChannelsModeratedByAppInstanceUserPaginator(client ListChannelsModer
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListChannelsModeratedByAppInstanceUserInput{}
 	}
 
 	return &ListChannelsModeratedByAppInstanceUserPaginator{

@@ -162,6 +162,10 @@ type ListStackSetOperationsPaginator struct {
 
 // NewListStackSetOperationsPaginator returns a new ListStackSetOperationsPaginator
 func NewListStackSetOperationsPaginator(client ListStackSetOperationsAPIClient, params *ListStackSetOperationsInput, optFns ...func(*ListStackSetOperationsPaginatorOptions)) *ListStackSetOperationsPaginator {
+	if params == nil {
+		params = &ListStackSetOperationsInput{}
+	}
+
 	options := ListStackSetOperationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -169,10 +173,6 @@ func NewListStackSetOperationsPaginator(client ListStackSetOperationsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListStackSetOperationsInput{}
 	}
 
 	return &ListStackSetOperationsPaginator{

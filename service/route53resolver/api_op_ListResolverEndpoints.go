@@ -159,6 +159,10 @@ type ListResolverEndpointsPaginator struct {
 
 // NewListResolverEndpointsPaginator returns a new ListResolverEndpointsPaginator
 func NewListResolverEndpointsPaginator(client ListResolverEndpointsAPIClient, params *ListResolverEndpointsInput, optFns ...func(*ListResolverEndpointsPaginatorOptions)) *ListResolverEndpointsPaginator {
+	if params == nil {
+		params = &ListResolverEndpointsInput{}
+	}
+
 	options := ListResolverEndpointsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewListResolverEndpointsPaginator(client ListResolverEndpointsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListResolverEndpointsInput{}
 	}
 
 	return &ListResolverEndpointsPaginator{

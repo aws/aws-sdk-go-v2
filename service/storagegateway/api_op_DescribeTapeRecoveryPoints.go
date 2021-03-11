@@ -167,6 +167,10 @@ type DescribeTapeRecoveryPointsPaginator struct {
 // NewDescribeTapeRecoveryPointsPaginator returns a new
 // DescribeTapeRecoveryPointsPaginator
 func NewDescribeTapeRecoveryPointsPaginator(client DescribeTapeRecoveryPointsAPIClient, params *DescribeTapeRecoveryPointsInput, optFns ...func(*DescribeTapeRecoveryPointsPaginatorOptions)) *DescribeTapeRecoveryPointsPaginator {
+	if params == nil {
+		params = &DescribeTapeRecoveryPointsInput{}
+	}
+
 	options := DescribeTapeRecoveryPointsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -174,10 +178,6 @@ func NewDescribeTapeRecoveryPointsPaginator(client DescribeTapeRecoveryPointsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeTapeRecoveryPointsInput{}
 	}
 
 	return &DescribeTapeRecoveryPointsPaginator{

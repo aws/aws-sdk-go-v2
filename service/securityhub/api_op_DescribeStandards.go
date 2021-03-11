@@ -142,6 +142,10 @@ type DescribeStandardsPaginator struct {
 
 // NewDescribeStandardsPaginator returns a new DescribeStandardsPaginator
 func NewDescribeStandardsPaginator(client DescribeStandardsAPIClient, params *DescribeStandardsInput, optFns ...func(*DescribeStandardsPaginatorOptions)) *DescribeStandardsPaginator {
+	if params == nil {
+		params = &DescribeStandardsInput{}
+	}
+
 	options := DescribeStandardsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -149,10 +153,6 @@ func NewDescribeStandardsPaginator(client DescribeStandardsAPIClient, params *De
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeStandardsInput{}
 	}
 
 	return &DescribeStandardsPaginator{

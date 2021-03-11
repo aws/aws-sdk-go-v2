@@ -143,6 +143,10 @@ type ListWorkGroupsPaginator struct {
 
 // NewListWorkGroupsPaginator returns a new ListWorkGroupsPaginator
 func NewListWorkGroupsPaginator(client ListWorkGroupsAPIClient, params *ListWorkGroupsInput, optFns ...func(*ListWorkGroupsPaginatorOptions)) *ListWorkGroupsPaginator {
+	if params == nil {
+		params = &ListWorkGroupsInput{}
+	}
+
 	options := ListWorkGroupsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -150,10 +154,6 @@ func NewListWorkGroupsPaginator(client ListWorkGroupsAPIClient, params *ListWork
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListWorkGroupsInput{}
 	}
 
 	return &ListWorkGroupsPaginator{

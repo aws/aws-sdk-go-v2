@@ -154,6 +154,10 @@ type ListConfigurationRevisionsPaginator struct {
 // NewListConfigurationRevisionsPaginator returns a new
 // ListConfigurationRevisionsPaginator
 func NewListConfigurationRevisionsPaginator(client ListConfigurationRevisionsAPIClient, params *ListConfigurationRevisionsInput, optFns ...func(*ListConfigurationRevisionsPaginatorOptions)) *ListConfigurationRevisionsPaginator {
+	if params == nil {
+		params = &ListConfigurationRevisionsInput{}
+	}
+
 	options := ListConfigurationRevisionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -161,10 +165,6 @@ func NewListConfigurationRevisionsPaginator(client ListConfigurationRevisionsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListConfigurationRevisionsInput{}
 	}
 
 	return &ListConfigurationRevisionsPaginator{

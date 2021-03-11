@@ -187,6 +187,10 @@ type GetTextDetectionPaginator struct {
 
 // NewGetTextDetectionPaginator returns a new GetTextDetectionPaginator
 func NewGetTextDetectionPaginator(client GetTextDetectionAPIClient, params *GetTextDetectionInput, optFns ...func(*GetTextDetectionPaginatorOptions)) *GetTextDetectionPaginator {
+	if params == nil {
+		params = &GetTextDetectionInput{}
+	}
+
 	options := GetTextDetectionPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -194,10 +198,6 @@ func NewGetTextDetectionPaginator(client GetTextDetectionAPIClient, params *GetT
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetTextDetectionInput{}
 	}
 
 	return &GetTextDetectionPaginator{

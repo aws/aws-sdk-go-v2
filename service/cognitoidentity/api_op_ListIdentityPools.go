@@ -146,6 +146,10 @@ type ListIdentityPoolsPaginator struct {
 
 // NewListIdentityPoolsPaginator returns a new ListIdentityPoolsPaginator
 func NewListIdentityPoolsPaginator(client ListIdentityPoolsAPIClient, params *ListIdentityPoolsInput, optFns ...func(*ListIdentityPoolsPaginatorOptions)) *ListIdentityPoolsPaginator {
+	if params == nil {
+		params = &ListIdentityPoolsInput{}
+	}
+
 	options := ListIdentityPoolsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -153,10 +157,6 @@ func NewListIdentityPoolsPaginator(client ListIdentityPoolsAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListIdentityPoolsInput{}
 	}
 
 	return &ListIdentityPoolsPaginator{

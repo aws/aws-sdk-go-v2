@@ -166,6 +166,10 @@ type ListCommandInvocationsPaginator struct {
 
 // NewListCommandInvocationsPaginator returns a new ListCommandInvocationsPaginator
 func NewListCommandInvocationsPaginator(client ListCommandInvocationsAPIClient, params *ListCommandInvocationsInput, optFns ...func(*ListCommandInvocationsPaginatorOptions)) *ListCommandInvocationsPaginator {
+	if params == nil {
+		params = &ListCommandInvocationsInput{}
+	}
+
 	options := ListCommandInvocationsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -173,10 +177,6 @@ func NewListCommandInvocationsPaginator(client ListCommandInvocationsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCommandInvocationsInput{}
 	}
 
 	return &ListCommandInvocationsPaginator{

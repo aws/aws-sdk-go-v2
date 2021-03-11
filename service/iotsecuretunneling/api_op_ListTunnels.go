@@ -141,6 +141,10 @@ type ListTunnelsPaginator struct {
 
 // NewListTunnelsPaginator returns a new ListTunnelsPaginator
 func NewListTunnelsPaginator(client ListTunnelsAPIClient, params *ListTunnelsInput, optFns ...func(*ListTunnelsPaginatorOptions)) *ListTunnelsPaginator {
+	if params == nil {
+		params = &ListTunnelsInput{}
+	}
+
 	options := ListTunnelsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -148,10 +152,6 @@ func NewListTunnelsPaginator(client ListTunnelsAPIClient, params *ListTunnelsInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTunnelsInput{}
 	}
 
 	return &ListTunnelsPaginator{

@@ -200,6 +200,10 @@ type DescribeDBInstanceAutomatedBackupsPaginator struct {
 // NewDescribeDBInstanceAutomatedBackupsPaginator returns a new
 // DescribeDBInstanceAutomatedBackupsPaginator
 func NewDescribeDBInstanceAutomatedBackupsPaginator(client DescribeDBInstanceAutomatedBackupsAPIClient, params *DescribeDBInstanceAutomatedBackupsInput, optFns ...func(*DescribeDBInstanceAutomatedBackupsPaginatorOptions)) *DescribeDBInstanceAutomatedBackupsPaginator {
+	if params == nil {
+		params = &DescribeDBInstanceAutomatedBackupsInput{}
+	}
+
 	options := DescribeDBInstanceAutomatedBackupsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -207,10 +211,6 @@ func NewDescribeDBInstanceAutomatedBackupsPaginator(client DescribeDBInstanceAut
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeDBInstanceAutomatedBackupsInput{}
 	}
 
 	return &DescribeDBInstanceAutomatedBackupsPaginator{

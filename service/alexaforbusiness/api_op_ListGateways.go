@@ -142,6 +142,10 @@ type ListGatewaysPaginator struct {
 
 // NewListGatewaysPaginator returns a new ListGatewaysPaginator
 func NewListGatewaysPaginator(client ListGatewaysAPIClient, params *ListGatewaysInput, optFns ...func(*ListGatewaysPaginatorOptions)) *ListGatewaysPaginator {
+	if params == nil {
+		params = &ListGatewaysInput{}
+	}
+
 	options := ListGatewaysPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -149,10 +153,6 @@ func NewListGatewaysPaginator(client ListGatewaysAPIClient, params *ListGateways
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListGatewaysInput{}
 	}
 
 	return &ListGatewaysPaginator{

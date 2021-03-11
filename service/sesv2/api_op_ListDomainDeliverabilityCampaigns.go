@@ -185,6 +185,10 @@ type ListDomainDeliverabilityCampaignsPaginator struct {
 // NewListDomainDeliverabilityCampaignsPaginator returns a new
 // ListDomainDeliverabilityCampaignsPaginator
 func NewListDomainDeliverabilityCampaignsPaginator(client ListDomainDeliverabilityCampaignsAPIClient, params *ListDomainDeliverabilityCampaignsInput, optFns ...func(*ListDomainDeliverabilityCampaignsPaginatorOptions)) *ListDomainDeliverabilityCampaignsPaginator {
+	if params == nil {
+		params = &ListDomainDeliverabilityCampaignsInput{}
+	}
+
 	options := ListDomainDeliverabilityCampaignsPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -192,10 +196,6 @@ func NewListDomainDeliverabilityCampaignsPaginator(client ListDomainDeliverabili
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDomainDeliverabilityCampaignsInput{}
 	}
 
 	return &ListDomainDeliverabilityCampaignsPaginator{

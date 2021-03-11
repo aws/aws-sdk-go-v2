@@ -155,6 +155,10 @@ type AdminListGroupsForUserPaginator struct {
 
 // NewAdminListGroupsForUserPaginator returns a new AdminListGroupsForUserPaginator
 func NewAdminListGroupsForUserPaginator(client AdminListGroupsForUserAPIClient, params *AdminListGroupsForUserInput, optFns ...func(*AdminListGroupsForUserPaginatorOptions)) *AdminListGroupsForUserPaginator {
+	if params == nil {
+		params = &AdminListGroupsForUserInput{}
+	}
+
 	options := AdminListGroupsForUserPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -162,10 +166,6 @@ func NewAdminListGroupsForUserPaginator(client AdminListGroupsForUserAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &AdminListGroupsForUserInput{}
 	}
 
 	return &AdminListGroupsForUserPaginator{

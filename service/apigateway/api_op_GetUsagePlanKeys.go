@@ -163,6 +163,10 @@ type GetUsagePlanKeysPaginator struct {
 
 // NewGetUsagePlanKeysPaginator returns a new GetUsagePlanKeysPaginator
 func NewGetUsagePlanKeysPaginator(client GetUsagePlanKeysAPIClient, params *GetUsagePlanKeysInput, optFns ...func(*GetUsagePlanKeysPaginatorOptions)) *GetUsagePlanKeysPaginator {
+	if params == nil {
+		params = &GetUsagePlanKeysInput{}
+	}
+
 	options := GetUsagePlanKeysPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -170,10 +174,6 @@ func NewGetUsagePlanKeysPaginator(client GetUsagePlanKeysAPIClient, params *GetU
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetUsagePlanKeysInput{}
 	}
 
 	return &GetUsagePlanKeysPaginator{

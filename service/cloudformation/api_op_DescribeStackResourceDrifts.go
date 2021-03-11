@@ -194,6 +194,10 @@ type DescribeStackResourceDriftsPaginator struct {
 // NewDescribeStackResourceDriftsPaginator returns a new
 // DescribeStackResourceDriftsPaginator
 func NewDescribeStackResourceDriftsPaginator(client DescribeStackResourceDriftsAPIClient, params *DescribeStackResourceDriftsInput, optFns ...func(*DescribeStackResourceDriftsPaginatorOptions)) *DescribeStackResourceDriftsPaginator {
+	if params == nil {
+		params = &DescribeStackResourceDriftsInput{}
+	}
+
 	options := DescribeStackResourceDriftsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -201,10 +205,6 @@ func NewDescribeStackResourceDriftsPaginator(client DescribeStackResourceDriftsA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeStackResourceDriftsInput{}
 	}
 
 	return &DescribeStackResourceDriftsPaginator{

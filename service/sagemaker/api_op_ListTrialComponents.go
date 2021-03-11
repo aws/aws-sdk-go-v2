@@ -177,6 +177,10 @@ type ListTrialComponentsPaginator struct {
 
 // NewListTrialComponentsPaginator returns a new ListTrialComponentsPaginator
 func NewListTrialComponentsPaginator(client ListTrialComponentsAPIClient, params *ListTrialComponentsInput, optFns ...func(*ListTrialComponentsPaginatorOptions)) *ListTrialComponentsPaginator {
+	if params == nil {
+		params = &ListTrialComponentsInput{}
+	}
+
 	options := ListTrialComponentsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -184,10 +188,6 @@ func NewListTrialComponentsPaginator(client ListTrialComponentsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTrialComponentsInput{}
 	}
 
 	return &ListTrialComponentsPaginator{

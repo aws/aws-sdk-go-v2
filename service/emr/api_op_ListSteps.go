@@ -152,14 +152,14 @@ type ListStepsPaginator struct {
 
 // NewListStepsPaginator returns a new ListStepsPaginator
 func NewListStepsPaginator(client ListStepsAPIClient, params *ListStepsInput, optFns ...func(*ListStepsPaginatorOptions)) *ListStepsPaginator {
+	if params == nil {
+		params = &ListStepsInput{}
+	}
+
 	options := ListStepsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListStepsInput{}
 	}
 
 	return &ListStepsPaginator{

@@ -156,6 +156,10 @@ type GetOpsSummaryPaginator struct {
 
 // NewGetOpsSummaryPaginator returns a new GetOpsSummaryPaginator
 func NewGetOpsSummaryPaginator(client GetOpsSummaryAPIClient, params *GetOpsSummaryInput, optFns ...func(*GetOpsSummaryPaginatorOptions)) *GetOpsSummaryPaginator {
+	if params == nil {
+		params = &GetOpsSummaryInput{}
+	}
+
 	options := GetOpsSummaryPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -163,10 +167,6 @@ func NewGetOpsSummaryPaginator(client GetOpsSummaryAPIClient, params *GetOpsSumm
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetOpsSummaryInput{}
 	}
 
 	return &GetOpsSummaryPaginator{

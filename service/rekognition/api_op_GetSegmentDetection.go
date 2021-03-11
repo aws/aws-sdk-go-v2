@@ -204,6 +204,10 @@ type GetSegmentDetectionPaginator struct {
 
 // NewGetSegmentDetectionPaginator returns a new GetSegmentDetectionPaginator
 func NewGetSegmentDetectionPaginator(client GetSegmentDetectionAPIClient, params *GetSegmentDetectionInput, optFns ...func(*GetSegmentDetectionPaginatorOptions)) *GetSegmentDetectionPaginator {
+	if params == nil {
+		params = &GetSegmentDetectionInput{}
+	}
+
 	options := GetSegmentDetectionPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -211,10 +215,6 @@ func NewGetSegmentDetectionPaginator(client GetSegmentDetectionAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetSegmentDetectionInput{}
 	}
 
 	return &GetSegmentDetectionPaginator{

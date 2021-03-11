@@ -152,6 +152,10 @@ type ListWebsiteCertificateAuthoritiesPaginator struct {
 // NewListWebsiteCertificateAuthoritiesPaginator returns a new
 // ListWebsiteCertificateAuthoritiesPaginator
 func NewListWebsiteCertificateAuthoritiesPaginator(client ListWebsiteCertificateAuthoritiesAPIClient, params *ListWebsiteCertificateAuthoritiesInput, optFns ...func(*ListWebsiteCertificateAuthoritiesPaginatorOptions)) *ListWebsiteCertificateAuthoritiesPaginator {
+	if params == nil {
+		params = &ListWebsiteCertificateAuthoritiesInput{}
+	}
+
 	options := ListWebsiteCertificateAuthoritiesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -159,10 +163,6 @@ func NewListWebsiteCertificateAuthoritiesPaginator(client ListWebsiteCertificate
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListWebsiteCertificateAuthoritiesInput{}
 	}
 
 	return &ListWebsiteCertificateAuthoritiesPaginator{

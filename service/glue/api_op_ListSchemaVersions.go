@@ -161,6 +161,10 @@ type ListSchemaVersionsPaginator struct {
 
 // NewListSchemaVersionsPaginator returns a new ListSchemaVersionsPaginator
 func NewListSchemaVersionsPaginator(client ListSchemaVersionsAPIClient, params *ListSchemaVersionsInput, optFns ...func(*ListSchemaVersionsPaginatorOptions)) *ListSchemaVersionsPaginator {
+	if params == nil {
+		params = &ListSchemaVersionsInput{}
+	}
+
 	options := ListSchemaVersionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -168,10 +172,6 @@ func NewListSchemaVersionsPaginator(client ListSchemaVersionsAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSchemaVersionsInput{}
 	}
 
 	return &ListSchemaVersionsPaginator{

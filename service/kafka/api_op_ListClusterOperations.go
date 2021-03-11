@@ -154,6 +154,10 @@ type ListClusterOperationsPaginator struct {
 
 // NewListClusterOperationsPaginator returns a new ListClusterOperationsPaginator
 func NewListClusterOperationsPaginator(client ListClusterOperationsAPIClient, params *ListClusterOperationsInput, optFns ...func(*ListClusterOperationsPaginatorOptions)) *ListClusterOperationsPaginator {
+	if params == nil {
+		params = &ListClusterOperationsInput{}
+	}
+
 	options := ListClusterOperationsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -161,10 +165,6 @@ func NewListClusterOperationsPaginator(client ListClusterOperationsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListClusterOperationsInput{}
 	}
 
 	return &ListClusterOperationsPaginator{

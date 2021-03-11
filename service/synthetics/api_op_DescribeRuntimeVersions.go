@@ -151,6 +151,10 @@ type DescribeRuntimeVersionsPaginator struct {
 // NewDescribeRuntimeVersionsPaginator returns a new
 // DescribeRuntimeVersionsPaginator
 func NewDescribeRuntimeVersionsPaginator(client DescribeRuntimeVersionsAPIClient, params *DescribeRuntimeVersionsInput, optFns ...func(*DescribeRuntimeVersionsPaginatorOptions)) *DescribeRuntimeVersionsPaginator {
+	if params == nil {
+		params = &DescribeRuntimeVersionsInput{}
+	}
+
 	options := DescribeRuntimeVersionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -158,10 +162,6 @@ func NewDescribeRuntimeVersionsPaginator(client DescribeRuntimeVersionsAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeRuntimeVersionsInput{}
 	}
 
 	return &DescribeRuntimeVersionsPaginator{

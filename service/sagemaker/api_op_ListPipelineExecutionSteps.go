@@ -154,6 +154,10 @@ type ListPipelineExecutionStepsPaginator struct {
 // NewListPipelineExecutionStepsPaginator returns a new
 // ListPipelineExecutionStepsPaginator
 func NewListPipelineExecutionStepsPaginator(client ListPipelineExecutionStepsAPIClient, params *ListPipelineExecutionStepsInput, optFns ...func(*ListPipelineExecutionStepsPaginatorOptions)) *ListPipelineExecutionStepsPaginator {
+	if params == nil {
+		params = &ListPipelineExecutionStepsInput{}
+	}
+
 	options := ListPipelineExecutionStepsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -161,10 +165,6 @@ func NewListPipelineExecutionStepsPaginator(client ListPipelineExecutionStepsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPipelineExecutionStepsInput{}
 	}
 
 	return &ListPipelineExecutionStepsPaginator{

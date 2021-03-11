@@ -153,6 +153,10 @@ type GetTransitGatewayConnectPeerAssociationsPaginator struct {
 // NewGetTransitGatewayConnectPeerAssociationsPaginator returns a new
 // GetTransitGatewayConnectPeerAssociationsPaginator
 func NewGetTransitGatewayConnectPeerAssociationsPaginator(client GetTransitGatewayConnectPeerAssociationsAPIClient, params *GetTransitGatewayConnectPeerAssociationsInput, optFns ...func(*GetTransitGatewayConnectPeerAssociationsPaginatorOptions)) *GetTransitGatewayConnectPeerAssociationsPaginator {
+	if params == nil {
+		params = &GetTransitGatewayConnectPeerAssociationsInput{}
+	}
+
 	options := GetTransitGatewayConnectPeerAssociationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -160,10 +164,6 @@ func NewGetTransitGatewayConnectPeerAssociationsPaginator(client GetTransitGatew
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetTransitGatewayConnectPeerAssociationsInput{}
 	}
 
 	return &GetTransitGatewayConnectPeerAssociationsPaginator{

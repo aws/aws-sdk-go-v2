@@ -148,6 +148,10 @@ type ListApprovedOriginsPaginator struct {
 
 // NewListApprovedOriginsPaginator returns a new ListApprovedOriginsPaginator
 func NewListApprovedOriginsPaginator(client ListApprovedOriginsAPIClient, params *ListApprovedOriginsInput, optFns ...func(*ListApprovedOriginsPaginatorOptions)) *ListApprovedOriginsPaginator {
+	if params == nil {
+		params = &ListApprovedOriginsInput{}
+	}
+
 	options := ListApprovedOriginsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -155,10 +159,6 @@ func NewListApprovedOriginsPaginator(client ListApprovedOriginsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListApprovedOriginsInput{}
 	}
 
 	return &ListApprovedOriginsPaginator{

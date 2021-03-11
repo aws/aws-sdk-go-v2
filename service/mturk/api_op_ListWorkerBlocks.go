@@ -143,6 +143,10 @@ type ListWorkerBlocksPaginator struct {
 
 // NewListWorkerBlocksPaginator returns a new ListWorkerBlocksPaginator
 func NewListWorkerBlocksPaginator(client ListWorkerBlocksAPIClient, params *ListWorkerBlocksInput, optFns ...func(*ListWorkerBlocksPaginatorOptions)) *ListWorkerBlocksPaginator {
+	if params == nil {
+		params = &ListWorkerBlocksInput{}
+	}
+
 	options := ListWorkerBlocksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -150,10 +154,6 @@ func NewListWorkerBlocksPaginator(client ListWorkerBlocksAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListWorkerBlocksInput{}
 	}
 
 	return &ListWorkerBlocksPaginator{

@@ -155,6 +155,10 @@ type GetBasePathMappingsPaginator struct {
 
 // NewGetBasePathMappingsPaginator returns a new GetBasePathMappingsPaginator
 func NewGetBasePathMappingsPaginator(client GetBasePathMappingsAPIClient, params *GetBasePathMappingsInput, optFns ...func(*GetBasePathMappingsPaginatorOptions)) *GetBasePathMappingsPaginator {
+	if params == nil {
+		params = &GetBasePathMappingsInput{}
+	}
+
 	options := GetBasePathMappingsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -162,10 +166,6 @@ func NewGetBasePathMappingsPaginator(client GetBasePathMappingsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetBasePathMappingsInput{}
 	}
 
 	return &GetBasePathMappingsPaginator{

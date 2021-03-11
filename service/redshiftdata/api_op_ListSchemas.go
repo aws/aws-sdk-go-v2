@@ -186,6 +186,10 @@ type ListSchemasPaginator struct {
 
 // NewListSchemasPaginator returns a new ListSchemasPaginator
 func NewListSchemasPaginator(client ListSchemasAPIClient, params *ListSchemasInput, optFns ...func(*ListSchemasPaginatorOptions)) *ListSchemasPaginator {
+	if params == nil {
+		params = &ListSchemasInput{}
+	}
+
 	options := ListSchemasPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -193,10 +197,6 @@ func NewListSchemasPaginator(client ListSchemasAPIClient, params *ListSchemasInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSchemasInput{}
 	}
 
 	return &ListSchemasPaginator{

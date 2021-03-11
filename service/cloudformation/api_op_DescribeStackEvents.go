@@ -153,14 +153,14 @@ type DescribeStackEventsPaginator struct {
 
 // NewDescribeStackEventsPaginator returns a new DescribeStackEventsPaginator
 func NewDescribeStackEventsPaginator(client DescribeStackEventsAPIClient, params *DescribeStackEventsInput, optFns ...func(*DescribeStackEventsPaginatorOptions)) *DescribeStackEventsPaginator {
+	if params == nil {
+		params = &DescribeStackEventsInput{}
+	}
+
 	options := DescribeStackEventsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeStackEventsInput{}
 	}
 
 	return &DescribeStackEventsPaginator{

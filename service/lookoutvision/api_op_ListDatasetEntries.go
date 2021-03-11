@@ -186,6 +186,10 @@ type ListDatasetEntriesPaginator struct {
 
 // NewListDatasetEntriesPaginator returns a new ListDatasetEntriesPaginator
 func NewListDatasetEntriesPaginator(client ListDatasetEntriesAPIClient, params *ListDatasetEntriesInput, optFns ...func(*ListDatasetEntriesPaginatorOptions)) *ListDatasetEntriesPaginator {
+	if params == nil {
+		params = &ListDatasetEntriesInput{}
+	}
+
 	options := ListDatasetEntriesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -193,10 +197,6 @@ func NewListDatasetEntriesPaginator(client ListDatasetEntriesAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDatasetEntriesInput{}
 	}
 
 	return &ListDatasetEntriesPaginator{

@@ -180,6 +180,10 @@ type ListAccountsForParentPaginator struct {
 
 // NewListAccountsForParentPaginator returns a new ListAccountsForParentPaginator
 func NewListAccountsForParentPaginator(client ListAccountsForParentAPIClient, params *ListAccountsForParentInput, optFns ...func(*ListAccountsForParentPaginatorOptions)) *ListAccountsForParentPaginator {
+	if params == nil {
+		params = &ListAccountsForParentInput{}
+	}
+
 	options := ListAccountsForParentPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -187,10 +191,6 @@ func NewListAccountsForParentPaginator(client ListAccountsForParentAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAccountsForParentInput{}
 	}
 
 	return &ListAccountsForParentPaginator{

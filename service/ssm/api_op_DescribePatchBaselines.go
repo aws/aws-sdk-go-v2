@@ -146,6 +146,10 @@ type DescribePatchBaselinesPaginator struct {
 
 // NewDescribePatchBaselinesPaginator returns a new DescribePatchBaselinesPaginator
 func NewDescribePatchBaselinesPaginator(client DescribePatchBaselinesAPIClient, params *DescribePatchBaselinesInput, optFns ...func(*DescribePatchBaselinesPaginatorOptions)) *DescribePatchBaselinesPaginator {
+	if params == nil {
+		params = &DescribePatchBaselinesInput{}
+	}
+
 	options := DescribePatchBaselinesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -153,10 +157,6 @@ func NewDescribePatchBaselinesPaginator(client DescribePatchBaselinesAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribePatchBaselinesInput{}
 	}
 
 	return &DescribePatchBaselinesPaginator{

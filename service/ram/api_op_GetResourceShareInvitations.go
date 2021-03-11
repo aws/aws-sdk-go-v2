@@ -150,6 +150,10 @@ type GetResourceShareInvitationsPaginator struct {
 // NewGetResourceShareInvitationsPaginator returns a new
 // GetResourceShareInvitationsPaginator
 func NewGetResourceShareInvitationsPaginator(client GetResourceShareInvitationsAPIClient, params *GetResourceShareInvitationsInput, optFns ...func(*GetResourceShareInvitationsPaginatorOptions)) *GetResourceShareInvitationsPaginator {
+	if params == nil {
+		params = &GetResourceShareInvitationsInput{}
+	}
+
 	options := GetResourceShareInvitationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -157,10 +161,6 @@ func NewGetResourceShareInvitationsPaginator(client GetResourceShareInvitationsA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetResourceShareInvitationsInput{}
 	}
 
 	return &GetResourceShareInvitationsPaginator{

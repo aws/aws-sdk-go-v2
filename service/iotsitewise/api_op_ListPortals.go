@@ -168,6 +168,10 @@ type ListPortalsPaginator struct {
 
 // NewListPortalsPaginator returns a new ListPortalsPaginator
 func NewListPortalsPaginator(client ListPortalsAPIClient, params *ListPortalsInput, optFns ...func(*ListPortalsPaginatorOptions)) *ListPortalsPaginator {
+	if params == nil {
+		params = &ListPortalsInput{}
+	}
+
 	options := ListPortalsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -175,10 +179,6 @@ func NewListPortalsPaginator(client ListPortalsAPIClient, params *ListPortalsInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPortalsInput{}
 	}
 
 	return &ListPortalsPaginator{

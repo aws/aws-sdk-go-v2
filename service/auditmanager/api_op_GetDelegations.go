@@ -138,6 +138,10 @@ type GetDelegationsPaginator struct {
 
 // NewGetDelegationsPaginator returns a new GetDelegationsPaginator
 func NewGetDelegationsPaginator(client GetDelegationsAPIClient, params *GetDelegationsInput, optFns ...func(*GetDelegationsPaginatorOptions)) *GetDelegationsPaginator {
+	if params == nil {
+		params = &GetDelegationsInput{}
+	}
+
 	options := GetDelegationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -145,10 +149,6 @@ func NewGetDelegationsPaginator(client GetDelegationsAPIClient, params *GetDeleg
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetDelegationsInput{}
 	}
 
 	return &GetDelegationsPaginator{

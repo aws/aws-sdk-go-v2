@@ -144,6 +144,10 @@ type ListApprovalRuleTemplatesPaginator struct {
 // NewListApprovalRuleTemplatesPaginator returns a new
 // ListApprovalRuleTemplatesPaginator
 func NewListApprovalRuleTemplatesPaginator(client ListApprovalRuleTemplatesAPIClient, params *ListApprovalRuleTemplatesInput, optFns ...func(*ListApprovalRuleTemplatesPaginatorOptions)) *ListApprovalRuleTemplatesPaginator {
+	if params == nil {
+		params = &ListApprovalRuleTemplatesInput{}
+	}
+
 	options := ListApprovalRuleTemplatesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -151,10 +155,6 @@ func NewListApprovalRuleTemplatesPaginator(client ListApprovalRuleTemplatesAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListApprovalRuleTemplatesInput{}
 	}
 
 	return &ListApprovalRuleTemplatesPaginator{

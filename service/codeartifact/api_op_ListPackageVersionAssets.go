@@ -235,6 +235,10 @@ type ListPackageVersionAssetsPaginator struct {
 // NewListPackageVersionAssetsPaginator returns a new
 // ListPackageVersionAssetsPaginator
 func NewListPackageVersionAssetsPaginator(client ListPackageVersionAssetsAPIClient, params *ListPackageVersionAssetsInput, optFns ...func(*ListPackageVersionAssetsPaginatorOptions)) *ListPackageVersionAssetsPaginator {
+	if params == nil {
+		params = &ListPackageVersionAssetsInput{}
+	}
+
 	options := ListPackageVersionAssetsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -242,10 +246,6 @@ func NewListPackageVersionAssetsPaginator(client ListPackageVersionAssetsAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPackageVersionAssetsInput{}
 	}
 
 	return &ListPackageVersionAssetsPaginator{

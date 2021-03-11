@@ -157,6 +157,10 @@ type GetBotAliasesPaginator struct {
 
 // NewGetBotAliasesPaginator returns a new GetBotAliasesPaginator
 func NewGetBotAliasesPaginator(client GetBotAliasesAPIClient, params *GetBotAliasesInput, optFns ...func(*GetBotAliasesPaginatorOptions)) *GetBotAliasesPaginator {
+	if params == nil {
+		params = &GetBotAliasesInput{}
+	}
+
 	options := GetBotAliasesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -164,10 +168,6 @@ func NewGetBotAliasesPaginator(client GetBotAliasesAPIClient, params *GetBotAlia
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetBotAliasesInput{}
 	}
 
 	return &GetBotAliasesPaginator{

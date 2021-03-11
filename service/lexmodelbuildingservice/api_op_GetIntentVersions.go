@@ -161,6 +161,10 @@ type GetIntentVersionsPaginator struct {
 
 // NewGetIntentVersionsPaginator returns a new GetIntentVersionsPaginator
 func NewGetIntentVersionsPaginator(client GetIntentVersionsAPIClient, params *GetIntentVersionsInput, optFns ...func(*GetIntentVersionsPaginatorOptions)) *GetIntentVersionsPaginator {
+	if params == nil {
+		params = &GetIntentVersionsInput{}
+	}
+
 	options := GetIntentVersionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -168,10 +172,6 @@ func NewGetIntentVersionsPaginator(client GetIntentVersionsAPIClient, params *Ge
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetIntentVersionsInput{}
 	}
 
 	return &GetIntentVersionsPaginator{

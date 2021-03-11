@@ -153,6 +153,10 @@ type DescribeInstanceAssociationsStatusPaginator struct {
 // NewDescribeInstanceAssociationsStatusPaginator returns a new
 // DescribeInstanceAssociationsStatusPaginator
 func NewDescribeInstanceAssociationsStatusPaginator(client DescribeInstanceAssociationsStatusAPIClient, params *DescribeInstanceAssociationsStatusInput, optFns ...func(*DescribeInstanceAssociationsStatusPaginatorOptions)) *DescribeInstanceAssociationsStatusPaginator {
+	if params == nil {
+		params = &DescribeInstanceAssociationsStatusInput{}
+	}
+
 	options := DescribeInstanceAssociationsStatusPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -160,10 +164,6 @@ func NewDescribeInstanceAssociationsStatusPaginator(client DescribeInstanceAssoc
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeInstanceAssociationsStatusInput{}
 	}
 
 	return &DescribeInstanceAssociationsStatusPaginator{

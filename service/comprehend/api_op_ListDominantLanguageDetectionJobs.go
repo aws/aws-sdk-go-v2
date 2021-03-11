@@ -146,6 +146,10 @@ type ListDominantLanguageDetectionJobsPaginator struct {
 // NewListDominantLanguageDetectionJobsPaginator returns a new
 // ListDominantLanguageDetectionJobsPaginator
 func NewListDominantLanguageDetectionJobsPaginator(client ListDominantLanguageDetectionJobsAPIClient, params *ListDominantLanguageDetectionJobsInput, optFns ...func(*ListDominantLanguageDetectionJobsPaginatorOptions)) *ListDominantLanguageDetectionJobsPaginator {
+	if params == nil {
+		params = &ListDominantLanguageDetectionJobsInput{}
+	}
+
 	options := ListDominantLanguageDetectionJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -153,10 +157,6 @@ func NewListDominantLanguageDetectionJobsPaginator(client ListDominantLanguageDe
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDominantLanguageDetectionJobsInput{}
 	}
 
 	return &ListDominantLanguageDetectionJobsPaginator{

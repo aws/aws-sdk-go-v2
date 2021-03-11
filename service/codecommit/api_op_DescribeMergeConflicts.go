@@ -209,6 +209,10 @@ type DescribeMergeConflictsPaginator struct {
 
 // NewDescribeMergeConflictsPaginator returns a new DescribeMergeConflictsPaginator
 func NewDescribeMergeConflictsPaginator(client DescribeMergeConflictsAPIClient, params *DescribeMergeConflictsInput, optFns ...func(*DescribeMergeConflictsPaginatorOptions)) *DescribeMergeConflictsPaginator {
+	if params == nil {
+		params = &DescribeMergeConflictsInput{}
+	}
+
 	options := DescribeMergeConflictsPaginatorOptions{}
 	if params.MaxMergeHunks != nil {
 		options.Limit = *params.MaxMergeHunks
@@ -216,10 +220,6 @@ func NewDescribeMergeConflictsPaginator(client DescribeMergeConflictsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeMergeConflictsInput{}
 	}
 
 	return &DescribeMergeConflictsPaginator{

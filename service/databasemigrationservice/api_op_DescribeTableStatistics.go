@@ -172,6 +172,10 @@ type DescribeTableStatisticsPaginator struct {
 // NewDescribeTableStatisticsPaginator returns a new
 // DescribeTableStatisticsPaginator
 func NewDescribeTableStatisticsPaginator(client DescribeTableStatisticsAPIClient, params *DescribeTableStatisticsInput, optFns ...func(*DescribeTableStatisticsPaginatorOptions)) *DescribeTableStatisticsPaginator {
+	if params == nil {
+		params = &DescribeTableStatisticsInput{}
+	}
+
 	options := DescribeTableStatisticsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -179,10 +183,6 @@ func NewDescribeTableStatisticsPaginator(client DescribeTableStatisticsAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeTableStatisticsInput{}
 	}
 
 	return &DescribeTableStatisticsPaginator{

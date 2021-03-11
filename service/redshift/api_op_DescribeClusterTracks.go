@@ -149,6 +149,10 @@ type DescribeClusterTracksPaginator struct {
 
 // NewDescribeClusterTracksPaginator returns a new DescribeClusterTracksPaginator
 func NewDescribeClusterTracksPaginator(client DescribeClusterTracksAPIClient, params *DescribeClusterTracksInput, optFns ...func(*DescribeClusterTracksPaginatorOptions)) *DescribeClusterTracksPaginator {
+	if params == nil {
+		params = &DescribeClusterTracksInput{}
+	}
+
 	options := DescribeClusterTracksPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -156,10 +160,6 @@ func NewDescribeClusterTracksPaginator(client DescribeClusterTracksAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeClusterTracksInput{}
 	}
 
 	return &DescribeClusterTracksPaginator{

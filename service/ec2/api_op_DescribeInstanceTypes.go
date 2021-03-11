@@ -304,6 +304,10 @@ type DescribeInstanceTypesPaginator struct {
 
 // NewDescribeInstanceTypesPaginator returns a new DescribeInstanceTypesPaginator
 func NewDescribeInstanceTypesPaginator(client DescribeInstanceTypesAPIClient, params *DescribeInstanceTypesInput, optFns ...func(*DescribeInstanceTypesPaginatorOptions)) *DescribeInstanceTypesPaginator {
+	if params == nil {
+		params = &DescribeInstanceTypesInput{}
+	}
+
 	options := DescribeInstanceTypesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -311,10 +315,6 @@ func NewDescribeInstanceTypesPaginator(client DescribeInstanceTypesAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeInstanceTypesInput{}
 	}
 
 	return &DescribeInstanceTypesPaginator{

@@ -180,6 +180,10 @@ type ListTargetsForPolicyPaginator struct {
 
 // NewListTargetsForPolicyPaginator returns a new ListTargetsForPolicyPaginator
 func NewListTargetsForPolicyPaginator(client ListTargetsForPolicyAPIClient, params *ListTargetsForPolicyInput, optFns ...func(*ListTargetsForPolicyPaginatorOptions)) *ListTargetsForPolicyPaginator {
+	if params == nil {
+		params = &ListTargetsForPolicyInput{}
+	}
+
 	options := ListTargetsForPolicyPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -187,10 +191,6 @@ func NewListTargetsForPolicyPaginator(client ListTargetsForPolicyAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTargetsForPolicyInput{}
 	}
 
 	return &ListTargetsForPolicyPaginator{

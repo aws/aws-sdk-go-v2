@@ -152,6 +152,10 @@ type ListPrincipalThingsPaginator struct {
 
 // NewListPrincipalThingsPaginator returns a new ListPrincipalThingsPaginator
 func NewListPrincipalThingsPaginator(client ListPrincipalThingsAPIClient, params *ListPrincipalThingsInput, optFns ...func(*ListPrincipalThingsPaginatorOptions)) *ListPrincipalThingsPaginator {
+	if params == nil {
+		params = &ListPrincipalThingsInput{}
+	}
+
 	options := ListPrincipalThingsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -159,10 +163,6 @@ func NewListPrincipalThingsPaginator(client ListPrincipalThingsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPrincipalThingsInput{}
 	}
 
 	return &ListPrincipalThingsPaginator{

@@ -180,6 +180,10 @@ type ListDashboardsPaginator struct {
 
 // NewListDashboardsPaginator returns a new ListDashboardsPaginator
 func NewListDashboardsPaginator(client ListDashboardsAPIClient, params *ListDashboardsInput, optFns ...func(*ListDashboardsPaginatorOptions)) *ListDashboardsPaginator {
+	if params == nil {
+		params = &ListDashboardsInput{}
+	}
+
 	options := ListDashboardsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -187,10 +191,6 @@ func NewListDashboardsPaginator(client ListDashboardsAPIClient, params *ListDash
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDashboardsInput{}
 	}
 
 	return &ListDashboardsPaginator{

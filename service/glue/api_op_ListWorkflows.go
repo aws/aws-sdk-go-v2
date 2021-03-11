@@ -136,6 +136,10 @@ type ListWorkflowsPaginator struct {
 
 // NewListWorkflowsPaginator returns a new ListWorkflowsPaginator
 func NewListWorkflowsPaginator(client ListWorkflowsAPIClient, params *ListWorkflowsInput, optFns ...func(*ListWorkflowsPaginatorOptions)) *ListWorkflowsPaginator {
+	if params == nil {
+		params = &ListWorkflowsInput{}
+	}
+
 	options := ListWorkflowsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -143,10 +147,6 @@ func NewListWorkflowsPaginator(client ListWorkflowsAPIClient, params *ListWorkfl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListWorkflowsInput{}
 	}
 
 	return &ListWorkflowsPaginator{

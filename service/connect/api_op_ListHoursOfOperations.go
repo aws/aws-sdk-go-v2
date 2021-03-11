@@ -152,6 +152,10 @@ type ListHoursOfOperationsPaginator struct {
 
 // NewListHoursOfOperationsPaginator returns a new ListHoursOfOperationsPaginator
 func NewListHoursOfOperationsPaginator(client ListHoursOfOperationsAPIClient, params *ListHoursOfOperationsInput, optFns ...func(*ListHoursOfOperationsPaginatorOptions)) *ListHoursOfOperationsPaginator {
+	if params == nil {
+		params = &ListHoursOfOperationsInput{}
+	}
+
 	options := ListHoursOfOperationsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -159,10 +163,6 @@ func NewListHoursOfOperationsPaginator(client ListHoursOfOperationsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListHoursOfOperationsInput{}
 	}
 
 	return &ListHoursOfOperationsPaginator{

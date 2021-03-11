@@ -279,6 +279,10 @@ type DescribeNetworkInterfacesPaginator struct {
 // NewDescribeNetworkInterfacesPaginator returns a new
 // DescribeNetworkInterfacesPaginator
 func NewDescribeNetworkInterfacesPaginator(client DescribeNetworkInterfacesAPIClient, params *DescribeNetworkInterfacesInput, optFns ...func(*DescribeNetworkInterfacesPaginatorOptions)) *DescribeNetworkInterfacesPaginator {
+	if params == nil {
+		params = &DescribeNetworkInterfacesInput{}
+	}
+
 	options := DescribeNetworkInterfacesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -286,10 +290,6 @@ func NewDescribeNetworkInterfacesPaginator(client DescribeNetworkInterfacesAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeNetworkInterfacesInput{}
 	}
 
 	return &DescribeNetworkInterfacesPaginator{

@@ -171,6 +171,10 @@ type ListRecommendationFeedbackPaginator struct {
 // NewListRecommendationFeedbackPaginator returns a new
 // ListRecommendationFeedbackPaginator
 func NewListRecommendationFeedbackPaginator(client ListRecommendationFeedbackAPIClient, params *ListRecommendationFeedbackInput, optFns ...func(*ListRecommendationFeedbackPaginatorOptions)) *ListRecommendationFeedbackPaginator {
+	if params == nil {
+		params = &ListRecommendationFeedbackInput{}
+	}
+
 	options := ListRecommendationFeedbackPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -178,10 +182,6 @@ func NewListRecommendationFeedbackPaginator(client ListRecommendationFeedbackAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRecommendationFeedbackInput{}
 	}
 
 	return &ListRecommendationFeedbackPaginator{

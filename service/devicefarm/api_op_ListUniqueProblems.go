@@ -165,14 +165,14 @@ type ListUniqueProblemsPaginator struct {
 
 // NewListUniqueProblemsPaginator returns a new ListUniqueProblemsPaginator
 func NewListUniqueProblemsPaginator(client ListUniqueProblemsAPIClient, params *ListUniqueProblemsInput, optFns ...func(*ListUniqueProblemsPaginatorOptions)) *ListUniqueProblemsPaginator {
+	if params == nil {
+		params = &ListUniqueProblemsInput{}
+	}
+
 	options := ListUniqueProblemsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListUniqueProblemsInput{}
 	}
 
 	return &ListUniqueProblemsPaginator{

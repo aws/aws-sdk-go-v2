@@ -169,6 +169,10 @@ type ListPredictorsPaginator struct {
 
 // NewListPredictorsPaginator returns a new ListPredictorsPaginator
 func NewListPredictorsPaginator(client ListPredictorsAPIClient, params *ListPredictorsInput, optFns ...func(*ListPredictorsPaginatorOptions)) *ListPredictorsPaginator {
+	if params == nil {
+		params = &ListPredictorsInput{}
+	}
+
 	options := ListPredictorsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -176,10 +180,6 @@ func NewListPredictorsPaginator(client ListPredictorsAPIClient, params *ListPred
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPredictorsInput{}
 	}
 
 	return &ListPredictorsPaginator{

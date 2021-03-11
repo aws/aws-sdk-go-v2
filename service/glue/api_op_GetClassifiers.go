@@ -138,6 +138,10 @@ type GetClassifiersPaginator struct {
 
 // NewGetClassifiersPaginator returns a new GetClassifiersPaginator
 func NewGetClassifiersPaginator(client GetClassifiersAPIClient, params *GetClassifiersInput, optFns ...func(*GetClassifiersPaginatorOptions)) *GetClassifiersPaginator {
+	if params == nil {
+		params = &GetClassifiersInput{}
+	}
+
 	options := GetClassifiersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -145,10 +149,6 @@ func NewGetClassifiersPaginator(client GetClassifiersAPIClient, params *GetClass
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetClassifiersInput{}
 	}
 
 	return &GetClassifiersPaginator{

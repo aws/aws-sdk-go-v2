@@ -158,6 +158,10 @@ type DescribeMaintenanceWindowTargetsPaginator struct {
 // NewDescribeMaintenanceWindowTargetsPaginator returns a new
 // DescribeMaintenanceWindowTargetsPaginator
 func NewDescribeMaintenanceWindowTargetsPaginator(client DescribeMaintenanceWindowTargetsAPIClient, params *DescribeMaintenanceWindowTargetsInput, optFns ...func(*DescribeMaintenanceWindowTargetsPaginatorOptions)) *DescribeMaintenanceWindowTargetsPaginator {
+	if params == nil {
+		params = &DescribeMaintenanceWindowTargetsInput{}
+	}
+
 	options := DescribeMaintenanceWindowTargetsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -165,10 +169,6 @@ func NewDescribeMaintenanceWindowTargetsPaginator(client DescribeMaintenanceWind
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeMaintenanceWindowTargetsInput{}
 	}
 
 	return &DescribeMaintenanceWindowTargetsPaginator{

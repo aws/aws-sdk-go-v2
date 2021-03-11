@@ -159,6 +159,10 @@ type ListEntitlementsPaginator struct {
 
 // NewListEntitlementsPaginator returns a new ListEntitlementsPaginator
 func NewListEntitlementsPaginator(client ListEntitlementsAPIClient, params *ListEntitlementsInput, optFns ...func(*ListEntitlementsPaginatorOptions)) *ListEntitlementsPaginator {
+	if params == nil {
+		params = &ListEntitlementsInput{}
+	}
+
 	options := ListEntitlementsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -166,10 +170,6 @@ func NewListEntitlementsPaginator(client ListEntitlementsAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEntitlementsInput{}
 	}
 
 	return &ListEntitlementsPaginator{

@@ -173,6 +173,10 @@ type DescribeDBLogFilesPaginator struct {
 
 // NewDescribeDBLogFilesPaginator returns a new DescribeDBLogFilesPaginator
 func NewDescribeDBLogFilesPaginator(client DescribeDBLogFilesAPIClient, params *DescribeDBLogFilesInput, optFns ...func(*DescribeDBLogFilesPaginatorOptions)) *DescribeDBLogFilesPaginator {
+	if params == nil {
+		params = &DescribeDBLogFilesInput{}
+	}
+
 	options := DescribeDBLogFilesPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -180,10 +184,6 @@ func NewDescribeDBLogFilesPaginator(client DescribeDBLogFilesAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeDBLogFilesInput{}
 	}
 
 	return &DescribeDBLogFilesPaginator{

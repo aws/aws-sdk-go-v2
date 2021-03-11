@@ -153,6 +153,10 @@ type ListLayerVersionsPaginator struct {
 
 // NewListLayerVersionsPaginator returns a new ListLayerVersionsPaginator
 func NewListLayerVersionsPaginator(client ListLayerVersionsAPIClient, params *ListLayerVersionsInput, optFns ...func(*ListLayerVersionsPaginatorOptions)) *ListLayerVersionsPaginator {
+	if params == nil {
+		params = &ListLayerVersionsInput{}
+	}
+
 	options := ListLayerVersionsPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -160,10 +164,6 @@ func NewListLayerVersionsPaginator(client ListLayerVersionsAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListLayerVersionsInput{}
 	}
 
 	return &ListLayerVersionsPaginator{

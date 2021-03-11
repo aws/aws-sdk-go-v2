@@ -185,6 +185,10 @@ type GetLogEventsPaginator struct {
 
 // NewGetLogEventsPaginator returns a new GetLogEventsPaginator
 func NewGetLogEventsPaginator(client GetLogEventsAPIClient, params *GetLogEventsInput, optFns ...func(*GetLogEventsPaginatorOptions)) *GetLogEventsPaginator {
+	if params == nil {
+		params = &GetLogEventsInput{}
+	}
+
 	options := GetLogEventsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -192,10 +196,6 @@ func NewGetLogEventsPaginator(client GetLogEventsAPIClient, params *GetLogEvents
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetLogEventsInput{}
 	}
 
 	return &GetLogEventsPaginator{

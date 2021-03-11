@@ -150,6 +150,10 @@ type DescribeModelVersionsPaginator struct {
 
 // NewDescribeModelVersionsPaginator returns a new DescribeModelVersionsPaginator
 func NewDescribeModelVersionsPaginator(client DescribeModelVersionsAPIClient, params *DescribeModelVersionsInput, optFns ...func(*DescribeModelVersionsPaginatorOptions)) *DescribeModelVersionsPaginator {
+	if params == nil {
+		params = &DescribeModelVersionsInput{}
+	}
+
 	options := DescribeModelVersionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -157,10 +161,6 @@ func NewDescribeModelVersionsPaginator(client DescribeModelVersionsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeModelVersionsInput{}
 	}
 
 	return &DescribeModelVersionsPaginator{

@@ -151,6 +151,10 @@ type ListConfigurationProfilesPaginator struct {
 // NewListConfigurationProfilesPaginator returns a new
 // ListConfigurationProfilesPaginator
 func NewListConfigurationProfilesPaginator(client ListConfigurationProfilesAPIClient, params *ListConfigurationProfilesInput, optFns ...func(*ListConfigurationProfilesPaginatorOptions)) *ListConfigurationProfilesPaginator {
+	if params == nil {
+		params = &ListConfigurationProfilesInput{}
+	}
+
 	options := ListConfigurationProfilesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -158,10 +162,6 @@ func NewListConfigurationProfilesPaginator(client ListConfigurationProfilesAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListConfigurationProfilesInput{}
 	}
 
 	return &ListConfigurationProfilesPaginator{

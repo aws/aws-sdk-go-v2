@@ -145,6 +145,10 @@ type ListScramSecretsPaginator struct {
 
 // NewListScramSecretsPaginator returns a new ListScramSecretsPaginator
 func NewListScramSecretsPaginator(client ListScramSecretsAPIClient, params *ListScramSecretsInput, optFns ...func(*ListScramSecretsPaginatorOptions)) *ListScramSecretsPaginator {
+	if params == nil {
+		params = &ListScramSecretsInput{}
+	}
+
 	options := ListScramSecretsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -152,10 +156,6 @@ func NewListScramSecretsPaginator(client ListScramSecretsAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListScramSecretsInput{}
 	}
 
 	return &ListScramSecretsPaginator{

@@ -152,6 +152,10 @@ type ListAssociatedApprovalRuleTemplatesForRepositoryPaginator struct {
 // NewListAssociatedApprovalRuleTemplatesForRepositoryPaginator returns a new
 // ListAssociatedApprovalRuleTemplatesForRepositoryPaginator
 func NewListAssociatedApprovalRuleTemplatesForRepositoryPaginator(client ListAssociatedApprovalRuleTemplatesForRepositoryAPIClient, params *ListAssociatedApprovalRuleTemplatesForRepositoryInput, optFns ...func(*ListAssociatedApprovalRuleTemplatesForRepositoryPaginatorOptions)) *ListAssociatedApprovalRuleTemplatesForRepositoryPaginator {
+	if params == nil {
+		params = &ListAssociatedApprovalRuleTemplatesForRepositoryInput{}
+	}
+
 	options := ListAssociatedApprovalRuleTemplatesForRepositoryPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -159,10 +163,6 @@ func NewListAssociatedApprovalRuleTemplatesForRepositoryPaginator(client ListAss
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAssociatedApprovalRuleTemplatesForRepositoryInput{}
 	}
 
 	return &ListAssociatedApprovalRuleTemplatesForRepositoryPaginator{

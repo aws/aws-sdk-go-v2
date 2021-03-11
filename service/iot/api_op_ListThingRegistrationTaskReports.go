@@ -159,6 +159,10 @@ type ListThingRegistrationTaskReportsPaginator struct {
 // NewListThingRegistrationTaskReportsPaginator returns a new
 // ListThingRegistrationTaskReportsPaginator
 func NewListThingRegistrationTaskReportsPaginator(client ListThingRegistrationTaskReportsAPIClient, params *ListThingRegistrationTaskReportsInput, optFns ...func(*ListThingRegistrationTaskReportsPaginatorOptions)) *ListThingRegistrationTaskReportsPaginator {
+	if params == nil {
+		params = &ListThingRegistrationTaskReportsInput{}
+	}
+
 	options := ListThingRegistrationTaskReportsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewListThingRegistrationTaskReportsPaginator(client ListThingRegistrationTa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListThingRegistrationTaskReportsInput{}
 	}
 
 	return &ListThingRegistrationTaskReportsPaginator{

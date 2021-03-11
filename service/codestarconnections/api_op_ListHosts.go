@@ -143,6 +143,10 @@ type ListHostsPaginator struct {
 
 // NewListHostsPaginator returns a new ListHostsPaginator
 func NewListHostsPaginator(client ListHostsAPIClient, params *ListHostsInput, optFns ...func(*ListHostsPaginatorOptions)) *ListHostsPaginator {
+	if params == nil {
+		params = &ListHostsInput{}
+	}
+
 	options := ListHostsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -150,10 +154,6 @@ func NewListHostsPaginator(client ListHostsAPIClient, params *ListHostsInput, op
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListHostsInput{}
 	}
 
 	return &ListHostsPaginator{

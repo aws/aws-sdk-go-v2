@@ -155,6 +155,10 @@ type ListJournalS3ExportsPaginator struct {
 
 // NewListJournalS3ExportsPaginator returns a new ListJournalS3ExportsPaginator
 func NewListJournalS3ExportsPaginator(client ListJournalS3ExportsAPIClient, params *ListJournalS3ExportsInput, optFns ...func(*ListJournalS3ExportsPaginatorOptions)) *ListJournalS3ExportsPaginator {
+	if params == nil {
+		params = &ListJournalS3ExportsInput{}
+	}
+
 	options := ListJournalS3ExportsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewListJournalS3ExportsPaginator(client ListJournalS3ExportsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListJournalS3ExportsInput{}
 	}
 
 	return &ListJournalS3ExportsPaginator{

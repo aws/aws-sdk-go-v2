@@ -135,14 +135,14 @@ type GetSamplingStatisticSummariesPaginator struct {
 // NewGetSamplingStatisticSummariesPaginator returns a new
 // GetSamplingStatisticSummariesPaginator
 func NewGetSamplingStatisticSummariesPaginator(client GetSamplingStatisticSummariesAPIClient, params *GetSamplingStatisticSummariesInput, optFns ...func(*GetSamplingStatisticSummariesPaginatorOptions)) *GetSamplingStatisticSummariesPaginator {
+	if params == nil {
+		params = &GetSamplingStatisticSummariesInput{}
+	}
+
 	options := GetSamplingStatisticSummariesPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetSamplingStatisticSummariesInput{}
 	}
 
 	return &GetSamplingStatisticSummariesPaginator{

@@ -420,6 +420,10 @@ type ScanPaginator struct {
 
 // NewScanPaginator returns a new ScanPaginator
 func NewScanPaginator(client ScanAPIClient, params *ScanInput, optFns ...func(*ScanPaginatorOptions)) *ScanPaginator {
+	if params == nil {
+		params = &ScanInput{}
+	}
+
 	options := ScanPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -427,10 +431,6 @@ func NewScanPaginator(client ScanAPIClient, params *ScanInput, optFns ...func(*S
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ScanInput{}
 	}
 
 	return &ScanPaginator{

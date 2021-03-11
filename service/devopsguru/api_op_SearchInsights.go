@@ -168,6 +168,10 @@ type SearchInsightsPaginator struct {
 
 // NewSearchInsightsPaginator returns a new SearchInsightsPaginator
 func NewSearchInsightsPaginator(client SearchInsightsAPIClient, params *SearchInsightsInput, optFns ...func(*SearchInsightsPaginatorOptions)) *SearchInsightsPaginator {
+	if params == nil {
+		params = &SearchInsightsInput{}
+	}
+
 	options := SearchInsightsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -175,10 +179,6 @@ func NewSearchInsightsPaginator(client SearchInsightsAPIClient, params *SearchIn
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchInsightsInput{}
 	}
 
 	return &SearchInsightsPaginator{

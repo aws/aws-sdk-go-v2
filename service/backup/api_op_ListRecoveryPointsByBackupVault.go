@@ -176,6 +176,10 @@ type ListRecoveryPointsByBackupVaultPaginator struct {
 // NewListRecoveryPointsByBackupVaultPaginator returns a new
 // ListRecoveryPointsByBackupVaultPaginator
 func NewListRecoveryPointsByBackupVaultPaginator(client ListRecoveryPointsByBackupVaultAPIClient, params *ListRecoveryPointsByBackupVaultInput, optFns ...func(*ListRecoveryPointsByBackupVaultPaginatorOptions)) *ListRecoveryPointsByBackupVaultPaginator {
+	if params == nil {
+		params = &ListRecoveryPointsByBackupVaultInput{}
+	}
+
 	options := ListRecoveryPointsByBackupVaultPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -183,10 +187,6 @@ func NewListRecoveryPointsByBackupVaultPaginator(client ListRecoveryPointsByBack
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRecoveryPointsByBackupVaultInput{}
 	}
 
 	return &ListRecoveryPointsByBackupVaultPaginator{

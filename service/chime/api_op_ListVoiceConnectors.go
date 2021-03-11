@@ -139,6 +139,10 @@ type ListVoiceConnectorsPaginator struct {
 
 // NewListVoiceConnectorsPaginator returns a new ListVoiceConnectorsPaginator
 func NewListVoiceConnectorsPaginator(client ListVoiceConnectorsAPIClient, params *ListVoiceConnectorsInput, optFns ...func(*ListVoiceConnectorsPaginatorOptions)) *ListVoiceConnectorsPaginator {
+	if params == nil {
+		params = &ListVoiceConnectorsInput{}
+	}
+
 	options := ListVoiceConnectorsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -146,10 +150,6 @@ func NewListVoiceConnectorsPaginator(client ListVoiceConnectorsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListVoiceConnectorsInput{}
 	}
 
 	return &ListVoiceConnectorsPaginator{

@@ -202,6 +202,10 @@ type ListMultipartUploadsPaginator struct {
 
 // NewListMultipartUploadsPaginator returns a new ListMultipartUploadsPaginator
 func NewListMultipartUploadsPaginator(client ListMultipartUploadsAPIClient, params *ListMultipartUploadsInput, optFns ...func(*ListMultipartUploadsPaginatorOptions)) *ListMultipartUploadsPaginator {
+	if params == nil {
+		params = &ListMultipartUploadsInput{}
+	}
+
 	options := ListMultipartUploadsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -209,10 +213,6 @@ func NewListMultipartUploadsPaginator(client ListMultipartUploadsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListMultipartUploadsInput{}
 	}
 
 	return &ListMultipartUploadsPaginator{

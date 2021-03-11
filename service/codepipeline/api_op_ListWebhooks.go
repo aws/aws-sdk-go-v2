@@ -145,6 +145,10 @@ type ListWebhooksPaginator struct {
 
 // NewListWebhooksPaginator returns a new ListWebhooksPaginator
 func NewListWebhooksPaginator(client ListWebhooksAPIClient, params *ListWebhooksInput, optFns ...func(*ListWebhooksPaginatorOptions)) *ListWebhooksPaginator {
+	if params == nil {
+		params = &ListWebhooksInput{}
+	}
+
 	options := ListWebhooksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewListWebhooksPaginator(client ListWebhooksAPIClient, params *ListWebhooks
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListWebhooksInput{}
 	}
 
 	return &ListWebhooksPaginator{

@@ -149,6 +149,10 @@ type ListAccountRolesPaginator struct {
 
 // NewListAccountRolesPaginator returns a new ListAccountRolesPaginator
 func NewListAccountRolesPaginator(client ListAccountRolesAPIClient, params *ListAccountRolesInput, optFns ...func(*ListAccountRolesPaginatorOptions)) *ListAccountRolesPaginator {
+	if params == nil {
+		params = &ListAccountRolesInput{}
+	}
+
 	options := ListAccountRolesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -156,10 +160,6 @@ func NewListAccountRolesPaginator(client ListAccountRolesAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAccountRolesInput{}
 	}
 
 	return &ListAccountRolesPaginator{

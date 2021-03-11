@@ -146,6 +146,10 @@ type DescribeLogGroupsPaginator struct {
 
 // NewDescribeLogGroupsPaginator returns a new DescribeLogGroupsPaginator
 func NewDescribeLogGroupsPaginator(client DescribeLogGroupsAPIClient, params *DescribeLogGroupsInput, optFns ...func(*DescribeLogGroupsPaginatorOptions)) *DescribeLogGroupsPaginator {
+	if params == nil {
+		params = &DescribeLogGroupsInput{}
+	}
+
 	options := DescribeLogGroupsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -153,10 +157,6 @@ func NewDescribeLogGroupsPaginator(client DescribeLogGroupsAPIClient, params *De
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeLogGroupsInput{}
 	}
 
 	return &DescribeLogGroupsPaginator{

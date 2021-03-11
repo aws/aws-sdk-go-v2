@@ -148,6 +148,10 @@ type ListRepositoriesPaginator struct {
 
 // NewListRepositoriesPaginator returns a new ListRepositoriesPaginator
 func NewListRepositoriesPaginator(client ListRepositoriesAPIClient, params *ListRepositoriesInput, optFns ...func(*ListRepositoriesPaginatorOptions)) *ListRepositoriesPaginator {
+	if params == nil {
+		params = &ListRepositoriesInput{}
+	}
+
 	options := ListRepositoriesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -155,10 +159,6 @@ func NewListRepositoriesPaginator(client ListRepositoriesAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRepositoriesInput{}
 	}
 
 	return &ListRepositoriesPaginator{

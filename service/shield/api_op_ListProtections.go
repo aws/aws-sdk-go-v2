@@ -158,6 +158,10 @@ type ListProtectionsPaginator struct {
 
 // NewListProtectionsPaginator returns a new ListProtectionsPaginator
 func NewListProtectionsPaginator(client ListProtectionsAPIClient, params *ListProtectionsInput, optFns ...func(*ListProtectionsPaginatorOptions)) *ListProtectionsPaginator {
+	if params == nil {
+		params = &ListProtectionsInput{}
+	}
+
 	options := ListProtectionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -165,10 +169,6 @@ func NewListProtectionsPaginator(client ListProtectionsAPIClient, params *ListPr
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListProtectionsInput{}
 	}
 
 	return &ListProtectionsPaginator{

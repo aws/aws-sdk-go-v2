@@ -162,6 +162,10 @@ type ListSnapshotBlocksPaginator struct {
 
 // NewListSnapshotBlocksPaginator returns a new ListSnapshotBlocksPaginator
 func NewListSnapshotBlocksPaginator(client ListSnapshotBlocksAPIClient, params *ListSnapshotBlocksInput, optFns ...func(*ListSnapshotBlocksPaginatorOptions)) *ListSnapshotBlocksPaginator {
+	if params == nil {
+		params = &ListSnapshotBlocksInput{}
+	}
+
 	options := ListSnapshotBlocksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -169,10 +173,6 @@ func NewListSnapshotBlocksPaginator(client ListSnapshotBlocksAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSnapshotBlocksInput{}
 	}
 
 	return &ListSnapshotBlocksPaginator{

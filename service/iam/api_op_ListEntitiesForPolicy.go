@@ -210,6 +210,10 @@ type ListEntitiesForPolicyPaginator struct {
 
 // NewListEntitiesForPolicyPaginator returns a new ListEntitiesForPolicyPaginator
 func NewListEntitiesForPolicyPaginator(client ListEntitiesForPolicyAPIClient, params *ListEntitiesForPolicyInput, optFns ...func(*ListEntitiesForPolicyPaginatorOptions)) *ListEntitiesForPolicyPaginator {
+	if params == nil {
+		params = &ListEntitiesForPolicyInput{}
+	}
+
 	options := ListEntitiesForPolicyPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -217,10 +221,6 @@ func NewListEntitiesForPolicyPaginator(client ListEntitiesForPolicyAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEntitiesForPolicyInput{}
 	}
 
 	return &ListEntitiesForPolicyPaginator{

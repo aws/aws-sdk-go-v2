@@ -159,6 +159,10 @@ type ListLaunchPathsPaginator struct {
 
 // NewListLaunchPathsPaginator returns a new ListLaunchPathsPaginator
 func NewListLaunchPathsPaginator(client ListLaunchPathsAPIClient, params *ListLaunchPathsInput, optFns ...func(*ListLaunchPathsPaginatorOptions)) *ListLaunchPathsPaginator {
+	if params == nil {
+		params = &ListLaunchPathsInput{}
+	}
+
 	options := ListLaunchPathsPaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -166,10 +170,6 @@ func NewListLaunchPathsPaginator(client ListLaunchPathsAPIClient, params *ListLa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListLaunchPathsInput{}
 	}
 
 	return &ListLaunchPathsPaginator{

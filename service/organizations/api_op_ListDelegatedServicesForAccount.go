@@ -174,6 +174,10 @@ type ListDelegatedServicesForAccountPaginator struct {
 // NewListDelegatedServicesForAccountPaginator returns a new
 // ListDelegatedServicesForAccountPaginator
 func NewListDelegatedServicesForAccountPaginator(client ListDelegatedServicesForAccountAPIClient, params *ListDelegatedServicesForAccountInput, optFns ...func(*ListDelegatedServicesForAccountPaginatorOptions)) *ListDelegatedServicesForAccountPaginator {
+	if params == nil {
+		params = &ListDelegatedServicesForAccountInput{}
+	}
+
 	options := ListDelegatedServicesForAccountPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -181,10 +185,6 @@ func NewListDelegatedServicesForAccountPaginator(client ListDelegatedServicesFor
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDelegatedServicesForAccountInput{}
 	}
 
 	return &ListDelegatedServicesForAccountPaginator{

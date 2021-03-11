@@ -145,6 +145,10 @@ type DescribeGlobalNetworksPaginator struct {
 
 // NewDescribeGlobalNetworksPaginator returns a new DescribeGlobalNetworksPaginator
 func NewDescribeGlobalNetworksPaginator(client DescribeGlobalNetworksAPIClient, params *DescribeGlobalNetworksInput, optFns ...func(*DescribeGlobalNetworksPaginatorOptions)) *DescribeGlobalNetworksPaginator {
+	if params == nil {
+		params = &DescribeGlobalNetworksInput{}
+	}
+
 	options := DescribeGlobalNetworksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewDescribeGlobalNetworksPaginator(client DescribeGlobalNetworksAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeGlobalNetworksInput{}
 	}
 
 	return &DescribeGlobalNetworksPaginator{

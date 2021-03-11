@@ -170,6 +170,10 @@ type ListOfferingsPaginator struct {
 
 // NewListOfferingsPaginator returns a new ListOfferingsPaginator
 func NewListOfferingsPaginator(client ListOfferingsAPIClient, params *ListOfferingsInput, optFns ...func(*ListOfferingsPaginatorOptions)) *ListOfferingsPaginator {
+	if params == nil {
+		params = &ListOfferingsInput{}
+	}
+
 	options := ListOfferingsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -177,10 +181,6 @@ func NewListOfferingsPaginator(client ListOfferingsAPIClient, params *ListOfferi
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListOfferingsInput{}
 	}
 
 	return &ListOfferingsPaginator{

@@ -138,6 +138,10 @@ type ListIndicesPaginator struct {
 
 // NewListIndicesPaginator returns a new ListIndicesPaginator
 func NewListIndicesPaginator(client ListIndicesAPIClient, params *ListIndicesInput, optFns ...func(*ListIndicesPaginatorOptions)) *ListIndicesPaginator {
+	if params == nil {
+		params = &ListIndicesInput{}
+	}
+
 	options := ListIndicesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -145,10 +149,6 @@ func NewListIndicesPaginator(client ListIndicesAPIClient, params *ListIndicesInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListIndicesInput{}
 	}
 
 	return &ListIndicesPaginator{

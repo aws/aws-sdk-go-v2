@@ -153,6 +153,10 @@ type DescribeEffectiveInstanceAssociationsPaginator struct {
 // NewDescribeEffectiveInstanceAssociationsPaginator returns a new
 // DescribeEffectiveInstanceAssociationsPaginator
 func NewDescribeEffectiveInstanceAssociationsPaginator(client DescribeEffectiveInstanceAssociationsAPIClient, params *DescribeEffectiveInstanceAssociationsInput, optFns ...func(*DescribeEffectiveInstanceAssociationsPaginatorOptions)) *DescribeEffectiveInstanceAssociationsPaginator {
+	if params == nil {
+		params = &DescribeEffectiveInstanceAssociationsInput{}
+	}
+
 	options := DescribeEffectiveInstanceAssociationsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -160,10 +164,6 @@ func NewDescribeEffectiveInstanceAssociationsPaginator(client DescribeEffectiveI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeEffectiveInstanceAssociationsInput{}
 	}
 
 	return &DescribeEffectiveInstanceAssociationsPaginator{

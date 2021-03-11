@@ -211,6 +211,10 @@ type DescribeDBClusterBacktracksPaginator struct {
 // NewDescribeDBClusterBacktracksPaginator returns a new
 // DescribeDBClusterBacktracksPaginator
 func NewDescribeDBClusterBacktracksPaginator(client DescribeDBClusterBacktracksAPIClient, params *DescribeDBClusterBacktracksInput, optFns ...func(*DescribeDBClusterBacktracksPaginatorOptions)) *DescribeDBClusterBacktracksPaginator {
+	if params == nil {
+		params = &DescribeDBClusterBacktracksInput{}
+	}
+
 	options := DescribeDBClusterBacktracksPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -218,10 +222,6 @@ func NewDescribeDBClusterBacktracksPaginator(client DescribeDBClusterBacktracksA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeDBClusterBacktracksInput{}
 	}
 
 	return &DescribeDBClusterBacktracksPaginator{

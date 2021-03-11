@@ -166,6 +166,10 @@ type ListPermissionsPaginator struct {
 
 // NewListPermissionsPaginator returns a new ListPermissionsPaginator
 func NewListPermissionsPaginator(client ListPermissionsAPIClient, params *ListPermissionsInput, optFns ...func(*ListPermissionsPaginatorOptions)) *ListPermissionsPaginator {
+	if params == nil {
+		params = &ListPermissionsInput{}
+	}
+
 	options := ListPermissionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -173,10 +177,6 @@ func NewListPermissionsPaginator(client ListPermissionsAPIClient, params *ListPe
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPermissionsInput{}
 	}
 
 	return &ListPermissionsPaginator{

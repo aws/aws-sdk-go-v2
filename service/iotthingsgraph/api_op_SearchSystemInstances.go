@@ -146,6 +146,10 @@ type SearchSystemInstancesPaginator struct {
 
 // NewSearchSystemInstancesPaginator returns a new SearchSystemInstancesPaginator
 func NewSearchSystemInstancesPaginator(client SearchSystemInstancesAPIClient, params *SearchSystemInstancesInput, optFns ...func(*SearchSystemInstancesPaginatorOptions)) *SearchSystemInstancesPaginator {
+	if params == nil {
+		params = &SearchSystemInstancesInput{}
+	}
+
 	options := SearchSystemInstancesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -153,10 +157,6 @@ func NewSearchSystemInstancesPaginator(client SearchSystemInstancesAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchSystemInstancesInput{}
 	}
 
 	return &SearchSystemInstancesPaginator{

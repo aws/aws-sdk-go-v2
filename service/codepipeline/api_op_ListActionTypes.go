@@ -143,14 +143,14 @@ type ListActionTypesPaginator struct {
 
 // NewListActionTypesPaginator returns a new ListActionTypesPaginator
 func NewListActionTypesPaginator(client ListActionTypesAPIClient, params *ListActionTypesInput, optFns ...func(*ListActionTypesPaginatorOptions)) *ListActionTypesPaginator {
+	if params == nil {
+		params = &ListActionTypesInput{}
+	}
+
 	options := ListActionTypesPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListActionTypesInput{}
 	}
 
 	return &ListActionTypesPaginator{

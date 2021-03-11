@@ -140,6 +140,10 @@ type ListParallelDataPaginator struct {
 
 // NewListParallelDataPaginator returns a new ListParallelDataPaginator
 func NewListParallelDataPaginator(client ListParallelDataAPIClient, params *ListParallelDataInput, optFns ...func(*ListParallelDataPaginatorOptions)) *ListParallelDataPaginator {
+	if params == nil {
+		params = &ListParallelDataInput{}
+	}
+
 	options := ListParallelDataPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -147,10 +151,6 @@ func NewListParallelDataPaginator(client ListParallelDataAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListParallelDataInput{}
 	}
 
 	return &ListParallelDataPaginator{

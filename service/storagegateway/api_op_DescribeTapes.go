@@ -163,6 +163,10 @@ type DescribeTapesPaginator struct {
 
 // NewDescribeTapesPaginator returns a new DescribeTapesPaginator
 func NewDescribeTapesPaginator(client DescribeTapesAPIClient, params *DescribeTapesInput, optFns ...func(*DescribeTapesPaginatorOptions)) *DescribeTapesPaginator {
+	if params == nil {
+		params = &DescribeTapesInput{}
+	}
+
 	options := DescribeTapesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -170,10 +174,6 @@ func NewDescribeTapesPaginator(client DescribeTapesAPIClient, params *DescribeTa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeTapesInput{}
 	}
 
 	return &DescribeTapesPaginator{

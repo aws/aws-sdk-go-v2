@@ -212,6 +212,10 @@ type DescribeDataSourcesPaginator struct {
 
 // NewDescribeDataSourcesPaginator returns a new DescribeDataSourcesPaginator
 func NewDescribeDataSourcesPaginator(client DescribeDataSourcesAPIClient, params *DescribeDataSourcesInput, optFns ...func(*DescribeDataSourcesPaginatorOptions)) *DescribeDataSourcesPaginator {
+	if params == nil {
+		params = &DescribeDataSourcesInput{}
+	}
+
 	options := DescribeDataSourcesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -219,10 +223,6 @@ func NewDescribeDataSourcesPaginator(client DescribeDataSourcesAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeDataSourcesInput{}
 	}
 
 	return &DescribeDataSourcesPaginator{

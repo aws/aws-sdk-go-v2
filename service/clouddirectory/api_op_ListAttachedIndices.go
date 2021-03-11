@@ -155,6 +155,10 @@ type ListAttachedIndicesPaginator struct {
 
 // NewListAttachedIndicesPaginator returns a new ListAttachedIndicesPaginator
 func NewListAttachedIndicesPaginator(client ListAttachedIndicesAPIClient, params *ListAttachedIndicesInput, optFns ...func(*ListAttachedIndicesPaginatorOptions)) *ListAttachedIndicesPaginator {
+	if params == nil {
+		params = &ListAttachedIndicesInput{}
+	}
+
 	options := ListAttachedIndicesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewListAttachedIndicesPaginator(client ListAttachedIndicesAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAttachedIndicesInput{}
 	}
 
 	return &ListAttachedIndicesPaginator{

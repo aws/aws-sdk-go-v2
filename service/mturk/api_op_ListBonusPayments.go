@@ -155,6 +155,10 @@ type ListBonusPaymentsPaginator struct {
 
 // NewListBonusPaymentsPaginator returns a new ListBonusPaymentsPaginator
 func NewListBonusPaymentsPaginator(client ListBonusPaymentsAPIClient, params *ListBonusPaymentsInput, optFns ...func(*ListBonusPaymentsPaginatorOptions)) *ListBonusPaymentsPaginator {
+	if params == nil {
+		params = &ListBonusPaymentsInput{}
+	}
+
 	options := ListBonusPaymentsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewListBonusPaymentsPaginator(client ListBonusPaymentsAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListBonusPaymentsInput{}
 	}
 
 	return &ListBonusPaymentsPaginator{

@@ -187,6 +187,10 @@ type ListOrganizationalUnitsForParentPaginator struct {
 // NewListOrganizationalUnitsForParentPaginator returns a new
 // ListOrganizationalUnitsForParentPaginator
 func NewListOrganizationalUnitsForParentPaginator(client ListOrganizationalUnitsForParentAPIClient, params *ListOrganizationalUnitsForParentInput, optFns ...func(*ListOrganizationalUnitsForParentPaginatorOptions)) *ListOrganizationalUnitsForParentPaginator {
+	if params == nil {
+		params = &ListOrganizationalUnitsForParentInput{}
+	}
+
 	options := ListOrganizationalUnitsForParentPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -194,10 +198,6 @@ func NewListOrganizationalUnitsForParentPaginator(client ListOrganizationalUnits
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListOrganizationalUnitsForParentInput{}
 	}
 
 	return &ListOrganizationalUnitsForParentPaginator{

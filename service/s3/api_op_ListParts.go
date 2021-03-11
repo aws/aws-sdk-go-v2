@@ -290,6 +290,10 @@ type ListPartsPaginator struct {
 
 // NewListPartsPaginator returns a new ListPartsPaginator
 func NewListPartsPaginator(client ListPartsAPIClient, params *ListPartsInput, optFns ...func(*ListPartsPaginatorOptions)) *ListPartsPaginator {
+	if params == nil {
+		params = &ListPartsInput{}
+	}
+
 	options := ListPartsPaginatorOptions{}
 	if params.MaxParts != 0 {
 		options.Limit = params.MaxParts
@@ -297,10 +301,6 @@ func NewListPartsPaginator(client ListPartsAPIClient, params *ListPartsInput, op
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPartsInput{}
 	}
 
 	return &ListPartsPaginator{

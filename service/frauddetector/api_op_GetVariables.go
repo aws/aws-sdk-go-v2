@@ -145,6 +145,10 @@ type GetVariablesPaginator struct {
 
 // NewGetVariablesPaginator returns a new GetVariablesPaginator
 func NewGetVariablesPaginator(client GetVariablesAPIClient, params *GetVariablesInput, optFns ...func(*GetVariablesPaginatorOptions)) *GetVariablesPaginator {
+	if params == nil {
+		params = &GetVariablesInput{}
+	}
+
 	options := GetVariablesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewGetVariablesPaginator(client GetVariablesAPIClient, params *GetVariables
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetVariablesInput{}
 	}
 
 	return &GetVariablesPaginator{

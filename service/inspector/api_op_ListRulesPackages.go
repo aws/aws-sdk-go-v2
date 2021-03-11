@@ -147,6 +147,10 @@ type ListRulesPackagesPaginator struct {
 
 // NewListRulesPackagesPaginator returns a new ListRulesPackagesPaginator
 func NewListRulesPackagesPaginator(client ListRulesPackagesAPIClient, params *ListRulesPackagesInput, optFns ...func(*ListRulesPackagesPaginatorOptions)) *ListRulesPackagesPaginator {
+	if params == nil {
+		params = &ListRulesPackagesInput{}
+	}
+
 	options := ListRulesPackagesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -154,10 +158,6 @@ func NewListRulesPackagesPaginator(client ListRulesPackagesAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRulesPackagesInput{}
 	}
 
 	return &ListRulesPackagesPaginator{

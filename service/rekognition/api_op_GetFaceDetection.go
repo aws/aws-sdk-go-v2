@@ -182,6 +182,10 @@ type GetFaceDetectionPaginator struct {
 
 // NewGetFaceDetectionPaginator returns a new GetFaceDetectionPaginator
 func NewGetFaceDetectionPaginator(client GetFaceDetectionAPIClient, params *GetFaceDetectionInput, optFns ...func(*GetFaceDetectionPaginatorOptions)) *GetFaceDetectionPaginator {
+	if params == nil {
+		params = &GetFaceDetectionInput{}
+	}
+
 	options := GetFaceDetectionPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -189,10 +193,6 @@ func NewGetFaceDetectionPaginator(client GetFaceDetectionAPIClient, params *GetF
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetFaceDetectionInput{}
 	}
 
 	return &GetFaceDetectionPaginator{

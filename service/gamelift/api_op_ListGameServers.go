@@ -179,6 +179,10 @@ type ListGameServersPaginator struct {
 
 // NewListGameServersPaginator returns a new ListGameServersPaginator
 func NewListGameServersPaginator(client ListGameServersAPIClient, params *ListGameServersInput, optFns ...func(*ListGameServersPaginatorOptions)) *ListGameServersPaginator {
+	if params == nil {
+		params = &ListGameServersInput{}
+	}
+
 	options := ListGameServersPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -186,10 +190,6 @@ func NewListGameServersPaginator(client ListGameServersAPIClient, params *ListGa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListGameServersInput{}
 	}
 
 	return &ListGameServersPaginator{

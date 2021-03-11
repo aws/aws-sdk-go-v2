@@ -170,6 +170,10 @@ type ListRootsPaginator struct {
 
 // NewListRootsPaginator returns a new ListRootsPaginator
 func NewListRootsPaginator(client ListRootsAPIClient, params *ListRootsInput, optFns ...func(*ListRootsPaginatorOptions)) *ListRootsPaginator {
+	if params == nil {
+		params = &ListRootsInput{}
+	}
+
 	options := ListRootsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -177,10 +181,6 @@ func NewListRootsPaginator(client ListRootsAPIClient, params *ListRootsInput, op
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRootsInput{}
 	}
 
 	return &ListRootsPaginator{

@@ -329,6 +329,10 @@ type SimulateCustomPolicyPaginator struct {
 
 // NewSimulateCustomPolicyPaginator returns a new SimulateCustomPolicyPaginator
 func NewSimulateCustomPolicyPaginator(client SimulateCustomPolicyAPIClient, params *SimulateCustomPolicyInput, optFns ...func(*SimulateCustomPolicyPaginatorOptions)) *SimulateCustomPolicyPaginator {
+	if params == nil {
+		params = &SimulateCustomPolicyInput{}
+	}
+
 	options := SimulateCustomPolicyPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -336,10 +340,6 @@ func NewSimulateCustomPolicyPaginator(client SimulateCustomPolicyAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SimulateCustomPolicyInput{}
 	}
 
 	return &SimulateCustomPolicyPaginator{

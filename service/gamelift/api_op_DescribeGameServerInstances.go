@@ -194,6 +194,10 @@ type DescribeGameServerInstancesPaginator struct {
 // NewDescribeGameServerInstancesPaginator returns a new
 // DescribeGameServerInstancesPaginator
 func NewDescribeGameServerInstancesPaginator(client DescribeGameServerInstancesAPIClient, params *DescribeGameServerInstancesInput, optFns ...func(*DescribeGameServerInstancesPaginatorOptions)) *DescribeGameServerInstancesPaginator {
+	if params == nil {
+		params = &DescribeGameServerInstancesInput{}
+	}
+
 	options := DescribeGameServerInstancesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -201,10 +205,6 @@ func NewDescribeGameServerInstancesPaginator(client DescribeGameServerInstancesA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeGameServerInstancesInput{}
 	}
 
 	return &DescribeGameServerInstancesPaginator{

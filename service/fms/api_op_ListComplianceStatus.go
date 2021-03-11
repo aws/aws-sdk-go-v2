@@ -166,6 +166,10 @@ type ListComplianceStatusPaginator struct {
 
 // NewListComplianceStatusPaginator returns a new ListComplianceStatusPaginator
 func NewListComplianceStatusPaginator(client ListComplianceStatusAPIClient, params *ListComplianceStatusInput, optFns ...func(*ListComplianceStatusPaginatorOptions)) *ListComplianceStatusPaginator {
+	if params == nil {
+		params = &ListComplianceStatusInput{}
+	}
+
 	options := ListComplianceStatusPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -173,10 +177,6 @@ func NewListComplianceStatusPaginator(client ListComplianceStatusAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListComplianceStatusInput{}
 	}
 
 	return &ListComplianceStatusPaginator{

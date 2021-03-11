@@ -195,6 +195,10 @@ type ListTasksPaginator struct {
 
 // NewListTasksPaginator returns a new ListTasksPaginator
 func NewListTasksPaginator(client ListTasksAPIClient, params *ListTasksInput, optFns ...func(*ListTasksPaginatorOptions)) *ListTasksPaginator {
+	if params == nil {
+		params = &ListTasksInput{}
+	}
+
 	options := ListTasksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -202,10 +206,6 @@ func NewListTasksPaginator(client ListTasksAPIClient, params *ListTasksInput, op
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTasksInput{}
 	}
 
 	return &ListTasksPaginator{

@@ -136,14 +136,14 @@ type ListTopicsPaginator struct {
 
 // NewListTopicsPaginator returns a new ListTopicsPaginator
 func NewListTopicsPaginator(client ListTopicsAPIClient, params *ListTopicsInput, optFns ...func(*ListTopicsPaginatorOptions)) *ListTopicsPaginator {
+	if params == nil {
+		params = &ListTopicsInput{}
+	}
+
 	options := ListTopicsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTopicsInput{}
 	}
 
 	return &ListTopicsPaginator{

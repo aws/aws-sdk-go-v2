@@ -152,6 +152,10 @@ type ListInputDeviceTransfersPaginator struct {
 // NewListInputDeviceTransfersPaginator returns a new
 // ListInputDeviceTransfersPaginator
 func NewListInputDeviceTransfersPaginator(client ListInputDeviceTransfersAPIClient, params *ListInputDeviceTransfersInput, optFns ...func(*ListInputDeviceTransfersPaginatorOptions)) *ListInputDeviceTransfersPaginator {
+	if params == nil {
+		params = &ListInputDeviceTransfersInput{}
+	}
+
 	options := ListInputDeviceTransfersPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -159,10 +163,6 @@ func NewListInputDeviceTransfersPaginator(client ListInputDeviceTransfersAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListInputDeviceTransfersInput{}
 	}
 
 	return &ListInputDeviceTransfersPaginator{

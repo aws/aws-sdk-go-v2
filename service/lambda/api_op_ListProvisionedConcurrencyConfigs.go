@@ -162,6 +162,10 @@ type ListProvisionedConcurrencyConfigsPaginator struct {
 // NewListProvisionedConcurrencyConfigsPaginator returns a new
 // ListProvisionedConcurrencyConfigsPaginator
 func NewListProvisionedConcurrencyConfigsPaginator(client ListProvisionedConcurrencyConfigsAPIClient, params *ListProvisionedConcurrencyConfigsInput, optFns ...func(*ListProvisionedConcurrencyConfigsPaginatorOptions)) *ListProvisionedConcurrencyConfigsPaginator {
+	if params == nil {
+		params = &ListProvisionedConcurrencyConfigsInput{}
+	}
+
 	options := ListProvisionedConcurrencyConfigsPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -169,10 +173,6 @@ func NewListProvisionedConcurrencyConfigsPaginator(client ListProvisionedConcurr
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListProvisionedConcurrencyConfigsInput{}
 	}
 
 	return &ListProvisionedConcurrencyConfigsPaginator{

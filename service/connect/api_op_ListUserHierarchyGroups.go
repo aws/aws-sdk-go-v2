@@ -153,6 +153,10 @@ type ListUserHierarchyGroupsPaginator struct {
 // NewListUserHierarchyGroupsPaginator returns a new
 // ListUserHierarchyGroupsPaginator
 func NewListUserHierarchyGroupsPaginator(client ListUserHierarchyGroupsAPIClient, params *ListUserHierarchyGroupsInput, optFns ...func(*ListUserHierarchyGroupsPaginatorOptions)) *ListUserHierarchyGroupsPaginator {
+	if params == nil {
+		params = &ListUserHierarchyGroupsInput{}
+	}
+
 	options := ListUserHierarchyGroupsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -160,10 +164,6 @@ func NewListUserHierarchyGroupsPaginator(client ListUserHierarchyGroupsAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListUserHierarchyGroupsInput{}
 	}
 
 	return &ListUserHierarchyGroupsPaginator{

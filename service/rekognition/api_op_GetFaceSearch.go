@@ -197,6 +197,10 @@ type GetFaceSearchPaginator struct {
 
 // NewGetFaceSearchPaginator returns a new GetFaceSearchPaginator
 func NewGetFaceSearchPaginator(client GetFaceSearchAPIClient, params *GetFaceSearchInput, optFns ...func(*GetFaceSearchPaginatorOptions)) *GetFaceSearchPaginator {
+	if params == nil {
+		params = &GetFaceSearchInput{}
+	}
+
 	options := GetFaceSearchPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -204,10 +208,6 @@ func NewGetFaceSearchPaginator(client GetFaceSearchAPIClient, params *GetFaceSea
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetFaceSearchInput{}
 	}
 
 	return &GetFaceSearchPaginator{

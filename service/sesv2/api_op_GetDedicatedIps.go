@@ -153,6 +153,10 @@ type GetDedicatedIpsPaginator struct {
 
 // NewGetDedicatedIpsPaginator returns a new GetDedicatedIpsPaginator
 func NewGetDedicatedIpsPaginator(client GetDedicatedIpsAPIClient, params *GetDedicatedIpsInput, optFns ...func(*GetDedicatedIpsPaginatorOptions)) *GetDedicatedIpsPaginator {
+	if params == nil {
+		params = &GetDedicatedIpsInput{}
+	}
+
 	options := GetDedicatedIpsPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -160,10 +164,6 @@ func NewGetDedicatedIpsPaginator(client GetDedicatedIpsAPIClient, params *GetDed
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetDedicatedIpsInput{}
 	}
 
 	return &GetDedicatedIpsPaginator{

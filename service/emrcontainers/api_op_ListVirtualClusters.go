@@ -161,6 +161,10 @@ type ListVirtualClustersPaginator struct {
 
 // NewListVirtualClustersPaginator returns a new ListVirtualClustersPaginator
 func NewListVirtualClustersPaginator(client ListVirtualClustersAPIClient, params *ListVirtualClustersInput, optFns ...func(*ListVirtualClustersPaginatorOptions)) *ListVirtualClustersPaginator {
+	if params == nil {
+		params = &ListVirtualClustersInput{}
+	}
+
 	options := ListVirtualClustersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -168,10 +172,6 @@ func NewListVirtualClustersPaginator(client ListVirtualClustersAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListVirtualClustersInput{}
 	}
 
 	return &ListVirtualClustersPaginator{

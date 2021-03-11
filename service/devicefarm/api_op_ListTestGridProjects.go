@@ -140,6 +140,10 @@ type ListTestGridProjectsPaginator struct {
 
 // NewListTestGridProjectsPaginator returns a new ListTestGridProjectsPaginator
 func NewListTestGridProjectsPaginator(client ListTestGridProjectsAPIClient, params *ListTestGridProjectsInput, optFns ...func(*ListTestGridProjectsPaginatorOptions)) *ListTestGridProjectsPaginator {
+	if params == nil {
+		params = &ListTestGridProjectsInput{}
+	}
+
 	options := ListTestGridProjectsPaginatorOptions{}
 	if params.MaxResult != nil {
 		options.Limit = *params.MaxResult
@@ -147,10 +151,6 @@ func NewListTestGridProjectsPaginator(client ListTestGridProjectsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTestGridProjectsInput{}
 	}
 
 	return &ListTestGridProjectsPaginator{

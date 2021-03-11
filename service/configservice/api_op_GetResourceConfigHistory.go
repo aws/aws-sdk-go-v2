@@ -186,6 +186,10 @@ type GetResourceConfigHistoryPaginator struct {
 // NewGetResourceConfigHistoryPaginator returns a new
 // GetResourceConfigHistoryPaginator
 func NewGetResourceConfigHistoryPaginator(client GetResourceConfigHistoryAPIClient, params *GetResourceConfigHistoryInput, optFns ...func(*GetResourceConfigHistoryPaginatorOptions)) *GetResourceConfigHistoryPaginator {
+	if params == nil {
+		params = &GetResourceConfigHistoryInput{}
+	}
+
 	options := GetResourceConfigHistoryPaginatorOptions{}
 	if params.Limit != 0 {
 		options.Limit = params.Limit
@@ -193,10 +197,6 @@ func NewGetResourceConfigHistoryPaginator(client GetResourceConfigHistoryAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetResourceConfigHistoryInput{}
 	}
 
 	return &GetResourceConfigHistoryPaginator{

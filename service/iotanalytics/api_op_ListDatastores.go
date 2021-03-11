@@ -141,6 +141,10 @@ type ListDatastoresPaginator struct {
 
 // NewListDatastoresPaginator returns a new ListDatastoresPaginator
 func NewListDatastoresPaginator(client ListDatastoresAPIClient, params *ListDatastoresInput, optFns ...func(*ListDatastoresPaginatorOptions)) *ListDatastoresPaginator {
+	if params == nil {
+		params = &ListDatastoresInput{}
+	}
+
 	options := ListDatastoresPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -148,10 +152,6 @@ func NewListDatastoresPaginator(client ListDatastoresAPIClient, params *ListData
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDatastoresInput{}
 	}
 
 	return &ListDatastoresPaginator{

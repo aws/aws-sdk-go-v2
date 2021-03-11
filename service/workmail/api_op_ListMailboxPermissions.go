@@ -157,6 +157,10 @@ type ListMailboxPermissionsPaginator struct {
 
 // NewListMailboxPermissionsPaginator returns a new ListMailboxPermissionsPaginator
 func NewListMailboxPermissionsPaginator(client ListMailboxPermissionsAPIClient, params *ListMailboxPermissionsInput, optFns ...func(*ListMailboxPermissionsPaginatorOptions)) *ListMailboxPermissionsPaginator {
+	if params == nil {
+		params = &ListMailboxPermissionsInput{}
+	}
+
 	options := ListMailboxPermissionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -164,10 +168,6 @@ func NewListMailboxPermissionsPaginator(client ListMailboxPermissionsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListMailboxPermissionsInput{}
 	}
 
 	return &ListMailboxPermissionsPaginator{

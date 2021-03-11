@@ -171,6 +171,10 @@ type DescribeGlobalClustersPaginator struct {
 
 // NewDescribeGlobalClustersPaginator returns a new DescribeGlobalClustersPaginator
 func NewDescribeGlobalClustersPaginator(client DescribeGlobalClustersAPIClient, params *DescribeGlobalClustersInput, optFns ...func(*DescribeGlobalClustersPaginatorOptions)) *DescribeGlobalClustersPaginator {
+	if params == nil {
+		params = &DescribeGlobalClustersInput{}
+	}
+
 	options := DescribeGlobalClustersPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -178,10 +182,6 @@ func NewDescribeGlobalClustersPaginator(client DescribeGlobalClustersAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeGlobalClustersInput{}
 	}
 
 	return &DescribeGlobalClustersPaginator{

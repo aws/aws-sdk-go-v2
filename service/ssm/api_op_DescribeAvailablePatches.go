@@ -145,6 +145,10 @@ type DescribeAvailablePatchesPaginator struct {
 // NewDescribeAvailablePatchesPaginator returns a new
 // DescribeAvailablePatchesPaginator
 func NewDescribeAvailablePatchesPaginator(client DescribeAvailablePatchesAPIClient, params *DescribeAvailablePatchesInput, optFns ...func(*DescribeAvailablePatchesPaginatorOptions)) *DescribeAvailablePatchesPaginator {
+	if params == nil {
+		params = &DescribeAvailablePatchesInput{}
+	}
+
 	options := DescribeAvailablePatchesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -152,10 +156,6 @@ func NewDescribeAvailablePatchesPaginator(client DescribeAvailablePatchesAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeAvailablePatchesInput{}
 	}
 
 	return &DescribeAvailablePatchesPaginator{

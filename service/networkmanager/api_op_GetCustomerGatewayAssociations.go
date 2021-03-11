@@ -156,6 +156,10 @@ type GetCustomerGatewayAssociationsPaginator struct {
 // NewGetCustomerGatewayAssociationsPaginator returns a new
 // GetCustomerGatewayAssociationsPaginator
 func NewGetCustomerGatewayAssociationsPaginator(client GetCustomerGatewayAssociationsAPIClient, params *GetCustomerGatewayAssociationsInput, optFns ...func(*GetCustomerGatewayAssociationsPaginatorOptions)) *GetCustomerGatewayAssociationsPaginator {
+	if params == nil {
+		params = &GetCustomerGatewayAssociationsInput{}
+	}
+
 	options := GetCustomerGatewayAssociationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -163,10 +167,6 @@ func NewGetCustomerGatewayAssociationsPaginator(client GetCustomerGatewayAssocia
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetCustomerGatewayAssociationsInput{}
 	}
 
 	return &GetCustomerGatewayAssociationsPaginator{

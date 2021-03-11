@@ -151,6 +151,10 @@ type ListNodesPaginator struct {
 
 // NewListNodesPaginator returns a new ListNodesPaginator
 func NewListNodesPaginator(client ListNodesAPIClient, params *ListNodesInput, optFns ...func(*ListNodesPaginatorOptions)) *ListNodesPaginator {
+	if params == nil {
+		params = &ListNodesInput{}
+	}
+
 	options := ListNodesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -158,10 +162,6 @@ func NewListNodesPaginator(client ListNodesAPIClient, params *ListNodesInput, op
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListNodesInput{}
 	}
 
 	return &ListNodesPaginator{

@@ -156,6 +156,10 @@ type ListExperimentsPaginator struct {
 
 // NewListExperimentsPaginator returns a new ListExperimentsPaginator
 func NewListExperimentsPaginator(client ListExperimentsAPIClient, params *ListExperimentsInput, optFns ...func(*ListExperimentsPaginatorOptions)) *ListExperimentsPaginator {
+	if params == nil {
+		params = &ListExperimentsInput{}
+	}
+
 	options := ListExperimentsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -163,10 +167,6 @@ func NewListExperimentsPaginator(client ListExperimentsAPIClient, params *ListEx
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListExperimentsInput{}
 	}
 
 	return &ListExperimentsPaginator{

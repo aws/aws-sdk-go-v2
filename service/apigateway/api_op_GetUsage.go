@@ -181,6 +181,10 @@ type GetUsagePaginator struct {
 
 // NewGetUsagePaginator returns a new GetUsagePaginator
 func NewGetUsagePaginator(client GetUsageAPIClient, params *GetUsageInput, optFns ...func(*GetUsagePaginatorOptions)) *GetUsagePaginator {
+	if params == nil {
+		params = &GetUsageInput{}
+	}
+
 	options := GetUsagePaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -188,10 +192,6 @@ func NewGetUsagePaginator(client GetUsageAPIClient, params *GetUsageInput, optFn
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetUsageInput{}
 	}
 
 	return &GetUsagePaginator{

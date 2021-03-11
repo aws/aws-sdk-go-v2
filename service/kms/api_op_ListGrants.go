@@ -193,6 +193,10 @@ type ListGrantsPaginator struct {
 
 // NewListGrantsPaginator returns a new ListGrantsPaginator
 func NewListGrantsPaginator(client ListGrantsAPIClient, params *ListGrantsInput, optFns ...func(*ListGrantsPaginatorOptions)) *ListGrantsPaginator {
+	if params == nil {
+		params = &ListGrantsInput{}
+	}
+
 	options := ListGrantsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -200,10 +204,6 @@ func NewListGrantsPaginator(client ListGrantsAPIClient, params *ListGrantsInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListGrantsInput{}
 	}
 
 	return &ListGrantsPaginator{

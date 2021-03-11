@@ -188,6 +188,10 @@ type DescribeClusterSubnetGroupsPaginator struct {
 // NewDescribeClusterSubnetGroupsPaginator returns a new
 // DescribeClusterSubnetGroupsPaginator
 func NewDescribeClusterSubnetGroupsPaginator(client DescribeClusterSubnetGroupsAPIClient, params *DescribeClusterSubnetGroupsInput, optFns ...func(*DescribeClusterSubnetGroupsPaginatorOptions)) *DescribeClusterSubnetGroupsPaginator {
+	if params == nil {
+		params = &DescribeClusterSubnetGroupsInput{}
+	}
+
 	options := DescribeClusterSubnetGroupsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -195,10 +199,6 @@ func NewDescribeClusterSubnetGroupsPaginator(client DescribeClusterSubnetGroupsA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeClusterSubnetGroupsInput{}
 	}
 
 	return &DescribeClusterSubnetGroupsPaginator{

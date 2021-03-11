@@ -159,6 +159,10 @@ type ListPortfoliosForProductPaginator struct {
 // NewListPortfoliosForProductPaginator returns a new
 // ListPortfoliosForProductPaginator
 func NewListPortfoliosForProductPaginator(client ListPortfoliosForProductAPIClient, params *ListPortfoliosForProductInput, optFns ...func(*ListPortfoliosForProductPaginatorOptions)) *ListPortfoliosForProductPaginator {
+	if params == nil {
+		params = &ListPortfoliosForProductInput{}
+	}
+
 	options := ListPortfoliosForProductPaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -166,10 +170,6 @@ func NewListPortfoliosForProductPaginator(client ListPortfoliosForProductAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPortfoliosForProductInput{}
 	}
 
 	return &ListPortfoliosForProductPaginator{

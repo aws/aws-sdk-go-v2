@@ -148,6 +148,10 @@ type DescribeActionTargetsPaginator struct {
 
 // NewDescribeActionTargetsPaginator returns a new DescribeActionTargetsPaginator
 func NewDescribeActionTargetsPaginator(client DescribeActionTargetsAPIClient, params *DescribeActionTargetsInput, optFns ...func(*DescribeActionTargetsPaginatorOptions)) *DescribeActionTargetsPaginator {
+	if params == nil {
+		params = &DescribeActionTargetsInput{}
+	}
+
 	options := DescribeActionTargetsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -155,10 +159,6 @@ func NewDescribeActionTargetsPaginator(client DescribeActionTargetsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeActionTargetsInput{}
 	}
 
 	return &DescribeActionTargetsPaginator{

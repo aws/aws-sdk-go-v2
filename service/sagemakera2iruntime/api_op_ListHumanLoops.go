@@ -166,6 +166,10 @@ type ListHumanLoopsPaginator struct {
 
 // NewListHumanLoopsPaginator returns a new ListHumanLoopsPaginator
 func NewListHumanLoopsPaginator(client ListHumanLoopsAPIClient, params *ListHumanLoopsInput, optFns ...func(*ListHumanLoopsPaginatorOptions)) *ListHumanLoopsPaginator {
+	if params == nil {
+		params = &ListHumanLoopsInput{}
+	}
+
 	options := ListHumanLoopsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -173,10 +177,6 @@ func NewListHumanLoopsPaginator(client ListHumanLoopsAPIClient, params *ListHuma
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListHumanLoopsInput{}
 	}
 
 	return &ListHumanLoopsPaginator{

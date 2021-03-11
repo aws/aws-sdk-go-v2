@@ -146,6 +146,10 @@ type ListCampaignsPaginator struct {
 
 // NewListCampaignsPaginator returns a new ListCampaignsPaginator
 func NewListCampaignsPaginator(client ListCampaignsAPIClient, params *ListCampaignsInput, optFns ...func(*ListCampaignsPaginatorOptions)) *ListCampaignsPaginator {
+	if params == nil {
+		params = &ListCampaignsInput{}
+	}
+
 	options := ListCampaignsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -153,10 +157,6 @@ func NewListCampaignsPaginator(client ListCampaignsAPIClient, params *ListCampai
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCampaignsInput{}
 	}
 
 	return &ListCampaignsPaginator{

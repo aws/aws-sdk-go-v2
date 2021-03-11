@@ -182,14 +182,14 @@ type GetTraceSummariesPaginator struct {
 
 // NewGetTraceSummariesPaginator returns a new GetTraceSummariesPaginator
 func NewGetTraceSummariesPaginator(client GetTraceSummariesAPIClient, params *GetTraceSummariesInput, optFns ...func(*GetTraceSummariesPaginatorOptions)) *GetTraceSummariesPaginator {
+	if params == nil {
+		params = &GetTraceSummariesInput{}
+	}
+
 	options := GetTraceSummariesPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetTraceSummariesInput{}
 	}
 
 	return &GetTraceSummariesPaginator{

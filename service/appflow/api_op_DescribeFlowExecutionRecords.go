@@ -152,6 +152,10 @@ type DescribeFlowExecutionRecordsPaginator struct {
 // NewDescribeFlowExecutionRecordsPaginator returns a new
 // DescribeFlowExecutionRecordsPaginator
 func NewDescribeFlowExecutionRecordsPaginator(client DescribeFlowExecutionRecordsAPIClient, params *DescribeFlowExecutionRecordsInput, optFns ...func(*DescribeFlowExecutionRecordsPaginatorOptions)) *DescribeFlowExecutionRecordsPaginator {
+	if params == nil {
+		params = &DescribeFlowExecutionRecordsInput{}
+	}
+
 	options := DescribeFlowExecutionRecordsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -159,10 +163,6 @@ func NewDescribeFlowExecutionRecordsPaginator(client DescribeFlowExecutionRecord
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeFlowExecutionRecordsInput{}
 	}
 
 	return &DescribeFlowExecutionRecordsPaginator{

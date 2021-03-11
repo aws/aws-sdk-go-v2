@@ -173,6 +173,10 @@ type ListVolumesPaginator struct {
 
 // NewListVolumesPaginator returns a new ListVolumesPaginator
 func NewListVolumesPaginator(client ListVolumesAPIClient, params *ListVolumesInput, optFns ...func(*ListVolumesPaginatorOptions)) *ListVolumesPaginator {
+	if params == nil {
+		params = &ListVolumesInput{}
+	}
+
 	options := ListVolumesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -180,10 +184,6 @@ func NewListVolumesPaginator(client ListVolumesAPIClient, params *ListVolumesInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListVolumesInput{}
 	}
 
 	return &ListVolumesPaginator{

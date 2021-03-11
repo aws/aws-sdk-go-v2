@@ -170,6 +170,10 @@ type ListVirtualGatewaysPaginator struct {
 
 // NewListVirtualGatewaysPaginator returns a new ListVirtualGatewaysPaginator
 func NewListVirtualGatewaysPaginator(client ListVirtualGatewaysAPIClient, params *ListVirtualGatewaysInput, optFns ...func(*ListVirtualGatewaysPaginatorOptions)) *ListVirtualGatewaysPaginator {
+	if params == nil {
+		params = &ListVirtualGatewaysInput{}
+	}
+
 	options := ListVirtualGatewaysPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -177,10 +181,6 @@ func NewListVirtualGatewaysPaginator(client ListVirtualGatewaysAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListVirtualGatewaysInput{}
 	}
 
 	return &ListVirtualGatewaysPaginator{

@@ -150,6 +150,10 @@ type ListComponentVersionsPaginator struct {
 
 // NewListComponentVersionsPaginator returns a new ListComponentVersionsPaginator
 func NewListComponentVersionsPaginator(client ListComponentVersionsAPIClient, params *ListComponentVersionsInput, optFns ...func(*ListComponentVersionsPaginatorOptions)) *ListComponentVersionsPaginator {
+	if params == nil {
+		params = &ListComponentVersionsInput{}
+	}
+
 	options := ListComponentVersionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -157,10 +161,6 @@ func NewListComponentVersionsPaginator(client ListComponentVersionsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListComponentVersionsInput{}
 	}
 
 	return &ListComponentVersionsPaginator{

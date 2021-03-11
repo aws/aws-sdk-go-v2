@@ -172,6 +172,10 @@ type DescribePendingMaintenanceActionsPaginator struct {
 // NewDescribePendingMaintenanceActionsPaginator returns a new
 // DescribePendingMaintenanceActionsPaginator
 func NewDescribePendingMaintenanceActionsPaginator(client DescribePendingMaintenanceActionsAPIClient, params *DescribePendingMaintenanceActionsInput, optFns ...func(*DescribePendingMaintenanceActionsPaginatorOptions)) *DescribePendingMaintenanceActionsPaginator {
+	if params == nil {
+		params = &DescribePendingMaintenanceActionsInput{}
+	}
+
 	options := DescribePendingMaintenanceActionsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -179,10 +183,6 @@ func NewDescribePendingMaintenanceActionsPaginator(client DescribePendingMainten
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribePendingMaintenanceActionsInput{}
 	}
 
 	return &DescribePendingMaintenanceActionsPaginator{

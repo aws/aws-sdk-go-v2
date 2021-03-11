@@ -156,6 +156,10 @@ type ListSigningPlatformsPaginator struct {
 
 // NewListSigningPlatformsPaginator returns a new ListSigningPlatformsPaginator
 func NewListSigningPlatformsPaginator(client ListSigningPlatformsAPIClient, params *ListSigningPlatformsInput, optFns ...func(*ListSigningPlatformsPaginatorOptions)) *ListSigningPlatformsPaginator {
+	if params == nil {
+		params = &ListSigningPlatformsInput{}
+	}
+
 	options := ListSigningPlatformsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -163,10 +167,6 @@ func NewListSigningPlatformsPaginator(client ListSigningPlatformsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSigningPlatformsInput{}
 	}
 
 	return &ListSigningPlatformsPaginator{

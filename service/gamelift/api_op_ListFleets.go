@@ -176,6 +176,10 @@ type ListFleetsPaginator struct {
 
 // NewListFleetsPaginator returns a new ListFleetsPaginator
 func NewListFleetsPaginator(client ListFleetsAPIClient, params *ListFleetsInput, optFns ...func(*ListFleetsPaginatorOptions)) *ListFleetsPaginator {
+	if params == nil {
+		params = &ListFleetsInput{}
+	}
+
 	options := ListFleetsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -183,10 +187,6 @@ func NewListFleetsPaginator(client ListFleetsAPIClient, params *ListFleetsInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListFleetsInput{}
 	}
 
 	return &ListFleetsPaginator{

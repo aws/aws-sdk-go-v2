@@ -170,6 +170,10 @@ type GetInstancesHealthStatusPaginator struct {
 // NewGetInstancesHealthStatusPaginator returns a new
 // GetInstancesHealthStatusPaginator
 func NewGetInstancesHealthStatusPaginator(client GetInstancesHealthStatusAPIClient, params *GetInstancesHealthStatusInput, optFns ...func(*GetInstancesHealthStatusPaginatorOptions)) *GetInstancesHealthStatusPaginator {
+	if params == nil {
+		params = &GetInstancesHealthStatusInput{}
+	}
+
 	options := GetInstancesHealthStatusPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -177,10 +181,6 @@ func NewGetInstancesHealthStatusPaginator(client GetInstancesHealthStatusAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetInstancesHealthStatusInput{}
 	}
 
 	return &GetInstancesHealthStatusPaginator{

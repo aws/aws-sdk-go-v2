@@ -168,6 +168,10 @@ type DescribeDBClusterParameterGroupsPaginator struct {
 // NewDescribeDBClusterParameterGroupsPaginator returns a new
 // DescribeDBClusterParameterGroupsPaginator
 func NewDescribeDBClusterParameterGroupsPaginator(client DescribeDBClusterParameterGroupsAPIClient, params *DescribeDBClusterParameterGroupsInput, optFns ...func(*DescribeDBClusterParameterGroupsPaginatorOptions)) *DescribeDBClusterParameterGroupsPaginator {
+	if params == nil {
+		params = &DescribeDBClusterParameterGroupsInput{}
+	}
+
 	options := DescribeDBClusterParameterGroupsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -175,10 +179,6 @@ func NewDescribeDBClusterParameterGroupsPaginator(client DescribeDBClusterParame
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeDBClusterParameterGroupsInput{}
 	}
 
 	return &DescribeDBClusterParameterGroupsPaginator{

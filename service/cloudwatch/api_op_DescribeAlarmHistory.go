@@ -166,6 +166,10 @@ type DescribeAlarmHistoryPaginator struct {
 
 // NewDescribeAlarmHistoryPaginator returns a new DescribeAlarmHistoryPaginator
 func NewDescribeAlarmHistoryPaginator(client DescribeAlarmHistoryAPIClient, params *DescribeAlarmHistoryInput, optFns ...func(*DescribeAlarmHistoryPaginatorOptions)) *DescribeAlarmHistoryPaginator {
+	if params == nil {
+		params = &DescribeAlarmHistoryInput{}
+	}
+
 	options := DescribeAlarmHistoryPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -173,10 +177,6 @@ func NewDescribeAlarmHistoryPaginator(client DescribeAlarmHistoryAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeAlarmHistoryInput{}
 	}
 
 	return &DescribeAlarmHistoryPaginator{

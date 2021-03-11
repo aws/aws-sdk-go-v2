@@ -172,6 +172,10 @@ type DescribeLogStreamsPaginator struct {
 
 // NewDescribeLogStreamsPaginator returns a new DescribeLogStreamsPaginator
 func NewDescribeLogStreamsPaginator(client DescribeLogStreamsAPIClient, params *DescribeLogStreamsInput, optFns ...func(*DescribeLogStreamsPaginatorOptions)) *DescribeLogStreamsPaginator {
+	if params == nil {
+		params = &DescribeLogStreamsInput{}
+	}
+
 	options := DescribeLogStreamsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -179,10 +183,6 @@ func NewDescribeLogStreamsPaginator(client DescribeLogStreamsAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeLogStreamsInput{}
 	}
 
 	return &DescribeLogStreamsPaginator{

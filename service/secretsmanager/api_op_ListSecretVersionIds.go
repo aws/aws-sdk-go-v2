@@ -220,6 +220,10 @@ type ListSecretVersionIdsPaginator struct {
 
 // NewListSecretVersionIdsPaginator returns a new ListSecretVersionIdsPaginator
 func NewListSecretVersionIdsPaginator(client ListSecretVersionIdsAPIClient, params *ListSecretVersionIdsInput, optFns ...func(*ListSecretVersionIdsPaginatorOptions)) *ListSecretVersionIdsPaginator {
+	if params == nil {
+		params = &ListSecretVersionIdsInput{}
+	}
+
 	options := ListSecretVersionIdsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -227,10 +231,6 @@ func NewListSecretVersionIdsPaginator(client ListSecretVersionIdsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSecretVersionIdsInput{}
 	}
 
 	return &ListSecretVersionIdsPaginator{

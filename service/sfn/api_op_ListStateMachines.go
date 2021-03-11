@@ -160,6 +160,10 @@ type ListStateMachinesPaginator struct {
 
 // NewListStateMachinesPaginator returns a new ListStateMachinesPaginator
 func NewListStateMachinesPaginator(client ListStateMachinesAPIClient, params *ListStateMachinesInput, optFns ...func(*ListStateMachinesPaginatorOptions)) *ListStateMachinesPaginator {
+	if params == nil {
+		params = &ListStateMachinesInput{}
+	}
+
 	options := ListStateMachinesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -167,10 +171,6 @@ func NewListStateMachinesPaginator(client ListStateMachinesAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListStateMachinesInput{}
 	}
 
 	return &ListStateMachinesPaginator{

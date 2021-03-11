@@ -158,6 +158,10 @@ type ListTablesPaginator struct {
 
 // NewListTablesPaginator returns a new ListTablesPaginator
 func NewListTablesPaginator(client ListTablesAPIClient, params *ListTablesInput, optFns ...func(*ListTablesPaginatorOptions)) *ListTablesPaginator {
+	if params == nil {
+		params = &ListTablesInput{}
+	}
+
 	options := ListTablesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -165,10 +169,6 @@ func NewListTablesPaginator(client ListTablesAPIClient, params *ListTablesInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTablesInput{}
 	}
 
 	return &ListTablesPaginator{

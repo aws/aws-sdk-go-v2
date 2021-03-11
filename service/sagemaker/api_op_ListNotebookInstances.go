@@ -192,6 +192,10 @@ type ListNotebookInstancesPaginator struct {
 
 // NewListNotebookInstancesPaginator returns a new ListNotebookInstancesPaginator
 func NewListNotebookInstancesPaginator(client ListNotebookInstancesAPIClient, params *ListNotebookInstancesInput, optFns ...func(*ListNotebookInstancesPaginatorOptions)) *ListNotebookInstancesPaginator {
+	if params == nil {
+		params = &ListNotebookInstancesInput{}
+	}
+
 	options := ListNotebookInstancesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -199,10 +203,6 @@ func NewListNotebookInstancesPaginator(client ListNotebookInstancesAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListNotebookInstancesInput{}
 	}
 
 	return &ListNotebookInstancesPaginator{

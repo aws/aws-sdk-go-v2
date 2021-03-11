@@ -139,14 +139,14 @@ type ListExportsPaginator struct {
 
 // NewListExportsPaginator returns a new ListExportsPaginator
 func NewListExportsPaginator(client ListExportsAPIClient, params *ListExportsInput, optFns ...func(*ListExportsPaginatorOptions)) *ListExportsPaginator {
+	if params == nil {
+		params = &ListExportsInput{}
+	}
+
 	options := ListExportsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListExportsInput{}
 	}
 
 	return &ListExportsPaginator{

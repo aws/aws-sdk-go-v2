@@ -148,6 +148,10 @@ type ListUserPoolsPaginator struct {
 
 // NewListUserPoolsPaginator returns a new ListUserPoolsPaginator
 func NewListUserPoolsPaginator(client ListUserPoolsAPIClient, params *ListUserPoolsInput, optFns ...func(*ListUserPoolsPaginatorOptions)) *ListUserPoolsPaginator {
+	if params == nil {
+		params = &ListUserPoolsInput{}
+	}
+
 	options := ListUserPoolsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -155,10 +159,6 @@ func NewListUserPoolsPaginator(client ListUserPoolsAPIClient, params *ListUserPo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListUserPoolsInput{}
 	}
 
 	return &ListUserPoolsPaginator{

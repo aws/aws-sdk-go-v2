@@ -191,6 +191,10 @@ type GetAccountAuthorizationDetailsPaginator struct {
 // NewGetAccountAuthorizationDetailsPaginator returns a new
 // GetAccountAuthorizationDetailsPaginator
 func NewGetAccountAuthorizationDetailsPaginator(client GetAccountAuthorizationDetailsAPIClient, params *GetAccountAuthorizationDetailsInput, optFns ...func(*GetAccountAuthorizationDetailsPaginatorOptions)) *GetAccountAuthorizationDetailsPaginator {
+	if params == nil {
+		params = &GetAccountAuthorizationDetailsInput{}
+	}
+
 	options := GetAccountAuthorizationDetailsPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -198,10 +202,6 @@ func NewGetAccountAuthorizationDetailsPaginator(client GetAccountAuthorizationDe
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetAccountAuthorizationDetailsInput{}
 	}
 
 	return &GetAccountAuthorizationDetailsPaginator{

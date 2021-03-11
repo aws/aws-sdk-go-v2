@@ -160,6 +160,10 @@ type SearchSkillGroupsPaginator struct {
 
 // NewSearchSkillGroupsPaginator returns a new SearchSkillGroupsPaginator
 func NewSearchSkillGroupsPaginator(client SearchSkillGroupsAPIClient, params *SearchSkillGroupsInput, optFns ...func(*SearchSkillGroupsPaginatorOptions)) *SearchSkillGroupsPaginator {
+	if params == nil {
+		params = &SearchSkillGroupsInput{}
+	}
+
 	options := SearchSkillGroupsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -167,10 +171,6 @@ func NewSearchSkillGroupsPaginator(client SearchSkillGroupsAPIClient, params *Se
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchSkillGroupsInput{}
 	}
 
 	return &SearchSkillGroupsPaginator{

@@ -170,6 +170,10 @@ type DescribeAffectedEntitiesPaginator struct {
 // NewDescribeAffectedEntitiesPaginator returns a new
 // DescribeAffectedEntitiesPaginator
 func NewDescribeAffectedEntitiesPaginator(client DescribeAffectedEntitiesAPIClient, params *DescribeAffectedEntitiesInput, optFns ...func(*DescribeAffectedEntitiesPaginatorOptions)) *DescribeAffectedEntitiesPaginator {
+	if params == nil {
+		params = &DescribeAffectedEntitiesInput{}
+	}
+
 	options := DescribeAffectedEntitiesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -177,10 +181,6 @@ func NewDescribeAffectedEntitiesPaginator(client DescribeAffectedEntitiesAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeAffectedEntitiesInput{}
 	}
 
 	return &DescribeAffectedEntitiesPaginator{

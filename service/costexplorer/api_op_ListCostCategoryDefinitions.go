@@ -155,6 +155,10 @@ type ListCostCategoryDefinitionsPaginator struct {
 // NewListCostCategoryDefinitionsPaginator returns a new
 // ListCostCategoryDefinitionsPaginator
 func NewListCostCategoryDefinitionsPaginator(client ListCostCategoryDefinitionsAPIClient, params *ListCostCategoryDefinitionsInput, optFns ...func(*ListCostCategoryDefinitionsPaginatorOptions)) *ListCostCategoryDefinitionsPaginator {
+	if params == nil {
+		params = &ListCostCategoryDefinitionsInput{}
+	}
+
 	options := ListCostCategoryDefinitionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -162,10 +166,6 @@ func NewListCostCategoryDefinitionsPaginator(client ListCostCategoryDefinitionsA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCostCategoryDefinitionsInput{}
 	}
 
 	return &ListCostCategoryDefinitionsPaginator{

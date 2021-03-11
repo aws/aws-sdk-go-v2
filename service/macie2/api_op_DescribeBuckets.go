@@ -150,6 +150,10 @@ type DescribeBucketsPaginator struct {
 
 // NewDescribeBucketsPaginator returns a new DescribeBucketsPaginator
 func NewDescribeBucketsPaginator(client DescribeBucketsAPIClient, params *DescribeBucketsInput, optFns ...func(*DescribeBucketsPaginatorOptions)) *DescribeBucketsPaginator {
+	if params == nil {
+		params = &DescribeBucketsInput{}
+	}
+
 	options := DescribeBucketsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -157,10 +161,6 @@ func NewDescribeBucketsPaginator(client DescribeBucketsAPIClient, params *Descri
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeBucketsInput{}
 	}
 
 	return &DescribeBucketsPaginator{

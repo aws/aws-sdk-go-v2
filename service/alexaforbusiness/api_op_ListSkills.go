@@ -152,6 +152,10 @@ type ListSkillsPaginator struct {
 
 // NewListSkillsPaginator returns a new ListSkillsPaginator
 func NewListSkillsPaginator(client ListSkillsAPIClient, params *ListSkillsInput, optFns ...func(*ListSkillsPaginatorOptions)) *ListSkillsPaginator {
+	if params == nil {
+		params = &ListSkillsInput{}
+	}
+
 	options := ListSkillsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -159,10 +163,6 @@ func NewListSkillsPaginator(client ListSkillsAPIClient, params *ListSkillsInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSkillsInput{}
 	}
 
 	return &ListSkillsPaginator{

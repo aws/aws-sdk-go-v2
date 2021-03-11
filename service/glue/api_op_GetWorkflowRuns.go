@@ -149,6 +149,10 @@ type GetWorkflowRunsPaginator struct {
 
 // NewGetWorkflowRunsPaginator returns a new GetWorkflowRunsPaginator
 func NewGetWorkflowRunsPaginator(client GetWorkflowRunsAPIClient, params *GetWorkflowRunsInput, optFns ...func(*GetWorkflowRunsPaginatorOptions)) *GetWorkflowRunsPaginator {
+	if params == nil {
+		params = &GetWorkflowRunsInput{}
+	}
+
 	options := GetWorkflowRunsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -156,10 +160,6 @@ func NewGetWorkflowRunsPaginator(client GetWorkflowRunsAPIClient, params *GetWor
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetWorkflowRunsInput{}
 	}
 
 	return &GetWorkflowRunsPaginator{

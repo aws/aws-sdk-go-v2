@@ -173,6 +173,10 @@ type ListStackInstancesPaginator struct {
 
 // NewListStackInstancesPaginator returns a new ListStackInstancesPaginator
 func NewListStackInstancesPaginator(client ListStackInstancesAPIClient, params *ListStackInstancesInput, optFns ...func(*ListStackInstancesPaginatorOptions)) *ListStackInstancesPaginator {
+	if params == nil {
+		params = &ListStackInstancesInput{}
+	}
+
 	options := ListStackInstancesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -180,10 +184,6 @@ func NewListStackInstancesPaginator(client ListStackInstancesAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListStackInstancesInput{}
 	}
 
 	return &ListStackInstancesPaginator{

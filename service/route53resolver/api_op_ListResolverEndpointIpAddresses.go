@@ -165,6 +165,10 @@ type ListResolverEndpointIpAddressesPaginator struct {
 // NewListResolverEndpointIpAddressesPaginator returns a new
 // ListResolverEndpointIpAddressesPaginator
 func NewListResolverEndpointIpAddressesPaginator(client ListResolverEndpointIpAddressesAPIClient, params *ListResolverEndpointIpAddressesInput, optFns ...func(*ListResolverEndpointIpAddressesPaginatorOptions)) *ListResolverEndpointIpAddressesPaginator {
+	if params == nil {
+		params = &ListResolverEndpointIpAddressesInput{}
+	}
+
 	options := ListResolverEndpointIpAddressesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -172,10 +176,6 @@ func NewListResolverEndpointIpAddressesPaginator(client ListResolverEndpointIpAd
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListResolverEndpointIpAddressesInput{}
 	}
 
 	return &ListResolverEndpointIpAddressesPaginator{

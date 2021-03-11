@@ -157,6 +157,10 @@ type ListAccountAssignmentCreationStatusPaginator struct {
 // NewListAccountAssignmentCreationStatusPaginator returns a new
 // ListAccountAssignmentCreationStatusPaginator
 func NewListAccountAssignmentCreationStatusPaginator(client ListAccountAssignmentCreationStatusAPIClient, params *ListAccountAssignmentCreationStatusInput, optFns ...func(*ListAccountAssignmentCreationStatusPaginatorOptions)) *ListAccountAssignmentCreationStatusPaginator {
+	if params == nil {
+		params = &ListAccountAssignmentCreationStatusInput{}
+	}
+
 	options := ListAccountAssignmentCreationStatusPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -164,10 +168,6 @@ func NewListAccountAssignmentCreationStatusPaginator(client ListAccountAssignmen
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAccountAssignmentCreationStatusInput{}
 	}
 
 	return &ListAccountAssignmentCreationStatusPaginator{

@@ -146,6 +146,10 @@ type ListDomainConfigurationsPaginator struct {
 // NewListDomainConfigurationsPaginator returns a new
 // ListDomainConfigurationsPaginator
 func NewListDomainConfigurationsPaginator(client ListDomainConfigurationsAPIClient, params *ListDomainConfigurationsInput, optFns ...func(*ListDomainConfigurationsPaginatorOptions)) *ListDomainConfigurationsPaginator {
+	if params == nil {
+		params = &ListDomainConfigurationsInput{}
+	}
+
 	options := ListDomainConfigurationsPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -153,10 +157,6 @@ func NewListDomainConfigurationsPaginator(client ListDomainConfigurationsAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDomainConfigurationsInput{}
 	}
 
 	return &ListDomainConfigurationsPaginator{

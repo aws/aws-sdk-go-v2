@@ -153,14 +153,14 @@ type ListJobsByStatusPaginator struct {
 
 // NewListJobsByStatusPaginator returns a new ListJobsByStatusPaginator
 func NewListJobsByStatusPaginator(client ListJobsByStatusAPIClient, params *ListJobsByStatusInput, optFns ...func(*ListJobsByStatusPaginatorOptions)) *ListJobsByStatusPaginator {
+	if params == nil {
+		params = &ListJobsByStatusInput{}
+	}
+
 	options := ListJobsByStatusPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListJobsByStatusInput{}
 	}
 
 	return &ListJobsByStatusPaginator{

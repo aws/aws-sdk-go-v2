@@ -140,14 +140,14 @@ type ListBranchesPaginator struct {
 
 // NewListBranchesPaginator returns a new ListBranchesPaginator
 func NewListBranchesPaginator(client ListBranchesAPIClient, params *ListBranchesInput, optFns ...func(*ListBranchesPaginatorOptions)) *ListBranchesPaginator {
+	if params == nil {
+		params = &ListBranchesInput{}
+	}
+
 	options := ListBranchesPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListBranchesInput{}
 	}
 
 	return &ListBranchesPaginator{

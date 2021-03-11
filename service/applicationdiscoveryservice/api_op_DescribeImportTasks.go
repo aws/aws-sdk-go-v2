@@ -146,6 +146,10 @@ type DescribeImportTasksPaginator struct {
 
 // NewDescribeImportTasksPaginator returns a new DescribeImportTasksPaginator
 func NewDescribeImportTasksPaginator(client DescribeImportTasksAPIClient, params *DescribeImportTasksInput, optFns ...func(*DescribeImportTasksPaginatorOptions)) *DescribeImportTasksPaginator {
+	if params == nil {
+		params = &DescribeImportTasksInput{}
+	}
+
 	options := DescribeImportTasksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -153,10 +157,6 @@ func NewDescribeImportTasksPaginator(client DescribeImportTasksAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeImportTasksInput{}
 	}
 
 	return &DescribeImportTasksPaginator{

@@ -184,6 +184,10 @@ type DescribeNodeConfigurationOptionsPaginator struct {
 // NewDescribeNodeConfigurationOptionsPaginator returns a new
 // DescribeNodeConfigurationOptionsPaginator
 func NewDescribeNodeConfigurationOptionsPaginator(client DescribeNodeConfigurationOptionsAPIClient, params *DescribeNodeConfigurationOptionsInput, optFns ...func(*DescribeNodeConfigurationOptionsPaginatorOptions)) *DescribeNodeConfigurationOptionsPaginator {
+	if params == nil {
+		params = &DescribeNodeConfigurationOptionsInput{}
+	}
+
 	options := DescribeNodeConfigurationOptionsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -191,10 +195,6 @@ func NewDescribeNodeConfigurationOptionsPaginator(client DescribeNodeConfigurati
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeNodeConfigurationOptionsInput{}
 	}
 
 	return &DescribeNodeConfigurationOptionsPaginator{

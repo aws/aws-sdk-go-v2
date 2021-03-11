@@ -178,6 +178,10 @@ type DescribeOrderableClusterOptionsPaginator struct {
 // NewDescribeOrderableClusterOptionsPaginator returns a new
 // DescribeOrderableClusterOptionsPaginator
 func NewDescribeOrderableClusterOptionsPaginator(client DescribeOrderableClusterOptionsAPIClient, params *DescribeOrderableClusterOptionsInput, optFns ...func(*DescribeOrderableClusterOptionsPaginatorOptions)) *DescribeOrderableClusterOptionsPaginator {
+	if params == nil {
+		params = &DescribeOrderableClusterOptionsInput{}
+	}
+
 	options := DescribeOrderableClusterOptionsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -185,10 +189,6 @@ func NewDescribeOrderableClusterOptionsPaginator(client DescribeOrderableCluster
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeOrderableClusterOptionsInput{}
 	}
 
 	return &DescribeOrderableClusterOptionsPaginator{

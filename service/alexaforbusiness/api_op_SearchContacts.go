@@ -159,6 +159,10 @@ type SearchContactsPaginator struct {
 
 // NewSearchContactsPaginator returns a new SearchContactsPaginator
 func NewSearchContactsPaginator(client SearchContactsAPIClient, params *SearchContactsInput, optFns ...func(*SearchContactsPaginatorOptions)) *SearchContactsPaginator {
+	if params == nil {
+		params = &SearchContactsInput{}
+	}
+
 	options := SearchContactsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewSearchContactsPaginator(client SearchContactsAPIClient, params *SearchCo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchContactsInput{}
 	}
 
 	return &SearchContactsPaginator{

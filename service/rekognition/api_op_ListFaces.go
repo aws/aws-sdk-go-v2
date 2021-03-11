@@ -156,6 +156,10 @@ type ListFacesPaginator struct {
 
 // NewListFacesPaginator returns a new ListFacesPaginator
 func NewListFacesPaginator(client ListFacesAPIClient, params *ListFacesInput, optFns ...func(*ListFacesPaginatorOptions)) *ListFacesPaginator {
+	if params == nil {
+		params = &ListFacesInput{}
+	}
+
 	options := ListFacesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -163,10 +167,6 @@ func NewListFacesPaginator(client ListFacesAPIClient, params *ListFacesInput, op
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListFacesInput{}
 	}
 
 	return &ListFacesPaginator{

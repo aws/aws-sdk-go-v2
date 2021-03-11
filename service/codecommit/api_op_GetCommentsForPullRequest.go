@@ -168,6 +168,10 @@ type GetCommentsForPullRequestPaginator struct {
 // NewGetCommentsForPullRequestPaginator returns a new
 // GetCommentsForPullRequestPaginator
 func NewGetCommentsForPullRequestPaginator(client GetCommentsForPullRequestAPIClient, params *GetCommentsForPullRequestInput, optFns ...func(*GetCommentsForPullRequestPaginatorOptions)) *GetCommentsForPullRequestPaginator {
+	if params == nil {
+		params = &GetCommentsForPullRequestInput{}
+	}
+
 	options := GetCommentsForPullRequestPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -175,10 +179,6 @@ func NewGetCommentsForPullRequestPaginator(client GetCommentsForPullRequestAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetCommentsForPullRequestInput{}
 	}
 
 	return &GetCommentsForPullRequestPaginator{

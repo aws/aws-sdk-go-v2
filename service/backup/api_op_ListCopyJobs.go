@@ -185,6 +185,10 @@ type ListCopyJobsPaginator struct {
 
 // NewListCopyJobsPaginator returns a new ListCopyJobsPaginator
 func NewListCopyJobsPaginator(client ListCopyJobsAPIClient, params *ListCopyJobsInput, optFns ...func(*ListCopyJobsPaginatorOptions)) *ListCopyJobsPaginator {
+	if params == nil {
+		params = &ListCopyJobsInput{}
+	}
+
 	options := ListCopyJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -192,10 +196,6 @@ func NewListCopyJobsPaginator(client ListCopyJobsAPIClient, params *ListCopyJobs
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCopyJobsInput{}
 	}
 
 	return &ListCopyJobsPaginator{

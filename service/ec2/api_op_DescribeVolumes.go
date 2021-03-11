@@ -237,6 +237,10 @@ type DescribeVolumesPaginator struct {
 
 // NewDescribeVolumesPaginator returns a new DescribeVolumesPaginator
 func NewDescribeVolumesPaginator(client DescribeVolumesAPIClient, params *DescribeVolumesInput, optFns ...func(*DescribeVolumesPaginatorOptions)) *DescribeVolumesPaginator {
+	if params == nil {
+		params = &DescribeVolumesInput{}
+	}
+
 	options := DescribeVolumesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -244,10 +248,6 @@ func NewDescribeVolumesPaginator(client DescribeVolumesAPIClient, params *Descri
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeVolumesInput{}
 	}
 
 	return &DescribeVolumesPaginator{

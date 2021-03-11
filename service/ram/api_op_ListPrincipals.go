@@ -167,6 +167,10 @@ type ListPrincipalsPaginator struct {
 
 // NewListPrincipalsPaginator returns a new ListPrincipalsPaginator
 func NewListPrincipalsPaginator(client ListPrincipalsAPIClient, params *ListPrincipalsInput, optFns ...func(*ListPrincipalsPaginatorOptions)) *ListPrincipalsPaginator {
+	if params == nil {
+		params = &ListPrincipalsInput{}
+	}
+
 	options := ListPrincipalsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -174,10 +178,6 @@ func NewListPrincipalsPaginator(client ListPrincipalsAPIClient, params *ListPrin
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPrincipalsInput{}
 	}
 
 	return &ListPrincipalsPaginator{

@@ -143,6 +143,10 @@ type ListInvitationsPaginator struct {
 
 // NewListInvitationsPaginator returns a new ListInvitationsPaginator
 func NewListInvitationsPaginator(client ListInvitationsAPIClient, params *ListInvitationsInput, optFns ...func(*ListInvitationsPaginatorOptions)) *ListInvitationsPaginator {
+	if params == nil {
+		params = &ListInvitationsInput{}
+	}
+
 	options := ListInvitationsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -150,10 +154,6 @@ func NewListInvitationsPaginator(client ListInvitationsAPIClient, params *ListIn
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListInvitationsInput{}
 	}
 
 	return &ListInvitationsPaginator{

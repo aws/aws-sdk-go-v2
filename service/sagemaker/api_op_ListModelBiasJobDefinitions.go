@@ -168,6 +168,10 @@ type ListModelBiasJobDefinitionsPaginator struct {
 // NewListModelBiasJobDefinitionsPaginator returns a new
 // ListModelBiasJobDefinitionsPaginator
 func NewListModelBiasJobDefinitionsPaginator(client ListModelBiasJobDefinitionsAPIClient, params *ListModelBiasJobDefinitionsInput, optFns ...func(*ListModelBiasJobDefinitionsPaginatorOptions)) *ListModelBiasJobDefinitionsPaginator {
+	if params == nil {
+		params = &ListModelBiasJobDefinitionsInput{}
+	}
+
 	options := ListModelBiasJobDefinitionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -175,10 +179,6 @@ func NewListModelBiasJobDefinitionsPaginator(client ListModelBiasJobDefinitionsA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListModelBiasJobDefinitionsInput{}
 	}
 
 	return &ListModelBiasJobDefinitionsPaginator{

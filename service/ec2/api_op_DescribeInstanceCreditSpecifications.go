@@ -180,6 +180,10 @@ type DescribeInstanceCreditSpecificationsPaginator struct {
 // NewDescribeInstanceCreditSpecificationsPaginator returns a new
 // DescribeInstanceCreditSpecificationsPaginator
 func NewDescribeInstanceCreditSpecificationsPaginator(client DescribeInstanceCreditSpecificationsAPIClient, params *DescribeInstanceCreditSpecificationsInput, optFns ...func(*DescribeInstanceCreditSpecificationsPaginatorOptions)) *DescribeInstanceCreditSpecificationsPaginator {
+	if params == nil {
+		params = &DescribeInstanceCreditSpecificationsInput{}
+	}
+
 	options := DescribeInstanceCreditSpecificationsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -187,10 +191,6 @@ func NewDescribeInstanceCreditSpecificationsPaginator(client DescribeInstanceCre
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeInstanceCreditSpecificationsInput{}
 	}
 
 	return &DescribeInstanceCreditSpecificationsPaginator{

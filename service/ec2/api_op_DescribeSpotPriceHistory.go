@@ -200,6 +200,10 @@ type DescribeSpotPriceHistoryPaginator struct {
 // NewDescribeSpotPriceHistoryPaginator returns a new
 // DescribeSpotPriceHistoryPaginator
 func NewDescribeSpotPriceHistoryPaginator(client DescribeSpotPriceHistoryAPIClient, params *DescribeSpotPriceHistoryInput, optFns ...func(*DescribeSpotPriceHistoryPaginatorOptions)) *DescribeSpotPriceHistoryPaginator {
+	if params == nil {
+		params = &DescribeSpotPriceHistoryInput{}
+	}
+
 	options := DescribeSpotPriceHistoryPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -207,10 +211,6 @@ func NewDescribeSpotPriceHistoryPaginator(client DescribeSpotPriceHistoryAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeSpotPriceHistoryInput{}
 	}
 
 	return &DescribeSpotPriceHistoryPaginator{

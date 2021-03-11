@@ -140,6 +140,10 @@ type ListRoleAliasesPaginator struct {
 
 // NewListRoleAliasesPaginator returns a new ListRoleAliasesPaginator
 func NewListRoleAliasesPaginator(client ListRoleAliasesAPIClient, params *ListRoleAliasesInput, optFns ...func(*ListRoleAliasesPaginatorOptions)) *ListRoleAliasesPaginator {
+	if params == nil {
+		params = &ListRoleAliasesInput{}
+	}
+
 	options := ListRoleAliasesPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -147,10 +151,6 @@ func NewListRoleAliasesPaginator(client ListRoleAliasesAPIClient, params *ListRo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRoleAliasesInput{}
 	}
 
 	return &ListRoleAliasesPaginator{

@@ -160,6 +160,10 @@ type DescribeReplicationSubnetGroupsPaginator struct {
 // NewDescribeReplicationSubnetGroupsPaginator returns a new
 // DescribeReplicationSubnetGroupsPaginator
 func NewDescribeReplicationSubnetGroupsPaginator(client DescribeReplicationSubnetGroupsAPIClient, params *DescribeReplicationSubnetGroupsInput, optFns ...func(*DescribeReplicationSubnetGroupsPaginatorOptions)) *DescribeReplicationSubnetGroupsPaginator {
+	if params == nil {
+		params = &DescribeReplicationSubnetGroupsInput{}
+	}
+
 	options := DescribeReplicationSubnetGroupsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -167,10 +171,6 @@ func NewDescribeReplicationSubnetGroupsPaginator(client DescribeReplicationSubne
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeReplicationSubnetGroupsInput{}
 	}
 
 	return &DescribeReplicationSubnetGroupsPaginator{

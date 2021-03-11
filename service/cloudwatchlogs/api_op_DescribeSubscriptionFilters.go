@@ -157,6 +157,10 @@ type DescribeSubscriptionFiltersPaginator struct {
 // NewDescribeSubscriptionFiltersPaginator returns a new
 // DescribeSubscriptionFiltersPaginator
 func NewDescribeSubscriptionFiltersPaginator(client DescribeSubscriptionFiltersAPIClient, params *DescribeSubscriptionFiltersInput, optFns ...func(*DescribeSubscriptionFiltersPaginatorOptions)) *DescribeSubscriptionFiltersPaginator {
+	if params == nil {
+		params = &DescribeSubscriptionFiltersInput{}
+	}
+
 	options := DescribeSubscriptionFiltersPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -164,10 +168,6 @@ func NewDescribeSubscriptionFiltersPaginator(client DescribeSubscriptionFiltersA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeSubscriptionFiltersInput{}
 	}
 
 	return &DescribeSubscriptionFiltersPaginator{

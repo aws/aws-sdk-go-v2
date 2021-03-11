@@ -149,6 +149,10 @@ type ListLexBotsPaginator struct {
 
 // NewListLexBotsPaginator returns a new ListLexBotsPaginator
 func NewListLexBotsPaginator(client ListLexBotsAPIClient, params *ListLexBotsInput, optFns ...func(*ListLexBotsPaginatorOptions)) *ListLexBotsPaginator {
+	if params == nil {
+		params = &ListLexBotsInput{}
+	}
+
 	options := ListLexBotsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -156,10 +160,6 @@ func NewListLexBotsPaginator(client ListLexBotsAPIClient, params *ListLexBotsInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListLexBotsInput{}
 	}
 
 	return &ListLexBotsPaginator{

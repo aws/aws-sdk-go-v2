@@ -172,6 +172,10 @@ type DescribeFileSystemAliasesPaginator struct {
 // NewDescribeFileSystemAliasesPaginator returns a new
 // DescribeFileSystemAliasesPaginator
 func NewDescribeFileSystemAliasesPaginator(client DescribeFileSystemAliasesAPIClient, params *DescribeFileSystemAliasesInput, optFns ...func(*DescribeFileSystemAliasesPaginatorOptions)) *DescribeFileSystemAliasesPaginator {
+	if params == nil {
+		params = &DescribeFileSystemAliasesInput{}
+	}
+
 	options := DescribeFileSystemAliasesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -179,10 +183,6 @@ func NewDescribeFileSystemAliasesPaginator(client DescribeFileSystemAliasesAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeFileSystemAliasesInput{}
 	}
 
 	return &DescribeFileSystemAliasesPaginator{

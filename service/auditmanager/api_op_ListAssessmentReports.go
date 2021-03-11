@@ -139,6 +139,10 @@ type ListAssessmentReportsPaginator struct {
 
 // NewListAssessmentReportsPaginator returns a new ListAssessmentReportsPaginator
 func NewListAssessmentReportsPaginator(client ListAssessmentReportsAPIClient, params *ListAssessmentReportsInput, optFns ...func(*ListAssessmentReportsPaginatorOptions)) *ListAssessmentReportsPaginator {
+	if params == nil {
+		params = &ListAssessmentReportsInput{}
+	}
+
 	options := ListAssessmentReportsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -146,10 +150,6 @@ func NewListAssessmentReportsPaginator(client ListAssessmentReportsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAssessmentReportsInput{}
 	}
 
 	return &ListAssessmentReportsPaginator{

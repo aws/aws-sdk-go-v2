@@ -152,6 +152,10 @@ type GetFindingsPaginator struct {
 
 // NewGetFindingsPaginator returns a new GetFindingsPaginator
 func NewGetFindingsPaginator(client GetFindingsAPIClient, params *GetFindingsInput, optFns ...func(*GetFindingsPaginatorOptions)) *GetFindingsPaginator {
+	if params == nil {
+		params = &GetFindingsInput{}
+	}
+
 	options := GetFindingsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -159,10 +163,6 @@ func NewGetFindingsPaginator(client GetFindingsAPIClient, params *GetFindingsInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetFindingsInput{}
 	}
 
 	return &GetFindingsPaginator{

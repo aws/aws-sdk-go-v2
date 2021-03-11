@@ -183,6 +183,10 @@ type ListTaskDefinitionFamiliesPaginator struct {
 // NewListTaskDefinitionFamiliesPaginator returns a new
 // ListTaskDefinitionFamiliesPaginator
 func NewListTaskDefinitionFamiliesPaginator(client ListTaskDefinitionFamiliesAPIClient, params *ListTaskDefinitionFamiliesInput, optFns ...func(*ListTaskDefinitionFamiliesPaginatorOptions)) *ListTaskDefinitionFamiliesPaginator {
+	if params == nil {
+		params = &ListTaskDefinitionFamiliesInput{}
+	}
+
 	options := ListTaskDefinitionFamiliesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -190,10 +194,6 @@ func NewListTaskDefinitionFamiliesPaginator(client ListTaskDefinitionFamiliesAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTaskDefinitionFamiliesInput{}
 	}
 
 	return &ListTaskDefinitionFamiliesPaginator{

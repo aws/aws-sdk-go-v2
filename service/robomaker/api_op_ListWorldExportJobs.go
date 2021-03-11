@@ -162,6 +162,10 @@ type ListWorldExportJobsPaginator struct {
 
 // NewListWorldExportJobsPaginator returns a new ListWorldExportJobsPaginator
 func NewListWorldExportJobsPaginator(client ListWorldExportJobsAPIClient, params *ListWorldExportJobsInput, optFns ...func(*ListWorldExportJobsPaginatorOptions)) *ListWorldExportJobsPaginator {
+	if params == nil {
+		params = &ListWorldExportJobsInput{}
+	}
+
 	options := ListWorldExportJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -169,10 +173,6 @@ func NewListWorldExportJobsPaginator(client ListWorldExportJobsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListWorldExportJobsInput{}
 	}
 
 	return &ListWorldExportJobsPaginator{

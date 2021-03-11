@@ -200,6 +200,10 @@ type GetContentModerationPaginator struct {
 
 // NewGetContentModerationPaginator returns a new GetContentModerationPaginator
 func NewGetContentModerationPaginator(client GetContentModerationAPIClient, params *GetContentModerationInput, optFns ...func(*GetContentModerationPaginatorOptions)) *GetContentModerationPaginator {
+	if params == nil {
+		params = &GetContentModerationInput{}
+	}
+
 	options := GetContentModerationPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -207,10 +211,6 @@ func NewGetContentModerationPaginator(client GetContentModerationAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetContentModerationInput{}
 	}
 
 	return &GetContentModerationPaginator{

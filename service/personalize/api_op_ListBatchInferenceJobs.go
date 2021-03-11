@@ -147,6 +147,10 @@ type ListBatchInferenceJobsPaginator struct {
 
 // NewListBatchInferenceJobsPaginator returns a new ListBatchInferenceJobsPaginator
 func NewListBatchInferenceJobsPaginator(client ListBatchInferenceJobsAPIClient, params *ListBatchInferenceJobsInput, optFns ...func(*ListBatchInferenceJobsPaginatorOptions)) *ListBatchInferenceJobsPaginator {
+	if params == nil {
+		params = &ListBatchInferenceJobsInput{}
+	}
+
 	options := ListBatchInferenceJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -154,10 +158,6 @@ func NewListBatchInferenceJobsPaginator(client ListBatchInferenceJobsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListBatchInferenceJobsInput{}
 	}
 
 	return &ListBatchInferenceJobsPaginator{

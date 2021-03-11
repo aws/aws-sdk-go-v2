@@ -151,6 +151,10 @@ type ListDedicatedIpPoolsPaginator struct {
 
 // NewListDedicatedIpPoolsPaginator returns a new ListDedicatedIpPoolsPaginator
 func NewListDedicatedIpPoolsPaginator(client ListDedicatedIpPoolsAPIClient, params *ListDedicatedIpPoolsInput, optFns ...func(*ListDedicatedIpPoolsPaginatorOptions)) *ListDedicatedIpPoolsPaginator {
+	if params == nil {
+		params = &ListDedicatedIpPoolsInput{}
+	}
+
 	options := ListDedicatedIpPoolsPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -158,10 +162,6 @@ func NewListDedicatedIpPoolsPaginator(client ListDedicatedIpPoolsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDedicatedIpPoolsInput{}
 	}
 
 	return &ListDedicatedIpPoolsPaginator{

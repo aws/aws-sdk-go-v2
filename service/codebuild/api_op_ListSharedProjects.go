@@ -172,6 +172,10 @@ type ListSharedProjectsPaginator struct {
 
 // NewListSharedProjectsPaginator returns a new ListSharedProjectsPaginator
 func NewListSharedProjectsPaginator(client ListSharedProjectsAPIClient, params *ListSharedProjectsInput, optFns ...func(*ListSharedProjectsPaginatorOptions)) *ListSharedProjectsPaginator {
+	if params == nil {
+		params = &ListSharedProjectsInput{}
+	}
+
 	options := ListSharedProjectsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -179,10 +183,6 @@ func NewListSharedProjectsPaginator(client ListSharedProjectsAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSharedProjectsInput{}
 	}
 
 	return &ListSharedProjectsPaginator{

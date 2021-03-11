@@ -148,6 +148,10 @@ type ListDiscoverersPaginator struct {
 
 // NewListDiscoverersPaginator returns a new ListDiscoverersPaginator
 func NewListDiscoverersPaginator(client ListDiscoverersAPIClient, params *ListDiscoverersInput, optFns ...func(*ListDiscoverersPaginatorOptions)) *ListDiscoverersPaginator {
+	if params == nil {
+		params = &ListDiscoverersInput{}
+	}
+
 	options := ListDiscoverersPaginatorOptions{}
 	if params.Limit != 0 {
 		options.Limit = params.Limit
@@ -155,10 +159,6 @@ func NewListDiscoverersPaginator(client ListDiscoverersAPIClient, params *ListDi
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDiscoverersInput{}
 	}
 
 	return &ListDiscoverersPaginator{

@@ -185,6 +185,10 @@ type ListContainerInstancesPaginator struct {
 
 // NewListContainerInstancesPaginator returns a new ListContainerInstancesPaginator
 func NewListContainerInstancesPaginator(client ListContainerInstancesAPIClient, params *ListContainerInstancesInput, optFns ...func(*ListContainerInstancesPaginatorOptions)) *ListContainerInstancesPaginator {
+	if params == nil {
+		params = &ListContainerInstancesInput{}
+	}
+
 	options := ListContainerInstancesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -192,10 +196,6 @@ func NewListContainerInstancesPaginator(client ListContainerInstancesAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListContainerInstancesInput{}
 	}
 
 	return &ListContainerInstancesPaginator{

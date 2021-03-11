@@ -173,6 +173,10 @@ type DescribeEnvironmentMembershipsPaginator struct {
 // NewDescribeEnvironmentMembershipsPaginator returns a new
 // DescribeEnvironmentMembershipsPaginator
 func NewDescribeEnvironmentMembershipsPaginator(client DescribeEnvironmentMembershipsAPIClient, params *DescribeEnvironmentMembershipsInput, optFns ...func(*DescribeEnvironmentMembershipsPaginatorOptions)) *DescribeEnvironmentMembershipsPaginator {
+	if params == nil {
+		params = &DescribeEnvironmentMembershipsInput{}
+	}
+
 	options := DescribeEnvironmentMembershipsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -180,10 +184,6 @@ func NewDescribeEnvironmentMembershipsPaginator(client DescribeEnvironmentMember
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeEnvironmentMembershipsInput{}
 	}
 
 	return &DescribeEnvironmentMembershipsPaginator{

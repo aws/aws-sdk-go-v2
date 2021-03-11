@@ -160,6 +160,10 @@ type ListVocabulariesPaginator struct {
 
 // NewListVocabulariesPaginator returns a new ListVocabulariesPaginator
 func NewListVocabulariesPaginator(client ListVocabulariesAPIClient, params *ListVocabulariesInput, optFns ...func(*ListVocabulariesPaginatorOptions)) *ListVocabulariesPaginator {
+	if params == nil {
+		params = &ListVocabulariesInput{}
+	}
+
 	options := ListVocabulariesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -167,10 +171,6 @@ func NewListVocabulariesPaginator(client ListVocabulariesAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListVocabulariesInput{}
 	}
 
 	return &ListVocabulariesPaginator{

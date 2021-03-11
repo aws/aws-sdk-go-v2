@@ -149,6 +149,10 @@ type ListLambdaFunctionsPaginator struct {
 
 // NewListLambdaFunctionsPaginator returns a new ListLambdaFunctionsPaginator
 func NewListLambdaFunctionsPaginator(client ListLambdaFunctionsAPIClient, params *ListLambdaFunctionsInput, optFns ...func(*ListLambdaFunctionsPaginatorOptions)) *ListLambdaFunctionsPaginator {
+	if params == nil {
+		params = &ListLambdaFunctionsInput{}
+	}
+
 	options := ListLambdaFunctionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -156,10 +160,6 @@ func NewListLambdaFunctionsPaginator(client ListLambdaFunctionsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListLambdaFunctionsInput{}
 	}
 
 	return &ListLambdaFunctionsPaginator{

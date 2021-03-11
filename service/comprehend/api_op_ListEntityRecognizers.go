@@ -148,6 +148,10 @@ type ListEntityRecognizersPaginator struct {
 
 // NewListEntityRecognizersPaginator returns a new ListEntityRecognizersPaginator
 func NewListEntityRecognizersPaginator(client ListEntityRecognizersAPIClient, params *ListEntityRecognizersInput, optFns ...func(*ListEntityRecognizersPaginatorOptions)) *ListEntityRecognizersPaginator {
+	if params == nil {
+		params = &ListEntityRecognizersInput{}
+	}
+
 	options := ListEntityRecognizersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -155,10 +159,6 @@ func NewListEntityRecognizersPaginator(client ListEntityRecognizersAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEntityRecognizersInput{}
 	}
 
 	return &ListEntityRecognizersPaginator{

@@ -170,6 +170,10 @@ type ListAnswersPaginator struct {
 
 // NewListAnswersPaginator returns a new ListAnswersPaginator
 func NewListAnswersPaginator(client ListAnswersAPIClient, params *ListAnswersInput, optFns ...func(*ListAnswersPaginatorOptions)) *ListAnswersPaginator {
+	if params == nil {
+		params = &ListAnswersInput{}
+	}
+
 	options := ListAnswersPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -177,10 +181,6 @@ func NewListAnswersPaginator(client ListAnswersAPIClient, params *ListAnswersInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAnswersInput{}
 	}
 
 	return &ListAnswersPaginator{

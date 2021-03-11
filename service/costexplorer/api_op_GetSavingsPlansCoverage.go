@@ -206,6 +206,10 @@ type GetSavingsPlansCoveragePaginator struct {
 // NewGetSavingsPlansCoveragePaginator returns a new
 // GetSavingsPlansCoveragePaginator
 func NewGetSavingsPlansCoveragePaginator(client GetSavingsPlansCoverageAPIClient, params *GetSavingsPlansCoverageInput, optFns ...func(*GetSavingsPlansCoveragePaginatorOptions)) *GetSavingsPlansCoveragePaginator {
+	if params == nil {
+		params = &GetSavingsPlansCoverageInput{}
+	}
+
 	options := GetSavingsPlansCoveragePaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -213,10 +217,6 @@ func NewGetSavingsPlansCoveragePaginator(client GetSavingsPlansCoverageAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetSavingsPlansCoverageInput{}
 	}
 
 	return &GetSavingsPlansCoveragePaginator{

@@ -168,6 +168,10 @@ type DescribeInstallationMediaPaginator struct {
 // NewDescribeInstallationMediaPaginator returns a new
 // DescribeInstallationMediaPaginator
 func NewDescribeInstallationMediaPaginator(client DescribeInstallationMediaAPIClient, params *DescribeInstallationMediaInput, optFns ...func(*DescribeInstallationMediaPaginatorOptions)) *DescribeInstallationMediaPaginator {
+	if params == nil {
+		params = &DescribeInstallationMediaInput{}
+	}
+
 	options := DescribeInstallationMediaPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -175,10 +179,6 @@ func NewDescribeInstallationMediaPaginator(client DescribeInstallationMediaAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeInstallationMediaInput{}
 	}
 
 	return &DescribeInstallationMediaPaginator{

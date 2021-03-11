@@ -145,6 +145,10 @@ type GetDetectorsPaginator struct {
 
 // NewGetDetectorsPaginator returns a new GetDetectorsPaginator
 func NewGetDetectorsPaginator(client GetDetectorsAPIClient, params *GetDetectorsInput, optFns ...func(*GetDetectorsPaginatorOptions)) *GetDetectorsPaginator {
+	if params == nil {
+		params = &GetDetectorsInput{}
+	}
+
 	options := GetDetectorsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewGetDetectorsPaginator(client GetDetectorsAPIClient, params *GetDetectors
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetDetectorsInput{}
 	}
 
 	return &GetDetectorsPaginator{

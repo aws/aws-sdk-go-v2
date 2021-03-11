@@ -158,6 +158,10 @@ type GetReservedNodeExchangeOfferingsPaginator struct {
 // NewGetReservedNodeExchangeOfferingsPaginator returns a new
 // GetReservedNodeExchangeOfferingsPaginator
 func NewGetReservedNodeExchangeOfferingsPaginator(client GetReservedNodeExchangeOfferingsAPIClient, params *GetReservedNodeExchangeOfferingsInput, optFns ...func(*GetReservedNodeExchangeOfferingsPaginatorOptions)) *GetReservedNodeExchangeOfferingsPaginator {
+	if params == nil {
+		params = &GetReservedNodeExchangeOfferingsInput{}
+	}
+
 	options := GetReservedNodeExchangeOfferingsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -165,10 +169,6 @@ func NewGetReservedNodeExchangeOfferingsPaginator(client GetReservedNodeExchange
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetReservedNodeExchangeOfferingsInput{}
 	}
 
 	return &GetReservedNodeExchangeOfferingsPaginator{

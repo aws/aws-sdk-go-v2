@@ -150,6 +150,10 @@ type SearchSystemTemplatesPaginator struct {
 
 // NewSearchSystemTemplatesPaginator returns a new SearchSystemTemplatesPaginator
 func NewSearchSystemTemplatesPaginator(client SearchSystemTemplatesAPIClient, params *SearchSystemTemplatesInput, optFns ...func(*SearchSystemTemplatesPaginatorOptions)) *SearchSystemTemplatesPaginator {
+	if params == nil {
+		params = &SearchSystemTemplatesInput{}
+	}
+
 	options := SearchSystemTemplatesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -157,10 +161,6 @@ func NewSearchSystemTemplatesPaginator(client SearchSystemTemplatesAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchSystemTemplatesInput{}
 	}
 
 	return &SearchSystemTemplatesPaginator{

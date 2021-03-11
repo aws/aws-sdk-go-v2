@@ -141,6 +141,10 @@ type ListDistributionsPaginator struct {
 
 // NewListDistributionsPaginator returns a new ListDistributionsPaginator
 func NewListDistributionsPaginator(client ListDistributionsAPIClient, params *ListDistributionsInput, optFns ...func(*ListDistributionsPaginatorOptions)) *ListDistributionsPaginator {
+	if params == nil {
+		params = &ListDistributionsInput{}
+	}
+
 	options := ListDistributionsPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -148,10 +152,6 @@ func NewListDistributionsPaginator(client ListDistributionsAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDistributionsInput{}
 	}
 
 	return &ListDistributionsPaginator{

@@ -149,6 +149,10 @@ type DescribeCanariesPaginator struct {
 
 // NewDescribeCanariesPaginator returns a new DescribeCanariesPaginator
 func NewDescribeCanariesPaginator(client DescribeCanariesAPIClient, params *DescribeCanariesInput, optFns ...func(*DescribeCanariesPaginatorOptions)) *DescribeCanariesPaginator {
+	if params == nil {
+		params = &DescribeCanariesInput{}
+	}
+
 	options := DescribeCanariesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -156,10 +160,6 @@ func NewDescribeCanariesPaginator(client DescribeCanariesAPIClient, params *Desc
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeCanariesInput{}
 	}
 
 	return &DescribeCanariesPaginator{

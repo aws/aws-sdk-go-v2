@@ -158,6 +158,10 @@ type ListManagedPoliciesInPermissionSetPaginator struct {
 // NewListManagedPoliciesInPermissionSetPaginator returns a new
 // ListManagedPoliciesInPermissionSetPaginator
 func NewListManagedPoliciesInPermissionSetPaginator(client ListManagedPoliciesInPermissionSetAPIClient, params *ListManagedPoliciesInPermissionSetInput, optFns ...func(*ListManagedPoliciesInPermissionSetPaginatorOptions)) *ListManagedPoliciesInPermissionSetPaginator {
+	if params == nil {
+		params = &ListManagedPoliciesInPermissionSetInput{}
+	}
+
 	options := ListManagedPoliciesInPermissionSetPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -165,10 +169,6 @@ func NewListManagedPoliciesInPermissionSetPaginator(client ListManagedPoliciesIn
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListManagedPoliciesInPermissionSetInput{}
 	}
 
 	return &ListManagedPoliciesInPermissionSetPaginator{

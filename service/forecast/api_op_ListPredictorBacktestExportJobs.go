@@ -169,6 +169,10 @@ type ListPredictorBacktestExportJobsPaginator struct {
 // NewListPredictorBacktestExportJobsPaginator returns a new
 // ListPredictorBacktestExportJobsPaginator
 func NewListPredictorBacktestExportJobsPaginator(client ListPredictorBacktestExportJobsAPIClient, params *ListPredictorBacktestExportJobsInput, optFns ...func(*ListPredictorBacktestExportJobsPaginatorOptions)) *ListPredictorBacktestExportJobsPaginator {
+	if params == nil {
+		params = &ListPredictorBacktestExportJobsInput{}
+	}
+
 	options := ListPredictorBacktestExportJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -176,10 +180,6 @@ func NewListPredictorBacktestExportJobsPaginator(client ListPredictorBacktestExp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPredictorBacktestExportJobsInput{}
 	}
 
 	return &ListPredictorBacktestExportJobsPaginator{

@@ -152,6 +152,10 @@ type GetPackageVersionHistoryPaginator struct {
 // NewGetPackageVersionHistoryPaginator returns a new
 // GetPackageVersionHistoryPaginator
 func NewGetPackageVersionHistoryPaginator(client GetPackageVersionHistoryAPIClient, params *GetPackageVersionHistoryInput, optFns ...func(*GetPackageVersionHistoryPaginatorOptions)) *GetPackageVersionHistoryPaginator {
+	if params == nil {
+		params = &GetPackageVersionHistoryInput{}
+	}
+
 	options := GetPackageVersionHistoryPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -159,10 +163,6 @@ func NewGetPackageVersionHistoryPaginator(client GetPackageVersionHistoryAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetPackageVersionHistoryInput{}
 	}
 
 	return &GetPackageVersionHistoryPaginator{

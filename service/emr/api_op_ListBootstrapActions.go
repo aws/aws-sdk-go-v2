@@ -143,14 +143,14 @@ type ListBootstrapActionsPaginator struct {
 
 // NewListBootstrapActionsPaginator returns a new ListBootstrapActionsPaginator
 func NewListBootstrapActionsPaginator(client ListBootstrapActionsAPIClient, params *ListBootstrapActionsInput, optFns ...func(*ListBootstrapActionsPaginatorOptions)) *ListBootstrapActionsPaginator {
+	if params == nil {
+		params = &ListBootstrapActionsInput{}
+	}
+
 	options := ListBootstrapActionsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListBootstrapActionsInput{}
 	}
 
 	return &ListBootstrapActionsPaginator{

@@ -137,6 +137,10 @@ type ListSitesPaginator struct {
 
 // NewListSitesPaginator returns a new ListSitesPaginator
 func NewListSitesPaginator(client ListSitesAPIClient, params *ListSitesInput, optFns ...func(*ListSitesPaginatorOptions)) *ListSitesPaginator {
+	if params == nil {
+		params = &ListSitesInput{}
+	}
+
 	options := ListSitesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -144,10 +148,6 @@ func NewListSitesPaginator(client ListSitesAPIClient, params *ListSitesInput, op
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSitesInput{}
 	}
 
 	return &ListSitesPaginator{

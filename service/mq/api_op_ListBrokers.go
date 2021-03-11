@@ -141,6 +141,10 @@ type ListBrokersPaginator struct {
 
 // NewListBrokersPaginator returns a new ListBrokersPaginator
 func NewListBrokersPaginator(client ListBrokersAPIClient, params *ListBrokersInput, optFns ...func(*ListBrokersPaginatorOptions)) *ListBrokersPaginator {
+	if params == nil {
+		params = &ListBrokersInput{}
+	}
+
 	options := ListBrokersPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -148,10 +152,6 @@ func NewListBrokersPaginator(client ListBrokersAPIClient, params *ListBrokersInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListBrokersInput{}
 	}
 
 	return &ListBrokersPaginator{

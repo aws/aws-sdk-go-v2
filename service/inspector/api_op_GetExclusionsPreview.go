@@ -172,6 +172,10 @@ type GetExclusionsPreviewPaginator struct {
 
 // NewGetExclusionsPreviewPaginator returns a new GetExclusionsPreviewPaginator
 func NewGetExclusionsPreviewPaginator(client GetExclusionsPreviewAPIClient, params *GetExclusionsPreviewInput, optFns ...func(*GetExclusionsPreviewPaginatorOptions)) *GetExclusionsPreviewPaginator {
+	if params == nil {
+		params = &GetExclusionsPreviewInput{}
+	}
+
 	options := GetExclusionsPreviewPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -179,10 +183,6 @@ func NewGetExclusionsPreviewPaginator(client GetExclusionsPreviewAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetExclusionsPreviewInput{}
 	}
 
 	return &GetExclusionsPreviewPaginator{

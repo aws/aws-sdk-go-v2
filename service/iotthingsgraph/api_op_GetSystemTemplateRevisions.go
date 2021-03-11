@@ -155,6 +155,10 @@ type GetSystemTemplateRevisionsPaginator struct {
 // NewGetSystemTemplateRevisionsPaginator returns a new
 // GetSystemTemplateRevisionsPaginator
 func NewGetSystemTemplateRevisionsPaginator(client GetSystemTemplateRevisionsAPIClient, params *GetSystemTemplateRevisionsInput, optFns ...func(*GetSystemTemplateRevisionsPaginatorOptions)) *GetSystemTemplateRevisionsPaginator {
+	if params == nil {
+		params = &GetSystemTemplateRevisionsInput{}
+	}
+
 	options := GetSystemTemplateRevisionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewGetSystemTemplateRevisionsPaginator(client GetSystemTemplateRevisionsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetSystemTemplateRevisionsInput{}
 	}
 
 	return &GetSystemTemplateRevisionsPaginator{

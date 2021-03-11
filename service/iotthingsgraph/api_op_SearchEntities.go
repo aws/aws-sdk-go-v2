@@ -160,6 +160,10 @@ type SearchEntitiesPaginator struct {
 
 // NewSearchEntitiesPaginator returns a new SearchEntitiesPaginator
 func NewSearchEntitiesPaginator(client SearchEntitiesAPIClient, params *SearchEntitiesInput, optFns ...func(*SearchEntitiesPaginatorOptions)) *SearchEntitiesPaginator {
+	if params == nil {
+		params = &SearchEntitiesInput{}
+	}
+
 	options := SearchEntitiesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -167,10 +171,6 @@ func NewSearchEntitiesPaginator(client SearchEntitiesAPIClient, params *SearchEn
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchEntitiesInput{}
 	}
 
 	return &SearchEntitiesPaginator{

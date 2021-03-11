@@ -170,6 +170,10 @@ type ListDatasetImportJobsPaginator struct {
 
 // NewListDatasetImportJobsPaginator returns a new ListDatasetImportJobsPaginator
 func NewListDatasetImportJobsPaginator(client ListDatasetImportJobsAPIClient, params *ListDatasetImportJobsInput, optFns ...func(*ListDatasetImportJobsPaginatorOptions)) *ListDatasetImportJobsPaginator {
+	if params == nil {
+		params = &ListDatasetImportJobsInput{}
+	}
+
 	options := ListDatasetImportJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -177,10 +181,6 @@ func NewListDatasetImportJobsPaginator(client ListDatasetImportJobsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDatasetImportJobsInput{}
 	}
 
 	return &ListDatasetImportJobsPaginator{

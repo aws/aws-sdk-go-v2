@@ -158,6 +158,10 @@ type ListWorldsPaginator struct {
 
 // NewListWorldsPaginator returns a new ListWorldsPaginator
 func NewListWorldsPaginator(client ListWorldsAPIClient, params *ListWorldsInput, optFns ...func(*ListWorldsPaginatorOptions)) *ListWorldsPaginator {
+	if params == nil {
+		params = &ListWorldsInput{}
+	}
+
 	options := ListWorldsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -165,10 +169,6 @@ func NewListWorldsPaginator(client ListWorldsAPIClient, params *ListWorldsInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListWorldsInput{}
 	}
 
 	return &ListWorldsPaginator{

@@ -175,6 +175,10 @@ type ListVirtualMFADevicesPaginator struct {
 
 // NewListVirtualMFADevicesPaginator returns a new ListVirtualMFADevicesPaginator
 func NewListVirtualMFADevicesPaginator(client ListVirtualMFADevicesAPIClient, params *ListVirtualMFADevicesInput, optFns ...func(*ListVirtualMFADevicesPaginatorOptions)) *ListVirtualMFADevicesPaginator {
+	if params == nil {
+		params = &ListVirtualMFADevicesInput{}
+	}
+
 	options := ListVirtualMFADevicesPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -182,10 +186,6 @@ func NewListVirtualMFADevicesPaginator(client ListVirtualMFADevicesAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListVirtualMFADevicesInput{}
 	}
 
 	return &ListVirtualMFADevicesPaginator{

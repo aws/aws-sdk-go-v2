@@ -141,6 +141,10 @@ type ListOTAUpdatesPaginator struct {
 
 // NewListOTAUpdatesPaginator returns a new ListOTAUpdatesPaginator
 func NewListOTAUpdatesPaginator(client ListOTAUpdatesAPIClient, params *ListOTAUpdatesInput, optFns ...func(*ListOTAUpdatesPaginatorOptions)) *ListOTAUpdatesPaginator {
+	if params == nil {
+		params = &ListOTAUpdatesInput{}
+	}
+
 	options := ListOTAUpdatesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -148,10 +152,6 @@ func NewListOTAUpdatesPaginator(client ListOTAUpdatesAPIClient, params *ListOTAU
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListOTAUpdatesInput{}
 	}
 
 	return &ListOTAUpdatesPaginator{

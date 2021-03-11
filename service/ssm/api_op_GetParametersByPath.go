@@ -175,6 +175,10 @@ type GetParametersByPathPaginator struct {
 
 // NewGetParametersByPathPaginator returns a new GetParametersByPathPaginator
 func NewGetParametersByPathPaginator(client GetParametersByPathAPIClient, params *GetParametersByPathInput, optFns ...func(*GetParametersByPathPaginatorOptions)) *GetParametersByPathPaginator {
+	if params == nil {
+		params = &GetParametersByPathInput{}
+	}
+
 	options := GetParametersByPathPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -182,10 +186,6 @@ func NewGetParametersByPathPaginator(client GetParametersByPathAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetParametersByPathInput{}
 	}
 
 	return &GetParametersByPathPaginator{

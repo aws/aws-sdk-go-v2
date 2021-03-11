@@ -143,6 +143,10 @@ type ListGroundStationsPaginator struct {
 
 // NewListGroundStationsPaginator returns a new ListGroundStationsPaginator
 func NewListGroundStationsPaginator(client ListGroundStationsAPIClient, params *ListGroundStationsInput, optFns ...func(*ListGroundStationsPaginatorOptions)) *ListGroundStationsPaginator {
+	if params == nil {
+		params = &ListGroundStationsInput{}
+	}
+
 	options := ListGroundStationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -150,10 +154,6 @@ func NewListGroundStationsPaginator(client ListGroundStationsAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListGroundStationsInput{}
 	}
 
 	return &ListGroundStationsPaginator{

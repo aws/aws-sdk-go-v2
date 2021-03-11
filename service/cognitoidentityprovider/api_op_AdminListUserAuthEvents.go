@@ -155,6 +155,10 @@ type AdminListUserAuthEventsPaginator struct {
 // NewAdminListUserAuthEventsPaginator returns a new
 // AdminListUserAuthEventsPaginator
 func NewAdminListUserAuthEventsPaginator(client AdminListUserAuthEventsAPIClient, params *AdminListUserAuthEventsInput, optFns ...func(*AdminListUserAuthEventsPaginatorOptions)) *AdminListUserAuthEventsPaginator {
+	if params == nil {
+		params = &AdminListUserAuthEventsInput{}
+	}
+
 	options := AdminListUserAuthEventsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewAdminListUserAuthEventsPaginator(client AdminListUserAuthEventsAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &AdminListUserAuthEventsInput{}
 	}
 
 	return &AdminListUserAuthEventsPaginator{

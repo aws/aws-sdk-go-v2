@@ -144,6 +144,10 @@ type ListPlaybackKeyPairsPaginator struct {
 
 // NewListPlaybackKeyPairsPaginator returns a new ListPlaybackKeyPairsPaginator
 func NewListPlaybackKeyPairsPaginator(client ListPlaybackKeyPairsAPIClient, params *ListPlaybackKeyPairsInput, optFns ...func(*ListPlaybackKeyPairsPaginatorOptions)) *ListPlaybackKeyPairsPaginator {
+	if params == nil {
+		params = &ListPlaybackKeyPairsInput{}
+	}
+
 	options := ListPlaybackKeyPairsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -151,10 +155,6 @@ func NewListPlaybackKeyPairsPaginator(client ListPlaybackKeyPairsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPlaybackKeyPairsInput{}
 	}
 
 	return &ListPlaybackKeyPairsPaginator{

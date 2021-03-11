@@ -157,6 +157,10 @@ type DescribeAddonVersionsPaginator struct {
 
 // NewDescribeAddonVersionsPaginator returns a new DescribeAddonVersionsPaginator
 func NewDescribeAddonVersionsPaginator(client DescribeAddonVersionsAPIClient, params *DescribeAddonVersionsInput, optFns ...func(*DescribeAddonVersionsPaginatorOptions)) *DescribeAddonVersionsPaginator {
+	if params == nil {
+		params = &DescribeAddonVersionsInput{}
+	}
+
 	options := DescribeAddonVersionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -164,10 +168,6 @@ func NewDescribeAddonVersionsPaginator(client DescribeAddonVersionsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeAddonVersionsInput{}
 	}
 
 	return &DescribeAddonVersionsPaginator{

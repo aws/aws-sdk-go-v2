@@ -166,6 +166,10 @@ type GetCommentsForComparedCommitPaginator struct {
 // NewGetCommentsForComparedCommitPaginator returns a new
 // GetCommentsForComparedCommitPaginator
 func NewGetCommentsForComparedCommitPaginator(client GetCommentsForComparedCommitAPIClient, params *GetCommentsForComparedCommitInput, optFns ...func(*GetCommentsForComparedCommitPaginatorOptions)) *GetCommentsForComparedCommitPaginator {
+	if params == nil {
+		params = &GetCommentsForComparedCommitInput{}
+	}
+
 	options := GetCommentsForComparedCommitPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -173,10 +177,6 @@ func NewGetCommentsForComparedCommitPaginator(client GetCommentsForComparedCommi
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetCommentsForComparedCommitInput{}
 	}
 
 	return &GetCommentsForComparedCommitPaginator{

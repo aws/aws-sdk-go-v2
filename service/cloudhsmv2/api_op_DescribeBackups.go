@@ -165,6 +165,10 @@ type DescribeBackupsPaginator struct {
 
 // NewDescribeBackupsPaginator returns a new DescribeBackupsPaginator
 func NewDescribeBackupsPaginator(client DescribeBackupsAPIClient, params *DescribeBackupsInput, optFns ...func(*DescribeBackupsPaginatorOptions)) *DescribeBackupsPaginator {
+	if params == nil {
+		params = &DescribeBackupsInput{}
+	}
+
 	options := DescribeBackupsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -172,10 +176,6 @@ func NewDescribeBackupsPaginator(client DescribeBackupsAPIClient, params *Descri
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeBackupsInput{}
 	}
 
 	return &DescribeBackupsPaginator{

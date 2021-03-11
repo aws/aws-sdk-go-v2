@@ -141,14 +141,14 @@ type DescribeAccountLimitsPaginator struct {
 
 // NewDescribeAccountLimitsPaginator returns a new DescribeAccountLimitsPaginator
 func NewDescribeAccountLimitsPaginator(client DescribeAccountLimitsAPIClient, params *DescribeAccountLimitsInput, optFns ...func(*DescribeAccountLimitsPaginatorOptions)) *DescribeAccountLimitsPaginator {
+	if params == nil {
+		params = &DescribeAccountLimitsInput{}
+	}
+
 	options := DescribeAccountLimitsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeAccountLimitsInput{}
 	}
 
 	return &DescribeAccountLimitsPaginator{

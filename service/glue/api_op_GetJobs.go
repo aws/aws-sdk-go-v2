@@ -137,6 +137,10 @@ type GetJobsPaginator struct {
 
 // NewGetJobsPaginator returns a new GetJobsPaginator
 func NewGetJobsPaginator(client GetJobsAPIClient, params *GetJobsInput, optFns ...func(*GetJobsPaginatorOptions)) *GetJobsPaginator {
+	if params == nil {
+		params = &GetJobsInput{}
+	}
+
 	options := GetJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -144,10 +148,6 @@ func NewGetJobsPaginator(client GetJobsAPIClient, params *GetJobsInput, optFns .
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetJobsInput{}
 	}
 
 	return &GetJobsPaginator{

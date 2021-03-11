@@ -140,6 +140,10 @@ type ListSipMediaApplicationsPaginator struct {
 // NewListSipMediaApplicationsPaginator returns a new
 // ListSipMediaApplicationsPaginator
 func NewListSipMediaApplicationsPaginator(client ListSipMediaApplicationsAPIClient, params *ListSipMediaApplicationsInput, optFns ...func(*ListSipMediaApplicationsPaginatorOptions)) *ListSipMediaApplicationsPaginator {
+	if params == nil {
+		params = &ListSipMediaApplicationsInput{}
+	}
+
 	options := ListSipMediaApplicationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -147,10 +151,6 @@ func NewListSipMediaApplicationsPaginator(client ListSipMediaApplicationsAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSipMediaApplicationsInput{}
 	}
 
 	return &ListSipMediaApplicationsPaginator{

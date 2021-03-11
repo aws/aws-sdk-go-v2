@@ -161,6 +161,10 @@ type ListEmailIdentitiesPaginator struct {
 
 // NewListEmailIdentitiesPaginator returns a new ListEmailIdentitiesPaginator
 func NewListEmailIdentitiesPaginator(client ListEmailIdentitiesAPIClient, params *ListEmailIdentitiesInput, optFns ...func(*ListEmailIdentitiesPaginatorOptions)) *ListEmailIdentitiesPaginator {
+	if params == nil {
+		params = &ListEmailIdentitiesInput{}
+	}
+
 	options := ListEmailIdentitiesPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -168,10 +172,6 @@ func NewListEmailIdentitiesPaginator(client ListEmailIdentitiesAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEmailIdentitiesInput{}
 	}
 
 	return &ListEmailIdentitiesPaginator{

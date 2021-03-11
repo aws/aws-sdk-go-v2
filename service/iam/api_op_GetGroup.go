@@ -181,6 +181,10 @@ type GetGroupPaginator struct {
 
 // NewGetGroupPaginator returns a new GetGroupPaginator
 func NewGetGroupPaginator(client GetGroupAPIClient, params *GetGroupInput, optFns ...func(*GetGroupPaginatorOptions)) *GetGroupPaginator {
+	if params == nil {
+		params = &GetGroupInput{}
+	}
+
 	options := GetGroupPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -188,10 +192,6 @@ func NewGetGroupPaginator(client GetGroupAPIClient, params *GetGroupInput, optFn
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetGroupInput{}
 	}
 
 	return &GetGroupPaginator{

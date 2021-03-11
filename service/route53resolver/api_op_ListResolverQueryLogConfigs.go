@@ -238,6 +238,10 @@ type ListResolverQueryLogConfigsPaginator struct {
 // NewListResolverQueryLogConfigsPaginator returns a new
 // ListResolverQueryLogConfigsPaginator
 func NewListResolverQueryLogConfigsPaginator(client ListResolverQueryLogConfigsAPIClient, params *ListResolverQueryLogConfigsInput, optFns ...func(*ListResolverQueryLogConfigsPaginatorOptions)) *ListResolverQueryLogConfigsPaginator {
+	if params == nil {
+		params = &ListResolverQueryLogConfigsInput{}
+	}
+
 	options := ListResolverQueryLogConfigsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -245,10 +249,6 @@ func NewListResolverQueryLogConfigsPaginator(client ListResolverQueryLogConfigsA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListResolverQueryLogConfigsInput{}
 	}
 
 	return &ListResolverQueryLogConfigsPaginator{

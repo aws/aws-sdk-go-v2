@@ -223,6 +223,10 @@ type DescribeBatchPredictionsPaginator struct {
 // NewDescribeBatchPredictionsPaginator returns a new
 // DescribeBatchPredictionsPaginator
 func NewDescribeBatchPredictionsPaginator(client DescribeBatchPredictionsAPIClient, params *DescribeBatchPredictionsInput, optFns ...func(*DescribeBatchPredictionsPaginatorOptions)) *DescribeBatchPredictionsPaginator {
+	if params == nil {
+		params = &DescribeBatchPredictionsInput{}
+	}
+
 	options := DescribeBatchPredictionsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -230,10 +234,6 @@ func NewDescribeBatchPredictionsPaginator(client DescribeBatchPredictionsAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeBatchPredictionsInput{}
 	}
 
 	return &DescribeBatchPredictionsPaginator{

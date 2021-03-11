@@ -147,6 +147,10 @@ type ListCertificatesPaginator struct {
 
 // NewListCertificatesPaginator returns a new ListCertificatesPaginator
 func NewListCertificatesPaginator(client ListCertificatesAPIClient, params *ListCertificatesInput, optFns ...func(*ListCertificatesPaginatorOptions)) *ListCertificatesPaginator {
+	if params == nil {
+		params = &ListCertificatesInput{}
+	}
+
 	options := ListCertificatesPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -154,10 +158,6 @@ func NewListCertificatesPaginator(client ListCertificatesAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCertificatesInput{}
 	}
 
 	return &ListCertificatesPaginator{

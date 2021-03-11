@@ -170,14 +170,14 @@ type GetServiceGraphPaginator struct {
 
 // NewGetServiceGraphPaginator returns a new GetServiceGraphPaginator
 func NewGetServiceGraphPaginator(client GetServiceGraphAPIClient, params *GetServiceGraphInput, optFns ...func(*GetServiceGraphPaginatorOptions)) *GetServiceGraphPaginator {
+	if params == nil {
+		params = &GetServiceGraphInput{}
+	}
+
 	options := GetServiceGraphPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetServiceGraphInput{}
 	}
 
 	return &GetServiceGraphPaginator{

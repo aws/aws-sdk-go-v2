@@ -159,6 +159,10 @@ type ListDashboardVersionsPaginator struct {
 
 // NewListDashboardVersionsPaginator returns a new ListDashboardVersionsPaginator
 func NewListDashboardVersionsPaginator(client ListDashboardVersionsAPIClient, params *ListDashboardVersionsInput, optFns ...func(*ListDashboardVersionsPaginatorOptions)) *ListDashboardVersionsPaginator {
+	if params == nil {
+		params = &ListDashboardVersionsInput{}
+	}
+
 	options := ListDashboardVersionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -166,10 +170,6 @@ func NewListDashboardVersionsPaginator(client ListDashboardVersionsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDashboardVersionsInput{}
 	}
 
 	return &ListDashboardVersionsPaginator{

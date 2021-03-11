@@ -158,6 +158,10 @@ type SearchUsersPaginator struct {
 
 // NewSearchUsersPaginator returns a new SearchUsersPaginator
 func NewSearchUsersPaginator(client SearchUsersAPIClient, params *SearchUsersInput, optFns ...func(*SearchUsersPaginatorOptions)) *SearchUsersPaginator {
+	if params == nil {
+		params = &SearchUsersInput{}
+	}
+
 	options := SearchUsersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -165,10 +169,6 @@ func NewSearchUsersPaginator(client SearchUsersAPIClient, params *SearchUsersInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchUsersInput{}
 	}
 
 	return &SearchUsersPaginator{

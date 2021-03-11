@@ -139,14 +139,14 @@ type ListSubscriptionsPaginator struct {
 
 // NewListSubscriptionsPaginator returns a new ListSubscriptionsPaginator
 func NewListSubscriptionsPaginator(client ListSubscriptionsAPIClient, params *ListSubscriptionsInput, optFns ...func(*ListSubscriptionsPaginatorOptions)) *ListSubscriptionsPaginator {
+	if params == nil {
+		params = &ListSubscriptionsInput{}
+	}
+
 	options := ListSubscriptionsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSubscriptionsInput{}
 	}
 
 	return &ListSubscriptionsPaginator{

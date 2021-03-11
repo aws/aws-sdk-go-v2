@@ -160,6 +160,10 @@ type DescribeRemediationExecutionStatusPaginator struct {
 // NewDescribeRemediationExecutionStatusPaginator returns a new
 // DescribeRemediationExecutionStatusPaginator
 func NewDescribeRemediationExecutionStatusPaginator(client DescribeRemediationExecutionStatusAPIClient, params *DescribeRemediationExecutionStatusInput, optFns ...func(*DescribeRemediationExecutionStatusPaginatorOptions)) *DescribeRemediationExecutionStatusPaginator {
+	if params == nil {
+		params = &DescribeRemediationExecutionStatusInput{}
+	}
+
 	options := DescribeRemediationExecutionStatusPaginatorOptions{}
 	if params.Limit != 0 {
 		options.Limit = params.Limit
@@ -167,10 +171,6 @@ func NewDescribeRemediationExecutionStatusPaginator(client DescribeRemediationEx
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeRemediationExecutionStatusInput{}
 	}
 
 	return &DescribeRemediationExecutionStatusPaginator{

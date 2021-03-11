@@ -216,6 +216,10 @@ type GetCurrentMetricDataPaginator struct {
 
 // NewGetCurrentMetricDataPaginator returns a new GetCurrentMetricDataPaginator
 func NewGetCurrentMetricDataPaginator(client GetCurrentMetricDataAPIClient, params *GetCurrentMetricDataInput, optFns ...func(*GetCurrentMetricDataPaginatorOptions)) *GetCurrentMetricDataPaginator {
+	if params == nil {
+		params = &GetCurrentMetricDataInput{}
+	}
+
 	options := GetCurrentMetricDataPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -223,10 +227,6 @@ func NewGetCurrentMetricDataPaginator(client GetCurrentMetricDataAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetCurrentMetricDataInput{}
 	}
 
 	return &GetCurrentMetricDataPaginator{

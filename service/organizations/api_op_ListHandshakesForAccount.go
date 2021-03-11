@@ -179,6 +179,10 @@ type ListHandshakesForAccountPaginator struct {
 // NewListHandshakesForAccountPaginator returns a new
 // ListHandshakesForAccountPaginator
 func NewListHandshakesForAccountPaginator(client ListHandshakesForAccountAPIClient, params *ListHandshakesForAccountInput, optFns ...func(*ListHandshakesForAccountPaginatorOptions)) *ListHandshakesForAccountPaginator {
+	if params == nil {
+		params = &ListHandshakesForAccountInput{}
+	}
+
 	options := ListHandshakesForAccountPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -186,10 +190,6 @@ func NewListHandshakesForAccountPaginator(client ListHandshakesForAccountAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListHandshakesForAccountInput{}
 	}
 
 	return &ListHandshakesForAccountPaginator{

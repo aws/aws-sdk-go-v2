@@ -182,6 +182,10 @@ type ListTaskDefinitionsPaginator struct {
 
 // NewListTaskDefinitionsPaginator returns a new ListTaskDefinitionsPaginator
 func NewListTaskDefinitionsPaginator(client ListTaskDefinitionsAPIClient, params *ListTaskDefinitionsInput, optFns ...func(*ListTaskDefinitionsPaginatorOptions)) *ListTaskDefinitionsPaginator {
+	if params == nil {
+		params = &ListTaskDefinitionsInput{}
+	}
+
 	options := ListTaskDefinitionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -189,10 +193,6 @@ func NewListTaskDefinitionsPaginator(client ListTaskDefinitionsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTaskDefinitionsInput{}
 	}
 
 	return &ListTaskDefinitionsPaginator{

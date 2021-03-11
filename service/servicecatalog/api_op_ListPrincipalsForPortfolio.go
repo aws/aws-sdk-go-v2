@@ -160,6 +160,10 @@ type ListPrincipalsForPortfolioPaginator struct {
 // NewListPrincipalsForPortfolioPaginator returns a new
 // ListPrincipalsForPortfolioPaginator
 func NewListPrincipalsForPortfolioPaginator(client ListPrincipalsForPortfolioAPIClient, params *ListPrincipalsForPortfolioInput, optFns ...func(*ListPrincipalsForPortfolioPaginatorOptions)) *ListPrincipalsForPortfolioPaginator {
+	if params == nil {
+		params = &ListPrincipalsForPortfolioInput{}
+	}
+
 	options := ListPrincipalsForPortfolioPaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -167,10 +171,6 @@ func NewListPrincipalsForPortfolioPaginator(client ListPrincipalsForPortfolioAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPrincipalsForPortfolioInput{}
 	}
 
 	return &ListPrincipalsForPortfolioPaginator{

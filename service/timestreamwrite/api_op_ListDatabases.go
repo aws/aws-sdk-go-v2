@@ -147,6 +147,10 @@ type ListDatabasesPaginator struct {
 
 // NewListDatabasesPaginator returns a new ListDatabasesPaginator
 func NewListDatabasesPaginator(client ListDatabasesAPIClient, params *ListDatabasesInput, optFns ...func(*ListDatabasesPaginatorOptions)) *ListDatabasesPaginator {
+	if params == nil {
+		params = &ListDatabasesInput{}
+	}
+
 	options := ListDatabasesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -154,10 +158,6 @@ func NewListDatabasesPaginator(client ListDatabasesAPIClient, params *ListDataba
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDatabasesInput{}
 	}
 
 	return &ListDatabasesPaginator{

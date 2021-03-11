@@ -149,6 +149,10 @@ type ListThingGroupsPaginator struct {
 
 // NewListThingGroupsPaginator returns a new ListThingGroupsPaginator
 func NewListThingGroupsPaginator(client ListThingGroupsAPIClient, params *ListThingGroupsInput, optFns ...func(*ListThingGroupsPaginatorOptions)) *ListThingGroupsPaginator {
+	if params == nil {
+		params = &ListThingGroupsInput{}
+	}
+
 	options := ListThingGroupsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -156,10 +160,6 @@ func NewListThingGroupsPaginator(client ListThingGroupsAPIClient, params *ListTh
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListThingGroupsInput{}
 	}
 
 	return &ListThingGroupsPaginator{

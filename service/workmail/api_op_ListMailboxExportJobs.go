@@ -148,6 +148,10 @@ type ListMailboxExportJobsPaginator struct {
 
 // NewListMailboxExportJobsPaginator returns a new ListMailboxExportJobsPaginator
 func NewListMailboxExportJobsPaginator(client ListMailboxExportJobsAPIClient, params *ListMailboxExportJobsInput, optFns ...func(*ListMailboxExportJobsPaginatorOptions)) *ListMailboxExportJobsPaginator {
+	if params == nil {
+		params = &ListMailboxExportJobsInput{}
+	}
+
 	options := ListMailboxExportJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -155,10 +159,6 @@ func NewListMailboxExportJobsPaginator(client ListMailboxExportJobsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListMailboxExportJobsInput{}
 	}
 
 	return &ListMailboxExportJobsPaginator{

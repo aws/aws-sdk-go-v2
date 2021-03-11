@@ -144,6 +144,10 @@ type ListDomainsPaginator struct {
 
 // NewListDomainsPaginator returns a new ListDomainsPaginator
 func NewListDomainsPaginator(client ListDomainsAPIClient, params *ListDomainsInput, optFns ...func(*ListDomainsPaginatorOptions)) *ListDomainsPaginator {
+	if params == nil {
+		params = &ListDomainsInput{}
+	}
+
 	options := ListDomainsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -151,10 +155,6 @@ func NewListDomainsPaginator(client ListDomainsAPIClient, params *ListDomainsInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDomainsInput{}
 	}
 
 	return &ListDomainsPaginator{

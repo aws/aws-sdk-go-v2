@@ -161,6 +161,10 @@ type ListCustomVerificationEmailTemplatesPaginator struct {
 // NewListCustomVerificationEmailTemplatesPaginator returns a new
 // ListCustomVerificationEmailTemplatesPaginator
 func NewListCustomVerificationEmailTemplatesPaginator(client ListCustomVerificationEmailTemplatesAPIClient, params *ListCustomVerificationEmailTemplatesInput, optFns ...func(*ListCustomVerificationEmailTemplatesPaginatorOptions)) *ListCustomVerificationEmailTemplatesPaginator {
+	if params == nil {
+		params = &ListCustomVerificationEmailTemplatesInput{}
+	}
+
 	options := ListCustomVerificationEmailTemplatesPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -168,10 +172,6 @@ func NewListCustomVerificationEmailTemplatesPaginator(client ListCustomVerificat
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCustomVerificationEmailTemplatesInput{}
 	}
 
 	return &ListCustomVerificationEmailTemplatesPaginator{

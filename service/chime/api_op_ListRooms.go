@@ -150,6 +150,10 @@ type ListRoomsPaginator struct {
 
 // NewListRoomsPaginator returns a new ListRoomsPaginator
 func NewListRoomsPaginator(client ListRoomsAPIClient, params *ListRoomsInput, optFns ...func(*ListRoomsPaginatorOptions)) *ListRoomsPaginator {
+	if params == nil {
+		params = &ListRoomsInput{}
+	}
+
 	options := ListRoomsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -157,10 +161,6 @@ func NewListRoomsPaginator(client ListRoomsAPIClient, params *ListRoomsInput, op
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRoomsInput{}
 	}
 
 	return &ListRoomsPaginator{

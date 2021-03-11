@@ -175,6 +175,10 @@ type ListEventSourceMappingsPaginator struct {
 // NewListEventSourceMappingsPaginator returns a new
 // ListEventSourceMappingsPaginator
 func NewListEventSourceMappingsPaginator(client ListEventSourceMappingsAPIClient, params *ListEventSourceMappingsInput, optFns ...func(*ListEventSourceMappingsPaginatorOptions)) *ListEventSourceMappingsPaginator {
+	if params == nil {
+		params = &ListEventSourceMappingsInput{}
+	}
+
 	options := ListEventSourceMappingsPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -182,10 +186,6 @@ func NewListEventSourceMappingsPaginator(client ListEventSourceMappingsAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEventSourceMappingsInput{}
 	}
 
 	return &ListEventSourceMappingsPaginator{

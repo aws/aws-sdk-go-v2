@@ -144,6 +144,10 @@ type ListManagedSchemaArnsPaginator struct {
 
 // NewListManagedSchemaArnsPaginator returns a new ListManagedSchemaArnsPaginator
 func NewListManagedSchemaArnsPaginator(client ListManagedSchemaArnsAPIClient, params *ListManagedSchemaArnsInput, optFns ...func(*ListManagedSchemaArnsPaginatorOptions)) *ListManagedSchemaArnsPaginator {
+	if params == nil {
+		params = &ListManagedSchemaArnsInput{}
+	}
+
 	options := ListManagedSchemaArnsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -151,10 +155,6 @@ func NewListManagedSchemaArnsPaginator(client ListManagedSchemaArnsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListManagedSchemaArnsInput{}
 	}
 
 	return &ListManagedSchemaArnsPaginator{

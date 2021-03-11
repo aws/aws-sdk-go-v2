@@ -153,6 +153,10 @@ type ListServiceQuotasPaginator struct {
 
 // NewListServiceQuotasPaginator returns a new ListServiceQuotasPaginator
 func NewListServiceQuotasPaginator(client ListServiceQuotasAPIClient, params *ListServiceQuotasInput, optFns ...func(*ListServiceQuotasPaginatorOptions)) *ListServiceQuotasPaginator {
+	if params == nil {
+		params = &ListServiceQuotasInput{}
+	}
+
 	options := ListServiceQuotasPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -160,10 +164,6 @@ func NewListServiceQuotasPaginator(client ListServiceQuotasAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListServiceQuotasInput{}
 	}
 
 	return &ListServiceQuotasPaginator{

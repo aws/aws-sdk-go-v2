@@ -140,6 +140,10 @@ type ListTerminologiesPaginator struct {
 
 // NewListTerminologiesPaginator returns a new ListTerminologiesPaginator
 func NewListTerminologiesPaginator(client ListTerminologiesAPIClient, params *ListTerminologiesInput, optFns ...func(*ListTerminologiesPaginatorOptions)) *ListTerminologiesPaginator {
+	if params == nil {
+		params = &ListTerminologiesInput{}
+	}
+
 	options := ListTerminologiesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -147,10 +151,6 @@ func NewListTerminologiesPaginator(client ListTerminologiesAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTerminologiesInput{}
 	}
 
 	return &ListTerminologiesPaginator{

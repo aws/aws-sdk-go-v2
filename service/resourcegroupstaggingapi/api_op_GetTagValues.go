@@ -146,14 +146,14 @@ type GetTagValuesPaginator struct {
 
 // NewGetTagValuesPaginator returns a new GetTagValuesPaginator
 func NewGetTagValuesPaginator(client GetTagValuesAPIClient, params *GetTagValuesInput, optFns ...func(*GetTagValuesPaginatorOptions)) *GetTagValuesPaginator {
+	if params == nil {
+		params = &GetTagValuesInput{}
+	}
+
 	options := GetTagValuesPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetTagValuesInput{}
 	}
 
 	return &GetTagValuesPaginator{

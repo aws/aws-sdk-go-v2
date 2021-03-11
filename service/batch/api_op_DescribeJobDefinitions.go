@@ -171,6 +171,10 @@ type DescribeJobDefinitionsPaginator struct {
 
 // NewDescribeJobDefinitionsPaginator returns a new DescribeJobDefinitionsPaginator
 func NewDescribeJobDefinitionsPaginator(client DescribeJobDefinitionsAPIClient, params *DescribeJobDefinitionsInput, optFns ...func(*DescribeJobDefinitionsPaginatorOptions)) *DescribeJobDefinitionsPaginator {
+	if params == nil {
+		params = &DescribeJobDefinitionsInput{}
+	}
+
 	options := DescribeJobDefinitionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -178,10 +182,6 @@ func NewDescribeJobDefinitionsPaginator(client DescribeJobDefinitionsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeJobDefinitionsInput{}
 	}
 
 	return &DescribeJobDefinitionsPaginator{

@@ -170,6 +170,10 @@ type ListTapesPaginator struct {
 
 // NewListTapesPaginator returns a new ListTapesPaginator
 func NewListTapesPaginator(client ListTapesAPIClient, params *ListTapesInput, optFns ...func(*ListTapesPaginatorOptions)) *ListTapesPaginator {
+	if params == nil {
+		params = &ListTapesInput{}
+	}
+
 	options := ListTapesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -177,10 +181,6 @@ func NewListTapesPaginator(client ListTapesAPIClient, params *ListTapesInput, op
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTapesInput{}
 	}
 
 	return &ListTapesPaginator{

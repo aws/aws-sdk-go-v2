@@ -144,14 +144,14 @@ type DescribeWorkspaceDirectoriesPaginator struct {
 // NewDescribeWorkspaceDirectoriesPaginator returns a new
 // DescribeWorkspaceDirectoriesPaginator
 func NewDescribeWorkspaceDirectoriesPaginator(client DescribeWorkspaceDirectoriesAPIClient, params *DescribeWorkspaceDirectoriesInput, optFns ...func(*DescribeWorkspaceDirectoriesPaginatorOptions)) *DescribeWorkspaceDirectoriesPaginator {
+	if params == nil {
+		params = &DescribeWorkspaceDirectoriesInput{}
+	}
+
 	options := DescribeWorkspaceDirectoriesPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeWorkspaceDirectoriesInput{}
 	}
 
 	return &DescribeWorkspaceDirectoriesPaginator{

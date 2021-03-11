@@ -206,6 +206,10 @@ type GetCelebrityRecognitionPaginator struct {
 // NewGetCelebrityRecognitionPaginator returns a new
 // GetCelebrityRecognitionPaginator
 func NewGetCelebrityRecognitionPaginator(client GetCelebrityRecognitionAPIClient, params *GetCelebrityRecognitionInput, optFns ...func(*GetCelebrityRecognitionPaginatorOptions)) *GetCelebrityRecognitionPaginator {
+	if params == nil {
+		params = &GetCelebrityRecognitionInput{}
+	}
+
 	options := GetCelebrityRecognitionPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -213,10 +217,6 @@ func NewGetCelebrityRecognitionPaginator(client GetCelebrityRecognitionAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetCelebrityRecognitionInput{}
 	}
 
 	return &GetCelebrityRecognitionPaginator{

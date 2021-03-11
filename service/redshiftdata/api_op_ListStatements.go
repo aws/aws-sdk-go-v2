@@ -183,6 +183,10 @@ type ListStatementsPaginator struct {
 
 // NewListStatementsPaginator returns a new ListStatementsPaginator
 func NewListStatementsPaginator(client ListStatementsAPIClient, params *ListStatementsInput, optFns ...func(*ListStatementsPaginatorOptions)) *ListStatementsPaginator {
+	if params == nil {
+		params = &ListStatementsInput{}
+	}
+
 	options := ListStatementsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -190,10 +194,6 @@ func NewListStatementsPaginator(client ListStatementsAPIClient, params *ListStat
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListStatementsInput{}
 	}
 
 	return &ListStatementsPaginator{

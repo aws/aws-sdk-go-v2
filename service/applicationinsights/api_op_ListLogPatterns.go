@@ -155,6 +155,10 @@ type ListLogPatternsPaginator struct {
 
 // NewListLogPatternsPaginator returns a new ListLogPatternsPaginator
 func NewListLogPatternsPaginator(client ListLogPatternsAPIClient, params *ListLogPatternsInput, optFns ...func(*ListLogPatternsPaginatorOptions)) *ListLogPatternsPaginator {
+	if params == nil {
+		params = &ListLogPatternsInput{}
+	}
+
 	options := ListLogPatternsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewListLogPatternsPaginator(client ListLogPatternsAPIClient, params *ListLo
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListLogPatternsInput{}
 	}
 
 	return &ListLogPatternsPaginator{

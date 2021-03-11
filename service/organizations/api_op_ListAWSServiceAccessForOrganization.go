@@ -174,6 +174,10 @@ type ListAWSServiceAccessForOrganizationPaginator struct {
 // NewListAWSServiceAccessForOrganizationPaginator returns a new
 // ListAWSServiceAccessForOrganizationPaginator
 func NewListAWSServiceAccessForOrganizationPaginator(client ListAWSServiceAccessForOrganizationAPIClient, params *ListAWSServiceAccessForOrganizationInput, optFns ...func(*ListAWSServiceAccessForOrganizationPaginatorOptions)) *ListAWSServiceAccessForOrganizationPaginator {
+	if params == nil {
+		params = &ListAWSServiceAccessForOrganizationInput{}
+	}
+
 	options := ListAWSServiceAccessForOrganizationPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -181,10 +185,6 @@ func NewListAWSServiceAccessForOrganizationPaginator(client ListAWSServiceAccess
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAWSServiceAccessForOrganizationInput{}
 	}
 
 	return &ListAWSServiceAccessForOrganizationPaginator{

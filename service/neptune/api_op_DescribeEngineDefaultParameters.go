@@ -160,6 +160,10 @@ type DescribeEngineDefaultParametersPaginator struct {
 // NewDescribeEngineDefaultParametersPaginator returns a new
 // DescribeEngineDefaultParametersPaginator
 func NewDescribeEngineDefaultParametersPaginator(client DescribeEngineDefaultParametersAPIClient, params *DescribeEngineDefaultParametersInput, optFns ...func(*DescribeEngineDefaultParametersPaginatorOptions)) *DescribeEngineDefaultParametersPaginator {
+	if params == nil {
+		params = &DescribeEngineDefaultParametersInput{}
+	}
+
 	options := DescribeEngineDefaultParametersPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -167,10 +171,6 @@ func NewDescribeEngineDefaultParametersPaginator(client DescribeEngineDefaultPar
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeEngineDefaultParametersInput{}
 	}
 
 	return &DescribeEngineDefaultParametersPaginator{

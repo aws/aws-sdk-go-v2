@@ -145,6 +145,10 @@ type ListDirectoriesPaginator struct {
 
 // NewListDirectoriesPaginator returns a new ListDirectoriesPaginator
 func NewListDirectoriesPaginator(client ListDirectoriesAPIClient, params *ListDirectoriesInput, optFns ...func(*ListDirectoriesPaginatorOptions)) *ListDirectoriesPaginator {
+	if params == nil {
+		params = &ListDirectoriesInput{}
+	}
+
 	options := ListDirectoriesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewListDirectoriesPaginator(client ListDirectoriesAPIClient, params *ListDi
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDirectoriesInput{}
 	}
 
 	return &ListDirectoriesPaginator{

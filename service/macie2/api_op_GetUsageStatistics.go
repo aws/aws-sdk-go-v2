@@ -150,6 +150,10 @@ type GetUsageStatisticsPaginator struct {
 
 // NewGetUsageStatisticsPaginator returns a new GetUsageStatisticsPaginator
 func NewGetUsageStatisticsPaginator(client GetUsageStatisticsAPIClient, params *GetUsageStatisticsInput, optFns ...func(*GetUsageStatisticsPaginatorOptions)) *GetUsageStatisticsPaginator {
+	if params == nil {
+		params = &GetUsageStatisticsInput{}
+	}
+
 	options := GetUsageStatisticsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -157,10 +161,6 @@ func NewGetUsageStatisticsPaginator(client GetUsageStatisticsAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetUsageStatisticsInput{}
 	}
 
 	return &GetUsageStatisticsPaginator{

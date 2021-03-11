@@ -144,6 +144,10 @@ type ListCloudFrontOriginAccessIdentitiesPaginator struct {
 // NewListCloudFrontOriginAccessIdentitiesPaginator returns a new
 // ListCloudFrontOriginAccessIdentitiesPaginator
 func NewListCloudFrontOriginAccessIdentitiesPaginator(client ListCloudFrontOriginAccessIdentitiesAPIClient, params *ListCloudFrontOriginAccessIdentitiesInput, optFns ...func(*ListCloudFrontOriginAccessIdentitiesPaginatorOptions)) *ListCloudFrontOriginAccessIdentitiesPaginator {
+	if params == nil {
+		params = &ListCloudFrontOriginAccessIdentitiesInput{}
+	}
+
 	options := ListCloudFrontOriginAccessIdentitiesPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -151,10 +155,6 @@ func NewListCloudFrontOriginAccessIdentitiesPaginator(client ListCloudFrontOrigi
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCloudFrontOriginAccessIdentitiesInput{}
 	}
 
 	return &ListCloudFrontOriginAccessIdentitiesPaginator{

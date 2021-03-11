@@ -146,6 +146,10 @@ type GetExternalModelsPaginator struct {
 
 // NewGetExternalModelsPaginator returns a new GetExternalModelsPaginator
 func NewGetExternalModelsPaginator(client GetExternalModelsAPIClient, params *GetExternalModelsInput, optFns ...func(*GetExternalModelsPaginatorOptions)) *GetExternalModelsPaginator {
+	if params == nil {
+		params = &GetExternalModelsInput{}
+	}
+
 	options := GetExternalModelsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -153,10 +157,6 @@ func NewGetExternalModelsPaginator(client GetExternalModelsAPIClient, params *Ge
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetExternalModelsInput{}
 	}
 
 	return &GetExternalModelsPaginator{

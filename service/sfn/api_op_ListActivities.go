@@ -162,6 +162,10 @@ type ListActivitiesPaginator struct {
 
 // NewListActivitiesPaginator returns a new ListActivitiesPaginator
 func NewListActivitiesPaginator(client ListActivitiesAPIClient, params *ListActivitiesInput, optFns ...func(*ListActivitiesPaginatorOptions)) *ListActivitiesPaginator {
+	if params == nil {
+		params = &ListActivitiesInput{}
+	}
+
 	options := ListActivitiesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -169,10 +173,6 @@ func NewListActivitiesPaginator(client ListActivitiesAPIClient, params *ListActi
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListActivitiesInput{}
 	}
 
 	return &ListActivitiesPaginator{

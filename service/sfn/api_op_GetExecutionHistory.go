@@ -180,6 +180,10 @@ type GetExecutionHistoryPaginator struct {
 
 // NewGetExecutionHistoryPaginator returns a new GetExecutionHistoryPaginator
 func NewGetExecutionHistoryPaginator(client GetExecutionHistoryAPIClient, params *GetExecutionHistoryInput, optFns ...func(*GetExecutionHistoryPaginatorOptions)) *GetExecutionHistoryPaginator {
+	if params == nil {
+		params = &GetExecutionHistoryInput{}
+	}
+
 	options := GetExecutionHistoryPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -187,10 +191,6 @@ func NewGetExecutionHistoryPaginator(client GetExecutionHistoryAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetExecutionHistoryInput{}
 	}
 
 	return &GetExecutionHistoryPaginator{

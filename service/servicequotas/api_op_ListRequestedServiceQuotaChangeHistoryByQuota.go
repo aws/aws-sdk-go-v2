@@ -162,6 +162,10 @@ type ListRequestedServiceQuotaChangeHistoryByQuotaPaginator struct {
 // NewListRequestedServiceQuotaChangeHistoryByQuotaPaginator returns a new
 // ListRequestedServiceQuotaChangeHistoryByQuotaPaginator
 func NewListRequestedServiceQuotaChangeHistoryByQuotaPaginator(client ListRequestedServiceQuotaChangeHistoryByQuotaAPIClient, params *ListRequestedServiceQuotaChangeHistoryByQuotaInput, optFns ...func(*ListRequestedServiceQuotaChangeHistoryByQuotaPaginatorOptions)) *ListRequestedServiceQuotaChangeHistoryByQuotaPaginator {
+	if params == nil {
+		params = &ListRequestedServiceQuotaChangeHistoryByQuotaInput{}
+	}
+
 	options := ListRequestedServiceQuotaChangeHistoryByQuotaPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -169,10 +173,6 @@ func NewListRequestedServiceQuotaChangeHistoryByQuotaPaginator(client ListReques
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRequestedServiceQuotaChangeHistoryByQuotaInput{}
 	}
 
 	return &ListRequestedServiceQuotaChangeHistoryByQuotaPaginator{

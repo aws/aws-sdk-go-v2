@@ -152,6 +152,10 @@ type ListIntegrationAssociationsPaginator struct {
 // NewListIntegrationAssociationsPaginator returns a new
 // ListIntegrationAssociationsPaginator
 func NewListIntegrationAssociationsPaginator(client ListIntegrationAssociationsAPIClient, params *ListIntegrationAssociationsInput, optFns ...func(*ListIntegrationAssociationsPaginatorOptions)) *ListIntegrationAssociationsPaginator {
+	if params == nil {
+		params = &ListIntegrationAssociationsInput{}
+	}
+
 	options := ListIntegrationAssociationsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -159,10 +163,6 @@ func NewListIntegrationAssociationsPaginator(client ListIntegrationAssociationsA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListIntegrationAssociationsInput{}
 	}
 
 	return &ListIntegrationAssociationsPaginator{

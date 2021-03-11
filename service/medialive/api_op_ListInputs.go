@@ -139,6 +139,10 @@ type ListInputsPaginator struct {
 
 // NewListInputsPaginator returns a new ListInputsPaginator
 func NewListInputsPaginator(client ListInputsAPIClient, params *ListInputsInput, optFns ...func(*ListInputsPaginatorOptions)) *ListInputsPaginator {
+	if params == nil {
+		params = &ListInputsInput{}
+	}
+
 	options := ListInputsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -146,10 +150,6 @@ func NewListInputsPaginator(client ListInputsAPIClient, params *ListInputsInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListInputsInput{}
 	}
 
 	return &ListInputsPaginator{

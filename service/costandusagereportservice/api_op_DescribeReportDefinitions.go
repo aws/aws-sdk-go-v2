@@ -142,6 +142,10 @@ type DescribeReportDefinitionsPaginator struct {
 // NewDescribeReportDefinitionsPaginator returns a new
 // DescribeReportDefinitionsPaginator
 func NewDescribeReportDefinitionsPaginator(client DescribeReportDefinitionsAPIClient, params *DescribeReportDefinitionsInput, optFns ...func(*DescribeReportDefinitionsPaginatorOptions)) *DescribeReportDefinitionsPaginator {
+	if params == nil {
+		params = &DescribeReportDefinitionsInput{}
+	}
+
 	options := DescribeReportDefinitionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -149,10 +153,6 @@ func NewDescribeReportDefinitionsPaginator(client DescribeReportDefinitionsAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeReportDefinitionsInput{}
 	}
 
 	return &DescribeReportDefinitionsPaginator{

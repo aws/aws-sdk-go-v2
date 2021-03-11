@@ -165,6 +165,10 @@ type ListCandidatesForAutoMLJobPaginator struct {
 // NewListCandidatesForAutoMLJobPaginator returns a new
 // ListCandidatesForAutoMLJobPaginator
 func NewListCandidatesForAutoMLJobPaginator(client ListCandidatesForAutoMLJobAPIClient, params *ListCandidatesForAutoMLJobInput, optFns ...func(*ListCandidatesForAutoMLJobPaginatorOptions)) *ListCandidatesForAutoMLJobPaginator {
+	if params == nil {
+		params = &ListCandidatesForAutoMLJobInput{}
+	}
+
 	options := ListCandidatesForAutoMLJobPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -172,10 +176,6 @@ func NewListCandidatesForAutoMLJobPaginator(client ListCandidatesForAutoMLJobAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListCandidatesForAutoMLJobInput{}
 	}
 
 	return &ListCandidatesForAutoMLJobPaginator{

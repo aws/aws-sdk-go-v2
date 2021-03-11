@@ -157,6 +157,10 @@ type ListComplianceItemsPaginator struct {
 
 // NewListComplianceItemsPaginator returns a new ListComplianceItemsPaginator
 func NewListComplianceItemsPaginator(client ListComplianceItemsAPIClient, params *ListComplianceItemsInput, optFns ...func(*ListComplianceItemsPaginatorOptions)) *ListComplianceItemsPaginator {
+	if params == nil {
+		params = &ListComplianceItemsInput{}
+	}
+
 	options := ListComplianceItemsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -164,10 +168,6 @@ func NewListComplianceItemsPaginator(client ListComplianceItemsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListComplianceItemsInput{}
 	}
 
 	return &ListComplianceItemsPaginator{

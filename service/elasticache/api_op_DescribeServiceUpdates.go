@@ -151,6 +151,10 @@ type DescribeServiceUpdatesPaginator struct {
 
 // NewDescribeServiceUpdatesPaginator returns a new DescribeServiceUpdatesPaginator
 func NewDescribeServiceUpdatesPaginator(client DescribeServiceUpdatesAPIClient, params *DescribeServiceUpdatesInput, optFns ...func(*DescribeServiceUpdatesPaginatorOptions)) *DescribeServiceUpdatesPaginator {
+	if params == nil {
+		params = &DescribeServiceUpdatesInput{}
+	}
+
 	options := DescribeServiceUpdatesPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -158,10 +162,6 @@ func NewDescribeServiceUpdatesPaginator(client DescribeServiceUpdatesAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeServiceUpdatesInput{}
 	}
 
 	return &DescribeServiceUpdatesPaginator{

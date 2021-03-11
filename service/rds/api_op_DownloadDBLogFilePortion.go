@@ -207,6 +207,10 @@ type DownloadDBLogFilePortionPaginator struct {
 // NewDownloadDBLogFilePortionPaginator returns a new
 // DownloadDBLogFilePortionPaginator
 func NewDownloadDBLogFilePortionPaginator(client DownloadDBLogFilePortionAPIClient, params *DownloadDBLogFilePortionInput, optFns ...func(*DownloadDBLogFilePortionPaginatorOptions)) *DownloadDBLogFilePortionPaginator {
+	if params == nil {
+		params = &DownloadDBLogFilePortionInput{}
+	}
+
 	options := DownloadDBLogFilePortionPaginatorOptions{}
 	if params.NumberOfLines != 0 {
 		options.Limit = params.NumberOfLines
@@ -214,10 +218,6 @@ func NewDownloadDBLogFilePortionPaginator(client DownloadDBLogFilePortionAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DownloadDBLogFilePortionInput{}
 	}
 
 	return &DownloadDBLogFilePortionPaginator{

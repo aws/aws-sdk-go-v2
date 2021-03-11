@@ -148,6 +148,10 @@ type ListTopicRulesPaginator struct {
 
 // NewListTopicRulesPaginator returns a new ListTopicRulesPaginator
 func NewListTopicRulesPaginator(client ListTopicRulesAPIClient, params *ListTopicRulesInput, optFns ...func(*ListTopicRulesPaginatorOptions)) *ListTopicRulesPaginator {
+	if params == nil {
+		params = &ListTopicRulesInput{}
+	}
+
 	options := ListTopicRulesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -155,10 +159,6 @@ func NewListTopicRulesPaginator(client ListTopicRulesAPIClient, params *ListTopi
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTopicRulesInput{}
 	}
 
 	return &ListTopicRulesPaginator{

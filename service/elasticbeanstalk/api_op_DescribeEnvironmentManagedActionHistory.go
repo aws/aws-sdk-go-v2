@@ -150,6 +150,10 @@ type DescribeEnvironmentManagedActionHistoryPaginator struct {
 // NewDescribeEnvironmentManagedActionHistoryPaginator returns a new
 // DescribeEnvironmentManagedActionHistoryPaginator
 func NewDescribeEnvironmentManagedActionHistoryPaginator(client DescribeEnvironmentManagedActionHistoryAPIClient, params *DescribeEnvironmentManagedActionHistoryInput, optFns ...func(*DescribeEnvironmentManagedActionHistoryPaginatorOptions)) *DescribeEnvironmentManagedActionHistoryPaginator {
+	if params == nil {
+		params = &DescribeEnvironmentManagedActionHistoryInput{}
+	}
+
 	options := DescribeEnvironmentManagedActionHistoryPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -157,10 +161,6 @@ func NewDescribeEnvironmentManagedActionHistoryPaginator(client DescribeEnvironm
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeEnvironmentManagedActionHistoryInput{}
 	}
 
 	return &DescribeEnvironmentManagedActionHistoryPaginator{

@@ -154,6 +154,10 @@ type ListReviewableHITsPaginator struct {
 
 // NewListReviewableHITsPaginator returns a new ListReviewableHITsPaginator
 func NewListReviewableHITsPaginator(client ListReviewableHITsAPIClient, params *ListReviewableHITsInput, optFns ...func(*ListReviewableHITsPaginatorOptions)) *ListReviewableHITsPaginator {
+	if params == nil {
+		params = &ListReviewableHITsInput{}
+	}
+
 	options := ListReviewableHITsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -161,10 +165,6 @@ func NewListReviewableHITsPaginator(client ListReviewableHITsAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListReviewableHITsInput{}
 	}
 
 	return &ListReviewableHITsPaginator{

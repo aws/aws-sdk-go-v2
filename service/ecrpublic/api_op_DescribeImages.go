@@ -179,6 +179,10 @@ type DescribeImagesPaginator struct {
 
 // NewDescribeImagesPaginator returns a new DescribeImagesPaginator
 func NewDescribeImagesPaginator(client DescribeImagesAPIClient, params *DescribeImagesInput, optFns ...func(*DescribeImagesPaginatorOptions)) *DescribeImagesPaginator {
+	if params == nil {
+		params = &DescribeImagesInput{}
+	}
+
 	options := DescribeImagesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -186,10 +190,6 @@ func NewDescribeImagesPaginator(client DescribeImagesAPIClient, params *Describe
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeImagesInput{}
 	}
 
 	return &DescribeImagesPaginator{

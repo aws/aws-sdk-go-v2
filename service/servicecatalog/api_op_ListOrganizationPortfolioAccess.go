@@ -178,6 +178,10 @@ type ListOrganizationPortfolioAccessPaginator struct {
 // NewListOrganizationPortfolioAccessPaginator returns a new
 // ListOrganizationPortfolioAccessPaginator
 func NewListOrganizationPortfolioAccessPaginator(client ListOrganizationPortfolioAccessAPIClient, params *ListOrganizationPortfolioAccessInput, optFns ...func(*ListOrganizationPortfolioAccessPaginatorOptions)) *ListOrganizationPortfolioAccessPaginator {
+	if params == nil {
+		params = &ListOrganizationPortfolioAccessInput{}
+	}
+
 	options := ListOrganizationPortfolioAccessPaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -185,10 +189,6 @@ func NewListOrganizationPortfolioAccessPaginator(client ListOrganizationPortfoli
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListOrganizationPortfolioAccessInput{}
 	}
 
 	return &ListOrganizationPortfolioAccessPaginator{

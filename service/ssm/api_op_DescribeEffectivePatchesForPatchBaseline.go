@@ -153,6 +153,10 @@ type DescribeEffectivePatchesForPatchBaselinePaginator struct {
 // NewDescribeEffectivePatchesForPatchBaselinePaginator returns a new
 // DescribeEffectivePatchesForPatchBaselinePaginator
 func NewDescribeEffectivePatchesForPatchBaselinePaginator(client DescribeEffectivePatchesForPatchBaselineAPIClient, params *DescribeEffectivePatchesForPatchBaselineInput, optFns ...func(*DescribeEffectivePatchesForPatchBaselinePaginatorOptions)) *DescribeEffectivePatchesForPatchBaselinePaginator {
+	if params == nil {
+		params = &DescribeEffectivePatchesForPatchBaselineInput{}
+	}
+
 	options := DescribeEffectivePatchesForPatchBaselinePaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -160,10 +164,6 @@ func NewDescribeEffectivePatchesForPatchBaselinePaginator(client DescribeEffecti
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeEffectivePatchesForPatchBaselineInput{}
 	}
 
 	return &DescribeEffectivePatchesForPatchBaselinePaginator{

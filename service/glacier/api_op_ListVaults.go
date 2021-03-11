@@ -188,6 +188,10 @@ type ListVaultsPaginator struct {
 
 // NewListVaultsPaginator returns a new ListVaultsPaginator
 func NewListVaultsPaginator(client ListVaultsAPIClient, params *ListVaultsInput, optFns ...func(*ListVaultsPaginatorOptions)) *ListVaultsPaginator {
+	if params == nil {
+		params = &ListVaultsInput{}
+	}
+
 	options := ListVaultsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -195,10 +199,6 @@ func NewListVaultsPaginator(client ListVaultsAPIClient, params *ListVaultsInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListVaultsInput{}
 	}
 
 	return &ListVaultsPaginator{

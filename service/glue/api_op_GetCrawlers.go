@@ -138,6 +138,10 @@ type GetCrawlersPaginator struct {
 
 // NewGetCrawlersPaginator returns a new GetCrawlersPaginator
 func NewGetCrawlersPaginator(client GetCrawlersAPIClient, params *GetCrawlersInput, optFns ...func(*GetCrawlersPaginatorOptions)) *GetCrawlersPaginator {
+	if params == nil {
+		params = &GetCrawlersInput{}
+	}
+
 	options := GetCrawlersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -145,10 +149,6 @@ func NewGetCrawlersPaginator(client GetCrawlersAPIClient, params *GetCrawlersInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetCrawlersInput{}
 	}
 
 	return &GetCrawlersPaginator{

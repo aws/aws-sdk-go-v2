@@ -163,6 +163,10 @@ type DescribeJobQueuesPaginator struct {
 
 // NewDescribeJobQueuesPaginator returns a new DescribeJobQueuesPaginator
 func NewDescribeJobQueuesPaginator(client DescribeJobQueuesAPIClient, params *DescribeJobQueuesInput, optFns ...func(*DescribeJobQueuesPaginatorOptions)) *DescribeJobQueuesPaginator {
+	if params == nil {
+		params = &DescribeJobQueuesInput{}
+	}
+
 	options := DescribeJobQueuesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -170,10 +174,6 @@ func NewDescribeJobQueuesPaginator(client DescribeJobQueuesAPIClient, params *De
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeJobQueuesInput{}
 	}
 
 	return &DescribeJobQueuesPaginator{

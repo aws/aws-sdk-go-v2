@@ -157,6 +157,10 @@ type ListIngestionsPaginator struct {
 
 // NewListIngestionsPaginator returns a new ListIngestionsPaginator
 func NewListIngestionsPaginator(client ListIngestionsAPIClient, params *ListIngestionsInput, optFns ...func(*ListIngestionsPaginatorOptions)) *ListIngestionsPaginator {
+	if params == nil {
+		params = &ListIngestionsInput{}
+	}
+
 	options := ListIngestionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -164,10 +168,6 @@ func NewListIngestionsPaginator(client ListIngestionsAPIClient, params *ListInge
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListIngestionsInput{}
 	}
 
 	return &ListIngestionsPaginator{

@@ -150,6 +150,10 @@ type GetModelsPaginator struct {
 
 // NewGetModelsPaginator returns a new GetModelsPaginator
 func NewGetModelsPaginator(client GetModelsAPIClient, params *GetModelsInput, optFns ...func(*GetModelsPaginatorOptions)) *GetModelsPaginator {
+	if params == nil {
+		params = &GetModelsInput{}
+	}
+
 	options := GetModelsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -157,10 +161,6 @@ func NewGetModelsPaginator(client GetModelsAPIClient, params *GetModelsInput, op
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetModelsInput{}
 	}
 
 	return &GetModelsPaginator{

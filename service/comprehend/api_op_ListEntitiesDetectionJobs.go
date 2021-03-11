@@ -145,6 +145,10 @@ type ListEntitiesDetectionJobsPaginator struct {
 // NewListEntitiesDetectionJobsPaginator returns a new
 // ListEntitiesDetectionJobsPaginator
 func NewListEntitiesDetectionJobsPaginator(client ListEntitiesDetectionJobsAPIClient, params *ListEntitiesDetectionJobsInput, optFns ...func(*ListEntitiesDetectionJobsPaginatorOptions)) *ListEntitiesDetectionJobsPaginator {
+	if params == nil {
+		params = &ListEntitiesDetectionJobsInput{}
+	}
+
 	options := ListEntitiesDetectionJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewListEntitiesDetectionJobsPaginator(client ListEntitiesDetectionJobsAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEntitiesDetectionJobsInput{}
 	}
 
 	return &ListEntitiesDetectionJobsPaginator{

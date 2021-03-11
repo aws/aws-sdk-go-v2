@@ -151,6 +151,10 @@ type ListAppliedSchemaArnsPaginator struct {
 
 // NewListAppliedSchemaArnsPaginator returns a new ListAppliedSchemaArnsPaginator
 func NewListAppliedSchemaArnsPaginator(client ListAppliedSchemaArnsAPIClient, params *ListAppliedSchemaArnsInput, optFns ...func(*ListAppliedSchemaArnsPaginatorOptions)) *ListAppliedSchemaArnsPaginator {
+	if params == nil {
+		params = &ListAppliedSchemaArnsInput{}
+	}
+
 	options := ListAppliedSchemaArnsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -158,10 +162,6 @@ func NewListAppliedSchemaArnsPaginator(client ListAppliedSchemaArnsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAppliedSchemaArnsInput{}
 	}
 
 	return &ListAppliedSchemaArnsPaginator{

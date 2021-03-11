@@ -145,14 +145,14 @@ type BatchGetTracesPaginator struct {
 
 // NewBatchGetTracesPaginator returns a new BatchGetTracesPaginator
 func NewBatchGetTracesPaginator(client BatchGetTracesAPIClient, params *BatchGetTracesInput, optFns ...func(*BatchGetTracesPaginatorOptions)) *BatchGetTracesPaginator {
+	if params == nil {
+		params = &BatchGetTracesInput{}
+	}
+
 	options := BatchGetTracesPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &BatchGetTracesInput{}
 	}
 
 	return &BatchGetTracesPaginator{

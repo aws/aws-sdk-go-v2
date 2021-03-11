@@ -221,6 +221,10 @@ type ListOpenWorkflowExecutionsPaginator struct {
 // NewListOpenWorkflowExecutionsPaginator returns a new
 // ListOpenWorkflowExecutionsPaginator
 func NewListOpenWorkflowExecutionsPaginator(client ListOpenWorkflowExecutionsAPIClient, params *ListOpenWorkflowExecutionsInput, optFns ...func(*ListOpenWorkflowExecutionsPaginatorOptions)) *ListOpenWorkflowExecutionsPaginator {
+	if params == nil {
+		params = &ListOpenWorkflowExecutionsInput{}
+	}
+
 	options := ListOpenWorkflowExecutionsPaginatorOptions{}
 	if params.MaximumPageSize != 0 {
 		options.Limit = params.MaximumPageSize
@@ -228,10 +232,6 @@ func NewListOpenWorkflowExecutionsPaginator(client ListOpenWorkflowExecutionsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListOpenWorkflowExecutionsInput{}
 	}
 
 	return &ListOpenWorkflowExecutionsPaginator{

@@ -144,6 +144,10 @@ type ListV2LoggingLevelsPaginator struct {
 
 // NewListV2LoggingLevelsPaginator returns a new ListV2LoggingLevelsPaginator
 func NewListV2LoggingLevelsPaginator(client ListV2LoggingLevelsAPIClient, params *ListV2LoggingLevelsInput, optFns ...func(*ListV2LoggingLevelsPaginatorOptions)) *ListV2LoggingLevelsPaginator {
+	if params == nil {
+		params = &ListV2LoggingLevelsInput{}
+	}
+
 	options := ListV2LoggingLevelsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -151,10 +155,6 @@ func NewListV2LoggingLevelsPaginator(client ListV2LoggingLevelsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListV2LoggingLevelsInput{}
 	}
 
 	return &ListV2LoggingLevelsPaginator{

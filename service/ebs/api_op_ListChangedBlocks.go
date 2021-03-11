@@ -169,6 +169,10 @@ type ListChangedBlocksPaginator struct {
 
 // NewListChangedBlocksPaginator returns a new ListChangedBlocksPaginator
 func NewListChangedBlocksPaginator(client ListChangedBlocksAPIClient, params *ListChangedBlocksInput, optFns ...func(*ListChangedBlocksPaginatorOptions)) *ListChangedBlocksPaginator {
+	if params == nil {
+		params = &ListChangedBlocksInput{}
+	}
+
 	options := ListChangedBlocksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -176,10 +180,6 @@ func NewListChangedBlocksPaginator(client ListChangedBlocksAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListChangedBlocksInput{}
 	}
 
 	return &ListChangedBlocksPaginator{

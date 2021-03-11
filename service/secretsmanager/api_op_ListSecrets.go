@@ -185,6 +185,10 @@ type ListSecretsPaginator struct {
 
 // NewListSecretsPaginator returns a new ListSecretsPaginator
 func NewListSecretsPaginator(client ListSecretsAPIClient, params *ListSecretsInput, optFns ...func(*ListSecretsPaginatorOptions)) *ListSecretsPaginator {
+	if params == nil {
+		params = &ListSecretsInput{}
+	}
+
 	options := ListSecretsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -192,10 +196,6 @@ func NewListSecretsPaginator(client ListSecretsAPIClient, params *ListSecretsInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSecretsInput{}
 	}
 
 	return &ListSecretsPaginator{

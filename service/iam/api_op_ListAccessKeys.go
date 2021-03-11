@@ -180,6 +180,10 @@ type ListAccessKeysPaginator struct {
 
 // NewListAccessKeysPaginator returns a new ListAccessKeysPaginator
 func NewListAccessKeysPaginator(client ListAccessKeysAPIClient, params *ListAccessKeysInput, optFns ...func(*ListAccessKeysPaginatorOptions)) *ListAccessKeysPaginator {
+	if params == nil {
+		params = &ListAccessKeysInput{}
+	}
+
 	options := ListAccessKeysPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -187,10 +191,6 @@ func NewListAccessKeysPaginator(client ListAccessKeysAPIClient, params *ListAcce
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAccessKeysInput{}
 	}
 
 	return &ListAccessKeysPaginator{

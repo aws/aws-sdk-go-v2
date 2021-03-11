@@ -163,6 +163,10 @@ type DescribeClusterDbRevisionsPaginator struct {
 // NewDescribeClusterDbRevisionsPaginator returns a new
 // DescribeClusterDbRevisionsPaginator
 func NewDescribeClusterDbRevisionsPaginator(client DescribeClusterDbRevisionsAPIClient, params *DescribeClusterDbRevisionsInput, optFns ...func(*DescribeClusterDbRevisionsPaginatorOptions)) *DescribeClusterDbRevisionsPaginator {
+	if params == nil {
+		params = &DescribeClusterDbRevisionsInput{}
+	}
+
 	options := DescribeClusterDbRevisionsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -170,10 +174,6 @@ func NewDescribeClusterDbRevisionsPaginator(client DescribeClusterDbRevisionsAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeClusterDbRevisionsInput{}
 	}
 
 	return &DescribeClusterDbRevisionsPaginator{

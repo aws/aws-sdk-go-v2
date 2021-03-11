@@ -139,6 +139,10 @@ type ListPhoneNumberOrdersPaginator struct {
 
 // NewListPhoneNumberOrdersPaginator returns a new ListPhoneNumberOrdersPaginator
 func NewListPhoneNumberOrdersPaginator(client ListPhoneNumberOrdersAPIClient, params *ListPhoneNumberOrdersInput, optFns ...func(*ListPhoneNumberOrdersPaginatorOptions)) *ListPhoneNumberOrdersPaginator {
+	if params == nil {
+		params = &ListPhoneNumberOrdersInput{}
+	}
+
 	options := ListPhoneNumberOrdersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -146,10 +150,6 @@ func NewListPhoneNumberOrdersPaginator(client ListPhoneNumberOrdersAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPhoneNumberOrdersInput{}
 	}
 
 	return &ListPhoneNumberOrdersPaginator{

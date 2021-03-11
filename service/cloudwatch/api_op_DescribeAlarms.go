@@ -197,6 +197,10 @@ type DescribeAlarmsPaginator struct {
 
 // NewDescribeAlarmsPaginator returns a new DescribeAlarmsPaginator
 func NewDescribeAlarmsPaginator(client DescribeAlarmsAPIClient, params *DescribeAlarmsInput, optFns ...func(*DescribeAlarmsPaginatorOptions)) *DescribeAlarmsPaginator {
+	if params == nil {
+		params = &DescribeAlarmsInput{}
+	}
+
 	options := DescribeAlarmsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -204,10 +208,6 @@ func NewDescribeAlarmsPaginator(client DescribeAlarmsAPIClient, params *Describe
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeAlarmsInput{}
 	}
 
 	return &DescribeAlarmsPaginator{

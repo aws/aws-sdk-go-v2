@@ -163,6 +163,10 @@ type ListResolverRuleAssociationsPaginator struct {
 // NewListResolverRuleAssociationsPaginator returns a new
 // ListResolverRuleAssociationsPaginator
 func NewListResolverRuleAssociationsPaginator(client ListResolverRuleAssociationsAPIClient, params *ListResolverRuleAssociationsInput, optFns ...func(*ListResolverRuleAssociationsPaginatorOptions)) *ListResolverRuleAssociationsPaginator {
+	if params == nil {
+		params = &ListResolverRuleAssociationsInput{}
+	}
+
 	options := ListResolverRuleAssociationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -170,10 +174,6 @@ func NewListResolverRuleAssociationsPaginator(client ListResolverRuleAssociation
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListResolverRuleAssociationsInput{}
 	}
 
 	return &ListResolverRuleAssociationsPaginator{

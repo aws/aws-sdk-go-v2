@@ -140,6 +140,10 @@ type ListConferenceProvidersPaginator struct {
 // NewListConferenceProvidersPaginator returns a new
 // ListConferenceProvidersPaginator
 func NewListConferenceProvidersPaginator(client ListConferenceProvidersAPIClient, params *ListConferenceProvidersInput, optFns ...func(*ListConferenceProvidersPaginatorOptions)) *ListConferenceProvidersPaginator {
+	if params == nil {
+		params = &ListConferenceProvidersInput{}
+	}
+
 	options := ListConferenceProvidersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -147,10 +151,6 @@ func NewListConferenceProvidersPaginator(client ListConferenceProvidersAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListConferenceProvidersInput{}
 	}
 
 	return &ListConferenceProvidersPaginator{

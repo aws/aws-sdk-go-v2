@@ -182,6 +182,10 @@ type ListReviewPolicyResultsForHITPaginator struct {
 // NewListReviewPolicyResultsForHITPaginator returns a new
 // ListReviewPolicyResultsForHITPaginator
 func NewListReviewPolicyResultsForHITPaginator(client ListReviewPolicyResultsForHITAPIClient, params *ListReviewPolicyResultsForHITInput, optFns ...func(*ListReviewPolicyResultsForHITPaginatorOptions)) *ListReviewPolicyResultsForHITPaginator {
+	if params == nil {
+		params = &ListReviewPolicyResultsForHITInput{}
+	}
+
 	options := ListReviewPolicyResultsForHITPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -189,10 +193,6 @@ func NewListReviewPolicyResultsForHITPaginator(client ListReviewPolicyResultsFor
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListReviewPolicyResultsForHITInput{}
 	}
 
 	return &ListReviewPolicyResultsForHITPaginator{

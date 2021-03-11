@@ -159,6 +159,10 @@ type ListBuildBatchesForProjectPaginator struct {
 // NewListBuildBatchesForProjectPaginator returns a new
 // ListBuildBatchesForProjectPaginator
 func NewListBuildBatchesForProjectPaginator(client ListBuildBatchesForProjectAPIClient, params *ListBuildBatchesForProjectInput, optFns ...func(*ListBuildBatchesForProjectPaginatorOptions)) *ListBuildBatchesForProjectPaginator {
+	if params == nil {
+		params = &ListBuildBatchesForProjectInput{}
+	}
+
 	options := ListBuildBatchesForProjectPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewListBuildBatchesForProjectPaginator(client ListBuildBatchesForProjectAPI
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListBuildBatchesForProjectInput{}
 	}
 
 	return &ListBuildBatchesForProjectPaginator{

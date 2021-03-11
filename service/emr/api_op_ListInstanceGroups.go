@@ -143,14 +143,14 @@ type ListInstanceGroupsPaginator struct {
 
 // NewListInstanceGroupsPaginator returns a new ListInstanceGroupsPaginator
 func NewListInstanceGroupsPaginator(client ListInstanceGroupsAPIClient, params *ListInstanceGroupsInput, optFns ...func(*ListInstanceGroupsPaginatorOptions)) *ListInstanceGroupsPaginator {
+	if params == nil {
+		params = &ListInstanceGroupsInput{}
+	}
+
 	options := ListInstanceGroupsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListInstanceGroupsInput{}
 	}
 
 	return &ListInstanceGroupsPaginator{

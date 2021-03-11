@@ -172,6 +172,10 @@ type SearchProvisionedProductsPaginator struct {
 // NewSearchProvisionedProductsPaginator returns a new
 // SearchProvisionedProductsPaginator
 func NewSearchProvisionedProductsPaginator(client SearchProvisionedProductsAPIClient, params *SearchProvisionedProductsInput, optFns ...func(*SearchProvisionedProductsPaginatorOptions)) *SearchProvisionedProductsPaginator {
+	if params == nil {
+		params = &SearchProvisionedProductsInput{}
+	}
+
 	options := SearchProvisionedProductsPaginatorOptions{}
 	if params.PageSize != 0 {
 		options.Limit = params.PageSize
@@ -179,10 +183,6 @@ func NewSearchProvisionedProductsPaginator(client SearchProvisionedProductsAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchProvisionedProductsInput{}
 	}
 
 	return &SearchProvisionedProductsPaginator{

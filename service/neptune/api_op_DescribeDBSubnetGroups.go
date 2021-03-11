@@ -161,6 +161,10 @@ type DescribeDBSubnetGroupsPaginator struct {
 
 // NewDescribeDBSubnetGroupsPaginator returns a new DescribeDBSubnetGroupsPaginator
 func NewDescribeDBSubnetGroupsPaginator(client DescribeDBSubnetGroupsAPIClient, params *DescribeDBSubnetGroupsInput, optFns ...func(*DescribeDBSubnetGroupsPaginatorOptions)) *DescribeDBSubnetGroupsPaginator {
+	if params == nil {
+		params = &DescribeDBSubnetGroupsInput{}
+	}
+
 	options := DescribeDBSubnetGroupsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -168,10 +172,6 @@ func NewDescribeDBSubnetGroupsPaginator(client DescribeDBSubnetGroupsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeDBSubnetGroupsInput{}
 	}
 
 	return &DescribeDBSubnetGroupsPaginator{

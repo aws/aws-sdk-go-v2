@@ -225,14 +225,14 @@ type ListUploadsPaginator struct {
 
 // NewListUploadsPaginator returns a new ListUploadsPaginator
 func NewListUploadsPaginator(client ListUploadsAPIClient, params *ListUploadsInput, optFns ...func(*ListUploadsPaginatorOptions)) *ListUploadsPaginator {
+	if params == nil {
+		params = &ListUploadsInput{}
+	}
+
 	options := ListUploadsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListUploadsInput{}
 	}
 
 	return &ListUploadsPaginator{

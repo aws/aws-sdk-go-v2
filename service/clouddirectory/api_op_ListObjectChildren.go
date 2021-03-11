@@ -162,6 +162,10 @@ type ListObjectChildrenPaginator struct {
 
 // NewListObjectChildrenPaginator returns a new ListObjectChildrenPaginator
 func NewListObjectChildrenPaginator(client ListObjectChildrenAPIClient, params *ListObjectChildrenInput, optFns ...func(*ListObjectChildrenPaginatorOptions)) *ListObjectChildrenPaginator {
+	if params == nil {
+		params = &ListObjectChildrenInput{}
+	}
+
 	options := ListObjectChildrenPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -169,10 +173,6 @@ func NewListObjectChildrenPaginator(client ListObjectChildrenAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListObjectChildrenInput{}
 	}
 
 	return &ListObjectChildrenPaginator{

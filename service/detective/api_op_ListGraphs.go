@@ -145,6 +145,10 @@ type ListGraphsPaginator struct {
 
 // NewListGraphsPaginator returns a new ListGraphsPaginator
 func NewListGraphsPaginator(client ListGraphsAPIClient, params *ListGraphsInput, optFns ...func(*ListGraphsPaginatorOptions)) *ListGraphsPaginator {
+	if params == nil {
+		params = &ListGraphsInput{}
+	}
+
 	options := ListGraphsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewListGraphsPaginator(client ListGraphsAPIClient, params *ListGraphsInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListGraphsInput{}
 	}
 
 	return &ListGraphsPaginator{

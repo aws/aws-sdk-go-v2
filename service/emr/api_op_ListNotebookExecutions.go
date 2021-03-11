@@ -184,14 +184,14 @@ type ListNotebookExecutionsPaginator struct {
 
 // NewListNotebookExecutionsPaginator returns a new ListNotebookExecutionsPaginator
 func NewListNotebookExecutionsPaginator(client ListNotebookExecutionsAPIClient, params *ListNotebookExecutionsInput, optFns ...func(*ListNotebookExecutionsPaginatorOptions)) *ListNotebookExecutionsPaginator {
+	if params == nil {
+		params = &ListNotebookExecutionsInput{}
+	}
+
 	options := ListNotebookExecutionsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListNotebookExecutionsInput{}
 	}
 
 	return &ListNotebookExecutionsPaginator{

@@ -158,6 +158,10 @@ type ListLanguageModelsPaginator struct {
 
 // NewListLanguageModelsPaginator returns a new ListLanguageModelsPaginator
 func NewListLanguageModelsPaginator(client ListLanguageModelsAPIClient, params *ListLanguageModelsInput, optFns ...func(*ListLanguageModelsPaginatorOptions)) *ListLanguageModelsPaginator {
+	if params == nil {
+		params = &ListLanguageModelsInput{}
+	}
+
 	options := ListLanguageModelsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -165,10 +169,6 @@ func NewListLanguageModelsPaginator(client ListLanguageModelsAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListLanguageModelsInput{}
 	}
 
 	return &ListLanguageModelsPaginator{

@@ -164,6 +164,10 @@ type DescribeCodeCoveragesPaginator struct {
 
 // NewDescribeCodeCoveragesPaginator returns a new DescribeCodeCoveragesPaginator
 func NewDescribeCodeCoveragesPaginator(client DescribeCodeCoveragesAPIClient, params *DescribeCodeCoveragesInput, optFns ...func(*DescribeCodeCoveragesPaginatorOptions)) *DescribeCodeCoveragesPaginator {
+	if params == nil {
+		params = &DescribeCodeCoveragesInput{}
+	}
+
 	options := DescribeCodeCoveragesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -171,10 +175,6 @@ func NewDescribeCodeCoveragesPaginator(client DescribeCodeCoveragesAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeCodeCoveragesInput{}
 	}
 
 	return &DescribeCodeCoveragesPaginator{

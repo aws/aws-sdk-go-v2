@@ -150,6 +150,10 @@ type ListOpsItemEventsPaginator struct {
 
 // NewListOpsItemEventsPaginator returns a new ListOpsItemEventsPaginator
 func NewListOpsItemEventsPaginator(client ListOpsItemEventsAPIClient, params *ListOpsItemEventsInput, optFns ...func(*ListOpsItemEventsPaginatorOptions)) *ListOpsItemEventsPaginator {
+	if params == nil {
+		params = &ListOpsItemEventsInput{}
+	}
+
 	options := ListOpsItemEventsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -157,10 +161,6 @@ func NewListOpsItemEventsPaginator(client ListOpsItemEventsAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListOpsItemEventsInput{}
 	}
 
 	return &ListOpsItemEventsPaginator{

@@ -182,6 +182,10 @@ type ListAppInstanceAdminsPaginator struct {
 
 // NewListAppInstanceAdminsPaginator returns a new ListAppInstanceAdminsPaginator
 func NewListAppInstanceAdminsPaginator(client ListAppInstanceAdminsAPIClient, params *ListAppInstanceAdminsInput, optFns ...func(*ListAppInstanceAdminsPaginatorOptions)) *ListAppInstanceAdminsPaginator {
+	if params == nil {
+		params = &ListAppInstanceAdminsInput{}
+	}
+
 	options := ListAppInstanceAdminsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -189,10 +193,6 @@ func NewListAppInstanceAdminsPaginator(client ListAppInstanceAdminsAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAppInstanceAdminsInput{}
 	}
 
 	return &ListAppInstanceAdminsPaginator{

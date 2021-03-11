@@ -157,6 +157,10 @@ type ListHumanTaskUisPaginator struct {
 
 // NewListHumanTaskUisPaginator returns a new ListHumanTaskUisPaginator
 func NewListHumanTaskUisPaginator(client ListHumanTaskUisAPIClient, params *ListHumanTaskUisInput, optFns ...func(*ListHumanTaskUisPaginatorOptions)) *ListHumanTaskUisPaginator {
+	if params == nil {
+		params = &ListHumanTaskUisInput{}
+	}
+
 	options := ListHumanTaskUisPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -164,10 +168,6 @@ func NewListHumanTaskUisPaginator(client ListHumanTaskUisAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListHumanTaskUisInput{}
 	}
 
 	return &ListHumanTaskUisPaginator{

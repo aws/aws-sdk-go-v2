@@ -159,6 +159,10 @@ type ListTemplateAliasesPaginator struct {
 
 // NewListTemplateAliasesPaginator returns a new ListTemplateAliasesPaginator
 func NewListTemplateAliasesPaginator(client ListTemplateAliasesAPIClient, params *ListTemplateAliasesInput, optFns ...func(*ListTemplateAliasesPaginatorOptions)) *ListTemplateAliasesPaginator {
+	if params == nil {
+		params = &ListTemplateAliasesInput{}
+	}
+
 	options := ListTemplateAliasesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -166,10 +170,6 @@ func NewListTemplateAliasesPaginator(client ListTemplateAliasesAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTemplateAliasesInput{}
 	}
 
 	return &ListTemplateAliasesPaginator{

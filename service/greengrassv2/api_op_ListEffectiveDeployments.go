@@ -150,6 +150,10 @@ type ListEffectiveDeploymentsPaginator struct {
 // NewListEffectiveDeploymentsPaginator returns a new
 // ListEffectiveDeploymentsPaginator
 func NewListEffectiveDeploymentsPaginator(client ListEffectiveDeploymentsAPIClient, params *ListEffectiveDeploymentsInput, optFns ...func(*ListEffectiveDeploymentsPaginatorOptions)) *ListEffectiveDeploymentsPaginator {
+	if params == nil {
+		params = &ListEffectiveDeploymentsInput{}
+	}
+
 	options := ListEffectiveDeploymentsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -157,10 +161,6 @@ func NewListEffectiveDeploymentsPaginator(client ListEffectiveDeploymentsAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEffectiveDeploymentsInput{}
 	}
 
 	return &ListEffectiveDeploymentsPaginator{

@@ -162,6 +162,10 @@ type ListImagesPaginator struct {
 
 // NewListImagesPaginator returns a new ListImagesPaginator
 func NewListImagesPaginator(client ListImagesAPIClient, params *ListImagesInput, optFns ...func(*ListImagesPaginatorOptions)) *ListImagesPaginator {
+	if params == nil {
+		params = &ListImagesInput{}
+	}
+
 	options := ListImagesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -169,10 +173,6 @@ func NewListImagesPaginator(client ListImagesAPIClient, params *ListImagesInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListImagesInput{}
 	}
 
 	return &ListImagesPaginator{

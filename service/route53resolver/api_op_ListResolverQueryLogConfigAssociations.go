@@ -236,6 +236,10 @@ type ListResolverQueryLogConfigAssociationsPaginator struct {
 // NewListResolverQueryLogConfigAssociationsPaginator returns a new
 // ListResolverQueryLogConfigAssociationsPaginator
 func NewListResolverQueryLogConfigAssociationsPaginator(client ListResolverQueryLogConfigAssociationsAPIClient, params *ListResolverQueryLogConfigAssociationsInput, optFns ...func(*ListResolverQueryLogConfigAssociationsPaginatorOptions)) *ListResolverQueryLogConfigAssociationsPaginator {
+	if params == nil {
+		params = &ListResolverQueryLogConfigAssociationsInput{}
+	}
+
 	options := ListResolverQueryLogConfigAssociationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -243,10 +247,6 @@ func NewListResolverQueryLogConfigAssociationsPaginator(client ListResolverQuery
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListResolverQueryLogConfigAssociationsInput{}
 	}
 
 	return &ListResolverQueryLogConfigAssociationsPaginator{

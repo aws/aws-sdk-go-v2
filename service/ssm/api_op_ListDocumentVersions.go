@@ -151,6 +151,10 @@ type ListDocumentVersionsPaginator struct {
 
 // NewListDocumentVersionsPaginator returns a new ListDocumentVersionsPaginator
 func NewListDocumentVersionsPaginator(client ListDocumentVersionsAPIClient, params *ListDocumentVersionsInput, optFns ...func(*ListDocumentVersionsPaginatorOptions)) *ListDocumentVersionsPaginator {
+	if params == nil {
+		params = &ListDocumentVersionsInput{}
+	}
+
 	options := ListDocumentVersionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -158,10 +162,6 @@ func NewListDocumentVersionsPaginator(client ListDocumentVersionsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDocumentVersionsInput{}
 	}
 
 	return &ListDocumentVersionsPaginator{

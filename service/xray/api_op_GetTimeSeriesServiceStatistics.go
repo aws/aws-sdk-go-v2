@@ -172,14 +172,14 @@ type GetTimeSeriesServiceStatisticsPaginator struct {
 // NewGetTimeSeriesServiceStatisticsPaginator returns a new
 // GetTimeSeriesServiceStatisticsPaginator
 func NewGetTimeSeriesServiceStatisticsPaginator(client GetTimeSeriesServiceStatisticsAPIClient, params *GetTimeSeriesServiceStatisticsInput, optFns ...func(*GetTimeSeriesServiceStatisticsPaginatorOptions)) *GetTimeSeriesServiceStatisticsPaginator {
+	if params == nil {
+		params = &GetTimeSeriesServiceStatisticsInput{}
+	}
+
 	options := GetTimeSeriesServiceStatisticsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetTimeSeriesServiceStatisticsInput{}
 	}
 
 	return &GetTimeSeriesServiceStatisticsPaginator{

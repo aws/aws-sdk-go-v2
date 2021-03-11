@@ -187,6 +187,10 @@ type ListBackupJobsPaginator struct {
 
 // NewListBackupJobsPaginator returns a new ListBackupJobsPaginator
 func NewListBackupJobsPaginator(client ListBackupJobsAPIClient, params *ListBackupJobsInput, optFns ...func(*ListBackupJobsPaginatorOptions)) *ListBackupJobsPaginator {
+	if params == nil {
+		params = &ListBackupJobsInput{}
+	}
+
 	options := ListBackupJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -194,10 +198,6 @@ func NewListBackupJobsPaginator(client ListBackupJobsAPIClient, params *ListBack
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListBackupJobsInput{}
 	}
 
 	return &ListBackupJobsPaginator{

@@ -182,6 +182,10 @@ type ListPlatformBranchesPaginator struct {
 
 // NewListPlatformBranchesPaginator returns a new ListPlatformBranchesPaginator
 func NewListPlatformBranchesPaginator(client ListPlatformBranchesAPIClient, params *ListPlatformBranchesInput, optFns ...func(*ListPlatformBranchesPaginatorOptions)) *ListPlatformBranchesPaginator {
+	if params == nil {
+		params = &ListPlatformBranchesInput{}
+	}
+
 	options := ListPlatformBranchesPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -189,10 +193,6 @@ func NewListPlatformBranchesPaginator(client ListPlatformBranchesAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPlatformBranchesInput{}
 	}
 
 	return &ListPlatformBranchesPaginator{

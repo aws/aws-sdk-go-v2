@@ -157,6 +157,10 @@ type GetUpgradeHistoryPaginator struct {
 
 // NewGetUpgradeHistoryPaginator returns a new GetUpgradeHistoryPaginator
 func NewGetUpgradeHistoryPaginator(client GetUpgradeHistoryAPIClient, params *GetUpgradeHistoryInput, optFns ...func(*GetUpgradeHistoryPaginatorOptions)) *GetUpgradeHistoryPaginator {
+	if params == nil {
+		params = &GetUpgradeHistoryInput{}
+	}
+
 	options := GetUpgradeHistoryPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -164,10 +168,6 @@ func NewGetUpgradeHistoryPaginator(client GetUpgradeHistoryAPIClient, params *Ge
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetUpgradeHistoryInput{}
 	}
 
 	return &GetUpgradeHistoryPaginator{

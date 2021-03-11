@@ -155,6 +155,10 @@ type DescribeBudgetsPaginator struct {
 
 // NewDescribeBudgetsPaginator returns a new DescribeBudgetsPaginator
 func NewDescribeBudgetsPaginator(client DescribeBudgetsAPIClient, params *DescribeBudgetsInput, optFns ...func(*DescribeBudgetsPaginatorOptions)) *DescribeBudgetsPaginator {
+	if params == nil {
+		params = &DescribeBudgetsInput{}
+	}
+
 	options := DescribeBudgetsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -162,10 +166,6 @@ func NewDescribeBudgetsPaginator(client DescribeBudgetsAPIClient, params *Descri
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeBudgetsInput{}
 	}
 
 	return &DescribeBudgetsPaginator{

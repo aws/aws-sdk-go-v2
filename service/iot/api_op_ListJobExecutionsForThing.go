@@ -159,6 +159,10 @@ type ListJobExecutionsForThingPaginator struct {
 // NewListJobExecutionsForThingPaginator returns a new
 // ListJobExecutionsForThingPaginator
 func NewListJobExecutionsForThingPaginator(client ListJobExecutionsForThingAPIClient, params *ListJobExecutionsForThingInput, optFns ...func(*ListJobExecutionsForThingPaginatorOptions)) *ListJobExecutionsForThingPaginator {
+	if params == nil {
+		params = &ListJobExecutionsForThingInput{}
+	}
+
 	options := ListJobExecutionsForThingPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -166,10 +170,6 @@ func NewListJobExecutionsForThingPaginator(client ListJobExecutionsForThingAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListJobExecutionsForThingInput{}
 	}
 
 	return &ListJobExecutionsForThingPaginator{

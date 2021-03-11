@@ -155,6 +155,10 @@ type GetParameterHistoryPaginator struct {
 
 // NewGetParameterHistoryPaginator returns a new GetParameterHistoryPaginator
 func NewGetParameterHistoryPaginator(client GetParameterHistoryAPIClient, params *GetParameterHistoryInput, optFns ...func(*GetParameterHistoryPaginatorOptions)) *GetParameterHistoryPaginator {
+	if params == nil {
+		params = &GetParameterHistoryInput{}
+	}
+
 	options := GetParameterHistoryPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -162,10 +166,6 @@ func NewGetParameterHistoryPaginator(client GetParameterHistoryAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetParameterHistoryInput{}
 	}
 
 	return &GetParameterHistoryPaginator{

@@ -142,6 +142,10 @@ type ListHITsPaginator struct {
 
 // NewListHITsPaginator returns a new ListHITsPaginator
 func NewListHITsPaginator(client ListHITsAPIClient, params *ListHITsInput, optFns ...func(*ListHITsPaginatorOptions)) *ListHITsPaginator {
+	if params == nil {
+		params = &ListHITsInput{}
+	}
+
 	options := ListHITsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -149,10 +153,6 @@ func NewListHITsPaginator(client ListHITsAPIClient, params *ListHITsInput, optFn
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListHITsInput{}
 	}
 
 	return &ListHITsPaginator{

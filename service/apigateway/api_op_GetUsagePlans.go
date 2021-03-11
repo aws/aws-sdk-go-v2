@@ -149,6 +149,10 @@ type GetUsagePlansPaginator struct {
 
 // NewGetUsagePlansPaginator returns a new GetUsagePlansPaginator
 func NewGetUsagePlansPaginator(client GetUsagePlansAPIClient, params *GetUsagePlansInput, optFns ...func(*GetUsagePlansPaginatorOptions)) *GetUsagePlansPaginator {
+	if params == nil {
+		params = &GetUsagePlansInput{}
+	}
+
 	options := GetUsagePlansPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -156,10 +160,6 @@ func NewGetUsagePlansPaginator(client GetUsagePlansAPIClient, params *GetUsagePl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetUsagePlansInput{}
 	}
 
 	return &GetUsagePlansPaginator{

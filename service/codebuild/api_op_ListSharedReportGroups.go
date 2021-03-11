@@ -172,6 +172,10 @@ type ListSharedReportGroupsPaginator struct {
 
 // NewListSharedReportGroupsPaginator returns a new ListSharedReportGroupsPaginator
 func NewListSharedReportGroupsPaginator(client ListSharedReportGroupsAPIClient, params *ListSharedReportGroupsInput, optFns ...func(*ListSharedReportGroupsPaginatorOptions)) *ListSharedReportGroupsPaginator {
+	if params == nil {
+		params = &ListSharedReportGroupsInput{}
+	}
+
 	options := ListSharedReportGroupsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -179,10 +183,6 @@ func NewListSharedReportGroupsPaginator(client ListSharedReportGroupsAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSharedReportGroupsInput{}
 	}
 
 	return &ListSharedReportGroupsPaginator{

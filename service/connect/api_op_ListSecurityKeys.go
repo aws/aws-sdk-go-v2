@@ -148,6 +148,10 @@ type ListSecurityKeysPaginator struct {
 
 // NewListSecurityKeysPaginator returns a new ListSecurityKeysPaginator
 func NewListSecurityKeysPaginator(client ListSecurityKeysAPIClient, params *ListSecurityKeysInput, optFns ...func(*ListSecurityKeysPaginatorOptions)) *ListSecurityKeysPaginator {
+	if params == nil {
+		params = &ListSecurityKeysInput{}
+	}
+
 	options := ListSecurityKeysPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -155,10 +159,6 @@ func NewListSecurityKeysPaginator(client ListSecurityKeysAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSecurityKeysInput{}
 	}
 
 	return &ListSecurityKeysPaginator{

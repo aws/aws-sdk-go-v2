@@ -156,6 +156,10 @@ type ListResourceDataSyncPaginator struct {
 
 // NewListResourceDataSyncPaginator returns a new ListResourceDataSyncPaginator
 func NewListResourceDataSyncPaginator(client ListResourceDataSyncAPIClient, params *ListResourceDataSyncInput, optFns ...func(*ListResourceDataSyncPaginatorOptions)) *ListResourceDataSyncPaginator {
+	if params == nil {
+		params = &ListResourceDataSyncInput{}
+	}
+
 	options := ListResourceDataSyncPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -163,10 +167,6 @@ func NewListResourceDataSyncPaginator(client ListResourceDataSyncAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListResourceDataSyncInput{}
 	}
 
 	return &ListResourceDataSyncPaginator{

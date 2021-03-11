@@ -193,14 +193,14 @@ type ListApplicationRevisionsPaginator struct {
 // NewListApplicationRevisionsPaginator returns a new
 // ListApplicationRevisionsPaginator
 func NewListApplicationRevisionsPaginator(client ListApplicationRevisionsAPIClient, params *ListApplicationRevisionsInput, optFns ...func(*ListApplicationRevisionsPaginatorOptions)) *ListApplicationRevisionsPaginator {
+	if params == nil {
+		params = &ListApplicationRevisionsInput{}
+	}
+
 	options := ListApplicationRevisionsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListApplicationRevisionsInput{}
 	}
 
 	return &ListApplicationRevisionsPaginator{

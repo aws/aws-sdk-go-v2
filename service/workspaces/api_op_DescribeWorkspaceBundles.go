@@ -147,14 +147,14 @@ type DescribeWorkspaceBundlesPaginator struct {
 // NewDescribeWorkspaceBundlesPaginator returns a new
 // DescribeWorkspaceBundlesPaginator
 func NewDescribeWorkspaceBundlesPaginator(client DescribeWorkspaceBundlesAPIClient, params *DescribeWorkspaceBundlesInput, optFns ...func(*DescribeWorkspaceBundlesPaginatorOptions)) *DescribeWorkspaceBundlesPaginator {
+	if params == nil {
+		params = &DescribeWorkspaceBundlesInput{}
+	}
+
 	options := DescribeWorkspaceBundlesPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeWorkspaceBundlesInput{}
 	}
 
 	return &DescribeWorkspaceBundlesPaginator{

@@ -188,6 +188,10 @@ type DescribeMatchmakingConfigurationsPaginator struct {
 // NewDescribeMatchmakingConfigurationsPaginator returns a new
 // DescribeMatchmakingConfigurationsPaginator
 func NewDescribeMatchmakingConfigurationsPaginator(client DescribeMatchmakingConfigurationsAPIClient, params *DescribeMatchmakingConfigurationsInput, optFns ...func(*DescribeMatchmakingConfigurationsPaginatorOptions)) *DescribeMatchmakingConfigurationsPaginator {
+	if params == nil {
+		params = &DescribeMatchmakingConfigurationsInput{}
+	}
+
 	options := DescribeMatchmakingConfigurationsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -195,10 +199,6 @@ func NewDescribeMatchmakingConfigurationsPaginator(client DescribeMatchmakingCon
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeMatchmakingConfigurationsInput{}
 	}
 
 	return &DescribeMatchmakingConfigurationsPaginator{

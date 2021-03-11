@@ -152,6 +152,10 @@ type ListServiceQuotaIncreaseRequestsInTemplatePaginator struct {
 // NewListServiceQuotaIncreaseRequestsInTemplatePaginator returns a new
 // ListServiceQuotaIncreaseRequestsInTemplatePaginator
 func NewListServiceQuotaIncreaseRequestsInTemplatePaginator(client ListServiceQuotaIncreaseRequestsInTemplateAPIClient, params *ListServiceQuotaIncreaseRequestsInTemplateInput, optFns ...func(*ListServiceQuotaIncreaseRequestsInTemplatePaginatorOptions)) *ListServiceQuotaIncreaseRequestsInTemplatePaginator {
+	if params == nil {
+		params = &ListServiceQuotaIncreaseRequestsInTemplateInput{}
+	}
+
 	options := ListServiceQuotaIncreaseRequestsInTemplatePaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -159,10 +163,6 @@ func NewListServiceQuotaIncreaseRequestsInTemplatePaginator(client ListServiceQu
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListServiceQuotaIncreaseRequestsInTemplateInput{}
 	}
 
 	return &ListServiceQuotaIncreaseRequestsInTemplatePaginator{

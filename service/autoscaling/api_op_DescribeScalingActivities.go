@@ -158,6 +158,10 @@ type DescribeScalingActivitiesPaginator struct {
 // NewDescribeScalingActivitiesPaginator returns a new
 // DescribeScalingActivitiesPaginator
 func NewDescribeScalingActivitiesPaginator(client DescribeScalingActivitiesAPIClient, params *DescribeScalingActivitiesInput, optFns ...func(*DescribeScalingActivitiesPaginatorOptions)) *DescribeScalingActivitiesPaginator {
+	if params == nil {
+		params = &DescribeScalingActivitiesInput{}
+	}
+
 	options := DescribeScalingActivitiesPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -165,10 +169,6 @@ func NewDescribeScalingActivitiesPaginator(client DescribeScalingActivitiesAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeScalingActivitiesInput{}
 	}
 
 	return &DescribeScalingActivitiesPaginator{

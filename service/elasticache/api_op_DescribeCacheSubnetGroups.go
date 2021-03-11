@@ -158,6 +158,10 @@ type DescribeCacheSubnetGroupsPaginator struct {
 // NewDescribeCacheSubnetGroupsPaginator returns a new
 // DescribeCacheSubnetGroupsPaginator
 func NewDescribeCacheSubnetGroupsPaginator(client DescribeCacheSubnetGroupsAPIClient, params *DescribeCacheSubnetGroupsInput, optFns ...func(*DescribeCacheSubnetGroupsPaginatorOptions)) *DescribeCacheSubnetGroupsPaginator {
+	if params == nil {
+		params = &DescribeCacheSubnetGroupsInput{}
+	}
+
 	options := DescribeCacheSubnetGroupsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -165,10 +169,6 @@ func NewDescribeCacheSubnetGroupsPaginator(client DescribeCacheSubnetGroupsAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeCacheSubnetGroupsInput{}
 	}
 
 	return &DescribeCacheSubnetGroupsPaginator{

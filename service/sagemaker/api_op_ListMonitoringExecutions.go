@@ -188,6 +188,10 @@ type ListMonitoringExecutionsPaginator struct {
 // NewListMonitoringExecutionsPaginator returns a new
 // ListMonitoringExecutionsPaginator
 func NewListMonitoringExecutionsPaginator(client ListMonitoringExecutionsAPIClient, params *ListMonitoringExecutionsInput, optFns ...func(*ListMonitoringExecutionsPaginatorOptions)) *ListMonitoringExecutionsPaginator {
+	if params == nil {
+		params = &ListMonitoringExecutionsInput{}
+	}
+
 	options := ListMonitoringExecutionsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -195,10 +199,6 @@ func NewListMonitoringExecutionsPaginator(client ListMonitoringExecutionsAPIClie
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListMonitoringExecutionsInput{}
 	}
 
 	return &ListMonitoringExecutionsPaginator{

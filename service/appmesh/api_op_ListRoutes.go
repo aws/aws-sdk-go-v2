@@ -175,6 +175,10 @@ type ListRoutesPaginator struct {
 
 // NewListRoutesPaginator returns a new ListRoutesPaginator
 func NewListRoutesPaginator(client ListRoutesAPIClient, params *ListRoutesInput, optFns ...func(*ListRoutesPaginatorOptions)) *ListRoutesPaginator {
+	if params == nil {
+		params = &ListRoutesInput{}
+	}
+
 	options := ListRoutesPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -182,10 +186,6 @@ func NewListRoutesPaginator(client ListRoutesAPIClient, params *ListRoutesInput,
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListRoutesInput{}
 	}
 
 	return &ListRoutesPaginator{

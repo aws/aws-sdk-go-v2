@@ -161,6 +161,10 @@ type ListPrincipalPoliciesPaginator struct {
 
 // NewListPrincipalPoliciesPaginator returns a new ListPrincipalPoliciesPaginator
 func NewListPrincipalPoliciesPaginator(client ListPrincipalPoliciesAPIClient, params *ListPrincipalPoliciesInput, optFns ...func(*ListPrincipalPoliciesPaginatorOptions)) *ListPrincipalPoliciesPaginator {
+	if params == nil {
+		params = &ListPrincipalPoliciesInput{}
+	}
+
 	options := ListPrincipalPoliciesPaginatorOptions{}
 	if params.PageSize != nil {
 		options.Limit = *params.PageSize
@@ -168,10 +172,6 @@ func NewListPrincipalPoliciesPaginator(client ListPrincipalPoliciesAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListPrincipalPoliciesInput{}
 	}
 
 	return &ListPrincipalPoliciesPaginator{

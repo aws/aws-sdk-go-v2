@@ -145,6 +145,10 @@ type ListEnvironmentsPaginator struct {
 
 // NewListEnvironmentsPaginator returns a new ListEnvironmentsPaginator
 func NewListEnvironmentsPaginator(client ListEnvironmentsAPIClient, params *ListEnvironmentsInput, optFns ...func(*ListEnvironmentsPaginatorOptions)) *ListEnvironmentsPaginator {
+	if params == nil {
+		params = &ListEnvironmentsInput{}
+	}
+
 	options := ListEnvironmentsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewListEnvironmentsPaginator(client ListEnvironmentsAPIClient, params *List
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEnvironmentsInput{}
 	}
 
 	return &ListEnvironmentsPaginator{

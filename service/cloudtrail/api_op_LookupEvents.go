@@ -213,6 +213,10 @@ type LookupEventsPaginator struct {
 
 // NewLookupEventsPaginator returns a new LookupEventsPaginator
 func NewLookupEventsPaginator(client LookupEventsAPIClient, params *LookupEventsInput, optFns ...func(*LookupEventsPaginatorOptions)) *LookupEventsPaginator {
+	if params == nil {
+		params = &LookupEventsInput{}
+	}
+
 	options := LookupEventsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -220,10 +224,6 @@ func NewLookupEventsPaginator(client LookupEventsAPIClient, params *LookupEvents
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &LookupEventsInput{}
 	}
 
 	return &LookupEventsPaginator{

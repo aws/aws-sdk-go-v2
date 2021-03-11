@@ -144,14 +144,14 @@ type ListTestsPaginator struct {
 
 // NewListTestsPaginator returns a new ListTestsPaginator
 func NewListTestsPaginator(client ListTestsAPIClient, params *ListTestsInput, optFns ...func(*ListTestsPaginatorOptions)) *ListTestsPaginator {
+	if params == nil {
+		params = &ListTestsInput{}
+	}
+
 	options := ListTestsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTestsInput{}
 	}
 
 	return &ListTestsPaginator{

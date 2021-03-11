@@ -194,6 +194,10 @@ type DescribeGameSessionsPaginator struct {
 
 // NewDescribeGameSessionsPaginator returns a new DescribeGameSessionsPaginator
 func NewDescribeGameSessionsPaginator(client DescribeGameSessionsAPIClient, params *DescribeGameSessionsInput, optFns ...func(*DescribeGameSessionsPaginatorOptions)) *DescribeGameSessionsPaginator {
+	if params == nil {
+		params = &DescribeGameSessionsInput{}
+	}
+
 	options := DescribeGameSessionsPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -201,10 +205,6 @@ func NewDescribeGameSessionsPaginator(client DescribeGameSessionsAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeGameSessionsInput{}
 	}
 
 	return &DescribeGameSessionsPaginator{

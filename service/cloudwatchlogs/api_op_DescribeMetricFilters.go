@@ -160,6 +160,10 @@ type DescribeMetricFiltersPaginator struct {
 
 // NewDescribeMetricFiltersPaginator returns a new DescribeMetricFiltersPaginator
 func NewDescribeMetricFiltersPaginator(client DescribeMetricFiltersAPIClient, params *DescribeMetricFiltersInput, optFns ...func(*DescribeMetricFiltersPaginatorOptions)) *DescribeMetricFiltersPaginator {
+	if params == nil {
+		params = &DescribeMetricFiltersInput{}
+	}
+
 	options := DescribeMetricFiltersPaginatorOptions{}
 	if params.Limit != nil {
 		options.Limit = *params.Limit
@@ -167,10 +171,6 @@ func NewDescribeMetricFiltersPaginator(client DescribeMetricFiltersAPIClient, pa
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeMetricFiltersInput{}
 	}
 
 	return &DescribeMetricFiltersPaginator{

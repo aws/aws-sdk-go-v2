@@ -176,6 +176,10 @@ type ListExecutionsPaginator struct {
 
 // NewListExecutionsPaginator returns a new ListExecutionsPaginator
 func NewListExecutionsPaginator(client ListExecutionsAPIClient, params *ListExecutionsInput, optFns ...func(*ListExecutionsPaginatorOptions)) *ListExecutionsPaginator {
+	if params == nil {
+		params = &ListExecutionsInput{}
+	}
+
 	options := ListExecutionsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -183,10 +187,6 @@ func NewListExecutionsPaginator(client ListExecutionsAPIClient, params *ListExec
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListExecutionsInput{}
 	}
 
 	return &ListExecutionsPaginator{

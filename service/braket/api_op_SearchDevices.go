@@ -149,6 +149,10 @@ type SearchDevicesPaginator struct {
 
 // NewSearchDevicesPaginator returns a new SearchDevicesPaginator
 func NewSearchDevicesPaginator(client SearchDevicesAPIClient, params *SearchDevicesInput, optFns ...func(*SearchDevicesPaginatorOptions)) *SearchDevicesPaginator {
+	if params == nil {
+		params = &SearchDevicesInput{}
+	}
+
 	options := SearchDevicesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -156,10 +160,6 @@ func NewSearchDevicesPaginator(client SearchDevicesAPIClient, params *SearchDevi
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &SearchDevicesInput{}
 	}
 
 	return &SearchDevicesPaginator{

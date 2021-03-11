@@ -155,14 +155,14 @@ type DescribeResourceCollectionHealthPaginator struct {
 // NewDescribeResourceCollectionHealthPaginator returns a new
 // DescribeResourceCollectionHealthPaginator
 func NewDescribeResourceCollectionHealthPaginator(client DescribeResourceCollectionHealthAPIClient, params *DescribeResourceCollectionHealthInput, optFns ...func(*DescribeResourceCollectionHealthPaginatorOptions)) *DescribeResourceCollectionHealthPaginator {
+	if params == nil {
+		params = &DescribeResourceCollectionHealthInput{}
+	}
+
 	options := DescribeResourceCollectionHealthPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeResourceCollectionHealthInput{}
 	}
 
 	return &DescribeResourceCollectionHealthPaginator{

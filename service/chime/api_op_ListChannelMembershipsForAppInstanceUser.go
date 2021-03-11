@@ -176,6 +176,10 @@ type ListChannelMembershipsForAppInstanceUserPaginator struct {
 // NewListChannelMembershipsForAppInstanceUserPaginator returns a new
 // ListChannelMembershipsForAppInstanceUserPaginator
 func NewListChannelMembershipsForAppInstanceUserPaginator(client ListChannelMembershipsForAppInstanceUserAPIClient, params *ListChannelMembershipsForAppInstanceUserInput, optFns ...func(*ListChannelMembershipsForAppInstanceUserPaginatorOptions)) *ListChannelMembershipsForAppInstanceUserPaginator {
+	if params == nil {
+		params = &ListChannelMembershipsForAppInstanceUserInput{}
+	}
+
 	options := ListChannelMembershipsForAppInstanceUserPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -183,10 +187,6 @@ func NewListChannelMembershipsForAppInstanceUserPaginator(client ListChannelMemb
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListChannelMembershipsForAppInstanceUserInput{}
 	}
 
 	return &ListChannelMembershipsForAppInstanceUserPaginator{

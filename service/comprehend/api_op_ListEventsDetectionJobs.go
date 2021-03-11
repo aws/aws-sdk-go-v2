@@ -145,6 +145,10 @@ type ListEventsDetectionJobsPaginator struct {
 // NewListEventsDetectionJobsPaginator returns a new
 // ListEventsDetectionJobsPaginator
 func NewListEventsDetectionJobsPaginator(client ListEventsDetectionJobsAPIClient, params *ListEventsDetectionJobsInput, optFns ...func(*ListEventsDetectionJobsPaginatorOptions)) *ListEventsDetectionJobsPaginator {
+	if params == nil {
+		params = &ListEventsDetectionJobsInput{}
+	}
+
 	options := ListEventsDetectionJobsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -152,10 +156,6 @@ func NewListEventsDetectionJobsPaginator(client ListEventsDetectionJobsAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListEventsDetectionJobsInput{}
 	}
 
 	return &ListEventsDetectionJobsPaginator{

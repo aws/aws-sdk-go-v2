@@ -144,14 +144,14 @@ type ListSuitesPaginator struct {
 
 // NewListSuitesPaginator returns a new ListSuitesPaginator
 func NewListSuitesPaginator(client ListSuitesAPIClient, params *ListSuitesInput, optFns ...func(*ListSuitesPaginatorOptions)) *ListSuitesPaginator {
+	if params == nil {
+		params = &ListSuitesInput{}
+	}
+
 	options := ListSuitesPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSuitesInput{}
 	}
 
 	return &ListSuitesPaginator{

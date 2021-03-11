@@ -150,6 +150,10 @@ type ListWorkforcesPaginator struct {
 
 // NewListWorkforcesPaginator returns a new ListWorkforcesPaginator
 func NewListWorkforcesPaginator(client ListWorkforcesAPIClient, params *ListWorkforcesInput, optFns ...func(*ListWorkforcesPaginatorOptions)) *ListWorkforcesPaginator {
+	if params == nil {
+		params = &ListWorkforcesInput{}
+	}
+
 	options := ListWorkforcesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -157,10 +161,6 @@ func NewListWorkforcesPaginator(client ListWorkforcesAPIClient, params *ListWork
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListWorkforcesInput{}
 	}
 
 	return &ListWorkforcesPaginator{

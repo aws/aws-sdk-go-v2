@@ -188,6 +188,10 @@ type DescribeAffectedAccountsForOrganizationPaginator struct {
 // NewDescribeAffectedAccountsForOrganizationPaginator returns a new
 // DescribeAffectedAccountsForOrganizationPaginator
 func NewDescribeAffectedAccountsForOrganizationPaginator(client DescribeAffectedAccountsForOrganizationAPIClient, params *DescribeAffectedAccountsForOrganizationInput, optFns ...func(*DescribeAffectedAccountsForOrganizationPaginatorOptions)) *DescribeAffectedAccountsForOrganizationPaginator {
+	if params == nil {
+		params = &DescribeAffectedAccountsForOrganizationInput{}
+	}
+
 	options := DescribeAffectedAccountsForOrganizationPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -195,10 +199,6 @@ func NewDescribeAffectedAccountsForOrganizationPaginator(client DescribeAffected
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeAffectedAccountsForOrganizationInput{}
 	}
 
 	return &DescribeAffectedAccountsForOrganizationPaginator{

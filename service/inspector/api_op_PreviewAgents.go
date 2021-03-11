@@ -156,6 +156,10 @@ type PreviewAgentsPaginator struct {
 
 // NewPreviewAgentsPaginator returns a new PreviewAgentsPaginator
 func NewPreviewAgentsPaginator(client PreviewAgentsAPIClient, params *PreviewAgentsInput, optFns ...func(*PreviewAgentsPaginatorOptions)) *PreviewAgentsPaginator {
+	if params == nil {
+		params = &PreviewAgentsInput{}
+	}
+
 	options := PreviewAgentsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -163,10 +167,6 @@ func NewPreviewAgentsPaginator(client PreviewAgentsAPIClient, params *PreviewAge
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &PreviewAgentsInput{}
 	}
 
 	return &PreviewAgentsPaginator{

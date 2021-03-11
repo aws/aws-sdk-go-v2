@@ -141,6 +141,10 @@ type ListWirelessGatewaysPaginator struct {
 
 // NewListWirelessGatewaysPaginator returns a new ListWirelessGatewaysPaginator
 func NewListWirelessGatewaysPaginator(client ListWirelessGatewaysAPIClient, params *ListWirelessGatewaysInput, optFns ...func(*ListWirelessGatewaysPaginatorOptions)) *ListWirelessGatewaysPaginator {
+	if params == nil {
+		params = &ListWirelessGatewaysInput{}
+	}
+
 	options := ListWirelessGatewaysPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -148,10 +152,6 @@ func NewListWirelessGatewaysPaginator(client ListWirelessGatewaysAPIClient, para
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListWirelessGatewaysInput{}
 	}
 
 	return &ListWirelessGatewaysPaginator{

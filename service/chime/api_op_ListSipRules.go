@@ -140,6 +140,10 @@ type ListSipRulesPaginator struct {
 
 // NewListSipRulesPaginator returns a new ListSipRulesPaginator
 func NewListSipRulesPaginator(client ListSipRulesAPIClient, params *ListSipRulesInput, optFns ...func(*ListSipRulesPaginatorOptions)) *ListSipRulesPaginator {
+	if params == nil {
+		params = &ListSipRulesInput{}
+	}
+
 	options := ListSipRulesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -147,10 +151,6 @@ func NewListSipRulesPaginator(client ListSipRulesAPIClient, params *ListSipRules
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSipRulesInput{}
 	}
 
 	return &ListSipRulesPaginator{

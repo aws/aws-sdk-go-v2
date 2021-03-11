@@ -150,6 +150,10 @@ type ListTriggersPaginator struct {
 
 // NewListTriggersPaginator returns a new ListTriggersPaginator
 func NewListTriggersPaginator(client ListTriggersAPIClient, params *ListTriggersInput, optFns ...func(*ListTriggersPaginatorOptions)) *ListTriggersPaginator {
+	if params == nil {
+		params = &ListTriggersInput{}
+	}
+
 	options := ListTriggersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -157,10 +161,6 @@ func NewListTriggersPaginator(client ListTriggersAPIClient, params *ListTriggers
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTriggersInput{}
 	}
 
 	return &ListTriggersPaginator{

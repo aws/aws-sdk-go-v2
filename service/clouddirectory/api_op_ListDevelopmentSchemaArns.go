@@ -139,6 +139,10 @@ type ListDevelopmentSchemaArnsPaginator struct {
 // NewListDevelopmentSchemaArnsPaginator returns a new
 // ListDevelopmentSchemaArnsPaginator
 func NewListDevelopmentSchemaArnsPaginator(client ListDevelopmentSchemaArnsAPIClient, params *ListDevelopmentSchemaArnsInput, optFns ...func(*ListDevelopmentSchemaArnsPaginatorOptions)) *ListDevelopmentSchemaArnsPaginator {
+	if params == nil {
+		params = &ListDevelopmentSchemaArnsInput{}
+	}
+
 	options := ListDevelopmentSchemaArnsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -146,10 +150,6 @@ func NewListDevelopmentSchemaArnsPaginator(client ListDevelopmentSchemaArnsAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDevelopmentSchemaArnsInput{}
 	}
 
 	return &ListDevelopmentSchemaArnsPaginator{

@@ -168,6 +168,10 @@ type ListForecastsPaginator struct {
 
 // NewListForecastsPaginator returns a new ListForecastsPaginator
 func NewListForecastsPaginator(client ListForecastsAPIClient, params *ListForecastsInput, optFns ...func(*ListForecastsPaginatorOptions)) *ListForecastsPaginator {
+	if params == nil {
+		params = &ListForecastsInput{}
+	}
+
 	options := ListForecastsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -175,10 +179,6 @@ func NewListForecastsPaginator(client ListForecastsAPIClient, params *ListForeca
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListForecastsInput{}
 	}
 
 	return &ListForecastsPaginator{

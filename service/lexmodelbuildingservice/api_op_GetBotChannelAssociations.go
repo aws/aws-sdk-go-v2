@@ -169,6 +169,10 @@ type GetBotChannelAssociationsPaginator struct {
 // NewGetBotChannelAssociationsPaginator returns a new
 // GetBotChannelAssociationsPaginator
 func NewGetBotChannelAssociationsPaginator(client GetBotChannelAssociationsAPIClient, params *GetBotChannelAssociationsInput, optFns ...func(*GetBotChannelAssociationsPaginatorOptions)) *GetBotChannelAssociationsPaginator {
+	if params == nil {
+		params = &GetBotChannelAssociationsInput{}
+	}
+
 	options := GetBotChannelAssociationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -176,10 +180,6 @@ func NewGetBotChannelAssociationsPaginator(client GetBotChannelAssociationsAPICl
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetBotChannelAssociationsInput{}
 	}
 
 	return &GetBotChannelAssociationsPaginator{

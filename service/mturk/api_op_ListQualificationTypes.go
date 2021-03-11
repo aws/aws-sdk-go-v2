@@ -168,6 +168,10 @@ type ListQualificationTypesPaginator struct {
 
 // NewListQualificationTypesPaginator returns a new ListQualificationTypesPaginator
 func NewListQualificationTypesPaginator(client ListQualificationTypesAPIClient, params *ListQualificationTypesInput, optFns ...func(*ListQualificationTypesPaginatorOptions)) *ListQualificationTypesPaginator {
+	if params == nil {
+		params = &ListQualificationTypesInput{}
+	}
+
 	options := ListQualificationTypesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -175,10 +179,6 @@ func NewListQualificationTypesPaginator(client ListQualificationTypesAPIClient, 
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListQualificationTypesInput{}
 	}
 
 	return &ListQualificationTypesPaginator{

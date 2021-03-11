@@ -151,6 +151,10 @@ type ListInvalidationsPaginator struct {
 
 // NewListInvalidationsPaginator returns a new ListInvalidationsPaginator
 func NewListInvalidationsPaginator(client ListInvalidationsAPIClient, params *ListInvalidationsInput, optFns ...func(*ListInvalidationsPaginatorOptions)) *ListInvalidationsPaginator {
+	if params == nil {
+		params = &ListInvalidationsInput{}
+	}
+
 	options := ListInvalidationsPaginatorOptions{}
 	if params.MaxItems != nil {
 		options.Limit = *params.MaxItems
@@ -158,10 +162,6 @@ func NewListInvalidationsPaginator(client ListInvalidationsAPIClient, params *Li
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListInvalidationsInput{}
 	}
 
 	return &ListInvalidationsPaginator{

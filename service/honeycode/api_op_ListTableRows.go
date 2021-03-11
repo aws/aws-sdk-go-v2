@@ -182,6 +182,10 @@ type ListTableRowsPaginator struct {
 
 // NewListTableRowsPaginator returns a new ListTableRowsPaginator
 func NewListTableRowsPaginator(client ListTableRowsAPIClient, params *ListTableRowsInput, optFns ...func(*ListTableRowsPaginatorOptions)) *ListTableRowsPaginator {
+	if params == nil {
+		params = &ListTableRowsInput{}
+	}
+
 	options := ListTableRowsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -189,10 +193,6 @@ func NewListTableRowsPaginator(client ListTableRowsAPIClient, params *ListTableR
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTableRowsInput{}
 	}
 
 	return &ListTableRowsPaginator{

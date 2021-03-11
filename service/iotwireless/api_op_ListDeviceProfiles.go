@@ -141,6 +141,10 @@ type ListDeviceProfilesPaginator struct {
 
 // NewListDeviceProfilesPaginator returns a new ListDeviceProfilesPaginator
 func NewListDeviceProfilesPaginator(client ListDeviceProfilesAPIClient, params *ListDeviceProfilesInput, optFns ...func(*ListDeviceProfilesPaginatorOptions)) *ListDeviceProfilesPaginator {
+	if params == nil {
+		params = &ListDeviceProfilesInput{}
+	}
+
 	options := ListDeviceProfilesPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -148,10 +152,6 @@ func NewListDeviceProfilesPaginator(client ListDeviceProfilesAPIClient, params *
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListDeviceProfilesInput{}
 	}
 
 	return &ListDeviceProfilesPaginator{

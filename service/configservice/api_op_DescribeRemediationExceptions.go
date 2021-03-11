@@ -166,6 +166,10 @@ type DescribeRemediationExceptionsPaginator struct {
 // NewDescribeRemediationExceptionsPaginator returns a new
 // DescribeRemediationExceptionsPaginator
 func NewDescribeRemediationExceptionsPaginator(client DescribeRemediationExceptionsAPIClient, params *DescribeRemediationExceptionsInput, optFns ...func(*DescribeRemediationExceptionsPaginatorOptions)) *DescribeRemediationExceptionsPaginator {
+	if params == nil {
+		params = &DescribeRemediationExceptionsInput{}
+	}
+
 	options := DescribeRemediationExceptionsPaginatorOptions{}
 	if params.Limit != 0 {
 		options.Limit = params.Limit
@@ -173,10 +177,6 @@ func NewDescribeRemediationExceptionsPaginator(client DescribeRemediationExcepti
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeRemediationExceptionsInput{}
 	}
 
 	return &DescribeRemediationExceptionsPaginator{

@@ -150,6 +150,10 @@ type ListTargetsPaginator struct {
 
 // NewListTargetsPaginator returns a new ListTargetsPaginator
 func NewListTargetsPaginator(client ListTargetsAPIClient, params *ListTargetsInput, optFns ...func(*ListTargetsPaginatorOptions)) *ListTargetsPaginator {
+	if params == nil {
+		params = &ListTargetsInput{}
+	}
+
 	options := ListTargetsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -157,10 +161,6 @@ func NewListTargetsPaginator(client ListTargetsAPIClient, params *ListTargetsInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListTargetsInput{}
 	}
 
 	return &ListTargetsPaginator{

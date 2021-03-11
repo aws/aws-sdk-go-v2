@@ -155,6 +155,10 @@ type GetProductsPaginator struct {
 
 // NewGetProductsPaginator returns a new GetProductsPaginator
 func NewGetProductsPaginator(client GetProductsAPIClient, params *GetProductsInput, optFns ...func(*GetProductsPaginatorOptions)) *GetProductsPaginator {
+	if params == nil {
+		params = &GetProductsInput{}
+	}
+
 	options := GetProductsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -162,10 +166,6 @@ func NewGetProductsPaginator(client GetProductsAPIClient, params *GetProductsInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetProductsInput{}
 	}
 
 	return &GetProductsPaginator{

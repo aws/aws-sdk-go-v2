@@ -142,6 +142,10 @@ type ListStreamsPaginator struct {
 
 // NewListStreamsPaginator returns a new ListStreamsPaginator
 func NewListStreamsPaginator(client ListStreamsAPIClient, params *ListStreamsInput, optFns ...func(*ListStreamsPaginatorOptions)) *ListStreamsPaginator {
+	if params == nil {
+		params = &ListStreamsInput{}
+	}
+
 	options := ListStreamsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -149,10 +153,6 @@ func NewListStreamsPaginator(client ListStreamsAPIClient, params *ListStreamsInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListStreamsInput{}
 	}
 
 	return &ListStreamsPaginator{

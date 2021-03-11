@@ -196,6 +196,10 @@ type DescribeUsageLimitsPaginator struct {
 
 // NewDescribeUsageLimitsPaginator returns a new DescribeUsageLimitsPaginator
 func NewDescribeUsageLimitsPaginator(client DescribeUsageLimitsAPIClient, params *DescribeUsageLimitsInput, optFns ...func(*DescribeUsageLimitsPaginatorOptions)) *DescribeUsageLimitsPaginator {
+	if params == nil {
+		params = &DescribeUsageLimitsInput{}
+	}
+
 	options := DescribeUsageLimitsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -203,10 +207,6 @@ func NewDescribeUsageLimitsPaginator(client DescribeUsageLimitsAPIClient, params
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeUsageLimitsInput{}
 	}
 
 	return &DescribeUsageLimitsPaginator{

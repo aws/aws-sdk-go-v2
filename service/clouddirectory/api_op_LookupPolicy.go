@@ -161,6 +161,10 @@ type LookupPolicyPaginator struct {
 
 // NewLookupPolicyPaginator returns a new LookupPolicyPaginator
 func NewLookupPolicyPaginator(client LookupPolicyAPIClient, params *LookupPolicyInput, optFns ...func(*LookupPolicyPaginatorOptions)) *LookupPolicyPaginator {
+	if params == nil {
+		params = &LookupPolicyInput{}
+	}
+
 	options := LookupPolicyPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -168,10 +172,6 @@ func NewLookupPolicyPaginator(client LookupPolicyAPIClient, params *LookupPolicy
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &LookupPolicyInput{}
 	}
 
 	return &LookupPolicyPaginator{

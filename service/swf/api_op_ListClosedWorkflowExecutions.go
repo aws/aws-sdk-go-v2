@@ -238,6 +238,10 @@ type ListClosedWorkflowExecutionsPaginator struct {
 // NewListClosedWorkflowExecutionsPaginator returns a new
 // ListClosedWorkflowExecutionsPaginator
 func NewListClosedWorkflowExecutionsPaginator(client ListClosedWorkflowExecutionsAPIClient, params *ListClosedWorkflowExecutionsInput, optFns ...func(*ListClosedWorkflowExecutionsPaginatorOptions)) *ListClosedWorkflowExecutionsPaginator {
+	if params == nil {
+		params = &ListClosedWorkflowExecutionsInput{}
+	}
+
 	options := ListClosedWorkflowExecutionsPaginatorOptions{}
 	if params.MaximumPageSize != 0 {
 		options.Limit = params.MaximumPageSize
@@ -245,10 +249,6 @@ func NewListClosedWorkflowExecutionsPaginator(client ListClosedWorkflowExecution
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListClosedWorkflowExecutionsInput{}
 	}
 
 	return &ListClosedWorkflowExecutionsPaginator{

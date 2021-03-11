@@ -193,14 +193,14 @@ type DescribeReservedInstancesModificationsPaginator struct {
 // NewDescribeReservedInstancesModificationsPaginator returns a new
 // DescribeReservedInstancesModificationsPaginator
 func NewDescribeReservedInstancesModificationsPaginator(client DescribeReservedInstancesModificationsAPIClient, params *DescribeReservedInstancesModificationsInput, optFns ...func(*DescribeReservedInstancesModificationsPaginatorOptions)) *DescribeReservedInstancesModificationsPaginator {
+	if params == nil {
+		params = &DescribeReservedInstancesModificationsInput{}
+	}
+
 	options := DescribeReservedInstancesModificationsPaginatorOptions{}
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeReservedInstancesModificationsInput{}
 	}
 
 	return &DescribeReservedInstancesModificationsPaginator{

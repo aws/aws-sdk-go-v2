@@ -144,6 +144,10 @@ type GetOutcomesPaginator struct {
 
 // NewGetOutcomesPaginator returns a new GetOutcomesPaginator
 func NewGetOutcomesPaginator(client GetOutcomesAPIClient, params *GetOutcomesInput, optFns ...func(*GetOutcomesPaginatorOptions)) *GetOutcomesPaginator {
+	if params == nil {
+		params = &GetOutcomesInput{}
+	}
+
 	options := GetOutcomesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -151,10 +155,6 @@ func NewGetOutcomesPaginator(client GetOutcomesAPIClient, params *GetOutcomesInp
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetOutcomesInput{}
 	}
 
 	return &GetOutcomesPaginator{

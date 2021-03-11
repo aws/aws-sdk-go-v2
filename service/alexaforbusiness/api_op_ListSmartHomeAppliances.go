@@ -148,6 +148,10 @@ type ListSmartHomeAppliancesPaginator struct {
 // NewListSmartHomeAppliancesPaginator returns a new
 // ListSmartHomeAppliancesPaginator
 func NewListSmartHomeAppliancesPaginator(client ListSmartHomeAppliancesAPIClient, params *ListSmartHomeAppliancesInput, optFns ...func(*ListSmartHomeAppliancesPaginatorOptions)) *ListSmartHomeAppliancesPaginator {
+	if params == nil {
+		params = &ListSmartHomeAppliancesInput{}
+	}
+
 	options := ListSmartHomeAppliancesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -155,10 +159,6 @@ func NewListSmartHomeAppliancesPaginator(client ListSmartHomeAppliancesAPIClient
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListSmartHomeAppliancesInput{}
 	}
 
 	return &ListSmartHomeAppliancesPaginator{

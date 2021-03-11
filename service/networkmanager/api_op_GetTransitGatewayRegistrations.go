@@ -154,6 +154,10 @@ type GetTransitGatewayRegistrationsPaginator struct {
 // NewGetTransitGatewayRegistrationsPaginator returns a new
 // GetTransitGatewayRegistrationsPaginator
 func NewGetTransitGatewayRegistrationsPaginator(client GetTransitGatewayRegistrationsAPIClient, params *GetTransitGatewayRegistrationsInput, optFns ...func(*GetTransitGatewayRegistrationsPaginatorOptions)) *GetTransitGatewayRegistrationsPaginator {
+	if params == nil {
+		params = &GetTransitGatewayRegistrationsInput{}
+	}
+
 	options := GetTransitGatewayRegistrationsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -161,10 +165,6 @@ func NewGetTransitGatewayRegistrationsPaginator(client GetTransitGatewayRegistra
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &GetTransitGatewayRegistrationsInput{}
 	}
 
 	return &GetTransitGatewayRegistrationsPaginator{

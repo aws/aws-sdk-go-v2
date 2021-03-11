@@ -164,6 +164,10 @@ type ListAuditTasksPaginator struct {
 
 // NewListAuditTasksPaginator returns a new ListAuditTasksPaginator
 func NewListAuditTasksPaginator(client ListAuditTasksAPIClient, params *ListAuditTasksInput, optFns ...func(*ListAuditTasksPaginatorOptions)) *ListAuditTasksPaginator {
+	if params == nil {
+		params = &ListAuditTasksInput{}
+	}
+
 	options := ListAuditTasksPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
@@ -171,10 +175,6 @@ func NewListAuditTasksPaginator(client ListAuditTasksAPIClient, params *ListAudi
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &ListAuditTasksInput{}
 	}
 
 	return &ListAuditTasksPaginator{

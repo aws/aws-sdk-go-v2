@@ -172,6 +172,10 @@ type DescribeComputeEnvironmentsPaginator struct {
 // NewDescribeComputeEnvironmentsPaginator returns a new
 // DescribeComputeEnvironmentsPaginator
 func NewDescribeComputeEnvironmentsPaginator(client DescribeComputeEnvironmentsAPIClient, params *DescribeComputeEnvironmentsInput, optFns ...func(*DescribeComputeEnvironmentsPaginatorOptions)) *DescribeComputeEnvironmentsPaginator {
+	if params == nil {
+		params = &DescribeComputeEnvironmentsInput{}
+	}
+
 	options := DescribeComputeEnvironmentsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
@@ -179,10 +183,6 @@ func NewDescribeComputeEnvironmentsPaginator(client DescribeComputeEnvironmentsA
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeComputeEnvironmentsInput{}
 	}
 
 	return &DescribeComputeEnvironmentsPaginator{

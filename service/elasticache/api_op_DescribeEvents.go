@@ -174,6 +174,10 @@ type DescribeEventsPaginator struct {
 
 // NewDescribeEventsPaginator returns a new DescribeEventsPaginator
 func NewDescribeEventsPaginator(client DescribeEventsAPIClient, params *DescribeEventsInput, optFns ...func(*DescribeEventsPaginatorOptions)) *DescribeEventsPaginator {
+	if params == nil {
+		params = &DescribeEventsInput{}
+	}
+
 	options := DescribeEventsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
@@ -181,10 +185,6 @@ func NewDescribeEventsPaginator(client DescribeEventsAPIClient, params *Describe
 
 	for _, fn := range optFns {
 		fn(&options)
-	}
-
-	if params == nil {
-		params = &DescribeEventsInput{}
 	}
 
 	return &DescribeEventsPaginator{
