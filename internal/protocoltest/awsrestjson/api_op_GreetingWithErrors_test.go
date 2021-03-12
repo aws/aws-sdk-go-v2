@@ -27,18 +27,28 @@ func TestClient_GreetingWithErrors_awsRestjson1Deserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *GreetingWithErrorsOutput
 	}{
-		// Ensures that operations with errors successfully know how to deserialize the
-		// successful response
+		// Ensures that operations with errors successfully know how to deserialize a
+		// successful response. As of January 2021, server implementations are expected to
+		// respond with a JSON object regardless of if the output parameters are empty.
 		"RestJsonGreetingWithErrors": {
 			StatusCode: 200,
 			Header: http.Header{
-				"Content-Type": []string{"application/json"},
-				"X-Greeting":   []string{"Hello"},
+				"X-Greeting": []string{"Hello"},
 			},
 			BodyMediaType: "application/json",
-			Body: []byte(`{
-			    "greeting": "Hello"
-			}`),
+			Body:          []byte(`{}`),
+			ExpectResult: &GreetingWithErrorsOutput{
+				Greeting: ptr.String("Hello"),
+			},
+		},
+		// This test is similar to RestJsonGreetingWithErrors, but it ensures that clients
+		// can gracefully deal with a server omitting a response payload.
+		"RestJsonGreetingWithErrorsNoPayload": {
+			StatusCode: 200,
+			Header: http.Header{
+				"X-Greeting": []string{"Hello"},
+			},
+			Body: []byte(``),
 			ExpectResult: &GreetingWithErrorsOutput{
 				Greeting: ptr.String("Hello"),
 			},

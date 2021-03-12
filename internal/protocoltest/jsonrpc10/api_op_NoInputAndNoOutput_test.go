@@ -33,8 +33,11 @@ func TestClient_NoInputAndNoOutput_awsAwsjson10Serialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// No input serializes no payload
-		"AwsJson10NoInputAndNoOutput": {
+		// Clients must always send an empty JSON object payload for operations with no
+		// input (that is, {}). While AWS service implementations support requests with no
+		// payload or requests that send {}, always sending {} from the client is preferred
+		// for forward compatibility in case input is ever added to an operation.
+		"AwsJson10MustAlwaysSendEmptyJsonPayload": {
 			Params:        &NoInputAndNoOutputInput{},
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
@@ -43,10 +46,35 @@ func TestClient_NoInputAndNoOutput_awsAwsjson10Serialize(t *testing.T) {
 				"Content-Type": []string{"application/x-amz-json-1.0"},
 				"X-Amz-Target": []string{"JsonRpc10.NoInputAndNoOutput"},
 			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
+			},
+		},
+		// Service implementations must support no payload or an empty object payload for
+		// operations that define no input. However, despite the lack of a payload, a
+		// Content-Type header is still required in order for the service to properly
+		// detect the protocol.
+		"AwsJson10ServiceSupportsNoPayloadForNoInput": {
+			Params:        &NoInputAndNoOutputInput{},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+				"X-Amz-Target": []string{"JsonRpc10.NoInputAndNoOutput"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
 		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "AwsJson10ServiceSupportsNoPayloadForNoInput" {
+				t.Skip("disabled test aws.protocoltests.json10#JsonRpc10 aws.protocoltests.json10#NoInputAndNoOutput")
+			}
+
 			var actualReq *http.Request
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				actualReq = r.Clone(r.Context())
@@ -118,12 +146,42 @@ func TestClient_NoInputAndNoOutput_awsAwsjson10Deserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *NoInputAndNoOutputOutput
 	}{
-		// No output serializes no payload
-		"AwsJson10NoInputAndNoOutput": {
+		// When no output is defined, the service is expected to return an empty payload,
+		// however, client must ignore a JSON payload if one is returned. This ensures that
+		// if output is added later, then it will not break the client.
+		"AwsJson10HandlesEmptyOutputShape": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type": []string{"application/x-amz-json-1.0"},
 			},
+			BodyMediaType: "application/json",
+			Body:          []byte(`{}`),
+			ExpectResult:  &NoInputAndNoOutputOutput{},
+		},
+		// This client-only test builds on handles_empty_output_shape, by including
+		// unexpected fields in the JSON. A client needs to ignore JSON output that is
+		// empty or that contains JSON object data.
+		"AwsJson10HandlesUnexpectedJsonOutput": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "foo": true
+			}`),
+			ExpectResult: &NoInputAndNoOutputOutput{},
+		},
+		// When no output is defined, the service is expected to return an empty payload.
+		// Despite the lack of a payload, the service is expected to always send a
+		// Content-Type header. Clients must handle cases where a service returns a JSON
+		// object and where a service returns no JSON at all.
+		"AwsJson10ServiceRespondsWithNoPayload": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			Body:         []byte(``),
 			ExpectResult: &NoInputAndNoOutputOutput{},
 		},
 	}

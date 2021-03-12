@@ -29,6 +29,46 @@ func (m *validateOpConstantQueryString) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpEndpointWithHostLabelHeaderOperation struct {
+}
+
+func (*validateOpEndpointWithHostLabelHeaderOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEndpointWithHostLabelHeaderOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EndpointWithHostLabelHeaderOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEndpointWithHostLabelHeaderOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEndpointWithHostLabelOperation struct {
+}
+
+func (*validateOpEndpointWithHostLabelOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEndpointWithHostLabelOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EndpointWithHostLabelOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEndpointWithHostLabelOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpHttpRequestWithGreedyLabelInPath struct {
 }
 
@@ -93,6 +133,14 @@ func addOpConstantQueryStringValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpConstantQueryString{}, middleware.After)
 }
 
+func addOpEndpointWithHostLabelHeaderOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEndpointWithHostLabelHeaderOperation{}, middleware.After)
+}
+
+func addOpEndpointWithHostLabelOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEndpointWithHostLabelOperation{}, middleware.After)
+}
+
 func addOpHttpRequestWithGreedyLabelInPathValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpHttpRequestWithGreedyLabelInPath{}, middleware.After)
 }
@@ -112,6 +160,36 @@ func validateOpConstantQueryStringInput(v *ConstantQueryStringInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ConstantQueryStringInput"}
 	if v.Hello == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Hello"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEndpointWithHostLabelHeaderOperationInput(v *EndpointWithHostLabelHeaderOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EndpointWithHostLabelHeaderOperationInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEndpointWithHostLabelOperationInput(v *EndpointWithHostLabelOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EndpointWithHostLabelOperationInput"}
+	if v.Label == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Label"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

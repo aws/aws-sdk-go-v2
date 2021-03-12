@@ -54,6 +54,108 @@ type XmlNamespaceNested struct {
 	Values []string
 }
 
+type XmlNestedUnionStruct struct {
+	BooleanValue *bool
+
+	ByteValue *int8
+
+	DoubleValue *float64
+
+	FloatValue *float32
+
+	IntegerValue *int32
+
+	LongValue *int64
+
+	ShortValue *int16
+
+	StringValue *string
+}
+
+// The following types satisfy this interface:
+//  XmlUnionShapeMemberStringValue
+//  XmlUnionShapeMemberBooleanValue
+//  XmlUnionShapeMemberByteValue
+//  XmlUnionShapeMemberShortValue
+//  XmlUnionShapeMemberIntegerValue
+//  XmlUnionShapeMemberLongValue
+//  XmlUnionShapeMemberFloatValue
+//  XmlUnionShapeMemberDoubleValue
+//  XmlUnionShapeMemberUnionValue
+//  XmlUnionShapeMemberStructValue
+type XmlUnionShape interface {
+	isXmlUnionShape()
+}
+
+type XmlUnionShapeMemberStringValue struct {
+	Value string
+}
+
+func (*XmlUnionShapeMemberStringValue) isXmlUnionShape() {}
+
+type XmlUnionShapeMemberBooleanValue struct {
+	Value bool
+}
+
+func (*XmlUnionShapeMemberBooleanValue) isXmlUnionShape() {}
+
+type XmlUnionShapeMemberByteValue struct {
+	Value int8
+}
+
+func (*XmlUnionShapeMemberByteValue) isXmlUnionShape() {}
+
+type XmlUnionShapeMemberShortValue struct {
+	Value int16
+}
+
+func (*XmlUnionShapeMemberShortValue) isXmlUnionShape() {}
+
+type XmlUnionShapeMemberIntegerValue struct {
+	Value int32
+}
+
+func (*XmlUnionShapeMemberIntegerValue) isXmlUnionShape() {}
+
+type XmlUnionShapeMemberLongValue struct {
+	Value int64
+}
+
+func (*XmlUnionShapeMemberLongValue) isXmlUnionShape() {}
+
+type XmlUnionShapeMemberFloatValue struct {
+	Value float32
+}
+
+func (*XmlUnionShapeMemberFloatValue) isXmlUnionShape() {}
+
+type XmlUnionShapeMemberDoubleValue struct {
+	Value float64
+}
+
+func (*XmlUnionShapeMemberDoubleValue) isXmlUnionShape() {}
+
+type XmlUnionShapeMemberUnionValue struct {
+	Value XmlUnionShape
+}
+
+func (*XmlUnionShapeMemberUnionValue) isXmlUnionShape() {}
+
+type XmlUnionShapeMemberStructValue struct {
+	Value XmlNestedUnionStruct
+}
+
+func (*XmlUnionShapeMemberStructValue) isXmlUnionShape() {}
+
 type GreetingStruct struct {
 	Hi *string
 }
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+}
+
+func (*UnknownUnionMember) isXmlUnionShape() {}

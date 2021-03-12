@@ -51,9 +51,46 @@ func TestClient_EmptyOperation_awsAwsjson11Serialize(t *testing.T) {
 				"X-Amz-Target": []string{"JsonProtocol.EmptyOperation"},
 			},
 		},
+		// Clients must always send an empty JSON object payload for operations with no
+		// input (that is, {}). While AWS service implementations support requests with no
+		// payload or requests that send {}, always sending {} from the client is preferred
+		// for forward compatibility in case input is ever added to an operation.
+		"json_1_1_client_sends_empty_payload_for_no_input_shape": {
+			Params:        &EmptyOperationInput{},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
+			},
+		},
+		// Service implementations must support no payload or an empty object payload for
+		// operations that define no input. However, despite the lack of a payload, a
+		// Content-Type header is still required in order for the service to properly
+		// detect the protocol.
+		"json_1_1_service_supports_empty_payload_for_no_input_shape": {
+			Params:        &EmptyOperationInput{},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "json_1_1_service_supports_empty_payload_for_no_input_shape" {
+				t.Skip("disabled test aws.protocoltests.json#JsonProtocol aws.protocoltests.json#EmptyOperation")
+			}
+
 			var actualReq *http.Request
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				actualReq = r.Clone(r.Context())
@@ -125,7 +162,9 @@ func TestClient_EmptyOperation_awsAwsjson11Deserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *EmptyOperationOutput
 	}{
-		// Handles empty output shapes
+		// When no output is defined, the service is expected to return an empty payload,
+		// however, client must ignore a JSON payload if one is returned. This ensures that
+		// if output is added later, then it will not break the client.
 		"handles_empty_output_shape": {
 			StatusCode: 200,
 			Header: http.Header{
@@ -134,6 +173,32 @@ func TestClient_EmptyOperation_awsAwsjson11Deserialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			Body:          []byte(`{}`),
 			ExpectResult:  &EmptyOperationOutput{},
+		},
+		// This client-only test builds on handles_empty_output_shape, by including
+		// unexpected fields in the JSON. A client needs to ignore JSON output that is
+		// empty or that contains JSON object data.
+		"handles_unexpected_json_output": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "foo": true
+			}`),
+			ExpectResult: &EmptyOperationOutput{},
+		},
+		// When no output is defined, the service is expected to return an empty payload.
+		// Despite the lack of a payload, the service is expected to always send a
+		// Content-Type header. Clients must handle cases where a service returns a JSON
+		// object and where a service returns no JSON at all.
+		"json_1_1_service_responds_with_no_payload": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.1"},
+			},
+			Body:         []byte(``),
+			ExpectResult: &EmptyOperationOutput{},
 		},
 	}
 	for name, c := range cases {

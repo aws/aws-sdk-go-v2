@@ -33,7 +33,7 @@ func TestClient_NoInputAndOutput_awsAwsjson10Serialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// No input serializes no payload
+		// A client should always send and empty JSON object payload.
 		"AwsJson10NoInputAndOutput": {
 			Params:        &NoInputAndOutputInput{},
 			ExpectMethod:  "POST",
@@ -42,6 +42,10 @@ func TestClient_NoInputAndOutput_awsAwsjson10Serialize(t *testing.T) {
 			ExpectHeader: http.Header{
 				"Content-Type": []string{"application/x-amz-json-1.0"},
 				"X-Amz-Target": []string{"JsonRpc10.NoInputAndOutput"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
 			},
 		},
 	}
@@ -118,13 +122,15 @@ func TestClient_NoInputAndOutput_awsAwsjson10Deserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *NoInputAndOutputOutput
 	}{
-		// Empty output serializes no payload
+		// Empty output always serializes an empty object payload.
 		"AwsJson10NoInputAndOutput": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type": []string{"application/x-amz-json-1.0"},
 			},
-			ExpectResult: &NoInputAndOutputOutput{},
+			BodyMediaType: "application/json",
+			Body:          []byte(`{}`),
+			ExpectResult:  &NoInputAndOutputOutput{},
 		},
 	}
 	for name, c := range cases {

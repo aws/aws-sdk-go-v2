@@ -5,6 +5,7 @@ package restxmlwithnamespace
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxmlwithnamespace/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +40,8 @@ type SimpleScalarPropertiesInput struct {
 
 	LongValue *int64
 
+	Nested *types.NestedWithNamespace
+
 	ShortValue *int16
 
 	StringValue *string
@@ -60,6 +63,8 @@ type SimpleScalarPropertiesOutput struct {
 	IntegerValue *int32
 
 	LongValue *int64
+
+	Nested *types.NestedWithNamespace
 
 	ShortValue *int16
 
