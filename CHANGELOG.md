@@ -1,3 +1,20 @@
+# Release 2021-03-12
+## Service Client Highlights
+* Fixed a bug that could cause union shape types to be deserialized incorrectly.
+* Fixed a bug where unboxed shapes that were marked as required were not serialized and sent over the wire, causing an API error from the service.
+* `service/docdb` - v1.2.0
+  * Client now support presigned URL generation for CopyDBClusterSnapshot and CreateDBCluster operations by specifying the target SourceRegion.
+* `service/neptune` - v1.2.0
+   * Client now support presigned URL generation for CopyDBClusterSnapshot and CreateDBCluster operations by specifying the target SourceRegion.
+* `service/detective` - v1.1.2
+  * Fix deserialization of API response timestamp member.
+* `service/s3` - v1.2.1
+  * Fixed an issue where ListObjectsV2 and ListParts paginators could loop infinitely.
+  * Fixed key encoding when addressing S3 Access Points.
+## Core SDK Highlights
+* `config` - v1.1.2
+  * Fixed a panic when using WithEC2IMDSRegion without a specified IMDS client.
+
 # Release 2021-02-09
 ## Service Client Highlights
 * `service/s3` - v1.2.0
