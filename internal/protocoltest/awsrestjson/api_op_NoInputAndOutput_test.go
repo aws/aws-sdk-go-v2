@@ -34,12 +34,16 @@ func TestClient_NoInputAndOutput_awsRestjson1Serialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// No input serializes no payload
+		// No input serializes no payload. When clients do not need to serialize any data
+		// in the payload, they should omit a payload altogether.
 		"RestJsonNoInputAndOutput": {
 			Params:        &NoInputAndOutputInput{},
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/NoInputAndOutputOutput",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
 		},
 	}
 	for name, c := range cases {
@@ -116,9 +120,22 @@ func TestClient_NoInputAndOutput_awsRestjson1Deserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *NoInputAndOutputOutput
 	}{
-		// Empty output serializes no payload
-		"RestJsonNoInputAndOutput": {
+		// Operations that define output and do not bind anything to the payload return a
+		// JSON object in the response.
+		"RestJsonNoInputAndOutputWithJson": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body:          []byte(`{}`),
+			ExpectResult:  &NoInputAndOutputOutput{},
+		},
+		// This test is similar to RestJsonNoInputAndOutputWithJson, but it ensures that
+		// clients can gracefully handle responses that omit a JSON payload.
+		"RestJsonNoInputAndOutputNoPayload": {
 			StatusCode:   200,
+			Body:         []byte(``),
 			ExpectResult: &NoInputAndOutputOutput{},
 		},
 	}

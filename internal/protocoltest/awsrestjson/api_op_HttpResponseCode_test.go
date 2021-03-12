@@ -25,14 +25,26 @@ func TestClient_HttpResponseCode_awsRestjson1Deserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *HttpResponseCodeOutput
 	}{
-		// Binds the http response code to an output structure.
+		// Binds the http response code to an output structure. Note that even though all
+		// members are bound outside of the payload, an empty JSON object is serialized in
+		// the response. However, clients should be able to handle an empty JSON object or
+		// an empty payload without failing to deserialize a response.
 		"RestJsonHttpResponseCode": {
 			StatusCode: 201,
 			Header: http.Header{
 				"Content-Type": []string{"application/json"},
 			},
-			BodyMediaType: "json",
-			Body:          []byte(``),
+			BodyMediaType: "application/json",
+			Body:          []byte(`{}`),
+			ExpectResult: &HttpResponseCodeOutput{
+				Status: ptr.Int32(201),
+			},
+		},
+		// This test ensures that clients gracefully handle cases where the service
+		// responds with no payload rather than an empty JSON object.
+		"RestJsonHttpResponseCodeWithNoPayload": {
+			StatusCode: 201,
+			Body:       []byte(``),
 			ExpectResult: &HttpResponseCodeOutput{
 				Status: ptr.Int32(201),
 			},

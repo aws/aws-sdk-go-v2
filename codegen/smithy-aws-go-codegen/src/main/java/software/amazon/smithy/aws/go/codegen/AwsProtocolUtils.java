@@ -103,6 +103,89 @@ final class AwsProtocolUtils {
                 .build());
 
         Set<HttpProtocolUnitTestGenerator.SkipTest> inputSkipTests = new TreeSet<>(SetUtils.of(
+                // Smithy 1.6 changed unit tests that the SDK codegen don't support or are opinionated.
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#EmptyInputAndEmptyOutput"))
+                        .addTestName("RestJsonEmptyInputAndEmptyOutputWithJson")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#EndpointOperation"))
+                        .addTestName("RestJsonEndpointTrait")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#EndpointWithHostLabelOperation"))
+                        .addTestName("RestJsonEndpointTraitWithHostLabel")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.ec2#AwsEc2"))
+                        .operation(ShapeId.from("aws.protocoltests.ec2#EndpointOperation"))
+                        .addTestName("Ec2QueryEndpointTrait")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.ec2#AwsEc2"))
+                        .operation(ShapeId.from("aws.protocoltests.ec2#EndpointWithHostLabelOperation"))
+                        .addTestName("Ec2QueryEndpointTraitWithHostLabel")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json#JsonProtocol"))
+                        .operation(ShapeId.from("aws.protocoltests.json#EmptyOperation"))
+                        .addTestName("json_1_1_service_supports_empty_payload_for_no_input_shape")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json#JsonProtocol"))
+                        .operation(ShapeId.from("aws.protocoltests.json#EndpointOperation"))
+                        .addTestName("AwsJson11EndpointTrait")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json#JsonProtocol"))
+                        .operation(ShapeId.from("aws.protocoltests.json#EndpointWithHostLabelOperation"))
+                        .addTestName("AwsJson11EndpointTraitWithHostLabel")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
+                        .operation(ShapeId.from("aws.protocoltests.json10#NoInputAndNoOutput"))
+                        .addTestName("AwsJson10ServiceSupportsNoPayloadForNoInput")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
+                        .operation(ShapeId.from("aws.protocoltests.json10#EndpointOperation"))
+                        .addTestName("AwsJson10EndpointTrait")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
+                        .operation(ShapeId.from("aws.protocoltests.json10#EndpointWithHostLabelOperation"))
+                        .addTestName("AwsJson10EndpointTraitWithHostLabel")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.query#AwsQuery"))
+                        .operation(ShapeId.from("aws.protocoltests.query#EndpointOperation"))
+                        .addTestName("AwsQueryEndpointTrait")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.query#AwsQuery"))
+                        .operation(ShapeId.from("aws.protocoltests.query#EndpointWithHostLabelOperation"))
+                        .addTestName("AwsQueryEndpointTraitWithHostLabel")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restxml#RestXml"))
+                        .operation(ShapeId.from("aws.protocoltests.restxml#EndpointOperation"))
+                        .addTestName("RestXmlEndpointTrait")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restxml#RestXml"))
+                        .operation(ShapeId.from("aws.protocoltests.restxml#EndpointWithHostLabelHeaderOperation"))
+                        .addTestName("RestXmlEndpointTraitWithHostLabelAndHttpBinding")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restxml#RestXml"))
+                        .operation(ShapeId.from("aws.protocoltests.restxml#EndpointWithHostLabelOperation"))
+                        .addTestName("RestXmlEndpointTraitWithHostLabel")
+                        .build(),
+
+
                 // REST-JSON Documents
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))

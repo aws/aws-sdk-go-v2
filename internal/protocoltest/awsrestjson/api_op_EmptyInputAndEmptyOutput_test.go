@@ -34,20 +34,40 @@ func TestClient_EmptyInputAndEmptyOutput_awsRestjson1Serialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Empty input serializes no payload
+		// Clients should not serialize a JSON payload when no parameters are given that
+		// are sent in the body. A service will tolerate clients that omit a payload or
+		// that send a JSON object.
 		"RestJsonEmptyInputAndEmptyOutput": {
 			Params:        &EmptyInputAndEmptyOutputInput{},
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/EmptyInputAndEmptyOutput",
 			ExpectQuery:   []smithytesting.QueryItem{},
-			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		// Similar to RestJsonEmptyInputAndEmptyOutput, but ensures that services
+		// gracefully handles receiving a JSON object.
+		"RestJsonEmptyInputAndEmptyOutputWithJson": {
+			Params:        &EmptyInputAndEmptyOutputInput{},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/EmptyInputAndEmptyOutput",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
 			},
 		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "RestJsonEmptyInputAndEmptyOutputWithJson" {
+				t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#EmptyInputAndEmptyOutput")
+			}
+
 			var actualReq *http.Request
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				actualReq = r.Clone(r.Context())
@@ -120,19 +140,23 @@ func TestClient_EmptyInputAndEmptyOutput_awsRestjson1Deserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *EmptyInputAndEmptyOutputOutput
 	}{
-		// Empty output serializes no payload
+		// As of January 2021, server implementations are expected to respond with a JSON
+		// object regardless of if the output parameters are empty.
 		"RestJsonEmptyInputAndEmptyOutput": {
-			StatusCode:    200,
-			BodyMediaType: "application/json",
-			Body:          []byte(``),
-			ExpectResult:  &EmptyInputAndEmptyOutputOutput{},
-		},
-		// Empty output serializes no payload
-		"RestJsonEmptyInputAndEmptyJsonObjectOutput": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
 			BodyMediaType: "application/json",
 			Body:          []byte(`{}`),
 			ExpectResult:  &EmptyInputAndEmptyOutputOutput{},
+		},
+		// This test ensures that clients can gracefully handle situations where a service
+		// omits a JSON payload entirely.
+		"RestJsonEmptyInputAndEmptyOutputJsonObjectOutput": {
+			StatusCode:   200,
+			Body:         []byte(``),
+			ExpectResult: &EmptyInputAndEmptyOutputOutput{},
 		},
 	}
 	for name, c := range cases {

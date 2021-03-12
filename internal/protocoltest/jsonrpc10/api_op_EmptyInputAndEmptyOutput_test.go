@@ -33,7 +33,7 @@ func TestClient_EmptyInputAndEmptyOutput_awsAwsjson10Serialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Empty input serializes no payload
+		// Clients must always send an empty object if input is modeled.
 		"AwsJson10EmptyInputAndEmptyOutput": {
 			Params:        &EmptyInputAndEmptyOutputInput{},
 			ExpectMethod:  "POST",
@@ -45,7 +45,7 @@ func TestClient_EmptyInputAndEmptyOutput_awsAwsjson10Serialize(t *testing.T) {
 			},
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareReaderEmpty(actual)
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
 			},
 		},
 	}
@@ -126,18 +126,8 @@ func TestClient_EmptyInputAndEmptyOutput_awsAwsjson10Deserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *EmptyInputAndEmptyOutputOutput
 	}{
-		// Empty output serializes no payload
-		"AwsJson10EmptyInputAndEmptyOutput": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type": []string{"application/x-amz-json-1.0"},
-			},
-			BodyMediaType: "application/json",
-			Body:          []byte(``),
-			ExpectResult:  &EmptyInputAndEmptyOutputOutput{},
-		},
-		// Empty output serializes no payload
-		"AwsJson10EmptyInputAndEmptyJsonObjectOutput": {
+		// A service will always return a JSON object for operations with modeled output.
+		"AwsJson10EmptyInputAndEmptyOutputSendJsonObject": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type": []string{"application/x-amz-json-1.0"},

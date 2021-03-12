@@ -45,7 +45,8 @@ func TestClient_HttpPayloadTraits_awsRestjson1Serialize(t *testing.T) {
 			ExpectURIPath: "/HttpPayloadTraits",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
-				"X-Foo": []string{"Foo"},
+				"Content-Type": []string{"application/octet-stream"},
+				"X-Foo":        []string{"Foo"},
 			},
 			RequireHeader: []string{
 				"Content-Length",
