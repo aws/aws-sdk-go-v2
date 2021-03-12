@@ -3,6 +3,7 @@ package customizations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/smithy-go/encoding/httpbinding"
 	"log"
 	"net/url"
 	"strings"
@@ -229,14 +230,18 @@ func moveBucketNameToHost(u *url.URL, bucket string) {
 
 // remove bucket from url
 func removeBucketFromPath(u *url.URL, bucket string) {
-	// modify url path
-	u.Path = strings.Replace(u.Path, "/"+bucket, "", -1)
+	if strings.HasPrefix(u.Path, "/"+bucket) {
+		// modify url path
+		u.Path = strings.Replace(u.Path, "/"+bucket, "", 1)
+
+		// modify url raw path
+		u.RawPath = strings.Replace(u.RawPath, "/"+httpbinding.EscapePath(bucket, true), "", 1)
+	}
+
 	if u.Path == "" {
 		u.Path = "/"
 	}
 
-	// modify url raw path
-	u.RawPath = strings.Replace(u.RawPath, "/"+bucket, "", -1)
 	if u.RawPath == "" {
 		u.RawPath = "/"
 	}
