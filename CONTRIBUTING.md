@@ -10,9 +10,9 @@ effectively respond to your bug report or contribution.
 
 Jump To:
 
-* [Bug Reports](_#Bug-Reports_)
-* [Feature Requests](_#Feature-Requests_)
-* [Code Contributions](_#Code-Contributions_)
+* [Bug Reports](#bug-reports)
+* [Feature Requests](#feature-requests)
+* [Code Contributions](#code-contributions)
 
 
 ## How to contribute
