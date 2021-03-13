@@ -1,9 +1,0 @@
-{
- "ID": "service.neptune-feature-1613429050967233000",
- "SchemaVersion": 1,
- "Module": "service/neptune",
- "Type": "feature",
- "Description": "Client now support presigned URL generation for CopyDBClusterSnapshot and CreateDBCluster operations by specifying the target SourceRegion",
- "MinVersion": "",
- "AffectedModules": null
-}

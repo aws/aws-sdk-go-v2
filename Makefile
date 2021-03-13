@@ -6,6 +6,8 @@ BUILD_TAGS=-tags "example,codegen,integration,ec2env,perftest"
 
 SMITHY_GO_SRC ?= $(shell pwd)/../smithy-go
 
+SDK_MIN_GO_VERSION ?= 1.15
+
 EACHMODULE_FAILFAST ?= true
 EACHMODULE_FAILFAST_FLAG=-fail-fast=${EACHMODULE_FAILFAST}
 
@@ -41,7 +43,7 @@ all: generate unit
 ###################
 # Code Generation #
 ###################
-generate: smithy-generate gen-config-asserts copy-attributevalue-feature gen-repo-mod-replace gen-mod-dropreplace-smithy tidy-modules-. add-module-license-files gen-aws-ptrs
+generate: smithy-generate gen-config-asserts copy-attributevalue-feature gen-repo-mod-replace gen-mod-dropreplace-smithy min-go-version-. tidy-modules-. add-module-license-files gen-aws-ptrs
 
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
@@ -134,6 +136,11 @@ copy-attributevalue-feature:
 	rm -rf ./*.bk && \
 	gofmt -w -s . && \
 	go test .
+
+min-go-version-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst min-go-version-,,$@)) ${EACHMODULE_FLAGS} \
+		"go mod edit -go=${SDK_MIN_GO_VERSION}"
 
 
 ################
