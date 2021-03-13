@@ -107,7 +107,7 @@ func WithDownloaderClientOptions(opts ...func(*s3.Options)) func(*Downloader) {
 //	}
 //
 //	// Create an S3 client using the loaded configuration
-//  s3.NewFromConfig(cfg)
+//	s3.NewFromConfig(cfg)
 //
 //	// Create a downloader passing it the S3 client
 //	downloader := manager.NewDownloader(s3.NewFromConfig(cfg))
@@ -148,7 +148,20 @@ func NewDownloader(c DownloadAPIClient, options ...func(*Downloader)) *Downloade
 // options that will be applied to all API operations made with this downloader.
 //
 // The w io.WriterAt can be satisfied by an os.File to do multipart concurrent
-// downloads, or in memory []byte wrapper using aws.WriteAtBuffer.
+// downloads, or in memory []byte wrapper using aws.WriteAtBuffer. In case you download
+// files into memory do not forget to pre-allocate memory to avoid additional allocations
+// and GC runs.
+//
+// Example:
+//	// pre-allocate in memory buffer, where headObject type is *s3.HeadObjectOutput
+//	buf := make([]byte, int(headObject.ContentLength))
+//	// wrap with aws.WriteAtBuffer
+//	w := s3manager.NewWriteAtBuffer(buf)
+//	// download file into the memory
+//	numBytesDownloaded, err := downloader.Download(ctx, w, &s3.GetObjectInput{
+//		Bucket: aws.String(bucket),
+//		Key:    aws.String(item),
+//	})
 //
 // Specifying a Downloader.Concurrency of 1 will cause the Downloader to
 // download the parts from S3 sequentially.
