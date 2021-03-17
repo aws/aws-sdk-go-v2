@@ -18,6 +18,7 @@ import (
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestComputePayloadHashMiddleware(t *testing.T) {
@@ -200,6 +201,106 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 				if loggerBuf.Len() != 0 {
 					t.Errorf("expect no log, got %v", loggerBuf.String())
 				}
+			}
+		})
+	}
+}
+
+func TestSwapComputePayloadSHA256ForUnsignedPayloadMiddleware(t *testing.T) {
+	cases := map[string]struct {
+		InitStep  func(*middleware.Stack) error
+		Mutator   func(*middleware.Stack) error
+		ExpectErr string
+		ExpectIDs []string
+	}{
+		"swap in place": {
+			InitStep: func(s *middleware.Stack) (err error) {
+				err = s.Build.Add(middleware.BuildMiddlewareFunc("before", nil), middleware.After)
+				if err != nil {
+					return err
+				}
+				err = AddComputePayloadSHA256Middleware(s)
+				if err != nil {
+					return err
+				}
+				err = s.Build.Add(middleware.BuildMiddlewareFunc("after", nil), middleware.After)
+				if err != nil {
+					return err
+				}
+				return nil
+			},
+			Mutator: SwapComputePayloadSHA256ForUnsignedPayloadMiddleware,
+			ExpectIDs: []string{
+				"before",
+				computePayloadHashMiddlewareID,
+				"after",
+			},
+		},
+
+		"already unsigned payload exists": {
+			InitStep: func(s *middleware.Stack) (err error) {
+				err = s.Build.Add(middleware.BuildMiddlewareFunc("before", nil), middleware.After)
+				if err != nil {
+					return err
+				}
+				err = AddUnsignedPayloadMiddleware(s)
+				if err != nil {
+					return err
+				}
+				err = s.Build.Add(middleware.BuildMiddlewareFunc("after", nil), middleware.After)
+				if err != nil {
+					return err
+				}
+				return nil
+			},
+			Mutator: SwapComputePayloadSHA256ForUnsignedPayloadMiddleware,
+			ExpectIDs: []string{
+				"before",
+				computePayloadHashMiddlewareID,
+				"after",
+			},
+		},
+
+		"no compute payload": {
+			InitStep: func(s *middleware.Stack) (err error) {
+				err = s.Build.Add(middleware.BuildMiddlewareFunc("before", nil), middleware.After)
+				if err != nil {
+					return err
+				}
+				err = s.Build.Add(middleware.BuildMiddlewareFunc("after", nil), middleware.After)
+				if err != nil {
+					return err
+				}
+				return nil
+			},
+			Mutator:   SwapComputePayloadSHA256ForUnsignedPayloadMiddleware,
+			ExpectErr: "not found, " + computePayloadHashMiddlewareID,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			stack := middleware.NewStack(t.Name(), smithyhttp.NewStackRequest)
+			if err := c.InitStep(stack); err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			err := c.Mutator(stack)
+			if len(c.ExpectErr) != 0 {
+				if err == nil {
+					t.Fatalf("expect error, got none")
+				}
+				if e, a := c.ExpectErr, err.Error(); !strings.Contains(a, e) {
+					t.Fatalf("expect error to contain %v, got %v", e, a)
+				}
+				return
+			}
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			if diff := cmp.Diff(c.ExpectIDs, stack.Build.List()); len(diff) != 0 {
+				t.Errorf("expect match\n%v", diff)
 			}
 		})
 	}
