@@ -4,7 +4,7 @@
  "Module": "service/...",
  "Type": "major",
  "Description": "New supported API",
- "MinVersion": "",
+ "MinVersion": "v1.0.0",
  "AffectedModules": [
   "service/amp",
   "service/amplifybackend",
