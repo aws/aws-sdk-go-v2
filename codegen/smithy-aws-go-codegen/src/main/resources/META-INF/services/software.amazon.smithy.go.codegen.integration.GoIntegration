@@ -35,3 +35,4 @@ software.amazon.smithy.aws.go.codegen.AwsHttpPresignURLClientGenerator
 software.amazon.smithy.aws.go.codegen.ResolveClientConfig
 software.amazon.smithy.aws.go.codegen.customization.S3GetBucketLocation
 software.amazon.smithy.aws.go.codegen.RequestResponseLogging
+software.amazon.smithy.aws.go.codegen.customization.S3AddPutObjectUnseekableBodyDoc

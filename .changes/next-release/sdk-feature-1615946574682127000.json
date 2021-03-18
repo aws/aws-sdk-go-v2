@@ -1,0 +1,9 @@
+{
+ "ID": "sdk-feature-1615946574682127000",
+ "SchemaVersion": 1,
+ "Module": "/",
+ "Type": "feature",
+ "Description": "Add helper to V4 signer package to swap compute payload hash middleware with unsigned payload middleware",
+ "MinVersion": "",
+ "AffectedModules": null
+}
