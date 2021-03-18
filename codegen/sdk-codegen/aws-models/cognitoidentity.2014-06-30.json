@@ -73,6 +73,9 @@
                     "target": "com.amazonaws.cognitoidentity#GetOpenIdTokenForDeveloperIdentity"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentity#GetPrincipalTagAttributeMap"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentity#ListIdentities"
                 },
                 {
@@ -89,6 +92,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentity#SetIdentityPoolRoles"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#SetPrincipalTagAttributeMap"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentity#TagResource"
@@ -320,7 +326,7 @@
                 "OpenIdConnectProviderARNs": {
                     "target": "com.amazonaws.cognitoidentity#OIDCProviderList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of OpendID Connect provider ARNs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARN) of the OpenID Connect providers.</p>"
                     }
                 },
                 "CognitoIdentityProviders": {
@@ -687,7 +693,7 @@
                 "Logins": {
                     "target": "com.amazonaws.cognitoidentity#LoginsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of optional name-value pairs that map provider names to provider tokens. The\n         name-value pair will follow the syntax \"provider_name\":\n         \"provider_user_identifier\".</p>\n         <p>Logins should not be specified when trying to get credentials for an unauthenticated\n         identity.</p>\n         <p>The Logins parameter is required when using identities associated with external\n         identity providers such as FaceBook. For examples of <code>Logins</code> maps, see the code\n         examples in the <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html\">External Identity Providers</a> section of the Amazon Cognito Developer\n         Guide.</p>"
+                        "smithy.api#documentation": "<p>A set of optional name-value pairs that map provider names to provider tokens. The\n         name-value pair will follow the syntax \"provider_name\":\n         \"provider_user_identifier\".</p>\n         <p>Logins should not be specified when trying to get credentials for an unauthenticated\n         identity.</p>\n         <p>The Logins parameter is required when using identities associated with external\n         identity providers such as Facebook. For examples of <code>Logins</code> maps, see the code\n         examples in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html\">External Identity Providers</a> section of the Amazon Cognito Developer\n         Guide.</p>"
                     }
                 },
                 "CustomRoleArn": {
@@ -908,7 +914,7 @@
             ],
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by\n            <a>GetId</a>. You can optionally add additional logins for the identity.\n         Supplying multiple logins creates an implicit link.</p>\n         <p>The OpenId token is valid for 10 minutes.</p>\n         <p>This is a public API. You do not need any credentials to call this API.</p>",
+                "smithy.api#documentation": "<p>Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by\n            <a>GetId</a>. You can optionally add additional logins for the identity.\n         Supplying multiple logins creates an implicit link.</p>\n         <p>The OpenID token is valid for 10 minutes.</p>\n         <p>This is a public API. You do not need any credentials to call this API.</p>",
                 "smithy.api#optionalAuth": {}
             }
         },
@@ -970,6 +976,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "PrincipalTags": {
+                    "target": "com.amazonaws.cognitoidentity#PrincipalTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this operation to configure attribute mappings for custom providers. </p>"
+                    }
+                },
                 "TokenDuration": {
                     "target": "com.amazonaws.cognitoidentity#TokenDuration",
                     "traits": {
@@ -1014,7 +1026,7 @@
                 "Logins": {
                     "target": "com.amazonaws.cognitoidentity#LoginsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of optional name-value pairs that map provider names to provider tokens. When\n         using graph.facebook.com and www.amazon.com, supply the access_token returned from the\n         provider's authflow. For accounts.google.com, an Amazon Cognito user pool provider, or any\n         other OpenId Connect provider, always include the <code>id_token</code>.</p>"
+                        "smithy.api#documentation": "<p>A set of optional name-value pairs that map provider names to provider tokens. When\n         using graph.facebook.com and www.amazon.com, supply the access_token returned from the\n         provider's authflow. For accounts.google.com, an Amazon Cognito user pool provider, or any\n         other OpenID Connect provider, always include the <code>id_token</code>.</p>"
                     }
                 }
             },
@@ -1040,6 +1052,83 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Returned in response to a successful GetOpenIdToken request.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetPrincipalTagAttributeMap": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#GetPrincipalTagAttributeMapInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#GetPrincipalTagAttributeMapResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use <code>GetPrincipalTagAttributeMap</code> to list all mappings between <code>PrincipalTags</code> and user attributes.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetPrincipalTagAttributeMapInput": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this operation to get the ID of the Identity Pool you setup attribute mappings for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityProviderName": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this operation to get the provider name.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#GetPrincipalTagAttributeMapResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this operation to get the ID of the Identity Pool you setup attribute mappings for.</p>"
+                    }
+                },
+                "IdentityProviderName": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this operation to get the provider name.</p>"
+                    }
+                },
+                "UseDefaults": {
+                    "target": "com.amazonaws.cognitoidentity#UseDefaults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this operation to list </p>"
+                    }
+                },
+                "PrincipalTags": {
+                    "target": "com.amazonaws.cognitoidentity#PrincipalTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this operation to add principal tags. The <code>PrincipalTags</code>operation enables you to reference user attributes in your IAM permissions policy.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.cognitoidentity#HideDisabled": {
@@ -1150,7 +1239,7 @@
                 "OpenIdConnectProviderARNs": {
                     "target": "com.amazonaws.cognitoidentity#OIDCProviderList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of OpendID Connect provider ARNs.</p>"
+                        "smithy.api#documentation": "<p>The ARNs of the OpenID Connect providers.</p>"
                     }
                 },
                 "CognitoIdentityProviders": {
@@ -1869,6 +1958,39 @@
                 "smithy.api#pattern": "[\\S]+"
             }
         },
+        "com.amazonaws.cognitoidentity#PrincipalTagID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#PrincipalTagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#PrincipalTags": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cognitoidentity#PrincipalTagID"
+            },
+            "value": {
+                "target": "com.amazonaws.cognitoidentity#PrincipalTagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.cognitoidentity#QueryLimit": {
             "type": "integer",
             "traits": {
@@ -2071,12 +2193,101 @@
                 "RoleMappings": {
                     "target": "com.amazonaws.cognitoidentity#RoleMappingMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>How users for a specific identity provider are to mapped to roles. This is a string\n         to <a>RoleMapping</a> object map. The string identifies the identity provider,\n         for example, \"graph.facebook.com\" or\n         \"cognito-idp-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id\".</p>\n         <p>Up to 25 rules can be specified per identity provider.</p>"
+                        "smithy.api#documentation": "<p>How users for a specific identity provider are to mapped to roles. This is a string\n         to <a>RoleMapping</a> object map. The string identifies the identity provider,\n         for example, \"graph.facebook.com\" or\n         \"cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id\".</p>\n         <p>Up to 25 rules can be specified per identity provider.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Input to the <code>SetIdentityPoolRoles</code> action.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#SetPrincipalTagAttributeMap": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentity#SetPrincipalTagAttributeMapInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentity#SetPrincipalTagAttributeMapResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentity#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentity#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>You can use this operation to use default (username and clientID) attribute or custom attribute mappings.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#SetPrincipalTagAttributeMapInput": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Identity Pool you want to set attribute mappings for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityProviderName": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider name you want to use for attribute mappings.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UseDefaults": {
+                    "target": "com.amazonaws.cognitoidentity#UseDefaults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this operation to use default (username and clientID) attribute mappings.</p>"
+                    }
+                },
+                "PrincipalTags": {
+                    "target": "com.amazonaws.cognitoidentity#PrincipalTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this operation to add principal tags.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cognitoidentity#SetPrincipalTagAttributeMapResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolId": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityPoolId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Identity Pool you want to set attribute mappings for.</p>"
+                    }
+                },
+                "IdentityProviderName": {
+                    "target": "com.amazonaws.cognitoidentity#IdentityProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider name you want to use for attribute mappings.</p>"
+                    }
+                },
+                "UseDefaults": {
+                    "target": "com.amazonaws.cognitoidentity#UseDefaults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this operation to select default (username and clientID) attribute mappings.</p>"
+                    }
+                },
+                "PrincipalTags": {
+                    "target": "com.amazonaws.cognitoidentity#PrincipalTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can use this operation to add principal tags. The <code>PrincipalTags</code>operation enables you to reference user attributes in your IAM permissions policy.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.cognitoidentity#String": {
@@ -2117,7 +2328,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns a set of tags to an Amazon Cognito identity pool. A tag is a label that you can\n         use to categorize and manage identity pools in different ways, such as by purpose, owner,\n         environment, or other criteria.</p>\n         <p>Each tag consists of a key and value, both of which you define. A key is a general\n         category for more specific values. For example, if you have two versions of an identity\n         pool, one for testing and another for production, you might assign an\n            <code>Environment</code> tag key to both identity pools. The value of this key might be\n            <code>Test</code> for one identity pool and <code>Production</code> for the\n         other.</p>\n         <p>Tags are useful for cost tracking and access control. You can activate your tags so that\n         they appear on the Billing and Cost Management console, where you can track the costs\n         associated with your identity pools. In an IAM policy, you can constrain permissions for\n         identity pools based on specific tags or tag values.</p>\n         <p>You can use this action up to 5 times per second, per account. An identity pool can have\n         as many as 50 tags.</p>"
+                "smithy.api#documentation": "<p>Assigns a set of tags to the specified Amazon Cognito identity pool. A tag is a label\n         that you can use to categorize and manage identity pools in different ways, such as by\n         purpose, owner, environment, or other criteria.</p>\n         <p>Each tag consists of a key and value, both of which you define. A key is a general\n         category for more specific values. For example, if you have two versions of an identity\n         pool, one for testing and another for production, you might assign an\n            <code>Environment</code> tag key to both identity pools. The value of this key might be\n            <code>Test</code> for one identity pool and <code>Production</code> for the\n         other.</p>\n         <p>Tags are useful for cost tracking and access control. You can activate your tags so that\n         they appear on the Billing and Cost Management console, where you can track the costs\n         associated with your identity pools. In an IAM policy, you can constrain permissions for\n         identity pools based on specific tags or tag values.</p>\n         <p>You can use this action up to 5 times per second, per account. An identity pool can have\n         as many as 50 tags.</p>"
             }
         },
         "com.amazonaws.cognitoidentity#TagResourceInput": {
@@ -2126,7 +2337,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.cognitoidentity#ARNString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the identity pool to assign the tags to.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the identity pool.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2364,7 +2575,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified tags from an Amazon Cognito identity pool. You can use this action\n         up to 5 times per second, per account</p>"
+                "smithy.api#documentation": "<p>Removes the specified tags from the specified Amazon Cognito identity pool. You can use\n         this action up to 5 times per second, per account</p>"
             }
         },
         "com.amazonaws.cognitoidentity#UntagResourceInput": {
@@ -2373,7 +2584,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.cognitoidentity#ARNString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the identity pool that the tags are assigned\n         to.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the identity pool.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2426,6 +2637,12 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Updates an identity pool.</p>\n         <p>You must use AWS Developer credentials to call this API.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentity#UseDefaults": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
             }
         }
     }

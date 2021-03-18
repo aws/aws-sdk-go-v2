@@ -1,0 +1,1914 @@
+{
+    "smithy": "1.0",
+    "shapes": {
+        "com.amazonaws.mwaa#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Access to the Airflow Web UI or CLI has been Denied. Please follow the MWAA user guide to setup permissions to access the Web UI and CLI functionality.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.mwaa#AirflowConfigurationOptions": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.mwaa#ConfigKey"
+            },
+            "value": {
+                "target": "com.amazonaws.mwaa#ConfigValue"
+            }
+        },
+        "com.amazonaws.mwaa#AirflowVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[0-9a-z.]+$"
+            }
+        },
+        "com.amazonaws.mwaa#AmazonMWAA": {
+            "type": "service",
+            "version": "2020-07-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.mwaa#CreateCliToken"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#CreateEnvironment"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#CreateWebLoginToken"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#DeleteEnvironment"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#GetEnvironment"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ListEnvironments"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#PublishMetrics"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#UpdateEnvironment"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "MWAA",
+                    "arnNamespace": "airflow",
+                    "cloudFormationName": "AmazonMWAA",
+                    "cloudTrailEventSource": "airflow.amazonaws.com",
+                    "endpointPrefix": "airflow"
+                },
+                "aws.auth#sigv4": {
+                    "name": "airflow"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Amazon Managed Workflows for Apache Airflow</fullname>\n        <p>This section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html\">What Is Amazon MWAA?</a>.</p>",
+                "smithy.api#title": "AmazonMWAA"
+            }
+        },
+        "com.amazonaws.mwaa#CloudWatchLogGroupArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)?:logs:[a-z0-9\\-]+:\\d{12}:log-group:\\w+"
+            }
+        },
+        "com.amazonaws.mwaa#ConfigKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z]+([a-z._]*[a-z]+)?$"
+            }
+        },
+        "com.amazonaws.mwaa#ConfigValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.mwaa#CreateCliToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mwaa#CreateCliTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mwaa#CreateCliTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mwaa#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a CLI token to use Airflow CLI.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "env."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/clitoken/{Name}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mwaa#CreateCliTokenRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.mwaa#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Create a CLI token request for a MWAA environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#CreateCliTokenResponse": {
+            "type": "structure",
+            "members": {
+                "CliToken": {
+                    "target": "com.amazonaws.mwaa#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Create an Airflow CLI login token response for the provided JWT token.</p>",
+                        "smithy.api#sensitive": {}
+                    }
+                },
+                "WebServerHostname": {
+                    "target": "com.amazonaws.mwaa#Hostname",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Create an Airflow CLI login token response for the provided webserver hostname.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#CreateEnvironment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mwaa#CreateEnvironmentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.mwaa#CreateEnvironmentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mwaa#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>JSON blob that describes the environment to create.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/environments/{Name}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.mwaa#CreateEnvironmentInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.mwaa#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your MWAA environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutionRoleArn": {
+                    "target": "com.amazonaws.mwaa#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution role for your environment. An execution role is an AWS Identity and Access Management (IAM) role that grants MWAA permission to access AWS services and resources used by your environment. For example, <code>arn:aws:iam::123456789:role/my-execution-role</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/manage-access.html\">Managing access to Amazon Managed Workflows for Apache Airflow</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceBucketArn": {
+                    "target": "com.amazonaws.mwaa#S3BucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of your Amazon S3 storage bucket. For example, <code>arn:aws:s3:::airflow-mybucketname</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DagS3Path": {
+                    "target": "com.amazonaws.mwaa#RelativePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relative path to the DAG folder on your Amazon S3 storage bucket. For example, <code>dags</code>. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import.html\">Importing DAGs on Amazon MWAA</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NetworkConfiguration": {
+                    "target": "com.amazonaws.mwaa#NetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC networking components you want to use for your environment. At least two private subnet identifiers and one VPC security group identifier are required to create an environment. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-mwaa.html\">Creating the VPC network for a MWAA environment</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PluginsS3Path": {
+                    "target": "com.amazonaws.mwaa#RelativePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relative path to the <code>plugins.zip</code> file on your Amazon S3 storage bucket. For example, <code>plugins.zip</code>. If a relative path is provided in the request, then <code>PluginsS3ObjectVersion</code> is required. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import.html\">Importing DAGs on Amazon MWAA</a>.</p>"
+                    }
+                },
+                "PluginsS3ObjectVersion": {
+                    "target": "com.amazonaws.mwaa#S3ObjectVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>plugins.zip</code> file version you want to use.</p>"
+                    }
+                },
+                "RequirementsS3Path": {
+                    "target": "com.amazonaws.mwaa#RelativePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relative path to the <code>requirements.txt</code> file on your Amazon S3 storage bucket. For example, <code>requirements.txt</code>. If a relative path is provided in the request, then <code>RequirementsS3ObjectVersion</code> is required. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import.html\">Importing DAGs on Amazon MWAA</a>.</p>"
+                    }
+                },
+                "RequirementsS3ObjectVersion": {
+                    "target": "com.amazonaws.mwaa#S3ObjectVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>requirements.txt</code> file version you want to use.</p>"
+                    }
+                },
+                "AirflowConfigurationOptions": {
+                    "target": "com.amazonaws.mwaa#AirflowConfigurationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Apache Airflow configuration setting you want to override in your environment. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html\">Environment configuration</a>.</p>",
+                        "smithy.api#sensitive": {}
+                    }
+                },
+                "EnvironmentClass": {
+                    "target": "com.amazonaws.mwaa#EnvironmentClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment class you want to use for your environment. The environment class determines the size of the containers and database used for your Apache Airflow services.</p>"
+                    }
+                },
+                "MaxWorkers": {
+                    "target": "com.amazonaws.mwaa#MaxWorkers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers and the Fargate containers that run your tasks up to the number you specify in this field. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra containers leaving the one worker that is included with your environment.</p>"
+                    }
+                },
+                "KmsKey": {
+                    "target": "com.amazonaws.mwaa#KmsKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Key Management Service (KMS) key to encrypt and decrypt the data in your environment. You can use an AWS KMS key managed by MWAA, or a custom KMS key (advanced). For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html?icmpid=docs_console_unmapped#master_keys\">Customer master keys (CMKs)</a> in the AWS KMS developer guide.</p>"
+                    }
+                },
+                "AirflowVersion": {
+                    "target": "com.amazonaws.mwaa#AirflowVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Apache Airflow version you want to use for your environment.</p>"
+                    }
+                },
+                "LoggingConfiguration": {
+                    "target": "com.amazonaws.mwaa#LoggingConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Apache Airflow logs you want to send to Amazon CloudWatch Logs.</p>"
+                    }
+                },
+                "WeeklyMaintenanceWindowStart": {
+                    "target": "com.amazonaws.mwaa#WeeklyMaintenanceWindowStart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day and time you want MWAA to start weekly maintenance updates on your environment.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mwaa#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata tags you want to attach to your environment. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS resources</a>.</p>"
+                    }
+                },
+                "WebserverAccessMode": {
+                    "target": "com.amazonaws.mwaa#WebserverAccessMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The networking access of your Apache Airflow web server. A public network allows your Airflow UI to be accessed over the Internet by users granted access in your IAM policy. A private network limits access of your Airflow UI to users within your VPC. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-mwaa.html\">Creating the VPC network for a MWAA environment</a>.</p>"
+                    }
+                },
+                "MinWorkers": {
+                    "target": "com.amazonaws.mwaa#MinWorkers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers and the Fargate containers that run your tasks up to the number you specify in the <code>MaxWorkers</code> field. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra containers leaving the worker count you specify in the <code>MinWorkers</code> field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation to create an environment. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html\">Get started with Amazon Managed Workflows for Apache Airflow</a>.</p>"
+            }
+        },
+        "com.amazonaws.mwaa#CreateEnvironmentOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.mwaa#EnvironmentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resulting Amazon MWAA envirnonment ARN.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#CreateWebLoginToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mwaa#CreateWebLoginTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mwaa#CreateWebLoginTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mwaa#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a JWT token to be used to login to Airflow Web UI with claims based Authentication.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "env."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/webtoken/{Name}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.mwaa#CreateWebLoginTokenRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.mwaa#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Create an Airflow Web UI login token request for a MWAA environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#CreateWebLoginTokenResponse": {
+            "type": "structure",
+            "members": {
+                "WebToken": {
+                    "target": "com.amazonaws.mwaa#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Create an Airflow Web UI login token response for the provided JWT token.</p>",
+                        "smithy.api#sensitive": {}
+                    }
+                },
+                "WebServerHostname": {
+                    "target": "com.amazonaws.mwaa#Hostname",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Create an Airflow Web UI login token response for the provided webserver hostname.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#CreatedAt": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.mwaa#DeleteEnvironment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mwaa#DeleteEnvironmentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.mwaa#DeleteEnvironmentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mwaa#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an existing environment.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/environments/{Name}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.mwaa#DeleteEnvironmentInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.mwaa#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#DeleteEnvironmentOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.mwaa#Dimension": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Internal only API.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Internal only API.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Internal only API.</p>"
+            }
+        },
+        "com.amazonaws.mwaa#Dimensions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mwaa#Dimension"
+            }
+        },
+        "com.amazonaws.mwaa#Environment": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.mwaa#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.mwaa#EnvironmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.mwaa#EnvironmentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.mwaa#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Created At date of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "WebserverUrl": {
+                    "target": "com.amazonaws.mwaa#WebserverUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Webserver URL of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "ExecutionRoleArn": {
+                    "target": "com.amazonaws.mwaa#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Execution Role ARN of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "ServiceRoleArn": {
+                    "target": "com.amazonaws.mwaa#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Service Role ARN of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "KmsKey": {
+                    "target": "com.amazonaws.mwaa#KmsKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Kms Key of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "AirflowVersion": {
+                    "target": "com.amazonaws.mwaa#AirflowVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AirflowV ersion of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "SourceBucketArn": {
+                    "target": "com.amazonaws.mwaa#S3BucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Source S3 Bucket ARN of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "DagS3Path": {
+                    "target": "com.amazonaws.mwaa#RelativePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Dags S3 Path of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "PluginsS3Path": {
+                    "target": "com.amazonaws.mwaa#RelativePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Plugins.zip S3 Path of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "PluginsS3ObjectVersion": {
+                    "target": "com.amazonaws.mwaa#S3ObjectVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Plugins.zip S3 Object Version of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "RequirementsS3Path": {
+                    "target": "com.amazonaws.mwaa#RelativePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Requirement.txt S3 Path of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "RequirementsS3ObjectVersion": {
+                    "target": "com.amazonaws.mwaa#S3ObjectVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Requirements.txt file S3 Object Version of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "AirflowConfigurationOptions": {
+                    "target": "com.amazonaws.mwaa#AirflowConfigurationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Airflow Configuration Options of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "EnvironmentClass": {
+                    "target": "com.amazonaws.mwaa#EnvironmentClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Environment Class (size) of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "MaxWorkers": {
+                    "target": "com.amazonaws.mwaa#MaxWorkers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of workers to run in your Amazon MWAA Environment.</p>"
+                    }
+                },
+                "NetworkConfiguration": {
+                    "target": "com.amazonaws.mwaa#NetworkConfiguration"
+                },
+                "LoggingConfiguration": {
+                    "target": "com.amazonaws.mwaa#LoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Logging Configuration of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "LastUpdate": {
+                    "target": "com.amazonaws.mwaa#LastUpdate"
+                },
+                "WeeklyMaintenanceWindowStart": {
+                    "target": "com.amazonaws.mwaa#WeeklyMaintenanceWindowStart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Weekly Maintenance Window Start of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mwaa#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Tags of the Amazon MWAA Environment.</p>"
+                    }
+                },
+                "WebserverAccessMode": {
+                    "target": "com.amazonaws.mwaa#WebserverAccessMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Webserver Access Mode of the Amazon MWAA Environment (public or private only).</p>"
+                    }
+                },
+                "MinWorkers": {
+                    "target": "com.amazonaws.mwaa#MinWorkers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of workers to run in your Amazon MWAA Environment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An Amazon MWAA environment.</p>"
+            }
+        },
+        "com.amazonaws.mwaa#EnvironmentArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)?:airflow:[a-z0-9\\-]+:\\d{12}:environment/\\w+"
+            }
+        },
+        "com.amazonaws.mwaa#EnvironmentClass": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.mwaa#EnvironmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mwaa#EnvironmentName"
+            }
+        },
+        "com.amazonaws.mwaa#EnvironmentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 80
+                },
+                "smithy.api#pattern": "^[a-zA-Z][0-9a-zA-Z-_]*$"
+            }
+        },
+        "com.amazonaws.mwaa#EnvironmentStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "CREATE_FAILED",
+                        "name": "CREATE_FAILED"
+                    },
+                    {
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
+                    },
+                    {
+                        "value": "UPDATING",
+                        "name": "UPDATING"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    },
+                    {
+                        "value": "UNAVAILABLE",
+                        "name": "UNAVAILABLE"
+                    },
+                    {
+                        "value": "UPDATE_FAILED",
+                        "name": "UPDATE_FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mwaa#ErrorCode": {
+            "type": "string"
+        },
+        "com.amazonaws.mwaa#ErrorMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^.+$"
+            }
+        },
+        "com.amazonaws.mwaa#GetEnvironment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mwaa#GetEnvironmentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.mwaa#GetEnvironmentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mwaa#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get details of an existing environment.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/environments/{Name}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.mwaa#GetEnvironmentInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.mwaa#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#GetEnvironmentOutput": {
+            "type": "structure",
+            "members": {
+                "Environment": {
+                    "target": "com.amazonaws.mwaa#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON blob with environment details.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#Hostname": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$"
+            }
+        },
+        "com.amazonaws.mwaa#IamRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+            }
+        },
+        "com.amazonaws.mwaa#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>InternalServerException: An internal error has occurred.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.mwaa#KmsKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^(((arn:aws(-[a-z]+)?:kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?key\\/)?[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}|(arn:aws(-[a-z]+)?:kms:[a-z]{2}-[a-z]+-\\d:\\d+:)?alias/.+)$"
+            }
+        },
+        "com.amazonaws.mwaa#LastUpdate": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.mwaa#UpdateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of last update of SUCCESS, FAILED, CREATING, DELETING.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.mwaa#UpdateCreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time that last update occurred.</p>"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.mwaa#UpdateError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error string of last update, if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Last update information for the environment.</p>"
+            }
+        },
+        "com.amazonaws.mwaa#ListEnvironments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mwaa#ListEnvironmentsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.mwaa#ListEnvironmentsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mwaa#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List Amazon MWAA Environments.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/environments",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Environments",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.mwaa#ListEnvironmentsInput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.mwaa#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Next Token when listing MWAA environments.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum results when listing MWAA environments.</p>",
+                        "smithy.api#httpQuery": "MaxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 25
+                        }
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#ListEnvironmentsOutput": {
+            "type": "structure",
+            "members": {
+                "Environments": {
+                    "target": "com.amazonaws.mwaa#EnvironmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Amazon MWAA Environments.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.mwaa#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Next Token when listing MWAA environments.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mwaa#ListTagsForResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.mwaa#ListTagsForResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mwaa#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the tags for MWAA environments.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.mwaa#ListTagsForResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.mwaa#EnvironmentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the MWAA environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#ListTagsForResourceOutput": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.mwaa#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags of the MWAA environments.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#LoggingConfiguration": {
+            "type": "structure",
+            "members": {
+                "DagProcessingLogs": {
+                    "target": "com.amazonaws.mwaa#ModuleLoggingConfiguration"
+                },
+                "SchedulerLogs": {
+                    "target": "com.amazonaws.mwaa#ModuleLoggingConfiguration"
+                },
+                "WebserverLogs": {
+                    "target": "com.amazonaws.mwaa#ModuleLoggingConfiguration"
+                },
+                "WorkerLogs": {
+                    "target": "com.amazonaws.mwaa#ModuleLoggingConfiguration"
+                },
+                "TaskLogs": {
+                    "target": "com.amazonaws.mwaa#ModuleLoggingConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Logging Configuration of your Amazon MWAA environment.</p>"
+            }
+        },
+        "com.amazonaws.mwaa#LoggingConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "DagProcessingLogs": {
+                    "target": "com.amazonaws.mwaa#ModuleLoggingConfigurationInput"
+                },
+                "SchedulerLogs": {
+                    "target": "com.amazonaws.mwaa#ModuleLoggingConfigurationInput"
+                },
+                "WebserverLogs": {
+                    "target": "com.amazonaws.mwaa#ModuleLoggingConfigurationInput"
+                },
+                "WorkerLogs": {
+                    "target": "com.amazonaws.mwaa#ModuleLoggingConfigurationInput"
+                },
+                "TaskLogs": {
+                    "target": "com.amazonaws.mwaa#ModuleLoggingConfigurationInput"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Logging Configuration of your Amazon MWAA environment.</p>"
+            }
+        },
+        "com.amazonaws.mwaa#LoggingEnabled": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.mwaa#LoggingLevel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CRITICAL",
+                        "name": "CRITICAL"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    },
+                    {
+                        "value": "WARNING",
+                        "name": "WARNING"
+                    },
+                    {
+                        "value": "INFO",
+                        "name": "INFO"
+                    },
+                    {
+                        "value": "DEBUG",
+                        "name": "DEBUG"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mwaa#MaxWorkers": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.mwaa#MetricData": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mwaa#MetricDatum"
+            }
+        },
+        "com.amazonaws.mwaa#MetricDatum": {
+            "type": "structure",
+            "members": {
+                "MetricName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Internal only API.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Timestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Internal only API.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Dimensions": {
+                    "target": "com.amazonaws.mwaa#Dimensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Internal only API.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Internal only API.</p>"
+                    }
+                },
+                "Unit": {
+                    "target": "com.amazonaws.mwaa#Unit"
+                },
+                "StatisticValues": {
+                    "target": "com.amazonaws.mwaa#StatisticSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Internal only API.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Internal only API.</p>"
+            }
+        },
+        "com.amazonaws.mwaa#MinWorkers": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.mwaa#ModuleLoggingConfiguration": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.mwaa#LoggingEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines that the logging module is enabled.</p>"
+                    }
+                },
+                "LogLevel": {
+                    "target": "com.amazonaws.mwaa#LoggingLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the log level, which can be CRITICAL, ERROR, WARNING, or INFO.</p>"
+                    }
+                },
+                "CloudWatchLogGroupArn": {
+                    "target": "com.amazonaws.mwaa#CloudWatchLogGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the ARN for the CloudWatch group where the logs will be published.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A JSON blob that provides configuration to use for logging with respect to the various Apache Airflow services: DagProcessingLogs,\n        SchedulerLogs, TaskLogs, WebserverLogs, and WorkerLogs.</p>"
+            }
+        },
+        "com.amazonaws.mwaa#ModuleLoggingConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.mwaa#LoggingEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines that the logging module is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogLevel": {
+                    "target": "com.amazonaws.mwaa#LoggingLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the log level, which can be CRITICAL, ERROR, WARNING, or INFO.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A JSON blob that provides configuration to use for logging with respect to the various Apache Airflow services: DagProcessingLogs,\n        SchedulerLogs, TaskLogs, WebserverLogs, and WorkerLogs.</p>"
+            }
+        },
+        "com.amazonaws.mwaa#NetworkConfiguration": {
+            "type": "structure",
+            "members": {
+                "SubnetIds": {
+                    "target": "com.amazonaws.mwaa#SubnetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide a JSON list of 2 subnet IDs by name. These must be private subnets, in the same VPC, in two different availability zones.</p>"
+                    }
+                },
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.mwaa#SecurityGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON list of 1 or more security groups IDs by name, in the same VPC as the subnets.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provide the security group and subnet IDs for the workers and scheduler.</p>"
+            }
+        },
+        "com.amazonaws.mwaa#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.mwaa#PublishMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mwaa#PublishMetricsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.mwaa#PublishMetricsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mwaa#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "An operation for publishing metrics from the customers to the Ops plane.",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "ops."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/metrics/environments/{EnvironmentName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mwaa#PublishMetricsInput": {
+            "type": "structure",
+            "members": {
+                "EnvironmentName": {
+                    "target": "com.amazonaws.mwaa#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Publishes environment metric data to Amazon CloudWatch.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricData": {
+                    "target": "com.amazonaws.mwaa#MetricData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metrica.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#PublishMetricsOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.mwaa#RelativePath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.mwaa#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>ResourceNotFoundException: The resource is not available.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.mwaa#S3BucketArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)?:s3:::[a-z0-9.\\-]+$"
+            }
+        },
+        "com.amazonaws.mwaa#S3ObjectVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.mwaa#SecurityGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^sg-[a-zA-Z0-9\\-._]+$"
+            }
+        },
+        "com.amazonaws.mwaa#SecurityGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mwaa#SecurityGroupId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.mwaa#StatisticSet": {
+            "type": "structure",
+            "members": {
+                "SampleCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Internal only API.</p>"
+                    }
+                },
+                "Sum": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Internal only API.</p>"
+                    }
+                },
+                "Minimum": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Internal only API.</p>"
+                    }
+                },
+                "Maximum": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Internal only API.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Internal only API.</p>"
+            }
+        },
+        "com.amazonaws.mwaa#SubnetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^subnet-[a-zA-Z0-9\\-._]+$"
+            }
+        },
+        "com.amazonaws.mwaa#SubnetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mwaa#SubnetId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.mwaa#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.mwaa#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mwaa#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.mwaa#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.mwaa#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.mwaa#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.mwaa#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mwaa#TagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.mwaa#TagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mwaa#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Add tag to the MWAA environments.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mwaa#TagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.mwaa#EnvironmentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag resource ARN of the MWAA environments.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mwaa#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag resource tag of the MWAA environments.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#TagResourceOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.mwaa#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.mwaa#Token": {
+            "type": "string"
+        },
+        "com.amazonaws.mwaa#Unit": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Unit",
+                "smithy.api#enum": [
+                    {
+                        "value": "Seconds",
+                        "name": "SECONDS"
+                    },
+                    {
+                        "value": "Microseconds",
+                        "name": "MICROSECONDS"
+                    },
+                    {
+                        "value": "Milliseconds",
+                        "name": "MILLISECONDS"
+                    },
+                    {
+                        "value": "Bytes",
+                        "name": "BYTES"
+                    },
+                    {
+                        "value": "Kilobytes",
+                        "name": "KILOBYTES"
+                    },
+                    {
+                        "value": "Megabytes",
+                        "name": "MEGABYTES"
+                    },
+                    {
+                        "value": "Gigabytes",
+                        "name": "GIGABYTES"
+                    },
+                    {
+                        "value": "Terabytes",
+                        "name": "TERABYTES"
+                    },
+                    {
+                        "value": "Bits",
+                        "name": "BITS"
+                    },
+                    {
+                        "value": "Kilobits",
+                        "name": "KILOBITS"
+                    },
+                    {
+                        "value": "Megabits",
+                        "name": "MEGABITS"
+                    },
+                    {
+                        "value": "Gigabits",
+                        "name": "GIGABITS"
+                    },
+                    {
+                        "value": "Terabits",
+                        "name": "TERABITS"
+                    },
+                    {
+                        "value": "Percent",
+                        "name": "PERCENT"
+                    },
+                    {
+                        "value": "Count",
+                        "name": "COUNT"
+                    },
+                    {
+                        "value": "Bytes/Second",
+                        "name": "BYTES_PER_SECOND"
+                    },
+                    {
+                        "value": "Kilobytes/Second",
+                        "name": "KILOBYTES_PER_SECOND"
+                    },
+                    {
+                        "value": "Megabytes/Second",
+                        "name": "MEGABYTES_PER_SECOND"
+                    },
+                    {
+                        "value": "Gigabytes/Second",
+                        "name": "GIGABYTES_PER_SECOND"
+                    },
+                    {
+                        "value": "Terabytes/Second",
+                        "name": "TERABYTES_PER_SECOND"
+                    },
+                    {
+                        "value": "Bits/Second",
+                        "name": "BITS_PER_SECOND"
+                    },
+                    {
+                        "value": "Kilobits/Second",
+                        "name": "KILOBITS_PER_SECOND"
+                    },
+                    {
+                        "value": "Megabits/Second",
+                        "name": "MEGABITS_PER_SECOND"
+                    },
+                    {
+                        "value": "Gigabits/Second",
+                        "name": "GIGABITS_PER_SECOND"
+                    },
+                    {
+                        "value": "Terabits/Second",
+                        "name": "TERABITS_PER_SECOND"
+                    },
+                    {
+                        "value": "Count/Second",
+                        "name": "COUNT_PER_SECOND"
+                    },
+                    {
+                        "value": "None",
+                        "name": "NONE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mwaa#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mwaa#UntagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.mwaa#UntagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mwaa#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Remove a tag from the MWAA environments.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.mwaa#UntagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.mwaa#EnvironmentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag resource ARN of the MWAA environments.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.mwaa#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag resource key of the MWAA environments.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#UntagResourceOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.mwaa#UpdateCreatedAt": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.mwaa#UpdateEnvironment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mwaa#UpdateEnvironmentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.mwaa#UpdateEnvironmentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mwaa#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update an MWAA environment.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/environments/{Name}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mwaa#UpdateEnvironmentInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.mwaa#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your Amazon MWAA environment that you wish to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutionRoleArn": {
+                    "target": "com.amazonaws.mwaa#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Executio Role ARN to update of your Amazon MWAA environment.</p>"
+                    }
+                },
+                "AirflowVersion": {
+                    "target": "com.amazonaws.mwaa#AirflowVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Airflow Version to update of your Amazon MWAA environment.</p>"
+                    }
+                },
+                "SourceBucketArn": {
+                    "target": "com.amazonaws.mwaa#S3BucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 Source Bucket ARN to update of your Amazon MWAA environment.</p>"
+                    }
+                },
+                "DagS3Path": {
+                    "target": "com.amazonaws.mwaa#RelativePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Dags folder S3 Path to update of your Amazon MWAA environment.</p>"
+                    }
+                },
+                "PluginsS3Path": {
+                    "target": "com.amazonaws.mwaa#RelativePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Plugins.zip S3 Path to update of your Amazon MWAA environment.</p>"
+                    }
+                },
+                "PluginsS3ObjectVersion": {
+                    "target": "com.amazonaws.mwaa#S3ObjectVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Plugins.zip S3 Object Version to update of your Amazon MWAA environment.</p>"
+                    }
+                },
+                "RequirementsS3Path": {
+                    "target": "com.amazonaws.mwaa#RelativePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Requirements.txt S3 Path to update of your Amazon MWAA environment.</p>"
+                    }
+                },
+                "RequirementsS3ObjectVersion": {
+                    "target": "com.amazonaws.mwaa#S3ObjectVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Requirements.txt S3 ObjectV ersion to update of your Amazon MWAA environment.</p>"
+                    }
+                },
+                "AirflowConfigurationOptions": {
+                    "target": "com.amazonaws.mwaa#AirflowConfigurationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Airflow Configuration Options to update of your Amazon MWAA environment.</p>",
+                        "smithy.api#sensitive": {}
+                    }
+                },
+                "EnvironmentClass": {
+                    "target": "com.amazonaws.mwaa#EnvironmentClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Environment Class to update of your Amazon MWAA environment.</p>"
+                    }
+                },
+                "MaxWorkers": {
+                    "target": "com.amazonaws.mwaa#MaxWorkers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of workers to update of your Amazon MWAA environment.</p>"
+                    }
+                },
+                "NetworkConfiguration": {
+                    "target": "com.amazonaws.mwaa#UpdateNetworkConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Network Configuration to update of your Amazon MWAA environment.</p>"
+                    }
+                },
+                "LoggingConfiguration": {
+                    "target": "com.amazonaws.mwaa#LoggingConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Logging Configuration to update of your Amazon MWAA environment.</p>"
+                    }
+                },
+                "WeeklyMaintenanceWindowStart": {
+                    "target": "com.amazonaws.mwaa#WeeklyMaintenanceWindowStart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Weekly Maintenance Window Start to update of your Amazon MWAA environment.</p>"
+                    }
+                },
+                "WebserverAccessMode": {
+                    "target": "com.amazonaws.mwaa#WebserverAccessMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Webserver Access Mode to update of your Amazon MWAA environment.</p>"
+                    }
+                },
+                "MinWorkers": {
+                    "target": "com.amazonaws.mwaa#MinWorkers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of workers to update of your Amazon MWAA environment.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#UpdateEnvironmentOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.mwaa#EnvironmentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN to update of your Amazon MWAA environment.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mwaa#UpdateError": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.mwaa#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error code of update.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.mwaa#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error message of update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Error information of update, if applicable.</p>"
+            }
+        },
+        "com.amazonaws.mwaa#UpdateNetworkConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.mwaa#SecurityGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide a JSON list of 1 or more security groups IDs by name, in the same VPC as the subnets.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provide the security group and subnet IDs for the workers and scheduler.</p>"
+            }
+        },
+        "com.amazonaws.mwaa#UpdateStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mwaa#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>ValidationException: The provided input is not valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.mwaa#WebserverAccessMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PRIVATE_ONLY",
+                        "name": "PRIVATE_ONLY"
+                    },
+                    {
+                        "value": "PUBLIC_ONLY",
+                        "name": "PUBLIC_ONLY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mwaa#WebserverUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^https://.+$"
+            }
+        },
+        "com.amazonaws.mwaa#WeeklyMaintenanceWindowStart": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 9
+                },
+                "smithy.api#pattern": "(MON|TUE|WED|THU|FRI|SAT|SUN):([01]\\d|2[0-3]):(00|30)"
+            }
+        }
+    }
+}

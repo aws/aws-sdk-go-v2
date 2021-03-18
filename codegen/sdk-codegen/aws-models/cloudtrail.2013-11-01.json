@@ -132,7 +132,7 @@
                 "Field": {
                     "target": "com.amazonaws.cloudtrail#SelectorField",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A field in an event record on which to filter events to be logged. Supported fields include <code>readOnly</code>, <code>eventCategory</code>, \n         <code>eventSource</code> (for management events), <code>eventName</code>, <code>resources.type</code>, and <code>resources.ARN</code>.\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>readOnly</code>\n                  </b> - Optional. Can be set to <code>Equals</code> a value of <code>true</code>\n            or <code>false</code>. A value of <code>false</code> logs both <code>read</code> and\n            <code>write</code> events.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventSource</code>\n                  </b> - For filtering management events only. \n            This can be set only to <code>NotEquals</code> \n                  <code>kms.amazonaws.com</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventName</code>\n                  </b> - Can use any operator. You can use it to ﬁlter in\n            or ﬁlter out any data event logged to CloudTrail, such as <code>PutBucket</code>. You can have multiple values\n            for this ﬁeld, separated by commas.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventCategory</code>\n                  </b> - This is required. It must be set to <code>Equals</code>, and \n            the value must be <code>Management</code> or <code>Data</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.type</code>\n                  </b> - This ﬁeld is required. <code>resources.type</code> \n            can only use the <code>Equals</code> operator, and the value can be one of the following: <code>AWS::S3::Object</code> \n            or <code>AWS::Lambda::Function</code>. You can have only one <code>resources.type</code> ﬁeld per selector. To log \n            data events on more than one resource type, add another selector.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.ARN</code>\n                  </b> - You can use any operator with resources.ARN, but\n            if you use <code>Equals</code> or <code>NotEquals</code>, the value must exactly match the ARN of a valid resource \n            of the type you've speciﬁed in the template as the value of resources.type. For example, if resources.type equals \n            <code>AWS::S3::Object</code>, the ARN must be in one of the following formats. The trailing slash is intentional; do not exclude it.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:partition:s3:::bucket_name/</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>arn:partition:s3:::bucket_name/object_or_file_name/</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When resources.type equals <code>AWS::Lambda::Function</code>, and the operator is set\n            to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:partition:lambda:region:account_ID:function:function_name</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n         A field in an event record on which to filter events to be logged. Supported fields include <code>readOnly</code>, <code>eventCategory</code>, \n         <code>eventSource</code> (for management events), <code>eventName</code>, <code>resources.type</code>, and <code>resources.ARN</code>.\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>readOnly</code>\n                  </b> - Optional. Can be set to <code>Equals</code> a value of <code>true</code>\n            or <code>false</code>. A value of <code>false</code> logs both <code>read</code> and\n            <code>write</code> events.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventSource</code>\n                  </b> - For filtering management events only. \n            This can be set only to <code>NotEquals</code> \n                  <code>kms.amazonaws.com</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventName</code>\n                  </b> - Can use any operator. You can use it to ﬁlter in\n            or ﬁlter out any data event logged to CloudTrail, such as <code>PutBucket</code>. You can have multiple values\n            for this ﬁeld, separated by commas.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventCategory</code>\n                  </b> - This is required. It must be set to <code>Equals</code>, and \n            the value must be <code>Management</code> or <code>Data</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.type</code>\n                  </b> - This ﬁeld is required. <code>resources.type</code> \n            can only use the <code>Equals</code> operator, and the value can be one of the following: <code>AWS::S3::Object</code>, \n            <code>AWS::Lambda::Function</code>, or <code>AWS::S3Outposts::Object</code>. You can have only one <code>resources.type</code> ﬁeld per selector. To log \n            data events on more than one resource type, add another selector.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.ARN</code>\n                  </b> - You can use any operator with resources.ARN, but\n            if you use <code>Equals</code> or <code>NotEquals</code>, the value must exactly match the ARN of a valid resource \n            of the type you've speciﬁed in the template as the value of resources.type. For example, if resources.type equals \n            <code>AWS::S3::Object</code>, the ARN must be in one of the following formats. The trailing slash is intentional; do not exclude it.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:partition:s3:::bucket_name/</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>arn:partition:s3:::bucket_name/object_or_file_name/</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When resources.type equals <code>AWS::Lambda::Function</code>, and the operator is set\n            to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:partition:lambda:region:account_ID:function:function_name</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::S3Outposts::Object</code>, and the operator \n               is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:partition:s3-outposts:region:>account_ID:object_path</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -337,6 +337,22 @@
                 "smithy.api#documentation": "<p>Cannot set a CloudWatch Logs delivery for this region.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudtrail#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This exception is thrown when the specified resource is not ready for an operation. \n         This can occur when you try to run an operation on a trail before CloudTrail has time to fully load the trail. \n         If this exception occurs, wait a few minutes, and then try the operation again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.cloudtrail#CreateTrail": {
@@ -610,7 +626,7 @@
                 "Type": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type in which you want to log data events. You can specify <code>AWS::S3::Object</code> or\n         <code>AWS::Lambda::Function</code> resources.</p>"
+                        "smithy.api#documentation": "<p>The resource type in which you want to log data events. You can specify <code>AWS::S3::Object</code> or\n         <code>AWS::Lambda::Function</code> resources.</p>\n         <p>The <code>AWS::S3Outposts::Object</code> resource type is not valid in basic event selectors. To log data events on this resource type, \n         use advanced event selectors.</p>"
                     }
                 },
                 "Values": {
@@ -648,6 +664,9 @@
                 "target": "com.amazonaws.cloudtrail#DeleteTrailResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#ConflictException"
+                },
                 {
                     "target": "com.amazonaws.cloudtrail#InsufficientDependencyServiceAccessPermissionException"
                 },
@@ -2299,10 +2318,16 @@
                     "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#KmsException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#S3BucketDoesNotExistException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#TrailNotFoundException"

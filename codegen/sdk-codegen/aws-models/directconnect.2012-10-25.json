@@ -1096,7 +1096,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a BGP peer on the specified virtual interface.</p>\n         <p>You must create a BGP peer for the corresponding address family (IPv4/IPv6) in order to access AWS resources that also use that address family.</p>\n         <p>If logical redundancy is not supported by the connection, interconnect, or LAG, the BGP peer cannot \n      be in the same address family as an existing BGP peer on the virtual interface.</p>\n         <p>When creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from\n      the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses.</p>\n         <p>For a public virtual interface, the Autonomous System Number (ASN) must be private or already whitelisted for the virtual interface.</p>"
+                "smithy.api#documentation": "<p>Creates a BGP peer on the specified virtual interface.</p>\n         <p>You must create a BGP peer for the corresponding address family (IPv4/IPv6) in order to access AWS resources that also use that address family.</p>\n         <p>If logical redundancy is not supported by the connection, interconnect, or LAG, the BGP peer cannot \n      be in the same address family as an existing BGP peer on the virtual interface.</p>\n         <p>When creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from\n      the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses.</p>\n         <p>For a public virtual interface, the Autonomous System Number (ASN) must be private or already on the allow list for the virtual interface.</p>"
             }
         },
         "com.amazonaws.directconnect#CreateBGPPeerRequest": {
@@ -2234,7 +2234,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the associations between your Direct Connect gateways and virtual private gateways.\n      You must specify a Direct Connect gateway, a virtual private gateway, or both. If you specify\n      a Direct Connect gateway, the response contains all virtual private gateways associated with \n      the Direct Connect gateway. If you specify a virtual private gateway, the response contains \n      all Direct Connect gateways associated with the virtual private gateway. If you specify both, \n      the response contains the association between the Direct Connect gateway and the virtual \n      private gateway.</p>"
+                "smithy.api#documentation": "<p>Lists the associations between your Direct Connect gateways and virtual private gateways and transit gateways. You must specify one of the following:</p>\n         <ul>\n            <li>\n               <p>A Direct Connect gateway</p>\n               <p>The response contains all virtual private gateways and transit gateways associated with the Direct Connect gateway.</p>\n            </li>\n            <li>\n               <p>A virtual private gateway</p>\n               <p>The response contains the Direct Connect gateway.</p>\n            </li>\n            <li>\n               <p>A transit gateway</p>\n               <p>The response contains the Direct Connect gateway.</p>\n            </li>\n            <li>\n               <p>A Direct Connect gateway and a virtual private gateway</p>\n               <p>The response contains the association between the Direct Connect gateway and virtual private gateway.</p>\n            </li>\n            <li>\n               <p>A Direct Connect gateway and a transit gateway</p>\n               <p>The response contains the association between the Direct Connect gateway and transit gateway.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.directconnect#DescribeDirectConnectGatewayAssociationsRequest": {
@@ -2273,7 +2273,7 @@
                 "virtualGatewayId": {
                     "target": "com.amazonaws.directconnect#VirtualGatewayId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the virtual private gateway.</p>"
+                        "smithy.api#documentation": "<p>The ID of the virtual private gateway or transit gateway.</p>"
                     }
                 }
             }

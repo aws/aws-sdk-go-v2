@@ -188,6 +188,12 @@
                         "smithy.api#documentation": "<p>Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. </p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.iotwireless#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags attached to the specified resource. Tags are metadata that can be used to manage a resource</p>"
+                    }
                 }
             }
         },
@@ -198,6 +204,12 @@
                     "target": "com.amazonaws.iotwireless#SidewalkAccountInfo",
                     "traits": {
                         "smithy.api#documentation": "<p>The Sidewalk account credentials.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#PartnerAccountArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the resource.</p>"
                     }
                 }
             }
@@ -1029,6 +1041,12 @@
                         "smithy.api#documentation": "<p>Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. </p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.iotwireless#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags attached to the specified resource. Tags are metadata that can be used to manage a resource</p>"
+                    }
                 }
             }
         },
@@ -1039,6 +1057,12 @@
                     "target": "com.amazonaws.iotwireless#WirelessGatewayTaskDefinitionId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the new wireless gateway task definition.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#WirelessGatewayTaskDefinitionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the resource.</p>"
                     }
                 }
             }
@@ -1886,6 +1910,10 @@
                     {
                         "value": "RuleName",
                         "name": "RuleName"
+                    },
+                    {
+                        "value": "MqttTopic",
+                        "name": "MqttTopic"
                     }
                 ]
             }
@@ -2583,6 +2611,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the certificate associated with the wireless gateway.</p>"
                     }
+                },
+                "LoRaWANNetworkServerCertificateId": {
+                    "target": "com.amazonaws.iotwireless#IotCertificateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the certificate that is associated with the wireless gateway and used for the LoRaWANNetworkServer endpoint.</p>"
+                    }
                 }
             }
         },
@@ -2876,6 +2910,12 @@
                     "target": "com.amazonaws.iotwireless#UpdateWirelessGatewayTaskCreate",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the gateways to update.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#WirelessGatewayTaskDefinitionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the resource.</p>"
                     }
                 }
             }
@@ -4265,6 +4305,9 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#PartnerAccountArn": {
+            "type": "string"
+        },
         "com.amazonaws.iotwireless#PartnerAccountId": {
             "type": "string",
             "traits": {
@@ -4498,7 +4541,7 @@
                 "TransmitMode": {
                     "target": "com.amazonaws.iotwireless#TransmitMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The transmit mode to use to send data to the wireless device. Can be: <code>0</code> for UM (unacknowledge mode), <code>1</code> for AM (acknowledge mode), or <code>2</code> for (TM) transparent mode.</p>",
+                        "smithy.api#documentation": "<p>The transmit mode to use to send data to the wireless device. Can be: <code>0</code> for UM (unacknowledge mode) or <code>1</code> for AM (acknowledge mode).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4533,7 +4576,8 @@
             "traits": {
                 "smithy.api#box": {},
                 "smithy.api#range": {
-                    "min": 0
+                    "min": 0,
+                    "max": 16383
                 }
             }
         },
@@ -4674,7 +4718,13 @@
                 "Fingerprint": {
                     "target": "com.amazonaws.iotwireless#Fingerprint",
                     "traits": {
-                        "smithy.api#documentation": "<p>Fingerprint for Sidewalk application server private key.</p>"
+                        "smithy.api#documentation": "<p>The fingerprint of the Sidewalk application server private key.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#PartnerAccountArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the resource.</p>"
                     }
                 }
             },
@@ -5410,6 +5460,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The properties that relate to the LoRaWAN wireless gateway.</p>"
                     }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#WirelessGatewayTaskDefinitionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the resource.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5650,6 +5706,9 @@
             "member": {
                 "target": "com.amazonaws.iotwireless#WirelessGatewayStatistics"
             }
+        },
+        "com.amazonaws.iotwireless#WirelessGatewayTaskDefinitionArn": {
+            "type": "string"
         },
         "com.amazonaws.iotwireless#WirelessGatewayTaskDefinitionId": {
             "type": "string",

@@ -4913,6 +4913,21 @@
                 "smithy.api#documentation": "<p>Contains information for a group identity in an access policy.</p>"
             }
         },
+        "com.amazonaws.iotsitewise#IAMRoleIdentity": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.iotsitewise#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.htmll#identifiers-arns\">IAM ARNs</a> in the\n      <i>IAM User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an AWS Identity and Access Management (IAM) role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM roles</a> in the\n      <i>IAM User Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.iotsitewise#IAMUserIdentity": {
             "type": "structure",
             "members": {
@@ -4969,6 +4984,12 @@
                     "target": "com.amazonaws.iotsitewise#IAMUserIdentity",
                     "traits": {
                         "smithy.api#documentation": "<p>An IAM user identity.</p>"
+                    }
+                },
+                "iamRole": {
+                    "target": "com.amazonaws.iotsitewise#IAMRoleIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An IAM role identity.</p>"
                     }
                 }
             },
@@ -6139,7 +6160,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Contains an asset measurement property. This structure is empty. For more information, see\n      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements\">Measurements</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Contains an asset measurement property. For more information, see\n      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements\">Measurements</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>"
             }
         },
         "com.amazonaws.iotsitewise#Metric": {

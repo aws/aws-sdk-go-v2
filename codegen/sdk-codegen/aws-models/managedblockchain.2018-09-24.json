@@ -68,6 +68,16 @@
                 "smithy.api#documentation": "<p>A policy type that defines the voting rules for the network. The rules decide if a proposal is approved. Approval may be based on criteria such as the percentage of <code>YES</code> votes and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.</p>\n         <p>Applies only to Hyperledger Fabric.</p>"
             }
         },
+        "com.amazonaws.managedblockchain#ArnString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:.+:.+:.+:.+:.+"
+            }
+        },
         "com.amazonaws.managedblockchain#AvailabilityZoneString": {
             "type": "string"
         },
@@ -112,6 +122,9 @@
                 },
                 {
                     "target": "com.amazonaws.managedblockchain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#TooManyTagsException"
                 }
             ],
             "traits": {
@@ -195,6 +208,9 @@
                 },
                 {
                     "target": "com.amazonaws.managedblockchain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#TooManyTagsException"
                 }
             ],
             "traits": {
@@ -263,6 +279,12 @@
                         "smithy.api#documentation": "<p>Configuration properties for the first member within the network.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.managedblockchain#InputTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to the network. Each tag consists of a key and optional value.</p>\n         <p>When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>"
+                    }
                 }
             }
         },
@@ -315,6 +337,9 @@
                 },
                 {
                     "target": "com.amazonaws.managedblockchain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#TooManyTagsException"
                 }
             ],
             "traits": {
@@ -357,6 +382,12 @@
                         "smithy.api#documentation": "<p>The properties of a node configuration.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.managedblockchain#InputTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to the node. Each tag consists of a key and optional value.</p>\n         <p>When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>"
+                    }
                 }
             }
         },
@@ -397,6 +428,9 @@
                 },
                 {
                     "target": "com.amazonaws.managedblockchain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#TooManyTagsException"
                 }
             ],
             "traits": {
@@ -445,6 +479,12 @@
                     "target": "com.amazonaws.managedblockchain#DescriptionString",
                     "traits": {
                         "smithy.api#documentation": "<p>A description for the proposal that is visible to voting members, for example, \"Proposal to add Example Corp. as member.\"</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.managedblockchain#InputTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to the proposal. Each tag consists of a key and optional value.</p>\n         <p>When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource. If the proposal is for a network invitation, the invitation inherits the tags added to the proposal.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -620,6 +660,9 @@
             "traits": {
                 "smithy.api#box": {}
             }
+        },
+        "com.amazonaws.managedblockchain#ExceptionMessage": {
+            "type": "string"
         },
         "com.amazonaws.managedblockchain#Framework": {
             "type": "string",
@@ -921,6 +964,21 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.managedblockchain#InputTagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.managedblockchain#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.managedblockchain#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.managedblockchain#InstanceTypeString": {
             "type": "string"
         },
@@ -975,6 +1033,12 @@
                 },
                 "NetworkSummary": {
                     "target": "com.amazonaws.managedblockchain#NetworkSummary"
+                },
+                "Arn": {
+                    "target": "com.amazonaws.managedblockchain#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the invitation. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1578,6 +1642,61 @@
                 }
             }
         },
+        "com.amazonaws.managedblockchain#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.managedblockchain#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.managedblockchain#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.managedblockchain#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#ResourceNotReadyException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of tags for the specified resource. Each tag consists of a key and optional value.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.managedblockchain#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.managedblockchain#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.managedblockchain#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.managedblockchain#OutputTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the resource.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.managedblockchain#LogConfiguration": {
             "type": "structure",
             "members": {
@@ -1656,6 +1775,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the member was created.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.managedblockchain#OutputTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags assigned to the member. Tags consist of a key and optional value. For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.managedblockchain#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the member. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1689,6 +1820,12 @@
                     "target": "com.amazonaws.managedblockchain#MemberLogPublishingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration properties for logging events associated with a member of a Managed Blockchain network.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.managedblockchain#InputTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags assigned to the member. Tags consist of a key and optional value. For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>\n         <p>When specifying tags during creation, you can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource.</p>"
                     }
                 }
             },
@@ -1873,6 +2010,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An indicator of whether the member is owned by your AWS account or a different AWS account.</p>"
                     }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.managedblockchain#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the member. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1957,6 +2100,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the network was created.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.managedblockchain#OutputTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags assigned to the network. Each tag consists of a key and optional value.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.managedblockchain#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1974,7 +2129,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Attributes of Ethereum for a network.</p>"
+                "smithy.api#documentation": "<p>Attributes of Ethereum for a network. </p>"
             }
         },
         "com.amazonaws.managedblockchain#NetworkFabricAttributes": {
@@ -2024,7 +2179,7 @@
                 "Ethereum": {
                     "target": "com.amazonaws.managedblockchain#NetworkEthereumAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Attributes of an Ethereum network for Managed Blockchain resources participating in an Ethereum network.</p>"
+                        "smithy.api#documentation": "<p>Attributes of an Ethereum network for Managed Blockchain resources participating in an Ethereum network. </p>"
                     }
                 }
             },
@@ -2137,6 +2292,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the network was created.</p>"
                     }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.managedblockchain#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2179,7 +2340,7 @@
                 "AvailabilityZone": {
                     "target": "com.amazonaws.managedblockchain#AvailabilityZoneString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone in which the node exists.</p>"
+                        "smithy.api#documentation": "<p>The Availability Zone in which the node exists. Required for Ethereum nodes. </p>"
                     }
                 },
                 "FrameworkAttributes": {
@@ -2211,6 +2372,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the node was created.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.managedblockchain#OutputTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags assigned to the node. Each tag consists of a key and optional value.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.managedblockchain#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the node. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2230,7 +2403,7 @@
                 "AvailabilityZone": {
                     "target": "com.amazonaws.managedblockchain#AvailabilityZoneString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone in which the node exists.</p>"
+                        "smithy.api#documentation": "<p>The Availability Zone in which the node exists. Required for Ethereum nodes. </p>"
                     }
                 },
                 "LogPublishingConfiguration": {
@@ -2322,7 +2495,7 @@
                 "Ethereum": {
                     "target": "com.amazonaws.managedblockchain#NodeEthereumAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Attributes of Ethereum for a node on a Managed Blockchain network that uses Ethereum.</p>"
+                        "smithy.api#documentation": "<p>Attributes of Ethereum for a node on a Managed Blockchain network that uses Ethereum. </p>"
                     }
                 }
             },
@@ -2425,6 +2598,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The EC2 instance type for the node.</p>"
                     }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.managedblockchain#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the node. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2435,6 +2614,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.managedblockchain#NodeSummary"
+            }
+        },
+        "com.amazonaws.managedblockchain#OutputTagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.managedblockchain#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.managedblockchain#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
             }
         },
         "com.amazonaws.managedblockchain#PaginationToken": {
@@ -2533,6 +2727,18 @@
                     "target": "com.amazonaws.managedblockchain#VoteCount",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The number of votes remaining to be cast on the proposal by members. In other words, the number of members minus the sum of <code>YES</code> votes and <code>NO</code> votes.\n      </p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.managedblockchain#OutputTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags assigned to the proposal. Each tag consists of a key and optional value.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.managedblockchain#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the proposal. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
                     }
                 }
             },
@@ -2650,6 +2856,12 @@
                     "target": "com.amazonaws.managedblockchain#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The date and time that the proposal expires. This is the <code>CreationDate</code> plus the <code>ProposalDurationInHours</code> that is specified in the <code>ProposalThresholdPolicy</code>.  After this date and time, if members have not cast enough votes to determine the outcome according to the voting policy, the proposal is <code>EXPIRED</code> and <code>Actions</code> are not carried out.\n      </p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.managedblockchain#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the proposal. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
                     }
                 }
             },
@@ -2784,10 +2996,16 @@
             "members": {
                 "Message": {
                     "target": "com.amazonaws.managedblockchain#String"
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.managedblockchain#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A requested resource does not exist. It may have been deleted or referenced inaccurately.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A requested resource does not exist on the network. It may have been deleted or referenced inaccurately.</p>",
+                "smithy.api#documentation": "<p>A requested resource does not exist. It may have been deleted or referenced inaccurately.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -2822,6 +3040,94 @@
         },
         "com.amazonaws.managedblockchain#String": {
             "type": "string"
+        },
+        "com.amazonaws.managedblockchain#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.managedblockchain#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.managedblockchain#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.managedblockchain#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.managedblockchain#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.managedblockchain#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.managedblockchain#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#ResourceNotReadyException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#TooManyTagsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds or overwrites the specified tags for the specified Amazon Managed Blockchain resource. Each tag consists of a key and optional value.</p>\n         <p>When you specify a tag key that already exists, the tag value is overwritten with the new value. Use <code>UntagResource</code> to remove tag keys.</p>\n         <p>A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, your request fails and returns an error.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.managedblockchain#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.managedblockchain#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.managedblockchain#InputTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to assign to the specified resource. Tag values can be empty, for example, <code>\"MyTagKey\" : \"\"</code>. You can specify multiple key-value pairs in a single request, with an overall maximum of 50 tags added to each resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.managedblockchain#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.managedblockchain#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
         },
         "com.amazonaws.managedblockchain#TaigaWebService": {
             "type": "service",
@@ -2876,7 +3182,16 @@
                     "target": "com.amazonaws.managedblockchain#ListProposalVotes"
                 },
                 {
+                    "target": "com.amazonaws.managedblockchain#ListTagsForResource"
+                },
+                {
                     "target": "com.amazonaws.managedblockchain#RejectInvitation"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#UntagResource"
                 },
                 {
                     "target": "com.amazonaws.managedblockchain#UpdateMember"
@@ -2943,6 +3258,81 @@
             "traits": {
                 "smithy.api#timestampFormat": "date-time"
             }
+        },
+        "com.amazonaws.managedblockchain#TooManyTagsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.managedblockchain#ExceptionMessage"
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.managedblockchain#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.managedblockchain#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.managedblockchain#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.managedblockchain#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.managedblockchain#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchain#ResourceNotReadyException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the specified tags from the Amazon Managed Blockchain resource.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.managedblockchain#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.managedblockchain#ArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.managedblockchain#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.managedblockchain#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.managedblockchain#UpdateMember": {
             "type": "operation",

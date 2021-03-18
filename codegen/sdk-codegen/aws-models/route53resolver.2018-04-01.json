@@ -919,7 +919,7 @@
                 "Name": {
                     "target": "com.amazonaws.route53resolver#FilterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the parameter that you want to use to filter objects.</p>\n\t\t       <p>The valid values for <code>Name</code> depend on the action that you're including the filter in, \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverEndpoints.html\">ListResolverEndpoints</a>, \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html\">ListResolverRules</a>, \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html\">ListResolverRuleAssociations</a>, \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigs.html\">ListResolverQueryLogConfigs</a>,\n\t\t\tor \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html\">ListResolverQueryLogConfigAssociations</a>.</p>\n\t\t\n\t\t       <note>\n\t\t\t         <p>In early versions of Resolver, values for <code>Name</code> were listed as uppercase, with underscore (_) delimiters. For example, \n\t\t\t\t<code>CreatorRequestId</code> was originally listed as <code>CREATOR_REQUEST_ID</code>. Uppercase values for <code>Name</code> are still supported.</p>\n\t\t       </note>\n\t\t\n\t\t       <p>\n            <b>ListResolverEndpoints</b>\n         </p>\n\t\t       <p>Valid values for <code>Name</code> include the following:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>CreatorRequestId</code>: The value that you specified when you created the Resolver endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Direction</code>: Whether you want to return inbound or outbound Resolver endpoints. If you specify <code>DIRECTION</code> \n\t\t\t\tfor <code>Name</code>, specify <code>INBOUND</code> or <code>OUTBOUND</code> for <code>Values</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HostVpcId</code>: The ID of the VPC that inbound DNS queries pass through on the way from your network to your VPCs in a region, or \n\t\t\t\tthe VPC that outbound queries pass through on the way from your VPCs to your network. In a \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverEndpoint.html\">CreateResolverEndpoint</a>\n\t\t\t\trequest, <code>SubnetId</code> indirectly identifies the VPC. In a \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html\">GetResolverEndpoint</a>\n\t\t\t\trequest, the VPC ID for a Resolver endpoint \n\t\t\t\tis returned in the <code>HostVPCId</code> element. </p>\n            </li>\n            <li>\n               <p>\n                  <code>IpAddressCount</code>: The number of IP addresses that you have associated with the Resolver endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Name</code>: The name of the Resolver endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SecurityGroupIds</code>: The IDs of the VPC security groups that you specified when you created the \n\t\t\t\tResolver endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>: The status of the Resolver endpoint. If you specify <code>Status</code> for <code>Name</code>, \n\t\t\t\tspecify one of the following status codes for <code>Values</code>: <code>CREATING</code>, <code>OPERATIONAL</code>, <code>UPDATING</code>,\n\t\t\t\t<code>AUTO_RECOVERING</code>, <code>ACTION_NEEDED</code>, or <code>DELETING</code>. For more information, see <code>Status</code> in\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverEndpoint.html\">ResolverEndpoint</a>.</p>\n            </li>\n         </ul>\n\t\t\n\t\t       <p>\n            <b>ListResolverRules</b>\n         </p>\n\t\t       <p>Valid values for <code>Name</code> include the following:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>CreatorRequestId</code>: The value that you specified when you created the Resolver rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DomainName</code>: The domain name for which Resolver is forwarding DNS queries to your network. In the value that \n\t\t\t\tyou specify for <code>Values</code>, include a trailing dot (.) after the domain name. For example, if the domain name is example.com, \n\t\t\t\tspecify the following value. Note the \".\" after <code>com</code>:</p>\n\t\t\t\t           <p>\n                  <code>example.com.</code>\n               </p>\n\t\t\t         </li>\n            <li>\n               <p>\n                  <code>Name</code>: The name of the Resolver rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ResolverEndpointId</code>: The ID of the Resolver endpoint that the Resolver rule is associated with.</p>\n\t\t\t\t           <note>\n                  <p>You can filter on the Resolver endpoint only for rules that have a value of <code>FORWARD</code> for \n\t\t\t\t\t<code>RuleType</code>.</p>\n               </note>\n\t\t\t         </li>\n            <li>\n               <p>\n                  <code>Status</code>: The status of the Resolver rule. If you specify <code>Status</code> for <code>Name</code>, \n\t\t\t\tspecify one of the following status codes for <code>Values</code>: <code>COMPLETE</code>, <code>DELETING</code>, <code>UPDATING</code>, \n\t\t\t\tor <code>FAILED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Type</code>: The type of the Resolver rule. If you specify <code>TYPE</code> \n\t\t\t\tfor <code>Name</code>, specify <code>FORWARD</code> or <code>SYSTEM</code> for <code>Values</code>.</p>\n            </li>\n         </ul>\n\t\t\n\t\t       <p>\n            <b>ListResolverRuleAssociations</b>\n         </p>\n\t\t       <p>Valid values for <code>Name</code> include the following:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>Name</code>: The name of the Resolver rule association.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ResolverRuleId</code>: The ID of the Resolver rule that is associated with one or more VPCs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>: The status of the Resolver rule association. If you specify <code>Status</code> for <code>Name</code>, \n\t\t\t\tspecify one of the following status codes for <code>Values</code>: <code>CREATING</code>, <code>COMPLETE</code>, <code>DELETING</code>, or \n\t\t\t\t<code>FAILED</code>.</p>\n\t\t\t         </li>\n            <li>\n               <p>\n                  <code>VPCId</code>: The ID of the VPC that the Resolver rule is associated with.</p>\n            </li>\n         </ul>\n\n\t\t       <p>\n            <b>ListResolverQueryLogConfigs</b>\n         </p>\n\t\t       <p>Valid values for <code>Name</code> include the following:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>Arn</code>: The ARN for the query logging configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AssociationCount</code>: The number of VPCs that are associated with the query logging configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreationTime</code>: The date and time that the query logging configuration was created, in Unix time format and \n\t\t\t\tCoordinated Universal Time (UTC). </p>\n            </li>\n            <li>\n               <p>\n                  <code>CreatorRequestId</code>: A unique string that identifies the request that created the query logging configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Destination</code>: The AWS service that you want to forward query logs to. Valid values include the following:</p>\n\t\t\t\t           <ul>\n                  <li>\n                     <p>\n                        <code>S3</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CloudWatchLogs</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>KinesisFirehose</code>\n                     </p>\n                  </li>\n               </ul>\n\t\t\t         </li>\n            <li>\n               <p>\n                  <code>DestinationArn</code>: The ARN of the location that Resolver is sending query logs to. This value can be the ARN for an \n\t\t\t\tS3 bucket, a CloudWatch Logs log group, or a Kinesis Data Firehose delivery stream.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Id</code>: The ID of the query logging configuration</p>\n            </li>\n            <li>\n               <p>\n                  <code>Name</code>: The name of the query logging configuration</p>\n            </li>\n            <li>\n               <p>\n                  <code>OwnerId</code>: The AWS account ID for the account that created the query logging configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ShareStatus</code>: An indication of whether the query logging configuration is shared with other AWS accounts, \n\t\t\t\tor was shared with the current account by another AWS account. Valid values include: <code>NOT_SHARED</code>, <code>SHARED_WITH_ME</code>, \n\t\t\t\tor <code>SHARED_BY_ME</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>: The status of the query logging configuration. If you specify <code>Status</code> for <code>Name</code>, \n\t\t\t\tspecify the applicable status code for <code>Values</code>: <code>CREATING</code>, <code>CREATED</code>, \n\t\t\t\t<code>DELETING</code>, or <code>FAILED</code>. For more information, see \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfig.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfig-Status\">Status</a>.\n\t\t\t\t</p>\n\t\t\t         </li>\n         </ul>\n\t\t\n\t\t       <p>\n            <b>ListResolverQueryLogConfigAssociations</b>\n         </p>\n\t\t       <p>Valid values for <code>Name</code> include the following:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>CreationTime</code>: The date and time that the VPC was associated with the query logging configuration, in Unix time format and \n\t\t\t\tCoordinated Universal Time (UTC).</p>\n            </li>\n            <li>\n               <p>\n                  <code>Error</code>: If the value of <code>Status</code> is <code>FAILED</code>, specify the cause: \n\t\t\t\t<code>DESTINATION_NOT_FOUND</code> or <code>ACCESS_DENIED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Id</code>: The ID of the query logging association.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ResolverQueryLogConfigId</code>: The ID of the query logging configuration that a VPC is associated with.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceId</code>: The ID of the Amazon VPC that is associated with the query logging configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>: The status of the query logging association. If you specify <code>Status</code> for <code>Name</code>, \n\t\t\t\tspecify the applicable status code for <code>Values</code>: <code>CREATING</code>, <code>CREATED</code>, \n\t\t\t\t<code>DELETING</code>, or <code>FAILED</code>. For more information, see \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/API_route53resolver_ResolverQueryLogConfigAssociation.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfigAssociation-Status\">Status</a>.\n\t\t\t\t</p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the parameter that you want to use to filter objects.</p>\n\t\t       <p>The valid values for <code>Name</code> depend on the action that you're including the filter in, \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverEndpoints.html\">ListResolverEndpoints</a>, \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html\">ListResolverRules</a>, \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html\">ListResolverRuleAssociations</a>, \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigs.html\">ListResolverQueryLogConfigs</a>,\n\t\t\tor \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html\">ListResolverQueryLogConfigAssociations</a>.</p>\n\t\t\n\t\t       <note>\n\t\t\t         <p>In early versions of Resolver, values for <code>Name</code> were listed as uppercase, with underscore (_) delimiters. For example, \n\t\t\t\t<code>CreatorRequestId</code> was originally listed as <code>CREATOR_REQUEST_ID</code>. Uppercase values for <code>Name</code> are still supported.</p>\n\t\t       </note>\n\t\t\n\t\t       <p>\n            <b>ListResolverEndpoints</b>\n         </p>\n\t\t       <p>Valid values for <code>Name</code> include the following:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>CreatorRequestId</code>: The value that you specified when you created the Resolver endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Direction</code>: Whether you want to return inbound or outbound Resolver endpoints. If you specify <code>DIRECTION</code> \n\t\t\t\tfor <code>Name</code>, specify <code>INBOUND</code> or <code>OUTBOUND</code> for <code>Values</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HostVpcId</code>: The ID of the VPC that inbound DNS queries pass through on the way from your network to your VPCs in a region, or \n\t\t\t\tthe VPC that outbound queries pass through on the way from your VPCs to your network. In a \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverEndpoint.html\">CreateResolverEndpoint</a>\n\t\t\t\trequest, <code>SubnetId</code> indirectly identifies the VPC. In a \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html\">GetResolverEndpoint</a>\n\t\t\t\trequest, the VPC ID for a Resolver endpoint \n\t\t\t\tis returned in the <code>HostVPCId</code> element. </p>\n            </li>\n            <li>\n               <p>\n                  <code>IpAddressCount</code>: The number of IP addresses that you have associated with the Resolver endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Name</code>: The name of the Resolver endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SecurityGroupIds</code>: The IDs of the VPC security groups that you specified when you created the \n\t\t\t\tResolver endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>: The status of the Resolver endpoint. If you specify <code>Status</code> for <code>Name</code>, \n\t\t\t\tspecify one of the following status codes for <code>Values</code>: <code>CREATING</code>, <code>OPERATIONAL</code>, <code>UPDATING</code>,\n\t\t\t\t<code>AUTO_RECOVERING</code>, <code>ACTION_NEEDED</code>, or <code>DELETING</code>. For more information, see <code>Status</code> in\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverEndpoint.html\">ResolverEndpoint</a>.</p>\n            </li>\n         </ul>\n\t\t\n\t\t       <p>\n            <b>ListResolverRules</b>\n         </p>\n\t\t       <p>Valid values for <code>Name</code> include the following:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>CreatorRequestId</code>: The value that you specified when you created the Resolver rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DomainName</code>: The domain name for which Resolver is forwarding DNS queries to your network. In the value that \n\t\t\t\tyou specify for <code>Values</code>, include a trailing dot (.) after the domain name. For example, if the domain name is example.com, \n\t\t\t\tspecify the following value. Note the \".\" after <code>com</code>:</p>\n\t\t\t\t           <p>\n                  <code>example.com.</code>\n               </p>\n\t\t\t         </li>\n            <li>\n               <p>\n                  <code>Name</code>: The name of the Resolver rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ResolverEndpointId</code>: The ID of the Resolver endpoint that the Resolver rule is associated with.</p>\n\t\t\t\t           <note>\n                  <p>You can filter on the Resolver endpoint only for rules that have a value of <code>FORWARD</code> for \n\t\t\t\t\t<code>RuleType</code>.</p>\n               </note>\n\t\t\t         </li>\n            <li>\n               <p>\n                  <code>Status</code>: The status of the Resolver rule. If you specify <code>Status</code> for <code>Name</code>, \n\t\t\t\tspecify one of the following status codes for <code>Values</code>: <code>COMPLETE</code>, <code>DELETING</code>, <code>UPDATING</code>, \n\t\t\t\tor <code>FAILED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Type</code>: The type of the Resolver rule. If you specify <code>TYPE</code> \n\t\t\t\tfor <code>Name</code>, specify <code>FORWARD</code> or <code>SYSTEM</code> for <code>Values</code>.</p>\n            </li>\n         </ul>\n\t\t\n\t\t       <p>\n            <b>ListResolverRuleAssociations</b>\n         </p>\n\t\t       <p>Valid values for <code>Name</code> include the following:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>Name</code>: The name of the Resolver rule association.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ResolverRuleId</code>: The ID of the Resolver rule that is associated with one or more VPCs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>: The status of the Resolver rule association. If you specify <code>Status</code> for <code>Name</code>, \n\t\t\t\tspecify one of the following status codes for <code>Values</code>: <code>CREATING</code>, <code>COMPLETE</code>, <code>DELETING</code>, or \n\t\t\t\t<code>FAILED</code>.</p>\n\t\t\t         </li>\n            <li>\n               <p>\n                  <code>VPCId</code>: The ID of the VPC that the Resolver rule is associated with.</p>\n            </li>\n         </ul>\n\n\t\t       <p>\n            <b>ListResolverQueryLogConfigs</b>\n         </p>\n\t\t       <p>Valid values for <code>Name</code> include the following:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>Arn</code>: The ARN for the query logging configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AssociationCount</code>: The number of VPCs that are associated with the query logging configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreationTime</code>: The date and time that the query logging configuration was created, in Unix time format and \n\t\t\t\tCoordinated Universal Time (UTC). </p>\n            </li>\n            <li>\n               <p>\n                  <code>CreatorRequestId</code>: A unique string that identifies the request that created the query logging configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Destination</code>: The AWS service that you want to forward query logs to. Valid values include the following:</p>\n\t\t\t\t           <ul>\n                  <li>\n                     <p>\n                        <code>S3</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CloudWatchLogs</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>KinesisFirehose</code>\n                     </p>\n                  </li>\n               </ul>\n\t\t\t         </li>\n            <li>\n               <p>\n                  <code>DestinationArn</code>: The ARN of the location that Resolver is sending query logs to. This value can be the ARN for an \n\t\t\t\tS3 bucket, a CloudWatch Logs log group, or a Kinesis Data Firehose delivery stream.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Id</code>: The ID of the query logging configuration</p>\n            </li>\n            <li>\n               <p>\n                  <code>Name</code>: The name of the query logging configuration</p>\n            </li>\n            <li>\n               <p>\n                  <code>OwnerId</code>: The AWS account ID for the account that created the query logging configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ShareStatus</code>: An indication of whether the query logging configuration is shared with other AWS accounts, \n\t\t\t\tor was shared with the current account by another AWS account. Valid values include: <code>NOT_SHARED</code>, <code>SHARED_WITH_ME</code>, \n\t\t\t\tor <code>SHARED_BY_ME</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>: The status of the query logging configuration. If you specify <code>Status</code> for <code>Name</code>, \n\t\t\t\tspecify the applicable status code for <code>Values</code>: <code>CREATING</code>, <code>CREATED</code>, \n\t\t\t\t<code>DELETING</code>, or <code>FAILED</code>. For more information, see \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfig.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfig-Status\">Status</a>.\n\t\t\t\t</p>\n\t\t\t         </li>\n         </ul>\n\t\t\n\t\t       <p>\n            <b>ListResolverQueryLogConfigAssociations</b>\n         </p>\n\t\t       <p>Valid values for <code>Name</code> include the following:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>CreationTime</code>: The date and time that the VPC was associated with the query logging configuration, in Unix time format and \n\t\t\t\tCoordinated Universal Time (UTC).</p>\n            </li>\n            <li>\n               <p>\n                  <code>Error</code>: If the value of <code>Status</code> is <code>FAILED</code>, specify the cause: \n\t\t\t\t<code>DESTINATION_NOT_FOUND</code> or <code>ACCESS_DENIED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Id</code>: The ID of the query logging association.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ResolverQueryLogConfigId</code>: The ID of the query logging configuration that a VPC is associated with.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceId</code>: The ID of the Amazon VPC that is associated with the query logging configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>: The status of the query logging association. If you specify <code>Status</code> for <code>Name</code>, \n\t\t\t\tspecify the applicable status code for <code>Values</code>: <code>CREATING</code>, <code>CREATED</code>, \n\t\t\t\t<code>DELETING</code>, or <code>FAILED</code>. For more information, see \n\t\t\t    <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfigAssociation.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfigAssociation-Status\">Status</a>.\n\t\t\t\t</p>\n\t\t\t         </li>\n         </ul>"
                     }
                 },
                 "Values": {
@@ -930,7 +930,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>For Resolver list operations \n\t\t\t(<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverEndpoints.html\">ListResolverEndpoints</a>, \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html\">ListResolverRules</a>, \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html\">ListResolverRuleAssociations</a>, \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigs.html\">ListResolverQueryLogConfigs</a>,\n\t\t\tand\n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html\">ListResolverQueryLogConfigAssociations</a>), \n\t\t\tan optional specification to return a subset of objects.</p>\n\t\t       <p>To filter objects, such as Resolver endpoints or Resolver rules, you specify <code>Name</code> and <code>Values</code>. For example, \n\t\t\tto list only inbound Resolver endpoints, specify <code>Direction</code> for <code>Name</code> and specify <code>INBOUND</code> for <code>Values</code>. </p>"
+                "smithy.api#documentation": "<p>For Resolver list operations \n\t\t\t(<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverEndpoints.html\">ListResolverEndpoints</a>, \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html\">ListResolverRules</a>, \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html\">ListResolverRuleAssociations</a>, \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigs.html\">ListResolverQueryLogConfigs</a>,\n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html\">ListResolverQueryLogConfigAssociations</a>),\n\t\t\tand\n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverDnssecConfigs.html\">ListResolverDnssecConfigs</a>), \n\t\t\tan optional specification to return a subset of objects.</p>\n\t\t       <p>To filter objects, such as Resolver endpoints or Resolver rules, you specify <code>Name</code> and <code>Values</code>. For example, \n\t\t\tto list only inbound Resolver endpoints, specify <code>Direction</code> for <code>Name</code> and specify <code>INBOUND</code> for <code>Values</code>. </p>"
             }
         },
         "com.amazonaws.route53resolver#FilterName": {
@@ -961,6 +961,61 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.route53resolver#Filter"
+            }
+        },
+        "com.amazonaws.route53resolver#GetResolverDnssecConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53resolver#GetResolverDnssecConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53resolver#GetResolverDnssecConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets DNSSEC validation information for a specified resource.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#GetResolverDnssecConfigRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceId": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the virtual private cloud (VPC) for the DNSSEC validation status.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#GetResolverDnssecConfigResponse": {
+            "type": "structure",
+            "members": {
+                "ResolverDNSSECConfig": {
+                    "target": "com.amazonaws.route53resolver#ResolverDnssecConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information about a configuration for DNSSEC validation.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.route53resolver#GetResolverEndpoint": {
@@ -1269,7 +1324,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a Resolver rule policy. A Resolver rule policy specifies the Resolver operations and resources \n\t\t\tthat you want to allow another AWS account to be able to use. </p>"
+                "smithy.api#documentation": "<p>Gets information about the Resolver rule policy for a specified rule. A Resolver rule policy includes the rule that you want to share \n\t\t\twith another account, the account that you want to share the rule with, and the Resolver operations that you want to allow the account to use. </p>"
             }
         },
         "com.amazonaws.route53resolver#GetResolverRulePolicyRequest": {
@@ -1278,7 +1333,7 @@
                 "Arn": {
                     "target": "com.amazonaws.route53resolver#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Resolver rule policy that you want to get information about.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Resolver rule that you want to get the Resolver rule policy for.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1290,7 +1345,7 @@
                 "ResolverRulePolicy": {
                     "target": "com.amazonaws.route53resolver#ResolverRulePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the Resolver rule policy that you specified in a <code>GetResolverRulePolicy</code> request.</p>"
+                        "smithy.api#documentation": "<p>The Resolver rule policy for the rule that you specified in a <code>GetResolverRulePolicy</code> request.</p>"
                     }
                 }
             }
@@ -1592,6 +1647,84 @@
             "traits": {
                 "smithy.api#documentation": "<p>The request caused one or more limits to be exceeded.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.route53resolver#ListResolverDnssecConfigs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53resolver#ListResolverDnssecConfigsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53resolver#ListResolverDnssecConfigsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the configurations for DNSSEC validation that are associated with the current AWS account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#ListResolverDnssecConfigsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.route53resolver#MaxResults",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>\n            <i>Optional</i>: An integer that specifies the maximum number of DNSSEC configuration results that you want Amazon Route 53 to return. \n\t\t\tIf you don't specify a value for <code>MaxResults</code>, Route 53 returns up to 100 configuration per page.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.route53resolver#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Optional) If the current AWS account has more than <code>MaxResults</code> DNSSEC configurations, use <code>NextToken</code> \n\t\t\tto get the second and subsequent pages of results.</p>\n\t\t       <p>For the first <code>ListResolverDnssecConfigs</code> request, omit this value.</p>\n\t\t       <p>For the second and subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value \n\t\t\tfor <code>NextToken</code> in the request.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.route53resolver#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional specification to return a subset of objects.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#ListResolverDnssecConfigsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.route53resolver#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If a response includes the last of the DNSSEC configurations that are associated with the current AWS account, \n\t\t\t<code>NextToken</code> doesn't appear in the response.</p>\n\t\t       <p>If a response doesn't include the last of the configurations, you can get more configurations by submitting another \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListResolverDnssecConfigs.html\">ListResolverDnssecConfigs</a> \n\t\t\trequest. Get the value of <code>NextToken</code> that Amazon Route 53 returned in the previous response and include it in \n\t\t\t<code>NextToken</code> in the next request.</p>"
+                    }
+                },
+                "ResolverDnssecConfigs": {
+                    "target": "com.amazonaws.route53resolver#ResolverDnssecConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that contains one \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ResolverDnssecConfig.html\">ResolverDnssecConfig</a> element \n\t\t\tfor each configuration for DNSSEC validation that is associated with the current AWS account.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.route53resolver#ListResolverEndpointIpAddresses": {
@@ -2322,7 +2455,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Specifies an AWS account that you want to share rules with, the Resolver rules that you want to share, and the operations that you want \n\t\t\tthe account to be able to perform on those rules.</p>"
+                "smithy.api#documentation": "<p>Specifies an AWS rule that you want to share with another account, the account that you want to share the rule with, \n\t\t\tand the operations that you want the account to be able to perform on the rule.</p>"
             }
         },
         "com.amazonaws.route53resolver#PutResolverRulePolicyRequest": {
@@ -2331,14 +2464,14 @@
                 "Arn": {
                     "target": "com.amazonaws.route53resolver#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the account that you want to share rules with.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rule that you want to share with another account.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ResolverRulePolicy": {
                     "target": "com.amazonaws.route53resolver#ResolverRulePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>An AWS Identity and Access Management policy statement that lists the rules that you want to share with another AWS account and the operations that you want the account \n\t\t\tto be able to perform. You can specify the following operations in the <code>Actions</code> section of the statement:</p>\n\t\t\t      <ul>\n            <li>\n               <p>\n                  <code>route53resolver:GetResolverRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>route53resolver:AssociateResolverRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>route53resolver:DisassociateResolverRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>route53resolver:ListResolverRules</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>route53resolver:ListResolverRuleAssociations</code>\n               </p>\n            </li>\n         </ul>\n\t\t\n\t\t       <p>In the <code>Resource</code> section of the statement, you specify the ARNs for the rules that you want to share with the account that you \n\t\t\tspecified in <code>Arn</code>. </p>",
+                        "smithy.api#documentation": "<p>An AWS Identity and Access Management policy statement that lists the rules that you want to share with another AWS account and the operations that you want the account \n\t\t\tto be able to perform. You can specify the following operations in the <code>Action</code> section of the statement:</p>\n\t\t\t      <ul>\n            <li>\n               <p>\n                  <code>route53resolver:GetResolverRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>route53resolver:AssociateResolverRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>route53resolver:DisassociateResolverRule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>route53resolver:ListResolverRules</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>route53resolver:ListResolverRuleAssociations</code>\n               </p>\n            </li>\n         </ul>\n\t\t\n\t\t       <p>In the <code>Resource</code> section of the statement, specify the ARN for the rule that you want to share with another account. Specify the same ARN \n\t\t\tthat you specified in <code>Arn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2356,6 +2489,67 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The response to a <code>PutResolverRulePolicy</code> request.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#ResolverDNSSECValidationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLING",
+                        "name": "Enabling"
+                    },
+                    {
+                        "value": "ENABLED",
+                        "name": "Enabled"
+                    },
+                    {
+                        "value": "DISABLING",
+                        "name": "Disabling"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "Disabled"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.route53resolver#ResolverDnssecConfig": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for a configuration for DNSSEC validation.</p>"
+                    }
+                },
+                "OwnerId": {
+                    "target": "com.amazonaws.route53resolver#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner account ID of the virtual private cloud (VPC) for a configuration for DNSSEC validation.</p>"
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the virtual private cloud (VPC) that you're configuring the DNSSEC validation status for.</p>"
+                    }
+                },
+                "ValidationStatus": {
+                    "target": "com.amazonaws.route53resolver#ResolverDNSSECValidationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validation status for a DNSSEC configuration. The status can be one of the following:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <b>ENABLING:</b> DNSSEC validation is being enabled but is not complete.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ENABLED:</b> DNSSEC validation is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DISABLING:</b> DNSSEC validation is being disabled but is not complete.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DISABLED</b> DNSSEC validation is disabled.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex type that contains information about a configuration for DNSSEC validation.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#ResolverDnssecConfigList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53resolver#ResolverDnssecConfig"
             }
         },
         "com.amazonaws.route53resolver#ResolverEndpoint": {
@@ -3079,6 +3273,9 @@
                     "target": "com.amazonaws.route53resolver#DisassociateResolverRule"
                 },
                 {
+                    "target": "com.amazonaws.route53resolver#GetResolverDnssecConfig"
+                },
+                {
                     "target": "com.amazonaws.route53resolver#GetResolverEndpoint"
                 },
                 {
@@ -3098,6 +3295,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53resolver#GetResolverRulePolicy"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ListResolverDnssecConfigs"
                 },
                 {
                     "target": "com.amazonaws.route53resolver#ListResolverEndpointIpAddresses"
@@ -3131,6 +3331,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53resolver#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#UpdateResolverDnssecConfig"
                 },
                 {
                     "target": "com.amazonaws.route53resolver#UpdateResolverEndpoint"
@@ -3475,6 +3678,68 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.route53resolver#UpdateResolverDnssecConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53resolver#UpdateResolverDnssecConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53resolver#UpdateResolverDnssecConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing DNSSEC validation configuration. If there is no existing DNSSEC validation configuration, one is created.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#UpdateResolverDnssecConfigRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceId": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the virtual private cloud (VPC) that you're updating the DNSSEC validation status for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Validation": {
+                    "target": "com.amazonaws.route53resolver#Validation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new value that you are specifying for DNSSEC validation for the VPC. The value can be <code>ENABLE</code>\n\t\t\tor <code>DISABLE</code>. Be aware that it can take time for a validation status change to be completed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#UpdateResolverDnssecConfigResponse": {
+            "type": "structure",
+            "members": {
+                "ResolverDNSSECConfig": {
+                    "target": "com.amazonaws.route53resolver#ResolverDnssecConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A complex type that contains settings for the specified DNSSEC configuration.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.route53resolver#UpdateResolverEndpoint": {
             "type": "operation",
             "input": {
@@ -3596,6 +3861,21 @@
                         "smithy.api#documentation": "<p>The response to an <code>UpdateResolverRule</code> request.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.route53resolver#Validation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLE",
+                        "name": "ENABLE"
+                    },
+                    {
+                        "value": "DISABLE",
+                        "name": "DISABLE"
+                    }
+                ]
             }
         }
     }

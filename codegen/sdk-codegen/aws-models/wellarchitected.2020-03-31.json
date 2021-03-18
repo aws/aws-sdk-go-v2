@@ -483,6 +483,12 @@
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.wellarchitected#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be associated with the workload.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2202,6 +2208,54 @@
                 "smithy.api#documentation": "<p>Input for List Share Invitations</p>"
             }
         },
+        "com.amazonaws.wellarchitected#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListTagsForResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListTagsForResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the tags for a resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{WorkloadArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListTagsForResourceInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadArn": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadArn",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListTagsForResourceOutput": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.wellarchitected#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for the resource.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.wellarchitected#ListWorkloadShares": {
             "type": "operation",
             "input": {
@@ -2759,7 +2813,7 @@
                 "target": "com.amazonaws.wellarchitected#ChoiceId"
             },
             "traits": {
-                "smithy.api#documentation": "<p>List of selected choice IDs in a question answer.</p>"
+                "smithy.api#documentation": "<p>List of selected choice IDs in a question answer.</p>\n        <p>The values entered replace the previously selected choices.</p>"
             }
         },
         "com.amazonaws.wellarchitected#ServiceCode": {
@@ -2930,6 +2984,99 @@
                 }
             }
         },
+        "com.amazonaws.wellarchitected#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.wellarchitected#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.wellarchitected#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#TagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#TagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds one or more tags to the specified resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{WorkloadArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#TagResourceInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadArn": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadArn",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.wellarchitected#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#TagResourceOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.wellarchitected#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.wellarchitected#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -2957,6 +3104,55 @@
             "traits": {
                 "smithy.api#documentation": "<p>The date and time recorded.</p>"
             }
+        },
+        "com.amazonaws.wellarchitected#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#UntagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#UntagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes specified tags from a resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{WorkloadArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#UntagResourceInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadArn": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadArn",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.wellarchitected#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The keys of the tags to be removed.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#UntagResourceOutput": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.wellarchitected#UpdateAnswer": {
             "type": "operation",
@@ -2987,7 +3183,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update the answer.</p>",
+                "smithy.api#documentation": "<p>Update the answer to a specific question in a workload review.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers/{QuestionId}",
@@ -3608,10 +3804,19 @@
                     "target": "com.amazonaws.wellarchitected#ListShareInvitations"
                 },
                 {
+                    "target": "com.amazonaws.wellarchitected#ListTagsForResource"
+                },
+                {
                     "target": "com.amazonaws.wellarchitected#ListWorkloads"
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#ListWorkloadShares"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#UntagResource"
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#UpdateAnswer"
@@ -3644,7 +3849,7 @@
                     "name": "wellarchitected"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>AWS Well-Architected Tool</fullname>\n         <p>This is the <i>AWS Well-Architected Tool API Reference</i>.</p>\n        \n        <p>The AWS Well-Architected Tool API provides programmatic access to the <a href=\"http://aws.amazon.com/well-architected-tool\">AWS Well-Architected Tool</a> in the <a href=\"https://console.aws.amazon.com/wellarchitected\">AWS Management Console</a>.</p>\n        <p>\n            <b>Managing workloads:</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                  <a>CreateWorkload</a>: Define a new workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>ListWorkloads</a>: List workloads.</p>\n            </li>\n            <li>\n                <p>\n                  <a>GetWorkload</a>: Get the properties of a workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>UpdateWorkload</a>: Update the properties of a workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>DeleteWorkload</a>: Delete a workload.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Managing milestones:</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                  <a>CreateMilestone</a>: Create a milestone.</p>\n            </li>\n            <li>\n                <p>\n                  <a>ListMilestones</a>: List milestones.</p>\n            </li>\n            <li>\n                <p>\n                  <a>GetMilestone</a>: Get the properties of a milestone.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Managing lenses:</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                  <a>ListLenses</a>: List the available lenses.</p>\n            </li>\n            <li>\n                <p>\n                  <a>AssociateLenses</a>: Add one or more lenses to a\n                    workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>DisassociateLenses</a>: Remove one or more lenses from a\n                    workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>ListNotifications</a>: List lens notifications for a workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>GetLensVersionDifference</a>: Get the differences between the version of a lens used\n                    in a workload and the latest version.</p>\n            </li>\n            <li>\n                <p>\n                  <a>UpgradeLensReview</a>: Upgrade a workload to use the latest version of a lens.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Managing reviews:</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                  <a>ListLensReviews</a>: List reviews associated with a\n                    workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>GetLensReview</a>: Get pillar and risk data associated with a\n                    workload review.</p>\n            </li>\n            <li>\n                <p>\n                  <a>GetLensReviewReport</a>: Get the report associated with a\n                    workload review.</p>\n            </li>\n            <li>\n                <p>\n                  <a>UpdateLensReview</a>: Update the notes associated with a\n                    workload review.</p>\n            </li>\n            <li>\n                <p>\n                  <a>ListAnswers</a>: List the questions and answers in a workload\n                    review.</p>\n            </li>\n            <li>\n                <p>\n                  <a>UpdateAnswer</a>: Update the answer to a specific question in a\n                    workload review.</p>\n            </li>\n            <li>\n                <p>\n                  <a>ListLensReviewImprovements</a>: List the improvement plan\n                    associated with a workload review.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Managing workload shares:</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                  <a>ListWorkloadShares</a>: List the workload shares associated with\n                    a workload.</p>\n            </li>\n            <li>\n                <p>\n                  <a>CreateWorkloadShare</a>: Create a workload share.</p>\n            </li>\n            <li>\n                <p>\n                  <a>UpdateWorkloadShare</a>: Update a workload share.</p>\n            </li>\n            <li>\n                <p>\n                  <a>DeleteWorkloadShare</a>: Delete a workload share.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Managing workload share invitations:</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                  <a>ListShareInvitations</a>: List workload share\n                    invitations.</p>\n            </li>\n            <li>\n                <p>\n                  <a>UpdateShareInvitation</a>: Update a workload share\n                    invitation.</p>\n            </li>\n         </ul>\n        <p>For information about the AWS Well-Architected Tool, see the <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html\">AWS Well-Architected Tool User Guide</a>.</p>",
+                "smithy.api#documentation": "<fullname>AWS Well-Architected Tool</fullname>\n        \n         <p>This is the <i>AWS Well-Architected Tool API Reference</i>. The AWS Well-Architected Tool API provides programmatic access to the \n            <a href=\"http://aws.amazon.com/well-architected-tool\">AWS Well-Architected Tool</a> in the \n            <a href=\"https://console.aws.amazon.com/wellarchitected\">AWS Management Console</a>. For information \n            about the AWS Well-Architected Tool, see the \n            <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html\">AWS Well-Architected Tool User Guide</a>.</p>",
                 "smithy.api#title": "AWS Well-Architected Tool"
             }
         },
@@ -3721,6 +3926,12 @@
                     "target": "com.amazonaws.wellarchitected#ShareInvitationId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID assigned to the share invitation.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.wellarchitected#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the workload.</p>"
                     }
                 }
             },

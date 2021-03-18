@@ -185,6 +185,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.networkfirewall#InsufficientCapacityException"
+                },
+                {
                     "target": "com.amazonaws.networkfirewall#InternalServerError"
                 },
                 {
@@ -600,7 +603,7 @@
                 "Rules": {
                     "target": "com.amazonaws.networkfirewall#RulesString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a file containing stateful rule group rules specifications in Suricata flat format, with one rule\nper line. Use this to import your existing Suricata compatible rule groups. </p>\n         <note>\n            <p>You must provide either this rules setting or a populated <code>RuleGroup</code> setting, but not both. </p>\n         </note>  \n         <p>You can provide your rule group specification in a file through this setting when you create or update your rule group. The call \nresponse returns a <a>RuleGroup</a> object that Network Firewall has populated from your file. \n         Network Firewall uses the file contents to populate the rule group rules, but does not maintain a reference to the file or use the file in any way after performing the create or update. If you call <a>DescribeRuleGroup</a> to retrieve the rule group, Network Firewall returns rules settings inside a <a>RuleGroup</a> object. </p>"
+                        "smithy.api#documentation": "<p>A string containing stateful rule group rules specifications in Suricata flat format, with one rule\nper line. Use this to import your existing Suricata compatible rule groups. </p>\n         <note>\n            <p>You must provide either this rules setting or a populated <code>RuleGroup</code> setting, but not both. </p>\n         </note>  \n         <p>You can provide your rule group specification in Suricata flat format through this setting when you create or update your rule group. The call \nresponse returns a <a>RuleGroup</a> object that Network Firewall has populated from your string. </p>"
                     }
                 },
                 "Type": {
@@ -816,6 +819,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
@@ -1113,6 +1119,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.networkfirewall#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
                 },
                 {
                     "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
@@ -1499,7 +1508,7 @@
                 "StatelessFragmentDefaultActions": {
                     "target": "com.amazonaws.networkfirewall#StatelessActions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The actions to take on a fragmented packet if it doesn't match any of the stateless\n         rules in the policy. If you want non-matching fragmented packets to be forwarded for\n         stateful inspection, specify <code>aws:forward_to_sfe</code>. </p>\n         <p>You must specify one of the standard actions: <code>aws:pass</code>,\n            <code>aws:drop</code>, or <code>aws:forward_to_sfe</code>. In addition, you can specify\n         custom actions that are compatible with your standard section choice.</p>\n         <p>For example, you could specify <code>[\"aws:pass\"]</code> or you could specify\n            <code>[\"aws:pass\", “customActionName”]</code>. For information about compatibility, see\n         the custom action descriptions under <a>CustomAction</a>.</p>",
+                        "smithy.api#documentation": "<p>The actions to take on a fragmented UDP packet if it doesn't match any of the stateless\n      rules in the policy. Network Firewall only manages UDP packet fragments and silently drops packet fragments for other protocols. \n      If you want non-matching fragmented UDP packets to be forwarded for\n         stateful inspection, specify <code>aws:forward_to_sfe</code>. </p>\n         <p>You must specify one of the standard actions: <code>aws:pass</code>,\n            <code>aws:drop</code>, or <code>aws:forward_to_sfe</code>. In addition, you can specify\n         custom actions that are compatible with your standard section choice.</p>\n         <p>For example, you could specify <code>[\"aws:pass\"]</code> or you could specify\n            <code>[\"aws:pass\", “customActionName”]</code>. For information about compatibility, see\n         the custom action descriptions under <a>CustomAction</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1687,7 +1696,7 @@
                 "Protocol": {
                     "target": "com.amazonaws.networkfirewall#StatefulRuleProtocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol to inspect for. To match with any protocol, specify <code>ANY</code>. </p>",
+                        "smithy.api#documentation": "<p>The protocol to inspect for. To specify all, you can use <code>IP</code>, because all traffic on AWS and on the internet is IP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2051,6 +2060,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.networkfirewall#InvalidRequestException"
+                },
+                {
                     "target": "com.amazonaws.networkfirewall#ResourceNotFoundException"
                 }
             ],
@@ -2362,7 +2374,7 @@
                     "name": "network-firewall"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>This is the API Reference for AWS Network Firewall. This guide is for developers who need\n         detailed information about the Network Firewall API actions, data types, and errors. </p>\n         <ul>\n            <li>\n               <p>The REST API requires you to handle connection details, such as calculating\n               signatures, handling request retries, and error handling. For general information\n               about using the AWS REST APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-apis.html\">AWS APIs</a>. </p>\n               <p>To access Network Firewall using the REST API endpoint:\n                  <code>https://network-firewall.<region>.amazonaws.com </code>\n               </p>\n            </li>\n            <li>\n               <p>Alternatively, you can use one of the AWS SDKs to access an API that's tailored to\n               the programming language or platform that you're using. For more information, see\n                  <a href=\"http://aws.amazon.com/tools/#SDKs\">AWS SDKs</a>.</p>\n            </li>\n            <li>\n               <p>For descriptions of Network Firewall features, including and step-by-step\n               instructions on how to use them through the Network Firewall console, see the <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/\">Network Firewall Developer\n                  Guide</a>.</p>\n            </li>\n         </ul>\n         <p>Network Firewall is a stateful, managed, network firewall and intrusion detection and\n         prevention service for Amazon Virtual Private Cloud (Amazon VPC). With Network Firewall, you can filter traffic at the\n         perimeter of your VPC. This includes filtering traffic going to and coming from an internet\n         gateway, NAT gateway, or over VPN or AWS Direct Connect. Network Firewall uses rules that are compatible\n          with Suricata, a free, open source intrusion detection system (IDS) engine. For information about Suricata, \n          see the <a href=\"https://suricata-ids.org/\">Suricata website</a>.</p>\n         <p>You can use Network Firewall to monitor and protect your VPC traffic in a number of ways.\n         The following are just a few examples: </p>\n         <ul>\n            <li>\n               <p>Allow domains or IP addresses for known AWS service endpoints, such as Amazon S3, and\n               block all other forms of traffic.</p>\n            </li>\n            <li>\n               <p>Use custom lists of known bad domains to limit the types of domain names that your\n               applications can access.</p>\n            </li>\n            <li>\n               <p>Perform deep packet inspection on traffic entering or leaving your VPC.</p>\n            </li>\n            <li>\n               <p>Rate limit traffic going from AWS to on-premises IP destinations.</p>\n            </li>\n            <li>\n               <p>Use stateful protocol detection to filter protocols like HTTPS, regardless of the\n               port used.</p>\n            </li>\n         </ul>\n         <p>To enable Network Firewall for your VPCs, you perform steps in both Amazon VPC and in\n         Network Firewall. For information about using Amazon VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/\">Amazon VPC User Guide</a>.</p>\n         <p>To start using Network Firewall, do the following: </p>\n         <ol>\n            <li>\n               <p>(Optional) If you don't already have a VPC that you want to protect, create it in\n               Amazon VPC. </p>\n            </li>\n            <li>\n               <p>In Amazon VPC, in each Availability Zone where you want to have a firewall endpoint, create a\n               subnet for the sole use of Network Firewall. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create stateless and stateful rule groups, \n                 to define the components of the network traffic filtering behavior that you want your firewall to have. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create a firewall policy that uses your rule groups and\n                 specifies additional default traffic filtering behavior. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create a firewall and specify your new firewall policy and \n                 VPC subnets. Network Firewall creates a firewall endpoint in each subnet that you\n               specify, with the behavior that's defined in the firewall policy.</p>\n            </li>\n            <li>\n               <p>In Amazon VPC, use ingress routing enhancements to route traffic through the new firewall\n               endpoints.</p>\n            </li>\n         </ol>",
+                "smithy.api#documentation": "<p>This is the API Reference for AWS Network Firewall. This guide is for developers who need\n         detailed information about the Network Firewall API actions, data types, and errors. </p>\n         <ul>\n            <li>\n               <p>The REST API requires you to handle connection details, such as calculating\n               signatures, handling request retries, and error handling. For general information\n               about using the AWS REST APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-apis.html\">AWS APIs</a>. </p>\n               <p>To access Network Firewall using the REST API endpoint:\n                  <code>https://network-firewall.<region>.amazonaws.com </code>\n               </p>\n            </li>\n            <li>\n               <p>Alternatively, you can use one of the AWS SDKs to access an API that's tailored to\n               the programming language or platform that you're using. For more information, see\n                  <a href=\"http://aws.amazon.com/tools/#SDKs\">AWS SDKs</a>.</p>\n            </li>\n            <li>\n               <p>For descriptions of Network Firewall features, including and step-by-step\n               instructions on how to use them through the Network Firewall console, see the <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/\">Network Firewall Developer\n                  Guide</a>.</p>\n            </li>\n         </ul>\n         <p>Network Firewall is a stateful, managed, network firewall and intrusion detection and\n         prevention service for Amazon Virtual Private Cloud (Amazon VPC). With Network Firewall, you can filter traffic at the\n         perimeter of your VPC. This includes filtering traffic going to and coming from an internet\n         gateway, NAT gateway, or over VPN or AWS Direct Connect. Network Firewall uses rules that are compatible\n          with Suricata, a free, open source intrusion detection system (IDS) engine. For information about Suricata, \n          see the <a href=\"https://suricata-ids.org/\">Suricata website</a>.</p>\n         <p>You can use Network Firewall to monitor and protect your VPC traffic in a number of ways.\n         The following are just a few examples: </p>\n         <ul>\n            <li>\n               <p>Allow domains or IP addresses for known AWS service endpoints, such as Amazon S3, and\n               block all other forms of traffic.</p>\n            </li>\n            <li>\n               <p>Use custom lists of known bad domains to limit the types of domain names that your\n               applications can access.</p>\n            </li>\n            <li>\n               <p>Perform deep packet inspection on traffic entering or leaving your VPC.</p>\n            </li>\n            <li>\n               <p>Use stateful protocol detection to filter protocols like HTTPS, regardless of the\n               port used.</p>\n            </li>\n         </ul>\n         <p>To enable Network Firewall for your VPCs, you perform steps in both Amazon VPC and in\n         Network Firewall. For information about using Amazon VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/\">Amazon VPC User Guide</a>.</p>\n         <p>To start using Network Firewall, do the following: </p>\n         <ol>\n            <li>\n               <p>(Optional) If you don't already have a VPC that you want to protect, create it in\n               Amazon VPC. </p>\n            </li>\n            <li>\n               <p>In Amazon VPC, in each Availability Zone where you want to have a firewall endpoint, create a\n               subnet for the sole use of Network Firewall. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create stateless and stateful rule groups, \n                 to define the components of the network traffic filtering behavior that you want your firewall to have. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create a firewall policy that uses your rule groups and\n                 specifies additional default traffic filtering behavior. </p>\n            </li>\n            <li>\n               <p>In Network Firewall, create a firewall and specify your new firewall policy and \n                 VPC subnets. Network Firewall creates a firewall endpoint in each subnet that you\n               specify, with the behavior that's defined in the firewall policy.</p>\n            </li>\n            <li>\n               <p>In Amazon VPC, use ingress routing enhancements to route traffic through the new firewall\n               endpoints.</p>\n            </li>\n         </ol>",
                 "smithy.api#title": "AWS Network Firewall"
             }
         },
@@ -2392,12 +2404,18 @@
                 "SyncStatus": {
                     "target": "com.amazonaws.networkfirewall#PerObjectSyncStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Indicates whether this object is in sync with the version indicated in the update token.</p>"
+                    }
+                },
+                "UpdateToken": {
+                    "target": "com.amazonaws.networkfirewall#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version of the object that is either in sync or pending synchronization. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Provides configuration status for a single policy or rule group that is used for a firewall endpoint. Network Firewall\n         provides each endpoint with the rules that are configured in the firewall policy. Each time\n         you add a subnet or modify the associated firewall policy, Network Firewall synchronizes the\n          rules in the endpoint, so it can properly filter network traffic. This is part of a <a>SyncState</a> for a firewall.</p>"
             }
         },
         "com.amazonaws.networkfirewall#PerObjectSyncStatus": {
@@ -2873,7 +2891,7 @@
                 "RulesString": {
                     "target": "com.amazonaws.networkfirewall#RulesString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Stateful inspection criteria, provided in Suricata compatible intrusion prevention\n         system (IPS) rules. Suricata is an open-source network IPS that includes a standard\n         rule-based language for network traffic inspection.</p>\n         <p>These rules contain the inspection criteria and the action to take for traffic that\n         matches the criteria, so this type of rule group doesn't have a separate action\n         setting.</p>\n         <p>You can provide the rules from a file that you've stored in an Amazon S3 bucket, or by\n         providing the rules in a Suricata rules string. To import from Amazon S3, provide the fully\n         qualified name of the file that contains the rules definitions. To provide a Suricata rule\n         string, provide the complete, Suricata compatible rule.</p>"
+                        "smithy.api#documentation": "<p>Stateful inspection criteria, provided in Suricata compatible intrusion prevention\n         system (IPS) rules. Suricata is an open-source network IPS that includes a standard\n         rule-based language for network traffic inspection.</p>\n         <p>These rules contain the inspection criteria and the action to take for traffic that\n         matches the criteria, so this type of rule group doesn't have a separate action\n         setting.</p>"
                     }
                 },
                 "RulesSourceList": {
@@ -2905,14 +2923,14 @@
                 "Targets": {
                     "target": "com.amazonaws.networkfirewall#RuleTargets",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domains that you want to inspect for in your traffic flows. To provide multiple\n         domains, separate them with commas.</p>",
+                        "smithy.api#documentation": "<p>The domains that you want to inspect for in your traffic flows. To provide multiple\n         domains, separate them with commas. Valid domain specifications are the following:</p>\n         <ul>\n            <li>\n               <p>Explicit names. For example, <code>abc.example.com</code> matches only the domain <code>abc.example.com</code>.</p>\n            </li>\n            <li>\n               <p>Names that use a domain wildcard, which you indicate with an initial '<code>.</code>'. For example,<code>.example.com</code> matches <code>example.com</code> and matches all subdomains of <code>example.com</code>, such as <code>abc.example.com</code> and <code>www.example.com</code>. </p>\n\t           </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "TargetTypes": {
                     "target": "com.amazonaws.networkfirewall#TargetTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The protocols you want to inspect. Specify <code>TLS_SNI</code> for <code>HTTPS</code>. Specity <code>HTTP_HOST</code> for <code>HTTP</code>. You can specify either or both. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2925,7 +2943,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Stateful inspection criteria for a domain list rule group. </p>"
+                "smithy.api#documentation": "<p>Stateful inspection criteria for a domain list rule group. </p>\n         <p>For HTTPS traffic, domain filtering is SNI-based. It uses the server name indicator extension of the TLS handshake.</p>\n         <p>By default, Network Firewall domain list inspection only includes traffic coming from the VPC where you deploy the firewall. To inspect traffic from IP addresses outside of the deployment VPC, you set the <code>HOME_NET</code> rule variable to include the CIDR range of the deployment VPC plus the other CIDR ranges. For more information, see <a>RuleVariables</a> in this guide and <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/stateful-rule-groups-domain-names.html\">Stateful domain list rule groups in AWS Network Firewall</a> in the <i>Network Firewall Developer Guide</i>\n         </p>"
             }
         },
         "com.amazonaws.networkfirewall#RulesString": {
@@ -4046,7 +4064,7 @@
                 "Rules": {
                     "target": "com.amazonaws.networkfirewall#RulesString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a file containing stateful rule group rules specifications in Suricata flat format, with one rule\nper line. Use this to import your existing Suricata compatible rule groups. </p>\n         <note>\n            <p>You must provide either this rules setting or a populated <code>RuleGroup</code> setting, but not both. </p>\n         </note>  \n         <p>You can provide your rule group specification in a file through this setting when you create or update your rule group. The call \nresponse returns a <a>RuleGroup</a> object that Network Firewall has populated from your file. \n         Network Firewall uses the file contents to populate the rule group rules, but does not maintain a reference to the file or use the file in any way after performing the create or update. If you call <a>DescribeRuleGroup</a> to retrieve the rule group, Network Firewall returns rules settings inside a <a>RuleGroup</a> object. </p>"
+                        "smithy.api#documentation": "<p>A string containing stateful rule group rules specifications in Suricata flat format, with one rule\nper line. Use this to import your existing Suricata compatible rule groups. </p>\n         <note>\n            <p>You must provide either this rules setting or a populated <code>RuleGroup</code> setting, but not both. </p>\n         </note>  \n         <p>You can provide your rule group specification in Suricata flat format through this setting when you create or update your rule group. The call \nresponse returns a <a>RuleGroup</a> object that Network Firewall has populated from your string. </p>"
                     }
                 },
                 "Type": {

@@ -382,6 +382,9 @@
                     "target": "com.amazonaws.rds#CreateDBProxy"
                 },
                 {
+                    "target": "com.amazonaws.rds#CreateDBProxyEndpoint"
+                },
+                {
                     "target": "com.amazonaws.rds#CreateDBSecurityGroup"
                 },
                 {
@@ -425,6 +428,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#DeleteDBProxy"
+                },
+                {
+                    "target": "com.amazonaws.rds#DeleteDBProxyEndpoint"
                 },
                 {
                     "target": "com.amazonaws.rds#DeleteDBSecurityGroup"
@@ -502,6 +508,9 @@
                     "target": "com.amazonaws.rds#DescribeDBProxies"
                 },
                 {
+                    "target": "com.amazonaws.rds#DescribeDBProxyEndpoints"
+                },
+                {
                     "target": "com.amazonaws.rds#DescribeDBProxyTargetGroups"
                 },
                 {
@@ -574,6 +583,9 @@
                     "target": "com.amazonaws.rds#FailoverDBCluster"
                 },
                 {
+                    "target": "com.amazonaws.rds#FailoverGlobalCluster"
+                },
+                {
                     "target": "com.amazonaws.rds#ImportInstallationMedia"
                 },
                 {
@@ -605,6 +617,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#ModifyDBProxy"
+                },
+                {
+                    "target": "com.amazonaws.rds#ModifyDBProxyEndpoint"
                 },
                 {
                     "target": "com.amazonaws.rds#ModifyDBProxyTargetGroup"
@@ -1005,6 +1020,16 @@
                 }
             }
         },
+        "com.amazonaws.rds#AwsBackupRecoveryPointArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 43,
+                    "max": 350
+                },
+                "smithy.api#pattern": "^arn:aws[a-z-]*:backup:[-a-z0-9]+:[0-9]{12}:[-a-z]+:([a-z0-9\\-]+:)?[a-z][a-z0-9\\-]{0,255}$"
+            }
+        },
         "com.amazonaws.rds#BacktrackDBCluster": {
             "type": "operation",
             "input": {
@@ -1262,7 +1287,7 @@
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DBClusterIdentifier for the DB cluster.</p>"
+                        "smithy.api#documentation": "<p>The DBClusterIdentifier value for the DB cluster.</p>"
                     }
                 },
                 "MasterUserPassword": {
@@ -1274,7 +1299,7 @@
                 "IAMDatabaseAuthenticationEnabled": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.</p>"
                     }
                 },
                 "EngineVersion": {
@@ -1393,7 +1418,7 @@
                 "SourceDBClusterParameterGroupIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group.\n            For information about  \n            creating an ARN, \n            see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\">\n                Constructing an ARN for Amazon RDS</a> in the <i>Amazon Aurora User Guide</i>.\n        </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n               <p>Must specify a valid DB cluster parameter group.</p>\n            </li>\n            <li>\n               <p>If the source DB cluster parameter group is in the same AWS Region as the copy, \n                specify a valid DB parameter group identifier, for example\n                <code>my-db-cluster-param-group</code>, or a valid ARN.</p>\n            </li>\n            <li>\n               <p>If the source DB parameter group is in a different AWS Region than the copy,\n                specify a valid DB cluster parameter group ARN, for example\n                <code>arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group.\n            For information about  \n            creating an ARN, \n            see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\">\n                Constructing an ARN for Amazon RDS</a> in the <i>Amazon Aurora User Guide</i>.\n        </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n               <p>Must specify a valid DB cluster parameter group.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1536,7 +1561,7 @@
                 "SourceDBParameterGroupIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The identifier or ARN for the source DB parameter group.\n        For information about  \n        creating an ARN, \n        see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\">\n            Constructing an ARN for Amazon RDS</a> in the <i>Amazon RDS User Guide</i>.\n        </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must specify a valid DB parameter group.</p>\n            </li>\n            <li>\n               <p>Must specify a valid DB parameter group identifier, for example\n                <code>my-db-param-group</code>, or a valid ARN.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n        The identifier or ARN for the source DB parameter group.\n        For information about  \n        creating an ARN, \n        see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\">\n            Constructing an ARN for Amazon RDS</a> in the <i>Amazon RDS User Guide</i>.\n        </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must specify a valid DB parameter group.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2082,13 +2107,13 @@
                 "EnableCloudwatchLogsExports": {
                     "target": "com.amazonaws.rds#LogTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values\n            in the list depend on the DB engine being used. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch\">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.</p>\n        <p>\n            <b>Aurora MySQL</b>\n        </p>\n        <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. \n        </p>\n        <p>\n            <b>Aurora PostgreSQL</b>\n        </p>\n        <p>Possible values are <code>postgresql</code> and <code>upgrade</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values\n            in the list depend on the DB engine being used. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch\">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.</p>\n        <p>\n            <b>Aurora MySQL</b>\n        </p>\n        <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. \n        </p>\n        <p>\n            <b>Aurora PostgreSQL</b>\n        </p>\n        <p>Possible value is <code>postgresql</code>.\n        </p>"
                     }
                 },
                 "EngineMode": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DB engine mode of the DB cluster, either <code>provisioned</code> \n            <code>serverless</code>, \n            <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.</p>\n        <p>The <code>parallelquery</code> engine mode isn't required for Aurora MySQL version 1.23 and higher 1.x versions, \n            and version 2.09 and higher 2.x versions.</p>\n        <p>The <code>global</code> engine mode isn't required for Aurora MySQL version 1.22 and higher 1.x versions, \n            and <code>global</code> engine mode isn't required for any 2.x versions.</p>\n        <p>The <code>multimaster</code> engine mode only applies for DB clusters created with Aurora MySQL version 5.6.10a.</p>\n        <p>For Aurora PostgreSQL, the <code>global</code> engine mode isn't required, and both the <code>parallelquery</code> \n            and the <code>multimaster</code> engine modes currently aren't supported.</p>\n        <p>Limitations and requirements apply to some DB engine modes. For more information, see the \n            following sections in the <i>Amazon Aurora User Guide</i>:</p>\n        <ul>\n            <li>\n                <p>\n                    <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations\">\n                        Limitations of Aurora Serverless</a>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations\">\n                        Limitations of Parallel Query</a>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations\">\n                        Limitations of Aurora Global Databases</a>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations\">\n                        Limitations of Multi-Master Clusters</a>\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, \n            <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.</p>\n        <p>The <code>parallelquery</code> engine mode isn't required for Aurora MySQL version 1.23 and higher 1.x versions, \n            and version 2.09 and higher 2.x versions.</p>\n        <p>The <code>global</code> engine mode isn't required for Aurora MySQL version 1.22 and higher 1.x versions, \n            and <code>global</code> engine mode isn't required for any 2.x versions.</p>\n        <p>The <code>multimaster</code> engine mode only applies for DB clusters created with Aurora MySQL version 5.6.10a.</p>\n        <p>For Aurora PostgreSQL, the <code>global</code> engine mode isn't required, and both the <code>parallelquery</code> \n            and the <code>multimaster</code> engine modes currently aren't supported.</p>\n        <p>Limitations and requirements apply to some DB engine modes. For more information, see the \n            following sections in the <i>Amazon Aurora User Guide</i>:</p>\n        <ul>\n            <li>\n                <p>\n                    <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations\">\n                        Limitations of Aurora Serverless</a>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations\">\n                        Limitations of Parallel Query</a>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations\">\n                        Limitations of Aurora Global Databases</a>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations\">\n                        Limitations of Multi-Master Clusters</a>\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ScalingConfiguration": {
@@ -2136,7 +2161,7 @@
                 "EnableGlobalWriteForwarding": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether to enable write operations to be forwarded\n      from this cluster to the primary cluster in an Aurora global database. The\n      resulting changes are replicated back to this cluster. This parameter only\n      applies to DB clusters that are secondary clusters in an Aurora global database.\n      By default, Aurora disallows write operations for secondary clusters.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether to enable this DB cluster to forward write operations to the primary cluster of an\n      Aurora global database (<a>GlobalCluster</a>). By default, write operations are not allowed on Aurora DB clusters that\n      are secondary clusters in an Aurora global database.</p>\n         <p>You can set this value only on Aurora DB clusters that are members of an Aurora global database. With this parameter\n      enabled, a secondary cluster can forward writes to the current primary cluster and the resulting changes are replicated back to\n      this cluster. For the primary DB cluster of an Aurora global database, this value is used immediately if the\n        primary is demoted by the <a>FailoverGlobalCluster</a> API operation, but it does nothing until then.\n    </p>"
                     }
                 }
             },
@@ -2357,7 +2382,7 @@
                 "DBName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n               <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n         <p>\n            <b>MariaDB</b>\n         </p>\n         <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n               <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 63 letters, numbers, or underscores.</p>\n            </li>\n            <li>\n               <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n         <p>\n            <b>Oracle</b>\n         </p>\n         <p>The Oracle System ID (SID) of the created DB instance.\n          If you specify <code>null</code>, the default value <code>ORCL</code> is used.\n          You can't specify the string NULL, or any other reserved word, for <code>DBName</code>. \n      </p>\n         <p>Default: <code>ORCL</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't be longer than 8 characters</p>\n            </li>\n         </ul>\n         <p>\n            <b>SQL Server</b>\n         </p>\n         <p>Not applicable. Must be null.</p>\n         <p>\n            <b>Amazon Aurora</b>\n         </p>\n         <p>The name of the database to create when the primary instance of the DB cluster is created.\n        If this parameter isn't specified, no database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n               <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n         <p>\n            <b>MariaDB</b>\n         </p>\n         <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n               <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, a database named <code>postgres</code> \n          is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 63 letters, numbers, or underscores.</p>\n            </li>\n            <li>\n               <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n         <p>\n            <b>Oracle</b>\n         </p>\n         <p>The Oracle System ID (SID) of the created DB instance.\n          If you specify <code>null</code>, the default value <code>ORCL</code> is used.\n          You can't specify the string NULL, or any other reserved word, for <code>DBName</code>. \n      </p>\n         <p>Default: <code>ORCL</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't be longer than 8 characters</p>\n            </li>\n         </ul>\n         <p>\n            <b>SQL Server</b>\n         </p>\n         <p>Not applicable. Must be null.</p>\n         <p>\n            <b>Amazon Aurora MySQL</b>\n         </p>\n         <p>The name of the database to create when the primary DB instance of the Aurora MySQL DB cluster is\n          created. If this parameter isn't specified for an Aurora MySQL DB cluster, no database is created \n          in the DB cluster.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n              <p>It must contain 1 to 64 alphanumeric characters.</p>\n            </li>\n            <li>\n              <p>It can't be a word reserved by the database engine.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Amazon Aurora PostgreSQL</b>\n         </p>\n         <p>The name of the database to create when the primary DB instance of the Aurora PostgreSQL DB cluster is\n          created. If this parameter isn't specified for an Aurora PostgreSQL DB cluster, \n          a database named <code>postgres</code> is created in the DB cluster.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n              <p>It must contain 1 to 63 alphanumeric characters.</p>\n            </li>\n            <li>\n              <p>It must begin with a letter or an underscore.\n                  Subsequent characters can be letters, underscores, or digits\n                  (0 to 9).</p>\n            </li>\n            <li>\n              <p>It can't be a word reserved by the\n                  database engine.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DBInstanceIdentifier": {
@@ -2462,7 +2487,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the database engine to use.</p>\n         <p>For a list of valid engine versions, use the  <code>DescribeDBEngineVersions</code> action.</p>\n         <p>The following are the database engines and links to information about the major and minor versions that are available with \n          Amazon RDS. Not every database engine is available for every AWS Region.</p>\n    \n         <p>\n            <b>Amazon Aurora</b>\n         </p>\n        <p>Not applicable. The version number of the database engine to be used by the DB\n            instance is managed by the DB cluster.</p>\n      \n         <p>\n            <b>MariaDB</b>\n         </p>\n\n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt\">MariaDB on Amazon RDS Versions</a> in the \n          <i>Amazon RDS User Guide.</i>\n         </p>\n      \n         <p>\n            <b>Microsoft SQL Server</b>\n         </p>\n      \n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport\">Microsoft SQL Server Versions on Amazon RDS</a> in the \n          <i>Amazon RDS User Guide.</i>\n         </p>\n      \n         <p>\n            <b>MySQL</b>\n         </p>\n\n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt\">MySQL on Amazon RDS Versions</a> in the \n          <i>Amazon RDS User Guide.</i>\n         </p>     \n      \n         <p>\n            <b>Oracle</b>\n         </p>\n      \n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html\">Oracle Database Engine Release Notes</a> in the \n          <i>Amazon RDS User Guide.</i>\n         </p>\n\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n\n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions\">Supported PostgreSQL Database Versions</a> in the \n          <i>Amazon RDS User Guide.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>The version number of the database engine to use.</p>\n         <p>For a list of valid engine versions, use the  <code>DescribeDBEngineVersions</code> action.</p>\n         <p>The following are the database engines and links to information about the major and minor versions that are available with \n          Amazon RDS. Not every database engine is available for every AWS Region.</p>\n    \n         <p>\n            <b>Amazon Aurora</b>\n         </p>\n        <p>Not applicable. The version number of the database engine to be used by the DB\n            instance is managed by the DB cluster.</p>\n      \n         <p>\n            <b>MariaDB</b>\n         </p>\n\n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt\">MariaDB on Amazon RDS Versions</a> in the \n          <i>Amazon RDS User Guide.</i>\n         </p>\n      \n         <p>\n            <b>Microsoft SQL Server</b>\n         </p>\n      \n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport\">Microsoft SQL Server Versions on Amazon RDS</a> in the \n          <i>Amazon RDS User Guide.</i>\n         </p>\n      \n         <p>\n            <b>MySQL</b>\n         </p>\n\n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt\">MySQL on Amazon RDS Versions</a> in the \n          <i>Amazon RDS User Guide.</i>\n         </p>     \n      \n         <p>\n            <b>Oracle</b>\n         </p>\n      \n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html\">Oracle Database Engine Release Notes</a> in the \n          <i>Amazon RDS User Guide.</i>\n         </p>\n\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n\n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts\">Amazon RDS for PostgreSQL versions and extensions</a> in the \n          <i>Amazon RDS User Guide.</i>\n         </p>"
                     }
                 },
                 "AutoMinorVersionUpgrade": {
@@ -2486,7 +2511,7 @@
                 "OptionGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates that the DB instance should be associated with the specified option group.</p>\n         <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed from an option group. Also, that option group can't be removed from a DB instance once it is associated with a DB instance</p>"
+                        "smithy.api#documentation": "<p>A value that indicates that the DB instance should be associated with the specified option group.</p>\n         <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed from an option group. Also, that option group can't be removed from a DB instance once it is associated with a DB instance</p>"
                     }
                 },
                 "CharacterSetName": {
@@ -2618,7 +2643,7 @@
                 "EnableCloudwatchLogsExports": {
                     "target": "com.amazonaws.rds#LogTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values\n            in the list depend on the DB engine being used. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch\">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database\n                    Service User Guide</i>.</p>\n        <p>\n            <b>Amazon Aurora</b>\n        </p>\n        <p>Not applicable. CloudWatch Logs exports are managed by the DB cluster.\n        </p>\n        <p>\n            <b>MariaDB</b>\n        </p>\n        <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. \n        </p>\n        <p>\n            <b>Microsoft SQL Server</b>\n        </p>\n        <p>Possible values are <code>agent</code> and <code>error</code>.\n        </p>\n         <p>\n            <b>MySQL</b>\n        </p>\n        <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. \n        </p>\n        <p>\n            <b>Oracle</b>\n        </p>\n        <p>Possible values are <code>alert</code>, <code>audit</code>, <code>listener</code>, and <code>trace</code>. \n        </p>\n        <p>\n            <b>PostgreSQL</b>\n        </p>\n        <p>Possible values are <code>postgresql</code> and <code>upgrade</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values\n            in the list depend on the DB engine being used. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch\">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database\n                    Service User Guide</i>.</p>\n        <p>\n            <b>Amazon Aurora</b>\n        </p>\n        <p>Not applicable. CloudWatch Logs exports are managed by the DB cluster.\n        </p>\n        <p>\n            <b>MariaDB</b>\n        </p>\n        <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. \n        </p>\n        <p>\n            <b>Microsoft SQL Server</b>\n        </p>\n        <p>Possible values are <code>agent</code> and <code>error</code>.\n        </p>\n         <p>\n            <b>MySQL</b>\n        </p>\n        <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. \n        </p>\n        <p>\n            <b>Oracle</b>\n        </p>\n        <p>Possible values are <code>alert</code>, <code>audit</code>, <code>listener</code>, <code>trace</code>, and\n            <code>oemagent</code>.\n        </p>\n        <p>\n            <b>PostgreSQL</b>\n        </p>\n        <p>Possible values are <code>postgresql</code> and <code>upgrade</code>.\n        </p>"
                     }
                 },
                 "ProcessorFeatures": {
@@ -2636,7 +2661,7 @@
                 "MaxAllocatedStorage": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>"
+                        "smithy.api#documentation": "<p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>\n        <p>For more information about this setting, including limitations that apply to it, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling\">\n                Managing capacity automatically with Amazon RDS storage autoscaling</a> \n            in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
                 "EnableCustomerOwnedIp": {
@@ -2912,7 +2937,7 @@
                 "MaxAllocatedStorage": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>"
+                        "smithy.api#documentation": "<p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>\n        <p>For more information about this setting, including limitations that apply to it, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling\">\n                Managing capacity automatically with Amazon RDS storage autoscaling</a> \n            in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 }
             }
@@ -3017,6 +3042,87 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a new DB proxy.</p>"
+            }
+        },
+        "com.amazonaws.rds#CreateDBProxyEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#CreateDBProxyEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#CreateDBProxyEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rds#DBProxyEndpointAlreadyExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#DBProxyEndpointQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#DBProxyNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidDBProxyStateFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidSubnet"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n        Creates a <code>DBProxyEndpoint</code>. Only applies to proxies that are associated with Aurora DB clusters.\n        You can use DB proxy endpoints to specify read/write or read-only access to the DB cluster. You can also use\n        DB proxy endpoints to access a DB proxy through a different VPC than the proxy's default VPC.\n      </p>"
+            }
+        },
+        "com.amazonaws.rds#CreateDBProxyEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "DBProxyName": {
+                    "target": "com.amazonaws.rds#DBProxyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DB proxy associated with the DB proxy endpoint that you create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DBProxyEndpointName": {
+                    "target": "com.amazonaws.rds#DBProxyEndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DB proxy endpoint to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VpcSubnetIds": {
+                    "target": "com.amazonaws.rds#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC subnet IDs for the DB proxy endpoint that you create. You can specify a\n        different set of subnet IDs than for the original DB proxy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VpcSecurityGroupIds": {
+                    "target": "com.amazonaws.rds#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC security group IDs for the DB proxy endpoint that you create. You can\n        specify a different set of security group IDs than for the original DB proxy.\n        The default is the default security group for the VPC.</p>"
+                    }
+                },
+                "TargetRole": {
+                    "target": "com.amazonaws.rds#DBProxyEndpointTargetRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether the DB proxy endpoint can be used for read/write\n        or read-only operations. The default is <code>READ_WRITE</code>.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.rds#TagList"
+                }
+            }
+        },
+        "com.amazonaws.rds#CreateDBProxyEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "DBProxyEndpoint": {
+                    "target": "com.amazonaws.rds#DBProxyEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>DBProxyEndpoint</code> object that is created by the API operation.\n        The DB proxy endpoint that you create might provide capabilities such as read/write\n        or read-only operations, or using a different VPC than the proxy's default VPC.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#CreateDBProxyRequest": {
@@ -3496,7 +3602,7 @@
                 "EngineName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the engine that this option group should be associated with.</p>",
+                        "smithy.api#documentation": "<p>Specifies the name of the engine that this option group should be associated with.</p>\n         <p>Valid Values:\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3960,7 +4066,7 @@
                 "PendingModifiedValues": {
                     "target": "com.amazonaws.rds#ClusterPendingModifiedValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that changes to the DB cluster are pending. This element is only included when changes are pending. \n          Specific changes are identified by subelements.</p>"
+                        "smithy.api#documentation": "<p>A value that specifies that changes to the DB cluster are pending. This element is only included when changes are pending. \n          Specific changes are identified by subelements.</p>"
                     }
                 }
             },
@@ -4233,6 +4339,16 @@
                 "smithy.api#documentation": "<p>The cluster already has the maximum number of custom endpoints.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.rds#DBClusterIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "[A-Za-z][0-9A-Za-z-:._]*"
             }
         },
         "com.amazonaws.rds#DBClusterList": {
@@ -4572,7 +4688,13 @@
                 "Engine": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the database engine.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name of the database engine for this DB cluster snapshot.</p>"
+                    }
+                },
+                "EngineMode": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the engine mode of the database engine for this DB cluster snapshot.</p>"
                     }
                 },
                 "AllocatedStorage": {
@@ -4608,7 +4730,7 @@
                 "MasterUsername": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the master username for the DB cluster snapshot.</p>"
+                        "smithy.api#documentation": "<p>Provides the master username for this DB cluster snapshot.</p>"
                     }
                 },
                 "EngineVersion": {
@@ -5030,7 +5152,7 @@
                 "PendingModifiedValues": {
                     "target": "com.amazonaws.rds#PendingModifiedValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that changes to the DB instance are pending. This element is only included when changes are pending. Specific changes are identified by subelements.</p>"
+                        "smithy.api#documentation": "<p>A value that specifies that changes to the DB instance are pending. This element is only included when changes are pending. Specific changes are identified by subelements.</p>"
                     }
                 },
                 "LatestRestorableTime": {
@@ -5054,7 +5176,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates that minor version patches are applied automatically.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates that minor version patches are applied automatically.</p>"
                     }
                 },
                 "ReadReplicaSourceDBInstanceIdentifier": {
@@ -5298,6 +5420,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether a customer-owned IP address (CoIP) is enabled for an RDS on Outposts DB instance.</p>\n        <p>A <i>CoIP </i>provides local or external connectivity to resources in\n            your Outpost subnets through your on-premises network. For some use cases, a CoIP can\n            provide lower latency for connections to the DB instance from outside of its virtual\n            private cloud (VPC) on your local network.</p>\n        <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working with Amazon RDS on AWS Outposts</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n        <p>For more information about CoIPs, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing\">Customer-owned IP addresses</a> \n            in the <i>AWS Outposts User Guide</i>.</p>"
+                    }
+                },
+                "AwsBackupRecoveryPointArn": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recovery point in AWS Backup.</p>"
                     }
                 }
             },
@@ -5920,6 +6048,12 @@
                         "smithy.api#documentation": "<p>The engine family applies to MySQL and PostgreSQL for both RDS and Aurora.</p>"
                     }
                 },
+                "VpcId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the VPC ID of the DB proxy.</p>"
+                    }
+                },
                 "VpcSecurityGroupIds": {
                     "target": "com.amazonaws.rds#StringList",
                     "traits": {
@@ -5947,7 +6081,7 @@
                 "Endpoint": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint that you can use to connect to the proxy. You include the endpoint value in the\n        connection string for a database client application.</p>"
+                        "smithy.api#documentation": "<p>The endpoint that you can use to connect to the DB proxy. You include the endpoint value in the\n        connection string for a database client application.</p>"
                     }
                 },
                 "RequireTLS": {
@@ -5998,10 +6132,195 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.rds#DBProxyEndpoint": {
+            "type": "structure",
+            "members": {
+                "DBProxyEndpointName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the DB proxy endpoint. An identifier must begin with a letter and\n        must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen\n        or contain two consecutive hyphens.</p>"
+                    }
+                },
+                "DBProxyEndpointArn": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the DB proxy endpoint.</p>"
+                    }
+                },
+                "DBProxyName": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the DB proxy that is associated with this DB proxy endpoint.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.rds#DBProxyEndpointStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of this DB proxy endpoint. A status of <code>available</code> means the\n        endpoint is ready to handle requests. Other values indicate that you must wait for\n        the endpoint to be ready, or take some action to resolve an issue.</p>"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the VPC ID of the DB proxy endpoint.</p>"
+                    }
+                },
+                "VpcSecurityGroupIds": {
+                    "target": "com.amazonaws.rds#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a list of VPC security groups that the DB proxy endpoint belongs to.</p>"
+                    }
+                },
+                "VpcSubnetIds": {
+                    "target": "com.amazonaws.rds#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EC2 subnet IDs for the DB proxy endpoint.</p>"
+                    }
+                },
+                "Endpoint": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint that you can use to connect to the DB proxy. You include the endpoint value in the\n        connection string for a database client application.</p>"
+                    }
+                },
+                "CreatedDate": {
+                    "target": "com.amazonaws.rds#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the DB proxy endpoint was first created.</p>"
+                    }
+                },
+                "TargetRole": {
+                    "target": "com.amazonaws.rds#DBProxyEndpointTargetRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations.</p>"
+                    }
+                },
+                "IsDefault": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether this endpoint is the default endpoint for the associated DB proxy.\n        Default DB proxy endpoints always have read/write capability. Other endpoints that you associate with the\n        DB proxy can be either read/write or read-only.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data structure representing an endpoint associated with a DB proxy. RDS automatically creates one\n        endpoint for each DB proxy. For Aurora DB clusters, you can associate additional endpoints with the same\n        DB proxy. These endpoints can be read/write or read-only. They can also reside in different VPCs than the\n        associated DB proxy.</p>\n         <p>This data type is used as a response element in the <code>DescribeDBProxyEndpoints</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.rds#DBProxyEndpointAlreadyExistsFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rds#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified DB proxy endpoint name must be unique for all DB proxy endpoints owned by your AWS account in the specified AWS Region.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.rds#DBProxyEndpointList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#DBProxyEndpoint"
+            }
+        },
+        "com.amazonaws.rds#DBProxyEndpointName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*"
+            }
+        },
+        "com.amazonaws.rds#DBProxyEndpointNotFoundFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rds#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The DB proxy endpoint doesn't exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.rds#DBProxyEndpointQuotaExceededFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rds#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The DB proxy already has the maximum number of endpoints.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.rds#DBProxyEndpointStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "available",
+                        "name": "AVAILABLE"
+                    },
+                    {
+                        "value": "modifying",
+                        "name": "MODIFYING"
+                    },
+                    {
+                        "value": "incompatible-network",
+                        "name": "INCOMPATIBLE_NETWORK"
+                    },
+                    {
+                        "value": "insufficient-resource-limits",
+                        "name": "INSUFFICIENT_RESOURCE_LIMITS"
+                    },
+                    {
+                        "value": "creating",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "deleting",
+                        "name": "DELETING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rds#DBProxyEndpointTargetRole": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "READ_WRITE",
+                        "name": "READ_WRITE"
+                    },
+                    {
+                        "value": "READ_ONLY",
+                        "name": "READ_ONLY"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.rds#DBProxyList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.rds#DBProxy"
+            }
+        },
+        "com.amazonaws.rds#DBProxyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*"
             }
         },
         "com.amazonaws.rds#DBProxyNotFoundFault": {
@@ -6110,6 +6429,12 @@
                     "target": "com.amazonaws.rds#TargetType",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the kind of database, such as an RDS DB instance or an Aurora DB cluster, that the target represents.</p>"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.rds#TargetRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether the target of the proxy can be used for read/write or read-only operations.</p>"
                     }
                 },
                 "TargetHealth": {
@@ -7218,7 +7543,50 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing proxy.</p>"
+                "smithy.api#documentation": "<p>Deletes an existing DB proxy.</p>"
+            }
+        },
+        "com.amazonaws.rds#DeleteDBProxyEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#DeleteDBProxyEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#DeleteDBProxyEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rds#DBProxyEndpointNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidDBProxyEndpointStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a <code>DBProxyEndpoint</code>. Doing so removes the ability to access the DB proxy using the\n        endpoint that you defined. The endpoint that you delete might have provided capabilities such as read/write\n        or read-only operations, or using a different VPC than the DB proxy's default VPC.</p>"
+            }
+        },
+        "com.amazonaws.rds#DeleteDBProxyEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "DBProxyEndpointName": {
+                    "target": "com.amazonaws.rds#DBProxyEndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DB proxy endpoint to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rds#DeleteDBProxyEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "DBProxyEndpoint": {
+                    "target": "com.amazonaws.rds#DBProxyEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data structure representing the details of the DB proxy endpoint that you delete.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#DeleteDBProxyRequest": {
@@ -8256,7 +8624,7 @@
                 "Engine": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database engine to return.</p>"
+                        "smithy.api#documentation": "<p>The database engine to return.</p>\n         <p>Valid Values:\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora</code> (for MySQL 5.6-compatible Aurora)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-mysql</code> (for MySQL 5.7-compatible Aurora)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "EngineVersion": {
@@ -8776,7 +9144,7 @@
                 "DBProxyName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the DB proxy.</p>"
+                        "smithy.api#documentation": "<p>The name of the DB proxy. If you omit this parameter,\n        the output includes information about all DB proxies owned by\n        your AWS account ID.</p>"
                     }
                 },
                 "Filters": {
@@ -8806,6 +9174,84 @@
                     "target": "com.amazonaws.rds#DBProxyList",
                     "traits": {
                         "smithy.api#documentation": "<p>A return value representing an arbitrary number of <code>DBProxy</code> data structures.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        An optional pagination token provided by a previous request.\n        If this parameter is specified, the response includes only records beyond the marker,\n        up to the value specified by <code>MaxRecords</code>.\n      </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rds#DescribeDBProxyEndpoints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#DescribeDBProxyEndpointsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#DescribeDBProxyEndpointsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rds#DBProxyEndpointNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#DBProxyNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about DB proxy endpoints.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "DBProxyEndpoints",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.rds#DescribeDBProxyEndpointsRequest": {
+            "type": "structure",
+            "members": {
+                "DBProxyName": {
+                    "target": "com.amazonaws.rds#DBProxyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DB proxy whose endpoints you want to describe. If you omit\n        this parameter, the output includes information about all DB proxy endpoints\n        associated with all your DB proxies.</p>"
+                    }
+                },
+                "DBProxyEndpointName": {
+                    "target": "com.amazonaws.rds#DBProxyEndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a DB proxy endpoint to describe. If you omit this parameter,\n        the output includes information about all DB proxy endpoints associated with\n        the specified proxy.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.rds#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter is not currently supported.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        An optional pagination token provided by a previous request.\n        If this parameter is specified, the response includes only records beyond the marker,\n        up to the value specified by <code>MaxRecords</code>.\n      </p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.rds#MaxRecords",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records exist\n          than the specified <code>MaxRecords</code> value, a pagination token called a marker is\n          included in the response so that the remaining results can be retrieved. </p>\n         <p>Default: 100</p>\n         <p>Constraints: Minimum 20, maximum 100.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rds#DescribeDBProxyEndpointsResponse": {
+            "type": "structure",
+            "members": {
+                "DBProxyEndpoints": {
+                    "target": "com.amazonaws.rds#DBProxyEndpointList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of <code>ProxyEndpoint</code> objects returned by the API operation.</p>"
                     }
                 },
                 "Marker": {
@@ -9750,7 +10196,7 @@
                 "EngineName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A required parameter. Options available for the given engine name are described.</p>",
+                        "smithy.api#documentation": "<p>A required parameter. Options available for the given engine name are described.</p>\n         <p>Valid Values:\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9836,7 +10282,7 @@
                 "EngineName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the list of option groups to only include groups associated with a specific database engine.</p>"
+                        "smithy.api#documentation": "<p>Filters the list of option groups to only include groups associated with a specific database engine.</p>\n         <p>Valid Values:\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "MajorEngineVersion": {
@@ -9874,7 +10320,7 @@
                 "Engine": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the engine to retrieve DB instance options for.</p>",
+                        "smithy.api#documentation": "<p>The name of the engine to retrieve DB instance options for.</p>\n         <p>Valid Values:\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora</code> (for MySQL 5.6-compatible Aurora)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-mysql</code> (for MySQL 5.7-compatible Aurora)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10995,6 +11441,104 @@
                 }
             }
         },
+        "com.amazonaws.rds#FailoverGlobalCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#FailoverGlobalClusterMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#FailoverGlobalClusterResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rds#DBClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#GlobalClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidDBClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidGlobalClusterStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates the failover process for an Aurora global database (<a>GlobalCluster</a>).</p>\n         <p>A failover for an Aurora global database promotes one of secondary read-only DB clusters to be\n       the primary DB cluster and demotes the primary DB cluster to being a secondary (read-only) DB cluster. In other words,\n     the role of the current primary DB cluster and the selected (target) DB cluster are switched. The selected\n     secondary DB cluster assumes full read/write capabilities for the Aurora global database.</p>\n         <p>For more information about failing over an Amazon Aurora global database, see\n      <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.managed-failover\">Managed planned failover for Amazon Aurora global\n        databases</a> in the <i>Amazon Aurora User Guide.</i>\n         </p>\n         <note>\n            <p>This action applies to <a>GlobalCluster</a> (Aurora global databases) only. Use this action only on\n       healthy Aurora global databases with running Aurora DB clusters and no Region-wide outages, to test disaster recovery scenarios or to\n        reconfigure your Aurora global database topology.\n       </p>\n         </note>"
+            }
+        },
+        "com.amazonaws.rds#FailoverGlobalClusterMessage": {
+            "type": "structure",
+            "members": {
+                "GlobalClusterIdentifier": {
+                    "target": "com.amazonaws.rds#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the Aurora global database (<a>GlobalCluster</a>)\n    that should be failed over. The identifier is the unique key assigned by\n    the user when the Aurora global database was created. In other words,\n    it's the name of the Aurora global database that you want to fail over. </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing\n      <a>GlobalCluster</a> (Aurora global database).</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetDbClusterIdentifier": {
+                    "target": "com.amazonaws.rds#DBClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the secondary Aurora DB cluster that you want to promote to primary for the Aurora\n       global database (<a>GlobalCluster</a>.) Use the Amazon Resource Name (ARN) for the identifier so that\n       Aurora can locate the cluster in its AWS Region.      \n </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rds#FailoverGlobalClusterResult": {
+            "type": "structure",
+            "members": {
+                "GlobalCluster": {
+                    "target": "com.amazonaws.rds#GlobalCluster"
+                }
+            }
+        },
+        "com.amazonaws.rds#FailoverState": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.rds#FailoverStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Aurora global database (<a>GlobalCluster</a>). Possible values are as follows:\n    </p>\n         <ul>\n            <li>\n               <p>pending  A request to fail over the Aurora global database (<a>GlobalCluster</a>) has been received by the service. The\n        <code>GlobalCluster</code>'s primary DB cluster and the specified secondary DB cluster are being verified before the failover\n        process can start.</p>\n            </li>\n            <li>\n               <p>failing-over  This status covers the range of Aurora internal operations that take place during the failover process, such\n        as demoting the primary Aurora DB cluster, promoting the secondary Aurora DB, and synchronizing replicas. </p>\n            </li>\n            <li>\n               <p>cancelling  The request to fail over the Aurora global database (<a>GlobalCluster</a>) was cancelled and the primary\n        Aurora DB cluster and the selected secondary Aurora DB cluster are returning to their previous states. \n      </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "FromDbClusterArn": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Aurora DB cluster that is currently being demoted, and which is associated with this\n       state. </p>"
+                    }
+                },
+                "ToDbClusterArn": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Aurora DB cluster that is currently being promoted, and which is associated\n     with this state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the state of scheduled or in-process failover operations on an\n      Aurora global database (<a>GlobalCluster</a>). This Data type is empty unless a failover\n      operation is scheduled or is currently underway on the Aurora global database. </p>"
+            }
+        },
+        "com.amazonaws.rds#FailoverStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "pending",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "failing-over",
+                        "name": "FAILING_OVER"
+                    },
+                    {
+                        "value": "cancelling",
+                        "name": "CANCELLING"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.rds#FeatureNameList": {
             "type": "list",
             "member": {
@@ -11103,6 +11647,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n        The list of cluster IDs for secondary clusters within the global database cluster. Currently limited to\n        1 item.\n      </p>"
                     }
+                },
+                "FailoverState": {
+                    "target": "com.amazonaws.rds#FailoverState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A data object containing all properties for the current state of an in-process or pending failover process for this Aurora global database.\n      This object is empty unless the <a>FailoverGlobalCluster</a> API operation has been called on this Aurora global database (<a>GlobalCluster</a>).\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -11120,6 +11670,16 @@
                 "smithy.api#documentation": "<p>The <code>GlobalClusterIdentifier</code> already exists. Choose a new global database identifier (unique name) to create a new global database cluster.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.rds#GlobalClusterIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "[A-Za-z][0-9A-Za-z-:._]*"
             }
         },
         "com.amazonaws.rds#GlobalClusterList": {
@@ -11488,7 +12048,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The requested operation can't be performed because there aren't enough available IP addresses \n            in the proxy's subnets. Add more CIDR blocks to the VPC or remove IP address that aren't required \n            from the subnets.</p>",
+                "smithy.api#documentation": "<p>The requested operation can't be performed because there aren't enough available IP addresses \n           in the proxy's subnets. Add more CIDR blocks to the VPC or remove IP address that aren't required \n           from the subnets.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -11628,6 +12188,19 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The DB parameter group is in use or is in an invalid state. If you are attempting\n            to delete the parameter group, you can't delete it when the parameter group is in\n            this state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.rds#InvalidDBProxyEndpointStateFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rds#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You can't perform this operation while the DB proxy endpoint is in a particular state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -12312,7 +12885,7 @@
                 "EnableGlobalWriteForwarding": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether to enable write operations to be forwarded\n      from this cluster to the primary cluster in an Aurora global database. The\n      resulting changes are replicated back to this cluster. This parameter only\n      applies to DB clusters that are secondary clusters in an Aurora global database.\n      By default, Aurora disallows write operations for secondary clusters.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether to enable this DB cluster to forward write operations to the primary cluster of an\n      Aurora global database (<a>GlobalCluster</a>). By default, write operations are not allowed on Aurora DB clusters that\n      are secondary clusters in an Aurora global database.</p>\n         <p>You can set this value only on Aurora DB clusters that are members of an Aurora global database. With this parameter\n      enabled, a secondary cluster can forward writes to the current primary cluster and the resulting changes are replicated back to\n      this cluster. For the primary DB cluster of an Aurora global database, this value is used immediately if the primary is\n      demoted by the <a>FailoverGlobalCluster</a> API operation, but it does nothing until then.\n    </p>"
                     }
                 }
             },
@@ -12591,7 +13164,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n    The version number of the database engine to upgrade to. \n    Changing this parameter results in an outage and the change \n    is applied during the next maintenance window\n    unless the <code>ApplyImmediately</code> parameter is enabled for this request.\n    </p>\n         <p>For major version upgrades, if a nondefault DB parameter group is currently in use, a\n            new DB parameter group in the DB parameter group family for the new engine version must\n            be specified. The new DB parameter group can be the default for that DB parameter group\n            family.</p>\n         <p>For information about valid engine versions, see <code>CreateDBInstance</code>, or call <code>DescribeDBEngineVersions</code>.</p>"
+                        "smithy.api#documentation": "<p>\n    The version number of the database engine to upgrade to. \n    Changing this parameter results in an outage and the change \n    is applied during the next maintenance window\n    unless the <code>ApplyImmediately</code> parameter is enabled for this request.\n    </p>\n         <p>For major version upgrades, if a nondefault DB parameter group is currently in use, a\n            new DB parameter group in the DB parameter group family for the new engine version must\n            be specified. The new DB parameter group can be the default for that DB parameter group\n            family.</p>\n         <p>If you specify only a major version, Amazon RDS will update the DB instance to the \n          default minor version if the current minor version is lower.\n          For information about valid engine versions, see <code>CreateDBInstance</code>, \n          or call <code>DescribeDBEngineVersions</code>.</p>"
                     }
                 },
                 "AllowMajorVersionUpgrade": {
@@ -12621,7 +13194,7 @@
                 "OptionGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            Indicates that the DB instance should be associated with the specified option group. \n            Changing this parameter doesn't result in an outage except in the following case and the change \n            is applied during the next maintenance window\n            unless the <code>ApplyImmediately</code> parameter is enabled \n            for this request. If the parameter change results in an option group that \n            enables OEM, this change can cause a brief (sub-second) period during which new connections \n            are rejected but existing connections are not interrupted.\n        </p>\n         <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed from an option group, and that option group can't be removed from a DB instance once it is associated with a DB instance</p>"
+                        "smithy.api#documentation": "<p>\n            A value that indicates the DB instance should be associated with the specified option group. \n            Changing this parameter doesn't result in an outage except in the following case and the change \n            is applied during the next maintenance window\n            unless the <code>ApplyImmediately</code> parameter is enabled \n            for this request. If the parameter change results in an option group that \n            enables OEM, this change can cause a brief (sub-second) period during which new connections \n            are rejected but existing connections are not interrupted.\n        </p>\n         <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed from an option group, and that option group can't be removed from a DB instance once it is associated with a DB instance</p>"
                     }
                 },
                 "NewDBInstanceIdentifier": {
@@ -12753,7 +13326,7 @@
                 "MaxAllocatedStorage": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>"
+                        "smithy.api#documentation": "<p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>\n        <p>For more information about this setting, including limitations that apply to it, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling\">\n                Managing capacity automatically with Amazon RDS storage autoscaling</a> \n            in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
                 "CertificateRotationRestart": {
@@ -12772,6 +13345,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.</p>\n        <p>A <i>CoIP</i> provides local or external connectivity to resources in\n            your Outpost subnets through your on-premises network. For some use cases, a CoIP can\n            provide lower latency for connections to the DB instance from outside of its virtual\n            private cloud (VPC) on your local network.</p>\n        <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working with Amazon RDS on AWS Outposts</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n        <p>For more information about CoIPs, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing\">Customer-owned IP addresses</a> \n            in the <i>AWS Outposts User Guide</i>.</p>"
+                    }
+                },
+                "AwsBackupRecoveryPointArn": {
+                    "target": "com.amazonaws.rds#AwsBackupRecoveryPointArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recovery point in AWS Backup.</p>"
                     }
                 }
             },
@@ -12850,6 +13429,67 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Changes the settings for an existing DB proxy.</p>"
+            }
+        },
+        "com.amazonaws.rds#ModifyDBProxyEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#ModifyDBProxyEndpointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#ModifyDBProxyEndpointResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rds#DBProxyEndpointAlreadyExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#DBProxyEndpointNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidDBProxyEndpointStateFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidDBProxyStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Changes the settings for an existing DB proxy endpoint.</p>"
+            }
+        },
+        "com.amazonaws.rds#ModifyDBProxyEndpointRequest": {
+            "type": "structure",
+            "members": {
+                "DBProxyEndpointName": {
+                    "target": "com.amazonaws.rds#DBProxyEndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DB proxy sociated with the DB proxy endpoint that you want to modify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NewDBProxyEndpointName": {
+                    "target": "com.amazonaws.rds#DBProxyEndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new identifier for the <code>DBProxyEndpoint</code>. An identifier must\n        begin with a letter and must contain only ASCII letters, digits, and hyphens; it\n        can't end with a hyphen or contain two consecutive hyphens.</p>"
+                    }
+                },
+                "VpcSecurityGroupIds": {
+                    "target": "com.amazonaws.rds#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC security group IDs for the DB proxy endpoint. When the DB proxy endpoint\n        uses a different VPC than the original proxy, you also specify a different\n        set of security group IDs than for the original proxy.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rds#ModifyDBProxyEndpointResponse": {
+            "type": "structure",
+            "members": {
+                "DBProxyEndpoint": {
+                    "target": "com.amazonaws.rds#DBProxyEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>DBProxyEndpoint</code> object representing the new settings for the DB proxy endpoint.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#ModifyDBProxyRequest": {
@@ -13253,6 +13893,12 @@
                     "target": "com.amazonaws.rds#GlobalClusterNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#InvalidDBClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidDBInstanceStateFault"
+                },
+                {
                     "target": "com.amazonaws.rds#InvalidGlobalClusterStateFault"
                 }
             ],
@@ -13279,6 +13925,18 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>\n        Indicates if the global database cluster has deletion protection enabled. The global database cluster\n        can't be deleted when deletion protection is enabled.\n      </p>"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the database engine to which you want to upgrade. \n          Changing this parameter results in an outage. The change is applied during\n          the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p>\n         <p>To list all of the available engine versions for <code>aurora</code> (for MySQL 5.6-compatible Aurora), use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'</code>\n         </p>\n         <p>To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL 5.7-compatible Aurora), use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-mysql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'</code>\n         </p>\n         <p>To list all of the available engine versions for <code>aurora-postgresql</code>, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'</code>\n         </p>"
+                    }
+                },
+                "AllowMajorVersionUpgrade": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether major version upgrades are allowed.</p>\n         <p>Constraints: You must allow major version upgrades when specifying a value for the\n                <code>EngineVersion</code> parameter that is a different major version than the DB\n            cluster's current version.</p>\n         <p>If you upgrade the major version of a global database, the cluster and DB instance parameter\n        groups are set to the default parameter groups for the new version. Apply any custom parameter\n        groups after completing the upgrade.</p>"
                     }
                 }
             }
@@ -14395,7 +15053,7 @@
                 "MultiAZ": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates that the Single-AZ DB instance will change to a Multi-AZ deployment.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates that the Single-AZ DB instance will change to a Multi-AZ deployment.</p>"
                     }
                 },
                 "EngineVersion": {
@@ -14457,7 +15115,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n        This data type is used as a response element in the <code>ModifyDBInstance</code> action and \n          contains changes that will be applied during the next maintenance window.\n       </p>"
+                "smithy.api#documentation": "<p>\n        This data type is used as a response element in the <code>ModifyDBInstance</code> operation and \n          contains changes that will be applied during the next maintenance window.\n       </p>"
             }
         },
         "com.amazonaws.rds#PointInTimeRestoreNotEnabledFault": {
@@ -16835,7 +17493,7 @@
                 "MaxAllocatedStorage": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>"
+                        "smithy.api#documentation": "<p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>\n        <p>For more information about this setting, including limitations that apply to it, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling\">\n                Managing capacity automatically with Amazon RDS storage autoscaling</a> \n            in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 }
             }
@@ -17118,7 +17776,7 @@
                 "MaxAllocatedStorage": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>"
+                        "smithy.api#documentation": "<p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>\n         <p>For more information about this setting, including limitations that apply to it, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling\">\n              Managing capacity automatically with Amazon RDS storage autoscaling</a> \n          in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
                 "SourceDBInstanceAutomatedBackupsArn": {
@@ -18326,6 +18984,10 @@
                     {
                         "value": "PENDING_PROXY_CAPACITY",
                         "name": "PENDING_PROXY_CAPACITY"
+                    },
+                    {
+                        "value": "INVALID_REPLICATION_STATE",
+                        "name": "INVALID_REPLICATION_STATE"
                     }
                 ]
             }
@@ -18334,6 +18996,25 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.rds#DBProxyTarget"
+            }
+        },
+        "com.amazonaws.rds#TargetRole": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "READ_WRITE",
+                        "name": "READ_WRITE"
+                    },
+                    {
+                        "value": "READ_ONLY",
+                        "name": "READ_ONLY"
+                    },
+                    {
+                        "value": "UNKNOWN",
+                        "name": "UNKNOWN"
+                    }
+                ]
             }
         },
         "com.amazonaws.rds#TargetState": {
@@ -18418,7 +19099,25 @@
                 "IsMajorVersionUpgrade": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether a database engine is upgraded to a major version.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether upgrading to the target version requires upgrading the major version of the database engine.</p>"
+                    }
+                },
+                "SupportedEngineModes": {
+                    "target": "com.amazonaws.rds#EngineModeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the supported DB engine modes for the target engine version.</p>"
+                    }
+                },
+                "SupportsParallelQuery": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether you can use Aurora parallel query with the target engine version.</p>"
+                    }
+                },
+                "SupportsGlobalDatabases": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether you can use Aurora global databases with the target engine version.</p>"
                     }
                 }
             },

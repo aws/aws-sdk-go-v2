@@ -335,7 +335,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an endpoint for an Amazon FSx for Windows file system.</p>"
+                "smithy.api#documentation": "<p>Creates an endpoint for an Amazon FSx for Windows File Server file system.</p>"
             }
         },
         "com.amazonaws.datasync#CreateLocationFsxWindowsRequest": {
@@ -344,20 +344,20 @@
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#FsxWindowsSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>A subdirectory in the location’s path. This subdirectory in the Amazon FSx for Windows file system is used\n      to read data from the Amazon FSx for Windows source location or write data to the FSx for Windows destination.</p>"
+                        "smithy.api#documentation": "<p>A subdirectory in the location’s path. This subdirectory in the Amazon FSx for Windows\n      File Server file system is used to read data from the Amazon FSx for Windows File Server\n      source location or write data to the FSx for Windows File Server destination.</p>"
                     }
                 },
                 "FsxFilesystemArn": {
                     "target": "com.amazonaws.datasync#FsxFilesystemArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the FSx for Windows file system.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the FSx for Windows File Server file system.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SecurityGroupArns": {
                     "target": "com.amazonaws.datasync#Ec2SecurityGroupArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are to use to configure the\n      FSx for Windows file system.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are to use to configure the\n      FSx for Windows File Server file system.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -370,20 +370,20 @@
                 "User": {
                     "target": "com.amazonaws.datasync#SmbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user who has the permissions to access files and folders in the\n      FSx for Windows file system.</p>",
+                        "smithy.api#documentation": "<p>The user who has the permissions to access files and folders in the FSx for Windows File\n      Server file system.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Domain": {
                     "target": "com.amazonaws.datasync#SmbDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Windows domain that the FSx for Windows server belongs to.</p>"
+                        "smithy.api#documentation": "<p>The name of the Windows domain that the FSx for Windows File Server belongs to.</p>"
                     }
                 },
                 "Password": {
                     "target": "com.amazonaws.datasync#SmbPassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password of the user who has the permissions to access files and folders in the\n      FSx for Windows file system.</p>",
+                        "smithy.api#documentation": "<p>The password of the user who has the permissions to access files and folders in the FSx\n      for Windows File Server file system.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -395,7 +395,7 @@
                 "LocationArn": {
                     "target": "com.amazonaws.datasync#LocationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows file system location that is\n      created.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows File Server file system location\n      that is created.</p>"
                     }
                 }
             }
@@ -679,7 +679,7 @@
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#SmbSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subdirectory in the SMB file system that is used to read data from the SMB source\n      location or write data to the SMB destination. The SMB path should be a path that's\n      exported by the SMB server, or a subdirectory of that path. The path should be such that it\n      can be mounted by other SMB clients in your network.</p>\n         <note>\n            <p>\n               <code>Subdirectory</code> must be specified with forward slashes. For example,\n          <code>/path/to/folder</code>.</p>\n         </note>\n      \n         <p>To transfer all the data in the folder you specified, DataSync needs to have permissions\n      to mount the SMB share, as well as to access all the data in that share. To ensure this,\n      either ensure that the user/password specified belongs to the user who can mount the share,\n      and who has the appropriate permissions for all of the files and directories that you want\n      DataSync to access, or use credentials of a member of the Backup Operators group to mount\n      the share. Doing either enables the agent to access the data. For the agent to access\n      directories, you must additionally enable all execute access.</p>",
+                        "smithy.api#documentation": "<p>The subdirectory in the SMB file system that is used to read data from the SMB source\n      location or write data to the SMB destination. The SMB path should be a path that's\n      exported by the SMB server, or a subdirectory of that path. The path should be such that it\n      can be mounted by other SMB clients in your network.</p>\n         <note>\n            <p>\n               <code>Subdirectory</code> must be specified with forward slashes. For example,\n          <code>/path/to/folder</code>.</p>\n         </note>\n\n         <p>To transfer all the data in the folder you specified, DataSync needs to have permissions\n      to mount the SMB share, as well as to access all the data in that share. To ensure this,\n      either ensure that the user/password specified belongs to the user who can mount the share,\n      and who has the appropriate permissions for all of the files and directories that you want\n      DataSync to access, or use credentials of a member of the Backup Operators group to mount\n      the share. Doing either enables the agent to access the data. For the agent to access\n      directories, you must additionally enable all execute access.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -765,7 +765,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a task. A task is a set of two locations (source and destination) and a set of\n      Options that you use to control the behavior of a task. If you don't specify Options when you\n      create a task, AWS DataSync populates them with service defaults.</p>\n         <p>When you create a task, it first enters the CREATING state. During CREATING\n      AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task\n      transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If\n      required, AWS DataSync mounts the AWS location before each task execution.</p>\n         <p>If an agent that is associated with a source (NFS) location goes offline, the task\n      transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING\n      status for more than a few minutes, it means that your agent might be having trouble mounting\n      the source NFS file system. Check the task's ErrorCode and ErrorDetail. Mount issues are often\n      caused by either a misconfigured firewall or a mistyped NFS server hostname.</p>"
+                "smithy.api#documentation": "<p>Creates a task.</p>\n         <p>A task includes a source location and a destination location, and a configuration\n      that specifies how data is transferred. A task always transfers data from the source \n      location to the destination location. The configuration specifies options such as \n      task scheduling, bandwidth limits, etc. A task is the complete definition of a data \n      transfer.</p>\n         <p>When you create a task that transfers data between AWS services in different AWS Regions,\n      one of the two locations that you specify must reside in the Region where DataSync is being\n      used. The other location must be specified in a different Region.</p>\n         <p>You can transfer data between commercial AWS Regions except for China, or between AWS\n      GovCloud (US-East and US-West) Regions.</p>\n    \n         <important>\n            <p>When you use DataSync to copy files or objects between AWS Regions, \n      you pay for data transfer between Regions. This is billed as data transfer OUT \n      from your source Region to your destination Region. For more information, \n      see <a href=\"http://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer\">Data Transfer pricing</a>.\n    </p>\n         </important>"
             }
         },
         "com.amazonaws.datasync#CreateTaskRequest": {
@@ -1123,7 +1123,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns metadata, such as the path information about an Amazon FSx for Windows location.</p>"
+                "smithy.api#documentation": "<p>Returns metadata, such as the path information about an Amazon FSx for Windows File Server\n      location.</p>"
             }
         },
         "com.amazonaws.datasync#DescribeLocationFsxWindowsRequest": {
@@ -1132,7 +1132,7 @@
                 "LocationArn": {
                     "target": "com.amazonaws.datasync#LocationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows location to describe.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows File Server location to\n      describe.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1144,37 +1144,37 @@
                 "LocationArn": {
                     "target": "com.amazonaws.datasync#LocationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows location that was described.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FSx for Windows File Server location that was\n      described.</p>"
                     }
                 },
                 "LocationUri": {
                     "target": "com.amazonaws.datasync#LocationUri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the FSx for Windows location that was described.</p>"
+                        "smithy.api#documentation": "<p>The URL of the FSx for Windows File Server location that was described.</p>"
                     }
                 },
                 "SecurityGroupArns": {
                     "target": "com.amazonaws.datasync#Ec2SecurityGroupArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are configured for the FSx\n      for Windows file system.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are configured for the FSx\n      for Windows File Server file system.</p>"
                     }
                 },
                 "CreationTime": {
                     "target": "com.amazonaws.datasync#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time that the FSx for Windows location was created.</p>"
+                        "smithy.api#documentation": "<p>The time that the FSx for Windows File Server location was created.</p>"
                     }
                 },
                 "User": {
                     "target": "com.amazonaws.datasync#SmbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user who has the permissions to access files and folders in the\n      FSx for Windows file system.</p>"
+                        "smithy.api#documentation": "<p>The user who has the permissions to access files and folders in the FSx for Windows File\n      Server file system.</p>"
                     }
                 },
                 "Domain": {
                     "target": "com.amazonaws.datasync#SmbDomain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Windows domain that the FSx for Windows server belongs to.</p>"
+                        "smithy.api#documentation": "<p>The name of the Windows domain that the FSx for Windows File Server belongs to.</p>"
                     }
                 }
             }
@@ -2025,6 +2025,15 @@
                 },
                 {
                     "target": "com.amazonaws.datasync#UpdateAgent"
+                },
+                {
+                    "target": "com.amazonaws.datasync#UpdateLocationNfs"
+                },
+                {
+                    "target": "com.amazonaws.datasync#UpdateLocationObjectStorage"
+                },
+                {
+                    "target": "com.amazonaws.datasync#UpdateLocationSmb"
                 },
                 {
                     "target": "com.amazonaws.datasync#UpdateTask"
@@ -3253,7 +3262,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a specific invocation of a task. A <code>TaskExecution</code> value represents\n      an individual run of a task. Each task can have at most one <code>TaskExecution</code> at a\n      time.</p>\n         <p>\n            <code>TaskExecution</code> has the following transition phases: INITIALIZING |\n      PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. </p>\n      \n         <p>For detailed information, see the Task Execution section in the Components\n      and Terminology topic in the <i>AWS DataSync User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Starts a specific invocation of a task. A <code>TaskExecution</code> value represents\n      an individual run of a task. Each task can have at most one <code>TaskExecution</code> at a\n      time.</p>\n         <p>\n            <code>TaskExecution</code> has the following transition phases: INITIALIZING |\n      PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. </p>\n      \n         <p>For detailed information, see the Task Execution section in the Components and\n      Terminology topic in the <i>AWS DataSync User Guide</i>.</p>"
             }
         },
         "com.amazonaws.datasync#StartTaskExecutionRequest": {
@@ -3817,6 +3826,195 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.datasync#UpdateLocationNfs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#UpdateLocationNfsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#UpdateLocationNfsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates some of the parameters of a previously created location for Network File System (NFS) access.\n      For information about creating an NFS location, see <a>create-nfs-location</a>.</p>"
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationNfsRequest": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the NFS location to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subdirectory": {
+                    "target": "com.amazonaws.datasync#NfsSubdirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subdirectory in the NFS file system that is used to read data from the NFS source\n      location or write data to the NFS destination. The NFS path should be a path that's\n      exported by the NFS server, or a subdirectory of that path. The path should be such that it\n      can be mounted by other NFS clients in your network.</p>\n    \n         <p>To see all the paths exported by your NFS server, run \"<code>showmount -e\n        nfs-server-name</code>\" from an NFS client that has access to your server. You can specify\n        any directory that appears in the results, and any subdirectory of that directory. Ensure that\n        the NFS export is accessible without Kerberos authentication. </p>\n         <p>To transfer all the data in the folder that you specified, DataSync must have\n      permissions to read all the data. To ensure this, either configure the NFS export with\n        <code>no_root_squash</code>, or ensure that the files you want DataSync to\n      access have permissions that allow read access for all users. Doing either option enables the\n      agent to read the files. For the agent to access directories, you must additionally enable all\n      execute access.</p>\n         <p>If you are copying data to or from your AWS Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on AWS Snowcone</a> for more information.</p>\n     \n         <p>For information about NFS export configuration, see 18.7. The /etc/exports\n      Configuration File in the Red Hat Enterprise Linux documentation.</p>"
+                    }
+                },
+                "OnPremConfig": {
+                    "target": "com.amazonaws.datasync#OnPremConfig"
+                },
+                "MountOptions": {
+                    "target": "com.amazonaws.datasync#NfsMountOptions"
+                }
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationNfsResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.datasync#UpdateLocationObjectStorage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#UpdateLocationObjectStorageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#UpdateLocationObjectStorageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates some of the parameters of a previously created location for self-managed object\n      storage server access. For information about creating a self-managed object storage location,\n      see <a>create-object-location</a>.</p>"
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationObjectStorageRequest": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the self-managed object storage server location to be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServerPort": {
+                    "target": "com.amazonaws.datasync#ObjectStorageServerPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port that your self-managed object storage server accepts inbound network traffic on.\n      The server port is set by default to TCP 80 (HTTP) or TCP 443 (HTTPS). You can \n      specify a custom port if your self-managed object storage server requires one.</p>"
+                    }
+                },
+                "ServerProtocol": {
+                    "target": "com.amazonaws.datasync#ObjectStorageServerProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol that the object storage server uses to communicate. Valid values are\n        <code>HTTP</code> or <code>HTTPS</code>.</p>"
+                    }
+                },
+                "Subdirectory": {
+                    "target": "com.amazonaws.datasync#S3Subdirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subdirectory in the self-managed object storage server that is used\n      to read data from.</p>"
+                    }
+                },
+                "AccessKey": {
+                    "target": "com.amazonaws.datasync#ObjectStorageAccessKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. The access key is used if credentials are required to access the self-managed\n      object storage server. If your object storage requires a user name and password to\n      authenticate, use <code>AccessKey</code> and <code>SecretKey</code> to provide the user name\n      and password, respectively.</p>"
+                    }
+                },
+                "SecretKey": {
+                    "target": "com.amazonaws.datasync#ObjectStorageSecretKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. The secret key is used if credentials are required to access the self-managed\n      object storage server. If your object storage requires a user name and password to\n      authenticate, use <code>AccessKey</code> and <code>SecretKey</code> to provide the user name\n      and password, respectively.</p>"
+                    }
+                },
+                "AgentArns": {
+                    "target": "com.amazonaws.datasync#AgentArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agents associated with the \n      self-managed object storage server location.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationObjectStorageResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.datasync#UpdateLocationSmb": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datasync#UpdateLocationSmbRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.datasync#UpdateLocationSmbResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datasync#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.datasync#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates some of the parameters of a previously created location for Server Message Block\n      (SMB) file system access. For information about creating an SMB location, see <a>create-smb-location</a>.</p>"
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationSmbRequest": {
+            "type": "structure",
+            "members": {
+                "LocationArn": {
+                    "target": "com.amazonaws.datasync#LocationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SMB location to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subdirectory": {
+                    "target": "com.amazonaws.datasync#SmbSubdirectory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subdirectory in the SMB file system that is used to read data from the SMB source\n      location or write data to the SMB destination. The SMB path should be a path that's\n      exported by the SMB server, or a subdirectory of that path. The path should be such that it\n      can be mounted by other SMB clients in your network.</p>\n         <note>\n            <p>\n               <code>Subdirectory</code> must be specified with forward slashes. For example,\n      <code>/path/to/folder</code>.</p>\n         </note>\n    \n         <p>To transfer all the data in the folder that you specified, DataSync must have\n      permissions to mount the SMB share and to access all the data in that share. To ensure this,\n      do either of the following:</p>\n         <ul>\n            <li>\n               <p>Ensure that the user/password specified belongs to the user who can mount the share\n          and who has the appropriate permissions for all of the files and directories that you want\n          DataSync to access.</p>\n            </li>\n            <li>\n               <p>Use credentials of a member of the Backup Operators group to mount the share. </p>\n            </li>\n         </ul>\n         <p>Doing either of these options enables the agent to access the data. For the agent to\n      access directories, you must also enable all execute access.</p>"
+                    }
+                },
+                "User": {
+                    "target": "com.amazonaws.datasync#SmbUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who can mount the share has the permissions to access files and folders in the\n      SMB share.</p>"
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.datasync#SmbDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Windows domain that the SMB server belongs to.</p>"
+                    }
+                },
+                "Password": {
+                    "target": "com.amazonaws.datasync#SmbPassword",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password of the user who can mount the share has the permissions to access files and\n      folders in the SMB share.</p>"
+                    }
+                },
+                "AgentArns": {
+                    "target": "com.amazonaws.datasync#AgentArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB)\n      location.</p>"
+                    }
+                },
+                "MountOptions": {
+                    "target": "com.amazonaws.datasync#SmbMountOptions"
+                }
+            }
+        },
+        "com.amazonaws.datasync#UpdateLocationSmbResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.datasync#UpdateTask": {
             "type": "operation",
             "input": {
@@ -3854,7 +4052,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates execution of a task.</p>\n         <p>You can modify bandwidth throttling for a task execution that is running or queued.\n      For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/working-with-task-executions.html#adjust-bandwidth-throttling\">Adjusting Bandwidth Throttling for a Task Execution</a>.</p>\n    \n         <note>\n            <p>The only <code>Option</code> that can be modified by <code>UpdateTaskExecution</code> \n        is <code>\n                  <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond\">BytesPerSecond</a>\n               </code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Updates execution of a task.</p>\n         <p>You can modify bandwidth throttling for a task execution that is running or queued.\n      For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#adjust-bandwidth-throttling\">Adjusting Bandwidth Throttling for a Task Execution</a>.</p>\n    \n         <note>\n            <p>The only <code>Option</code> that can be modified by <code>UpdateTaskExecution</code> \n        is <code>\n                  <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond\">BytesPerSecond</a>\n               </code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.datasync#UpdateTaskExecutionRequest": {

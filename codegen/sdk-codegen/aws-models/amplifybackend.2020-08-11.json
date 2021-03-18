@@ -1,0 +1,3844 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.amplifybackend#AdditionalConstraintsElement": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "REQUIRE_DIGIT",
+                        "name": "REQUIRE_DIGIT"
+                    },
+                    {
+                        "value": "REQUIRE_LOWERCASE",
+                        "name": "REQUIRE_LOWERCASE"
+                    },
+                    {
+                        "value": "REQUIRE_SYMBOL",
+                        "name": "REQUIRE_SYMBOL"
+                    },
+                    {
+                        "value": "REQUIRE_UPPERCASE",
+                        "name": "REQUIRE_UPPERCASE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifybackend#AmplifyBackend": {
+            "type": "service",
+            "version": "2020-08-11",
+            "operations": [
+                {
+                    "target": "com.amazonaws.amplifybackend#CloneBackend"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#CreateBackend"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#CreateBackendAPI"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#CreateBackendAuth"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#CreateBackendConfig"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#CreateToken"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#DeleteBackend"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#DeleteBackendAPI"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#DeleteBackendAuth"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#DeleteToken"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GenerateBackendAPIModels"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GetBackend"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GetBackendAPI"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GetBackendAPIModels"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GetBackendAuth"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GetBackendJob"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GetToken"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#ListBackendJobs"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#RemoveAllBackends"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#RemoveBackendConfig"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#UpdateBackendAPI"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#UpdateBackendAuth"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#UpdateBackendConfig"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#UpdateBackendJob"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "AmplifyBackend",
+                    "arnNamespace": "amplifybackend",
+                    "cloudFormationName": "AmplifyBackend",
+                    "cloudTrailEventSource": "amplifybackend.amazonaws.com",
+                    "endpointPrefix": "amplifybackend"
+                },
+                "aws.auth#sigv4": {
+                    "name": "amplifybackend"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>AWS Amplify Admin API</p>",
+                "smithy.api#title": "AmplifyBackend"
+            }
+        },
+        "com.amazonaws.amplifybackend#AuthResources": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "USER_POOL_ONLY",
+                        "name": "USER_POOL_ONLY"
+                    },
+                    {
+                        "value": "IDENTITY_POOL_AND_USER_POOL",
+                        "name": "IDENTITY_POOL_AND_USER_POOL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifybackend#BackendAPIAppSyncAuthSettings": {
+            "type": "structure",
+            "members": {
+                "CognitoUserPoolId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Cognito user pool ID, if Amazon Cognito is used as an authentication setting to access your data models.</p>",
+                        "smithy.api#jsonName": "cognitoUserPoolId"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API key description for API_KEY, if it is used as an authentication mechanism to access your data models.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                },
+                "ExpirationTime": {
+                    "target": "com.amazonaws.amplifybackend#__double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API key expiration time for API_KEY, if it is used as an authentication mechanism to access your data models.</p>",
+                        "smithy.api#jsonName": "expirationTime"
+                    }
+                },
+                "OpenIDAuthTTL": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiry time for the OpenID authentication mechanism.</p>",
+                        "smithy.api#jsonName": "openIDAuthTTL"
+                    }
+                },
+                "OpenIDClientId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The clientID for openID, if openID is used as an authentication setting to access your data models.</p>",
+                        "smithy.api#jsonName": "openIDClientId"
+                    }
+                },
+                "OpenIDIatTTL": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiry time for the OpenID authentication mechanism.</p>",
+                        "smithy.api#jsonName": "openIDIatTTL"
+                    }
+                },
+                "OpenIDIssueURL": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The openID issuer URL, if openID is used as an authentication setting to access your data models.</p>",
+                        "smithy.api#jsonName": "openIDIssueURL"
+                    }
+                },
+                "OpenIDProviderName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The openID provider name, if openID is used as an authentication mechanism to access your data models.</p>",
+                        "smithy.api#jsonName": "openIDProviderName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The authentication settings for accessing provisioned data models in your Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#BackendAPIAuthType": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.amplifybackend#Mode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the authentication mode.</p>",
+                        "smithy.api#jsonName": "mode"
+                    }
+                },
+                "Settings": {
+                    "target": "com.amazonaws.amplifybackend#BackendAPIAppSyncAuthSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes settings for the authentication mode.</p>",
+                        "smithy.api#jsonName": "settings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the auth types for your configured data models.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#BackendAPIConflictResolution": {
+            "type": "structure",
+            "members": {
+                "ResolutionStrategy": {
+                    "target": "com.amazonaws.amplifybackend#ResolutionStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy for conflict resolution.</p>",
+                        "smithy.api#jsonName": "resolutionStrategy"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the conflict resolution configuration for the data model configured in your Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#BackendAPIResourceConfig": {
+            "type": "structure",
+            "members": {
+                "AdditionalAuthTypes": {
+                    "target": "com.amazonaws.amplifybackend#ListOfBackendAPIAuthType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional authentication methods used to interact with your data models.</p>",
+                        "smithy.api#jsonName": "additionalAuthTypes"
+                    }
+                },
+                "ApiName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API name used to interact with the data model, configured as a part of the Amplify project.</p>",
+                        "smithy.api#jsonName": "apiName"
+                    }
+                },
+                "ConflictResolution": {
+                    "target": "com.amazonaws.amplifybackend#BackendAPIConflictResolution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conflict resolution strategy for your data stored in the data models.</p>",
+                        "smithy.api#jsonName": "conflictResolution"
+                    }
+                },
+                "DefaultAuthType": {
+                    "target": "com.amazonaws.amplifybackend#BackendAPIAuthType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default authentication type for interacting with the configured data models in your Amplify project.</p>",
+                        "smithy.api#jsonName": "defaultAuthType"
+                    }
+                },
+                "Service": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service used to provision and interact with the data model.</p>",
+                        "smithy.api#jsonName": "service"
+                    }
+                },
+                "TransformSchema": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the data model in the annotated transform of the GraphQL schema.</p>",
+                        "smithy.api#jsonName": "transformSchema"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource configuration for the data model, configured as a part of the Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#BackendAuthSocialProviderConfig": {
+            "type": "structure",
+            "members": {
+                "ClientId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the client_id that can be obtained from the third-party social federation provider.</p>",
+                        "smithy.api#jsonName": "client_id"
+                    }
+                },
+                "ClientSecret": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the client_secret that can be obtained from third-party social federation providers.</p>",
+                        "smithy.api#jsonName": "client_secret"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes third-party social federation configurations for allowing your app users to sign in using OAuth.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#BackendJobRespObj": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the job was created.</p>",
+                        "smithy.api#jsonName": "createTime"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operation.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                },
+                "UpdateTime": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the job was last updated.</p>",
+                        "smithy.api#jsonName": "updateTime"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response object for this operation.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#BadRequestException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message to inform that the request failed.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error returned if a request is not formed properly.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.amplifybackend#CloneBackend": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#CloneBackendRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#CloneBackendResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This operation clones an existing backend.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/environments/{BackendEnvironmentName}/clone",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#CloneBackendRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the destination backend environment to be created.</p>",
+                        "smithy.api#jsonName": "targetEnvironmentName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for CloneBackend.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#CloneBackendResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operation.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackend": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#CreateBackendRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#CreateBackendResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This operation creates a backend for an Amplify app. Backends are automatically created at the time of app creation.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendAPI": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#CreateBackendAPIRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#CreateBackendAPIResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new backend API resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/api",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendAPIRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceConfig": {
+                    "target": "com.amazonaws.amplifybackend#BackendAPIResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource configuration for this request.</p>",
+                        "smithy.api#jsonName": "resourceConfig",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this resource.</p>",
+                        "smithy.api#jsonName": "resourceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for CreateBackendAPI.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendAPIResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operation.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendAuth": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#CreateBackendAuthRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#CreateBackendAuthResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new backend authentication resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/auth",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendAuthForgotPasswordConfig": {
+            "type": "structure",
+            "members": {
+                "DeliveryMethod": {
+                    "target": "com.amazonaws.amplifybackend#DeliveryMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>",
+                        "smithy.api#jsonName": "deliveryMethod",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EmailSettings": {
+                    "target": "com.amazonaws.amplifybackend#EmailSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the email sent when an app user forgets their password.</p>",
+                        "smithy.api#jsonName": "emailSettings"
+                    }
+                },
+                "SmsSettings": {
+                    "target": "com.amazonaws.amplifybackend#SmsSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the SMS message sent when an app user forgets their password.</p>",
+                        "smithy.api#jsonName": "smsSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the forgot password policy for authenticating into the Amplify app.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendAuthIdentityPoolConfig": {
+            "type": "structure",
+            "members": {
+                "IdentityPoolName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the identity pool used for authorization.</p>",
+                        "smithy.api#jsonName": "identityPoolName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UnauthenticatedLogin": {
+                    "target": "com.amazonaws.amplifybackend#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to true or false based on whether you want to enable guest authorization to your Amplify app.</p>",
+                        "smithy.api#jsonName": "unauthenticatedLogin",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes authorization configurations for the auth resources, configured as a part of your Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendAuthMFAConfig": {
+            "type": "structure",
+            "members": {
+                "MFAMode": {
+                    "target": "com.amazonaws.amplifybackend#MFAMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in your Amplify project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Settings": {
+                    "target": "com.amazonaws.amplifybackend#Settings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration settings and methods for your Amplify app users to use MFA.</p>",
+                        "smithy.api#jsonName": "settings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendAuthOAuthConfig": {
+            "type": "structure",
+            "members": {
+                "DomainPrefix": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain prefix for your Amplify app.</p>",
+                        "smithy.api#jsonName": "domainPrefix"
+                    }
+                },
+                "OAuthGrantType": {
+                    "target": "com.amazonaws.amplifybackend#OAuthGrantType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth grant type that you use to allow app users to authenticate from your Amplify app.</p>",
+                        "smithy.api#jsonName": "oAuthGrantType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OAuthScopes": {
+                    "target": "com.amazonaws.amplifybackend#ListOfOAuthScopesElement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of OAuth-related flows that allow your app users to authenticate from your Amplify app.</p>",
+                        "smithy.api#jsonName": "oAuthScopes",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RedirectSignInURIs": {
+                    "target": "com.amazonaws.amplifybackend#ListOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The redirected URI for signing in to your Amplify app.</p>",
+                        "smithy.api#jsonName": "redirectSignInURIs",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RedirectSignOutURIs": {
+                    "target": "com.amazonaws.amplifybackend#ListOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Redirect URLs that OAuth uses when a user signs out of an Amplify app.</p>",
+                        "smithy.api#jsonName": "redirectSignOutURIs",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SocialProviderSettings": {
+                    "target": "com.amazonaws.amplifybackend#SocialProviderSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for using social identity providers for access to your Amplify app.</p>",
+                        "smithy.api#jsonName": "socialProviderSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates the OAuth configuration for your Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendAuthPasswordPolicyConfig": {
+            "type": "structure",
+            "members": {
+                "AdditionalConstraints": {
+                    "target": "com.amazonaws.amplifybackend#ListOfAdditionalConstraintsElement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional constraints for the password used to access the backend of your Amplify project.</p>",
+                        "smithy.api#jsonName": "additionalConstraints"
+                    }
+                },
+                "MinimumLength": {
+                    "target": "com.amazonaws.amplifybackend#__double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum length of the password used to access the backend of your Amplify project.</p>",
+                        "smithy.api#jsonName": "minimumLength",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The password policy configuration for the backend of your Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendAuthRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceConfig": {
+                    "target": "com.amazonaws.amplifybackend#CreateBackendAuthResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource configuration for this request object.</p>",
+                        "smithy.api#jsonName": "resourceConfig",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this resource.</p>",
+                        "smithy.api#jsonName": "resourceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for CreateBackendAuth.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendAuthResourceConfig": {
+            "type": "structure",
+            "members": {
+                "AuthResources": {
+                    "target": "com.amazonaws.amplifybackend#AuthResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines whether you want to configure only authentication or both authentication and authorization settings.</p>",
+                        "smithy.api#jsonName": "authResources",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityPoolConfigs": {
+                    "target": "com.amazonaws.amplifybackend#CreateBackendAuthIdentityPoolConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.</p>",
+                        "smithy.api#jsonName": "identityPoolConfigs"
+                    }
+                },
+                "Service": {
+                    "target": "com.amazonaws.amplifybackend#Service",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the service name to use when configuring an authentication resource in your Amplify project.</p>",
+                        "smithy.api#jsonName": "service",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserPoolConfigs": {
+                    "target": "com.amazonaws.amplifybackend#CreateBackendAuthUserPoolConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.</p>",
+                        "smithy.api#jsonName": "userPoolConfigs",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the resource configuration when creating an auth resource in your Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendAuthResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operation.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendAuthUserPoolConfig": {
+            "type": "structure",
+            "members": {
+                "ForgotPassword": {
+                    "target": "com.amazonaws.amplifybackend#CreateBackendAuthForgotPasswordConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the forgotten password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>",
+                        "smithy.api#jsonName": "forgotPassword"
+                    }
+                },
+                "Mfa": {
+                    "target": "com.amazonaws.amplifybackend#CreateBackendAuthMFAConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>",
+                        "smithy.api#jsonName": "mfa"
+                    }
+                },
+                "OAuth": {
+                    "target": "com.amazonaws.amplifybackend#CreateBackendAuthOAuthConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the OAuth policy and rules for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>",
+                        "smithy.api#jsonName": "oAuth"
+                    }
+                },
+                "PasswordPolicy": {
+                    "target": "com.amazonaws.amplifybackend#CreateBackendAuthPasswordPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>",
+                        "smithy.api#jsonName": "passwordPolicy"
+                    }
+                },
+                "RequiredSignUpAttributes": {
+                    "target": "com.amazonaws.amplifybackend#ListOfRequiredSignUpAttributesElement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The required attributes to sign up new users in the Amazon Cognito user pool.</p>",
+                        "smithy.api#jsonName": "requiredSignUpAttributes",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SignInMethod": {
+                    "target": "com.amazonaws.amplifybackend#SignInMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the sign-in methods that your Amplify app users to log in using the Amazon Cognito user pool that's configured as a part of your Amplify project.</p>",
+                        "smithy.api#jsonName": "signInMethod",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserPoolName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Cognito user pool name.</p>",
+                        "smithy.api#jsonName": "userPoolName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the Amazon Cognito user pool configuration for the auth resource to be configured for your Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#CreateBackendConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#CreateBackendConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a config object for a backend.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/config",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendConfigRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendManagerAppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID for the backend manager.</p>",
+                        "smithy.api#jsonName": "backendManagerAppId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for CreateBackendConfig.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendConfigResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AppName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app.</p>",
+                        "smithy.api#jsonName": "appName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceConfig": {
+                    "target": "com.amazonaws.amplifybackend#ResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource configuration for the backend creation request.</p>",
+                        "smithy.api#jsonName": "resourceConfig"
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource.</p>",
+                        "smithy.api#jsonName": "resourceName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for CreateBackend.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateBackendResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operation.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#CreateTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#CreateTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Generates a one-time challenge code to authenticate a user into your Amplify Admin UI.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/challenge",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateTokenRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#CreateTokenResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "ChallengeCode": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One-time challenge code for authenticating into the Amplify Admin UI.</p>",
+                        "smithy.api#jsonName": "challengeCode"
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID provided when creating a new challenge token.</p>",
+                        "smithy.api#jsonName": "sessionId"
+                    }
+                },
+                "Ttl": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiry time for the one-time generated token code.</p>",
+                        "smithy.api#jsonName": "ttl"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#DeleteBackend": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#DeleteBackendRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#DeleteBackendResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes an existing environment from your Amplify project.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/environments/{BackendEnvironmentName}/remove",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#DeleteBackendAPI": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#DeleteBackendAPIRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#DeleteBackendAPIResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing backend API resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/api/{BackendEnvironmentName}/remove",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#DeleteBackendAPIRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceConfig": {
+                    "target": "com.amazonaws.amplifybackend#BackendAPIResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the resource configuration for the data model in your Amplify project.</p>",
+                        "smithy.api#jsonName": "resourceConfig"
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this resource.</p>",
+                        "smithy.api#jsonName": "resourceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for DeleteBackendAPI.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#DeleteBackendAPIResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operation.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#DeleteBackendAuth": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#DeleteBackendAuthRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#DeleteBackendAuthResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing backend authentication resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/auth/{BackendEnvironmentName}/remove",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#DeleteBackendAuthRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this resource.</p>",
+                        "smithy.api#jsonName": "resourceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for DeleteBackendAuth.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#DeleteBackendAuthResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operation.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#DeleteBackendRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#DeleteBackendResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operation.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#DeleteToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#DeleteTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#DeleteTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the challenge token based on the given appId and sessionId.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/challenge/{SessionId}/remove",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#DeleteTokenRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#DeleteTokenResponse": {
+            "type": "structure",
+            "members": {
+                "IsSuccess": {
+                    "target": "com.amazonaws.amplifybackend#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the request succeeded or failed.</p>",
+                        "smithy.api#jsonName": "isSuccess"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#DeliveryMethod": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EMAIL",
+                        "name": "EMAIL"
+                    },
+                    {
+                        "value": "SMS",
+                        "name": "SMS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifybackend#EmailSettings": {
+            "type": "structure",
+            "members": {
+                "EmailMessage": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body of the email.</p>",
+                        "smithy.api#jsonName": "emailMessage"
+                    }
+                },
+                "EmailSubject": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subject of the email.</p>",
+                        "smithy.api#jsonName": "emailSubject"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the email sent when an app user forgets their password.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#GatewayTimeoutException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message to inform that the request failed.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error returned if there's a temporary issue with the service.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 504
+            }
+        },
+        "com.amazonaws.amplifybackend#GenerateBackendAPIModels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#GenerateBackendAPIModelsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#GenerateBackendAPIModelsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Generates a model schema for an existing backend API resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/api/{BackendEnvironmentName}/generateModels",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GenerateBackendAPIModelsRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this resource.</p>",
+                        "smithy.api#jsonName": "resourceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for GenerateBackendAPIModels.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#GenerateBackendAPIModelsResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operation.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackend": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#GetBackendRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#GetBackendResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides project-level details for your Amplify UI project.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/details",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendAPI": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#GetBackendAPIRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#GetBackendAPIResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the details for a backend API.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/api/{BackendEnvironmentName}/details",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendAPIModels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#GetBackendAPIModelsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#GetBackendAPIModelsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Generates a model schema for existing backend API resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/api/{BackendEnvironmentName}/getModels",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendAPIModelsRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this resource.</p>",
+                        "smithy.api#jsonName": "resourceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for GetBackendAPIModels.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendAPIModelsResponse": {
+            "type": "structure",
+            "members": {
+                "Models": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stringified JSON of the DataStore model.</p>",
+                        "smithy.api#jsonName": "models"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendAPIRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceConfig": {
+                    "target": "com.amazonaws.amplifybackend#BackendAPIResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the resource configuration for the data model in your Amplify project.</p>",
+                        "smithy.api#jsonName": "resourceConfig"
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this resource.</p>",
+                        "smithy.api#jsonName": "resourceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for GetBackendAPI.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendAPIResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "ResourceConfig": {
+                    "target": "com.amazonaws.amplifybackend#BackendAPIResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource configuration for this response object.</p>",
+                        "smithy.api#jsonName": "resourceConfig"
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this resource.</p>",
+                        "smithy.api#jsonName": "resourceName"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendAuth": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#GetBackendAuthRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#GetBackendAuthResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets backend auth details.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/auth/{BackendEnvironmentName}/details",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendAuthRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this resource.</p>",
+                        "smithy.api#jsonName": "resourceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for GetBackendAuth.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendAuthResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "ResourceConfig": {
+                    "target": "com.amazonaws.amplifybackend#CreateBackendAuthResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource configuration for authorization requests to the backend of your Amplify project.</p>",
+                        "smithy.api#jsonName": "resourceConfig"
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this resource.</p>",
+                        "smithy.api#jsonName": "resourceName"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#GetBackendJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#GetBackendJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a specific job.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/backend/{AppId}/job/{BackendEnvironmentName}/{JobId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendJobRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendJobResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the job was created.</p>",
+                        "smithy.api#jsonName": "createTime"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operation.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                },
+                "UpdateTime": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the job was last updated.</p>",
+                        "smithy.api#jsonName": "updateTime"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for GetBackend.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#GetBackendResponse": {
+            "type": "structure",
+            "members": {
+                "AmplifyMetaConfig": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A stringified version of the current configurations for your Amplify project.</p>",
+                        "smithy.api#jsonName": "amplifyMetaConfig"
+                    }
+                },
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "AppName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app.</p>",
+                        "smithy.api#jsonName": "appName"
+                    }
+                },
+                "BackendEnvironmentList": {
+                    "target": "com.amazonaws.amplifybackend#ListOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of backend environments in an array.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentList"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GetToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#GetTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#GetTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the challenge token based on the given appId and sessionId.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/backend/{AppId}/challenge/{SessionId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GetTokenRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#GetTokenResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "ChallengeCode": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The one-time challenge code for authenticating into the Amplify Admin UI.</p>",
+                        "smithy.api#jsonName": "challengeCode"
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID provided when creating a new challenge token.</p>",
+                        "smithy.api#jsonName": "sessionId"
+                    }
+                },
+                "Ttl": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiry time for the one-time generated token code.</p>",
+                        "smithy.api#jsonName": "ttl"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#ListBackendJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#ListBackendJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#ListBackendJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the jobs for the backend of an Amplify app.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/job/{BackendEnvironmentName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#ListBackendJobsRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.amplifybackend#__integerMin1Max25",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that you want in the response.</p>",
+                        "smithy.api#jsonName": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list of response objects to include only those with the specified operation name.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list of response objects to include only those with the specified status.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for ListBackendJobs.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#ListBackendJobsResponse": {
+            "type": "structure",
+            "members": {
+                "Jobs": {
+                    "target": "com.amazonaws.amplifybackend#ListOfBackendJobRespObj",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of jobs and their properties.</p>",
+                        "smithy.api#jsonName": "jobs"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#ListOfAdditionalConstraintsElement": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifybackend#AdditionalConstraintsElement"
+            }
+        },
+        "com.amazonaws.amplifybackend#ListOfBackendAPIAuthType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifybackend#BackendAPIAuthType"
+            }
+        },
+        "com.amazonaws.amplifybackend#ListOfBackendJobRespObj": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifybackend#BackendJobRespObj"
+            }
+        },
+        "com.amazonaws.amplifybackend#ListOfMfaTypesElement": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifybackend#MfaTypesElement"
+            }
+        },
+        "com.amazonaws.amplifybackend#ListOfOAuthScopesElement": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifybackend#OAuthScopesElement"
+            }
+        },
+        "com.amazonaws.amplifybackend#ListOfRequiredSignUpAttributesElement": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifybackend#RequiredSignUpAttributesElement"
+            }
+        },
+        "com.amazonaws.amplifybackend#ListOf__string": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifybackend#__string"
+            }
+        },
+        "com.amazonaws.amplifybackend#LoginAuthConfigReqObj": {
+            "type": "structure",
+            "members": {
+                "AwsCognitoIdentityPoolId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Cognito identity pool ID used for Amplify Admin UI login authorization.</p>",
+                        "smithy.api#jsonName": "aws_cognito_identity_pool_id"
+                    }
+                },
+                "AwsCognitoRegion": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Region for the Amplify Admin UI login.</p>",
+                        "smithy.api#jsonName": "aws_cognito_region"
+                    }
+                },
+                "AwsUserPoolsId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Cognito user pool ID used for Amplify Admin UI login authentication.</p>",
+                        "smithy.api#jsonName": "aws_user_pools_id"
+                    }
+                },
+                "AwsUserPoolsWebClientId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The web client ID for the Amazon Cognito user pools.</p>",
+                        "smithy.api#jsonName": "aws_user_pools_web_client_id"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request object for this operation.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#MFAMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ON",
+                        "name": "ON"
+                    },
+                    {
+                        "value": "OFF",
+                        "name": "OFF"
+                    },
+                    {
+                        "value": "OPTIONAL",
+                        "name": "OPTIONAL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifybackend#MfaTypesElement": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SMS",
+                        "name": "SMS"
+                    },
+                    {
+                        "value": "TOTP",
+                        "name": "TOTP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifybackend#Mode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "API_KEY",
+                        "name": "API_KEY"
+                    },
+                    {
+                        "value": "AWS_IAM",
+                        "name": "AWS_IAM"
+                    },
+                    {
+                        "value": "AMAZON_COGNITO_USER_POOLS",
+                        "name": "AMAZON_COGNITO_USER_POOLS"
+                    },
+                    {
+                        "value": "OPENID_CONNECT",
+                        "name": "OPENID_CONNECT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifybackend#NotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message to inform that the request failed.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource that wasn't found.</p>",
+                        "smithy.api#jsonName": "resourceType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error returned when a specific resource type is not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.amplifybackend#OAuthGrantType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CODE",
+                        "name": "CODE"
+                    },
+                    {
+                        "value": "IMPLICIT",
+                        "name": "IMPLICIT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifybackend#OAuthScopesElement": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PHONE",
+                        "name": "PHONE"
+                    },
+                    {
+                        "value": "EMAIL",
+                        "name": "EMAIL"
+                    },
+                    {
+                        "value": "OPENID",
+                        "name": "OPENID"
+                    },
+                    {
+                        "value": "PROFILE",
+                        "name": "PROFILE"
+                    },
+                    {
+                        "value": "AWS_COGNITO_SIGNIN_USER_ADMIN",
+                        "name": "AWS_COGNITO_SIGNIN_USER_ADMIN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifybackend#RemoveAllBackends": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#RemoveAllBackendsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#RemoveAllBackendsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes all backend environments from your Amplify project.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/remove",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#RemoveAllBackendsRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CleanAmplifyApp": {
+                    "target": "com.amazonaws.amplifybackend#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Cleans up the Amplify Console app if this value is set to true.</p>",
+                        "smithy.api#jsonName": "cleanAmplifyApp"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for RemoveAllBackends.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#RemoveAllBackendsResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operation.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#RemoveBackendConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#RemoveBackendConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#RemoveBackendConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the AWS resources that are required to access the Amplify Admin UI.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/config/remove",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#RemoveBackendConfigRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#RemoveBackendConfigResponse": {
+            "type": "structure",
+            "members": {
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#RequiredSignUpAttributesElement": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ADDRESS",
+                        "name": "ADDRESS"
+                    },
+                    {
+                        "value": "BIRTHDATE",
+                        "name": "BIRTHDATE"
+                    },
+                    {
+                        "value": "EMAIL",
+                        "name": "EMAIL"
+                    },
+                    {
+                        "value": "FAMILY_NAME",
+                        "name": "FAMILY_NAME"
+                    },
+                    {
+                        "value": "GENDER",
+                        "name": "GENDER"
+                    },
+                    {
+                        "value": "GIVEN_NAME",
+                        "name": "GIVEN_NAME"
+                    },
+                    {
+                        "value": "LOCALE",
+                        "name": "LOCALE"
+                    },
+                    {
+                        "value": "MIDDLE_NAME",
+                        "name": "MIDDLE_NAME"
+                    },
+                    {
+                        "value": "NAME",
+                        "name": "NAME"
+                    },
+                    {
+                        "value": "NICKNAME",
+                        "name": "NICKNAME"
+                    },
+                    {
+                        "value": "PHONE_NUMBER",
+                        "name": "PHONE_NUMBER"
+                    },
+                    {
+                        "value": "PICTURE",
+                        "name": "PICTURE"
+                    },
+                    {
+                        "value": "PREFERRED_USERNAME",
+                        "name": "PREFERRED_USERNAME"
+                    },
+                    {
+                        "value": "PROFILE",
+                        "name": "PROFILE"
+                    },
+                    {
+                        "value": "UPDATED_AT",
+                        "name": "UPDATED_AT"
+                    },
+                    {
+                        "value": "WEBSITE",
+                        "name": "WEBSITE"
+                    },
+                    {
+                        "value": "ZONE_INFO",
+                        "name": "ZONE_INFO"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifybackend#ResolutionStrategy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OPTIMISTIC_CONCURRENCY",
+                        "name": "OPTIMISTIC_CONCURRENCY"
+                    },
+                    {
+                        "value": "LAMBDA",
+                        "name": "LAMBDA"
+                    },
+                    {
+                        "value": "AUTOMERGE",
+                        "name": "AUTOMERGE"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifybackend#ResourceConfig": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the resource configuration for the data model in your Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#Service": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "COGNITO",
+                        "name": "COGNITO"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifybackend#Settings": {
+            "type": "structure",
+            "members": {
+                "MfaTypes": {
+                    "target": "com.amazonaws.amplifybackend#ListOfMfaTypesElement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported MFA types.</p>",
+                        "smithy.api#jsonName": "mfaTypes"
+                    }
+                },
+                "SmsMessage": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body of the SMS message.</p>",
+                        "smithy.api#jsonName": "smsMessage"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings of your MFA configuration for the backend of your Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#SignInMethod": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EMAIL",
+                        "name": "EMAIL"
+                    },
+                    {
+                        "value": "EMAIL_AND_PHONE_NUMBER",
+                        "name": "EMAIL_AND_PHONE_NUMBER"
+                    },
+                    {
+                        "value": "PHONE_NUMBER",
+                        "name": "PHONE_NUMBER"
+                    },
+                    {
+                        "value": "USERNAME",
+                        "name": "USERNAME"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifybackend#SmsSettings": {
+            "type": "structure",
+            "members": {
+                "SmsMessage": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body of the SMS message.</p>",
+                        "smithy.api#jsonName": "smsMessage"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>SMS settings for authentication.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#SocialProviderSettings": {
+            "type": "structure",
+            "members": {
+                "Facebook": {
+                    "target": "com.amazonaws.amplifybackend#BackendAuthSocialProviderConfig"
+                },
+                "Google": {
+                    "target": "com.amazonaws.amplifybackend#BackendAuthSocialProviderConfig"
+                },
+                "LoginWithAmazon": {
+                    "target": "com.amazonaws.amplifybackend#BackendAuthSocialProviderConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings for using the social identity providers for access to your Amplify app.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#Status": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LATEST",
+                        "name": "LATEST"
+                    },
+                    {
+                        "value": "STALE",
+                        "name": "STALE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifybackend#TooManyRequestsException": {
+            "type": "structure",
+            "members": {
+                "LimitType": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of limit that was exceeded.</p>",
+                        "smithy.api#jsonName": "limitType"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message to inform that the request failed.</p>",
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error that is returned when a limit of a specific type is exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendAPI": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#UpdateBackendAPIRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#UpdateBackendAPIResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing backend API resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/api/{BackendEnvironmentName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendAPIRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceConfig": {
+                    "target": "com.amazonaws.amplifybackend#BackendAPIResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the resource configuration for the data model in your Amplify project.</p>",
+                        "smithy.api#jsonName": "resourceConfig"
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this resource.</p>",
+                        "smithy.api#jsonName": "resourceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for UpdateBackendAPI.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendAPIResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operation.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendAuth": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#UpdateBackendAuthRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#UpdateBackendAuthResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing backend authentication resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/auth/{BackendEnvironmentName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendAuthForgotPasswordConfig": {
+            "type": "structure",
+            "members": {
+                "DeliveryMethod": {
+                    "target": "com.amazonaws.amplifybackend#DeliveryMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>",
+                        "smithy.api#jsonName": "deliveryMethod"
+                    }
+                },
+                "EmailSettings": {
+                    "target": "com.amazonaws.amplifybackend#EmailSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the email sent when an app user forgets their password.</p>",
+                        "smithy.api#jsonName": "emailSettings"
+                    }
+                },
+                "SmsSettings": {
+                    "target": "com.amazonaws.amplifybackend#SmsSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the SMS message sent when an Amplify app user forgets their password.</p>",
+                        "smithy.api#jsonName": "smsSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the forgot password policy for authenticating into the Amplify app.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendAuthIdentityPoolConfig": {
+            "type": "structure",
+            "members": {
+                "UnauthenticatedLogin": {
+                    "target": "com.amazonaws.amplifybackend#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value that you can set to allow or disallow guest-level authorization into your Amplify app.</p>",
+                        "smithy.api#jsonName": "unauthenticatedLogin"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendAuthMFAConfig": {
+            "type": "structure",
+            "members": {
+                "MFAMode": {
+                    "target": "com.amazonaws.amplifybackend#MFAMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MFA mode for the backend of your Amplify project.</p>"
+                    }
+                },
+                "Settings": {
+                    "target": "com.amazonaws.amplifybackend#Settings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings of your MFA configuration for the backend of your Amplify project.</p>",
+                        "smithy.api#jsonName": "settings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the multi-factor authentication (MFA) configuration for the backend of your Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendAuthOAuthConfig": {
+            "type": "structure",
+            "members": {
+                "DomainPrefix": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Cognito domain prefix used to create a hosted UI for authentication.</p>",
+                        "smithy.api#jsonName": "domainPrefix"
+                    }
+                },
+                "OAuthGrantType": {
+                    "target": "com.amazonaws.amplifybackend#OAuthGrantType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth grant type to allow app users to authenticate from your Amplify app.</p>",
+                        "smithy.api#jsonName": "oAuthGrantType"
+                    }
+                },
+                "OAuthScopes": {
+                    "target": "com.amazonaws.amplifybackend#ListOfOAuthScopesElement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of OAuth-related flows that can allow users to authenticate from your Amplify app.</p>",
+                        "smithy.api#jsonName": "oAuthScopes"
+                    }
+                },
+                "RedirectSignInURIs": {
+                    "target": "com.amazonaws.amplifybackend#ListOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Redirect URLs that OAuth uses when a user signs in to an Amplify app.</p>",
+                        "smithy.api#jsonName": "redirectSignInURIs"
+                    }
+                },
+                "RedirectSignOutURIs": {
+                    "target": "com.amazonaws.amplifybackend#ListOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Redirect URLs that OAuth uses when a user signs out of an Amplify app.</p>",
+                        "smithy.api#jsonName": "redirectSignOutURIs"
+                    }
+                },
+                "SocialProviderSettings": {
+                    "target": "com.amazonaws.amplifybackend#SocialProviderSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes third-party social federation configurations for allowing your users to sign in with OAuth.</p>",
+                        "smithy.api#jsonName": "socialProviderSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The OAuth configurations for authenticating users into your Amplify app.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendAuthPasswordPolicyConfig": {
+            "type": "structure",
+            "members": {
+                "AdditionalConstraints": {
+                    "target": "com.amazonaws.amplifybackend#ListOfAdditionalConstraintsElement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes additional constrains on the password requirements to sign in to the auth resource, configured as a part of your Amplify project.</p>",
+                        "smithy.api#jsonName": "additionalConstraints"
+                    }
+                },
+                "MinimumLength": {
+                    "target": "com.amazonaws.amplifybackend#__double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the minimum length of the password required to sign in to the auth resource, configured as a part of your Amplify project.</p>",
+                        "smithy.api#jsonName": "minimumLength"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the password policy for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendAuthRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceConfig": {
+                    "target": "com.amazonaws.amplifybackend#UpdateBackendAuthResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource configuration for this request object.</p>",
+                        "smithy.api#jsonName": "resourceConfig",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of this resource.</p>",
+                        "smithy.api#jsonName": "resourceName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for UpdateBackendAuth.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendAuthResourceConfig": {
+            "type": "structure",
+            "members": {
+                "AuthResources": {
+                    "target": "com.amazonaws.amplifybackend#AuthResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the service name to use when configuring an authentication resource in your Amplify project.</p>",
+                        "smithy.api#jsonName": "authResources",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityPoolConfigs": {
+                    "target": "com.amazonaws.amplifybackend#UpdateBackendAuthIdentityPoolConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.</p>",
+                        "smithy.api#jsonName": "identityPoolConfigs"
+                    }
+                },
+                "Service": {
+                    "target": "com.amazonaws.amplifybackend#Service",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the service name to use when configuring an authentication resource in your Amplify project.</p>",
+                        "smithy.api#jsonName": "service",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserPoolConfigs": {
+                    "target": "com.amazonaws.amplifybackend#UpdateBackendAuthUserPoolConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.</p>",
+                        "smithy.api#jsonName": "userPoolConfigs",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the resource configuration when updating an authentication resource in your Amplify project.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendAuthResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operation.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendAuthUserPoolConfig": {
+            "type": "structure",
+            "members": {
+                "ForgotPassword": {
+                    "target": "com.amazonaws.amplifybackend#UpdateBackendAuthForgotPasswordConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the forgot password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>",
+                        "smithy.api#jsonName": "forgotPassword"
+                    }
+                },
+                "Mfa": {
+                    "target": "com.amazonaws.amplifybackend#UpdateBackendAuthMFAConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>",
+                        "smithy.api#jsonName": "mfa"
+                    }
+                },
+                "OAuth": {
+                    "target": "com.amazonaws.amplifybackend#UpdateBackendAuthOAuthConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the OAuth policy and rules for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>",
+                        "smithy.api#jsonName": "oAuth"
+                    }
+                },
+                "PasswordPolicy": {
+                    "target": "com.amazonaws.amplifybackend#UpdateBackendAuthPasswordPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>",
+                        "smithy.api#jsonName": "passwordPolicy"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the Amazon Cognito user pool configuration to configure the authorization resource for your Amplify project on an update.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#UpdateBackendConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#UpdateBackendConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the AWS resources that are required to access the Amplify Admin UI.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/config/update",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendConfigRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LoginAuthConfig": {
+                    "target": "com.amazonaws.amplifybackend#LoginAuthConfigReqObj",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the Amazon Cognito configuration for Admin UI access.</p>",
+                        "smithy.api#jsonName": "loginAuthConfig"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for UpdateBackendConfig.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendConfigResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendManagerAppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID for the backend manager.</p>",
+                        "smithy.api#jsonName": "backendManagerAppId"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "LoginAuthConfig": {
+                    "target": "com.amazonaws.amplifybackend#LoginAuthConfigReqObj",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the Amazon Cognito configurations for the Admin UI auth resource to log in with.</p>",
+                        "smithy.api#jsonName": "loginAuthConfig"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifybackend#UpdateBackendJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifybackend#UpdateBackendJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifybackend#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifybackend#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a specific job.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/backend/{AppId}/job/{BackendEnvironmentName}/{JobId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendJobRequest": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list of response objects to include only those with the specified operation name.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list of response objects to include only those with the specified status.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body for GetBackendJob.</p>"
+            }
+        },
+        "com.amazonaws.amplifybackend#UpdateBackendJobResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app ID.</p>",
+                        "smithy.api#jsonName": "appId"
+                    }
+                },
+                "BackendEnvironmentName": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment.</p>",
+                        "smithy.api#jsonName": "backendEnvironmentName"
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the job was created.</p>",
+                        "smithy.api#jsonName": "createTime"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request failed, this is the returned error.</p>",
+                        "smithy.api#jsonName": "error"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the job.</p>",
+                        "smithy.api#jsonName": "jobId"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operation.</p>",
+                        "smithy.api#jsonName": "operation"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                },
+                "UpdateTime": {
+                    "target": "com.amazonaws.amplifybackend#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the job was last updated.</p>",
+                        "smithy.api#jsonName": "updateTime"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#__boolean": {
+            "type": "boolean"
+        },
+        "com.amazonaws.amplifybackend#__double": {
+            "type": "double"
+        },
+        "com.amazonaws.amplifybackend#__integerMin1Max25": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.amplifybackend#__string": {
+            "type": "string"
+        }
+    }
+}

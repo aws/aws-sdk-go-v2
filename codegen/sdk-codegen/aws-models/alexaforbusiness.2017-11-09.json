@@ -1469,6 +1469,12 @@
                         "smithy.api#documentation": "<p>A unique, user-specified identifier for the request that ensures\n         idempotency.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.alexaforbusiness#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be added to the specified resource. Do not provide system tags.</p>"
+                    }
                 }
             }
         },
@@ -1626,6 +1632,12 @@
                         "smithy.api#documentation": "<p>The request token of the client.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.alexaforbusiness#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be added to the specified resource. Do not provide system tags.</p>"
+                    }
                 }
             }
         },
@@ -1705,6 +1717,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A unique, user-specified identifier for this request that ensures\n         idempotency.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.alexaforbusiness#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be added to the specified resource. Do not provide system tags.</p>"
                     }
                 }
             }
@@ -1791,6 +1809,12 @@
                         "smithy.api#documentation": "<p> A unique, user-specified identifier for the request that ensures idempotency.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.alexaforbusiness#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be added to the specified resource. Do not provide system tags.</p>"
                     }
                 }
             }
@@ -1951,6 +1975,12 @@
                     "traits": {
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.alexaforbusiness#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be added to the specified resource. Do not provide system tags. </p>"
                     }
                 }
             }
@@ -6206,7 +6236,13 @@
                 "RoomArn": {
                     "target": "com.amazonaws.alexaforbusiness#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the room with which to associate your AVS device.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the room with which to associate your AVS device.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.alexaforbusiness#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be added to the specified resource. Do not provide system tags.</p>"
                     }
                 }
             }
@@ -6314,7 +6350,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Determines the details for the room from which a skill request was invoked. This\n         operation is used by skill developers.</p>"
+                "smithy.api#documentation": "<p>Determines the details for the room from which a skill request was invoked. This\n         operation is used by skill developers.</p>\n         <p>To query ResolveRoom from an Alexa skill, the skill ID needs to be authorized. When\n         the skill is using an AWS Lambda function, the skill is automatically authorized when you\n         publish your skill as a private skill to your AWS account. Skills that are hosted using a\n         custom web service must be manually authorized. To get your skill authorized, contact AWS\n         Support with your AWS account ID that queries the ResolveRoom API and skill ID. </p>"
             }
         },
         "com.amazonaws.alexaforbusiness#ResolveRoomRequest": {

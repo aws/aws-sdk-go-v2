@@ -1082,7 +1082,7 @@
                 "TumblingWindowInSeconds": {
                     "target": "com.amazonaws.lambda#TumblingWindowInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.</p>"
+                        "smithy.api#documentation": "<p>(Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.</p>"
                     }
                 },
                 "Topics": {
@@ -1280,7 +1280,7 @@
                 "ImageConfig": {
                     "target": "com.amazonaws.lambda#ImageConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration values that override the container image Dockerfile.</p>"
+                        "smithy.api#documentation": "<p>\n            <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html\">Container image configuration\n      values</a> that override the values in the container image Dockerfile.</p>"
                     }
                 },
                 "CodeSigningConfigArn": {
@@ -2166,7 +2166,7 @@
                 "TumblingWindowInSeconds": {
                     "target": "com.amazonaws.lambda#TumblingWindowInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.</p>"
+                        "smithy.api#documentation": "<p>(Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.</p>"
                     }
                 },
                 "FunctionResponseTypes": {
@@ -2610,7 +2610,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 1
                 }
             }
@@ -3632,7 +3632,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration values that override the container image Dockerfile settings. See   \n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html\">Container settings</a>. </p>"
+                "smithy.api#documentation": "<p>Configuration values that override the container image Dockerfile settings. See   \n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms\">Container settings</a>. </p>"
             }
         },
         "com.amazonaws.lambda#ImageConfigError": {
@@ -4813,7 +4813,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50\n      functions per call.</p>\n         <p>Set <code>FunctionVersion</code> to <code>ALL</code> to include all published versions of each function in\n      addition to the unpublished version. To get more information about a function or version, use <a>GetFunction</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50\n      functions per call.</p>\n         <p>Set <code>FunctionVersion</code> to <code>ALL</code> to include all published versions of each function in\n      addition to the unpublished version. </p>\n         <note>\n            <p>The <code>ListFunctions</code> action returns a subset of the <a>FunctionConfiguration</a> fields.   \n      To get the additional fields (State, StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode) \n      for a function or version, use <a>GetFunction</a>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-03-31/functions",
@@ -4932,7 +4932,7 @@
                 "MaxItems": {
                     "target": "com.amazonaws.lambda#MaxListItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of functions to return.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of functions to return in the response. Note that <code>ListFunctions</code> returns a maximum of 50 items in each response, \n      even if you set the number higher.</p>",
                         "smithy.api#httpQuery": "MaxItems"
                     }
                 }
@@ -6517,6 +6517,10 @@
                         "name": "nodejs12x"
                     },
                     {
+                        "value": "nodejs14.x",
+                        "name": "nodejs14x"
+                    },
+                    {
                         "value": "java8",
                         "name": "java8"
                     },
@@ -6684,7 +6688,7 @@
                 "Type": {
                     "target": "com.amazonaws.lambda#SourceAccessType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authentication protocol or the VPC components for your event source. For example: <code>\"Type\":\"SASL_SCRAM_512_AUTH\"</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BASIC_AUTH</code> - (MQ) The Secrets Manager secret that stores your broker credentials.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your Kafka cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your Kafka brokers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SASL_SCRAM_256_AUTH</code> - The ARN of your secret key used for SASL SCRAM-256 authentication of your Kafka brokers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SASL_SCRAM_512_AUTH</code> - The ARN of your secret key used for SASL SCRAM-512 authentication of your Kafka brokers.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of authentication protocol or the VPC components for your event source. For example: <code>\"Type\":\"SASL_SCRAM_512_AUTH\"</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BASIC_AUTH</code> - (MQ) The Secrets Manager secret that stores your broker credentials.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your Self-Managed Apache Kafka cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your Self-Managed Apache Kafka brokers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SASL_SCRAM_256_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your Self-Managed Apache Kafka brokers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SASL_SCRAM_512_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your Self-Managed Apache Kafka brokers.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "URI": {
@@ -6705,7 +6709,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 22
                 }
             }
@@ -7447,7 +7451,7 @@
                 "TumblingWindowInSeconds": {
                     "target": "com.amazonaws.lambda#TumblingWindowInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.</p>"
+                        "smithy.api#documentation": "<p>(Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.</p>"
                     }
                 },
                 "FunctionResponseTypes": {
@@ -7712,7 +7716,7 @@
                 "ImageConfig": {
                     "target": "com.amazonaws.lambda#ImageConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration values that override the container image Dockerfile.</p>"
+                        "smithy.api#documentation": "<p>\n            <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html\">Container image configuration\n        values</a> that override the values in the container image Dockerfile.</p>"
                     }
                 }
             }

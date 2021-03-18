@@ -55,7 +55,7 @@
                     "name": "personalize"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Personalize can consume real-time user event data, such as <i>stream</i> or <i>click</i> data, and use\n      it for model training either alone or combined with historical data. For more information see <a>recording-events</a>.</p>",
+                "smithy.api#documentation": "<p>Amazon Personalize can consume real-time user event data, such as <i>stream</i> or <i>click</i> data, and use\n      it for model training either alone or combined with historical data. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html\">Recording Events</a>.</p>",
                 "smithy.api#title": "Amazon Personalize Events"
             }
         },
@@ -189,12 +189,12 @@
                 "properties": {
                     "target": "com.amazonaws.personalizeevents#SynthesizedJsonItemProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string map of item-specific metadata. Each element in the map consists of a key-value pair. For example,\n    </p>\n         <p>\n            <code>{\"numberOfRatings\": \"12\"}</code>\n         </p>\n         <p>The keys use camel case names that match the fields in the Items\n      schema. In the above example, the <code>numberOfRatings</code> would match the\n      'NUMBER_OF_RATINGS' field defined in the Items schema.</p>"
+                        "smithy.api#documentation": "<p>A string map of item-specific metadata. Each element in the map consists of a key-value pair. \n      For example, <code>{\"numberOfRatings\": \"12\"}</code>.</p>\n         <p>The keys use camel case names that match the fields in the schema for the Items\n      dataset. In the previous example, the <code>numberOfRatings</code> matches the\n      'NUMBER_OF_RATINGS' field defined in the Items schema. For categorical string data, to include multiple categories for a single item, \n      separate each category with a pipe separator (<code>|</code>). For example, <code>\\\"Horror|Action\\\"</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents item metadata added to an Items dataset using the \n      <code>PutItems</code> API.</p>"
+                "smithy.api#documentation": "<p>Represents item metadata added to an Items dataset using the \n      <code>PutItems</code> API. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html\">Importing Items Incrementally</a>.\n    </p>"
             }
         },
         "com.amazonaws.personalizeevents#ItemId": {
@@ -229,7 +229,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Records user interaction event data. For more information see <a>event-record-api</a>.</p>",
+                "smithy.api#documentation": "<p>Records user interaction event data. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html\">Recording Events</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/events",
@@ -256,7 +256,7 @@
                 "sessionId": {
                     "target": "com.amazonaws.personalizeevents#StringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The session ID associated with the user's visit. Your application generates the sessionId when a user first visits your website or uses your application. \n      Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information see <a>event-record-api</a>.</p>",
+                        "smithy.api#documentation": "<p>The session ID associated with the user's visit. Your application generates the sessionId when a user first visits your website or uses your application. \n      Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information, see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html\">Recording Events</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -279,11 +279,14 @@
                     "target": "com.amazonaws.personalizeevents#InvalidInputException"
                 },
                 {
+                    "target": "com.amazonaws.personalizeevents#ResourceInUseException"
+                },
+                {
                     "target": "com.amazonaws.personalizeevents#ResourceNotFoundException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more items to an Items dataset. For more information see \n      <a>importing-items</a>.</p>",
+                "smithy.api#documentation": "<p>Adds one or more items to an Items dataset. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html\">Importing Items Incrementally</a>.\n     </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/items",
@@ -297,7 +300,7 @@
                 "datasetArn": {
                     "target": "com.amazonaws.personalizeevents#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the Items dataset you are adding the item or items to.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Items dataset you are adding the item or items to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -320,11 +323,14 @@
                     "target": "com.amazonaws.personalizeevents#InvalidInputException"
                 },
                 {
+                    "target": "com.amazonaws.personalizeevents#ResourceInUseException"
+                },
+                {
                     "target": "com.amazonaws.personalizeevents#ResourceNotFoundException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more users to a Users dataset. For more information see \n      <a>importing-users</a>.</p>",
+                "smithy.api#documentation": "<p>Adds one or more users to a Users dataset. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html\">Importing Users Incrementally</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/users",
@@ -338,7 +344,7 @@
                 "datasetArn": {
                     "target": "com.amazonaws.personalizeevents#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the Users dataset you are adding the user or users to.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Users dataset you are adding the user or users to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -358,6 +364,19 @@
                     "min": 1,
                     "max": 40
                 }
+            }
+        },
+        "com.amazonaws.personalizeevents#ResourceInUseException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.personalizeevents#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource is in use.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.personalizeevents#ResourceNotFoundException": {
@@ -397,7 +416,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1024
+                    "max": 4096
                 },
                 "smithy.api#mediaType": "application/json"
             }
@@ -407,7 +426,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1024
+                    "max": 4096
                 },
                 "smithy.api#mediaType": "application/json"
             }
@@ -425,12 +444,12 @@
                 "properties": {
                     "target": "com.amazonaws.personalizeevents#SynthesizedJsonUserProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string map of user-specific metadata. Each element in the map consists of a key-value pair. For example,\n    </p>\n         <p>\n            <code>{\"numberOfVideosWatched\": \"45\"}</code>\n         </p>\n         <p>The keys use camel case names that match the fields in the Users\n      schema. In the above example, the <code>numberOfVideosWatched</code> would match the\n      'NUMBER_OF_VIDEOS_WATCHED' field defined in the Users schema.</p>"
+                        "smithy.api#documentation": "<p>A string map of user-specific metadata. Each element in the map consists of a key-value pair. \n      For example, <code>{\"numberOfVideosWatched\": \"45\"}</code>.</p>\n         <p>The keys use camel case names that match the fields in the schema for the Users\n      dataset. In the previous example, the <code>numberOfVideosWatched</code> matches the\n      'NUMBER_OF_VIDEOS_WATCHED' field defined in the Users schema. For categorical string data, \n      to include multiple categories for a single user, separate each category with a pipe separator (<code>|</code>). \n      For example, <code>\\\"Member|Frequent shopper\\\"</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents user metadata added to a Users dataset using the \n      <code>PutUsers</code> API.</p>"
+                "smithy.api#documentation": "<p>Represents user metadata added to a Users dataset using the \n      <code>PutUsers</code> API. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html\">Importing Users Incrementally</a>.</p>"
             }
         },
         "com.amazonaws.personalizeevents#UserId": {

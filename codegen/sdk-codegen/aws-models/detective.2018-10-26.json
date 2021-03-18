@@ -88,7 +88,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An AWS account that is the master of or a member of a behavior graph.</p>"
+                "smithy.api#documentation": "<p>An AWS account that is the administrator account of or a member of a behavior\n         graph.</p>"
             }
         },
         "com.amazonaws.detective#AccountId": {
@@ -178,9 +178,12 @@
                     "name": "detective"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Detective uses machine learning and purpose-built visualizations to help you analyze and\n         investigate security issues across your Amazon Web Services (AWS) workloads. Detective automatically\n         extracts time-based events such as login attempts, API calls, and network traffic from\n         AWS CloudTrail and Amazon Virtual Private Cloud (Amazon VPC) flow logs. It also extracts findings detected by\n         Amazon GuardDuty.</p>\n         <p>The Detective API primarily supports the creation and management of behavior graphs. A\n         behavior graph contains the extracted data from a set of member accounts, and is created\n         and managed by a master account.</p>\n         <p>Every behavior graph is specific to a Region. You can only use the API to manage graphs\n         that belong to the Region that is associated with the currently selected endpoint.</p>\n         <p>A Detective master account can use the Detective API to do the following:</p>\n         <ul>\n            <li>\n               <p>Enable and disable Detective. Enabling Detective creates a new behavior graph.</p>\n            </li>\n            <li>\n               <p>View the list of member accounts in a behavior graph.</p>\n            </li>\n            <li>\n               <p>Add member accounts to a behavior graph.</p>\n            </li>\n            <li>\n               <p>Remove member accounts from a behavior graph.</p>\n            </li>\n         </ul>\n         <p>A member account can use the Detective API to do the following:</p>\n         <ul>\n            <li>\n               <p>View the list of behavior graphs that they are invited to.</p>\n            </li>\n            <li>\n               <p>Accept an invitation to contribute to a behavior graph.</p>\n            </li>\n            <li>\n               <p>Decline an invitation to contribute to a behavior graph.</p>\n            </li>\n            <li>\n               <p>Remove their account from a behavior graph.</p>\n            </li>\n         </ul>\n         <p>All API actions are logged as CloudTrail events. See <a href=\"https://docs.aws.amazon.com/detective/latest/adminguide/logging-using-cloudtrail.html\">Logging Detective API Calls with CloudTrail</a>.</p>",
+                "smithy.api#documentation": "<p>Detective uses machine learning and purpose-built visualizations to help you analyze and\n         investigate security issues across your Amazon Web Services (AWS) workloads. Detective automatically\n         extracts time-based events such as login attempts, API calls, and network traffic from\n         AWS CloudTrail and Amazon Virtual Private Cloud (Amazon VPC) flow logs. It also extracts findings detected by\n         Amazon GuardDuty.</p>\n         <p>The Detective API primarily supports the creation and management of behavior graphs. A\n         behavior graph contains the extracted data from a set of member accounts, and is created\n         and managed by an administrator account.</p>\n         <p>Every behavior graph is specific to a Region. You can only use the API to manage graphs\n         that belong to the Region that is associated with the currently selected endpoint.</p>\n         <p>A Detective administrator account can use the Detective API to do the following:</p>\n         <ul>\n            <li>\n               <p>Enable and disable Detective. Enabling Detective creates a new behavior graph.</p>\n            </li>\n            <li>\n               <p>View the list of member accounts in a behavior graph.</p>\n            </li>\n            <li>\n               <p>Add member accounts to a behavior graph.</p>\n            </li>\n            <li>\n               <p>Remove member accounts from a behavior graph.</p>\n            </li>\n         </ul>\n         <p>A member account can use the Detective API to do the following:</p>\n         <ul>\n            <li>\n               <p>View the list of behavior graphs that they are invited to.</p>\n            </li>\n            <li>\n               <p>Accept an invitation to contribute to a behavior graph.</p>\n            </li>\n            <li>\n               <p>Decline an invitation to contribute to a behavior graph.</p>\n            </li>\n            <li>\n               <p>Remove their account from a behavior graph.</p>\n            </li>\n         </ul>\n         <p>All API actions are logged as CloudTrail events. See <a href=\"https://docs.aws.amazon.com/detective/latest/adminguide/logging-using-cloudtrail.html\">Logging Detective API Calls with CloudTrail</a>.</p>\n         <note>\n            <p>We replaced the term \"master account\" with the term \"administrator account.\" An\n            administrator account is used to centrally manage multiple accounts. In the case of\n            Detective, the administrator account manages the accounts in their behavior graph.</p>\n         </note>",
                 "smithy.api#title": "Amazon Detective"
             }
+        },
+        "com.amazonaws.detective#Boolean": {
+            "type": "boolean"
         },
         "com.amazonaws.detective#ConflictException": {
             "type": "structure",
@@ -212,7 +215,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new behavior graph for the calling account, and sets that account as the\n         master account. This operation is called by the account that is enabling Detective.</p>\n         <p>Before you try to enable Detective, make sure that your account has been enrolled in\n         Amazon GuardDuty for at least 48 hours. If you do not meet this requirement, you cannot enable\n         Detective. If you do meet the GuardDuty prerequisite, then when you make the request to enable\n         Detective, it checks whether your data volume is within the Detective quota. If it exceeds the\n         quota, then you cannot enable Detective. </p>\n         <p>The operation also enables Detective for the calling account in the currently selected\n         Region. It returns the ARN of the new behavior graph.</p>\n         <p>\n            <code>CreateGraph</code> triggers a process to create the corresponding data tables for\n         the new behavior graph.</p>\n         <p>An account can only be the master account for one behavior graph within a Region. If the\n         same account calls <code>CreateGraph</code> with the same master account, it always returns\n         the same behavior graph ARN. It does not create a new behavior graph.</p>",
+                "smithy.api#documentation": "<p>Creates a new behavior graph for the calling account, and sets that account as the\n         administrator account. This operation is called by the account that is enabling\n         Detective.</p>\n         <p>Before you try to enable Detective, make sure that your account has been enrolled in\n         Amazon GuardDuty for at least 48 hours. If you do not meet this requirement, you cannot enable\n         Detective. If you do meet the GuardDuty prerequisite, then when you make the request to enable\n         Detective, it checks whether your data volume is within the Detective quota. If it exceeds the\n         quota, then you cannot enable Detective. </p>\n         <p>The operation also enables Detective for the calling account in the currently selected\n         Region. It returns the ARN of the new behavior graph.</p>\n         <p>\n            <code>CreateGraph</code> triggers a process to create the corresponding data tables for\n         the new behavior graph.</p>\n         <p>An account can only be the administrator account for one behavior graph within a Region.\n         If the same account calls <code>CreateGraph</code> with the same administrator account, it\n         always returns the same behavior graph ARN. It does not create a new behavior graph.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/graph",
@@ -254,7 +257,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends a request to invite the specified AWS accounts to be member accounts in the\n         behavior graph. This operation can only be called by the master account for a behavior\n         graph. </p>\n         <p>\n            <code>CreateMembers</code> verifies the accounts and then sends invitations to the\n         verified accounts.</p>\n         <p>The request provides the behavior graph ARN and the list of accounts to invite.</p>\n         <p>The response separates the requested accounts into two lists:</p>\n         <ul>\n            <li>\n               <p>The accounts that <code>CreateMembers</code> was able to start the verification\n               for. This list includes member accounts that are being verified, that have passed\n               verification and are being sent an invitation, and that have failed\n               verification.</p>\n            </li>\n            <li>\n               <p>The accounts that <code>CreateMembers</code> was unable to process. This list\n               includes accounts that were already invited to be member accounts in the behavior\n               graph.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Sends a request to invite the specified AWS accounts to be member accounts in the\n         behavior graph. This operation can only be called by the administrator account for a\n         behavior graph. </p>\n         <p>\n            <code>CreateMembers</code> verifies the accounts and then invites the verified accounts.\n         The administrator can optionally specify to not send invitation emails to the member\n         accounts. This would be used when the administrator manages their member accounts\n         centrally.</p>\n         <p>The request provides the behavior graph ARN and the list of accounts to invite.</p>\n         <p>The response separates the requested accounts into two lists:</p>\n         <ul>\n            <li>\n               <p>The accounts that <code>CreateMembers</code> was able to start the verification\n               for. This list includes member accounts that are being verified, that have passed\n               verification and are to be invited, and that have failed verification.</p>\n            </li>\n            <li>\n               <p>The accounts that <code>CreateMembers</code> was unable to process. This list\n               includes accounts that were already invited to be member accounts in the behavior\n               graph.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/graph/members",
@@ -276,6 +279,12 @@
                     "target": "com.amazonaws.detective#EmailMessage",
                     "traits": {
                         "smithy.api#documentation": "<p>Customized message text to include in the invitation email message to the invited member\n         accounts.</p>"
+                    }
+                },
+                "DisableEmailNotification": {
+                    "target": "com.amazonaws.detective#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>if set to <code>true</code>, then the member accounts do not receive email\n         notifications. By default, this is set to <code>false</code>, and the member accounts\n         receive email notifications.</p>"
                     }
                 },
                 "Accounts": {
@@ -321,7 +330,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables the specified behavior graph and queues it to be deleted. This operation\n         removes the graph from each member account's list of behavior graphs.</p>\n         <p>\n            <code>DeleteGraph</code> can only be called by the master account for a behavior\n         graph.</p>",
+                "smithy.api#documentation": "<p>Disables the specified behavior graph and queues it to be deleted. This operation\n         removes the graph from each member account's list of behavior graphs.</p>\n         <p>\n            <code>DeleteGraph</code> can only be called by the administrator account for a behavior\n         graph.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/graph/removal",
@@ -364,7 +373,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes one or more member accounts from the master account behavior graph. This\n         operation can only be called by a Detective master account. That account cannot use\n            <code>DeleteMembers</code> to delete their own account from the behavior graph. To\n         disable a behavior graph, the master account uses the <code>DeleteGraph</code> API\n         method.</p>",
+                "smithy.api#documentation": "<p>Deletes one or more member accounts from the administrator account's behavior graph.\n         This operation can only be called by a Detective administrator account. That account cannot use\n            <code>DeleteMembers</code> to delete their own account from the behavior graph. To\n         disable a behavior graph, the administrator account uses the <code>DeleteGraph</code> API\n         method.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/graph/members/removal",
@@ -596,7 +605,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the list of behavior graphs that the calling account is a master of. This\n         operation can only be called by a master account.</p>\n         <p>Because an account can currently only be the master of one behavior graph within a\n         Region, the results always contain a single graph.</p>",
+                "smithy.api#documentation": "<p>Returns the list of behavior graphs that the calling account is an administrator account\n         of. This operation can only be called by an administrator account.</p>\n         <p>Because an account can currently only be the administrator of one behavior graph within\n         a Region, the results always contain a single behavior graph.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/graphs/list",
@@ -632,7 +641,7 @@
                 "GraphList": {
                     "target": "com.amazonaws.detective#GraphList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of behavior graphs that the account is a master for.</p>"
+                        "smithy.api#documentation": "<p>A list of behavior graphs that the account is an administrator account for.</p>"
                     }
                 },
                 "NextToken": {
@@ -679,7 +688,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.detective#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>For requests to retrieve the next page of results, the pagination token that was\n         returned with the previous page of results.  The initial request does not include a\n         pagination token.</p>"
+                        "smithy.api#documentation": "<p>For requests to retrieve the next page of results, the pagination token that was\n         returned with the previous page of results. The initial request does not include a\n         pagination token.</p>"
                     }
                 },
                 "MaxResults": {
@@ -805,7 +814,16 @@
                 "MasterId": {
                     "target": "com.amazonaws.detective#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account identifier of the master account for the behavior graph.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "This property is deprecated, use AdministratorId instead."
+                        },
+                        "smithy.api#documentation": "<p>Deprecated. Instead of <code>MasterId</code>, use <code>AdministratorId</code>.</p>\n         <p>The AWS account identifier of the administrator account for the behavior graph.</p>"
+                    }
+                },
+                "AdministratorId": {
+                    "target": "com.amazonaws.detective#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account identifier of the administrator account for the behavior graph.</p>"
                     }
                 },
                 "Status": {
@@ -1011,7 +1029,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends a request to enable data ingest for a member account that has a status of\n         <code>ACCEPTED_BUT_DISABLED</code>.</p>\n         <p>For valid member accounts, the status is updated as follows.</p>\n         <ul>\n            <li>\n               <p>If Detective enabled the member account, then the new status is\n               <code>ENABLED</code>.</p>\n            </li>\n            <li>\n               <p>If Detective cannot enable the member account, the status remains\n               <code>ACCEPTED_BUT_DISABLED</code>. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Sends a request to enable data ingest for a member account that has a status of\n            <code>ACCEPTED_BUT_DISABLED</code>.</p>\n         <p>For valid member accounts, the status is updated as follows.</p>\n         <ul>\n            <li>\n               <p>If Detective enabled the member account, then the new status is\n               <code>ENABLED</code>.</p>\n            </li>\n            <li>\n               <p>If Detective cannot enable the member account, the status remains\n                  <code>ACCEPTED_BUT_DISABLED</code>. </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/graph/member/monitoringstate",
@@ -1032,7 +1050,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.detective#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the member account to try to enable.</p>\n         <p>The account must be an invited member account with a status of\n         <code>ACCEPTED_BUT_DISABLED</code>. </p>",
+                        "smithy.api#documentation": "<p>The account ID of the member account to try to enable.</p>\n         <p>The account must be an invited member account with a status of\n            <code>ACCEPTED_BUT_DISABLED</code>. </p>",
                         "smithy.api#required": {}
                     }
                 }

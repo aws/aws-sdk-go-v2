@@ -65,6 +65,19 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.qldbsession#CapacityExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.qldbsession#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returned when the request exceeds the processing capacity of the ledger.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503
+            }
+        },
         "com.amazonaws.qldbsession#CommitDigest": {
             "type": "blob"
         },
@@ -257,13 +270,13 @@
                 "ReadIOs": {
                     "target": "com.amazonaws.qldbsession#ReadIOs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of read I/O requests that the command performed.</p>"
+                        "smithy.api#documentation": "<p>The number of read I/O requests that the command made.</p>"
                     }
                 },
                 "WriteIOs": {
                     "target": "com.amazonaws.qldbsession#WriteIOs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of write I/O requests that the command performed.</p>"
+                        "smithy.api#documentation": "<p>The number of write I/O requests that the command made.</p>"
                     }
                 }
             },
@@ -421,6 +434,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.qldbsession#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.qldbsession#CapacityExceededException"
                 },
                 {
                     "target": "com.amazonaws.qldbsession#InvalidSessionException"
@@ -632,7 +648,7 @@
                 "ProcessingTimeMilliseconds": {
                     "target": "com.amazonaws.qldbsession#ProcessingTimeMilliseconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time that was taken for the command to finish processing, measured in\n         milliseconds.</p>"
+                        "smithy.api#documentation": "<p>The amount of time that QLDB spent on processing the command, measured in\n         milliseconds.</p>"
                     }
                 }
             },

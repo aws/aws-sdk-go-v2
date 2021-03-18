@@ -202,10 +202,17 @@
                         "smithy.api#httpHeader": "X-Amzn-SageMaker-Target-Variant"
                     }
                 },
+                "TargetContainerHostname": {
+                    "target": "com.amazonaws.sagemakerruntime#TargetContainerHostnameHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the endpoint hosts multiple containers and is configured to use direct invocation,\n            this parameter specifies the host name of the container to invoke.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Target-Container-Hostname"
+                    }
+                },
                 "InferenceId": {
                     "target": "com.amazonaws.sagemakerruntime#InferenceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you provide a value, it is added to the captured data when you enable data capture\n            on the endpoint.\n            For information about data capture, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html\">Capture Data</a>.</p>",
+                        "smithy.api#documentation": "<p>If you provide a value, it is added to the captured data when you enable data capture\n            on the endpoint. For information about data capture, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html\">Capture\n            Data</a>.</p>",
                         "smithy.api#httpHeader": "X-Amzn-SageMaker-Inference-Id"
                     }
                 }
@@ -305,6 +312,16 @@
             "type": "integer",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.sagemakerruntime#TargetContainerHostnameHeader": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
             }
         },
         "com.amazonaws.sagemakerruntime#TargetModelHeader": {

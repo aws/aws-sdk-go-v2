@@ -6117,6 +6117,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the Oracle endpoint connection details.</p>"
                     }
+                },
+                "SecretsManagerOracleAsmAccessRoleArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The full ARN\n         of the IAM role that specifies AWS DMS as the trusted entity and grants the required\n         permissions to access the <code>SecretsManagerOracleAsmSecret</code>. This\n            <code>SecretsManagerOracleAsmSecret</code> has the secret value that allows access to\n         the Oracle ASM of the endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify the\n            values for this setting and <code>SecretsManagerOracleAsmSecretId</code>. Or you can\n            specify clear-text values for <code>AsmUserName</code>, <code>AsmPassword</code>, and\n               <code>AsmServerName</code>. You can't specify both. For more information on\n            creating this <code>SecretsManagerOracleAsmSecret</code> and the\n               <code>SecretsManagerOracleAsmAccessRoleArn</code> and\n               <code>SecretsManagerOracleAsmSecretId</code> required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service\n               resources</a> in the <i>AWS Database Migration Service User\n               Guide</i>.</p>\n         </note>"
+                    }
+                },
+                "SecretsManagerOracleAsmSecretId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The full ARN, partial ARN, or friendly name of the <code>SecretsManagerOracleAsmSecret</code> \n         that contains the Oracle ASM connection details for the Oracle endpoint.</p>"
+                    }
                 }
             },
             "traits": {

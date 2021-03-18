@@ -1107,7 +1107,7 @@
                 "behavior": {
                     "target": "com.amazonaws.lightsail#BehaviorEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cache behavior for the specified path.</p>\n         <p>You can specify one of the following per-path cache behaviors:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>cache</code>\n                  </b> - This behavior caches the\n          specified path.\n          </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>dont-cache</code>\n                  </b> - This behavior doesn't cache\n          the specified path.\n          </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The cache behavior for the specified path.</p>\n         <p>You can specify one of the following per-path cache behaviors:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>cache</code>\n                  </b> - This behavior caches the\n          specified path. </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>dont-cache</code>\n                  </b> - This behavior doesn't cache\n          the specified path. </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1219,7 +1219,7 @@
                 "requestFailureReason": {
                     "target": "com.amazonaws.lightsail#RequestFailureReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The validation failure reason, if any, of the certificate.</p>\n         <p>The following failure reasons are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>NO_AVAILABLE_CONTACTS</code>\n                  </b> - This failure\n          applies to email validation, which is not available for Lightsail certificates.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ADDITIONAL_VERIFICATION_REQUIRED</code>\n                  </b> -\n          Lightsail requires additional information to process this certificate request. This can\n          happen as a fraud-protection measure, such as when the domain ranks within the Alexa top\n          1000 websites. To provide the required information, use the <a href=\"https://console.aws.amazon.com/support/home\">AWS Support Center</a> to contact\n          AWS Support.</p>\n               <note>\n                  <p>You cannot request a certificate for Amazon-owned domain names such as those ending\n            in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DOMAIN_NOT_ALLOWED</code>\n                  </b> - One or more of the\n          domain names in the certificate request was reported as an unsafe domain by <a href=\"https://www.virustotal.com/gui/home/url\">VirusTotal</a>. To correct the\n          problem, search for your domain name on the <a href=\"https://www.virustotal.com/gui/home/url\">VirusTotal</a> website. If your domain\n          is reported as suspicious, see <a href=\"https://www.google.com/webmasters/hacked/?hl=en\">Google Help for Hacked\n            Websites</a> to learn what you can do.</p>\n               <p>If you believe that the result is a false positive, notify the organization that is\n          reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and\n          cannot remove your domain from a block list itself. After you correct the problem and the\n          VirusTotal registry has been updated, request a new certificate.</p>\n               <p>If you see this error and your domain is not included in the VirusTotal list, visit\n          the <a href=\"https://console.aws.amazon.com/support/home\">AWS Support Center</a>\n          and create a case.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>INVALID_PUBLIC_DOMAIN</code>\n                  </b> - One or more of\n          the domain names in the certificate request is not valid. Typically, this is because a\n          domain name in the request is not a valid top-level domain. Try to request a certificate\n          again, correcting any spelling errors or typos that were in the failed request, and ensure\n          that all domain names in the request are for valid top-level domains. For example, you\n          cannot request a certificate for <code>example.invalidpublicdomain</code> because\n            <code>invalidpublicdomain</code> is not a valid top-level domain.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>OTHER</code>\n                  </b> - Typically, this failure occurs\n          when there is a typographical error in one or more of the domain names in the certificate\n          request. Try to request a certificate again, correcting any spelling errors or typos that\n          were in the failed request. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The validation failure reason, if any, of the certificate.</p>\n         <p>The following failure reasons are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>NO_AVAILABLE_CONTACTS</code>\n                  </b> - This failure\n          applies to email validation, which is not available for Lightsail certificates.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ADDITIONAL_VERIFICATION_REQUIRED</code>\n                  </b> -\n          Lightsail requires additional information to process this certificate request. This can\n          happen as a fraud-protection measure, such as when the domain ranks within the Alexa top\n          1000 websites. To provide the required information, use the <a href=\"https://console.aws.amazon.com/support/home\">AWS Support Center</a> to contact\n          AWS Support.</p>\n               <note>\n                  <p>You cannot request a certificate for Amazon-owned domain names such as those ending\n            in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DOMAIN_NOT_ALLOWED</code>\n                  </b> - One or more of the\n          domain names in the certificate request was reported as an unsafe domain by <a href=\"https://www.virustotal.com/gui/home/url\">VirusTotal</a>. To correct the\n          problem, search for your domain name on the <a href=\"https://www.virustotal.com/gui/home/url\">VirusTotal</a> website. If your domain\n          is reported as suspicious, see <a href=\"https://developers.google.com/web/fundamentals/security/hacked\">Google Help for\n            Hacked Websites</a> to learn what you can do.</p>\n               <p>If you believe that the result is a false positive, notify the organization that is\n          reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and\n          cannot remove your domain from a block list itself. After you correct the problem and the\n          VirusTotal registry has been updated, request a new certificate.</p>\n               <p>If you see this error and your domain is not included in the VirusTotal list, visit\n          the <a href=\"https://console.aws.amazon.com/support/home\">AWS Support Center</a>\n          and create a case.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>INVALID_PUBLIC_DOMAIN</code>\n                  </b> - One or more of\n          the domain names in the certificate request is not valid. Typically, this is because a\n          domain name in the request is not a valid top-level domain. Try to request a certificate\n          again, correcting any spelling errors or typos that were in the failed request, and ensure\n          that all domain names in the request are for valid top-level domains. For example, you\n          cannot request a certificate for <code>example.invalidpublicdomain</code> because\n            <code>invalidpublicdomain</code> is not a valid top-level domain.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>OTHER</code>\n                  </b> - Typically, this failure occurs\n          when there is a typographical error in one or more of the domain names in the certificate\n          request. Try to request a certificate again, correcting any spelling errors or typos that\n          were in the failed request. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "inUseResourceCount": {
@@ -2029,31 +2029,31 @@
                 "healthyThreshold": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of consecutive health checks successes required before moving the container to\n      the <code>Healthy</code> state.</p>"
+                        "smithy.api#documentation": "<p>The number of consecutive health checks successes required before moving the container to\n      the <code>Healthy</code> state. The default value is <code>2</code>.</p>"
                     }
                 },
                 "unhealthyThreshold": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of consecutive health check failures required before moving the container to\n      the <code>Unhealthy</code> state.</p>"
+                        "smithy.api#documentation": "<p>The number of consecutive health check failures required before moving the container to\n      the <code>Unhealthy</code> state. The default value is <code>2</code>.</p>"
                     }
                 },
                 "timeoutSeconds": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time, in seconds, during which no response means a failed health check. You\n      may specify between 2 and 60 seconds.</p>"
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, during which no response means a failed health check. You\n      can specify between 2 and 60 seconds. The default value is <code>2</code>.</p>"
                     }
                 },
                 "intervalSeconds": {
                     "target": "com.amazonaws.lightsail#integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The approximate interval, in seconds, between health checks of an individual container.\n      You may specify between 5 and 300 seconds.</p>"
+                        "smithy.api#documentation": "<p>The approximate interval, in seconds, between health checks of an individual container.\n      You can specify between 5 and 300 seconds. The default value is <code>5</code>.</p>"
                     }
                 },
                 "path": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path on the container on which to perform the health check.</p>"
+                        "smithy.api#documentation": "<p>The path on the container on which to perform the health check. The default value is\n        <code>/</code>.</p>"
                     }
                 },
                 "successCodes": {
@@ -2482,7 +2482,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an SSL/TLS certificate for a Amazon Lightsail content delivery network (CDN)\n      distribution.</p>\n         <p>After the certificate is created, use the <code>AttachCertificateToDistribution</code>\n      action to attach the certificate to your distribution.</p>\n         <important>\n            <p>Only certificates created in the <code>us-east-1</code> AWS Region can be attached to\n        Lightsail distributions. Lightsail distributions are global resources that can reference\n        an origin in any AWS Region, and distribute its content globally. However, all\n        distributions are located in the <code>us-east-1</code> Region.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Creates an SSL/TLS certificate for an Amazon Lightsail content delivery network (CDN)\n      distribution and a container service.</p>\n         <p>After the certificate is valid, use the <code>AttachCertificateToDistribution</code>\n      action to use the certificate and its domains with your distribution. Or use the\n        <code>UpdateContainerService</code> action to use the certificate and its domains with your\n      container service.</p>\n         <important>\n            <p>Only certificates created in the <code>us-east-1</code> AWS Region can be attached to\n        Lightsail distributions. Lightsail distributions are global resources that can reference\n        an origin in any AWS Region, and distribute its content globally. However, all\n        distributions are located in the <code>us-east-1</code> Region.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/CreateCertificate",
@@ -2694,7 +2694,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Lightsail container service.</p>\n\n         <p>A Lightsail container service is a compute resource to which you can deploy containers.\n      For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-containers\">Container services in Amazon Lightsail</a> in the <i>Lightsail Dev\n        Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Lightsail container service.</p>\n\n         <p>A Lightsail container service is a compute resource to which you can deploy containers.\n      For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-services\">Container services in Amazon Lightsail</a> in the <i>Lightsail Dev\n        Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/container-services",
@@ -2798,7 +2798,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a temporary set of log in credentials that you can use to log in to the Docker\n      process on your local machine. After you're logged in, you can use the native Docker commands\n      to push your local container images to the container image registry of your Amazon Lightsail\n      account so that you can use them with your Lightsail container service. The log in\n      credentials expire 12 hours after they are created, at which point you will need to create a\n      new set of log in credentials.</p>\n\n         <note>\n            <p>You can only push container images to the container service registry of your Lightsail\n        account. You cannot pull container images perform any other container image management\n        actions on the container service registry of your Lightsail account.</p>\n         </note>\n\n         <p>After you push your container images to the container image registry of your Lightsail\n      account, use the <code>RegisterContainerImage</code> action to register the pushed images to a\n      specific Lightsail container service.</p>\n\n         <note>\n            <p>This action is not required if you install and use the Lightsail Control\n        (lightsailctl) plugin to push container images to your Lightsail container service. For\n        more information, see <a href=\"amazon-lightsail-pushing-container-images\">Pushing and\n          managing container images on your Amazon Lightsail container services</a> in the\n          <i>Lightsail Dev Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a temporary set of log in credentials that you can use to log in to the Docker\n      process on your local machine. After you're logged in, you can use the native Docker commands\n      to push your local container images to the container image registry of your Amazon Lightsail\n      account so that you can use them with your Lightsail container service. The log in\n      credentials expire 12 hours after they are created, at which point you will need to create a\n      new set of log in credentials.</p>\n\n         <note>\n            <p>You can only push container images to the container service registry of your Lightsail\n        account. You cannot pull container images or perform any other container image management\n        actions on the container service registry.</p>\n         </note>\n\n         <p>After you push your container images to the container image registry of your Lightsail\n      account, use the <code>RegisterContainerImage</code> action to register the pushed images to a\n      specific Lightsail container service.</p>\n\n         <note>\n            <p>This action is not required if you install and use the Lightsail Control\n        (lightsailctl) plugin to push container images to your Lightsail container service. For\n        more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images\">Pushing and managing container images on your Amazon Lightsail container services</a>\n        in the <i>Lightsail Dev Guide</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/container-registry-login",
@@ -3239,6 +3239,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "ipAddressType": {
+                    "target": "com.amazonaws.lightsail#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the distribution.</p>\n\n         <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for\n      IPv4 and IPv6.</p>\n\n         <p>The default value is <code>dualstack</code>.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.lightsail#TagList",
                     "traits": {
@@ -3619,6 +3625,12 @@
                         "smithy.api#documentation": "<p>An array of objects representing the add-ons to enable for the new instance.</p>"
                     }
                 },
+                "ipAddressType": {
+                    "target": "com.amazonaws.lightsail#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the instance.</p>\n\n         <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for\n      IPv4 and IPv6.</p>\n\n         <p>The default value is <code>dualstack</code>.</p>"
+                    }
+                },
                 "sourceInstanceName": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
@@ -3710,6 +3722,12 @@
                     "target": "com.amazonaws.lightsail#AddOnRequestList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects representing the add-ons to enable for the new instance.</p>"
+                    }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.lightsail#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the instance.</p>\n\n         <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for\n      IPv4 and IPv6.</p>\n\n         <p>The default value is <code>dualstack</code>.</p>"
                     }
                 }
             }
@@ -3898,6 +3916,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tag keys and optional values to add to the resource during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.lightsail#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type for the load balancer.</p>\n\n         <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for\n      IPv4 and IPv6.</p>\n\n         <p>The default value is <code>dualstack</code>.</p>"
+                    }
                 }
             }
         },
@@ -3944,7 +3968,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Lightsail load balancer TLS certificate.</p>\n         <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>\n         <p>The <code>CreateLoadBalancerTlsCertificate</code> operation supports tag-based access\n      control via resource tags applied to the resource identified by <code>load balancer\n        name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Creates an SSL/TLS certificate for an Amazon Lightsail load balancer.</p>\n         <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>\n         <p>The <code>CreateLoadBalancerTlsCertificate</code> operation supports tag-based access\n      control via resource tags applied to the resource identified by <code>load balancer\n        name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/CreateLoadBalancerTlsCertificate",
@@ -4158,7 +4182,7 @@
                 "relationalDatabaseName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name to use for your new database.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 2 to 255 alphanumeric characters, or hyphens.</p>\n            </li>\n            <li>\n               <p>The first and last character must be a letter or number.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name to use for your new Lightsail database resource.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 2 to 255 alphanumeric characters, or hyphens.</p>\n            </li>\n            <li>\n               <p>The first and last character must be a letter or number.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6113,7 +6137,7 @@
                 "progress": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The progress of the disk snapshot operation.</p>"
+                        "smithy.api#documentation": "<p>The progress of the snapshot.</p>"
                     }
                 },
                 "fromDiskName": {
@@ -11286,10 +11310,16 @@
                         "smithy.api#documentation": "<p>The public IP address of the instance.</p>"
                     }
                 },
-                "ipv6Address": {
-                    "target": "com.amazonaws.lightsail#IpV6Address",
+                "ipv6Addresses": {
+                    "target": "com.amazonaws.lightsail#Ipv6AddressList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv6 address of the instance.</p>"
+                        "smithy.api#documentation": "<p>The IPv6 addresses of the instance.</p>"
+                    }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.lightsail#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type of the instance.</p>\n\n         <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for\n      IPv4 and IPv6.</p>"
                     }
                 },
                 "hardware": {
@@ -11430,7 +11460,7 @@
                 "portInfoSource": {
                     "target": "com.amazonaws.lightsail#PortInfoSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port configuration to use for the new Amazon EC2 instance.</p>\n         <p>The following configuration options are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DEFAULT</code> - Use the default firewall settings from the Lightsail instance\n          blueprint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE</code> - Use the configured firewall settings from the source\n          Lightsail instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> - Use the default Amazon EC2 security group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CLOSED</code> - All ports closed.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If you configured <code>lightsail-connect</code> as a <code>cidrListAliases</code> on\n        your instance, or if you chose to allow the Lightsail browser-based SSH or RDP clients to\n        connect to your instance, that configuration is not carried over to your new Amazon EC2\n        instance.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The port configuration to use for the new Amazon EC2 instance.</p>\n      \n         <p>The following configuration options are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DEFAULT</code> - Use the default firewall settings from the Lightsail instance\n          blueprint. If this is specified, then IPv4 and IPv6 will be configured for the new\n          instance that is created in Amazon EC2.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE</code> - Use the configured firewall settings from the source\n          Lightsail instance. If this is specified, the new instance that is created in Amazon EC2 will\n          be configured to match the configuration of the source Lightsail instance. For example,\n          if the source instance is configured for dual-stack (IPv4 and IPv6), then IPv4 and IPv6\n          will be configured for the new instance that is created in Amazon EC2. If the source instance\n          is configured for IPv4 only, then only IPv4 will be configured for the new instance that\n          is created in Amazon EC2.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code> - Use the default Amazon EC2 security group. If this is specified, then\n          only IPv4 will be configured for the new instance that is created in Amazon EC2.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CLOSED</code> - All ports closed. If this is specified, then only IPv4 will be\n          configured for the new instance that is created in Amazon EC2.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If you configured <code>lightsail-connect</code> as a <code>cidrListAliases</code> on\n        your instance, or if you chose to allow the Lightsail browser-based SSH or RDP clients to\n        connect to your instance, that configuration is not carried over to your new Amazon EC2\n        instance.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11690,13 +11720,13 @@
                 "fromPort": {
                     "target": "com.amazonaws.lightsail#Port",
                     "traits": {
-                        "smithy.api#documentation": "<p>The first port in a range of open ports on an instance.</p>\n         <p>Allowed ports:</p>\n         <ul>\n            <li>\n               <p>TCP and UDP - <code>0</code> to <code>65535</code>\n               </p>\n            </li>\n            <li>\n               <p>ICMP - The ICMP type. For example, specify <code>8</code> as the <code>fromPort</code>\n          (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP\n          Ping. For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages\">Control Messages</a> on <i>Wikipedia</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The first port in a range of open ports on an instance.</p>\n         <p>Allowed ports:</p>\n         <ul>\n            <li>\n               <p>TCP and UDP - <code>0</code> to <code>65535</code>\n               </p>\n            </li>\n            <li>\n               <p>ICMP - The ICMP type for IPv4 addresses. For example, specify <code>8</code> as the\n            <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP\n          code), to enable ICMP Ping. For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages\">Control Messages</a> on <i>Wikipedia</i>.</p>\n            </li>\n            <li>\n               <p>ICMPv6 - The ICMP type for IPv6 addresses. For example, specify <code>128</code> as\n          the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6\n          code). For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6\">Internet\n            Control Message Protocol for IPv6</a>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "toPort": {
                     "target": "com.amazonaws.lightsail#Port",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last port in a range of open ports on an instance.</p>\n         <p>Allowed ports:</p>\n         <ul>\n            <li>\n               <p>TCP and UDP - <code>0</code> to <code>65535</code>\n               </p>\n            </li>\n            <li>\n               <p>ICMP - The ICMP code. For example, specify <code>8</code> as the <code>fromPort</code>\n          (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP\n          Ping. For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages\">Control Messages</a> on <i>Wikipedia</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The last port in a range of open ports on an instance.</p>\n         <p>Allowed ports:</p>\n         <ul>\n            <li>\n               <p>TCP and UDP - <code>0</code> to <code>65535</code>\n               </p>\n            </li>\n            <li>\n               <p>ICMP - The ICMP code for IPv4 addresses. For example, specify <code>8</code> as the\n            <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP\n          code), to enable ICMP Ping. For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages\">Control Messages</a> on <i>Wikipedia</i>.</p>\n            </li>\n            <li>\n               <p>ICMPv6 - The ICMP code for IPv6 addresses. For example, specify <code>128</code> as\n          the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6\n          code). For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6\">Internet\n            Control Message Protocol for IPv6</a>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "protocol": {
@@ -11732,7 +11762,13 @@
                 "cidrs": {
                     "target": "com.amazonaws.lightsail#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to\n      an instance through the ports, and the protocol. Lightsail supports IPv4 addresses.</p>\n         <p>For more information about CIDR block notation, see <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation\">Classless\n        Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>"
+                        "smithy.api#documentation": "<p>The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are allowed to\n      connect to an instance through the ports, and the protocol.</p>\n         <note>\n            <p>The <code>ipv6Cidrs</code> parameter lists the IPv6 addresses that are allowed to\n        connect to an instance.</p>\n         </note>\n         <p>For more information about CIDR block notation, see <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation\">Classless\n        Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>"
+                    }
+                },
+                "ipv6Cidrs": {
+                    "target": "com.amazonaws.lightsail#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 address, or range of IPv6 addresses (in CIDR notation) that are allowed to\n      connect to an instance through the ports, and the protocol. Only devices with an IPv6 address\n      can connect to an instance through IPv6; otherwise, IPv4 should be used.</p>\n         <note>\n            <p>The <code>cidrs</code> parameter lists the IPv4 addresses that are allowed to connect to\n        an instance.</p>\n         </note>\n         <p>For more information about CIDR block notation, see <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation\">Classless\n        Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>"
                     }
                 },
                 "cidrListAliases": {
@@ -11758,13 +11794,13 @@
                 "fromPort": {
                     "target": "com.amazonaws.lightsail#Port",
                     "traits": {
-                        "smithy.api#documentation": "<p>The first port in a range of open ports on an instance.</p>\n         <p>Allowed ports:</p>\n         <ul>\n            <li>\n               <p>TCP and UDP - <code>0</code> to <code>65535</code>\n               </p>\n            </li>\n            <li>\n               <p>ICMP - The ICMP type. For example, specify <code>8</code> as the <code>fromPort</code>\n          (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP\n          Ping. For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages\">Control Messages</a> on <i>Wikipedia</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The first port in a range of open ports on an instance.</p>\n         <p>Allowed ports:</p>\n         <ul>\n            <li>\n               <p>TCP and UDP - <code>0</code> to <code>65535</code>\n               </p>\n            </li>\n            <li>\n               <p>ICMP - The ICMP type for IPv4 addresses. For example, specify <code>8</code> as the\n            <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP\n          code), to enable ICMP Ping. For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages\">Control Messages</a> on <i>Wikipedia</i>.</p>\n            </li>\n            <li>\n               <p>ICMPv6 - The ICMP type for IPv6 addresses. For example, specify <code>128</code> as\n          the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6\n          code). For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6\">Internet\n            Control Message Protocol for IPv6</a>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "toPort": {
                     "target": "com.amazonaws.lightsail#Port",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last port in a range of open ports on an instance.</p>\n         <p>Allowed ports:</p>\n         <ul>\n            <li>\n               <p>TCP and UDP - <code>0</code> to <code>65535</code>\n               </p>\n            </li>\n            <li>\n               <p>ICMP - The ICMP code. For example, specify <code>8</code> as the <code>fromPort</code>\n          (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP\n          Ping. For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages\">Control Messages</a> on <i>Wikipedia</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The last port in a range of open ports on an instance.</p>\n         <p>Allowed ports:</p>\n         <ul>\n            <li>\n               <p>TCP and UDP - <code>0</code> to <code>65535</code>\n               </p>\n            </li>\n            <li>\n               <p>ICMP - The ICMP code for IPv4 addresses. For example, specify <code>8</code> as the\n            <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP\n          code), to enable ICMP Ping. For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages\">Control Messages</a> on <i>Wikipedia</i>.</p>\n            </li>\n            <li>\n               <p>ICMPv6 - The ICMP code for IPv6 addresses. For example, specify <code>128</code> as\n          the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6\n          code). For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6\">Internet\n            Control Message Protocol for IPv6</a>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "protocol": {
@@ -11782,7 +11818,13 @@
                 "cidrs": {
                     "target": "com.amazonaws.lightsail#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to\n      an instance through the ports, and the protocol. Lightsail supports IPv4 addresses.</p>\n         <p>For more information about CIDR block notation, see <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation\">Classless\n        Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>"
+                        "smithy.api#documentation": "<p>The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are allowed to\n      connect to an instance through the ports, and the protocol.</p>\n         <note>\n            <p>The <code>ipv6Cidrs</code> parameter lists the IPv6 addresses that are allowed to\n        connect to an instance.</p>\n         </note>\n         <p>For more information about CIDR block notation, see <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation\">Classless\n        Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>"
+                    }
+                },
+                "ipv6Cidrs": {
+                    "target": "com.amazonaws.lightsail#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 address, or range of IPv6 addresses (in CIDR notation) that are allowed to\n      connect to an instance through the ports, and the protocol. Only devices with an IPv6 address\n      can connect to an instance through IPv6; otherwise, IPv4 should be used.</p>\n         <note>\n            <p>The <code>cidrs</code> parameter lists the IPv4 addresses that are allowed to connect to\n        an instance.</p>\n         </note>\n         <p>For more information about CIDR block notation, see <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation\">Classless\n        Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>"
                     }
                 },
                 "cidrListAliases": {
@@ -11856,7 +11898,7 @@
                 "progress": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The progress of the snapshot.</p>"
+                        "smithy.api#documentation": "<p>The progress of the snapshot.</p>\n         <note>\n            <p>This is populated only for disk snapshots, and is <code>null</code> for instance\n        snapshots.</p>\n         </note>"
                     }
                 },
                 "fromAttachedDisks": {
@@ -11994,7 +12036,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lightsail throws this exception when user input does not conform to the validation rules\n      of an input field.</p>\n         <note>\n            <p>Domain-related APIs are only available in the N. Virginia (us-east-1) Region. Please set\n        your AWS Region configuration to us-east-1 to create, view, or edit these resources.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lightsail throws this exception when user input does not conform to the validation rules\n      of an input field.</p>\n         <note>\n            <p>Domain and distribution APIs are only available in the N. Virginia\n          (<code>us-east-1</code>) AWS Region. Please set your AWS Region configuration to\n          <code>us-east-1</code> to create, view, or edit these resources.</p>\n         </note>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -12005,10 +12047,31 @@
                 "smithy.api#pattern": "([0-9]{1,3}\\.){3}[0-9]{1,3}"
             }
         },
-        "com.amazonaws.lightsail#IpV6Address": {
+        "com.amazonaws.lightsail#IpAddressType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "dualstack",
+                        "name": "DUALSTACK"
+                    },
+                    {
+                        "value": "ipv4",
+                        "name": "IPV4"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lightsail#Ipv6Address": {
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "([A-F0-9]{1,4}:){7}[A-F0-9]{1,4}"
+            }
+        },
+        "com.amazonaws.lightsail#Ipv6AddressList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#Ipv6Address"
             }
         },
         "com.amazonaws.lightsail#IsVpcPeered": {
@@ -12246,6 +12309,12 @@
                     "target": "com.amazonaws.lightsail#boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the bundle that is currently applied to your distribution, specified\n      using the <code>distributionName</code> parameter, can be changed to another bundle.</p>\n         <p>Use the <code>UpdateDistributionBundle</code> action to change your distribution's\n      bundle.</p>"
+                    }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.lightsail#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type of the distribution.</p>\n\n         <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for\n      IPv4 and IPv6.</p>"
                     }
                 },
                 "tags": {
@@ -12642,6 +12711,9 @@
                     "target": "com.amazonaws.lightsail#SendContactMethodVerification"
                 },
                 {
+                    "target": "com.amazonaws.lightsail#SetIpAddressType"
+                },
+                {
                     "target": "com.amazonaws.lightsail#StartInstance"
                 },
                 {
@@ -12800,6 +12872,12 @@
                     "target": "com.amazonaws.lightsail#LoadBalancerConfigurationOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>A string to string map of the configuration options for your load balancer. Valid values\n      are listed below.</p>"
+                    }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.lightsail#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type of the load balancer.</p>\n\n         <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for\n      IPv4 and IPv6.</p>"
                     }
                 }
             },
@@ -13016,7 +13094,7 @@
                 "failureReason": {
                     "target": "com.amazonaws.lightsail#LoadBalancerTlsCertificateFailureReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The validation failure reason, if any, of the certificate.</p>\n\n         <p>The following failure reasons are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>NO_AVAILABLE_CONTACTS</code>\n                  </b> - This failure\n          applies to email validation, which is not available for Lightsail certificates.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ADDITIONAL_VERIFICATION_REQUIRED</code>\n                  </b> -\n          Lightsail requires additional information to process this certificate request. This can\n          happen as a fraud-protection measure, such as when the domain ranks within the Alexa top\n          1000 websites. To provide the required information, use the <a href=\"https://console.aws.amazon.com/support/home\">AWS Support Center</a> to contact\n          AWS Support.</p>\n               <note>\n                  <p>You cannot request a certificate for Amazon-owned domain names such as those ending\n            in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DOMAIN_NOT_ALLOWED</code>\n                  </b> - One or more of the\n          domain names in the certificate request was reported as an unsafe domain by <a href=\"https://www.virustotal.com/gui/home/url\">VirusTotal</a>. To correct the\n          problem, search for your domain name on the <a href=\"https://www.virustotal.com/gui/home/url\">VirusTotal</a> website. If your domain\n          is reported as suspicious, see <a href=\"https://www.google.com/webmasters/hacked/?hl=en\">Google Help for Hacked\n            Websites</a> to learn what you can do.</p>\n               <p>If you believe that the result is a false positive, notify the organization that is\n          reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and\n          cannot remove your domain from a block list itself. After you correct the problem and the\n          VirusTotal registry has been updated, request a new certificate.</p>\n               <p>If you see this error and your domain is not included in the VirusTotal list, visit\n          the <a href=\"https://console.aws.amazon.com/support/home\">AWS Support Center</a>\n          and create a case.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>INVALID_PUBLIC_DOMAIN</code>\n                  </b> - One or more of\n          the domain names in the certificate request is not valid. Typically, this is because a\n          domain name in the request is not a valid top-level domain. Try to request a certificate\n          again, correcting any spelling errors or typos that were in the failed request, and ensure\n          that all domain names in the request are for valid top-level domains. For example, you\n          cannot request a certificate for <code>example.invalidpublicdomain</code> because\n            <code>invalidpublicdomain</code> is not a valid top-level domain.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>OTHER</code>\n                  </b> - Typically, this failure occurs\n          when there is a typographical error in one or more of the domain names in the certificate\n          request. Try to request a certificate again, correcting any spelling errors or typos that\n          were in the failed request. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The validation failure reason, if any, of the certificate.</p>\n\n         <p>The following failure reasons are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>NO_AVAILABLE_CONTACTS</code>\n                  </b> - This failure\n          applies to email validation, which is not available for Lightsail certificates.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ADDITIONAL_VERIFICATION_REQUIRED</code>\n                  </b> -\n          Lightsail requires additional information to process this certificate request. This can\n          happen as a fraud-protection measure, such as when the domain ranks within the Alexa top\n          1000 websites. To provide the required information, use the <a href=\"https://console.aws.amazon.com/support/home\">AWS Support Center</a> to contact\n          AWS Support.</p>\n               <note>\n                  <p>You cannot request a certificate for Amazon-owned domain names such as those ending\n            in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DOMAIN_NOT_ALLOWED</code>\n                  </b> - One or more of the\n          domain names in the certificate request was reported as an unsafe domain by <a href=\"https://www.virustotal.com/gui/home/url\">VirusTotal</a>. To correct the\n          problem, search for your domain name on the <a href=\"https://www.virustotal.com/gui/home/url\">VirusTotal</a> website. If your domain\n          is reported as suspicious, see <a href=\"https://developers.google.com/web/fundamentals/security/hacked\">Google Help for\n            Hacked Websites</a> to learn what you can do.</p>\n               <p>If you believe that the result is a false positive, notify the organization that is\n          reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and\n          cannot remove your domain from a block list itself. After you correct the problem and the\n          VirusTotal registry has been updated, request a new certificate.</p>\n               <p>If you see this error and your domain is not included in the VirusTotal list, visit\n          the <a href=\"https://console.aws.amazon.com/support/home\">AWS Support Center</a>\n          and create a case.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>INVALID_PUBLIC_DOMAIN</code>\n                  </b> - One or more of\n          the domain names in the certificate request is not valid. Typically, this is because a\n          domain name in the request is not a valid top-level domain. Try to request a certificate\n          again, correcting any spelling errors or typos that were in the failed request, and ensure\n          that all domain names in the request are for valid top-level domains. For example, you\n          cannot request a certificate for <code>example.invalidpublicdomain</code> because\n            <code>invalidpublicdomain</code> is not a valid top-level domain.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>OTHER</code>\n                  </b> - Typically, this failure occurs\n          when there is a typographical error in one or more of the domain names in the certificate\n          request. Try to request a certificate again, correcting any spelling errors or typos that\n          were in the failed request. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "issuedAt": {
@@ -14274,6 +14352,10 @@
                         "name": "UpdateDistributionBundle"
                     },
                     {
+                        "value": "SetIpAddressType",
+                        "name": "SetIpAddressType"
+                    },
+                    {
                         "value": "CreateCertificate",
                         "name": "CreateCertificate"
                     },
@@ -14522,13 +14604,13 @@
                 "fromPort": {
                     "target": "com.amazonaws.lightsail#Port",
                     "traits": {
-                        "smithy.api#documentation": "<p>The first port in a range of open ports on an instance.</p>\n         <p>Allowed ports:</p>\n         <ul>\n            <li>\n               <p>TCP and UDP - <code>0</code> to <code>65535</code>\n               </p>\n            </li>\n            <li>\n               <p>ICMP - The ICMP type. For example, specify <code>8</code> as the <code>fromPort</code>\n          (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP\n          Ping. For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages\">Control Messages</a> on <i>Wikipedia</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The first port in a range of open ports on an instance.</p>\n         <p>Allowed ports:</p>\n         <ul>\n            <li>\n               <p>TCP and UDP - <code>0</code> to <code>65535</code>\n               </p>\n            </li>\n            <li>\n               <p>ICMP - The ICMP type for IPv4 addresses. For example, specify <code>8</code> as the\n            <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP\n          code), to enable ICMP Ping. For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages\">Control Messages</a> on <i>Wikipedia</i>.</p>\n            </li>\n            <li>\n               <p>ICMPv6 - The ICMP type for IPv6 addresses. For example, specify <code>128</code> as\n          the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6\n          code). For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6\">Internet\n            Control Message Protocol for IPv6</a>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "toPort": {
                     "target": "com.amazonaws.lightsail#Port",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last port in a range of open ports on an instance.</p>\n         <p>Allowed ports:</p>\n         <ul>\n            <li>\n               <p>TCP and UDP - <code>0</code> to <code>65535</code>\n               </p>\n            </li>\n            <li>\n               <p>ICMP - The ICMP code. For example, specify <code>8</code> as the <code>fromPort</code>\n          (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP\n          Ping. For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages\">Control Messages</a> on <i>Wikipedia</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The last port in a range of open ports on an instance.</p>\n         <p>Allowed ports:</p>\n         <ul>\n            <li>\n               <p>TCP and UDP - <code>0</code> to <code>65535</code>\n               </p>\n            </li>\n            <li>\n               <p>ICMP - The ICMP code for IPv4 addresses. For example, specify <code>8</code> as the\n            <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP\n          code), to enable ICMP Ping. For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages\">Control Messages</a> on <i>Wikipedia</i>.</p>\n            </li>\n            <li>\n               <p>ICMPv6 - The ICMP code for IPv6 addresses. For example, specify <code>128</code> as\n          the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6\n          code). For more information, see <a href=\"https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6\">Internet\n            Control Message Protocol for IPv6</a>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "protocol": {
@@ -14540,7 +14622,13 @@
                 "cidrs": {
                     "target": "com.amazonaws.lightsail#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to\n      an instance through the ports, and the protocol. Lightsail supports IPv4 addresses.</p>\n         <p>Examples:</p>\n         <ul>\n            <li>\n               <p>To allow the IP address <code>192.0.2.44</code>, specify <code>192.0.2.44</code> or\n            <code>192.0.2.44/32</code>. </p>\n            </li>\n            <li>\n               <p>To allow the IP addresses <code>192.0.2.0</code> to <code>192.0.2.255</code>, specify\n            <code>192.0.2.0/24</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR block notation, see <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation\">Classless\n        Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>"
+                        "smithy.api#documentation": "<p>The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are allowed to\n      connect to an instance through the ports, and the protocol.</p>\n         <note>\n            <p>The <code>ipv6Cidrs</code> parameter lists the IPv6 addresses that are allowed to\n        connect to an instance.</p>\n         </note>\n         <p>Examples:</p>\n         <ul>\n            <li>\n               <p>To allow the IP address <code>192.0.2.44</code>, specify <code>192.0.2.44</code> or\n            <code>192.0.2.44/32</code>. </p>\n            </li>\n            <li>\n               <p>To allow the IP addresses <code>192.0.2.0</code> to <code>192.0.2.255</code>, specify\n            <code>192.0.2.0/24</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR block notation, see <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation\">Classless\n        Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>"
+                    }
+                },
+                "ipv6Cidrs": {
+                    "target": "com.amazonaws.lightsail#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 address, or range of IPv6 addresses (in CIDR notation) that are allowed to\n      connect to an instance through the ports, and the protocol. Only devices with an IPv6 address\n      can connect to an instance through IPv6; otherwise, IPv4 should be used.</p>\n         <note>\n            <p>The <code>cidrs</code> parameter lists the IPv4 addresses that are allowed to connect to\n        an instance.</p>\n         </note>\n         <p>For more information about CIDR block notation, see <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation\">Classless\n        Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>"
                     }
                 },
                 "cidrListAliases": {
@@ -15112,7 +15200,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers a container image to your Amazon Lightsail container service.</p>\n\n         <note>\n            <p>This action is not required if you install and use the Lightsail Control\n        (lightsailctl) plugin to push container images to your Lightsail container service. For\n        more information, see <a href=\"amazon-lightsail-pushing-container-images\">Pushing and\n          managing container images on your Amazon Lightsail container services</a> in the\n          <i>Lightsail Dev Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Registers a container image to your Amazon Lightsail container service.</p>\n\n         <note>\n            <p>This action is not required if you install and use the Lightsail Control\n        (lightsailctl) plugin to push container images to your Lightsail container service. For\n        more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images\">Pushing and managing container images on your Amazon Lightsail container services</a>\n        in the <i>Lightsail Dev Guide</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/container-services/{serviceName}/images",
@@ -16188,6 +16276,83 @@
                 "smithy.api#documentation": "<p>A general service exception.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.lightsail#SetIpAddressType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lightsail#SetIpAddressTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lightsail#SetIpAddressTypeResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lightsail#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#AccountSetupInProgressException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#OperationFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lightsail#UnauthenticatedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the IP address type for an Amazon Lightsail resource.</p>\n\n         <p>Use this action to enable dual-stack for a resource, which enables IPv4 and IPv6 for the\n      specified resource. Alternately, you can use this action to disable dual-stack, and enable\n      IPv4 only.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ls/api/2016-11-28/SetIpAddressType",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lightsail#SetIpAddressTypeRequest": {
+            "type": "structure",
+            "members": {
+                "resourceType": {
+                    "target": "com.amazonaws.lightsail#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type.</p>\n         <p>The possible values are <code>Distribution</code>, <code>Instance</code>, and\n        <code>LoadBalancer</code>.</p>\n         <note>\n            <p>Distribution-related APIs are available only in the N. Virginia (<code>us-east-1</code>)\n        AWS Region. Set your AWS Region configuration to <code>us-east-1</code> to create, view,\n        or edit distributions.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceName": {
+                    "target": "com.amazonaws.lightsail#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource for which to set the IP address type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.lightsail#IpAddressType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type to set for the specified resource.</p>\n\n         <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for\n      IPv4 and IPv6.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#SetIpAddressTypeResult": {
+            "type": "structure",
+            "members": {
+                "operations": {
+                    "target": "com.amazonaws.lightsail#OperationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.lightsail#StartInstance": {

@@ -179,6 +179,109 @@
                 "smithy.api#documentation": "A CMAF packaging configuration."
             }
         },
+        "com.amazonaws.mediapackagevod#ConfigureLogs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediapackagevod#ConfigureLogsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediapackagevod#ConfigureLogsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mediapackagevod#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagevod#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagevod#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagevod#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagevod#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagevod#UnprocessableEntityException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Changes the packaging group's properities to configure log subscription",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/packaging_groups/{Id}/configure_logs",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mediapackagevod#ConfigureLogsRequest": {
+            "type": "structure",
+            "members": {
+                "EgressAccessLogs": {
+                    "target": "com.amazonaws.mediapackagevod#EgressAccessLogs",
+                    "traits": {
+                        "smithy.api#jsonName": "egressAccessLogs"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.mediapackagevod#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of a MediaPackage VOD PackagingGroup resource.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The option to configure log subscription."
+            }
+        },
+        "com.amazonaws.mediapackagevod#ConfigureLogsResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.mediapackagevod#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the PackagingGroup.",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "Authorization": {
+                    "target": "com.amazonaws.mediapackagevod#Authorization",
+                    "traits": {
+                        "smithy.api#jsonName": "authorization"
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.mediapackagevod#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The fully qualified domain name for Assets in the PackagingGroup.",
+                        "smithy.api#jsonName": "domainName"
+                    }
+                },
+                "EgressAccessLogs": {
+                    "target": "com.amazonaws.mediapackagevod#EgressAccessLogs",
+                    "traits": {
+                        "smithy.api#jsonName": "egressAccessLogs"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.mediapackagevod#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the PackagingGroup.",
+                        "smithy.api#jsonName": "id"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mediapackagevod#Tags",
+                    "traits": {
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediapackagevod#CreateAsset": {
             "type": "operation",
             "input": {
@@ -529,6 +632,12 @@
                         "smithy.api#jsonName": "authorization"
                     }
                 },
+                "EgressAccessLogs": {
+                    "target": "com.amazonaws.mediapackagevod#EgressAccessLogs",
+                    "traits": {
+                        "smithy.api#jsonName": "egressAccessLogs"
+                    }
+                },
                 "Id": {
                     "target": "com.amazonaws.mediapackagevod#__string",
                     "traits": {
@@ -569,6 +678,12 @@
                     "traits": {
                         "smithy.api#documentation": "The fully qualified domain name for Assets in the PackagingGroup.",
                         "smithy.api#jsonName": "domainName"
+                    }
+                },
+                "EgressAccessLogs": {
+                    "target": "com.amazonaws.mediapackagevod#EgressAccessLogs",
+                    "traits": {
+                        "smithy.api#jsonName": "egressAccessLogs"
                     }
                 },
                 "Id": {
@@ -1144,6 +1259,12 @@
                         "smithy.api#jsonName": "domainName"
                     }
                 },
+                "EgressAccessLogs": {
+                    "target": "com.amazonaws.mediapackagevod#EgressAccessLogs",
+                    "traits": {
+                        "smithy.api#jsonName": "egressAccessLogs"
+                    }
+                },
                 "Id": {
                     "target": "com.amazonaws.mediapackagevod#__string",
                     "traits": {
@@ -1157,6 +1278,21 @@
                         "smithy.api#jsonName": "tags"
                     }
                 }
+            }
+        },
+        "com.amazonaws.mediapackagevod#EgressAccessLogs": {
+            "type": "structure",
+            "members": {
+                "LogGroupName": {
+                    "target": "com.amazonaws.mediapackagevod#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Customize the log group name.",
+                        "smithy.api#jsonName": "logGroupName"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configure egress access logging."
             }
         },
         "com.amazonaws.mediapackagevod#EgressEndpoint": {
@@ -1670,6 +1806,9 @@
             "version": "2018-11-07",
             "operations": [
                 {
+                    "target": "com.amazonaws.mediapackagevod#ConfigureLogs"
+                },
+                {
                     "target": "com.amazonaws.mediapackagevod#CreateAsset"
                 },
                 {
@@ -1895,6 +2034,12 @@
                     "traits": {
                         "smithy.api#documentation": "The fully qualified domain name for Assets in the PackagingGroup.",
                         "smithy.api#jsonName": "domainName"
+                    }
+                },
+                "EgressAccessLogs": {
+                    "target": "com.amazonaws.mediapackagevod#EgressAccessLogs",
+                    "traits": {
+                        "smithy.api#jsonName": "egressAccessLogs"
                     }
                 },
                 "Id": {
@@ -2239,6 +2384,12 @@
                     "traits": {
                         "smithy.api#documentation": "The fully qualified domain name for Assets in the PackagingGroup.",
                         "smithy.api#jsonName": "domainName"
+                    }
+                },
+                "EgressAccessLogs": {
+                    "target": "com.amazonaws.mediapackagevod#EgressAccessLogs",
+                    "traits": {
+                        "smithy.api#jsonName": "egressAccessLogs"
                     }
                 },
                 "Id": {

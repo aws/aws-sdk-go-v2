@@ -138,6 +138,136 @@
                 "target": "com.amazonaws.securityhub#NonEmptyString"
             }
         },
+        "com.amazonaws.securityhub#Action": {
+            "type": "structure",
+            "members": {
+                "ActionType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of action that was detected. The possible action types are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NETWORK_CONNECTION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_API_CALL</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DNS_REQUEST</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PORT_PROBE</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "NetworkConnectionAction": {
+                    "target": "com.amazonaws.securityhub#NetworkConnectionAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Included if <code>ActionType</code> is <code>NETWORK_CONNECTION</code>. Provides details\n         about the network connection that was detected.</p>"
+                    }
+                },
+                "AwsApiCallAction": {
+                    "target": "com.amazonaws.securityhub#AwsApiCallAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Included if <code>ActionType</code> is <code>AWS_API_CALL</code>. Provides details about\n         the API call that was detected. </p>"
+                    }
+                },
+                "DnsRequestAction": {
+                    "target": "com.amazonaws.securityhub#DnsRequestAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Included if <code>ActionType</code> is <code>DNS_REQUEST</code>. Provides details about\n         the DNS request that was detected. </p>"
+                    }
+                },
+                "PortProbeAction": {
+                    "target": "com.amazonaws.securityhub#PortProbeAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Included if <code>ActionType</code> is <code>PORT_PROBE</code>. Provides details about\n         the port probe that was detected. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about one of the following actions that affects or that was taken on a resource:</p>\n         <ul>\n            <li>\n               <p>A remote IP address issued an AWS API call</p>\n            </li>\n            <li>\n               <p>A DNS request was received</p>\n            </li>\n            <li>\n               <p>A remote IP address attempted to connect to an EC2 instance</p>\n            </li>\n            <li>\n               <p>A remote IP address attempted a port probe on an EC2 instance</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.securityhub#ActionLocalIpDetails": {
+            "type": "structure",
+            "members": {
+                "IpAddressV4": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the IP address where the scanned port is located.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#ActionLocalPortDetails": {
+            "type": "structure",
+            "members": {
+                "Port": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of the port.</p>"
+                    }
+                },
+                "PortName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port name of the local connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>For <code>NetworkConnectionAction</code> and <code>PortProbeDetails</code>,\n            <code>LocalPortDetails</code> provides information about the local port that was\n         involved in the action.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#ActionRemoteIpDetails": {
+            "type": "structure",
+            "members": {
+                "IpAddressV4": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address.</p>"
+                    }
+                },
+                "Organization": {
+                    "target": "com.amazonaws.securityhub#IpOrganizationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The internet service provider (ISP) organization associated with the remote IP\n         address.</p>"
+                    }
+                },
+                "Country": {
+                    "target": "com.amazonaws.securityhub#Country",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country where the remote IP address is located.</p>"
+                    }
+                },
+                "City": {
+                    "target": "com.amazonaws.securityhub#City",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The city where the remote IP address is located.</p>"
+                    }
+                },
+                "GeoLocation": {
+                    "target": "com.amazonaws.securityhub#GeoLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The coordinates of the location of the remote IP address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>For <code>AwsApiAction</code>, <code>NetworkConnectionAction</code>, and\n            <code>PortProbeAction</code>, <code>RemoteIpDetails</code> provides information about\n         the remote IP address that was involved in the action.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#ActionRemotePortDetails": {
+            "type": "structure",
+            "members": {
+                "Port": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of the port.</p>"
+                    }
+                },
+                "PortName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port name of the remote connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the remote port that was involved in an attempted network\n         connection.</p>"
+            }
+        },
         "com.amazonaws.securityhub#ActionTarget": {
             "type": "structure",
             "members": {
@@ -253,6 +383,76 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#AvailabilityZone"
+            }
+        },
+        "com.amazonaws.securityhub#AwsApiCallAction": {
+            "type": "structure",
+            "members": {
+                "Api": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the API method that was issued.</p>"
+                    }
+                },
+                "ServiceName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AWS service that the API method belongs to.</p>"
+                    }
+                },
+                "CallerType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the API call originated from a remote IP address\n            (<code>remoteip</code>) or from a DNS domain (<code>domain</code>).</p>"
+                    }
+                },
+                "RemoteIpDetails": {
+                    "target": "com.amazonaws.securityhub#ActionRemoteIpDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provided if <code>CallerType</code> is <code>remoteIp</code>. Provides information about\n         the remote IP address that the API call originated from.</p>"
+                    }
+                },
+                "DomainDetails": {
+                    "target": "com.amazonaws.securityhub#AwsApiCallActionDomainDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provided if <code>CallerType</code> is <code>domain</code>. Provides information about\n         the DNS domain that the API call originated from.</p>"
+                    }
+                },
+                "AffectedResources": {
+                    "target": "com.amazonaws.securityhub#FieldMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the resources that were affected by the API call.</p>"
+                    }
+                },
+                "FirstSeen": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ISO8601-formatted timestamp that indicates when the API call was first\n         observed.</p>"
+                    }
+                },
+                "LastSeen": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ISO8601-formatted timestamp that indicates when the API call was most recently\n         observed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provided if <code>ActionType</code> is <code>AWS_API_CALL</code>. It provides details\n         about the API call that was detected.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsApiCallActionDomainDetails": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DNS domain that issued the API call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provided if <code>CallerType</code> is <code>domain</code>. It provides information\n         about the DNS domain that issued the API call.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsApiGatewayAccessLogSettings": {
@@ -2439,10 +2639,80 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether traffic to or from the instance is validated.</p>"
                     }
+                },
+                "IpV6Addresses": {
+                    "target": "com.amazonaws.securityhub#AwsEc2NetworkInterfaceIpV6AddressList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv6 addresses associated with the network interface.</p>"
+                    }
+                },
+                "PrivateIpAddresses": {
+                    "target": "com.amazonaws.securityhub#AwsEc2NetworkInterfacePrivateIpAddressList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private IPv4 addresses associated with the network interface.</p>"
+                    }
+                },
+                "PublicDnsName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public DNS name of the network interface.</p>"
+                    }
+                },
+                "PublicIp": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address of the Elastic IP address bound to the network interface.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about the network interface</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2NetworkInterfaceIpV6AddressDetail": {
+            "type": "structure",
+            "members": {
+                "IpV6Address": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPV6 address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about an IPV6 address that is associated with the network\n         interface.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2NetworkInterfaceIpV6AddressList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsEc2NetworkInterfaceIpV6AddressDetail"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2NetworkInterfacePrivateIpAddressDetail": {
+            "type": "structure",
+            "members": {
+                "PrivateIpAddress": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address.</p>"
+                    }
+                },
+                "PrivateDnsName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The private DNS name for the IP address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about a private IPv4 address that is with the network\n         interface.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2NetworkInterfacePrivateIpAddressList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsEc2NetworkInterfacePrivateIpAddressDetail"
             }
         },
         "com.amazonaws.securityhub#AwsEc2NetworkInterfaceSecurityGroup": {
@@ -4821,7 +5091,7 @@
                 "Engine": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The name of the database engine that you want to use for this DB instance.</p>"
                     }
                 },
                 "AllocatedStorage": {
@@ -5394,18 +5664,18 @@
                 "OptionGroupName": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The name of the option group.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The status of the option group membership.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>An option group membership.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsRdsDbOptionGroupMemberships": {
@@ -5420,18 +5690,18 @@
                 "DbParameterGroupName": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The name of the parameter group.</p>"
                     }
                 },
                 "ParameterApplyStatus": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The status of parameter updates.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Provides information about a parameter group for a DB instance.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsRdsDbParameterGroups": {
@@ -5446,96 +5716,96 @@
                 "DbInstanceClass": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The new DB instance class for the DB instance.</p>"
                     }
                 },
                 "AllocatedStorage": {
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The new value of the allocated storage for the DB instance.</p>"
                     }
                 },
                 "MasterUserPassword": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The new master user password for the DB instance.</p>"
                     }
                 },
                 "Port": {
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The new port for the DB instance.</p>"
                     }
                 },
                 "BackupRetentionPeriod": {
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The new backup retention period for the DB instance.</p>"
                     }
                 },
                 "MultiAZ": {
                     "target": "com.amazonaws.securityhub#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Indicates that a single Availability Zone DB instance is changing to a multiple Availability Zone deployment.</p>"
                     }
                 },
                 "EngineVersion": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The new engine version for the DB instance.</p>"
                     }
                 },
                 "LicenseModel": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The new license model value for the DB instance.</p>"
                     }
                 },
                 "Iops": {
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The new provisioned IOPS value for the DB instance.</p>"
                     }
                 },
                 "DbInstanceIdentifier": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The new DB instance identifier for the DB instance.</p>"
                     }
                 },
                 "StorageType": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The new storage type for the DB instance.</p>"
                     }
                 },
                 "CaCertificateIdentifier": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The new CA certificate identifier for the DB instance.</p>"
                     }
                 },
                 "DbSubnetGroupName": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The name of the new subnet group for the DB instance.</p>"
                     }
                 },
                 "PendingCloudWatchLogsExports": {
                     "target": "com.amazonaws.securityhub#AwsRdsPendingCloudWatchLogsExports",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A list of log types that are being enabled or disabled.</p>"
                     }
                 },
                 "ProcessorFeatures": {
                     "target": "com.amazonaws.securityhub#AwsRdsDbProcessorFeatures",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Processor features that are being updated.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Changes to a DB instance that are currently pending.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsRdsDbProcessorFeature": {
@@ -5544,18 +5814,18 @@
                 "Name": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The name of the processor feature.</p>"
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The value of the processor feature.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>A processor feature.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsRdsDbProcessorFeatures": {
@@ -5570,168 +5840,168 @@
                 "DbSnapshotIdentifier": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The name or ARN of the DB snapshot that is used to restore the DB instance.</p>"
                     }
                 },
                 "DbInstanceIdentifier": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>A name for the DB instance.</p>"
                     }
                 },
                 "SnapshotCreateTime": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>When the snapshot was taken in Coordinated Universal Time (UTC).</p>"
                     }
                 },
                 "Engine": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The name of the database engine to use for this DB instance.</p>"
                     }
                 },
                 "AllocatedStorage": {
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The amount of storage (in gigabytes) to be initially allocated for the database instance.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The status of this DB snapshot.</p>"
                     }
                 },
                 "Port": {
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The port that the database engine was listening on at the time of the snapshot.</p>"
                     }
                 },
                 "AvailabilityZone": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Specifies the name of the Availability Zone in which the DB instance was located at the time of the DB snapshot.</p>"
                     }
                 },
                 "VpcId": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The VPC ID associated with the DB snapshot.</p>"
                     }
                 },
                 "InstanceCreateTime": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Specifies the time in Coordinated Universal Time (UTC) when the DB instance, from which the snapshot was taken, was created.</p>"
                     }
                 },
                 "MasterUsername": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The master user name for the DB snapshot.</p>"
                     }
                 },
                 "EngineVersion": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The version of the database engine.</p>"
                     }
                 },
                 "LicenseModel": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>License model information for the restored DB instance.</p>"
                     }
                 },
                 "SnapshotType": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The type of the DB snapshot.</p>"
                     }
                 },
                 "Iops": {
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.</p>"
                     }
                 },
                 "OptionGroupName": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The option group name for the DB snapshot.</p>"
                     }
                 },
                 "PercentProgress": {
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The percentage of the estimated data that has been transferred.</p>"
                     }
                 },
                 "SourceRegion": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The AWS Region that the DB snapshot was created in or copied from.</p>"
                     }
                 },
                 "SourceDbSnapshotIdentifier": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The DB snapshot ARN that the DB snapshot was copied from.</p>"
                     }
                 },
                 "StorageType": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The storage type associated with the DB snapshot.</p>"
                     }
                 },
                 "TdeCredentialArn": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The ARN from the key store with which to associate the instance for TDE encryption.</p>"
                     }
                 },
                 "Encrypted": {
                     "target": "com.amazonaws.securityhub#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Whether the DB snapshot is encrypted.</p>"
                     }
                 },
                 "KmsKeyId": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>If <code>Encrypted</code> is <code>true</code>, the AWS KMS key identifier for the encrypted DB snapshot.</p>"
                     }
                 },
                 "Timezone": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The time zone of the DB snapshot.</p>"
                     }
                 },
                 "IamDatabaseAuthenticationEnabled": {
                     "target": "com.amazonaws.securityhub#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Whether mapping of IAM accounts to database accounts is enabled.</p>"
                     }
                 },
                 "ProcessorFeatures": {
                     "target": "com.amazonaws.securityhub#AwsRdsDbProcessorFeatures",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.</p>"
                     }
                 },
                 "DbiResourceId": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>The identifier for the source DB instance.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Provides details about an Amazon RDS DB cluster snapshot.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsRdsDbStatusInfo": {
@@ -6590,6 +6860,38 @@
                 "target": "com.amazonaws.securityhub#AwsRedshiftClusterVpcSecurityGroup"
             }
         },
+        "com.amazonaws.securityhub#AwsS3AccountPublicAccessBlockDetails": {
+            "type": "structure",
+            "members": {
+                "BlockPublicAcls": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to reject calls to update an S3 bucket if the calls include a public access control list (ACL).</p>"
+                    }
+                },
+                "BlockPublicPolicy": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to reject calls to update the access policy for an S3 bucket or access point if the policy allows public access.</p>"
+                    }
+                },
+                "IgnorePublicAcls": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether Amazon S3 ignores public ACLs that are associated with an S3 bucket.</p>"
+                    }
+                },
+                "RestrictPublicBuckets": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to restrict access to an access point or S3 bucket that has a public policy to only AWS service principals and authorized users within the S3 bucket owner's account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>provides information about the Amazon S3 Public Access Block configuration for accounts.</p>"
+            }
+        },
         "com.amazonaws.securityhub#AwsS3BucketDetails": {
             "type": "structure",
             "members": {
@@ -6615,6 +6917,12 @@
                     "target": "com.amazonaws.securityhub#AwsS3BucketServerSideEncryptionConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption rules that are applied to the S3 bucket.</p>"
+                    }
+                },
+                "PublicAccessBlockConfiguration": {
+                    "target": "com.amazonaws.securityhub#AwsS3AccountPublicAccessBlockDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about the Amazon S3 Public Access Block configuration for the S3 bucket.</p>"
                     }
                 }
             },
@@ -6831,8 +7139,7 @@
                 "Types": {
                     "target": "com.amazonaws.securityhub#TypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more finding types in the format of <code>namespace/category/classifier</code>\n         that classify a finding.</p>\n         <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual\n         Behaviors | Sensitive Data Identifications</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>One or more finding types in the format of <code>namespace/category/classifier</code>\n         that classify a finding.</p>\n         <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual\n         Behaviors | Sensitive Data Identifications</p>"
                     }
                 },
                 "FirstObservedAt": {
@@ -6864,8 +7171,7 @@
                 "Severity": {
                     "target": "com.amazonaws.securityhub#Severity",
                     "traits": {
-                        "smithy.api#documentation": "<p>A finding's severity.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A finding's severity.</p>"
                     }
                 },
                 "Confidence": {
@@ -7008,6 +7314,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides an overview of the patch compliance status for an instance against a selected\n         compliance standard.</p>"
                     }
+                },
+                "Action": {
+                    "target": "com.amazonaws.securityhub#Action",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides details about an action that affects or that was taken on a resource.</p>"
+                    }
+                },
+                "FindingProviderFields": {
+                    "target": "com.amazonaws.securityhub#FindingProviderFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>In a <code>BatchImportFindings</code> request, finding providers use <code>FindingProviderFields</code> to provide and update their own values for confidence, criticality, related findings, severity, and types.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7074,12 +7392,18 @@
                 "SeverityProduct": {
                     "target": "com.amazonaws.securityhub#NumberFilterList",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This filter is deprecated, use FindingProviiltersSeverityOriginal instead."
+                        },
                         "smithy.api#documentation": "<p>The native severity as defined by the security-findings provider's solution that\n         generated the finding.</p>"
                     }
                 },
                 "SeverityNormalized": {
                     "target": "com.amazonaws.securityhub#NumberFilterList",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This filter is deprecated, use SeverityLabel or FindingProviderFieldsSeverityLabel instead."
+                        },
                         "smithy.api#documentation": "<p>The normalized severity of a finding.</p>"
                     }
                 },
@@ -7476,7 +7800,7 @@
                 "WorkflowStatus": {
                     "target": "com.amazonaws.securityhub#StringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the investigation into a finding. Allowed values are the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code> - The initial state of a finding, before it is reviewed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOTIFIED</code> - Indicates that the resource owner has been notified about\n               the security issue. Used when the initial reviewer is not the resource owner, and\n               needs intervention from the resource owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be\n               acted upon.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLVED</code> - The finding was reviewed and remediated and is now\n               considered resolved. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the investigation into a finding. Allowed values are the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code> - The initial state of a finding, before it is reviewed.</p>\n               <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or\n                  <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p>\n               <ul>\n                  <li>\n                     <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p>\n                  </li>\n                  <li>\n                     <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>,\n                        <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>NOTIFIED</code> - Indicates that the resource owner has been notified about\n               the security issue. Used when the initial reviewer is not the resource owner, and\n               needs intervention from the resource owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be\n               acted upon.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLVED</code> - The finding was reviewed and remediated and is now\n               considered resolved. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "RecordState": {
@@ -7519,6 +7843,48 @@
                     "target": "com.amazonaws.securityhub#KeywordFilterList",
                     "traits": {
                         "smithy.api#documentation": "<p>A keyword for a finding.</p>"
+                    }
+                },
+                "FindingProviderFieldsConfidence": {
+                    "target": "com.amazonaws.securityhub#NumberFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding provider value for the finding confidence. Confidence is defined as the likelihood\n         that a finding accurately identifies the behavior or issue that it was intended to\n         identify.</p>\n         <p>Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent\n         confidence and 100 means 100 percent confidence.</p>"
+                    }
+                },
+                "FindingProviderFieldsCriticality": {
+                    "target": "com.amazonaws.securityhub#NumberFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding provider value for the level of importance assigned to the resources associated with\n         the findings.</p>\n         <p>A score of 0 means that the underlying resources have no criticality, and a score of 100\n         is reserved for the most critical resources. </p>"
+                    }
+                },
+                "FindingProviderFieldsRelatedFindingsId": {
+                    "target": "com.amazonaws.securityhub#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding identifier of a related finding that is identified by the finding provider.</p>"
+                    }
+                },
+                "FindingProviderFieldsRelatedFindingsProductArn": {
+                    "target": "com.amazonaws.securityhub#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the solution that generated a related finding that is identified by the finding provider.</p>"
+                    }
+                },
+                "FindingProviderFieldsSeverityLabel": {
+                    "target": "com.amazonaws.securityhub#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding provider value for the severity label.</p>"
+                    }
+                },
+                "FindingProviderFieldsSeverityOriginal": {
+                    "target": "com.amazonaws.securityhub#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding provider's original value for the severity.</p>"
+                    }
+                },
+                "FindingProviderFieldsTypes": {
+                    "target": "com.amazonaws.securityhub#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more finding types that the finding provider assigned to the finding. Uses the format of <code>namespace/category/classifier</code>\n         that classify a finding.</p>\n         <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual\n         Behaviors | Sensitive Data Identifications</p>"
                     }
                 }
             },
@@ -7648,6 +8014,150 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Data about a queue.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsSsmComplianceSummary": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current patch compliance status.</p>\n         <p>The possible status values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLIANT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_COMPLIANT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UNSPECIFIED_DATA</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CompliantCriticalCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For the patches that are compliant, the number that have a severity of\n            <code>CRITICAL</code>.</p>"
+                    }
+                },
+                "CompliantHighCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For the patches that are compliant, the number that have a severity of\n         <code>HIGH</code>.</p>"
+                    }
+                },
+                "CompliantMediumCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For the patches that are compliant, the number that have a severity of\n            <code>MEDIUM</code>.</p>"
+                    }
+                },
+                "ExecutionType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of execution that was used determine compliance.</p>"
+                    }
+                },
+                "NonCompliantCriticalCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For the patch items that are noncompliant, the number of items that have a severity of\n            <code>CRITICAL</code>.</p>"
+                    }
+                },
+                "CompliantInformationalCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For the patches that are compliant, the number that have a severity of\n            <code>INFORMATIONAL</code>.</p>"
+                    }
+                },
+                "NonCompliantInformationalCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For the patches that are noncompliant, the number that have a severity of\n            <code>INFORMATIONAL</code>.</p>"
+                    }
+                },
+                "CompliantUnspecifiedCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For the patches that are compliant, the number that have a severity of\n            <code>UNSPECIFIED</code>.</p>"
+                    }
+                },
+                "NonCompliantLowCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For the patches that are noncompliant, the number that have a severity of\n            <code>LOW</code>.</p>"
+                    }
+                },
+                "NonCompliantHighCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For the patches that are noncompliant, the number that have a severity of\n            <code>HIGH</code>.</p>"
+                    }
+                },
+                "CompliantLowCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For the patches that are compliant, the number that have a severity of\n         <code>LOW</code>.</p>"
+                    }
+                },
+                "ComplianceType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource for which the compliance was determined. For\n            <code>AwsSsmPatchCompliance</code>, <code>ComplianceType</code> is <code>Patch</code>. </p>"
+                    }
+                },
+                "PatchBaselineId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the patch baseline. The patch baseline lists the patches that are\n         approved for installation.</p>"
+                    }
+                },
+                "OverallSeverity": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The highest severity for the patches.</p>"
+                    }
+                },
+                "NonCompliantMediumCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For the patches that are noncompliant, the number that have a severity of\n            <code>MEDIUM</code>.</p>"
+                    }
+                },
+                "NonCompliantUnspecifiedCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For the patches that are noncompliant, the number that have a severity of\n            <code>UNSPECIFIED</code>.</p>"
+                    }
+                },
+                "PatchGroup": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the patch group for which compliance was determined. A patch group\n         uses tags to group EC2 instances that should have the same patch compliance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the details about the compliance status for a patch.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsSsmPatch": {
+            "type": "structure",
+            "members": {
+                "ComplianceSummary": {
+                    "target": "com.amazonaws.securityhub#AwsSsmComplianceSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compliance status details for the patch.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about the compliance for a patch.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsSsmPatchComplianceDetails": {
+            "type": "structure",
+            "members": {
+                "Patch": {
+                    "target": "com.amazonaws.securityhub#AwsSsmPatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the status of a patch.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the state of a patch on an instance based on the patch\n         baseline that was used to patch the instance.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsWafWebAclDetails": {
@@ -7863,7 +8373,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Imports security findings generated from an integrated third-party product into Security Hub.\n         This action is requested by the integrated product to import its findings into\n         Security Hub.</p>\n         <p>The maximum allowed size for a finding is 240 Kb. An error is returned for any finding\n         larger than 240 Kb.</p>\n         <p>After a finding is created, <code>BatchImportFindings</code> cannot be used to update\n         the following finding fields and objects, which Security Hub customers use to manage their\n         investigation workflow.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Note</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UserDefinedFields</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>VerificationState</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Workflow</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <code>BatchImportFindings</code> can be used to update the following finding fields and\n         objects only if they have not been updated using <code>BatchUpdateFindings</code>. After\n         they are updated using <code>BatchUpdateFindings</code>, these fields cannot be updated\n         using <code>BatchImportFindings</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Confidence</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Criticality</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RelatedFindings</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Severity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Types</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Imports security findings generated from an integrated product into Security Hub.\n         This action is requested by the integrated product to import its findings into\n         Security Hub.</p>\n         <p>The maximum allowed size for a finding is 240 Kb. An error is returned for any finding\n         larger than 240 Kb.</p>\n         <p>After a finding is created, <code>BatchImportFindings</code> cannot be used to update\n         the following finding fields and objects, which Security Hub customers use to manage their\n         investigation workflow.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Note</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UserDefinedFields</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>VerificationState</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Workflow</code>\n               </p>\n            </li>\n         </ul>\n         <p>Finding providers also should not use <code>BatchImportFindings</code> to update the following attributes.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Confidence</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Criticality</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RelatedFindings</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Severity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Types</code>\n               </p>\n            </li>\n         </ul>\n         <p>Instead, finding providers use <code>FindingProviderFields</code> to provide values for these attributes.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/findings/import",
@@ -7875,11 +8385,23 @@
             "type": "structure",
             "members": {
                 "Findings": {
-                    "target": "com.amazonaws.securityhub#AwsSecurityFindingList",
+                    "target": "com.amazonaws.securityhub#BatchImportFindingsRequestFindingList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of findings to import. To successfully import a finding, it must follow the\n            <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html\">AWS Security Finding Format</a>. Maximum of 100 findings per request.</p>",
                         "smithy.api#required": {}
                     }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#BatchImportFindingsRequestFindingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsSecurityFinding"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
                 }
             }
         },
@@ -8065,6 +8587,44 @@
                 "target": "com.amazonaws.securityhub#NonEmptyString"
             }
         },
+        "com.amazonaws.securityhub#Cell": {
+            "type": "structure",
+            "members": {
+                "Column": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The column number of the column that contains the data. For a Microsoft Excel workbook, the column number corresponds to the alphabetical column identifiers. For example, a value of 1 for Column corresponds to the A column in the workbook.</p>"
+                    }
+                },
+                "Row": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The row number of the row that contains the data.</p>"
+                    }
+                },
+                "ColumnName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column that contains the data.</p>"
+                    }
+                },
+                "CellReference": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For a Microsoft Excel workbook, provides the location of the cell, as an absolute cell reference, that contains the data. For example, Sheet2!C5 for cell C5 on Sheet2.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An occurrence of sensitive data detected in a Microsoft Excel workbook, comma-separated value (CSV) file, or tab-separated value (TSV) file.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#Cells": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#Cell"
+            }
+        },
         "com.amazonaws.securityhub#CidrBlockAssociation": {
             "type": "structure",
             "members": {
@@ -8095,6 +8655,84 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#CidrBlockAssociation"
+            }
+        },
+        "com.amazonaws.securityhub#City": {
+            "type": "structure",
+            "members": {
+                "CityName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the city.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a city.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#ClassificationResult": {
+            "type": "structure",
+            "members": {
+                "MimeType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of content that the finding applies to.</p>"
+                    }
+                },
+                "SizeClassified": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total size in bytes of the affected data.</p>"
+                    }
+                },
+                "AdditionalOccurrences": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether there are additional occurrences of sensitive data that are not included in the finding. This occurs when the number of occurrences exceeds the maximum that can be included.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.securityhub#ClassificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the sensitive data detection.</p>"
+                    }
+                },
+                "SensitiveData": {
+                    "target": "com.amazonaws.securityhub#SensitiveDataResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides details about sensitive data that was identified based on built-in configuration.</p>"
+                    }
+                },
+                "CustomDataIdentifiers": {
+                    "target": "com.amazonaws.securityhub#CustomDataIdentifiersResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides details about sensitive data that was identified based on customer-defined configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the sensitive data that was detected on the resource.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#ClassificationStatus": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code that represents the status of the sensitive data detection.</p>"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A longer description of the current status of the sensitive data detection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about the current status of the sensitive data detection.</p>"
             }
         },
         "com.amazonaws.securityhub#Compliance": {
@@ -8191,6 +8829,26 @@
                         "name": "DISABLED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.securityhub#Country": {
+            "type": "structure",
+            "members": {
+                "CountryCode": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 2-letter ISO 3166 country code for the country.</p>"
+                    }
+                },
+                "CountryName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the country.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a country.</p>"
             }
         },
         "com.amazonaws.securityhub#CreateActionTarget": {
@@ -8403,6 +9061,64 @@
                 }
             }
         },
+        "com.amazonaws.securityhub#CustomDataIdentifiersDetections": {
+            "type": "structure",
+            "members": {
+                "Count": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of occurrences of sensitive data that were detected.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the custom identifier that was used to detect the sensitive data.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>he name of the custom identifier that detected the sensitive data.</p>"
+                    }
+                },
+                "Occurrences": {
+                    "target": "com.amazonaws.securityhub#Occurrences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the sensitive data that was detected.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of detected instances of sensitive data.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#CustomDataIdentifiersDetectionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#CustomDataIdentifiersDetections"
+            }
+        },
+        "com.amazonaws.securityhub#CustomDataIdentifiersResult": {
+            "type": "structure",
+            "members": {
+                "Detections": {
+                    "target": "com.amazonaws.securityhub#CustomDataIdentifiersDetectionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of detected instances of sensitive data.</p>"
+                    }
+                },
+                "TotalCount": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of occurrences of sensitive data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains an instance of sensitive data that was detected by a customer-defined identifier.</p>"
+            }
+        },
         "com.amazonaws.securityhub#Cvss": {
             "type": "structure",
             "members": {
@@ -8433,6 +9149,26 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#Cvss"
+            }
+        },
+        "com.amazonaws.securityhub#DataClassificationDetails": {
+            "type": "structure",
+            "members": {
+                "DetailedResultsLocation": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the folder or file that contains the sensitive data.</p>"
+                    }
+                },
+                "Result": {
+                    "target": "com.amazonaws.securityhub#ClassificationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details about the sensitive data that was detected on the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about sensitive data that was detected on a resource.</p>"
             }
         },
         "com.amazonaws.securityhub#DateFilter": {
@@ -9002,7 +9738,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the available products that you can subscribe to and integrate\n         with Security Hub in order to consolidate findings.</p>",
+                "smithy.api#documentation": "<p>Returns information about product integrations in Security Hub.</p>\n         <p>You can optionally provide an integration ARN. If you provide an integration ARN, then\n         the results only include that integration.</p>\n         <p>If you do not provide an integration ARN, then the results include all of the available\n         product integrations. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/products",
@@ -9030,6 +9766,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
                         "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "ProductArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the integration to return.</p>",
+                        "smithy.api#httpQuery": "ProductArn"
                     }
                 }
             }
@@ -9430,6 +10173,32 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.securityhub#DnsRequestAction": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS domain that is associated with the DNS request.</p>"
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol that was used for the DNS request.</p>"
+                    }
+                },
+                "Blocked": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the DNS request was blocked.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provided if <code>ActionType</code> is <code>DNS_REQUEST</code>. It provides details\n         about the DNS request that was detected.</p>"
+            }
+        },
         "com.amazonaws.securityhub#Double": {
             "type": "double"
         },
@@ -9599,6 +10368,84 @@
             },
             "value": {
                 "target": "com.amazonaws.securityhub#NonEmptyString"
+            }
+        },
+        "com.amazonaws.securityhub#FindingProviderFields": {
+            "type": "structure",
+            "members": {
+                "Confidence": {
+                    "target": "com.amazonaws.securityhub#RatioScale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A finding's confidence. Confidence is defined as the likelihood that a finding\n         accurately identifies the behavior or issue that it was intended to identify.</p>\n         <p>Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent\n         confidence and 100 means 100 percent confidence.</p>"
+                    }
+                },
+                "Criticality": {
+                    "target": "com.amazonaws.securityhub#RatioScale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level of importance assigned to the resources associated with the finding.</p>\n         <p>A score of 0 means that the underlying resources have no criticality, and a score of 100\n         is reserved for the most critical resources.</p>"
+                    }
+                },
+                "RelatedFindings": {
+                    "target": "com.amazonaws.securityhub#RelatedFindingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of findings that are related to the current finding.</p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.securityhub#FindingProviderSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity of a finding.</p>"
+                    }
+                },
+                "Types": {
+                    "target": "com.amazonaws.securityhub#TypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more finding types in the format of <code>namespace/category/classifier</code>\n         that classify a finding.</p>\n         <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual\n         Behaviors | Sensitive Data Identifications</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>In a <code>BatchImportFindings</code> request, finding providers use <code>FindingProviderFields</code> to provide and update values for confidence, criticality, related findings, severity, and types.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#FindingProviderSeverity": {
+            "type": "structure",
+            "members": {
+                "Label": {
+                    "target": "com.amazonaws.securityhub#SeverityLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity label assigned to the finding by the finding provider.</p>"
+                    }
+                },
+                "Original": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding provider's original value for the severity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The severity assigned to the finding by the finding provider.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#GeoLocation": {
+            "type": "structure",
+            "members": {
+                "Lon": {
+                    "target": "com.amazonaws.securityhub#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The longitude of the location.</p>"
+                    }
+                },
+                "Lat": {
+                    "target": "com.amazonaws.securityhub#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latitude of the location.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the latitude and longitude coordinates of a location.</p>"
             }
         },
         "com.amazonaws.securityhub#GetEnabledStandards": {
@@ -10378,6 +11225,38 @@
                 "target": "com.amazonaws.securityhub#IpFilter"
             }
         },
+        "com.amazonaws.securityhub#IpOrganizationDetails": {
+            "type": "structure",
+            "members": {
+                "Asn": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Autonomous System Number (ASN) of the internet provider</p>"
+                    }
+                },
+                "AsnOrg": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the organization that registered the ASN.</p>"
+                    }
+                },
+                "Isp": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISP information for the internet provider.</p>"
+                    }
+                },
+                "Org": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the internet provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about an internet provider.</p>"
+            }
+        },
         "com.amazonaws.securityhub#Ipv6CidrBlockAssociation": {
             "type": "structure",
             "members": {
@@ -11124,6 +12003,50 @@
                 "smithy.api#documentation": "<p>The details of network-related information about a finding.</p>"
             }
         },
+        "com.amazonaws.securityhub#NetworkConnectionAction": {
+            "type": "structure",
+            "members": {
+                "ConnectionDirection": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The direction of the network connection request (<code>IN</code> or\n         <code>OUT</code>).</p>"
+                    }
+                },
+                "RemoteIpDetails": {
+                    "target": "com.amazonaws.securityhub#ActionRemoteIpDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the remote IP address that issued the network connection\n         request.</p>"
+                    }
+                },
+                "RemotePortDetails": {
+                    "target": "com.amazonaws.securityhub#ActionRemotePortDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the port on the remote IP address.</p>"
+                    }
+                },
+                "LocalPortDetails": {
+                    "target": "com.amazonaws.securityhub#ActionLocalPortDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the port on the EC2 instance.</p>"
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol used to make the network connection request.</p>"
+                    }
+                },
+                "Blocked": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the network connection attempt was blocked.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provided if <code>ActionType</code> is <code>NETWORK_CONNECTION</code>. It provides\n         details about the attempted network connection that was detected.</p>"
+            }
+        },
         "com.amazonaws.securityhub#NetworkDirection": {
             "type": "string",
             "traits": {
@@ -11321,6 +12244,76 @@
                 "target": "com.amazonaws.securityhub#NumberFilter"
             }
         },
+        "com.amazonaws.securityhub#Occurrences": {
+            "type": "structure",
+            "members": {
+                "LineRanges": {
+                    "target": "com.amazonaws.securityhub#Ranges",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Occurrences of sensitive data detected in a non-binary text file or a Microsoft Word file. Non-binary text files include files such as HTML, XML, JSON, and TXT files.</p>"
+                    }
+                },
+                "OffsetRanges": {
+                    "target": "com.amazonaws.securityhub#Ranges",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Occurrences of sensitive data detected in a binary text file.</p>"
+                    }
+                },
+                "Pages": {
+                    "target": "com.amazonaws.securityhub#Pages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Occurrences of sensitive data in an Adobe Portable Document Format (PDF) file.</p>"
+                    }
+                },
+                "Records": {
+                    "target": "com.amazonaws.securityhub#Records",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Occurrences of sensitive data in an Apache Avro object container or an Apache Parquet file.</p>"
+                    }
+                },
+                "Cells": {
+                    "target": "com.amazonaws.securityhub#Cells",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Occurrences of sensitive data detected in Microsoft Excel workbooks, comma-separated value (CSV) files, or tab-separated value (TSV) files.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The detected occurrences of sensitive data.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#Page": {
+            "type": "structure",
+            "members": {
+                "PageNumber": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The page number of the page that contains the sensitive data.</p>"
+                    }
+                },
+                "LineRange": {
+                    "target": "com.amazonaws.securityhub#Range",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An occurrence of sensitive data detected in a non-binary text file or a Microsoft Word file. Non-binary text files include files such as HTML, XML, JSON, and TXT files.</p>"
+                    }
+                },
+                "OffsetRange": {
+                    "target": "com.amazonaws.securityhub#Range",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An occurrence of sensitive data detected in a binary text file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An occurrence of sensitive data in an Adobe Portable Document Format (PDF) file.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#Pages": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#Page"
+            }
+        },
         "com.amazonaws.securityhub#Partition": {
             "type": "string",
             "traits": {
@@ -11413,6 +12406,58 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides an overview of the patch compliance status for an instance against a selected\n         compliance standard.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#PortProbeAction": {
+            "type": "structure",
+            "members": {
+                "PortProbeDetails": {
+                    "target": "com.amazonaws.securityhub#PortProbeDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the ports affected by the port probe.</p>"
+                    }
+                },
+                "Blocked": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the port probe was blocked.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provided if <code>ActionType</code> is <code>PORT_PROBE</code>. It provides details\n         about the attempted port probe that was detected.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#PortProbeDetail": {
+            "type": "structure",
+            "members": {
+                "LocalPortDetails": {
+                    "target": "com.amazonaws.securityhub#ActionLocalPortDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about the port that was scanned.</p>"
+                    }
+                },
+                "LocalIpDetails": {
+                    "target": "com.amazonaws.securityhub#ActionLocalIpDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about the IP address where the scanned port is located.</p>"
+                    }
+                },
+                "RemoteIpDetails": {
+                    "target": "com.amazonaws.securityhub#ActionRemoteIpDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about the remote IP address that performed the scan.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A port scan that was part of the port probe. For each scan, PortProbeDetails provides\n         information about the local IP address and port that were scanned, and the remote IP\n         address that the scan originated from.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#PortProbeDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#PortProbeDetail"
             }
         },
         "com.amazonaws.securityhub#PortRange": {
@@ -11560,6 +12605,38 @@
                 "target": "com.amazonaws.securityhub#Product"
             }
         },
+        "com.amazonaws.securityhub#Range": {
+            "type": "structure",
+            "members": {
+                "Start": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of lines (for a line range) or characters (for an offset range) from the beginning of the file to the end of the sensitive data.</p>"
+                    }
+                },
+                "End": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of lines (for a line range) or characters (for an offset range) from the beginning of the file to the end of the sensitive data.</p>"
+                    }
+                },
+                "StartColumn": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>In the line where the sensitive data starts, the column within the line where the sensitive data starts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies where the sensitive data begins and ends.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#Ranges": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#Range"
+            }
+        },
         "com.amazonaws.securityhub#RatioScale": {
             "type": "integer",
             "traits": {
@@ -11589,6 +12666,26 @@
                 "smithy.api#documentation": "<p>A recommendation on how to remediate the issue identified in a finding.</p>"
             }
         },
+        "com.amazonaws.securityhub#Record": {
+            "type": "structure",
+            "members": {
+                "JsonPath": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path, as a JSONPath expression, to the field in the record that contains the data. If the field name is longer than 20 characters, it is truncated. If the path is longer than 250 characters, it is truncated.</p>"
+                    }
+                },
+                "RecordIndex": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The record index, starting from 0, for the record that contains the data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An occurrence of sensitive data in an Apache Avro object container or an Apache Parquet file.</p>"
+            }
+        },
         "com.amazonaws.securityhub#RecordState": {
             "type": "string",
             "traits": {
@@ -11602,6 +12699,12 @@
                         "name": "ARCHIVED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.securityhub#Records": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#Record"
             }
         },
         "com.amazonaws.securityhub#RelatedFinding": {
@@ -11684,13 +12787,19 @@
                 "ResourceRole": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Identifies the role of the resource in the finding. A resource is either the actor or target of the finding activity,</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.securityhub#FieldMap",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of AWS tags associated with a resource at the time the finding was\n         processed.</p>"
+                    }
+                },
+                "DataClassification": {
+                    "target": "com.amazonaws.securityhub#DataClassificationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about sensitive data that was detected on the resource.</p>"
                     }
                 },
                 "Details": {
@@ -11801,6 +12910,12 @@
                         "smithy.api#documentation": "<p>Details about an Amazon S3 bucket related to a finding.</p>"
                     }
                 },
+                "AwsS3AccountPublicAccessBlock": {
+                    "target": "com.amazonaws.securityhub#AwsS3AccountPublicAccessBlockDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the Amazon S3 Public Access Block configuration for an account.</p>"
+                    }
+                },
                 "AwsS3Object": {
                     "target": "com.amazonaws.securityhub#AwsS3ObjectDetails",
                     "traits": {
@@ -11834,13 +12949,13 @@
                 "AwsApiGatewayV2Stage": {
                     "target": "com.amazonaws.securityhub#AwsApiGatewayV2StageDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Provides information about a version 2 stage for Amazon API Gateway.</p>"
                     }
                 },
                 "AwsApiGatewayV2Api": {
                     "target": "com.amazonaws.securityhub#AwsApiGatewayV2ApiDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Provides information about a version 2 API in Amazon API Gateway.</p>"
                     }
                 },
                 "AwsDynamoDbTable": {
@@ -11852,43 +12967,49 @@
                 "AwsApiGatewayStage": {
                     "target": "com.amazonaws.securityhub#AwsApiGatewayStageDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Provides information about a version 1 Amazon API Gateway stage.</p>"
                     }
                 },
                 "AwsApiGatewayRestApi": {
                     "target": "com.amazonaws.securityhub#AwsApiGatewayRestApiDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Provides information about a REST API in version 1 of Amazon API Gateway.</p>"
                     }
                 },
                 "AwsCloudTrailTrail": {
                     "target": "com.amazonaws.securityhub#AwsCloudTrailTrailDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Provides details about a CloudTrail trail.</p>"
+                    }
+                },
+                "AwsSsmPatchCompliance": {
+                    "target": "com.amazonaws.securityhub#AwsSsmPatchComplianceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about the state of a patch on an instance based on the patch baseline that was used to patch the instance.</p>"
                     }
                 },
                 "AwsCertificateManagerCertificate": {
                     "target": "com.amazonaws.securityhub#AwsCertificateManagerCertificateDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Provides details about an AWS Certificate Manager (ACM) certificate.</p>"
                     }
                 },
                 "AwsRedshiftCluster": {
                     "target": "com.amazonaws.securityhub#AwsRedshiftClusterDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Contains details about an Amazon Redshift cluster.</p>"
                     }
                 },
                 "AwsElbLoadBalancer": {
                     "target": "com.amazonaws.securityhub#AwsElbLoadBalancerDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>contains details about a Classic Load Balancer.</p>"
                     }
                 },
                 "AwsIamGroup": {
                     "target": "com.amazonaws.securityhub#AwsIamGroupDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>"
+                        "smithy.api#documentation": "<p>Contains details about an IAM group.</p>"
                     }
                 },
                 "AwsIamRole": {
@@ -12191,6 +13312,70 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>Security Hub provides you with a comprehensive view of the security state of your AWS\n         environment and resources. It also provides you with the readiness status of your\n         environment based on controls from supported security standards. Security Hub collects security\n         data from AWS accounts, services, and integrated third-party products and helps you analyze\n         security trends in your environment to identify the highest priority security issues. For\n         more information about Security Hub, see the <i>\n               <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">AWS Security Hub User\n               Guide</a>\n            </i>.</p>\n         <p>When you use operations in the Security Hub API, the requests are executed only in the AWS\n         Region that is currently active or in the specific AWS Region that you specify in your\n         request. Any configuration or settings change that results from the operation is applied\n         only to that Region. To make the same change in other Regions, execute the same command for\n         each Region to apply the change to.</p>\n         <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code>\n               <a>CreateMembers</a>\n            </code> to add a member account to Security Hub, the association of\n         the member account with the master account is created only in the <code>us-west-2</code>\n         Region. Security Hub must be enabled for the member account in the same Region that the invitation\n         was sent from.</p>\n         <p>The following throttling limits apply to using Security Hub API operations.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\n                     <a>BatchEnableStandards</a>\n                  </code> - <code>RateLimit</code> of 1\n               request per second, <code>BurstLimit</code> of 1 request per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>GetFindings</a>\n                  </code> - <code>RateLimit</code> of 3 requests per second.\n                  <code>BurstLimit</code> of 6 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>UpdateFindings</a>\n                  </code> - <code>RateLimit</code> of 1 request per\n               second. <code>BurstLimit</code> of 5 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>UpdateStandardsControl</a>\n                  </code> - <code>RateLimit</code> of\n               1 request per second, <code>BurstLimit</code> of 5 requests per second.</p>\n            </li>\n            <li>\n               <p>All other operations - <code>RateLimit</code> of 10 requests per second.\n                  <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS SecurityHub"
+            }
+        },
+        "com.amazonaws.securityhub#SensitiveDataDetections": {
+            "type": "structure",
+            "members": {
+                "Count": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of occurrences of sensitive data that were detected.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of sensitive data that was detected. For example, the type might indicate that the data is an email address.</p>"
+                    }
+                },
+                "Occurrences": {
+                    "target": "com.amazonaws.securityhub#Occurrences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the sensitive data that was detected.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of detected instances of sensitive data.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#SensitiveDataDetectionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#SensitiveDataDetections"
+            }
+        },
+        "com.amazonaws.securityhub#SensitiveDataResult": {
+            "type": "structure",
+            "members": {
+                "Category": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of sensitive data that was detected. For example, the category can indicate that the sensitive data involved credentials, financial information, or personal information.</p>"
+                    }
+                },
+                "Detections": {
+                    "target": "com.amazonaws.securityhub#SensitiveDataDetectionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of detected instances of sensitive data.</p>"
+                    }
+                },
+                "TotalCount": {
+                    "target": "com.amazonaws.securityhub#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of occurrences of sensitive data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a detected instance of sensitive data that are based on built-in identifiers.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#SensitiveDataResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#SensitiveDataResult"
             }
         },
         "com.amazonaws.securityhub#Severity": {
@@ -12564,7 +13749,7 @@
                 "StandardsStatus": {
                     "target": "com.amazonaws.securityhub#StandardsStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the standards subscription.</p>",
+                        "smithy.api#documentation": "<p>The status of the standard subscription.</p>\n         <p>The status values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> - Standard is in the process of being enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> - Standard is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INCOMPLETE</code> - Standard could not be enabled completely. Some controls may not be available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - Standard is in the process of being disabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Standard could not be disabled.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -13515,7 +14700,7 @@
                 "Status": {
                     "target": "com.amazonaws.securityhub#WorkflowStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the investigation into the finding. The allowed values are the\n         following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code> - The initial state of a finding, before it is reviewed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOTIFIED</code> - Indicates that you notified the resource owner about the\n               security issue. Used when the initial reviewer is not the resource owner, and needs\n               intervention from the resource owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be\n               acted upon.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLVED</code> - The finding was reviewed and remediated and is now\n               considered resolved. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the investigation into the finding. The allowed values are the\n         following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code> - The initial state of a finding, before it is reviewed.</p>\n               <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or\n                  <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>RecordState</code> changes from <code>ARCHIVED</code> to\n                        <code>ACTIVE</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ComplianceStatus</code> changes from <code>PASSED</code> to either\n                        <code>WARNING</code>, <code>FAILED</code>, or\n                     <code>NOT_AVAILABLE</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>NOTIFIED</code> - Indicates that you notified the resource owner about the\n               security issue. Used when the initial reviewer is not the resource owner, and needs\n               intervention from the resource owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be\n               acted upon.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLVED</code> - The finding was reviewed and remediated and is now\n               considered resolved. </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -13582,7 +14767,7 @@
                 "Status": {
                     "target": "com.amazonaws.securityhub#WorkflowStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the investigation into the finding. The allowed values are the\n         following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code> - The initial state of a finding, before it is reviewed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOTIFIED</code> - Indicates that you notified the resource owner about the\n               security issue. Used when the initial reviewer is not the resource owner, and needs\n               intervention from the resource owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLVED</code> - The finding was reviewed and remediated and is now\n               considered resolved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be\n               acted upon.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the investigation into the finding. The allowed values are the\n         following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code> - The initial state of a finding, before it is reviewed.</p>\n               <p>Security Hub also resets <code>WorkFlowStatus</code> from <code>NOTIFIED</code> or\n                  <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p>\n               <ul>\n                  <li>\n                     <p>The record state changes from <code>ARCHIVED</code> to\n                     <code>ACTIVE</code>.</p>\n                  </li>\n                  <li>\n                     <p>The compliance status changes from <code>PASSED</code> to either\n                        <code>WARNING</code>, <code>FAILED</code>, or\n                     <code>NOT_AVAILABLE</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>NOTIFIED</code> - Indicates that you notified the resource owner about the\n               security issue. Used when the initial reviewer is not the resource owner, and needs\n               intervention from the resource owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLVED</code> - The finding was reviewed and remediated and is now\n               considered resolved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be\n               acted upon.</p>\n            </li>\n         </ul>"
                     }
                 }
             },

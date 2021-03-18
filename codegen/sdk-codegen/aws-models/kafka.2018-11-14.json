@@ -2096,6 +2096,9 @@
                     "target": "com.amazonaws.kafka#UpdateBrokerStorage"
                 },
                 {
+                    "target": "com.amazonaws.kafka#UpdateBrokerType"
+                },
+                {
                     "target": "com.amazonaws.kafka#UpdateClusterConfiguration"
                 },
                 {
@@ -2860,6 +2863,13 @@
                     "traits": {
                         "smithy.api#jsonName": "loggingInfo"
                     }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.kafka#__stringMin5Max32",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Amazon MSK broker type.</p>",
+                        "smithy.api#jsonName": "instanceType"
+                    }
                 }
             },
             "traits": {
@@ -3583,6 +3593,94 @@
             }
         },
         "com.amazonaws.kafka#UpdateBrokerStorageResponse": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>",
+                        "smithy.api#jsonName": "clusterArn"
+                    }
+                },
+                "ClusterOperationArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster operation.</p>",
+                        "smithy.api#jsonName": "clusterOperationArn"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kafka#UpdateBrokerType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafka#UpdateBrokerTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#UpdateBrokerTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates EC2 instance type.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/clusters/{ClusterArn}/nodes/type",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafka#UpdateBrokerTypeRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CurrentVersion": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster version that you want to change. After this operation completes successfully, the cluster will have a new version.</p>",
+                        "smithy.api#jsonName": "currentVersion",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetInstanceType": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon MSK broker type that you want all of the brokers in this cluster to be.</p>",
+                        "smithy.api#jsonName": "targetInstanceType",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kafka#UpdateBrokerTypeResponse": {
             "type": "structure",
             "members": {
                 "ClusterArn": {
