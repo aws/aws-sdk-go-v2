@@ -402,11 +402,11 @@ func validateRecordPatch(v *types.RecordPatch) error {
 	if len(v.Op) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Op"))
 	}
-	if v.SyncCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SyncCount"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.SyncCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncCount"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -452,14 +452,14 @@ func validateOpDeleteDatasetInput(v *DeleteDatasetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDatasetInput"}
-	if v.DatasetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
-	}
 	if v.IdentityPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
 	}
 	if v.IdentityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityId"))
+	}
+	if v.DatasetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -473,14 +473,14 @@ func validateOpDescribeDatasetInput(v *DescribeDatasetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDatasetInput"}
+	if v.IdentityPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
+	}
 	if v.IdentityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityId"))
 	}
 	if v.DatasetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
-	}
-	if v.IdentityPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -509,11 +509,11 @@ func validateOpDescribeIdentityUsageInput(v *DescribeIdentityUsageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeIdentityUsageInput"}
-	if v.IdentityId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityId"))
-	}
 	if v.IdentityPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
+	}
+	if v.IdentityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -590,11 +590,11 @@ func validateOpListRecordsInput(v *ListRecordsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListRecordsInput"}
-	if v.IdentityId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityId"))
-	}
 	if v.IdentityPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
+	}
+	if v.IdentityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityId"))
 	}
 	if v.DatasetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
@@ -614,11 +614,11 @@ func validateOpRegisterDeviceInput(v *RegisterDeviceInput) error {
 	if v.IdentityPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
 	}
-	if len(v.Platform) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
-	}
 	if v.IdentityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityId"))
+	}
+	if len(v.Platform) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
 	}
 	if v.Token == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Token"))
@@ -635,11 +635,11 @@ func validateOpSetCognitoEventsInput(v *SetCognitoEventsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetCognitoEventsInput"}
-	if v.Events == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Events"))
-	}
 	if v.IdentityPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
+	}
+	if v.Events == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Events"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -668,17 +668,17 @@ func validateOpSubscribeToDatasetInput(v *SubscribeToDatasetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SubscribeToDatasetInput"}
-	if v.DatasetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
+	if v.IdentityPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
 	}
 	if v.IdentityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityId"))
 	}
+	if v.DatasetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
+	}
 	if v.DeviceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
-	}
-	if v.IdentityPoolId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -692,17 +692,17 @@ func validateOpUnsubscribeFromDatasetInput(v *UnsubscribeFromDatasetInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UnsubscribeFromDatasetInput"}
-	if v.IdentityId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityId"))
-	}
 	if v.IdentityPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
 	}
-	if v.DeviceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
+	if v.IdentityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityId"))
 	}
 	if v.DatasetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
+	}
+	if v.DeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -719,19 +719,19 @@ func validateOpUpdateRecordsInput(v *UpdateRecordsInput) error {
 	if v.IdentityPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
 	}
+	if v.IdentityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityId"))
+	}
+	if v.DatasetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
+	}
 	if v.RecordPatches != nil {
 		if err := validateRecordPatchList(v.RecordPatches); err != nil {
 			invalidParams.AddNested("RecordPatches", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.DatasetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
-	}
 	if v.SyncSessionToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SyncSessionToken"))
-	}
-	if v.IdentityId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
