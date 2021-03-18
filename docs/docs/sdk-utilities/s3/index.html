@@ -22,12 +22,12 @@
 Upload Manager The Amazon Simple Storage Service upload manager determines if a file can be split into smaller parts and uploaded in parallel. You can customize the number of parallel uploads and the size of the uploaded parts." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/" />
-<meta property="article:modified_time" content="2021-01-15T09:43:09-08:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
+<meta property="article:modified_time" content="2021-03-18T10:34:41-07:00" /><meta property="og:site_name" content="AWS SDK for Go V2" />
 <meta itemprop="name" content="Amazon S3 Utilities">
 <meta itemprop="description" content="Transfer Managers The Amazon Simple Storage Service upload and download managers can break up large objects, so they can be transferred in multiple parts, in parallel. This makes it easy to resume interrupted transfers.
 Upload Manager The Amazon Simple Storage Service upload manager determines if a file can be split into smaller parts and uploaded in parallel. You can customize the number of parallel uploads and the size of the uploaded parts.">
-<meta itemprop="dateModified" content="2021-01-15T09:43:09-08:00" />
-<meta itemprop="wordCount" content="1834">
+<meta itemprop="dateModified" content="2021-03-18T10:34:41-07:00" />
+<meta itemprop="wordCount" content="2069">
 
 
 
@@ -113,7 +113,7 @@ Upload Manager The Amazon Simple Storage Service upload manager determines if a 
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.086f389c648c501e66434700a9f547a4.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.64fc2aaa0f1e81c3be63afd4e7788874.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -145,7 +145,7 @@ Upload Manager The Amazon Simple Storage Service upload manager determines if a 
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.086f389c648c501e66434700a9f547a4.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.64fc2aaa0f1e81c3be63afd4e7788874.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -2981,10 +2981,31 @@ client&rsquo;s configured Region.</p>
 <span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Bucket %s is in %s region\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">bucket</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">region</span><span style="color:#000;font-weight:bold">)</span>
 </code></pre></div><p>If <code>GetBucketRegion</code> is not able to resolve the location of a Bucket, the function returns a
 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/s3/manager#BucketNotFound">BucketNotFound</a> error type as shown in the example.</p>
+<h1 id="unseekable-streaming-input">Unseekable Streaming Input</h1>
+<p>For API operations like <code>PutObject</code> and <code>UploadPart</code>, the Amazon S3 client expects the value of the <code>Body</code> input parameter to implement the <a href="https://pkg.go.dev/io#Seeker">io.Seeker</a> interface by default. The <code>io.Seeker</code> interface is used by the client to determine the length of the value to upload, and to compute payload hash for the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">request signature</a>. If the <code>Body</code> input parameter value does not implement <code>io.Seeker</code>, your application will receive an error.</p>
+<pre><code>operation error S3: PutObject, failed to compute payload hash: failed to seek
+body to start, request stream is not seekable
+</code></pre><p>You can change this behavior by modifying the operation method&rsquo;s <a href="https://aws.github.io/aws-sdk-go-v2/docs/middleware/">Middleware</a> using functional options. The <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3#WithAPIOptions">WithAPIOptions</a> helper returns a functional option for zero or more middleware mutators. To disable the client computing the payload hash and use <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-header-based-auth.html">Unsigned Payload</a> request signature add <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/signer/v4#RemoveComputePayloadSHA256Middleware">v4.SwapComputePayloadSHA256ForUnsignedPayloadMiddleware</a>.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000">resp</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObject</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">PutObjectInput</span><span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">Bucket</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">bucketName</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#000">Key</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">objectName</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#000">Body</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">bytes</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewBuffer</span><span style="color:#000;font-weight:bold">([]</span><span style="color:#204a87">byte</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">`example object!`</span><span style="color:#000;font-weight:bold">)),</span>
+    <span style="color:#000">ContentLength</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#0000cf;font-weight:bold">15</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#8f5902;font-style:italic">// length of body
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">},</span> <span style="color:#000">s3</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">WithAPIOptions</span><span style="color:#000;font-weight:bold">(</span>
+    <span style="color:#000">v4</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">SwapComputePayloadSHA256ForUnsignedPayloadMiddleware</span><span style="color:#000;font-weight:bold">,</span>
+<span style="color:#000;font-weight:bold">))</span>
+</code></pre></div>
+
+<div class="pageinfo pageinfo-warning">
+<p>Amazon S3 requires the content length to be provided for all object&rsquo;s uploaded to a bucket. Since the <code>Body</code> input parameter does not implement <code>io.Seeker</code> interface the client will not be able to compute the <code>ContentLength</code> parameter for the request. The parameter must be provided by the application. The request will fail if the <code>ContentLength</code> parameter is not provided.</p>
+<p>Use the SDK&rsquo;s <a href="https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/#upload-manager">Amazon S3 Upload Manager</a> for uploads that are not seekable, and do not have a known length.</p>
+
+</div>
+
 
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified January 15, 2021: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/418e7ccc4fa98c51e7987d136c7b1de6718bbc85">updates documentation for fixes and wording (#1046) (418e7ccc4)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified March 18, 2021: <a  href="https://github.com/aws/aws-sdk-go-v2/commit/48411e2fec29a1987ec52f5f17382455133f00b0">Add documentation for using Amazon S3 with unseekable body (#1175) (48411e2fe)</a>
 </div>
 </div>
 
