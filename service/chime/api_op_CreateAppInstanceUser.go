@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -30,17 +31,17 @@ func (c *Client) CreateAppInstanceUser(ctx context.Context, params *CreateAppIns
 
 type CreateAppInstanceUserInput struct {
 
-	// The ARN of the app instance request.
+	// The ARN of the AppInstance request.
 	//
 	// This member is required.
 	AppInstanceArn *string
 
-	// The user ID of the app instance.
+	// The user ID of the AppInstance.
 	//
 	// This member is required.
 	AppInstanceUserId *string
 
-	// The token assigned to the user requesting an app instance.
+	// The token assigned to the user requesting an AppInstance.
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -52,6 +53,9 @@ type CreateAppInstanceUserInput struct {
 
 	// The request's metadata. Limited to a 1KB string in UTF-8.
 	Metadata *string
+
+	// Tags assigned to the AppInstanceUser.
+	Tags []types.Tag
 }
 
 type CreateAppInstanceUserOutput struct {

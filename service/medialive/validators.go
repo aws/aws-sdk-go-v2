@@ -150,6 +150,26 @@ func (m *validateOpCreateMultiplexProgram) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePartnerInput struct {
+}
+
+func (*validateOpCreatePartnerInput) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePartnerInput) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePartnerInputInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePartnerInputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTags struct {
 }
 
@@ -916,6 +936,10 @@ func addOpCreateMultiplexValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateMultiplexProgramValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMultiplexProgram{}, middleware.After)
+}
+
+func addOpCreatePartnerInputValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePartnerInput{}, middleware.After)
 }
 
 func addOpCreateTagsValidationMiddleware(stack *middleware.Stack) error {
@@ -1741,6 +1765,18 @@ func validateCaptionLanguageMapping(v *types.CaptionLanguageMapping) error {
 	}
 }
 
+func validateCaptionRectangle(v *types.CaptionRectangle) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CaptionRectangle"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCaptionSelector(v *types.CaptionSelector) error {
 	if v == nil {
 		return nil
@@ -1748,6 +1784,28 @@ func validateCaptionSelector(v *types.CaptionSelector) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CaptionSelector"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SelectorSettings != nil {
+		if err := validateCaptionSelectorSettings(v.SelectorSettings); err != nil {
+			invalidParams.AddNested("SelectorSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCaptionSelectorSettings(v *types.CaptionSelectorSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CaptionSelectorSettings"}
+	if v.TeletextSourceSettings != nil {
+		if err := validateTeletextSourceSettings(v.TeletextSourceSettings); err != nil {
+			invalidParams.AddNested("TeletextSourceSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1923,18 +1981,6 @@ func validateFrameCaptureGroupSettings(v *types.FrameCaptureGroupSettings) error
 	if v.Destination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
 	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateFrameCaptureSettings(v *types.FrameCaptureSettings) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "FrameCaptureSettings"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2832,6 +2878,23 @@ func validateStaticKeySettings(v *types.StaticKeySettings) error {
 	}
 }
 
+func validateTeletextSourceSettings(v *types.TeletextSourceSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TeletextSourceSettings"}
+	if v.OutputRectangle != nil {
+		if err := validateCaptionRectangle(v.OutputRectangle); err != nil {
+			invalidParams.AddNested("OutputRectangle", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTimecodeConfig(v *types.TimecodeConfig) error {
 	if v == nil {
 		return nil
@@ -2891,11 +2954,6 @@ func validateVideoCodecSettings(v *types.VideoCodecSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VideoCodecSettings"}
-	if v.FrameCaptureSettings != nil {
-		if err := validateFrameCaptureSettings(v.FrameCaptureSettings); err != nil {
-			invalidParams.AddNested("FrameCaptureSettings", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.H265Settings != nil {
 		if err := validateH265Settings(v.H265Settings); err != nil {
 			invalidParams.AddNested("H265Settings", err.(smithy.InvalidParamsError))
@@ -2925,6 +2983,21 @@ func validateVideoDescription(v *types.VideoDescription) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVpcOutputSettings(v *types.VpcOutputSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcOutputSettings"}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3003,6 +3076,11 @@ func validateOpCreateChannelInput(v *CreateChannelInput) error {
 			invalidParams.AddNested("InputAttachments", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Vpc != nil {
+		if err := validateVpcOutputSettings(v.Vpc); err != nil {
+			invalidParams.AddNested("Vpc", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3075,6 +3153,21 @@ func validateOpCreateMultiplexProgramInput(v *CreateMultiplexProgramInput) error
 	}
 	if v.RequestId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePartnerInputInput(v *CreatePartnerInputInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePartnerInputInput"}
+	if v.InputId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

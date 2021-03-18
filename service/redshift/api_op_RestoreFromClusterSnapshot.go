@@ -75,9 +75,10 @@ type RestoreFromClusterSnapshotInput struct {
 
 	// The number of days that automated snapshots are retained. If the value is 0,
 	// automated snapshots are disabled. Even if automated snapshots are disabled, you
-	// can still create manual snapshots when you want with CreateClusterSnapshot.
-	// Default: The value selected for the cluster from which the snapshot was taken.
-	// Constraints: Must be a value from 0 to 35.
+	// can still create manual snapshots when you want with CreateClusterSnapshot. You
+	// can't disable automated snapshots for RA3 node types. Set the automated
+	// retention period from 1-35 days. Default: The value selected for the cluster
+	// from which the snapshot was taken. Constraints: Must be a value from 0 to 35.
 	AutomatedSnapshotRetentionPeriod *int32
 
 	// The Amazon EC2 Availability Zone in which to restore the cluster. Default: A

@@ -50,6 +50,9 @@ type UpdateElasticsearchDomainConfigInput struct {
 	// Specifies advanced security options.
 	AdvancedSecurityOptions *types.AdvancedSecurityOptionsInput
 
+	// Specifies Auto-Tune options.
+	AutoTuneOptions *types.AutoTuneOptions
+
 	// Options to specify the Cognito user and identity pools for Kibana
 	// authentication. For more information, see Amazon Cognito Authentication for
 	// Kibana
@@ -65,9 +68,15 @@ type UpdateElasticsearchDomainConfigInput struct {
 	// The type and number of instances to instantiate for the domain cluster.
 	ElasticsearchClusterConfig *types.ElasticsearchClusterConfig
 
+	// Specifies the Encryption At Rest Options.
+	EncryptionAtRestOptions *types.EncryptionAtRestOptions
+
 	// Map of LogType and LogPublishingOption, each containing options to publish a
 	// given type of Elasticsearch log.
 	LogPublishingOptions map[string]types.LogPublishingOption
+
+	// Specifies the NodeToNodeEncryptionOptions.
+	NodeToNodeEncryptionOptions *types.NodeToNodeEncryptionOptions
 
 	// Option to set the time, in UTC format, for the daily automated snapshot. Default
 	// value is 0 hours.

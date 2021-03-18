@@ -11,9 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a password for the specified user, giving the user the ability to access
-// AWS services through the AWS Management Console. For more information about
-// managing passwords, see Managing Passwords
+// Creates a password for the specified IAM user. A password allows an IAM user to
+// access AWS services through the AWS Management Console. You can use the AWS CLI,
+// the AWS API, or the Users page in the IAM console to create a password for any
+// IAM user. Use ChangePassword to update your own existing password in the My
+// Security Credentials page in the AWS Management Console. For more information
+// about managing passwords, see Managing passwords
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html) in
 // the IAM User Guide.
 func (c *Client) CreateLoginProfile(ctx context.Context, params *CreateLoginProfileInput, optFns ...func(*Options)) (*CreateLoginProfileOutput, error) {

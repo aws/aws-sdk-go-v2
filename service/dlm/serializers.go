@@ -704,6 +704,11 @@ func awsRestjson1_serializeDocumentCreateRule(v *types.CreateRule, value smithyj
 		ok.String(string(v.IntervalUnit))
 	}
 
+	if len(v.Location) > 0 {
+		ok := object.Key("Location")
+		ok.String(string(v.Location))
+	}
+
 	if v.Times != nil {
 		ok := object.Key("Times")
 		if err := awsRestjson1_serializeDocumentTimesList(v.Times, ok); err != nil {
@@ -779,14 +784,14 @@ func awsRestjson1_serializeDocumentCrossRegionCopyRule(v *types.CrossRegionCopyR
 		ok.String(*v.CmkArn)
 	}
 
-	if v.CopyTags {
+	if v.CopyTags != nil {
 		ok := object.Key("CopyTags")
-		ok.Boolean(v.CopyTags)
+		ok.Boolean(*v.CopyTags)
 	}
 
-	{
+	if v.Encrypted != nil {
 		ok := object.Key("Encrypted")
-		ok.Boolean(v.Encrypted)
+		ok.Boolean(*v.Encrypted)
 	}
 
 	if v.RetainRule != nil {
@@ -794,6 +799,11 @@ func awsRestjson1_serializeDocumentCrossRegionCopyRule(v *types.CrossRegionCopyR
 		if err := awsRestjson1_serializeDocumentCrossRegionCopyRetainRule(v.RetainRule, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Target != nil {
+		ok := object.Key("Target")
+		ok.String(*v.Target)
 	}
 
 	if v.TargetRegion != nil {
@@ -826,9 +836,9 @@ func awsRestjson1_serializeDocumentEncryptionConfiguration(v *types.EncryptionCo
 		ok.String(*v.CmkArn)
 	}
 
-	{
+	if v.Encrypted != nil {
 		ok := object.Key("Encrypted")
-		ok.Boolean(v.Encrypted)
+		ok.Boolean(*v.Encrypted)
 	}
 
 	return nil
@@ -910,14 +920,14 @@ func awsRestjson1_serializeDocumentParameters(v *types.Parameters, value smithyj
 	object := value.Object()
 	defer object.Close()
 
-	if v.ExcludeBootVolume {
+	if v.ExcludeBootVolume != nil {
 		ok := object.Key("ExcludeBootVolume")
-		ok.Boolean(v.ExcludeBootVolume)
+		ok.Boolean(*v.ExcludeBootVolume)
 	}
 
-	if v.NoReboot {
+	if v.NoReboot != nil {
 		ok := object.Key("NoReboot")
-		ok.Boolean(v.NoReboot)
+		ok.Boolean(*v.NoReboot)
 	}
 
 	return nil
@@ -953,6 +963,13 @@ func awsRestjson1_serializeDocumentPolicyDetails(v *types.PolicyDetails, value s
 		ok.String(string(v.PolicyType))
 	}
 
+	if v.ResourceLocations != nil {
+		ok := object.Key("ResourceLocations")
+		if err := awsRestjson1_serializeDocumentResourceLocationList(v.ResourceLocations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResourceTypes != nil {
 		ok := object.Key("ResourceTypes")
 		if err := awsRestjson1_serializeDocumentResourceTypeValuesList(v.ResourceTypes, ok); err != nil {
@@ -974,6 +991,17 @@ func awsRestjson1_serializeDocumentPolicyDetails(v *types.PolicyDetails, value s
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourceLocationList(v []types.ResourceLocationValues, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

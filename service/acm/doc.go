@@ -3,9 +3,8 @@
 // Package acm provides the API client, operations, and parameter types for AWS
 // Certificate Manager.
 //
-// AWS Certificate Manager Welcome to the AWS Certificate Manager (ACM) API
-// documentation. You can use ACM to manage SSL/TLS certificates for your AWS-based
-// websites and applications. For general information about using ACM, see the  AWS
-// Certificate Manager User Guide
+// AWS Certificate Manager You can use AWS Certificate Manager (ACM) to manage
+// SSL/TLS certificates for your AWS-based websites and applications. For more
+// information about using ACM, see the AWS Certificate Manager User Guide
 // (https://docs.aws.amazon.com/acm/latest/userguide/).
 package acm

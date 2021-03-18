@@ -411,7 +411,18 @@ func awsAwsjson11_serializeDocumentRegionFilterList(v []string, value smithyjson
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResourceARNList(v []string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentResourceARNListForGet(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResourceARNListForTagUntag(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -598,6 +609,13 @@ func awsAwsjson11_serializeOpDocumentGetResourcesInput(v *GetResourcesInput, val
 		ok.String(*v.PaginationToken)
 	}
 
+	if v.ResourceARNList != nil {
+		ok := object.Key("ResourceARNList")
+		if err := awsAwsjson11_serializeDocumentResourceARNListForGet(v.ResourceARNList, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResourcesPerPage != nil {
 		ok := object.Key("ResourcesPerPage")
 		ok.Integer(*v.ResourcesPerPage)
@@ -629,11 +647,6 @@ func awsAwsjson11_serializeOpDocumentGetTagKeysInput(v *GetTagKeysInput, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
-		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
-	}
-
 	if v.PaginationToken != nil {
 		ok := object.Key("PaginationToken")
 		ok.String(*v.PaginationToken)
@@ -649,11 +662,6 @@ func awsAwsjson11_serializeOpDocumentGetTagValuesInput(v *GetTagValuesInput, val
 	if v.Key != nil {
 		ok := object.Key("Key")
 		ok.String(*v.Key)
-	}
-
-	if v.MaxResults != nil {
-		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
 	}
 
 	if v.PaginationToken != nil {
@@ -682,7 +690,7 @@ func awsAwsjson11_serializeOpDocumentTagResourcesInput(v *TagResourcesInput, val
 
 	if v.ResourceARNList != nil {
 		ok := object.Key("ResourceARNList")
-		if err := awsAwsjson11_serializeDocumentResourceARNList(v.ResourceARNList, ok); err != nil {
+		if err := awsAwsjson11_serializeDocumentResourceARNListForTagUntag(v.ResourceARNList, ok); err != nil {
 			return err
 		}
 	}
@@ -703,7 +711,7 @@ func awsAwsjson11_serializeOpDocumentUntagResourcesInput(v *UntagResourcesInput,
 
 	if v.ResourceARNList != nil {
 		ok := object.Key("ResourceARNList")
-		if err := awsAwsjson11_serializeDocumentResourceARNList(v.ResourceARNList, ok); err != nil {
+		if err := awsAwsjson11_serializeDocumentResourceARNListForTagUntag(v.ResourceARNList, ok); err != nil {
 			return err
 		}
 	}

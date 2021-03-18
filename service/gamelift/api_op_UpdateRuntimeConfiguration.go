@@ -12,42 +12,22 @@ import (
 )
 
 // Updates the current runtime configuration for the specified fleet, which tells
-// Amazon GameLift how to launch server processes on instances in the fleet. You
-// can update a fleet's runtime configuration at any time after the fleet is
-// created; it does not need to be in an ACTIVE status. To update runtime
-// configuration, specify the fleet ID and provide a RuntimeConfiguration object
-// with an updated set of server process configurations. Each instance in a Amazon
-// GameLift fleet checks regularly for an updated runtime configuration and changes
-// how it launches server processes to comply with the latest version. Existing
-// server processes are not affected by the update; runtime configuration changes
-// are applied gradually as existing processes shut down and new processes are
-// launched during Amazon GameLift's normal process recycling activity. Learn more
-// Setting up GameLift Fleets
+// GameLift how to launch server processes on all instances in the fleet. You can
+// update a fleet's runtime configuration at any time after the fleet is created;
+// it does not need to be in ACTIVE status. To update runtime configuration,
+// specify the fleet ID and provide a RuntimeConfiguration with an updated set of
+// server process configurations. If successful, the fleet's runtime configuration
+// settings are updated. Each instance in the fleet regularly checks for and
+// retrieves updated runtime configurations. Instances immediately begin complying
+// with the new configuration by launching new server processes or not replacing
+// existing processes when they shut down. Updating a fleet's runtime configuration
+// never affects existing server processes. Learn more Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related operations
-//
-// * CreateFleet
-//
-// * ListFleets
-//
-// * DeleteFleet
-//
-// *
-// DescribeFleetAttributes
-//
-// * Update fleets:
-//
-// * UpdateFleetAttributes
-//
-// *
-// UpdateFleetCapacity
-//
-// * UpdateFleetPortSettings
-//
-// * UpdateRuntimeConfiguration
-//
-// *
-// StartFleetActions or StopFleetActions
+// Related actions CreateFleetLocations | UpdateFleetAttributes |
+// UpdateFleetCapacity | UpdateFleetPortSettings | UpdateRuntimeConfiguration |
+// StopFleetActions | StartFleetActions | PutScalingPolicy | DeleteFleet |
+// DeleteFleetLocations | DeleteScalingPolicy | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateRuntimeConfiguration(ctx context.Context, params *UpdateRuntimeConfigurationInput, optFns ...func(*Options)) (*UpdateRuntimeConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateRuntimeConfigurationInput{}
@@ -66,8 +46,8 @@ func (c *Client) UpdateRuntimeConfiguration(ctx context.Context, params *UpdateR
 // Represents the input for a request operation.
 type UpdateRuntimeConfigurationInput struct {
 
-	// A unique identifier for a fleet to update runtime configuration for. You can use
-	// either the fleet ID or ARN value.
+	// A unique identifier for the fleet to update runtime configuration for. You can
+	// use either the fleet ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string
@@ -75,10 +55,8 @@ type UpdateRuntimeConfigurationInput struct {
 	// Instructions for launching server processes on each instance in the fleet.
 	// Server processes run either a custom game build executable or a Realtime Servers
 	// script. The runtime configuration lists the types of server processes to run on
-	// an instance and includes the following configuration settings: the server
-	// executable or launch script file, launch parameters, and the number of processes
-	// to run concurrently on each instance. A CreateFleet request must include a
-	// runtime configuration with at least one server process configuration.
+	// an instance, how to launch them, and the number of processes to run
+	// concurrently.
 	//
 	// This member is required.
 	RuntimeConfiguration *types.RuntimeConfiguration
@@ -87,8 +65,8 @@ type UpdateRuntimeConfigurationInput struct {
 // Represents the returned data in response to a request operation.
 type UpdateRuntimeConfigurationOutput struct {
 
-	// The runtime configuration currently in force. If the update was successful, this
-	// object matches the one in the request.
+	// The runtime configuration currently in use by all instances in the fleet. If the
+	// update was successful, all property changes are shown.
 	RuntimeConfiguration *types.RuntimeConfiguration
 
 	// Metadata pertaining to the operation's result.

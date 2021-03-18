@@ -100,7 +100,7 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // The resource policy is invalid or is missing a required statement. For general
 // information about IAM policy and statement structure, see Overview of JSON
 // Policies
-// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json).
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json).
 type InvalidPolicyException struct {
 	Message *string
 }

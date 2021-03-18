@@ -6168,6 +6168,19 @@ func awsAwsquery_deserializeDocumentActivity(v **types.Activity, decoder smithyx
 				sv.ActivityId = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("AutoScalingGroupARN", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AutoScalingGroupARN = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("AutoScalingGroupName", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -6179,6 +6192,19 @@ func awsAwsquery_deserializeDocumentActivity(v **types.Activity, decoder smithyx
 			{
 				xtv := string(val)
 				sv.AutoScalingGroupName = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("AutoScalingGroupState", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AutoScalingGroupState = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Cause", t.Name.Local):
@@ -11511,6 +11537,19 @@ func awsAwsquery_deserializeDocumentScheduledUpdateGroupAction(v **types.Schedul
 					return err
 				}
 				sv.Time = ptr.Time(t)
+			}
+
+		case strings.EqualFold("TimeZone", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TimeZone = ptr.String(xtv)
 			}
 
 		default:

@@ -10,17 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an event tracker that you use when sending event data to the specified
+// Creates an event tracker that you use when adding event data to a specified
 // dataset group using the PutEvents
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html) API.
-// When Amazon Personalize creates an event tracker, it also creates an
-// event-interactions dataset in the dataset group associated with the event
-// tracker. The event-interactions dataset stores the event data from the PutEvents
-// call. The contents of this dataset are not available to the user. Only one event
-// tracker can be associated with a dataset group. You will get an error if you
-// call CreateEventTracker using the same dataset group as an existing event
-// tracker. When you send event data you include your tracking ID. The tracking ID
-// identifies the customer and authorizes the customer to send the data. The event
+// Only one event tracker can be associated with a dataset group. You will get an
+// error if you call CreateEventTracker using the same dataset group as an existing
+// event tracker. When you create an event tracker, the response includes a
+// tracking ID, which you pass as a parameter when you use the PutEvents
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html)
+// operation. Amazon Personalize then appends the event data to the Interactions
+// dataset of the dataset group you specify in your event tracker. The event
 // tracker can be in one of the following states:
 //
 // * CREATE PENDING > CREATE

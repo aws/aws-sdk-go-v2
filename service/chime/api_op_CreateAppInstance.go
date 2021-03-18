@@ -7,12 +7,13 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Chime Messaging SDK AppInstance under an AWS Account. Only
-// Messaging SDK customers use this API. CreateAppInstance supports idempotency
+// Creates an Amazon Chime SDK messaging AppInstance under an AWS account. Only SDK
+// messaging customers use this API. CreateAppInstance supports idempotency
 // behavior as described in the AWS API Standard.
 func (c *Client) CreateAppInstance(ctx context.Context, params *CreateAppInstanceInput, optFns ...func(*Options)) (*CreateAppInstanceOutput, error) {
 	if params == nil {
@@ -31,23 +32,26 @@ func (c *Client) CreateAppInstance(ctx context.Context, params *CreateAppInstanc
 
 type CreateAppInstanceInput struct {
 
-	// The ClientRequestToken of the app instance.
+	// The ClientRequestToken of the AppInstance.
 	//
 	// This member is required.
 	ClientRequestToken *string
 
-	// The name of the app instance.
+	// The name of the AppInstance.
 	//
 	// This member is required.
 	Name *string
 
-	// The metadata of the app instance. Limited to a 1KB string in UTF-8.
+	// The metadata of the AppInstance. Limited to a 1KB string in UTF-8.
 	Metadata *string
+
+	// Tags assigned to the AppInstanceUser.
+	Tags []types.Tag
 }
 
 type CreateAppInstanceOutput struct {
 
-	// The Amazon Resource Number (ARN) of the app instance.
+	// The Amazon Resource Number (ARN) of the AppInstance.
 	AppInstanceArn *string
 
 	// Metadata pertaining to the operation's result.

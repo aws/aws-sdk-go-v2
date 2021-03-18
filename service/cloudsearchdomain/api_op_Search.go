@@ -33,11 +33,10 @@ import (
 // For more information, see Searching Your Data
 // (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching.html) in
 // the Amazon CloudSearch Developer Guide. The endpoint for submitting Search
-// requests is domain-specific and requires the --endpoint-url option. You submit
-// search requests to a domain's search endpoint. To get the search endpoint for
-// your domain, use the Amazon CloudSearch configuration service DescribeDomains
-// action. The endpoints are also available on the domain dashboard in the Amazon
-// CloudSearch console.
+// requests is domain-specific. You submit search requests to a domain's search
+// endpoint. To get the search endpoint for your domain, use the Amazon CloudSearch
+// configuration service DescribeDomains action. A domain's endpoints are also
+// displayed on the domain dashboard in the Amazon CloudSearch console.
 func (c *Client) Search(ctx context.Context, params *SearchInput, optFns ...func(*Options)) (*SearchOutput, error) {
 	if params == nil {
 		params = &SearchInput{}
@@ -79,12 +78,12 @@ type SearchInput struct {
 	Cursor *string
 
 	// Defines one or more numeric expressions that can be used to sort results or
-	// specify search criteria. You can also specify expressions as return fields. You
-	// specify the expressions in JSON using the form {"EXPRESSIONNAME":"EXPRESSION"}.
-	// You can define and use multiple expressions in a search request. For example:
-	// {"expression1":"_score*rating", "expression2":"(1/rank)*year"}  For information
-	// about the variables, operators, and functions you can use in expressions, see
-	// Writing Expressions
+	// specify search or filter criteria. You can also specify expressions as return
+	// fields. You specify the expressions in JSON using the form
+	// {"EXPRESSIONNAME":"EXPRESSION"}. You can define and use multiple expressions in
+	// a search request. For example:  {"expression1":"_score*rating",
+	// "expression2":"(1/rank)*year"}  For information about the variables, operators,
+	// and functions you can use in expressions, see Writing Expressions
 	// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html#writing-expressions)
 	// in the Amazon CloudSearch Developer Guide.
 	Expr *string
@@ -235,9 +234,7 @@ type SearchInput struct {
 	// prevents Vietnamese words from being split incorrectly.) For example, you could
 	// disable all operators other than the phrase operator to support just simple term
 	// and phrase queries: "operators":["and","not","or", "prefix"]. Valid values: and,
-	// escape,
-	//
-	// fuzzy, near, not, or, phrase, precedence, prefix, whitespace. Default:
+	// escape, fuzzy, near, not, or, phrase, precedence, prefix, whitespace. Default:
 	// All operators and special characters are enabled. Valid for: simple.
 	//
 	// *

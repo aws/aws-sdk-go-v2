@@ -3818,6 +3818,46 @@ func awsRestjson1_deserializeErrorTooManyRequestsException(response *smithyhttp.
 	return output
 }
 
+func awsRestjson1_deserializeDocument__listOf__doubleMinNegative60Max6(v *[]float64, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []float64
+	if *v == nil {
+		cv = []float64{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col float64
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected __doubleMinNegative60Max6 to be json.Number, got %T instead", value)
+			}
+			f64, err := jtv.Float64()
+			if err != nil {
+				return err
+			}
+			col = f64
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOf__integerMin1Max2147483647(v *[]int32, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5973,7 +6013,7 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE to be of type string, got %T instead", value)
 				}
 				sv.ExternalAudioFileInput = ptr.String(jtv)
 			}
@@ -6475,6 +6515,11 @@ func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings
 				sv.AvcIntraClass = types.AvcIntraClass(jtv)
 			}
 
+		case "avcIntraUhdSettings":
+			if err := awsRestjson1_deserializeDocumentAvcIntraUhdSettings(&sv.AvcIntraUhdSettings, value); err != nil {
+				return err
+			}
+
 		case "framerateControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6528,6 +6573,15 @@ func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings
 				sv.InterlaceMode = types.AvcIntraInterlaceMode(jtv)
 			}
 
+		case "scanTypeConversionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AvcIntraScanTypeConversionMode to be of type string, got %T instead", value)
+				}
+				sv.ScanTypeConversionMode = types.AvcIntraScanTypeConversionMode(jtv)
+			}
+
 		case "slowPal":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6544,6 +6598,46 @@ func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings
 					return fmt.Errorf("expected AvcIntraTelecine to be of type string, got %T instead", value)
 				}
 				sv.Telecine = types.AvcIntraTelecine(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAvcIntraUhdSettings(v **types.AvcIntraUhdSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AvcIntraUhdSettings
+	if *v == nil {
+		sv = &types.AvcIntraUhdSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "qualityTuningLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AvcIntraUhdQualityTuningLevel to be of type string, got %T instead", value)
+				}
+				sv.QualityTuningLevel = types.AvcIntraUhdQualityTuningLevel(jtv)
 			}
 
 		default:
@@ -7603,6 +7697,15 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 					return fmt.Errorf("expected CmfcAudioDuration to be of type string, got %T instead", value)
 				}
 				sv.AudioDuration = types.CmfcAudioDuration(jtv)
+			}
+
+		case "iFrameOnlyManifest":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmfcIFrameOnlyManifest to be of type string, got %T instead", value)
+				}
+				sv.IFrameOnlyManifest = types.CmfcIFrameOnlyManifest(jtv)
 			}
 
 		case "scte35Esam":
@@ -10187,6 +10290,15 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				sv.RepeatPps = types.H264RepeatPps(jtv)
 			}
 
+		case "scanTypeConversionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H264ScanTypeConversionMode to be of type string, got %T instead", value)
+				}
+				sv.ScanTypeConversionMode = types.H264ScanTypeConversionMode(jtv)
+			}
+
 		case "sceneChangeDetect":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10684,6 +10796,15 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 					return fmt.Errorf("expected H265SampleAdaptiveOffsetFilterMode to be of type string, got %T instead", value)
 				}
 				sv.SampleAdaptiveOffsetFilterMode = types.H265SampleAdaptiveOffsetFilterMode(jtv)
+			}
+
+		case "scanTypeConversionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H265ScanTypeConversionMode to be of type string, got %T instead", value)
+				}
+				sv.ScanTypeConversionMode = types.H265ScanTypeConversionMode(jtv)
 			}
 
 		case "sceneChangeDetect":
@@ -11796,7 +11917,7 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA to be of type string, got %T instead", value)
 				}
 				sv.FileInput = ptr.String(jtv)
 			}
@@ -13710,7 +13831,7 @@ func awsRestjson1_deserializeDocumentMotionImageInserter(v **types.MotionImageIn
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringMin14Max1285PatternS3Mov09PngHttpsMov09Png to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringMin14PatternS3Mov09PngHttpsMov09Png to be of type string, got %T instead", value)
 				}
 				sv.Input = ptr.String(jtv)
 			}
@@ -14557,6 +14678,15 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 					return fmt.Errorf("expected Mpeg2RateControlMode to be of type string, got %T instead", value)
 				}
 				sv.RateControlMode = types.Mpeg2RateControlMode(jtv)
+			}
+
+		case "scanTypeConversionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Mpeg2ScanTypeConversionMode to be of type string, got %T instead", value)
+				}
+				sv.ScanTypeConversionMode = types.Mpeg2ScanTypeConversionMode(jtv)
 			}
 
 		case "sceneChangeDetect":
@@ -15577,6 +15707,11 @@ func awsRestjson1_deserializeDocumentOutputChannelMapping(v **types.OutputChanne
 				return err
 			}
 
+		case "inputChannelsFineTune":
+			if err := awsRestjson1_deserializeDocument__listOf__doubleMinNegative60Max6(&sv.InputChannelsFineTune, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -16147,6 +16282,15 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 					return err
 				}
 				sv.ParNumerator = int32(i64)
+			}
+
+		case "scanTypeConversionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProresScanTypeConversionMode to be of type string, got %T instead", value)
+				}
+				sv.ScanTypeConversionMode = types.ProresScanTypeConversionMode(jtv)
 			}
 
 		case "slowPal":
@@ -17552,6 +17696,15 @@ func awsRestjson1_deserializeDocumentVc3Settings(v **types.Vc3Settings, value in
 					return fmt.Errorf("expected Vc3InterlaceMode to be of type string, got %T instead", value)
 				}
 				sv.InterlaceMode = types.Vc3InterlaceMode(jtv)
+			}
+
+		case "scanTypeConversionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Vc3ScanTypeConversionMode to be of type string, got %T instead", value)
+				}
+				sv.ScanTypeConversionMode = types.Vc3ScanTypeConversionMode(jtv)
 			}
 
 		case "slowPal":

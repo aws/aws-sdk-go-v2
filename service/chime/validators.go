@@ -4667,6 +4667,11 @@ func validateOpCreateAppInstanceInput(v *CreateAppInstanceInput) error {
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4690,6 +4695,11 @@ func validateOpCreateAppInstanceUserInput(v *CreateAppInstanceUserInput) error {
 	}
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4979,6 +4989,12 @@ func validateOpCreateSipMediaApplicationCallInput(v *CreateSipMediaApplicationCa
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSipMediaApplicationCallInput"}
+	if v.FromPhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FromPhoneNumber"))
+	}
+	if v.ToPhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ToPhoneNumber"))
+	}
 	if v.SipMediaApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SipMediaApplicationId"))
 	}
@@ -4996,6 +5012,9 @@ func validateOpCreateSipMediaApplicationInput(v *CreateSipMediaApplicationInput)
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSipMediaApplicationInput"}
 	if v.AwsRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsRegion"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Endpoints == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Endpoints"))

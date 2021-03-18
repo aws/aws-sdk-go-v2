@@ -36,6 +36,12 @@ type Activity struct {
 	// This member is required.
 	StatusCode ScalingActivityStatusCode
 
+	// The Amazon Resource Name (ARN) of the Auto Scaling group.
+	AutoScalingGroupARN *string
+
+	// The state of the Auto Scaling group, which is either InService or Deleted.
+	AutoScalingGroupState *string
+
 	// A friendly, more verbose description of the activity.
 	Description *string
 
@@ -205,7 +211,13 @@ type AutoScalingInstanceDetails struct {
 	// This member is required.
 	InstanceId *string
 
-	// The lifecycle state for the instance.
+	// The lifecycle state for the instance. The Quarantined state is not used. For
+	// information about lifecycle states, see Instance lifecycle
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html)
+	// in the Amazon EC2 Auto Scaling User Guide. Valid Values: Pending | Pending:Wait
+	// | Pending:Proceed | Quarantined | InService | Terminating | Terminating:Wait |
+	// Terminating:Proceed | Terminated | Detaching | Detached | EnteringStandby |
+	// Standby
 	//
 	// This member is required.
 	LifecycleState *string
@@ -456,6 +468,9 @@ type Instance struct {
 	InstanceId *string
 
 	// A description of the current lifecycle state. The Quarantined state is not used.
+	// For information about lifecycle states, see Instance lifecycle
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	//
 	// This member is required.
 	LifecycleState LifecycleState
@@ -493,7 +508,6 @@ type InstanceMetadataOptions struct {
 
 	// The desired HTTP PUT response hop limit for instance metadata requests. The
 	// larger the number, the further instance metadata requests can travel. Default: 1
-	// Possible values: Integers from 1 to 64
 	HttpPutResponseHopLimit *int32
 
 	// The state of token usage for your instance metadata requests. If the parameter
@@ -584,11 +598,12 @@ type InstancesDistribution struct {
 
 	// Indicates how to allocate instance types to fulfill On-Demand capacity. The only
 	// valid value is prioritized, which is also the default value. This strategy uses
-	// the order of instance types in the overrides to define the launch priority of
-	// each instance type. The first instance type in the array is prioritized higher
-	// than the last. If all your On-Demand capacity cannot be fulfilled using your
-	// highest priority instance, then the Auto Scaling groups launches the remaining
-	// capacity using the second priority instance type, and so on.
+	// the order of instance types in the LaunchTemplateOverrides to define the launch
+	// priority of each instance type. The first instance type in the array is
+	// prioritized higher than the last. If all your On-Demand capacity cannot be
+	// fulfilled using your highest priority instance, then the Auto Scaling groups
+	// launches the remaining capacity using the second priority instance type, and so
+	// on.
 	OnDemandAllocationStrategy *string
 
 	// The minimum amount of the Auto Scaling group's capacity that must be fulfilled
@@ -605,12 +620,16 @@ type InstancesDistribution struct {
 	OnDemandPercentageAboveBaseCapacity *int32
 
 	// Indicates how to allocate instances across Spot Instance pools. If the
-	// allocation strategy is capacity-optimized (recommended), the Auto Scaling group
-	// launches instances using Spot pools that are optimally chosen based on the
-	// available Spot capacity. If the allocation strategy is lowest-price, the Auto
-	// Scaling group launches instances using the Spot pools with the lowest price, and
-	// evenly allocates your instances across the number of Spot pools that you
-	// specify. Defaults to lowest-price if not specified.
+	// allocation strategy is lowest-price, the Auto Scaling group launches instances
+	// using the Spot pools with the lowest price, and evenly allocates your instances
+	// across the number of Spot pools that you specify. Defaults to lowest-price if
+	// not specified. If the allocation strategy is capacity-optimized (recommended),
+	// the Auto Scaling group launches instances using Spot pools that are optimally
+	// chosen based on the available Spot capacity. Alternatively, you can use
+	// capacity-optimized-prioritized and set the order of instance types in the list
+	// of launch template overrides from highest to lowest priority (from first to last
+	// in the list). Amazon EC2 Auto Scaling honors the instance type priorities on a
+	// best-effort basis but optimizes for capacity first.
 	SpotAllocationStrategy *string
 
 	// The number of Spot Instance pools across which to allocate your Spot Instances.
@@ -748,14 +767,18 @@ type LaunchConfiguration struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	SpotPrice *string
 
-	// The Base64-encoded user data to make available to the launched EC2 instances.
-	// For more information, see Instance metadata and user data
+	// The user data to make available to the launched EC2 instances. For more
+	// information, see Instance metadata and user data
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
-	// in the Amazon EC2 User Guide for Linux Instances.
+	// (Linux) and Instance metadata and user data
+	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html)
+	// (Windows). If you are using a command line tool, base64-encoding is performed
+	// for you, and you can load the text from a file. Otherwise, you must provide
+	// base64-encoded text. User data is limited to 16 KB.
 	UserData *string
 }
 
-// Describes a launch template and overrides. You specify these parameters as part
+// Describes a launch template and overrides. You specify these properties as part
 // of a mixed instances policy. When you update the launch template or overrides,
 // existing Amazon EC2 instances continue to run. When scale out occurs, Amazon EC2
 // Auto Scaling launches instances to match the new settings. When scale in occurs,
@@ -766,15 +789,16 @@ type LaunchTemplate struct {
 	// The launch template to use.
 	LaunchTemplateSpecification *LaunchTemplateSpecification
 
-	// Any parameters that you specify override the same parameters in the launch
+	// Any properties that you specify override the same properties in the launch
 	// template. If not provided, Amazon EC2 Auto Scaling uses the instance type
 	// specified in the launch template when it launches an instance.
 	Overrides []LaunchTemplateOverrides
 }
 
 // Describes an override for a launch template. The maximum number of instance
-// types that can be associated with an Auto Scaling group is 20. For more
-// information, see Configuring overrides
+// types that can be associated with an Auto Scaling group is 40. The maximum
+// number of distinct launch templates you can define for an Auto Scaling group is
+// 20. For more information about configuring overrides, see Configuring overrides
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-override-options.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 type LaunchTemplateOverrides struct {
@@ -1108,12 +1132,12 @@ type MetricGranularityType struct {
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
 // in the Amazon EC2 Auto Scaling User Guide. You can create a mixed instances
 // policy for a new Auto Scaling group, or you can create it for an existing group
-// by updating the group to specify MixedInstancesPolicy as the top-level parameter
+// by updating the group to specify MixedInstancesPolicy as the top-level property
 // instead of a launch configuration or launch template.
 type MixedInstancesPolicy struct {
 
 	// Specifies the instances distribution. If not provided, the value for each
-	// parameter in InstancesDistribution uses a default value.
+	// property in InstancesDistribution uses a default value.
 	InstancesDistribution *InstancesDistribution
 
 	// Specifies the launch template to use and optionally the instance types
@@ -1227,8 +1251,25 @@ type ProcessType struct {
 	ProcessName *string
 }
 
-// Describes information used to start an instance refresh.
+// Describes information used to start an instance refresh. All properties are
+// optional. However, if you specify a value for CheckpointDelay, you must also
+// provide a value for CheckpointPercentages.
 type RefreshPreferences struct {
+
+	// The amount of time, in seconds, to wait after a checkpoint before continuing.
+	// This property is optional, but if you specify a value for it, you must also
+	// specify a value for CheckpointPercentages. If you specify a value for
+	// CheckpointPercentages and not for CheckpointDelay, the CheckpointDelay defaults
+	// to 3600 (1 hour).
+	CheckpointDelay *int32
+
+	// Threshold values for each checkpoint in ascending order. Each number must be
+	// unique. To replace all instances in the Auto Scaling group, the last number in
+	// the array must be 100. For usage examples, see Adding checkpoints to an instance
+	// refresh
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-adding-checkpoints-instance-refresh.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
+	CheckpointPercentages []int32
 
 	// The number of seconds until a newly launched instance is configured and ready to
 	// use. During this time, Amazon EC2 Auto Scaling does not immediately move on to
@@ -1353,11 +1394,13 @@ type ScheduledUpdateGroupAction struct {
 
 	// This parameter is no longer used.
 	Time *time.Time
+
+	// The time zone for the cron expression.
+	TimeZone *string
 }
 
 // Describes information used for one or more scheduled scaling action updates in a
-// BatchPutScheduledUpdateGroupAction operation. When updating a scheduled scaling
-// action, all optional parameters are left unchanged if not specified.
+// BatchPutScheduledUpdateGroupAction operation.
 type ScheduledUpdateGroupActionRequest struct {
 
 	// The name of the scaling action.
@@ -1369,8 +1412,7 @@ type ScheduledUpdateGroupActionRequest struct {
 	// scheduled action runs and the capacity it attempts to maintain.
 	DesiredCapacity *int32
 
-	// The date and time for the recurring schedule to end. Amazon EC2 Auto Scaling
-	// does not perform the action after this time.
+	// The date and time for the recurring schedule to end, in UTC.
 	EndTime *time.Time
 
 	// The maximum size of the Auto Scaling group.
@@ -1384,7 +1426,8 @@ type ScheduledUpdateGroupActionRequest struct {
 	// [Day_of_Month] [Month_of_Year] [Day_of_Week]. The value must be in quotes (for
 	// example, "30 0 1 1,6,12 *"). For more information about this format, see Crontab
 	// (http://crontab.org). When StartTime and EndTime are specified with Recurrence,
-	// they form the boundaries of when the recurring action starts and stops.
+	// they form the boundaries of when the recurring action starts and stops. Cron
+	// expressions use Universal Coordinated Time (UTC) by default.
 	Recurrence *string
 
 	// The date and time for the action to start, in YYYY-MM-DDThh:mm:ssZ format in
@@ -1394,6 +1437,14 @@ type ScheduledUpdateGroupActionRequest struct {
 	// to schedule the action in the past, Amazon EC2 Auto Scaling returns an error
 	// message.
 	StartTime *time.Time
+
+	// Specifies the time zone for a cron expression. If a time zone is not provided,
+	// UTC is used by default. Valid values are the canonical names of the IANA time
+	// zones, derived from the IANA Time Zone Database (such as Etc/GMT+9 or
+	// Pacific/Tahiti). For more information, see
+	// https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+	// (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+	TimeZone *string
 }
 
 // Describes information used to create a step adjustment for a step scaling

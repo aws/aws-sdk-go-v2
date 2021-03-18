@@ -2,6 +2,23 @@
 
 package types
 
+type ActionGroup string
+
+// Enum values for ActionGroup
+const (
+	// Permission group type for Agent APIs - ConfigureAgent, PostAgentProfile
+	ActionGroupAgentPermissions ActionGroup = "agentPermissions"
+)
+
+// Values returns all known values for ActionGroup. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionGroup) Values() []ActionGroup {
+	return []ActionGroup{
+		"agentPermissions",
+	}
+}
+
 type AgentParameterField string
 
 // Enum values for AgentParameterField
@@ -76,41 +93,40 @@ func (ComputePlatform) Values() []ComputePlatform {
 	}
 }
 
-type MetricType string
+type EventPublisher string
 
-// Enum values for MetricType
+// Enum values for EventPublisher
 const (
-	// Metric value aggregated for all instances of a frame name in a profile relative
-	// to the root frame.
-	MetricTypeAggregatedRelativeTotalTime MetricType = "AGGREGATED_RELATIVE_TOTAL_TIME"
+	// Notifications for Anomaly Detection
+	EventPublisherAnomalyDetection EventPublisher = "AnomalyDetection"
 )
 
-// Values returns all known values for MetricType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
-func (MetricType) Values() []MetricType {
-	return []MetricType{
-		"AGGREGATED_RELATIVE_TOTAL_TIME",
+// Values returns all known values for EventPublisher. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventPublisher) Values() []EventPublisher {
+	return []EventPublisher{
+		"AnomalyDetection",
 	}
 }
 
-type OrderBy string
+type FeedbackType string
 
-// Enum values for OrderBy
+// Enum values for FeedbackType
 const (
-	// Order by timestamp in descending order.
-	OrderByTimestampDescending OrderBy = "TimestampDescending"
-	// Order by timestamp in ascending order.
-	OrderByTimestampAscending OrderBy = "TimestampAscending"
+	// Profiler recommendation flagged as useful.
+	FeedbackTypePositive FeedbackType = "Positive"
+	// Profiler recommendation flagged as not useful.
+	FeedbackTypeNegative FeedbackType = "Negative"
 )
 
-// Values returns all known values for OrderBy. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
-func (OrderBy) Values() []OrderBy {
-	return []OrderBy{
-		"TimestampDescending",
-		"TimestampAscending",
+// Values returns all known values for FeedbackType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FeedbackType) Values() []FeedbackType {
+	return []FeedbackType{
+		"Positive",
+		"Negative",
 	}
 }
 
@@ -155,19 +171,40 @@ func (MetadataField) Values() []MetadataField {
 	}
 }
 
-type ActionGroup string
+type MetricType string
 
-// Enum values for ActionGroup
+// Enum values for MetricType
 const (
-	// Permission group type for Agent APIs - ConfigureAgent, PostAgentProfile
-	ActionGroupAgentPermissions ActionGroup = "agentPermissions"
+	// Metric value aggregated for all instances of a frame name in a profile relative
+	// to the root frame.
+	MetricTypeAggregatedRelativeTotalTime MetricType = "AggregatedRelativeTotalTime"
 )
 
-// Values returns all known values for ActionGroup. Note that this can be expanded
+// Values returns all known values for MetricType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.
-func (ActionGroup) Values() []ActionGroup {
-	return []ActionGroup{
-		"agentPermissions",
+func (MetricType) Values() []MetricType {
+	return []MetricType{
+		"AggregatedRelativeTotalTime",
+	}
+}
+
+type OrderBy string
+
+// Enum values for OrderBy
+const (
+	// Order by timestamp in descending order.
+	OrderByTimestampDescending OrderBy = "TimestampDescending"
+	// Order by timestamp in ascending order.
+	OrderByTimestampAscending OrderBy = "TimestampAscending"
+)
+
+// Values returns all known values for OrderBy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (OrderBy) Values() []OrderBy {
+	return []OrderBy{
+		"TimestampDescending",
+		"TimestampAscending",
 	}
 }

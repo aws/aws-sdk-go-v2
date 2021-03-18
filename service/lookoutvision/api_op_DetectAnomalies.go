@@ -18,7 +18,8 @@ import (
 // first start your model with the StartModel operation. You are charged for the
 // amount of time, in minutes, that a model runs and for the number of anomaly
 // detection units that your model uses. If you are not using a model, use the
-// StopModel operation to stop your model.
+// StopModel operation to stop your model. This operation requires permissions to
+// perform the lookoutvision:DetectAnomalies operation.
 func (c *Client) DetectAnomalies(ctx context.Context, params *DetectAnomaliesInput, optFns ...func(*Options)) (*DetectAnomaliesOutput, error) {
 	if params == nil {
 		params = &DetectAnomaliesInput{}

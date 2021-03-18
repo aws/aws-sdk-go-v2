@@ -12,8 +12,8 @@ import (
 )
 
 // Lists the account alias associated with the AWS account (Note: you can have only
-// one). For information about using an AWS account alias, see Using an Alias for
-// Your AWS Account ID
+// one). For information about using an AWS account alias, see Using an alias for
+// your AWS account ID
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html) in the IAM
 // User Guide.
 func (c *Client) ListAccountAliases(ctx context.Context, params *ListAccountAliasesInput, optFns ...func(*Options)) (*ListAccountAliasesOutput, error) {

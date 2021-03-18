@@ -65,6 +65,9 @@ type DescribeModelOutput struct {
 	// container.
 	EnableNetworkIsolation bool
 
+	// Specifies details of how containers in a multi-container endpoint are called.
+	InferenceExecutionConfig *types.InferenceExecutionConfig
+
 	// The location of the primary inference code, associated artifacts, and custom
 	// environment map that the inference code uses when it is deployed in production.
 	PrimaryContainer *types.ContainerDefinition

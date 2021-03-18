@@ -29176,6 +29176,11 @@ func awsAwsjson11_deserializeDocumentContainerDefinition(v **types.ContainerDefi
 				sv.ModelPackageName = ptr.String(jtv)
 			}
 
+		case "MultiModelConfig":
+			if err := awsAwsjson11_deserializeDocumentMultiModelConfig(&sv.MultiModelConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -35271,6 +35276,46 @@ func awsAwsjson11_deserializeDocumentImageVersions(v *[]types.ImageVersion, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInferenceExecutionConfig(v **types.InferenceExecutionConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InferenceExecutionConfig
+	if *v == nil {
+		sv = &types.InferenceExecutionConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InferenceExecutionMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.InferenceExecutionMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInferenceSpecification(v **types.InferenceSpecification, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -35365,6 +35410,15 @@ func awsAwsjson11_deserializeDocumentInputConfig(v **types.InputConfig, value in
 					return fmt.Errorf("expected Framework to be of type string, got %T instead", value)
 				}
 				sv.Framework = types.Framework(jtv)
+			}
+
+		case "FrameworkVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FrameworkVersion to be of type string, got %T instead", value)
+				}
+				sv.FrameworkVersion = ptr.String(jtv)
 			}
 
 		case "S3Uri":
@@ -40371,6 +40425,46 @@ func awsAwsjson11_deserializeDocumentMonitoringStoppingCondition(v **types.Monit
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentMultiModelConfig(v **types.MultiModelConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MultiModelConfig
+	if *v == nil {
+		sv = &types.MultiModelConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ModelCacheSetting":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelCacheSetting to be of type string, got %T instead", value)
+				}
+				sv.ModelCacheSetting = types.ModelCacheSetting(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentNetworkConfig(v **types.NetworkConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -43458,6 +43552,11 @@ func awsAwsjson11_deserializeDocumentProductionVariant(v **types.ProductionVaria
 				sv.AcceleratorType = types.ProductionVariantAcceleratorType(jtv)
 			}
 
+		case "CoreDumpConfig":
+			if err := awsAwsjson11_deserializeDocumentProductionVariantCoreDumpConfig(&sv.CoreDumpConfig, value); err != nil {
+				return err
+			}
+
 		case "InitialInstanceCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -43509,6 +43608,55 @@ func awsAwsjson11_deserializeDocumentProductionVariant(v **types.ProductionVaria
 					return fmt.Errorf("expected VariantName to be of type string, got %T instead", value)
 				}
 				sv.VariantName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentProductionVariantCoreDumpConfig(v **types.ProductionVariantCoreDumpConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProductionVariantCoreDumpConfig
+	if *v == nil {
+		sv = &types.ProductionVariantCoreDumpConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DestinationS3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DestinationS3Uri to be of type string, got %T instead", value)
+				}
+				sv.DestinationS3Uri = ptr.String(jtv)
+			}
+
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
 			}
 
 		default:
@@ -45168,6 +45316,15 @@ func awsAwsjson11_deserializeDocumentS3StorageConfig(v **types.S3StorageConfig, 
 					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
 				}
 				sv.KmsKeyId = ptr.String(jtv)
+			}
+
+		case "ResolvedOutputS3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.ResolvedOutputS3Uri = ptr.String(jtv)
 			}
 
 		case "S3Uri":
@@ -55640,6 +55797,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeModelOutput(v **DescribeModelOutp
 					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.ExecutionRoleArn = ptr.String(jtv)
+			}
+
+		case "InferenceExecutionConfig":
+			if err := awsAwsjson11_deserializeDocumentInferenceExecutionConfig(&sv.InferenceExecutionConfig, value); err != nil {
+				return err
 			}
 
 		case "ModelArn":

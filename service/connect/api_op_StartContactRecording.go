@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API starts recording the contact when the agent joins the call.
+// Starts recording the contact when the agent joins the call.
 // StartContactRecording is a one-time action. For example, if you use
 // StopContactRecording to stop recording an ongoing call, you can't use
 // StartContactRecording to restart it. For scenarios where the recording has
@@ -54,7 +54,7 @@ type StartContactRecordingInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// Who is being recorded.
+	// The person being recorded.
 	//
 	// This member is required.
 	VoiceRecordingConfiguration *types.VoiceRecordingConfiguration

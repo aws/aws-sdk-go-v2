@@ -63,6 +63,8 @@ type CreateServerInput struct {
 	// the issuer.
 	Certificate *string
 
+	Domain types.Domain
+
 	// The virtual private cloud (VPC) endpoint settings that are configured for your
 	// server. When you host your endpoint within your VPC, you can make it accessible
 	// only to resources within your VPC, or you can attach Elastic IPs and make it

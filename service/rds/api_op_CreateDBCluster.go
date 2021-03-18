@@ -132,15 +132,19 @@ type CreateDBClusterInput struct {
 	// see Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Aurora User Guide. Aurora MySQL Possible values are audit, error,
-	// general, and slowquery. Aurora PostgreSQL Possible values are postgresql and
-	// upgrade.
+	// general, and slowquery. Aurora PostgreSQL Possible value is postgresql.
 	EnableCloudwatchLogsExports []string
 
-	// A value that indicates whether to enable write operations to be forwarded from
-	// this cluster to the primary cluster in an Aurora global database. The resulting
-	// changes are replicated back to this cluster. This parameter only applies to DB
-	// clusters that are secondary clusters in an Aurora global database. By default,
-	// Aurora disallows write operations for secondary clusters.
+	// A value that indicates whether to enable this DB cluster to forward write
+	// operations to the primary cluster of an Aurora global database (GlobalCluster).
+	// By default, write operations are not allowed on Aurora DB clusters that are
+	// secondary clusters in an Aurora global database. You can set this value only on
+	// Aurora DB clusters that are members of an Aurora global database. With this
+	// parameter enabled, a secondary cluster can forward writes to the current primary
+	// cluster and the resulting changes are replicated back to this cluster. For the
+	// primary DB cluster of an Aurora global database, this value is used immediately
+	// if the primary is demoted by the FailoverGlobalCluster API operation, but it
+	// does nothing until then.
 	EnableGlobalWriteForwarding *bool
 
 	// A value that indicates whether to enable the HTTP endpoint for an Aurora
@@ -160,7 +164,7 @@ type CreateDBClusterInput struct {
 	// in the Amazon Aurora User Guide.
 	EnableIAMDatabaseAuthentication *bool
 
-	// The DB engine mode of the DB cluster, either provisionedserverless,
+	// The DB engine mode of the DB cluster, either provisioned, serverless,
 	// parallelquery, global, or multimaster. The parallelquery engine mode isn't
 	// required for Aurora MySQL version 1.23 and higher 1.x versions, and version 2.09
 	// and higher 2.x versions. The global engine mode isn't required for Aurora MySQL

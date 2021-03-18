@@ -477,6 +477,24 @@ func validateHomeDirectoryMappings(v []types.HomeDirectoryMapEntry) error {
 	}
 }
 
+func validatePosixProfile(v *types.PosixProfile) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PosixProfile"}
+	if v.Uid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uid"))
+	}
+	if v.Gid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Gid"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -537,6 +555,11 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 	if v.HomeDirectoryMappings != nil {
 		if err := validateHomeDirectoryMappings(v.HomeDirectoryMappings); err != nil {
 			invalidParams.AddNested("HomeDirectoryMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PosixProfile != nil {
+		if err := validatePosixProfile(v.PosixProfile); err != nil {
+			invalidParams.AddNested("PosixProfile", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Role == nil {
@@ -824,6 +847,11 @@ func validateOpUpdateUserInput(v *UpdateUserInput) error {
 	if v.HomeDirectoryMappings != nil {
 		if err := validateHomeDirectoryMappings(v.HomeDirectoryMappings); err != nil {
 			invalidParams.AddNested("HomeDirectoryMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PosixProfile != nil {
+		if err := validatePosixProfile(v.PosixProfile); err != nil {
+			invalidParams.AddNested("PosixProfile", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ServerId == nil {

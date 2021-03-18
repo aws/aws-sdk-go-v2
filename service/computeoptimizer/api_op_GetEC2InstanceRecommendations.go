@@ -34,9 +34,9 @@ func (c *Client) GetEC2InstanceRecommendations(ctx context.Context, params *GetE
 
 type GetEC2InstanceRecommendationsInput struct {
 
-	// The IDs of the AWS accounts for which to return instance recommendations. If
-	// your account is the management account of an organization, use this parameter to
-	// specify the member accounts for which you want to return instance
+	// The ID of the AWS account for which to return instance recommendations. If your
+	// account is the management account of an organization, use this parameter to
+	// specify the member account for which you want to return instance
 	// recommendations. Only one account ID can be specified per request.
 	AccountIds []string
 

@@ -6444,6 +6444,68 @@ func awsAwsjson11_serializeDocumentAutomationParameterValueList(v []string, valu
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentBaselineOverride(v *types.BaselineOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ApprovalRules != nil {
+		ok := object.Key("ApprovalRules")
+		if err := awsAwsjson11_serializeDocumentPatchRuleGroup(v.ApprovalRules, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ApprovedPatches != nil {
+		ok := object.Key("ApprovedPatches")
+		if err := awsAwsjson11_serializeDocumentPatchIdList(v.ApprovedPatches, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ApprovedPatchesComplianceLevel) > 0 {
+		ok := object.Key("ApprovedPatchesComplianceLevel")
+		ok.String(string(v.ApprovedPatchesComplianceLevel))
+	}
+
+	if v.ApprovedPatchesEnableNonSecurity {
+		ok := object.Key("ApprovedPatchesEnableNonSecurity")
+		ok.Boolean(v.ApprovedPatchesEnableNonSecurity)
+	}
+
+	if v.GlobalFilters != nil {
+		ok := object.Key("GlobalFilters")
+		if err := awsAwsjson11_serializeDocumentPatchFilterGroup(v.GlobalFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.OperatingSystem) > 0 {
+		ok := object.Key("OperatingSystem")
+		ok.String(string(v.OperatingSystem))
+	}
+
+	if v.RejectedPatches != nil {
+		ok := object.Key("RejectedPatches")
+		if err := awsAwsjson11_serializeDocumentPatchIdList(v.RejectedPatches, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.RejectedPatchesAction) > 0 {
+		ok := object.Key("RejectedPatchesAction")
+		ok.String(string(v.RejectedPatchesAction))
+	}
+
+	if v.Sources != nil {
+		ok := object.Key("Sources")
+		if err := awsAwsjson11_serializeDocumentPatchSourceList(v.Sources, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCalendarNameOrARNList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -9345,6 +9407,13 @@ func awsAwsjson11_serializeOpDocumentCreateOpsMetadataInput(v *CreateOpsMetadata
 		ok.String(*v.ResourceId)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -9920,9 +9989,19 @@ func awsAwsjson11_serializeOpDocumentDescribeDocumentPermissionInput(v *Describe
 	object := value.Object()
 	defer object.Close()
 
+	if v.MaxResults != 0 {
+		ok := object.Key("MaxResults")
+		ok.Integer(v.MaxResults)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
 	}
 
 	if len(v.PermissionType) > 0 {
@@ -10634,6 +10713,13 @@ func awsAwsjson11_serializeOpDocumentGetDefaultPatchBaselineInput(v *GetDefaultP
 func awsAwsjson11_serializeOpDocumentGetDeployablePatchSnapshotForInstanceInput(v *GetDeployablePatchSnapshotForInstanceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BaselineOverride != nil {
+		ok := object.Key("BaselineOverride")
+		if err := awsAwsjson11_serializeDocumentBaselineOverride(v.BaselineOverride, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.InstanceId != nil {
 		ok := object.Key("InstanceId")

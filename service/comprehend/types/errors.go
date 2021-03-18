@@ -276,11 +276,10 @@ func (e *TooManyTagsException) ErrorMessage() string {
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Amazon Comprehend can't process the language of the input text. For all custom
-// entity recognition APIs (such as CreateEntityRecognizer), only English, Spanish,
-// French, Italian, German, or Portuguese are accepted. For most other APIs, such
-// as those for Custom Classification, Amazon Comprehend accepts text in all
-// supported languages. For a list of supported languages, see supported-languages.
+// Amazon Comprehend can't process the language of the input text. For custom
+// entity recognition APIs, only English, Spanish, French, Italian, German, or
+// Portuguese are accepted. For a list of supported languages, see
+// supported-languages.
 type UnsupportedLanguageException struct {
 	Message *string
 }

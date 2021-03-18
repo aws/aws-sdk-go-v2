@@ -12,41 +12,29 @@ import (
 )
 
 // Uses FlexMatch to create a game match for a group of players based on custom
-// matchmaking rules. If you're also using GameLift hosting, a new game session is
-// started for the matched players. Each matchmaking request identifies one or more
-// players to find a match for, and specifies the type of match to build, including
-// the team configuration and the rules for an acceptable match. When a matchmaking
-// request identifies a group of players who want to play together, FlexMatch finds
-// additional players to fill the match. Match type, rules, and other features are
-// defined in a MatchmakingConfiguration. To start matchmaking, provide a unique
-// ticket ID, specify a matchmaking configuration, and include the players to be
-// matched. For each player, you must also include the player attribute values that
-// are required by the matchmaking configuration (in the rule set). If successful,
-// a matchmaking ticket is returned with status set to QUEUED. Track the status of
-// the ticket to respond as needed. If you're also using GameLift hosting, a
-// successfully completed ticket contains game session connection information.
-// Ticket status updates are tracked using event notification through Amazon Simple
+// matchmaking rules. With games that use GameLift managed hosting, this operation
+// also triggers GameLift to find hosting resources and start a new game session
+// for the new match. Each matchmaking request includes information on one or more
+// players and specifies the FlexMatch matchmaker to use. When a request is for
+// multiple players, FlexMatch attempts to build a match that includes all players
+// in the request, placing them in the same team and finding additional players as
+// needed to fill the match. To start matchmaking, provide a unique ticket ID,
+// specify a matchmaking configuration, and include the players to be matched. You
+// must also include any player attributes that are required by the matchmaking
+// configuration's rule set. If successful, a matchmaking ticket is returned with
+// status set to QUEUED. Track matchmaking events to respond as needed and acquire
+// game session connection information for successfully completed matches. Ticket
+// status updates are tracked using event notification through Amazon Simple
 // Notification Service (SNS), which is defined in the matchmaking configuration.
-// Learn more  Add FlexMatch to a Game Client
+// Learn more  Add FlexMatch to a game client
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
-// Set Up FlexMatch Event Notification
+// Set Up FlexMatch event notification
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html)
-// FlexMatch Integration Roadmap
-// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-tasks.html)
-// How GameLift FlexMatch Works
+// How GameLift FlexMatch works
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/gamelift-match.html)
-// Related operations
-//
-// * StartMatchmaking
-//
-// * DescribeMatchmaking
-//
-// *
-// StopMatchmaking
-//
-// * AcceptMatch
-//
-// * StartMatchBackfill
+// Related actions StartMatchmaking | DescribeMatchmaking | StopMatchmaking |
+// AcceptMatch | StartMatchBackfill | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) StartMatchmaking(ctx context.Context, params *StartMatchmakingInput, optFns ...func(*Options)) (*StartMatchmakingOutput, error) {
 	if params == nil {
 		params = &StartMatchmakingInput{}

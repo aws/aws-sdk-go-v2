@@ -166,6 +166,15 @@ func awsRestjson1_deserializeOpDocumentAssociateAwsAccountWithPartnerAccountOutp
 
 	for key, value := range shape {
 		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PartnerAccountArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
 		case "Sidewalk":
 			if err := awsRestjson1_deserializeDocumentSidewalkAccountInfo(&sv.Sidewalk, value); err != nil {
 				return err
@@ -1731,6 +1740,15 @@ func awsRestjson1_deserializeOpDocumentCreateWirelessGatewayTaskDefinitionOutput
 
 	for key, value := range shape {
 		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WirelessGatewayTaskDefinitionArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4504,6 +4522,15 @@ func awsRestjson1_deserializeOpDocumentGetWirelessGatewayCertificateOutput(v **G
 				sv.IotCertificateId = ptr.String(jtv)
 			}
 
+		case "LoRaWANNetworkServerCertificateId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IotCertificateId to be of type string, got %T instead", value)
+				}
+				sv.LoRaWANNetworkServerCertificateId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5188,6 +5215,15 @@ func awsRestjson1_deserializeOpDocumentGetWirelessGatewayTaskDefinitionOutput(v 
 
 	for key, value := range shape {
 		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WirelessGatewayTaskDefinitionArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
 		case "AutoCreateTasks":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9646,6 +9682,15 @@ func awsRestjson1_deserializeDocumentSidewalkAccountInfoWithFingerprint(v **type
 				sv.AmazonId = ptr.String(jtv)
 			}
 
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PartnerAccountArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
 		case "Fingerprint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9986,6 +10031,15 @@ func awsRestjson1_deserializeDocumentUpdateWirelessGatewayTaskEntry(v **types.Up
 
 	for key, value := range shape {
 		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WirelessGatewayTaskDefinitionArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)

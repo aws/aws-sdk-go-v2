@@ -44,7 +44,7 @@ type CreateRoutingProfileInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The channels agents can handle in the Contact Control Panel (CCP) for this
+	// The channels that agents can handle in the Contact Control Panel (CCP) for this
 	// routing profile.
 	//
 	// This member is required.
@@ -56,7 +56,7 @@ type CreateRoutingProfileInput struct {
 	Name *string
 
 	// The inbound queues associated with the routing profile. If no queue is added,
-	// the agent can only make outbound calls.
+	// the agent can make only outbound calls.
 	QueueConfigs []types.RoutingProfileQueueConfig
 
 	// One or more tags.

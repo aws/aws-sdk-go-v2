@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The endpoint for the messaging session.
+// The details of the endpoint for the messaging session.
 func (c *Client) GetMessagingSessionEndpoint(ctx context.Context, params *GetMessagingSessionEndpointInput, optFns ...func(*Options)) (*GetMessagingSessionEndpointOutput, error) {
 	if params == nil {
 		params = &GetMessagingSessionEndpointInput{}

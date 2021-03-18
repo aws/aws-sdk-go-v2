@@ -29,33 +29,16 @@ import (
 // notifications, and provide the topic ARN in the matchmaking configuration. An
 // alternative method, continuously polling ticket status with DescribeMatchmaking,
 // is only suitable for games in development with low matchmaking usage. Learn more
-// FlexMatch Developer Guide
-// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/gamelift-match.html)
-// Design a FlexMatch Matchmaker
+// Design a FlexMatch matchmaker
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-configuration.html)
-// Set Up FlexMatch Event Notification
+// Set up FlexMatch event notification
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html)
-// Related operations
-//
-// * CreateMatchmakingConfiguration
-//
-// *
-// DescribeMatchmakingConfigurations
-//
-// * UpdateMatchmakingConfiguration
-//
-// *
-// DeleteMatchmakingConfiguration
-//
-// * CreateMatchmakingRuleSet
-//
-// *
-// DescribeMatchmakingRuleSets
-//
-// * ValidateMatchmakingRuleSet
-//
-// *
-// DeleteMatchmakingRuleSet
+// Related actions CreateMatchmakingConfiguration |
+// DescribeMatchmakingConfigurations | UpdateMatchmakingConfiguration |
+// DeleteMatchmakingConfiguration | CreateMatchmakingRuleSet |
+// DescribeMatchmakingRuleSets | ValidateMatchmakingRuleSet |
+// DeleteMatchmakingRuleSet | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateMatchmakingConfiguration(ctx context.Context, params *CreateMatchmakingConfigurationInput, optFns ...func(*Options)) (*CreateMatchmakingConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateMatchmakingConfigurationInput{}
@@ -82,7 +65,7 @@ type CreateMatchmakingConfigurationInput struct {
 	// This member is required.
 	AcceptanceRequired *bool
 
-	// A unique identifier for a matchmaking configuration. This name is used to
+	// A unique identifier for the matchmaking configuration. This name is used to
 	// identify the configuration associated with a matchmaking request or ticket.
 	//
 	// This member is required.
@@ -95,7 +78,7 @@ type CreateMatchmakingConfigurationInput struct {
 	// This member is required.
 	RequestTimeoutSeconds *int32
 
-	// A unique identifier for a matchmaking rule set to use with this configuration.
+	// A unique identifier for the matchmaking rule set to use with this configuration.
 	// You can use either the rule set name or ARN value. A matchmaking configuration
 	// can only use rule sets that are defined in the same Region.
 	//
@@ -103,16 +86,14 @@ type CreateMatchmakingConfigurationInput struct {
 	RuleSetName *string
 
 	// The length of time (in seconds) to wait for players to accept a proposed match,
-	// if acceptance is required. If any player rejects the match or fails to accept
-	// before the timeout, the tickets are returned to the ticket pool and continue to
-	// be evaluated for an acceptable match.
+	// if acceptance is required.
 	AcceptanceTimeoutSeconds *int32
 
 	// The number of player slots in a match to keep open for future players. For
-	// example, assume that the configuration's rule set specifies a match for a single
-	// 12-person team. If the additional player count is set to 2, only 10 players are
-	// initially selected for the match. This parameter is not used if FlexMatchMode is
-	// set to STANDALONE.
+	// example, if the configuration's rule set specifies a match for a single
+	// 12-person team, and the additional player count is set to 2, only 10 players are
+	// selected for the match. This parameter is not used if FlexMatchMode is set to
+	// STANDALONE.
 	AdditionalPlayerCount *int32
 
 	// The method used to backfill game sessions that are created with this matchmaking
@@ -144,7 +125,7 @@ type CreateMatchmakingConfigurationInput struct {
 	// queue to start a game session for the match.
 	FlexMatchMode types.FlexMatchMode
 
-	// A set of custom properties for a game session, formatted as key-value pairs.
+	// A set of custom properties for a game session, formatted as key:value pairs.
 	// These properties are passed to a game server process in the GameSession object
 	// with a request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
@@ -162,12 +143,13 @@ type CreateMatchmakingConfigurationInput struct {
 	// STANDALONE.
 	GameSessionData *string
 
-	// Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
-	// that is assigned to a GameLift game session queue resource and uniquely
-	// identifies it. ARNs are unique across all Regions. Queues can be located in any
-	// Region. Queues are used to start new GameLift-hosted game sessions for matches
-	// that are created with this matchmaking configuration. If FlexMatchMode is set to
+	// The Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
+	// assigned to a GameLift game session queue resource and uniquely identifies it.
+	// ARNs are unique across all Regions. Format is
+	// arn:aws:gamelift:::gamesessionqueue/. Queues can be located in any Region.
+	// Queues are used to start new GameLift-hosted game sessions for matches that are
+	// created with this matchmaking configuration. If FlexMatchMode is set to
 	// STANDALONE, do not set this parameter.
 	GameSessionQueueArns []string
 

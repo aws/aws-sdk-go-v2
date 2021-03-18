@@ -230,6 +230,26 @@ func (m *validateOpDeletePackage) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDomainAutoTunes struct {
+}
+
+func (*validateOpDescribeDomainAutoTunes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDomainAutoTunes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDomainAutoTunesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDomainAutoTunesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeElasticsearchDomainConfig struct {
 }
 
@@ -654,6 +674,10 @@ func addOpDeletePackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePackage{}, middleware.After)
 }
 
+func addOpDescribeDomainAutoTunesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDomainAutoTunes{}, middleware.After)
+}
+
 func addOpDescribeElasticsearchDomainConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeElasticsearchDomainConfig{}, middleware.After)
 }
@@ -915,6 +939,11 @@ func validateOpCreateElasticsearchDomainInput(v *CreateElasticsearchDomainInput)
 			invalidParams.AddNested("AdvancedSecurityOptions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TagList != nil {
+		if err := validateTagList(v.TagList); err != nil {
+			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1024,6 +1053,21 @@ func validateOpDeletePackageInput(v *DeletePackageInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeletePackageInput"}
 	if v.PackageID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDomainAutoTunesInput(v *DescribeDomainAutoTunesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDomainAutoTunesInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

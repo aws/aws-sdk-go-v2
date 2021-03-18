@@ -38,7 +38,7 @@ type DescribeDimensionInput struct {
 
 type DescribeDimensionOutput struct {
 
-	// The ARN (Amazon resource name) for the dimension.
+	// The Amazon Resource Name (ARN) for the dimension.
 	Arn *string
 
 	// The date the dimension was created.

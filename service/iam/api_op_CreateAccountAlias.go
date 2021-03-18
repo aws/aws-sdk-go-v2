@@ -11,7 +11,7 @@ import (
 )
 
 // Creates an alias for your AWS account. For information about using an AWS
-// account alias, see Using an Alias for Your AWS Account ID
+// account alias, see Using an alias for your AWS account ID
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html) in the IAM
 // User Guide.
 func (c *Client) CreateAccountAlias(ctx context.Context, params *CreateAccountAliasInput, optFns ...func(*Options)) (*CreateAccountAliasOutput, error) {

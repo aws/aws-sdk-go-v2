@@ -49,9 +49,9 @@ type GetCredentialsForIdentityInput struct {
 	// "provider_user_identifier". Logins should not be specified when trying to get
 	// credentials for an unauthenticated identity. The Logins parameter is required
 	// when using identities associated with external identity providers such as
-	// FaceBook. For examples of Logins maps, see the code examples in the External
+	// Facebook. For examples of Logins maps, see the code examples in the External
 	// Identity Providers
-	// (http://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html)
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html)
 	// section of the Amazon Cognito Developer Guide.
 	Logins map[string]string
 }

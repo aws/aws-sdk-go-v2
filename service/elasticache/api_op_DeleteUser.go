@@ -40,16 +40,16 @@ type DeleteUserInput struct {
 
 type DeleteUserOutput struct {
 
-	// The Amazon Resource Name (ARN) of the user account.
+	// The Amazon Resource Name (ARN) of the user.
 	ARN *string
 
-	// Access permissions string used for this user account.
+	// Access permissions string used for this user.
 	AccessString *string
 
 	// Denotes whether the user requires a password to authenticate.
 	Authentication *types.Authentication
 
-	// Must be Redis.
+	// The current supported value is Redis.
 	Engine *string
 
 	// Indicates the user status. Can be "active", "modifying" or "deleting".

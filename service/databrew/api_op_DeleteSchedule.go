@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified AWS Glue DataBrew schedule from the current AWS account.
+// Deletes the specified DataBrew schedule.
 func (c *Client) DeleteSchedule(ctx context.Context, params *DeleteScheduleInput, optFns ...func(*Options)) (*DeleteScheduleOutput, error) {
 	if params == nil {
 		params = &DeleteScheduleInput{}

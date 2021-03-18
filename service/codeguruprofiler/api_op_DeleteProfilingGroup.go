@@ -29,7 +29,7 @@ func (c *Client) DeleteProfilingGroup(ctx context.Context, params *DeleteProfili
 // The structure representing the deleteProfilingGroupRequest.
 type DeleteProfilingGroupInput struct {
 
-	// The profiling group name to delete.
+	// The name of the profiling group to delete.
 	//
 	// This member is required.
 	ProfilingGroupName *string

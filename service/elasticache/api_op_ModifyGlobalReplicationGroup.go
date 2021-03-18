@@ -49,6 +49,10 @@ type ModifyGlobalReplicationGroupInput struct {
 	// A valid cache node type that you want to scale this Global Datastore to.
 	CacheNodeType *string
 
+	// The name of the cache parameter group to use with the Global datastore. It must
+	// be compatible with the major engine version used by the Global datastore.
+	CacheParameterGroupName *string
+
 	// The upgraded version of the cache engine to be run on the clusters in the Global
 	// Datastore.
 	EngineVersion *string

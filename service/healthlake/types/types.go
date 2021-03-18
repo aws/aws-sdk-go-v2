@@ -6,45 +6,45 @@ import (
 	"time"
 )
 
-// The filters applied to datastore query.
+// The filters applied to Data Store query.
 type DatastoreFilter struct {
 
-	// A filter that allows the user to set cutoff dates for records. All datastores
+	// A filter that allows the user to set cutoff dates for records. All Data Stores
 	// created after the specified date will be included in the results.
 	CreatedAfter *time.Time
 
-	// A filter that allows the user to set cutoff dates for records. All datastores
+	// A filter that allows the user to set cutoff dates for records. All Data Stores
 	// created before the specified date will be included in the results.
 	CreatedBefore *time.Time
 
-	// Allows the user to filter datastore results by name.
+	// Allows the user to filter Data Store results by name.
 	DatastoreName *string
 
-	// Allows the user to filter datastore results by status.
+	// Allows the user to filter Data Store results by status.
 	DatastoreStatus DatastoreStatus
 }
 
-// Displays the properties of the datastore, including the ID, Arn, name, and the
-// status of the datastore.
+// Displays the properties of the Data Store, including the ID, Arn, name, and the
+// status of the Data Store.
 type DatastoreProperties struct {
 
-	// The Amazon Resource Name used in the creation of the datastore.
+	// The Amazon Resource Name used in the creation of the Data Store.
 	//
 	// This member is required.
 	DatastoreArn *string
 
-	// The AWS endpoint for the datastore. Each datastore will have it's own endpoint
-	// with datastore ID in the endpoint URL.
+	// The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint
+	// with Data Store ID in the endpoint URL.
 	//
 	// This member is required.
 	DatastoreEndpoint *string
 
-	// The AWS-generated ID number for the datastore.
+	// The AWS-generated ID number for the Data Store.
 	//
 	// This member is required.
 	DatastoreId *string
 
-	// The status of the datastore. Possible statuses are 'CREATING', 'ACTIVE',
+	// The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE',
 	// 'DELETING', or 'DELETED'.
 	//
 	// This member is required.
@@ -55,19 +55,63 @@ type DatastoreProperties struct {
 	// This member is required.
 	DatastoreTypeVersion FHIRVersion
 
-	// The time that a datastore was created.
+	// The time that a Data Store was created.
 	CreatedAt *time.Time
 
-	// The user-generated name for the datastore.
+	// The user-generated name for the Data Store.
 	DatastoreName *string
 
-	// The preloaded data configuration for the datastore. Only data preloaded from
+	// The preloaded data configuration for the Data Store. Only data preloaded from
 	// Synthea is supported.
 	PreloadDataConfig *PreloadDataConfig
 }
 
+// The properties of a FHIR export job, including the ID, ARN, name, and the status
+// of the job.
+type ExportJobProperties struct {
+
+	// The AWS generated ID for the Data Store from which files are being exported for
+	// an export job.
+	//
+	// This member is required.
+	DatastoreId *string
+
+	// The AWS generated ID for an export job.
+	//
+	// This member is required.
+	JobId *string
+
+	// The status of a FHIR export job. Possible statuses are SUBMITTED, IN_PROGRESS,
+	// COMPLETED, or FAILED.
+	//
+	// This member is required.
+	JobStatus JobStatus
+
+	// The output data configuration that was supplied when the export job was created.
+	//
+	// This member is required.
+	OutputDataConfig OutputDataConfig
+
+	// The time an export job was initiated.
+	//
+	// This member is required.
+	SubmitTime *time.Time
+
+	// The Amazon Resource Name used during the initiation of the job.
+	DataAccessRoleArn *string
+
+	// The time an export job completed.
+	EndTime *time.Time
+
+	// The user generated name for an export job.
+	JobName *string
+
+	// An explanation of any errors that may have occurred during the export job.
+	Message *string
+}
+
 // Displays the properties of the import job, including the ID, Arn, Name, and the
-// status of the datastore.
+// status of the Data Store.
 type ImportJobProperties struct {
 
 	// The datastore id used when the Import job was created.
@@ -126,7 +170,23 @@ type InputDataConfigMemberS3Uri struct {
 
 func (*InputDataConfigMemberS3Uri) isInputDataConfig() {}
 
-// The input properties for the preloaded datastore. Only data preloaded from
+// The output data configuration that was supplied when the export job was created.
+//
+// The following types satisfy this interface:
+//  OutputDataConfigMemberS3Uri
+type OutputDataConfig interface {
+	isOutputDataConfig()
+}
+
+// The S3Uri is the user specified S3 location to which data will be exported from
+// a FHIR Data Store.
+type OutputDataConfigMemberS3Uri struct {
+	Value string
+}
+
+func (*OutputDataConfigMemberS3Uri) isOutputDataConfig() {}
+
+// The input properties for the preloaded Data Store. Only data preloaded from
 // Synthea is supported.
 type PreloadDataConfig struct {
 
@@ -143,4 +203,5 @@ type UnknownUnionMember struct {
 	Value []byte
 }
 
-func (*UnknownUnionMember) isInputDataConfig() {}
+func (*UnknownUnionMember) isInputDataConfig()  {}
+func (*UnknownUnionMember) isOutputDataConfig() {}

@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-// Modifies the definition of an existing AWS Glue DataBrew project in the current
-// AWS account.
+// Modifies the definition of an existing DataBrew project.
 func (c *Client) UpdateProject(ctx context.Context, params *UpdateProjectInput, optFns ...func(*Options)) (*UpdateProjectOutput, error) {
 	if params == nil {
 		params = &UpdateProjectInput{}
@@ -41,8 +40,8 @@ type UpdateProjectInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Represents the sample size and sampling type for AWS Glue DataBrew to use for
-	// interactive data analysis.
+	// Represents the sample size and sampling type for DataBrew to use for interactive
+	// data analysis.
 	Sample *types.Sample
 }
 

@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a Resolver rule policy. A Resolver rule policy specifies
-// the Resolver operations and resources that you want to allow another AWS account
-// to be able to use.
+// Gets information about the Resolver rule policy for a specified rule. A Resolver
+// rule policy includes the rule that you want to share with another account, the
+// account that you want to share the rule with, and the Resolver operations that
+// you want to allow the account to use.
 func (c *Client) GetResolverRulePolicy(ctx context.Context, params *GetResolverRulePolicyInput, optFns ...func(*Options)) (*GetResolverRulePolicyOutput, error) {
 	if params == nil {
 		params = &GetResolverRulePolicyInput{}
@@ -30,7 +31,7 @@ func (c *Client) GetResolverRulePolicy(ctx context.Context, params *GetResolverR
 
 type GetResolverRulePolicyInput struct {
 
-	// The ID of the Resolver rule policy that you want to get information about.
+	// The ID of the Resolver rule that you want to get the Resolver rule policy for.
 	//
 	// This member is required.
 	Arn *string
@@ -38,7 +39,7 @@ type GetResolverRulePolicyInput struct {
 
 type GetResolverRulePolicyOutput struct {
 
-	// Information about the Resolver rule policy that you specified in a
+	// The Resolver rule policy for the rule that you specified in a
 	// GetResolverRulePolicy request.
 	ResolverRulePolicy *string
 

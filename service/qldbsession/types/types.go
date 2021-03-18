@@ -120,10 +120,10 @@ type FetchPageResult struct {
 // Contains I/O usage metrics for a command that was invoked.
 type IOUsage struct {
 
-	// The number of read I/O requests that the command performed.
+	// The number of read I/O requests that the command made.
 	ReadIOs int64
 
-	// The number of write I/O requests that the command performed.
+	// The number of write I/O requests that the command made.
 	WriteIOs int64
 }
 
@@ -176,8 +176,8 @@ type StartTransactionResult struct {
 // sends the corresponding response.
 type TimingInformation struct {
 
-	// The amount of time that was taken for the command to finish processing, measured
-	// in milliseconds.
+	// The amount of time that QLDB spent on processing the command, measured in
+	// milliseconds.
 	ProcessingTimeMilliseconds int64
 }
 

@@ -107,7 +107,8 @@ type DescribeRecoveryPointOutput struct {
 	// cold storage must be stored in cold storage for a minimum of 90 days. Therefore,
 	// the “expire after days” setting must be 90 days greater than the “transition to
 	// cold after days” setting. The “transition to cold after days” setting cannot be
-	// changed after a backup has been transitioned to cold.
+	// changed after a backup has been transitioned to cold. Only Amazon EFS file
+	// system backups can be transitioned to cold storage.
 	Lifecycle *types.Lifecycle
 
 	// An ARN that uniquely identifies a recovery point; for example,

@@ -11,10 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Provides high-level information for a managed rule group, including descriptions
 // of the rules.
 func (c *Client) DescribeManagedRuleGroup(ctx context.Context, params *DescribeManagedRuleGroupInput, optFns ...func(*Options)) (*DescribeManagedRuleGroupOutput, error) {

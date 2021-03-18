@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the user name and password-creation date for the specified IAM user.
+// Retrieves the user name and password creation date for the specified IAM user.
 // If the user has not been assigned a password, the operation returns a 404
 // (NoSuchEntity) error.
 func (c *Client) GetLoginProfile(ctx context.Context, params *GetLoginProfileInput, optFns ...func(*Options)) (*GetLoginProfileOutput, error) {

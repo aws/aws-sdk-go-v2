@@ -167,8 +167,8 @@ type CreateGrantInput struct {
 
 type CreateGrantOutput struct {
 
-	// The unique identifier for the grant. You can use the GrantId in a subsequent
-	// RetireGrant or RevokeGrant operation.
+	// The unique identifier for the grant. You can use the GrantId in a ListGrants,
+	// RetireGrant, or RevokeGrant operation.
 	GrantId *string
 
 	// The grant token. For more information, see Grant Tokens

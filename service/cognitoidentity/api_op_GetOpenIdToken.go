@@ -11,7 +11,7 @@ import (
 
 // Gets an OpenID token, using a known Cognito ID. This known Cognito ID is
 // returned by GetId. You can optionally add additional logins for the identity.
-// Supplying multiple logins creates an implicit link. The OpenId token is valid
+// Supplying multiple logins creates an implicit link. The OpenID token is valid
 // for 10 minutes. This is a public API. You do not need any credentials to call
 // this API.
 func (c *Client) GetOpenIdToken(ctx context.Context, params *GetOpenIdTokenInput, optFns ...func(*Options)) (*GetOpenIdTokenOutput, error) {
@@ -40,7 +40,7 @@ type GetOpenIdTokenInput struct {
 	// A set of optional name-value pairs that map provider names to provider tokens.
 	// When using graph.facebook.com and www.amazon.com, supply the access_token
 	// returned from the provider's authflow. For accounts.google.com, an Amazon
-	// Cognito user pool provider, or any other OpenId Connect provider, always include
+	// Cognito user pool provider, or any other OpenID Connect provider, always include
 	// the id_token.
 	Logins map[string]string
 }

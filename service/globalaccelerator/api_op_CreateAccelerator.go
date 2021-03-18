@@ -59,7 +59,7 @@ type CreateAcceleratorInput struct {
 	// Optionally, if you've added your own IP address pool to Global Accelerator
 	// (BYOIP), you can choose IP addresses from your own pool to use for the
 	// accelerator's static IP addresses when you create an accelerator. You can
-	// specify one or two addresses, separated by a comma. Do not include the /32
+	// specify one or two addresses, separated by a space. Do not include the /32
 	// suffix. Only one IP address from each of your IP address ranges can be used for
 	// each accelerator. If you specify only one IP address from your IP address range,
 	// Global Accelerator assigns a second static IP address for the accelerator from

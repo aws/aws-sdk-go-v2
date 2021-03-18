@@ -35,8 +35,11 @@ type AcceptInvitationInput struct {
 	InvitationId *string
 
 	// The AWS account ID for the account that sent the invitation.
-	//
-	// This member is required.
+	AdministratorAccountId *string
+
+	// (Deprecated) The AWS account ID for the account that sent the invitation. This
+	// property has been replaced by the administratorAccountId property and is
+	// retained only for backward compatibility.
 	MasterAccount *string
 }
 

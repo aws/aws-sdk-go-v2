@@ -16,7 +16,9 @@ import (
 // a channel. To undo a ban, you first have to DeleteChannelBan, and then
 // CreateChannelMembership. Bans are cleaned up when you delete users or channels.
 // If you ban a user who is already part of a channel, that user is automatically
-// kicked from the channel.
+// kicked from the channel. The x-amz-chime-bearer request header is mandatory. Use
+// the AppInstanceUserArn of the user that makes the API call as the value in the
+// header.
 func (c *Client) CreateChannelBan(ctx context.Context, params *CreateChannelBanInput, optFns ...func(*Options)) (*CreateChannelBanOutput, error) {
 	if params == nil {
 		params = &CreateChannelBanInput{}
@@ -43,6 +45,9 @@ type CreateChannelBanInput struct {
 	//
 	// This member is required.
 	MemberArn *string
+
+	// The AppInstanceUserArn of the user that makes the API call.
+	ChimeBearer *string
 }
 
 type CreateChannelBanOutput struct {

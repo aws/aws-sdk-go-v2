@@ -11,35 +11,16 @@ import (
 )
 
 // Retrieves the location of stored game session logs for a specified game session.
-// When a game session is terminated, Amazon GameLift automatically stores the logs
-// in Amazon S3 and retains them for 14 days. Use this URL to download the logs.
-// See the AWS Service Limits
+// When a game session is terminated, GameLift automatically stores the logs in
+// Amazon S3 and retains them for 14 days. Use this URL to download the logs. See
+// the AWS Service Limits
 // (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_gamelift)
-// page for maximum log file sizes. Log files that exceed this limit are not
-// saved.
-//
-// * CreateGameSession
-//
-// * DescribeGameSessions
-//
-// *
-// DescribeGameSessionDetails
-//
-// * SearchGameSessions
-//
-// * UpdateGameSession
-//
-// *
-// GetGameSessionLogUrl
-//
-// * Game session placements
-//
-// * StartGameSessionPlacement
-//
-// *
-// DescribeGameSessionPlacement
-//
-// * StopGameSessionPlacement
+// page for maximum log file sizes. Log files that exceed this limit are not saved.
+// Related actions CreateGameSession | DescribeGameSessions |
+// DescribeGameSessionDetails | SearchGameSessions | UpdateGameSession |
+// GetGameSessionLogUrl | StartGameSessionPlacement | DescribeGameSessionPlacement
+// | StopGameSessionPlacement | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) GetGameSessionLogUrl(ctx context.Context, params *GetGameSessionLogUrlInput, optFns ...func(*Options)) (*GetGameSessionLogUrlOutput, error) {
 	if params == nil {
 		params = &GetGameSessionLogUrlInput{}

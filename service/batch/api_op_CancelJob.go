@@ -12,8 +12,8 @@ import (
 
 // Cancels a job in an AWS Batch job queue. Jobs that are in the SUBMITTED,
 // PENDING, or RUNNABLE state are canceled. Jobs that have progressed to STARTING
-// or RUNNING are not canceled (but the API operation still succeeds, even if no
-// job is canceled); these jobs must be terminated with the TerminateJob operation.
+// or RUNNING aren't canceled, but the API operation still succeeds, even if no job
+// is canceled. These jobs must be terminated with the TerminateJob operation.
 func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns ...func(*Options)) (*CancelJobOutput, error) {
 	if params == nil {
 		params = &CancelJobInput{}

@@ -24,7 +24,7 @@ type ChatMessage struct {
 	// This member is required.
 	Content *string
 
-	// The type of the content. Supported types are text/plain.
+	// The type of the content. Supported types are text and plain.
 	//
 	// This member is required.
 	ContentType *string
@@ -311,6 +311,44 @@ type HistoricalMetricResult struct {
 	Dimensions *Dimensions
 }
 
+// Information about of the hours of operation.
+type HoursOfOperation struct {
+
+	// Configuration information for the hours of operation.
+	Config []HoursOfOperationConfig
+
+	// The description for the hours of operation.
+	Description *string
+
+	// The Amazon Resource Name (ARN) for the hours of operation.
+	HoursOfOperationArn *string
+
+	// The identifier for the hours of operation.
+	HoursOfOperationId *string
+
+	// The name for the hours of operation.
+	Name *string
+
+	// One or more tags.
+	Tags map[string]string
+
+	// The time zone for the hours of operation.
+	TimeZone *string
+}
+
+// Contains information about the hours of operation.
+type HoursOfOperationConfig struct {
+
+	// The day that the hours of operation applies to.
+	Day HoursOfOperationDays
+
+	// The end time that your contact center is closes.
+	EndTime *HoursOfOperationTimeSlice
+
+	// The start time that your contact center is open.
+	StartTime *HoursOfOperationTimeSlice
+}
+
 // Contains summary information about hours of operation for a contact center.
 type HoursOfOperationSummary struct {
 
@@ -322,6 +360,16 @@ type HoursOfOperationSummary struct {
 
 	// The name of the hours of operation.
 	Name *string
+}
+
+// The start time or end time for an hours of operation.
+type HoursOfOperationTimeSlice struct {
+
+	// The hours.
+	Hours int32
+
+	// The minutes.
+	Minutes int32
 }
 
 // The Amazon Connect instance.
@@ -386,7 +434,7 @@ type InstanceStorageConfig struct {
 	// The configuration of the Kinesis video stream.
 	KinesisVideoStreamConfig *KinesisVideoStreamConfig
 
-	// The S3 configuration.
+	// The S3 bucket configuration.
 	S3Config *S3Config
 }
 
@@ -449,7 +497,7 @@ type IntegrationAssociationSummary struct {
 	SourceType SourceType
 }
 
-// Configuration information of a Kinesis Firehose delivery stream.
+// Configuration information of a Kinesis Data Firehose delivery stream.
 type KinesisFirehoseConfig struct {
 
 	// The Amazon Resource Name (ARN) of the delivery stream.
@@ -491,7 +539,7 @@ type KinesisVideoStreamConfig struct {
 // Configuration information of an Amazon Lex bot.
 type LexBot struct {
 
-	// The Region the Amazon Lex bot was created in.
+	// The Region that the Amazon Lex bot was created in.
 	LexRegion *string
 
 	// The name of the Amazon Lex bot.
@@ -511,6 +559,19 @@ type MediaConcurrency struct {
 	//
 	// This member is required.
 	Concurrency int32
+}
+
+// The outbound caller ID name, number, and outbound whisper flow.
+type OutboundCallerConfig struct {
+
+	// The caller ID name.
+	OutboundCallerIdName *string
+
+	// The caller ID number.
+	OutboundCallerIdNumberId *string
+
+	// The outbound whisper flow to be used during an outbound call.
+	OutboundFlowId *string
 }
 
 // The customer's details.
@@ -570,6 +631,38 @@ type PromptSummary struct {
 	Name *string
 }
 
+// Contains information about a queue.
+type Queue struct {
+
+	// The description of the queue.
+	Description *string
+
+	// The identifier for the hours of operation.
+	HoursOfOperationId *string
+
+	// The maximum number of contacts that can be in the queue before it is considered
+	// full.
+	MaxContacts int32
+
+	// The name of the queue.
+	Name *string
+
+	// The outbound caller ID name, number, and outbound whisper flow.
+	OutboundCallerConfig *OutboundCallerConfig
+
+	// The Amazon Resource Name (ARN) for the queue.
+	QueueArn *string
+
+	// The identifier for the queue.
+	QueueId *string
+
+	// The status of the queue.
+	Status QueueStatus
+
+	// One or more tags.
+	Tags map[string]string
+}
+
 // Contains information about a queue for a quick connect. The contact flow must be
 // of type Transfer to Queue.
 type QueueQuickConnectConfig struct {
@@ -579,7 +672,7 @@ type QueueQuickConnectConfig struct {
 	// This member is required.
 	ContactFlowId *string
 
-	// The identifier of the queue.
+	// The identifier for the queue.
 	//
 	// This member is required.
 	QueueId *string
@@ -657,13 +750,13 @@ type QuickConnectConfig struct {
 // Contains summary information about a quick connect.
 type QuickConnectSummary struct {
 
-	// The Amazon Resource Name (ARN).
+	// The Amazon Resource Name (ARN) of the quick connect.
 	Arn *string
 
 	// The identifier for the quick connect.
 	Id *string
 
-	// The name.
+	// The name of the quick connect.
 	Name *string
 
 	// The type of quick connect. In the Amazon Connect console, when you create a
@@ -681,8 +774,7 @@ type Reference struct {
 	// This member is required.
 	Type ReferenceType
 
-	// A formatted URL that will be shown to an agent in the Contact Control Panel
-	// (CCP)
+	// A formatted URL that displays to an agent in the Contact Control Panel (CCP)
 	//
 	// This member is required.
 	Value *string
@@ -771,7 +863,7 @@ type RoutingProfileQueueConfigSummary struct {
 	// This member is required.
 	QueueArn *string
 
-	// The identifier of the queue.
+	// The identifier for the queue.
 	//
 	// This member is required.
 	QueueId *string
@@ -791,7 +883,7 @@ type RoutingProfileQueueReference struct {
 	// This member is required.
 	Channel Channel
 
-	// The identifier of the queue.
+	// The identifier for the queue.
 	//
 	// This member is required.
 	QueueId *string
@@ -810,7 +902,7 @@ type RoutingProfileSummary struct {
 	Name *string
 }
 
-// Information about the S3 storage type.
+// Information about the Amazon Simple Storage Service (Amazon S3) storage type.
 type S3Config struct {
 
 	// The S3 bucket name.
@@ -823,7 +915,7 @@ type S3Config struct {
 	// This member is required.
 	BucketPrefix *string
 
-	// The S3 encryption configuration.
+	// The Amazon S3 encryption configuration.
 	EncryptionConfig *EncryptionConfig
 }
 

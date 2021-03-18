@@ -34,8 +34,7 @@ type UpdateControlInput struct {
 	// This member is required.
 	ControlId *string
 
-	// The data source that determines from where AWS Audit Manager collects evidence
-	// for the control.
+	// The data mapping sources for the specified control.
 	//
 	// This member is required.
 	ControlMappingSources []types.ControlMappingSource

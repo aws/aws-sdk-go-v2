@@ -1313,8 +1313,8 @@ type QuotaSettings struct {
 	// The maximum number of requests that can be made in a given time period.
 	Limit int32
 
-	// The number of requests subtracted from the given limit in the initial time
-	// period.
+	// The day that a time period starts. For example, with a time period of WEEK, an
+	// offset of 0 starts on Sunday, and an offset of 1 starts on Monday.
 	Offset int32
 
 	// The time period in which the limit applies. Valid values are "DAY", "WEEK" or

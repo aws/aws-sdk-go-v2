@@ -40,8 +40,7 @@ type SendDataToWirelessDeviceInput struct {
 	PayloadData *string
 
 	// The transmit mode to use to send data to the wireless device. Can be: 0 for UM
-	// (unacknowledge mode), 1 for AM (acknowledge mode), or 2 for (TM) transparent
-	// mode.
+	// (unacknowledge mode) or 1 for AM (acknowledge mode).
 	//
 	// This member is required.
 	TransmitMode *int32

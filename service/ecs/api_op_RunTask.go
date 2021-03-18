@@ -60,23 +60,10 @@ type RunTaskInput struct {
 	// This member is required.
 	TaskDefinition *string
 
-	// The capacity provider strategy to use for the task. A capacity provider strategy
-	// consists of one or more capacity providers along with the base and weight to
-	// assign to them. A capacity provider must be associated with the cluster to be
-	// used in a capacity provider strategy. The PutClusterCapacityProviders API is
-	// used to associate a capacity provider with a cluster. Only capacity providers
-	// with an ACTIVE or UPDATING status can be used. If a capacityProviderStrategy is
-	// specified, the launchType parameter must be omitted. If no
-	// capacityProviderStrategy or launchType is specified, the
-	// defaultCapacityProviderStrategy for the cluster is used. If specifying a
-	// capacity provider that uses an Auto Scaling group, the capacity provider must
-	// already be created. New capacity providers can be created with the
-	// CreateCapacityProvider API operation. To use a AWS Fargate capacity provider,
-	// specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate
-	// capacity providers are available to all accounts and only need to be associated
-	// with a cluster to be used. The PutClusterCapacityProviders API operation is used
-	// to update the list of available capacity providers for a cluster after the
-	// cluster is created.
+	// The capacity provider strategy to use for the task. If a
+	// capacityProviderStrategy is specified, the launchType parameter must be omitted.
+	// If no capacityProviderStrategy or launchType is specified, the
+	// defaultCapacityProviderStrategy for the cluster is used.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster on which to run
@@ -93,14 +80,23 @@ type RunTaskInput struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
 
+	// Whether or not to enable the execute command functionality for the containers in
+	// this task. If true, this enables execute command functionality on all containers
+	// in the task.
+	EnableExecuteCommand bool
+
 	// The name of the task group to associate with the task. The default value is the
 	// family name of the task definition (for example, family:my-family-name).
 	Group *string
 
-	// The launch type on which to run your task. For more information, see Amazon ECS
-	// Launch Types
+	// The launch type on which to run your task. The accepted values are FARGATE and
+	// EC2. For more information, see Amazon ECS Launch Types
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
-	// in the Amazon Elastic Container Service Developer Guide. If a launchType is
+	// in the Amazon Elastic Container Service Developer Guide. When a value of FARGATE
+	// is specified, your tasks are launched on AWS Fargate On-Demand infrastructure.
+	// To use Fargate Spot, you must use a capacity provider strategy with the
+	// FARGATE_SPOT capacity provider. When a value of EC2 is specified, your tasks are
+	// launched on Amazon EC2 instances registered to your cluster. If a launchType is
 	// specified, the capacityProviderStrategy parameter must be omitted.
 	LaunchType types.LaunchType
 

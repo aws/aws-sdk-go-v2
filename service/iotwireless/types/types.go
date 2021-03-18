@@ -405,7 +405,10 @@ type SidewalkAccountInfoWithFingerprint struct {
 	// The Sidewalk Amazon ID.
 	AmazonId *string
 
-	// Fingerprint for Sidewalk application server private key.
+	// The Amazon Resource Name of the resource.
+	Arn *string
+
+	// The fingerprint of the Sidewalk application server private key.
 	Fingerprint *string
 }
 
@@ -459,6 +462,9 @@ type UpdateWirelessGatewayTaskCreate struct {
 
 // UpdateWirelessGatewayTaskEntry object.
 type UpdateWirelessGatewayTaskEntry struct {
+
+	// The Amazon Resource Name of the resource.
+	Arn *string
 
 	// The ID of the new wireless gateway task entry.
 	Id *string

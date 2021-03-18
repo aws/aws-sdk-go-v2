@@ -18,10 +18,10 @@ import (
 // identified by those three attributes. You cannot create a scheduled action until
 // you have registered the resource as a scalable target. When start and end times
 // are specified with a recurring schedule using a cron expression or rates, they
-// form the boundaries of when the recurring action starts and stops. To update a
+// form the boundaries for when the recurring action starts and stops. To update a
 // scheduled action, specify the parameters that you want to change. If you don't
 // specify start and end times, the old values are deleted. For more information,
-// see Scheduled Scaling
+// see Scheduled scaling
 // (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html)
 // in the Application Auto Scaling User Guide. If a scalable target is
 // deregistered, the scalable target is no longer available to run scheduled
@@ -192,7 +192,7 @@ type PutScheduledActionInput struct {
 	// This member is required.
 	ServiceNamespace types.ServiceNamespace
 
-	// The date and time for the recurring schedule to end.
+	// The date and time for the recurring schedule to end, in UTC.
 	EndTime *time.Time
 
 	// The new minimum and maximum capacity. You can set both values or just one. At
@@ -213,18 +213,28 @@ type PutScheduledActionInput struct {
 	// * Cron expressions - "cron(fields)"
 	//
 	// At expressions are useful for
-	// one-time schedules. Specify the time in UTC. For rate expressions, value is a
-	// positive integer and unit is minute | minutes | hour | hours | day | days. For
-	// more information about cron expressions, see Cron Expressions
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
-	// in the Amazon CloudWatch Events User Guide. For examples of using these
-	// expressions, see Scheduled Scaling
-	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html)
+	// one-time schedules. Cron expressions are useful for scheduled actions that run
+	// periodically at a specified date and time, and rate expressions are useful for
+	// scheduled actions that run at a regular interval. At and cron expressions use
+	// Universal Coordinated Time (UTC) by default. The cron format consists of six
+	// fields separated by white spaces: [Minutes] [Hours] [Day_of_Month] [Month]
+	// [Day_of_Week] [Year]. For rate expressions, value is a positive integer and unit
+	// is minute | minutes | hour | hours | day | days. For more information and
+	// examples, see Example scheduled actions for Application Auto Scaling
+	// (https://docs.aws.amazon.com/autoscaling/application/userguide/examples-scheduled-actions.html)
 	// in the Application Auto Scaling User Guide.
 	Schedule *string
 
-	// The date and time for this scheduled action to start.
+	// The date and time for this scheduled action to start, in UTC.
 	StartTime *time.Time
+
+	// Specifies the time zone used when setting a scheduled action by using an at or
+	// cron expression. If a time zone is not provided, UTC is used by default. Valid
+	// values are the canonical names of the IANA time zones supported by Joda-Time
+	// (such as Etc/GMT+9 or Pacific/Tahiti). For more information, see
+	// https://www.joda.org/joda-time/timezones.html
+	// (https://www.joda.org/joda-time/timezones.html).
+	Timezone *string
 }
 
 type PutScheduledActionOutput struct {

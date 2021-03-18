@@ -3808,6 +3808,11 @@ func awsAwsquery_serializeOpDocumentCreateStackInstancesInput(v *CreateStackInst
 		}
 	}
 
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
+	}
+
 	if v.DeploymentTargets != nil {
 		objectKey := object.Key("DeploymentTargets")
 		if err := awsAwsquery_serializeDocumentDeploymentTargets(v.DeploymentTargets, objectKey); err != nil {
@@ -3863,6 +3868,11 @@ func awsAwsquery_serializeOpDocumentCreateStackSetInput(v *CreateStackSetInput, 
 		if err := awsAwsquery_serializeDocumentAutoDeployment(v.AutoDeployment, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
 	}
 
 	if v.Capabilities != nil {
@@ -3981,6 +3991,11 @@ func awsAwsquery_serializeOpDocumentDeleteStackInstancesInput(v *DeleteStackInst
 		}
 	}
 
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
+	}
+
 	if v.DeploymentTargets != nil {
 		objectKey := object.Key("DeploymentTargets")
 		if err := awsAwsquery_serializeDocumentDeploymentTargets(v.DeploymentTargets, objectKey); err != nil {
@@ -4023,6 +4038,11 @@ func awsAwsquery_serializeOpDocumentDeleteStackInstancesInput(v *DeleteStackInst
 func awsAwsquery_serializeOpDocumentDeleteStackSetInput(v *DeleteStackSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
+	}
 
 	if v.StackSetName != nil {
 		objectKey := object.Key("StackSetName")
@@ -4126,6 +4146,11 @@ func awsAwsquery_serializeOpDocumentDescribeStackInstanceInput(v *DescribeStackI
 	object := value.Object()
 	_ = object
 
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
+	}
+
 	if v.StackInstanceAccount != nil {
 		objectKey := object.Key("StackInstanceAccount")
 		objectKey.String(*v.StackInstanceAccount)
@@ -4216,6 +4241,11 @@ func awsAwsquery_serializeOpDocumentDescribeStackSetInput(v *DescribeStackSetInp
 	object := value.Object()
 	_ = object
 
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
+	}
+
 	if v.StackSetName != nil {
 		objectKey := object.Key("StackSetName")
 		objectKey.String(*v.StackSetName)
@@ -4227,6 +4257,11 @@ func awsAwsquery_serializeOpDocumentDescribeStackSetInput(v *DescribeStackSetInp
 func awsAwsquery_serializeOpDocumentDescribeStackSetOperationInput(v *DescribeStackSetOperationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
+	}
 
 	if v.OperationId != nil {
 		objectKey := object.Key("OperationId")
@@ -4336,6 +4371,11 @@ func awsAwsquery_serializeOpDocumentDetectStackResourceDriftInput(v *DetectStack
 func awsAwsquery_serializeOpDocumentDetectStackSetDriftInput(v *DetectStackSetDriftInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
+	}
 
 	if v.OperationId != nil {
 		objectKey := object.Key("OperationId")
@@ -4514,6 +4554,11 @@ func awsAwsquery_serializeOpDocumentListStackInstancesInput(v *ListStackInstance
 	object := value.Object()
 	_ = object
 
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
+	}
+
 	if v.Filters != nil {
 		objectKey := object.Key("Filters")
 		if err := awsAwsquery_serializeDocumentStackInstanceFilters(v.Filters, objectKey); err != nil {
@@ -4570,6 +4615,11 @@ func awsAwsquery_serializeOpDocumentListStackSetOperationResultsInput(v *ListSta
 	object := value.Object()
 	_ = object
 
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
+	}
+
 	if v.MaxResults != nil {
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(*v.MaxResults)
@@ -4597,6 +4647,11 @@ func awsAwsquery_serializeOpDocumentListStackSetOperationsInput(v *ListStackSetO
 	object := value.Object()
 	_ = object
 
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
+	}
+
 	if v.MaxResults != nil {
 		objectKey := object.Key("MaxResults")
 		objectKey.Integer(*v.MaxResults)
@@ -4618,6 +4673,11 @@ func awsAwsquery_serializeOpDocumentListStackSetOperationsInput(v *ListStackSetO
 func awsAwsquery_serializeOpDocumentListStackSetsInput(v *ListStackSetsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
+	}
 
 	if v.MaxResults != nil {
 		objectKey := object.Key("MaxResults")
@@ -4928,6 +4988,11 @@ func awsAwsquery_serializeOpDocumentStopStackSetOperationInput(v *StopStackSetOp
 	object := value.Object()
 	_ = object
 
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
+	}
+
 	if v.OperationId != nil {
 		objectKey := object.Key("OperationId")
 		objectKey.String(*v.OperationId)
@@ -5051,6 +5116,11 @@ func awsAwsquery_serializeOpDocumentUpdateStackInstancesInput(v *UpdateStackInst
 		}
 	}
 
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
+	}
+
 	if v.DeploymentTargets != nil {
 		objectKey := object.Key("DeploymentTargets")
 		if err := awsAwsquery_serializeDocumentDeploymentTargets(v.DeploymentTargets, objectKey); err != nil {
@@ -5113,6 +5183,11 @@ func awsAwsquery_serializeOpDocumentUpdateStackSetInput(v *UpdateStackSetInput, 
 		if err := awsAwsquery_serializeDocumentAutoDeployment(v.AutoDeployment, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
 	}
 
 	if v.Capabilities != nil {

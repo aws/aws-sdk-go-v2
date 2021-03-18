@@ -30,28 +30,38 @@ func (c *Client) CreateProfilingGroup(ctx context.Context, params *CreateProfili
 // The structure representing the createProfiliingGroupRequest.
 type CreateProfilingGroupInput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. This parameter specifies a unique identifier for the new profiling
-	// group that helps ensure idempotency.
+	// Amazon CodeGuru Profiler uses this universally unique identifier (UUID) to
+	// prevent the accidental creation of duplicate profiling groups if there are
+	// failures and retries.
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The name of the profiling group.
+	// The name of the profiling group to create.
 	//
 	// This member is required.
 	ProfilingGroupName *string
 
-	// The agent orchestration configuration.
+	// Specifies whether profiling is enabled or disabled for the created profiling
+	// group.
 	AgentOrchestrationConfig *types.AgentOrchestrationConfig
 
+	// The compute platform of the profiling group. Use AWSLambda if your application
+	// runs on AWS Lambda. Use Default if your application runs on a compute platform
+	// that is not AWS Lambda, such an Amazon EC2 instance, an on-premises server, or a
+	// different platform. If not specified, Default is used.
 	ComputePlatform types.ComputePlatform
+
+	// A list of tags to add to the created profiling group.
+	Tags map[string]string
 }
 
 // The structure representing the createProfilingGroupResponse.
 type CreateProfilingGroupOutput struct {
 
-	// Information about the new profiling group
+	// The returned ProfilingGroupDescription
+	// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// object that contains information about the created profiling group.
 	//
 	// This member is required.
 	ProfilingGroup *types.ProfilingGroupDescription

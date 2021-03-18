@@ -29,6 +29,13 @@ type AddOutputRequest struct {
 	// The maximum latency in milliseconds for Zixi-based streams.
 	MaxLatency int32
 
+	// The minimum latency in milliseconds for SRT-based streams. In streams that use
+	// the SRT protocol, this value that you set on your MediaConnect source or output
+	// represents the minimal potential latency of that connection. The latency of the
+	// stream is set to the highest number between the sender’s minimum latency and the
+	// receiver’s minimum latency.
+	MinLatency int32
+
 	// The name of the output. This value must be unique within the current flow.
 	Name *string
 
@@ -52,17 +59,15 @@ type AddOutputRequest struct {
 // Information about the encryption of the flow.
 type Encryption struct {
 
-	// The type of algorithm that is used for the encryption (such as aes128, aes192,
-	// or aes256).
-	//
-	// This member is required.
-	Algorithm Algorithm
-
 	// The ARN of the role that you created during setup (when you set up AWS Elemental
 	// MediaConnect as a trusted entity).
 	//
 	// This member is required.
 	RoleArn *string
+
+	// The type of algorithm that is used for the encryption (such as aes128, aes192,
+	// or aes256).
+	Algorithm Algorithm
 
 	// A 128-bit, 16-byte hex value represented by a 32-character string, to be used
 	// with the key for encrypting content. This parameter is not valid for static key
@@ -508,6 +513,13 @@ type SetSourceRequest struct {
 	// and Zixi-based streams.
 	MaxLatency int32
 
+	// The minimum latency in milliseconds for SRT-based streams. In streams that use
+	// the SRT protocol, this value that you set on your MediaConnect source or output
+	// represents the minimal potential latency of that connection. The latency of the
+	// stream is set to the highest number between the sender’s minimum latency and the
+	// receiver’s minimum latency.
+	MinLatency int32
+
 	// The name of the source.
 	Name *string
 
@@ -592,6 +604,13 @@ type Transport struct {
 	// The maximum latency in milliseconds. This parameter applies only to RIST-based
 	// and Zixi-based streams.
 	MaxLatency int32
+
+	// The minimum latency in milliseconds for SRT-based streams. In streams that use
+	// the SRT protocol, this value that you set on your MediaConnect source or output
+	// represents the minimal potential latency of that connection. The latency of the
+	// stream is set to the highest number between the sender’s minimum latency and the
+	// receiver’s minimum latency.
+	MinLatency int32
 
 	// The remote ID for the Zixi-pull stream.
 	RemoteId *string

@@ -15,8 +15,10 @@ import (
 // Describes the Application Auto Scaling scheduled actions for the specified
 // service namespace. You can filter the results using the ResourceId,
 // ScalableDimension, and ScheduledActionNames parameters. For more information,
-// see Scheduled Scaling
+// see Scheduled scaling
 // (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html)
+// and Managing scheduled scaling
+// (https://docs.aws.amazon.com/autoscaling/application/userguide/scheduled-scaling-additional-cli-commands.html)
 // in the Application Auto Scaling User Guide.
 func (c *Client) DescribeScheduledActions(ctx context.Context, params *DescribeScheduledActionsInput, optFns ...func(*Options)) (*DescribeScheduledActionsOutput, error) {
 	if params == nil {
@@ -53,20 +55,20 @@ type DescribeScheduledActionsInput struct {
 	NextToken *string
 
 	// The identifier of the resource associated with the scheduled action. This string
-	// consists of the resource type and unique identifier. If you specify a scalable
-	// dimension, you must also specify a resource ID.
+	// consists of the resource type and unique identifier.
 	//
-	// * ECS service - The resource
-	// type is service and the unique identifier is the cluster name and service name.
-	// Example: service/default/sample-webapp.
+	// * ECS service - The
+	// resource type is service and the unique identifier is the cluster name and
+	// service name. Example: service/default/sample-webapp.
 	//
-	// * Spot Fleet request - The resource
-	// type is spot-fleet-request and the unique identifier is the Spot Fleet request
-	// ID. Example: spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
+	// * Spot Fleet request -
+	// The resource type is spot-fleet-request and the unique identifier is the Spot
+	// Fleet request ID. Example:
+	// spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
 	//
-	// * EMR
-	// cluster - The resource type is instancegroup and the unique identifier is the
-	// cluster ID and instance group ID. Example:
+	// * EMR cluster -
+	// The resource type is instancegroup and the unique identifier is the cluster ID
+	// and instance group ID. Example:
 	// instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0.
 	//
 	// * AppStream 2.0 fleet - The

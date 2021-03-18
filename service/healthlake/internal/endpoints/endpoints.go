@@ -47,6 +47,9 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"us-east-1": endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-cn",

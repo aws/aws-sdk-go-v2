@@ -51,6 +51,9 @@ type UpdatePackagingGroupOutput struct {
 	// The fully qualified domain name for Assets in the PackagingGroup.
 	DomainName *string
 
+	// Configure egress access logging.
+	EgressAccessLogs *types.EgressAccessLogs
+
 	// The ID of the PackagingGroup.
 	Id *string
 

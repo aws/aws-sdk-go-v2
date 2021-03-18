@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Publishes a new major version of an AWS Glue DataBrew recipe that exists in the
-// current AWS account.
+// Publishes a new version of a DataBrew recipe.
 func (c *Client) PublishRecipe(ctx context.Context, params *PublishRecipeInput, optFns ...func(*Options)) (*PublishRecipeOutput, error) {
 	if params == nil {
 		params = &PublishRecipeInput{}

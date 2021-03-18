@@ -34,9 +34,10 @@ import (
 // * Cancelled - The operation is cancelled.
 //
 // For
-// more information, see Replacing Auto Scaling Instances Based on an Instance
-// Refresh
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html).
+// more information, see Replacing Auto Scaling instances based on an instance
+// refresh
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
+// in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) DescribeInstanceRefreshes(ctx context.Context, params *DescribeInstanceRefreshesInput, optFns ...func(*Options)) (*DescribeInstanceRefreshesOutput, error) {
 	if params == nil {
 		params = &DescribeInstanceRefreshesInput{}

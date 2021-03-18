@@ -3514,6 +3514,13 @@ func awsRestjson1_serializeDocumentClientPolicyTls(v *types.ClientPolicyTls, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.Certificate != nil {
+		ok := object.Key("certificate")
+		if err := awsRestjson1_serializeDocumentClientTlsCertificate(v.Certificate, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Enforce != nil {
 		ok := object.Key("enforce")
 		ok.Boolean(*v.Enforce)
@@ -3533,6 +3540,30 @@ func awsRestjson1_serializeDocumentClientPolicyTls(v *types.ClientPolicyTls, val
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentClientTlsCertificate(v types.ClientTlsCertificate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ClientTlsCertificateMemberFile:
+		av := object.Key("file")
+		if err := awsRestjson1_serializeDocumentListenerTlsFileCertificate(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ClientTlsCertificateMemberSds:
+		av := object.Key("sds")
+		if err := awsRestjson1_serializeDocumentListenerTlsSdsCertificate(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -4213,9 +4244,23 @@ func awsRestjson1_serializeDocumentListener(v *types.Listener, value smithyjson.
 	object := value.Object()
 	defer object.Close()
 
+	if v.ConnectionPool != nil {
+		ok := object.Key("connectionPool")
+		if err := awsRestjson1_serializeDocumentVirtualNodeConnectionPool(v.ConnectionPool, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.HealthCheck != nil {
 		ok := object.Key("healthCheck")
 		if err := awsRestjson1_serializeDocumentHealthCheckPolicy(v.HealthCheck, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OutlierDetection != nil {
+		ok := object.Key("outlierDetection")
+		if err := awsRestjson1_serializeDocumentOutlierDetection(v.OutlierDetection, ok); err != nil {
 			return err
 		}
 	}
@@ -4309,6 +4354,13 @@ func awsRestjson1_serializeDocumentListenerTls(v *types.ListenerTls, value smith
 		ok.String(string(v.Mode))
 	}
 
+	if v.Validation != nil {
+		ok := object.Key("validation")
+		if err := awsRestjson1_serializeDocumentListenerTlsValidationContext(v.Validation, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4341,6 +4393,12 @@ func awsRestjson1_serializeDocumentListenerTlsCertificate(v types.ListenerTlsCer
 			return err
 		}
 
+	case *types.ListenerTlsCertificateMemberSds:
+		av := object.Key("sds")
+		if err := awsRestjson1_serializeDocumentListenerTlsSdsCertificate(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -4362,6 +4420,63 @@ func awsRestjson1_serializeDocumentListenerTlsFileCertificate(v *types.ListenerT
 		ok.String(*v.PrivateKey)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListenerTlsSdsCertificate(v *types.ListenerTlsSdsCertificate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecretName != nil {
+		ok := object.Key("secretName")
+		ok.String(*v.SecretName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListenerTlsValidationContext(v *types.ListenerTlsValidationContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SubjectAlternativeNames != nil {
+		ok := object.Key("subjectAlternativeNames")
+		if err := awsRestjson1_serializeDocumentSubjectAlternativeNames(v.SubjectAlternativeNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Trust != nil {
+		ok := object.Key("trust")
+		if err := awsRestjson1_serializeDocumentListenerTlsValidationContextTrust(v.Trust, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListenerTlsValidationContextTrust(v types.ListenerTlsValidationContextTrust, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ListenerTlsValidationContextTrustMemberFile:
+		av := object.Key("file")
+		if err := awsRestjson1_serializeDocumentTlsValidationContextFileTrust(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ListenerTlsValidationContextTrustMemberSds:
+		av := object.Key("sds")
+		if err := awsRestjson1_serializeDocumentTlsValidationContextSdsTrust(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -4405,6 +4520,37 @@ func awsRestjson1_serializeDocumentMeshSpec(v *types.MeshSpec, value smithyjson.
 		if err := awsRestjson1_serializeDocumentEgressFilter(v.EgressFilter, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOutlierDetection(v *types.OutlierDetection, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BaseEjectionDuration != nil {
+		ok := object.Key("baseEjectionDuration")
+		if err := awsRestjson1_serializeDocumentDuration(v.BaseEjectionDuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Interval != nil {
+		ok := object.Key("interval")
+		if err := awsRestjson1_serializeDocumentDuration(v.Interval, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxEjectionPercent != nil {
+		ok := object.Key("maxEjectionPercent")
+		ok.Integer(*v.MaxEjectionPercent)
+	}
+
+	if v.MaxServerErrors != nil {
+		ok := object.Key("maxServerErrors")
+		ok.Long(*v.MaxServerErrors)
 	}
 
 	return nil
@@ -4499,6 +4645,45 @@ func awsRestjson1_serializeDocumentServiceDiscovery(v types.ServiceDiscovery, va
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSubjectAlternativeNameList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSubjectAlternativeNameMatchers(v *types.SubjectAlternativeNameMatchers, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Exact != nil {
+		ok := object.Key("exact")
+		if err := awsRestjson1_serializeDocumentSubjectAlternativeNameList(v.Exact, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSubjectAlternativeNames(v *types.SubjectAlternativeNames, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Match != nil {
+		ok := object.Key("match")
+		if err := awsRestjson1_serializeDocumentSubjectAlternativeNameMatchers(v.Match, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4607,6 +4792,13 @@ func awsRestjson1_serializeDocumentTlsValidationContext(v *types.TlsValidationCo
 	object := value.Object()
 	defer object.Close()
 
+	if v.SubjectAlternativeNames != nil {
+		ok := object.Key("subjectAlternativeNames")
+		if err := awsRestjson1_serializeDocumentSubjectAlternativeNames(v.SubjectAlternativeNames, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Trust != nil {
 		ok := object.Key("trust")
 		if err := awsRestjson1_serializeDocumentTlsValidationContextTrust(v.Trust, ok); err != nil {
@@ -4643,6 +4835,18 @@ func awsRestjson1_serializeDocumentTlsValidationContextFileTrust(v *types.TlsVal
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTlsValidationContextSdsTrust(v *types.TlsValidationContextSdsTrust, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecretName != nil {
+		ok := object.Key("secretName")
+		ok.String(*v.SecretName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentTlsValidationContextTrust(v types.TlsValidationContextTrust, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4657,6 +4861,12 @@ func awsRestjson1_serializeDocumentTlsValidationContextTrust(v types.TlsValidati
 	case *types.TlsValidationContextTrustMemberFile:
 		av := object.Key("file")
 		if err := awsRestjson1_serializeDocumentTlsValidationContextFileTrust(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.TlsValidationContextTrustMemberSds:
+		av := object.Key("sds")
+		if err := awsRestjson1_serializeDocumentTlsValidationContextSdsTrust(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4728,6 +4938,13 @@ func awsRestjson1_serializeDocumentVirtualGatewayClientPolicyTls(v *types.Virtua
 	object := value.Object()
 	defer object.Close()
 
+	if v.Certificate != nil {
+		ok := object.Key("certificate")
+		if err := awsRestjson1_serializeDocumentVirtualGatewayClientTlsCertificate(v.Certificate, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Enforce != nil {
 		ok := object.Key("enforce")
 		ok.Boolean(*v.Enforce)
@@ -4750,6 +4967,60 @@ func awsRestjson1_serializeDocumentVirtualGatewayClientPolicyTls(v *types.Virtua
 	return nil
 }
 
+func awsRestjson1_serializeDocumentVirtualGatewayClientTlsCertificate(v types.VirtualGatewayClientTlsCertificate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.VirtualGatewayClientTlsCertificateMemberFile:
+		av := object.Key("file")
+		if err := awsRestjson1_serializeDocumentVirtualGatewayListenerTlsFileCertificate(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.VirtualGatewayClientTlsCertificateMemberSds:
+		av := object.Key("sds")
+		if err := awsRestjson1_serializeDocumentVirtualGatewayListenerTlsSdsCertificate(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVirtualGatewayConnectionPool(v types.VirtualGatewayConnectionPool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.VirtualGatewayConnectionPoolMemberGrpc:
+		av := object.Key("grpc")
+		if err := awsRestjson1_serializeDocumentVirtualGatewayGrpcConnectionPool(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.VirtualGatewayConnectionPoolMemberHttp:
+		av := object.Key("http")
+		if err := awsRestjson1_serializeDocumentVirtualGatewayHttpConnectionPool(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.VirtualGatewayConnectionPoolMemberHttp2:
+		av := object.Key("http2")
+		if err := awsRestjson1_serializeDocumentVirtualGatewayHttp2ConnectionPool(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentVirtualGatewayFileAccessLog(v *types.VirtualGatewayFileAccessLog, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4757,6 +5028,18 @@ func awsRestjson1_serializeDocumentVirtualGatewayFileAccessLog(v *types.VirtualG
 	if v.Path != nil {
 		ok := object.Key("path")
 		ok.String(*v.Path)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVirtualGatewayGrpcConnectionPool(v *types.VirtualGatewayGrpcConnectionPool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("maxRequests")
+		ok.Integer(v.MaxRequests)
 	}
 
 	return nil
@@ -4804,9 +5087,45 @@ func awsRestjson1_serializeDocumentVirtualGatewayHealthCheckPolicy(v *types.Virt
 	return nil
 }
 
+func awsRestjson1_serializeDocumentVirtualGatewayHttp2ConnectionPool(v *types.VirtualGatewayHttp2ConnectionPool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("maxRequests")
+		ok.Integer(v.MaxRequests)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVirtualGatewayHttpConnectionPool(v *types.VirtualGatewayHttpConnectionPool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("maxConnections")
+		ok.Integer(v.MaxConnections)
+	}
+
+	if v.MaxPendingRequests != 0 {
+		ok := object.Key("maxPendingRequests")
+		ok.Integer(v.MaxPendingRequests)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentVirtualGatewayListener(v *types.VirtualGatewayListener, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ConnectionPool != nil {
+		ok := object.Key("connectionPool")
+		if err := awsRestjson1_serializeDocumentVirtualGatewayConnectionPool(v.ConnectionPool, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.HealthCheck != nil {
 		ok := object.Key("healthCheck")
@@ -4861,6 +5180,13 @@ func awsRestjson1_serializeDocumentVirtualGatewayListenerTls(v *types.VirtualGat
 		ok.String(string(v.Mode))
 	}
 
+	if v.Validation != nil {
+		ok := object.Key("validation")
+		if err := awsRestjson1_serializeDocumentVirtualGatewayListenerTlsValidationContext(v.Validation, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4893,6 +5219,12 @@ func awsRestjson1_serializeDocumentVirtualGatewayListenerTlsCertificate(v types.
 			return err
 		}
 
+	case *types.VirtualGatewayListenerTlsCertificateMemberSds:
+		av := object.Key("sds")
+		if err := awsRestjson1_serializeDocumentVirtualGatewayListenerTlsSdsCertificate(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -4914,6 +5246,63 @@ func awsRestjson1_serializeDocumentVirtualGatewayListenerTlsFileCertificate(v *t
 		ok.String(*v.PrivateKey)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVirtualGatewayListenerTlsSdsCertificate(v *types.VirtualGatewayListenerTlsSdsCertificate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecretName != nil {
+		ok := object.Key("secretName")
+		ok.String(*v.SecretName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVirtualGatewayListenerTlsValidationContext(v *types.VirtualGatewayListenerTlsValidationContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SubjectAlternativeNames != nil {
+		ok := object.Key("subjectAlternativeNames")
+		if err := awsRestjson1_serializeDocumentSubjectAlternativeNames(v.SubjectAlternativeNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Trust != nil {
+		ok := object.Key("trust")
+		if err := awsRestjson1_serializeDocumentVirtualGatewayListenerTlsValidationContextTrust(v.Trust, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVirtualGatewayListenerTlsValidationContextTrust(v types.VirtualGatewayListenerTlsValidationContextTrust, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.VirtualGatewayListenerTlsValidationContextTrustMemberFile:
+		av := object.Key("file")
+		if err := awsRestjson1_serializeDocumentVirtualGatewayTlsValidationContextFileTrust(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.VirtualGatewayListenerTlsValidationContextTrustMemberSds:
+		av := object.Key("sds")
+		if err := awsRestjson1_serializeDocumentVirtualGatewayTlsValidationContextSdsTrust(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -4980,6 +5369,13 @@ func awsRestjson1_serializeDocumentVirtualGatewayTlsValidationContext(v *types.V
 	object := value.Object()
 	defer object.Close()
 
+	if v.SubjectAlternativeNames != nil {
+		ok := object.Key("subjectAlternativeNames")
+		if err := awsRestjson1_serializeDocumentSubjectAlternativeNames(v.SubjectAlternativeNames, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Trust != nil {
 		ok := object.Key("trust")
 		if err := awsRestjson1_serializeDocumentVirtualGatewayTlsValidationContextTrust(v.Trust, ok); err != nil {
@@ -5016,6 +5412,18 @@ func awsRestjson1_serializeDocumentVirtualGatewayTlsValidationContextFileTrust(v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentVirtualGatewayTlsValidationContextSdsTrust(v *types.VirtualGatewayTlsValidationContextSdsTrust, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecretName != nil {
+		ok := object.Key("secretName")
+		ok.String(*v.SecretName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentVirtualGatewayTlsValidationContextTrust(v types.VirtualGatewayTlsValidationContextTrust, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5033,10 +5441,93 @@ func awsRestjson1_serializeDocumentVirtualGatewayTlsValidationContextTrust(v typ
 			return err
 		}
 
+	case *types.VirtualGatewayTlsValidationContextTrustMemberSds:
+		av := object.Key("sds")
+		if err := awsRestjson1_serializeDocumentVirtualGatewayTlsValidationContextSdsTrust(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVirtualNodeConnectionPool(v types.VirtualNodeConnectionPool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.VirtualNodeConnectionPoolMemberGrpc:
+		av := object.Key("grpc")
+		if err := awsRestjson1_serializeDocumentVirtualNodeGrpcConnectionPool(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.VirtualNodeConnectionPoolMemberHttp:
+		av := object.Key("http")
+		if err := awsRestjson1_serializeDocumentVirtualNodeHttpConnectionPool(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.VirtualNodeConnectionPoolMemberHttp2:
+		av := object.Key("http2")
+		if err := awsRestjson1_serializeDocumentVirtualNodeHttp2ConnectionPool(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.VirtualNodeConnectionPoolMemberTcp:
+		av := object.Key("tcp")
+		if err := awsRestjson1_serializeDocumentVirtualNodeTcpConnectionPool(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVirtualNodeGrpcConnectionPool(v *types.VirtualNodeGrpcConnectionPool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("maxRequests")
+		ok.Integer(v.MaxRequests)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVirtualNodeHttp2ConnectionPool(v *types.VirtualNodeHttp2ConnectionPool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("maxRequests")
+		ok.Integer(v.MaxRequests)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVirtualNodeHttpConnectionPool(v *types.VirtualNodeHttpConnectionPool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("maxConnections")
+		ok.Integer(v.MaxConnections)
+	}
+
+	if v.MaxPendingRequests != 0 {
+		ok := object.Key("maxPendingRequests")
+		ok.Integer(v.MaxPendingRequests)
+	}
+
 	return nil
 }
 
@@ -5089,6 +5580,18 @@ func awsRestjson1_serializeDocumentVirtualNodeSpec(v *types.VirtualNodeSpec, val
 		if err := awsRestjson1_serializeDocumentServiceDiscovery(v.ServiceDiscovery, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVirtualNodeTcpConnectionPool(v *types.VirtualNodeTcpConnectionPool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("maxConnections")
+		ok.Integer(v.MaxConnections)
 	}
 
 	return nil

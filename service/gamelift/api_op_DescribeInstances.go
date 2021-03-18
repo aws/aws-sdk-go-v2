@@ -12,21 +12,30 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about a fleet's instances, including instance IDs. Use
-// this operation to get details on all instances in the fleet or get details on
-// one specific instance. To get a specific instance, specify fleet ID and instance
-// ID. To get all instances in a fleet, specify a fleet ID only. Use the pagination
-// parameters to retrieve results as a set of sequential pages. If successful, an
-// Instance object is returned for each result. Learn more Remotely Access Fleet
-// Instances
+// Retrieves information about a fleet's instances, including instance IDs,
+// connection data, and status. This operation can be used in the following
+// ways:
+//
+// * To get information on all instances that are deployed to a fleet's home
+// Region, provide the fleet ID.
+//
+// * To get information on all instances that are
+// deployed to a fleet's remote location, provide the fleet ID and location
+// name.
+//
+// * To get information on a specific instance in a fleet, provide the fleet
+// ID and instance ID.
+//
+// Use the pagination parameters to retrieve results as a set
+// of sequential pages. If successful, an Instance object is returned for each
+// requested instance. Instances are not returned in any particular order. Learn
+// more Remotely Access Fleet Instances
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html)Debug
 // Fleet Issues
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
-// Related operations
-//
-// * DescribeInstances
-//
-// * GetInstanceAccess
+// Related actions DescribeInstances | GetInstanceAccess |
+// DescribeEC2InstanceLimits | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeInstances(ctx context.Context, params *DescribeInstancesInput, optFns ...func(*Options)) (*DescribeInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeInstancesInput{}
@@ -45,7 +54,7 @@ func (c *Client) DescribeInstances(ctx context.Context, params *DescribeInstance
 // Represents the input for a request operation.
 type DescribeInstancesInput struct {
 
-	// A unique identifier for a fleet to retrieve instance information for. You can
+	// A unique identifier for the fleet to retrieve instance information for. You can
 	// use either the fleet ID or ARN value.
 	//
 	// This member is required.
@@ -59,7 +68,11 @@ type DescribeInstancesInput struct {
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// Token that indicates the start of the next sequential page of results. Use the
+	// The name of a location to retrieve instance information for, in the form of an
+	// AWS Region code such as us-west-2.
+	Location *string
+
+	// A token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
@@ -71,8 +84,9 @@ type DescribeInstancesOutput struct {
 	// A collection of objects containing properties for each instance returned.
 	Instances []types.Instance
 
-	// Token that indicates where to resume retrieving results on the next call to this
-	// operation. If no token is returned, these results represent the end of the list.
+	// A token that indicates where to resume retrieving results on the next call to
+	// this operation. If no token is returned, these results represent the end of the
+	// list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

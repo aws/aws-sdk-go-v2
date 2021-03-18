@@ -53,6 +53,9 @@ type CreateConferenceProviderInput struct {
 
 	// The information for PSTN conferencing.
 	PSTNDialIn *types.PSTNDialIn
+
+	// The tags to be added to the specified resource. Do not provide system tags.
+	Tags []types.Tag
 }
 
 type CreateConferenceProviderOutput struct {

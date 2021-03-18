@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the properties associated with the FHIR datastore, including the datastore
-// ID, datastore ARN, datastore name, datastore status, created at, datastore type
-// version, and datastore endpoint.
+// Gets the properties associated with the FHIR Data Store, including the Data
+// Store ID, Data Store ARN, Data Store name, Data Store status, created at, Data
+// Store type version, and Data Store endpoint.
 func (c *Client) DescribeFHIRDatastore(ctx context.Context, params *DescribeFHIRDatastoreInput, optFns ...func(*Options)) (*DescribeFHIRDatastoreOutput, error) {
 	if params == nil {
 		params = &DescribeFHIRDatastoreInput{}
@@ -31,16 +31,16 @@ func (c *Client) DescribeFHIRDatastore(ctx context.Context, params *DescribeFHIR
 
 type DescribeFHIRDatastoreInput struct {
 
-	// The AWS-generated datastore id. This is part of the ‘CreateFHIRDatastore’
+	// The AWS-generated Data Store id. This is part of the ‘CreateFHIRDatastore’
 	// output.
 	DatastoreId *string
 }
 
 type DescribeFHIRDatastoreOutput struct {
 
-	// All properties associated with a datastore, including the datastore ID,
-	// datastore ARN, datastore name, datastore status, created at, datastore type
-	// version, and datastore endpoint.
+	// All properties associated with a Data Store, including the Data Store ID, Data
+	// Store ARN, Data Store name, Data Store status, created at, Data Store type
+	// version, and Data Store endpoint.
 	//
 	// This member is required.
 	DatastoreProperties *types.DatastoreProperties

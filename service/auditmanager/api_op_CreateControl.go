@@ -29,8 +29,7 @@ func (c *Client) CreateControl(ctx context.Context, params *CreateControlInput, 
 
 type CreateControlInput struct {
 
-	// The data source that determines from where AWS Audit Manager collects evidence
-	// for the control.
+	// The data mapping sources for the specified control.
 	//
 	// This member is required.
 	ControlMappingSources []types.CreateControlMappingSource

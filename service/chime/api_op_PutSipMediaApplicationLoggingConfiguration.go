@@ -29,7 +29,7 @@ func (c *Client) PutSipMediaApplicationLoggingConfiguration(ctx context.Context,
 
 type PutSipMediaApplicationLoggingConfigurationInput struct {
 
-	// The ID of the specified SIP media application
+	// The SIP media application ID.
 	//
 	// This member is required.
 	SipMediaApplicationId *string
@@ -40,7 +40,7 @@ type PutSipMediaApplicationLoggingConfigurationInput struct {
 
 type PutSipMediaApplicationLoggingConfigurationOutput struct {
 
-	// The actual logging configuration.
+	// Logging configuration of the SIP media application.
 	SipMediaApplicationLoggingConfiguration *types.SipMediaApplicationLoggingConfiguration
 
 	// Metadata pertaining to the operation's result.

@@ -2041,6 +2041,15 @@ func awsRestjson1_deserializeDocumentMemberDetail(v **types.MemberDetail, value 
 				sv.AccountId = ptr.String(jtv)
 			}
 
+		case "AdministratorId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.AdministratorId = ptr.String(jtv)
+			}
+
 		case "DisabledReason":
 			if value != nil {
 				jtv, ok := value.(string)

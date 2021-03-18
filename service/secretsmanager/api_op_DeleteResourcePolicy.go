@@ -22,10 +22,10 @@ import (
 // policy to a secret, use PutResourcePolicy.
 //
 // * To retrieve the current
-// resource-based policy that's attached to a secret, use GetResourcePolicy.
+// resource-based policy attached to a secret, use GetResourcePolicy.
 //
-// * To
-// list all of the currently available secrets, use ListSecrets.
+// * To list
+// all of the currently available secrets, use ListSecrets.
 func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourcePolicyInput, optFns ...func(*Options)) (*DeleteResourcePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteResourcePolicyInput{}

@@ -62,6 +62,13 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "ap-northeast-2",
 				},
 			},
+			"ap-northeast-3": endpoints.Endpoint{
+				Hostname:          "s3-control.ap-northeast-3.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-3",
+				},
+			},
 			"ap-south-1": endpoints.Endpoint{
 				Hostname:          "s3-control.ap-south-1.amazonaws.com",
 				SignatureVersions: []string{"s3v4"},

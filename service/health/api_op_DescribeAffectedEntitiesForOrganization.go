@@ -22,9 +22,17 @@ import (
 // with AWS Organizations. To do this, call the
 // EnableHealthServiceAccessForOrganization
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
-// operation from your organization's master account. This API operation uses
-// pagination. Specify the nextToken parameter in the next request to return more
-// results.
+// operation from your organization's management account.
+//
+// * This API operation
+// uses pagination. Specify the nextToken parameter in the next request to return
+// more results.
+//
+// * This operation doesn't support resource-level permissions. You
+// can't use this operation to allow or deny access to specific AWS Health events.
+// For more information, see Resource- and action-based conditions
+// (https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions)
+// in the AWS Health User Guide.
 func (c *Client) DescribeAffectedEntitiesForOrganization(ctx context.Context, params *DescribeAffectedEntitiesForOrganizationInput, optFns ...func(*Options)) (*DescribeAffectedEntitiesForOrganizationOutput, error) {
 	if params == nil {
 		params = &DescribeAffectedEntitiesForOrganizationInput{}

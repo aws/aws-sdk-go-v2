@@ -7,6 +7,28 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 )
 
+func ExampleConfigDetails_outputUsage() {
+	var union types.ConfigDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConfigDetailsMemberAntennaDemodDecodeDetails:
+		_ = v.Value // Value is types.AntennaDemodDecodeDetails
+
+	case *types.ConfigDetailsMemberEndpointDetails:
+		_ = v.Value // Value is types.EndpointDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AntennaDemodDecodeDetails
+var _ *types.EndpointDetails
+
 func ExampleConfigTypeData_outputUsage() {
 	var union types.ConfigTypeData
 	// type switches can be used to check the union value

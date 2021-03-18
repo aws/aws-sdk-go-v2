@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// This operation is used with the GameLift FleetIQ solution and game server
 // groups. Retrieves status information about the Amazon EC2 instances associated
 // with a GameLift FleetIQ game server group. Use this operation to detect when
 // instances are active or not available to host new game servers. If you are
@@ -27,25 +27,11 @@ import (
 // results in errors. Instead, as a best practice, cache the results and refresh
 // your cache no more than once every 10 seconds. Learn more GameLift FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related operations
-//
-// * CreateGameServerGroup
-//
-// * ListGameServerGroups
-//
-// *
-// DescribeGameServerGroup
-//
-// * UpdateGameServerGroup
-//
-// * DeleteGameServerGroup
-//
-// *
-// ResumeGameServerGroup
-//
-// * SuspendGameServerGroup
-//
-// * DescribeGameServerInstances
+// Related actions CreateGameServerGroup | ListGameServerGroups |
+// DescribeGameServerGroup | UpdateGameServerGroup | DeleteGameServerGroup |
+// ResumeGameServerGroup | SuspendGameServerGroup | DescribeGameServerInstances |
+// All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) DescribeGameServerInstances(ctx context.Context, params *DescribeGameServerInstancesInput, optFns ...func(*Options)) (*DescribeGameServerInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeGameServerInstancesInput{}
@@ -75,11 +61,11 @@ type DescribeGameServerInstancesInput struct {
 	InstanceIds []string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential segments.
+	// get results as a set of sequential pages.
 	Limit *int32
 
-	// A token that indicates the start of the next sequential segment of results. Use
-	// the token returned with the previous call to this operation. To start at the
+	// A token that indicates the start of the next sequential page of results. Use the
+	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
 }
@@ -173,7 +159,7 @@ var _ DescribeGameServerInstancesAPIClient = (*Client)(nil)
 // DescribeGameServerInstances
 type DescribeGameServerInstancesPaginatorOptions struct {
 	// The maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential segments.
+	// get results as a set of sequential pages.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

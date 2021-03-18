@@ -24,8 +24,7 @@ import (
 // Greengrass specifies to use the version from the AWS Cloud. To use this
 // operation, you must use the data plane API endpoint and authenticate with an AWS
 // IoT device certificate. For more information, see AWS IoT Greengrass endpoints
-// and quotas
-// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/general/latest/gr/greengrass.html).
+// and quotas (https://docs.aws.amazon.com/general/latest/gr/greengrass.html).
 func (c *Client) ResolveComponentCandidates(ctx context.Context, params *ResolveComponentCandidatesInput, optFns ...func(*Options)) (*ResolveComponentCandidatesOutput, error) {
 	if params == nil {
 		params = &ResolveComponentCandidatesInput{}

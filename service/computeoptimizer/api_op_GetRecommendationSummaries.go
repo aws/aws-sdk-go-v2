@@ -11,10 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the optimization findings for an account. For example, it returns the
-// number of Amazon EC2 instances in an account that are under-provisioned,
-// over-provisioned, or optimized. It also returns the number of Auto Scaling
-// groups in an account that are not optimized, or optimized.
+// Returns the optimization findings for an account. It returns the number of:
+//
+// *
+// Amazon EC2 instances in an account that are Underprovisioned, Overprovisioned,
+// or Optimized.
+//
+// * Auto Scaling groups in an account that are NotOptimized, or
+// Optimized.
+//
+// * Amazon EBS volumes in an account that are NotOptimized, or
+// Optimized.
+//
+// * Lambda functions in an account that are NotOptimized, or
+// Optimized.
 func (c *Client) GetRecommendationSummaries(ctx context.Context, params *GetRecommendationSummariesInput, optFns ...func(*Options)) (*GetRecommendationSummariesOutput, error) {
 	if params == nil {
 		params = &GetRecommendationSummariesInput{}
@@ -32,9 +42,9 @@ func (c *Client) GetRecommendationSummaries(ctx context.Context, params *GetReco
 
 type GetRecommendationSummariesInput struct {
 
-	// The IDs of the AWS accounts for which to return recommendation summaries. If
-	// your account is the management account of an organization, use this parameter to
-	// specify the member accounts for which you want to return recommendation
+	// The ID of the AWS account for which to return recommendation summaries. If your
+	// account is the management account of an organization, use this parameter to
+	// specify the member account for which you want to return recommendation
 	// summaries. Only one account ID can be specified per request.
 	AccountIds []string
 

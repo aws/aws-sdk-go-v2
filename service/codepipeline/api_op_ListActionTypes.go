@@ -38,6 +38,9 @@ type ListActionTypesInput struct {
 	// An identifier that was returned from the previous list action types call, which
 	// can be used to return the next set of action types in the list.
 	NextToken *string
+
+	// The Region to filter on for the list of action types.
+	RegionFilter *string
 }
 
 // Represents the output of a ListActionTypes action.

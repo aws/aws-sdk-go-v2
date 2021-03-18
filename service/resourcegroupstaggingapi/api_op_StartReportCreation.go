@@ -10,13 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a report that lists all tagged resources in accounts across your
+// Generates a report that lists all tagged resources in the accounts across your
 // organization and tells whether each resource is compliant with the effective tag
-// policy. Compliance data is refreshed daily. The generated report is saved to the
-// following location:
+// policy. Compliance data is refreshed daily. The report is generated
+// asynchronously. The generated report is saved to the following location:
 // s3://example-bucket/AwsTagPolicies/o-exampleorgid/YYYY-MM-ddTHH:mm:ssZ/report.csv
-// You can call this operation only from the organization's master account and from
-// the us-east-1 Region.
+// You can call this operation only from the organization's management account and
+// from the us-east-1 Region.
 func (c *Client) StartReportCreation(ctx context.Context, params *StartReportCreationInput, optFns ...func(*Options)) (*StartReportCreationOutput, error) {
 	if params == nil {
 		params = &StartReportCreationInput{}

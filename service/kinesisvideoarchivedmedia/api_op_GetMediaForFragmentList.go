@@ -15,34 +15,26 @@ import (
 // archived data in an Amazon Kinesis video stream. You must first call the
 // GetDataEndpoint API to get an endpoint. Then send the GetMediaForFragmentList
 // requests to this endpoint using the --endpoint-url parameter
-// (https://docs.aws.amazon.com/cli/latest/reference/). The following limits apply
-// when using the GetMediaForFragmentList API:
+// (https://docs.aws.amazon.com/cli/latest/reference/). For limits, see Kinesis
+// Video Streams Limits
+// (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html). If an
+// error is thrown after invoking a Kinesis Video Streams archived media API, in
+// addition to the HTTP status code and the response body, it includes the
+// following pieces of information:
 //
-// * A client can call
-// GetMediaForFragmentList up to five times per second per stream.
+// * x-amz-ErrorType HTTP header – contains a
+// more specific error type in addition to what the HTTP status code provides.
 //
-// * Kinesis Video
-// Streams sends media data at a rate of up to 25 megabytes per second (or 200
-// megabits per second) during a GetMediaForFragmentList session.
+// *
+// x-amz-RequestId HTTP header – if you want to report an issue to AWS, the support
+// team can better diagnose the problem if given the Request Id.
 //
-// If an error is
-// thrown after invoking a Kinesis Video Streams archived media API, in addition to
-// the HTTP status code and the response body, it includes the following pieces of
-// information:
-//
-// * x-amz-ErrorType HTTP header – contains a more specific error
-// type in addition to what the HTTP status code provides.
-//
-// * x-amz-RequestId HTTP
-// header – if you want to report an issue to AWS, the support team can better
-// diagnose the problem if given the Request Id.
-//
-// Both the HTTP status code and the
-// ErrorType header can be utilized to make programmatic decisions about whether
-// errors are retry-able and under what conditions, as well as provide information
-// on what actions the client programmer might need to take in order to
-// successfully try again. For more information, see the Errors section at the
-// bottom of this topic, as well as Common Errors
+// Both the HTTP
+// status code and the ErrorType header can be utilized to make programmatic
+// decisions about whether errors are retry-able and under what conditions, as well
+// as provide information on what actions the client programmer might need to take
+// in order to successfully try again. For more information, see the Errors section
+// at the bottom of this topic, as well as Common Errors
 // (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html).
 func (c *Client) GetMediaForFragmentList(ctx context.Context, params *GetMediaForFragmentListInput, optFns ...func(*Options)) (*GetMediaForFragmentListOutput, error) {
 	if params == nil {
@@ -67,9 +59,12 @@ type GetMediaForFragmentListInput struct {
 	// This member is required.
 	Fragments []string
 
-	// The name of the stream from which to retrieve fragment media.
-	//
-	// This member is required.
+	// The Amazon Resource Name (ARN) of the stream from which to retrieve fragment
+	// media. Specify either this parameter or the StreamName parameter.
+	StreamARN *string
+
+	// The name of the stream from which to retrieve fragment media. Specify either
+	// this parameter or the StreamARN parameter.
 	StreamName *string
 }
 

@@ -16,7 +16,7 @@ import (
 // perform the following actions.
 //
 // * ChannelModerator actions across all channels
-// in the app instance.
+// in the AppInstance.
 //
 // * DeleteChannelMessage actions.
 //
@@ -39,12 +39,12 @@ func (c *Client) CreateAppInstanceAdmin(ctx context.Context, params *CreateAppIn
 
 type CreateAppInstanceAdminInput struct {
 
-	// The ARN of the administrator of the current app instance.
+	// The ARN of the administrator of the current AppInstance.
 	//
 	// This member is required.
 	AppInstanceAdminArn *string
 
-	// The ARN of the app instance.
+	// The ARN of the AppInstance.
 	//
 	// This member is required.
 	AppInstanceArn *string
@@ -52,10 +52,10 @@ type CreateAppInstanceAdminInput struct {
 
 type CreateAppInstanceAdminOutput struct {
 
-	// The name and ARN of the admin for the app instance.
+	// The name and ARN of the admin for the AppInstance.
 	AppInstanceAdmin *types.Identity
 
-	// The ARN of the of the admin for the app instance.
+	// The ARN of the of the admin for the AppInstance.
 	AppInstanceArn *string
 
 	// Metadata pertaining to the operation's result.

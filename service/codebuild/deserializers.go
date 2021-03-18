@@ -5762,6 +5762,15 @@ func awsAwsjson11_deserializeDocumentBuildBatch(v **types.BuildBatch, value inte
 				sv.CurrentPhase = ptr.String(jtv)
 			}
 
+		case "debugSessionEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected WrapperBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.DebugSessionEnabled = ptr.Bool(jtv)
+			}
+
 		case "encryptionKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8117,6 +8126,19 @@ func awsAwsjson11_deserializeDocumentProject(v **types.Project, value interface{
 				return err
 			}
 
+		case "concurrentBuildLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WrapperInt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ConcurrentBuildLimit = ptr.Int32(int32(i64))
+			}
+
 		case "created":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10078,6 +10100,15 @@ func awsAwsjson11_deserializeDocumentS3ReportExportConfig(v **types.S3ReportExpo
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.Bucket = ptr.String(jtv)
+			}
+
+		case "bucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.BucketOwner = ptr.String(jtv)
 			}
 
 		case "encryptionDisabled":

@@ -41,7 +41,7 @@ type UpdateOpenIDConnectProviderThumbprintInput struct {
 	// The Amazon Resource Name (ARN) of the IAM OIDC provider resource object for
 	// which you want to update the thumbprint. You can get a list of OIDC provider
 	// ARNs by using the ListOpenIDConnectProviders operation. For more information
-	// about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// about ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//

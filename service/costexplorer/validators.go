@@ -210,6 +210,26 @@ func (m *validateOpGetCostAndUsageWithResources) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCostCategories struct {
+}
+
+func (*validateOpGetCostCategories) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCostCategories) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCostCategoriesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCostCategoriesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCostForecast struct {
 }
 
@@ -570,6 +590,10 @@ func addOpGetCostAndUsageWithResourcesValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpGetCostAndUsageWithResources{}, middleware.After)
 }
 
+func addOpGetCostCategoriesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCostCategories{}, middleware.After)
+}
+
 func addOpGetCostForecastValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCostForecast{}, middleware.After)
 }
@@ -754,6 +778,38 @@ func validateRightsizingRecommendationConfiguration(v *types.RightsizingRecommen
 	invalidParams := smithy.InvalidParamsError{Context: "RightsizingRecommendationConfiguration"}
 	if len(v.RecommendationTarget) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RecommendationTarget"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSortDefinition(v *types.SortDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SortDefinition"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSortDefinitions(v []types.SortDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SortDefinitions"}
+	for i := range v {
+		if err := validateSortDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -968,6 +1024,30 @@ func validateOpGetCostAndUsageWithResourcesInput(v *GetCostAndUsageWithResources
 	}
 }
 
+func validateOpGetCostCategoriesInput(v *GetCostCategoriesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCostCategoriesInput"}
+	if v.TimePeriod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimePeriod"))
+	} else if v.TimePeriod != nil {
+		if err := validateDateInterval(v.TimePeriod); err != nil {
+			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SortBy != nil {
+		if err := validateSortDefinitions(v.SortBy); err != nil {
+			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetCostForecastInput(v *GetCostForecastInput) error {
 	if v == nil {
 		return nil
@@ -1008,6 +1088,11 @@ func validateOpGetDimensionValuesInput(v *GetDimensionValuesInput) error {
 	if len(v.Dimension) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Dimension"))
 	}
+	if v.SortBy != nil {
+		if err := validateSortDefinitions(v.SortBy); err != nil {
+			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1025,6 +1110,11 @@ func validateOpGetReservationCoverageInput(v *GetReservationCoverageInput) error
 	} else if v.TimePeriod != nil {
 		if err := validateDateInterval(v.TimePeriod); err != nil {
 			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SortBy != nil {
+		if err := validateSortDefinition(v.SortBy); err != nil {
+			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1059,6 +1149,11 @@ func validateOpGetReservationUtilizationInput(v *GetReservationUtilizationInput)
 	} else if v.TimePeriod != nil {
 		if err := validateDateInterval(v.TimePeriod); err != nil {
 			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SortBy != nil {
+		if err := validateSortDefinition(v.SortBy); err != nil {
+			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1098,6 +1193,11 @@ func validateOpGetSavingsPlansCoverageInput(v *GetSavingsPlansCoverageInput) err
 	} else if v.TimePeriod != nil {
 		if err := validateDateInterval(v.TimePeriod); err != nil {
 			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SortBy != nil {
+		if err := validateSortDefinition(v.SortBy); err != nil {
+			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1143,6 +1243,11 @@ func validateOpGetSavingsPlansUtilizationDetailsInput(v *GetSavingsPlansUtilizat
 			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SortBy != nil {
+		if err := validateSortDefinition(v.SortBy); err != nil {
+			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1162,6 +1267,11 @@ func validateOpGetSavingsPlansUtilizationInput(v *GetSavingsPlansUtilizationInpu
 			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SortBy != nil {
+		if err := validateSortDefinition(v.SortBy); err != nil {
+			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1179,6 +1289,11 @@ func validateOpGetTagsInput(v *GetTagsInput) error {
 	} else if v.TimePeriod != nil {
 		if err := validateDateInterval(v.TimePeriod); err != nil {
 			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SortBy != nil {
+		if err := validateSortDefinitions(v.SortBy); err != nil {
+			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

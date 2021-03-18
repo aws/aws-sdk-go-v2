@@ -15,7 +15,7 @@ import (
 // public key uploaded by this operation can be used only for authenticating the
 // associated IAM user to an AWS CodeCommit repository. For more information about
 // using SSH keys to authenticate to an AWS CodeCommit repository, see Set up AWS
-// CodeCommit for SSH Connections
+// CodeCommit for SSH connections
 // (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
 // in the AWS CodeCommit User Guide.
 func (c *Client) UploadSSHPublicKey(ctx context.Context, params *UploadSSHPublicKeyInput, optFns ...func(*Options)) (*UploadSSHPublicKeyOutput, error) {

@@ -64,16 +64,16 @@ type AdvancedFieldSelector struct {
 	//
 	// * resources.type - This ﬁeld is required. resources.type
 	// can only use the Equals operator, and the value can be one of the following:
-	// AWS::S3::Object or AWS::Lambda::Function. You can have only one resources.type
-	// ﬁeld per selector. To log data events on more than one resource type, add
-	// another selector.
+	// AWS::S3::Object, AWS::Lambda::Function, or AWS::S3Outposts::Object. You can have
+	// only one resources.type ﬁeld per selector. To log data events on more than one
+	// resource type, add another selector.
 	//
-	// * resources.ARN - You can use any operator with
-	// resources.ARN, but if you use Equals or NotEquals, the value must exactly match
-	// the ARN of a valid resource of the type you've speciﬁed in the template as the
-	// value of resources.type. For example, if resources.type equals AWS::S3::Object,
-	// the ARN must be in one of the following formats. The trailing slash is
-	// intentional; do not exclude it.
+	// * resources.ARN - You can use any operator
+	// with resources.ARN, but if you use Equals or NotEquals, the value must exactly
+	// match the ARN of a valid resource of the type you've speciﬁed in the template as
+	// the value of resources.type. For example, if resources.type equals
+	// AWS::S3::Object, the ARN must be in one of the following formats. The trailing
+	// slash is intentional; do not exclude it.
 	//
 	// * arn:partition:s3:::bucket_name/
 	//
@@ -86,6 +86,13 @@ type AdvancedFieldSelector struct {
 	//
 	// *
 	// arn:partition:lambda:region:account_ID:function:function_name
+	//
+	// When
+	// resources.type equals AWS::S3Outposts::Object, and the operator is set to Equals
+	// or NotEquals, the ARN must be in the following format:
+	//
+	// *
+	// arn:partition:s3-outposts:region:>account_ID:object_path
 	//
 	// This member is required.
 	Field *string
@@ -166,7 +173,9 @@ type AdvancedFieldSelector struct {
 type DataResource struct {
 
 	// The resource type in which you want to log data events. You can specify
-	// AWS::S3::Object or AWS::Lambda::Function resources.
+	// AWS::S3::Object or AWS::Lambda::Function resources. The AWS::S3Outposts::Object
+	// resource type is not valid in basic event selectors. To log data events on this
+	// resource type, use advanced event selectors.
 	Type *string
 
 	// An array of Amazon Resource Name (ARN) strings or partial ARN strings for the

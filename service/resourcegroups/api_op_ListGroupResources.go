@@ -13,7 +13,10 @@ import (
 )
 
 // Returns a list of ARNs of the resources that are members of a specified resource
-// group.
+// group. Minimum permissions To run this command, you must have the following
+// permissions:
+//
+// * resource-groups:ListGroupResources
 func (c *Client) ListGroupResources(ctx context.Context, params *ListGroupResourcesInput, optFns ...func(*Options)) (*ListGroupResourcesOutput, error) {
 	if params == nil {
 		params = &ListGroupResourcesInput{}
@@ -57,7 +60,7 @@ type ListGroupResourcesInput struct {
 	// The name or the ARN of the resource group
 	Group *string
 
-	// Don't use this parameter. Use Group instead.
+	// Deprecated - don't use this parameter. Use the Group request field instead.
 	//
 	// Deprecated: This field is deprecated, use Group instead.
 	GroupName *string
@@ -93,9 +96,14 @@ type ListGroupResourcesOutput struct {
 	// CLOUDFORMATION_STACK_INACTIVE and CLOUDFORMATION_STACK_NOT_EXISTING.
 	QueryErrors []types.QueryError
 
-	// The ARNs and resource types of resources that are members of the group that you
-	// specified.
+	// Deprecated - don't use this parameter. Use the Resources response field instead.
+	//
+	// Deprecated: This field is deprecated, use Resources instead.
 	ResourceIdentifiers []types.ResourceIdentifier
+
+	// An array of resources from which you can determine each resource's identity,
+	// type, and group membership status.
+	Resources []types.ListGroupResourcesItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

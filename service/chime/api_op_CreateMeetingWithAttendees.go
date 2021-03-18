@@ -16,10 +16,10 @@ import (
 // attendees. For more information about specifying media Regions, see Amazon Chime
 // SDK Media Regions
 // (https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html) in
-// the Amazon Chime Developer Guide. For more information about the Amazon Chime
+// the Amazon Chime Developer Guide . For more information about the Amazon Chime
 // SDK, see Using the Amazon Chime SDK
 // (https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html) in the Amazon
-// Chime Developer Guide.
+// Chime Developer Guide .
 func (c *Client) CreateMeetingWithAttendees(ctx context.Context, params *CreateMeetingWithAttendeesInput, optFns ...func(*Options)) (*CreateMeetingWithAttendeesOutput, error) {
 	if params == nil {
 		params = &CreateMeetingWithAttendeesInput{}
@@ -49,18 +49,19 @@ type CreateMeetingWithAttendeesInput struct {
 	// The external meeting ID.
 	ExternalMeetingId *string
 
-	// The Region in which to create the meeting. Default: us-east-1. Available values:
-	// af-south-1, ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1,
-	// ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1,
-	// eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
+	// The Region in which to create the meeting. Default: us-east-1 . Available
+	// values: af-south-1 , ap-northeast-1 , ap-northeast-2 , ap-south-1 ,
+	// ap-southeast-1 , ap-southeast-2 , ca-central-1 , eu-central-1 , eu-north-1 ,
+	// eu-south-1 , eu-west-1 , eu-west-2 , eu-west-3 , sa-east-1 , us-east-1 ,
+	// us-east-2 , us-west-1 , us-west-2 .
 	MediaRegion *string
 
 	// Reserved.
 	MeetingHostId *string
 
-	// The configuration for resource targets to receive notifications when Amazon
-	// Chime SDK meeting and attendee events occur. The Amazon Chime SDK supports
-	// resource targets located in the US East (N. Virginia) AWS Region (us-east-1).
+	// The resource target configurations for receiving Amazon Chime SDK meeting and
+	// attendee event notifications. The Amazon Chime SDK supports resource targets
+	// located in the US East (N. Virginia) AWS Region (us-east-1).
 	NotificationsConfiguration *types.MeetingNotificationConfiguration
 
 	// The tag key-value pairs.

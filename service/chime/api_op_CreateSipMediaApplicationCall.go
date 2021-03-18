@@ -30,15 +30,19 @@ func (c *Client) CreateSipMediaApplicationCall(ctx context.Context, params *Crea
 
 type CreateSipMediaApplicationCallInput struct {
 
+	// The phone number that a user calls from.
+	//
+	// This member is required.
+	FromPhoneNumber *string
+
 	// The ID of the SIP media application.
 	//
 	// This member is required.
 	SipMediaApplicationId *string
 
-	// The phone number that a user calls from.
-	FromPhoneNumber *string
-
-	// The phone number that the user dials in order to connect to a meeting
+	// The phone number that the user dials in order to connect to a meeting.
+	//
+	// This member is required.
 	ToPhoneNumber *string
 }
 

@@ -41,21 +41,18 @@ type CreateSipRuleInput struct {
 	// This member is required.
 	TargetApplications []types.SipRuleTargetApplication
 
-	// The type of trigger whose value is assigned to the SIP rule in TriggerValue.
-	// Allowed trigger values are RequestUriHostname and ToPhoneNumber.
+	// The type of trigger assigned to the SIP rule in TriggerValue, currently
+	// RequestUriHostname or ToPhoneNumber.
 	//
 	// This member is required.
 	TriggerType types.SipRuleTriggerType
 
-	// If TriggerType is RequestUriHostname then the value can be the outbound host
-	// name of an Amazon Chime Voice Connector. If TriggerType is ToPhoneNumber then
-	// the value can be a customer-owned phone number in E164 format. SipRule is
-	// triggered if the SIP application requests a host name, or a If TriggerType is
-	// RequestUriHostname, then the value can be the outbound hostname of an Amazon
-	// Chime Voice Connector. If TriggerType is ToPhoneNumber, then the value can be a
-	// customer-owned phone number in E164 format. SipRule is triggered if the SIP
-	// application requests a host name, or a ToPhoneNumber value matches the incoming
-	// SIP request.
+	// If TriggerType is RequestUriHostname, the value can be the outbound host name of
+	// an Amazon Chime Voice Connector. If TriggerType is ToPhoneNumber, the value can
+	// be a customer-owned phone number in the E164 format. The SipMediaApplication
+	// specified in the SipRule is triggered if the request URI in an incoming SIP
+	// request matches the RequestUriHostname, or if the To header in the incoming SIP
+	// request matches the ToPhoneNumber value.
 	//
 	// This member is required.
 	TriggerValue *string

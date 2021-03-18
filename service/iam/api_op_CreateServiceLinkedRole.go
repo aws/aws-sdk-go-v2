@@ -17,7 +17,7 @@ import (
 // role, which could put your AWS resources into an unknown state. Allowing the
 // service to control the role helps improve service stability and proper cleanup
 // when a service and its role are no longer needed. For more information, see
-// Using Service-Linked Roles
+// Using service-linked roles
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html)
 // in the IAM User Guide. To attach a policy to this service-linked role, you must
 // make the request using the AWS service that depends on this role.
@@ -42,7 +42,7 @@ type CreateServiceLinkedRoleInput struct {
 	// use a string similar to a URL but without the http:// in front. For example:
 	// elasticbeanstalk.amazonaws.com. Service principals are unique and
 	// case-sensitive. To find the exact service principal for your service-linked
-	// role, see AWS Services That Work with IAM
+	// role, see AWS services that work with IAM
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-services-that-work-with-iam.html)
 	// in the IAM User Guide. Look for the services that have Yes in the Service-Linked
 	// Role column. Choose the Yes link to view the service-linked role documentation

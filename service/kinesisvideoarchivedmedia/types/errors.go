@@ -7,8 +7,10 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Kinesis Video Streams has throttled the request because you have exceeded the
-// limit of allowed client calls. Try making the call later.
+// Kinesis Video Streams has throttled the request because you have exceeded a
+// limit. Try making the call later. For information about limits, see Kinesis
+// Video Streams Limits
+// (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html).
 type ClientLimitExceededException struct {
 	Message *string
 }

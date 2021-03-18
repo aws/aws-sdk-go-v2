@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject
-// to change. Returns details for the specified Amazon EMR Studio including ID,
-// Name, VPC, Studio access URL, and so on.
+// Returns details for the specified Amazon EMR Studio including ID, Name, VPC,
+// Studio access URL, and so on.
 func (c *Client) DescribeStudio(ctx context.Context, params *DescribeStudioInput, optFns ...func(*Options)) (*DescribeStudioOutput, error) {
 	if params == nil {
 		params = &DescribeStudioInput{}

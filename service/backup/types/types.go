@@ -19,8 +19,12 @@ type AdvancedBackupSetting struct {
 	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html).
 	BackupOptions map[string]string
 
-	// The type of AWS resource to be backed up. For VSS Windows backups, the only
-	// supported resource type is Amazon EC2. Valid values: EC2.
+	// Specifies an object containing resource type and backup options. The only
+	// supported resource type is Amazon EC2 instances with Windows VSS. For an
+	// CloudFormation example, see the sample CloudFormation template to enable Windows
+	// VSS
+	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html)
+	// in the AWS Backup User Guide. Valid values: EC2.
 	ResourceType *string
 }
 
@@ -84,8 +88,10 @@ type BackupJob struct {
 	// 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
 	ExpectedCompletionDate *time.Time
 
-	// Specifies the IAM role ARN used to create the target recovery point; for
-	// example, arn:aws:iam::123456789012:role/S3Access.
+	// Specifies the IAM role ARN used to create the target recovery point. IAM roles
+	// other than the default role must include either AWSBackup or AwsBackup in the
+	// role name. For example, arn:aws:iam::123456789012:role/AWSBackupRDSAccess. Role
+	// names without those strings lack permissions to perform backup jobs.
 	IamRoleArn *string
 
 	// Contains an estimated percentage complete of a job at the time the job status
@@ -241,13 +247,19 @@ type BackupRule struct {
 	// operation.
 	CopyActions []CopyAction
 
+	// Specifies whether AWS Backup creates continuous backups. True causes AWS Backup
+	// to create continuous backups capable of point-in-time restore (PITR). False (or
+	// not specified) causes AWS Backup to create snapshot backups.
+	EnableContinuousBackup *bool
+
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. AWS Backup transitions and expires backups automatically
 	// according to the lifecycle that you define. Backups transitioned to cold storage
 	// must be stored in cold storage for a minimum of 90 days. Therefore, the “expire
 	// after days” setting must be 90 days greater than the “transition to cold after
 	// days” setting. The “transition to cold after days” setting cannot be changed
-	// after a backup has been transitioned to cold.
+	// after a backup has been transitioned to cold. Only Amazon EFS file system
+	// backups can be transitioned to cold storage.
 	Lifecycle *Lifecycle
 
 	// An array of key-value pair strings that are assigned to resources that are
@@ -295,13 +307,19 @@ type BackupRuleInput struct {
 	// operation.
 	CopyActions []CopyAction
 
+	// Specifies whether AWS Backup creates continuous backups. True causes AWS Backup
+	// to create continuous backups capable of point-in-time restore (PITR). False (or
+	// not specified) causes AWS Backup to create snapshot backups.
+	EnableContinuousBackup *bool
+
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. AWS Backup will transition and expire backups automatically
 	// according to the lifecycle that you define. Backups transitioned to cold storage
 	// must be stored in cold storage for a minimum of 90 days. Therefore, the “expire
 	// after days” setting must be 90 days greater than the “transition to cold after
 	// days” setting. The “transition to cold after days” setting cannot be changed
-	// after a backup has been transitioned to cold.
+	// after a backup has been transitioned to cold. Only Amazon EFS file system
+	// backups can be transitioned to cold storage.
 	Lifecycle *Lifecycle
 
 	// To help organize your resources, you can assign your own metadata to the
@@ -332,6 +350,7 @@ type BackupSelection struct {
 
 	// An array of conditions used to specify a set of resources to assign to a backup
 	// plan; for example, "StringEquals": {"ec2:ResourceTag/Department": "accounting".
+	// Assigns the backup plan to every resource with at least one matching tag.
 	ListOfTags []Condition
 
 	// An array of strings that contain Amazon Resource Names (ARNs) of resources to
@@ -406,7 +425,8 @@ type BackupVaultListMember struct {
 // for a minimum of 90 days. Therefore, the “expire after days” setting must be 90
 // days greater than the “transition to cold after days” setting. The “transition
 // to cold after days” setting cannot be changed after a backup has been
-// transitioned to cold.
+// transitioned to cold. Only Amazon EFS file system backups can be transitioned to
+// cold storage.
 type CalculatedLifecycle struct {
 
 	// A timestamp that specifies when to delete a recovery point.
@@ -456,7 +476,8 @@ type CopyAction struct {
 	// Therefore, on the console, the “expire after days” setting must be 90 days
 	// greater than the “transition to cold after days” setting. The “transition to
 	// cold after days” setting cannot be changed after a backup has been transitioned
-	// to cold.
+	// to cold. Only Amazon EFS file system backups can be transitioned to cold
+	// storage.
 	Lifecycle *Lifecycle
 }
 
@@ -531,7 +552,8 @@ type CopyJob struct {
 // Therefore, on the console, the “expire after days” setting must be 90 days
 // greater than the “transition to cold after days” setting. The “transition to
 // cold after days” setting cannot be changed after a backup has been transitioned
-// to cold.
+// to cold. Only Amazon EFS file system backups can be transitioned to cold
+// storage.
 type Lifecycle struct {
 
 	// Specifies the number of days after creation that a recovery point is deleted.
@@ -625,7 +647,8 @@ type RecoveryPointByBackupVault struct {
 	// must be stored in cold storage for a minimum of 90 days. Therefore, the “expire
 	// after days” setting must be 90 days greater than the “transition to cold after
 	// days” setting. The “transition to cold after days” setting cannot be changed
-	// after a backup has been transitioned to cold.
+	// after a backup has been transitioned to cold. Only Amazon EFS file system
+	// backups can be transitioned to cold storage.
 	Lifecycle *Lifecycle
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for

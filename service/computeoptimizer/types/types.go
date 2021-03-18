@@ -131,15 +131,18 @@ type EBSUtilizationMetric struct {
 	// specified period of time. Unit: Bytes
 	Name EBSMetricName
 
-	// The statistic of the utilization metric. The following statistics are
-	// available:
-	//
-	// * Average - This is the value of Sum / SampleCount during the
-	// specified period, or the average value observed during the specified period.
-	//
-	// *
-	// Maximum - The highest value observed during the specified period. Use this value
-	// to determine high volumes of activity for your application.
+	// The statistic of the utilization metric. The Compute Optimizer API, AWS Command
+	// Line Interface (AWS CLI), and SDKs return utilization metrics using only the
+	// Maximum statistic, which is the highest value observed during the specified
+	// period. The Compute Optimizer console displays graphs for some utilization
+	// metrics using the Average statistic, which is the value of Sum / SampleCount
+	// during the specified period. For more information, see Viewing resource
+	// recommendations
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
+	// in the AWS Compute Optimizer User Guide. You can also get averaged utilization
+	// metric data for your resources using Amazon CloudWatch. For more information,
+	// see the Amazon CloudWatch User Guide
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
 	Statistic MetricStatistic
 
 	// The value of the utilization metric.
@@ -301,6 +304,173 @@ type JobFilter struct {
 	Values []string
 }
 
+// Describes a projected utilization metric of an AWS Lambda function
+// recommendation option.
+type LambdaFunctionMemoryProjectedMetric struct {
+
+	// The name of the projected utilization metric.
+	Name LambdaFunctionMemoryMetricName
+
+	// The statistic of the projected utilization metric.
+	Statistic LambdaFunctionMemoryMetricStatistic
+
+	// The values of the projected utilization metrics.
+	Value float64
+}
+
+// Describes a recommendation option for an AWS Lambda function.
+type LambdaFunctionMemoryRecommendationOption struct {
+
+	// The memory size, in MB, of the function recommendation option.
+	MemorySize int32
+
+	// An array of objects that describe the projected utilization metrics of the
+	// function recommendation option.
+	ProjectedUtilizationMetrics []LambdaFunctionMemoryProjectedMetric
+
+	// The rank of the function recommendation option. The top recommendation option is
+	// ranked as 1.
+	Rank int32
+}
+
+// Describes an AWS Lambda function recommendation.
+type LambdaFunctionRecommendation struct {
+
+	// The AWS account ID of the function.
+	AccountId *string
+
+	// The amount of memory, in MB, that's allocated to the current function.
+	CurrentMemorySize int32
+
+	// The finding classification for the function. Findings for functions include:
+	//
+	// *
+	// Optimized — The function is correctly provisioned to run your workload based on
+	// its current configuration and its utilization history. This finding
+	// classification does not include finding reason codes.
+	//
+	// * NotOptimized — The
+	// function is performing at a higher level (over-provisioned) or at a lower level
+	// (under-provisioned) than required for your workload because its current
+	// configuration is not optimal. Over-provisioned resources might lead to
+	// unnecessary infrastructure cost, and under-provisioned resources might lead to
+	// poor application performance. This finding classification can include the
+	// MemoryUnderprovisioned and MemoryUnderprovisioned finding reason codes.
+	//
+	// *
+	// Unavailable — Compute Optimizer was unable to generate a recommendation for the
+	// function. This could be because the function has not accumulated sufficient
+	// metric data, or the function does not qualify for a recommendation. This finding
+	// classification can include the InsufficientData and Inconclusive finding reason
+	// codes. Functions with a finding of unavailable are not returned unless you
+	// specify the filter parameter with a value of Unavailable in your
+	// GetLambdaFunctionRecommendations request.
+	Finding LambdaFunctionRecommendationFinding
+
+	// The reason for the finding classification of the function. Functions that have a
+	// finding classification of Optimized don't have a finding reason code. Reason
+	// codes include:
+	//
+	// * MemoryOverprovisioned — The function is over-provisioned when
+	// its memory configuration can be sized down while still meeting the performance
+	// requirements of your workload. An over-provisioned function might lead to
+	// unnecessary infrastructure cost. This finding reason code is part of the
+	// NotOptimized finding classification.
+	//
+	// * MemoryUnderprovisioned — The function is
+	// under-provisioned when its memory configuration doesn't meet the performance
+	// requirements of the workload. An under-provisioned function might lead to poor
+	// application performance. This finding reason code is part of the NotOptimized
+	// finding classification.
+	//
+	// * InsufficientData — The function does not have
+	// sufficient metric data for Compute Optimizer to generate a recommendation. For
+	// more information, see the Supported resources and requirements
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html) in
+	// the AWS Compute Optimizer User Guide. This finding reason code is part of the
+	// Unavailable finding classification.
+	//
+	// * Inconclusive — The function does not
+	// qualify for a recommendation because Compute Optimizer cannot generate a
+	// recommendation with a high degree of confidence. This finding reason code is
+	// part of the Unavailable finding classification.
+	FindingReasonCodes []LambdaFunctionRecommendationFindingReasonCode
+
+	// The Amazon Resource Name (ARN) of the current function.
+	FunctionArn *string
+
+	// The version number of the current function.
+	FunctionVersion *string
+
+	// The time stamp of when the function recommendation was last refreshed.
+	LastRefreshTimestamp *time.Time
+
+	// The number of days for which utilization metrics were analyzed for the function.
+	LookbackPeriodInDays float64
+
+	// An array of objects that describe the memory configuration recommendation
+	// options for the function.
+	MemorySizeRecommendationOptions []LambdaFunctionMemoryRecommendationOption
+
+	// The number of times your function code was executed during the look-back period.
+	NumberOfInvocations int64
+
+	// An array of objects that describe the utilization metrics of the function.
+	UtilizationMetrics []LambdaFunctionUtilizationMetric
+}
+
+// Describes a filter that returns a more specific list of AWS Lambda function
+// recommendations.
+type LambdaFunctionRecommendationFilter struct {
+
+	// The name of the filter. Specify Finding to return recommendations with a
+	// specific finding classification (e.g., NotOptimized). Specify FindingReasonCode
+	// to return recommendations with a specific finding reason code (e.g.,
+	// MemoryUnderprovisioned).
+	Name LambdaFunctionRecommendationFilterName
+
+	// The value of the filter. The valid values for this parameter are as follows,
+	// depending on what you specify for the name parameter:
+	//
+	// * Specify Optimized,
+	// NotOptimized, or Unavailable if you specified the name parameter as Finding.
+	//
+	// *
+	// Specify MemoryOverprovisioned, MemoryUnderprovisioned, InsufficientData, or
+	// Inconclusive if you specified the name parameter as FindingReasonCode.
+	Values []string
+}
+
+// Describes a utilization metric of an AWS Lambda function.
+type LambdaFunctionUtilizationMetric struct {
+
+	// The name of the utilization metric. The following utilization metrics are
+	// available:
+	//
+	// * Duration - The amount of time that your function code spends
+	// processing an event.
+	//
+	// * Memory - The amount of memory used per invocation.
+	Name LambdaFunctionMetricName
+
+	// The statistic of the utilization metric. The Compute Optimizer API, AWS Command
+	// Line Interface (AWS CLI), and SDKs return utilization metrics using only the
+	// Maximum statistic, which is the highest value observed during the specified
+	// period. The Compute Optimizer console displays graphs for some utilization
+	// metrics using the Average statistic, which is the value of Sum / SampleCount
+	// during the specified period. For more information, see Viewing resource
+	// recommendations
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
+	// in the AWS Compute Optimizer User Guide. You can also get averaged utilization
+	// metric data for your resources using Amazon CloudWatch. For more information,
+	// see the Amazon CloudWatch User Guide
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
+	Statistic LambdaFunctionMetricStatistic
+
+	// The value of the utilization metric.
+	Value float64
+}
+
 // Describes a projected utilization metric of a recommendation option, such as an
 // Amazon EC2 instance. This represents the projected utilization of a
 // recommendation option had you used that resource during the analyzed period.
@@ -340,6 +510,16 @@ type ProjectedMetric struct {
 
 	// The values of the projected utilization metrics.
 	Values []float64
+}
+
+// A summary of a finding reason code.
+type ReasonCodeSummary struct {
+
+	// The name of the finding reason code.
+	Name FindingReasonCode
+
+	// The value of the finding reason code summary.
+	Value float64
 }
 
 // Describes a recommendation export job. Use the DescribeRecommendationExportJobs
@@ -460,6 +640,9 @@ type Summary struct {
 	// The finding classification of the recommendation.
 	Name Finding
 
+	// An array of objects that summarize a finding reason code.
+	ReasonCodeSummaries []ReasonCodeSummary
+
 	// The value of the recommendation summary.
 	Value float64
 }
@@ -504,15 +687,18 @@ type UtilizationMetric struct {
 	// the instance in a specified period of time. Unit: Bytes
 	Name MetricName
 
-	// The statistic of the utilization metric. The following statistics are
-	// available:
-	//
-	// * Average - This is the value of Sum / SampleCount during the
-	// specified period, or the average value observed during the specified period.
-	//
-	// *
-	// Maximum - The highest value observed during the specified period. Use this value
-	// to determine high volumes of activity for your application.
+	// The statistic of the utilization metric. The Compute Optimizer API, AWS Command
+	// Line Interface (AWS CLI), and SDKs return utilization metrics using only the
+	// Maximum statistic, which is the highest value observed during the specified
+	// period. The Compute Optimizer console displays graphs for some utilization
+	// metrics using the Average statistic, which is the value of Sum / SampleCount
+	// during the specified period. For more information, see Viewing resource
+	// recommendations
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
+	// in the AWS Compute Optimizer User Guide. You can also get averaged utilization
+	// metric data for your resources using Amazon CloudWatch. For more information,
+	// see the Amazon CloudWatch User Guide
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
 	Statistic MetricStatistic
 
 	// The value of the utilization metric.

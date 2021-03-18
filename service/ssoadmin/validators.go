@@ -735,15 +735,15 @@ func validateAccessControlAttribute(v *types.AccessControlAttribute) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AccessControlAttribute"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	} else if v.Value != nil {
 		if err := validateAccessControlAttributeValue(v.Value); err != nil {
 			invalidParams.AddNested("Value", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -808,14 +808,14 @@ func validateOpAttachManagedPolicyToPermissionSetInput(v *AttachManagedPolicyToP
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttachManagedPolicyToPermissionSetInput"}
-	if v.ManagedPolicyArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ManagedPolicyArn"))
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
 	if v.PermissionSetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
 	}
-	if v.InstanceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	if v.ManagedPolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManagedPolicyArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -829,23 +829,23 @@ func validateOpCreateAccountAssignmentInput(v *CreateAccountAssignmentInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAccountAssignmentInput"}
-	if v.PrincipalId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
-	}
-	if v.PermissionSetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
-	}
-	if len(v.TargetType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetType"))
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
 	if v.TargetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetId"))
 	}
+	if len(v.TargetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetType"))
+	}
+	if v.PermissionSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
+	}
 	if len(v.PrincipalType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PrincipalType"))
 	}
-	if v.InstanceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	if v.PrincipalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -859,15 +859,15 @@ func validateOpCreateInstanceAccessControlAttributeConfigurationInput(v *CreateI
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateInstanceAccessControlAttributeConfigurationInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
 	if v.InstanceAccessControlAttributeConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceAccessControlAttributeConfiguration"))
 	} else if v.InstanceAccessControlAttributeConfiguration != nil {
 		if err := validateInstanceAccessControlAttributeConfiguration(v.InstanceAccessControlAttributeConfiguration); err != nil {
 			invalidParams.AddNested("InstanceAccessControlAttributeConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.InstanceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -899,23 +899,23 @@ func validateOpDeleteAccountAssignmentInput(v *DeleteAccountAssignmentInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccountAssignmentInput"}
-	if len(v.PrincipalType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("PrincipalType"))
-	}
-	if len(v.TargetType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetType"))
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
 	if v.TargetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetId"))
 	}
+	if len(v.TargetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetType"))
+	}
 	if v.PermissionSetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
 	}
+	if len(v.PrincipalType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalType"))
+	}
 	if v.PrincipalId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
-	}
-	if v.InstanceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -962,11 +962,11 @@ func validateOpDeletePermissionSetInput(v *DeletePermissionSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeletePermissionSetInput"}
-	if v.PermissionSetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
-	}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.PermissionSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -980,11 +980,11 @@ func validateOpDescribeAccountAssignmentCreationStatusInput(v *DescribeAccountAs
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeAccountAssignmentCreationStatusInput"}
-	if v.AccountAssignmentCreationRequestId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountAssignmentCreationRequestId"))
-	}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.AccountAssignmentCreationRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountAssignmentCreationRequestId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -998,11 +998,11 @@ func validateOpDescribeAccountAssignmentDeletionStatusInput(v *DescribeAccountAs
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeAccountAssignmentDeletionStatusInput"}
-	if v.AccountAssignmentDeletionRequestId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountAssignmentDeletionRequestId"))
-	}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.AccountAssignmentDeletionRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountAssignmentDeletionRequestId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1031,11 +1031,11 @@ func validateOpDescribePermissionSetInput(v *DescribePermissionSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribePermissionSetInput"}
-	if v.PermissionSetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
-	}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.PermissionSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1049,11 +1049,11 @@ func validateOpDescribePermissionSetProvisioningStatusInput(v *DescribePermissio
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribePermissionSetProvisioningStatusInput"}
-	if v.ProvisionPermissionSetRequestId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProvisionPermissionSetRequestId"))
-	}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.ProvisionPermissionSetRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProvisionPermissionSetRequestId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1088,11 +1088,11 @@ func validateOpGetInlinePolicyForPermissionSetInput(v *GetInlinePolicyForPermiss
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetInlinePolicyForPermissionSetInput"}
-	if v.PermissionSetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
-	}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.PermissionSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1157,11 +1157,11 @@ func validateOpListAccountsForProvisionedPermissionSetInput(v *ListAccountsForPr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListAccountsForProvisionedPermissionSetInput"}
-	if v.PermissionSetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
-	}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.PermissionSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1175,11 +1175,11 @@ func validateOpListManagedPoliciesInPermissionSetInput(v *ListManagedPoliciesInP
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListManagedPoliciesInPermissionSetInput"}
-	if v.PermissionSetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
-	}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.PermissionSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1241,11 +1241,11 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1259,14 +1259,14 @@ func validateOpProvisionPermissionSetInput(v *ProvisionPermissionSetInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProvisionPermissionSetInput"}
-	if len(v.TargetType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetType"))
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
 	if v.PermissionSetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
 	}
-	if v.InstanceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	if len(v.TargetType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1280,14 +1280,14 @@ func validateOpPutInlinePolicyToPermissionSetInput(v *PutInlinePolicyToPermissio
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutInlinePolicyToPermissionSetInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
 	if v.PermissionSetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
 	}
 	if v.InlinePolicy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InlinePolicy"))
-	}
-	if v.InstanceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1301,14 +1301,14 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1343,15 +1343,15 @@ func validateOpUpdateInstanceAccessControlAttributeConfigurationInput(v *UpdateI
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateInstanceAccessControlAttributeConfigurationInput"}
+	if v.InstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
 	if v.InstanceAccessControlAttributeConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceAccessControlAttributeConfiguration"))
 	} else if v.InstanceAccessControlAttributeConfiguration != nil {
 		if err := validateInstanceAccessControlAttributeConfiguration(v.InstanceAccessControlAttributeConfiguration); err != nil {
 			invalidParams.AddNested("InstanceAccessControlAttributeConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.InstanceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1365,11 +1365,11 @@ func validateOpUpdatePermissionSetInput(v *UpdatePermissionSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePermissionSetInput"}
-	if v.PermissionSetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
-	}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if v.PermissionSetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionSetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

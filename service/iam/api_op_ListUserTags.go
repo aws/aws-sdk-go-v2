@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tags that are attached to the specified user. The returned list of
+// Lists the tags that are attached to the specified IAM user. The returned list of
 // tags is sorted by tag key. For more information about tagging, see Tagging IAM
-// Identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
-// the IAM User Guide.
+// resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the
+// IAM User Guide.
 func (c *Client) ListUserTags(ctx context.Context, params *ListUserTagsInput, optFns ...func(*Options)) (*ListUserTagsOutput, error) {
 	if params == nil {
 		params = &ListUserTagsInput{}
@@ -59,8 +59,8 @@ type ListUserTagsInput struct {
 type ListUserTagsOutput struct {
 
 	// The list of tags that are currently attached to the user. Each tag consists of a
-	// key name and an associated value. If no tags are attached to the specified user,
-	// the response contains an empty list.
+	// key name and an associated value. If no tags are attached to the specified
+	// resource, the response contains an empty list.
 	//
 	// This member is required.
 	Tags []types.Tag

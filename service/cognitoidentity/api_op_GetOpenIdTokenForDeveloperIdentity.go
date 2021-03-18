@@ -62,6 +62,9 @@ type GetOpenIdTokenForDeveloperIdentityInput struct {
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string
 
+	// Use this operation to configure attribute mappings for custom providers.
+	PrincipalTags map[string]string
+
 	// The expiration time of the token, in seconds. You can specify a custom
 	// expiration time for the token so that you can cache it. If you don't provide an
 	// expiration time, the token is valid for 15 minutes. You can exchange the token

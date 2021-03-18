@@ -173,6 +173,9 @@ type AssessmentFramework struct {
 // The metadata associated with a standard or custom framework.
 type AssessmentFrameworkMetadata struct {
 
+	// The Amazon Resource Name (ARN) of the framework.
+	Arn *string
+
 	// The compliance type that the new custom framework supports, such as CIS or
 	// HIPAA.
 	ComplianceType *string
@@ -414,8 +417,7 @@ type BatchImportEvidenceToAssessmentControlError struct {
 	// The error code returned by the BatchImportEvidenceToAssessmentControl API.
 	ErrorCode *string
 
-	// The error message returned by the BatchImportEvidenceToAssessmentControlError
-	// API.
+	// The error message returned by the BatchImportEvidenceToAssessmentControl API.
 	ErrorMessage *string
 
 	// Manual evidence that cannot be collected automatically by AWS Audit Manager.
@@ -457,7 +459,8 @@ type Control struct {
 	// The data mapping sources for the specified control.
 	ControlMappingSources []ControlMappingSource
 
-	// The data mapping sources for the specified control.
+	// The data source that determines from where AWS Audit Manager collects evidence
+	// for the control.
 	ControlSources *string
 
 	// Specifies when the control was created.
@@ -799,6 +802,9 @@ type Framework struct {
 
 	// The name of the specified framework.
 	Name *string
+
+	// The tags associated with the framework.
+	Tags map[string]string
 
 	// The framework type, such as custom or standard.
 	Type FrameworkType

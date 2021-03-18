@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpConfigureLogs struct {
+}
+
+func (*validateOpConfigureLogs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpConfigureLogs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ConfigureLogsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpConfigureLogsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAsset struct {
 }
 
@@ -270,6 +290,10 @@ func (m *validateOpUpdatePackagingGroup) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpConfigureLogsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpConfigureLogs{}, middleware.After)
+}
+
 func addOpCreateAssetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAsset{}, middleware.After)
 }
@@ -509,6 +533,21 @@ func validateSpekeKeyProvider(v *types.SpekeKeyProvider) error {
 	}
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpConfigureLogsInput(v *ConfigureLogsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigureLogsInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

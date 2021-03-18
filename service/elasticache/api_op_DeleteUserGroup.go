@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For Redis engine version 6.x onwards: Deletes a ser group. The user group must
-// first be disassociated from the replcation group before it can be deleted. For
+// For Redis engine version 6.x onwards: Deletes a user group. The user group must
+// first be disassociated from the replication group before it can be deleted. For
 // more information, see Using Role Based Access Control (RBAC)
 // (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html).
 func (c *Client) DeleteUserGroup(ctx context.Context, params *DeleteUserGroupInput, optFns ...func(*Options)) (*DeleteUserGroupOutput, error) {
@@ -43,7 +43,7 @@ type DeleteUserGroupOutput struct {
 	// The Amazon Resource Name (ARN) of the user group.
 	ARN *string
 
-	// Must be Redis.
+	// The current supported value is Redis.
 	Engine *string
 
 	// A list of updates being applied to the user groups.

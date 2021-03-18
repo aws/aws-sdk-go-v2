@@ -9057,14 +9057,29 @@ func awsRestjson1_serializeDocumentCampaignSmsMessage(v *types.CampaignSmsMessag
 		ok.String(*v.Body)
 	}
 
+	if v.EntityId != nil {
+		ok := object.Key("EntityId")
+		ok.String(*v.EntityId)
+	}
+
 	if len(v.MessageType) > 0 {
 		ok := object.Key("MessageType")
 		ok.String(string(v.MessageType))
 	}
 
+	if v.OriginationNumber != nil {
+		ok := object.Key("OriginationNumber")
+		ok.String(*v.OriginationNumber)
+	}
+
 	if v.SenderId != nil {
 		ok := object.Key("SenderId")
 		ok.String(*v.SenderId)
+	}
+
+	if v.TemplateId != nil {
+		ok := object.Key("TemplateId")
+		ok.String(*v.TemplateId)
 	}
 
 	return nil
@@ -10384,14 +10399,29 @@ func awsRestjson1_serializeDocumentJourneySMSMessage(v *types.JourneySMSMessage,
 	object := value.Object()
 	defer object.Close()
 
+	if v.EntityId != nil {
+		ok := object.Key("EntityId")
+		ok.String(*v.EntityId)
+	}
+
 	if len(v.MessageType) > 0 {
 		ok := object.Key("MessageType")
 		ok.String(string(v.MessageType))
 	}
 
+	if v.OriginationNumber != nil {
+		ok := object.Key("OriginationNumber")
+		ok.String(*v.OriginationNumber)
+	}
+
 	if v.SenderId != nil {
 		ok := object.Key("SenderId")
 		ok.String(*v.SenderId)
+	}
+
+	if v.TemplateId != nil {
+		ok := object.Key("TemplateId")
+		ok.String(*v.TemplateId)
 	}
 
 	return nil
@@ -11617,6 +11647,11 @@ func awsRestjson1_serializeDocumentSMSMessage(v *types.SMSMessage, value smithyj
 		ok.String(*v.Body)
 	}
 
+	if v.EntityId != nil {
+		ok := object.Key("EntityId")
+		ok.String(*v.EntityId)
+	}
+
 	if v.Keyword != nil {
 		ok := object.Key("Keyword")
 		ok.String(*v.Keyword)
@@ -11647,6 +11682,11 @@ func awsRestjson1_serializeDocumentSMSMessage(v *types.SMSMessage, value smithyj
 		if err := awsRestjson1_serializeDocumentMapOfListOf__string(v.Substitutions, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.TemplateId != nil {
+		ok := object.Key("TemplateId")
+		ok.String(*v.TemplateId)
 	}
 
 	return nil

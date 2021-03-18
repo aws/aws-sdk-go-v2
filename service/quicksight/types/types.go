@@ -603,6 +603,9 @@ type DataSet struct {
 	// The ID of the dataset.
 	DataSetId *string
 
+	// The folder that contains fields and nested subfolders for your dataset.
+	FieldFolders map[string]FieldFolder
+
 	// A value that indicates whether you want to import the data into SPICE.
 	ImportMode DataSetImportMode
 
@@ -980,6 +983,16 @@ type ExportToCSVOption struct {
 
 	// Availability status.
 	AvailabilityStatus DashboardBehavior
+}
+
+// A FieldFolder element is a folder that contains fields and nested subfolders.
+type FieldFolder struct {
+
+	// A folder has a list of columns. A column can only be in one folder.
+	Columns []string
+
+	// The description for a field folder.
+	Description *string
 }
 
 // A transform operation that filters rows based on a condition.
@@ -1573,20 +1586,26 @@ type RowInfo struct {
 	RowsIngested int64
 }
 
-// The row-level security configuration for the dataset.
+// Information about a dataset that contains permissions for row-level security
+// (RLS). The permissions dataset maps fields to users or groups. For more
+// information, see Using Row-Level Security (RLS) to Restrict Access to a Dataset
+// (https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html)
+// in the Amazon QuickSight User Guide. The option to deny permissions by setting
+// PermissionPolicy to DENY_ACCESS is not supported for new RLS datasets.
 type RowLevelPermissionDataSet struct {
 
-	// The Amazon Resource Name (ARN) of the permission dataset.
+	// The Amazon Resource Name (ARN) of the dataset that contains permissions for RLS.
 	//
 	// This member is required.
 	Arn *string
 
-	// Permission policy.
+	// The type of permissions to use when interpretting the permissions for RLS.
+	// DENY_ACCESS is included for backward compatibility only.
 	//
 	// This member is required.
 	PermissionPolicy RowLevelPermissionPolicy
 
-	// The namespace associated with the row-level permissions dataset.
+	// The namespace associated with the dataset that contains permissions for RLS.
 	Namespace *string
 }
 
@@ -1603,7 +1622,7 @@ type S3Parameters struct {
 // A physical table type for as S3 data source.
 type S3Source struct {
 
-	// The amazon Resource Name (ARN) for the data source.
+	// The Amazon Resource Name (ARN) for the data source.
 	//
 	// This member is required.
 	DataSourceArn *string

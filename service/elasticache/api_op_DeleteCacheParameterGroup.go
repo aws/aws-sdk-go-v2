@@ -11,7 +11,8 @@ import (
 )
 
 // Deletes the specified cache parameter group. You cannot delete a cache parameter
-// group if it is associated with any cache clusters.
+// group if it is associated with any cache clusters. You cannot delete the default
+// cache parameter groups in your account.
 func (c *Client) DeleteCacheParameterGroup(ctx context.Context, params *DeleteCacheParameterGroupInput, optFns ...func(*Options)) (*DeleteCacheParameterGroupOutput, error) {
 	if params == nil {
 		params = &DeleteCacheParameterGroupInput{}

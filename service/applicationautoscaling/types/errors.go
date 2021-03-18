@@ -82,8 +82,8 @@ func (e *InvalidNextTokenException) ErrorCode() string             { return "Inv
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A per-account resource limit is exceeded. For more information, see Application
-// Auto Scaling Limits
-// (https://docs.aws.amazon.com/ApplicationAutoScaling/latest/userguide/application-auto-scaling-limits.html).
+// Auto Scaling service quotas
+// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-limits.html).
 type LimitExceededException struct {
 	Message *string
 }

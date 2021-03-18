@@ -60,6 +60,16 @@ type CreateNodeInput struct {
 	// The unique identifier of the member that owns this node. Applies only to
 	// Hyperledger Fabric.
 	MemberId *string
+
+	// Tags to assign to the node. Each tag consists of a key and optional value. When
+	// specifying tags during creation, you can specify multiple key-value pairs in a
+	// single request, with an overall maximum of 50 tags added to each resource. For
+	// more information about tags, see Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	Tags map[string]string
 }
 
 type CreateNodeOutput struct {

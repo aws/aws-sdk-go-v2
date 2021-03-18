@@ -93,6 +93,15 @@ type UpdateDeploymentGroupInput struct {
 	// only on-premises instances identified by all the tag groups.
 	OnPremisesTagSet *types.OnPremisesTagSet
 
+	// Indicates what happens when new EC2 instances are launched mid-deployment and do
+	// not receive the deployed application revision. If this option is set to UPDATE
+	// or is unspecified, CodeDeploy initiates one or more 'auto-update outdated
+	// instances' deployments to apply the deployed application revision to the new EC2
+	// instances. If this option is set to IGNORE, CodeDeploy does not initiate a
+	// deployment to update the new EC2 instances. This may result in instances having
+	// different revisions.
+	OutdatedInstancesStrategy types.OutdatedInstancesStrategy
+
 	// A replacement ARN for the service role, if you want to change it.
 	ServiceRoleArn *string
 

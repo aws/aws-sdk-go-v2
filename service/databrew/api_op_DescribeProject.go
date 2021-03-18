@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-// Returns the definition of a specific AWS Glue DataBrew project that is in the
-// current AWS account.
+// Returns the definition of a specific DataBrew project.
 func (c *Client) DescribeProject(ctx context.Context, params *DescribeProjectInput, optFns ...func(*Options)) (*DescribeProjectOutput, error) {
 	if params == nil {
 		params = &DescribeProjectInput{}
@@ -71,12 +70,12 @@ type DescribeProjectOutput struct {
 	// The Amazon Resource Name (ARN) of the project.
 	ResourceArn *string
 
-	// The ARN of the AWS Identity and Access Management (IAM) role that was assumed
-	// for this request.
+	// The ARN of the AWS Identity and Access Management (IAM) role to be assumed when
+	// DataBrew runs the job.
 	RoleArn *string
 
-	// Represents the sample size and sampling type for AWS Glue DataBrew to use for
-	// interactive data analysis.
+	// Represents the sample size and sampling type for DataBrew to use for interactive
+	// data analysis.
 	Sample *types.Sample
 
 	// Describes the current state of the session:

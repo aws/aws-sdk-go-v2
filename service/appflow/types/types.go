@@ -132,6 +132,9 @@ type ConnectorMetadata struct {
 	// The connector metadata specific to Amplitude.
 	Amplitude *AmplitudeMetadata
 
+	// The connector metadata specific to Amazon Connect Customer Profiles.
+	CustomerProfiles *CustomerProfilesMetadata
+
 	// The connector metadata specific to Datadog.
 	Datadog *DatadogMetadata
 
@@ -143,6 +146,9 @@ type ConnectorMetadata struct {
 
 	// The connector metadata specific to Google Analytics.
 	GoogleAnalytics *GoogleAnalyticsMetadata
+
+	// The connector metadata specific to Amazon Honeycode.
+	Honeycode *HoneycodeMetadata
 
 	// The connector metadata specific to Infor Nexus.
 	InforNexus *InforNexusMetadata
@@ -306,6 +312,9 @@ type ConnectorProfileCredentials struct {
 	// The connector-specific credentials required when using Google Analytics.
 	GoogleAnalytics *GoogleAnalyticsConnectorProfileCredentials
 
+	// The connector-specific credentials required when using Amazon Honeycode.
+	Honeycode *HoneycodeConnectorProfileCredentials
+
 	// The connector-specific credentials required when using Infor Nexus.
 	InforNexus *InforNexusConnectorProfileCredentials
 
@@ -355,6 +364,9 @@ type ConnectorProfileProperties struct {
 	// The connector-specific properties required Google Analytics.
 	GoogleAnalytics *GoogleAnalyticsConnectorProfileProperties
 
+	// The connector-specific properties required by Amazon Honeycode.
+	Honeycode *HoneycodeConnectorProfileProperties
+
 	// The connector-specific properties required by Infor Nexus.
 	InforNexus *InforNexusConnectorProfileProperties
 
@@ -387,6 +399,23 @@ type ConnectorProfileProperties struct {
 
 	// The connector-specific properties required by Zendesk.
 	Zendesk *ZendeskConnectorProfileProperties
+}
+
+// The properties that are applied when Amazon Connect Customer Profiles is used as
+// a destination.
+type CustomerProfilesDestinationProperties struct {
+
+	// The unique name of the Amazon Connect Customer Profiles domain.
+	//
+	// This member is required.
+	DomainName *string
+
+	// The object specified in the Amazon Connect Customer Profiles flow destination.
+	ObjectTypeName *string
+}
+
+// The connector metadata specific to Amazon Connect Customer Profiles.
+type CustomerProfilesMetadata struct {
 }
 
 // The connector-specific credentials required by Datadog.
@@ -432,8 +461,17 @@ type DatadogSourceProperties struct {
 // This stores the information that is required to query a particular connector.
 type DestinationConnectorProperties struct {
 
+	// The properties required to query Amazon Connect Customer Profiles.
+	CustomerProfiles *CustomerProfilesDestinationProperties
+
 	// The properties required to query Amazon EventBridge.
 	EventBridge *EventBridgeDestinationProperties
+
+	// The properties required to query Amazon Honeycode.
+	Honeycode *HoneycodeDestinationProperties
+
+	// The properties required to query Amazon Lookout for Metrics.
+	LookoutMetrics *LookoutMetricsDestinationProperties
 
 	// The properties required to query Amazon Redshift.
 	Redshift *RedshiftDestinationProperties
@@ -592,6 +630,14 @@ type ExecutionDetails struct {
 // Specifies information about the past flow run instances for a given flow.
 type ExecutionRecord struct {
 
+	// The timestamp that indicates the last new or updated record to be transferred in
+	// the flow run.
+	DataPullEndTime *time.Time
+
+	// The timestamp that determines the first new or updated record to be transferred
+	// in the flow run.
+	DataPullStartTime *time.Time
+
 	// Specifies the identifier of the given flow run.
 	ExecutionId *string
 
@@ -737,6 +783,47 @@ type GoogleAnalyticsSourceProperties struct {
 	Object *string
 }
 
+// The connector-specific credentials required when using Amazon Honeycode.
+type HoneycodeConnectorProfileCredentials struct {
+
+	// The credentials used to access protected Amazon Honeycode resources.
+	AccessToken *string
+
+	// Used by select connectors for which the OAuth workflow is supported, such as
+	// Salesforce, Google Analytics, Marketo, Zendesk, and Slack.
+	OAuthRequest *ConnectorOAuthRequest
+
+	// The credentials used to acquire new access tokens.
+	RefreshToken *string
+}
+
+// The connector-specific properties required when using Amazon Honeycode.
+type HoneycodeConnectorProfileProperties struct {
+}
+
+// The properties that are applied when Amazon Honeycode is used as a destination.
+type HoneycodeDestinationProperties struct {
+
+	// The object specified in the Amazon Honeycode flow destination.
+	//
+	// This member is required.
+	Object *string
+
+	// The settings that determine how Amazon AppFlow handles an error when placing
+	// data in the destination. For example, this setting would determine if the flow
+	// should fail after one insertion error, or continue and attempt to insert every
+	// record regardless of the initial failure. ErrorHandlingConfig is a part of the
+	// destination connector details.
+	ErrorHandlingConfig *ErrorHandlingConfig
+}
+
+// The connector metadata specific to Amazon Honeycode.
+type HoneycodeMetadata struct {
+
+	// The desired authorization scope for the Amazon Honeycode account.
+	OAuthScopes []string
+}
+
 // Specifies the configuration used when importing incremental records from the
 // source.
 type IncrementalPullConfig struct {
@@ -792,6 +879,11 @@ type InforNexusSourceProperties struct {
 	Object *string
 }
 
+// The properties that are applied when Amazon Lookout for Metrics is used as a
+// destination.
+type LookoutMetricsDestinationProperties struct {
+}
+
 // The connector-specific profile credentials required by Marketo.
 type MarketoConnectorProfileCredentials struct {
 
@@ -841,11 +933,11 @@ type MarketoSourceProperties struct {
 // date.
 type PrefixConfig struct {
 
-	// Determines the format of the prefix, and whether it applies to the file name,
-	// file path, or both.
+	// Determines the level of granularity that's included in the prefix.
 	PrefixFormat PrefixFormat
 
-	// Determines the level of granularity that's included in the prefix.
+	// Determines the format of the prefix, and whether it applies to the file name,
+	// file path, or both.
 	PrefixType PrefixType
 }
 
@@ -1056,14 +1148,22 @@ type ScheduledTriggerProperties struct {
 	// complete data transfer for each flow run.
 	DataPullMode DataPullMode
 
+	// Specifies the date range for the records to import from the connector in the
+	// first flow run.
+	FirstExecutionFrom *time.Time
+
 	// Specifies the scheduled end time for a schedule-triggered flow.
 	ScheduleEndTime *time.Time
+
+	// Specifies the optional offset that is added to the time interval for a
+	// schedule-triggered flow.
+	ScheduleOffset int64
 
 	// Specifies the scheduled start time for a schedule-triggered flow.
 	ScheduleStartTime *time.Time
 
 	// Specifies the time zone used when referring to the date and time of a
-	// scheduled-triggered flow.
+	// scheduled-triggered flow, such as America/New_York.
 	Timezone *string
 }
 

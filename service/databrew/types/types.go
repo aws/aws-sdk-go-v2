@@ -16,13 +16,13 @@ type ConditionExpression struct {
 
 	// A specific condition to apply to a recipe action. For more information, see
 	// Recipe structure
-	// (https://docs.aws.amazon.com/databrew/latest/dg/recipe-structure.html) in the
-	// AWS Glue DataBrew Developer Guide.
+	// (https://docs.aws.amazon.com/databrew/latest/dg/recipes.html#recipes.structure)
+	// in the AWS Glue DataBrew Developer Guide.
 	//
 	// This member is required.
 	Condition *string
 
-	// A column to apply this condition to, within an AWS Glue DataBrew dataset.
+	// A column to apply this condition to.
 	//
 	// This member is required.
 	TargetColumn *string
@@ -31,8 +31,27 @@ type ConditionExpression struct {
 	Value *string
 }
 
-// Represents how metadata stored in the AWS Glue Data Catalog is defined in an AWS
-// Glue DataBrew dataset.
+// Options that define how DataBrew will read a Csv file when creating a dataset
+// from that file.
+type CsvOptions struct {
+
+	// A single character that specifies the delimiter being used in the Csv file.
+	Delimiter *string
+
+	// A variable that specifies whether the first row in the file will be parsed as
+	// the header. If false, column names will be auto-generated.
+	HeaderRow *bool
+}
+
+// Options that define how DataBrew will write a Csv file.
+type CsvOutputOptions struct {
+
+	// A single character that specifies the delimiter used to create Csv job output.
+	Delimiter *string
+}
+
+// Represents how metadata stored in the AWS Glue Data Catalog is defined in a
+// DataBrew dataset.
 type DataCatalogInputDefinition struct {
 
 	// The name of a database in the Data Catalog.
@@ -54,7 +73,7 @@ type DataCatalogInputDefinition struct {
 	TempDirectory *S3Location
 }
 
-// Represents a dataset that can be processed by AWS Glue DataBrew.
+// Represents a dataset that can be processed by DataBrew.
 type Dataset struct {
 
 	// Information on how DataBrew can find the dataset, in either the AWS Glue Data
@@ -74,13 +93,16 @@ type Dataset struct {
 	// The date and time that the dataset was created.
 	CreateDate *time.Time
 
-	// The identifier (the user name) of the user who created the dataset.
+	// The Amazon Resource Name (ARN) of the user who created the dataset.
 	CreatedBy *string
+
+	// Specifies the file format of a dataset created from an S3 file or folder.
+	Format InputFormat
 
 	// Options that define how DataBrew interprets the data in the dataset.
 	FormatOptions *FormatOptions
 
-	// The identifier (the user name) of the user who last modified the dataset.
+	// The Amazon Resource Name (ARN) of the user who last modified the dataset.
 	LastModifiedBy *string
 
 	// The last modification date and time of the dataset.
@@ -101,6 +123,10 @@ type Dataset struct {
 // creating a dataset from that file.
 type ExcelOptions struct {
 
+	// A variable that specifies whether the first row in the file will be parsed as
+	// the header. If false, column names will be auto-generated.
+	HeaderRow *bool
+
 	// Specifies one or more sheet numbers in the Excel file, which will be included in
 	// the dataset.
 	SheetIndexes []int32
@@ -110,8 +136,11 @@ type ExcelOptions struct {
 	SheetNames []string
 }
 
-// Options that define how Microsoft Excel input is to be interpreted by DataBrew.
+// Options that define the structure of either Csv, Excel, or JSON input.
 type FormatOptions struct {
+
+	// Options that define how Csv input is to be interpreted by DataBrew.
+	Csv *CsvOptions
 
 	// Options that define how Excel input is to be interpreted by DataBrew.
 	Excel *ExcelOptions
@@ -120,8 +149,8 @@ type FormatOptions struct {
 	Json *JsonOptions
 }
 
-// Information on how AWS Glue DataBrew can find data, in either the AWS Glue Data
-// Catalog or Amazon S3.
+// Information on how DataBrew can find data, in either the AWS Glue Data Catalog
+// or Amazon S3.
 type Input struct {
 
 	// The AWS Glue Data Catalog parameters for the data.
@@ -131,7 +160,7 @@ type Input struct {
 	S3InputDefinition *S3Location
 }
 
-// Represents all of the attributes of an AWS Glue DataBrew job.
+// Represents all of the attributes of a DataBrew job.
 type Job struct {
 
 	// The unique name of the job.
@@ -145,14 +174,15 @@ type Job struct {
 	// The date and time that the job was created.
 	CreateDate *time.Time
 
-	// The identifier (the user name) of the user who created the job.
+	// The Amazon Resource Name (ARN) of the user who created the job.
 	CreatedBy *string
 
 	// A dataset that the job is to process.
 	DatasetName *string
 
-	// The Amazon Resource Name (ARN) of an encryption key that is used to protect a
-	// job.
+	// The Amazon Resource Name (ARN) of an encryption key that is used to protect the
+	// job output. For more information, see Encrypting data written by DataBrew jobs
+	// (https://docs.aws.amazon.com/databrew/latest/dg/encryption-security-configuration.html)
 	EncryptionKeyArn *string
 
 	// The encryption mode for the job, which can be one of the following:
@@ -164,7 +194,13 @@ type Job struct {
 	// encryption with keys managed by Amazon S3.
 	EncryptionMode EncryptionMode
 
-	// The identifier (the user name) of the user who last modified the job.
+	// Sample configuration for profile jobs only. Determines the number of rows on
+	// which the profile job will be executed. If a JobSample value is not provided,
+	// the default value will be used. The default value is CUSTOM_ROWS for the mode
+	// parameter and 20000 for the size parameter.
+	JobSample *JobSample
+
+	// The Amazon Resource Name (ARN) of the user who last modified the job.
 	LastModifiedBy *string
 
 	// The modification date and time of the job.
@@ -211,7 +247,7 @@ type Job struct {
 	Type JobType
 }
 
-// Represents one run of an AWS Glue DataBrew job.
+// Represents one run of a DataBrew job.
 type JobRun struct {
 
 	// The number of times that DataBrew has attempted to run the job.
@@ -232,6 +268,12 @@ type JobRun struct {
 	// The name of the job being processed during this run.
 	JobName *string
 
+	// Sample configuration for profile jobs only. Determines the number of rows on
+	// which the profile job will be executed. If a JobSample value is not provided,
+	// the default value will be used. The default value is CUSTOM_ROWS for the mode
+	// parameter and 20000 for the size parameter.
+	JobSample *JobSample
+
 	// The name of an Amazon CloudWatch log group, where the job writes diagnostic
 	// messages when it runs.
 	LogGroupName *string
@@ -248,7 +290,7 @@ type JobRun struct {
 	// The unique identifier of the job run.
 	RunId *string
 
-	// The identifier (the user name) of the user who initiated the job run.
+	// The Amazon Resource Name (ARN) of the user who initiated the job run.
 	StartedBy *string
 
 	// The date and time when the job run began.
@@ -256,6 +298,28 @@ type JobRun struct {
 
 	// The current state of the job run entity itself.
 	State JobRunState
+}
+
+// Sample configuration for Profile Jobs only. Determines the number of rows on
+// which the Profile job will be executed. If a JobSample value is not provided for
+// profile jobs, the default value will be used. The default value is CUSTOM_ROWS
+// for the mode parameter and 20000 for the size parameter.
+type JobSample struct {
+
+	// Determines whether the profile job will be executed on the entire dataset or on
+	// a specified number of rows. Must be one of the following:
+	//
+	// * FULL_DATASET:
+	// Profile job will be executed on the entire dataset.
+	//
+	// * CUSTOM_ROWS: Profile job
+	// will be executed on the number of rows specified in the Size parameter.
+	Mode SampleMode
+
+	// Size parameter is only required when the mode is CUSTOM_ROWS. Profile job will
+	// be executed on the the specified number of rows. The maximum value for size is
+	// Long.MAX_VALUE. Long.MAX_VALUE = 9223372036854775807
+	Size *int64
 }
 
 // Represents the JSON-specific options that define how input is to be interpreted
@@ -266,7 +330,8 @@ type JsonOptions struct {
 	MultiLine bool
 }
 
-// Represents individual output from a particular job run.
+// Parameters that specify how and where DataBrew will write the output generated
+// by recipe jobs or profile jobs.
 type Output struct {
 
 	// The location in Amazon S3 where the job writes its output.
@@ -280,6 +345,9 @@ type Output struct {
 	// The data format of the output of the job.
 	Format OutputFormat
 
+	// Options that define how DataBrew formats job output files.
+	FormatOptions *OutputFormatOptions
+
 	// A value that, if true, means that any data in the location specified for output
 	// is overwritten with new output.
 	Overwrite bool
@@ -288,7 +356,14 @@ type Output struct {
 	PartitionColumns []string
 }
 
-// Represents all of the attributes of an AWS Glue DataBrew project.
+// Options that define the structure of Csv job output.
+type OutputFormatOptions struct {
+
+	// Options that define how DataBrew writes Csv output.
+	Csv *CsvOutputOptions
+}
+
+// Represents all of the attributes of a DataBrew project.
 type Project struct {
 
 	// The unique name of a project.
@@ -307,13 +382,13 @@ type Project struct {
 	// The date and time that the project was created.
 	CreateDate *time.Time
 
-	// The identifier (the user name) of the user who crated the project.
+	// The Amazon Resource Name (ARN) of the user who crated the project.
 	CreatedBy *string
 
 	// The dataset that the project is to act upon.
 	DatasetName *string
 
-	// The identifier (user name) of the user who last modified the project.
+	// The Amazon Resource Name (ARN) of the user who last modified the project.
 	LastModifiedBy *string
 
 	// The last modification date and time for the project.
@@ -322,7 +397,7 @@ type Project struct {
 	// The date and time when the project was opened.
 	OpenDate *time.Time
 
-	// The identifier (the user name) of the user that opened the project for use.
+	// The Amazon Resource Name (ARN) of the user that opened the project for use.
 	OpenedBy *string
 
 	// The Amazon Resource Name (ARN) for the project.
@@ -340,7 +415,7 @@ type Project struct {
 	Tags map[string]string
 }
 
-// Represents one or more actions to be performed on an AWS Glue DataBrew dataset.
+// Represents one or more actions to be performed on a DataBrew dataset.
 type Recipe struct {
 
 	// The unique name for the recipe.
@@ -351,13 +426,13 @@ type Recipe struct {
 	// The date and time that the recipe was created.
 	CreateDate *time.Time
 
-	// The identifier (the user name) of the user who created the recipe.
+	// The Amazon Resource Name (ARN) of the user who created the recipe.
 	CreatedBy *string
 
 	// The description of the recipe.
 	Description *string
 
-	// The identifier (user name) of the user who last modified the recipe.
+	// The Amazon Resource Name (ARN) of the user who last modified the recipe.
 	LastModifiedBy *string
 
 	// The last modification date and time of the recipe.
@@ -366,13 +441,24 @@ type Recipe struct {
 	// The name of the project that the recipe is associated with.
 	ProjectName *string
 
-	// The identifier (the user name) of the user who published the recipe.
+	// The Amazon Resource Name (ARN) of the user who published the recipe.
 	PublishedBy *string
 
 	// The date and time when the recipe was published.
 	PublishedDate *time.Time
 
-	// The identifier for the version for the recipe.
+	// The identifier for the version for the recipe. Must be one of the following:
+	//
+	// *
+	// Numeric version (X.Y) - X and Y stand for major and minor version numbers. The
+	// maximum length of each is 6 digits, and neither can be negative values. Both X
+	// and Y are required, and "0.0" is not a valid version.
+	//
+	// * LATEST_WORKING - the
+	// most recent valid version being developed in a DataBrew project.
+	//
+	// *
+	// LATEST_PUBLISHED - the most recent published version.
 	RecipeVersion *string
 
 	// The Amazon Resource Name (ARN) for the recipe.
@@ -386,10 +472,10 @@ type Recipe struct {
 }
 
 // Represents a transformation and associated parameters that are used to apply a
-// change to an AWS Glue DataBrew dataset. For more information, see Recipe
-// structure (https://docs.aws.amazon.com/databrew/latest/dg/recipe-structure.html)
-// and ecipe actions reference
-// (https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html) .
+// change to a DataBrew dataset. For more information, see Recipe structure
+// (https://docs.aws.amazon.com/databrew/latest/dg/recipe-structure.html) and
+// Recipe actions reference
+// (https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html).
 type RecipeAction struct {
 
 	// The name of a valid DataBrew transformation to be performed on the data.
@@ -401,7 +487,7 @@ type RecipeAction struct {
 	Parameters map[string]string
 }
 
-// Represents all of the attributes of an AWS Glue DataBrew recipe.
+// Represents the name and version of a DataBrew recipe.
 type RecipeReference struct {
 
 	// The name of the recipe.
@@ -413,7 +499,7 @@ type RecipeReference struct {
 	RecipeVersion *string
 }
 
-// Represents a single step to be performed in an AWS Glue DataBrew recipe.
+// Represents a single step from a DataBrew recipe to be performed.
 type RecipeStep struct {
 
 	// The particular action to be performed in the recipe step.
@@ -454,8 +540,8 @@ type S3Location struct {
 	Key *string
 }
 
-// Represents the sample size and sampling type for AWS Glue DataBrew to use for
-// interactive data analysis.
+// Represents the sample size and sampling type for DataBrew to use for interactive
+// data analysis.
 type Sample struct {
 
 	// The way in which DataBrew obtains rows from a dataset.
@@ -481,16 +567,18 @@ type Schedule struct {
 	// The date and time that the schedule was created.
 	CreateDate *time.Time
 
-	// The identifier (the user name) of the user who created the schedule.
+	// The Amazon Resource Name (ARN) of the user who created the schedule.
 	CreatedBy *string
 
-	// The date(s) and time(s), in cron format, when the job will run.
+	// The date(s) and time(s) when the job will run. For more information, see Cron
+	// expressions (https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html) in
+	// the AWS Glue DataBrew Developer Guide.
 	CronExpression *string
 
 	// A list of jobs to be run, according to the schedule.
 	JobNames []string
 
-	// The identifier (the user name) of the user who last modified the schedule.
+	// The Amazon Resource Name (ARN) of the user who last modified the schedule.
 	LastModifiedBy *string
 
 	// The date and time when the schedule was last modified.
@@ -503,8 +591,7 @@ type Schedule struct {
 	Tags map[string]string
 }
 
-// Represents the data being being transformed during an AWS Glue DataBrew project
-// session.
+// Represents the data being being transformed during an action.
 type ViewFrame struct {
 
 	// The starting index for the range of columns to return in the view frame.

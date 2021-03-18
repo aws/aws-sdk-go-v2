@@ -76,6 +76,7 @@ const (
 	EbsVolumeTypeIo1      EbsVolumeType = "io1"
 	EbsVolumeTypeIo2      EbsVolumeType = "io2"
 	EbsVolumeTypeGp2      EbsVolumeType = "gp2"
+	EbsVolumeTypeGp3      EbsVolumeType = "gp3"
 	EbsVolumeTypeSc1      EbsVolumeType = "sc1"
 	EbsVolumeTypeSt1      EbsVolumeType = "st1"
 )
@@ -89,6 +90,7 @@ func (EbsVolumeType) Values() []EbsVolumeType {
 		"io1",
 		"io2",
 		"gp2",
+		"gp3",
 		"sc1",
 		"st1",
 	}

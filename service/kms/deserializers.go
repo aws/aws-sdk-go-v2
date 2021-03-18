@@ -3667,6 +3667,9 @@ func awsAwsjson11_deserializeOpErrorListGrants(response *smithyhttp.Response, me
 	case strings.EqualFold("InvalidArnException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArnException(response, errorBody)
 
+	case strings.EqualFold("InvalidGrantIdException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidGrantIdException(response, errorBody)
+
 	case strings.EqualFold("InvalidMarkerException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidMarkerException(response, errorBody)
 

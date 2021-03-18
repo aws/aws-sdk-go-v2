@@ -10291,6 +10291,24 @@ func awsAwsjson11_deserializeDocumentOracleSettings(v **types.OracleSettings, va
 				sv.SecretsManagerAccessRoleArn = ptr.String(jtv)
 			}
 
+		case "SecretsManagerOracleAsmAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerOracleAsmAccessRoleArn = ptr.String(jtv)
+			}
+
+		case "SecretsManagerOracleAsmSecretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretsManagerOracleAsmSecretId = ptr.String(jtv)
+			}
+
 		case "SecretsManagerSecretId":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -5,21 +5,14 @@ package types
 // Contains an array.
 //
 // The following types satisfy this interface:
-//  ArrayValueMemberArrayValues
 //  ArrayValueMemberBooleanValues
-//  ArrayValueMemberDoubleValues
 //  ArrayValueMemberLongValues
+//  ArrayValueMemberDoubleValues
 //  ArrayValueMemberStringValues
+//  ArrayValueMemberArrayValues
 type ArrayValue interface {
 	isArrayValue()
 }
-
-// An array of arrays.
-type ArrayValueMemberArrayValues struct {
-	Value []ArrayValue
-}
-
-func (*ArrayValueMemberArrayValues) isArrayValue() {}
 
 // An array of Boolean values.
 type ArrayValueMemberBooleanValues struct {
@@ -28,13 +21,6 @@ type ArrayValueMemberBooleanValues struct {
 
 func (*ArrayValueMemberBooleanValues) isArrayValue() {}
 
-// An array of integers.
-type ArrayValueMemberDoubleValues struct {
-	Value []float64
-}
-
-func (*ArrayValueMemberDoubleValues) isArrayValue() {}
-
 // An array of floating point numbers.
 type ArrayValueMemberLongValues struct {
 	Value []int64
@@ -42,12 +28,26 @@ type ArrayValueMemberLongValues struct {
 
 func (*ArrayValueMemberLongValues) isArrayValue() {}
 
+// An array of integers.
+type ArrayValueMemberDoubleValues struct {
+	Value []float64
+}
+
+func (*ArrayValueMemberDoubleValues) isArrayValue() {}
+
 // An array of strings.
 type ArrayValueMemberStringValues struct {
 	Value []string
 }
 
 func (*ArrayValueMemberStringValues) isArrayValue() {}
+
+// An array of arrays.
+type ArrayValueMemberArrayValues struct {
+	Value []ArrayValue
+}
+
+func (*ArrayValueMemberArrayValues) isArrayValue() {}
 
 // Contains the metadata for a column.
 type ColumnMetadata struct {
@@ -98,44 +98,16 @@ type ColumnMetadata struct {
 // Contains a value.
 //
 // The following types satisfy this interface:
-//  FieldMemberArrayValue
-//  FieldMemberBlobValue
-//  FieldMemberBooleanValue
-//  FieldMemberDoubleValue
 //  FieldMemberIsNull
+//  FieldMemberBooleanValue
 //  FieldMemberLongValue
+//  FieldMemberDoubleValue
 //  FieldMemberStringValue
+//  FieldMemberBlobValue
+//  FieldMemberArrayValue
 type Field interface {
 	isField()
 }
-
-// An array of values.
-type FieldMemberArrayValue struct {
-	Value ArrayValue
-}
-
-func (*FieldMemberArrayValue) isField() {}
-
-// A value of BLOB data type.
-type FieldMemberBlobValue struct {
-	Value []byte
-}
-
-func (*FieldMemberBlobValue) isField() {}
-
-// A value of Boolean data type.
-type FieldMemberBooleanValue struct {
-	Value bool
-}
-
-func (*FieldMemberBooleanValue) isField() {}
-
-// A value of double data type.
-type FieldMemberDoubleValue struct {
-	Value float64
-}
-
-func (*FieldMemberDoubleValue) isField() {}
 
 // A NULL value.
 type FieldMemberIsNull struct {
@@ -144,6 +116,13 @@ type FieldMemberIsNull struct {
 
 func (*FieldMemberIsNull) isField() {}
 
+// A value of Boolean data type.
+type FieldMemberBooleanValue struct {
+	Value bool
+}
+
+func (*FieldMemberBooleanValue) isField() {}
+
 // A value of long data type.
 type FieldMemberLongValue struct {
 	Value int64
@@ -151,12 +130,33 @@ type FieldMemberLongValue struct {
 
 func (*FieldMemberLongValue) isField() {}
 
+// A value of double data type.
+type FieldMemberDoubleValue struct {
+	Value float64
+}
+
+func (*FieldMemberDoubleValue) isField() {}
+
 // A value of string data type.
 type FieldMemberStringValue struct {
 	Value string
 }
 
 func (*FieldMemberStringValue) isField() {}
+
+// A value of BLOB data type.
+type FieldMemberBlobValue struct {
+	Value []byte
+}
+
+func (*FieldMemberBlobValue) isField() {}
+
+// An array of values.
+type FieldMemberArrayValue struct {
+	Value ArrayValue
+}
+
+func (*FieldMemberArrayValue) isField() {}
 
 // A record returned by a call.
 type Record struct {
@@ -203,23 +203,30 @@ type SqlParameter struct {
 	// The name of the parameter.
 	Name *string
 
-	// A hint that specifies the correct object type for data type mapping. Values:
-	//
-	// *
-	// DECIMAL - The corresponding String parameter value is sent as an object of
-	// DECIMAL type to the database.
-	//
-	// * TIMESTAMP - The corresponding String parameter
-	// value is sent as an object of TIMESTAMP type to the database. The accepted
-	// format is YYYY-MM-DD HH:MM:SS[.FFF].
-	//
-	// * TIME - The corresponding String
-	// parameter value is sent as an object of TIME type to the database. The accepted
-	// format is HH:MM:SS[.FFF].
+	// A hint that specifies the correct object type for data type mapping. Possible
+	// values are as follows:
 	//
 	// * DATE - The corresponding String parameter value is
 	// sent as an object of DATE type to the database. The accepted format is
 	// YYYY-MM-DD.
+	//
+	// * DECIMAL - The corresponding String parameter value is sent as an
+	// object of DECIMAL type to the database.
+	//
+	// * JSON - The corresponding String
+	// parameter value is sent as an object of JSON type to the database.
+	//
+	// * TIME - The
+	// corresponding String parameter value is sent as an object of TIME type to the
+	// database. The accepted format is HH:MM:SS[.FFF].
+	//
+	// * TIMESTAMP - The
+	// corresponding String parameter value is sent as an object of TIMESTAMP type to
+	// the database. The accepted format is YYYY-MM-DD HH:MM:SS[.FFF].
+	//
+	// * UUID - The
+	// corresponding String parameter value is sent as an object of UUID type to the
+	// database.
 	TypeHint TypeHint
 
 	// The value of the parameter.
@@ -253,33 +260,26 @@ type UpdateResult struct {
 // Contains the value of a column. This data type is deprecated.
 //
 // The following types satisfy this interface:
-//  ValueMemberArrayValues
-//  ValueMemberBigIntValue
-//  ValueMemberBitValue
-//  ValueMemberBlobValue
-//  ValueMemberDoubleValue
-//  ValueMemberIntValue
 //  ValueMemberIsNull
+//  ValueMemberBitValue
+//  ValueMemberBigIntValue
+//  ValueMemberIntValue
+//  ValueMemberDoubleValue
 //  ValueMemberRealValue
 //  ValueMemberStringValue
+//  ValueMemberBlobValue
+//  ValueMemberArrayValues
 //  ValueMemberStructValue
 type Value interface {
 	isValue()
 }
 
-// An array of column values.
-type ValueMemberArrayValues struct {
-	Value []Value
+// A NULL value.
+type ValueMemberIsNull struct {
+	Value bool
 }
 
-func (*ValueMemberArrayValues) isValue() {}
-
-// A value for a column of big integer data type.
-type ValueMemberBigIntValue struct {
-	Value int64
-}
-
-func (*ValueMemberBigIntValue) isValue() {}
+func (*ValueMemberIsNull) isValue() {}
 
 // A value for a column of BIT data type.
 type ValueMemberBitValue struct {
@@ -288,19 +288,12 @@ type ValueMemberBitValue struct {
 
 func (*ValueMemberBitValue) isValue() {}
 
-// A value for a column of BLOB data type.
-type ValueMemberBlobValue struct {
-	Value []byte
+// A value for a column of big integer data type.
+type ValueMemberBigIntValue struct {
+	Value int64
 }
 
-func (*ValueMemberBlobValue) isValue() {}
-
-// A value for a column of double data type.
-type ValueMemberDoubleValue struct {
-	Value float64
-}
-
-func (*ValueMemberDoubleValue) isValue() {}
+func (*ValueMemberBigIntValue) isValue() {}
 
 // A value for a column of integer data type.
 type ValueMemberIntValue struct {
@@ -309,12 +302,12 @@ type ValueMemberIntValue struct {
 
 func (*ValueMemberIntValue) isValue() {}
 
-// A NULL value.
-type ValueMemberIsNull struct {
-	Value bool
+// A value for a column of double data type.
+type ValueMemberDoubleValue struct {
+	Value float64
 }
 
-func (*ValueMemberIsNull) isValue() {}
+func (*ValueMemberDoubleValue) isValue() {}
 
 // A value for a column of real data type.
 type ValueMemberRealValue struct {
@@ -329,6 +322,20 @@ type ValueMemberStringValue struct {
 }
 
 func (*ValueMemberStringValue) isValue() {}
+
+// A value for a column of BLOB data type.
+type ValueMemberBlobValue struct {
+	Value []byte
+}
+
+func (*ValueMemberBlobValue) isValue() {}
+
+// An array of column values.
+type ValueMemberArrayValues struct {
+	Value []Value
+}
+
+func (*ValueMemberArrayValues) isValue() {}
 
 // A value for a column of STRUCT data type.
 type ValueMemberStructValue struct {

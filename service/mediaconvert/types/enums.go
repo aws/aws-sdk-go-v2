@@ -719,9 +719,10 @@ type AvcIntraClass string
 
 // Enum values for AvcIntraClass
 const (
-	AvcIntraClassClass50  AvcIntraClass = "CLASS_50"
-	AvcIntraClassClass100 AvcIntraClass = "CLASS_100"
-	AvcIntraClassClass200 AvcIntraClass = "CLASS_200"
+	AvcIntraClassClass50   AvcIntraClass = "CLASS_50"
+	AvcIntraClassClass100  AvcIntraClass = "CLASS_100"
+	AvcIntraClassClass200  AvcIntraClass = "CLASS_200"
+	AvcIntraClassClass4k2k AvcIntraClass = "CLASS_4K_2K"
 )
 
 // Values returns all known values for AvcIntraClass. Note that this can be
@@ -732,6 +733,7 @@ func (AvcIntraClass) Values() []AvcIntraClass {
 		"CLASS_50",
 		"CLASS_100",
 		"CLASS_200",
+		"CLASS_4K_2K",
 	}
 }
 
@@ -798,6 +800,25 @@ func (AvcIntraInterlaceMode) Values() []AvcIntraInterlaceMode {
 	}
 }
 
+type AvcIntraScanTypeConversionMode string
+
+// Enum values for AvcIntraScanTypeConversionMode
+const (
+	AvcIntraScanTypeConversionModeInterlaced         AvcIntraScanTypeConversionMode = "INTERLACED"
+	AvcIntraScanTypeConversionModeInterlacedOptimize AvcIntraScanTypeConversionMode = "INTERLACED_OPTIMIZE"
+)
+
+// Values returns all known values for AvcIntraScanTypeConversionMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AvcIntraScanTypeConversionMode) Values() []AvcIntraScanTypeConversionMode {
+	return []AvcIntraScanTypeConversionMode{
+		"INTERLACED",
+		"INTERLACED_OPTIMIZE",
+	}
+}
+
 type AvcIntraSlowPal string
 
 // Enum values for AvcIntraSlowPal
@@ -831,6 +852,25 @@ func (AvcIntraTelecine) Values() []AvcIntraTelecine {
 	return []AvcIntraTelecine{
 		"NONE",
 		"HARD",
+	}
+}
+
+type AvcIntraUhdQualityTuningLevel string
+
+// Enum values for AvcIntraUhdQualityTuningLevel
+const (
+	AvcIntraUhdQualityTuningLevelSinglePass AvcIntraUhdQualityTuningLevel = "SINGLE_PASS"
+	AvcIntraUhdQualityTuningLevelMultiPass  AvcIntraUhdQualityTuningLevel = "MULTI_PASS"
+)
+
+// Values returns all known values for AvcIntraUhdQualityTuningLevel. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AvcIntraUhdQualityTuningLevel) Values() []AvcIntraUhdQualityTuningLevel {
+	return []AvcIntraUhdQualityTuningLevel{
+		"SINGLE_PASS",
+		"MULTI_PASS",
 	}
 }
 
@@ -1037,6 +1077,7 @@ const (
 	CaptionSourceTypeStl        CaptionSourceType = "STL"
 	CaptionSourceTypeSrt        CaptionSourceType = "SRT"
 	CaptionSourceTypeSmi        CaptionSourceType = "SMI"
+	CaptionSourceTypeSmpteTt    CaptionSourceType = "SMPTE_TT"
 	CaptionSourceTypeTeletext   CaptionSourceType = "TELETEXT"
 	CaptionSourceTypeNullSource CaptionSourceType = "NULL_SOURCE"
 	CaptionSourceTypeImsc       CaptionSourceType = "IMSC"
@@ -1056,6 +1097,7 @@ func (CaptionSourceType) Values() []CaptionSourceType {
 		"STL",
 		"SRT",
 		"SMI",
+		"SMPTE_TT",
 		"TELETEXT",
 		"NULL_SOURCE",
 		"IMSC",
@@ -1313,6 +1355,24 @@ func (CmfcAudioDuration) Values() []CmfcAudioDuration {
 	return []CmfcAudioDuration{
 		"DEFAULT_CODEC_DURATION",
 		"MATCH_VIDEO_DURATION",
+	}
+}
+
+type CmfcIFrameOnlyManifest string
+
+// Enum values for CmfcIFrameOnlyManifest
+const (
+	CmfcIFrameOnlyManifestInclude CmfcIFrameOnlyManifest = "INCLUDE"
+	CmfcIFrameOnlyManifestExclude CmfcIFrameOnlyManifest = "EXCLUDE"
+)
+
+// Values returns all known values for CmfcIFrameOnlyManifest. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmfcIFrameOnlyManifest) Values() []CmfcIFrameOnlyManifest {
+	return []CmfcIFrameOnlyManifest{
+		"INCLUDE",
+		"EXCLUDE",
 	}
 }
 
@@ -2777,6 +2837,24 @@ func (H264RepeatPps) Values() []H264RepeatPps {
 	}
 }
 
+type H264ScanTypeConversionMode string
+
+// Enum values for H264ScanTypeConversionMode
+const (
+	H264ScanTypeConversionModeInterlaced         H264ScanTypeConversionMode = "INTERLACED"
+	H264ScanTypeConversionModeInterlacedOptimize H264ScanTypeConversionMode = "INTERLACED_OPTIMIZE"
+)
+
+// Values returns all known values for H264ScanTypeConversionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H264ScanTypeConversionMode) Values() []H264ScanTypeConversionMode {
+	return []H264ScanTypeConversionMode{
+		"INTERLACED",
+		"INTERLACED_OPTIMIZE",
+	}
+}
+
 type H264SceneChangeDetect string
 
 // Enum values for H264SceneChangeDetect
@@ -3238,6 +3316,24 @@ func (H265SampleAdaptiveOffsetFilterMode) Values() []H265SampleAdaptiveOffsetFil
 		"DEFAULT",
 		"ADAPTIVE",
 		"OFF",
+	}
+}
+
+type H265ScanTypeConversionMode string
+
+// Enum values for H265ScanTypeConversionMode
+const (
+	H265ScanTypeConversionModeInterlaced         H265ScanTypeConversionMode = "INTERLACED"
+	H265ScanTypeConversionModeInterlacedOptimize H265ScanTypeConversionMode = "INTERLACED_OPTIMIZE"
+)
+
+// Values returns all known values for H265ScanTypeConversionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H265ScanTypeConversionMode) Values() []H265ScanTypeConversionMode {
+	return []H265ScanTypeConversionMode{
+		"INTERLACED",
+		"INTERLACED_OPTIMIZE",
 	}
 }
 
@@ -5235,6 +5331,24 @@ func (Mpeg2RateControlMode) Values() []Mpeg2RateControlMode {
 	}
 }
 
+type Mpeg2ScanTypeConversionMode string
+
+// Enum values for Mpeg2ScanTypeConversionMode
+const (
+	Mpeg2ScanTypeConversionModeInterlaced         Mpeg2ScanTypeConversionMode = "INTERLACED"
+	Mpeg2ScanTypeConversionModeInterlacedOptimize Mpeg2ScanTypeConversionMode = "INTERLACED_OPTIMIZE"
+)
+
+// Values returns all known values for Mpeg2ScanTypeConversionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Mpeg2ScanTypeConversionMode) Values() []Mpeg2ScanTypeConversionMode {
+	return []Mpeg2ScanTypeConversionMode{
+		"INTERLACED",
+		"INTERLACED_OPTIMIZE",
+	}
+}
+
 type Mpeg2SceneChangeDetect string
 
 // Enum values for Mpeg2SceneChangeDetect
@@ -5736,6 +5850,24 @@ func (ProresParControl) Values() []ProresParControl {
 	}
 }
 
+type ProresScanTypeConversionMode string
+
+// Enum values for ProresScanTypeConversionMode
+const (
+	ProresScanTypeConversionModeInterlaced         ProresScanTypeConversionMode = "INTERLACED"
+	ProresScanTypeConversionModeInterlacedOptimize ProresScanTypeConversionMode = "INTERLACED_OPTIMIZE"
+)
+
+// Values returns all known values for ProresScanTypeConversionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProresScanTypeConversionMode) Values() []ProresScanTypeConversionMode {
+	return []ProresScanTypeConversionMode{
+		"INTERLACED",
+		"INTERLACED_OPTIMIZE",
+	}
+}
+
 type ProresSlowPal string
 
 // Enum values for ProresSlowPal
@@ -6212,6 +6344,24 @@ func (Vc3InterlaceMode) Values() []Vc3InterlaceMode {
 	return []Vc3InterlaceMode{
 		"INTERLACED",
 		"PROGRESSIVE",
+	}
+}
+
+type Vc3ScanTypeConversionMode string
+
+// Enum values for Vc3ScanTypeConversionMode
+const (
+	Vc3ScanTypeConversionModeInterlaced         Vc3ScanTypeConversionMode = "INTERLACED"
+	Vc3ScanTypeConversionModeInterlacedOptimize Vc3ScanTypeConversionMode = "INTERLACED_OPTIMIZE"
+)
+
+// Values returns all known values for Vc3ScanTypeConversionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Vc3ScanTypeConversionMode) Values() []Vc3ScanTypeConversionMode {
+	return []Vc3ScanTypeConversionMode{
+		"INTERLACED",
+		"INTERLACED_OPTIMIZE",
 	}
 }
 

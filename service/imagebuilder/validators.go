@@ -590,6 +590,26 @@ func (m *validateOpListImageBuildVersions) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListImagePackages struct {
+}
+
+func (*validateOpListImagePackages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListImagePackages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListImagePackagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListImagePackagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListImagePipelineImages struct {
 }
 
@@ -944,6 +964,10 @@ func addOpListComponentBuildVersionsValidationMiddleware(stack *middleware.Stack
 
 func addOpListImageBuildVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListImageBuildVersions{}, middleware.After)
+}
+
+func addOpListImagePackagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListImagePackages{}, middleware.After)
 }
 
 func addOpListImagePipelineImagesValidationMiddleware(stack *middleware.Stack) error {
@@ -1624,6 +1648,21 @@ func validateOpListImageBuildVersionsInput(v *ListImageBuildVersionsInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "ListImageBuildVersionsInput"}
 	if v.ImageVersionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImageVersionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListImagePackagesInput(v *ListImagePackagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListImagePackagesInput"}
+	if v.ImageBuildVersionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageBuildVersionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

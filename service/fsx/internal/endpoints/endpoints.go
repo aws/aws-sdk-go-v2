@@ -48,6 +48,7 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"af-south-1":     endpoints.Endpoint{},
 			"ap-east-1":      endpoints.Endpoint{},
 			"ap-northeast-1": endpoints.Endpoint{},
 			"ap-northeast-2": endpoints.Endpoint{},
@@ -57,14 +58,46 @@ var defaultPartitions = endpoints.Partitions{
 			"ca-central-1":   endpoints.Endpoint{},
 			"eu-central-1":   endpoints.Endpoint{},
 			"eu-north-1":     endpoints.Endpoint{},
+			"eu-south-1":     endpoints.Endpoint{},
 			"eu-west-1":      endpoints.Endpoint{},
 			"eu-west-2":      endpoints.Endpoint{},
 			"eu-west-3":      endpoints.Endpoint{},
-			"sa-east-1":      endpoints.Endpoint{},
-			"us-east-1":      endpoints.Endpoint{},
-			"us-east-2":      endpoints.Endpoint{},
-			"us-west-1":      endpoints.Endpoint{},
-			"us-west-2":      endpoints.Endpoint{},
+			"fips-prod-ca-central-1": endpoints.Endpoint{
+				Hostname: "fsx-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
+			"fips-prod-us-east-1": endpoints.Endpoint{
+				Hostname: "fsx-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"fips-prod-us-east-2": endpoints.Endpoint{
+				Hostname: "fsx-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"fips-prod-us-west-1": endpoints.Endpoint{
+				Hostname: "fsx-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
+			"fips-prod-us-west-2": endpoints.Endpoint{
+				Hostname: "fsx-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			"me-south-1": endpoints.Endpoint{},
+			"sa-east-1":  endpoints.Endpoint{},
+			"us-east-1":  endpoints.Endpoint{},
+			"us-east-2":  endpoints.Endpoint{},
+			"us-west-1":  endpoints.Endpoint{},
+			"us-west-2":  endpoints.Endpoint{},
 		},
 	},
 	{
@@ -110,5 +143,21 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"fips-prod-us-gov-east-1": endpoints.Endpoint{
+				Hostname: "fsx-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+			},
+			"fips-prod-us-gov-west-1": endpoints.Endpoint{
+				Hostname: "fsx-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			"us-gov-east-1": endpoints.Endpoint{},
+			"us-gov-west-1": endpoints.Endpoint{},
+		},
 	},
 }

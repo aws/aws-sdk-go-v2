@@ -14,7 +14,9 @@ import (
 
 // Retrieve Performance Insights metrics for a set of data sources, over a time
 // period. You can provide specific dimension groups and dimensions, and provide
-// aggregation and filtering criteria for each group.
+// aggregation and filtering criteria for each group. Each response element returns
+// a maximum of 500 bytes. For larger elements, such as SQL statements, only the
+// first 500 bytes are returned.
 func (c *Client) GetResourceMetrics(ctx context.Context, params *GetResourceMetricsInput, optFns ...func(*Options)) (*GetResourceMetricsOutput, error) {
 	if params == nil {
 		params = &GetResourceMetricsInput{}
@@ -32,7 +34,7 @@ func (c *Client) GetResourceMetrics(ctx context.Context, params *GetResourceMetr
 
 type GetResourceMetricsInput struct {
 
-	// The date and time specifiying the end of the requested time series data. The
+	// The date and time specifying the end of the requested time series data. The
 	// value specified is exclusive - data points less than (but not equal to) EndTime
 	// will be returned. The value for EndTime must be later than the value for
 	// StartTime.
@@ -41,9 +43,9 @@ type GetResourceMetricsInput struct {
 	EndTime *time.Time
 
 	// An immutable, AWS Region-unique identifier for a data source. Performance
-	// Insights gathers metrics from this data source. To use an Amazon RDS instance as
-	// a data source, you specify its DbiResourceId value - for example:
-	// db-FAIHNTYBKTGAUSUZQYPDS2GW4A
+	// Insights gathers metrics from this data source. To use a DB instance as a data
+	// source, specify its DbiResourceId value. For example, specify
+	// db-FAIHNTYBKTGAUSUZQYPDS2GW4A.
 	//
 	// This member is required.
 	Identifier *string
@@ -55,8 +57,8 @@ type GetResourceMetricsInput struct {
 	// This member is required.
 	MetricQueries []types.MetricQuery
 
-	// The AWS service for which Performance Insights will return metrics. The only
-	// valid value for ServiceType is: RDS
+	// The AWS service for which Performance Insights returns metrics. The only valid
+	// value for ServiceType is RDS.
 	//
 	// This member is required.
 	ServiceType types.ServiceType
@@ -113,8 +115,8 @@ type GetResourceMetricsOutput struct {
 	AlignedStartTime *time.Time
 
 	// An immutable, AWS Region-unique identifier for a data source. Performance
-	// Insights gathers metrics from this data source. To use an Amazon RDS instance as
-	// a data source, you specify its DbiResourceId value - for example:
+	// Insights gathers metrics from this data source. To use a DB instance as a data
+	// source, you specify its DbiResourceId value - for example:
 	// db-FAIHNTYBKTGAUSUZQYPDS2GW4A
 	Identifier *string
 

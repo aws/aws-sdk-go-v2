@@ -27,6 +27,8 @@ const (
 	ActionFileUpload                   Action = "FILE_UPLOAD"
 	ActionFileDownload                 Action = "FILE_DOWNLOAD"
 	ActionPrintingToLocalDevice        Action = "PRINTING_TO_LOCAL_DEVICE"
+	ActionDomainPasswordSignin         Action = "DOMAIN_PASSWORD_SIGNIN"
+	ActionDomainSmartCardSignin        Action = "DOMAIN_SMART_CARD_SIGNIN"
 )
 
 // Values returns all known values for Action. Note that this can be expanded in
@@ -39,6 +41,8 @@ func (Action) Values() []Action {
 		"FILE_UPLOAD",
 		"FILE_DOWNLOAD",
 		"PRINTING_TO_LOCAL_DEVICE",
+		"DOMAIN_PASSWORD_SIGNIN",
+		"DOMAIN_SMART_CARD_SIGNIN",
 	}
 }
 
@@ -104,6 +108,8 @@ const (
 	FleetErrorCodeSecurityGroupsNotFound                            FleetErrorCode = "SECURITY_GROUPS_NOT_FOUND"
 	FleetErrorCodeIgwNotAttached                                    FleetErrorCode = "IGW_NOT_ATTACHED"
 	FleetErrorCodeIamServiceRoleMissingDescribeSecurityGroupsAction FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"
+	FleetErrorCodeFleetStopped                                      FleetErrorCode = "FLEET_STOPPED"
+	FleetErrorCodeFleetInstanceProvisioningFailure                  FleetErrorCode = "FLEET_INSTANCE_PROVISIONING_FAILURE"
 	FleetErrorCodeDomainJoinErrorFileNotFound                       FleetErrorCode = "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"
 	FleetErrorCodeDomainJoinErrorAccessDenied                       FleetErrorCode = "DOMAIN_JOIN_ERROR_ACCESS_DENIED"
 	FleetErrorCodeDomainJoinErrorLogonFailure                       FleetErrorCode = "DOMAIN_JOIN_ERROR_LOGON_FAILURE"
@@ -139,6 +145,8 @@ func (FleetErrorCode) Values() []FleetErrorCode {
 		"SECURITY_GROUPS_NOT_FOUND",
 		"IGW_NOT_ATTACHED",
 		"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION",
+		"FLEET_STOPPED",
+		"FLEET_INSTANCE_PROVISIONING_FAILURE",
 		"DOMAIN_JOIN_ERROR_FILE_NOT_FOUND",
 		"DOMAIN_JOIN_ERROR_ACCESS_DENIED",
 		"DOMAIN_JOIN_ERROR_LOGON_FAILURE",
@@ -254,6 +262,8 @@ const (
 	ImageStateFailed    ImageState = "FAILED"
 	ImageStateCopying   ImageState = "COPYING"
 	ImageStateDeleting  ImageState = "DELETING"
+	ImageStateCreating  ImageState = "CREATING"
+	ImageStateImporting ImageState = "IMPORTING"
 )
 
 // Values returns all known values for ImageState. Note that this can be expanded
@@ -266,6 +276,8 @@ func (ImageState) Values() []ImageState {
 		"FAILED",
 		"COPYING",
 		"DELETING",
+		"CREATING",
+		"IMPORTING",
 	}
 }
 

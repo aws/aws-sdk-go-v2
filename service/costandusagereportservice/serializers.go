@@ -230,6 +230,11 @@ func awsAwsjson11_serializeDocumentReportDefinition(v *types.ReportDefinition, v
 		}
 	}
 
+	if v.BillingViewArn != nil {
+		ok := object.Key("BillingViewArn")
+		ok.String(*v.BillingViewArn)
+	}
+
 	if len(v.Compression) > 0 {
 		ok := object.Key("Compression")
 		ok.String(string(v.Compression))

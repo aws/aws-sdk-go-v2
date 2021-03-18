@@ -71,14 +71,22 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "us-east-2",
 				},
 			},
+			"fips-us-west-1": endpoints.Endpoint{
+				Hostname: "cognito-idp-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
 			"fips-us-west-2": endpoints.Endpoint{
 				Hostname: "cognito-idp-fips.us-west-2.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-west-2",
 				},
 			},
+			"sa-east-1": endpoints.Endpoint{},
 			"us-east-1": endpoints.Endpoint{},
 			"us-east-2": endpoints.Endpoint{},
+			"us-west-1": endpoints.Endpoint{},
 			"us-west-2": endpoints.Endpoint{},
 		},
 	},

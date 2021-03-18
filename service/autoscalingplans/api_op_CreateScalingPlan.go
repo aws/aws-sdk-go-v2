@@ -30,12 +30,16 @@ func (c *Client) CreateScalingPlan(ctx context.Context, params *CreateScalingPla
 type CreateScalingPlanInput struct {
 
 	// A CloudFormation stack or set of tags. You can create one scaling plan per
-	// application source.
+	// application source. For more information, see ApplicationSource
+	// (https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ApplicationSource.html)
+	// in the AWS Auto Scaling API Reference.
 	//
 	// This member is required.
 	ApplicationSource *types.ApplicationSource
 
-	// The scaling instructions.
+	// The scaling instructions. For more information, see ScalingInstruction
+	// (https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html)
+	// in the AWS Auto Scaling API Reference.
 	//
 	// This member is required.
 	ScalingInstructions []types.ScalingInstruction
@@ -50,7 +54,7 @@ type CreateScalingPlanInput struct {
 type CreateScalingPlanOutput struct {
 
 	// The version number of the scaling plan. This value is always 1. Currently, you
-	// cannot specify multiple scaling plan versions.
+	// cannot have multiple scaling plan versions.
 	//
 	// This member is required.
 	ScalingPlanVersion *int64

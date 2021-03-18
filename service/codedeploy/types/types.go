@@ -265,6 +265,15 @@ type DeploymentGroupInfo struct {
 	// groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
 	OnPremisesTagSet *OnPremisesTagSet
 
+	// Indicates what happens when new EC2 instances are launched mid-deployment and do
+	// not receive the deployed application revision. If this option is set to UPDATE
+	// or is unspecified, CodeDeploy initiates one or more 'auto-update outdated
+	// instances' deployments to apply the deployed application revision to the new EC2
+	// instances. If this option is set to IGNORE, CodeDeploy does not initiate a
+	// deployment to update the new EC2 instances. This may result in instances having
+	// different revisions.
+	OutdatedInstancesStrategy OutdatedInstancesStrategy
+
 	// A service role Amazon Resource Name (ARN) that grants CodeDeploy permission to
 	// make calls to AWS services on your behalf. For more information, see Create a
 	// Service Role for AWS CodeDeploy
@@ -318,6 +327,10 @@ type DeploymentInfo struct {
 	//
 	// *
 	// codeDeployRollback: A rollback process created the deployment.
+	//
+	// *
+	// CodeDeployAutoUpdate: An auto-update process created the deployment when it
+	// detected outdated EC2 instances.
 	Creator DeploymentCreator
 
 	// The deployment configuration name.
@@ -396,6 +409,9 @@ type DeploymentInfo struct {
 	// Information about the application revision that was deployed to the deployment
 	// group before the most recent successful deployment.
 	PreviousRevision *RevisionLocation
+
+	// Information about deployments related to the specified deployment.
+	RelatedDeployments *RelatedDeployments
 
 	// Information about the location of stored application artifacts and the service
 	// from which to retrieve them.
@@ -1057,6 +1073,17 @@ type RawString struct {
 
 	// The SHA256 hash value of the revision content.
 	Sha256 *string
+}
+
+// Information about deployments related to the specified deployment.
+type RelatedDeployments struct {
+
+	// The deployment IDs of 'auto-update outdated instances' deployments triggered by
+	// this deployment.
+	AutoUpdateOutdatedInstancesDeploymentIds []string
+
+	// The deployment ID of the root deployment that triggered this deployment.
+	AutoUpdateOutdatedInstancesRootDeploymentId *string
 }
 
 // Information about an application revision.

@@ -65,7 +65,7 @@ type AssociateEnclaveCertificateIamRoleOutput struct {
 
 	// The Amazon S3 object key where the certificate, certificate chain, and encrypted
 	// private key bundle are stored. The object key is formatted as follows:
-	// certificate_arn/role_arn.
+	// role_arn/certificate_arn.
 	CertificateS3ObjectKey *string
 
 	// The ID of the AWS KMS CMK used to encrypt the private key of the certificate.

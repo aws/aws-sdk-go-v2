@@ -11,7 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all tag keys in the specified Region for the AWS account.
+// Returns all tag keys currently in use in the specified Region for the calling
+// AWS account. This operation supports pagination, where the response can be sent
+// in multiple pages. You should check the PaginationToken response parameter to
+// determine if there are additional results available to return. Repeat the query,
+// passing the PaginationToken response parameter value as an input to the next
+// request until you recieve a null value. A null value for PaginationToken
+// indicates that there are no more results waiting to be returned.
 func (c *Client) GetTagKeys(ctx context.Context, params *GetTagKeysInput, optFns ...func(*Options)) (*GetTagKeysOutput, error) {
 	if params == nil {
 		params = &GetTagKeysInput{}
@@ -28,19 +34,18 @@ func (c *Client) GetTagKeys(ctx context.Context, params *GetTagKeysInput, optFns
 }
 
 type GetTagKeysInput struct {
-	MaxResults *int32
 
-	// A string that indicates that additional data is available. Leave this value
-	// empty for your initial request. If the response includes a PaginationToken, use
-	// that string for this value to request an additional page of data.
+	// Specifies a PaginationToken response value from a previous request to indicate
+	// that you want the next page of results. Leave this parameter empty in your
+	// initial request.
 	PaginationToken *string
 }
 
 type GetTagKeysOutput struct {
 
-	// A string that indicates that the response contains more data than can be
-	// returned in a single response. To receive additional data, specify this string
-	// for the PaginationToken value in a subsequent request.
+	// A string that indicates that there is more data available than this response
+	// contains. To receive the next part of the response, specify this response value
+	// as the PaginationToken value in the request for the next page.
 	PaginationToken *string
 
 	// A list of all tag keys in the AWS account.

@@ -11,30 +11,33 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Suspends activity on a fleet. Currently, this operation is used to stop a
-// fleet's auto-scaling activity. It is used to temporarily stop triggering scaling
-// events. The policies can be retained and auto-scaling activity can be restarted
-// using StartFleetActions. You can view a fleet's stopped actions using
-// DescribeFleetAttributes. To stop fleet actions, specify the fleet ID and the
-// type of actions to suspend. When auto-scaling fleet actions are stopped, Amazon
-// GameLift no longer initiates scaling events except in response to manual changes
-// using UpdateFleetCapacity. Learn more Setting up GameLift Fleets
+// Suspends certain types of activity in a fleet location. Currently, this
+// operation is used to stop auto-scaling activity. For multi-location fleets,
+// fleet actions are managed separately for each location. Stopping fleet actions
+// has several potential purposes. It allows you to temporarily stop auto-scaling
+// activity but retain your scaling policies for use in the future. For
+// multi-location fleets, you can set up fleet-wide auto-scaling, and then opt out
+// of it for certain locations. This operation can be used in the following
+// ways:
+//
+// * To stop actions on instances in the fleet's home Region, provide a
+// fleet ID and the type of actions to suspend.
+//
+// * To stop actions on instances in
+// one of the fleet's remote locations, provide a fleet ID, a location name, and
+// the type of actions to suspend.
+//
+// If successful, GameLift no longer initiates
+// scaling events except in response to manual changes using UpdateFleetCapacity.
+// You can view a fleet's stopped actions using DescribeFleetAttributes or
+// DescribeFleetLocationAttributes. Suspended activity can be restarted using
+// StartFleetActions. Learn more Setting up GameLift Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related operations
-//
-// * CreateFleet
-//
-// * ListFleets
-//
-// * DeleteFleet
-//
-// *
-// DescribeFleetAttributes
-//
-// * UpdateFleetAttributes
-//
-// * StartFleetActions or
-// StopFleetActions
+// Related actions CreateFleet | UpdateFleetCapacity | PutScalingPolicy |
+// DescribeEC2InstanceLimits | DescribeFleetAttributes |
+// DescribeFleetLocationAttributes | UpdateFleetAttributes | StopFleetActions |
+// DeleteFleet | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) StopFleetActions(ctx context.Context, params *StopFleetActionsInput, optFns ...func(*Options)) (*StopFleetActionsOutput, error) {
 	if params == nil {
 		params = &StopFleetActionsInput{}
@@ -50,6 +53,7 @@ func (c *Client) StopFleetActions(ctx context.Context, params *StopFleetActionsI
 	return out, nil
 }
 
+// Represents the input for a request operation.
 type StopFleetActionsInput struct {
 
 	// List of actions to suspend on the fleet.
@@ -57,14 +61,30 @@ type StopFleetActionsInput struct {
 	// This member is required.
 	Actions []types.FleetAction
 
-	// A unique identifier for a fleet to stop actions on. You can use either the fleet
-	// ID or ARN value.
+	// A unique identifier for the fleet to stop actions on. You can use either the
+	// fleet ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string
+
+	// The fleet location to stop fleet actions for. Specify a location in the form of
+	// an AWS Region code, such as us-west-2.
+	Location *string
 }
 
+// Represents the input for a request operation.
 type StopFleetActionsOutput struct {
+
+	// The Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
+	// assigned to a GameLift fleet resource and uniquely identifies it. ARNs are
+	// unique across all Regions. Format is
+	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912.
+	FleetArn *string
+
+	// A unique identifier for the fleet to stop actions on.
+	FleetId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }

@@ -21,6 +21,10 @@ import (
 // * Only an
 // AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an
 // account.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the
+// AppInstanceUserArn of the user that makes the API call as the value in the
+// header.
 func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, optFns ...func(*Options)) (*ListChannelsOutput, error) {
 	if params == nil {
 		params = &ListChannelsInput{}
@@ -38,10 +42,13 @@ func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, op
 
 type ListChannelsInput struct {
 
-	// The ARN of the app instance.
+	// The ARN of the AppInstance.
 	//
 	// This member is required.
 	AppInstanceArn *string
+
+	// The AppInstanceUserArn of the user that makes the API call.
+	ChimeBearer *string
 
 	// The maximum number of channels that you want to return.
 	MaxResults *int32
@@ -51,8 +58,7 @@ type ListChannelsInput struct {
 	NextToken *string
 
 	// The privacy setting. PUBLIC retrieves all the public channels. PRIVATE retrieves
-	// private channels. Only an app instance administrator can retrieve private
-	// channels.
+	// private channels. Only an AppInstanceAdmin can retrieve private channels.
 	Privacy types.ChannelPrivacy
 }
 

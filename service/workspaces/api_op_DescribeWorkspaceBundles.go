@@ -40,8 +40,8 @@ type DescribeWorkspaceBundlesInput struct {
 	NextToken *string
 
 	// The owner of the bundles. You cannot combine this parameter with any other
-	// filter. Specify AMAZON to describe the bundles provided by AWS or null to
-	// describe the bundles that belong to your account.
+	// filter. To describe the bundles provided by AWS, specify AMAZON. To describe the
+	// bundles that belong to your account, don't specify a value.
 	Owner *string
 }
 
@@ -50,9 +50,9 @@ type DescribeWorkspaceBundlesOutput struct {
 	// Information about the bundles.
 	Bundles []types.WorkspaceBundle
 
-	// The token to use to retrieve the next set of results, or null if there are no
-	// more results available. This token is valid for one day and must be used within
-	// that time frame.
+	// The token to use to retrieve the next page of results. This value is null when
+	// there are no more results to return. This token is valid for one day and must be
+	// used within that time frame.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

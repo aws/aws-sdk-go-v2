@@ -36,9 +36,13 @@ type RegisterTargetWithMaintenanceWindowInput struct {
 	ResourceType types.MaintenanceWindowResourceType
 
 	// The targets to register with the maintenance window. In other words, the
-	// instances to run commands on when the maintenance window runs. You can specify
-	// targets using instance IDs, resource group names, or tags that have been applied
-	// to instances. Example 1: Specify instance IDs
+	// instances to run commands on when the maintenance window runs. If a single
+	// maintenance window task is registered with multiple targets, its task
+	// invocations occur sequentially and not in parallel. If your task must run on
+	// multiple targets at the same time, register a task for each target individually
+	// and assign each task the same priority level. You can specify targets using
+	// instance IDs, resource group names, or tags that have been applied to instances.
+	// Example 1: Specify instance IDs
 	// Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3  Example 2: Use
 	// tag key-pairs applied to instances
 	// Key=tag:my-tag-key,Values=my-tag-value-1,my-tag-value-2  Example 3: Use tag-keys

@@ -170,15 +170,19 @@ type CreateAccountFailureReason string
 
 // Enum values for CreateAccountFailureReason
 const (
-	CreateAccountFailureReasonAccountLimitExceeded          CreateAccountFailureReason = "ACCOUNT_LIMIT_EXCEEDED"
-	CreateAccountFailureReasonEmailAlreadyExists            CreateAccountFailureReason = "EMAIL_ALREADY_EXISTS"
-	CreateAccountFailureReasonInvalidAddress                CreateAccountFailureReason = "INVALID_ADDRESS"
-	CreateAccountFailureReasonInvalidEmail                  CreateAccountFailureReason = "INVALID_EMAIL"
-	CreateAccountFailureReasonConcurrentAccountModification CreateAccountFailureReason = "CONCURRENT_ACCOUNT_MODIFICATION"
-	CreateAccountFailureReasonInternalFailure               CreateAccountFailureReason = "INTERNAL_FAILURE"
-	CreateAccountFailureReasonGovcloudAccountAlreadyExists  CreateAccountFailureReason = "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
-	CreateAccountFailureReasonMissingBusinessValidation     CreateAccountFailureReason = "MISSING_BUSINESS_VALIDATION"
-	CreateAccountFailureReasonMissingPaymentInstrument      CreateAccountFailureReason = "MISSING_PAYMENT_INSTRUMENT"
+	CreateAccountFailureReasonAccountLimitExceeded                 CreateAccountFailureReason = "ACCOUNT_LIMIT_EXCEEDED"
+	CreateAccountFailureReasonEmailAlreadyExists                   CreateAccountFailureReason = "EMAIL_ALREADY_EXISTS"
+	CreateAccountFailureReasonInvalidAddress                       CreateAccountFailureReason = "INVALID_ADDRESS"
+	CreateAccountFailureReasonInvalidEmail                         CreateAccountFailureReason = "INVALID_EMAIL"
+	CreateAccountFailureReasonConcurrentAccountModification        CreateAccountFailureReason = "CONCURRENT_ACCOUNT_MODIFICATION"
+	CreateAccountFailureReasonInternalFailure                      CreateAccountFailureReason = "INTERNAL_FAILURE"
+	CreateAccountFailureReasonGovcloudAccountAlreadyExists         CreateAccountFailureReason = "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
+	CreateAccountFailureReasonMissingBusinessValidation            CreateAccountFailureReason = "MISSING_BUSINESS_VALIDATION"
+	CreateAccountFailureReasonFailedBusinessValidation             CreateAccountFailureReason = "FAILED_BUSINESS_VALIDATION"
+	CreateAccountFailureReasonPendingBusinessVALIDATIONv           CreateAccountFailureReason = "PENDING_BUSINESS_VALIDATION"
+	CreateAccountFailureReasonInvalidIdentityForBusinessValidation CreateAccountFailureReason = "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION"
+	CreateAccountFailureReasonUnknownBusinessValidation            CreateAccountFailureReason = "UNKNOWN_BUSINESS_VALIDATION"
+	CreateAccountFailureReasonMissingPaymentInstrument             CreateAccountFailureReason = "MISSING_PAYMENT_INSTRUMENT"
 )
 
 // Values returns all known values for CreateAccountFailureReason. Note that this
@@ -194,6 +198,10 @@ func (CreateAccountFailureReason) Values() []CreateAccountFailureReason {
 		"INTERNAL_FAILURE",
 		"GOVCLOUD_ACCOUNT_ALREADY_EXISTS",
 		"MISSING_BUSINESS_VALIDATION",
+		"FAILED_BUSINESS_VALIDATION",
+		"PENDING_BUSINESS_VALIDATION",
+		"INVALID_IDENTITY_FOR_BUSINESS_VALIDATION",
+		"UNKNOWN_BUSINESS_VALIDATION",
 		"MISSING_PAYMENT_INSTRUMENT",
 	}
 }
@@ -242,14 +250,15 @@ type HandshakeConstraintViolationExceptionReason string
 
 // Enum values for HandshakeConstraintViolationExceptionReason
 const (
-	HandshakeConstraintViolationExceptionReasonAccountNumberLimitExceeded                    HandshakeConstraintViolationExceptionReason = "ACCOUNT_NUMBER_LIMIT_EXCEEDED"
-	HandshakeConstraintViolationExceptionReasonHandshakeRateLimitExceeded                    HandshakeConstraintViolationExceptionReason = "HANDSHAKE_RATE_LIMIT_EXCEEDED"
-	HandshakeConstraintViolationExceptionReasonAlreadyInAnOrganization                       HandshakeConstraintViolationExceptionReason = "ALREADY_IN_AN_ORGANIZATION"
-	HandshakeConstraintViolationExceptionReasonOrganizationAlreadyHasAllFeatures             HandshakeConstraintViolationExceptionReason = "ORGANIZATION_ALREADY_HAS_ALL_FEATURES"
-	HandshakeConstraintViolationExceptionReasonInviteDisabledDuringEnableAllFeatures         HandshakeConstraintViolationExceptionReason = "INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES"
-	HandshakeConstraintViolationExceptionReasonPaymentInstrumentRequired                     HandshakeConstraintViolationExceptionReason = "PAYMENT_INSTRUMENT_REQUIRED"
-	HandshakeConstraintViolationExceptionReasonOrganizationFromDifferentSellerOfRecord       HandshakeConstraintViolationExceptionReason = "ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD"
-	HandshakeConstraintViolationExceptionReasonOrganizationMembershipChangeRateLimitExceeded HandshakeConstraintViolationExceptionReason = "ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED"
+	HandshakeConstraintViolationExceptionReasonAccountNumberLimitExceeded                       HandshakeConstraintViolationExceptionReason = "ACCOUNT_NUMBER_LIMIT_EXCEEDED"
+	HandshakeConstraintViolationExceptionReasonHandshakeRateLimitExceeded                       HandshakeConstraintViolationExceptionReason = "HANDSHAKE_RATE_LIMIT_EXCEEDED"
+	HandshakeConstraintViolationExceptionReasonAlreadyInAnOrganization                          HandshakeConstraintViolationExceptionReason = "ALREADY_IN_AN_ORGANIZATION"
+	HandshakeConstraintViolationExceptionReasonOrganizationAlreadyHasAllFeatures                HandshakeConstraintViolationExceptionReason = "ORGANIZATION_ALREADY_HAS_ALL_FEATURES"
+	HandshakeConstraintViolationExceptionReasonOrganizationIsAlreadyPendingAllFeaturesMigration HandshakeConstraintViolationExceptionReason = "ORGANIZATION_IS_ALREADY_PENDING_ALL_FEATURES_MIGRATION"
+	HandshakeConstraintViolationExceptionReasonInviteDisabledDuringEnableAllFeatures            HandshakeConstraintViolationExceptionReason = "INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES"
+	HandshakeConstraintViolationExceptionReasonPaymentInstrumentRequired                        HandshakeConstraintViolationExceptionReason = "PAYMENT_INSTRUMENT_REQUIRED"
+	HandshakeConstraintViolationExceptionReasonOrganizationFromDifferentSellerOfRecord          HandshakeConstraintViolationExceptionReason = "ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD"
+	HandshakeConstraintViolationExceptionReasonOrganizationMembershipChangeRateLimitExceeded    HandshakeConstraintViolationExceptionReason = "ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED"
 )
 
 // Values returns all known values for HandshakeConstraintViolationExceptionReason.
@@ -262,6 +271,7 @@ func (HandshakeConstraintViolationExceptionReason) Values() []HandshakeConstrain
 		"HANDSHAKE_RATE_LIMIT_EXCEEDED",
 		"ALREADY_IN_AN_ORGANIZATION",
 		"ORGANIZATION_ALREADY_HAS_ALL_FEATURES",
+		"ORGANIZATION_IS_ALREADY_PENDING_ALL_FEATURES_MIGRATION",
 		"INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES",
 		"PAYMENT_INSTRUMENT_REQUIRED",
 		"ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD",
@@ -390,6 +400,7 @@ const (
 	InvalidInputExceptionReasonInvalidSystemTagsParameter         InvalidInputExceptionReason = "INVALID_SYSTEM_TAGS_PARAMETER"
 	InvalidInputExceptionReasonDuplicateTagKey                    InvalidInputExceptionReason = "DUPLICATE_TAG_KEY"
 	InvalidInputExceptionReasonTargetNotSupported                 InvalidInputExceptionReason = "TARGET_NOT_SUPPORTED"
+	InvalidInputExceptionReasonInvalidEmailAddressTarget          InvalidInputExceptionReason = "INVALID_EMAIL_ADDRESS_TARGET"
 )
 
 // Values returns all known values for InvalidInputExceptionReason. Note that this
@@ -420,6 +431,7 @@ func (InvalidInputExceptionReason) Values() []InvalidInputExceptionReason {
 		"INVALID_SYSTEM_TAGS_PARAMETER",
 		"DUPLICATE_TAG_KEY",
 		"TARGET_NOT_SUPPORTED",
+		"INVALID_EMAIL_ADDRESS_TARGET",
 	}
 }
 

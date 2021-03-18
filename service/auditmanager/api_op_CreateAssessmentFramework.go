@@ -45,6 +45,9 @@ type CreateAssessmentFrameworkInput struct {
 
 	// An optional description for the new custom framework.
 	Description *string
+
+	// The tags associated with the framework.
+	Tags map[string]string
 }
 
 type CreateAssessmentFrameworkOutput struct {

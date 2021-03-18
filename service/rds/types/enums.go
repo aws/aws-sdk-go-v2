@@ -76,6 +76,50 @@ func (AuthScheme) Values() []AuthScheme {
 	}
 }
 
+type DBProxyEndpointStatus string
+
+// Enum values for DBProxyEndpointStatus
+const (
+	DBProxyEndpointStatusAvailable                  DBProxyEndpointStatus = "available"
+	DBProxyEndpointStatusModifying                  DBProxyEndpointStatus = "modifying"
+	DBProxyEndpointStatusIncompatibleNetwork        DBProxyEndpointStatus = "incompatible-network"
+	DBProxyEndpointStatusInsufficientResourceLimits DBProxyEndpointStatus = "insufficient-resource-limits"
+	DBProxyEndpointStatusCreating                   DBProxyEndpointStatus = "creating"
+	DBProxyEndpointStatusDeleting                   DBProxyEndpointStatus = "deleting"
+)
+
+// Values returns all known values for DBProxyEndpointStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DBProxyEndpointStatus) Values() []DBProxyEndpointStatus {
+	return []DBProxyEndpointStatus{
+		"available",
+		"modifying",
+		"incompatible-network",
+		"insufficient-resource-limits",
+		"creating",
+		"deleting",
+	}
+}
+
+type DBProxyEndpointTargetRole string
+
+// Enum values for DBProxyEndpointTargetRole
+const (
+	DBProxyEndpointTargetRoleReadWrite DBProxyEndpointTargetRole = "READ_WRITE"
+	DBProxyEndpointTargetRoleReadOnly  DBProxyEndpointTargetRole = "READ_ONLY"
+)
+
+// Values returns all known values for DBProxyEndpointTargetRole. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DBProxyEndpointTargetRole) Values() []DBProxyEndpointTargetRole {
+	return []DBProxyEndpointTargetRole{
+		"READ_WRITE",
+		"READ_ONLY",
+	}
+}
+
 type DBProxyStatus string
 
 // Enum values for DBProxyStatus
@@ -123,6 +167,26 @@ func (EngineFamily) Values() []EngineFamily {
 	return []EngineFamily{
 		"MYSQL",
 		"POSTGRESQL",
+	}
+}
+
+type FailoverStatus string
+
+// Enum values for FailoverStatus
+const (
+	FailoverStatusPending     FailoverStatus = "pending"
+	FailoverStatusFailingOver FailoverStatus = "failing-over"
+	FailoverStatusCancelling  FailoverStatus = "cancelling"
+)
+
+// Values returns all known values for FailoverStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FailoverStatus) Values() []FailoverStatus {
+	return []FailoverStatus{
+		"pending",
+		"failing-over",
+		"cancelling",
 	}
 }
 
@@ -192,10 +256,11 @@ type TargetHealthReason string
 
 // Enum values for TargetHealthReason
 const (
-	TargetHealthReasonUnreachable          TargetHealthReason = "UNREACHABLE"
-	TargetHealthReasonConnectionFailed     TargetHealthReason = "CONNECTION_FAILED"
-	TargetHealthReasonAuthFailure          TargetHealthReason = "AUTH_FAILURE"
-	TargetHealthReasonPendingProxyCapacity TargetHealthReason = "PENDING_PROXY_CAPACITY"
+	TargetHealthReasonUnreachable             TargetHealthReason = "UNREACHABLE"
+	TargetHealthReasonConnectionFailed        TargetHealthReason = "CONNECTION_FAILED"
+	TargetHealthReasonAuthFailure             TargetHealthReason = "AUTH_FAILURE"
+	TargetHealthReasonPendingProxyCapacity    TargetHealthReason = "PENDING_PROXY_CAPACITY"
+	TargetHealthReasonInvalidReplicationState TargetHealthReason = "INVALID_REPLICATION_STATE"
 )
 
 // Values returns all known values for TargetHealthReason. Note that this can be
@@ -207,6 +272,27 @@ func (TargetHealthReason) Values() []TargetHealthReason {
 		"CONNECTION_FAILED",
 		"AUTH_FAILURE",
 		"PENDING_PROXY_CAPACITY",
+		"INVALID_REPLICATION_STATE",
+	}
+}
+
+type TargetRole string
+
+// Enum values for TargetRole
+const (
+	TargetRoleReadWrite TargetRole = "READ_WRITE"
+	TargetRoleReadOnly  TargetRole = "READ_ONLY"
+	TargetRoleUnknown   TargetRole = "UNKNOWN"
+)
+
+// Values returns all known values for TargetRole. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TargetRole) Values() []TargetRole {
+	return []TargetRole{
+		"READ_WRITE",
+		"READ_ONLY",
+		"UNKNOWN",
 	}
 }
 

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified tags from an Amazon Cognito identity pool. You can use
-// this action up to 5 times per second, per account
+// Removes the specified tags from the specified Amazon Cognito identity pool. You
+// can use this action up to 5 times per second, per account
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -29,8 +29,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the identity pool that the tags are assigned
-	// to.
+	// The Amazon Resource Name (ARN) of the identity pool.
 	//
 	// This member is required.
 	ResourceArn *string

@@ -15,15 +15,11 @@ type AliasListEntry struct {
 	// String that contains the alias. This value begins with alias/.
 	AliasName *string
 
-	// Date and time that the alias was most recently created in the account and
-	// Region. Formatted as Unix time.
 	CreationDate *time.Time
 
-	// Date and time that the alias was most recently associated with a CMK in the
-	// account and Region. Formatted as Unix time.
 	LastUpdatedDate *time.Time
 
-	// String that contains the key identifier of the CMK associated with the alias.
+	// String that contains the key identifier referred to by the alias.
 	TargetKeyId *string
 }
 

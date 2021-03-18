@@ -19,7 +19,7 @@ import (
 // you can call this operation, you must first enable AWS Health to work with AWS
 // Organizations. To do this, call the EnableHealthServiceAccessForOrganization
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
-// operation from your organization's master account. This API operation uses
+// operation from your organization's management account. This API operation uses
 // pagination. Specify the nextToken parameter in the next request to return more
 // results.
 func (c *Client) DescribeAffectedAccountsForOrganization(ctx context.Context, params *DescribeAffectedAccountsForOrganizationInput, optFns ...func(*Options)) (*DescribeAffectedAccountsForOrganizationOutput, error) {

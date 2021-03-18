@@ -14,12 +14,15 @@ import (
 // private CA resource or the policy cannot be found, this action returns a
 // ResourceNotFoundException. The policy can be attached or updated with PutPolicy
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_PutPolicy.html) and
-// removed with DeletePolicy. About Policies
+// removed with DeletePolicy
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePolicy.html).
+// About Policies
 //
-// * A policy grants access on a private
-// CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations
-// unit. Policies are under the control of a CA administrator. For more
-// information, see Using a Resource Based Policy with ACM Private CA.
+// * A policy grants access on a private CA to an AWS customer
+// account, to AWS Organizations, or to an AWS Organizations unit. Policies are
+// under the control of a CA administrator. For more information, see Using a
+// Resource Based Policy with ACM Private CA
+// (https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html).
 //
 // * A policy
 // permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed
@@ -34,7 +37,8 @@ import (
 //
 // * Updates made
 // in AWS Resource Manager (RAM) are reflected in policies. For more information,
-// see Using AWS Resource Access Manager (RAM) with ACM Private CA.
+// see Attach a Policy for Cross-Account Access
+// (https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-ram.html).
 func (c *Client) GetPolicy(ctx context.Context, params *GetPolicyInput, optFns ...func(*Options)) (*GetPolicyOutput, error) {
 	if params == nil {
 		params = &GetPolicyInput{}

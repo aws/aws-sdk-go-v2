@@ -265,8 +265,8 @@ type EventSourceMappingConfiguration struct {
 	// The name of the Kafka topic.
 	Topics []string
 
-	// (Streams) The duration of a processing window in seconds. The range is between 1
-	// second up to 15 minutes.
+	// (Streams) The duration in seconds of a processing window. The range is between 1
+	// second up to 900 seconds.
 	TumblingWindowInSeconds *int32
 
 	// The identifier of the event source mapping.
@@ -464,7 +464,7 @@ type FunctionEventInvokeConfig struct {
 
 // Configuration values that override the container image Dockerfile settings. See
 // Container settings
-// (https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html).
+// (https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms).
 type ImageConfig struct {
 
 	// Specifies parameters that you want to pass in with ENTRYPOINT.
@@ -654,17 +654,18 @@ type SourceAccessConfiguration struct {
 	//
 	// * VPC_SUBNET - The subnets
 	// associated with your VPC. Lambda connects to these subnets to fetch data from
-	// your Kafka cluster.
+	// your Self-Managed Apache Kafka cluster.
 	//
-	// * VPC_SECURITY_GROUP - The VPC security group used to
-	// manage access to your Kafka brokers.
-	//
-	// * SASL_SCRAM_256_AUTH - The ARN of your
-	// secret key used for SASL SCRAM-256 authentication of your Kafka brokers.
+	// * VPC_SECURITY_GROUP - The VPC security
+	// group used to manage access to your Self-Managed Apache Kafka brokers.
 	//
 	// *
-	// SASL_SCRAM_512_AUTH - The ARN of your secret key used for SASL SCRAM-512
-	// authentication of your Kafka brokers.
+	// SASL_SCRAM_256_AUTH - The Secrets Manager ARN of your secret key used for SASL
+	// SCRAM-256 authentication of your Self-Managed Apache Kafka brokers.
+	//
+	// *
+	// SASL_SCRAM_512_AUTH - The Secrets Manager ARN of your secret key used for SASL
+	// SCRAM-512 authentication of your Self-Managed Apache Kafka brokers.
 	Type SourceAccessType
 
 	// The value for your chosen configuration in Type. For example: "URI":

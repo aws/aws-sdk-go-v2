@@ -81,7 +81,9 @@ type UpdateFunctionConfigurationInput struct {
 	// (https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html).
 	Handler *string
 
-	// Configuration values that override the container image Dockerfile.
+	// Container image configuration values
+	// (https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html) that override
+	// the values in the container image Dockerfile.
 	ImageConfig *types.ImageConfig
 
 	// The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt

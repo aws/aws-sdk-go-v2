@@ -912,9 +912,6 @@ func validateOpCreateComputeEnvironmentInput(v *CreateComputeEnvironmentInput) e
 			invalidParams.AddNested("ComputeResources", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ServiceRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceRole"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

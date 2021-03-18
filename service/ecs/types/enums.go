@@ -110,10 +110,11 @@ type ClusterField string
 
 // Enum values for ClusterField
 const (
-	ClusterFieldAttachments ClusterField = "ATTACHMENTS"
-	ClusterFieldSettings    ClusterField = "SETTINGS"
-	ClusterFieldStatistics  ClusterField = "STATISTICS"
-	ClusterFieldTags        ClusterField = "TAGS"
+	ClusterFieldAttachments    ClusterField = "ATTACHMENTS"
+	ClusterFieldConfigurations ClusterField = "CONFIGURATIONS"
+	ClusterFieldSettings       ClusterField = "SETTINGS"
+	ClusterFieldStatistics     ClusterField = "STATISTICS"
+	ClusterFieldTags           ClusterField = "TAGS"
 )
 
 // Values returns all known values for ClusterField. Note that this can be expanded
@@ -122,6 +123,7 @@ const (
 func (ClusterField) Values() []ClusterField {
 	return []ClusterField{
 		"ATTACHMENTS",
+		"CONFIGURATIONS",
 		"SETTINGS",
 		"STATISTICS",
 		"TAGS",
@@ -374,6 +376,26 @@ func (EnvironmentFileType) Values() []EnvironmentFileType {
 	}
 }
 
+type ExecuteCommandLogging string
+
+// Enum values for ExecuteCommandLogging
+const (
+	ExecuteCommandLoggingNone     ExecuteCommandLogging = "NONE"
+	ExecuteCommandLoggingDefault  ExecuteCommandLogging = "DEFAULT"
+	ExecuteCommandLoggingOverride ExecuteCommandLogging = "OVERRIDE"
+)
+
+// Values returns all known values for ExecuteCommandLogging. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecuteCommandLogging) Values() []ExecuteCommandLogging {
+	return []ExecuteCommandLogging{
+		"NONE",
+		"DEFAULT",
+		"OVERRIDE",
+	}
+}
+
 type FirelensConfigurationType string
 
 // Enum values for FirelensConfigurationType
@@ -477,6 +499,22 @@ func (LogDriver) Values() []LogDriver {
 		"awslogs",
 		"splunk",
 		"awsfirelens",
+	}
+}
+
+type ManagedAgentName string
+
+// Enum values for ManagedAgentName
+const (
+	ManagedAgentNameExecuteCommandAgent ManagedAgentName = "ExecuteCommandAgent"
+)
+
+// Values returns all known values for ManagedAgentName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedAgentName) Values() []ManagedAgentName {
+	return []ManagedAgentName{
+		"ExecuteCommandAgent",
 	}
 }
 

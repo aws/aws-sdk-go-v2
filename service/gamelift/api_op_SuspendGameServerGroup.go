@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// This operation is used with the GameLift FleetIQ solution and game server
 // groups. Temporarily stops activity on a game server group without terminating
 // instances or the game server group. You can restart activity by calling
 // ResumeGameServerGroup. You can suspend the following activity:
@@ -31,25 +31,11 @@ import (
 // returned showing that the activity is listed in SuspendedActions. Learn more
 // GameLift FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related operations
-//
-// * CreateGameServerGroup
-//
-// * ListGameServerGroups
-//
-// *
-// DescribeGameServerGroup
-//
-// * UpdateGameServerGroup
-//
-// * DeleteGameServerGroup
-//
-// *
-// ResumeGameServerGroup
-//
-// * SuspendGameServerGroup
-//
-// * DescribeGameServerInstances
+// Related actions CreateGameServerGroup | ListGameServerGroups |
+// DescribeGameServerGroup | UpdateGameServerGroup | DeleteGameServerGroup |
+// ResumeGameServerGroup | SuspendGameServerGroup | DescribeGameServerInstances |
+// All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) SuspendGameServerGroup(ctx context.Context, params *SuspendGameServerGroupInput, optFns ...func(*Options)) (*SuspendGameServerGroupOutput, error) {
 	if params == nil {
 		params = &SuspendGameServerGroupInput{}

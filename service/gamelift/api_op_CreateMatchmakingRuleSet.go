@@ -21,11 +21,11 @@ import (
 // it is a good idea to check the rule set syntax using ValidateMatchmakingRuleSet
 // before creating a new rule set. Learn more
 //
-// * Build a Rule Set
+// * Build a rule set
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
 //
 // *
-// Design a Matchmaker
+// Design a matchmaker
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-configuration.html)
 //
 // *
@@ -33,27 +33,11 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-intro.html)
 //
 // Related
-// operations
-//
-// * CreateMatchmakingConfiguration
-//
-// *
-// DescribeMatchmakingConfigurations
-//
-// * UpdateMatchmakingConfiguration
-//
-// *
-// DeleteMatchmakingConfiguration
-//
-// * CreateMatchmakingRuleSet
-//
-// *
-// DescribeMatchmakingRuleSets
-//
-// * ValidateMatchmakingRuleSet
-//
-// *
-// DeleteMatchmakingRuleSet
+// actions CreateMatchmakingConfiguration | DescribeMatchmakingConfigurations |
+// UpdateMatchmakingConfiguration | DeleteMatchmakingConfiguration |
+// CreateMatchmakingRuleSet | DescribeMatchmakingRuleSets |
+// ValidateMatchmakingRuleSet | DeleteMatchmakingRuleSet | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateMatchmakingRuleSet(ctx context.Context, params *CreateMatchmakingRuleSetInput, optFns ...func(*Options)) (*CreateMatchmakingRuleSetOutput, error) {
 	if params == nil {
 		params = &CreateMatchmakingRuleSetInput{}
@@ -72,7 +56,7 @@ func (c *Client) CreateMatchmakingRuleSet(ctx context.Context, params *CreateMat
 // Represents the input for a request operation.
 type CreateMatchmakingRuleSetInput struct {
 
-	// A unique identifier for a matchmaking rule set. A matchmaking configuration
+	// A unique identifier for the matchmaking rule set. A matchmaking configuration
 	// identifies the rule set it uses by this name value. Note that the rule set name
 	// is different from the optional name field in the rule set body.
 	//

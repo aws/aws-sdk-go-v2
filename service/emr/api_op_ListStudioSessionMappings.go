@@ -12,9 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject
-// to change. Returns a list of all user or group session mappings for the EMR
-// Studio specified by StudioId.
+// Returns a list of all user or group session mappings for the Amazon EMR Studio
+// specified by StudioId.
 func (c *Client) ListStudioSessionMappings(ctx context.Context, params *ListStudioSessionMappingsInput, optFns ...func(*Options)) (*ListStudioSessionMappingsOutput, error) {
 	if params == nil {
 		params = &ListStudioSessionMappingsInput{}
@@ -50,7 +49,8 @@ type ListStudioSessionMappingsOutput struct {
 	Marker *string
 
 	// A list of session mapping summary objects. Each object includes session mapping
-	// details such as creation time, identity type (user or group), and Studio ID.
+	// details such as creation time, identity type (user or group), and Amazon EMR
+	// Studio ID.
 	SessionMappings []types.SessionMappingSummary
 
 	// Metadata pertaining to the operation's result.

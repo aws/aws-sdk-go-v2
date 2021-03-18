@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// This operation is used with the GameLift FleetIQ solution and game server
 // groups. Updates GameLift FleetIQ-specific properties for a game server group.
 // Many Auto Scaling group properties are updated on the Auto Scaling group
 // directly, including the launch template, Auto Scaling policies, and
@@ -21,25 +21,11 @@ import (
 // continue to perform instance balancing activity. If successful, a
 // GameServerGroup object is returned. Learn more GameLift FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related operations
-//
-// * CreateGameServerGroup
-//
-// * ListGameServerGroups
-//
-// *
-// DescribeGameServerGroup
-//
-// * UpdateGameServerGroup
-//
-// * DeleteGameServerGroup
-//
-// *
-// ResumeGameServerGroup
-//
-// * SuspendGameServerGroup
-//
-// * DescribeGameServerInstances
+// Related actions CreateGameServerGroup | ListGameServerGroups |
+// DescribeGameServerGroup | UpdateGameServerGroup | DeleteGameServerGroup |
+// ResumeGameServerGroup | SuspendGameServerGroup | DescribeGameServerInstances |
+// All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) UpdateGameServerGroup(ctx context.Context, params *UpdateGameServerGroupInput, optFns ...func(*Options)) (*UpdateGameServerGroupOutput, error) {
 	if params == nil {
 		params = &UpdateGameServerGroupInput{}

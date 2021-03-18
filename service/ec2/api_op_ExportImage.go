@@ -67,7 +67,7 @@ type ExportImageInput struct {
 	// named 'vmimport'.
 	RoleName *string
 
-	// The tags to apply to the image being exported.
+	// The tags to apply to the export image task during creation.
 	TagSpecifications []types.TagSpecification
 }
 
@@ -102,7 +102,7 @@ type ExportImageOutput struct {
 	// The status message for the export image task.
 	StatusMessage *string
 
-	// Any tags assigned to the image being exported.
+	// Any tags assigned to the export image task.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

@@ -22,22 +22,13 @@ import (
 // to receive notifications, and provide the topic ARN in the matchmaking
 // configuration. Continuously poling ticket status with DescribeMatchmaking should
 // only be used for games in development with low matchmaking usage. Learn more
-// Add FlexMatch to a Game Client
+// Add FlexMatch to a game client
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
-// Set Up FlexMatch Event Notification
+// Set Up FlexMatch event notification
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html)
-// Related operations
-//
-// * StartMatchmaking
-//
-// * DescribeMatchmaking
-//
-// *
-// StopMatchmaking
-//
-// * AcceptMatch
-//
-// * StartMatchBackfill
+// Related actions StartMatchmaking | DescribeMatchmaking | StopMatchmaking |
+// AcceptMatch | StartMatchBackfill | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeMatchmaking(ctx context.Context, params *DescribeMatchmakingInput, optFns ...func(*Options)) (*DescribeMatchmakingOutput, error) {
 	if params == nil {
 		params = &DescribeMatchmakingInput{}

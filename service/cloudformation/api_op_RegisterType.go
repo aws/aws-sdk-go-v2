@@ -11,26 +11,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers a type with the CloudFormation service. Registering a type makes it
-// available for use in CloudFormation templates in your AWS account, and
+// Registers an extension with the CloudFormation service. Registering an extension
+// makes it available for use in CloudFormation templates in your AWS account, and
 // includes:
 //
-// * Validating the resource schema
+// * Validating the extension schema
 //
-// * Determining which handlers have
-// been specified for the resource
+// * Determining which handlers, if
+// any, have been specified for the extension
 //
-// * Making the resource type available for use in
-// your account
+// * Making the extension available for
+// use in your account
 //
-// For more information on how to develop types and ready them for
-// registeration, see Creating Resource Providers
+// For more information on how to develop extensions and ready
+// them for registeration, see Creating Resource Providers
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html)
-// in the CloudFormation CLI User Guide. You can have a maximum of 50 resource type
-// versions registered at a time. This maximum is per account and per region. Use
-// DeregisterType to deregister specific resource type versions if necessary. Once
-// you have initiated a registration request using RegisterType, you can use
-// DescribeTypeRegistration to monitor the progress of the registration request.
+// in the CloudFormation CLI User Guide. You can have a maximum of 50 resource
+// extension versions registered at a time. This maximum is per account and per
+// region. Use DeregisterType to deregister specific extension versions if
+// necessary. Once you have initiated a registration request using RegisterType,
+// you can use DescribeTypeRegistration to monitor the progress of the registration
+// request.
 func (c *Client) RegisterType(ctx context.Context, params *RegisterTypeInput, optFns ...func(*Options)) (*RegisterTypeOutput, error) {
 	if params == nil {
 		params = &RegisterTypeInput{}
@@ -48,27 +49,26 @@ func (c *Client) RegisterType(ctx context.Context, params *RegisterTypeInput, op
 
 type RegisterTypeInput struct {
 
-	// A url to the S3 bucket containing the schema handler package that contains the
-	// schema, event handlers, and associated files for the type you want to register.
-	// For information on generating a schema handler package for the type you want to
-	// register, see submit
+	// A url to the S3 bucket containing the extension project package that contains
+	// the neccessary files for the extension you want to register. For information on
+	// generating a schema handler package for the extension you want to register, see
+	// submit
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html)
-	// in the CloudFormation CLI User Guide. The user registering the resource provider
-	// type must be able to access the the schema handler package in the S3 bucket.
-	// That is, the user needs to have GetObject
-	// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html) permissions
-	// for the schema handler package. For more information, see Actions, Resources,
-	// and Condition Keys for Amazon S3
+	// in the CloudFormation CLI User Guide. The user registering the extension must be
+	// able to access the package in the S3 bucket. That is, the user needs to have
+	// GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
+	// permissions for the schema handler package. For more information, see Actions,
+	// Resources, and Condition Keys for Amazon S3
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html) in the AWS
 	// Identity and Access Management User Guide.
 	//
 	// This member is required.
 	SchemaHandlerPackage *string
 
-	// The name of the type being registered. We recommend that type names adhere to
-	// the following pattern: company_or_organization::service::type. The following
-	// organization namespaces are reserved and cannot be used in your resource type
-	// names:
+	// The name of the extension being registered. We recommend that extension names
+	// adhere to the following pattern: company_or_organization::service::type. The
+	// following organization namespaces are reserved and cannot be used in your
+	// extension names:
 	//
 	// * Alexa
 	//
@@ -87,25 +87,25 @@ type RegisterTypeInput struct {
 
 	// A unique identifier that acts as an idempotency key for this registration
 	// request. Specifying a client request token prevents CloudFormation from
-	// generating more than one version of a type from the same registeration request,
-	// even if the request is submitted multiple times.
+	// generating more than one version of an extension from the same registeration
+	// request, even if the request is submitted multiple times.
 	ClientRequestToken *string
 
 	// The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when
-	// invoking the resource provider. If your resource type calls AWS APIs in any of
-	// its handlers, you must create an IAM execution role
+	// invoking the extension. If your extension calls AWS APIs in any of its handlers,
+	// you must create an IAM execution role
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) that includes
 	// the necessary permissions to call those AWS APIs, and provision that execution
-	// role in your account. When CloudFormation needs to invoke the resource provider
-	// handler, CloudFormation assumes this execution role to create a temporary
-	// session token, which it then passes to the resource provider handler, thereby
-	// supplying your resource provider with the appropriate credentials.
+	// role in your account. When CloudFormation needs to invoke the extension handler,
+	// CloudFormation assumes this execution role to create a temporary session token,
+	// which it then passes to the extension handler, thereby supplying your extension
+	// with the appropriate credentials.
 	ExecutionRoleArn *string
 
-	// Specifies logging configuration information for a type.
+	// Specifies logging configuration information for an extension.
 	LoggingConfig *types.LoggingConfig
 
-	// The kind of type. Currently, the only valid value is RESOURCE.
+	// The kind of extension.
 	Type types.RegistryType
 }
 
@@ -113,7 +113,7 @@ type RegisterTypeOutput struct {
 
 	// The identifier for this registration request. Use this registration token when
 	// calling DescribeTypeRegistration, which returns information about the status and
-	// IDs of the type registration.
+	// IDs of the extension registration.
 	RegistrationToken *string
 
 	// Metadata pertaining to the operation's result.

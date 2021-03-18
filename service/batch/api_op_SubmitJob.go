@@ -11,10 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Submits an AWS Batch job from a job definition. Parameters specified during
-// SubmitJob override parameters defined in the job definition. Jobs run on Fargate
-// resources don't run for more than 14 days. After 14 days, the Fargate resources
-// might no longer be available and the job is terminated.
+// Submits an AWS Batch job from a job definition. Parameters that are specified
+// during SubmitJob override parameters defined in the job definition. vCPU and
+// memory requirements that are specified in the ResourceRequirements objects in
+// the job definition are the exception. They can't be overridden this way using
+// the memory and vcpus parameters. Rather, you must specify updates to job
+// definition parameters in a ResourceRequirements object that's included in the
+// containerOverrides parameter. Jobs that run on Fargate resources can't be
+// guaranteed to run for more than 14 days. This is because, after 14 days, Fargate
+// resources might become unavailable and job might be terminated.
 func (c *Client) SubmitJob(ctx context.Context, params *SubmitJobInput, optFns ...func(*Options)) (*SubmitJobOutput, error) {
 	if params == nil {
 		params = &SubmitJobInput{}
@@ -47,8 +52,8 @@ type SubmitJobInput struct {
 	// This member is required.
 	JobName *string
 
-	// The job queue into which the job is submitted. You can specify either the name
-	// or the Amazon Resource Name (ARN) of the queue.
+	// The job queue where the job is submitted. You can specify either the name or the
+	// Amazon Resource Name (ARN) of the queue.
 	//
 	// This member is required.
 	JobQueue *string
@@ -60,13 +65,12 @@ type SubmitJobInput struct {
 	// Batch User Guide.
 	ArrayProperties *types.ArrayProperties
 
-	// A list of container overrides in JSON format that specify the name of a
+	// A list of container overrides in the JSON format that specify the name of a
 	// container in the specified job definition and the overrides it should receive.
-	// You can override the default command for a container (that's specified in the
-	// job definition or the Docker image) with a command override. You can also
-	// override existing environment variables (that are specified in the job
-	// definition or Docker image) on a container or add new environment variables to
-	// it with an environment override.
+	// You can override the default command for a container, which is specified in the
+	// job definition or the Docker image, with a command override. You can also
+	// override existing environment variables on a container or add new environment
+	// variables to it with an environment override.
 	ContainerOverrides *types.ContainerOverrides
 
 	// A list of dependencies for the job. A job can depend upon a maximum of 20 jobs.

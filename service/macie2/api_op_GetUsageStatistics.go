@@ -31,8 +31,8 @@ func (c *Client) GetUsageStatistics(ctx context.Context, params *GetUsageStatist
 type GetUsageStatisticsInput struct {
 
 	// An array of objects, one for each condition to use to filter the query results.
-	// If the array contains more than one object, Amazon Macie uses an AND operator to
-	// join the conditions specified by the objects.
+	// If you specify more than one condition, Amazon Macie uses an AND operator to
+	// join the conditions.
 	FilterBy []types.UsageStatisticsFilter
 
 	// The maximum number of items to include in each page of the response.
@@ -44,6 +44,12 @@ type GetUsageStatisticsInput struct {
 
 	// The criteria to use to sort the query results.
 	SortBy *types.UsageStatisticsSortBy
+
+	// The inclusive time period to query usage data for. Valid values are:
+	// MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for
+	// the preceding 30 days. If you don't specify a value, Amazon Macie provides usage
+	// data for the preceding 30 days.
+	TimeRange types.TimeRange
 }
 
 type GetUsageStatisticsOutput struct {
@@ -55,6 +61,11 @@ type GetUsageStatisticsOutput struct {
 	// An array of objects that contains the results of the query. Each object contains
 	// the data for an account that meets the filter criteria specified in the request.
 	Records []types.UsageRecord
+
+	// The inclusive time period that the usage data applies to. Possible values are:
+	// MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for
+	// the preceding 30 days.
+	TimeRange types.TimeRange
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

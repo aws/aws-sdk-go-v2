@@ -23,67 +23,65 @@ import (
 // Manager automatically attaches the staging label AWSCURRENT to the new
 // version.
 //
-// * If another version of this secret already exists, then this
-// operation does not automatically move any staging labels other than those that
-// you explicitly specify in the VersionStages parameter.
+// * If you do not specify a value for VersionStages then Secrets Manager
+// automatically moves the staging label AWSCURRENT to this new version.
 //
-// * If this operation
-// moves the staging label AWSCURRENT from another version to this version (because
-// you included it in the StagingLabels parameter) then Secrets Manager also
-// automatically moves the staging label AWSPREVIOUS to the version that AWSCURRENT
-// was removed from.
+// * If this
+// operation moves the staging label AWSCURRENT from another version to this
+// version, then Secrets Manager also automatically moves the staging label
+// AWSPREVIOUS to the version that AWSCURRENT was removed from.
 //
-// * This operation is idempotent. If a version with a VersionId
-// with the same value as the ClientRequestToken parameter already exists and you
-// specify the same secret data, the operation succeeds but does nothing. However,
-// if the secret data is different, then the operation fails because you cannot
-// modify an existing version; you can only create new ones.
+// * This operation
+// is idempotent. If a version with a VersionId with the same value as the
+// ClientRequestToken parameter already exists and you specify the same secret
+// data, the operation succeeds but does nothing. However, if the secret data is
+// different, then the operation fails because you cannot modify an existing
+// version; you can only create new ones.
 //
-// * If you call an
-// operation to encrypt or decrypt the SecretString or SecretBinary for a secret in
-// the same account as the calling user and that secret doesn't specify a AWS KMS
-// encryption key, Secrets Manager uses the account's default AWS managed customer
-// master key (CMK) with the alias aws/secretsmanager. If this key doesn't already
-// exist in your account then Secrets Manager creates it for you automatically. All
-// users and roles in the same AWS account automatically have access to use the
-// default CMK. Note that if an Secrets Manager API call results in AWS creating
-// the account's AWS-managed CMK, it can result in a one-time significant delay in
-// returning the result.
-//
-// * If the secret resides in a different AWS account from
-// the credentials calling an API that requires encryption or decryption of the
-// secret value then you must create and use a custom AWS KMS CMK because you can't
-// access the default CMK for the account using credentials from a different AWS
-// account. Store the ARN of the CMK in the secret when you create the secret or
-// when you update it by including it in the KMSKeyId. If you call an API that must
-// encrypt or decrypt SecretString or SecretBinary using credentials from a
-// different account then the AWS KMS key policy must grant cross-account access to
-// that other account's user or role for both the kms:GenerateDataKey and
-// kms:Decrypt operations.
-//
-// Minimum permissions To run this command, you must have
-// the following permissions:
-//
-// * secretsmanager:PutSecretValue
+// * If you call an operation to encrypt or
+// decrypt the SecretString or SecretBinary for a secret in the same account as the
+// calling user and that secret doesn't specify a AWS KMS encryption key, Secrets
+// Manager uses the account's default AWS managed customer master key (CMK) with
+// the alias aws/secretsmanager. If this key doesn't already exist in your account
+// then Secrets Manager creates it for you automatically. All users and roles in
+// the same AWS account automatically have access to use the default CMK. Note that
+// if an Secrets Manager API call results in AWS creating the account's AWS-managed
+// CMK, it can result in a one-time significant delay in returning the result.
 //
 // *
-// kms:GenerateDataKey - needed only if you use a customer-managed AWS KMS key to
-// encrypt the secret. You do not need this permission to use the account's default
-// AWS managed CMK for Secrets Manager.
+// If the secret resides in a different AWS account from the credentials calling an
+// API that requires encryption or decryption of the secret value then you must
+// create and use a custom AWS KMS CMK because you can't access the default CMK for
+// the account using credentials from a different AWS account. Store the ARN of the
+// CMK in the secret when you create the secret or when you update it by including
+// it in the KMSKeyId. If you call an API that must encrypt or decrypt SecretString
+// or SecretBinary using credentials from a different account then the AWS KMS key
+// policy must grant cross-account access to that other account's user or role for
+// both the kms:GenerateDataKey and kms:Decrypt operations.
+//
+// Minimum permissions To
+// run this command, you must have the following permissions:
+//
+// *
+// secretsmanager:PutSecretValue
+//
+// * kms:GenerateDataKey - needed only if you use a
+// customer-managed AWS KMS key to encrypt the secret. You do not need this
+// permission to use the account's default AWS managed CMK for Secrets
+// Manager.
 //
 // Related operations
 //
-// * To retrieve the
-// encrypted value you store in the version of a secret, use GetSecretValue.
+// * To retrieve the encrypted value you store in the
+// version of a secret, use GetSecretValue.
 //
-// * To
-// create a secret, use CreateSecret.
+// * To create a secret, use
+// CreateSecret.
 //
-// * To get the details for a secret, use
-// DescribeSecret.
+// * To get the details for a secret, use DescribeSecret.
 //
-// * To list the versions attached to a secret, use
-// ListSecretVersionIds.
+// * To list
+// the versions attached to a secret, use ListSecretVersionIds.
 func (c *Client) PutSecretValue(ctx context.Context, params *PutSecretValueInput, optFns ...func(*Options)) (*PutSecretValueOutput, error) {
 	if params == nil {
 		params = &PutSecretValueInput{}

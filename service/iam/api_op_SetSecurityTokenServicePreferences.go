@@ -16,16 +16,16 @@ import (
 // available as a global service, and all STS requests go to a single endpoint at
 // https://sts.amazonaws.com. AWS recommends using Regional STS endpoints to reduce
 // latency, build in redundancy, and increase session token availability. For
-// information about Regional endpoints for STS, see AWS Regions and Endpoints
-// (https://docs.aws.amazon.com/general/latest/gr/rande.html#sts_region) in the AWS
-// General Reference. If you make an STS call to the global endpoint, the resulting
-// session tokens might be valid in some Regions but not others. It depends on the
-// version that is set in this operation. Version 1 tokens are valid only in AWS
-// Regions that are available by default. These tokens do not work in manually
-// enabled Regions, such as Asia Pacific (Hong Kong). Version 2 tokens are valid in
-// all Regions. However, version 2 tokens are longer and might affect systems where
-// you temporarily store tokens. For information, see Activating and Deactivating
-// STS in an AWS Region
+// information about Regional endpoints for STS, see AWS AWS Security Token Service
+// endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/sts.html) in
+// the AWS General Reference. If you make an STS call to the global endpoint, the
+// resulting session tokens might be valid in some Regions but not others. It
+// depends on the version that is set in this operation. Version 1 tokens are valid
+// only in AWS Regions that are available by default. These tokens do not work in
+// manually enabled Regions, such as Asia Pacific (Hong Kong). Version 2 tokens are
+// valid in all Regions. However, version 2 tokens are longer and might affect
+// systems where you temporarily store tokens. For information, see Activating and
+// deactivating STS in an AWS region
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 // in the IAM User Guide. To view the current session token version, see the
 // GlobalEndpointTokenVersion entry in the response of the GetAccountSummary
@@ -51,8 +51,8 @@ type SetSecurityTokenServicePreferencesInput struct {
 	// Regions that are available by default. These tokens do not work in manually
 	// enabled Regions, such as Asia Pacific (Hong Kong). Version 2 tokens are valid in
 	// all Regions. However, version 2 tokens are longer and might affect systems where
-	// you temporarily store tokens. For information, see Activating and Deactivating
-	// STS in an AWS Region
+	// you temporarily store tokens. For information, see Activating and deactivating
+	// STS in an AWS region
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 	// in the IAM User Guide.
 	//

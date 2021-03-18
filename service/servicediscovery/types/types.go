@@ -322,6 +322,9 @@ type HealthCheckCustomConfig struct {
 	// UpdateInstanceCustomHealthStatus request with the same value before 30 seconds
 	// has passed doesn't accelerate the change. AWS Cloud Map still waits 30 seconds
 	// after the first request to make the change.
+	//
+	// Deprecated: Configurable FailureThreshold of HealthCheckCustomConfig is
+	// deprecated. It will always have value 1.
 	FailureThreshold *int32
 }
 
@@ -827,6 +830,12 @@ type Service struct {
 
 	// The ID of the namespace that was used to create the service.
 	NamespaceId *string
+
+	// Describes the systems that can be used to discover the service instances.
+	// DNS_HTTP The service instances can be discovered using either DNS queries or the
+	// DiscoverInstances API operation. HTTP The service instances can only be
+	// discovered using the DiscoverInstances API operation. DNS Reserved.
+	Type ServiceType
 }
 
 // A complex type that contains changes to an existing service.
@@ -1035,6 +1044,12 @@ type ServiceSummary struct {
 
 	// The name of the service.
 	Name *string
+
+	// Describes the systems that can be used to discover the service instances.
+	// DNS_HTTP The service instances can be discovered using either DNS queries or the
+	// DiscoverInstances API operation. HTTP The service instances can only be
+	// discovered using the DiscoverInstances API operation. DNS Reserved.
+	Type ServiceType
 }
 
 // A custom key-value pair associated with a resource.

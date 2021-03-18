@@ -93,6 +93,8 @@ type UpdateUserInput struct {
 	// AWS Security Token Service API Reference.
 	Policy *string
 
+	PosixProfile *types.PosixProfile
+
 	// The IAM role that controls your users' access to your Amazon S3 bucket. The
 	// policies attached to this role will determine the level of access you want to
 	// provide your users when transferring files into and out of your Amazon S3 bucket

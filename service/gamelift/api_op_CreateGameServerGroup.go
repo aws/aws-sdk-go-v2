@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// This operation is used with the GameLift FleetIQ solution and game server
 // groups. Creates a GameLift FleetIQ game server group for managing game hosting
 // on a collection of Amazon EC2 instances for game hosting. This operation creates
 // the game server group, creates an Auto Scaling group in your AWS account, and
@@ -30,7 +30,7 @@ import (
 // AWS account to allow GameLift FleetIQ to create and interact with the Auto
 // Scaling group. For more information, see Create IAM roles for cross-service
 // interaction
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-iam-permissions-roles.html)
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-iam-permissions-roles.html)
 // in the GameLift FleetIQ Developer Guide.
 //
 // To create a new game server group,
@@ -47,25 +47,11 @@ import (
 // its balancing activities to optimize for availability and cost. Learn more
 // GameLift FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related operations
-//
-// * CreateGameServerGroup
-//
-// * ListGameServerGroups
-//
-// *
-// DescribeGameServerGroup
-//
-// * UpdateGameServerGroup
-//
-// * DeleteGameServerGroup
-//
-// *
-// ResumeGameServerGroup
-//
-// * SuspendGameServerGroup
-//
-// * DescribeGameServerInstances
+// Related actions CreateGameServerGroup | ListGameServerGroups |
+// DescribeGameServerGroup | UpdateGameServerGroup | DeleteGameServerGroup |
+// ResumeGameServerGroup | SuspendGameServerGroup | DescribeGameServerInstances |
+// All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) CreateGameServerGroup(ctx context.Context, params *CreateGameServerGroupInput, optFns ...func(*Options)) (*CreateGameServerGroupOutput, error) {
 	if params == nil {
 		params = &CreateGameServerGroupInput{}
@@ -112,7 +98,10 @@ type CreateGameServerGroupInput struct {
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html)
 	// in the Amazon EC2 Auto Scaling User Guide. After the Auto Scaling group is
 	// created, update this value directly in the Auto Scaling group using the AWS
-	// console or APIs.
+	// console or APIs. If you specify network interfaces in your launch template, you
+	// must explicitly set the property AssociatePublicIpAddress to "true". If no
+	// network interface is specified in the launch template, GameLift FleetIQ uses
+	// your account's default VPC.
 	//
 	// This member is required.
 	LaunchTemplate *types.LaunchTemplateSpecification

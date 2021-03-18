@@ -14,30 +14,11 @@ import (
 // and GameLift removes all record of it. To delete a scaling policy, specify both
 // the scaling policy name and the fleet ID it is associated with. To temporarily
 // suspend scaling policies, call StopFleetActions. This operation suspends all
-// policies for the fleet.
-//
-// * DescribeFleetCapacity
-//
-// * UpdateFleetCapacity
-//
-// *
-// DescribeEC2InstanceLimits
-//
-// * Manage scaling policies:
-//
-// * PutScalingPolicy
-// (auto-scaling)
-//
-// * DescribeScalingPolicies (auto-scaling)
-//
-// * DeleteScalingPolicy
-// (auto-scaling)
-//
-// * Manage fleet actions:
-//
-// * StartFleetActions
-//
-// * StopFleetActions
+// policies for the fleet. Related actions DescribeFleetCapacity |
+// UpdateFleetCapacity | DescribeEC2InstanceLimits | PutScalingPolicy |
+// DescribeScalingPolicies | DeleteScalingPolicy | StopFleetActions |
+// StartFleetActions | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DeleteScalingPolicy(ctx context.Context, params *DeleteScalingPolicyInput, optFns ...func(*Options)) (*DeleteScalingPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteScalingPolicyInput{}
@@ -56,14 +37,14 @@ func (c *Client) DeleteScalingPolicy(ctx context.Context, params *DeleteScalingP
 // Represents the input for a request operation.
 type DeleteScalingPolicyInput struct {
 
-	// A unique identifier for a fleet to be deleted. You can use either the fleet ID
+	// A unique identifier for the fleet to be deleted. You can use either the fleet ID
 	// or ARN value.
 	//
 	// This member is required.
 	FleetId *string
 
-	// A descriptive label that is associated with a scaling policy. Policy names do
-	// not need to be unique.
+	// A descriptive label that is associated with a fleet's scaling policy. Policy
+	// names do not need to be unique.
 	//
 	// This member is required.
 	Name *string

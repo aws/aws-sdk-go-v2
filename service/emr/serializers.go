@@ -2130,6 +2130,53 @@ func (m *awsAwsjson11_serializeOpTerminateJobFlows) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateStudio struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateStudio) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateStudio) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateStudioInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ElasticMapReduce.UpdateStudio")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateStudioInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateStudioSessionMapping struct {
 }
 
@@ -3128,6 +3175,28 @@ func awsAwsjson11_serializeDocumentNewSupportedProductsList(v []types.SupportedP
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOnDemandCapacityReservationOptions(v *types.OnDemandCapacityReservationOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.CapacityReservationPreference) > 0 {
+		ok := object.Key("CapacityReservationPreference")
+		ok.String(string(v.CapacityReservationPreference))
+	}
+
+	if v.CapacityReservationResourceGroupArn != nil {
+		ok := object.Key("CapacityReservationResourceGroupArn")
+		ok.String(*v.CapacityReservationResourceGroupArn)
+	}
+
+	if len(v.UsageStrategy) > 0 {
+		ok := object.Key("UsageStrategy")
+		ok.String(string(v.UsageStrategy))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOnDemandProvisioningSpecification(v *types.OnDemandProvisioningSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3135,6 +3204,13 @@ func awsAwsjson11_serializeDocumentOnDemandProvisioningSpecification(v *types.On
 	if len(v.AllocationStrategy) > 0 {
 		ok := object.Key("AllocationStrategy")
 		ok.String(string(v.AllocationStrategy))
+	}
+
+	if v.CapacityReservationOptions != nil {
+		ok := object.Key("CapacityReservationOptions")
+		if err := awsAwsjson11_serializeDocumentOnDemandCapacityReservationOptions(v.CapacityReservationOptions, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -4682,6 +4758,40 @@ func awsAwsjson11_serializeOpDocumentTerminateJobFlowsInput(v *TerminateJobFlows
 	if v.JobFlowIds != nil {
 		ok := object.Key("JobFlowIds")
 		if err := awsAwsjson11_serializeDocumentXmlStringList(v.JobFlowIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateStudioInput(v *UpdateStudioInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultS3Location != nil {
+		ok := object.Key("DefaultS3Location")
+		ok.String(*v.DefaultS3Location)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.StudioId != nil {
+		ok := object.Key("StudioId")
+		ok.String(*v.StudioId)
+	}
+
+	if v.SubnetIds != nil {
+		ok := object.Key("SubnetIds")
+		if err := awsAwsjson11_serializeDocumentSubnetIdList(v.SubnetIds, ok); err != nil {
 			return err
 		}
 	}

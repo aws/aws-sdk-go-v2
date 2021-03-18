@@ -3670,6 +3670,11 @@ func awsRestjson1_deserializeDocumentConnectorMetadata(v **types.ConnectorMetada
 				return err
 			}
 
+		case "CustomerProfiles":
+			if err := awsRestjson1_deserializeDocumentCustomerProfilesMetadata(&sv.CustomerProfiles, value); err != nil {
+				return err
+			}
+
 		case "Datadog":
 			if err := awsRestjson1_deserializeDocumentDatadogMetadata(&sv.Datadog, value); err != nil {
 				return err
@@ -3687,6 +3692,11 @@ func awsRestjson1_deserializeDocumentConnectorMetadata(v **types.ConnectorMetada
 
 		case "GoogleAnalytics":
 			if err := awsRestjson1_deserializeDocumentGoogleAnalyticsMetadata(&sv.GoogleAnalytics, value); err != nil {
+				return err
+			}
+
+		case "Honeycode":
+			if err := awsRestjson1_deserializeDocumentHoneycodeMetadata(&sv.Honeycode, value); err != nil {
 				return err
 			}
 
@@ -4104,6 +4114,11 @@ func awsRestjson1_deserializeDocumentConnectorProfileProperties(v **types.Connec
 				return err
 			}
 
+		case "Honeycode":
+			if err := awsRestjson1_deserializeDocumentHoneycodeConnectorProfileProperties(&sv.Honeycode, value); err != nil {
+				return err
+			}
+
 		case "InforNexus":
 			if err := awsRestjson1_deserializeDocumentInforNexusConnectorProfileProperties(&sv.InforNexus, value); err != nil {
 				return err
@@ -4244,6 +4259,86 @@ func awsRestjson1_deserializeDocumentConnectorTypeList(v *[]types.ConnectorType,
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCustomerProfilesDestinationProperties(v **types.CustomerProfilesDestinationProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomerProfilesDestinationProperties
+	if *v == nil {
+		sv = &types.CustomerProfilesDestinationProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "domainName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DomainName to be of type string, got %T instead", value)
+				}
+				sv.DomainName = ptr.String(jtv)
+			}
+
+		case "objectTypeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ObjectTypeName to be of type string, got %T instead", value)
+				}
+				sv.ObjectTypeName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomerProfilesMetadata(v **types.CustomerProfilesMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomerProfilesMetadata
+	if *v == nil {
+		sv = &types.CustomerProfilesMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDatadogConnectorProfileProperties(v **types.DatadogConnectorProfileProperties, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4377,8 +4472,23 @@ func awsRestjson1_deserializeDocumentDestinationConnectorProperties(v **types.De
 
 	for key, value := range shape {
 		switch key {
+		case "CustomerProfiles":
+			if err := awsRestjson1_deserializeDocumentCustomerProfilesDestinationProperties(&sv.CustomerProfiles, value); err != nil {
+				return err
+			}
+
 		case "EventBridge":
 			if err := awsRestjson1_deserializeDocumentEventBridgeDestinationProperties(&sv.EventBridge, value); err != nil {
+				return err
+			}
+
+		case "Honeycode":
+			if err := awsRestjson1_deserializeDocumentHoneycodeDestinationProperties(&sv.Honeycode, value); err != nil {
+				return err
+			}
+
+		case "LookoutMetrics":
+			if err := awsRestjson1_deserializeDocumentLookoutMetricsDestinationProperties(&sv.LookoutMetrics, value); err != nil {
 				return err
 			}
 
@@ -4958,6 +5068,32 @@ func awsRestjson1_deserializeDocumentExecutionRecord(v **types.ExecutionRecord, 
 
 	for key, value := range shape {
 		switch key {
+		case "dataPullEndTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Date to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.DataPullEndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "dataPullStartTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Date to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.DataPullStartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
 		case "executionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5500,6 +5636,118 @@ func awsRestjson1_deserializeDocumentGoogleAnalyticsSourceProperties(v **types.G
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentHoneycodeConnectorProfileProperties(v **types.HoneycodeConnectorProfileProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HoneycodeConnectorProfileProperties
+	if *v == nil {
+		sv = &types.HoneycodeConnectorProfileProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHoneycodeDestinationProperties(v **types.HoneycodeDestinationProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HoneycodeDestinationProperties
+	if *v == nil {
+		sv = &types.HoneycodeDestinationProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorHandlingConfig":
+			if err := awsRestjson1_deserializeDocumentErrorHandlingConfig(&sv.ErrorHandlingConfig, value); err != nil {
+				return err
+			}
+
+		case "object":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Object to be of type string, got %T instead", value)
+				}
+				sv.Object = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHoneycodeMetadata(v **types.HoneycodeMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HoneycodeMetadata
+	if *v == nil {
+		sv = &types.HoneycodeMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "oAuthScopes":
+			if err := awsRestjson1_deserializeDocumentOAuthScopeList(&sv.OAuthScopes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIdFieldNameList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5718,6 +5966,37 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				sv.Message = ptr.String(jtv)
 			}
 
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLookoutMetricsDestinationProperties(v **types.LookoutMetricsDestinationProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LookoutMetricsDestinationProperties
+	if *v == nil {
+		sv = &types.LookoutMetricsDestinationProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
 		default:
 			_, _ = key, value
 
@@ -6577,6 +6856,19 @@ func awsRestjson1_deserializeDocumentScheduledTriggerProperties(v **types.Schedu
 				sv.DataPullMode = types.DataPullMode(jtv)
 			}
 
+		case "firstExecutionFrom":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Date to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.FirstExecutionFrom = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
 		case "scheduleEndTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6597,6 +6889,19 @@ func awsRestjson1_deserializeDocumentScheduledTriggerProperties(v **types.Schedu
 					return fmt.Errorf("expected ScheduleExpression to be of type string, got %T instead", value)
 				}
 				sv.ScheduleExpression = ptr.String(jtv)
+			}
+
+		case "scheduleOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ScheduleOffset to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ScheduleOffset = i64
 			}
 
 		case "scheduleStartTime":

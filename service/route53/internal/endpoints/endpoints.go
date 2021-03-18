@@ -108,8 +108,17 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^us\\-isob\\-\\w+\\-\\d+$"),
-		IsRegionalized: true,
+		RegionRegex:       regexp.MustCompile("^us\\-isob\\-\\w+\\-\\d+$"),
+		IsRegionalized:    false,
+		PartitionEndpoint: "aws-iso-b-global",
+		Endpoints: endpoints.Endpoints{
+			"aws-iso-b-global": endpoints.Endpoint{
+				Hostname: "route53.sc2s.sgov.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isob-east-1",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-us-gov",

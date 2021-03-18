@@ -11,8 +11,7 @@ import (
 )
 
 // Retrieves information about IAM entity usage and IAM quotas in the AWS account.
-// The number and size of IAM resources in an AWS account are limited. For more
-// information, see IAM and STS Quotas
+// For information about IAM quotas, see IAM and STS quotas
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in
 // the IAM User Guide.
 func (c *Client) GetAccountSummary(ctx context.Context, params *GetAccountSummaryInput, optFns ...func(*Options)) (*GetAccountSummaryOutput, error) {

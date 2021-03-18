@@ -190,6 +190,26 @@ func (m *validateOpCancelCertificateTransfer) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelDetectMitigationActionsTask struct {
+}
+
+func (*validateOpCancelDetectMitigationActionsTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelDetectMitigationActionsTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelDetectMitigationActionsTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelDetectMitigationActionsTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelJobExecution struct {
 }
 
@@ -325,6 +345,26 @@ func (m *validateOpCreateCertificateFromCsr) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateCertificateFromCsrInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCustomMetric struct {
+}
+
+func (*validateOpCreateCustomMetric) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomMetric) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomMetricInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomMetricInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -825,6 +865,26 @@ func (m *validateOpDeleteCertificate) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCustomMetric struct {
+}
+
+func (*validateOpDeleteCustomMetric) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCustomMetric) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCustomMetricInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCustomMetricInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1425,6 +1485,46 @@ func (m *validateOpDescribeCertificate) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeCustomMetric struct {
+}
+
+func (*validateOpDescribeCustomMetric) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCustomMetric) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCustomMetricInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCustomMetricInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeDetectMitigationActionsTask struct {
+}
+
+func (*validateOpDescribeDetectMitigationActionsTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDetectMitigationActionsTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDetectMitigationActionsTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDetectMitigationActionsTaskInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2150,6 +2250,26 @@ func (m *validateOpListCertificatesByCA) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDetectMitigationActionsTasks struct {
+}
+
+func (*validateOpListDetectMitigationActionsTasks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDetectMitigationActionsTasks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDetectMitigationActionsTasksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDetectMitigationActionsTasksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListJobExecutionsForJob struct {
 }
 
@@ -2730,6 +2850,26 @@ func (m *validateOpStartAuditMitigationActionsTask) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartDetectMitigationActionsTask struct {
+}
+
+func (*validateOpStartDetectMitigationActionsTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDetectMitigationActionsTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDetectMitigationActionsTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDetectMitigationActionsTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartOnDemandAuditTask struct {
 }
 
@@ -2985,6 +3125,26 @@ func (m *validateOpUpdateCertificate) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCustomMetric struct {
+}
+
+func (*validateOpUpdateCustomMetric) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCustomMetric) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCustomMetricInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCustomMetricInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3326,6 +3486,10 @@ func addOpCancelCertificateTransferValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpCancelCertificateTransfer{}, middleware.After)
 }
 
+func addOpCancelDetectMitigationActionsTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelDetectMitigationActionsTask{}, middleware.After)
+}
+
 func addOpCancelJobExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelJobExecution{}, middleware.After)
 }
@@ -3352,6 +3516,10 @@ func addOpCreateBillingGroupValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpCreateCertificateFromCsrValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCertificateFromCsr{}, middleware.After)
+}
+
+func addOpCreateCustomMetricValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomMetric{}, middleware.After)
 }
 
 func addOpCreateDimensionValidationMiddleware(stack *middleware.Stack) error {
@@ -3452,6 +3620,10 @@ func addOpDeleteCACertificateValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeleteCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCertificate{}, middleware.After)
+}
+
+func addOpDeleteCustomMetricValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCustomMetric{}, middleware.After)
 }
 
 func addOpDeleteDimensionValidationMiddleware(stack *middleware.Stack) error {
@@ -3572,6 +3744,14 @@ func addOpDescribeCACertificateValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDescribeCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCertificate{}, middleware.After)
+}
+
+func addOpDescribeCustomMetricValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCustomMetric{}, middleware.After)
+}
+
+func addOpDescribeDetectMitigationActionsTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDetectMitigationActionsTask{}, middleware.After)
 }
 
 func addOpDescribeDimensionValidationMiddleware(stack *middleware.Stack) error {
@@ -3718,6 +3898,10 @@ func addOpListCertificatesByCAValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpListCertificatesByCA{}, middleware.After)
 }
 
+func addOpListDetectMitigationActionsTasksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDetectMitigationActionsTasks{}, middleware.After)
+}
+
 func addOpListJobExecutionsForJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListJobExecutionsForJob{}, middleware.After)
 }
@@ -3834,6 +4018,10 @@ func addOpStartAuditMitigationActionsTaskValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpStartAuditMitigationActionsTask{}, middleware.After)
 }
 
+func addOpStartDetectMitigationActionsTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDetectMitigationActionsTask{}, middleware.After)
+}
+
 func addOpStartOnDemandAuditTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartOnDemandAuditTask{}, middleware.After)
 }
@@ -3884,6 +4072,10 @@ func addOpUpdateCACertificateValidationMiddleware(stack *middleware.Stack) error
 
 func addOpUpdateCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCertificate{}, middleware.After)
+}
+
+func addOpUpdateCustomMetricValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCustomMetric{}, middleware.After)
 }
 
 func addOpUpdateDimensionValidationMiddleware(stack *middleware.Stack) error {
@@ -4104,6 +4296,11 @@ func validateAction(v *types.Action) error {
 	if v.Http != nil {
 		if err := validateHttpAction(v.Http); err != nil {
 			invalidParams.AddNested("Http", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Kafka != nil {
+		if err := validateKafkaAction(v.Kafka); err != nil {
+			invalidParams.AddNested("Kafka", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4390,6 +4587,28 @@ func validateBehavior(v *types.Behavior) error {
 	if v.MetricDimension != nil {
 		if err := validateMetricDimension(v.MetricDimension); err != nil {
 			invalidParams.AddNested("MetricDimension", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Criteria != nil {
+		if err := validateBehaviorCriteria(v.Criteria); err != nil {
+			invalidParams.AddNested("Criteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBehaviorCriteria(v *types.BehaviorCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BehaviorCriteria"}
+	if v.MlDetectionConfig != nil {
+		if err := validateMachineLearningDetectionConfig(v.MlDetectionConfig); err != nil {
+			invalidParams.AddNested("MlDetectionConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4761,6 +4980,27 @@ func validateJobExecutionsRolloutConfig(v *types.JobExecutionsRolloutConfig) err
 	}
 }
 
+func validateKafkaAction(v *types.KafkaAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KafkaAction"}
+	if v.DestinationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationArn"))
+	}
+	if v.Topic == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Topic"))
+	}
+	if v.ClientProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientProperties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateKinesisAction(v *types.KinesisAction) error {
 	if v == nil {
 		return nil
@@ -4816,6 +5056,21 @@ func validateLogTarget(v *types.LogTarget) error {
 	invalidParams := smithy.InvalidParamsError{Context: "LogTarget"}
 	if len(v.TargetType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMachineLearningDetectionConfig(v *types.MachineLearningDetectionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MachineLearningDetectionConfig"}
+	if len(v.ConfidenceLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfidenceLevel"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5287,6 +5542,11 @@ func validateTopicRuleDestinationConfiguration(v *types.TopicRuleDestinationConf
 			invalidParams.AddNested("HttpUrlConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.VpcConfiguration != nil {
+		if err := validateVpcDestinationConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5343,6 +5603,45 @@ func validateUpdateDeviceCertificateParams(v *types.UpdateDeviceCertificateParam
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDeviceCertificateParams"}
 	if len(v.Action) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateViolationEventOccurrenceRange(v *types.ViolationEventOccurrenceRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ViolationEventOccurrenceRange"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVpcDestinationConfiguration(v *types.VpcDestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcDestinationConfiguration"}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5501,6 +5800,21 @@ func validateOpCancelCertificateTransferInput(v *CancelCertificateTransferInput)
 	}
 }
 
+func validateOpCancelDetectMitigationActionsTaskInput(v *CancelDetectMitigationActionsTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelDetectMitigationActionsTaskInput"}
+	if v.TaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelJobExecutionInput(v *CancelJobExecutionInput) error {
 	if v == nil {
 		return nil
@@ -5620,6 +5934,32 @@ func validateOpCreateCertificateFromCsrInput(v *CreateCertificateFromCsrInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCertificateFromCsrInput"}
 	if v.CertificateSigningRequest == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateSigningRequest"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCustomMetricInput(v *CreateCustomMetricInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomMetricInput"}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if len(v.MetricType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricType"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6191,6 +6531,21 @@ func validateOpDeleteCertificateInput(v *DeleteCertificateInput) error {
 	}
 }
 
+func validateOpDeleteCustomMetricInput(v *DeleteCustomMetricInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomMetricInput"}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDimensionInput(v *DeleteDimensionInput) error {
 	if v == nil {
 		return nil
@@ -6651,6 +7006,36 @@ func validateOpDescribeCertificateInput(v *DescribeCertificateInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeCertificateInput"}
 	if v.CertificateId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeCustomMetricInput(v *DescribeCustomMetricInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCustomMetricInput"}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDetectMitigationActionsTaskInput(v *DescribeDetectMitigationActionsTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDetectMitigationActionsTaskInput"}
+	if v.TaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7229,6 +7614,24 @@ func validateOpListCertificatesByCAInput(v *ListCertificatesByCAInput) error {
 	}
 }
 
+func validateOpListDetectMitigationActionsTasksInput(v *ListDetectMitigationActionsTasksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDetectMitigationActionsTasksInput"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListJobExecutionsForJobInput(v *ListJobExecutionsForJobInput) error {
 	if v == nil {
 		return nil
@@ -7708,6 +8111,35 @@ func validateOpStartAuditMitigationActionsTaskInput(v *StartAuditMitigationActio
 	}
 }
 
+func validateOpStartDetectMitigationActionsTaskInput(v *StartDetectMitigationActionsTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDetectMitigationActionsTaskInput"}
+	if v.TaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
+	}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	}
+	if v.ViolationEventOccurrenceRange != nil {
+		if err := validateViolationEventOccurrenceRange(v.ViolationEventOccurrenceRange); err != nil {
+			invalidParams.AddNested("ViolationEventOccurrenceRange", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartOnDemandAuditTaskInput(v *StartOnDemandAuditTaskInput) error {
 	if v == nil {
 		return nil
@@ -7930,6 +8362,24 @@ func validateOpUpdateCertificateInput(v *UpdateCertificateInput) error {
 	}
 	if len(v.NewStatus) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("NewStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCustomMetricInput(v *UpdateCustomMetricInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCustomMetricInput"}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.DisplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

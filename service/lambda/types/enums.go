@@ -229,6 +229,7 @@ const (
 	RuntimeNodejs810    Runtime = "nodejs8.10"
 	RuntimeNodejs10x    Runtime = "nodejs10.x"
 	RuntimeNodejs12x    Runtime = "nodejs12.x"
+	RuntimeNodejs14x    Runtime = "nodejs14.x"
 	RuntimeJava8        Runtime = "java8"
 	RuntimeJava8al2     Runtime = "java8.al2"
 	RuntimeJava11       Runtime = "java11"
@@ -259,6 +260,7 @@ func (Runtime) Values() []Runtime {
 		"nodejs8.10",
 		"nodejs10.x",
 		"nodejs12.x",
+		"nodejs14.x",
 		"java8",
 		"java8.al2",
 		"java11",

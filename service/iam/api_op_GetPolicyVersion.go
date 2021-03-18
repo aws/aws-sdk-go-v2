@@ -12,20 +12,20 @@ import (
 )
 
 // Retrieves information about the specified version of the specified managed
-// policy, including the policy document. Policies returned by this API are
+// policy, including the policy document. Policies returned by this operation are
 // URL-encoded compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986). You
 // can use a URL decoding method to convert the policy back to plain JSON text. For
 // example, if you use Java, you can use the decode method of the
 // java.net.URLDecoder utility class in the Java SDK. Other languages and SDKs
 // provide similar functionality. To list the available versions for a policy, use
-// ListPolicyVersions. This API retrieves information about managed policies. To
-// retrieve information about an inline policy that is embedded in a user, group,
-// or role, use the GetUserPolicy, GetGroupPolicy, or GetRolePolicy API. For more
-// information about the types of policies, see Managed Policies and Inline
-// Policies
+// ListPolicyVersions. This operation retrieves information about managed policies.
+// To retrieve information about an inline policy that is embedded in a user,
+// group, or role, use GetUserPolicy, GetGroupPolicy, or GetRolePolicy. For more
+// information about the types of policies, see Managed policies and inline
+// policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. For more information about managed policy versions, see
-// Versioning for Managed Policies
+// Versioning for managed policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 // in the IAM User Guide.
 func (c *Client) GetPolicyVersion(ctx context.Context, params *GetPolicyVersionInput, optFns ...func(*Options)) (*GetPolicyVersionOutput, error) {
@@ -46,8 +46,7 @@ func (c *Client) GetPolicyVersion(ctx context.Context, params *GetPolicyVersionI
 type GetPolicyVersionInput struct {
 
 	// The Amazon Resource Name (ARN) of the managed policy that you want information
-	// about. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces
+	// about. For more information about ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//

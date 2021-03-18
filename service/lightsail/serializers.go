@@ -5937,6 +5937,53 @@ func (m *awsAwsjson11_serializeOpSendContactMethodVerification) HandleSerialize(
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpSetIpAddressType struct {
+}
+
+func (*awsAwsjson11_serializeOpSetIpAddressType) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpSetIpAddressType) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SetIpAddressTypeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Lightsail_20161128.SetIpAddressType")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentSetIpAddressTypeInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpStartInstance struct {
 }
 
@@ -7237,6 +7284,13 @@ func awsAwsjson11_serializeDocumentPortInfo(v *types.PortInfo, value smithyjson.
 		ok.Integer(v.FromPort)
 	}
 
+	if v.Ipv6Cidrs != nil {
+		ok := object.Key("ipv6Cidrs")
+		if err := awsAwsjson11_serializeDocumentStringList(v.Ipv6Cidrs, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Protocol) > 0 {
 		ok := object.Key("protocol")
 		ok.String(string(v.Protocol))
@@ -7881,6 +7935,11 @@ func awsAwsjson11_serializeOpDocumentCreateDistributionInput(v *CreateDistributi
 		ok.String(*v.DistributionName)
 	}
 
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("ipAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
 	if v.Origin != nil {
 		ok := object.Key("origin")
 		if err := awsAwsjson11_serializeDocumentInputOrigin(v.Origin, ok); err != nil {
@@ -7976,6 +8035,11 @@ func awsAwsjson11_serializeOpDocumentCreateInstancesFromSnapshotInput(v *CreateI
 		ok.String(*v.InstanceSnapshotName)
 	}
 
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("ipAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
 	if v.KeyPairName != nil {
 		ok := object.Key("keyPairName")
 		ok.String(*v.KeyPairName)
@@ -8047,6 +8111,11 @@ func awsAwsjson11_serializeOpDocumentCreateInstancesInput(v *CreateInstancesInpu
 		if err := awsAwsjson11_serializeDocumentStringList(v.InstanceNames, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("ipAddressType")
+		ok.String(string(v.IpAddressType))
 	}
 
 	if v.KeyPairName != nil {
@@ -8141,6 +8210,11 @@ func awsAwsjson11_serializeOpDocumentCreateLoadBalancerInput(v *CreateLoadBalanc
 	{
 		ok := object.Key("instancePort")
 		ok.Integer(v.InstancePort)
+	}
+
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("ipAddressType")
+		ok.String(string(v.IpAddressType))
 	}
 
 	if v.LoadBalancerName != nil {
@@ -9893,6 +9967,28 @@ func awsAwsjson11_serializeOpDocumentSendContactMethodVerificationInput(v *SendC
 	if len(v.Protocol) > 0 {
 		ok := object.Key("protocol")
 		ok.String(string(v.Protocol))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentSetIpAddressTypeInput(v *SetIpAddressTypeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("ipAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
+	if v.ResourceName != nil {
+		ok := object.Key("resourceName")
+		ok.String(*v.ResourceName)
+	}
+
+	if len(v.ResourceType) > 0 {
+		ok := object.Key("resourceType")
+		ok.String(string(v.ResourceType))
 	}
 
 	return nil

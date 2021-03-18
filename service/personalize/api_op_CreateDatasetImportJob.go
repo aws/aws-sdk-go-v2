@@ -16,23 +16,24 @@ import (
 // the training data, you must specify an AWS Identity and Access Management (IAM)
 // role that has permission to read from the data source, as Amazon Personalize
 // makes a copy of your data and processes it in an internal AWS system. The
-// dataset import job replaces any previous data in the dataset. Status A dataset
-// import job can be in one of the following states:
+// dataset import job replaces any existing data in the dataset that you imported
+// in bulk. Status A dataset import job can be in one of the following states:
 //
-// * CREATE PENDING > CREATE
-// IN_PROGRESS > ACTIVE -or- CREATE FAILED
+// *
+// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //
-// To get the status of the import job,
-// call DescribeDatasetImportJob, providing the Amazon Resource Name (ARN) of the
-// dataset import job. The dataset import is complete when the status shows as
-// ACTIVE. If the status shows as CREATE FAILED, the response includes a
-// failureReason key, which describes why the job failed. Importing takes time. You
-// must wait until the status shows as ACTIVE before training a model using the
-// dataset. Related APIs
+// To get the
+// status of the import job, call DescribeDatasetImportJob, providing the Amazon
+// Resource Name (ARN) of the dataset import job. The dataset import is complete
+// when the status shows as ACTIVE. If the status shows as CREATE FAILED, the
+// response includes a failureReason key, which describes why the job failed.
+// Importing takes time. You must wait until the status shows as ACTIVE before
+// training a model using the dataset. Related APIs
 //
 // * ListDatasetImportJobs
 //
-// * DescribeDatasetImportJob
+// *
+// DescribeDatasetImportJob
 func (c *Client) CreateDatasetImportJob(ctx context.Context, params *CreateDatasetImportJobInput, optFns ...func(*Options)) (*CreateDatasetImportJobOutput, error) {
 	if params == nil {
 		params = &CreateDatasetImportJobInput{}

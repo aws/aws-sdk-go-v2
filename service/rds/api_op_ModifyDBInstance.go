@@ -77,6 +77,9 @@ type ModifyDBInstanceInput struct {
 	// available, and RDS has enabled auto patching for that engine version.
 	AutoMinorVersionUpgrade *bool
 
+	// The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
+	AwsBackupRecoveryPointArn *string
+
 	// The number of days to retain automated backups. Setting this parameter to a
 	// positive number enables backups. Setting this parameter to 0 disables automated
 	// backups. Changing this parameter can result in an outage if you change from 0 to
@@ -242,7 +245,9 @@ type ModifyDBInstanceInput struct {
 	// major version upgrades, if a nondefault DB parameter group is currently in use,
 	// a new DB parameter group in the DB parameter group family for the new engine
 	// version must be specified. The new DB parameter group can be the default for
-	// that DB parameter group family. For information about valid engine versions, see
+	// that DB parameter group family. If you specify only a major version, Amazon RDS
+	// will update the DB instance to the default minor version if the current minor
+	// version is lower. For information about valid engine versions, see
 	// CreateDBInstance, or call DescribeDBEngineVersions.
 	EngineVersion *string
 
@@ -292,7 +297,11 @@ type ModifyDBInstanceInput struct {
 	MasterUserPassword *string
 
 	// The upper limit to which Amazon RDS can automatically scale the storage of the
-	// DB instance.
+	// DB instance. For more information about this setting, including limitations that
+	// apply to it, see  Managing capacity automatically with Amazon RDS storage
+	// autoscaling
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling)
+	// in the Amazon RDS User Guide.
 	MaxAllocatedStorage *int32
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
@@ -334,8 +343,8 @@ type ModifyDBInstanceInput struct {
 	// Example: mydbinstance
 	NewDBInstanceIdentifier *string
 
-	// Indicates that the DB instance should be associated with the specified option
-	// group. Changing this parameter doesn't result in an outage except in the
+	// A value that indicates the DB instance should be associated with the specified
+	// option group. Changing this parameter doesn't result in an outage except in the
 	// following case and the change is applied during the next maintenance window
 	// unless the ApplyImmediately parameter is enabled for this request. If the
 	// parameter change results in an option group that enables OEM, this change can

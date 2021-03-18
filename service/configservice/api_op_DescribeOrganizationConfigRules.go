@@ -11,13 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of organization config rules. Only a master account and a
-// delegated administrator account can call this API. When calling this API with a
-// delegated administrator, you must ensure AWS Organizations
-// ListDelegatedAdministrator permissions are added.  When you specify the limit
-// and the next token, you receive a paginated response. Limit and next token are
-// not applicable if you specify organization config rule names. It is only
-// applicable, when you request all the organization config rules.
+// Returns a list of organization config rules. When you specify the limit and the
+// next token, you receive a paginated response. Limit and next token are not
+// applicable if you specify organization config rule names. It is only applicable,
+// when you request all the organization config rules.
 func (c *Client) DescribeOrganizationConfigRules(ctx context.Context, params *DescribeOrganizationConfigRulesInput, optFns ...func(*Options)) (*DescribeOrganizationConfigRulesOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConfigRulesInput{}

@@ -15,18 +15,18 @@ import (
 // part of the role's access (permissions) policy. The role's trust policy is
 // created at the same time as the role, using CreateRole. You can update a role's
 // trust policy using UpdateAssumeRolePolicy. For more information about IAM roles,
-// go to Using Roles to Delegate Permissions and Federate Identities
+// see Using roles to delegate permissions and federate identities
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html). A role
 // can also have a managed policy attached to it. To attach a managed policy to a
 // role, use AttachRolePolicy. To create a new managed policy, use CreatePolicy.
-// For information about policies, see Managed Policies and Inline Policies
+// For information about policies, see Managed policies and inline policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide. For information about limits on the number of inline
-// policies that you can embed with a role, see Limitations on IAM Entities
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html) in
+// in the IAM User Guide. For information about the maximum number of inline
+// policies that you can embed with a role, see IAM and STS quotas
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in
 // the IAM User Guide. Because policy documents can be large, you should use POST
 // rather than GET when calling PutRolePolicy. For general information about using
-// the Query API with IAM, go to Making Query Requests
+// the Query API with IAM, see Making query requests
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html) in the
 // IAM User Guide.
 func (c *Client) PutRolePolicy(ctx context.Context, params *PutRolePolicyInput, optFns ...func(*Options)) (*PutRolePolicyOutput, error) {

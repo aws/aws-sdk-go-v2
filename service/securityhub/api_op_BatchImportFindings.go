@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Imports security findings generated from an integrated third-party product into
-// Security Hub. This action is requested by the integrated product to import its
-// findings into Security Hub. The maximum allowed size for a finding is 240 Kb. An
-// error is returned for any finding larger than 240 Kb. After a finding is
-// created, BatchImportFindings cannot be used to update the following finding
-// fields and objects, which Security Hub customers use to manage their
-// investigation workflow.
+// Imports security findings generated from an integrated product into Security
+// Hub. This action is requested by the integrated product to import its findings
+// into Security Hub. The maximum allowed size for a finding is 240 Kb. An error is
+// returned for any finding larger than 240 Kb. After a finding is created,
+// BatchImportFindings cannot be used to update the following finding fields and
+// objects, which Security Hub customers use to manage their investigation
+// workflow.
 //
 // * Note
 //
@@ -25,13 +25,11 @@ import (
 //
 // * VerificationState
 //
-// *
-// Workflow
+// * Workflow
 //
-// BatchImportFindings can be used to update the following finding fields
-// and objects only if they have not been updated using BatchUpdateFindings. After
-// they are updated using BatchUpdateFindings, these fields cannot be updated using
-// BatchImportFindings.
+// Finding
+// providers also should not use BatchImportFindings to update the following
+// attributes.
 //
 // * Confidence
 //
@@ -39,10 +37,13 @@ import (
 //
 // * RelatedFindings
 //
-// *
-// Severity
+// * Severity
 //
-// * Types
+// *
+// Types
+//
+// Instead, finding providers use FindingProviderFields to provide values
+// for these attributes.
 func (c *Client) BatchImportFindings(ctx context.Context, params *BatchImportFindingsInput, optFns ...func(*Options)) (*BatchImportFindingsOutput, error) {
 	if params == nil {
 		params = &BatchImportFindingsInput{}

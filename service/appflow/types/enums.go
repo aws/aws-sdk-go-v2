@@ -58,24 +58,27 @@ type ConnectorType string
 
 // Enum values for ConnectorType
 const (
-	ConnectorTypeSalesforce      ConnectorType = "Salesforce"
-	ConnectorTypeSingular        ConnectorType = "Singular"
-	ConnectorTypeSlack           ConnectorType = "Slack"
-	ConnectorTypeRedshift        ConnectorType = "Redshift"
-	ConnectorTypeS3              ConnectorType = "S3"
-	ConnectorTypeMarketo         ConnectorType = "Marketo"
-	ConnectorTypeGoogleanalytics ConnectorType = "Googleanalytics"
-	ConnectorTypeZendesk         ConnectorType = "Zendesk"
-	ConnectorTypeServicenow      ConnectorType = "Servicenow"
-	ConnectorTypeDatadog         ConnectorType = "Datadog"
-	ConnectorTypeTrendmicro      ConnectorType = "Trendmicro"
-	ConnectorTypeSnowflake       ConnectorType = "Snowflake"
-	ConnectorTypeDynatrace       ConnectorType = "Dynatrace"
-	ConnectorTypeInfornexus      ConnectorType = "Infornexus"
-	ConnectorTypeAmplitude       ConnectorType = "Amplitude"
-	ConnectorTypeVeeva           ConnectorType = "Veeva"
-	ConnectorTypeEventbridge     ConnectorType = "EventBridge"
-	ConnectorTypeUpsolver        ConnectorType = "Upsolver"
+	ConnectorTypeSalesforce       ConnectorType = "Salesforce"
+	ConnectorTypeSingular         ConnectorType = "Singular"
+	ConnectorTypeSlack            ConnectorType = "Slack"
+	ConnectorTypeRedshift         ConnectorType = "Redshift"
+	ConnectorTypeS3               ConnectorType = "S3"
+	ConnectorTypeMarketo          ConnectorType = "Marketo"
+	ConnectorTypeGoogleanalytics  ConnectorType = "Googleanalytics"
+	ConnectorTypeZendesk          ConnectorType = "Zendesk"
+	ConnectorTypeServicenow       ConnectorType = "Servicenow"
+	ConnectorTypeDatadog          ConnectorType = "Datadog"
+	ConnectorTypeTrendmicro       ConnectorType = "Trendmicro"
+	ConnectorTypeSnowflake        ConnectorType = "Snowflake"
+	ConnectorTypeDynatrace        ConnectorType = "Dynatrace"
+	ConnectorTypeInfornexus       ConnectorType = "Infornexus"
+	ConnectorTypeAmplitude        ConnectorType = "Amplitude"
+	ConnectorTypeVeeva            ConnectorType = "Veeva"
+	ConnectorTypeEventbridge      ConnectorType = "EventBridge"
+	ConnectorTypeLookoutmetrics   ConnectorType = "LookoutMetrics"
+	ConnectorTypeUpsolver         ConnectorType = "Upsolver"
+	ConnectorTypeHoneycode        ConnectorType = "Honeycode"
+	ConnectorTypeCustomerprofiles ConnectorType = "CustomerProfiles"
 )
 
 // Values returns all known values for ConnectorType. Note that this can be
@@ -100,7 +103,10 @@ func (ConnectorType) Values() []ConnectorType {
 		"Amplitude",
 		"Veeva",
 		"EventBridge",
+		"LookoutMetrics",
 		"Upsolver",
+		"Honeycode",
+		"CustomerProfiles",
 	}
 }
 

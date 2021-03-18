@@ -113,6 +113,11 @@ type CreateSecretInput struct {
 	// This member is required.
 	Name *string
 
+	// (Optional) Add a list of regions to replicate secrets. Secrets Manager
+	// replicates the KMSKeyID objects to the list of regions specified in the
+	// parameter.
+	AddReplicaRegions []types.ReplicaRegionType
+
 	// (Optional) If you include SecretString or SecretBinary, then an initial version
 	// is created as part of the secret, and this parameter specifies a unique
 	// identifier for the new version. If you use the AWS CLI or one of the AWS SDK to
@@ -137,7 +142,7 @@ type CreateSecretInput struct {
 	//
 	// * If a version with this
 	// value already exists and that version's SecretString and SecretBinary values are
-	// different from those in the request then the request fails because you cannot
+	// different from those in the request, then the request fails because you cannot
 	// modify an existing version. Instead, use PutSecretValue to create a new
 	// version.
 	//
@@ -146,6 +151,10 @@ type CreateSecretInput struct {
 
 	// (Optional) Specifies a user-provided description of the secret.
 	Description *string
+
+	// (Optional) If set, the replication overwrites a secret with the same name in the
+	// destination region.
+	ForceOverwriteReplicaSecret bool
 
 	// (Optional) Specifies the ARN, Key ID, or alias of the AWS KMS customer master
 	// key (CMK) to be used to encrypt the SecretString or SecretBinary values in the
@@ -249,6 +258,9 @@ type CreateSecretOutput struct {
 
 	// The friendly name of the secret that you just created.
 	Name *string
+
+	// Describes a list of replication status objects as InProgress, Failed or InSync.
+	ReplicationStatus []types.ReplicationStatusType
 
 	// The unique identifier associated with the version of the secret you just
 	// created.

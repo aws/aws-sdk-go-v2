@@ -58,7 +58,19 @@ var defaultPartitions = endpoints.Partitions{
 			"eu-west-1":      endpoints.Endpoint{},
 			"eu-west-2":      endpoints.Endpoint{},
 			"us-east-1":      endpoints.Endpoint{},
-			"us-west-2":      endpoints.Endpoint{},
+			"us-east-1-fips": endpoints.Endpoint{
+				Hostname: "models-fips.lex.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"us-west-2": endpoints.Endpoint{},
+			"us-west-2-fips": endpoints.Endpoint{
+				Hostname: "models-fips.lex.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
 		},
 	},
 	{
@@ -97,8 +109,20 @@ var defaultPartitions = endpoints.Partitions{
 			Hostname:          "models.lex.{region}.amazonaws.com",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
+			CredentialScope: endpoints.CredentialScope{
+				Service: "lex",
+			},
 		},
 		RegionRegex:    regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"us-gov-west-1": endpoints.Endpoint{},
+			"us-gov-west-1-fips": endpoints.Endpoint{
+				Hostname: "models-fips.lex.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+		},
 	},
 }

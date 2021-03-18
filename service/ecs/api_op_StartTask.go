@@ -57,6 +57,10 @@ type StartTaskInput struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
 
+	// Whether or not the execute command functionality is enabled for the task. If
+	// true, this enables execute command functionality on all containers in the task.
+	EnableExecuteCommand bool
+
 	// The name of the task group to associate with the task. The default value is the
 	// family name of the task definition (for example, family:my-family-name).
 	Group *string

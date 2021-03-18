@@ -65,30 +65,10 @@ import (
 // policy name is returned. Scaling policies are automatically in force as soon as
 // they're successfully created. If the fleet's auto-scaling actions are
 // temporarily suspended, the new policy will be in force once the fleet actions
-// are restarted.
-//
-// * DescribeFleetCapacity
-//
-// * UpdateFleetCapacity
-//
-// *
-// DescribeEC2InstanceLimits
-//
-// * Manage scaling policies:
-//
-// * PutScalingPolicy
-// (auto-scaling)
-//
-// * DescribeScalingPolicies (auto-scaling)
-//
-// * DeleteScalingPolicy
-// (auto-scaling)
-//
-// * Manage fleet actions:
-//
-// * StartFleetActions
-//
-// * StopFleetActions
+// are restarted. Related actions DescribeFleetCapacity | UpdateFleetCapacity |
+// DescribeEC2InstanceLimits | PutScalingPolicy | DescribeScalingPolicies |
+// DeleteScalingPolicy | StopFleetActions | StartFleetActions | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyInput, optFns ...func(*Options)) (*PutScalingPolicyOutput, error) {
 	if params == nil {
 		params = &PutScalingPolicyInput{}
@@ -107,8 +87,8 @@ func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyI
 // Represents the input for a request operation.
 type PutScalingPolicyInput struct {
 
-	// A unique identifier for a fleet to apply this policy to. You can use either the
-	// fleet ID or ARN value. The fleet cannot be in any of the following statuses:
+	// A unique identifier for the fleet to apply this policy to. You can use either
+	// the fleet ID or ARN value. The fleet cannot be in any of the following statuses:
 	// ERROR or DELETING.
 	//
 	// This member is required.
@@ -162,9 +142,9 @@ type PutScalingPolicyInput struct {
 	// This member is required.
 	MetricName types.MetricName
 
-	// A descriptive label that is associated with a scaling policy. Policy names do
-	// not need to be unique. A fleet can have only one scaling policy with the same
-	// name.
+	// A descriptive label that is associated with a fleet's scaling policy. Policy
+	// names do not need to be unique. A fleet can have only one scaling policy with
+	// the same name.
 	//
 	// This member is required.
 	Name *string
@@ -203,7 +183,7 @@ type PutScalingPolicyInput struct {
 	// the fleet down by 10%.
 	ScalingAdjustmentType types.ScalingAdjustmentType
 
-	// The settings for a target-based scaling policy.
+	// An object that contains settings for a target-based scaling policy.
 	TargetConfiguration *types.TargetConfiguration
 
 	// Metric value used to trigger a scaling event.
@@ -213,8 +193,8 @@ type PutScalingPolicyInput struct {
 // Represents the returned data in response to a request operation.
 type PutScalingPolicyOutput struct {
 
-	// A descriptive label that is associated with a scaling policy. Policy names do
-	// not need to be unique.
+	// A descriptive label that is associated with a fleet's scaling policy. Policy
+	// names do not need to be unique.
 	Name *string
 
 	// Metadata pertaining to the operation's result.

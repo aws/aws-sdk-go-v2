@@ -1850,6 +1850,26 @@ func (m *validateOpSendContactMethodVerification) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSetIpAddressType struct {
+}
+
+func (*validateOpSetIpAddressType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetIpAddressType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetIpAddressTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetIpAddressTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartInstance struct {
 }
 
@@ -2476,6 +2496,10 @@ func addOpReleaseStaticIpValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSendContactMethodVerificationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendContactMethodVerification{}, middleware.After)
+}
+
+func addOpSetIpAddressTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetIpAddressType{}, middleware.After)
 }
 
 func addOpStartInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -4276,6 +4300,27 @@ func validateOpSendContactMethodVerificationInput(v *SendContactMethodVerificati
 	invalidParams := smithy.InvalidParamsError{Context: "SendContactMethodVerificationInput"}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSetIpAddressTypeInput(v *SetIpAddressTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetIpAddressTypeInput"}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
+	if len(v.IpAddressType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IpAddressType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

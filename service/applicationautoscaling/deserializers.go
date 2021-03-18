@@ -2644,6 +2644,15 @@ func awsAwsjson11_deserializeDocumentScheduledAction(v **types.ScheduledAction, 
 				sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
+		case "Timezone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceIdMaxLen1600 to be of type string, got %T instead", value)
+				}
+				sv.Timezone = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

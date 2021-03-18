@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Runs an AWS Glue DataBrew job that exists in the current AWS account.
+// Runs a DataBrew job.
 func (c *Client) StartJobRun(ctx context.Context, params *StartJobRunInput, optFns ...func(*Options)) (*StartJobRunOutput, error) {
 	if params == nil {
 		params = &StartJobRunInput{}

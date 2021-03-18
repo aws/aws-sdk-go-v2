@@ -11,7 +11,7 @@ import (
 )
 
 // Describes the status of the StartReportCreation operation. You can call this
-// operation only from the organization's master account and from the us-east-1
+// operation only from the organization's management account and from the us-east-1
 // Region.
 func (c *Client) DescribeReportCreation(ctx context.Context, params *DescribeReportCreationInput, optFns ...func(*Options)) (*DescribeReportCreationOutput, error) {
 	if params == nil {

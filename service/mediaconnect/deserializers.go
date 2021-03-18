@@ -6620,6 +6620,19 @@ func awsRestjson1_deserializeDocumentTransport(v **types.Transport, value interf
 				sv.MaxLatency = int32(i64)
 			}
 
+		case "minLatency":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinLatency = int32(i64)
+			}
+
 		case "protocol":
 			if value != nil {
 				jtv, ok := value.(string)

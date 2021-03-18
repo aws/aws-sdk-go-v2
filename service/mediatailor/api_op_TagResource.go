@@ -35,8 +35,7 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// A comma-separated list of tag key:value pairs. For example: { "Key1": "Value1",
-	// "Key2": "Value2" }
+	// A comma-separated list of tag key:value pairs.
 	//
 	// This member is required.
 	Tags map[string]string

@@ -272,8 +272,8 @@ type DeploymentComponentUpdatePolicy struct {
 	// IPC operation to receive these notifications. Then, components can respond with
 	// the DeferComponentUpdate
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate)
-	// IPC operation. For more information, see the Create deployments
-	// (https://docs.aws.amazon.com/greengrass/v2/latest/developerguide/create-deployments.html)
+	// IPC operation. For more information, see Create deployments
+	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html)
 	// in the AWS IoT Greengrass V2 Developer Guide.
 	//
 	// * SKIP_NOTIFY_COMPONENTS – The
@@ -297,8 +297,8 @@ type DeploymentComponentUpdatePolicy struct {
 // configuration update. Then, components can respond with the
 // SendConfigurationValidityReport
 // (https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-sendconfigurationvalidityreport)
-// IPC operation. For more information, see the Create deployments
-// (https://docs.aws.amazon.com/greengrass/v2/latest/developerguide/create-deployments.html)
+// IPC operation. For more information, see Create deployments
+// (https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html)
 // in the AWS IoT Greengrass V2 Developer Guide.
 type DeploymentConfigurationValidationPolicy struct {
 

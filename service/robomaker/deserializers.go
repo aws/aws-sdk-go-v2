@@ -12526,6 +12526,20 @@ func awsRestjson1_deserializeDocumentRobotApplicationConfig(v **types.RobotAppli
 				return err
 			}
 
+		case "uploadConfigurations":
+			if err := awsRestjson1_deserializeDocumentUploadConfigurations(&sv.UploadConfigurations, value); err != nil {
+				return err
+			}
+
+		case "useDefaultUploadConfigurations":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.UseDefaultUploadConfigurations = ptr.Bool(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -13226,6 +13240,20 @@ func awsRestjson1_deserializeDocumentSimulationApplicationConfig(v **types.Simul
 		case "launchConfig":
 			if err := awsRestjson1_deserializeDocumentLaunchConfig(&sv.LaunchConfig, value); err != nil {
 				return err
+			}
+
+		case "uploadConfigurations":
+			if err := awsRestjson1_deserializeDocumentUploadConfigurations(&sv.UploadConfigurations, value); err != nil {
+				return err
+			}
+
+		case "useDefaultUploadConfigurations":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.UseDefaultUploadConfigurations = ptr.Bool(jtv)
 			}
 
 		case "worldConfigs":
@@ -14408,6 +14436,98 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUploadConfiguration(v **types.UploadConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UploadConfiguration
+	if *v == nil {
+		sv = &types.UploadConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Path to be of type string, got %T instead", value)
+				}
+				sv.Path = ptr.String(jtv)
+			}
+
+		case "uploadBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UploadBehavior to be of type string, got %T instead", value)
+				}
+				sv.UploadBehavior = types.UploadBehavior(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUploadConfigurations(v *[]types.UploadConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.UploadConfiguration
+	if *v == nil {
+		cv = []types.UploadConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.UploadConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentUploadConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

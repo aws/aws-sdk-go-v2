@@ -35,8 +35,9 @@ type CreateAnalyzerInput struct {
 	// This member is required.
 	AnalyzerName *string
 
-	// The type of analyzer to create. Only ACCOUNT analyzers are supported. You can
-	// create only one analyzer per account per Region.
+	// The type of analyzer to create. Only ACCOUNT and ORGANIZATION analyzers are
+	// supported. You can create only one analyzer per account per Region. You can
+	// create up to 5 analyzers per organization per Region.
 	//
 	// This member is required.
 	Type types.Type

@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,8 +58,12 @@ type RegisterAVSDeviceInput struct {
 	// your AVS device.
 	DeviceSerialNumber *string
 
-	// The ARN of the room with which to associate your AVS device.
+	// The Amazon Resource Name (ARN) of the room with which to associate your AVS
+	// device.
 	RoomArn *string
+
+	// The tags to be added to the specified resource. Do not provide system tags.
+	Tags []types.Tag
 }
 
 type RegisterAVSDeviceOutput struct {

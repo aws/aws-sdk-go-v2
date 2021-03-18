@@ -11,45 +11,32 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Establishes a new queue for processing requests to place new game sessions. A
-// queue identifies where new game sessions can be hosted -- by specifying a list
-// of destinations (fleets or aliases) -- and how long requests can wait in the
-// queue before timing out. You can set up a queue to try to place game sessions on
-// fleets in multiple Regions. To add placement requests to a queue, call
-// StartGameSessionPlacement and reference the queue name. Destination order. When
-// processing a request for a game session, Amazon GameLift tries each destination
-// in order until it finds one with available resources to host the new game
-// session. A queue's default order is determined by how destinations are listed.
-// The default order is overridden when a game session placement request provides
-// player latency information. Player latency information enables Amazon GameLift
-// to prioritize destinations where players report the lowest average latency, as a
-// result placing the new game session where the majority of players will have the
-// best possible gameplay experience. Player latency policies. For placement
-// requests containing player latency information, use player latency policies to
-// protect individual players from very high latencies. With a latency cap, even
-// when a destination can deliver a low latency for most players, the game is not
-// placed where any individual player is reporting latency higher than a policy's
-// maximum. A queue can have multiple latency policies, which are enforced
-// consecutively starting with the policy with the lowest latency cap. Use multiple
-// policies to gradually relax latency controls; for example, you might set a
-// policy with a low latency cap for the first 60 seconds, a second policy with a
-// higher cap for the next 60 seconds, etc. To create a new queue, provide a name,
-// timeout value, a list of destinations and, if desired, a set of latency
-// policies. If successful, a new queue object is returned. Learn more  Design a
-// Game Session Queue
+// Creates a placement queue that processes requests for new game sessions. A queue
+// uses FleetIQ algorithms to determine the best placement locations and find an
+// available game server there, then prompts the game server process to start a new
+// game session. A game session queue is configured with a set of destinations
+// (GameLift fleets or aliases), which determine the locations where the queue can
+// place new game sessions. These destinations can span multiple fleet types (Spot
+// and On-Demand), instance types, and AWS Regions. If the queue includes
+// multi-location fleets, the queue is able to place game sessions in all of a
+// fleet's remote locations. You can opt to filter out individual locations if
+// needed. The queue configuration also determines how FleetIQ selects the best
+// available placement for a new game session. Before searching for an available
+// game server, FleetIQ first prioritizes the queue's destinations and locations,
+// with the best placement locations on top. You can set up the queue to use the
+// FleetIQ default prioritization or provide an alternate set of priorities. To
+// create a new queue, provide a name, timeout value, and a list of destinations.
+// Optionally, specify a sort configuration and/or a filter, and define a set of
+// latency cap policies. If successful, a new GameSessionQueue object is returned
+// with an assigned queue ARN. New game session requests, which are submitted to
+// queue with StartGameSessionPlacement or StartMatchmaking, reference a queue's
+// name or ARN. Learn more  Design a game session queue
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-design.html)
-// Create a Game Session Queue
+// Create a game session queue
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-creating.html)
-// Related operations
-//
-// * CreateGameSessionQueue
-//
-// * DescribeGameSessionQueues
-//
-// *
-// UpdateGameSessionQueue
-//
-// * DeleteGameSessionQueue
+// Related actions CreateGameSessionQueue | DescribeGameSessionQueues |
+// UpdateGameSessionQueue | DeleteGameSessionQueue | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateGameSessionQueue(ctx context.Context, params *CreateGameSessionQueueInput, optFns ...func(*Options)) (*CreateGameSessionQueueOutput, error) {
 	if params == nil {
 		params = &CreateGameSessionQueueInput{}
@@ -74,22 +61,29 @@ type CreateGameSessionQueueInput struct {
 	// This member is required.
 	Name *string
 
-	// A list of fleets that can be used to fulfill game session placement requests in
-	// the queue. Fleets are identified by either a fleet ARN or a fleet alias ARN.
-	// Destinations are listed in default preference order.
+	// A list of fleets and/or fleet aliases that can be used to fulfill game session
+	// placement requests in the queue. Destinations are identified by either a fleet
+	// ARN or a fleet alias ARN, and are listed in order of placement preference.
 	Destinations []types.GameSessionQueueDestination
 
-	// A collection of latency policies to apply when processing game sessions
-	// placement requests with player latency information. Multiple policies are
-	// evaluated in order of the maximum latency value, starting with the lowest
-	// latency values. With just one policy, the policy is enforced at the start of the
-	// game session placement for the duration period. With multiple policies, each
-	// policy is enforced consecutively for its duration period. For example, a queue
-	// might enforce a 60-second policy followed by a 120-second policy, and then no
-	// policy for the remainder of the placement. A player latency policy must set a
-	// value for MaximumIndividualPlayerLatencyMilliseconds. If none is set, this API
-	// request fails.
+	// A list of locations where a queue is allowed to place new game sessions.
+	// Locations are specified in the form of AWS Region codes, such as us-west-2. If
+	// this parameter is not set, game sessions can be placed in any queue location.
+	FilterConfiguration *types.FilterConfiguration
+
+	// A set of policies that act as a sliding cap on player latency. FleetIQ works to
+	// deliver low latency for most players in a game session. These policies ensure
+	// that no individual player can be placed into a game with unreasonably high
+	// latency. Use multiple policies to gradually relax latency requirements a step at
+	// a time. Multiple policies are applied based on their maximum allowed latency,
+	// starting with the lowest value.
 	PlayerLatencyPolicies []types.PlayerLatencyPolicy
+
+	// Custom settings to use when prioritizing destinations and locations for game
+	// session placements. This configuration replaces the FleetIQ default
+	// prioritization process. Priority types that are not explicitly named will be
+	// automatically applied at the end of the prioritization process.
+	PriorityConfiguration *types.PriorityConfiguration
 
 	// A list of labels to assign to the new game session queue resource. Tags are
 	// developer-defined key-value pairs. Tagging AWS resources are useful for resource

@@ -4,6 +4,7 @@ package mediastoredata
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/types"
@@ -123,6 +124,97 @@ func addOperationListItemsMiddlewares(stack *middleware.Stack, options Options) 
 		return err
 	}
 	return nil
+}
+
+// ListItemsAPIClient is a client that implements the ListItems operation.
+type ListItemsAPIClient interface {
+	ListItems(context.Context, *ListItemsInput, ...func(*Options)) (*ListItemsOutput, error)
+}
+
+var _ ListItemsAPIClient = (*Client)(nil)
+
+// ListItemsPaginatorOptions is the paginator options for ListItems
+type ListItemsPaginatorOptions struct {
+	// The maximum number of results to return per API request. For example, you submit
+	// a ListItems request with MaxResults set at 500. Although 2,000 items match your
+	// request, the service returns no more than the first 500 items. (The service also
+	// returns a NextToken value that you can use to fetch the next batch of results.)
+	// The service might return fewer results than the MaxResults value. If MaxResults
+	// is not included in the request, the service defaults to pagination with a
+	// maximum of 1,000 results per page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListItemsPaginator is a paginator for ListItems
+type ListItemsPaginator struct {
+	options   ListItemsPaginatorOptions
+	client    ListItemsAPIClient
+	params    *ListItemsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListItemsPaginator returns a new ListItemsPaginator
+func NewListItemsPaginator(client ListItemsAPIClient, params *ListItemsInput, optFns ...func(*ListItemsPaginatorOptions)) *ListItemsPaginator {
+	if params == nil {
+		params = &ListItemsInput{}
+	}
+
+	options := ListItemsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListItemsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListItemsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListItems page.
+func (p *ListItemsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListItemsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListItems(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListItems(region string) *awsmiddleware.RegisterServiceMetadata {

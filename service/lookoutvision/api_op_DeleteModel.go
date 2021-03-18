@@ -12,7 +12,11 @@ import (
 )
 
 // Deletes an Amazon Lookout for Vision model. You can't delete a running model. To
-// stop a running model, use the StopModel operation.
+// stop a running model, use the StopModel operation. It might take a few seconds
+// to delete a model. To determine if a model has been deleted, call ListProjects
+// and check if the version of the model (ModelVersion) is in the Models array.
+// This operation requires permissions to perform the lookoutvision:DeleteModel
+// operation.
 func (c *Client) DeleteModel(ctx context.Context, params *DeleteModelInput, optFns ...func(*Options)) (*DeleteModelOutput, error) {
 	if params == nil {
 		params = &DeleteModelInput{}

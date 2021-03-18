@@ -52,6 +52,28 @@ func (EncryptionMode) Values() []EncryptionMode {
 	}
 }
 
+type InputFormat string
+
+// Enum values for InputFormat
+const (
+	InputFormatCsv     InputFormat = "CSV"
+	InputFormatJson    InputFormat = "JSON"
+	InputFormatParquet InputFormat = "PARQUET"
+	InputFormatExcel   InputFormat = "EXCEL"
+)
+
+// Values returns all known values for InputFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (InputFormat) Values() []InputFormat {
+	return []InputFormat{
+		"CSV",
+		"JSON",
+		"PARQUET",
+		"EXCEL",
+	}
+}
+
 type JobRunState string
 
 // Enum values for JobRunState
@@ -141,6 +163,24 @@ func (OutputFormat) Values() []OutputFormat {
 		"AVRO",
 		"ORC",
 		"XML",
+	}
+}
+
+type SampleMode string
+
+// Enum values for SampleMode
+const (
+	SampleModeFullDataset SampleMode = "FULL_DATASET"
+	SampleModeCustomRows  SampleMode = "CUSTOM_ROWS"
+)
+
+// Values returns all known values for SampleMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SampleMode) Values() []SampleMode {
+	return []SampleMode{
+		"FULL_DATASET",
+		"CUSTOM_ROWS",
 	}
 }
 

@@ -17,8 +17,8 @@ import (
 // that can affect the permissions for the role. You cannot set the boundary for a
 // service-linked role. Policies used as permissions boundaries do not provide
 // permissions. You must also attach a permissions policy to the role. To learn how
-// the effective permissions for a role are evaluated, see IAM JSON Policy
-// Evaluation Logic
+// the effective permissions for a role are evaluated, see IAM JSON policy
+// evaluation logic
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html)
 // in the IAM User Guide.
 func (c *Client) PutRolePermissionsBoundary(ctx context.Context, params *PutRolePermissionsBoundaryInput, optFns ...func(*Options)) (*PutRolePermissionsBoundaryOutput, error) {

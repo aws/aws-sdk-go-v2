@@ -40,13 +40,9 @@ import (
 // (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
 // General Reference  AWS Tagging Strategies
 // (http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
-// Related operations
-//
-// * TagResource
-//
-// * UntagResource
-//
-// * ListTagsForResource
+// Related actions TagResource | UntagResource | ListTagsForResource | All APIs by
+// task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

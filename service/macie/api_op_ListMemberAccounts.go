@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all Amazon Macie Classic member accounts for the current Amazon Macie
-// Classic master account.
+// Lists all Amazon Macie Classic member accounts for the current Macie Classic
+// administrator account.
 func (c *Client) ListMemberAccounts(ctx context.Context, params *ListMemberAccountsInput, optFns ...func(*Options)) (*ListMemberAccountsOutput, error) {
 	if params == nil {
 		params = &ListMemberAccountsInput{}
@@ -45,7 +45,7 @@ type ListMemberAccountsInput struct {
 type ListMemberAccountsOutput struct {
 
 	// A list of the Amazon Macie Classic member accounts returned by the action. The
-	// current master account is also included in this list.
+	// current Macie Classic administrator account is also included in this list.
 	MemberAccounts []types.MemberAccount
 
 	// When a response is generated, if there is more data to be listed, this parameter

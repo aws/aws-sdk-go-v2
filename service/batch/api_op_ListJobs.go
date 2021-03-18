@@ -18,14 +18,14 @@ import (
 // * A job queue ID to return a list of jobs in that job queue
 //
 // * A
-// multi-node parallel job ID to return a list of that job's nodes
+// multi-node parallel job ID to return a list of nodes for that job
 //
-// * An array job
-// ID to return a list of that job's children
+// * An array
+// job ID to return a list of the children for that job
 //
-// You can filter the results by job
-// status with the jobStatus parameter. If you don't specify a status, only RUNNING
-// jobs are returned.
+// You can filter the results
+// by job status with the jobStatus parameter. If you don't specify a status, only
+// RUNNING jobs are returned.
 func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...func(*Options)) (*ListJobsOutput, error) {
 	if params == nil {
 		params = &ListJobsInput{}
@@ -57,10 +57,10 @@ type ListJobsInput struct {
 
 	// The maximum number of results returned by ListJobs in paginated output. When
 	// this parameter is used, ListJobs only returns maxResults results in a single
-	// page along with a nextToken response element. The remaining results of the
-	// initial request can be seen by sending another ListJobs request with the
-	// returned nextToken value. This value can be between 1 and 100. If this parameter
-	// isn't used, then ListJobs returns up to 100 results and a nextToken value if
+	// page and a nextToken response element. The remaining results of the initial
+	// request can be seen by sending another ListJobs request with the returned
+	// nextToken value. This value can be between 1 and 100. If this parameter isn't
+	// used, then ListJobs returns up to 100 results and a nextToken value if
 	// applicable.
 	MaxResults int32
 
@@ -166,10 +166,10 @@ var _ ListJobsAPIClient = (*Client)(nil)
 type ListJobsPaginatorOptions struct {
 	// The maximum number of results returned by ListJobs in paginated output. When
 	// this parameter is used, ListJobs only returns maxResults results in a single
-	// page along with a nextToken response element. The remaining results of the
-	// initial request can be seen by sending another ListJobs request with the
-	// returned nextToken value. This value can be between 1 and 100. If this parameter
-	// isn't used, then ListJobs returns up to 100 results and a nextToken value if
+	// page and a nextToken response element. The remaining results of the initial
+	// request can be seen by sending another ListJobs request with the returned
+	// nextToken value. This value can be between 1 and 100. If this parameter isn't
+	// used, then ListJobs returns up to 100 results and a nextToken value if
 	// applicable.
 	Limit int32
 

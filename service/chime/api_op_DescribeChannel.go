@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the full details of a channel in an Amazon Chime app instance.
+// Returns the full details of a channel in an Amazon Chime AppInstance. The
+// x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of
+// the user that makes the API call as the value in the header.
 func (c *Client) DescribeChannel(ctx context.Context, params *DescribeChannelInput, optFns ...func(*Options)) (*DescribeChannelOutput, error) {
 	if params == nil {
 		params = &DescribeChannelInput{}
@@ -34,6 +36,9 @@ type DescribeChannelInput struct {
 	//
 	// This member is required.
 	ChannelArn *string
+
+	// The AppInstanceUserArn of the user that makes the API call.
+	ChimeBearer *string
 }
 
 type DescribeChannelOutput struct {

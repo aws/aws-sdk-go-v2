@@ -43,6 +43,12 @@ type ListStatementsInput struct {
 	// all response records have been retrieved for the request.
 	NextToken *string
 
+	// A value that filters which statements to return in the response. If true, all
+	// statements run by the caller's IAM role are returned. If false, only statements
+	// run by the caller's IAM role in the current IAM session are returned. The
+	// default is true.
+	RoleLevel *bool
+
 	// The name of the SQL statement specified as input to ExecuteStatement to identify
 	// the query. You can list multiple statements by providing a prefix that matches
 	// the beginning of the statement name. For example, to list myStatement1,

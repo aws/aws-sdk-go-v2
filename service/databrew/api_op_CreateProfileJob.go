@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new job to profile an AWS Glue DataBrew dataset that exists in the
-// current AWS account.
+// Creates a new job to analyze a dataset and create its data profile.
 func (c *Client) CreateProfileJob(ctx context.Context, params *CreateProfileJobInput, optFns ...func(*Options)) (*CreateProfileJobOutput, error) {
 	if params == nil {
 		params = &CreateProfileJobInput{}
@@ -35,7 +34,8 @@ type CreateProfileJobInput struct {
 	// This member is required.
 	DatasetName *string
 
-	// The name of the job to be created.
+	// The name of the job to be created. Valid characters are alphanumeric (A-Z, a-z,
+	// 0-9), hyphen (-), period (.), and space.
 	//
 	// This member is required.
 	Name *string
@@ -47,7 +47,7 @@ type CreateProfileJobInput struct {
 	OutputLocation *types.S3Location
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role to be assumed for this request.
+	// role to be assumed when DataBrew runs the job.
 	//
 	// This member is required.
 	RoleArn *string
@@ -59,15 +59,20 @@ type CreateProfileJobInput struct {
 	// The encryption mode for the job, which can be one of the following:
 	//
 	// * SSE-KMS -
-	// para>SSE-KMS - server-side encryption with AWS KMS-managed keys.
+	// SSE-KMS - Server-side encryption with AWS KMS-managed keys.
 	//
 	// * SSE-S3 -
 	// Server-side encryption with keys managed by Amazon S3.
 	EncryptionMode types.EncryptionMode
 
-	// A value that enables or disables Amazon CloudWatch logging for the current AWS
-	// account. If logging is enabled, CloudWatch writes one log stream for each job
-	// run.
+	// Sample configuration for profile jobs only. Determines the number of rows on
+	// which the profile job will be executed. If a JobSample value is not provided,
+	// the default value will be used. The default value is CUSTOM_ROWS for the mode
+	// parameter and 20000 for the size parameter.
+	JobSample *types.JobSample
+
+	// Enables or disables Amazon CloudWatch logging for the job. If logging is
+	// enabled, CloudWatch writes one log stream for each job run.
 	LogSubscription types.LogSubscription
 
 	// The maximum number of nodes that DataBrew can use when the job processes data.

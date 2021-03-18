@@ -10,9 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a recommendation filter. For more information, see Using Filters with
-// Amazon Personalize
-// (https://docs.aws.amazon.com/personalize/latest/dg/filters.html).
+// Creates a recommendation filter. For more information, see filter.
 func (c *Client) CreateFilter(ctx context.Context, params *CreateFilterInput, optFns ...func(*Options)) (*CreateFilterOutput, error) {
 	if params == nil {
 		params = &CreateFilterInput{}
@@ -35,12 +33,10 @@ type CreateFilterInput struct {
 	// This member is required.
 	DatasetGroupArn *string
 
-	// The filter expression that designates the interaction types that the filter will
-	// filter out. A filter expression must follow the following format: EXCLUDE itemId
-	// WHERE INTERACTIONS.event_type in ("EVENT_TYPE") Where "EVENT_TYPE" is the type
-	// of event to filter out. To filter out all items with any interactions history,
-	// set "*" as the EVENT_TYPE. For more information, see Using Filters with Amazon
-	// Personalize (https://docs.aws.amazon.com/personalize/latest/dg/filters.html).
+	// The filter expression defines which items are included or excluded from
+	// recommendations. Filter expression must follow specific format rules. For
+	// information about filter expression structure and syntax, see
+	// filter-expressions.
 	//
 	// This member is required.
 	FilterExpression *string

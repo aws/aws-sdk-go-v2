@@ -12,7 +12,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns summary information about stack sets that are associated with the user.
+// Returns summary information about stack sets that are associated with the
+// user.
+//
+// * [Self-managed permissions] If you set the CallAs parameter to SELF
+// while signed in to your AWS account, ListStackSets returns all self-managed
+// stack sets in your AWS account.
+//
+// * [Service-managed permissions] If you set the
+// CallAs parameter to SELF while signed in to the organization's management
+// account, ListStackSets returns all stack sets in the management account.
+//
+// *
+// [Service-managed permissions] If you set the CallAs parameter to DELEGATED_ADMIN
+// while signed in to your member account, ListStackSets returns all stack sets
+// with service-managed permissions in the management account.
 func (c *Client) ListStackSets(ctx context.Context, params *ListStackSetsInput, optFns ...func(*Options)) (*ListStackSetsOutput, error) {
 	if params == nil {
 		params = &ListStackSetsInput{}
@@ -29,6 +43,22 @@ func (c *Client) ListStackSets(ctx context.Context, params *ListStackSetsInput, 
 }
 
 type ListStackSetsInput struct {
+
+	// [Service-managed permissions] Specifies whether you are acting as an account
+	// administrator in the management account or as a delegated administrator in a
+	// member account. By default, SELF is specified. Use SELF for stack sets with
+	// self-managed permissions.
+	//
+	// * If you are signed in to the management account,
+	// specify SELF.
+	//
+	// * If you are signed in to a delegated administrator account,
+	// specify DELEGATED_ADMIN. Your AWS account must be registered as a delegated
+	// administrator in the management account. For more information, see Register a
+	// delegated administrator
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
+	// in the AWS CloudFormation User Guide.
+	CallAs types.CallAs
 
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken

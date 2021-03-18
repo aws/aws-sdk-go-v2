@@ -770,6 +770,26 @@ func (m *validateOpTerminateJobFlows) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateStudio struct {
+}
+
+func (*validateOpUpdateStudio) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateStudio) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateStudioInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateStudioInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateStudioSessionMapping struct {
 }
 
@@ -940,6 +960,10 @@ func addOpStopNotebookExecutionValidationMiddleware(stack *middleware.Stack) err
 
 func addOpTerminateJobFlowsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTerminateJobFlows{}, middleware.After)
+}
+
+func addOpUpdateStudioValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateStudio{}, middleware.After)
 }
 
 func addOpUpdateStudioSessionMappingValidationMiddleware(stack *middleware.Stack) error {
@@ -1844,6 +1868,9 @@ func validateOpCreateStudioInput(v *CreateStudioInput) error {
 	if v.EngineSecurityGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EngineSecurityGroupId"))
 	}
+	if v.DefaultS3Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultS3Location"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2404,6 +2431,21 @@ func validateOpTerminateJobFlowsInput(v *TerminateJobFlowsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TerminateJobFlowsInput"}
 	if v.JobFlowIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobFlowIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateStudioInput(v *UpdateStudioInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateStudioInput"}
+	if v.StudioId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

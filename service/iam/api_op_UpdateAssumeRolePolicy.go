@@ -12,7 +12,7 @@ import (
 
 // Updates the policy that grants an IAM entity permission to assume a role. This
 // is typically referred to as the "role trust policy". For more information about
-// roles, go to Using Roles to Delegate Permissions and Federate Identities
+// roles, see Using roles to delegate permissions and federate identities
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html).
 func (c *Client) UpdateAssumeRolePolicy(ctx context.Context, params *UpdateAssumeRolePolicyInput, optFns ...func(*Options)) (*UpdateAssumeRolePolicyOutput, error) {
 	if params == nil {

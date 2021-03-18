@@ -76,7 +76,7 @@ type DescribeSecretOutput struct {
 	// The ARN of the secret.
 	ARN *string
 
-	// The date that the secret was created.
+	// The date you created the secret.
 	CreatedDate *time.Time
 
 	// This value exists if the secret is scheduled for deletion. Some time after the
@@ -103,8 +103,10 @@ type DescribeSecretOutput struct {
 	// The last date and time that this secret was modified in any way.
 	LastChangedDate *time.Time
 
-	// The most recent date and time that the Secrets Manager rotation process was
-	// successfully completed. This value is null if the secret has never rotated.
+	// The last date and time that the rotation process for this secret was invoked.
+	// The most recent date and time that the Secrets Manager rotation process
+	// successfully completed. If the secret doesn't rotate, Secrets Manager returns a
+	// null value.
 	LastRotatedDate *time.Time
 
 	// The user-provided friendly name of the secret.
@@ -112,6 +114,12 @@ type DescribeSecretOutput struct {
 
 	// Returns the name of the service that created this secret.
 	OwningService *string
+
+	// Specifies the primary region for secret replication.
+	PrimaryRegion *string
+
+	// Describes a list of replication status objects as InProgress, Failed or InSync.P
+	ReplicationStatus []types.ReplicationStatusType
 
 	// Specifies whether automatic rotation is enabled for this secret. To enable
 	// rotation, use RotateSecret with AutomaticallyRotateAfterDays set to a value
@@ -123,7 +131,7 @@ type DescribeSecretOutput struct {
 	// RotateSecret.
 	RotationLambdaARN *string
 
-	// A structure that contains the rotation configuration for this secret.
+	// A structure with the rotation configuration for this secret.
 	RotationRules *types.RotationRulesType
 
 	// The list of user-defined tags that are associated with the secret. To add tags

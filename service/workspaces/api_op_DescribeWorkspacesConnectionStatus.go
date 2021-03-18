@@ -39,8 +39,8 @@ type DescribeWorkspacesConnectionStatusInput struct {
 
 type DescribeWorkspacesConnectionStatusOutput struct {
 
-	// The token to use to retrieve the next set of results, or null if no more results
-	// are available.
+	// The token to use to retrieve the next page of results. This value is null when
+	// there are no more results to return.
 	NextToken *string
 
 	// Information about the connection status of the WorkSpace.

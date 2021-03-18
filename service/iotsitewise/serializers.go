@@ -4899,6 +4899,18 @@ func awsRestjson1_serializeDocumentGroupIdentity(v *types.GroupIdentity, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIAMRoleIdentity(v *types.IAMRoleIdentity, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIAMUserIdentity(v *types.IAMUserIdentity, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4918,6 +4930,13 @@ func awsRestjson1_serializeDocumentIdentity(v *types.Identity, value smithyjson.
 	if v.Group != nil {
 		ok := object.Key("group")
 		if err := awsRestjson1_serializeDocumentGroupIdentity(v.Group, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IamRole != nil {
+		ok := object.Key("iamRole")
+		if err := awsRestjson1_serializeDocumentIAMRoleIdentity(v.IamRole, ok); err != nil {
 			return err
 		}
 	}

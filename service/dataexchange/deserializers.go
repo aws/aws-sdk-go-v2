@@ -4838,6 +4838,56 @@ func awsRestjson1_deserializeDocumentExportAssetToSignedUrlResponseDetails(v **t
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentExportRevisionsToS3ResponseDetails(v **types.ExportRevisionsToS3ResponseDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExportRevisionsToS3ResponseDetails
+	if *v == nil {
+		sv = &types.ExportRevisionsToS3ResponseDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataSetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.DataSetId = ptr.String(jtv)
+			}
+
+		case "Encryption":
+			if err := awsRestjson1_deserializeDocumentExportServerSideEncryption(&sv.Encryption, value); err != nil {
+				return err
+			}
+
+		case "RevisionDestinations":
+			if err := awsRestjson1_deserializeDocumentListOfRevisionDestinationEntry(&sv.RevisionDestinations, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentExportServerSideEncryption(v **types.ExportServerSideEncryption, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5511,6 +5561,40 @@ func awsRestjson1_deserializeDocumentListOfJobError(v *[]types.JobError, value i
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentListOfRevisionDestinationEntry(v *[]types.RevisionDestinationEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RevisionDestinationEntry
+	if *v == nil {
+		cv = []types.RevisionDestinationEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RevisionDestinationEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRevisionDestinationEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentListOfRevisionEntry(v *[]types.RevisionEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5711,6 +5795,11 @@ func awsRestjson1_deserializeDocumentResponseDetails(v **types.ResponseDetails, 
 				return err
 			}
 
+		case "ExportRevisionsToS3":
+			if err := awsRestjson1_deserializeDocumentExportRevisionsToS3ResponseDetails(&sv.ExportRevisionsToS3, value); err != nil {
+				return err
+			}
+
 		case "ImportAssetFromSignedUrl":
 			if err := awsRestjson1_deserializeDocumentImportAssetFromSignedUrlResponseDetails(&sv.ImportAssetFromSignedUrl, value); err != nil {
 				return err
@@ -5719,6 +5808,64 @@ func awsRestjson1_deserializeDocumentResponseDetails(v **types.ResponseDetails, 
 		case "ImportAssetsFromS3":
 			if err := awsRestjson1_deserializeDocumentImportAssetsFromS3ResponseDetails(&sv.ImportAssetsFromS3, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRevisionDestinationEntry(v **types.RevisionDestinationEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RevisionDestinationEntry
+	if *v == nil {
+		sv = &types.RevisionDestinationEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Bucket = ptr.String(jtv)
+			}
+
+		case "KeyPattern":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.KeyPattern = ptr.String(jtv)
+			}
+
+		case "RevisionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.RevisionId = ptr.String(jtv)
 			}
 
 		default:

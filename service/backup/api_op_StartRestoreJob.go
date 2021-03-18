@@ -66,9 +66,10 @@ type StartRestoreJobInput struct {
 	// the recovery point is restored to a new Amazon EFS file system.
 	//
 	// *
-	// ItemsToRestore : A serialized list of up to five strings where each string is a
-	// file path. Use ItemsToRestore to restore specific files or directories rather
-	// than the entire file system. This parameter is optional.
+	// ItemsToRestore : An array of one to five strings where each string is a file
+	// path. Use ItemsToRestore to restore specific files or directories rather than
+	// the entire file system. This parameter is optional. For example,
+	// "itemsToRestore":"[\"/my.test\"]".
 	//
 	// This member is required.
 	Metadata map[string]string
@@ -98,7 +99,10 @@ type StartRestoreJobInput struct {
 	// * RDS for
 	// Amazon Relational Database Service
 	//
-	// * Storage Gateway for AWS Storage Gateway
+	// * Aurora for Amazon Aurora
+	//
+	// * Storage
+	// Gateway for AWS Storage Gateway
 	ResourceType *string
 }
 

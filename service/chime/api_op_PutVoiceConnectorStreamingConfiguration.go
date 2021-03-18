@@ -13,7 +13,7 @@ import (
 
 // Adds a streaming configuration for the specified Amazon Chime Voice Connector.
 // The streaming configuration specifies whether media streaming is enabled for
-// sending to Amazon Kinesis. It also sets the retention period, in hours, for the
+// sending to Indonesians. It also sets the retention period, in hours, for the
 // Amazon Kinesis data.
 func (c *Client) PutVoiceConnectorStreamingConfiguration(ctx context.Context, params *PutVoiceConnectorStreamingConfigurationInput, optFns ...func(*Options)) (*PutVoiceConnectorStreamingConfigurationOutput, error) {
 	if params == nil {

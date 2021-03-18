@@ -314,9 +314,15 @@ type ColumnError struct {
 	Error *ErrorDetail
 }
 
+// A structure containing the column name and column importance score for a column.
+// Column importance helps you understand how columns contribute to your model, by
+// identifying which columns in your records are more important than others.
 type ColumnImportance struct {
+
+	// The name of a column.
 	ColumnName *string
 
+	// The column importance score for the column, as a decimal.
 	Importance *float64
 }
 
@@ -515,6 +521,18 @@ type Connection struct {
 	// KAFKA_SKIP_CUSTOM_CERT_VALIDATION - Whether to skip the validation of the CA
 	// cert file or not. AWS Glue validates for three algorithms: SHA256withRSA,
 	// SHA384withRSA and SHA512withRSA. Default value is "false".
+	//
+	// * SECRET_ID - The
+	// secret ID used for the secret manager of credentials.
+	//
+	// * CONNECTOR_URL - The
+	// connector URL for a MARKETPLACE or CUSTOM connection.
+	//
+	// * CONNECTOR_TYPE - The
+	// connector type for a MARKETPLACE or CUSTOM connection.
+	//
+	// * CONNECTOR_CLASS_NAME -
+	// The connector class name for a MARKETPLACE or CUSTOM connection.
 	ConnectionProperties map[string]string
 
 	// The type of the connection. Currently, SFTP is not supported.
@@ -566,8 +584,16 @@ type ConnectionInput struct {
 	// * NETWORK - Designates a network connection to a data source within
 	// an Amazon Virtual Private Cloud environment (Amazon VPC).
 	//
-	// SFTP is not
-	// supported.
+	// * MARKETPLACE - Uses
+	// configuration settings contained in a connector purchased from AWS Marketplace
+	// to read from and write to data stores that are not natively supported by AWS
+	// Glue.
+	//
+	// * CUSTOM - Uses configuration settings contained in a custom connector to
+	// read from and write to data stores that are not natively supported by AWS
+	// Glue.
+	//
+	// SFTP is not supported.
 	//
 	// This member is required.
 	ConnectionType ConnectionType
@@ -1339,6 +1365,8 @@ type FindMatchesMetrics struct {
 	// (https://en.wikipedia.org/wiki/Precision_and_recall) in Wikipedia.
 	AreaUnderPRCurve *float64
 
+	// A list of ColumnImportance structures containing column importance metrics,
+	// sorted in order of descending importance.
 	ColumnImportances []ColumnImportance
 
 	// The confusion matrix shows you what your transform is predicting accurately and
@@ -2635,11 +2663,17 @@ type SchemaColumn struct {
 	Name *string
 }
 
+// The unique ID of the schema in the AWS Glue schema registry.
 type SchemaId struct {
+
+	// The name of the schema registry that contains the schema.
 	RegistryName *string
 
+	// The Amazon Resource Name (ARN) of the schema. One of SchemaArn or SchemaName has
+	// to be provided.
 	SchemaArn *string
 
+	// The name of the schema. One of SchemaArn or SchemaName has to be provided.
 	SchemaName *string
 }
 
@@ -2712,9 +2746,13 @@ type SchemaVersionListItem struct {
 	VersionNumber int64
 }
 
+// A structure containing the schema version information.
 type SchemaVersionNumber struct {
+
+	// The latest version available for the schema.
 	LatestVersion bool
 
+	// The version number of the schema.
 	VersionNumber int64
 }
 

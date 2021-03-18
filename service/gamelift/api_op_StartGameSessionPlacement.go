@@ -48,31 +48,11 @@ import (
 // DescribeGameSessionPlacement and check the request's status. If the status is
 // FULFILLED, a new game session has been created and a game session ARN and Region
 // are referenced. If the placement request times out, you can resubmit the request
-// or retry it with a different queue.
-//
-// * CreateGameSession
-//
-// *
-// DescribeGameSessions
-//
-// * DescribeGameSessionDetails
-//
-// * SearchGameSessions
-//
-// *
-// UpdateGameSession
-//
-// * GetGameSessionLogUrl
-//
-// * Game session placements
-//
-// *
-// StartGameSessionPlacement
-//
-// * DescribeGameSessionPlacement
-//
-// *
-// StopGameSessionPlacement
+// or retry it with a different queue. Related actions CreateGameSession |
+// DescribeGameSessions | DescribeGameSessionDetails | SearchGameSessions |
+// UpdateGameSession | GetGameSessionLogUrl | StartGameSessionPlacement |
+// DescribeGameSessionPlacement | StopGameSessionPlacement | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) StartGameSessionPlacement(ctx context.Context, params *StartGameSessionPlacementInput, optFns ...func(*Options)) (*StartGameSessionPlacementOutput, error) {
 	if params == nil {
 		params = &StartGameSessionPlacementInput{}
@@ -113,15 +93,15 @@ type StartGameSessionPlacementInput struct {
 	// Set of information on each player to create a player session for.
 	DesiredPlayerSessions []types.DesiredPlayerSession
 
-	// Set of custom properties for a game session, formatted as key:value pairs. These
-	// properties are passed to a game server process in the GameSession object with a
-	// request to start a new game session (see Start a Game Session
+	// A set of custom properties for a game session, formatted as key:value pairs.
+	// These properties are passed to a game server process in the GameSession object
+	// with a request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	GameProperties []types.GameProperty
 
-	// Set of custom game session properties, formatted as a single string value. This
-	// data is passed to a game server process in the GameSession object with a request
-	// to start a new game session (see Start a Game Session
+	// A set of custom game session properties, formatted as a single string value.
+	// This data is passed to a game server process in the GameSession object with a
+	// request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	GameSessionData *string
 
@@ -129,10 +109,10 @@ type StartGameSessionPlacementInput struct {
 	// need to be unique.
 	GameSessionName *string
 
-	// Set of values, expressed in milliseconds, indicating the amount of latency that
-	// a player experiences when connected to AWS Regions. This information is used to
-	// try to place the new game session where it can offer the best possible gameplay
-	// experience for the players.
+	// A set of values, expressed in milliseconds, that indicates the amount of latency
+	// that a player experiences when connected to AWS Regions. This information is
+	// used to try to place the new game session where it can offer the best possible
+	// gameplay experience for the players.
 	PlayerLatencies []types.PlayerLatency
 }
 

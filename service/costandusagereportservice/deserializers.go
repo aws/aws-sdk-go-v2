@@ -765,6 +765,15 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				return err
 			}
 
+		case "BillingViewArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingViewArn to be of type string, got %T instead", value)
+				}
+				sv.BillingViewArn = ptr.String(jtv)
+			}
+
 		case "Compression":
 			if value != nil {
 				jtv, ok := value.(string)

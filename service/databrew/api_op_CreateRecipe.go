@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new AWS Glue DataBrew recipe for the current AWS account.
+// Creates a new DataBrew recipe.
 func (c *Client) CreateRecipe(ctx context.Context, params *CreateRecipeInput, optFns ...func(*Options)) (*CreateRecipeOutput, error) {
 	if params == nil {
 		params = &CreateRecipeInput{}
@@ -29,7 +29,8 @@ func (c *Client) CreateRecipe(ctx context.Context, params *CreateRecipeInput, op
 
 type CreateRecipeInput struct {
 
-	// A unique name for the recipe.
+	// A unique name for the recipe. Valid characters are alphanumeric (A-Z, a-z, 0-9),
+	// hyphen (-), period (.), and space.
 	//
 	// This member is required.
 	Name *string

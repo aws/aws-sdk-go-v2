@@ -54,9 +54,9 @@ func (e *AccountSetupInProgressException) ErrorCode() string {
 func (e *AccountSetupInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Lightsail throws this exception when user input does not conform to the
-// validation rules of an input field. Domain-related APIs are only available in
-// the N. Virginia (us-east-1) Region. Please set your AWS Region configuration to
-// us-east-1 to create, view, or edit these resources.
+// validation rules of an input field. Domain and distribution APIs are only
+// available in the N. Virginia (us-east-1) AWS Region. Please set your AWS Region
+// configuration to us-east-1 to create, view, or edit these resources.
 type InvalidInputException struct {
 	Message *string
 

@@ -13,7 +13,7 @@ import (
 // Deletes the specified inline policy that is embedded in the specified IAM role.
 // A role can also have managed policies attached to it. To detach a managed policy
 // from a role, use DetachRolePolicy. For more information about policies, refer to
-// Managed Policies and Inline Policies
+// Managed policies and inline policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) DeleteRolePolicy(ctx context.Context, params *DeleteRolePolicyInput, optFns ...func(*Options)) (*DeleteRolePolicyOutput, error) {

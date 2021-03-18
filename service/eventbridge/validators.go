@@ -50,6 +50,26 @@ func (m *validateOpCancelReplay) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateApiDestination struct {
+}
+
+func (*validateOpCreateApiDestination) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateApiDestination) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateApiDestinationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateApiDestinationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateArchive struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpCreateArchive) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateArchiveInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateConnection struct {
+}
+
+func (*validateOpCreateConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConnectionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -130,6 +170,46 @@ func (m *validateOpDeactivateEventSource) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeauthorizeConnection struct {
+}
+
+func (*validateOpDeauthorizeConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeauthorizeConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeauthorizeConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeauthorizeConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteApiDestination struct {
+}
+
+func (*validateOpDeleteApiDestination) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteApiDestination) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteApiDestinationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteApiDestinationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteArchive struct {
 }
 
@@ -145,6 +225,26 @@ func (m *validateOpDeleteArchive) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteArchiveInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConnection struct {
+}
+
+func (*validateOpDeleteConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConnectionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,6 +310,26 @@ func (m *validateOpDeleteRule) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeApiDestination struct {
+}
+
+func (*validateOpDescribeApiDestination) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeApiDestination) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeApiDestinationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeApiDestinationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeArchive struct {
 }
 
@@ -225,6 +345,26 @@ func (m *validateOpDescribeArchive) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeArchiveInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeConnection struct {
+}
+
+func (*validateOpDescribeConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeConnectionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -650,6 +790,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateApiDestination struct {
+}
+
+func (*validateOpUpdateApiDestination) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateApiDestination) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateApiDestinationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateApiDestinationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateArchive struct {
 }
 
@@ -670,6 +830,26 @@ func (m *validateOpUpdateArchive) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConnection struct {
+}
+
+func (*validateOpUpdateConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpActivateEventSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpActivateEventSource{}, middleware.After)
 }
@@ -678,8 +858,16 @@ func addOpCancelReplayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelReplay{}, middleware.After)
 }
 
+func addOpCreateApiDestinationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateApiDestination{}, middleware.After)
+}
+
 func addOpCreateArchiveValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateArchive{}, middleware.After)
+}
+
+func addOpCreateConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConnection{}, middleware.After)
 }
 
 func addOpCreateEventBusValidationMiddleware(stack *middleware.Stack) error {
@@ -694,8 +882,20 @@ func addOpDeactivateEventSourceValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeactivateEventSource{}, middleware.After)
 }
 
+func addOpDeauthorizeConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeauthorizeConnection{}, middleware.After)
+}
+
+func addOpDeleteApiDestinationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteApiDestination{}, middleware.After)
+}
+
 func addOpDeleteArchiveValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteArchive{}, middleware.After)
+}
+
+func addOpDeleteConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConnection{}, middleware.After)
 }
 
 func addOpDeleteEventBusValidationMiddleware(stack *middleware.Stack) error {
@@ -710,8 +910,16 @@ func addOpDeleteRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRule{}, middleware.After)
 }
 
+func addOpDescribeApiDestinationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeApiDestination{}, middleware.After)
+}
+
 func addOpDescribeArchiveValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeArchive{}, middleware.After)
+}
+
+func addOpDescribeConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeConnection{}, middleware.After)
 }
 
 func addOpDescribeEventSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -798,8 +1006,16 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateApiDestinationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateApiDestination{}, middleware.After)
+}
+
 func addOpUpdateArchiveValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateArchive{}, middleware.After)
+}
+
+func addOpUpdateConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConnection{}, middleware.After)
 }
 
 func validateAwsVpcConfiguration(v *types.AwsVpcConfiguration) error {
@@ -848,6 +1064,112 @@ func validateCondition(v *types.Condition) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateConnectionApiKeyAuthRequestParameters(v *types.CreateConnectionApiKeyAuthRequestParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectionApiKeyAuthRequestParameters"}
+	if v.ApiKeyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiKeyName"))
+	}
+	if v.ApiKeyValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiKeyValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateConnectionAuthRequestParameters(v *types.CreateConnectionAuthRequestParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectionAuthRequestParameters"}
+	if v.BasicAuthParameters != nil {
+		if err := validateCreateConnectionBasicAuthRequestParameters(v.BasicAuthParameters); err != nil {
+			invalidParams.AddNested("BasicAuthParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OAuthParameters != nil {
+		if err := validateCreateConnectionOAuthRequestParameters(v.OAuthParameters); err != nil {
+			invalidParams.AddNested("OAuthParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ApiKeyAuthParameters != nil {
+		if err := validateCreateConnectionApiKeyAuthRequestParameters(v.ApiKeyAuthParameters); err != nil {
+			invalidParams.AddNested("ApiKeyAuthParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateConnectionBasicAuthRequestParameters(v *types.CreateConnectionBasicAuthRequestParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectionBasicAuthRequestParameters"}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateConnectionOAuthClientRequestParameters(v *types.CreateConnectionOAuthClientRequestParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectionOAuthClientRequestParameters"}
+	if v.ClientID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientID"))
+	}
+	if v.ClientSecret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateConnectionOAuthRequestParameters(v *types.CreateConnectionOAuthRequestParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectionOAuthRequestParameters"}
+	if v.ClientParameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientParameters"))
+	} else if v.ClientParameters != nil {
+		if err := validateCreateConnectionOAuthClientRequestParameters(v.ClientParameters); err != nil {
+			invalidParams.AddNested("ClientParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AuthorizationEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationEndpoint"))
+	}
+	if len(v.HttpMethod) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1140,6 +1462,30 @@ func validateOpCancelReplayInput(v *CancelReplayInput) error {
 	}
 }
 
+func validateOpCreateApiDestinationInput(v *CreateApiDestinationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateApiDestinationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ConnectionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionArn"))
+	}
+	if v.InvocationEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvocationEndpoint"))
+	}
+	if len(v.HttpMethod) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("HttpMethod"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateArchiveInput(v *CreateArchiveInput) error {
 	if v == nil {
 		return nil
@@ -1150,6 +1496,31 @@ func validateOpCreateArchiveInput(v *CreateArchiveInput) error {
 	}
 	if v.EventSourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventSourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateConnectionInput(v *CreateConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.AuthorizationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationType"))
+	}
+	if v.AuthParameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthParameters"))
+	} else if v.AuthParameters != nil {
+		if err := validateCreateConnectionAuthRequestParameters(v.AuthParameters); err != nil {
+			invalidParams.AddNested("AuthParameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1211,6 +1582,36 @@ func validateOpDeactivateEventSourceInput(v *DeactivateEventSourceInput) error {
 	}
 }
 
+func validateOpDeauthorizeConnectionInput(v *DeauthorizeConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeauthorizeConnectionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteApiDestinationInput(v *DeleteApiDestinationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteApiDestinationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteArchiveInput(v *DeleteArchiveInput) error {
 	if v == nil {
 		return nil
@@ -1218,6 +1619,21 @@ func validateOpDeleteArchiveInput(v *DeleteArchiveInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteArchiveInput"}
 	if v.ArchiveName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ArchiveName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConnectionInput(v *DeleteConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1274,6 +1690,21 @@ func validateOpDeleteRuleInput(v *DeleteRuleInput) error {
 	}
 }
 
+func validateOpDescribeApiDestinationInput(v *DescribeApiDestinationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeApiDestinationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeArchiveInput(v *DescribeArchiveInput) error {
 	if v == nil {
 		return nil
@@ -1281,6 +1712,21 @@ func validateOpDescribeArchiveInput(v *DescribeArchiveInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeArchiveInput"}
 	if v.ArchiveName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ArchiveName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeConnectionInput(v *DescribeConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeConnectionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1650,6 +2096,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 }
 
+func validateOpUpdateApiDestinationInput(v *UpdateApiDestinationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateApiDestinationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateArchiveInput(v *UpdateArchiveInput) error {
 	if v == nil {
 		return nil
@@ -1657,6 +2118,21 @@ func validateOpUpdateArchiveInput(v *UpdateArchiveInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateArchiveInput"}
 	if v.ArchiveName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ArchiveName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConnectionInput(v *UpdateConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

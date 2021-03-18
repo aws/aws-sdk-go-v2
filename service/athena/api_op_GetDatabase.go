@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a database object for the specfied database and data catalog.
+// Returns a database object for the specified database and data catalog.
 func (c *Client) GetDatabase(ctx context.Context, params *GetDatabaseInput, optFns ...func(*Options)) (*GetDatabaseOutput, error) {
 	if params == nil {
 		params = &GetDatabaseInput{}

@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject
-// to change. Fetches mapping details for the specified Amazon EMR Studio and
-// identity (user or group).
+// Fetches mapping details for the specified Amazon EMR Studio and identity (user
+// or group).
 func (c *Client) GetStudioSessionMapping(ctx context.Context, params *GetStudioSessionMappingInput, optFns ...func(*Options)) (*GetStudioSessionMappingOutput, error) {
 	if params == nil {
 		params = &GetStudioSessionMappingInput{}
@@ -51,7 +50,7 @@ type GetStudioSessionMappingInput struct {
 	IdentityId *string
 
 	// The name of the user or group to fetch. For more information, see UserName
-	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId)
+	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
 	// and DisplayName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
 	// in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId

@@ -218,11 +218,11 @@ func validateOpExecuteSqlInput(v *ExecuteSqlInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExecuteSqlInput"}
-	if v.AwsSecretStoreArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AwsSecretStoreArn"))
-	}
 	if v.DbClusterOrInstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DbClusterOrInstanceArn"))
+	}
+	if v.AwsSecretStoreArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsSecretStoreArn"))
 	}
 	if v.SqlStatements == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SqlStatements"))

@@ -19,16 +19,22 @@ import (
 //
 // * Redis (cluster mode enabled) clusters
 //
-// * A cluster that is
-// the last read replica of a replication group
+// * Redis (cluster
+// mode disabled) clusters
 //
-// * A node group (shard) that has
-// Multi-AZ mode enabled
-//
-// * A cluster from a Redis (cluster mode enabled)
+// * A cluster that is the last read replica of a
 // replication group
 //
-// * A cluster that is not in the available state
+// * A cluster that is the primary node of a replication
+// group
+//
+// * A node group (shard) that has Multi-AZ mode enabled
+//
+// * A cluster from a
+// Redis (cluster mode enabled) replication group
+//
+// * A cluster that is not in the
+// available state
 func (c *Client) DeleteCacheCluster(ctx context.Context, params *DeleteCacheClusterInput, optFns ...func(*Options)) (*DeleteCacheClusterOutput, error) {
 	if params == nil {
 		params = &DeleteCacheClusterInput{}

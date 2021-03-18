@@ -1883,6 +1883,18 @@ func awsAwsquery_serializeDocumentInsightRuleNames(v []string, value query.Value
 	return nil
 }
 
+func awsAwsquery_serializeDocumentLabelOptions(v *types.LabelOptions, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Timezone != nil {
+		objectKey := object.Key("Timezone")
+		objectKey.String(*v.Timezone)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentMetric(v *types.Metric, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -2583,6 +2595,13 @@ func awsAwsquery_serializeOpDocumentGetMetricDataInput(v *GetMetricDataInput, va
 	if v.EndTime != nil {
 		objectKey := object.Key("EndTime")
 		objectKey.String(smithytime.FormatDateTime(*v.EndTime))
+	}
+
+	if v.LabelOptions != nil {
+		objectKey := object.Key("LabelOptions")
+		if err := awsAwsquery_serializeDocumentLabelOptions(v.LabelOptions, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.MaxDatapoints != nil {

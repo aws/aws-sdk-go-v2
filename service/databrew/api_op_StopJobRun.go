@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops the specified job from running in the current AWS account.
+// Stops a particular run of a job.
 func (c *Client) StopJobRun(ctx context.Context, params *StopJobRunInput, optFns ...func(*Options)) (*StopJobRunOutput, error) {
 	if params == nil {
 		params = &StopJobRunInput{}

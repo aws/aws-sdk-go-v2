@@ -545,9 +545,9 @@ func awsRestjson1_serializeOpDocumentCreateImageInput(v *CreateImageInput, value
 		ok.String(*v.DistributionConfigurationArn)
 	}
 
-	if v.EnhancedImageMetadataEnabled {
+	if v.EnhancedImageMetadataEnabled != nil {
 		ok := object.Key("enhancedImageMetadataEnabled")
-		ok.Boolean(v.EnhancedImageMetadataEnabled)
+		ok.Boolean(*v.EnhancedImageMetadataEnabled)
 	}
 
 	if v.ImageRecipeArn != nil {
@@ -662,9 +662,9 @@ func awsRestjson1_serializeOpDocumentCreateImagePipelineInput(v *CreateImagePipe
 		ok.String(*v.DistributionConfigurationArn)
 	}
 
-	if v.EnhancedImageMetadataEnabled {
+	if v.EnhancedImageMetadataEnabled != nil {
 		ok := object.Key("enhancedImageMetadataEnabled")
-		ok.Boolean(v.EnhancedImageMetadataEnabled)
+		ok.Boolean(*v.EnhancedImageMetadataEnabled)
 	}
 
 	if v.ImageRecipeArn != nil {
@@ -965,9 +965,9 @@ func awsRestjson1_serializeOpDocumentCreateInfrastructureConfigurationInput(v *C
 		}
 	}
 
-	if v.TerminateInstanceOnFailure {
+	if v.TerminateInstanceOnFailure != nil {
 		ok := object.Key("terminateInstanceOnFailure")
-		ok.Boolean(v.TerminateInstanceOnFailure)
+		ok.Boolean(*v.TerminateInstanceOnFailure)
 	}
 
 	return nil
@@ -2590,6 +2590,89 @@ func awsRestjson1_serializeOpDocumentListImageBuildVersionsInput(v *ListImageBui
 	return nil
 }
 
+type awsRestjson1_serializeOpListImagePackages struct {
+}
+
+func (*awsRestjson1_serializeOpListImagePackages) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListImagePackages) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListImagePackagesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/ListImagePackages")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListImagePackagesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListImagePackagesInput(v *ListImagePackagesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListImagePackagesInput(v *ListImagePackagesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ImageBuildVersionArn != nil {
+		ok := object.Key("imageBuildVersionArn")
+		ok.String(*v.ImageBuildVersionArn)
+	}
+
+	if v.MaxResults != 0 {
+		ok := object.Key("maxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListImagePipelineImages struct {
 }
 
@@ -2932,9 +3015,9 @@ func awsRestjson1_serializeOpDocumentListImagesInput(v *ListImagesInput, value s
 		}
 	}
 
-	if v.IncludeDeprecated {
+	if v.IncludeDeprecated != nil {
 		ok := object.Key("includeDeprecated")
-		ok.Boolean(v.IncludeDeprecated)
+		ok.Boolean(*v.IncludeDeprecated)
 	}
 
 	if v.MaxResults != 0 {
@@ -3825,9 +3908,9 @@ func awsRestjson1_serializeOpDocumentUpdateImagePipelineInput(v *UpdateImagePipe
 		ok.String(*v.DistributionConfigurationArn)
 	}
 
-	if v.EnhancedImageMetadataEnabled {
+	if v.EnhancedImageMetadataEnabled != nil {
 		ok := object.Key("enhancedImageMetadataEnabled")
-		ok.Boolean(v.EnhancedImageMetadataEnabled)
+		ok.Boolean(*v.EnhancedImageMetadataEnabled)
 	}
 
 	if v.ImagePipelineArn != nil {
@@ -3995,9 +4078,9 @@ func awsRestjson1_serializeOpDocumentUpdateInfrastructureConfigurationInput(v *U
 		ok.String(*v.SubnetId)
 	}
 
-	if v.TerminateInstanceOnFailure {
+	if v.TerminateInstanceOnFailure != nil {
 		ok := object.Key("terminateInstanceOnFailure")
-		ok.Boolean(v.TerminateInstanceOnFailure)
+		ok.Boolean(*v.TerminateInstanceOnFailure)
 	}
 
 	return nil
@@ -4158,19 +4241,19 @@ func awsRestjson1_serializeDocumentEbsInstanceBlockDeviceSpecification(v *types.
 	object := value.Object()
 	defer object.Close()
 
-	if v.DeleteOnTermination {
+	if v.DeleteOnTermination != nil {
 		ok := object.Key("deleteOnTermination")
-		ok.Boolean(v.DeleteOnTermination)
+		ok.Boolean(*v.DeleteOnTermination)
 	}
 
-	if v.Encrypted {
+	if v.Encrypted != nil {
 		ok := object.Key("encrypted")
-		ok.Boolean(v.Encrypted)
+		ok.Boolean(*v.Encrypted)
 	}
 
-	if v.Iops != 0 {
+	if v.Iops != nil {
 		ok := object.Key("iops")
-		ok.Integer(v.Iops)
+		ok.Integer(*v.Iops)
 	}
 
 	if v.KmsKeyId != nil {
@@ -4183,9 +4266,9 @@ func awsRestjson1_serializeDocumentEbsInstanceBlockDeviceSpecification(v *types.
 		ok.String(*v.SnapshotId)
 	}
 
-	if v.VolumeSize != 0 {
+	if v.VolumeSize != nil {
 		ok := object.Key("volumeSize")
-		ok.Integer(v.VolumeSize)
+		ok.Integer(*v.VolumeSize)
 	}
 
 	if len(v.VolumeType) > 0 {
@@ -4243,14 +4326,14 @@ func awsRestjson1_serializeDocumentImageTestsConfiguration(v *types.ImageTestsCo
 	object := value.Object()
 	defer object.Close()
 
-	if v.ImageTestsEnabled {
+	if v.ImageTestsEnabled != nil {
 		ok := object.Key("imageTestsEnabled")
-		ok.Boolean(v.ImageTestsEnabled)
+		ok.Boolean(*v.ImageTestsEnabled)
 	}
 
-	if v.TimeoutMinutes != 0 {
+	if v.TimeoutMinutes != nil {
 		ok := object.Key("timeoutMinutes")
-		ok.Integer(v.TimeoutMinutes)
+		ok.Integer(*v.TimeoutMinutes)
 	}
 
 	return nil
@@ -4406,6 +4489,11 @@ func awsRestjson1_serializeDocumentSchedule(v *types.Schedule, value smithyjson.
 	if v.ScheduleExpression != nil {
 		ok := object.Key("scheduleExpression")
 		ok.String(*v.ScheduleExpression)
+	}
+
+	if v.Timezone != nil {
+		ok := object.Key("timezone")
+		ok.String(*v.Timezone)
 	}
 
 	return nil

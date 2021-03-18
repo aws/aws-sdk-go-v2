@@ -8,7 +8,7 @@ type ClassificationType struct {
 
 	// A continuous classification of the objects that are added to a specified S3
 	// bucket. Amazon Macie Classic begins performing continuous classification after a
-	// bucket is successfully associated with Amazon Macie Classic.
+	// bucket is successfully associated with Macie Classic.
 	//
 	// This member is required.
 	Continuous S3ContinuousClassificationType
@@ -27,7 +27,7 @@ type ClassificationTypeUpdate struct {
 
 	// A continuous classification of the objects that are added to a specified S3
 	// bucket. Amazon Macie Classic begins performing continuous classification after a
-	// bucket is successfully associated with Amazon Macie Classic.
+	// bucket is successfully associated with Macie Classic.
 	Continuous S3ContinuousClassificationType
 
 	// A one-time classification of all of the existing objects in a specified S3

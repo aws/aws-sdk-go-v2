@@ -12,15 +12,12 @@ import (
 )
 
 // Provides organization conformance pack deployment status for an organization.
-// Only a master account and a delegated administrator account can call this API.
-// When calling this API with a delegated administrator, you must ensure AWS
-// Organizations ListDelegatedAdministrator permissions are added. The status is
-// not considered successful until organization conformance pack is successfully
-// deployed in all the member accounts with an exception of excluded accounts. When
-// you specify the limit and the next token, you receive a paginated response.
-// Limit and next token are not applicable if you specify organization conformance
-// pack names. They are only applicable, when you request all the organization
-// conformance packs.
+// The status is not considered successful until organization conformance pack is
+// successfully deployed in all the member accounts with an exception of excluded
+// accounts. When you specify the limit and the next token, you receive a paginated
+// response. Limit and next token are not applicable if you specify organization
+// conformance pack names. They are only applicable, when you request all the
+// organization conformance packs.
 func (c *Client) DescribeOrganizationConformancePackStatuses(ctx context.Context, params *DescribeOrganizationConformancePackStatusesInput, optFns ...func(*Options)) (*DescribeOrganizationConformancePackStatusesOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConformancePackStatusesInput{}

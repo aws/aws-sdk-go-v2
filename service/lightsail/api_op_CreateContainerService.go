@@ -14,7 +14,7 @@ import (
 // Creates an Amazon Lightsail container service. A Lightsail container service is
 // a compute resource to which you can deploy containers. For more information, see
 // Container services in Amazon Lightsail
-// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-containers)
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-services)
 // in the Lightsail Dev Guide.
 func (c *Client) CreateContainerService(ctx context.Context, params *CreateContainerServiceInput, optFns ...func(*Options)) (*CreateContainerServiceOutput, error) {
 	if params == nil {

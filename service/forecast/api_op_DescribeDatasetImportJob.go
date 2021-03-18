@@ -83,24 +83,27 @@ type DescribeDatasetImportJobOutput struct {
 	// "CC_POSTALCODE".
 	GeolocationFormat *string
 
-	// The last time that the dataset was modified. The time depends on the status of
-	// the job, as follows:
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
 	//
-	// * CREATE_PENDING - The same time as CreationTime.
+	// * CREATE_PENDING - The CreationTime.
 	//
-	// *
-	// CREATE_IN_PROGRESS - The current timestamp.
+	// * CREATE_IN_PROGRESS - The
+	// current timestamp.
 	//
-	// * ACTIVE or CREATE_FAILED - When
-	// the job finished or failed.
+	// * CREATE_STOPPING - The current timestamp.
+	//
+	// * CREATE_STOPPED
+	// - When the job stopped.
+	//
+	// * ACTIVE or CREATE_FAILED - When the job finished or
+	// failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
 	Message *string
 
-	// The status of the dataset import job. The status is reflected in the status of
-	// the dataset. For example, when the import job status is CREATE_IN_PROGRESS, the
-	// status of the dataset is UPDATE_IN_PROGRESS. States include:
+	// The status of the dataset import job. States include:
 	//
 	// * ACTIVE
 	//
@@ -109,6 +112,8 @@ type DescribeDatasetImportJobOutput struct {
 	//
 	// * DELETE_PENDING,
 	// DELETE_IN_PROGRESS, DELETE_FAILED
+	//
+	// * CREATE_STOPPING, CREATE_STOPPED
 	Status *string
 
 	// The single time zone applied to every item in the dataset

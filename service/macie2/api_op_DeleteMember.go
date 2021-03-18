@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the association between an Amazon Macie master account and an account.
+// Deletes the association between an Amazon Macie administrator account and an
+// account.
 func (c *Client) DeleteMember(ctx context.Context, params *DeleteMemberInput, optFns ...func(*Options)) (*DeleteMemberOutput, error) {
 	if params == nil {
 		params = &DeleteMemberInput{}

@@ -140,7 +140,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The policy document that you provided isn't valid.
+// You provided a resource-based policy with syntax errors.
 type MalformedPolicyDocumentException struct {
 	Message *string
 }
@@ -176,7 +176,8 @@ func (e *PreconditionNotMetException) ErrorMessage() string {
 func (e *PreconditionNotMetException) ErrorCode() string             { return "PreconditionNotMetException" }
 func (e *PreconditionNotMetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource policy did not prevent broad access to the secret.
+// The BlockPublicPolicy parameter is set to true and the resource policy did not
+// prevent broad access to the secret.
 type PublicPolicyException struct {
 	Message *string
 }

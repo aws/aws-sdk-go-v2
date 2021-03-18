@@ -73,7 +73,7 @@ type DescribeIdentityPoolOutput struct {
 	// by purpose, owner, environment, or other criteria.
 	IdentityPoolTags map[string]string
 
-	// A list of OpendID Connect provider ARNs.
+	// The ARNs of the OpenID Connect providers.
 	OpenIdConnectProviderARNs []string
 
 	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity

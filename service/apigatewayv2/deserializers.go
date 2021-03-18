@@ -1410,6 +1410,11 @@ func awsRestjson1_deserializeOpDocumentCreateIntegrationOutput(v **CreateIntegra
 				return err
 			}
 
+		case "responseParameters":
+			if err := awsRestjson1_deserializeDocumentResponseParameters(&sv.ResponseParameters, value); err != nil {
+				return err
+			}
+
 		case "templateSelectionExpression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6508,6 +6513,11 @@ func awsRestjson1_deserializeOpDocumentGetIntegrationOutput(v **GetIntegrationOu
 				return err
 			}
 
+		case "responseParameters":
+			if err := awsRestjson1_deserializeDocumentResponseParameters(&sv.ResponseParameters, value); err != nil {
+				return err
+			}
+
 		case "templateSelectionExpression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11510,6 +11520,11 @@ func awsRestjson1_deserializeOpDocumentUpdateIntegrationOutput(v **UpdateIntegra
 				return err
 			}
 
+		case "responseParameters":
+			if err := awsRestjson1_deserializeDocumentResponseParameters(&sv.ResponseParameters, value); err != nil {
+				return err
+			}
+
 		case "templateSelectionExpression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14732,6 +14747,11 @@ func awsRestjson1_deserializeDocumentIntegration(v **types.Integration, value in
 				return err
 			}
 
+		case "responseParameters":
+			if err := awsRestjson1_deserializeDocumentResponseParameters(&sv.ResponseParameters, value); err != nil {
+				return err
+			}
+
 		case "templateSelectionExpression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15142,6 +15162,40 @@ func awsRestjson1_deserializeDocumentParameterConstraints(v **types.ParameterCon
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResponseParameters(v *map[string]map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]map[string]string
+	if *v == nil {
+		mv = map[string]map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal map[string]string
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentIntegrationParameters(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 

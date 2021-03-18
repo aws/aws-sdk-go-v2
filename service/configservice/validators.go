@@ -330,6 +330,26 @@ func (m *validateOpDeleteRetentionConfiguration) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteStoredQuery struct {
+}
+
+func (*validateOpDeleteStoredQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteStoredQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteStoredQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteStoredQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeliverConfigSnapshot struct {
 }
 
@@ -690,6 +710,26 @@ func (m *validateOpGetResourceConfigHistory) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetStoredQuery struct {
+}
+
+func (*validateOpGetStoredQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetStoredQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetStoredQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetStoredQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAggregateDiscoveredResources struct {
 }
 
@@ -890,6 +930,26 @@ func (m *validateOpPutEvaluations) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutExternalEvaluation struct {
+}
+
+func (*validateOpPutExternalEvaluation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutExternalEvaluation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutExternalEvaluationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutExternalEvaluationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutOrganizationConfigRule struct {
 }
 
@@ -1005,6 +1065,26 @@ func (m *validateOpPutRetentionConfiguration) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutRetentionConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutStoredQuery struct {
+}
+
+func (*validateOpPutStoredQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutStoredQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutStoredQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutStoredQueryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1214,6 +1294,10 @@ func addOpDeleteRetentionConfigurationValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpDeleteRetentionConfiguration{}, middleware.After)
 }
 
+func addOpDeleteStoredQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteStoredQuery{}, middleware.After)
+}
+
 func addOpDeliverConfigSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeliverConfigSnapshot{}, middleware.After)
 }
@@ -1286,6 +1370,10 @@ func addOpGetResourceConfigHistoryValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetResourceConfigHistory{}, middleware.After)
 }
 
+func addOpGetStoredQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetStoredQuery{}, middleware.After)
+}
+
 func addOpListAggregateDiscoveredResourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAggregateDiscoveredResources{}, middleware.After)
 }
@@ -1326,6 +1414,10 @@ func addOpPutEvaluationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutEvaluations{}, middleware.After)
 }
 
+func addOpPutExternalEvaluationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutExternalEvaluation{}, middleware.After)
+}
+
 func addOpPutOrganizationConfigRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutOrganizationConfigRule{}, middleware.After)
 }
@@ -1348,6 +1440,10 @@ func addOpPutResourceConfigValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutRetentionConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutRetentionConfiguration{}, middleware.After)
+}
+
+func addOpPutStoredQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutStoredQuery{}, middleware.After)
 }
 
 func addOpSelectAggregateResourceConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -1521,6 +1617,30 @@ func validateEvaluations(v []types.Evaluation) error {
 		if err := validateEvaluation(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExternalEvaluation(v *types.ExternalEvaluation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExternalEvaluation"}
+	if v.ComplianceResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComplianceResourceType"))
+	}
+	if v.ComplianceResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComplianceResourceId"))
+	}
+	if len(v.ComplianceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComplianceType"))
+	}
+	if v.OrderingTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrderingTimestamp"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1752,6 +1872,21 @@ func validateStaticValue(v *types.StaticValue) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StaticValue"}
 	if v.Values == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStoredQuery(v *types.StoredQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StoredQuery"}
+	if v.QueryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2015,6 +2150,21 @@ func validateOpDeleteRetentionConfigurationInput(v *DeleteRetentionConfiguration
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRetentionConfigurationInput"}
 	if v.RetentionConfigurationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RetentionConfigurationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteStoredQueryInput(v *DeleteStoredQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteStoredQueryInput"}
+	if v.QueryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2320,6 +2470,21 @@ func validateOpGetResourceConfigHistoryInput(v *GetResourceConfigHistoryInput) e
 	}
 }
 
+func validateOpGetStoredQueryInput(v *GetStoredQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetStoredQueryInput"}
+	if v.QueryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAggregateDiscoveredResourcesInput(v *ListAggregateDiscoveredResourcesInput) error {
 	if v == nil {
 		return nil
@@ -2500,6 +2665,28 @@ func validateOpPutEvaluationsInput(v *PutEvaluationsInput) error {
 	}
 }
 
+func validateOpPutExternalEvaluationInput(v *PutExternalEvaluationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutExternalEvaluationInput"}
+	if v.ConfigRuleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigRuleName"))
+	}
+	if v.ExternalEvaluation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExternalEvaluation"))
+	} else if v.ExternalEvaluation != nil {
+		if err := validateExternalEvaluation(v.ExternalEvaluation); err != nil {
+			invalidParams.AddNested("ExternalEvaluation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutOrganizationConfigRuleInput(v *PutOrganizationConfigRuleInput) error {
 	if v == nil {
 		return nil
@@ -2611,6 +2798,25 @@ func validateOpPutRetentionConfigurationInput(v *PutRetentionConfigurationInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutRetentionConfigurationInput"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutStoredQueryInput(v *PutStoredQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutStoredQueryInput"}
+	if v.StoredQuery == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StoredQuery"))
+	} else if v.StoredQuery != nil {
+		if err := validateStoredQuery(v.StoredQuery); err != nil {
+			invalidParams.AddNested("StoredQuery", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

@@ -713,6 +713,9 @@ func validateOpDeleteIntegrationInput(v *DeleteIntegrationInput) error {
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -826,6 +829,9 @@ func validateOpGetIntegrationInput(v *GetIntegrationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetIntegrationInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

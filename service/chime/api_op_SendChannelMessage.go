@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends a message to a particular channel that the member is a part of. STANDARD
+// Sends a message to a particular channel that the member is a part of. The
+// x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of
+// the user that makes the API call as the value in the header. Also, STANDARD
 // messages can contain 4KB of data and the 1KB of metadata. CONTROL messages can
 // contain 30 bytes of data and no metadata.
 func (c *Client) SendChannelMessage(ctx context.Context, params *SendChannelMessageInput, optFns ...func(*Options)) (*SendChannelMessageOutput, error) {
@@ -57,6 +59,9 @@ type SendChannelMessageInput struct {
 	//
 	// This member is required.
 	Type types.ChannelMessageType
+
+	// The AppInstanceUserArn of the user that makes the API call.
+	ChimeBearer *string
 
 	// The optional metadata for each message.
 	Metadata *string

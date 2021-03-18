@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Device Defender security profiles you have created. You can use
-// filters to list only those security profiles associated with a thing group or
-// only those associated with your account.
+// Lists the Device Defender security profiles you've created. You can filter
+// security profiles by dimension or custom metric. dimensionName and metricName
+// cannot be used in the same request.
 func (c *Client) ListSecurityProfiles(ctx context.Context, params *ListSecurityProfilesInput, optFns ...func(*Options)) (*ListSecurityProfilesOutput, error) {
 	if params == nil {
 		params = &ListSecurityProfilesInput{}
@@ -33,11 +33,14 @@ func (c *Client) ListSecurityProfiles(ctx context.Context, params *ListSecurityP
 type ListSecurityProfilesInput struct {
 
 	// A filter to limit results to the security profiles that use the defined
-	// dimension.
+	// dimension. Cannot be used with metricName
 	DimensionName *string
 
 	// The maximum number of results to return at one time.
 	MaxResults *int32
+
+	// The name of the custom metric. Cannot be used with dimensionName.
+	MetricName *string
 
 	// The token for the next set of results.
 	NextToken *string

@@ -16,7 +16,9 @@ import (
 // MessageAttributes.entry.N parameter. For more information, see Publishing to a
 // mobile phone
 // (https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html) in the
-// Amazon SNS Developer Guide.
+// Amazon SNS Developer Guide. To use this operation, you must grant the Amazon SNS
+// service principal (sns.amazonaws.com) permission to perform the s3:ListBucket
+// action.
 func (c *Client) SetSMSAttributes(ctx context.Context, params *SetSMSAttributesInput, optFns ...func(*Options)) (*SetSMSAttributesOutput, error) {
 	if params == nil {
 		params = &SetSMSAttributesInput{}

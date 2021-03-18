@@ -12,8 +12,7 @@ import (
 
 // Deletes an outcome. You cannot delete an outcome that is used in a rule version.
 // When you delete an outcome, Amazon Fraud Detector permanently deletes that
-// outcome from the evaluation history, and the data is no longer stored in Amazon
-// Fraud Detector.
+// outcome and the data is no longer stored in Amazon Fraud Detector.
 func (c *Client) DeleteOutcome(ctx context.Context, params *DeleteOutcomeInput, optFns ...func(*Options)) (*DeleteOutcomeOutput, error) {
 	if params == nil {
 		params = &DeleteOutcomeInput{}

@@ -40,9 +40,16 @@ type AssociateAwsAccountWithPartnerAccountInput struct {
 	// occurs. If you omit this value, AWS SDKs will automatically generate a unique
 	// client request.
 	ClientRequestToken *string
+
+	// The tags attached to the specified resource. Tags are metadata that can be used
+	// to manage a resource
+	Tags []types.Tag
 }
 
 type AssociateAwsAccountWithPartnerAccountOutput struct {
+
+	// The Amazon Resource Name of the resource.
+	Arn *string
 
 	// The Sidewalk account credentials.
 	Sidewalk *types.SidewalkAccountInfo

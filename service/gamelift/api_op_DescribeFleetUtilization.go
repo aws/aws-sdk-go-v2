@@ -12,51 +12,35 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves utilization statistics for one or more fleets. These statistics
-// provide insight into how available hosting resources are currently being used.
-// To get statistics on available hosting resources, see DescribeFleetCapacity. You
-// can request utilization data for all fleets, or specify a list of one or more
-// fleet IDs. When requesting multiple fleets, use the pagination parameters to
-// retrieve results as a set of sequential pages. If successful, a FleetUtilization
-// object is returned for each requested fleet ID, unless the fleet identifier is
-// not found. Some API operations may limit the number of fleet IDs allowed in one
-// request. If a request exceeds this limit, the request fails and the error
-// message includes the maximum allowed. Learn more Setting up GameLift Fleets
+// Retrieves utilization statistics for one or more fleets. Utilization data
+// provides a snapshot of how the fleet's hosting resources are currently being
+// used. For fleets with remote locations, this operation retrieves data for the
+// fleet's home Region only. See DescribeFleetLocationUtilization to get
+// utilization statistics for a fleet's remote locations. This operation can be
+// used in the following ways:
+//
+// * To get utilization data for one or more specific
+// fleets, provide a list of fleet IDs or fleet ARNs.
+//
+// * To get utilization data
+// for all fleets, do not provide a fleet identifier.
+//
+// When requesting multiple
+// fleets, use the pagination parameters to retrieve results as a set of sequential
+// pages. If successful, a FleetUtilization object is returned for each requested
+// fleet ID, unless the fleet identifier is not found. Each fleet utilization
+// object includes a Location property, which is set to the fleet's home Region.
+// Some API operations may limit the number of fleet IDs allowed in one request. If
+// a request exceeds this limit, the request fails and the error message includes
+// the maximum allowed. Learn more Setting up GameLift Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)GameLift
 // Metrics for Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
-// Related operations
-//
-// * CreateFleet
-//
-// * ListFleets
-//
-// * DeleteFleet
-//
-// * Describe
-// fleets:
-//
-// * DescribeFleetAttributes
-//
-// * DescribeFleetCapacity
-//
-// *
-// DescribeFleetPortSettings
-//
-// * DescribeFleetUtilization
-//
-// *
-// DescribeRuntimeConfiguration
-//
-// * DescribeEC2InstanceLimits
-//
-// *
-// DescribeFleetEvents
-//
-// * UpdateFleetAttributes
-//
-// * StartFleetActions or
-// StopFleetActions
+// Related actions ListFleets | DescribeEC2InstanceLimits | DescribeFleetAttributes
+// | DescribeFleetCapacity | DescribeFleetEvents | DescribeFleetLocationAttributes
+// | DescribeFleetPortSettings | DescribeFleetUtilization |
+// DescribeRuntimeConfiguration | DescribeScalingPolicies | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeFleetUtilization(ctx context.Context, params *DescribeFleetUtilizationInput, optFns ...func(*Options)) (*DescribeFleetUtilizationOutput, error) {
 	if params == nil {
 		params = &DescribeFleetUtilizationInput{}
@@ -75,11 +59,9 @@ func (c *Client) DescribeFleetUtilization(ctx context.Context, params *DescribeF
 // Represents the input for a request operation.
 type DescribeFleetUtilizationInput struct {
 
-	// A unique identifier for a fleet(s) to retrieve utilization data for. You can use
-	// either the fleet ID or ARN value. To retrieve attributes for all current fleets,
-	// do not include this parameter. If the list of fleet identifiers includes fleets
-	// that don't currently exist, the request succeeds but no attributes for that
-	// fleet are returned.
+	// A unique identifier for the fleet(s) to retrieve utilization data for. You can
+	// use either the fleet ID or ARN value. To retrieve attributes for all current
+	// fleets, do not include this parameter.
 	FleetIds []string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -87,7 +69,7 @@ type DescribeFleetUtilizationInput struct {
 	// request specifies one or a list of fleet IDs.
 	Limit *int32
 
-	// Token that indicates the start of the next sequential page of results. Use the
+	// A token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value. This parameter is ignored
 	// when the request specifies one or a list of fleet IDs.
@@ -98,11 +80,12 @@ type DescribeFleetUtilizationInput struct {
 type DescribeFleetUtilizationOutput struct {
 
 	// A collection of objects containing utilization information for each requested
-	// fleet ID.
+	// fleet ID. Utilization objects are returned only for fleets that currently exist.
 	FleetUtilization []types.FleetUtilization
 
-	// Token that indicates where to resume retrieving results on the next call to this
-	// operation. If no token is returned, these results represent the end of the list.
+	// A token that indicates where to resume retrieving results on the next call to
+	// this operation. If no token is returned, these results represent the end of the
+	// list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

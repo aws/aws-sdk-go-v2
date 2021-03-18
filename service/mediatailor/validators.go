@@ -5,9 +5,130 @@ package mediatailor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
+
+type validateOpCreateChannel struct {
+}
+
+func (*validateOpCreateChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateProgram struct {
+}
+
+func (*validateOpCreateProgram) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateProgram) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateProgramInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateProgramInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSourceLocation struct {
+}
+
+func (*validateOpCreateSourceLocation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSourceLocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSourceLocationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSourceLocationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateVodSource struct {
+}
+
+func (*validateOpCreateVodSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVodSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVodSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVodSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteChannel struct {
+}
+
+func (*validateOpDeleteChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteChannelPolicy struct {
+}
+
+func (*validateOpDeleteChannelPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteChannelPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteChannelPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteChannelPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
 
 type validateOpDeletePlaybackConfiguration struct {
 }
@@ -24,6 +145,186 @@ func (m *validateOpDeletePlaybackConfiguration) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeletePlaybackConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteProgram struct {
+}
+
+func (*validateOpDeleteProgram) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteProgram) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteProgramInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteProgramInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSourceLocation struct {
+}
+
+func (*validateOpDeleteSourceLocation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSourceLocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSourceLocationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSourceLocationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteVodSource struct {
+}
+
+func (*validateOpDeleteVodSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVodSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVodSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVodSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeChannel struct {
+}
+
+func (*validateOpDescribeChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeProgram struct {
+}
+
+func (*validateOpDescribeProgram) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeProgram) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeProgramInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeProgramInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeSourceLocation struct {
+}
+
+func (*validateOpDescribeSourceLocation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSourceLocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSourceLocationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSourceLocationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeVodSource struct {
+}
+
+func (*validateOpDescribeVodSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeVodSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeVodSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeVodSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetChannelPolicy struct {
+}
+
+func (*validateOpGetChannelPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetChannelPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetChannelPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetChannelPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetChannelSchedule struct {
+}
+
+func (*validateOpGetChannelSchedule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetChannelSchedule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetChannelScheduleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetChannelScheduleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -69,6 +370,86 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListVodSources struct {
+}
+
+func (*validateOpListVodSources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListVodSources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListVodSourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListVodSourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutChannelPolicy struct {
+}
+
+func (*validateOpPutChannelPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutChannelPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutChannelPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutChannelPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartChannel struct {
+}
+
+func (*validateOpStartChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopChannel struct {
+}
+
+func (*validateOpStopChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -109,8 +490,128 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateChannel struct {
+}
+
+func (*validateOpUpdateChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateSourceLocation struct {
+}
+
+func (*validateOpUpdateSourceLocation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSourceLocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSourceLocationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSourceLocationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateVodSource struct {
+}
+
+func (*validateOpUpdateVodSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateVodSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateVodSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateVodSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpCreateChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateChannel{}, middleware.After)
+}
+
+func addOpCreateProgramValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateProgram{}, middleware.After)
+}
+
+func addOpCreateSourceLocationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSourceLocation{}, middleware.After)
+}
+
+func addOpCreateVodSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVodSource{}, middleware.After)
+}
+
+func addOpDeleteChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteChannel{}, middleware.After)
+}
+
+func addOpDeleteChannelPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteChannelPolicy{}, middleware.After)
+}
+
 func addOpDeletePlaybackConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePlaybackConfiguration{}, middleware.After)
+}
+
+func addOpDeleteProgramValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteProgram{}, middleware.After)
+}
+
+func addOpDeleteSourceLocationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSourceLocation{}, middleware.After)
+}
+
+func addOpDeleteVodSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVodSource{}, middleware.After)
+}
+
+func addOpDescribeChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeChannel{}, middleware.After)
+}
+
+func addOpDescribeProgramValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeProgram{}, middleware.After)
+}
+
+func addOpDescribeSourceLocationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSourceLocation{}, middleware.After)
+}
+
+func addOpDescribeVodSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeVodSource{}, middleware.After)
+}
+
+func addOpGetChannelPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetChannelPolicy{}, middleware.After)
+}
+
+func addOpGetChannelScheduleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetChannelSchedule{}, middleware.After)
 }
 
 func addOpGetPlaybackConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -121,12 +622,298 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpListVodSourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListVodSources{}, middleware.After)
+}
+
+func addOpPutChannelPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutChannelPolicy{}, middleware.After)
+}
+
+func addOpStartChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartChannel{}, middleware.After)
+}
+
+func addOpStopChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopChannel{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateChannel{}, middleware.After)
+}
+
+func addOpUpdateSourceLocationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSourceLocation{}, middleware.After)
+}
+
+func addOpUpdateVodSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateVodSource{}, middleware.After)
+}
+
+func validateHttpConfiguration(v *types.HttpConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpConfiguration"}
+	if v.BaseUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHttpPackageConfiguration(v *types.HttpPackageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpPackageConfiguration"}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if v.SourceGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceGroup"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHttpPackageConfigurations(v []types.HttpPackageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpPackageConfigurations"}
+	for i := range v {
+		if err := validateHttpPackageConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRequestOutputItem(v *types.RequestOutputItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RequestOutputItem"}
+	if v.ManifestName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManifestName"))
+	}
+	if v.SourceGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceGroup"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRequestOutputs(v []types.RequestOutputItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RequestOutputs"}
+	for i := range v {
+		if err := validateRequestOutputItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduleConfiguration(v *types.ScheduleConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduleConfiguration"}
+	if v.Transition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Transition"))
+	} else if v.Transition != nil {
+		if err := validateTransition(v.Transition); err != nil {
+			invalidParams.AddNested("Transition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTransition(v *types.Transition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Transition"}
+	if len(v.RelativePosition) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RelativePosition"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateChannelInput(v *CreateChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateChannelInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.Outputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Outputs"))
+	} else if v.Outputs != nil {
+		if err := validateRequestOutputs(v.Outputs); err != nil {
+			invalidParams.AddNested("Outputs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.PlaybackMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PlaybackMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateProgramInput(v *CreateProgramInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateProgramInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.ProgramName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramName"))
+	}
+	if v.ScheduleConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleConfiguration"))
+	} else if v.ScheduleConfiguration != nil {
+		if err := validateScheduleConfiguration(v.ScheduleConfiguration); err != nil {
+			invalidParams.AddNested("ScheduleConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceLocationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLocationName"))
+	}
+	if v.VodSourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VodSourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSourceLocationInput(v *CreateSourceLocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSourceLocationInput"}
+	if v.HttpConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HttpConfiguration"))
+	} else if v.HttpConfiguration != nil {
+		if err := validateHttpConfiguration(v.HttpConfiguration); err != nil {
+			invalidParams.AddNested("HttpConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceLocationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLocationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateVodSourceInput(v *CreateVodSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVodSourceInput"}
+	if v.HttpPackageConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HttpPackageConfigurations"))
+	} else if v.HttpPackageConfigurations != nil {
+		if err := validateHttpPackageConfigurations(v.HttpPackageConfigurations); err != nil {
+			invalidParams.AddNested("HttpPackageConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceLocationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLocationName"))
+	}
+	if v.VodSourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VodSourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteChannelInput(v *DeleteChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteChannelInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteChannelPolicyInput(v *DeleteChannelPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteChannelPolicyInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpDeletePlaybackConfigurationInput(v *DeletePlaybackConfigurationInput) error {
@@ -136,6 +923,153 @@ func validateOpDeletePlaybackConfigurationInput(v *DeletePlaybackConfigurationIn
 	invalidParams := smithy.InvalidParamsError{Context: "DeletePlaybackConfigurationInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteProgramInput(v *DeleteProgramInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteProgramInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.ProgramName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSourceLocationInput(v *DeleteSourceLocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSourceLocationInput"}
+	if v.SourceLocationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLocationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteVodSourceInput(v *DeleteVodSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVodSourceInput"}
+	if v.SourceLocationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLocationName"))
+	}
+	if v.VodSourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VodSourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeChannelInput(v *DescribeChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeChannelInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeProgramInput(v *DescribeProgramInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeProgramInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.ProgramName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeSourceLocationInput(v *DescribeSourceLocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSourceLocationInput"}
+	if v.SourceLocationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLocationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeVodSourceInput(v *DescribeVodSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeVodSourceInput"}
+	if v.SourceLocationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLocationName"))
+	}
+	if v.VodSourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VodSourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetChannelPolicyInput(v *GetChannelPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetChannelPolicyInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetChannelScheduleInput(v *GetChannelScheduleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetChannelScheduleInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -174,6 +1108,69 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpListVodSourcesInput(v *ListVodSourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListVodSourcesInput"}
+	if v.SourceLocationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLocationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutChannelPolicyInput(v *PutChannelPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutChannelPolicyInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartChannelInput(v *StartChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartChannelInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopChannelInput(v *StopChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopChannelInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -202,6 +1199,75 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateChannelInput"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.Outputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Outputs"))
+	} else if v.Outputs != nil {
+		if err := validateRequestOutputs(v.Outputs); err != nil {
+			invalidParams.AddNested("Outputs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSourceLocationInput(v *UpdateSourceLocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSourceLocationInput"}
+	if v.HttpConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HttpConfiguration"))
+	} else if v.HttpConfiguration != nil {
+		if err := validateHttpConfiguration(v.HttpConfiguration); err != nil {
+			invalidParams.AddNested("HttpConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceLocationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLocationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateVodSourceInput(v *UpdateVodSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateVodSourceInput"}
+	if v.HttpPackageConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HttpPackageConfigurations"))
+	} else if v.HttpPackageConfigurations != nil {
+		if err := validateHttpPackageConfigurations(v.HttpPackageConfigurations); err != nil {
+			invalidParams.AddNested("HttpPackageConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceLocationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLocationName"))
+	}
+	if v.VodSourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VodSourceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

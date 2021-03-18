@@ -30,7 +30,7 @@ func (c *Client) UpdateProfilingGroup(ctx context.Context, params *UpdateProfili
 // The structure representing the updateProfilingGroupRequest.
 type UpdateProfilingGroupInput struct {
 
-	//
+	// Specifies whether profiling is enabled or disabled for a profiling group.
 	//
 	// This member is required.
 	AgentOrchestrationConfig *types.AgentOrchestrationConfig
@@ -44,7 +44,9 @@ type UpdateProfilingGroupInput struct {
 // The structure representing the updateProfilingGroupResponse.
 type UpdateProfilingGroupOutput struct {
 
-	// Updated information about the profiling group.
+	// A ProfilingGroupDescription
+	// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// that contains information about the returned updated profiling group.
 	//
 	// This member is required.
 	ProfilingGroup *types.ProfilingGroupDescription

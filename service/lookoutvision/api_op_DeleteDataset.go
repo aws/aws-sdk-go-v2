@@ -24,8 +24,8 @@ import (
 // the training dataset, you must create a training dataset before you can create a
 // model.
 //
-// It might take a while to delete the dataset. To check the current
-// status, check the Status field in the response from a call to DescribeDataset.
+// This operation requires permissions to perform the
+// lookoutvision:DeleteDataset operation.
 func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, optFns ...func(*Options)) (*DeleteDatasetOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetInput{}

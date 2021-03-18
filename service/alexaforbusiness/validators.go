@@ -2212,6 +2212,11 @@ func validateOpCreateAddressBookInput(v *CreateAddressBookInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2274,6 +2279,11 @@ func validateOpCreateConferenceProviderInput(v *CreateConferenceProviderInput) e
 			invalidParams.AddNested("MeetingSetting", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2299,6 +2309,11 @@ func validateOpCreateContactInput(v *CreateContactInput) error {
 			invalidParams.AddNested("SipAddresses", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2316,6 +2331,11 @@ func validateOpCreateGatewayGroupInput(v *CreateGatewayGroupInput) error {
 	}
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2340,6 +2360,11 @@ func validateOpCreateNetworkProfileInput(v *CreateNetworkProfileInput) error {
 	}
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2936,6 +2961,11 @@ func validateOpRegisterAVSDeviceInput(v *RegisterAVSDeviceInput) error {
 	}
 	if v.AmazonId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AmazonId"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

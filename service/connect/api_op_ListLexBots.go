@@ -37,7 +37,7 @@ type ListLexBotsInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The maximimum number of results to return per page.
+	// The maximum number of results to return per page.
 	MaxResults int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -47,7 +47,7 @@ type ListLexBotsInput struct {
 
 type ListLexBotsOutput struct {
 
-	// The the names and regions of the Amazon Lex bots associated with the specified
+	// The names and Regions of the Amazon Lex bots associated with the specified
 	// instance.
 	LexBots []types.LexBot
 
@@ -130,7 +130,7 @@ var _ ListLexBotsAPIClient = (*Client)(nil)
 
 // ListLexBotsPaginatorOptions is the paginator options for ListLexBots
 type ListLexBotsPaginatorOptions struct {
-	// The maximimum number of results to return per page.
+	// The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new role for your AWS account. For more information about roles, go to
-// IAM Roles
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html). The
-// number and size of IAM resources in an AWS account are limited. For more
-// information, see IAM and STS Quotas
+// Creates a new role for your AWS account. For more information about roles, see
+// IAM roles
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html). For
+// information about quotas for role names and the number of roles you can create,
+// see IAM and STS quotas
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in
 // the IAM User Guide.
 func (c *Client) CreateRole(ctx context.Context, params *CreateRoleInput, optFns ...func(*Options)) (*CreateRoleOutput, error) {
@@ -79,7 +79,7 @@ type CreateRoleInput struct {
 	// DurationSeconds parameter, their security credentials are valid for one hour by
 	// default. This applies when you use the AssumeRole* API operations or the
 	// assume-role* CLI operations but does not apply when you use those operations to
-	// create a console URL. For more information, see Using IAM Roles
+	// create a console URL. For more information, see Using IAM roles
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) in the IAM
 	// User Guide.
 	MaxSessionDuration *int32
@@ -98,12 +98,12 @@ type CreateRoleInput struct {
 	// The ARN of the policy that is used to set the permissions boundary for the role.
 	PermissionsBoundary *string
 
-	// A list of tags that you want to attach to the newly created role. Each tag
-	// consists of a key name and an associated value. For more information about
-	// tagging, see Tagging IAM Identities
+	// A list of tags that you want to attach to the new role. Each tag consists of a
+	// key name and an associated value. For more information about tagging, see
+	// Tagging IAM resources
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
-	// Guide. If any one of the tags is invalid or if you exceed the allowed number of
-	// tags per role, then the entire request fails and the role is not created.
+	// Guide. If any one of the tags is invalid or if you exceed the allowed maximum
+	// number of tags, then the entire request fails and the resource is not created.
 	Tags []types.Tag
 }
 

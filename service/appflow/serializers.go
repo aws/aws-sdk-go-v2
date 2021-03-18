@@ -1706,6 +1706,13 @@ func awsRestjson1_serializeDocumentConnectorProfileCredentials(v *types.Connecto
 		}
 	}
 
+	if v.Honeycode != nil {
+		ok := object.Key("Honeycode")
+		if err := awsRestjson1_serializeDocumentHoneycodeConnectorProfileCredentials(v.Honeycode, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InforNexus != nil {
 		ok := object.Key("InforNexus")
 		if err := awsRestjson1_serializeDocumentInforNexusConnectorProfileCredentials(v.InforNexus, ok); err != nil {
@@ -1829,6 +1836,13 @@ func awsRestjson1_serializeDocumentConnectorProfileProperties(v *types.Connector
 		}
 	}
 
+	if v.Honeycode != nil {
+		ok := object.Key("Honeycode")
+		if err := awsRestjson1_serializeDocumentHoneycodeConnectorProfileProperties(v.Honeycode, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InforNexus != nil {
 		ok := object.Key("InforNexus")
 		if err := awsRestjson1_serializeDocumentInforNexusConnectorProfileProperties(v.InforNexus, ok); err != nil {
@@ -1920,6 +1934,23 @@ func awsRestjson1_serializeDocumentConnectorTypeList(v []types.ConnectorType, va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCustomerProfilesDestinationProperties(v *types.CustomerProfilesDestinationProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainName != nil {
+		ok := object.Key("domainName")
+		ok.String(*v.DomainName)
+	}
+
+	if v.ObjectTypeName != nil {
+		ok := object.Key("objectTypeName")
+		ok.String(*v.ObjectTypeName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDatadogConnectorProfileCredentials(v *types.DatadogConnectorProfileCredentials, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1965,9 +1996,30 @@ func awsRestjson1_serializeDocumentDestinationConnectorProperties(v *types.Desti
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomerProfiles != nil {
+		ok := object.Key("CustomerProfiles")
+		if err := awsRestjson1_serializeDocumentCustomerProfilesDestinationProperties(v.CustomerProfiles, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EventBridge != nil {
 		ok := object.Key("EventBridge")
 		if err := awsRestjson1_serializeDocumentEventBridgeDestinationProperties(v.EventBridge, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Honeycode != nil {
+		ok := object.Key("Honeycode")
+		if err := awsRestjson1_serializeDocumentHoneycodeDestinationProperties(v.Honeycode, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LookoutMetrics != nil {
+		ok := object.Key("LookoutMetrics")
+		if err := awsRestjson1_serializeDocumentLookoutMetricsDestinationProperties(v.LookoutMetrics, ok); err != nil {
 			return err
 		}
 	}
@@ -2177,6 +2229,56 @@ func awsRestjson1_serializeDocumentGoogleAnalyticsSourceProperties(v *types.Goog
 	return nil
 }
 
+func awsRestjson1_serializeDocumentHoneycodeConnectorProfileCredentials(v *types.HoneycodeConnectorProfileCredentials, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessToken != nil {
+		ok := object.Key("accessToken")
+		ok.String(*v.AccessToken)
+	}
+
+	if v.OAuthRequest != nil {
+		ok := object.Key("oAuthRequest")
+		if err := awsRestjson1_serializeDocumentConnectorOAuthRequest(v.OAuthRequest, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RefreshToken != nil {
+		ok := object.Key("refreshToken")
+		ok.String(*v.RefreshToken)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHoneycodeConnectorProfileProperties(v *types.HoneycodeConnectorProfileProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHoneycodeDestinationProperties(v *types.HoneycodeDestinationProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ErrorHandlingConfig != nil {
+		ok := object.Key("errorHandlingConfig")
+		if err := awsRestjson1_serializeDocumentErrorHandlingConfig(v.ErrorHandlingConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Object != nil {
+		ok := object.Key("object")
+		ok.String(*v.Object)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIdFieldNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2247,6 +2349,13 @@ func awsRestjson1_serializeDocumentInforNexusSourceProperties(v *types.InforNexu
 		ok := object.Key("object")
 		ok.String(*v.Object)
 	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLookoutMetricsDestinationProperties(v *types.LookoutMetricsDestinationProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	return nil
 }
@@ -2569,6 +2678,11 @@ func awsRestjson1_serializeDocumentScheduledTriggerProperties(v *types.Scheduled
 		ok.String(string(v.DataPullMode))
 	}
 
+	if v.FirstExecutionFrom != nil {
+		ok := object.Key("firstExecutionFrom")
+		ok.Double(smithytime.FormatEpochSeconds(*v.FirstExecutionFrom))
+	}
+
 	if v.ScheduleEndTime != nil {
 		ok := object.Key("scheduleEndTime")
 		ok.Double(smithytime.FormatEpochSeconds(*v.ScheduleEndTime))
@@ -2577,6 +2691,11 @@ func awsRestjson1_serializeDocumentScheduledTriggerProperties(v *types.Scheduled
 	if v.ScheduleExpression != nil {
 		ok := object.Key("scheduleExpression")
 		ok.String(*v.ScheduleExpression)
+	}
+
+	if v.ScheduleOffset != 0 {
+		ok := object.Key("scheduleOffset")
+		ok.Long(v.ScheduleOffset)
 	}
 
 	if v.ScheduleStartTime != nil {

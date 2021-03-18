@@ -59,6 +59,13 @@ type UpdateFlowOutputInput struct {
 	// The maximum latency in milliseconds for Zixi-based streams.
 	MaxLatency int32
 
+	// The minimum latency in milliseconds for SRT-based streams. In streams that use
+	// the SRT protocol, this value that you set on your MediaConnect source or output
+	// represents the minimal potential latency of that connection. The latency of the
+	// stream is set to the highest number between the sender’s minimum latency and the
+	// receiver’s minimum latency.
+	MinLatency int32
+
 	// The port to use when content is distributed to this output.
 	Port int32
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// This operation is used with the GameLift FleetIQ solution and game server
 // groups. Locates an available game server and temporarily reserves it to host
 // gameplay and players. This operation is called from a game client or client
 // service (such as a matchmaker) to request hosting resources for a new game
@@ -42,21 +42,9 @@ import (
 // the instance status by calling DescribeGameServerInstances. Learn more GameLift
 // FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related operations
-//
-// * RegisterGameServer
-//
-// * ListGameServers
-//
-// *
-// ClaimGameServer
-//
-// * DescribeGameServer
-//
-// * UpdateGameServer
-//
-// *
-// DeregisterGameServer
+// Related actions RegisterGameServer | ListGameServers | ClaimGameServer |
+// DescribeGameServer | UpdateGameServer | DeregisterGameServer | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) ClaimGameServer(ctx context.Context, params *ClaimGameServerInput, optFns ...func(*Options)) (*ClaimGameServerOutput, error) {
 	if params == nil {
 		params = &ClaimGameServerInput{}
@@ -75,7 +63,7 @@ func (c *Client) ClaimGameServer(ctx context.Context, params *ClaimGameServerInp
 type ClaimGameServerInput struct {
 
 	// A unique identifier for the game server group where the game server is running.
-	// Use either the GameServerGroup name or ARN value.. If you are not specifying a
+	// Use either the GameServerGroup name or ARN value. If you are not specifying a
 	// game server to claim, this value identifies where you want GameLift FleetIQ to
 	// look for an available game server to claim.
 	//

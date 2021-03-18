@@ -4,6 +4,7 @@ package imagebuilder
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
@@ -117,6 +118,91 @@ func addOperationListDistributionConfigurationsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+// ListDistributionConfigurationsAPIClient is a client that implements the
+// ListDistributionConfigurations operation.
+type ListDistributionConfigurationsAPIClient interface {
+	ListDistributionConfigurations(context.Context, *ListDistributionConfigurationsInput, ...func(*Options)) (*ListDistributionConfigurationsOutput, error)
+}
+
+var _ ListDistributionConfigurationsAPIClient = (*Client)(nil)
+
+// ListDistributionConfigurationsPaginatorOptions is the paginator options for
+// ListDistributionConfigurations
+type ListDistributionConfigurationsPaginatorOptions struct {
+	// The maximum items to return in a request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDistributionConfigurationsPaginator is a paginator for
+// ListDistributionConfigurations
+type ListDistributionConfigurationsPaginator struct {
+	options   ListDistributionConfigurationsPaginatorOptions
+	client    ListDistributionConfigurationsAPIClient
+	params    *ListDistributionConfigurationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDistributionConfigurationsPaginator returns a new
+// ListDistributionConfigurationsPaginator
+func NewListDistributionConfigurationsPaginator(client ListDistributionConfigurationsAPIClient, params *ListDistributionConfigurationsInput, optFns ...func(*ListDistributionConfigurationsPaginatorOptions)) *ListDistributionConfigurationsPaginator {
+	if params == nil {
+		params = &ListDistributionConfigurationsInput{}
+	}
+
+	options := ListDistributionConfigurationsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListDistributionConfigurationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDistributionConfigurationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDistributionConfigurations page.
+func (p *ListDistributionConfigurationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDistributionConfigurationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListDistributionConfigurations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDistributionConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {

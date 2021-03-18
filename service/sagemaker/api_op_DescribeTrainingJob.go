@@ -12,7 +12,11 @@ import (
 	"time"
 )
 
-// Returns information about a training job.
+// Returns information about a training job. Some of the attributes below only
+// appear if the training job successfully starts. If the training job fails,
+// TrainingJobStatus is Failed and, depending on the FailureReason, attributes like
+// TrainingStartTime, TrainingTimeInSeconds, TrainingEndTime, and
+// BillableTimeInSeconds may not be present in the response.
 func (c *Client) DescribeTrainingJob(ctx context.Context, params *DescribeTrainingJobInput, optFns ...func(*Options)) (*DescribeTrainingJobOutput, error) {
 	if params == nil {
 		params = &DescribeTrainingJobInput{}
@@ -168,8 +172,12 @@ type DescribeTrainingJobOutput struct {
 	// The Amazon Resource Name (ARN) of an AutoML job.
 	AutoMLJobArn *string
 
-	// The billable time in seconds. You can calculate the savings from using managed
-	// spot training using the formula (1 - BillableTimeInSeconds /
+	// The billable time in seconds. Billable time refers to the absolute wall-clock
+	// time. Multiply BillableTimeInSeconds by the number of instances (InstanceCount)
+	// in your training cluster to get the total compute time Amazon SageMaker will
+	// bill you if you run distributed training. The formula is as follows:
+	// BillableTimeInSeconds * InstanceCount . You can calculate the savings from using
+	// managed spot training using the formula (1 - BillableTimeInSeconds /
 	// TrainingTimeInSeconds) * 100. For example, if BillableTimeInSeconds is 100 and
 	// TrainingTimeInSeconds is 500, the savings is 80%.
 	BillableTimeInSeconds *int32

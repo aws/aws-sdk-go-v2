@@ -91,7 +91,7 @@ type ImportSnapshotInput struct {
 	// The name of the role to use when not using the default role, 'vmimport'.
 	RoleName *string
 
-	// The tags to apply to the snapshot being imported.
+	// The tags to apply to the import snapshot task during creation.
 	TagSpecifications []types.TagSpecification
 }
 
@@ -106,7 +106,7 @@ type ImportSnapshotOutput struct {
 	// Information about the import snapshot task.
 	SnapshotTaskDetail *types.SnapshotTaskDetail
 
-	// Any tags assigned to the snapshot being imported.
+	// Any tags assigned to the import snapshot task.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

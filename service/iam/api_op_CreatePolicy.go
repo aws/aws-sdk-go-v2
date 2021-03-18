@@ -14,10 +14,13 @@ import (
 // Creates a new managed policy for your AWS account. This operation creates a
 // policy version with a version identifier of v1 and sets v1 as the policy's
 // default version. For more information about policy versions, see Versioning for
-// Managed Policies
+// managed policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
+// in the IAM User Guide. As a best practice, you can validate your IAM policies.
+// To learn more, see Validating IAM policies
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html)
 // in the IAM User Guide. For more information about managed policies in general,
-// see Managed Policies and Inline Policies
+// see Managed policies and inline policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, optFns ...func(*Options)) (*CreatePolicyOutput, error) {
@@ -71,7 +74,7 @@ type CreatePolicyInput struct {
 	// assigned, it cannot be changed.
 	Description *string
 
-	// The path for the policy. For more information about paths, see IAM Identifiers
+	// The path for the policy. For more information about paths, see IAM identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
 	// IAM User Guide. This parameter is optional. If it is not included, it defaults
 	// to a slash (/). This parameter allows (through its regex pattern
@@ -81,6 +84,14 @@ type CreatePolicyInput struct {
 	// through the DEL character (\u007F), including most punctuation characters,
 	// digits, and upper and lowercased letters.
 	Path *string
+
+	// A list of tags that you want to attach to the new IAM customer managed policy.
+	// Each tag consists of a key name and an associated value. For more information
+	// about tagging, see Tagging IAM resources
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
+	// Guide. If any one of the tags is invalid or if you exceed the allowed maximum
+	// number of tags, then the entire request fails and the resource is not created.
+	Tags []types.Tag
 }
 
 // Contains the response to a successful CreatePolicy request.

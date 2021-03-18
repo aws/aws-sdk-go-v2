@@ -5983,6 +5983,11 @@ func awsAwsquery_serializeOpDocumentModifyGlobalReplicationGroupInput(v *ModifyG
 		objectKey.String(*v.CacheNodeType)
 	}
 
+	if v.CacheParameterGroupName != nil {
+		objectKey := object.Key("CacheParameterGroupName")
+		objectKey.String(*v.CacheParameterGroupName)
+	}
+
 	if v.EngineVersion != nil {
 		objectKey := object.Key("EngineVersion")
 		objectKey.String(*v.EngineVersion)

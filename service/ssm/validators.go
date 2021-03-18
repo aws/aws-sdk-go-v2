@@ -2958,6 +2958,33 @@ func validateAutomationExecutionFilterList(v []types.AutomationExecutionFilter) 
 	}
 }
 
+func validateBaselineOverride(v *types.BaselineOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BaselineOverride"}
+	if v.GlobalFilters != nil {
+		if err := validatePatchFilterGroup(v.GlobalFilters); err != nil {
+			invalidParams.AddNested("GlobalFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ApprovalRules != nil {
+		if err := validatePatchRuleGroup(v.ApprovalRules); err != nil {
+			invalidParams.AddNested("ApprovalRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Sources != nil {
+		if err := validatePatchSourceList(v.Sources); err != nil {
+			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCommandFilter(v *types.CommandFilter) error {
 	if v == nil {
 		return nil
@@ -4324,6 +4351,11 @@ func validateOpCreateOpsMetadataInput(v *CreateOpsMetadataInput) error {
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5086,6 +5118,11 @@ func validateOpGetDeployablePatchSnapshotForInstanceInput(v *GetDeployablePatchS
 	}
 	if v.SnapshotId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnapshotId"))
+	}
+	if v.BaselineOverride != nil {
+		if err := validateBaselineOverride(v.BaselineOverride); err != nil {
+			invalidParams.AddNested("BaselineOverride", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

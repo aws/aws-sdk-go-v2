@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds metadata tags to an AWS Glue DataBrew resource, such as a dataset, job,
-// project, or recipe.
+// Adds metadata tags to a DataBrew resource, such as a dataset, project, recipe,
+// job, or schedule.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

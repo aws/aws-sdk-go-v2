@@ -178,6 +178,16 @@ func awsRestjson1_serializeOpDocumentCreateFileSystemInput(v *CreateFileSystemIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.AvailabilityZoneName != nil {
+		ok := object.Key("AvailabilityZoneName")
+		ok.String(*v.AvailabilityZoneName)
+	}
+
+	if v.Backup != nil {
+		ok := object.Key("Backup")
+		ok.Boolean(*v.Backup)
+	}
+
 	if v.CreationToken != nil {
 		ok := object.Key("CreationToken")
 		ok.String(*v.CreationToken)

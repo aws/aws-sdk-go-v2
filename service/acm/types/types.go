@@ -11,7 +11,7 @@ import (
 type CertificateDetail struct {
 
 	// The Amazon Resource Name (ARN) of the certificate. For more information about
-	// ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	CertificateArn *string
@@ -21,8 +21,7 @@ type CertificateDetail struct {
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	CertificateAuthorityArn *string
 
-	// The time at which the certificate was requested. This value exists only when the
-	// certificate type is AMAZON_ISSUED.
+	// The time at which the certificate was requested.
 	CreatedAt *time.Time
 
 	// The fully qualified domain name for the certificate, such as www.example.com or
@@ -151,8 +150,7 @@ type CertificateSummary struct {
 
 	// Amazon Resource Name (ARN) of the certificate. This is of the form:
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces
+	// For more information about ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	CertificateArn *string
 
@@ -233,6 +231,16 @@ type DomainValidationOption struct {
 	ValidationDomain *string
 }
 
+// Object containing expiration events options associated with an AWS account.
+type ExpiryEventsConfiguration struct {
+
+	// Specifies the number of days prior to certificate expiration when ACM starts
+	// generating EventBridge events. ACM sends one event per day per certificate until
+	// the certificate expires. By default, accounts receive events starting 45 days
+	// before certificate expiration.
+	DaysBeforeExpiry *int32
+}
+
 // The Extended Key Usage X.509 v3 extension defines one or more purposes for which
 // the public key can be used. This is in addition to or in place of the basic
 // purposes specified by the Key Usage extension.
@@ -277,10 +285,10 @@ type Filters struct {
 	ExtendedKeyUsage []ExtendedKeyUsageName
 
 	// Specify one or more algorithms that can be used to generate key pairs. Default
-	// filtering returns only RSA_2048 certificates. To return other certificate types,
-	// provide the desired type signatures in a comma-separated list. For example,
-	// "keyTypes": ["RSA_2048,RSA_4096"] returns both RSA_2048 and RSA_4096
-	// certificates.
+	// filtering returns only RSA_1024 and RSA_2048 certificates that have at least one
+	// domain. To return other certificate types, provide the desired type signatures
+	// in a comma-separated list. For example, "keyTypes": ["RSA_2048,RSA_4096"]
+	// returns both RSA_2048 and RSA_4096 certificates.
 	KeyTypes []KeyAlgorithm
 
 	// Specify one or more KeyUsage extension values.

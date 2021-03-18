@@ -84,9 +84,59 @@ type GetReservationUtilizationInput struct {
 	// Groups only by SUBSCRIPTION_ID. Metadata is included.
 	GroupBy []types.GroupDefinition
 
+	// The maximum number of objects that you returned for this request. If more
+	// objects are available, in the response, AWS provides a NextPageToken value that
+	// you can use in a subsequent call to get the next batch of objects.
+	MaxResults int32
+
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.
 	NextPageToken *string
+
+	// The value by which you want to sort the data. The following values are supported
+	// for Key:
+	//
+	// * UtilizationPercentage
+	//
+	// * UtilizationPercentageInUnits
+	//
+	// *
+	// PurchasedHours
+	//
+	// * PurchasedUnits
+	//
+	// * TotalActualHours
+	//
+	// * TotalActualUnits
+	//
+	// *
+	// UnusedHours
+	//
+	// * UnusedUnits
+	//
+	// * OnDemandCostOfRIHoursUsed
+	//
+	// * NetRISavings
+	//
+	// *
+	// TotalPotentialRISavings
+	//
+	// * AmortizedUpfrontFee
+	//
+	// * AmortizedRecurringFee
+	//
+	// *
+	// TotalAmortizedFee
+	//
+	// * RICostForUnusedHours
+	//
+	// * RealizedSavings
+	//
+	// *
+	// UnrealizedSavings
+	//
+	// Supported values for SortOrder are ASCENDING or DESCENDING.
+	SortBy *types.SortDefinition
 }
 
 type GetReservationUtilizationOutput struct {

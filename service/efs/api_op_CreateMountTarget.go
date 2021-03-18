@@ -17,29 +17,39 @@ import (
 // Availability Zone share a single mount target for a given file system. If you
 // have multiple subnets in an Availability Zone, you create a mount target in one
 // of the subnets. EC2 instances do not need to be in the same subnet as the mount
-// target in order to access their file system. For more information, see Amazon
-// EFS: How it Works (https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html).
-// In the request, you also specify a file system ID for which you are creating the
-// mount target and the file system's lifecycle state must be available. For more
-// information, see DescribeFileSystems. In the request, you also provide a subnet
-// ID, which determines the following:
+// target in order to access their file system. You can create only one mount
+// target for an EFS file system using One Zone storage classes. You must create
+// that mount target in the same Availability Zone in which the file system is
+// located. Use the AvailabilityZoneName and AvailabiltyZoneId properties in the
+// DescribeFileSystems response object to get this information. Use the subnetId
+// associated with the file system's Availability Zone when creating the mount
+// target. For more information, see Amazon EFS: How it Works
+// (https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html). To create a mount
+// target for a file system, the file system's lifecycle state must be available.
+// For more information, see DescribeFileSystems. In the request, provide the
+// following:
 //
-// * VPC in which Amazon EFS creates the mount
-// target
+// * The file system ID for which you are creating the mount target.
 //
-// * Availability Zone in which Amazon EFS creates the mount target
+// *
+// A subnet ID, which determines the following:
 //
-// * IP
-// address range from which Amazon EFS selects the IP address of the mount target
-// (if you don't specify an IP address in the request)
+// * The VPC in which Amazon EFS
+// creates the mount target
 //
-// After creating the mount
-// target, Amazon EFS returns a response that includes, a MountTargetId and an
-// IpAddress. You use this IP address when mounting the file system in an EC2
-// instance. You can also use the mount target's DNS name when mounting the file
-// system. The EC2 instance on which you mount the file system by using the mount
-// target can resolve the mount target's DNS name to its IP address. For more
-// information, see How it Works: Implementation Overview
+// * The Availability Zone in which Amazon EFS creates
+// the mount target
+//
+// * The IP address range from which Amazon EFS selects the IP
+// address of the mount target (if you don't specify an IP address in the
+// request)
+//
+// After creating the mount target, Amazon EFS returns a response that
+// includes, a MountTargetId and an IpAddress. You use this IP address when
+// mounting the file system in an EC2 instance. You can also use the mount target's
+// DNS name when mounting the file system. The EC2 instance on which you mount the
+// file system by using the mount target can resolve the mount target's DNS name to
+// its IP address. For more information, see How it Works: Implementation Overview
 // (https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html#how-it-works-implementation).
 // Note that you can create mount targets for a file system in only one VPC, and
 // there can be only one mount target per Availability Zone. That is, if the file
@@ -134,7 +144,9 @@ type CreateMountTargetInput struct {
 	// This member is required.
 	FileSystemId *string
 
-	// The ID of the subnet to add the mount target in.
+	// The ID of the subnet to add the mount target in. For file systems that use One
+	// Zone storage classes, use the subnet that is associated with the file system's
+	// Availability Zone.
 	//
 	// This member is required.
 	SubnetId *string
@@ -170,15 +182,15 @@ type CreateMountTargetOutput struct {
 	// This member is required.
 	SubnetId *string
 
-	// The unique and consistent identifier of the Availability Zone (AZ) that the
-	// mount target resides in. For example, use1-az1 is an AZ ID for the us-east-1
-	// Region and it has the same location in every AWS account.
+	// The unique and consistent identifier of the Availability Zone that the mount
+	// target resides in. For example, use1-az1 is an AZ ID for the us-east-1 Region
+	// and it has the same location in every AWS account.
 	AvailabilityZoneId *string
 
-	// The name of the Availability Zone (AZ) that the mount target resides in. AZs are
-	// independently mapped to names for each AWS account. For example, the
-	// Availability Zone us-east-1a for your AWS account might not be the same location
-	// as us-east-1a for another AWS account.
+	// The name of the Availability Zone in which the mount target is located.
+	// Availability Zones are independently mapped to names for each AWS account. For
+	// example, the Availability Zone us-east-1a for your AWS account might not be the
+	// same location as us-east-1a for another AWS account.
 	AvailabilityZoneName *string
 
 	// Address at which the file system can be mounted by using the mount target.
@@ -191,7 +203,7 @@ type CreateMountTargetOutput struct {
 	// AWS account ID that owns the resource.
 	OwnerId *string
 
-	// The Virtual Private Cloud (VPC) ID that the mount target is configured in.
+	// The virtual private cloud (VPC) ID that the mount target is configured in.
 	VpcId *string
 
 	// Metadata pertaining to the operation's result.

@@ -12,7 +12,7 @@ import (
 )
 
 // Returns metadata, such as the path information about an Amazon FSx for Windows
-// location.
+// File Server location.
 func (c *Client) DescribeLocationFsxWindows(ctx context.Context, params *DescribeLocationFsxWindowsInput, optFns ...func(*Options)) (*DescribeLocationFsxWindowsOutput, error) {
 	if params == nil {
 		params = &DescribeLocationFsxWindowsInput{}
@@ -30,7 +30,8 @@ func (c *Client) DescribeLocationFsxWindows(ctx context.Context, params *Describ
 
 type DescribeLocationFsxWindowsInput struct {
 
-	// The Amazon Resource Name (ARN) of the FSx for Windows location to describe.
+	// The Amazon Resource Name (ARN) of the FSx for Windows File Server location to
+	// describe.
 	//
 	// This member is required.
 	LocationArn *string
@@ -38,25 +39,25 @@ type DescribeLocationFsxWindowsInput struct {
 
 type DescribeLocationFsxWindowsOutput struct {
 
-	// The time that the FSx for Windows location was created.
+	// The time that the FSx for Windows File Server location was created.
 	CreationTime *time.Time
 
-	// The name of the Windows domain that the FSx for Windows server belongs to.
+	// The name of the Windows domain that the FSx for Windows File Server belongs to.
 	Domain *string
 
-	// The Amazon Resource Name (ARN) of the FSx for Windows location that was
-	// described.
+	// The Amazon Resource Name (ARN) of the FSx for Windows File Server location that
+	// was described.
 	LocationArn *string
 
-	// The URL of the FSx for Windows location that was described.
+	// The URL of the FSx for Windows File Server location that was described.
 	LocationUri *string
 
 	// The Amazon Resource Names (ARNs) of the security groups that are configured for
-	// the FSx for Windows file system.
+	// the FSx for Windows File Server file system.
 	SecurityGroupArns []string
 
 	// The user who has the permissions to access files and folders in the FSx for
-	// Windows file system.
+	// Windows File Server file system.
 	User *string
 
 	// Metadata pertaining to the operation's result.

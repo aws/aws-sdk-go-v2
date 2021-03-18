@@ -4418,6 +4418,9 @@ func awsRestjson1_deserializeOpErrorGetServicesInScope(response *smithyhttp.Resp
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
@@ -8404,6 +8407,15 @@ func awsRestjson1_deserializeDocumentAssessmentFrameworkMetadata(v **types.Asses
 
 	for key, value := range shape {
 		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuditManagerArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
 		case "complianceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11141,6 +11153,11 @@ func awsRestjson1_deserializeDocumentFramework(v **types.Framework, value interf
 					return fmt.Errorf("expected FrameworkName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		case "type":

@@ -516,46 +516,70 @@ type GameServerGroupInstanceType string
 
 // Enum values for GameServerGroupInstanceType
 const (
-	GameServerGroupInstanceTypeC4Large    GameServerGroupInstanceType = "c4.large"
-	GameServerGroupInstanceTypeC4Xlarge   GameServerGroupInstanceType = "c4.xlarge"
-	GameServerGroupInstanceTypeC42xlarge  GameServerGroupInstanceType = "c4.2xlarge"
-	GameServerGroupInstanceTypeC44xlarge  GameServerGroupInstanceType = "c4.4xlarge"
-	GameServerGroupInstanceTypeC48xlarge  GameServerGroupInstanceType = "c4.8xlarge"
-	GameServerGroupInstanceTypeC5Large    GameServerGroupInstanceType = "c5.large"
-	GameServerGroupInstanceTypeC5Xlarge   GameServerGroupInstanceType = "c5.xlarge"
-	GameServerGroupInstanceTypeC52xlarge  GameServerGroupInstanceType = "c5.2xlarge"
-	GameServerGroupInstanceTypeC54xlarge  GameServerGroupInstanceType = "c5.4xlarge"
-	GameServerGroupInstanceTypeC59xlarge  GameServerGroupInstanceType = "c5.9xlarge"
-	GameServerGroupInstanceTypeC512xlarge GameServerGroupInstanceType = "c5.12xlarge"
-	GameServerGroupInstanceTypeC518xlarge GameServerGroupInstanceType = "c5.18xlarge"
-	GameServerGroupInstanceTypeC524xlarge GameServerGroupInstanceType = "c5.24xlarge"
-	GameServerGroupInstanceTypeR4Large    GameServerGroupInstanceType = "r4.large"
-	GameServerGroupInstanceTypeR4Xlarge   GameServerGroupInstanceType = "r4.xlarge"
-	GameServerGroupInstanceTypeR42xlarge  GameServerGroupInstanceType = "r4.2xlarge"
-	GameServerGroupInstanceTypeR44xlarge  GameServerGroupInstanceType = "r4.4xlarge"
-	GameServerGroupInstanceTypeR48xlarge  GameServerGroupInstanceType = "r4.8xlarge"
-	GameServerGroupInstanceTypeR416xlarge GameServerGroupInstanceType = "r4.16xlarge"
-	GameServerGroupInstanceTypeR5Large    GameServerGroupInstanceType = "r5.large"
-	GameServerGroupInstanceTypeR5Xlarge   GameServerGroupInstanceType = "r5.xlarge"
-	GameServerGroupInstanceTypeR52xlarge  GameServerGroupInstanceType = "r5.2xlarge"
-	GameServerGroupInstanceTypeR54xlarge  GameServerGroupInstanceType = "r5.4xlarge"
-	GameServerGroupInstanceTypeR58xlarge  GameServerGroupInstanceType = "r5.8xlarge"
-	GameServerGroupInstanceTypeR512xlarge GameServerGroupInstanceType = "r5.12xlarge"
-	GameServerGroupInstanceTypeR516xlarge GameServerGroupInstanceType = "r5.16xlarge"
-	GameServerGroupInstanceTypeR524xlarge GameServerGroupInstanceType = "r5.24xlarge"
-	GameServerGroupInstanceTypeM4Large    GameServerGroupInstanceType = "m4.large"
-	GameServerGroupInstanceTypeM4Xlarge   GameServerGroupInstanceType = "m4.xlarge"
-	GameServerGroupInstanceTypeM42xlarge  GameServerGroupInstanceType = "m4.2xlarge"
-	GameServerGroupInstanceTypeM44xlarge  GameServerGroupInstanceType = "m4.4xlarge"
-	GameServerGroupInstanceTypeM410xlarge GameServerGroupInstanceType = "m4.10xlarge"
-	GameServerGroupInstanceTypeM5Large    GameServerGroupInstanceType = "m5.large"
-	GameServerGroupInstanceTypeM5Xlarge   GameServerGroupInstanceType = "m5.xlarge"
-	GameServerGroupInstanceTypeM52xlarge  GameServerGroupInstanceType = "m5.2xlarge"
-	GameServerGroupInstanceTypeM54xlarge  GameServerGroupInstanceType = "m5.4xlarge"
-	GameServerGroupInstanceTypeM58xlarge  GameServerGroupInstanceType = "m5.8xlarge"
-	GameServerGroupInstanceTypeM512xlarge GameServerGroupInstanceType = "m5.12xlarge"
-	GameServerGroupInstanceTypeM516xlarge GameServerGroupInstanceType = "m5.16xlarge"
-	GameServerGroupInstanceTypeM524xlarge GameServerGroupInstanceType = "m5.24xlarge"
+	GameServerGroupInstanceTypeC4Large     GameServerGroupInstanceType = "c4.large"
+	GameServerGroupInstanceTypeC4Xlarge    GameServerGroupInstanceType = "c4.xlarge"
+	GameServerGroupInstanceTypeC42xlarge   GameServerGroupInstanceType = "c4.2xlarge"
+	GameServerGroupInstanceTypeC44xlarge   GameServerGroupInstanceType = "c4.4xlarge"
+	GameServerGroupInstanceTypeC48xlarge   GameServerGroupInstanceType = "c4.8xlarge"
+	GameServerGroupInstanceTypeC5Large     GameServerGroupInstanceType = "c5.large"
+	GameServerGroupInstanceTypeC5Xlarge    GameServerGroupInstanceType = "c5.xlarge"
+	GameServerGroupInstanceTypeC52xlarge   GameServerGroupInstanceType = "c5.2xlarge"
+	GameServerGroupInstanceTypeC54xlarge   GameServerGroupInstanceType = "c5.4xlarge"
+	GameServerGroupInstanceTypeC59xlarge   GameServerGroupInstanceType = "c5.9xlarge"
+	GameServerGroupInstanceTypeC512xlarge  GameServerGroupInstanceType = "c5.12xlarge"
+	GameServerGroupInstanceTypeC518xlarge  GameServerGroupInstanceType = "c5.18xlarge"
+	GameServerGroupInstanceTypeC524xlarge  GameServerGroupInstanceType = "c5.24xlarge"
+	GameServerGroupInstanceTypeC5aLarge    GameServerGroupInstanceType = "c5a.large"
+	GameServerGroupInstanceTypeC5aXlarge   GameServerGroupInstanceType = "c5a.xlarge"
+	GameServerGroupInstanceTypeC5a2xlarge  GameServerGroupInstanceType = "c5a.2xlarge"
+	GameServerGroupInstanceTypeC5a4xlarge  GameServerGroupInstanceType = "c5a.4xlarge"
+	GameServerGroupInstanceTypeC5a8xlarge  GameServerGroupInstanceType = "c5a.8xlarge"
+	GameServerGroupInstanceTypeC5a12xlarge GameServerGroupInstanceType = "c5a.12xlarge"
+	GameServerGroupInstanceTypeC5a16xlarge GameServerGroupInstanceType = "c5a.16xlarge"
+	GameServerGroupInstanceTypeC5a24xlarge GameServerGroupInstanceType = "c5a.24xlarge"
+	GameServerGroupInstanceTypeR4Large     GameServerGroupInstanceType = "r4.large"
+	GameServerGroupInstanceTypeR4Xlarge    GameServerGroupInstanceType = "r4.xlarge"
+	GameServerGroupInstanceTypeR42xlarge   GameServerGroupInstanceType = "r4.2xlarge"
+	GameServerGroupInstanceTypeR44xlarge   GameServerGroupInstanceType = "r4.4xlarge"
+	GameServerGroupInstanceTypeR48xlarge   GameServerGroupInstanceType = "r4.8xlarge"
+	GameServerGroupInstanceTypeR416xlarge  GameServerGroupInstanceType = "r4.16xlarge"
+	GameServerGroupInstanceTypeR5Large     GameServerGroupInstanceType = "r5.large"
+	GameServerGroupInstanceTypeR5Xlarge    GameServerGroupInstanceType = "r5.xlarge"
+	GameServerGroupInstanceTypeR52xlarge   GameServerGroupInstanceType = "r5.2xlarge"
+	GameServerGroupInstanceTypeR54xlarge   GameServerGroupInstanceType = "r5.4xlarge"
+	GameServerGroupInstanceTypeR58xlarge   GameServerGroupInstanceType = "r5.8xlarge"
+	GameServerGroupInstanceTypeR512xlarge  GameServerGroupInstanceType = "r5.12xlarge"
+	GameServerGroupInstanceTypeR516xlarge  GameServerGroupInstanceType = "r5.16xlarge"
+	GameServerGroupInstanceTypeR524xlarge  GameServerGroupInstanceType = "r5.24xlarge"
+	GameServerGroupInstanceTypeR5aLarge    GameServerGroupInstanceType = "r5a.large"
+	GameServerGroupInstanceTypeR5aXlarge   GameServerGroupInstanceType = "r5a.xlarge"
+	GameServerGroupInstanceTypeR5a2xlarge  GameServerGroupInstanceType = "r5a.2xlarge"
+	GameServerGroupInstanceTypeR5a4xlarge  GameServerGroupInstanceType = "r5a.4xlarge"
+	GameServerGroupInstanceTypeR5a8xlarge  GameServerGroupInstanceType = "r5a.8xlarge"
+	GameServerGroupInstanceTypeR5a12xlarge GameServerGroupInstanceType = "r5a.12xlarge"
+	GameServerGroupInstanceTypeR5a16xlarge GameServerGroupInstanceType = "r5a.16xlarge"
+	GameServerGroupInstanceTypeR5a24xlarge GameServerGroupInstanceType = "r5a.24xlarge"
+	GameServerGroupInstanceTypeM4Large     GameServerGroupInstanceType = "m4.large"
+	GameServerGroupInstanceTypeM4Xlarge    GameServerGroupInstanceType = "m4.xlarge"
+	GameServerGroupInstanceTypeM42xlarge   GameServerGroupInstanceType = "m4.2xlarge"
+	GameServerGroupInstanceTypeM44xlarge   GameServerGroupInstanceType = "m4.4xlarge"
+	GameServerGroupInstanceTypeM410xlarge  GameServerGroupInstanceType = "m4.10xlarge"
+	GameServerGroupInstanceTypeM5Large     GameServerGroupInstanceType = "m5.large"
+	GameServerGroupInstanceTypeM5Xlarge    GameServerGroupInstanceType = "m5.xlarge"
+	GameServerGroupInstanceTypeM52xlarge   GameServerGroupInstanceType = "m5.2xlarge"
+	GameServerGroupInstanceTypeM54xlarge   GameServerGroupInstanceType = "m5.4xlarge"
+	GameServerGroupInstanceTypeM58xlarge   GameServerGroupInstanceType = "m5.8xlarge"
+	GameServerGroupInstanceTypeM512xlarge  GameServerGroupInstanceType = "m5.12xlarge"
+	GameServerGroupInstanceTypeM516xlarge  GameServerGroupInstanceType = "m5.16xlarge"
+	GameServerGroupInstanceTypeM524xlarge  GameServerGroupInstanceType = "m5.24xlarge"
+	GameServerGroupInstanceTypeM5aLarge    GameServerGroupInstanceType = "m5a.large"
+	GameServerGroupInstanceTypeM5aXlarge   GameServerGroupInstanceType = "m5a.xlarge"
+	GameServerGroupInstanceTypeM5a2xlarge  GameServerGroupInstanceType = "m5a.2xlarge"
+	GameServerGroupInstanceTypeM5a4xlarge  GameServerGroupInstanceType = "m5a.4xlarge"
+	GameServerGroupInstanceTypeM5a8xlarge  GameServerGroupInstanceType = "m5a.8xlarge"
+	GameServerGroupInstanceTypeM5a12xlarge GameServerGroupInstanceType = "m5a.12xlarge"
+	GameServerGroupInstanceTypeM5a16xlarge GameServerGroupInstanceType = "m5a.16xlarge"
+	GameServerGroupInstanceTypeM5a24xlarge GameServerGroupInstanceType = "m5a.24xlarge"
 )
 
 // Values returns all known values for GameServerGroupInstanceType. Note that this
@@ -576,6 +600,14 @@ func (GameServerGroupInstanceType) Values() []GameServerGroupInstanceType {
 		"c5.12xlarge",
 		"c5.18xlarge",
 		"c5.24xlarge",
+		"c5a.large",
+		"c5a.xlarge",
+		"c5a.2xlarge",
+		"c5a.4xlarge",
+		"c5a.8xlarge",
+		"c5a.12xlarge",
+		"c5a.16xlarge",
+		"c5a.24xlarge",
 		"r4.large",
 		"r4.xlarge",
 		"r4.2xlarge",
@@ -590,6 +622,14 @@ func (GameServerGroupInstanceType) Values() []GameServerGroupInstanceType {
 		"r5.12xlarge",
 		"r5.16xlarge",
 		"r5.24xlarge",
+		"r5a.large",
+		"r5a.xlarge",
+		"r5a.2xlarge",
+		"r5a.4xlarge",
+		"r5a.8xlarge",
+		"r5a.12xlarge",
+		"r5a.16xlarge",
+		"r5a.24xlarge",
 		"m4.large",
 		"m4.xlarge",
 		"m4.2xlarge",
@@ -603,6 +643,14 @@ func (GameServerGroupInstanceType) Values() []GameServerGroupInstanceType {
 		"m5.12xlarge",
 		"m5.16xlarge",
 		"m5.24xlarge",
+		"m5a.large",
+		"m5a.xlarge",
+		"m5a.2xlarge",
+		"m5a.4xlarge",
+		"m5a.8xlarge",
+		"m5a.12xlarge",
+		"m5a.16xlarge",
+		"m5a.24xlarge",
 	}
 }
 
@@ -808,6 +856,22 @@ func (IpProtocol) Values() []IpProtocol {
 	}
 }
 
+type LocationUpdateStatus string
+
+// Enum values for LocationUpdateStatus
+const (
+	LocationUpdateStatusPendingUpdate LocationUpdateStatus = "PENDING_UPDATE"
+)
+
+// Values returns all known values for LocationUpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LocationUpdateStatus) Values() []LocationUpdateStatus {
+	return []LocationUpdateStatus{
+		"PENDING_UPDATE",
+	}
+}
+
 type MatchmakingConfigurationStatus string
 
 // Enum values for MatchmakingConfigurationStatus
@@ -950,6 +1014,28 @@ func (PolicyType) Values() []PolicyType {
 	return []PolicyType{
 		"RuleBased",
 		"TargetBased",
+	}
+}
+
+type PriorityType string
+
+// Enum values for PriorityType
+const (
+	PriorityTypeLatency     PriorityType = "LATENCY"
+	PriorityTypeCost        PriorityType = "COST"
+	PriorityTypeDestination PriorityType = "DESTINATION"
+	PriorityTypeLocation    PriorityType = "LOCATION"
+)
+
+// Values returns all known values for PriorityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PriorityType) Values() []PriorityType {
+	return []PriorityType{
+		"LATENCY",
+		"COST",
+		"DESTINATION",
+		"LOCATION",
 	}
 }
 

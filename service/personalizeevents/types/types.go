@@ -55,7 +55,9 @@ type Event struct {
 	RecommendationId *string
 }
 
-// Represents item metadata added to an Items dataset using the PutItems API.
+// Represents item metadata added to an Items dataset using the PutItems API. For
+// more information see Importing Items Incrementally
+// (https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html).
 type Item struct {
 
 	// The ID associated with the item.
@@ -64,16 +66,20 @@ type Item struct {
 	ItemId *string
 
 	// A string map of item-specific metadata. Each element in the map consists of a
-	// key-value pair. For example, {"numberOfRatings": "12"} The keys use camel case
-	// names that match the fields in the Items schema. In the above example, the
-	// numberOfRatings would match the 'NUMBER_OF_RATINGS' field defined in the Items
-	// schema.
+	// key-value pair. For example, {"numberOfRatings": "12"}. The keys use camel case
+	// names that match the fields in the schema for the Items dataset. In the previous
+	// example, the numberOfRatings matches the 'NUMBER_OF_RATINGS' field defined in
+	// the Items schema. For categorical string data, to include multiple categories
+	// for a single item, separate each category with a pipe separator (|). For
+	// example, \"Horror|Action\".
 	//
 	// This value conforms to the media type: application/json
 	Properties *string
 }
 
-// Represents user metadata added to a Users dataset using the PutUsers API.
+// Represents user metadata added to a Users dataset using the PutUsers API. For
+// more information see Importing Users Incrementally
+// (https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html).
 type User struct {
 
 	// The ID associated with the user.
@@ -82,10 +88,12 @@ type User struct {
 	UserId *string
 
 	// A string map of user-specific metadata. Each element in the map consists of a
-	// key-value pair. For example, {"numberOfVideosWatched": "45"} The keys use camel
-	// case names that match the fields in the Users schema. In the above example, the
-	// numberOfVideosWatched would match the 'NUMBER_OF_VIDEOS_WATCHED' field defined
-	// in the Users schema.
+	// key-value pair. For example, {"numberOfVideosWatched": "45"}. The keys use camel
+	// case names that match the fields in the schema for the Users dataset. In the
+	// previous example, the numberOfVideosWatched matches the
+	// 'NUMBER_OF_VIDEOS_WATCHED' field defined in the Users schema. For categorical
+	// string data, to include multiple categories for a single user, separate each
+	// category with a pipe separator (|). For example, \"Member|Frequent shopper\".
 	//
 	// This value conforms to the media type: application/json
 	Properties *string

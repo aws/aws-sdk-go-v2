@@ -17,7 +17,7 @@ import (
 // support this feature. For a current list of services that support it, see the
 // column Supports Delegated Administrator in the table at AWS Services that you
 // can use with AWS Organizations
-// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrated-services-list.html)
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html)
 // in the AWS Organizations User Guide. This operation can be called only from the
 // organization's management account.
 func (c *Client) RegisterDelegatedAdministrator(ctx context.Context, params *RegisterDelegatedAdministratorInput, optFns ...func(*Options)) (*RegisterDelegatedAdministratorOutput, error) {

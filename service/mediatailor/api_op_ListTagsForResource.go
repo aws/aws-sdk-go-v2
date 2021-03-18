@@ -38,8 +38,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// A comma-separated list of tag key:value pairs. For example: { "Key1": "Value1",
-	// "Key2": "Value2" }
+	// A comma-separated list of tag key:value pairs.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

@@ -1894,6 +1894,13 @@ func (m *awsAwsjson11_serializeOpUpdateWebACL) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAll(v *types.All, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAllowAction(v *types.AllowAction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2049,6 +2056,13 @@ func awsAwsjson11_serializeDocumentFieldToMatch(v *types.FieldToMatch, value smi
 		}
 	}
 
+	if v.JsonBody != nil {
+		ok := object.Key("JsonBody")
+		if err := awsAwsjson11_serializeDocumentJsonBody(v.JsonBody, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Method != nil {
 		ok := object.Key("Method")
 		if err := awsAwsjson11_serializeDocumentMethod(v.Method, ok); err != nil {
@@ -2174,6 +2188,62 @@ func awsAwsjson11_serializeDocumentIPSetReferenceStatement(v *types.IPSetReferen
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentJsonBody(v *types.JsonBody, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.InvalidFallbackBehavior) > 0 {
+		ok := object.Key("InvalidFallbackBehavior")
+		ok.String(string(v.InvalidFallbackBehavior))
+	}
+
+	if v.MatchPattern != nil {
+		ok := object.Key("MatchPattern")
+		if err := awsAwsjson11_serializeDocumentJsonMatchPattern(v.MatchPattern, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.MatchScope) > 0 {
+		ok := object.Key("MatchScope")
+		ok.String(string(v.MatchScope))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentJsonMatchPattern(v *types.JsonMatchPattern, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.All != nil {
+		ok := object.Key("All")
+		if err := awsAwsjson11_serializeDocumentAll(v.All, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IncludedPaths != nil {
+		ok := object.Key("IncludedPaths")
+		if err := awsAwsjson11_serializeDocumentJsonPointerPaths(v.IncludedPaths, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentJsonPointerPaths(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

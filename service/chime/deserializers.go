@@ -5934,9 +5934,6 @@ func awsRestjson1_deserializeOpErrorDeleteAppInstanceAdmin(response *smithyhttp.
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
 
-	case strings.EqualFold("ResourceLimitExceededException", errorCode):
-		return awsRestjson1_deserializeErrorResourceLimitExceededException(response, errorBody)
-
 	case strings.EqualFold("ServiceFailureException", errorCode):
 		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
 
@@ -16111,9 +16108,6 @@ func awsRestjson1_deserializeOpErrorListAppInstanceAdmins(response *smithyhttp.R
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
 
-	case strings.EqualFold("ResourceLimitExceededException", errorCode):
-		return awsRestjson1_deserializeErrorResourceLimitExceededException(response, errorBody)
-
 	case strings.EqualFold("ServiceFailureException", errorCode):
 		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)
 
@@ -18897,6 +18891,9 @@ func awsRestjson1_deserializeOpErrorListPhoneNumbers(response *smithyhttp.Respon
 
 	case strings.EqualFold("ForbiddenException", errorCode):
 		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
+
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
 	case strings.EqualFold("ServiceFailureException", errorCode):
 		return awsRestjson1_deserializeErrorServiceFailureException(response, errorBody)

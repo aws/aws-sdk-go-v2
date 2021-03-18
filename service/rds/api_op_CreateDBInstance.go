@@ -245,35 +245,50 @@ type CreateDBInstanceInput struct {
 	// reserved by the specified database engine
 	//
 	// PostgreSQL The name of the database
-	// to create when the DB instance is created. If this parameter isn't specified, no
-	// database is created in the DB instance. Constraints:
+	// to create when the DB instance is created. If this parameter isn't specified, a
+	// database named postgres is created in the DB instance. Constraints:
 	//
-	// * Must contain 1 to 63
-	// letters, numbers, or underscores.
+	// * Must
+	// contain 1 to 63 letters, numbers, or underscores.
 	//
-	// * Must begin with a letter. Subsequent
-	// characters can be letters, underscores, or digits (0-9).
+	// * Must begin with a letter.
+	// Subsequent characters can be letters, underscores, or digits (0-9).
 	//
-	// * Can't be a word
-	// reserved by the specified database engine
+	// * Can't be
+	// a word reserved by the specified database engine
 	//
-	// Oracle The Oracle System ID (SID) of
-	// the created DB instance. If you specify null, the default value ORCL is used.
-	// You can't specify the string NULL, or any other reserved word, for DBName.
+	// Oracle The Oracle System ID
+	// (SID) of the created DB instance. If you specify null, the default value ORCL is
+	// used. You can't specify the string NULL, or any other reserved word, for DBName.
 	// Default: ORCL Constraints:
 	//
 	// * Can't be longer than 8 characters
 	//
 	// SQL Server Not
-	// applicable. Must be null. Amazon Aurora The name of the database to create when
-	// the primary instance of the DB cluster is created. If this parameter isn't
-	// specified, no database is created in the DB instance. Constraints:
+	// applicable. Must be null. Amazon Aurora MySQL The name of the database to create
+	// when the primary DB instance of the Aurora MySQL DB cluster is created. If this
+	// parameter isn't specified for an Aurora MySQL DB cluster, no database is created
+	// in the DB cluster. Constraints:
 	//
-	// * Must
-	// contain 1 to 64 letters or numbers.
+	// * It must contain 1 to 64 alphanumeric
+	// characters.
 	//
-	// * Can't be a word reserved by the specified
-	// database engine
+	// * It can't be a word reserved by the database engine.
+	//
+	// Amazon
+	// Aurora PostgreSQL The name of the database to create when the primary DB
+	// instance of the Aurora PostgreSQL DB cluster is created. If this parameter isn't
+	// specified for an Aurora PostgreSQL DB cluster, a database named postgres is
+	// created in the DB cluster. Constraints:
+	//
+	// * It must contain 1 to 63 alphanumeric
+	// characters.
+	//
+	// * It must begin with a letter or an underscore. Subsequent
+	// characters can be letters, underscores, or digits (0 to 9).
+	//
+	// * It can't be a
+	// word reserved by the database engine.
 	DBName *string
 
 	// The name of the DB parameter group to associate with this DB instance. If you do
@@ -328,8 +343,8 @@ type CreateDBInstanceInput struct {
 	// applicable. CloudWatch Logs exports are managed by the DB cluster. MariaDB
 	// Possible values are audit, error, general, and slowquery. Microsoft SQL Server
 	// Possible values are agent and error. MySQL Possible values are audit, error,
-	// general, and slowquery. Oracle Possible values are alert, audit, listener, and
-	// trace. PostgreSQL Possible values are postgresql and upgrade.
+	// general, and slowquery. Oracle Possible values are alert, audit, listener,
+	// trace, and oemagent. PostgreSQL Possible values are postgresql and upgrade.
 	EnableCloudwatchLogsExports []string
 
 	// A value that indicates whether to enable a customer-owned IP address (CoIP) for
@@ -375,9 +390,9 @@ type CreateDBInstanceInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt)
 	// in the Amazon RDS User Guide. Oracle See Oracle Database Engine Release Notes
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html)
-	// in the Amazon RDS User Guide. PostgreSQL See Supported PostgreSQL Database
-	// Versions
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions)
+	// in the Amazon RDS User Guide. PostgreSQL See Amazon RDS for PostgreSQL versions
+	// and extensions
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts)
 	// in the Amazon RDS User Guide.
 	EngineVersion *string
 
@@ -477,7 +492,11 @@ type CreateDBInstanceInput struct {
 	MasterUsername *string
 
 	// The upper limit to which Amazon RDS can automatically scale the storage of the
-	// DB instance.
+	// DB instance. For more information about this setting, including limitations that
+	// apply to it, see  Managing capacity automatically with Amazon RDS storage
+	// autoscaling
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling)
+	// in the Amazon RDS User Guide.
 	MaxAllocatedStorage *int32
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
@@ -504,10 +523,11 @@ type CreateDBInstanceInput struct {
 	// The name of the NCHAR character set for the Oracle DB instance.
 	NcharCharacterSetName *string
 
-	// Indicates that the DB instance should be associated with the specified option
-	// group. Permanent options, such as the TDE option for Oracle Advanced Security
-	// TDE, can't be removed from an option group. Also, that option group can't be
-	// removed from a DB instance once it is associated with a DB instance
+	// A value that indicates that the DB instance should be associated with the
+	// specified option group. Permanent options, such as the TDE option for Oracle
+	// Advanced Security TDE, can't be removed from an option group. Also, that option
+	// group can't be removed from a DB instance once it is associated with a DB
+	// instance
 	OptionGroupName *string
 
 	// The AWS KMS key identifier for encryption of Performance Insights data. The AWS

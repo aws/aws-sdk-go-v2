@@ -38,6 +38,16 @@ type CreateRule struct {
 	// The interval unit.
 	IntervalUnit IntervalUnitValues
 
+	// Specifies the destination for snapshots created by the policy. To create
+	// snapshots in the same Region as the source resource, specify CLOUD. To create
+	// snapshots on the same Outpost as the source resource, specify OUTPOST_LOCAL. If
+	// you omit this parameter, CLOUD is used by default. If the policy targets
+	// resources in an AWS Region, then you must create snapshots in the same Region as
+	// the source resource. If the policy targets resources on an Outpost, then you can
+	// create snapshots on the same Outpost as the source resource, or in the Region of
+	// that Outpost.
+	Location LocationValues
+
 	// The time, in UTC, to start the operation. The supported format is hh:mm. The
 	// operation occurs within a one-hour window following the specified time. If you
 	// do not specify a time, Amazon DLM selects a time within the next 24 hours.
@@ -81,12 +91,7 @@ type CrossRegionCopyRule struct {
 	// not enabled.
 	//
 	// This member is required.
-	Encrypted bool
-
-	// The target Region.
-	//
-	// This member is required.
-	TargetRegion *string
+	Encrypted *bool
 
 	// The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use
 	// for EBS encryption. If this parameter is not specified, your AWS managed CMK for
@@ -94,10 +99,20 @@ type CrossRegionCopyRule struct {
 	CmkArn *string
 
 	// Copy all user-defined tags from the source snapshot to the copied snapshot.
-	CopyTags bool
+	CopyTags *bool
 
 	// The retention rule.
 	RetainRule *CrossRegionCopyRetainRule
+
+	// The Amazon Resource Name (ARN) of the target AWS Outpost for the snapshot
+	// copies. If you specify an ARN, you must omit TargetRegion. You cannot specify a
+	// target Region and a target Outpost in the same rule.
+	Target *string
+
+	// The target Region for the snapshot copies. If you specify a target Region, you
+	// must omit Target. You cannot specify a target Region and a target Outpost in the
+	// same rule.
+	TargetRegion *string
 }
 
 // Specifies the encryption settings for shared snapshots that are copied across
@@ -110,7 +125,7 @@ type EncryptionConfiguration struct {
 	// not enabled.
 	//
 	// This member is required.
-	Encrypted bool
+	Encrypted *bool
 
 	// The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use
 	// for EBS encryption. If this parameter is not specified, your AWS managed CMK for
@@ -241,13 +256,13 @@ type Parameters struct {
 	// the root volume from snapshots created using CreateSnapshots
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSnapshots.html).
 	// The default is false.
-	ExcludeBootVolume bool
+	ExcludeBootVolume *bool
 
 	// Applies to AMI lifecycle policies only. Indicates whether targeted instances are
 	// rebooted when the lifecycle policy runs. true indicates that targeted instances
 	// are not rebooted when the policy runs. false indicates that target instances are
 	// rebooted when the policy runs. The default is true (instances are not rebooted).
-	NoReboot bool
+	NoReboot *bool
 }
 
 // Specifies the configuration of a lifecycle policy.
@@ -276,6 +291,13 @@ type PolicyDetails struct {
 	// create an event-based policy that performs specific actions when a defined event
 	// occurs in your AWS account. The default is EBS_SNAPSHOT_MANAGEMENT.
 	PolicyType PolicyTypeValues
+
+	// The location of the resources to backup. If the source resources are located in
+	// an AWS Region, specify CLOUD. If the source resources are located on an AWS
+	// Outpost in your account, specify OUTPOST. If you specify OUTPOST, Amazon Data
+	// Lifecycle Manager backs up all resources of the specified type with matching
+	// target tags across all of the Outposts in your account.
+	ResourceLocations []ResourceLocationValues
 
 	// The target resource type for snapshot and AMI lifecycle policies. Use VOLUME to
 	// create snapshots of individual volumes or use INSTANCE to create multi-volume
@@ -321,7 +343,11 @@ type Schedule struct {
 	// The creation rule.
 	CreateRule *CreateRule
 
-	// The rule for cross-Region snapshot copies.
+	// The rule for cross-Region snapshot copies. You can only specify cross-Region
+	// copy rules for policies that create snapshots in a Region. If the policy creates
+	// snapshots on an Outpost, then you cannot copy the snapshots to a Region or to an
+	// Outpost. If the policy creates snapshots in a Region, then snapshots can be
+	// copied to up to three Regions or Outposts.
 	CrossRegionCopyRules []CrossRegionCopyRule
 
 	// The rule for enabling fast snapshot restore.

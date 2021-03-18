@@ -110,6 +110,26 @@ func (m *validateOpCreateFleet) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateFleetLocations struct {
+}
+
+func (*validateOpCreateFleetLocations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFleetLocations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFleetLocationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFleetLocationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateGameServerGroup struct {
 }
 
@@ -370,6 +390,26 @@ func (m *validateOpDeleteFleet) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteFleetLocations struct {
+}
+
+func (*validateOpDeleteFleetLocations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFleetLocations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFleetLocationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFleetLocationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteGameServerGroup struct {
 }
 
@@ -605,6 +645,66 @@ func (m *validateOpDescribeFleetEvents) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeFleetEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeFleetLocationAttributes struct {
+}
+
+func (*validateOpDescribeFleetLocationAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFleetLocationAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFleetLocationAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFleetLocationAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeFleetLocationCapacity struct {
+}
+
+func (*validateOpDescribeFleetLocationCapacity) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFleetLocationCapacity) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFleetLocationCapacityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFleetLocationCapacityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeFleetLocationUtilization struct {
+}
+
+func (*validateOpDescribeFleetLocationUtilization) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFleetLocationUtilization) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFleetLocationUtilizationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFleetLocationUtilizationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1470,6 +1570,10 @@ func addOpCreateFleetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFleet{}, middleware.After)
 }
 
+func addOpCreateFleetLocationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFleetLocations{}, middleware.After)
+}
+
 func addOpCreateGameServerGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGameServerGroup{}, middleware.After)
 }
@@ -1522,6 +1626,10 @@ func addOpDeleteFleetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFleet{}, middleware.After)
 }
 
+func addOpDeleteFleetLocationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFleetLocations{}, middleware.After)
+}
+
 func addOpDeleteGameServerGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteGameServerGroup{}, middleware.After)
 }
@@ -1568,6 +1676,18 @@ func addOpDescribeBuildValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeFleetEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFleetEvents{}, middleware.After)
+}
+
+func addOpDescribeFleetLocationAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFleetLocationAttributes{}, middleware.After)
+}
+
+func addOpDescribeFleetLocationCapacityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFleetLocationCapacity{}, middleware.After)
+}
+
+func addOpDescribeFleetLocationUtilizationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFleetLocationUtilization{}, middleware.After)
 }
 
 func addOpDescribeFleetPortSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -2108,6 +2228,24 @@ func validateOpCreateFleetInput(v *CreateFleetInput) error {
 	}
 }
 
+func validateOpCreateFleetLocationsInput(v *CreateFleetLocationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFleetLocationsInput"}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if v.Locations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Locations"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateGameServerGroupInput(v *CreateGameServerGroupInput) error {
 	if v == nil {
 		return nil
@@ -2386,6 +2524,24 @@ func validateOpDeleteFleetInput(v *DeleteFleetInput) error {
 	}
 }
 
+func validateOpDeleteFleetLocationsInput(v *DeleteFleetLocationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFleetLocationsInput"}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if v.Locations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Locations"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteGameServerGroupInput(v *DeleteGameServerGroupInput) error {
 	if v == nil {
 		return nil
@@ -2570,6 +2726,57 @@ func validateOpDescribeFleetEventsInput(v *DescribeFleetEventsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeFleetEventsInput"}
 	if v.FleetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeFleetLocationAttributesInput(v *DescribeFleetLocationAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFleetLocationAttributesInput"}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeFleetLocationCapacityInput(v *DescribeFleetLocationCapacityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFleetLocationCapacityInput"}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeFleetLocationUtilizationInput(v *DescribeFleetLocationUtilizationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFleetLocationUtilizationInput"}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

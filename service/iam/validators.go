@@ -1530,6 +1530,66 @@ func (m *validateOpListInstanceProfilesForRole) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListInstanceProfileTags struct {
+}
+
+func (*validateOpListInstanceProfileTags) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInstanceProfileTags) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInstanceProfileTagsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInstanceProfileTagsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListMFADeviceTags struct {
+}
+
+func (*validateOpListMFADeviceTags) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMFADeviceTags) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMFADeviceTagsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMFADeviceTagsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListOpenIDConnectProviderTags struct {
+}
+
+func (*validateOpListOpenIDConnectProviderTags) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListOpenIDConnectProviderTags) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListOpenIDConnectProviderTagsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListOpenIDConnectProviderTagsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPoliciesGrantingServiceAccess struct {
 }
 
@@ -1545,6 +1605,26 @@ func (m *validateOpListPoliciesGrantingServiceAccess) HandleInitialize(ctx conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListPoliciesGrantingServiceAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPolicyTags struct {
+}
+
+func (*validateOpListPolicyTags) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPolicyTags) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPolicyTagsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPolicyTagsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1605,6 +1685,46 @@ func (m *validateOpListRoleTags) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListRoleTagsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSAMLProviderTags struct {
+}
+
+func (*validateOpListSAMLProviderTags) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSAMLProviderTags) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSAMLProviderTagsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSAMLProviderTagsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListServerCertificateTags struct {
+}
+
+func (*validateOpListServerCertificateTags) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListServerCertificateTags) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListServerCertificateTagsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListServerCertificateTagsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1930,6 +2050,86 @@ func (m *validateOpSimulatePrincipalPolicy) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTagInstanceProfile struct {
+}
+
+func (*validateOpTagInstanceProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagInstanceProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagInstanceProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagInstanceProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTagMFADevice struct {
+}
+
+func (*validateOpTagMFADevice) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagMFADevice) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagMFADeviceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagMFADeviceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTagOpenIDConnectProvider struct {
+}
+
+func (*validateOpTagOpenIDConnectProvider) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagOpenIDConnectProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagOpenIDConnectProviderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagOpenIDConnectProviderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTagPolicy struct {
+}
+
+func (*validateOpTagPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagRole struct {
 }
 
@@ -1945,6 +2145,46 @@ func (m *validateOpTagRole) HandleInitialize(ctx context.Context, in middleware.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpTagRoleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTagSAMLProvider struct {
+}
+
+func (*validateOpTagSAMLProvider) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagSAMLProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagSAMLProviderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagSAMLProviderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTagServerCertificate struct {
+}
+
+func (*validateOpTagServerCertificate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagServerCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagServerCertificateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagServerCertificateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1970,6 +2210,86 @@ func (m *validateOpTagUser) HandleInitialize(ctx context.Context, in middleware.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUntagInstanceProfile struct {
+}
+
+func (*validateOpUntagInstanceProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagInstanceProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagInstanceProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagInstanceProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagMFADevice struct {
+}
+
+func (*validateOpUntagMFADevice) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagMFADevice) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagMFADeviceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagMFADeviceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagOpenIDConnectProvider struct {
+}
+
+func (*validateOpUntagOpenIDConnectProvider) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagOpenIDConnectProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagOpenIDConnectProviderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagOpenIDConnectProviderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagPolicy struct {
+}
+
+func (*validateOpUntagPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUntagRole struct {
 }
 
@@ -1985,6 +2305,46 @@ func (m *validateOpUntagRole) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUntagRoleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagSAMLProvider struct {
+}
+
+func (*validateOpUntagSAMLProvider) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagSAMLProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagSAMLProviderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagSAMLProviderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagServerCertificate struct {
+}
+
+func (*validateOpUntagServerCertificate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagServerCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagServerCertificateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagServerCertificateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2634,8 +2994,24 @@ func addOpListInstanceProfilesForRoleValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpListInstanceProfilesForRole{}, middleware.After)
 }
 
+func addOpListInstanceProfileTagsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInstanceProfileTags{}, middleware.After)
+}
+
+func addOpListMFADeviceTagsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMFADeviceTags{}, middleware.After)
+}
+
+func addOpListOpenIDConnectProviderTagsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListOpenIDConnectProviderTags{}, middleware.After)
+}
+
 func addOpListPoliciesGrantingServiceAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPoliciesGrantingServiceAccess{}, middleware.After)
+}
+
+func addOpListPolicyTagsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPolicyTags{}, middleware.After)
 }
 
 func addOpListPolicyVersionsValidationMiddleware(stack *middleware.Stack) error {
@@ -2648,6 +3024,14 @@ func addOpListRolePoliciesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListRoleTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRoleTags{}, middleware.After)
+}
+
+func addOpListSAMLProviderTagsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSAMLProviderTags{}, middleware.After)
+}
+
+func addOpListServerCertificateTagsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListServerCertificateTags{}, middleware.After)
 }
 
 func addOpListUserPoliciesValidationMiddleware(stack *middleware.Stack) error {
@@ -2714,16 +3098,64 @@ func addOpSimulatePrincipalPolicyValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpSimulatePrincipalPolicy{}, middleware.After)
 }
 
+func addOpTagInstanceProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagInstanceProfile{}, middleware.After)
+}
+
+func addOpTagMFADeviceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagMFADevice{}, middleware.After)
+}
+
+func addOpTagOpenIDConnectProviderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagOpenIDConnectProvider{}, middleware.After)
+}
+
+func addOpTagPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagPolicy{}, middleware.After)
+}
+
 func addOpTagRoleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagRole{}, middleware.After)
+}
+
+func addOpTagSAMLProviderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagSAMLProvider{}, middleware.After)
+}
+
+func addOpTagServerCertificateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagServerCertificate{}, middleware.After)
 }
 
 func addOpTagUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagUser{}, middleware.After)
 }
 
+func addOpUntagInstanceProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagInstanceProfile{}, middleware.After)
+}
+
+func addOpUntagMFADeviceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagMFADevice{}, middleware.After)
+}
+
+func addOpUntagOpenIDConnectProviderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagOpenIDConnectProvider{}, middleware.After)
+}
+
+func addOpUntagPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagPolicy{}, middleware.After)
+}
+
 func addOpUntagRoleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagRole{}, middleware.After)
+}
+
+func addOpUntagSAMLProviderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagSAMLProvider{}, middleware.After)
+}
+
+func addOpUntagServerCertificateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagServerCertificate{}, middleware.After)
 }
 
 func addOpUntagUserValidationMiddleware(stack *middleware.Stack) error {
@@ -2993,6 +3425,11 @@ func validateOpCreateInstanceProfileInput(v *CreateInstanceProfileInput) error {
 	if v.InstanceProfileName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceProfileName"))
 	}
+	if v.Tags != nil {
+		if err := validateTagListType(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3029,6 +3466,11 @@ func validateOpCreateOpenIDConnectProviderInput(v *CreateOpenIDConnectProviderIn
 	if v.ThumbprintList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThumbprintList"))
 	}
+	if v.Tags != nil {
+		if err := validateTagListType(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3046,6 +3488,11 @@ func validateOpCreatePolicyInput(v *CreatePolicyInput) error {
 	}
 	if v.PolicyDocument == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
+	}
+	if v.Tags != nil {
+		if err := validateTagListType(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3105,6 +3552,11 @@ func validateOpCreateSAMLProviderInput(v *CreateSAMLProviderInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Tags != nil {
+		if err := validateTagListType(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3173,6 +3625,11 @@ func validateOpCreateVirtualMFADeviceInput(v *CreateVirtualMFADeviceInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "CreateVirtualMFADeviceInput"}
 	if v.VirtualMFADeviceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VirtualMFADeviceName"))
+	}
+	if v.Tags != nil {
+		if err := validateTagListType(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4078,6 +4535,51 @@ func validateOpListInstanceProfilesForRoleInput(v *ListInstanceProfilesForRoleIn
 	}
 }
 
+func validateOpListInstanceProfileTagsInput(v *ListInstanceProfileTagsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInstanceProfileTagsInput"}
+	if v.InstanceProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceProfileName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMFADeviceTagsInput(v *ListMFADeviceTagsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMFADeviceTagsInput"}
+	if v.SerialNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SerialNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListOpenIDConnectProviderTagsInput(v *ListOpenIDConnectProviderTagsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOpenIDConnectProviderTagsInput"}
+	if v.OpenIDConnectProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OpenIDConnectProviderArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListPoliciesGrantingServiceAccessInput(v *ListPoliciesGrantingServiceAccessInput) error {
 	if v == nil {
 		return nil
@@ -4088,6 +4590,21 @@ func validateOpListPoliciesGrantingServiceAccessInput(v *ListPoliciesGrantingSer
 	}
 	if v.ServiceNamespaces == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceNamespaces"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPolicyTagsInput(v *ListPolicyTagsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPolicyTagsInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4133,6 +4650,36 @@ func validateOpListRoleTagsInput(v *ListRoleTagsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListRoleTagsInput"}
 	if v.RoleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSAMLProviderTagsInput(v *ListSAMLProviderTagsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSAMLProviderTagsInput"}
+	if v.SAMLProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SAMLProviderArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListServerCertificateTagsInput(v *ListServerCertificateTagsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListServerCertificateTagsInput"}
+	if v.ServerCertificateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerCertificateName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4432,6 +4979,94 @@ func validateOpSimulatePrincipalPolicyInput(v *SimulatePrincipalPolicyInput) err
 	}
 }
 
+func validateOpTagInstanceProfileInput(v *TagInstanceProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagInstanceProfileInput"}
+	if v.InstanceProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceProfileName"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagListType(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagMFADeviceInput(v *TagMFADeviceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagMFADeviceInput"}
+	if v.SerialNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SerialNumber"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagListType(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagOpenIDConnectProviderInput(v *TagOpenIDConnectProviderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagOpenIDConnectProviderInput"}
+	if v.OpenIDConnectProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OpenIDConnectProviderArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagListType(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagPolicyInput(v *TagPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagPolicyInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagListType(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagRoleInput(v *TagRoleInput) error {
 	if v == nil {
 		return nil
@@ -4439,6 +5074,50 @@ func validateOpTagRoleInput(v *TagRoleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TagRoleInput"}
 	if v.RoleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagListType(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagSAMLProviderInput(v *TagSAMLProviderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagSAMLProviderInput"}
+	if v.SAMLProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SAMLProviderArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagListType(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagServerCertificateInput(v *TagServerCertificateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagServerCertificateInput"}
+	if v.ServerCertificateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerCertificateName"))
 	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
@@ -4476,6 +5155,78 @@ func validateOpTagUserInput(v *TagUserInput) error {
 	}
 }
 
+func validateOpUntagInstanceProfileInput(v *UntagInstanceProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagInstanceProfileInput"}
+	if v.InstanceProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceProfileName"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagMFADeviceInput(v *UntagMFADeviceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagMFADeviceInput"}
+	if v.SerialNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SerialNumber"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagOpenIDConnectProviderInput(v *UntagOpenIDConnectProviderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagOpenIDConnectProviderInput"}
+	if v.OpenIDConnectProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OpenIDConnectProviderArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagPolicyInput(v *UntagPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagPolicyInput"}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUntagRoleInput(v *UntagRoleInput) error {
 	if v == nil {
 		return nil
@@ -4483,6 +5234,42 @@ func validateOpUntagRoleInput(v *UntagRoleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UntagRoleInput"}
 	if v.RoleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagSAMLProviderInput(v *UntagSAMLProviderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagSAMLProviderInput"}
+	if v.SAMLProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SAMLProviderArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagServerCertificateInput(v *UntagServerCertificateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagServerCertificateInput"}
+	if v.ServerCertificateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerCertificateName"))
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
@@ -4747,6 +5534,11 @@ func validateOpUploadServerCertificateInput(v *UploadServerCertificateInput) err
 	}
 	if v.PrivateKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PrivateKey"))
+	}
+	if v.Tags != nil {
+		if err := validateTagListType(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -12,8 +12,8 @@ import (
 )
 
 // Deletes the specified scheduled action for an Application Auto Scaling scalable
-// target. For more information, see Delete a Scheduled Action
-// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html#delete-scheduled-action)
+// target. For more information, see Delete a scheduled action
+// (https://docs.aws.amazon.com/autoscaling/application/userguide/scheduled-scaling-additional-cli-commands.html#delete-scheduled-action)
 // in the Application Auto Scaling User Guide.
 func (c *Client) DeleteScheduledAction(ctx context.Context, params *DeleteScheduledActionInput, optFns ...func(*Options)) (*DeleteScheduledActionOutput, error) {
 	if params == nil {

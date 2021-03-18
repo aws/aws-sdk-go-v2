@@ -7,6 +7,25 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// The number of active statements exceeds the limit.
+type ActiveStatementsExceededException struct {
+	Message *string
+}
+
+func (e *ActiveStatementsExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ActiveStatementsExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ActiveStatementsExceededException) ErrorCode() string {
+	return "ActiveStatementsExceededException"
+}
+func (e *ActiveStatementsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The SQL statement encountered an environmental error while running.
 type ExecuteStatementException struct {
 	Message *string

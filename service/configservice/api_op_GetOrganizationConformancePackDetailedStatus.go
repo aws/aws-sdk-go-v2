@@ -12,10 +12,7 @@ import (
 )
 
 // Returns detailed status for each member account within an organization for a
-// given organization conformance pack. Only a master account and a delegated
-// administrator account can call this API. When calling this API with a delegated
-// administrator, you must ensure AWS Organizations ListDelegatedAdministrator
-// permissions are added.
+// given organization conformance pack.
 func (c *Client) GetOrganizationConformancePackDetailedStatus(ctx context.Context, params *GetOrganizationConformancePackDetailedStatusInput, optFns ...func(*Options)) (*GetOrganizationConformancePackDetailedStatusOutput, error) {
 	if params == nil {
 		params = &GetOrganizationConformancePackDetailedStatusInput{}

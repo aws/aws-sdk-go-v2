@@ -5,6 +5,7 @@ package workmailmessageflow
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workmailmessageflow/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -29,8 +30,69 @@ func (m *validateOpGetRawMessageContent) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutRawMessageContent struct {
+}
+
+func (*validateOpPutRawMessageContent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutRawMessageContent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutRawMessageContentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutRawMessageContentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpGetRawMessageContentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRawMessageContent{}, middleware.After)
+}
+
+func addOpPutRawMessageContentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutRawMessageContent{}, middleware.After)
+}
+
+func validateRawMessageContent(v *types.RawMessageContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RawMessageContent"}
+	if v.S3Reference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Reference"))
+	} else if v.S3Reference != nil {
+		if err := validateS3Reference(v.S3Reference); err != nil {
+			invalidParams.AddNested("S3Reference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3Reference(v *types.S3Reference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Reference"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpGetRawMessageContentInput(v *GetRawMessageContentInput) error {
@@ -40,6 +102,28 @@ func validateOpGetRawMessageContentInput(v *GetRawMessageContentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetRawMessageContentInput"}
 	if v.MessageId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutRawMessageContentInput(v *PutRawMessageContentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutRawMessageContentInput"}
+	if v.MessageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	} else if v.Content != nil {
+		if err := validateRawMessageContent(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

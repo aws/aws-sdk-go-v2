@@ -1094,6 +1094,57 @@ func (m *awsAwsjson11_serializeOpUpdateCertificateAuthority) HandleSerialize(ctx
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAccessDescription(v *types.AccessDescription, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessLocation != nil {
+		ok := object.Key("AccessLocation")
+		if err := awsAwsjson11_serializeDocumentGeneralName(v.AccessLocation, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AccessMethod != nil {
+		ok := object.Key("AccessMethod")
+		if err := awsAwsjson11_serializeDocumentAccessMethod(v.AccessMethod, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAccessDescriptionList(v []types.AccessDescription, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAccessDescription(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAccessMethod(v *types.AccessMethod, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AccessMethodType) > 0 {
+		ok := object.Key("AccessMethodType")
+		ok.String(string(v.AccessMethodType))
+	}
+
+	if v.CustomObjectIdentifier != nil {
+		ok := object.Key("CustomObjectIdentifier")
+		ok.String(*v.CustomObjectIdentifier)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentActionList(v []types.ActionType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1102,6 +1153,27 @@ func awsAwsjson11_serializeDocumentActionList(v []types.ActionType, value smithy
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentApiPassthrough(v *types.ApiPassthrough, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Extensions != nil {
+		ok := object.Key("Extensions")
+		if err := awsAwsjson11_serializeDocumentExtensions(v.Extensions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Subject != nil {
+		ok := object.Key("Subject")
+		if err := awsAwsjson11_serializeDocumentASN1Subject(v.Subject, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1186,6 +1258,13 @@ func awsAwsjson11_serializeDocumentCertificateAuthorityConfiguration(v *types.Ce
 	object := value.Object()
 	defer object.Close()
 
+	if v.CsrExtensions != nil {
+		ok := object.Key("CsrExtensions")
+		if err := awsAwsjson11_serializeDocumentCsrExtensions(v.CsrExtensions, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.KeyAlgorithm) > 0 {
 		ok := object.Key("KeyAlgorithm")
 		ok.String(string(v.KeyAlgorithm))
@@ -1203,6 +1282,19 @@ func awsAwsjson11_serializeDocumentCertificateAuthorityConfiguration(v *types.Ce
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCertificatePolicyList(v []types.PolicyInformation, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentPolicyInformation(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -1228,6 +1320,307 @@ func awsAwsjson11_serializeDocumentCrlConfiguration(v *types.CrlConfiguration, v
 	if v.S3BucketName != nil {
 		ok := object.Key("S3BucketName")
 		ok.String(*v.S3BucketName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCsrExtensions(v *types.CsrExtensions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KeyUsage != nil {
+		ok := object.Key("KeyUsage")
+		if err := awsAwsjson11_serializeDocumentKeyUsage(v.KeyUsage, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SubjectInformationAccess != nil {
+		ok := object.Key("SubjectInformationAccess")
+		if err := awsAwsjson11_serializeDocumentAccessDescriptionList(v.SubjectInformationAccess, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEdiPartyName(v *types.EdiPartyName, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NameAssigner != nil {
+		ok := object.Key("NameAssigner")
+		ok.String(*v.NameAssigner)
+	}
+
+	if v.PartyName != nil {
+		ok := object.Key("PartyName")
+		ok.String(*v.PartyName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentExtendedKeyUsage(v *types.ExtendedKeyUsage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExtendedKeyUsageObjectIdentifier != nil {
+		ok := object.Key("ExtendedKeyUsageObjectIdentifier")
+		ok.String(*v.ExtendedKeyUsageObjectIdentifier)
+	}
+
+	if len(v.ExtendedKeyUsageType) > 0 {
+		ok := object.Key("ExtendedKeyUsageType")
+		ok.String(string(v.ExtendedKeyUsageType))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentExtendedKeyUsageList(v []types.ExtendedKeyUsage, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentExtendedKeyUsage(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentExtensions(v *types.Extensions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificatePolicies != nil {
+		ok := object.Key("CertificatePolicies")
+		if err := awsAwsjson11_serializeDocumentCertificatePolicyList(v.CertificatePolicies, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExtendedKeyUsage != nil {
+		ok := object.Key("ExtendedKeyUsage")
+		if err := awsAwsjson11_serializeDocumentExtendedKeyUsageList(v.ExtendedKeyUsage, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KeyUsage != nil {
+		ok := object.Key("KeyUsage")
+		if err := awsAwsjson11_serializeDocumentKeyUsage(v.KeyUsage, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SubjectAlternativeNames != nil {
+		ok := object.Key("SubjectAlternativeNames")
+		if err := awsAwsjson11_serializeDocumentGeneralNameList(v.SubjectAlternativeNames, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGeneralName(v *types.GeneralName, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DirectoryName != nil {
+		ok := object.Key("DirectoryName")
+		if err := awsAwsjson11_serializeDocumentASN1Subject(v.DirectoryName, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DnsName != nil {
+		ok := object.Key("DnsName")
+		ok.String(*v.DnsName)
+	}
+
+	if v.EdiPartyName != nil {
+		ok := object.Key("EdiPartyName")
+		if err := awsAwsjson11_serializeDocumentEdiPartyName(v.EdiPartyName, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IpAddress != nil {
+		ok := object.Key("IpAddress")
+		ok.String(*v.IpAddress)
+	}
+
+	if v.OtherName != nil {
+		ok := object.Key("OtherName")
+		if err := awsAwsjson11_serializeDocumentOtherName(v.OtherName, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RegisteredId != nil {
+		ok := object.Key("RegisteredId")
+		ok.String(*v.RegisteredId)
+	}
+
+	if v.Rfc822Name != nil {
+		ok := object.Key("Rfc822Name")
+		ok.String(*v.Rfc822Name)
+	}
+
+	if v.UniformResourceIdentifier != nil {
+		ok := object.Key("UniformResourceIdentifier")
+		ok.String(*v.UniformResourceIdentifier)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGeneralNameList(v []types.GeneralName, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentGeneralName(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentKeyUsage(v *types.KeyUsage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CRLSign {
+		ok := object.Key("CRLSign")
+		ok.Boolean(v.CRLSign)
+	}
+
+	if v.DataEncipherment {
+		ok := object.Key("DataEncipherment")
+		ok.Boolean(v.DataEncipherment)
+	}
+
+	if v.DecipherOnly {
+		ok := object.Key("DecipherOnly")
+		ok.Boolean(v.DecipherOnly)
+	}
+
+	if v.DigitalSignature {
+		ok := object.Key("DigitalSignature")
+		ok.Boolean(v.DigitalSignature)
+	}
+
+	if v.EncipherOnly {
+		ok := object.Key("EncipherOnly")
+		ok.Boolean(v.EncipherOnly)
+	}
+
+	if v.KeyAgreement {
+		ok := object.Key("KeyAgreement")
+		ok.Boolean(v.KeyAgreement)
+	}
+
+	if v.KeyCertSign {
+		ok := object.Key("KeyCertSign")
+		ok.Boolean(v.KeyCertSign)
+	}
+
+	if v.KeyEncipherment {
+		ok := object.Key("KeyEncipherment")
+		ok.Boolean(v.KeyEncipherment)
+	}
+
+	if v.NonRepudiation {
+		ok := object.Key("NonRepudiation")
+		ok.Boolean(v.NonRepudiation)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOtherName(v *types.OtherName, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TypeId != nil {
+		ok := object.Key("TypeId")
+		ok.String(*v.TypeId)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPolicyInformation(v *types.PolicyInformation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertPolicyId != nil {
+		ok := object.Key("CertPolicyId")
+		ok.String(*v.CertPolicyId)
+	}
+
+	if v.PolicyQualifiers != nil {
+		ok := object.Key("PolicyQualifiers")
+		if err := awsAwsjson11_serializeDocumentPolicyQualifierInfoList(v.PolicyQualifiers, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPolicyQualifierInfo(v *types.PolicyQualifierInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.PolicyQualifierId) > 0 {
+		ok := object.Key("PolicyQualifierId")
+		ok.String(string(v.PolicyQualifierId))
+	}
+
+	if v.Qualifier != nil {
+		ok := object.Key("Qualifier")
+		if err := awsAwsjson11_serializeDocumentQualifier(v.Qualifier, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPolicyQualifierInfoList(v []types.PolicyQualifierInfo, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentPolicyQualifierInfo(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentQualifier(v *types.Qualifier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CpsUri != nil {
+		ok := object.Key("CpsUri")
+		ok.String(*v.CpsUri)
 	}
 
 	return nil
@@ -1542,6 +1935,13 @@ func awsAwsjson11_serializeOpDocumentIssueCertificateInput(v *IssueCertificateIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.ApiPassthrough != nil {
+		ok := object.Key("ApiPassthrough")
+		if err := awsAwsjson11_serializeDocumentApiPassthrough(v.ApiPassthrough, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CertificateAuthorityArn != nil {
 		ok := object.Key("CertificateAuthorityArn")
 		ok.String(*v.CertificateAuthorityArn)
@@ -1570,6 +1970,13 @@ func awsAwsjson11_serializeOpDocumentIssueCertificateInput(v *IssueCertificateIn
 	if v.Validity != nil {
 		ok := object.Key("Validity")
 		if err := awsAwsjson11_serializeDocumentValidity(v.Validity, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ValidityNotBefore != nil {
+		ok := object.Key("ValidityNotBefore")
+		if err := awsAwsjson11_serializeDocumentValidity(v.ValidityNotBefore, ok); err != nil {
 			return err
 		}
 	}

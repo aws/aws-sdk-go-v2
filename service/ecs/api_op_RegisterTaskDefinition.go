@@ -131,7 +131,7 @@ type RegisterTaskDefinitionInput struct {
 	// apply to all containers within a task.
 	//
 	// This parameter is not supported for
-	// Windows containers or tasks using the Fargate launch type.
+	// Windows containers or tasks run on AWS Fargate.
 	IpcMode types.IpcMode
 
 	// The amount of memory (in MiB) used by the task. It can be expressed as an
@@ -204,7 +204,7 @@ type RegisterTaskDefinitionInput struct {
 	// run reference. If the host PID mode is used, be aware that there is a heightened
 	// risk of undesired process namespace expose. For more information, see Docker
 	// security (https://docs.docker.com/engine/security/security/). This parameter is
-	// not supported for Windows containers or tasks using the Fargate launch type.
+	// not supported for Windows containers or tasks run on AWS Fargate.
 	PidMode types.PidMode
 
 	// An array of placement constraint objects to use for the task. You can specify a
@@ -223,8 +223,9 @@ type RegisterTaskDefinitionInput struct {
 	ProxyConfiguration *types.ProxyConfiguration
 
 	// The task launch type that Amazon ECS should validate the task definition
-	// against. This ensures that the task definition parameters are compatible with
-	// the specified launch type. If no value is specified, it defaults to EC2.
+	// against. A client exception is returned if the task definition doesn't validate
+	// against the compatibilities specified. If no value is specified, the parameter
+	// is omitted from the response.
 	RequiresCompatibilities []types.Compatibility
 
 	// The metadata that you apply to the task definition to help you categorize and

@@ -93,6 +93,28 @@ type GetSavingsPlansCoverageInput struct {
 	// token when the response from a previous call has more results than the maximum
 	// page size.
 	NextToken *string
+
+	// The value by which you want to sort the data. The following values are supported
+	// for Key:
+	//
+	// * SpendCoveredBySavingsPlan
+	//
+	// * OnDemandCost
+	//
+	// * CoveragePercentage
+	//
+	// *
+	// TotalCost
+	//
+	// * InstanceFamily
+	//
+	// * Region
+	//
+	// * Service
+	//
+	// Supported values for SortOrder
+	// are ASCENDING or DESCENDING.
+	SortBy *types.SortDefinition
 }
 
 type GetSavingsPlansCoverageOutput struct {

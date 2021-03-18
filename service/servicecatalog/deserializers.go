@@ -10368,7 +10368,7 @@ func awsAwsjson11_deserializeDocumentAllowedValues(v *[]string, value interface{
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected AllowedValue to be of type string, got %T instead", value)
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}
@@ -11516,9 +11516,63 @@ func awsAwsjson11_deserializeDocumentParameterConstraints(v **types.ParameterCon
 
 	for key, value := range shape {
 		switch key {
+		case "AllowedPattern":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AllowedPattern = ptr.String(jtv)
+			}
+
 		case "AllowedValues":
 			if err := awsAwsjson11_deserializeDocumentAllowedValues(&sv.AllowedValues, value); err != nil {
 				return err
+			}
+
+		case "ConstraintDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ConstraintDescription = ptr.String(jtv)
+			}
+
+		case "MaxLength":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.MaxLength = ptr.String(jtv)
+			}
+
+		case "MaxValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.MaxValue = ptr.String(jtv)
+			}
+
+		case "MinLength":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.MinLength = ptr.String(jtv)
+			}
+
+		case "MinValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.MinValue = ptr.String(jtv)
 			}
 
 		default:

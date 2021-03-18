@@ -49,6 +49,12 @@ type UpdateProjectInput struct {
 	// time.
 	Cache *types.ProjectCache
 
+	// The maximum number of concurrent builds that are allowed for this project. New
+	// builds are only started if the current number of builds is less than or equal to
+	// this limit. If the current build count meets this limit, new builds are
+	// throttled and are not run. To remove this limit, set this value to -1.
+	ConcurrentBuildLimit *int32
+
 	// A new or replacement description of the build project.
 	Description *string
 
@@ -113,13 +119,13 @@ type UpdateProjectInput struct {
 	// build. If a branch name is specified, the branch's HEAD commit ID is used. If
 	// not specified, the default branch's HEAD commit ID is used.
 	//
-	// * For Amazon Simple
-	// Storage Service (Amazon S3): the version ID of the object that represents the
-	// build input ZIP file to use.
+	// * For Amazon S3:
+	// the version ID of the object that represents the build input ZIP file to
+	// use.
 	//
-	// If sourceVersion is specified at the build level,
-	// then that version takes precedence over this sourceVersion (at the project
-	// level). For more information, see Source Version Sample with CodeBuild
+	// If sourceVersion is specified at the build level, then that version takes
+	// precedence over this sourceVersion (at the project level). For more information,
+	// see Source Version Sample with CodeBuild
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
 	// in the AWS CodeBuild User Guide.
 	SourceVersion *string

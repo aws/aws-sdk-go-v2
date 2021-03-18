@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Activates a key signing key (KSK) so that it can be used for signing by DNSSEC.
+// Activates a key-signing key (KSK) so that it can be used for signing by DNSSEC.
 // This operation changes the KSK status to ACTIVE.
 func (c *Client) ActivateKeySigningKey(ctx context.Context, params *ActivateKeySigningKeyInput, optFns ...func(*Options)) (*ActivateKeySigningKeyOutput, error) {
 	if params == nil {
@@ -35,7 +35,9 @@ type ActivateKeySigningKeyInput struct {
 	// This member is required.
 	HostedZoneId *string
 
-	// An alphanumeric string used to identify a key signing key (KSK).
+	// A string used to identify a key-signing key (KSK). Name can include numbers,
+	// letters, and underscores (_). Name must be unique for each key-signing key in
+	// the same hosted zone.
 	//
 	// This member is required.
 	Name *string

@@ -1804,6 +1804,9 @@ func awsRestjson1_deserializeOpErrorListChannels(response *smithyhttp.Response, 
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
 
@@ -4207,15 +4210,15 @@ func awsRestjson1_deserializeDocumentStream(v **types.Stream, value interface{})
 
 		case "startTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StreamStartTime to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected StreamStartTime to be of type string, got %T instead", value)
 				}
-				f64, err := jtv.Float64()
+				t, err := smithytime.ParseDateTime(jtv)
 				if err != nil {
 					return err
 				}
-				sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+				sv.StartTime = ptr.Time(t)
 			}
 
 		case "state":
@@ -4510,15 +4513,15 @@ func awsRestjson1_deserializeDocumentStreamSummary(v **types.StreamSummary, valu
 
 		case "startTime":
 			if value != nil {
-				jtv, ok := value.(json.Number)
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StreamStartTime to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected StreamStartTime to be of type string, got %T instead", value)
 				}
-				f64, err := jtv.Float64()
+				t, err := smithytime.ParseDateTime(jtv)
 				if err != nil {
 					return err
 				}
-				sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+				sv.StartTime = ptr.Time(t)
 			}
 
 		case "state":

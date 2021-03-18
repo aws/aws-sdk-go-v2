@@ -19,29 +19,14 @@ import (
 // pagination parameters to retrieve results as a set of sequential pages. If
 // successful, a configuration is returned for each requested name. When specifying
 // a list of names, only configurations that currently exist are returned. Learn
-// more  Setting Up FlexMatch Matchmakers
+// more  Setting up FlexMatch matchmakers
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/matchmaker-build.html)
-// Related operations
-//
-// * CreateMatchmakingConfiguration
-//
-// *
-// DescribeMatchmakingConfigurations
-//
-// * UpdateMatchmakingConfiguration
-//
-// *
-// DeleteMatchmakingConfiguration
-//
-// * CreateMatchmakingRuleSet
-//
-// *
-// DescribeMatchmakingRuleSets
-//
-// * ValidateMatchmakingRuleSet
-//
-// *
-// DeleteMatchmakingRuleSet
+// Related actions CreateMatchmakingConfiguration |
+// DescribeMatchmakingConfigurations | UpdateMatchmakingConfiguration |
+// DeleteMatchmakingConfiguration | CreateMatchmakingRuleSet |
+// DescribeMatchmakingRuleSets | ValidateMatchmakingRuleSet |
+// DeleteMatchmakingRuleSet | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeMatchmakingConfigurations(ctx context.Context, params *DescribeMatchmakingConfigurationsInput, optFns ...func(*Options)) (*DescribeMatchmakingConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeMatchmakingConfigurationsInput{}
@@ -64,8 +49,8 @@ type DescribeMatchmakingConfigurationsInput struct {
 	// get results as a set of sequential pages. This parameter is limited to 10.
 	Limit *int32
 
-	// A unique identifier for a matchmaking configuration(s) to retrieve. You can use
-	// either the configuration name or ARN value. To request all existing
+	// A unique identifier for the matchmaking configuration(s) to retrieve. You can
+	// use either the configuration name or ARN value. To request all existing
 	// configurations, leave this parameter empty.
 	Names []string
 
@@ -74,9 +59,9 @@ type DescribeMatchmakingConfigurationsInput struct {
 	// beginning of the result set, do not specify a value.
 	NextToken *string
 
-	// A unique identifier for a matchmaking rule set. You can use either the rule set
-	// name or ARN value. Use this parameter to retrieve all matchmaking configurations
-	// that use this rule set.
+	// A unique identifier for the matchmaking rule set. You can use either the rule
+	// set name or ARN value. Use this parameter to retrieve all matchmaking
+	// configurations that use this rule set.
 	RuleSetName *string
 }
 

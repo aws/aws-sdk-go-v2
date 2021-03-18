@@ -61,37 +61,15 @@ type GetScalingPlanResourceForecastDataInput struct {
 	// This member is required.
 	ForecastDataType types.ForecastDataType
 
-	// The ID of the resource. This string consists of the resource type and unique
-	// identifier.
-	//
-	// * Auto Scaling group - The resource type is autoScalingGroup and
-	// the unique identifier is the name of the Auto Scaling group. Example:
+	// The ID of the resource. This string consists of a prefix (autoScalingGroup)
+	// followed by the name of a specified Auto Scaling group (my-asg). Example:
 	// autoScalingGroup/my-asg.
-	//
-	// * ECS service - The resource type is service and the
-	// unique identifier is the cluster name and service name. Example:
-	// service/default/sample-webapp.
-	//
-	// * Spot Fleet request - The resource type is
-	// spot-fleet-request and the unique identifier is the Spot Fleet request ID.
-	// Example: spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
-	//
-	// *
-	// DynamoDB table - The resource type is table and the unique identifier is the
-	// resource ID. Example: table/my-table.
-	//
-	// * DynamoDB global secondary index - The
-	// resource type is index and the unique identifier is the resource ID. Example:
-	// table/my-table/index/my-table-index.
-	//
-	// * Aurora DB cluster - The resource type is
-	// cluster and the unique identifier is the cluster name. Example:
-	// cluster:my-db-cluster.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// The scalable dimension for the resource.
+	// The scalable dimension for the resource. The only valid value is
+	// autoscaling:autoScalingGroup:DesiredCapacity.
 	//
 	// This member is required.
 	ScalableDimension types.ScalableDimension
@@ -101,12 +79,12 @@ type GetScalingPlanResourceForecastDataInput struct {
 	// This member is required.
 	ScalingPlanName *string
 
-	// The version number of the scaling plan.
+	// The version number of the scaling plan. Currently, the only valid value is 1.
 	//
 	// This member is required.
 	ScalingPlanVersion *int64
 
-	// The namespace of the AWS service.
+	// The namespace of the AWS service. The only valid value is autoscaling.
 	//
 	// This member is required.
 	ServiceNamespace types.ServiceNamespace

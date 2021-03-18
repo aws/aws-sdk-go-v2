@@ -40,7 +40,39 @@ type DescribeDBEngineVersionsInput struct {
 	// or engine and major version combination is returned.
 	DefaultOnly bool
 
-	// The database engine to return.
+	// The database engine to return. Valid Values:
+	//
+	// * aurora (for MySQL 5.6-compatible
+	// Aurora)
+	//
+	// * aurora-mysql (for MySQL 5.7-compatible Aurora)
+	//
+	// *
+	// aurora-postgresql
+	//
+	// * mariadb
+	//
+	// * mysql
+	//
+	// * oracle-ee
+	//
+	// * oracle-se2
+	//
+	// *
+	// oracle-se1
+	//
+	// * oracle-se
+	//
+	// * postgres
+	//
+	// * sqlserver-ee
+	//
+	// * sqlserver-se
+	//
+	// *
+	// sqlserver-ex
+	//
+	// * sqlserver-web
 	Engine *string
 
 	// The database engine version to return. Example: 5.1.49

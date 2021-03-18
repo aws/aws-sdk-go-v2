@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all channel memberships in a channel.
+// Lists all channel memberships in a channel. The x-amz-chime-bearer request
+// header is mandatory. Use the AppInstanceUserArn of the user that makes the API
+// call as the value in the header.
 func (c *Client) ListChannelMemberships(ctx context.Context, params *ListChannelMembershipsInput, optFns ...func(*Options)) (*ListChannelMembershipsOutput, error) {
 	if params == nil {
 		params = &ListChannelMembershipsInput{}
@@ -35,11 +37,14 @@ type ListChannelMembershipsInput struct {
 	// This member is required.
 	ChannelArn *string
 
+	// The AppInstanceUserArn of the user that makes the API call.
+	ChimeBearer *string
+
 	// The maximum number of channel memberships that you want returned.
 	MaxResults *int32
 
 	// The token passed by previous API calls until all requested channel memberships
-	// are returned..
+	// are returned.
 	NextToken *string
 
 	// The membership type of a user, DEFAULT or HIDDEN. Default members are always

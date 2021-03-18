@@ -310,6 +310,26 @@ func (m *validateOpDescribeRestoreJob) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateRecoveryPoint struct {
+}
+
+func (*validateOpDisassociateRecoveryPoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateRecoveryPoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateRecoveryPointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateRecoveryPointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpExportBackupPlanTemplate struct {
 }
 
@@ -830,6 +850,10 @@ func addOpDescribeRestoreJobValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDescribeRestoreJob{}, middleware.After)
 }
 
+func addOpDisassociateRecoveryPointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateRecoveryPoint{}, middleware.After)
+}
+
 func addOpExportBackupPlanTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExportBackupPlanTemplate{}, middleware.After)
 }
@@ -1314,6 +1338,24 @@ func validateOpDescribeRestoreJobInput(v *DescribeRestoreJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeRestoreJobInput"}
 	if v.RestoreJobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestoreJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateRecoveryPointInput(v *DisassociateRecoveryPointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateRecoveryPointInput"}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.RecoveryPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

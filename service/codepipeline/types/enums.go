@@ -173,6 +173,24 @@ func (EncryptionKeyType) Values() []EncryptionKeyType {
 	}
 }
 
+type ExecutorType string
+
+// Enum values for ExecutorType
+const (
+	ExecutorTypeJobWorker ExecutorType = "JobWorker"
+	ExecutorTypeLambda    ExecutorType = "Lambda"
+)
+
+// Values returns all known values for ExecutorType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ExecutorType) Values() []ExecutorType {
+	return []ExecutorType{
+		"JobWorker",
+		"Lambda",
+	}
+}
+
 type FailureType string
 
 // Enum values for FailureType
@@ -231,6 +249,7 @@ type PipelineExecutionStatus string
 
 // Enum values for PipelineExecutionStatus
 const (
+	PipelineExecutionStatusCancelled  PipelineExecutionStatus = "Cancelled"
 	PipelineExecutionStatusInProgress PipelineExecutionStatus = "InProgress"
 	PipelineExecutionStatusStopped    PipelineExecutionStatus = "Stopped"
 	PipelineExecutionStatusStopping   PipelineExecutionStatus = "Stopping"
@@ -244,6 +263,7 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (PipelineExecutionStatus) Values() []PipelineExecutionStatus {
 	return []PipelineExecutionStatus{
+		"Cancelled",
 		"InProgress",
 		"Stopped",
 		"Stopping",
@@ -257,6 +277,7 @@ type StageExecutionStatus string
 
 // Enum values for StageExecutionStatus
 const (
+	StageExecutionStatusCancelled  StageExecutionStatus = "Cancelled"
 	StageExecutionStatusInProgress StageExecutionStatus = "InProgress"
 	StageExecutionStatusFailed     StageExecutionStatus = "Failed"
 	StageExecutionStatusStopped    StageExecutionStatus = "Stopped"
@@ -269,6 +290,7 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (StageExecutionStatus) Values() []StageExecutionStatus {
 	return []StageExecutionStatus{
+		"Cancelled",
 		"InProgress",
 		"Failed",
 		"Stopped",

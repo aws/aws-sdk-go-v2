@@ -116,11 +116,16 @@ type ModifyDBClusterInput struct {
 	// Directory Service.
 	DomainIAMRoleName *string
 
-	// A value that indicates whether to enable write operations to be forwarded from
-	// this cluster to the primary cluster in an Aurora global database. The resulting
-	// changes are replicated back to this cluster. This parameter only applies to DB
-	// clusters that are secondary clusters in an Aurora global database. By default,
-	// Aurora disallows write operations for secondary clusters.
+	// A value that indicates whether to enable this DB cluster to forward write
+	// operations to the primary cluster of an Aurora global database (GlobalCluster).
+	// By default, write operations are not allowed on Aurora DB clusters that are
+	// secondary clusters in an Aurora global database. You can set this value only on
+	// Aurora DB clusters that are members of an Aurora global database. With this
+	// parameter enabled, a secondary cluster can forward writes to the current primary
+	// cluster and the resulting changes are replicated back to this cluster. For the
+	// primary DB cluster of an Aurora global database, this value is used immediately
+	// if the primary is demoted by the FailoverGlobalCluster API operation, but it
+	// does nothing until then.
 	EnableGlobalWriteForwarding *bool
 
 	// A value that indicates whether to enable the HTTP endpoint for an Aurora

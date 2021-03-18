@@ -13,7 +13,9 @@ import (
 	"time"
 )
 
-// Returns a list of existing backup jobs for an authenticated account.
+// Returns a list of existing backup jobs for an authenticated account for the last
+// 30 days. For a longer period of time, consider using these monitoring tools
+// (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html).
 func (c *Client) ListBackupJobs(ctx context.Context, params *ListBackupJobsInput, optFns ...func(*Options)) (*ListBackupJobsOutput, error) {
 	if params == nil {
 		params = &ListBackupJobsInput{}
@@ -32,7 +34,8 @@ func (c *Client) ListBackupJobs(ctx context.Context, params *ListBackupJobsInput
 type ListBackupJobsInput struct {
 
 	// The account ID to list the jobs from. Returns only backup jobs associated with
-	// the specified account ID.
+	// the specified account ID. If used from an AWS Organizations management account,
+	// passing * returns all jobs across the organization.
 	ByAccountId *string
 
 	// Returns only backup jobs that will be stored in the specified backup vault.
@@ -66,7 +69,10 @@ type ListBackupJobsInput struct {
 	// * RDS for Amazon Relational
 	// Database Service
 	//
-	// * Storage Gateway for AWS Storage Gateway
+	// * Aurora for Amazon Aurora
+	//
+	// * Storage Gateway for AWS Storage
+	// Gateway
 	ByResourceType *string
 
 	// Returns only backup jobs that are in the specified state.

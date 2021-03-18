@@ -100,7 +100,7 @@ type GetMetricDataInput struct {
 	// metrics for all queues is returned.
 	Groupings []types.Grouping
 
-	// The maximimum number of results to return per page.
+	// The maximum number of results to return per page.
 	MaxResults int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -196,7 +196,7 @@ var _ GetMetricDataAPIClient = (*Client)(nil)
 
 // GetMetricDataPaginatorOptions is the paginator options for GetMetricData
 type GetMetricDataPaginatorOptions struct {
-	// The maximimum number of results to return per page.
+	// The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

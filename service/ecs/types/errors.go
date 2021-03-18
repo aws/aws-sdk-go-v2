@@ -363,6 +363,24 @@ func (e *ServiceNotFoundException) ErrorMessage() string {
 func (e *ServiceNotFoundException) ErrorCode() string             { return "ServiceNotFoundException" }
 func (e *ServiceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The target container is not properly configured with the execute command agent
+// or the container is no longer active or running.
+type TargetNotConnectedException struct {
+	Message *string
+}
+
+func (e *TargetNotConnectedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TargetNotConnectedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TargetNotConnectedException) ErrorCode() string             { return "TargetNotConnectedException" }
+func (e *TargetNotConnectedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified target could not be found. You can view your available container
 // instances with ListContainerInstances. Amazon ECS container instances are
 // cluster-specific and Region-specific.

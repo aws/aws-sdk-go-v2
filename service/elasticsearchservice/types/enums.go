@@ -2,6 +2,72 @@
 
 package types
 
+type AutoTuneDesiredState string
+
+// Enum values for AutoTuneDesiredState
+const (
+	AutoTuneDesiredStateEnabled  AutoTuneDesiredState = "ENABLED"
+	AutoTuneDesiredStateDisabled AutoTuneDesiredState = "DISABLED"
+)
+
+// Values returns all known values for AutoTuneDesiredState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoTuneDesiredState) Values() []AutoTuneDesiredState {
+	return []AutoTuneDesiredState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type AutoTuneState string
+
+// Enum values for AutoTuneState
+const (
+	AutoTuneStateEnabled                       AutoTuneState = "ENABLED"
+	AutoTuneStateDisabled                      AutoTuneState = "DISABLED"
+	AutoTuneStateEnableInProgress              AutoTuneState = "ENABLE_IN_PROGRESS"
+	AutoTuneStateDisableInProgress             AutoTuneState = "DISABLE_IN_PROGRESS"
+	AutoTuneStateDisabledAndRollbackScheduled  AutoTuneState = "DISABLED_AND_ROLLBACK_SCHEDULED"
+	AutoTuneStateDisabledAndRollbackInProgress AutoTuneState = "DISABLED_AND_ROLLBACK_IN_PROGRESS"
+	AutoTuneStateDisabledAndRollbackComplete   AutoTuneState = "DISABLED_AND_ROLLBACK_COMPLETE"
+	AutoTuneStateDisabledAndRollbackError      AutoTuneState = "DISABLED_AND_ROLLBACK_ERROR"
+	AutoTuneStateError                         AutoTuneState = "ERROR"
+)
+
+// Values returns all known values for AutoTuneState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoTuneState) Values() []AutoTuneState {
+	return []AutoTuneState{
+		"ENABLED",
+		"DISABLED",
+		"ENABLE_IN_PROGRESS",
+		"DISABLE_IN_PROGRESS",
+		"DISABLED_AND_ROLLBACK_SCHEDULED",
+		"DISABLED_AND_ROLLBACK_IN_PROGRESS",
+		"DISABLED_AND_ROLLBACK_COMPLETE",
+		"DISABLED_AND_ROLLBACK_ERROR",
+		"ERROR",
+	}
+}
+
+type AutoTuneType string
+
+// Enum values for AutoTuneType
+const (
+	AutoTuneTypeScheduledAction AutoTuneType = "SCHEDULED_ACTION"
+)
+
+// Values returns all known values for AutoTuneType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AutoTuneType) Values() []AutoTuneType {
+	return []AutoTuneType{
+		"SCHEDULED_ACTION",
+	}
+}
+
 type DeploymentStatus string
 
 // Enum values for DeploymentStatus
@@ -382,6 +448,79 @@ func (ReservedElasticsearchInstancePaymentOption) Values() []ReservedElasticsear
 		"ALL_UPFRONT",
 		"PARTIAL_UPFRONT",
 		"NO_UPFRONT",
+	}
+}
+
+type RollbackOnDisable string
+
+// Enum values for RollbackOnDisable
+const (
+	RollbackOnDisableNoRollback      RollbackOnDisable = "NO_ROLLBACK"
+	RollbackOnDisableDefaultRollback RollbackOnDisable = "DEFAULT_ROLLBACK"
+)
+
+// Values returns all known values for RollbackOnDisable. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RollbackOnDisable) Values() []RollbackOnDisable {
+	return []RollbackOnDisable{
+		"NO_ROLLBACK",
+		"DEFAULT_ROLLBACK",
+	}
+}
+
+type ScheduledAutoTuneActionType string
+
+// Enum values for ScheduledAutoTuneActionType
+const (
+	ScheduledAutoTuneActionTypeJvmHeapSizeTuning ScheduledAutoTuneActionType = "JVM_HEAP_SIZE_TUNING"
+	ScheduledAutoTuneActionTypeJvmYoungGenTuning ScheduledAutoTuneActionType = "JVM_YOUNG_GEN_TUNING"
+)
+
+// Values returns all known values for ScheduledAutoTuneActionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduledAutoTuneActionType) Values() []ScheduledAutoTuneActionType {
+	return []ScheduledAutoTuneActionType{
+		"JVM_HEAP_SIZE_TUNING",
+		"JVM_YOUNG_GEN_TUNING",
+	}
+}
+
+type ScheduledAutoTuneSeverityType string
+
+// Enum values for ScheduledAutoTuneSeverityType
+const (
+	ScheduledAutoTuneSeverityTypeLow    ScheduledAutoTuneSeverityType = "LOW"
+	ScheduledAutoTuneSeverityTypeMedium ScheduledAutoTuneSeverityType = "MEDIUM"
+	ScheduledAutoTuneSeverityTypeHigh   ScheduledAutoTuneSeverityType = "HIGH"
+)
+
+// Values returns all known values for ScheduledAutoTuneSeverityType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ScheduledAutoTuneSeverityType) Values() []ScheduledAutoTuneSeverityType {
+	return []ScheduledAutoTuneSeverityType{
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+	}
+}
+
+type TimeUnit string
+
+// Enum values for TimeUnit
+const (
+	TimeUnitHours TimeUnit = "HOURS"
+)
+
+// Values returns all known values for TimeUnit. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (TimeUnit) Values() []TimeUnit {
+	return []TimeUnit{
+		"HOURS",
 	}
 }
 

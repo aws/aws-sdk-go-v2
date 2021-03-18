@@ -4,6 +4,7 @@ package quicksight
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
@@ -125,6 +126,88 @@ func addOperationListThemeVersionsMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 	return nil
+}
+
+// ListThemeVersionsAPIClient is a client that implements the ListThemeVersions
+// operation.
+type ListThemeVersionsAPIClient interface {
+	ListThemeVersions(context.Context, *ListThemeVersionsInput, ...func(*Options)) (*ListThemeVersionsOutput, error)
+}
+
+var _ ListThemeVersionsAPIClient = (*Client)(nil)
+
+// ListThemeVersionsPaginatorOptions is the paginator options for ListThemeVersions
+type ListThemeVersionsPaginatorOptions struct {
+	// The maximum number of results to be returned per request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListThemeVersionsPaginator is a paginator for ListThemeVersions
+type ListThemeVersionsPaginator struct {
+	options   ListThemeVersionsPaginatorOptions
+	client    ListThemeVersionsAPIClient
+	params    *ListThemeVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListThemeVersionsPaginator returns a new ListThemeVersionsPaginator
+func NewListThemeVersionsPaginator(client ListThemeVersionsAPIClient, params *ListThemeVersionsInput, optFns ...func(*ListThemeVersionsPaginatorOptions)) *ListThemeVersionsPaginator {
+	if params == nil {
+		params = &ListThemeVersionsInput{}
+	}
+
+	options := ListThemeVersionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListThemeVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListThemeVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListThemeVersions page.
+func (p *ListThemeVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListThemeVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListThemeVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListThemeVersions(region string) *awsmiddleware.RegisterServiceMetadata {

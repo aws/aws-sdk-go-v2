@@ -94,6 +94,7 @@ const (
 	DeploymentCreatorAutoscaling            DeploymentCreator = "autoscaling"
 	DeploymentCreatorCodeDeployRollback     DeploymentCreator = "codeDeployRollback"
 	DeploymentCreatorCodeDeploy             DeploymentCreator = "CodeDeploy"
+	DeploymentCreatorCodeDeployAutoUpdate   DeploymentCreator = "CodeDeployAutoUpdate"
 	DeploymentCreatorCloudFormation         DeploymentCreator = "CloudFormation"
 	DeploymentCreatorCloudFormationRollback DeploymentCreator = "CloudFormationRollback"
 )
@@ -107,6 +108,7 @@ func (DeploymentCreator) Values() []DeploymentCreator {
 		"autoscaling",
 		"codeDeployRollback",
 		"CodeDeploy",
+		"CodeDeployAutoUpdate",
 		"CloudFormation",
 		"CloudFormationRollback",
 	}
@@ -527,6 +529,24 @@ func (MinimumHealthyHostsType) Values() []MinimumHealthyHostsType {
 	return []MinimumHealthyHostsType{
 		"HOST_COUNT",
 		"FLEET_PERCENT",
+	}
+}
+
+type OutdatedInstancesStrategy string
+
+// Enum values for OutdatedInstancesStrategy
+const (
+	OutdatedInstancesStrategyUpdate OutdatedInstancesStrategy = "UPDATE"
+	OutdatedInstancesStrategyIgnore OutdatedInstancesStrategy = "IGNORE"
+)
+
+// Values returns all known values for OutdatedInstancesStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OutdatedInstancesStrategy) Values() []OutdatedInstancesStrategy {
+	return []OutdatedInstancesStrategy{
+		"UPDATE",
+		"IGNORE",
 	}
 }
 

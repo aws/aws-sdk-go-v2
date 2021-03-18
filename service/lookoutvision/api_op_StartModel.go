@@ -14,9 +14,11 @@ import (
 
 // Starts the running of the version of an Amazon Lookout for Vision model.
 // Starting a model takes a while to complete. To check the current state of the
-// model, use DescribeModel. Once the model is running, you can detect custom
-// labels in new images by calling DetectAnomalies. You are charged for the amount
-// of time that the model is running. To stop a running model, call StopModel.
+// model, use DescribeModel. A model is ready to use when its status is HOSTED.
+// Once the model is running, you can detect custom labels in new images by calling
+// DetectAnomalies. You are charged for the amount of time that the model is
+// running. To stop a running model, call StopModel. This operation requires
+// permissions to perform the lookoutvision:StartModel operation.
 func (c *Client) StartModel(ctx context.Context, params *StartModelInput, optFns ...func(*Options)) (*StartModelOutput, error) {
 	if params == nil {
 		params = &StartModelInput{}

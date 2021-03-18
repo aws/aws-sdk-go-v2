@@ -15,20 +15,9 @@ import (
 // Retrieves all aliases for this AWS account. You can filter the result set by
 // alias name and/or routing strategy type. Use the pagination parameters to
 // retrieve results in sequential pages. Returned aliases are not listed in any
-// particular order.
-//
-// * CreateAlias
-//
-// * ListAliases
-//
-// * DescribeAlias
-//
-// *
-// UpdateAlias
-//
-// * DeleteAlias
-//
-// * ResolveAlias
+// particular order. Related actions CreateAlias | ListAliases | DescribeAlias |
+// UpdateAlias | DeleteAlias | ResolveAlias | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optFns ...func(*Options)) (*ListAliasesOutput, error) {
 	if params == nil {
 		params = &ListAliasesInput{}

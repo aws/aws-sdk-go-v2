@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes the specified server certificate. For more information about working
-// with server certificates, see Working with Server Certificates
+// with server certificates, see Working with server certificates
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
 // in the IAM User Guide. This topic also includes a list of AWS services that can
 // use the server certificates that you manage with IAM. If you are using a server
@@ -20,7 +20,7 @@ import (
 // deletion of bound certificates, it may continue to use the certificates. This
 // could cause Elastic Load Balancing to stop accepting traffic. We recommend that
 // you remove the reference to the certificate from Elastic Load Balancing before
-// using this command to delete the certificate. For more information, go to
+// using this command to delete the certificate. For more information, see
 // DeleteLoadBalancerListeners
 // (https://docs.aws.amazon.com/ElasticLoadBalancing/latest/APIReference/API_DeleteLoadBalancerListeners.html)
 // in the Elastic Load Balancing API Reference.

@@ -1792,6 +1792,32 @@ func awsRestjson1_serializeDocumentExportAssetToSignedUrlRequestDetails(v *types
 	return nil
 }
 
+func awsRestjson1_serializeDocumentExportRevisionsToS3RequestDetails(v *types.ExportRevisionsToS3RequestDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataSetId != nil {
+		ok := object.Key("DataSetId")
+		ok.String(*v.DataSetId)
+	}
+
+	if v.Encryption != nil {
+		ok := object.Key("Encryption")
+		if err := awsRestjson1_serializeDocumentExportServerSideEncryption(v.Encryption, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RevisionDestinations != nil {
+		ok := object.Key("RevisionDestinations")
+		if err := awsRestjson1_serializeDocumentListOfRevisionDestinationEntry(v.RevisionDestinations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentExportServerSideEncryption(v *types.ExportServerSideEncryption, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1886,6 +1912,19 @@ func awsRestjson1_serializeDocumentListOfAssetSourceEntry(v []types.AssetSourceE
 	return nil
 }
 
+func awsRestjson1_serializeDocumentListOfRevisionDestinationEntry(v []types.RevisionDestinationEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRevisionDestinationEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMapOf__string(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1915,6 +1954,13 @@ func awsRestjson1_serializeDocumentRequestDetails(v *types.RequestDetails, value
 		}
 	}
 
+	if v.ExportRevisionsToS3 != nil {
+		ok := object.Key("ExportRevisionsToS3")
+		if err := awsRestjson1_serializeDocumentExportRevisionsToS3RequestDetails(v.ExportRevisionsToS3, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ImportAssetFromSignedUrl != nil {
 		ok := object.Key("ImportAssetFromSignedUrl")
 		if err := awsRestjson1_serializeDocumentImportAssetFromSignedUrlRequestDetails(v.ImportAssetFromSignedUrl, ok); err != nil {
@@ -1927,6 +1973,28 @@ func awsRestjson1_serializeDocumentRequestDetails(v *types.RequestDetails, value
 		if err := awsRestjson1_serializeDocumentImportAssetsFromS3RequestDetails(v.ImportAssetsFromS3, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRevisionDestinationEntry(v *types.RevisionDestinationEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bucket != nil {
+		ok := object.Key("Bucket")
+		ok.String(*v.Bucket)
+	}
+
+	if v.KeyPattern != nil {
+		ok := object.Key("KeyPattern")
+		ok.String(*v.KeyPattern)
+	}
+
+	if v.RevisionId != nil {
+		ok := object.Key("RevisionId")
+		ok.String(*v.RevisionId)
 	}
 
 	return nil

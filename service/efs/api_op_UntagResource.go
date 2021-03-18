@@ -35,7 +35,7 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceId *string
 
-	// The keys of the key:value tag pairs that you want to remove from the specified
+	// The keys of the key-value tag pairs that you want to remove from the specified
 	// EFS resource.
 	//
 	// This member is required.

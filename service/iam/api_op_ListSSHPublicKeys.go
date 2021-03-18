@@ -17,7 +17,7 @@ import (
 // returned by this operation are used only for authenticating the IAM user to an
 // AWS CodeCommit repository. For more information about using SSH keys to
 // authenticate to an AWS CodeCommit repository, see Set up AWS CodeCommit for SSH
-// Connections
+// connections
 // (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
 // in the AWS CodeCommit User Guide. Although each user is limited to a small
 // number of keys, you can still paginate the results using the MaxItems and Marker

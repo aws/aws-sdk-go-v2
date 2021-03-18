@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,8 +61,8 @@ type CreateOpenIDConnectProviderInput struct {
 	// keys at https://keys.server.example.com/openid-connect. In that case, the
 	// thumbprint string would be the hex-encoded SHA-1 hash value of the certificate
 	// used by https://keys.server.example.com. For more information about obtaining
-	// the OIDC provider's thumbprint, see Obtaining the Thumbprint for an OpenID
-	// Connect Provider
+	// the OIDC provider's thumbprint, see Obtaining the thumbprint for an OpenID
+	// Connect provider
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html)
 	// in the IAM User Guide.
 	//
@@ -89,6 +90,14 @@ type CreateOpenIDConnectProviderInput struct {
 	// CreateOpenIDConnectProviderRequest operation accepts client IDs up to 255
 	// characters long.
 	ClientIDList []string
+
+	// A list of tags that you want to attach to the new IAM OpenID Connect (OIDC)
+	// provider. Each tag consists of a key name and an associated value. For more
+	// information about tagging, see Tagging IAM resources
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
+	// Guide. If any one of the tags is invalid or if you exceed the allowed maximum
+	// number of tags, then the entire request fails and the resource is not created.
+	Tags []types.Tag
 }
 
 // Contains the response to a successful CreateOpenIDConnectProvider request.
@@ -97,6 +106,12 @@ type CreateOpenIDConnectProviderOutput struct {
 	// The Amazon Resource Name (ARN) of the new IAM OpenID Connect provider that is
 	// created. For more information, see OpenIDConnectProviderListEntry.
 	OpenIDConnectProviderArn *string
+
+	// A list of tags that are attached to the new IAM OIDC provider. The returned list
+	// of tags is sorted by tag key. For more information about tagging, see Tagging
+	// IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
+	// the IAM User Guide.
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

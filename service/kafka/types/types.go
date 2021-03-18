@@ -429,6 +429,9 @@ type MutableClusterInfo struct {
 	// CloudWatch for this cluster.
 	EnhancedMonitoring EnhancedMonitoring
 
+	// Information about the Amazon MSK broker type.
+	InstanceType *string
+
 	// The Kafka version.
 	KafkaVersion *string
 

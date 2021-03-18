@@ -11,35 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates fleet properties, including name and description, for a fleet. To update
-// metadata, specify the fleet ID and the property values that you want to change.
-// If successful, the fleet ID for the updated fleet is returned. Learn more
-// Setting up GameLift Fleets
+// Updates a fleet's mutable attributes, including game session protection and
+// resource creation limits. To update fleet attributes, specify the fleet ID and
+// the property values that you want to change. If successful, an updated
+// FleetAttributes object is returned. Learn more Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related operations
-//
-// * CreateFleet
-//
-// * ListFleets
-//
-// * DeleteFleet
-//
-// *
-// DescribeFleetAttributes
-//
-// * Update fleets:
-//
-// * UpdateFleetAttributes
-//
-// *
-// UpdateFleetCapacity
-//
-// * UpdateFleetPortSettings
-//
-// * UpdateRuntimeConfiguration
-//
-// *
-// StartFleetActions or StopFleetActions
+// Related actions CreateFleetLocations | UpdateFleetAttributes |
+// UpdateFleetCapacity | UpdateFleetPortSettings | UpdateRuntimeConfiguration |
+// StopFleetActions | StartFleetActions | PutScalingPolicy | DeleteFleet |
+// DeleteFleetLocations | DeleteScalingPolicy | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateFleetAttributes(ctx context.Context, params *UpdateFleetAttributesInput, optFns ...func(*Options)) (*UpdateFleetAttributesOutput, error) {
 	if params == nil {
 		params = &UpdateFleetAttributesInput{}
@@ -58,26 +39,26 @@ func (c *Client) UpdateFleetAttributes(ctx context.Context, params *UpdateFleetA
 // Represents the input for a request operation.
 type UpdateFleetAttributesInput struct {
 
-	// A unique identifier for a fleet to update attribute metadata for. You can use
+	// A unique identifier for the fleet to update attribute metadata for. You can use
 	// either the fleet ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string
 
-	// Human-readable description of a fleet.
+	// A human-readable description of a fleet.
 	Description *string
 
-	// Names of metric groups to include this fleet in. Amazon CloudWatch uses a fleet
-	// metric group is to aggregate metrics from multiple fleets. Use an existing
-	// metric group name to add this fleet to the group. Or use a new name to create a
-	// new metric group. A fleet can only be included in one metric group at a time.
+	// The name of a metric group to add this fleet to. Use a metric group in Amazon
+	// CloudWatch to aggregate the metrics from multiple fleets. Provide an existing
+	// metric group name, or create a new metric group by providing a new name. A fleet
+	// can only be in one metric group at a time.
 	MetricGroups []string
 
 	// A descriptive label that is associated with a fleet. Fleet names do not need to
 	// be unique.
 	Name *string
 
-	// Game session protection policy to apply to all new instances created in this
+	// The game session protection policy to apply to all new instances created in this
 	// fleet. Instances that already exist are not affected. You can set protection for
 	// individual instances using UpdateGameSession.
 	//
@@ -89,16 +70,15 @@ type UpdateFleetAttributesInput struct {
 	// event.
 	NewGameSessionProtectionPolicy types.ProtectionPolicy
 
-	// Policy that limits the number of game sessions an individual player can create
-	// over a span of time.
+	// Policy settings that limit the number of game sessions an individual player can
+	// create over a span of time.
 	ResourceCreationLimitPolicy *types.ResourceCreationLimitPolicy
 }
 
 // Represents the returned data in response to a request operation.
 type UpdateFleetAttributesOutput struct {
 
-	// A unique identifier for a fleet that was updated. Use either the fleet ID or ARN
-	// value.
+	// A unique identifier for the fleet that was updated.
 	FleetId *string
 
 	// Metadata pertaining to the operation's result.

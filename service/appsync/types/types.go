@@ -350,6 +350,11 @@ type FunctionConfiguration struct {
 
 	// The Function response mapping template.
 	ResponseMappingTemplate *string
+
+	// Describes a Sync configuration for a resolver. Contains information on which
+	// Conflict Detection as well as Resolution strategy should be performed when the
+	// resolver is invoked.
+	SyncConfig *SyncConfig
 }
 
 // Describes a GraphQL API.

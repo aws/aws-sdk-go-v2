@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the definition of an existing AWS Glue DataBrew dataset in the current
-// AWS account.
+// Modifies the definition of an existing DataBrew dataset.
 func (c *Client) UpdateDataset(ctx context.Context, params *UpdateDatasetInput, optFns ...func(*Options)) (*UpdateDatasetOutput, error) {
 	if params == nil {
 		params = &UpdateDatasetInput{}
@@ -30,8 +29,8 @@ func (c *Client) UpdateDataset(ctx context.Context, params *UpdateDatasetInput, 
 
 type UpdateDatasetInput struct {
 
-	// Information on how AWS Glue DataBrew can find data, in either the AWS Glue Data
-	// Catalog or Amazon S3.
+	// Information on how DataBrew can find data, in either the AWS Glue Data Catalog
+	// or Amazon S3.
 	//
 	// This member is required.
 	Input *types.Input
@@ -41,7 +40,10 @@ type UpdateDatasetInput struct {
 	// This member is required.
 	Name *string
 
-	// Options that define how Microsoft Excel input is to be interpreted by DataBrew.
+	// Specifies the file format of a dataset created from an S3 file or folder.
+	Format types.InputFormat
+
+	// Options that define the structure of either Csv, Excel, or JSON input.
 	FormatOptions *types.FormatOptions
 }
 

@@ -69,6 +69,10 @@ type CreateLoadBalancerInput struct {
 	// scripting on it.
 	HealthCheckPath *string
 
+	// The IP address type for the load balancer. The possible values are ipv4 for IPv4
+	// only, and dualstack for IPv4 and IPv6. The default value is dualstack.
+	IpAddressType types.IpAddressType
+
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
 	Tags []types.Tag

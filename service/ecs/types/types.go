@@ -206,7 +206,19 @@ type CapacityProvider struct {
 	UpdateStatusReason *string
 }
 
-// The details of a capacity provider strategy.
+// The details of a capacity provider strategy. A capacity provider strategy can be
+// set when using the RunTask or CreateCluster APIs or as the default capacity
+// provider strategy for a cluster with the CreateCluster API. Only capacity
+// providers that are already associated with a cluster and have an ACTIVE or
+// UPDATING status can be used in a capacity provider strategy. The
+// PutClusterCapacityProviders API is used to associate a capacity provider with a
+// cluster. If specifying a capacity provider that uses an Auto Scaling group, the
+// capacity provider must already be created. New Auto Scaling group capacity
+// providers can be created with the CreateCapacityProvider API operation. To use a
+// AWS Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT
+// capacity providers. The AWS Fargate capacity providers are available to all
+// accounts and only need to be associated with a cluster to be used in a capacity
+// provider strategy.
 type CapacityProviderStrategyItem struct {
 
 	// The short name of the capacity provider.
@@ -216,17 +228,25 @@ type CapacityProviderStrategyItem struct {
 
 	// The base value designates how many tasks, at a minimum, to run on the specified
 	// capacity provider. Only one capacity provider in a capacity provider strategy
-	// can have a base defined.
+	// can have a base defined. If no value is specified, the default value of 0 is
+	// used.
 	Base int32
 
 	// The weight value designates the relative percentage of the total number of tasks
-	// launched that should use the specified capacity provider. For example, if you
-	// have a strategy that contains two capacity providers and both have a weight of
-	// 1, then when the base is satisfied, the tasks will be split evenly across the
-	// two capacity providers. Using that same logic, if you specify a weight of 1 for
-	// capacityProviderA and a weight of 4 for capacityProviderB, then for every one
-	// task that is run using capacityProviderA, four tasks would use
-	// capacityProviderB.
+	// launched that should use the specified capacity provider. The weight value is
+	// taken into consideration after the base value, if defined, is satisfied. If no
+	// weight value is specified, the default value of 0 is used. When multiple
+	// capacity providers are specified within a capacity provider strategy, at least
+	// one of the capacity providers must have a weight value greater than zero and any
+	// capacity providers with a weight of 0 will not be used to place tasks. If you
+	// specify multiple capacity providers in a strategy that all have a weight of 0,
+	// any RunTask or CreateService actions using the capacity provider strategy will
+	// fail. An example scenario for using weights is defining a strategy that contains
+	// two capacity providers and both have a weight of 1, then when the base is
+	// satisfied, the tasks will be split evenly across the two capacity providers.
+	// Using that same logic, if you specify a weight of 1 for capacityProviderA and a
+	// weight of 4 for capacityProviderB, then for every one task that is run using
+	// capacityProviderA, four tasks would use capacityProviderB.
 	Weight int32
 }
 
@@ -263,6 +283,9 @@ type Cluster struct {
 
 	// A user-generated string that you use to identify your cluster.
 	ClusterName *string
+
+	// The execute command configuration for the cluster.
+	Configuration *ClusterConfiguration
 
 	// The default capacity provider strategy for the cluster. When services or tasks
 	// are run in the cluster with no launch type or capacity provider strategy
@@ -351,6 +374,13 @@ type Cluster struct {
 	Tags []Tag
 }
 
+// The execute command configuration for the cluster.
+type ClusterConfiguration struct {
+
+	// The details of the execute command configuration.
+	ExecuteCommandConfiguration *ExecuteCommandConfiguration
+}
+
 // The settings to use when creating a cluster. This parameter is used to enable
 // CloudWatch Container Insights for a cluster.
 type ClusterSetting struct {
@@ -397,6 +427,9 @@ type Container struct {
 
 	// The last known status of the container.
 	LastStatus *string
+
+	// The details of any Amazon ECS managed agents associated with the container.
+	ManagedAgents []ManagedAgent
 
 	// The hard limit (in MiB) of memory set for the container.
 	Memory *string
@@ -607,8 +640,7 @@ type ContainerDefinition struct {
 	// processed from the top down. It is recommended to use unique variable names. For
 	// more information, see Specifying Environment Variables
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
-	// in the Amazon Elastic Container Service Developer Guide. This field is not valid
-	// for containers in tasks using the Fargate launch type.
+	// in the Amazon Elastic Container Service Developer Guide.
 	EnvironmentFiles []EnvironmentFile
 
 	// If the essential parameter of a container is marked as true, and that container
@@ -851,8 +883,7 @@ type ContainerDefinition struct {
 	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
 	// --privileged option to docker run
 	// (https://docs.docker.com/engine/reference/run/#security-configuration). This
-	// parameter is not supported for Windows containers or tasks using the Fargate
-	// launch type.
+	// parameter is not supported for Windows containers or tasks run on AWS Fargate.
 	Privileged *bool
 
 	// When this parameter is true, a TTY is allocated. This parameter maps to Tty in
@@ -1566,10 +1597,10 @@ type EFSVolumeConfiguration struct {
 // precedence over the variables contained within an environment file. If multiple
 // environment files are specified that contain the same variable, they are
 // processed from the top down. It is recommended to use unique variable names. For
-// more information, see Specifying Environment Variables
+// more information, see Specifying environment variables
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
-// in the Amazon Elastic Container Service Developer Guide. This field is not valid
-// for containers in tasks using the Fargate launch type.
+// in the Amazon Elastic Container Service Developer Guide. This field is only
+// valid for containers in Fargate tasks that use platform version 1.4.0 or later.
 type EnvironmentFile struct {
 
 	// The file type to use. The only supported value is s3.
@@ -1582,6 +1613,58 @@ type EnvironmentFile struct {
 	//
 	// This member is required.
 	Value *string
+}
+
+// The details of the execute command configuration.
+type ExecuteCommandConfiguration struct {
+
+	// Specify an AWS Key Management Service key ID to encrypt the data between the
+	// local client and the container.
+	KmsKeyId *string
+
+	// The log configuration for the results of the execute command actions. The logs
+	// can be sent to CloudWatch Logs or an Amazon S3 bucket. When logging=OVERRIDE is
+	// specified, a logConfiguration must be provided.
+	LogConfiguration *ExecuteCommandLogConfiguration
+
+	// The log setting to use for redirecting logs for your execute command results.
+	// The following log settings are available.
+	//
+	// * NONE: The execute command session
+	// is not logged.
+	//
+	// * DEFAULT: The awslogs configuration in the task definition is
+	// used. If no logging parameter is specified, it defaults to this value. If no
+	// awslogs log driver is configured in the task definition, the output won't be
+	// logged.
+	//
+	// * OVERRIDE: Specify the logging details as a part of logConfiguration.
+	// If the OVERRIDE logging option is specified, the logConfiguration is required.
+	Logging ExecuteCommandLogging
+}
+
+// The log configuration for the results of the execute command actions. The logs
+// can be sent to CloudWatch Logs or an Amazon S3 bucket.
+type ExecuteCommandLogConfiguration struct {
+
+	// Whether or not to enable encryption on the CloudWatch logs. If not specified,
+	// encryption will be disabled.
+	CloudWatchEncryptionEnabled bool
+
+	// The name of the CloudWatch log group to send logs to. The CloudWatch log group
+	// must already be created.
+	CloudWatchLogGroupName *string
+
+	// The name of the S3 bucket to send logs to. The S3 bucket must already be
+	// created.
+	S3BucketName *string
+
+	// Whether or not to enable encryption on the CloudWatch logs. If not specified,
+	// encryption will be disabled.
+	S3EncryptionEnabled bool
+
+	// An optional folder in the S3 bucket to place logs in.
+	S3KeyPrefix *string
 }
 
 // A failed resource. For a list of common causes, see API failure reasons
@@ -1619,7 +1702,8 @@ type FirelensConfiguration struct {
 	// For more information, see Creating a Task Definition that Uses a FireLens
 	// Configuration
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-taskdef)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// in the Amazon Elastic Container Service Developer Guide. Tasks hosted on AWS
+	// Fargate only support the file configuration file type.
 	Options map[string]string
 }
 
@@ -2061,6 +2145,45 @@ type LogConfiguration struct {
 	SecretOptions []Secret
 }
 
+// Details about the managed agent status for the container.
+type ManagedAgent struct {
+
+	// The Unix timestamp for when the managed agent was last started.
+	LastStartedAt *time.Time
+
+	// The last known status of the managed agent.
+	LastStatus *string
+
+	// The name of the managed agent. When the execute command feature is enabled, the
+	// managed agent name is ExecuteCommandAgent.
+	Name ManagedAgentName
+
+	// The reason for why the managed agent is in the state it is in.
+	Reason *string
+}
+
+// An object representing a change in state for a managed agent.
+type ManagedAgentStateChange struct {
+
+	// The name of the container associated with the managed agent.
+	//
+	// This member is required.
+	ContainerName *string
+
+	// The name of the managed agent.
+	//
+	// This member is required.
+	ManagedAgentName ManagedAgentName
+
+	// The status of the managed agent.
+	//
+	// This member is required.
+	Status *string
+
+	// The reason for the status of the managed agent.
+	Reason *string
+}
+
 // The managed scaling settings for the Auto Scaling group capacity provider. When
 // managed scaling is enabled, Amazon ECS manages the scale-in and scale-out
 // actions of the Auto Scaling group. Amazon ECS manages a target tracking scaling
@@ -2462,6 +2585,11 @@ type Service struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
 
+	// Whether or not the execute command functionality is enabled for the service. If
+	// true, the execute command functionality is enabled for all containers in tasks
+	// as part of the service.
+	EnableExecuteCommand bool
+
 	// The event stream for your service. A maximum of 100 of the latest events are
 	// displayed.
 	Events []ServiceEvent
@@ -2641,6 +2769,21 @@ type ServiceRegistry struct {
 	RegistryArn *string
 }
 
+// The details of the execute command session.
+type Session struct {
+
+	// The ID of the execute command session.
+	SessionId *string
+
+	// A URL back to managed agent on the container that the SSM Session Manager client
+	// uses to send commands and receive output from the container.
+	StreamUrl *string
+
+	// An encrypted token value containing session and caller information. Used to
+	// authenticate the connection to the container.
+	TokenValue *string
+}
+
 // The current account setting for a resource.
 type Setting struct {
 
@@ -2788,6 +2931,10 @@ type Task struct {
 	// The desired status of the task. For more information, see Task Lifecycle
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-lifecycle.html).
 	DesiredStatus *string
+
+	// Whether or not execute command functionality is enabled for this task. If true,
+	// this enables execute command functionality on all containers in the task.
+	EnableExecuteCommand bool
 
 	// The Unix timestamp for when the task execution stopped.
 	ExecutionStoppedAt *time.Time
@@ -2938,8 +3085,8 @@ type Task struct {
 // to launching the task definition through an Amazon ECS service or task.
 type TaskDefinition struct {
 
-	// The launch type to use with your task. For more information, see Amazon ECS
-	// Launch Types
+	// The task launch types the task definition validated against during task
+	// definition registration. For more information, see Amazon ECS launch types
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Compatibilities []Compatibility
@@ -2973,6 +3120,9 @@ type TaskDefinition struct {
 	// * 4096 (4 vCPU) - Available memory values: Between
 	// 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)
 	Cpu *string
+
+	// The Unix timestamp for when the task definition was deregistered.
+	DeregisteredAt *time.Time
 
 	// The Amazon Resource Name (ARN) of the task execution role that grants the Amazon
 	// ECS container agent permission to make AWS API calls on your behalf. The task
@@ -3020,35 +3170,35 @@ type TaskDefinition struct {
 	// apply to all containers within a task.
 	//
 	// This parameter is not supported for
-	// Windows containers or tasks using the Fargate launch type.
+	// Windows containers or tasks run on AWS Fargate.
 	IpcMode IpcMode
 
-	// The amount (in MiB) of memory used by the task. If using the EC2 launch type,
-	// you must specify either a task-level memory value or a container-level memory
-	// value. This field is optional and any value can be used. If a task-level memory
-	// value is specified then the container-level memory value is optional. For more
-	// information regarding container-level memory and memory reservation, see
-	// ContainerDefinition
+	// The amount (in MiB) of memory used by the task. If your tasks will be run on
+	// Amazon EC2 instances, you must specify either a task-level memory value or a
+	// container-level memory value. This field is optional and any value can be used.
+	// If a task-level memory value is specified then the container-level memory value
+	// is optional. For more information regarding container-level memory and memory
+	// reservation, see ContainerDefinition
 	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html).
-	// If using the Fargate launch type, this field is required and you must use one of
-	// the following values, which determines your range of valid values for the cpu
-	// parameter:
+	// If your tasks will be run on AWS Fargate, this field is required and you must
+	// use one of the following values, which determines your range of valid values for
+	// the cpu parameter:
 	//
-	// * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu values: 256
-	// (.25 vCPU)
+	// * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu
+	// values: 256 (.25 vCPU)
 	//
-	// * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available cpu
-	// values: 512 (.5 vCPU)
+	// * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) -
+	// Available cpu values: 512 (.5 vCPU)
 	//
-	// * 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB),
-	// 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available cpu values: 1024 (1 vCPU)
+	// * 2048 (2 GB), 3072 (3 GB), 4096 (4 GB),
+	// 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available cpu values: 1024
+	// (1 vCPU)
 	//
-	// *
-	// Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available
-	// cpu values: 2048 (2 vCPU)
+	// * Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) -
+	// Available cpu values: 2048 (2 vCPU)
 	//
-	// * Between 8192 (8 GB) and 30720 (30 GB) in increments
-	// of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
+	// * Between 8192 (8 GB) and 30720 (30 GB) in
+	// increments of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
 	Memory *string
 
 	// The Docker networking mode to use for the containers in the task. The valid
@@ -3094,11 +3244,11 @@ type TaskDefinition struct {
 	// run reference. If the host PID mode is used, be aware that there is a heightened
 	// risk of undesired process namespace expose. For more information, see Docker
 	// security (https://docs.docker.com/engine/security/security/). This parameter is
-	// not supported for Windows containers or tasks using the Fargate launch type.
+	// not supported for Windows containers or tasks run on AWS Fargate.
 	PidMode PidMode
 
-	// An array of placement constraint objects to use for tasks. This field is not
-	// valid if you are using the Fargate launch type for your task.
+	// An array of placement constraint objects to use for tasks. This parameter is not
+	// supported for tasks run on AWS Fargate.
 	PlacementConstraints []TaskDefinitionPlacementConstraint
 
 	// The configuration details for the App Mesh proxy. Your Amazon ECS container
@@ -3111,12 +3261,26 @@ type TaskDefinition struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	ProxyConfiguration *ProxyConfiguration
 
-	// The container instance attributes required by your task. This field is not valid
-	// if you are using the Fargate launch type for your task.
+	// The Unix timestamp for when the task definition was registered.
+	RegisteredAt *time.Time
+
+	// The principal that registered the task definition.
+	RegisteredBy *string
+
+	// The container instance attributes required by your task. When an Amazon EC2
+	// instance is registered to your cluster, the Amazon ECS container agent assigns
+	// some standard attributes to the instance. You can apply custom attributes,
+	// specified as key-value pairs using the Amazon ECS console or the PutAttributes
+	// API. These attributes are used when considering task placement for tasks hosted
+	// on Amazon EC2 instances. For more information, see Attributes
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes)
+	// in the Amazon Elastic Container Service Developer Guide. This parameter is not
+	// supported for tasks run on AWS Fargate.
 	RequiresAttributes []Attribute
 
-	// The launch type the task requires. If no value is specified, it will default to
-	// EC2. Valid values include EC2 and FARGATE.
+	// The task launch types the task definition was validated against. To determine
+	// which task launch types the task definition is validated for, see the
+	// TaskDefinition$compatibilities parameter.
 	RequiresCompatibilities []Compatibility
 
 	// The revision of the task in a particular family. The revision is a version
@@ -3140,29 +3304,28 @@ type TaskDefinition struct {
 	// Windows require that the -EnableTaskIAMRole option is set when you launch the
 	// Amazon ECS-optimized Windows AMI. Your containers must also run some
 	// configuration code in order to take advantage of the feature. For more
-	// information, see Windows IAM Roles for Tasks
+	// information, see Windows IAM roles for tasks
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	TaskRoleArn *string
 
-	// The list of volume definitions for the task. If your tasks are using the Fargate
-	// launch type, the host and sourcePath parameters are not supported. For more
-	// information about volume definition parameters and defaults, see Amazon ECS Task
-	// Definitions
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// The list of data volume definitions for the task. For more information, see
+	// Using data volumes in tasks
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html)
+	// in the Amazon Elastic Container Service Developer Guide. The host and sourcePath
+	// parameters are not supported for tasks run on AWS Fargate.
 	Volumes []Volume
 }
 
 // An object representing a constraint on task placement in the task definition.
-// For more information, see Task Placement Constraints
+// For more information, see Task placement constraints
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
-// in the Amazon Elastic Container Service Developer Guide. If you are using the
-// Fargate launch type, task placement constraints are not supported.
+// in the Amazon Elastic Container Service Developer Guide. Task placement
+// constraints are not supported for tasks run on AWS Fargate.
 type TaskDefinitionPlacementConstraint struct {
 
 	// A cluster query language expression to apply to the constraint. For more
-	// information, see Cluster Query Language
+	// information, see Cluster query language
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Expression *string
@@ -3230,7 +3393,7 @@ type TaskSet struct {
 	Id *string
 
 	// The launch type the tasks in the task set are using. For more information, see
-	// Amazon ECS Launch Types
+	// Amazon ECS launch types
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	LaunchType LaunchType
@@ -3247,10 +3410,9 @@ type TaskSet struct {
 	// it is restarted after being in the STOPPED state.
 	PendingCount int32
 
-	// The platform version on which the tasks in the task set are running. A platform
-	// version is only specified for tasks using the Fargate launch type. If one is not
-	// specified, the LATEST platform version is used by default. For more information,
-	// see AWS Fargate Platform Versions
+	// The AWS Fargate platform version on which the tasks in the task set are running.
+	// A platform version is only specified for tasks run on AWS Fargate. For more
+	// information, see AWS Fargate platform versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
@@ -3267,7 +3429,7 @@ type TaskSet struct {
 	ServiceArn *string
 
 	// The details of the service discovery registries to assign to this task set. For
-	// more information, see Service Discovery
+	// more information, see Service discovery
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
 	ServiceRegistries []ServiceRegistry
 
@@ -3412,10 +3574,10 @@ type VersionInfo struct {
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).
 type Volume struct {
 
-	// This parameter is specified when you are using Docker volumes. Docker volumes
-	// are only supported when you are using the EC2 launch type. Windows containers
-	// only support the use of the local driver. To use bind mounts, specify the host
-	// parameter instead.
+	// This parameter is specified when you are using Docker volumes. Windows
+	// containers only support the use of the local driver. To use bind mounts, specify
+	// the host parameter instead. Docker volumes are not supported by tasks run on AWS
+	// Fargate.
 	DockerVolumeConfiguration *DockerVolumeConfiguration
 
 	// This parameter is specified when you are using an Amazon Elastic File System

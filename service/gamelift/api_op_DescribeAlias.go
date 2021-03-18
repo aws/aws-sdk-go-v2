@@ -14,20 +14,9 @@ import (
 // Retrieves properties for an alias. This operation returns all alias metadata and
 // settings. To get an alias's target fleet ID only, use ResolveAlias. To get alias
 // properties, specify the alias ID. If successful, the requested alias record is
-// returned.
-//
-// * CreateAlias
-//
-// * ListAliases
-//
-// * DescribeAlias
-//
-// * UpdateAlias
-//
-// *
-// DeleteAlias
-//
-// * ResolveAlias
+// returned. Related actions CreateAlias | ListAliases | DescribeAlias |
+// UpdateAlias | DeleteAlias | ResolveAlias | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeAlias(ctx context.Context, params *DescribeAliasInput, optFns ...func(*Options)) (*DescribeAliasOutput, error) {
 	if params == nil {
 		params = &DescribeAliasInput{}

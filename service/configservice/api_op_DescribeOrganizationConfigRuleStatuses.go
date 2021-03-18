@@ -11,16 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides organization config rule deployment status for an organization. Only a
-// master account and a delegated administrator account can call this API. When
-// calling this API with a delegated administrator, you must ensure AWS
-// Organizations ListDelegatedAdministrator permissions are added. The status is
-// not considered successful until organization config rule is successfully
-// deployed in all the member accounts with an exception of excluded accounts. When
-// you specify the limit and the next token, you receive a paginated response.
-// Limit and next token are not applicable if you specify organization config rule
-// names. It is only applicable, when you request all the organization config
-// rules.
+// Provides organization config rule deployment status for an organization. The
+// status is not considered successful until organization config rule is
+// successfully deployed in all the member accounts with an exception of excluded
+// accounts. When you specify the limit and the next token, you receive a paginated
+// response. Limit and next token are not applicable if you specify organization
+// config rule names. It is only applicable, when you request all the organization
+// config rules.
 func (c *Client) DescribeOrganizationConfigRuleStatuses(ctx context.Context, params *DescribeOrganizationConfigRuleStatusesInput, optFns ...func(*Options)) (*DescribeOrganizationConfigRuleStatusesOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConfigRuleStatusesInput{}

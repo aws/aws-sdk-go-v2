@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of registration tokens for the specified type(s).
+// Returns a list of registration tokens for the specified extension(s).
 func (c *Client) ListTypeRegistrations(ctx context.Context, params *ListTypeRegistrationsInput, optFns ...func(*Options)) (*ListTypeRegistrationsOutput, error) {
 	if params == nil {
 		params = &ListTypeRegistrationsInput{}
@@ -43,19 +43,20 @@ type ListTypeRegistrationsInput struct {
 	// previous response object's NextToken parameter is set to null.
 	NextToken *string
 
-	// The current status of the type registration request. The default is IN_PROGRESS.
+	// The current status of the extension registration request. The default is
+	// IN_PROGRESS.
 	RegistrationStatusFilter types.RegistrationStatus
 
-	// The kind of type. Currently the only valid value is RESOURCE. Conditional: You
-	// must specify either TypeName and Type, or Arn.
+	// The kind of extension. Conditional: You must specify either TypeName and Type,
+	// or Arn.
 	Type types.RegistryType
 
-	// The Amazon Resource Name (ARN) of the type. Conditional: You must specify either
-	// TypeName and Type, or Arn.
+	// The Amazon Resource Name (ARN) of the extension. Conditional: You must specify
+	// either TypeName and Type, or Arn.
 	TypeArn *string
 
-	// The name of the type. Conditional: You must specify either TypeName and Type, or
-	// Arn.
+	// The name of the extension. Conditional: You must specify either TypeName and
+	// Type, or Arn.
 	TypeName *string
 }
 
@@ -67,7 +68,7 @@ type ListTypeRegistrationsOutput struct {
 	// all results, NextToken is set to null.
 	NextToken *string
 
-	// A list of type registration tokens. Use DescribeTypeRegistration to return
+	// A list of extension registration tokens. Use DescribeTypeRegistration to return
 	// detailed information about a type registration request.
 	RegistrationTokenList []string
 

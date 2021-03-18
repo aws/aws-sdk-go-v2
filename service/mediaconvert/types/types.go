@@ -578,14 +578,21 @@ type AvailBlanking struct {
 // Required when you set your output video codec to AVC-Intra. For more information
 // about the AVC-I settings, see the relevant specification. For detailed
 // information about SD and HD in AVC-I, see
-// https://ieeexplore.ieee.org/document/7290936.
+// https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in
+// AVC-I, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.
 type AvcIntraSettings struct {
 
 	// Specify the AVC-Intra class of your output. The AVC-Intra class selection
 	// determines the output video bit rate depending on the frame rate of the output.
 	// Outputs with higher class values have higher bitrates and improved image
-	// quality.
+	// quality. Note that for Class 4K/2K, MediaConvert supports only 4:2:2 chroma
+	// subsampling.
 	AvcIntraClass AvcIntraClass
+
+	// Optional when you set AVC-Intra class (avcIntraClass) to Class 4K/2K
+	// (CLASS_4K_2K). When you set AVC-Intra class to a different value, this object
+	// isn't allowed.
+	AvcIntraUhdSettings *AvcIntraUhdSettings
 
 	// If you are using the console, use the Framerate setting to specify the frame
 	// rate for this output. If you want to keep the same frame rate as the input
@@ -642,6 +649,21 @@ type AvcIntraSettings struct {
 	// options you choose.
 	InterlaceMode AvcIntraInterlaceMode
 
+	// Use this setting for interlaced outputs, when your output frame rate is half of
+	// your input frame rate. In this situation, choose Optimized interlacing
+	// (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this
+	// case, each progressive frame from the input corresponds to an interlaced field
+	// in the output. Keep the default value, Basic interlacing (INTERLACED), for all
+	// other output frame rates. With basic interlacing, MediaConvert performs any
+	// frame rate conversion first and then interlaces the frames. When you choose
+	// Optimized interlacing and you set your output frame rate to a value that isn't
+	// suitable for optimized interlacing, MediaConvert automatically falls back to
+	// basic interlacing. Required settings: To use optimized interlacing, you must set
+	// Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized
+	// interlacing for hard telecine outputs. You must also set Interlace mode
+	// (interlaceMode) to a value other than Progressive (PROGRESSIVE).
+	ScanTypeConversionMode AvcIntraScanTypeConversionMode
+
 	// Ignore this setting unless your input frame rate is 23.976 or 24 frames per
 	// second (fps). Enable slow PAL to create a 25 fps output. When you enable slow
 	// PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio
@@ -657,6 +679,20 @@ type AvcIntraSettings struct {
 	// None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without
 	// doing anything with the field polarity to create a smoother picture.
 	Telecine AvcIntraTelecine
+}
+
+// Optional when you set AVC-Intra class (avcIntraClass) to Class 4K/2K
+// (CLASS_4K_2K). When you set AVC-Intra class to a different value, this object
+// isn't allowed.
+type AvcIntraUhdSettings struct {
+
+	// Optional. Use Quality tuning level (qualityTuningLevel) to choose how many
+	// transcoding passes MediaConvert does with your video. When you choose Multi-pass
+	// (MULTI_PASS), your video quality is better and your output bitrate is more
+	// accurate. That is, the actual bitrate of your output is closer to the target
+	// bitrate defined in the specification. When you choose Single-pass (SINGLE_PASS),
+	// your encoding time is faster. The default behavior is Single-pass (SINGLE_PASS).
+	QualityTuningLevel AvcIntraUhdQualityTuningLevel
 }
 
 // Burn-In Destination Settings.
@@ -954,12 +990,21 @@ type CaptionSourceSettings struct {
 }
 
 // Channel mapping (ChannelMapping) contains the group of fields that hold the
-// remixing value for each channel. Units are in dB. Acceptable values are within
-// the range from -60 (mute) through 6. A setting of 0 passes the input channel
-// unchanged to the output channel (no attenuation or amplification).
+// remixing value for each channel, in dB. Specify remix values to indicate how
+// much of the content from your input audio channel you want in your output audio
+// channels. Each instance of the InputChannels or InputChannelsFineTune array
+// specifies these values for one output channel. Use one instance of this array
+// for each output channel. In the console, each array corresponds to a column in
+// the graphical depiction of the mapping matrix. The rows of the graphical matrix
+// correspond to input channels. Valid values are within the range from -60 (mute)
+// through 6. A setting of 0 passes the input channel unchanged to the output
+// channel (no attenuation or amplification). Use InputChannels or
+// InputChannelsFineTune to specify your remix values. Don't use both.
 type ChannelMapping struct {
 
-	// List of output channels
+	// In your JSON job specification, include one child of OutputChannels for each
+	// audio channel that you want in your output. Each child should contain one
+	// instance of InputChannels or InputChannelsFineTune.
 	OutputChannels []OutputChannelMapping
 }
 
@@ -1147,6 +1192,15 @@ type CmfcSettings struct {
 	// the file. When you keep the default value, any minor discrepancies between audio
 	// and video duration will depend on your output audio codec.
 	AudioDuration CmfcAudioDuration
+
+	// Choose Include (INCLUDE) to have MediaConvert generate an HLS child manifest
+	// that lists only the I-frames for this rendition, in addition to your regular
+	// manifest for this rendition. You might use this manifest as part of a workflow
+	// that creates preview functions for your video. MediaConvert adds both the
+	// I-frame only child manifest and the regular child manifest to the parent
+	// manifest. When you don't need the I-frame only child manifest, keep the default
+	// value Exclude (EXCLUDE).
+	IFrameOnlyManifest CmfcIFrameOnlyManifest
 
 	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT
 	// to put SCTE-35 markers in this output at the insertion points that you specify
@@ -2191,6 +2245,21 @@ type H264Settings struct {
 	// Places a PPS header on each encoded picture, even if repeated.
 	RepeatPps H264RepeatPps
 
+	// Use this setting for interlaced outputs, when your output frame rate is half of
+	// your input frame rate. In this situation, choose Optimized interlacing
+	// (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this
+	// case, each progressive frame from the input corresponds to an interlaced field
+	// in the output. Keep the default value, Basic interlacing (INTERLACED), for all
+	// other output frame rates. With basic interlacing, MediaConvert performs any
+	// frame rate conversion first and then interlaces the frames. When you choose
+	// Optimized interlacing and you set your output frame rate to a value that isn't
+	// suitable for optimized interlacing, MediaConvert automatically falls back to
+	// basic interlacing. Required settings: To use optimized interlacing, you must set
+	// Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized
+	// interlacing for hard telecine outputs. You must also set Interlace mode
+	// (interlaceMode) to a value other than Progressive (PROGRESSIVE).
+	ScanTypeConversionMode H264ScanTypeConversionMode
+
 	// Enable this setting to insert I-frames at scene changes that the service
 	// automatically detects. This improves video quality and is enabled by default. If
 	// this output uses QVBR, choose Transition detection (TRANSITION_DETECTION) for
@@ -2507,6 +2576,21 @@ type H265Settings struct {
 	// Specify Sample Adaptive Offset (SAO) filter strength. Adaptive mode dynamically
 	// selects best strength based on content
 	SampleAdaptiveOffsetFilterMode H265SampleAdaptiveOffsetFilterMode
+
+	// Use this setting for interlaced outputs, when your output frame rate is half of
+	// your input frame rate. In this situation, choose Optimized interlacing
+	// (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this
+	// case, each progressive frame from the input corresponds to an interlaced field
+	// in the output. Keep the default value, Basic interlacing (INTERLACED), for all
+	// other output frame rates. With basic interlacing, MediaConvert performs any
+	// frame rate conversion first and then interlaces the frames. When you choose
+	// Optimized interlacing and you set your output frame rate to a value that isn't
+	// suitable for optimized interlacing, MediaConvert automatically falls back to
+	// basic interlacing. Required settings: To use optimized interlacing, you must set
+	// Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized
+	// interlacing for hard telecine outputs. You must also set Interlace mode
+	// (interlaceMode) to a value other than Progressive (PROGRESSIVE).
+	ScanTypeConversionMode H265ScanTypeConversionMode
 
 	// Enable this setting to insert I-frames at scene changes that the service
 	// automatically detects. This improves video quality and is enabled by default. If
@@ -2897,8 +2981,13 @@ type HlsSettings struct {
 	// AUTOSELECT=NO
 	AudioTrackType HlsAudioTrackType
 
-	// When set to INCLUDE, writes I-Frame Only Manifest in addition to the HLS
-	// manifest
+	// Choose Include (INCLUDE) to have MediaConvert generate a child manifest that
+	// lists only the I-frames for this rendition, in addition to your regular manifest
+	// for this rendition. You might use this manifest as part of a workflow that
+	// creates preview functions for your video. MediaConvert adds both the I-frame
+	// only child manifest and the regular child manifest to the parent manifest. When
+	// you don't need the I-frame only child manifest, keep the default value Exclude
+	// (EXCLUDE).
 	IFrameOnlyManifest HlsIFrameOnlyManifest
 
 	// Use this setting to add an identifying string to the filename of each segment.
@@ -4338,9 +4427,24 @@ type Mpeg2Settings struct {
 	// faster, lower quality, single-pass encoding.
 	QualityTuningLevel Mpeg2QualityTuningLevel
 
-	// Use Rate control mode (Mpeg2RateControlMode) to specifiy whether the bitrate is
+	// Use Rate control mode (Mpeg2RateControlMode) to specify whether the bitrate is
 	// variable (vbr) or constant (cbr).
 	RateControlMode Mpeg2RateControlMode
+
+	// Use this setting for interlaced outputs, when your output frame rate is half of
+	// your input frame rate. In this situation, choose Optimized interlacing
+	// (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this
+	// case, each progressive frame from the input corresponds to an interlaced field
+	// in the output. Keep the default value, Basic interlacing (INTERLACED), for all
+	// other output frame rates. With basic interlacing, MediaConvert performs any
+	// frame rate conversion first and then interlaces the frames. When you choose
+	// Optimized interlacing and you set your output frame rate to a value that isn't
+	// suitable for optimized interlacing, MediaConvert automatically falls back to
+	// basic interlacing. Required settings: To use optimized interlacing, you must set
+	// Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized
+	// interlacing for hard telecine outputs. You must also set Interlace mode
+	// (interlaceMode) to a value other than Progressive (PROGRESSIVE).
+	ScanTypeConversionMode Mpeg2ScanTypeConversionMode
 
 	// Enable this setting to insert I-frames at scene changes that the service
 	// automatically detects. This improves video quality and is enabled by default.
@@ -4766,7 +4870,7 @@ type Output struct {
 	// Specific settings for this type of output.
 	OutputSettings *OutputSettings
 
-	// Use Preset (Preset) to specifiy a preset for your transcoding settings. Provide
+	// Use Preset (Preset) to specify a preset for your transcoding settings. Provide
 	// the system or custom preset name. You can specify either Preset (Preset) or
 	// Container settings (ContainerSettings), but not both.
 	Preset *string
@@ -4781,8 +4885,14 @@ type Output struct {
 // OutputChannel mapping settings.
 type OutputChannelMapping struct {
 
-	// List of input channels
+	// Use this setting to specify your remix values when they are integers, such as
+	// -10, 0, or 4.
 	InputChannels []int32
+
+	// Use this setting to specify your remix values when they have a decimal
+	// component, such as -10.312, 0.08, or 4.9. MediaConvert rounds your remixing
+	// values to the nearest thousandth.
+	InputChannelsFineTune []float64
 }
 
 // Details regarding output
@@ -4932,7 +5042,7 @@ type PresetSettings struct {
 // value PRORES.
 type ProresSettings struct {
 
-	// Use Profile (ProResCodecProfile) to specifiy the type of Apple ProRes codec to
+	// Use Profile (ProResCodecProfile) to specify the type of Apple ProRes codec to
 	// use for this output.
 	CodecProfile ProresCodecProfile
 
@@ -5015,6 +5125,21 @@ type ProresSettings struct {
 	// widescreen, you would specify the ratio 40:33. In this example, the value for
 	// parNumerator is 40.
 	ParNumerator int32
+
+	// Use this setting for interlaced outputs, when your output frame rate is half of
+	// your input frame rate. In this situation, choose Optimized interlacing
+	// (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this
+	// case, each progressive frame from the input corresponds to an interlaced field
+	// in the output. Keep the default value, Basic interlacing (INTERLACED), for all
+	// other output frame rates. With basic interlacing, MediaConvert performs any
+	// frame rate conversion first and then interlaces the frames. When you choose
+	// Optimized interlacing and you set your output frame rate to a value that isn't
+	// suitable for optimized interlacing, MediaConvert automatically falls back to
+	// basic interlacing. Required settings: To use optimized interlacing, you must set
+	// Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized
+	// interlacing for hard telecine outputs. You must also set Interlace mode
+	// (interlaceMode) to a value other than Progressive (PROGRESSIVE).
+	ScanTypeConversionMode ProresScanTypeConversionMode
 
 	// Ignore this setting unless your input frame rate is 23.976 or 24 frames per
 	// second (fps). Enable slow PAL to create a 25 fps output. When you enable slow
@@ -5124,18 +5249,31 @@ type Rectangle struct {
 type RemixSettings struct {
 
 	// Channel mapping (ChannelMapping) contains the group of fields that hold the
-	// remixing value for each channel. Units are in dB. Acceptable values are within
-	// the range from -60 (mute) through 6. A setting of 0 passes the input channel
-	// unchanged to the output channel (no attenuation or amplification).
+	// remixing value for each channel, in dB. Specify remix values to indicate how
+	// much of the content from your input audio channel you want in your output audio
+	// channels. Each instance of the InputChannels or InputChannelsFineTune array
+	// specifies these values for one output channel. Use one instance of this array
+	// for each output channel. In the console, each array corresponds to a column in
+	// the graphical depiction of the mapping matrix. The rows of the graphical matrix
+	// correspond to input channels. Valid values are within the range from -60 (mute)
+	// through 6. A setting of 0 passes the input channel unchanged to the output
+	// channel (no attenuation or amplification). Use InputChannels or
+	// InputChannelsFineTune to specify your remix values. Don't use both.
 	ChannelMapping *ChannelMapping
 
 	// Specify the number of audio channels from your input that you want to use in
 	// your output. With remixing, you might combine or split the data in these
-	// channels, so the number of channels in your final output might be different.
+	// channels, so the number of channels in your final output might be different. If
+	// you are doing both input channel mapping and output channel mapping, the number
+	// of output channels in your input mapping must be the same as the number of input
+	// channels in your output mapping.
 	ChannelsIn int32
 
 	// Specify the number of channels in this output after remixing. Valid values: 1,
-	// 2, 4, 6, 8... 64. (1 and even numbers to 64.)
+	// 2, 4, 6, 8... 64. (1 and even numbers to 64.) If you are doing both input
+	// channel mapping and output channel mapping, the number of output channels in
+	// your input mapping must be the same as the number of input channels in your
+	// output mapping.
 	ChannelsOut int32
 }
 
@@ -5536,6 +5674,21 @@ type Vc3Settings struct {
 	// value, MediaConvert will create a progressive output.
 	InterlaceMode Vc3InterlaceMode
 
+	// Use this setting for interlaced outputs, when your output frame rate is half of
+	// your input frame rate. In this situation, choose Optimized interlacing
+	// (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this
+	// case, each progressive frame from the input corresponds to an interlaced field
+	// in the output. Keep the default value, Basic interlacing (INTERLACED), for all
+	// other output frame rates. With basic interlacing, MediaConvert performs any
+	// frame rate conversion first and then interlaces the frames. When you choose
+	// Optimized interlacing and you set your output frame rate to a value that isn't
+	// suitable for optimized interlacing, MediaConvert automatically falls back to
+	// basic interlacing. Required settings: To use optimized interlacing, you must set
+	// Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized
+	// interlacing for hard telecine outputs. You must also set Interlace mode
+	// (interlaceMode) to a value other than Progressive (PROGRESSIVE).
+	ScanTypeConversionMode Vc3ScanTypeConversionMode
+
 	// Ignore this setting unless your input frame rate is 23.976 or 24 frames per
 	// second (fps). Enable slow PAL to create a 25 fps output by relabeling the video
 	// frames and resampling your audio. Note that enabling this setting will slightly
@@ -5579,7 +5732,8 @@ type VideoCodecSettings struct {
 	// Required when you set your output video codec to AVC-Intra. For more information
 	// about the AVC-I settings, see the relevant specification. For detailed
 	// information about SD and HD in AVC-I, see
-	// https://ieeexplore.ieee.org/document/7290936.
+	// https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in
+	// AVC-I, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.
 	AvcIntraSettings *AvcIntraSettings
 
 	// Specifies the video codec. This must be equal to one of the enum values defined

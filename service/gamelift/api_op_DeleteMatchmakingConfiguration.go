@@ -12,27 +12,12 @@ import (
 
 // Permanently removes a FlexMatch matchmaking configuration. To delete, specify
 // the configuration name. A matchmaking configuration cannot be deleted if it is
-// being used in any active matchmaking tickets. Related operations
-//
-// *
-// CreateMatchmakingConfiguration
-//
-// * DescribeMatchmakingConfigurations
-//
-// *
-// UpdateMatchmakingConfiguration
-//
-// * DeleteMatchmakingConfiguration
-//
-// *
-// CreateMatchmakingRuleSet
-//
-// * DescribeMatchmakingRuleSets
-//
-// *
-// ValidateMatchmakingRuleSet
-//
-// * DeleteMatchmakingRuleSet
+// being used in any active matchmaking tickets. Related actions
+// CreateMatchmakingConfiguration | DescribeMatchmakingConfigurations |
+// UpdateMatchmakingConfiguration | DeleteMatchmakingConfiguration |
+// CreateMatchmakingRuleSet | DescribeMatchmakingRuleSets |
+// ValidateMatchmakingRuleSet | DeleteMatchmakingRuleSet | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DeleteMatchmakingConfiguration(ctx context.Context, params *DeleteMatchmakingConfigurationInput, optFns ...func(*Options)) (*DeleteMatchmakingConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteMatchmakingConfigurationInput{}
@@ -51,7 +36,7 @@ func (c *Client) DeleteMatchmakingConfiguration(ctx context.Context, params *Del
 // Represents the input for a request operation.
 type DeleteMatchmakingConfigurationInput struct {
 
-	// A unique identifier for a matchmaking configuration. You can use either the
+	// A unique identifier for the matchmaking configuration. You can use either the
 	// configuration name or ARN value.
 	//
 	// This member is required.

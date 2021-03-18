@@ -32,6 +32,31 @@ func (c *Client) DescribeOptionGroupOptions(ctx context.Context, params *Describ
 type DescribeOptionGroupOptionsInput struct {
 
 	// A required parameter. Options available for the given engine name are described.
+	// Valid Values:
+	//
+	// * mariadb
+	//
+	// * mysql
+	//
+	// * oracle-ee
+	//
+	// * oracle-se2
+	//
+	// * oracle-se1
+	//
+	// *
+	// oracle-se
+	//
+	// * postgres
+	//
+	// * sqlserver-ee
+	//
+	// * sqlserver-se
+	//
+	// * sqlserver-ex
+	//
+	// *
+	// sqlserver-web
 	//
 	// This member is required.
 	EngineName *string

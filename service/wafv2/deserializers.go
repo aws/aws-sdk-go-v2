@@ -5540,6 +5540,37 @@ func awsAwsjson11_deserializeErrorWAFUnavailableEntityException(response *smithy
 	return output
 }
 
+func awsAwsjson11_deserializeDocumentAll(v **types.All, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.All
+	if *v == nil {
+		sv = &types.All{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAllowAction(v **types.AllowAction, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5974,6 +6005,11 @@ func awsAwsjson11_deserializeDocumentFieldToMatch(v **types.FieldToMatch, value 
 
 		case "Body":
 			if err := awsAwsjson11_deserializeDocumentBody(&sv.Body, value); err != nil {
+				return err
+			}
+
+		case "JsonBody":
+			if err := awsAwsjson11_deserializeDocumentJsonBody(&sv.JsonBody, value); err != nil {
 				return err
 			}
 
@@ -6735,6 +6771,137 @@ func awsAwsjson11_deserializeDocumentIPSetSummary(v **types.IPSetSummary, value 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentJsonBody(v **types.JsonBody, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JsonBody
+	if *v == nil {
+		sv = &types.JsonBody{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "InvalidFallbackBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BodyParsingFallbackBehavior to be of type string, got %T instead", value)
+				}
+				sv.InvalidFallbackBehavior = types.BodyParsingFallbackBehavior(jtv)
+			}
+
+		case "MatchPattern":
+			if err := awsAwsjson11_deserializeDocumentJsonMatchPattern(&sv.MatchPattern, value); err != nil {
+				return err
+			}
+
+		case "MatchScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JsonMatchScope to be of type string, got %T instead", value)
+				}
+				sv.MatchScope = types.JsonMatchScope(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentJsonMatchPattern(v **types.JsonMatchPattern, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JsonMatchPattern
+	if *v == nil {
+		sv = &types.JsonMatchPattern{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "All":
+			if err := awsAwsjson11_deserializeDocumentAll(&sv.All, value); err != nil {
+				return err
+			}
+
+		case "IncludedPaths":
+			if err := awsAwsjson11_deserializeDocumentJsonPointerPaths(&sv.IncludedPaths, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentJsonPointerPaths(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected JsonPointerPath to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

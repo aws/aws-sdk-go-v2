@@ -69,6 +69,10 @@ type CreateInstancesFromSnapshotInput struct {
 	// instance name parameters are mutually exclusive.
 	InstanceSnapshotName *string
 
+	// The IP address type for the instance. The possible values are ipv4 for IPv4
+	// only, and dualstack for IPv4 and IPv6. The default value is dualstack.
+	IpAddressType types.IpAddressType
+
 	// The name for your key pair.
 	KeyPairName *string
 

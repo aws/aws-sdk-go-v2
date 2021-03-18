@@ -682,6 +682,23 @@ func addOpUpdateOrganizationConfigurationValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpUpdateOrganizationConfiguration{}, middleware.After)
 }
 
+func validate__listOfS3BucketDefinitionForJob(v []types.S3BucketDefinitionForJob) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfS3BucketDefinitionForJob"}
+	for i := range v {
+		if err := validateS3BucketDefinitionForJob(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAccountDetail(v *types.AccountDetail) error {
 	if v == nil {
 		return nil
@@ -717,6 +734,24 @@ func validateClassificationExportConfiguration(v *types.ClassificationExportConf
 	}
 }
 
+func validateS3BucketDefinitionForJob(v *types.S3BucketDefinitionForJob) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3BucketDefinitionForJob"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Buckets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Buckets"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3Destination(v *types.S3Destination) error {
 	if v == nil {
 		return nil
@@ -735,6 +770,23 @@ func validateS3Destination(v *types.S3Destination) error {
 	}
 }
 
+func validateS3JobDefinition(v *types.S3JobDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3JobDefinition"}
+	if v.BucketDefinitions != nil {
+		if err := validate__listOfS3BucketDefinitionForJob(v.BucketDefinitions); err != nil {
+			invalidParams.AddNested("BucketDefinitions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAcceptInvitationInput(v *AcceptInvitationInput) error {
 	if v == nil {
 		return nil
@@ -742,9 +794,6 @@ func validateOpAcceptInvitationInput(v *AcceptInvitationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AcceptInvitationInput"}
 	if v.InvitationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InvitationId"))
-	}
-	if v.MasterAccount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MasterAccount"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -769,6 +818,10 @@ func validateOpCreateClassificationJobInput(v *CreateClassificationJobInput) err
 	}
 	if v.S3JobDefinition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3JobDefinition"))
+	} else if v.S3JobDefinition != nil {
+		if err := validateS3JobDefinition(v.S3JobDefinition); err != nil {
+			invalidParams.AddNested("S3JobDefinition", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

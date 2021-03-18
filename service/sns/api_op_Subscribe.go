@@ -34,30 +34,33 @@ func (c *Client) Subscribe(ctx context.Context, params *SubscribeInput, optFns .
 // Input for Subscribe action.
 type SubscribeInput struct {
 
-	// The protocol you want to use. Supported protocols include:
+	// The protocol that you want to use. Supported protocols include:
 	//
-	// * http – delivery of
-	// JSON-encoded message via HTTP POST
+	// * http –
+	// delivery of JSON-encoded message via HTTP POST
 	//
-	// * https – delivery of JSON-encoded message
-	// via HTTPS POST
+	// * https – delivery of
+	// JSON-encoded message via HTTPS POST
 	//
 	// * email – delivery of message via SMTP
 	//
-	// * email-json – delivery
-	// of JSON-encoded message via SMTP
+	// *
+	// email-json – delivery of JSON-encoded message via SMTP
 	//
-	// * sms – delivery of message via SMS
+	// * sms – delivery of
+	// message via SMS
 	//
-	// * sqs –
-	// delivery of JSON-encoded message to an Amazon SQS queue
+	// * sqs – delivery of JSON-encoded message to an Amazon SQS
+	// queue
 	//
-	// * application –
-	// delivery of JSON-encoded message to an EndpointArn for a mobile app and
-	// device.
+	// * application – delivery of JSON-encoded message to an EndpointArn for a
+	// mobile app and device
 	//
-	// * lambda – delivery of JSON-encoded message to an Amazon Lambda
-	// function.
+	// * lambda – delivery of JSON-encoded message to an AWS
+	// Lambda function
+	//
+	// * firehose – delivery of JSON-encoded message to an Amazon
+	// Kinesis Data Firehose delivery stream.
 	//
 	// This member is required.
 	Protocol *string
@@ -90,33 +93,55 @@ type SubscribeInput struct {
 	// errors (for example, when the service that powers the subscribed endpoint
 	// becomes unavailable) are held in the dead-letter queue for further analysis or
 	// reprocessing.
+	//
+	// The following attribute applies only to Amazon Kinesis Data
+	// Firehose delivery stream subscriptions:
+	//
+	// * SubscriptionRoleArn – The ARN of the
+	// IAM role that has the following:
+	//
+	// * Permission to write to the Kinesis Data
+	// Firehose delivery stream
+	//
+	// * Amazon SNS listed as a trusted entity
+	//
+	// Specifying a
+	// valid ARN for this attribute is required for Kinesis Data Firehose delivery
+	// stream subscriptions. For more information, see Fanout to Kinesis Data Firehose
+	// delivery streams
+	// (https://docs.aws.amazon.com/sns/latest/dg/sns-kinesis-subscriber.html) in the
+	// Amazon SNS Developer Guide.
 	Attributes map[string]string
 
 	// The endpoint that you want to receive notifications. Endpoints vary by
 	// protocol:
 	//
 	// * For the http protocol, the (public) endpoint is a URL beginning
-	// with http://
+	// with http://.
 	//
-	// * For the https protocol, the (public) endpoint is a URL beginning
-	// with https://
+	// * For the https protocol, the (public) endpoint is a URL
+	// beginning with https://.
 	//
-	// * For the email protocol, the endpoint is an email address
+	// * For the email protocol, the endpoint is an email
+	// address.
 	//
-	// * For
-	// the email-json protocol, the endpoint is an email address
+	// * For the email-json protocol, the endpoint is an email address.
 	//
-	// * For the sms
-	// protocol, the endpoint is a phone number of an SMS-enabled device
+	// *
+	// For the sms protocol, the endpoint is a phone number of an SMS-enabled
+	// device.
 	//
-	// * For the sqs
-	// protocol, the endpoint is the ARN of an Amazon SQS queue
+	// * For the sqs protocol, the endpoint is the ARN of an Amazon SQS
+	// queue.
 	//
-	// * For the application
-	// protocol, the endpoint is the EndpointArn of a mobile app and device.
+	// * For the application protocol, the endpoint is the EndpointArn of a
+	// mobile app and device.
 	//
-	// * For the
-	// lambda protocol, the endpoint is the ARN of an Amazon Lambda function.
+	// * For the lambda protocol, the endpoint is the ARN of an
+	// AWS Lambda function.
+	//
+	// * For the firehose protocol, the endpoint is the ARN of an
+	// Amazon Kinesis Data Firehose delivery stream.
 	Endpoint *string
 
 	// Sets whether the response from the Subscribe request includes the subscription

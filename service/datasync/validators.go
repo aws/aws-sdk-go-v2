@@ -570,6 +570,66 @@ func (m *validateOpUpdateAgent) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLocationNfs struct {
+}
+
+func (*validateOpUpdateLocationNfs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLocationNfs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLocationNfsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLocationNfsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateLocationObjectStorage struct {
+}
+
+func (*validateOpUpdateLocationObjectStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLocationObjectStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLocationObjectStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLocationObjectStorageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateLocationSmb struct {
+}
+
+func (*validateOpUpdateLocationSmb) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLocationSmb) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLocationSmbInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLocationSmbInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTaskExecution struct {
 }
 
@@ -720,6 +780,18 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAgentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAgent{}, middleware.After)
+}
+
+func addOpUpdateLocationNfsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLocationNfs{}, middleware.After)
+}
+
+func addOpUpdateLocationObjectStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLocationObjectStorage{}, middleware.After)
+}
+
+func addOpUpdateLocationSmbValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLocationSmb{}, middleware.After)
 }
 
 func addOpUpdateTaskExecutionValidationMiddleware(stack *middleware.Stack) error {
@@ -1426,6 +1498,56 @@ func validateOpUpdateAgentInput(v *UpdateAgentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentInput"}
 	if v.AgentArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLocationNfsInput(v *UpdateLocationNfsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLocationNfsInput"}
+	if v.LocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
+	}
+	if v.OnPremConfig != nil {
+		if err := validateOnPremConfig(v.OnPremConfig); err != nil {
+			invalidParams.AddNested("OnPremConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLocationObjectStorageInput(v *UpdateLocationObjectStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLocationObjectStorageInput"}
+	if v.LocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLocationSmbInput(v *UpdateLocationSmbInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLocationSmbInput"}
+	if v.LocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

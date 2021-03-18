@@ -29,7 +29,7 @@ func (c *Client) CreateSipMediaApplication(ctx context.Context, params *CreateSi
 
 type CreateSipMediaApplicationInput struct {
 
-	// AWS Region assigned to the SIP media application.
+	// The AWS Region assigned to the SIP media application.
 	//
 	// This member is required.
 	AwsRegion *string
@@ -41,12 +41,14 @@ type CreateSipMediaApplicationInput struct {
 	Endpoints []types.SipMediaApplicationEndpoint
 
 	// The SIP media application name.
+	//
+	// This member is required.
 	Name *string
 }
 
 type CreateSipMediaApplicationOutput struct {
 
-	// The Sip media application details.
+	// The SIP media application details.
 	SipMediaApplication *types.SipMediaApplication
 
 	// Metadata pertaining to the operation's result.

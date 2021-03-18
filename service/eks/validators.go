@@ -5,9 +5,50 @@ package eks
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
+
+type validateOpAssociateEncryptionConfig struct {
+}
+
+func (*validateOpAssociateEncryptionConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateEncryptionConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateEncryptionConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateEncryptionConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAssociateIdentityProviderConfig struct {
+}
+
+func (*validateOpAssociateIdentityProviderConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateIdentityProviderConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateIdentityProviderConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateIdentityProviderConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
 
 type validateOpCreateAddon struct {
 }
@@ -229,6 +270,26 @@ func (m *validateOpDescribeFargateProfile) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeIdentityProviderConfig struct {
+}
+
+func (*validateOpDescribeIdentityProviderConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeIdentityProviderConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeIdentityProviderConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeIdentityProviderConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeNodegroup struct {
 }
 
@@ -269,6 +330,26 @@ func (m *validateOpDescribeUpdate) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateIdentityProviderConfig struct {
+}
+
+func (*validateOpDisassociateIdentityProviderConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateIdentityProviderConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateIdentityProviderConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateIdentityProviderConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAddons struct {
 }
 
@@ -304,6 +385,26 @@ func (m *validateOpListFargateProfiles) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListFargateProfilesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListIdentityProviderConfigs struct {
+}
+
+func (*validateOpListIdentityProviderConfigs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIdentityProviderConfigs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIdentityProviderConfigsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIdentityProviderConfigsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -509,6 +610,14 @@ func (m *validateOpUpdateNodegroupVersion) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateEncryptionConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateEncryptionConfig{}, middleware.After)
+}
+
+func addOpAssociateIdentityProviderConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateIdentityProviderConfig{}, middleware.After)
+}
+
 func addOpCreateAddonValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAddon{}, middleware.After)
 }
@@ -553,6 +662,10 @@ func addOpDescribeFargateProfileValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDescribeFargateProfile{}, middleware.After)
 }
 
+func addOpDescribeIdentityProviderConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeIdentityProviderConfig{}, middleware.After)
+}
+
 func addOpDescribeNodegroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeNodegroup{}, middleware.After)
 }
@@ -561,12 +674,20 @@ func addOpDescribeUpdateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeUpdate{}, middleware.After)
 }
 
+func addOpDisassociateIdentityProviderConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateIdentityProviderConfig{}, middleware.After)
+}
+
 func addOpListAddonsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAddons{}, middleware.After)
 }
 
 func addOpListFargateProfilesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFargateProfiles{}, middleware.After)
+}
+
+func addOpListIdentityProviderConfigsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIdentityProviderConfigs{}, middleware.After)
 }
 
 func addOpListNodegroupsValidationMiddleware(stack *middleware.Stack) error {
@@ -607,6 +728,85 @@ func addOpUpdateNodegroupConfigValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdateNodegroupVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateNodegroupVersion{}, middleware.After)
+}
+
+func validateIdentityProviderConfig(v *types.IdentityProviderConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdentityProviderConfig"}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOidcIdentityProviderConfigRequest(v *types.OidcIdentityProviderConfigRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OidcIdentityProviderConfigRequest"}
+	if v.IdentityProviderConfigName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityProviderConfigName"))
+	}
+	if v.IssuerUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IssuerUrl"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateEncryptionConfigInput(v *AssociateEncryptionConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateEncryptionConfigInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.EncryptionConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EncryptionConfig"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateIdentityProviderConfigInput(v *AssociateIdentityProviderConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateIdentityProviderConfigInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.Oidc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Oidc"))
+	} else if v.Oidc != nil {
+		if err := validateOidcIdentityProviderConfigRequest(v.Oidc); err != nil {
+			invalidParams.AddNested("Oidc", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpCreateAddonInput(v *CreateAddonInput) error {
@@ -813,6 +1013,28 @@ func validateOpDescribeFargateProfileInput(v *DescribeFargateProfileInput) error
 	}
 }
 
+func validateOpDescribeIdentityProviderConfigInput(v *DescribeIdentityProviderConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeIdentityProviderConfigInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.IdentityProviderConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityProviderConfig"))
+	} else if v.IdentityProviderConfig != nil {
+		if err := validateIdentityProviderConfig(v.IdentityProviderConfig); err != nil {
+			invalidParams.AddNested("IdentityProviderConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeNodegroupInput(v *DescribeNodegroupInput) error {
 	if v == nil {
 		return nil
@@ -849,6 +1071,28 @@ func validateOpDescribeUpdateInput(v *DescribeUpdateInput) error {
 	}
 }
 
+func validateOpDisassociateIdentityProviderConfigInput(v *DisassociateIdentityProviderConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateIdentityProviderConfigInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.IdentityProviderConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityProviderConfig"))
+	} else if v.IdentityProviderConfig != nil {
+		if err := validateIdentityProviderConfig(v.IdentityProviderConfig); err != nil {
+			invalidParams.AddNested("IdentityProviderConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAddonsInput(v *ListAddonsInput) error {
 	if v == nil {
 		return nil
@@ -869,6 +1113,21 @@ func validateOpListFargateProfilesInput(v *ListFargateProfilesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListFargateProfilesInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListIdentityProviderConfigsInput(v *ListIdentityProviderConfigsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIdentityProviderConfigsInput"}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}

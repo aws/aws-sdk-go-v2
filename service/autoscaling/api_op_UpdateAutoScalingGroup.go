@@ -11,15 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the configuration for the specified Auto Scaling group. To update an
-// Auto Scaling group, specify the name of the group and the parameter that you
-// want to change. Any parameters that you don't specify are not changed by this
-// update request. The new settings take effect on any scaling activities after
-// this call returns. If you associate a new launch configuration or template with
-// an Auto Scaling group, all new instances will get the updated configuration.
-// Existing instances continue to run with the configuration that they were
-// originally launched with. When you update a group to specify a mixed instances
-// policy instead of a launch configuration or template, existing instances may be
+// We strongly recommend that all Auto Scaling groups use launch templates to
+// ensure full functionality for Amazon EC2 Auto Scaling and Amazon EC2. Updates
+// the configuration for the specified Auto Scaling group. To update an Auto
+// Scaling group, specify the name of the group and the parameter that you want to
+// change. Any parameters that you don't specify are not changed by this update
+// request. The new settings take effect on any scaling activities after this call
+// returns. If you associate a new launch configuration or template with an Auto
+// Scaling group, all new instances will get the updated configuration. Existing
+// instances continue to run with the configuration that they were originally
+// launched with. When you update a group to specify a mixed instances policy
+// instead of a launch configuration or template, existing instances may be
 // replaced to match the new purchasing options that you specified in the policy.
 // For example, if the group currently has 100% On-Demand capacity and the policy
 // specifies 50% Spot capacity, this means that half of your instances will be
@@ -137,7 +139,7 @@ type UpdateAutoScalingGroupInput struct {
 	MinSize *int32
 
 	// An embedded object that specifies a mixed instances policy. When you make
-	// changes to an existing policy, all optional parameters are left unchanged if not
+	// changes to an existing policy, all optional properties are left unchanged if not
 	// specified. For more information, see Auto Scaling groups with multiple instance
 	// types and purchase options
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)

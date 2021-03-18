@@ -38,6 +38,9 @@ type CreatePackagingGroupInput struct {
 	// CDN Authorization credentials
 	Authorization *types.Authorization
 
+	// Configure egress access logging.
+	EgressAccessLogs *types.EgressAccessLogs
+
 	// A collection of tags associated with a resource
 	Tags map[string]string
 }
@@ -52,6 +55,9 @@ type CreatePackagingGroupOutput struct {
 
 	// The fully qualified domain name for Assets in the PackagingGroup.
 	DomainName *string
+
+	// Configure egress access logging.
+	EgressAccessLogs *types.EgressAccessLogs
 
 	// The ID of the PackagingGroup.
 	Id *string

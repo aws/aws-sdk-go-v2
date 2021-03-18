@@ -37,6 +37,9 @@ type GetWirelessGatewayTaskDefinitionInput struct {
 
 type GetWirelessGatewayTaskDefinitionOutput struct {
 
+	// The Amazon Resource Name of the resource.
+	Arn *string
+
 	// Whether to automatically create tasks using this task definition for all
 	// gateways with the specified current version. If false, the task must me created
 	// by calling CreateWirelessGatewayTask.

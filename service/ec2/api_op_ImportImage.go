@@ -118,7 +118,7 @@ type ImportImageInput struct {
 	// The name of the role to use when not using the default role, 'vmimport'.
 	RoleName *string
 
-	// The tags to apply to the image being imported.
+	// The tags to apply to the import image task during creation.
 	TagSpecifications []types.TagSpecification
 }
 
@@ -167,7 +167,7 @@ type ImportImageOutput struct {
 	// A detailed status message of the import task.
 	StatusMessage *string
 
-	// Any tags assigned to the image being imported.
+	// Any tags assigned to the import image task.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

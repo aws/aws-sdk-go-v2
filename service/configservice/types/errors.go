@@ -270,6 +270,23 @@ func (e *InvalidS3KeyPrefixException) ErrorMessage() string {
 func (e *InvalidS3KeyPrefixException) ErrorCode() string             { return "InvalidS3KeyPrefixException" }
 func (e *InvalidS3KeyPrefixException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified Amazon KMS Key ARN is not valid.
+type InvalidS3KmsKeyArnException struct {
+	Message *string
+}
+
+func (e *InvalidS3KmsKeyArnException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidS3KmsKeyArnException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidS3KmsKeyArnException) ErrorCode() string             { return "InvalidS3KmsKeyArnException" }
+func (e *InvalidS3KmsKeyArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified Amazon SNS topic does not exist.
 type InvalidSNSTopicARNException struct {
 	Message *string
@@ -845,10 +862,31 @@ func (e *NoSuchRetentionConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// For PutConfigAggregator API, no permission to call EnableAWSServiceAccess API.
-// For all OrganizationConfigRule and OrganizationConformancePack APIs, AWS Config
-// throws an exception if APIs are called from member accounts. All APIs must be
-// called from organization master account.
+// For PutConfigurationAggregator API, you can see this exception for the following
+// reasons:
+//
+// * No permission to call EnableAWSServiceAccess API
+//
+// * The
+// configuration aggregator cannot be updated because your AWS Organization
+// management account or the delegated administrator role changed. Delete this
+// aggregator and create a new one with the current AWS Organization.
+//
+// * The
+// configuration aggregator is associated with a previous AWS Organization and AWS
+// Config cannot aggregate data with current AWS Organization. Delete this
+// aggregator and create a new one with the current AWS Organization.
+//
+// * You are
+// not a registered delegated administrator for AWS Config with permissions to call
+// ListDelegatedAdministrators API. Ensure that the management account registers
+// delagated administrator for AWS Config service principle name before the
+// delegated administrator creates an aggregator.
+//
+// For all OrganizationConfigRule
+// and OrganizationConformancePack APIs, AWS Config throws an exception if APIs are
+// called from member accounts. All APIs must be called from organization master
+// account.
 type OrganizationAccessDeniedException struct {
 	Message *string
 }
@@ -949,6 +987,28 @@ func (e *RemediationInProgressException) ErrorMessage() string {
 func (e *RemediationInProgressException) ErrorCode() string             { return "RemediationInProgressException" }
 func (e *RemediationInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Two users are trying to modify the same query at the same time. Wait for a
+// moment and try again.
+type ResourceConcurrentModificationException struct {
+	Message *string
+}
+
+func (e *ResourceConcurrentModificationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceConcurrentModificationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceConcurrentModificationException) ErrorCode() string {
+	return "ResourceConcurrentModificationException"
+}
+func (e *ResourceConcurrentModificationException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // You see this exception in the following cases:
 //
 // * For DeleteConfigRule, AWS
@@ -1044,7 +1104,12 @@ func (e *TooManyTagsException) ErrorMessage() string {
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested action is not valid.
+// The requested action is not valid. For PutStoredQuery, you will see this
+// exception if there are missing required fields or if the input value fails the
+// validation, or if you are trying to create more than 300 queries. For
+// GetStoredQuery, ListStoredQuery, and DeleteStoredQuery you will see this
+// exception if there are missing required fields or if the input value fails the
+// validation.
 type ValidationException struct {
 	Message *string
 }

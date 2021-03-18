@@ -186,9 +186,6 @@ func validateOpGetMediaForFragmentListInput(v *GetMediaForFragmentListInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetMediaForFragmentListInput"}
-	if v.StreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
-	}
 	if v.Fragments == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Fragments"))
 	}
@@ -204,9 +201,6 @@ func validateOpListFragmentsInput(v *ListFragmentsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListFragmentsInput"}
-	if v.StreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
-	}
 	if v.FragmentSelector != nil {
 		if err := validateFragmentSelector(v.FragmentSelector); err != nil {
 			invalidParams.AddNested("FragmentSelector", err.(smithy.InvalidParamsError))

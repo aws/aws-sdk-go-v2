@@ -103,6 +103,22 @@ type Address struct {
 	Tags []Tag
 }
 
+// The attributes associated with an Elastic IP address.
+type AddressAttribute struct {
+
+	// [EC2-VPC] The allocation ID.
+	AllocationId *string
+
+	// The pointer (PTR) record for the IP address.
+	PtrRecord *string
+
+	// The updated PTR record for the IP address.
+	PtrRecordUpdate *PtrUpdateStatus
+
+	// The public IP address.
+	PublicIp *string
+}
+
 // Describes a principal.
 type AllowedPrincipal struct {
 
@@ -289,7 +305,7 @@ type AssociatedRole struct {
 
 	// The key of the Amazon S3 object ey where the certificate, certificate chain, and
 	// encrypted private key bundle is stored. The object key is formated as follows:
-	// certificate_arn/role_arn.
+	// role_arn/certificate_arn.
 	CertificateS3ObjectKey *string
 
 	// The ID of the KMS customer master key (CMK) used to encrypt the private key.
@@ -1965,6 +1981,9 @@ type EbsBlockDevice struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html).
 	KmsKeyId *string
 
+	// The ARN of the Outpost on which the snapshot is stored.
+	OutpostArn *string
+
 	// The ID of the snapshot.
 	SnapshotId *string
 
@@ -2531,11 +2550,11 @@ type ExportImageTask struct {
 	// The status message for the export image task.
 	StatusMessage *string
 
-	// Any tags assigned to the image being exported.
+	// Any tags assigned to the export image task.
 	Tags []Tag
 }
 
-// Describes an instance export task.
+// Describes an export instance task.
 type ExportTask struct {
 
 	// A description of the resource being exported.
@@ -2582,7 +2601,7 @@ type ExportTaskS3LocationRequest struct {
 	S3Prefix *string
 }
 
-// Describes the format and location for an instance export task.
+// Describes the format and location for the export task.
 type ExportToS3Task struct {
 
 	// The container format used to combine disk images with metadata (such as OVF). If
@@ -2601,7 +2620,7 @@ type ExportToS3Task struct {
 	S3Key *string
 }
 
-// Describes an instance export task.
+// Describes an export instance task.
 type ExportToS3TaskSpecification struct {
 
 	// The container format used to combine disk images with metadata (such as OVF). If
@@ -2655,32 +2674,7 @@ type FederatedAuthenticationRequest struct {
 
 // A filter name and value pair that is used to return a more specific list of
 // results from a describe operation. Filters can be used to match a set of
-// resources by specific criteria, such as tags, attributes, or IDs. The filters
-// supported by a describe operation are documented with the describe operation.
-// For example:
-//
-// * DescribeAvailabilityZones
-//
-// * DescribeImages
-//
-// *
-// DescribeInstances
-//
-// * DescribeKeyPairs
-//
-// * DescribeSecurityGroups
-//
-// *
-// DescribeSnapshots
-//
-// * DescribeSubnets
-//
-// * DescribeTags
-//
-// * DescribeVolumes
-//
-// *
-// DescribeVpcs
+// resources by specific criteria, such as tags, attributes, or IDs.
 type Filter struct {
 
 	// The name of the filter. Filter names are case-sensitive.
@@ -2741,7 +2735,11 @@ type FleetData struct {
 	// The allocation strategy of On-Demand Instances in an EC2 Fleet.
 	OnDemandOptions *OnDemandOptions
 
-	// Indicates whether EC2 Fleet should replace unhealthy instances.
+	// Indicates whether EC2 Fleet should replace unhealthy Spot Instances. Supported
+	// only for fleets of type maintain. For more information, see EC2 Fleet health
+	// checks
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks)
+	// in the Amazon EC2 User Guide.
 	ReplaceUnhealthyInstances bool
 
 	// The configuration of Spot Instances in an EC2 Fleet.
@@ -2820,11 +2818,16 @@ type FleetLaunchTemplateOverrides struct {
 	// The location where the instance launched, if applicable.
 	Placement *PlacementResponse
 
-	// The priority for the launch template override. If AllocationStrategy is set to
-	// prioritized, EC2 Fleet uses priority to determine which launch template override
-	// to use first in fulfilling On-Demand capacity. The highest priority is launched
-	// first. Valid values are whole numbers starting at 0. The lower the number, the
-	// higher the priority. If no number is set, the override has the lowest priority.
+	// The priority for the launch template override. The highest priority is launched
+	// first. If the On-Demand AllocationStrategy is set to prioritized, EC2 Fleet uses
+	// priority to determine which launch template override to use first in fulfilling
+	// On-Demand capacity. If the Spot AllocationStrategy is set to
+	// capacity-optimized-prioritized, EC2 Fleet uses priority on a best-effort basis
+	// to determine which launch template override to use first in fulfilling Spot
+	// capacity, but optimizes for capacity first. Valid values are whole numbers
+	// starting at 0. The lower the number, the higher the priority. If no number is
+	// set, the override has the lowest priority. You can set the same priority for
+	// different launch template overrides.
 	Priority float64
 
 	// The ID of the subnet in which to launch the instances.
@@ -2849,12 +2852,16 @@ type FleetLaunchTemplateOverridesRequest struct {
 	// The location where the instance launched, if applicable.
 	Placement *Placement
 
-	// The priority for the launch template override. If AllocationStrategy is set to
-	// prioritized, EC2 Fleet uses priority to determine which launch template override
-	// to use first in fulfilling On-Demand capacity. The highest priority is launched
-	// first. Valid values are whole numbers starting at 0. The lower the number, the
-	// higher the priority. If no number is set, the launch template override has the
-	// lowest priority.
+	// The priority for the launch template override. The highest priority is launched
+	// first. If the On-Demand AllocationStrategy is set to prioritized, EC2 Fleet uses
+	// priority to determine which launch template override to use first in fulfilling
+	// On-Demand capacity. If the Spot AllocationStrategy is set to
+	// capacity-optimized-prioritized, EC2 Fleet uses priority on a best-effort basis
+	// to determine which launch template override to use first in fulfilling Spot
+	// capacity, but optimizes for capacity first. Valid values are whole numbers
+	// starting at 0. The lower the number, the higher the priority. If no number is
+	// set, the launch template override has the lowest priority. You can set the same
+	// priority for different launch template overrides.
 	Priority float64
 
 	// The IDs of the subnets in which to launch the instances. Separate multiple
@@ -3615,8 +3622,8 @@ type ImageDiskContainer struct {
 	// The block device mapping for the disk.
 	DeviceName *string
 
-	// The format of the disk image being imported. Valid values: OVA | VHD | VHDX
-	// |VMDK
+	// The format of the disk image being imported. Valid values: OVA | VHD | VHDX |
+	// VMDK | RAW
 	Format *string
 
 	// The ID of the EBS snapshot to be used for importing the snapshot.
@@ -4814,7 +4821,8 @@ type LaunchPermission struct {
 	// The name of the group.
 	Group PermissionGroup
 
-	// The AWS account ID.
+	// The AWS account ID. Constraints: Up to 10 000 account IDs can be specified in a
+	// single request.
 	UserId *string
 }
 
@@ -4929,7 +4937,7 @@ type LaunchTemplateBlockDeviceMapping struct {
 	// Information about the block device for an EBS volume.
 	Ebs *LaunchTemplateEbsBlockDevice
 
-	// Suppresses the specified device included in the block device mapping of the AMI.
+	// To omit the device from the block device mapping, specify an empty string.
 	NoDevice *string
 
 	// The virtual device name (ephemeralN).
@@ -4946,7 +4954,7 @@ type LaunchTemplateBlockDeviceMappingRequest struct {
 	// launched.
 	Ebs *LaunchTemplateEbsBlockDeviceRequest
 
-	// Suppresses the specified device included in the block device mapping of the AMI.
+	// To omit the device from the block device mapping, specify an empty string.
 	NoDevice *string
 
 	// The virtual device name (ephemeralN). Instance store volumes are numbered
@@ -5087,8 +5095,8 @@ type LaunchTemplateEbsBlockDeviceRequest struct {
 	// 64,000 IOPS only for Instances built on the Nitro System
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
 	// Other instance families guarantee performance up to 32,000 IOPS. This parameter
-	// is required for io1 and io2 volumes. The default for gp3 volumes is 3,000 IOPS.
-	// This parameter is not supported for gp2, st1, sc1, or standard volumes.
+	// is supported for io1, io2, and gp3 volumes only. This parameter is not supported
+	// for gp2, st1, sc1, or standard volumes.
 	Iops int32
 
 	// The ARN of the symmetric AWS Key Management Service (AWS KMS) CMK used for
@@ -5103,24 +5111,22 @@ type LaunchTemplateEbsBlockDeviceRequest struct {
 	Throughput int32
 
 	// The size of the volume, in GiBs. You must specify either a snapshot ID or a
-	// volume size. If you specify a snapshot, the default is the snapshot size. You
-	// can specify a volume size that is equal to or larger than the snapshot size. The
-	// following are the supported volumes sizes for each volume type:
+	// volume size. The following are the supported volumes sizes for each volume
+	// type:
 	//
-	// * gp2 and gp3:
-	// 1-16,384
+	// * gp2 and gp3: 1-16,384
 	//
 	// * io1 and io2: 4-16,384
 	//
-	// * st1 and sc1: 125-16,384
+	// * st1 and sc1:
+	// 125-16,384
 	//
-	// * standard:
-	// 1-1,024
+	// * standard: 1-1,024
 	VolumeSize int32
 
-	// The volume type. The default is gp2. For more information, see Amazon EBS volume
-	// types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// The volume type. For more information, see Amazon EBS volume types
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
+	// Amazon Elastic Compute Cloud User Guide.
 	VolumeType VolumeType
 }
 
@@ -5434,12 +5440,16 @@ type LaunchTemplateOverrides struct {
 	// The instance type.
 	InstanceType InstanceType
 
-	// The priority for the launch template override. If OnDemandAllocationStrategy is
-	// set to prioritized, Spot Fleet uses priority to determine which launch template
-	// override to use first in fulfilling On-Demand capacity. The highest priority is
-	// launched first. Valid values are whole numbers starting at 0. The lower the
-	// number, the higher the priority. If no number is set, the launch template
-	// override has the lowest priority.
+	// The priority for the launch template override. The highest priority is launched
+	// first. If OnDemandAllocationStrategy is set to prioritized, Spot Fleet uses
+	// priority to determine which launch template override to use first in fulfilling
+	// On-Demand capacity. If the Spot AllocationStrategy is set to
+	// capacityOptimizedPrioritized, Spot Fleet uses priority on a best-effort basis to
+	// determine which launch template override to use first in fulfilling Spot
+	// capacity, but optimizes for capacity first. Valid values are whole numbers
+	// starting at 0. The lower the number, the higher the priority. If no number is
+	// set, the launch template override has the lowest priority. You can set the same
+	// priority for different launch template overrides.
 	Priority float64
 
 	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
@@ -6434,8 +6444,8 @@ type NetworkInterface struct {
 	// The private IPv4 addresses associated with the network interface.
 	PrivateIpAddresses []NetworkInterfacePrivateIpAddress
 
-	// The ID of the entity that launched the instance on your behalf (for example, AWS
-	// Management Console or Auto Scaling).
+	// The alias or AWS account ID of the principal or service that created the network
+	// interface.
 	RequesterId *string
 
 	// Indicates whether the network interface is being managed by AWS.
@@ -7161,6 +7171,19 @@ type ProvisionedBandwidth struct {
 	Status *string
 }
 
+// The status of an updated pointer (PTR) record for an Elastic IP address.
+type PtrUpdateStatus struct {
+
+	// The reason for the PTR record update.
+	Reason *string
+
+	// The status of the PTR record update.
+	Status *string
+
+	// The value for the PTR record update.
+	Value *string
+}
+
 // Describes an IPv4 address pool.
 type PublicIpv4Pool struct {
 
@@ -7353,7 +7376,7 @@ type RequestLaunchTemplateData struct {
 	// Amazon Elastic Compute Cloud User Guide.
 	HibernationOptions *LaunchTemplateHibernationOptionsRequest
 
-	// The IAM instance profile.
+	// The name or Amazon Resource Name (ARN) of an IAM instance profile.
 	IamInstanceProfile *LaunchTemplateIamInstanceProfileSpecificationRequest
 
 	// The ID of the AMI.
@@ -8593,6 +8616,12 @@ type Snapshot struct {
 	// the parent volume.
 	KmsKeyId *string
 
+	// The ARN of the AWS Outpost on which the snapshot is stored. For more
+	// information, see EBS Local Snapshot on Outposts
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html) in
+	// the Amazon Elastic Compute Cloud User Guide.
+	OutpostArn *string
+
 	// The AWS owner alias, from an Amazon-maintained list (amazon). This is not the
 	// user-configured AWS account alias set using the IAM console.
 	OwnerAlias *string
@@ -8672,7 +8701,7 @@ type SnapshotDiskContainer struct {
 	// The description of the disk image being imported.
 	Description *string
 
-	// The format of the disk image being imported. Valid values: VHD | VMDK
+	// The format of the disk image being imported. Valid values: VHD | VMDK | RAW
 	Format *string
 
 	// The URL to the Amazon S3-based disk image being imported. It can either be a
@@ -8692,6 +8721,12 @@ type SnapshotInfo struct {
 
 	// Indicates whether the snapshot is encrypted.
 	Encrypted bool
+
+	// The ARN of the AWS Outpost on which the snapshot is stored. For more
+	// information, see EBS Local Snapshot on Outposts
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html) in
+	// the Amazon Elastic Compute Cloud User Guide.
+	OutpostArn *string
 
 	// Account id used when creating this snapshot.
 	OwnerId *string
@@ -8947,9 +8982,17 @@ type SpotFleetRequestConfigData struct {
 	// is lowestPrice, Spot Fleet launches instances from the Spot Instance pools with
 	// the lowest price. This is the default allocation strategy. If the allocation
 	// strategy is diversified, Spot Fleet launches instances from all the Spot
-	// Instance pools that you specify. If the allocation strategy is
-	// capacityOptimized, Spot Fleet launches instances from Spot Instance pools with
-	// optimal capacity for the number of instances that are launching.
+	// Instance pools that you specify. If the allocation strategy is capacityOptimized
+	// (recommended), Spot Fleet launches instances from Spot Instance pools with
+	// optimal capacity for the number of instances that are launching. To give certain
+	// instance types a higher chance of launching first, use
+	// capacityOptimizedPrioritized. Set a priority for each instance type by using the
+	// Priority parameter for LaunchTemplateOverrides. You can assign the same priority
+	// to different LaunchTemplateOverrides. EC2 implements the priorities on a
+	// best-effort basis, but optimizes for capacity first.
+	// capacityOptimizedPrioritized is supported only if your Spot Fleet uses a launch
+	// template. Note that if the OnDemandAllocationStrategy is set to prioritized, the
+	// same priority is applied when fulfilling On-Demand capacity.
 	AllocationStrategy AllocationStrategy
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
@@ -9256,8 +9299,16 @@ type SpotOptions struct {
 	// lowest price. This is the default allocation strategy. If the allocation
 	// strategy is diversified, EC2 Fleet launches instances from all of the Spot
 	// Instance pools that you specify. If the allocation strategy is
-	// capacity-optimized, EC2 Fleet launches instances from Spot Instance pools with
-	// optimal capacity for the number of instances that are launching.
+	// capacity-optimized (recommended), EC2 Fleet launches instances from Spot
+	// Instance pools with optimal capacity for the number of instances that are
+	// launching. To give certain instance types a higher chance of launching first,
+	// use capacity-optimized-prioritized. Set a priority for each instance type by
+	// using the Priority parameter for LaunchTemplateOverrides. You can assign the
+	// same priority to different LaunchTemplateOverrides. EC2 implements the
+	// priorities on a best-effort basis, but optimizes for capacity first.
+	// capacity-optimized-prioritized is supported only if your fleet uses a launch
+	// template. Note that if the On-Demand AllocationStrategy is set to prioritized,
+	// the same priority is applied when fulfilling On-Demand capacity.
 	AllocationStrategy SpotAllocationStrategy
 
 	// The behavior when a Spot Instance is interrupted. The default is terminate.
@@ -9298,8 +9349,16 @@ type SpotOptionsRequest struct {
 	// lowest price. This is the default allocation strategy. If the allocation
 	// strategy is diversified, EC2 Fleet launches instances from all of the Spot
 	// Instance pools that you specify. If the allocation strategy is
-	// capacity-optimized, EC2 Fleet launches instances from Spot Instance pools with
-	// optimal capacity for the number of instances that are launching.
+	// capacity-optimized (recommended), EC2 Fleet launches instances from Spot
+	// Instance pools with optimal capacity for the number of instances that are
+	// launching. To give certain instance types a higher chance of launching first,
+	// use capacity-optimized-prioritized. Set a priority for each instance type by
+	// using the Priority parameter for LaunchTemplateOverrides. You can assign the
+	// same priority to different LaunchTemplateOverrides. EC2 implements the
+	// priorities on a best-effort basis, but optimizes for capacity first.
+	// capacity-optimized-prioritized is supported only if your fleet uses a launch
+	// template. Note that if the On-Demand AllocationStrategy is set to prioritized,
+	// the same priority is applied when fulfilling On-Demand capacity.
 	AllocationStrategy SpotAllocationStrategy
 
 	// The behavior when a Spot Instance is interrupted. The default is terminate.

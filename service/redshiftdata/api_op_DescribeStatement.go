@@ -68,6 +68,10 @@ type DescribeStatementOutput struct {
 	// while running.
 	Error *string
 
+	// A value that indicates whether the statement has a result set. The result set
+	// can be empty.
+	HasResultSet *bool
+
 	// The SQL statement text.
 	QueryString *string
 

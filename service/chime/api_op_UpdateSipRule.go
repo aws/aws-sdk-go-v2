@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the details for the specified SIP rule.
+// Updates the details of the specified SIP rule.
 func (c *Client) UpdateSipRule(ctx context.Context, params *UpdateSipRuleInput, optFns ...func(*Options)) (*UpdateSipRuleOutput, error) {
 	if params == nil {
 		params = &UpdateSipRuleInput{}

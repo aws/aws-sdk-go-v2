@@ -1510,6 +1510,24 @@ func (ImageVersionStatus) Values() []ImageVersionStatus {
 	}
 }
 
+type InferenceExecutionMode string
+
+// Enum values for InferenceExecutionMode
+const (
+	InferenceExecutionModeSerial InferenceExecutionMode = "Serial"
+	InferenceExecutionModeDirect InferenceExecutionMode = "Direct"
+)
+
+// Values returns all known values for InferenceExecutionMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InferenceExecutionMode) Values() []InferenceExecutionMode {
+	return []InferenceExecutionMode{
+		"Serial",
+		"Direct",
+	}
+}
+
 type InputMode string
 
 // Enum values for InputMode
@@ -1796,6 +1814,24 @@ func (ModelApprovalStatus) Values() []ModelApprovalStatus {
 		"Approved",
 		"Rejected",
 		"PendingManualApproval",
+	}
+}
+
+type ModelCacheSetting string
+
+// Enum values for ModelCacheSetting
+const (
+	ModelCacheSettingEnabled  ModelCacheSetting = "Enabled"
+	ModelCacheSettingDisabled ModelCacheSetting = "Disabled"
+)
+
+// Values returns all known values for ModelCacheSetting. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelCacheSetting) Values() []ModelCacheSetting {
+	return []ModelCacheSetting{
+		"Enabled",
+		"Disabled",
 	}
 }
 
@@ -3391,6 +3427,7 @@ const (
 	TargetDeviceMlP3          TargetDevice = "ml_p3"
 	TargetDeviceMlG4dn        TargetDevice = "ml_g4dn"
 	TargetDeviceMlInf1        TargetDevice = "ml_inf1"
+	TargetDeviceMlEia2        TargetDevice = "ml_eia2"
 	TargetDeviceJetsonTx1     TargetDevice = "jetson_tx1"
 	TargetDeviceJetsonTx2     TargetDevice = "jetson_tx2"
 	TargetDeviceJetsonNano    TargetDevice = "jetson_nano"
@@ -3426,6 +3463,7 @@ func (TargetDevice) Values() []TargetDevice {
 		"ml_p3",
 		"ml_g4dn",
 		"ml_inf1",
+		"ml_eia2",
 		"jetson_tx1",
 		"jetson_tx2",
 		"jetson_nano",

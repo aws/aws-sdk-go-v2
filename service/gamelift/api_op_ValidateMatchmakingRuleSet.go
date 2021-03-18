@@ -15,31 +15,15 @@ import (
 // allowed property expressions. To validate syntax, provide a rule set JSON
 // string. Learn more
 //
-// * Build a Rule Set
+// * Build a rule set
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
 //
 // Related
-// operations
-//
-// * CreateMatchmakingConfiguration
-//
-// *
-// DescribeMatchmakingConfigurations
-//
-// * UpdateMatchmakingConfiguration
-//
-// *
-// DeleteMatchmakingConfiguration
-//
-// * CreateMatchmakingRuleSet
-//
-// *
-// DescribeMatchmakingRuleSets
-//
-// * ValidateMatchmakingRuleSet
-//
-// *
-// DeleteMatchmakingRuleSet
+// actions CreateMatchmakingConfiguration | DescribeMatchmakingConfigurations |
+// UpdateMatchmakingConfiguration | DeleteMatchmakingConfiguration |
+// CreateMatchmakingRuleSet | DescribeMatchmakingRuleSets |
+// ValidateMatchmakingRuleSet | DeleteMatchmakingRuleSet | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) ValidateMatchmakingRuleSet(ctx context.Context, params *ValidateMatchmakingRuleSetInput, optFns ...func(*Options)) (*ValidateMatchmakingRuleSetOutput, error) {
 	if params == nil {
 		params = &ValidateMatchmakingRuleSetInput{}

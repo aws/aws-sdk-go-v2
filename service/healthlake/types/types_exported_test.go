@@ -24,3 +24,21 @@ func ExampleInputDataConfig_outputUsage() {
 }
 
 var _ *string
+
+func ExampleOutputDataConfig_outputUsage() {
+	var union types.OutputDataConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OutputDataConfigMemberS3Uri:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string

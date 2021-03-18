@@ -565,8 +565,6 @@ type ProductInformationFilter struct {
 	ProductInformationFilterName *string
 
 	// Filter value.
-	//
-	// This member is required.
 	ProductInformationFilterValue []string
 }
 

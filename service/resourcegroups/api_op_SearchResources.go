@@ -14,7 +14,10 @@ import (
 
 // Returns a list of AWS resource identifiers that matches the specified query. The
 // query uses the same format as a resource query in a CreateGroup or
-// UpdateGroupQuery operation.
+// UpdateGroupQuery operation. Minimum permissions To run this command, you must
+// have the following permissions:
+//
+// * resource-groups:SearchResources
 func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInput, optFns ...func(*Options)) (*SearchResourcesOutput, error) {
 	if params == nil {
 		params = &SearchResourcesInput{}

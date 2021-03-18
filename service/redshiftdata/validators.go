@@ -239,6 +239,9 @@ func validateOpDescribeTableInput(v *DescribeTableInput) error {
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
+	if v.Database == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Database"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

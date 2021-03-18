@@ -3749,7 +3749,7 @@ type ViewerCertificate struct {
 	// (https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html), provide
 	// the Amazon Resource Name (ARN) of the ACM certificate. CloudFront only supports
 	// ACM certificates in the US East (N. Virginia) Region (us-east-1). If you specify
-	// an ACM certificate ARN, you must also specify values for MinimumProtocolVerison
+	// an ACM certificate ARN, you must also specify values for MinimumProtocolVersion
 	// and SSLSupportMethod.
 	ACMCertificateArn *string
 
@@ -3795,7 +3795,7 @@ type ViewerCertificate struct {
 	// SSL/TLS certificate is stored in AWS Identity and Access Management (AWS IAM)
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html),
 	// provide the ID of the IAM certificate. If you specify an IAM certificate ID, you
-	// must also specify values for MinimumProtocolVerison and SSLSupportMethod.
+	// must also specify values for MinimumProtocolVersion and SSLSupportMethod.
 	IAMCertificateId *string
 
 	// If the distribution uses Aliases (alternate domain names or CNAMEs), specify the

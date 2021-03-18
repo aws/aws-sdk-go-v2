@@ -12,7 +12,8 @@ import (
 	"io"
 )
 
-// Uploads an object to the specified path. Object sizes are limited to 25 MB.
+// Uploads an object to the specified path. Object sizes are limited to 25 MB for
+// standard upload availability and 10 MB for streaming upload availability.
 func (c *Client) PutObject(ctx context.Context, params *PutObjectInput, optFns ...func(*Options)) (*PutObjectOutput, error) {
 	if params == nil {
 		params = &PutObjectInput{}
@@ -68,6 +69,14 @@ type PutObjectInput struct {
 	// temporal storage class, and objects are persisted into durable storage shortly
 	// after being received.
 	StorageClass types.StorageClass
+
+	// Indicates the availability of an object while it is still uploading. If the
+	// value is set to streaming, the object is available for downloading after some
+	// initial buffering but before the object is uploaded completely. If the value is
+	// set to standard, the object is available for downloading only when it is
+	// uploaded completely. The default value for this header is standard. To use this
+	// header, you must also set the HTTP Transfer-Encoding header to chunked.
+	UploadAvailability types.UploadAvailability
 }
 
 type PutObjectOutput struct {

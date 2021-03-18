@@ -135,8 +135,10 @@ type BatchInferenceJob struct {
 // The configuration details of a batch inference job.
 type BatchInferenceJobConfig struct {
 
-	// A string to string map specifying the inference hyperparameters you wish to use
-	// for hyperparameter optimization. See customizing-solution-config-hpo.
+	// A string to string map specifying the exploration configuration hyperparameters,
+	// including explorationWeight and explorationItemAgeCutOff, you want to use to
+	// configure the amount of item exploration Amazon Personalize uses when
+	// recommending items. See native-recipe-new-item-USER_PERSONALIZATION.
 	ItemExplorationConfig map[string]string
 }
 
@@ -242,8 +244,13 @@ type Campaign struct {
 // The configuration details of a campaign.
 type CampaignConfig struct {
 
-	// A string to string map specifying the inference hyperparameters you wish to use
-	// for hyperparameter optimization. See customizing-solution-config-hpo.
+	// A string to string map specifying the exploration configuration hyperparameters,
+	// including explorationWeight and explorationItemAgeCutOff, you want to use to
+	// configure the amount of item exploration Amazon Personalize uses when
+	// recommending items. Provide itemExplorationConfig data only if your solution
+	// uses the User-Personalization
+	// (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
+	// recipe.
 	ItemExplorationConfig map[string]string
 }
 
@@ -763,10 +770,8 @@ type Filter struct {
 	FilterArn *string
 
 	// Specifies the type of item interactions to filter out of recommendation results.
-	// The filter expression must follow the following format: EXCLUDE itemId WHERE
-	// INTERACTIONS.event_type in ("EVENT_TYPE") Where "EVENT_TYPE" is the type of
-	// event to filter out. For more information, see Using Filters with Amazon
-	// Personalize (https://docs.aws.amazon.com/personalize/latest/dg/filters.html).
+	// The filter expression must follow specific format rules. For information about
+	// filter expression structure and syntax, see filter-expressions.
 	FilterExpression *string
 
 	// The time at which the filter was last updated.
@@ -804,21 +809,22 @@ type FilterSummary struct {
 	Status *string
 }
 
-// Describes the properties for hyperparameter optimization (HPO). For use with the
-// bring-your-own-recipe feature. Do not use for Amazon Personalize native recipes.
+// Describes the properties for hyperparameter optimization (HPO).
 type HPOConfig struct {
 
 	// The hyperparameters and their allowable ranges.
 	AlgorithmHyperParameterRanges *HyperParameterRanges
 
-	// The metric to optimize during HPO.
+	// The metric to optimize during HPO. Amazon Personalize doesn't support
+	// configuring the hpoObjective at this time.
 	HpoObjective *HPOObjective
 
 	// Describes the resource configuration for HPO.
 	HpoResourceConfig *HPOResourceConfig
 }
 
-// The metric to optimize during hyperparameter optimization (HPO).
+// The metric to optimize during hyperparameter optimization (HPO). Amazon
+// Personalize doesn't support configuring the hpoObjective at this time.
 type HPOObjective struct {
 
 	// The name of the metric.
@@ -960,7 +966,8 @@ type Solution struct {
 	DatasetGroupArn *string
 
 	// The event type (for example, 'click' or 'like') that is used for training the
-	// model.
+	// model. If no eventType is provided, Amazon Personalize uses all interactions for
+	// training with equal weight regardless of type.
 	EventType *string
 
 	// The date and time (in Unix time) that the solution was last updated.
@@ -1106,14 +1113,18 @@ type SolutionVersion struct {
 	// a model.
 	TrainingHours *float64
 
-	// The scope of training used to create the solution version. The FULL option
-	// trains the solution version based on the entirety of the input solution's
-	// training data, while the UPDATE option processes only the training data that has
-	// changed since the creation of the last solution version. Choose UPDATE when you
-	// want to start recommending items added to the dataset without retraining the
-	// model. The UPDATE option can only be used after you've created a solution
-	// version with the FULL option and the training solution uses the
-	// native-recipe-hrnn-coldstart.
+	// The scope of training to be performed when creating the solution version. The
+	// FULL option trains the solution version based on the entirety of the input
+	// solution's training data, while the UPDATE option processes only the data that
+	// has changed in comparison to the input solution. Choose UPDATE when you want to
+	// incrementally update your solution version instead of creating an entirely new
+	// one. The UPDATE option can only be used when you already have an active solution
+	// version created from the input solution using the FULL option and the input
+	// solution was trained with the User-Personalization
+	// (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
+	// recipe or the HRNN-Coldstart
+	// (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html)
+	// recipe.
 	TrainingMode TrainingMode
 
 	// If hyperparameter optimization was performed, contains the hyperparameter values

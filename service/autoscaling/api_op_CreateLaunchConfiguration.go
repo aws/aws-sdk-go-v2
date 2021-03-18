@@ -187,10 +187,14 @@ type CreateLaunchConfigurationInput struct {
 	// Spot price.
 	SpotPrice *string
 
-	// The Base64-encoded user data to make available to the launched EC2 instances.
-	// For more information, see Instance metadata and user data
+	// The user data to make available to the launched EC2 instances. For more
+	// information, see Instance metadata and user data
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
-	// in the Amazon EC2 User Guide for Linux Instances.
+	// (Linux) and Instance metadata and user data
+	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html)
+	// (Windows). If you are using a command line tool, base64-encoding is performed
+	// for you, and you can load the text from a file. Otherwise, you must provide
+	// base64-encoded text. User data is limited to 16 KB.
 	UserData *string
 }
 

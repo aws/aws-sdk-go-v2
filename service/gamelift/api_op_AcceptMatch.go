@@ -28,22 +28,13 @@ import (
 // status is returned to SEARCHING to find a new match. For tickets where one or
 // more players failed to respond, the ticket status is set to CANCELLED, and
 // processing is terminated. A new matchmaking request for these players can be
-// submitted as needed. Learn more  Add FlexMatch to a Game Client
+// submitted as needed. Learn more  Add FlexMatch to a game client
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
-// FlexMatch Events Reference
+// FlexMatch events
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html)
-// Related operations
-//
-// * StartMatchmaking
-//
-// * DescribeMatchmaking
-//
-// *
-// StopMatchmaking
-//
-// * AcceptMatch
-//
-// * StartMatchBackfill
+// (reference) Related actions StartMatchmaking | DescribeMatchmaking |
+// StopMatchmaking | AcceptMatch | StartMatchBackfill | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) AcceptMatch(ctx context.Context, params *AcceptMatchInput, optFns ...func(*Options)) (*AcceptMatchOutput, error) {
 	if params == nil {
 		params = &AcceptMatchInput{}

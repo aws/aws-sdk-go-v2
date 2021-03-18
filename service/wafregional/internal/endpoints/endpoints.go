@@ -330,10 +330,22 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"fips-us-gov-east-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+			},
 			"fips-us-gov-west-1": endpoints.Endpoint{
 				Hostname: "waf-regional-fips.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
+				},
+			},
+			"us-gov-east-1": endpoints.Endpoint{
+				Hostname: "waf-regional.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
 				},
 			},
 			"us-gov-west-1": endpoints.Endpoint{

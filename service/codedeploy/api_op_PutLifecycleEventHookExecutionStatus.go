@@ -47,8 +47,8 @@ type PutLifecycleEventHookExecutionStatusInput struct {
 	// is specified in the hooks section of the AppSpec file.
 	LifecycleEventHookExecutionId *string
 
-	// The result of a Lambda function that validates a deployment lifecycle event
-	// (Succeeded or Failed).
+	// The result of a Lambda function that validates a deployment lifecycle event.
+	// Succeeded and Failed are the only valid values for status.
 	Status types.LifecycleEventStatus
 }
 

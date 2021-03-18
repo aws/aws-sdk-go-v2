@@ -73,6 +73,9 @@ type CreateModelInput struct {
 	// to or from the model container.
 	EnableNetworkIsolation bool
 
+	// Specifies details of how containers in a multi-container endpoint are called.
+	InferenceExecutionConfig *types.InferenceExecutionConfig
+
 	// The location of the primary docker image containing inference code, associated
 	// artifacts, and custom environment map that the inference code uses when the
 	// model is deployed for predictions.

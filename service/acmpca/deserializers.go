@@ -3257,6 +3257,130 @@ func awsAwsjson11_deserializeErrorTooManyTagsException(response *smithyhttp.Resp
 	return output
 }
 
+func awsAwsjson11_deserializeDocumentAccessDescription(v **types.AccessDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccessDescription
+	if *v == nil {
+		sv = &types.AccessDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessLocation":
+			if err := awsAwsjson11_deserializeDocumentGeneralName(&sv.AccessLocation, value); err != nil {
+				return err
+			}
+
+		case "AccessMethod":
+			if err := awsAwsjson11_deserializeDocumentAccessMethod(&sv.AccessMethod, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAccessDescriptionList(v *[]types.AccessDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AccessDescription
+	if *v == nil {
+		cv = []types.AccessDescription{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AccessDescription
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAccessDescription(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAccessMethod(v **types.AccessMethod, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccessMethod
+	if *v == nil {
+		sv = &types.AccessMethod{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AccessMethodType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccessMethodType to be of type string, got %T instead", value)
+				}
+				sv.AccessMethodType = types.AccessMethodType(jtv)
+			}
+
+		case "CustomObjectIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomObjectIdentifier to be of type string, got %T instead", value)
+				}
+				sv.CustomObjectIdentifier = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentActionList(v *[]types.ActionType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3666,6 +3790,11 @@ func awsAwsjson11_deserializeDocumentCertificateAuthorityConfiguration(v **types
 
 	for key, value := range shape {
 		switch key {
+		case "CsrExtensions":
+			if err := awsAwsjson11_deserializeDocumentCsrExtensions(&sv.CsrExtensions, value); err != nil {
+				return err
+			}
+
 		case "KeyAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3838,6 +3967,187 @@ func awsAwsjson11_deserializeDocumentCrlConfiguration(v **types.CrlConfiguration
 					return fmt.Errorf("expected String3To255 to be of type string, got %T instead", value)
 				}
 				sv.S3BucketName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCsrExtensions(v **types.CsrExtensions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CsrExtensions
+	if *v == nil {
+		sv = &types.CsrExtensions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "KeyUsage":
+			if err := awsAwsjson11_deserializeDocumentKeyUsage(&sv.KeyUsage, value); err != nil {
+				return err
+			}
+
+		case "SubjectInformationAccess":
+			if err := awsAwsjson11_deserializeDocumentAccessDescriptionList(&sv.SubjectInformationAccess, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEdiPartyName(v **types.EdiPartyName, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EdiPartyName
+	if *v == nil {
+		sv = &types.EdiPartyName{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NameAssigner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String256 to be of type string, got %T instead", value)
+				}
+				sv.NameAssigner = ptr.String(jtv)
+			}
+
+		case "PartyName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String256 to be of type string, got %T instead", value)
+				}
+				sv.PartyName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGeneralName(v **types.GeneralName, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GeneralName
+	if *v == nil {
+		sv = &types.GeneralName{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DirectoryName":
+			if err := awsAwsjson11_deserializeDocumentASN1Subject(&sv.DirectoryName, value); err != nil {
+				return err
+			}
+
+		case "DnsName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String253 to be of type string, got %T instead", value)
+				}
+				sv.DnsName = ptr.String(jtv)
+			}
+
+		case "EdiPartyName":
+			if err := awsAwsjson11_deserializeDocumentEdiPartyName(&sv.EdiPartyName, value); err != nil {
+				return err
+			}
+
+		case "IpAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String39 to be of type string, got %T instead", value)
+				}
+				sv.IpAddress = ptr.String(jtv)
+			}
+
+		case "OtherName":
+			if err := awsAwsjson11_deserializeDocumentOtherName(&sv.OtherName, value); err != nil {
+				return err
+			}
+
+		case "RegisteredId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomObjectIdentifier to be of type string, got %T instead", value)
+				}
+				sv.RegisteredId = ptr.String(jtv)
+			}
+
+		case "Rfc822Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String256 to be of type string, got %T instead", value)
+				}
+				sv.Rfc822Name = ptr.String(jtv)
+			}
+
+		case "UniformResourceIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String253 to be of type string, got %T instead", value)
+				}
+				sv.UniformResourceIdentifier = ptr.String(jtv)
 			}
 
 		default:
@@ -4129,6 +4439,118 @@ func awsAwsjson11_deserializeDocumentInvalidTagException(v **types.InvalidTagExc
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentKeyUsage(v **types.KeyUsage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KeyUsage
+	if *v == nil {
+		sv = &types.KeyUsage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CRLSign":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CRLSign = jtv
+			}
+
+		case "DataEncipherment":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DataEncipherment = jtv
+			}
+
+		case "DecipherOnly":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DecipherOnly = jtv
+			}
+
+		case "DigitalSignature":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DigitalSignature = jtv
+			}
+
+		case "EncipherOnly":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EncipherOnly = jtv
+			}
+
+		case "KeyAgreement":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.KeyAgreement = jtv
+			}
+
+		case "KeyCertSign":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.KeyCertSign = jtv
+			}
+
+		case "KeyEncipherment":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.KeyEncipherment = jtv
+			}
+
+		case "NonRepudiation":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.NonRepudiation = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExceededException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4278,6 +4700,55 @@ func awsAwsjson11_deserializeDocumentMalformedCSRException(v **types.MalformedCS
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOtherName(v **types.OtherName, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OtherName
+	if *v == nil {
+		sv = &types.OtherName{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TypeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomObjectIdentifier to be of type string, got %T instead", value)
+				}
+				sv.TypeId = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String256 to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:

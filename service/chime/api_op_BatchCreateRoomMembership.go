@@ -12,8 +12,8 @@ import (
 )
 
 // Adds up to 50 members to a chat room in an Amazon Chime Enterprise account.
-// Members can be either users or bots. The member role designates whether the
-// member is a chat room administrator or a general chat room member.
+// Members can be users or bots. The member role designates whether the member is a
+// chat room administrator or a general chat room member.
 func (c *Client) BatchCreateRoomMembership(ctx context.Context, params *BatchCreateRoomMembershipInput, optFns ...func(*Options)) (*BatchCreateRoomMembershipOutput, error) {
 	if params == nil {
 		params = &BatchCreateRoomMembershipInput{}

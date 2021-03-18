@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels an audit that is in progress. The audit can be either scheduled or
-// on-demand. If the audit is not in progress, an "InvalidRequestException" occurs.
+// Cancels an audit that is in progress. The audit can be either scheduled or on
+// demand. If the audit isn't in progress, an "InvalidRequestException" occurs.
 func (c *Client) CancelAuditTask(ctx context.Context, params *CancelAuditTaskInput, optFns ...func(*Options)) (*CancelAuditTaskOutput, error) {
 	if params == nil {
 		params = &CancelAuditTaskInput{}

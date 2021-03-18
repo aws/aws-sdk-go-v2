@@ -11,37 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates port settings for a fleet. To update settings, specify the fleet ID to
-// be updated and list the permissions you want to update. List the permissions you
-// want to add in InboundPermissionAuthorizations, and permissions you want to
+// Updates permissions that allow inbound traffic to connect to game sessions that
+// are being hosted on instances in the fleet. To update settings, specify the
+// fleet ID to be updated and specify the changes to be made. List the permissions
+// you want to add in InboundPermissionAuthorizations, and permissions you want to
 // remove in InboundPermissionRevocations. Permissions to be removed must match
 // existing fleet permissions. If successful, the fleet ID for the updated fleet is
-// returned. Learn more Setting up GameLift Fleets
+// returned. For fleets with remote locations, port setting updates can take time
+// to propagate across all locations. You can check the status of updates in each
+// location by calling DescribeFleetPortSettings with a location name. Learn more
+// Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related operations
-//
-// * CreateFleet
-//
-// * ListFleets
-//
-// * DeleteFleet
-//
-// *
-// DescribeFleetAttributes
-//
-// * Update fleets:
-//
-// * UpdateFleetAttributes
-//
-// *
-// UpdateFleetCapacity
-//
-// * UpdateFleetPortSettings
-//
-// * UpdateRuntimeConfiguration
-//
-// *
-// StartFleetActions or StopFleetActions
+// Related actions CreateFleetLocations | UpdateFleetAttributes |
+// UpdateFleetCapacity | UpdateFleetPortSettings | UpdateRuntimeConfiguration |
+// StopFleetActions | StartFleetActions | PutScalingPolicy | DeleteFleet |
+// DeleteFleetLocations | DeleteScalingPolicy | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateFleetPortSettings(ctx context.Context, params *UpdateFleetPortSettingsInput, optFns ...func(*Options)) (*UpdateFleetPortSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateFleetPortSettingsInput{}
@@ -60,8 +45,8 @@ func (c *Client) UpdateFleetPortSettings(ctx context.Context, params *UpdateFlee
 // Represents the input for a request operation.
 type UpdateFleetPortSettingsInput struct {
 
-	// A unique identifier for a fleet to update port settings for. You can use either
-	// the fleet ID or ARN value.
+	// A unique identifier for the fleet to update port settings for. You can use
+	// either the fleet ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string
@@ -76,7 +61,7 @@ type UpdateFleetPortSettingsInput struct {
 // Represents the returned data in response to a request operation.
 type UpdateFleetPortSettingsOutput struct {
 
-	// A unique identifier for a fleet that was updated.
+	// A unique identifier for the fleet that was updated.
 	FleetId *string
 
 	// Metadata pertaining to the operation's result.

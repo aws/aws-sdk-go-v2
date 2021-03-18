@@ -41,7 +41,7 @@ type DescribeJobDefinitionsInput struct {
 
 	// The maximum number of results returned by DescribeJobDefinitions in paginated
 	// output. When this parameter is used, DescribeJobDefinitions only returns
-	// maxResults results in a single page along with a nextToken response element. The
+	// maxResults results in a single page and a nextToken response element. The
 	// remaining results of the initial request can be seen by sending another
 	// DescribeJobDefinitions request with the returned nextToken value. This value can
 	// be between 1 and 100. If this parameter isn't used, then DescribeJobDefinitions
@@ -148,7 +148,7 @@ var _ DescribeJobDefinitionsAPIClient = (*Client)(nil)
 type DescribeJobDefinitionsPaginatorOptions struct {
 	// The maximum number of results returned by DescribeJobDefinitions in paginated
 	// output. When this parameter is used, DescribeJobDefinitions only returns
-	// maxResults results in a single page along with a nextToken response element. The
+	// maxResults results in a single page and a nextToken response element. The
 	// remaining results of the initial request can be seen by sending another
 	// DescribeJobDefinitions request with the returned nextToken value. This value can
 	// be between 1 and 100. If this parameter isn't used, then DescribeJobDefinitions

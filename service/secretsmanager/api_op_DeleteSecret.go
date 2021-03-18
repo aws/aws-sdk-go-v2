@@ -11,26 +11,26 @@ import (
 	"time"
 )
 
-// Deletes an entire secret and all of its versions. You can optionally include a
+// Deletes an entire secret and all of the versions. You can optionally include a
 // recovery window during which you can restore the secret. If you don't specify a
 // recovery window value, the operation defaults to 30 days. Secrets Manager
 // attaches a DeletionDate stamp to the secret that specifies the end of the
 // recovery window. At the end of the recovery window, Secrets Manager deletes the
 // secret permanently. At any time before recovery window ends, you can use
 // RestoreSecret to remove the DeletionDate and cancel the deletion of the secret.
-// You cannot access the encrypted secret information in any secret that is
-// scheduled for deletion. If you need to access that information, you must cancel
-// the deletion with RestoreSecret and then retrieve the information.
+// You cannot access the encrypted secret information in any secret scheduled for
+// deletion. If you need to access that information, you must cancel the deletion
+// with RestoreSecret and then retrieve the information.
 //
-// * There is
-// no explicit operation to delete a version of a secret. Instead, remove all
-// staging labels from the VersionStage field of a version. That marks the version
-// as deprecated and allows Secrets Manager to delete it as needed. Versions that
-// do not have any staging labels do not show up in ListSecretVersionIds unless you
-// specify IncludeDeprecated.
+// * There is no explicit
+// operation to delete a version of a secret. Instead, remove all staging labels
+// from the VersionStage field of a version. That marks the version as deprecated
+// and allows Secrets Manager to delete it as needed. Versions without any staging
+// labels do not show up in ListSecretVersionIds unless you specify
+// IncludeDeprecated.
 //
-// * The permanent secret deletion at the end of the
-// waiting period is performed as a background task with low priority. There is no
+// * The permanent secret deletion at the end of the waiting
+// period is performed as a background task with low priority. There is no
 // guarantee of a specific time after the recovery window for the actual delete
 // operation to occur.
 //
@@ -63,21 +63,21 @@ func (c *Client) DeleteSecret(ctx context.Context, params *DeleteSecretInput, op
 
 type DeleteSecretInput struct {
 
-	// Specifies the secret that you want to delete. You can specify either the Amazon
-	// Resource Name (ARN) or the friendly name of the secret. If you specify an ARN,
-	// we generally recommend that you specify a complete ARN. You can specify a
-	// partial ARN too—for example, if you don’t include the final hyphen and six
-	// random characters that Secrets Manager adds at the end of the ARN when you
-	// created the secret. A partial ARN match can work as long as it uniquely matches
-	// only one secret. However, if your secret has a name that ends in a hyphen
-	// followed by six characters (before Secrets Manager adds the hyphen and six
-	// characters to the ARN) and you try to use that as a partial ARN, then those
-	// characters cause Secrets Manager to assume that you’re specifying a complete
-	// ARN. This confusion can cause unexpected results. To avoid this situation, we
-	// recommend that you don’t create secret names ending with a hyphen followed by
-	// six characters. If you specify an incomplete ARN without the random suffix, and
-	// instead provide the 'friendly name', you must not include the random suffix. If
-	// you do include the random suffix added by Secrets Manager, you receive either a
+	// Specifies the secret to delete. You can specify either the Amazon Resource Name
+	// (ARN) or the friendly name of the secret. If you specify an ARN, we generally
+	// recommend that you specify a complete ARN. You can specify a partial ARN too—for
+	// example, if you don’t include the final hyphen and six random characters that
+	// Secrets Manager adds at the end of the ARN when you created the secret. A
+	// partial ARN match can work as long as it uniquely matches only one secret.
+	// However, if your secret has a name that ends in a hyphen followed by six
+	// characters (before Secrets Manager adds the hyphen and six characters to the
+	// ARN) and you try to use that as a partial ARN, then those characters cause
+	// Secrets Manager to assume that you’re specifying a complete ARN. This confusion
+	// can cause unexpected results. To avoid this situation, we recommend that you
+	// don’t create secret names ending with a hyphen followed by six characters. If
+	// you specify an incomplete ARN without the random suffix, and instead provide the
+	// 'friendly name', you must not include the random suffix. If you do include the
+	// random suffix added by Secrets Manager, you receive either a
 	// ResourceNotFoundException or an AccessDeniedException error, depending on your
 	// permissions.
 	//
@@ -94,13 +94,15 @@ type DeleteSecretInput struct {
 	// waiting period before the permanent deletion that AWS would normally impose with
 	// the RecoveryWindowInDays parameter. If you delete a secret with the
 	// ForceDeleteWithouRecovery parameter, then you have no opportunity to recover the
-	// secret. It is permanently lost.
+	// secret. You lose the secret permanently. If you use this parameter and include a
+	// previously deleted or nonexistent secret, the operation does not return the
+	// error ResourceNotFoundException in order to correctly handle retries.
 	ForceDeleteWithoutRecovery bool
 
-	// (Optional) Specifies the number of days that Secrets Manager waits before it can
-	// delete the secret. You can't use both this parameter and the
+	// (Optional) Specifies the number of days that Secrets Manager waits before
+	// Secrets Manager can delete the secret. You can't use both this parameter and the
 	// ForceDeleteWithoutRecovery parameter in the same API call. This value can range
-	// from 7 to 30 days. The default value is 30.
+	// from 7 to 30 days with a default value of 30.
 	RecoveryWindowInDays int64
 }
 
@@ -114,7 +116,7 @@ type DeleteSecretOutput struct {
 	// plus the number of days specified in RecoveryWindowInDays.
 	DeletionDate *time.Time
 
-	// The friendly name of the secret that is now scheduled for deletion.
+	// The friendly name of the secret currently scheduled for deletion.
 	Name *string
 
 	// Metadata pertaining to the operation's result.

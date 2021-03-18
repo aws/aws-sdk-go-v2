@@ -13,7 +13,7 @@ import (
 )
 
 // Updates the definition for a dimension. You cannot change the type of a
-// dimension after it is created (you can delete it and re-create it).
+// dimension after it is created (you can delete it and recreate it).
 func (c *Client) UpdateDimension(ctx context.Context, params *UpdateDimensionInput, optFns ...func(*Options)) (*UpdateDimensionOutput, error) {
 	if params == nil {
 		params = &UpdateDimensionInput{}
@@ -47,7 +47,7 @@ type UpdateDimensionInput struct {
 
 type UpdateDimensionOutput struct {
 
-	// The ARN (Amazon resource name) of the created dimension.
+	// The Amazon Resource Name (ARN)of the created dimension.
 	Arn *string
 
 	// The date and time, in milliseconds since epoch, when the dimension was initially

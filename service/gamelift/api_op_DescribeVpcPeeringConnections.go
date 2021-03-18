@@ -17,22 +17,11 @@ import (
 // manage the Amazon GameLift fleets. Specify a fleet ID or leave the parameter
 // empty to retrieve all connection records. If successful, the retrieved
 // information includes both active and pending connections. Active connections
-// identify the IpV4 CIDR block that the VPC uses to connect.
-//
-// *
-// CreateVpcPeeringAuthorization
-//
-// * DescribeVpcPeeringAuthorizations
-//
-// *
-// DeleteVpcPeeringAuthorization
-//
-// * CreateVpcPeeringConnection
-//
-// *
-// DescribeVpcPeeringConnections
-//
-// * DeleteVpcPeeringConnection
+// identify the IpV4 CIDR block that the VPC uses to connect. Related actions
+// CreateVpcPeeringAuthorization | DescribeVpcPeeringAuthorizations |
+// DeleteVpcPeeringAuthorization | CreateVpcPeeringConnection |
+// DescribeVpcPeeringConnections | DeleteVpcPeeringConnection | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeVpcPeeringConnections(ctx context.Context, params *DescribeVpcPeeringConnectionsInput, optFns ...func(*Options)) (*DescribeVpcPeeringConnectionsOutput, error) {
 	if params == nil {
 		params = &DescribeVpcPeeringConnectionsInput{}
@@ -51,7 +40,7 @@ func (c *Client) DescribeVpcPeeringConnections(ctx context.Context, params *Desc
 // Represents the input for a request operation.
 type DescribeVpcPeeringConnectionsInput struct {
 
-	// A unique identifier for a fleet. You can use either the fleet ID or ARN value.
+	// A unique identifier for the fleet. You can use either the fleet ID or ARN value.
 	FleetId *string
 }
 

@@ -11,33 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Reserves open slots in a game session for a group of players. Before players can
-// be added, a game session must have an ACTIVE status, have a creation policy of
-// ALLOW_ALL, and have an open player slot. To add a single player to a game
-// session, use CreatePlayerSession. When a player connects to the game server and
-// references a player session ID, the game server contacts the Amazon GameLift
-// service to validate the player reservation and accept the player. To create
-// player sessions, specify a game session ID, a list of player IDs, and optionally
-// a set of player data strings. If successful, a slot is reserved in the game
-// session for each player and a set of new PlayerSession objects is returned.
-// Player sessions cannot be updated. Available in Amazon GameLift Local.
-//
-// *
-// CreatePlayerSession
-//
-// * CreatePlayerSessions
-//
-// * DescribePlayerSessions
-//
-// * Game
-// session placements
-//
-// * StartGameSessionPlacement
-//
-// *
-// DescribeGameSessionPlacement
-//
-// * StopGameSessionPlacement
+// Reserves open slots in a game session for a group of players. New player
+// sessions can be created in any game session with an open slot that is in ACTIVE
+// status and has a player creation policy of ACCEPT_ALL. To add a single player to
+// a game session, use CreatePlayerSession. To create player sessions, specify a
+// game session ID and a list of player IDs. Optionally, provide a set of player
+// data for each player ID. If successful, a slot is reserved in the game session
+// for each player, and new PlayerSession objects are returned with player session
+// IDs. Each player references their player session ID when sending a connection
+// request to the game session, and the game server can use it to validate the
+// player reservation with the GameLift service. Player sessions cannot be updated.
+// Available in Amazon GameLift Local. Related actions CreatePlayerSession |
+// CreatePlayerSessions | DescribePlayerSessions | StartGameSessionPlacement |
+// DescribeGameSessionPlacement | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreatePlayerSessions(ctx context.Context, params *CreatePlayerSessionsInput, optFns ...func(*Options)) (*CreatePlayerSessionsOutput, error) {
 	if params == nil {
 		params = &CreatePlayerSessionsInput{}
@@ -68,8 +55,8 @@ type CreatePlayerSessionsInput struct {
 
 	// Map of string pairs, each specifying a player ID and a set of developer-defined
 	// information related to the player. Amazon GameLift does not use this data, so it
-	// can be formatted as needed for use in the game. Player data strings for player
-	// IDs not included in the PlayerIds parameter are ignored.
+	// can be formatted as needed for use in the game. Any player data strings for
+	// player IDs that are not included in the PlayerIds parameter are ignored.
 	PlayerDataMap map[string]string
 }
 

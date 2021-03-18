@@ -12,20 +12,22 @@ import (
 )
 
 // Sends a request to invite the specified AWS accounts to be member accounts in
-// the behavior graph. This operation can only be called by the master account for
-// a behavior graph. CreateMembers verifies the accounts and then sends invitations
-// to the verified accounts. The request provides the behavior graph ARN and the
-// list of accounts to invite. The response separates the requested accounts into
-// two lists:
+// the behavior graph. This operation can only be called by the administrator
+// account for a behavior graph. CreateMembers verifies the accounts and then
+// invites the verified accounts. The administrator can optionally specify to not
+// send invitation emails to the member accounts. This would be used when the
+// administrator manages their member accounts centrally. The request provides the
+// behavior graph ARN and the list of accounts to invite. The response separates
+// the requested accounts into two lists:
 //
-// * The accounts that CreateMembers was able to start the verification
-// for. This list includes member accounts that are being verified, that have
-// passed verification and are being sent an invitation, and that have failed
-// verification.
+// * The accounts that CreateMembers was
+// able to start the verification for. This list includes member accounts that are
+// being verified, that have passed verification and are to be invited, and that
+// have failed verification.
 //
-// * The accounts that CreateMembers was unable to process. This
-// list includes accounts that were already invited to be member accounts in the
-// behavior graph.
+// * The accounts that CreateMembers was unable to
+// process. This list includes accounts that were already invited to be member
+// accounts in the behavior graph.
 func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, optFns ...func(*Options)) (*CreateMembersOutput, error) {
 	if params == nil {
 		params = &CreateMembersInput{}
@@ -55,6 +57,11 @@ type CreateMembersInput struct {
 	//
 	// This member is required.
 	GraphArn *string
+
+	// if set to true, then the member accounts do not receive email notifications. By
+	// default, this is set to false, and the member accounts receive email
+	// notifications.
+	DisableEmailNotification bool
 
 	// Customized message text to include in the invitation email message to the
 	// invited member accounts.

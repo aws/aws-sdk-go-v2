@@ -50,9 +50,9 @@ type ListAggregateDiscoveredResourcesInput struct {
 	// Filters the results based on the ResourceFilters object.
 	Filters *types.ResourceFilters
 
-	// The maximum number of resource identifiers returned on each page. The default is
-	// 100. You cannot specify a number greater than 100. If you specify 0, AWS Config
-	// uses the default.
+	// The maximum number of resource identifiers returned on each page. You cannot
+	// specify a number greater than 100. If you specify 0, AWS Config uses the
+	// default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next

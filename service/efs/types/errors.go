@@ -68,6 +68,28 @@ func (e *AccessPointNotFound) ErrorMessage() string {
 func (e *AccessPointNotFound) ErrorCode() string             { return "AccessPointNotFound" }
 func (e *AccessPointNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Returned if the Availability Zone that was specified for a mount target is
+// different from the Availability Zone that was specified for One Zone storage
+// classes. For more information, see Regional and One Zone storage redundancy
+// (https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html).
+type AvailabilityZonesMismatch struct {
+	Message *string
+
+	ErrorCode_ *string
+}
+
+func (e *AvailabilityZonesMismatch) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AvailabilityZonesMismatch) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AvailabilityZonesMismatch) ErrorCode() string             { return "AvailabilityZonesMismatch" }
+func (e *AvailabilityZonesMismatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Returned if the request is malformed or contains an error such as an invalid
 // parameter value or a missing required parameter.
 type BadRequest struct {
@@ -232,7 +254,7 @@ func (e *IncorrectMountTargetState) ErrorFault() smithy.ErrorFault { return smit
 // value might be returned when you try to create a file system in provisioned
 // throughput mode, when you attempt to increase the provisioned throughput of an
 // existing file system, or when you attempt to change an existing file system from
-// bursting to provisioned throughput mode.
+// bursting to provisioned throughput mode. Try again later.
 type InsufficientThroughputCapacity struct {
 	Message *string
 
@@ -515,7 +537,8 @@ func (e *TooManyRequests) ErrorMessage() string {
 func (e *TooManyRequests) ErrorCode() string             { return "TooManyRequests" }
 func (e *TooManyRequests) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-//
+// Returned if the requested Amazon EFS functionality is not available in the
+// specified Availability Zone.
 type UnsupportedAvailabilityZone struct {
 	Message *string
 
@@ -534,7 +557,7 @@ func (e *UnsupportedAvailabilityZone) ErrorMessage() string {
 func (e *UnsupportedAvailabilityZone) ErrorCode() string             { return "UnsupportedAvailabilityZone" }
 func (e *UnsupportedAvailabilityZone) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if the AWS Backup service is not available in the region that the
+// Returned if the AWS Backup service is not available in the Region in which the
 // request was made.
 type ValidationException struct {
 	Message *string

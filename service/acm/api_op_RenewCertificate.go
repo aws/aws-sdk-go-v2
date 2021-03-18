@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Renews an eligable ACM certificate. At this time, only exported private
+// Renews an eligible ACM certificate. At this time, only exported private
 // certificates can be renewed with this operation. In order to renew your ACM PCA
 // certificates with ACM, you must first grant the ACM service principal permission
 // to do so
@@ -38,8 +38,7 @@ type RenewCertificateInput struct {
 	// String that contains the ARN of the ACM certificate to be renewed. This must be
 	// of the form:
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces
+	// For more information about ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.

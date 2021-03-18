@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new group. The number and size of IAM resources in an AWS account are
-// limited. For more information, see IAM and STS Quotas
+// Creates a new group. For information about the number of groups you can create,
+// see IAM and STS quotas
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in
 // the IAM User Guide.
 func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optFns ...func(*Options)) (*CreateGroupOutput, error) {
@@ -40,7 +40,7 @@ type CreateGroupInput struct {
 	// This member is required.
 	GroupName *string
 
-	// The path to the group. For more information about paths, see IAM Identifiers
+	// The path to the group. For more information about paths, see IAM identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
 	// IAM User Guide. This parameter is optional. If it is not included, it defaults
 	// to a slash (/). This parameter allows (through its regex pattern

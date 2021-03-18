@@ -611,10 +611,14 @@ func (e *HandshakeAlreadyInStateException) ErrorFault() smithy.ErrorFault { retu
 // request is invalid because the organization has already enabled all features.
 //
 // *
-// ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD: The request failed because the
-// account is from a different marketplace than the accounts in the organization.
-// For example, accounts with India addresses must be associated with the AISPL
-// marketplace. All accounts in an organization must be from the same
+// ORGANIZATION_IS_ALREADY_PENDING_ALL_FEATURES_MIGRATION: The handshake request is
+// invalid because the organization has already started the process to enable all
+// features.
+//
+// * ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD: The request failed
+// because the account is from a different marketplace than the accounts in the
+// organization. For example, accounts with India addresses must be associated with
+// the AISPL marketplace. All accounts in an organization must be from the same
 // marketplace.
 //
 // * ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED: You
@@ -701,20 +705,23 @@ func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 // * INPUT_REQUIRED: You must include a value for all required
 // parameters.
 //
-// * INVALID_ENUM: You specified an invalid value.
+// * INVALID_EMAIL_ADDRESS_TARGET: You specified an invalid email
+// address for the invited account owner.
 //
-// *
-// INVALID_ENUM_POLICY_TYPE: You specified an invalid policy type string.
+// * INVALID_ENUM: You specified an invalid
+// value.
 //
-// *
-// INVALID_FULL_NAME_TARGET: You specified a full name that contains invalid
-// characters.
+// * INVALID_ENUM_POLICY_TYPE: You specified an invalid policy type
+// string.
 //
-// * INVALID_LIST_MEMBER: You provided a list to a parameter that
-// contains at least one invalid value.
+// * INVALID_FULL_NAME_TARGET: You specified a full name that contains
+// invalid characters.
 //
-// * INVALID_PAGINATION_TOKEN: Get the value
-// for the NextToken parameter from the response to a previous call of the
+// * INVALID_LIST_MEMBER: You provided a list to a parameter
+// that contains at least one invalid value.
+//
+// * INVALID_PAGINATION_TOKEN: Get the
+// value for the NextToken parameter from the response to a previous call of the
 // operation.
 //
 // * INVALID_PARTY_TYPE_TARGET: You specified the wrong type of entity

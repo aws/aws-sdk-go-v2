@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the queues associated with a routing profile.
+// Lists the queues associated with a routing profile.
 func (c *Client) ListRoutingProfileQueues(ctx context.Context, params *ListRoutingProfileQueuesInput, optFns ...func(*Options)) (*ListRoutingProfileQueuesOutput, error) {
 	if params == nil {
 		params = &ListRoutingProfileQueuesInput{}
@@ -40,7 +40,7 @@ type ListRoutingProfileQueuesInput struct {
 	// This member is required.
 	RoutingProfileId *string
 
-	// The maximimum number of results to return per page.
+	// The maximum number of results to return per page.
 	MaxResults int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -134,7 +134,7 @@ var _ ListRoutingProfileQueuesAPIClient = (*Client)(nil)
 // ListRoutingProfileQueuesPaginatorOptions is the paginator options for
 // ListRoutingProfileQueues
 type ListRoutingProfileQueuesPaginatorOptions struct {
-	// The maximimum number of results to return per page.
+	// The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

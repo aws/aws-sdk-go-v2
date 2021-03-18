@@ -577,6 +577,33 @@ func validateExportAssetToSignedUrlRequestDetails(v *types.ExportAssetToSignedUr
 	}
 }
 
+func validateExportRevisionsToS3RequestDetails(v *types.ExportRevisionsToS3RequestDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportRevisionsToS3RequestDetails"}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.Encryption != nil {
+		if err := validateExportServerSideEncryption(v.Encryption); err != nil {
+			invalidParams.AddNested("Encryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RevisionDestinations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionDestinations"))
+	} else if v.RevisionDestinations != nil {
+		if err := validateListOfRevisionDestinationEntry(v.RevisionDestinations); err != nil {
+			invalidParams.AddNested("RevisionDestinations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExportServerSideEncryption(v *types.ExportServerSideEncryption) error {
 	if v == nil {
 		return nil
@@ -675,6 +702,23 @@ func validateListOfAssetSourceEntry(v []types.AssetSourceEntry) error {
 	}
 }
 
+func validateListOfRevisionDestinationEntry(v []types.RevisionDestinationEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfRevisionDestinationEntry"}
+	for i := range v {
+		if err := validateRevisionDestinationEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRequestDetails(v *types.RequestDetails) error {
 	if v == nil {
 		return nil
@@ -690,6 +734,11 @@ func validateRequestDetails(v *types.RequestDetails) error {
 			invalidParams.AddNested("ExportAssetsToS3", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ExportRevisionsToS3 != nil {
+		if err := validateExportRevisionsToS3RequestDetails(v.ExportRevisionsToS3); err != nil {
+			invalidParams.AddNested("ExportRevisionsToS3", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ImportAssetFromSignedUrl != nil {
 		if err := validateImportAssetFromSignedUrlRequestDetails(v.ImportAssetFromSignedUrl); err != nil {
 			invalidParams.AddNested("ImportAssetFromSignedUrl", err.(smithy.InvalidParamsError))
@@ -699,6 +748,24 @@ func validateRequestDetails(v *types.RequestDetails) error {
 		if err := validateImportAssetsFromS3RequestDetails(v.ImportAssetsFromS3); err != nil {
 			invalidParams.AddNested("ImportAssetsFromS3", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRevisionDestinationEntry(v *types.RevisionDestinationEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevisionDestinationEntry"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

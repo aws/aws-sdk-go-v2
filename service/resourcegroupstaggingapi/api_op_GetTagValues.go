@@ -11,8 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all tag values for the specified key in the specified Region for the AWS
-// account.
+// Returns all tag values for the specified key that are used in the specified AWS
+// Region for the calling AWS account. This operation supports pagination, where
+// the response can be sent in multiple pages. You should check the PaginationToken
+// response parameter to determine if there are additional results available to
+// return. Repeat the query, passing the PaginationToken response parameter value
+// as an input to the next request until you recieve a null value. A null value for
+// PaginationToken indicates that there are no more results waiting to be returned.
 func (c *Client) GetTagValues(ctx context.Context, params *GetTagValuesInput, optFns ...func(*Options)) (*GetTagValuesOutput, error) {
 	if params == nil {
 		params = &GetTagValuesInput{}
@@ -30,28 +35,27 @@ func (c *Client) GetTagValues(ctx context.Context, params *GetTagValuesInput, op
 
 type GetTagValuesInput struct {
 
-	// The key for which you want to list all existing values in the specified Region
-	// for the AWS account.
+	// Specifies the tag key for which you want to list all existing values that are
+	// currently used in the specified AWS Region for the calling AWS account.
 	//
 	// This member is required.
 	Key *string
 
-	MaxResults *int32
-
-	// A string that indicates that additional data is available. Leave this value
-	// empty for your initial request. If the response includes a PaginationToken, use
-	// that string for this value to request an additional page of data.
+	// Specifies a PaginationToken response value from a previous request to indicate
+	// that you want the next page of results. Leave this parameter empty in your
+	// initial request.
 	PaginationToken *string
 }
 
 type GetTagValuesOutput struct {
 
-	// A string that indicates that the response contains more data than can be
-	// returned in a single response. To receive additional data, specify this string
-	// for the PaginationToken value in a subsequent request.
+	// A string that indicates that there is more data available than this response
+	// contains. To receive the next part of the response, specify this response value
+	// as the PaginationToken value in the request for the next page.
 	PaginationToken *string
 
-	// A list of all tag values for the specified key in the AWS account.
+	// A list of all tag values for the specified key currently used in the specified
+	// AWS Region for the calling AWS account.
 	TagValues []string
 
 	// Metadata pertaining to the operation's result.

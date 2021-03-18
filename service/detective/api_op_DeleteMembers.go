@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes one or more member accounts from the master account behavior graph. This
-// operation can only be called by a Detective master account. That account cannot
-// use DeleteMembers to delete their own account from the behavior graph. To
-// disable a behavior graph, the master account uses the DeleteGraph API method.
+// Deletes one or more member accounts from the administrator account's behavior
+// graph. This operation can only be called by a Detective administrator account.
+// That account cannot use DeleteMembers to delete their own account from the
+// behavior graph. To disable a behavior graph, the administrator account uses the
+// DeleteGraph API method.
 func (c *Client) DeleteMembers(ctx context.Context, params *DeleteMembersInput, optFns ...func(*Options)) (*DeleteMembersOutput, error) {
 	if params == nil {
 		params = &DeleteMembersInput{}

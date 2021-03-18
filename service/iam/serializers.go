@@ -4922,6 +4922,62 @@ func (m *awsAwsquery_serializeOpListInstanceProfilesForRole) HandleSerialize(ctx
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpListInstanceProfileTags struct {
+}
+
+func (*awsAwsquery_serializeOpListInstanceProfileTags) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpListInstanceProfileTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListInstanceProfileTagsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ListInstanceProfileTags")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentListInstanceProfileTagsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpListMFADevices struct {
 }
 
@@ -4978,6 +5034,62 @@ func (m *awsAwsquery_serializeOpListMFADevices) HandleSerialize(ctx context.Cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpListMFADeviceTags struct {
+}
+
+func (*awsAwsquery_serializeOpListMFADeviceTags) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpListMFADeviceTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListMFADeviceTagsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ListMFADeviceTags")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentListMFADeviceTagsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpListOpenIDConnectProviders struct {
 }
 
@@ -5012,6 +5124,62 @@ func (m *awsAwsquery_serializeOpListOpenIDConnectProviders) HandleSerialize(ctx 
 	body := bodyEncoder.Object()
 	body.Key("Action").String("ListOpenIDConnectProviders")
 	body.Key("Version").String("2010-05-08")
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpListOpenIDConnectProviderTags struct {
+}
+
+func (*awsAwsquery_serializeOpListOpenIDConnectProviderTags) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpListOpenIDConnectProviderTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListOpenIDConnectProviderTagsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ListOpenIDConnectProviderTags")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentListOpenIDConnectProviderTagsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
 
 	err = bodyEncoder.Encode()
 	if err != nil {
@@ -5122,6 +5290,62 @@ func (m *awsAwsquery_serializeOpListPoliciesGrantingServiceAccess) HandleSeriali
 	body.Key("Version").String("2010-05-08")
 
 	if err := awsAwsquery_serializeOpDocumentListPoliciesGrantingServiceAccessInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpListPolicyTags struct {
+}
+
+func (*awsAwsquery_serializeOpListPolicyTags) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpListPolicyTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListPolicyTagsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ListPolicyTags")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentListPolicyTagsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5418,6 +5642,62 @@ func (m *awsAwsquery_serializeOpListSAMLProviders) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpListSAMLProviderTags struct {
+}
+
+func (*awsAwsquery_serializeOpListSAMLProviderTags) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpListSAMLProviderTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListSAMLProviderTagsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ListSAMLProviderTags")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentListSAMLProviderTagsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpListServerCertificates struct {
 }
 
@@ -5454,6 +5734,62 @@ func (m *awsAwsquery_serializeOpListServerCertificates) HandleSerialize(ctx cont
 	body.Key("Version").String("2010-05-08")
 
 	if err := awsAwsquery_serializeOpDocumentListServerCertificatesInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpListServerCertificateTags struct {
+}
+
+func (*awsAwsquery_serializeOpListServerCertificateTags) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpListServerCertificateTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListServerCertificateTagsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ListServerCertificateTags")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentListServerCertificateTagsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -6650,6 +6986,230 @@ func (m *awsAwsquery_serializeOpSimulatePrincipalPolicy) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpTagInstanceProfile struct {
+}
+
+func (*awsAwsquery_serializeOpTagInstanceProfile) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpTagInstanceProfile) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*TagInstanceProfileInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("TagInstanceProfile")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentTagInstanceProfileInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpTagMFADevice struct {
+}
+
+func (*awsAwsquery_serializeOpTagMFADevice) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpTagMFADevice) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*TagMFADeviceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("TagMFADevice")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentTagMFADeviceInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpTagOpenIDConnectProvider struct {
+}
+
+func (*awsAwsquery_serializeOpTagOpenIDConnectProvider) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpTagOpenIDConnectProvider) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*TagOpenIDConnectProviderInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("TagOpenIDConnectProvider")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentTagOpenIDConnectProviderInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpTagPolicy struct {
+}
+
+func (*awsAwsquery_serializeOpTagPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpTagPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*TagPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("TagPolicy")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentTagPolicyInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpTagRole struct {
 }
 
@@ -6686,6 +7246,118 @@ func (m *awsAwsquery_serializeOpTagRole) HandleSerialize(ctx context.Context, in
 	body.Key("Version").String("2010-05-08")
 
 	if err := awsAwsquery_serializeOpDocumentTagRoleInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpTagSAMLProvider struct {
+}
+
+func (*awsAwsquery_serializeOpTagSAMLProvider) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpTagSAMLProvider) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*TagSAMLProviderInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("TagSAMLProvider")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentTagSAMLProviderInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpTagServerCertificate struct {
+}
+
+func (*awsAwsquery_serializeOpTagServerCertificate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpTagServerCertificate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*TagServerCertificateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("TagServerCertificate")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentTagServerCertificateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -6762,6 +7434,230 @@ func (m *awsAwsquery_serializeOpTagUser) HandleSerialize(ctx context.Context, in
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpUntagInstanceProfile struct {
+}
+
+func (*awsAwsquery_serializeOpUntagInstanceProfile) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpUntagInstanceProfile) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UntagInstanceProfileInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("UntagInstanceProfile")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentUntagInstanceProfileInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpUntagMFADevice struct {
+}
+
+func (*awsAwsquery_serializeOpUntagMFADevice) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpUntagMFADevice) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UntagMFADeviceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("UntagMFADevice")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentUntagMFADeviceInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpUntagOpenIDConnectProvider struct {
+}
+
+func (*awsAwsquery_serializeOpUntagOpenIDConnectProvider) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpUntagOpenIDConnectProvider) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UntagOpenIDConnectProviderInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("UntagOpenIDConnectProvider")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentUntagOpenIDConnectProviderInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpUntagPolicy struct {
+}
+
+func (*awsAwsquery_serializeOpUntagPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpUntagPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UntagPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("UntagPolicy")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentUntagPolicyInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpUntagRole struct {
 }
 
@@ -6798,6 +7694,118 @@ func (m *awsAwsquery_serializeOpUntagRole) HandleSerialize(ctx context.Context, 
 	body.Key("Version").String("2010-05-08")
 
 	if err := awsAwsquery_serializeOpDocumentUntagRoleInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpUntagSAMLProvider struct {
+}
+
+func (*awsAwsquery_serializeOpUntagSAMLProvider) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpUntagSAMLProvider) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UntagSAMLProviderInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("UntagSAMLProvider")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentUntagSAMLProviderInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpUntagServerCertificate struct {
+}
+
+func (*awsAwsquery_serializeOpUntagServerCertificate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpUntagServerCertificate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UntagServerCertificateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("UntagServerCertificate")
+	body.Key("Version").String("2010-05-08")
+
+	if err := awsAwsquery_serializeOpDocumentUntagServerCertificateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -8187,6 +9195,13 @@ func awsAwsquery_serializeOpDocumentCreateInstanceProfileInput(v *CreateInstance
 		objectKey.String(*v.Path)
 	}
 
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagListType(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -8219,6 +9234,13 @@ func awsAwsquery_serializeOpDocumentCreateOpenIDConnectProviderInput(v *CreateOp
 	if v.ClientIDList != nil {
 		objectKey := object.Key("ClientIDList")
 		if err := awsAwsquery_serializeDocumentClientIDListType(v.ClientIDList, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagListType(v.Tags, objectKey); err != nil {
 			return err
 		}
 	}
@@ -8260,6 +9282,13 @@ func awsAwsquery_serializeOpDocumentCreatePolicyInput(v *CreatePolicyInput, valu
 	if v.PolicyName != nil {
 		objectKey := object.Key("PolicyName")
 		objectKey.String(*v.PolicyName)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagListType(v.Tags, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -8345,6 +9374,13 @@ func awsAwsquery_serializeOpDocumentCreateSAMLProviderInput(v *CreateSAMLProvide
 		objectKey.String(*v.SAMLMetadataDocument)
 	}
 
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagListType(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -8423,6 +9459,13 @@ func awsAwsquery_serializeOpDocumentCreateVirtualMFADeviceInput(v *CreateVirtual
 	if v.Path != nil {
 		objectKey := object.Key("Path")
 		objectKey.String(*v.Path)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagListType(v.Tags, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.VirtualMFADeviceName != nil {
@@ -9498,6 +10541,28 @@ func awsAwsquery_serializeOpDocumentListInstanceProfilesInput(v *ListInstancePro
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentListInstanceProfileTagsInput(v *ListInstanceProfileTagsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.InstanceProfileName != nil {
+		objectKey := object.Key("InstanceProfileName")
+		objectKey.String(*v.InstanceProfileName)
+	}
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.MaxItems != nil {
+		objectKey := object.Key("MaxItems")
+		objectKey.Integer(*v.MaxItems)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentListMFADevicesInput(v *ListMFADevicesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -9520,9 +10585,53 @@ func awsAwsquery_serializeOpDocumentListMFADevicesInput(v *ListMFADevicesInput, 
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentListMFADeviceTagsInput(v *ListMFADeviceTagsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.MaxItems != nil {
+		objectKey := object.Key("MaxItems")
+		objectKey.Integer(*v.MaxItems)
+	}
+
+	if v.SerialNumber != nil {
+		objectKey := object.Key("SerialNumber")
+		objectKey.String(*v.SerialNumber)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentListOpenIDConnectProvidersInput(v *ListOpenIDConnectProvidersInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentListOpenIDConnectProviderTagsInput(v *ListOpenIDConnectProviderTagsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.MaxItems != nil {
+		objectKey := object.Key("MaxItems")
+		objectKey.Integer(*v.MaxItems)
+	}
+
+	if v.OpenIDConnectProviderArn != nil {
+		objectKey := object.Key("OpenIDConnectProviderArn")
+		objectKey.String(*v.OpenIDConnectProviderArn)
+	}
 
 	return nil
 }
@@ -9583,6 +10692,28 @@ func awsAwsquery_serializeOpDocumentListPoliciesInput(v *ListPoliciesInput, valu
 	if len(v.Scope) > 0 {
 		objectKey := object.Key("Scope")
 		objectKey.String(string(v.Scope))
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentListPolicyTagsInput(v *ListPolicyTagsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.MaxItems != nil {
+		objectKey := object.Key("MaxItems")
+		objectKey.Integer(*v.MaxItems)
+	}
+
+	if v.PolicyArn != nil {
+		objectKey := object.Key("PolicyArn")
+		objectKey.String(*v.PolicyArn)
 	}
 
 	return nil
@@ -9683,6 +10814,28 @@ func awsAwsquery_serializeOpDocumentListSAMLProvidersInput(v *ListSAMLProvidersI
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentListSAMLProviderTagsInput(v *ListSAMLProviderTagsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.MaxItems != nil {
+		objectKey := object.Key("MaxItems")
+		objectKey.Integer(*v.MaxItems)
+	}
+
+	if v.SAMLProviderArn != nil {
+		objectKey := object.Key("SAMLProviderArn")
+		objectKey.String(*v.SAMLProviderArn)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentListServerCertificatesInput(v *ListServerCertificatesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -9700,6 +10853,28 @@ func awsAwsquery_serializeOpDocumentListServerCertificatesInput(v *ListServerCer
 	if v.PathPrefix != nil {
 		objectKey := object.Key("PathPrefix")
 		objectKey.String(*v.PathPrefix)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentListServerCertificateTagsInput(v *ListServerCertificateTagsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.MaxItems != nil {
+		objectKey := object.Key("MaxItems")
+		objectKey.Integer(*v.MaxItems)
+	}
+
+	if v.ServerCertificateName != nil {
+		objectKey := object.Key("ServerCertificateName")
+		objectKey.String(*v.ServerCertificateName)
 	}
 
 	return nil
@@ -10227,6 +11402,82 @@ func awsAwsquery_serializeOpDocumentSimulatePrincipalPolicyInput(v *SimulatePrin
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentTagInstanceProfileInput(v *TagInstanceProfileInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.InstanceProfileName != nil {
+		objectKey := object.Key("InstanceProfileName")
+		objectKey.String(*v.InstanceProfileName)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagListType(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentTagMFADeviceInput(v *TagMFADeviceInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.SerialNumber != nil {
+		objectKey := object.Key("SerialNumber")
+		objectKey.String(*v.SerialNumber)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagListType(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentTagOpenIDConnectProviderInput(v *TagOpenIDConnectProviderInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.OpenIDConnectProviderArn != nil {
+		objectKey := object.Key("OpenIDConnectProviderArn")
+		objectKey.String(*v.OpenIDConnectProviderArn)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagListType(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentTagPolicyInput(v *TagPolicyInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.PolicyArn != nil {
+		objectKey := object.Key("PolicyArn")
+		objectKey.String(*v.PolicyArn)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagListType(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentTagRoleInput(v *TagRoleInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -10234,6 +11485,44 @@ func awsAwsquery_serializeOpDocumentTagRoleInput(v *TagRoleInput, value query.Va
 	if v.RoleName != nil {
 		objectKey := object.Key("RoleName")
 		objectKey.String(*v.RoleName)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagListType(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentTagSAMLProviderInput(v *TagSAMLProviderInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.SAMLProviderArn != nil {
+		objectKey := object.Key("SAMLProviderArn")
+		objectKey.String(*v.SAMLProviderArn)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagListType(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentTagServerCertificateInput(v *TagServerCertificateInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ServerCertificateName != nil {
+		objectKey := object.Key("ServerCertificateName")
+		objectKey.String(*v.ServerCertificateName)
 	}
 
 	if v.Tags != nil {
@@ -10265,6 +11554,82 @@ func awsAwsquery_serializeOpDocumentTagUserInput(v *TagUserInput, value query.Va
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentUntagInstanceProfileInput(v *UntagInstanceProfileInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.InstanceProfileName != nil {
+		objectKey := object.Key("InstanceProfileName")
+		objectKey.String(*v.InstanceProfileName)
+	}
+
+	if v.TagKeys != nil {
+		objectKey := object.Key("TagKeys")
+		if err := awsAwsquery_serializeDocumentTagKeyListType(v.TagKeys, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentUntagMFADeviceInput(v *UntagMFADeviceInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.SerialNumber != nil {
+		objectKey := object.Key("SerialNumber")
+		objectKey.String(*v.SerialNumber)
+	}
+
+	if v.TagKeys != nil {
+		objectKey := object.Key("TagKeys")
+		if err := awsAwsquery_serializeDocumentTagKeyListType(v.TagKeys, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentUntagOpenIDConnectProviderInput(v *UntagOpenIDConnectProviderInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.OpenIDConnectProviderArn != nil {
+		objectKey := object.Key("OpenIDConnectProviderArn")
+		objectKey.String(*v.OpenIDConnectProviderArn)
+	}
+
+	if v.TagKeys != nil {
+		objectKey := object.Key("TagKeys")
+		if err := awsAwsquery_serializeDocumentTagKeyListType(v.TagKeys, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentUntagPolicyInput(v *UntagPolicyInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.PolicyArn != nil {
+		objectKey := object.Key("PolicyArn")
+		objectKey.String(*v.PolicyArn)
+	}
+
+	if v.TagKeys != nil {
+		objectKey := object.Key("TagKeys")
+		if err := awsAwsquery_serializeDocumentTagKeyListType(v.TagKeys, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentUntagRoleInput(v *UntagRoleInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -10272,6 +11637,44 @@ func awsAwsquery_serializeOpDocumentUntagRoleInput(v *UntagRoleInput, value quer
 	if v.RoleName != nil {
 		objectKey := object.Key("RoleName")
 		objectKey.String(*v.RoleName)
+	}
+
+	if v.TagKeys != nil {
+		objectKey := object.Key("TagKeys")
+		if err := awsAwsquery_serializeDocumentTagKeyListType(v.TagKeys, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentUntagSAMLProviderInput(v *UntagSAMLProviderInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.SAMLProviderArn != nil {
+		objectKey := object.Key("SAMLProviderArn")
+		objectKey.String(*v.SAMLProviderArn)
+	}
+
+	if v.TagKeys != nil {
+		objectKey := object.Key("TagKeys")
+		if err := awsAwsquery_serializeDocumentTagKeyListType(v.TagKeys, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentUntagServerCertificateInput(v *UntagServerCertificateInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ServerCertificateName != nil {
+		objectKey := object.Key("ServerCertificateName")
+		objectKey.String(*v.ServerCertificateName)
 	}
 
 	if v.TagKeys != nil {
@@ -10650,6 +12053,13 @@ func awsAwsquery_serializeOpDocumentUploadServerCertificateInput(v *UploadServer
 	if v.ServerCertificateName != nil {
 		objectKey := object.Key("ServerCertificateName")
 		objectKey.String(*v.ServerCertificateName)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagListType(v.Tags, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil

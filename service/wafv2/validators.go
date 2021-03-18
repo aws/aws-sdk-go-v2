@@ -1044,6 +1044,11 @@ func validateFieldToMatch(v *types.FieldToMatch) error {
 			invalidParams.AddNested("SingleQueryArgument", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.JsonBody != nil {
+		if err := validateJsonBody(v.JsonBody); err != nil {
+			invalidParams.AddNested("JsonBody", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1119,6 +1124,24 @@ func validateIPSetReferenceStatement(v *types.IPSetReferenceStatement) error {
 		if err := validateIPSetForwardedIPConfig(v.IPSetForwardedIPConfig); err != nil {
 			invalidParams.AddNested("IPSetForwardedIPConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJsonBody(v *types.JsonBody) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JsonBody"}
+	if v.MatchPattern == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MatchPattern"))
+	}
+	if len(v.MatchScope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MatchScope"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

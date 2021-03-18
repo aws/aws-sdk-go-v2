@@ -37,10 +37,11 @@ func (c *Client) GetParametersByPath(ctx context.Context, params *GetParametersB
 
 type GetParametersByPathInput struct {
 
-	// The hierarchy for the parameter. Hierarchies start with a forward slash (/) and
-	// end with the parameter name. A parameter name hierarchy can have a maximum of 15
-	// levels. Here is an example of a hierarchy:
-	// /Finance/Prod/IAD/WinServ2016/license33
+	// The hierarchy for the parameter. Hierarchies start with a forward slash (/). The
+	// hierachy is the parameter name except the last part of the parameter. For the
+	// API call to succeeed, the last part of the parameter name cannot be in the path.
+	// A parameter name hierarchy can have a maximum of 15 levels. Here is an example
+	// of a hierarchy: /Finance/Prod/IAD/WinServ2016/license33
 	//
 	// This member is required.
 	Path *string

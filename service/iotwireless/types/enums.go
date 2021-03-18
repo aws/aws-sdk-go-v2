@@ -6,7 +6,8 @@ type ExpressionType string
 
 // Enum values for ExpressionType
 const (
-	ExpressionTypeRuleName ExpressionType = "RuleName"
+	ExpressionTypeRuleName  ExpressionType = "RuleName"
+	ExpressionTypeMqttTopic ExpressionType = "MqttTopic"
 )
 
 // Values returns all known values for ExpressionType. Note that this can be
@@ -15,6 +16,7 @@ const (
 func (ExpressionType) Values() []ExpressionType {
 	return []ExpressionType{
 		"RuleName",
+		"MqttTopic",
 	}
 }
 

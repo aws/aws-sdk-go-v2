@@ -3649,7 +3649,7 @@ func awsAwsjson11_deserializeDocumentHttpInstanceSummary(v **types.HttpInstanceS
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NamespaceName to be of type string, got %T instead", value)
+					return fmt.Errorf("expected NamespaceNameHttp to be of type string, got %T instead", value)
 				}
 				sv.NamespaceName = ptr.String(jtv)
 			}
@@ -4934,6 +4934,15 @@ func awsAwsjson11_deserializeDocumentService(v **types.Service, value interface{
 				sv.NamespaceId = ptr.String(jtv)
 			}
 
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServiceType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ServiceType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5172,6 +5181,15 @@ func awsAwsjson11_deserializeDocumentServiceSummary(v **types.ServiceSummary, va
 					return fmt.Errorf("expected ServiceName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServiceType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ServiceType(jtv)
 			}
 
 		default:

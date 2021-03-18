@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the answer.
+// Update the answer to a specific question in a workload review.
 func (c *Client) UpdateAnswer(ctx context.Context, params *UpdateAnswerInput, optFns ...func(*Options)) (*UpdateAnswerOutput, error) {
 	if params == nil {
 		params = &UpdateAnswerInput{}
@@ -52,7 +52,8 @@ type UpdateAnswerInput struct {
 	// The notes associated with the workload.
 	Notes *string
 
-	// List of selected choice IDs in a question answer.
+	// List of selected choice IDs in a question answer. The values entered replace the
+	// previously selected choices.
 	SelectedChoices []string
 }
 

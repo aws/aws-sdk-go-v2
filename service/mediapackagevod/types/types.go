@@ -137,6 +137,13 @@ type DashPackage struct {
 	SegmentTemplateFormat SegmentTemplateFormat
 }
 
+// Configure egress access logging.
+type EgressAccessLogs struct {
+
+	// Customize the log group name.
+	LogGroupName *string
+}
+
 // The endpoint URL used to access an Asset using one PackagingConfiguration.
 type EgressEndpoint struct {
 
@@ -291,6 +298,9 @@ type PackagingGroup struct {
 
 	// The fully qualified domain name for Assets in the PackagingGroup.
 	DomainName *string
+
+	// Configure egress access logging.
+	EgressAccessLogs *EgressAccessLogs
 
 	// The ID of the PackagingGroup.
 	Id *string

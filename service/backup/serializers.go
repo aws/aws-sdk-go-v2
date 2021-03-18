@@ -1176,6 +1176,78 @@ func awsRestjson1_serializeOpHttpBindingsDescribeRestoreJobInput(v *DescribeRest
 	return nil
 }
 
+type awsRestjson1_serializeOpDisassociateRecoveryPoint struct {
+}
+
+func (*awsRestjson1_serializeOpDisassociateRecoveryPoint) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDisassociateRecoveryPoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociateRecoveryPointInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/backup-vaults/{BackupVaultName}/recovery-points/{RecoveryPointArn}/disassociate")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDisassociateRecoveryPointInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDisassociateRecoveryPointInput(v *DisassociateRecoveryPointInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BackupVaultName == nil || len(*v.BackupVaultName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BackupVaultName must not be empty")}
+	}
+	if v.BackupVaultName != nil {
+		if err := encoder.SetURI("BackupVaultName").String(*v.BackupVaultName); err != nil {
+			return err
+		}
+	}
+
+	if v.RecoveryPointArn == nil || len(*v.RecoveryPointArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RecoveryPointArn must not be empty")}
+	}
+	if v.RecoveryPointArn != nil {
+		if err := encoder.SetURI("RecoveryPointArn").String(*v.RecoveryPointArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpExportBackupPlanTemplate struct {
 }
 
@@ -3797,6 +3869,11 @@ func awsRestjson1_serializeDocumentBackupRuleInput(v *types.BackupRuleInput, val
 		if err := awsRestjson1_serializeDocumentCopyActions(v.CopyActions, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.EnableContinuousBackup != nil {
+		ok := object.Key("EnableContinuousBackup")
+		ok.Boolean(*v.EnableContinuousBackup)
 	}
 
 	if v.Lifecycle != nil {

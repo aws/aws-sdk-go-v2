@@ -10,10 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches the specified managed policy to the specified user. You use this API to
-// attach a managed policy to a user. To embed an inline policy in a user, use
-// PutUserPolicy. For more information about policies, see Managed Policies and
-// Inline Policies
+// Attaches the specified managed policy to the specified user. You use this
+// operation to attach a managed policy to a user. To embed an inline policy in a
+// user, use PutUserPolicy. As a best practice, you can validate your IAM policies.
+// To learn more, see Validating IAM policies
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html)
+// in the IAM User Guide. For more information about policies, see Managed policies
+// and inline policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) AttachUserPolicy(ctx context.Context, params *AttachUserPolicyInput, optFns ...func(*Options)) (*AttachUserPolicyOutput, error) {
@@ -34,8 +37,7 @@ func (c *Client) AttachUserPolicy(ctx context.Context, params *AttachUserPolicyI
 type AttachUserPolicyInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM policy you want to attach. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and AWS Service
-	// Namespaces
+	// information about ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//

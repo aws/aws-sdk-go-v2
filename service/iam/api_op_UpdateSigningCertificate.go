@@ -43,8 +43,8 @@ type UpdateSigningCertificateInput struct {
 	CertificateId *string
 
 	// The status you want to assign to the certificate. Active means that the
-	// certificate can be used for API calls to AWS Inactive means that the certificate
-	// cannot be used.
+	// certificate can be used for programmatic calls to AWS Inactive means that the
+	// certificate cannot be used.
 	//
 	// This member is required.
 	Status types.StatusType

@@ -11,6 +11,7 @@ import (
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -386,6 +387,13 @@ func awsRestjson1_serializeOpDocumentCreateElasticsearchDomainInput(v *CreateEla
 		}
 	}
 
+	if v.AutoTuneOptions != nil {
+		ok := object.Key("AutoTuneOptions")
+		if err := awsRestjson1_serializeDocumentAutoTuneOptionsInput(v.AutoTuneOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CognitoOptions != nil {
 		ok := object.Key("CognitoOptions")
 		if err := awsRestjson1_serializeDocumentCognitoOptions(v.CognitoOptions, ok); err != nil {
@@ -448,6 +456,13 @@ func awsRestjson1_serializeOpDocumentCreateElasticsearchDomainInput(v *CreateEla
 	if v.SnapshotOptions != nil {
 		ok := object.Key("SnapshotOptions")
 		if err := awsRestjson1_serializeDocumentSnapshotOptions(v.SnapshotOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TagList != nil {
+		ok := object.Key("TagList")
+		if err := awsRestjson1_serializeDocumentTagList(v.TagList, ok); err != nil {
 			return err
 		}
 	}
@@ -936,6 +951,97 @@ func awsRestjson1_serializeOpHttpBindingsDeletePackageInput(v *DeletePackageInpu
 		if err := encoder.SetURI("PackageID").String(*v.PackageID); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeDomainAutoTunes struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeDomainAutoTunes) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeDomainAutoTunes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeDomainAutoTunesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/domain/{DomainName}/autoTunes")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeDomainAutoTunesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDescribeDomainAutoTunesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeDomainAutoTunesInput(v *DescribeDomainAutoTunesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainName == nil || len(*v.DomainName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
+	if v.DomainName != nil {
+		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDescribeDomainAutoTunesInput(v *DescribeDomainAutoTunesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != 0 {
+		ok := object.Key("MaxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
 	}
 
 	return nil
@@ -2723,6 +2829,13 @@ func awsRestjson1_serializeOpDocumentUpdateElasticsearchDomainConfigInput(v *Upd
 		}
 	}
 
+	if v.AutoTuneOptions != nil {
+		ok := object.Key("AutoTuneOptions")
+		if err := awsRestjson1_serializeDocumentAutoTuneOptions(v.AutoTuneOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CognitoOptions != nil {
 		ok := object.Key("CognitoOptions")
 		if err := awsRestjson1_serializeDocumentCognitoOptions(v.CognitoOptions, ok); err != nil {
@@ -2751,9 +2864,23 @@ func awsRestjson1_serializeOpDocumentUpdateElasticsearchDomainConfigInput(v *Upd
 		}
 	}
 
+	if v.EncryptionAtRestOptions != nil {
+		ok := object.Key("EncryptionAtRestOptions")
+		if err := awsRestjson1_serializeDocumentEncryptionAtRestOptions(v.EncryptionAtRestOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LogPublishingOptions != nil {
 		ok := object.Key("LogPublishingOptions")
 		if err := awsRestjson1_serializeDocumentLogPublishingOptions(v.LogPublishingOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NodeToNodeEncryptionOptions != nil {
+		ok := object.Key("NodeToNodeEncryptionOptions")
+		if err := awsRestjson1_serializeDocumentNodeToNodeEncryptionOptions(v.NodeToNodeEncryptionOptions, ok); err != nil {
 			return err
 		}
 	}
@@ -2990,6 +3117,86 @@ func awsRestjson1_serializeDocumentAdvancedSecurityOptionsInput(v *types.Advance
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAutoTuneMaintenanceSchedule(v *types.AutoTuneMaintenanceSchedule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CronExpressionForRecurrence != nil {
+		ok := object.Key("CronExpressionForRecurrence")
+		ok.String(*v.CronExpressionForRecurrence)
+	}
+
+	if v.Duration != nil {
+		ok := object.Key("Duration")
+		if err := awsRestjson1_serializeDocumentDuration(v.Duration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StartAt != nil {
+		ok := object.Key("StartAt")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartAt))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutoTuneMaintenanceScheduleList(v []types.AutoTuneMaintenanceSchedule, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAutoTuneMaintenanceSchedule(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutoTuneOptions(v *types.AutoTuneOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DesiredState) > 0 {
+		ok := object.Key("DesiredState")
+		ok.String(string(v.DesiredState))
+	}
+
+	if v.MaintenanceSchedules != nil {
+		ok := object.Key("MaintenanceSchedules")
+		if err := awsRestjson1_serializeDocumentAutoTuneMaintenanceScheduleList(v.MaintenanceSchedules, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.RollbackOnDisable) > 0 {
+		ok := object.Key("RollbackOnDisable")
+		ok.String(string(v.RollbackOnDisable))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutoTuneOptionsInput(v *types.AutoTuneOptionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DesiredState) > 0 {
+		ok := object.Key("DesiredState")
+		ok.String(string(v.DesiredState))
+	}
+
+	if v.MaintenanceSchedules != nil {
+		ok := object.Key("MaintenanceSchedules")
+		if err := awsRestjson1_serializeDocumentAutoTuneMaintenanceScheduleList(v.MaintenanceSchedules, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCognitoOptions(v *types.CognitoOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3122,6 +3329,23 @@ func awsRestjson1_serializeDocumentDomainNameList(v []string, value smithyjson.V
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDuration(v *types.Duration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Unit) > 0 {
+		ok := object.Key("Unit")
+		ok.String(string(v.Unit))
+	}
+
+	if v.Value != 0 {
+		ok := object.Key("Value")
+		ok.Long(v.Value)
+	}
+
 	return nil
 }
 

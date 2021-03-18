@@ -12,10 +12,7 @@ import (
 )
 
 // Returns detailed status for each member account within an organization for a
-// given organization config rule. Only a master account and a delegated
-// administrator account can call this API. When calling this API with a delegated
-// administrator, you must ensure AWS Organizations ListDelegatedAdministrator
-// permissions are added.
+// given organization config rule.
 func (c *Client) GetOrganizationConfigRuleDetailedStatus(ctx context.Context, params *GetOrganizationConfigRuleDetailedStatusInput, optFns ...func(*Options)) (*GetOrganizationConfigRuleDetailedStatusOutput, error) {
 	if params == nil {
 		params = &GetOrganizationConfigRuleDetailedStatusInput{}

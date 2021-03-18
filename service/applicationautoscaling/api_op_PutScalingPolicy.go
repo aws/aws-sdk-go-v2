@@ -30,10 +30,10 @@ import (
 // the step scaling policy initiates a scale-in activity before the target tracking
 // policy is ready to scale in, the scale-in activity will not be blocked. After
 // the scale-in activity completes, the target tracking policy could instruct the
-// scalable target to scale out again. For more information, see Target Tracking
-// Scaling Policies
+// scalable target to scale out again. For more information, see Target tracking
+// scaling policies
 // (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
-// and Step Scaling Policies
+// and Step scaling policies
 // (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)
 // in the Application Auto Scaling User Guide. If a scalable target is
 // deregistered, the scalable target is no longer available to execute scaling
@@ -207,9 +207,9 @@ type PutScalingPolicyInput struct {
 	// policy. The following policy types are supported: TargetTrackingScaling—Not
 	// supported for Amazon EMR StepScaling—Not supported for DynamoDB, Amazon
 	// Comprehend, Lambda, Amazon Keyspaces (for Apache Cassandra), or Amazon MSK. For
-	// more information, see Target Tracking Scaling Policies
+	// more information, see Target tracking scaling policies
 	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
-	// and Step Scaling Policies
+	// and Step scaling policies
 	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)
 	// in the Application Auto Scaling User Guide.
 	PolicyType types.PolicyType

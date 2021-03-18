@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Amazon Lookout for Vision projects in your AWS account.
+// Lists the Amazon Lookout for Vision projects in your AWS account. This operation
+// requires permissions to perform the lookoutvision:ListProjects operation.
 func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, optFns ...func(*Options)) (*ListProjectsOutput, error) {
 	if params == nil {
 		params = &ListProjectsInput{}

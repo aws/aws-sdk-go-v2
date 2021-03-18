@@ -120,27 +120,15 @@ import (
 // see Kinesis Video Streams pricing
 // (https://aws.amazon.com/kinesis/video-streams/pricing/).
 //
-// The following
-// restrictions apply to HLS sessions:
-//
-// * A streaming session URL should not be
-// shared between players. The service might throttle a session if multiple media
-// players are sharing it. For connection limits, see Kinesis Video Streams Limits
-// (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html).
-//
-// * A
-// Kinesis video stream can have a maximum of ten active HLS streaming sessions. If
-// a new session is created when the maximum number of sessions is already active,
-// the oldest (earliest created) session is closed. The number of active GetMedia
-// connections on a Kinesis video stream does not count against this limit, and the
-// number of active HLS sessions does not count against the active GetMedia
-// connection limit. The maximum limits for active HLS and MPEG-DASH streaming
-// sessions are independent of each other.
-//
-// You can monitor the amount of data that
-// the media player consumes by monitoring the GetMP4MediaFragment.OutgoingBytes
-// Amazon CloudWatch metric. For information about using CloudWatch to monitor
-// Kinesis Video Streams, see Monitoring Kinesis Video Streams
+// A streaming session
+// URL must not be shared between players. The service might throttle a session if
+// multiple media players are sharing it. For connection limits, see Kinesis Video
+// Streams Limits
+// (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html). You can
+// monitor the amount of data that the media player consumes by monitoring the
+// GetMP4MediaFragment.OutgoingBytes Amazon CloudWatch metric. For information
+// about using CloudWatch to monitor Kinesis Video Streams, see Monitoring Kinesis
+// Video Streams
 // (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/monitoring.html). For
 // pricing information, see Amazon Kinesis Video Streams Pricing
 // (https://aws.amazon.com/kinesis/video-streams/pricing/) and AWS Pricing
@@ -260,11 +248,10 @@ type GetHLSStreamingSessionURLInput struct {
 	// decreases the likelihood that rebuffering will occur during playback. We
 	// recommend that a live HLS media playlist have a minimum of 3 fragments and a
 	// maximum of 10 fragments. The default is 5 fragments if PlaybackMode is LIVE or
-	// LIVE_REPLAY, and 1,000 if PlaybackMode is ON_DEMAND. The maximum value of 1,000
-	// fragments corresponds to more than 16 minutes of video on streams with 1-second
-	// fragments, and more than 2 1/2 hours of video on streams with 10-second
-	// fragments.
-	MaxMediaPlaylistFragmentResults *int32
+	// LIVE_REPLAY, and 1,000 if PlaybackMode is ON_DEMAND. The maximum value of 5,000
+	// fragments corresponds to more than 80 minutes of video on streams with 1-second
+	// fragments, and more than 13 hours of video on streams with 10-second fragments.
+	MaxMediaPlaylistFragmentResults *int64
 
 	// Whether to retrieve live, live replay, or archived, on-demand data. Features of
 	// the three types of sessions include the following:
@@ -305,7 +292,7 @@ type GetHLSStreamingSessionURLInput struct {
 	// In all
 	// playback modes, if FragmentSelectorType is PRODUCER_TIMESTAMP, and if there are
 	// multiple fragments with the same start timestamp, the fragment that has the
-	// larger fragment number (that is, the newer fragment) is included in the HLS
+	// largest fragment number (that is, the newest fragment) is included in the HLS
 	// media playlist. The other fragments are not included. Fragments that have
 	// different timestamps but have overlapping durations are still included in the
 	// HLS media playlist. This can lead to unexpected behavior in the media player.

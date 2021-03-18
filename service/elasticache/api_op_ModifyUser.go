@@ -34,31 +34,31 @@ type ModifyUserInput struct {
 	// This member is required.
 	UserId *string
 
-	// Access permissions string used for this user account.
+	// Access permissions string used for this user.
 	AccessString *string
 
 	// Adds additional user permissions to the access string.
 	AppendAccessString *string
 
-	// Indicates no password is required for the user account.
+	// Indicates no password is required for the user.
 	NoPasswordRequired *bool
 
-	// The passwords belonging to the user account. You are allowed up to two.
+	// The passwords belonging to the user. You are allowed up to two.
 	Passwords []string
 }
 
 type ModifyUserOutput struct {
 
-	// The Amazon Resource Name (ARN) of the user account.
+	// The Amazon Resource Name (ARN) of the user.
 	ARN *string
 
-	// Access permissions string used for this user account.
+	// Access permissions string used for this user.
 	AccessString *string
 
 	// Denotes whether the user requires a password to authenticate.
 	Authentication *types.Authentication
 
-	// Must be Redis.
+	// The current supported value is Redis.
 	Engine *string
 
 	// Indicates the user status. Can be "active", "modifying" or "deleting".

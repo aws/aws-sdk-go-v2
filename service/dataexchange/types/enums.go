@@ -212,6 +212,7 @@ const (
 	TypeImportAssetFromSignedUrl Type = "IMPORT_ASSET_FROM_SIGNED_URL"
 	TypeExportAssetsToS3         Type = "EXPORT_ASSETS_TO_S3"
 	TypeExportAssetToSignedUrl   Type = "EXPORT_ASSET_TO_SIGNED_URL"
+	TypeExportRevisionsToS3      Type = "EXPORT_REVISIONS_TO_S3"
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
@@ -223,5 +224,6 @@ func (Type) Values() []Type {
 		"IMPORT_ASSET_FROM_SIGNED_URL",
 		"EXPORT_ASSETS_TO_S3",
 		"EXPORT_ASSET_TO_SIGNED_URL",
+		"EXPORT_REVISIONS_TO_S3",
 	}
 }

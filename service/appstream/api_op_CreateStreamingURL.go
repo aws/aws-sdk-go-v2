@@ -47,7 +47,9 @@ type CreateStreamingURLInput struct {
 	UserId *string
 
 	// The name of the application to launch after the session starts. This is the name
-	// that you specified as Name in the Image Assistant.
+	// that you specified as Name in the Image Assistant. If your fleet is enabled for
+	// the Desktop stream view, you can also choose to launch directly to the operating
+	// system desktop. To do so, specify Desktop.
 	ApplicationId *string
 
 	// The session context. For more information, see Session Context

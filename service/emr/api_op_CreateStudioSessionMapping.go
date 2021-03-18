@@ -11,10 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject
-// to change. Maps a user or group to the Amazon EMR Studio specified by StudioId,
-// and applies a session policy to refine Studio permissions for that user or
-// group.
+// Maps a user or group to the Amazon EMR Studio specified by StudioId, and applies
+// a session policy to refine Studio permissions for that user or group.
 func (c *Client) CreateStudioSessionMapping(ctx context.Context, params *CreateStudioSessionMappingInput, optFns ...func(*Options)) (*CreateStudioSessionMappingOutput, error) {
 	if params == nil {
 		params = &CreateStudioSessionMappingInput{}
@@ -32,7 +30,8 @@ func (c *Client) CreateStudioSessionMapping(ctx context.Context, params *CreateS
 
 type CreateStudioSessionMappingInput struct {
 
-	// Specifies whether the identity to map to the Studio is a user or a group.
+	// Specifies whether the identity to map to the Amazon EMR Studio is a user or a
+	// group.
 	//
 	// This member is required.
 	IdentityType types.IdentityType
@@ -59,7 +58,7 @@ type CreateStudioSessionMappingInput struct {
 	IdentityId *string
 
 	// The name of the user or group. For more information, see UserName
-	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId)
+	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
 	// and DisplayName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
 	// in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId

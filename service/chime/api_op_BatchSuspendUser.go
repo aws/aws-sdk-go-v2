@@ -15,7 +15,7 @@ import (
 // more information about different account types, see Managing Your Amazon Chime
 // Accounts (https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html)
 // in the Amazon Chime Administration Guide. Users suspended from a Team account
-// are disassociated from the account, but they can continue to use Amazon Chime as
+// are disassociated from the account,but they can continue to use Amazon Chime as
 // free users. To remove the suspension from suspended Team account users, invite
 // them to the Team account again. You can use the InviteUsers action to do so.
 // Users suspended from an EnterpriseLWA account are immediately signed out of

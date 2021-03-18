@@ -40,7 +40,8 @@ type Answer struct {
 	// The risk for a given workload, lens review, pillar, or question.
 	Risk Risk
 
-	// List of selected choice IDs in a question answer.
+	// List of selected choice IDs in a question answer. The values entered replace the
+	// previously selected choices.
 	SelectedChoices []string
 }
 
@@ -66,7 +67,8 @@ type AnswerSummary struct {
 	// The risk for a given workload, lens review, pillar, or question.
 	Risk Risk
 
-	// List of selected choice IDs in a question answer.
+	// List of selected choice IDs in a question answer. The values entered replace the
+	// previously selected choices.
 	SelectedChoices []string
 }
 
@@ -476,6 +478,9 @@ type Workload struct {
 
 	// The ID assigned to the share invitation.
 	ShareInvitationId *string
+
+	// The tags associated with the workload.
+	Tags map[string]string
 
 	// The date and time recorded.
 	UpdatedAt *time.Time

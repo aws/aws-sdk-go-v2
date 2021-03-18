@@ -350,6 +350,26 @@ func (m *validateOpDescribeTasks) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpExecuteCommand struct {
+}
+
+func (*validateOpExecuteCommand) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExecuteCommand) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExecuteCommandInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExecuteCommandInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAttributes struct {
 }
 
@@ -670,6 +690,26 @@ func (m *validateOpUpdateCapacityProvider) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCluster struct {
+}
+
+func (*validateOpUpdateCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateClusterSettings struct {
 }
 
@@ -858,6 +898,10 @@ func addOpDescribeTasksValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTasks{}, middleware.After)
 }
 
+func addOpExecuteCommandValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExecuteCommand{}, middleware.After)
+}
+
 func addOpListAttributesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAttributes{}, middleware.After)
 }
@@ -920,6 +964,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateCapacityProviderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCapacityProvider{}, middleware.After)
+}
+
+func addOpUpdateClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCluster{}, middleware.After)
 }
 
 func addOpUpdateClusterSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -1544,6 +1592,44 @@ func validateLogConfiguration(v *types.LogConfiguration) error {
 	}
 }
 
+func validateManagedAgentStateChange(v *types.ManagedAgentStateChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedAgentStateChange"}
+	if v.ContainerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerName"))
+	}
+	if len(v.ManagedAgentName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ManagedAgentName"))
+	}
+	if v.Status == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManagedAgentStateChanges(v []types.ManagedAgentStateChange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedAgentStateChanges"}
+	for i := range v {
+		if err := validateManagedAgentStateChange(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNetworkConfiguration(v *types.NetworkConfiguration) error {
 	if v == nil {
 		return nil
@@ -2129,6 +2215,24 @@ func validateOpDescribeTasksInput(v *DescribeTasksInput) error {
 	}
 }
 
+func validateOpExecuteCommandInput(v *ExecuteCommandInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExecuteCommandInput"}
+	if v.Command == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Command"))
+	}
+	if v.Task == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Task"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAttributesInput(v *ListAttributesInput) error {
 	if v == nil {
 		return nil
@@ -2400,6 +2504,11 @@ func validateOpSubmitTaskStateChangeInput(v *SubmitTaskStateChangeInput) error {
 			invalidParams.AddNested("Attachments", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ManagedAgents != nil {
+		if err := validateManagedAgentStateChanges(v.ManagedAgents); err != nil {
+			invalidParams.AddNested("ManagedAgents", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2453,6 +2562,21 @@ func validateOpUpdateCapacityProviderInput(v *UpdateCapacityProviderInput) error
 	}
 	if v.AutoScalingGroupProvider == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupProvider"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateClusterInput(v *UpdateClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateClusterInput"}
+	if v.Cluster == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Cluster"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

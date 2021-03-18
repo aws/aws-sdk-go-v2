@@ -16,11 +16,11 @@ import (
 	"time"
 )
 
-// Returns information about a type's registration, including its current status
-// and type and version identifiers. When you initiate a registration request using
-// RegisterType, you can then use DescribeTypeRegistration to monitor the progress
-// of that registration request. Once the registration request has completed, use
-// DescribeType to return detailed informaiton about a type.
+// Returns information about an extension's registration, including its current
+// status and type and version identifiers. When you initiate a registration
+// request using RegisterType, you can then use DescribeTypeRegistration to monitor
+// the progress of that registration request. Once the registration request has
+// completed, use DescribeType to return detailed information about an extension.
 func (c *Client) DescribeTypeRegistration(ctx context.Context, params *DescribeTypeRegistrationInput, optFns ...func(*Options)) (*DescribeTypeRegistrationOutput, error) {
 	if params == nil {
 		params = &DescribeTypeRegistrationInput{}
@@ -48,17 +48,18 @@ type DescribeTypeRegistrationInput struct {
 
 type DescribeTypeRegistrationOutput struct {
 
-	// The description of the type registration request.
+	// The description of the extension registration request.
 	Description *string
 
-	// The current status of the type registration request.
+	// The current status of the extension registration request.
 	ProgressStatus types.RegistrationStatus
 
-	// The Amazon Resource Name (ARN) of the type being registered. For registration
-	// requests with a ProgressStatus of other than COMPLETE, this will be null.
+	// The Amazon Resource Name (ARN) of the extension being registered. For
+	// registration requests with a ProgressStatus of other than COMPLETE, this will be
+	// null.
 	TypeArn *string
 
-	// The Amazon Resource Name (ARN) of this specific version of the type being
+	// The Amazon Resource Name (ARN) of this specific version of the extension being
 	// registered. For registration requests with a ProgressStatus of other than
 	// COMPLETE, this will be null.
 	TypeVersionArn *string

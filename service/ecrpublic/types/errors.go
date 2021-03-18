@@ -156,6 +156,25 @@ func (e *InvalidParameterException) ErrorMessage() string {
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An invalid parameter has been specified. Tag keys can have a maximum character
+// length of 128 characters, and tag values can have a maximum length of 256
+// characters.
+type InvalidTagParameterException struct {
+	Message *string
+}
+
+func (e *InvalidTagParameterException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidTagParameterException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidTagParameterException) ErrorCode() string             { return "InvalidTagParameterException" }
+func (e *InvalidTagParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The image layer already exists in the associated repository.
 type LayerAlreadyExistsException struct {
 	Message *string
@@ -356,6 +375,24 @@ func (e *ServerException) ErrorMessage() string {
 }
 func (e *ServerException) ErrorCode() string             { return "ServerException" }
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// The list of tags on the repository is over the limit. The maximum number of tags
+// that can be applied to a repository is 50.
+type TooManyTagsException struct {
+	Message *string
+}
+
+func (e *TooManyTagsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyTagsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The action is not supported in this Region.
 type UnsupportedCommandException struct {

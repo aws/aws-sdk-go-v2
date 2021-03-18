@@ -149,8 +149,9 @@ type ConformancePackComplianceType string
 
 // Enum values for ConformancePackComplianceType
 const (
-	ConformancePackComplianceTypeCompliant    ConformancePackComplianceType = "COMPLIANT"
-	ConformancePackComplianceTypeNonCompliant ConformancePackComplianceType = "NON_COMPLIANT"
+	ConformancePackComplianceTypeCompliant        ConformancePackComplianceType = "COMPLIANT"
+	ConformancePackComplianceTypeNonCompliant     ConformancePackComplianceType = "NON_COMPLIANT"
+	ConformancePackComplianceTypeInsufficientData ConformancePackComplianceType = "INSUFFICIENT_DATA"
 )
 
 // Values returns all known values for ConformancePackComplianceType. Note that
@@ -161,6 +162,7 @@ func (ConformancePackComplianceType) Values() []ConformancePackComplianceType {
 	return []ConformancePackComplianceType{
 		"COMPLIANT",
 		"NON_COMPLIANT",
+		"INSUFFICIENT_DATA",
 	}
 }
 
@@ -606,6 +608,9 @@ const (
 	ResourceTypeDistribution                     ResourceType = "AWS::CloudFront::Distribution"
 	ResourceTypeStreamingDistribution            ResourceType = "AWS::CloudFront::StreamingDistribution"
 	ResourceTypeFunction                         ResourceType = "AWS::Lambda::Function"
+	ResourceTypeNetworkFirewallFirewall          ResourceType = "AWS::NetworkFirewall::Firewall"
+	ResourceTypeNetworkFirewallFirewallPolicy    ResourceType = "AWS::NetworkFirewall::FirewallPolicy"
+	ResourceTypeNetworkFirewallRuleGroup         ResourceType = "AWS::NetworkFirewall::RuleGroup"
 	ResourceTypeApplication                      ResourceType = "AWS::ElasticBeanstalk::Application"
 	ResourceTypeApplicationVersion               ResourceType = "AWS::ElasticBeanstalk::ApplicationVersion"
 	ResourceTypeEnvironment                      ResourceType = "AWS::ElasticBeanstalk::Environment"
@@ -706,6 +711,9 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::CloudFront::Distribution",
 		"AWS::CloudFront::StreamingDistribution",
 		"AWS::Lambda::Function",
+		"AWS::NetworkFirewall::Firewall",
+		"AWS::NetworkFirewall::FirewallPolicy",
+		"AWS::NetworkFirewall::RuleGroup",
 		"AWS::ElasticBeanstalk::Application",
 		"AWS::ElasticBeanstalk::ApplicationVersion",
 		"AWS::ElasticBeanstalk::Environment",

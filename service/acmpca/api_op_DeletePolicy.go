@@ -25,21 +25,24 @@ import (
 // * A policy grants access on a private CA to an AWS customer
 // account, to AWS Organizations, or to an AWS Organizations unit. Policies are
 // under the control of a CA administrator. For more information, see Using a
-// Resource Based Policy with ACM Private CA.
+// Resource Based Policy with ACM Private CA
+// (https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html).
 //
-// * A policy permits a user of AWS
-// Certificate Manager (ACM) to issue ACM certificates signed by a CA in another
-// account.
+// * A policy
+// permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed
+// by a CA in another account.
 //
-// * For ACM to manage automatic renewal of these certificates, the ACM
-// user must configure a Service Linked Role (SLR). The SLR allows the ACM service
-// to assume the identity of the user, subject to confirmation against the ACM
-// Private CA policy. For more information, see Using a Service Linked Role with
-// ACM (https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html).
+// * For ACM to manage automatic renewal of these
+// certificates, the ACM user must configure a Service Linked Role (SLR). The SLR
+// allows the ACM service to assume the identity of the user, subject to
+// confirmation against the ACM Private CA policy. For more information, see Using
+// a Service Linked Role with ACM
+// (https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html).
 //
-// * Updates
-// made in AWS Resource Manager (RAM) are reflected in policies. For more
-// information, see Using AWS Resource Access Manager (RAM) with ACM Private CA.
+// * Updates made
+// in AWS Resource Manager (RAM) are reflected in policies. For more information,
+// see Attach a Policy for Cross-Account Access
+// (https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-ram.html).
 func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, optFns ...func(*Options)) (*DeletePolicyOutput, error) {
 	if params == nil {
 		params = &DeletePolicyInput{}

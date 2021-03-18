@@ -80,7 +80,7 @@ type ModifyCacheClusterInput struct {
 	//
 	// For
 	// more information, see Authenticating Users with Redis AUTH
-	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html)
+	// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html)
 	AuthTokenUpdateStrategy types.AuthTokenUpdateStrategyType
 
 	// This parameter is currently disabled.

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an interactive session, enabling you to manipulate an AWS Glue DataBrew
+// Creates an interactive session, enabling you to manipulate data in a DataBrew
 // project.
 func (c *Client) StartProjectSession(ctx context.Context, params *StartProjectSessionInput, optFns ...func(*Options)) (*StartProjectSessionOutput, error) {
 	if params == nil {

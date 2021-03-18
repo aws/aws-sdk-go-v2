@@ -13,43 +13,19 @@ import (
 	"time"
 )
 
-// Retrieves entries from the specified fleet's event log. You can specify a time
-// range to limit the result set. Use the pagination parameters to retrieve results
-// as a set of sequential pages. If successful, a collection of event log entries
-// matching the request are returned. Learn more Setting up GameLift Fleets
+// Retrieves entries from a fleet's event log. Fleet events are initiated by
+// changes in status, such as during fleet creation and termination, changes in
+// capacity, etc. If a fleet has multiple locations, events are also initiated by
+// changes to status and capacity in remote locations. You can specify a time range
+// to limit the result set. Use the pagination parameters to retrieve results as a
+// set of sequential pages. If successful, a collection of event log entries
+// matching the request are returned. Learn more Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related operations
-//
-// * CreateFleet
-//
-// * ListFleets
-//
-// * DeleteFleet
-//
-// * Describe
-// fleets:
-//
-// * DescribeFleetAttributes
-//
-// * DescribeFleetCapacity
-//
-// *
-// DescribeFleetPortSettings
-//
-// * DescribeFleetUtilization
-//
-// *
-// DescribeRuntimeConfiguration
-//
-// * DescribeEC2InstanceLimits
-//
-// *
-// DescribeFleetEvents
-//
-// * UpdateFleetAttributes
-//
-// * StartFleetActions or
-// StopFleetActions
+// Related actions ListFleets | DescribeEC2InstanceLimits | DescribeFleetAttributes
+// | DescribeFleetCapacity | DescribeFleetEvents | DescribeFleetLocationAttributes
+// | DescribeFleetPortSettings | DescribeFleetUtilization |
+// DescribeRuntimeConfiguration | DescribeScalingPolicies | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeFleetEvents(ctx context.Context, params *DescribeFleetEventsInput, optFns ...func(*Options)) (*DescribeFleetEventsOutput, error) {
 	if params == nil {
 		params = &DescribeFleetEventsInput{}
@@ -68,30 +44,31 @@ func (c *Client) DescribeFleetEvents(ctx context.Context, params *DescribeFleetE
 // Represents the input for a request operation.
 type DescribeFleetEventsInput struct {
 
-	// A unique identifier for a fleet to get event logs for. You can use either the
+	// A unique identifier for the fleet to get event logs for. You can use either the
 	// fleet ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string
 
-	// Most recent date to retrieve event logs for. If no end time is specified, this
-	// call returns entries from the specified start time up to the present. Format is
-	// a number expressed in Unix time as milliseconds (ex: "1469498468.057").
+	// The most recent date to retrieve event logs for. If no end time is specified,
+	// this call returns entries from the specified start time up to the present.
+	// Format is a number expressed in Unix time as milliseconds (ex:
+	// "1469498468.057").
 	EndTime *time.Time
 
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// Token that indicates the start of the next sequential page of results. Use the
+	// A token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
 
-	// Earliest date to retrieve event logs for. If no start time is specified, this
-	// call returns entries starting from when the fleet was created to the specified
-	// end time. Format is a number expressed in Unix time as milliseconds (ex:
-	// "1469498468.057").
+	// The earliest date to retrieve event logs for. If no start time is specified,
+	// this call returns entries starting from when the fleet was created to the
+	// specified end time. Format is a number expressed in Unix time as milliseconds
+	// (ex: "1469498468.057").
 	StartTime *time.Time
 }
 
@@ -101,8 +78,9 @@ type DescribeFleetEventsOutput struct {
 	// A collection of objects containing event log entries for the specified fleet.
 	Events []types.Event
 
-	// Token that indicates where to resume retrieving results on the next call to this
-	// operation. If no token is returned, these results represent the end of the list.
+	// A token that indicates where to resume retrieving results on the next call to
+	// this operation. If no token is returned, these results represent the end of the
+	// list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

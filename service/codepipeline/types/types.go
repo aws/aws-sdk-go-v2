@@ -331,6 +331,98 @@ type ActionType struct {
 	Settings *ActionTypeSettings
 }
 
+// Information about parameters for artifacts associated with the action type, such
+// as the minimum and maximum artifacts allowed.
+type ActionTypeArtifactDetails struct {
+
+	// The maximum number of artifacts that can be used with the actiontype. For
+	// example, you should specify a minimum and maximum of zero input artifacts for an
+	// action type with a category of source.
+	//
+	// This member is required.
+	MaximumCount int32
+
+	// The minimum number of artifacts that can be used with the action type. For
+	// example, you should specify a minimum and maximum of zero input artifacts for an
+	// action type with a category of source.
+	//
+	// This member is required.
+	MinimumCount int32
+}
+
+// The parameters for the action type definition that are provided when the action
+// type is created or updated.
+type ActionTypeDeclaration struct {
+
+	// Information about the executor for an action type that was created with any
+	// supported integration model.
+	//
+	// This member is required.
+	Executor *ActionTypeExecutor
+
+	// The action category, owner, provider, and version of the action type to be
+	// updated.
+	//
+	// This member is required.
+	Id *ActionTypeIdentifier
+
+	// Details for the artifacts, such as application files, to be worked on by the
+	// action. For example, the minimum and maximum number of input artifacts allowed.
+	//
+	// This member is required.
+	InputArtifactDetails *ActionTypeArtifactDetails
+
+	// Details for the output artifacts, such as a built application, that are the
+	// result of the action. For example, the minimum and maximum number of output
+	// artifacts allowed.
+	//
+	// This member is required.
+	OutputArtifactDetails *ActionTypeArtifactDetails
+
+	// The description for the action type to be updated.
+	Description *string
+
+	// Details identifying the accounts with permissions to use the action type.
+	Permissions *ActionTypePermissions
+
+	// The properties of the action type to be updated.
+	Properties []ActionTypeProperty
+
+	// The links associated with the action type to be updated.
+	Urls *ActionTypeUrls
+}
+
+// The action engine, or executor, for an action type created for a provider, where
+// the action is to be used by customers of the provider. The action engine is
+// associated with the model used to create and update the action, such as the
+// Lambda integration model.
+type ActionTypeExecutor struct {
+
+	// The action configuration properties for the action type. These properties are
+	// specified in the action definition when the action type is created.
+	//
+	// This member is required.
+	Configuration *ExecutorConfiguration
+
+	// The integration model used to create and update the action type, Lambda or
+	// JobWorker.
+	//
+	// This member is required.
+	Type ExecutorType
+
+	// The timeout in seconds for the job. An action execution can have multiple jobs.
+	// This is the timeout for a single job, not the entire action execution.
+	JobTimeout *int32
+
+	// The policy statement that specifies the permissions in the CodePipeline
+	// customer’s account that are needed to successfully run an action. To grant
+	// permission to another account, specify the account ID as the Principal, a
+	// domain-style identifier defined by the service, for example
+	// codepipeline.amazonaws.com. The size of the passed JSON policy document cannot
+	// exceed 2048 characters.
+	PolicyStatementsTemplate *string
+}
+
 // Represents information about an action type.
 type ActionTypeId struct {
 
@@ -378,6 +470,88 @@ type ActionTypeId struct {
 	Version *string
 }
 
+// Specifies the category, owner, provider, and version of the action type.
+type ActionTypeIdentifier struct {
+
+	// Defines what kind of action can be taken in the stage, one of the following:
+	//
+	// *
+	// Source
+	//
+	// * Build
+	//
+	// * Test
+	//
+	// * Deploy
+	//
+	// * Approval
+	//
+	// * Invoke
+	//
+	// This member is required.
+	Category ActionCategory
+
+	// The creator of the action type being called: AWS or ThirdParty.
+	//
+	// This member is required.
+	Owner *string
+
+	// The provider of the action type being called. The provider name is supplied when
+	// the action type is created.
+	//
+	// This member is required.
+	Provider *string
+
+	// A string that describes the action type version.
+	//
+	// This member is required.
+	Version *string
+}
+
+// Details identifying the users with permissions to use the action type.
+type ActionTypePermissions struct {
+
+	// A list of AWS account IDs with access to use the action type in their pipelines.
+	//
+	// This member is required.
+	AllowedAccounts []string
+}
+
+// Represents information about each property specified in the action
+// configuration, such as the description and key name that display for the
+// customer using the action type.
+type ActionTypeProperty struct {
+
+	// Whether the configuration property is a key.
+	//
+	// This member is required.
+	Key bool
+
+	// The property name that is displayed to users.
+	//
+	// This member is required.
+	Name *string
+
+	// Whether to omit the field value entered by the customer in the log. If true, the
+	// value is not saved in CloudTrail logs for the action execution.
+	//
+	// This member is required.
+	NoEcho bool
+
+	// Whether the configuration property is an optional value.
+	//
+	// This member is required.
+	Optional bool
+
+	// The description of the property that is displayed to users.
+	Description *string
+
+	// Indicates that the property is used with polling. An action type can have up to
+	// one queryable property. If it has one, that property must be both required and
+	// not secret.
+	Queryable bool
+}
+
 // Returns information about the settings for an action type.
 type ActionTypeSettings struct {
 
@@ -401,6 +575,30 @@ type ActionTypeSettings struct {
 	// The URL of a sign-up page where users can sign up for an external service and
 	// perform initial configuration of the action provided by that service.
 	ThirdPartyConfigurationUrl *string
+}
+
+// Returns information about URLs for web pages that display to customers as links
+// on the pipeline view, such as an external configuration page for the action
+// type.
+type ActionTypeUrls struct {
+
+	// The URL returned to the CodePipeline console that contains a link to the page
+	// where customers can configure the external action.
+	ConfigurationUrl *string
+
+	// The URL returned to the CodePipeline console that provides a deep link to the
+	// resources of the external system, such as a status page. This link is provided
+	// as part of the action display in the pipeline.
+	EntityUrlTemplate *string
+
+	// The link to an execution page for the action type in progress. For example, for
+	// a CodeDeploy action, this link is shown on the pipeline view page in the
+	// CodePipeline console, and it links to a CodeDeploy status page.
+	ExecutionUrlTemplate *string
+
+	// The URL returned to the CodePipeline console that contains a link to the page
+	// where customers can update or change the configuration of the external action.
+	RevisionUrlTemplate *string
 }
 
 // Represents information about the result of an approval request.
@@ -636,6 +834,18 @@ type ExecutionTrigger struct {
 	TriggerType TriggerType
 }
 
+// The action engine, or executor, related to the supported integration model used
+// to create and update the action type. The available executor types are Lambda
+// and JobWorker.
+type ExecutorConfiguration struct {
+
+	// Details about the JobWorker executor of the action type.
+	JobWorkerExecutorConfiguration *JobWorkerExecutorConfiguration
+
+	// Details about the Lambda executor of the action type.
+	LambdaExecutorConfiguration *LambdaExecutorConfiguration
+}
+
 // Represents information about failure details.
 type FailureDetails struct {
 
@@ -733,6 +943,28 @@ type JobDetails struct {
 
 	// The unique system-generated ID of the job.
 	Id *string
+}
+
+// Details about the polling configuration for the JobWorker action engine, or
+// executor.
+type JobWorkerExecutorConfiguration struct {
+
+	// The accounts in which the job worker is configured and might poll for jobs as
+	// part of the action execution.
+	PollingAccounts []string
+
+	// The service Principals in which the job worker is configured and might poll for
+	// jobs as part of the action execution.
+	PollingServicePrincipals []string
+}
+
+// Details about the configuration for the Lambda action engine, or executor.
+type LambdaExecutorConfiguration struct {
+
+	// The ARN of the Lambda function used by the action engine.
+	//
+	// This member is required.
+	LambdaFunctionArn *string
 }
 
 // The detail returned for each webhook after listing webhooks, such as the webhook
@@ -862,11 +1094,14 @@ type PipelineExecution struct {
 
 	// The status of the pipeline execution.
 	//
-	// * InProgress: The pipeline execution is
-	// currently running.
+	// * Cancelled: The pipeline’s definition
+	// was updated before the pipeline execution could be completed.
 	//
-	// * Stopped: The pipeline execution was manually stopped. For
-	// more information, see Stopped Executions
+	// * InProgress: The
+	// pipeline execution is currently running.
+	//
+	// * Stopped: The pipeline execution was
+	// manually stopped. For more information, see Stopped Executions
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
 	//
 	// *
@@ -887,6 +1122,9 @@ type PipelineExecution struct {
 	// *
 	// Failed: The pipeline execution was not completed successfully.
 	Status PipelineExecutionStatus
+
+	// A summary that contains a description of the pipeline execution status.
+	StatusSummary *string
 }
 
 // Summary information about a pipeline execution.
@@ -1052,6 +1290,8 @@ type StageExecution struct {
 	PipelineExecutionId *string
 
 	// The status of the stage, or for a completed stage, the last status of the stage.
+	// A status of cancelled means that the pipeline’s definition was updated before
+	// the stage execution could be completed.
 	//
 	// This member is required.
 	Status StageExecutionStatus

@@ -38,9 +38,6 @@ type CopyDBParameterGroupInput struct {
 	// * Must specify a valid DB parameter
 	// group.
 	//
-	// * Must specify a valid DB parameter group identifier, for example
-	// my-db-param-group, or a valid ARN.
-	//
 	// This member is required.
 	SourceDBParameterGroupIdentifier *string
 

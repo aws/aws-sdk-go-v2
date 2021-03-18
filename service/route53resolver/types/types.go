@@ -10,8 +10,10 @@ package types
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html),
 // ListResolverQueryLogConfigs
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigs.html),
-// and ListResolverQueryLogConfigAssociations
+// ListResolverQueryLogConfigAssociations
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html)),
+// and ListResolverDnssecConfigs
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverDnssecConfigs.html)),
 // an optional specification to return a subset of objects. To filter objects, such
 // as Resolver endpoints or Resolver rules, you specify Name and Values. For
 // example, to list only inbound Resolver endpoints, specify Direction for Name and
@@ -184,7 +186,7 @@ type Filter struct {
 	// Status: The status of the query logging association. If you specify Status for
 	// Name, specify the applicable status code for Values: CREATING, CREATED,
 	// DELETING, or FAILED. For more information, see Status
-	// (https://docs.aws.amazon.com/API_route53resolver_ResolverQueryLogConfigAssociation.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfigAssociation-Status).
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfigAssociation.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfigAssociation-Status).
 	Name *string
 
 	// When you're using a List operation and you want the operation to return a subset
@@ -258,6 +260,37 @@ type IpAddressUpdate struct {
 	// get this ID, use GetResolverEndpoint
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html).
 	SubnetId *string
+}
+
+// A complex type that contains information about a configuration for DNSSEC
+// validation.
+type ResolverDnssecConfig struct {
+
+	// The ID for a configuration for DNSSEC validation.
+	Id *string
+
+	// The owner account ID of the virtual private cloud (VPC) for a configuration for
+	// DNSSEC validation.
+	OwnerId *string
+
+	// The ID of the virtual private cloud (VPC) that you're configuring the DNSSEC
+	// validation status for.
+	ResourceId *string
+
+	// The validation status for a DNSSEC configuration. The status can be one of the
+	// following:
+	//
+	// * ENABLING: DNSSEC validation is being enabled but is not
+	// complete.
+	//
+	// * ENABLED: DNSSEC validation is enabled.
+	//
+	// * DISABLING: DNSSEC
+	// validation is being disabled but is not complete.
+	//
+	// * DISABLED DNSSEC validation
+	// is disabled.
+	ValidationStatus ResolverDNSSECValidationStatus
 }
 
 // In the response to a CreateResolverEndpoint

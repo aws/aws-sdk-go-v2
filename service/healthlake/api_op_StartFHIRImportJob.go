@@ -40,7 +40,7 @@ type StartFHIRImportJobInput struct {
 	// This member is required.
 	DataAccessRoleArn *string
 
-	// The AWS-generated datastore ID.
+	// The AWS-generated Data Store ID.
 	//
 	// This member is required.
 	DatastoreId *string
@@ -66,7 +66,7 @@ type StartFHIRImportJobOutput struct {
 	// This member is required.
 	JobStatus types.JobStatus
 
-	// The AWS-generated datastore ID.
+	// The AWS-generated Data Store ID.
 	DatastoreId *string
 
 	// Metadata pertaining to the operation's result.

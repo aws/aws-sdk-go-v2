@@ -62,7 +62,11 @@ type CreateFleetInput struct {
 	// Describes the configuration of On-Demand Instances in an EC2 Fleet.
 	OnDemandOptions *types.OnDemandOptionsRequest
 
-	// Indicates whether EC2 Fleet should replace unhealthy instances.
+	// Indicates whether EC2 Fleet should replace unhealthy Spot Instances. Supported
+	// only for fleets of type maintain. For more information, see EC2 Fleet health
+	// checks
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks)
+	// in the Amazon EC2 User Guide.
 	ReplaceUnhealthyInstances bool
 
 	// Describes the configuration of Spot Instances in an EC2 Fleet.

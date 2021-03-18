@@ -40,10 +40,11 @@ type ModelHostingStatus string
 
 // Enum values for ModelHostingStatus
 const (
-	ModelHostingStatusRunning  ModelHostingStatus = "RUNNING"
-	ModelHostingStatusStarting ModelHostingStatus = "STARTING"
-	ModelHostingStatusStopped  ModelHostingStatus = "STOPPED"
-	ModelHostingStatusFailed   ModelHostingStatus = "FAILED"
+	ModelHostingStatusStartingHosting ModelHostingStatus = "STARTING_HOSTING"
+	ModelHostingStatusHosted          ModelHostingStatus = "HOSTED"
+	ModelHostingStatusHostingFailed   ModelHostingStatus = "HOSTING_FAILED"
+	ModelHostingStatusStoppingHosting ModelHostingStatus = "STOPPING_HOSTING"
+	ModelHostingStatusSystemUpdating  ModelHostingStatus = "SYSTEM_UPDATING"
 )
 
 // Values returns all known values for ModelHostingStatus. Note that this can be
@@ -51,10 +52,11 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ModelHostingStatus) Values() []ModelHostingStatus {
 	return []ModelHostingStatus{
-		"RUNNING",
-		"STARTING",
-		"STOPPED",
-		"FAILED",
+		"STARTING_HOSTING",
+		"HOSTED",
+		"HOSTING_FAILED",
+		"STOPPING_HOSTING",
+		"SYSTEM_UPDATING",
 	}
 }
 

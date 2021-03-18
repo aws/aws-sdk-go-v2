@@ -27,6 +27,23 @@ func (e *BadRequestException) ErrorMessage() string {
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Returned when the request exceeds the processing capacity of the ledger.
+type CapacityExceededException struct {
+	Message *string
+}
+
+func (e *CapacityExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CapacityExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CapacityExceededException) ErrorCode() string             { return "CapacityExceededException" }
+func (e *CapacityExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // Returned if the session doesn't exist anymore because it timed out or expired.
 type InvalidSessionException struct {
 	Message *string

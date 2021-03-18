@@ -209,6 +209,11 @@ func awsRestjson1_serializeOpDocumentCreateMembersInput(v *CreateMembersInput, v
 		}
 	}
 
+	if v.DisableEmailNotification {
+		ok := object.Key("DisableEmailNotification")
+		ok.Boolean(v.DisableEmailNotification)
+	}
+
 	if v.GraphArn != nil {
 		ok := object.Key("GraphArn")
 		ok.String(*v.GraphArn)

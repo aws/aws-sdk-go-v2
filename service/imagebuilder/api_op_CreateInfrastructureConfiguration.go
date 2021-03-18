@@ -81,7 +81,7 @@ type CreateInfrastructureConfigurationInput struct {
 	// The terminate instance on failure setting of the infrastructure configuration.
 	// Set to false if you want Image Builder to retain the instance used to configure
 	// your AMI if the build or test phase of your workflow fails.
-	TerminateInstanceOnFailure bool
+	TerminateInstanceOnFailure *bool
 }
 
 type CreateInfrastructureConfigurationOutput struct {

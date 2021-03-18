@@ -30,12 +30,12 @@ func (c *Client) DeleteAppInstanceAdmin(ctx context.Context, params *DeleteAppIn
 
 type DeleteAppInstanceAdminInput struct {
 
-	// The ARN of the app instance's administrator.
+	// The ARN of the AppInstance's administrator.
 	//
 	// This member is required.
 	AppInstanceAdminArn *string
 
-	// The ARN of the app instance.
+	// The ARN of the AppInstance.
 	//
 	// This member is required.
 	AppInstanceArn *string

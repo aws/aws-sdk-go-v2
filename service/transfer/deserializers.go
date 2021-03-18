@@ -2851,6 +2851,15 @@ func awsAwsjson11_deserializeDocumentDescribedServer(v **types.DescribedServer, 
 				sv.Certificate = ptr.String(jtv)
 			}
 
+		case "Domain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Domain to be of type string, got %T instead", value)
+				}
+				sv.Domain = types.Domain(jtv)
+			}
+
 		case "EndpointDetails":
 			if err := awsAwsjson11_deserializeDocumentEndpointDetails(&sv.EndpointDetails, value); err != nil {
 				return err
@@ -3017,6 +3026,11 @@ func awsAwsjson11_deserializeDocumentDescribedUser(v **types.DescribedUser, valu
 					return fmt.Errorf("expected Policy to be of type string, got %T instead", value)
 				}
 				sv.Policy = ptr.String(jtv)
+			}
+
+		case "PosixProfile":
+			if err := awsAwsjson11_deserializeDocumentPosixProfile(&sv.PosixProfile, value); err != nil {
+				return err
 			}
 
 		case "Role":
@@ -3403,6 +3417,15 @@ func awsAwsjson11_deserializeDocumentListedServer(v **types.ListedServer, value 
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "Domain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Domain to be of type string, got %T instead", value)
+				}
+				sv.Domain = types.Domain(jtv)
+			}
+
 		case "EndpointType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3627,6 +3650,68 @@ func awsAwsjson11_deserializeDocumentListedUsers(v *[]types.ListedUser, value in
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentPosixProfile(v **types.PosixProfile, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PosixProfile
+	if *v == nil {
+		sv = &types.PosixProfile{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Gid":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PosixId to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Gid = ptr.Int64(i64)
+			}
+
+		case "SecondaryGids":
+			if err := awsAwsjson11_deserializeDocumentSecondaryGids(&sv.SecondaryGids, value); err != nil {
+				return err
+			}
+
+		case "Uid":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PosixId to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Uid = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentProtocols(v *[]types.Protocol, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3776,6 +3861,46 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSecondaryGids(v *[]int64, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []int64
+	if *v == nil {
+		cv = []int64{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col int64
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected PosixId to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			col = i64
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

@@ -210,6 +210,26 @@ func (m *validateOpGetOpenIdToken) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPrincipalTagAttributeMap struct {
+}
+
+func (*validateOpGetPrincipalTagAttributeMap) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPrincipalTagAttributeMap) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPrincipalTagAttributeMapInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPrincipalTagAttributeMapInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListIdentities struct {
 }
 
@@ -325,6 +345,26 @@ func (m *validateOpSetIdentityPoolRoles) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSetIdentityPoolRolesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSetPrincipalTagAttributeMap struct {
+}
+
+func (*validateOpSetPrincipalTagAttributeMap) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetPrincipalTagAttributeMap) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetPrincipalTagAttributeMapInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetPrincipalTagAttributeMapInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -470,6 +510,10 @@ func addOpGetOpenIdTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOpenIdToken{}, middleware.After)
 }
 
+func addOpGetPrincipalTagAttributeMapValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPrincipalTagAttributeMap{}, middleware.After)
+}
+
 func addOpListIdentitiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListIdentities{}, middleware.After)
 }
@@ -492,6 +536,10 @@ func addOpMergeDeveloperIdentitiesValidationMiddleware(stack *middleware.Stack) 
 
 func addOpSetIdentityPoolRolesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetIdentityPoolRoles{}, middleware.After)
+}
+
+func addOpSetPrincipalTagAttributeMapValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetPrincipalTagAttributeMap{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -765,6 +813,24 @@ func validateOpGetOpenIdTokenInput(v *GetOpenIdTokenInput) error {
 	}
 }
 
+func validateOpGetPrincipalTagAttributeMapInput(v *GetPrincipalTagAttributeMapInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPrincipalTagAttributeMapInput"}
+	if v.IdentityPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
+	}
+	if v.IdentityProviderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityProviderName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListIdentitiesInput(v *ListIdentitiesInput) error {
 	if v == nil {
 		return nil
@@ -861,6 +927,24 @@ func validateOpSetIdentityPoolRolesInput(v *SetIdentityPoolRolesInput) error {
 		if err := validateRoleMappingMap(v.RoleMappings); err != nil {
 			invalidParams.AddNested("RoleMappings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSetPrincipalTagAttributeMapInput(v *SetPrincipalTagAttributeMapInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetPrincipalTagAttributeMapInput"}
+	if v.IdentityPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
+	}
+	if v.IdentityProviderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityProviderName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

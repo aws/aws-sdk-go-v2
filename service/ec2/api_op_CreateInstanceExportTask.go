@@ -34,7 +34,7 @@ func (c *Client) CreateInstanceExportTask(ctx context.Context, params *CreateIns
 
 type CreateInstanceExportTaskInput struct {
 
-	// The format and location for an instance export task.
+	// The format and location for an export instance task.
 	//
 	// This member is required.
 	ExportToS3Task *types.ExportToS3TaskSpecification
@@ -53,13 +53,13 @@ type CreateInstanceExportTaskInput struct {
 	// maximum length is 255 characters.
 	Description *string
 
-	// The tags to apply to the instance export task during creation.
+	// The tags to apply to the export instance task during creation.
 	TagSpecifications []types.TagSpecification
 }
 
 type CreateInstanceExportTaskOutput struct {
 
-	// Information about the instance export task.
+	// Information about the export instance task.
 	ExportTask *types.ExportTask
 
 	// Metadata pertaining to the operation's result.

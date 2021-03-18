@@ -12,10 +12,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the event types that meet the specified filter criteria. If no filter
-// criteria are specified, all event types are returned, in no particular order.
-// This API operation uses pagination. Specify the nextToken parameter in the next
-// request to return more results.
+// Returns the event types that meet the specified filter criteria. You can use
+// this API operation to find information about the AWS Health event, such as the
+// category, AWS service, and event code. The metadata for each event appears in
+// the EventType
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_EventType.html)
+// object. If you don't specify a filter criteria, the API operation returns all
+// event types, in no particular order. This API operation uses pagination. Specify
+// the nextToken parameter in the next request to return more results.
 func (c *Client) DescribeEventTypes(ctx context.Context, params *DescribeEventTypesInput, optFns ...func(*Options)) (*DescribeEventTypesOutput, error) {
 	if params == nil {
 		params = &DescribeEventTypesInput{}

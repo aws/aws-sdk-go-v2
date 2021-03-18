@@ -14,9 +14,13 @@ import (
 
 // Lists the instance profiles that have the specified path prefix. If there are
 // none, the operation returns an empty list. For more information about instance
-// profiles, go to About Instance Profiles
+// profiles, see About instance profiles
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html).
-// You can paginate the results using the MaxItems and Marker parameters.
+// IAM resource-listing operations return a subset of the available attributes for
+// the resource. For example, this operation does not return tags, even though they
+// are an attribute of the returned object. To view all of the information for an
+// instance profile, see GetInstanceProfile. You can paginate the results using the
+// MaxItems and Marker parameters.
 func (c *Client) ListInstanceProfiles(ctx context.Context, params *ListInstanceProfilesInput, optFns ...func(*Options)) (*ListInstanceProfilesOutput, error) {
 	if params == nil {
 		params = &ListInstanceProfilesInput{}

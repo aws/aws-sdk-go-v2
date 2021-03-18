@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of build IDs for the specified build project, with each build ID
-// representing a single build.
+// Gets a list of build identifiers for the specified build project, with each
+// build identifier representing a single build.
 func (c *Client) ListBuildsForProject(ctx context.Context, params *ListBuildsForProjectInput, optFns ...func(*Options)) (*ListBuildsForProjectOutput, error) {
 	if params == nil {
 		params = &ListBuildsForProjectInput{}
@@ -44,13 +44,17 @@ type ListBuildsForProjectInput struct {
 	// tokens are returned.
 	NextToken *string
 
-	// The order to list build IDs. Valid values include:
+	// The order to list results in. The results are sorted by build number, not the
+	// build identifier. Valid values include:
 	//
-	// * ASCENDING: List the build
-	// IDs in ascending order by build ID.
+	// * ASCENDING: List the build IDs in
+	// ascending order by build ID.
 	//
-	// * DESCENDING: List the build IDs in
-	// descending order by build ID.
+	// * DESCENDING: List the build IDs in descending
+	// order by build ID.
+	//
+	// If the project has more than 100 builds, setting the sort
+	// order will result in an error.
 	SortOrder types.SortOrderType
 }
 

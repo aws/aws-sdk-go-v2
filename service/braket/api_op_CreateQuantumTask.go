@@ -64,6 +64,9 @@ type CreateQuantumTaskInput struct {
 	//
 	// This value conforms to the media type: application/json
 	DeviceParameters *string
+
+	// Tags to be added to the quantum task you're creating.
+	Tags map[string]string
 }
 
 type CreateQuantumTaskOutput struct {

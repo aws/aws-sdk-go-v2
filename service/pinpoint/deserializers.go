@@ -20999,6 +20999,15 @@ func awsRestjson1_deserializeDocumentCampaignSmsMessage(v **types.CampaignSmsMes
 				sv.Body = ptr.String(jtv)
 			}
 
+		case "EntityId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.EntityId = ptr.String(jtv)
+			}
+
 		case "MessageType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21008,6 +21017,15 @@ func awsRestjson1_deserializeDocumentCampaignSmsMessage(v **types.CampaignSmsMes
 				sv.MessageType = types.MessageType(jtv)
 			}
 
+		case "OriginationNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.OriginationNumber = ptr.String(jtv)
+			}
+
 		case "SenderId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21015,6 +21033,15 @@ func awsRestjson1_deserializeDocumentCampaignSmsMessage(v **types.CampaignSmsMes
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.SenderId = ptr.String(jtv)
+			}
+
+		case "TemplateId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.TemplateId = ptr.String(jtv)
 			}
 
 		default:
@@ -24651,6 +24678,15 @@ func awsRestjson1_deserializeDocumentJourneySMSMessage(v **types.JourneySMSMessa
 
 	for key, value := range shape {
 		switch key {
+		case "EntityId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.EntityId = ptr.String(jtv)
+			}
+
 		case "MessageType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24660,6 +24696,15 @@ func awsRestjson1_deserializeDocumentJourneySMSMessage(v **types.JourneySMSMessa
 				sv.MessageType = types.MessageType(jtv)
 			}
 
+		case "OriginationNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.OriginationNumber = ptr.String(jtv)
+			}
+
 		case "SenderId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24667,6 +24712,15 @@ func awsRestjson1_deserializeDocumentJourneySMSMessage(v **types.JourneySMSMessa
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.SenderId = ptr.String(jtv)
+			}
+
+		case "TemplateId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.TemplateId = ptr.String(jtv)
 			}
 
 		default:

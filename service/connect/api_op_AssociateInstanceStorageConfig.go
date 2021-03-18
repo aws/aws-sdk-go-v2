@@ -17,7 +17,7 @@ import (
 // that you can't define an instance with multiple S3 buckets for storing chat
 // transcripts. This API does not create a resource that doesn't exist. It only
 // associates it to the instance. Ensure that the resource being specified in the
-// storage configuration, like an Amazon S3 bucket, exists when being used for
+// storage configuration, like an S3 bucket, exists when being used for
 // association.
 func (c *Client) AssociateInstanceStorageConfig(ctx context.Context, params *AssociateInstanceStorageConfigInput, optFns ...func(*Options)) (*AssociateInstanceStorageConfigOutput, error) {
 	if params == nil {

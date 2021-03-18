@@ -11,10 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Creates a RegexPatternSet, which you reference in a
 // RegexPatternSetReferenceStatement, to have AWS WAF inspect a web request
 // component for the specified patterns.
@@ -60,8 +56,7 @@ type CreateRegexPatternSetInput struct {
 	// This member is required.
 	Scope types.Scope
 
-	// A description of the set that helps with identification. You cannot change the
-	// description of a set after you create it.
+	// A description of the set that helps with identification.
 	Description *string
 
 	// An array of key:value pairs to associate with the resource.

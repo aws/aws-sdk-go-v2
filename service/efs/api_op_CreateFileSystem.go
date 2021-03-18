@@ -35,22 +35,25 @@ import (
 // transport level timeout occurred or your connection was reset. As long as you
 // use the same creation token, if the initial call had succeeded in creating a
 // file system, the client can learn of its existence from the
-// FileSystemAlreadyExists error. The CreateFileSystem call returns while the file
+// FileSystemAlreadyExists error. For more information, see Creating a file system
+// (https://docs.aws.amazon.com/efs/latest/ug/creating-using-create-fs.html#creating-using-create-fs-part1)
+// in the Amazon EFS User Guide. The CreateFileSystem call returns while the file
 // system's lifecycle state is still creating. You can check the file system
 // creation status by calling the DescribeFileSystems operation, which among other
-// things returns the file system state. This operation also takes an optional
+// things returns the file system state. This operation accepts an optional
 // PerformanceMode parameter that you choose for your file system. We recommend
 // generalPurpose performance mode for most file systems. File systems using the
 // maxIO performance mode can scale to higher levels of aggregate throughput and
 // operations per second with a tradeoff of slightly higher latencies for most file
 // operations. The performance mode can't be changed after the file system has been
-// created. For more information, see Amazon EFS: Performance Modes
+// created. For more information, see Amazon EFS performance modes
 // (https://docs.aws.amazon.com/efs/latest/ug/performance.html#performancemodes.html).
-// After the file system is fully created, Amazon EFS sets its lifecycle state to
-// available, at which point you can create one or more mount targets for the file
-// system in your VPC. For more information, see CreateMountTarget. You mount your
-// Amazon EFS file system on an EC2 instances in your VPC by using the mount
-// target. For more information, see Amazon EFS: How it Works
+// You can set the throughput mode for the file system using the ThroughputMode
+// parameter. After the file system is fully created, Amazon EFS sets its lifecycle
+// state to available, at which point you can create one or more mount targets for
+// the file system in your VPC. For more information, see CreateMountTarget. You
+// mount your Amazon EFS file system on an EC2 instances in your VPC by using the
+// mount target. For more information, see Amazon EFS: How it Works
 // (https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html). This operation
 // requires permissions for the elasticfilesystem:CreateFileSystem action.
 func (c *Client) CreateFileSystem(ctx context.Context, params *CreateFileSystemInput, optFns ...func(*Options)) (*CreateFileSystemOutput, error) {
@@ -76,6 +79,25 @@ type CreateFileSystemInput struct {
 	// This member is required.
 	CreationToken *string
 
+	// Used to create a file system that uses One Zone storage classes. It specifies
+	// the AWS Availability Zone in which to create the file system. Use the format
+	// us-east-1a to specify the Availability Zone. For more information about One Zone
+	// storage classes, see Using EFS storage classes
+	// (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in the Amazon
+	// EFS User Guide. One Zone storage classes are not available in all Availability
+	// Zones in AWS Regions where Amazon EFS is available.
+	AvailabilityZoneName *string
+
+	// Specifies whether automatic backups are enabled on the file system that you are
+	// creating. Set the value to true to enable automatic backups. If you are creating
+	// a file system that uses One Zone storage classes, automatic backups are enabled
+	// by default. For more information, see Automatic backups
+	// (https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups) in
+	// the Amazon EFS User Guide. Default is false. However, if you specify an
+	// AvailabilityZoneName, the default is true. AWS Backup is not available in all
+	// AWS Regions where Amazon EFS is available.
+	Backup *bool
+
 	// A Boolean value that, if true, creates an encrypted file system. When creating
 	// an encrypted file system, you have the option of specifying
 	// CreateFileSystemRequest$KmsKeyId for an existing AWS Key Management Service (AWS
@@ -85,7 +107,7 @@ type CreateFileSystemInput struct {
 	Encrypted *bool
 
 	// The ID of the AWS KMS CMK to be used to protect the encrypted file system. This
-	// parameter is only required if you want to use a nondefault CMK. If this
+	// parameter is only required if you want to use a non-default CMK. If this
 	// parameter is not specified, the default CMK for Amazon EFS is used. This ID can
 	// be in one of the following formats:
 	//
@@ -112,16 +134,16 @@ type CreateFileSystemInput struct {
 	// mode for most file systems. File systems using the maxIO performance mode can
 	// scale to higher levels of aggregate throughput and operations per second with a
 	// tradeoff of slightly higher latencies for most file operations. The performance
-	// mode can't be changed after the file system has been created.
+	// mode can't be changed after the file system has been created. The maxIO mode is
+	// not supported on file systems using One Zone storage classes.
 	PerformanceMode types.PerformanceMode
 
 	// The throughput, measured in MiB/s, that you want to provision for a file system
 	// that you're creating. Valid values are 1-1024. Required if ThroughputMode is set
-	// to provisioned. The upper limit for throughput is 1024 MiB/s. You can get this
-	// limit increased by contacting AWS Support. For more information, see Amazon EFS
-	// Limits That You Can Increase
-	// (https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits) in the
-	// Amazon EFS User Guide.
+	// to provisioned. The upper limit for throughput is 1024 MiB/s. To increase this
+	// limit, contact AWS Support. For more information, see Amazon EFS quotas that you
+	// can increase (https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits)
+	// in the Amazon EFS User Guide.
 	ProvisionedThroughputInMibps *float64
 
 	// A value that specifies to create one or more tags associated with the file
@@ -129,15 +151,15 @@ type CreateFileSystemInput struct {
 	// creation by including a "Key":"Name","Value":"{value}" key-value pair.
 	Tags []types.Tag
 
-	// The throughput mode for the file system to be created. There are two throughput
-	// modes to choose from for your file system: bursting and provisioned. If you set
-	// ThroughputMode to provisioned, you must also set a value for
-	// ProvisionedThroughPutInMibps. You can decrease your file system's throughput in
-	// Provisioned Throughput mode or change between the throughput modes as long as
-	// it’s been more than 24 hours since the last decrease or throughput mode change.
-	// For more, see Specifying Throughput with Provisioned Mode
+	// Specifies the throughput mode for the file system, either bursting or
+	// provisioned. If you set ThroughputMode to provisioned, you must also set a value
+	// for ProvisionedThroughputInMibps. After you create the file system, you can
+	// decrease your file system's throughput in Provisioned Throughput mode or change
+	// between the throughput modes, as long as it’s been more than 24 hours since the
+	// last decrease or throughput mode change. For more information, see Specifying
+	// throughput with provisioned mode
 	// (https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput)
-	// in the Amazon EFS User Guide.
+	// in the Amazon EFS User Guide. Default is bursting.
 	ThroughputMode types.ThroughputMode
 }
 
@@ -200,6 +222,19 @@ type CreateFileSystemOutput struct {
 	// This member is required.
 	Tags []types.Tag
 
+	// The unique and consistent identifier of the Availability Zone in which the file
+	// system's One Zone storage classes exist. For example, use1-az1 is an
+	// Availability Zone ID for the us-east-1 AWS Region, and it has the same location
+	// in every AWS account.
+	AvailabilityZoneId *string
+
+	// Describes the AWS Availability Zone in which the file system is located, and is
+	// valid only for file systems using One Zone storage classes. For more
+	// information, see Using EFS storage classes
+	// (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in the Amazon
+	// EFS User Guide.
+	AvailabilityZoneName *string
+
 	// A Boolean value that, if true, indicates that the file system is encrypted.
 	Encrypted *bool
 
@@ -218,20 +253,14 @@ type CreateFileSystemOutput struct {
 	// value in this field.
 	Name *string
 
-	// The throughput, measured in MiB/s, that you want to provision for a file system.
-	// Valid values are 1-1024. Required if ThroughputMode is set to provisioned. The
-	// limit on throughput is 1024 MiB/s. You can get these limits increased by
-	// contacting AWS Support. For more information, see Amazon EFS Limits That You Can
-	// Increase (https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits) in
-	// the Amazon EFS User Guide.
+	// The amount of provisioned throughput, measured in MiB/s, for the file system.
+	// Valid for file systems using ThroughputMode set to provisioned.
 	ProvisionedThroughputInMibps *float64
 
-	// The throughput mode for a file system. There are two throughput modes to choose
-	// from for your file system: bursting and provisioned. If you set ThroughputMode
-	// to provisioned, you must also set a value for ProvisionedThroughPutInMibps. You
-	// can decrease your file system's throughput in Provisioned Throughput mode or
-	// change between the throughput modes as long as it’s been more than 24 hours
-	// since the last decrease or throughput mode change.
+	// Displays the file system's throughput mode. For more information, see Throughput
+	// modes
+	// (https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes) in
+	// the Amazon EFS User Guide.
 	ThroughputMode types.ThroughputMode
 
 	// Metadata pertaining to the operation's result.

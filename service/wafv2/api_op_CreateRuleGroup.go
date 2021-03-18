@@ -11,10 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Creates a RuleGroup per the specifications provided. A rule group defines a
 // collection of rules to inspect and control web requests that you can use in a
 // WebACL. When you create a rule group, you define an immutable capacity limit. If
@@ -78,8 +74,7 @@ type CreateRuleGroupInput struct {
 	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
 
-	// A description of the rule group that helps with identification. You cannot
-	// change the description of a rule group after you create it.
+	// A description of the rule group that helps with identification.
 	Description *string
 
 	// The Rule statements used to identify the web requests that you want to allow,

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes metadata tags from an AWS Glue DataBrew resource.
+// Removes metadata tags from a DataBrew resource.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -28,7 +28,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// An DataBrew resource from which you want to remove a tag or tags. The value for
+	// A DataBrew resource from which you want to remove a tag or tags. The value for
 	// this parameter is an Amazon Resource Name (ARN).
 	//
 	// This member is required.

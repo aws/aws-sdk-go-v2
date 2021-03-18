@@ -91,6 +91,13 @@ func awsRestjson1_serializeOpDocumentAssociateAwsAccountWithPartnerAccountInput(
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1002,6 +1009,13 @@ func awsRestjson1_serializeOpDocumentCreateWirelessGatewayTaskDefinitionInput(v 
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Update != nil {

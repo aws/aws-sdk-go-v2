@@ -12,7 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of existing resource groups in your account.
+// Returns a list of existing resource groups in your account. Minimum permissions
+// To run this command, you must have the following permissions:
+//
+// *
+// resource-groups:ListGroups
 func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns ...func(*Options)) (*ListGroupsOutput, error) {
 	if params == nil {
 		params = &ListGroupsInput{}
@@ -43,6 +47,9 @@ type ListGroupsInput struct {
 	// supported values are:
 	//
 	// * AWS:EC2::CapacityReservationPool
+	//
+	// *
+	// AWS:EC2::HostManagement
 	Filters []types.GroupFilter
 
 	// The total number of results that you want included on each page of the response.
@@ -69,8 +76,8 @@ type ListGroupsOutput struct {
 	// both the Name and the GroupArn.
 	GroupIdentifiers []types.GroupIdentifier
 
-	// This output element is deprecated and shouldn't be used. Refer to
-	// GroupIdentifiers instead.
+	// Deprecated - don't use this field. Use the GroupIdentifiers response field
+	// instead.
 	//
 	// Deprecated: This field is deprecated, use GroupIdentifiers instead.
 	Groups []types.Group

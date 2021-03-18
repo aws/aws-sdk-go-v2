@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change. List
-// the use cases.
+// This API is in preview release for Amazon Connect and is subject to change.
+// Lists the use cases.
 func (c *Client) ListUseCases(ctx context.Context, params *ListUseCasesInput, optFns ...func(*Options)) (*ListUseCasesOutput, error) {
 	if params == nil {
 		params = &ListUseCasesInput{}
@@ -43,7 +43,7 @@ type ListUseCasesInput struct {
 	// This member is required.
 	IntegrationAssociationId *string
 
-	// The maximimum number of results to return per page.
+	// The maximum number of results to return per page.
 	MaxResults int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -135,7 +135,7 @@ var _ ListUseCasesAPIClient = (*Client)(nil)
 
 // ListUseCasesPaginatorOptions is the paginator options for ListUseCases
 type ListUseCasesPaginatorOptions struct {
-	// The maximimum number of results to return per page.
+	// The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

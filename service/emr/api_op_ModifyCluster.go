@@ -34,8 +34,8 @@ type ModifyClusterInput struct {
 	// This member is required.
 	ClusterId *string
 
-	// The number of steps that can be executed concurrently. You can specify a maximum
-	// of 256 steps.
+	// The number of steps that can be executed concurrently. You can specify a minimum
+	// of 1 step and a maximum of 256 steps.
 	StepConcurrencyLevel *int32
 }
 

@@ -11,10 +11,30 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Validates the JSON text of the resource-based policy document attached to the
-// specified secret. The JSON request string input and response output displays
-// formatted code with white space and line breaks for better readability. Submit
-// your input as a single line JSON string. A resource-based policy is optional.
+// Validates that the resource policy does not grant a wide range of IAM principals
+// access to your secret. The JSON request string input and response output
+// displays formatted code with white space and line breaks for better readability.
+// Submit your input as a single line JSON string. A resource-based policy is
+// optional for secrets. The API performs three checks when validating the
+// secret:
+//
+// * Sends a call to Zelkova
+// (https://aws.amazon.com/blogs/security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/),
+// an automated reasoning engine, to ensure your Resource Policy does not allow
+// broad access to your secret.
+//
+// * Checks for correct syntax in a policy.
+//
+// *
+// Verifies the policy does not lock out a caller.
+//
+// Minimum Permissions You must
+// have the permissions required to access the following APIs:
+//
+// *
+// secretsmanager:PutResourcePolicy
+//
+// * secretsmanager:ValidateResourcePolicy
 func (c *Client) ValidateResourcePolicy(ctx context.Context, params *ValidateResourcePolicyInput, optFns ...func(*Options)) (*ValidateResourcePolicyOutput, error) {
 	if params == nil {
 		params = &ValidateResourcePolicyInput{}
@@ -32,28 +52,34 @@ func (c *Client) ValidateResourcePolicy(ctx context.Context, params *ValidateRes
 
 type ValidateResourcePolicyInput struct {
 
-	// Identifies the Resource Policy attached to the secret.
+	// A JSON-formatted string constructed according to the grammar and syntax for an
+	// AWS resource-based policy. The policy in the string identifies who can access or
+	// manage this secret and its versions. For information on how to format a JSON
+	// parameter for the various command line tool environments, see Using JSON for
+	// Parameters
+	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
+	// in the AWS CLI User Guide.publi
 	//
 	// This member is required.
 	ResourcePolicy *string
 
-	// The identifier for the secret that you want to validate a resource policy. You
-	// can specify either the Amazon Resource Name (ARN) or the friendly name of the
-	// secret. If you specify an ARN, we generally recommend that you specify a
-	// complete ARN. You can specify a partial ARN too—for example, if you don’t
-	// include the final hyphen and six random characters that Secrets Manager adds at
-	// the end of the ARN when you created the secret. A partial ARN match can work as
-	// long as it uniquely matches only one secret. However, if your secret has a name
-	// that ends in a hyphen followed by six characters (before Secrets Manager adds
-	// the hyphen and six characters to the ARN) and you try to use that as a partial
-	// ARN, then those characters cause Secrets Manager to assume that you’re
-	// specifying a complete ARN. This confusion can cause unexpected results. To avoid
-	// this situation, we recommend that you don’t create secret names ending with a
-	// hyphen followed by six characters. If you specify an incomplete ARN without the
-	// random suffix, and instead provide the 'friendly name', you must not include the
-	// random suffix. If you do include the random suffix added by Secrets Manager, you
-	// receive either a ResourceNotFoundException or an AccessDeniedException error,
-	// depending on your permissions.
+	// (Optional) The identifier of the secret with the resource-based policy you want
+	// to validate. You can specify either the Amazon Resource Name (ARN) or the
+	// friendly name of the secret. If you specify an ARN, we generally recommend that
+	// you specify a complete ARN. You can specify a partial ARN too—for example, if
+	// you don’t include the final hyphen and six random characters that Secrets
+	// Manager adds at the end of the ARN when you created the secret. A partial ARN
+	// match can work as long as it uniquely matches only one secret. However, if your
+	// secret has a name that ends in a hyphen followed by six characters (before
+	// Secrets Manager adds the hyphen and six characters to the ARN) and you try to
+	// use that as a partial ARN, then those characters cause Secrets Manager to assume
+	// that you’re specifying a complete ARN. This confusion can cause unexpected
+	// results. To avoid this situation, we recommend that you don’t create secret
+	// names ending with a hyphen followed by six characters. If you specify an
+	// incomplete ARN without the random suffix, and instead provide the 'friendly
+	// name', you must not include the random suffix. If you do include the random
+	// suffix added by Secrets Manager, you receive either a ResourceNotFoundException
+	// or an AccessDeniedException error, depending on your permissions.
 	SecretId *string
 }
 

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a single version of an AWS Glue DataBrew recipe.
+// Deletes a single version of a DataBrew recipe.
 func (c *Client) DeleteRecipeVersion(ctx context.Context, params *DeleteRecipeVersionInput, optFns ...func(*Options)) (*DeleteRecipeVersionOutput, error) {
 	if params == nil {
 		params = &DeleteRecipeVersionInput{}
@@ -28,12 +28,13 @@ func (c *Client) DeleteRecipeVersion(ctx context.Context, params *DeleteRecipeVe
 
 type DeleteRecipeVersionInput struct {
 
-	// The name of the recipe to be deleted.
+	// The name of the recipe.
 	//
 	// This member is required.
 	Name *string
 
-	// The version of the recipe to be deleted.
+	// The version of the recipe to be deleted. You can specify a numeric versions
+	// (X.Y) or LATEST_WORKING. LATEST_PUBLISHED is not supported.
 	//
 	// This member is required.
 	RecipeVersion *string

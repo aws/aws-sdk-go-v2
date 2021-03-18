@@ -15,7 +15,10 @@ import (
 // Returns a list of Lambda functions, with the version-specific configuration of
 // each. Lambda returns up to 50 functions per call. Set FunctionVersion to ALL to
 // include all published versions of each function in addition to the unpublished
-// version. To get more information about a function or version, use GetFunction.
+// version. The ListFunctions action returns a subset of the FunctionConfiguration
+// fields. To get the additional fields (State, StateReasonCode, StateReason,
+// LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode) for a
+// function or version, use GetFunction.
 func (c *Client) ListFunctions(ctx context.Context, params *ListFunctionsInput, optFns ...func(*Options)) (*ListFunctionsOutput, error) {
 	if params == nil {
 		params = &ListFunctionsInput{}
@@ -46,7 +49,9 @@ type ListFunctionsInput struct {
 	// must set FunctionVersion to ALL.
 	MasterRegion *string
 
-	// The maximum number of functions to return.
+	// The maximum number of functions to return in the response. Note that
+	// ListFunctions returns a maximum of 50 items in each response, even if you set
+	// the number higher.
 	MaxItems *int32
 }
 
@@ -132,7 +137,9 @@ var _ ListFunctionsAPIClient = (*Client)(nil)
 
 // ListFunctionsPaginatorOptions is the paginator options for ListFunctions
 type ListFunctionsPaginatorOptions struct {
-	// The maximum number of functions to return.
+	// The maximum number of functions to return in the response. Note that
+	// ListFunctions returns a maximum of 50 items in each response, even if you set
+	// the number higher.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

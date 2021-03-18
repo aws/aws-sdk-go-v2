@@ -40,8 +40,7 @@ type DescribeCompilationJobInput struct {
 
 type DescribeCompilationJobOutput struct {
 
-	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker assumes to
-	// perform the model compilation job.
+	// The Amazon Resource Name (ARN) of the model compilation job.
 	//
 	// This member is required.
 	CompilationJobArn *string
@@ -90,7 +89,8 @@ type DescribeCompilationJobOutput struct {
 	// This member is required.
 	OutputConfig *types.OutputConfig
 
-	// The Amazon Resource Name (ARN) of the model compilation job.
+	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker assumes to
+	// perform the model compilation job.
 	//
 	// This member is required.
 	RoleArn *string

@@ -46,6 +46,9 @@ type DescribeContactOutput struct {
 	// Status of a contact.
 	ContactStatus types.ContactStatus
 
+	// List describing source and destination details for each dataflow edge.
+	DataflowList []types.DataflowDetail
+
 	// End time of a contact.
 	EndTime *time.Time
 

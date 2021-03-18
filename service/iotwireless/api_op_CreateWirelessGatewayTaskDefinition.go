@@ -46,11 +46,18 @@ type CreateWirelessGatewayTaskDefinitionInput struct {
 	// The name of the new resource.
 	Name *string
 
+	// The tags attached to the specified resource. Tags are metadata that can be used
+	// to manage a resource
+	Tags []types.Tag
+
 	// Information about the gateways to update.
 	Update *types.UpdateWirelessGatewayTaskCreate
 }
 
 type CreateWirelessGatewayTaskDefinitionOutput struct {
+
+	// The Amazon Resource Name of the resource.
+	Arn *string
 
 	// The ID of the new wireless gateway task definition.
 	Id *string

@@ -13,9 +13,9 @@ import (
 
 // Retrieves information about the specified role, including the role's path, GUID,
 // ARN, and the role's trust policy that grants permission to assume the role. For
-// more information about roles, see Working with Roles
+// more information about roles, see Working with roles
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
-// Policies returned by this API are URL-encoded compliant with RFC 3986
+// Policies returned by this operation are URL-encoded compliant with RFC 3986
 // (https://tools.ietf.org/html/rfc3986). You can use a URL decoding method to
 // convert the policy back to plain JSON text. For example, if you use Java, you
 // can use the decode method of the java.net.URLDecoder utility class in the Java

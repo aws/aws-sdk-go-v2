@@ -2,6 +2,26 @@
 
 package types
 
+type AccessMethodType string
+
+// Enum values for AccessMethodType
+const (
+	AccessMethodTypeCaRepository        AccessMethodType = "CA_REPOSITORY"
+	AccessMethodTypeResourcePkiManifest AccessMethodType = "RESOURCE_PKI_MANIFEST"
+	AccessMethodTypeResourcePkiNotify   AccessMethodType = "RESOURCE_PKI_NOTIFY"
+)
+
+// Values returns all known values for AccessMethodType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccessMethodType) Values() []AccessMethodType {
+	return []AccessMethodType{
+		"CA_REPOSITORY",
+		"RESOURCE_PKI_MANIFEST",
+		"RESOURCE_PKI_NOTIFY",
+	}
+}
+
 type ActionType string
 
 // Enum values for ActionType
@@ -106,6 +126,38 @@ func (CertificateAuthorityType) Values() []CertificateAuthorityType {
 	}
 }
 
+type ExtendedKeyUsageType string
+
+// Enum values for ExtendedKeyUsageType
+const (
+	ExtendedKeyUsageTypeServerAuth              ExtendedKeyUsageType = "SERVER_AUTH"
+	ExtendedKeyUsageTypeClientAuth              ExtendedKeyUsageType = "CLIENT_AUTH"
+	ExtendedKeyUsageTypeCodeSigning             ExtendedKeyUsageType = "CODE_SIGNING"
+	ExtendedKeyUsageTypeEmailProtection         ExtendedKeyUsageType = "EMAIL_PROTECTION"
+	ExtendedKeyUsageTypeTimeStamping            ExtendedKeyUsageType = "TIME_STAMPING"
+	ExtendedKeyUsageTypeOcspSigning             ExtendedKeyUsageType = "OCSP_SIGNING"
+	ExtendedKeyUsageTypeSmartCardLogin          ExtendedKeyUsageType = "SMART_CARD_LOGIN"
+	ExtendedKeyUsageTypeDocumentSigning         ExtendedKeyUsageType = "DOCUMENT_SIGNING"
+	ExtendedKeyUsageTypeCertificateTransparency ExtendedKeyUsageType = "CERTIFICATE_TRANSPARENCY"
+)
+
+// Values returns all known values for ExtendedKeyUsageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExtendedKeyUsageType) Values() []ExtendedKeyUsageType {
+	return []ExtendedKeyUsageType{
+		"SERVER_AUTH",
+		"CLIENT_AUTH",
+		"CODE_SIGNING",
+		"EMAIL_PROTECTION",
+		"TIME_STAMPING",
+		"OCSP_SIGNING",
+		"SMART_CARD_LOGIN",
+		"DOCUMENT_SIGNING",
+		"CERTIFICATE_TRANSPARENCY",
+	}
+}
+
 type FailureReason string
 
 // Enum values for FailureReason
@@ -145,6 +197,22 @@ func (KeyAlgorithm) Values() []KeyAlgorithm {
 		"RSA_4096",
 		"EC_prime256v1",
 		"EC_secp384r1",
+	}
+}
+
+type PolicyQualifierId string
+
+// Enum values for PolicyQualifierId
+const (
+	PolicyQualifierIdCps PolicyQualifierId = "CPS"
+)
+
+// Values returns all known values for PolicyQualifierId. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyQualifierId) Values() []PolicyQualifierId {
+	return []PolicyQualifierId{
+		"CPS",
 	}
 }
 

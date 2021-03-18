@@ -44,12 +44,9 @@
 // *
 // Perform deep packet inspection on traffic entering or leaving your VPC.
 //
-// * Rate
-// limit traffic going from AWS to on-premises IP destinations.
-//
-// * Use stateful
-// protocol detection to filter protocols like HTTPS, regardless of the port
-// used.
+// * Use
+// stateful protocol detection to filter protocols like HTTPS, regardless of the
+// port used.
 //
 // To enable Network Firewall for your VPCs, you perform steps in both
 // Amazon VPC and in Network Firewall. For information about using Amazon VPC, see

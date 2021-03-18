@@ -12510,6 +12510,11 @@ func awsAwsjson11_serializeOpDocumentGetPartitionsInput(v *GetPartitionsInput, v
 		ok.String(*v.DatabaseName)
 	}
 
+	if v.ExcludeColumnSchema != nil {
+		ok := object.Key("ExcludeColumnSchema")
+		ok.Boolean(*v.ExcludeColumnSchema)
+	}
+
 	if v.Expression != nil {
 		ok := object.Key("Expression")
 		ok.String(*v.Expression)

@@ -18,9 +18,9 @@ import (
 // Depending on the parameters that you passed when you generated the report, the
 // data returned could include different information. For details, see
 // GenerateOrganizationsAccessReport. To call this operation, you must be signed in
-// to the master account in your organization. SCPs must be enabled for your
+// to the management account in your organization. SCPs must be enabled for your
 // organization root. You must have permissions to perform this operation. For more
-// information, see Refining Permissions Using Service Last Accessed Data
+// information, see Refining permissions using service last accessed data
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html)
 // in the IAM User Guide. For each service that principals in an account (root
 // users, IAM users, or IAM roles) could access using SCPs, the operation returns

@@ -11,21 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates settings for a game session queue, which determines how new game session
-// requests in the queue are processed. To update settings, specify the queue name
-// to be updated and provide the new settings. When updating destinations, provide
-// a complete list of destinations. Learn more  Using Multi-Region Queues
+// Updates the configuration of a game session queue, which determines how the
+// queue processes new game session requests. To update settings, specify the queue
+// name to be updated and provide the new settings. When updating destinations,
+// provide a complete list of destinations. Learn more  Using Multi-Region Queues
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html)
-// Related operations
-//
-// * CreateGameSessionQueue
-//
-// * DescribeGameSessionQueues
-//
-// *
-// UpdateGameSessionQueue
-//
-// * DeleteGameSessionQueue
+// Related actions CreateGameSessionQueue | DescribeGameSessionQueues |
+// UpdateGameSessionQueue | DeleteGameSessionQueue | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateGameSessionQueue(ctx context.Context, params *UpdateGameSessionQueueInput, optFns ...func(*Options)) (*UpdateGameSessionQueueOutput, error) {
 	if params == nil {
 		params = &UpdateGameSessionQueueInput{}
@@ -50,22 +43,33 @@ type UpdateGameSessionQueueInput struct {
 	// This member is required.
 	Name *string
 
-	// A list of fleets that can be used to fulfill game session placement requests in
-	// the queue. Fleets are identified by either a fleet ARN or a fleet alias ARN.
-	// Destinations are listed in default preference order. When updating this list,
-	// provide a complete list of destinations.
+	// A list of fleets and/or fleet aliases that can be used to fulfill game session
+	// placement requests in the queue. Destinations are identified by either a fleet
+	// ARN or a fleet alias ARN, and are listed in order of placement preference. When
+	// updating this list, provide a complete list of destinations.
 	Destinations []types.GameSessionQueueDestination
 
-	// A collection of latency policies to apply when processing game sessions
-	// placement requests with player latency information. Multiple policies are
-	// evaluated in order of the maximum latency value, starting with the lowest
-	// latency values. With just one policy, the policy is enforced at the start of the
-	// game session placement for the duration period. With multiple policies, each
-	// policy is enforced consecutively for its duration period. For example, a queue
-	// might enforce a 60-second policy followed by a 120-second policy, and then no
-	// policy for the remainder of the placement. When updating policies, provide a
-	// complete collection of policies.
+	// A list of locations where a queue is allowed to place new game sessions.
+	// Locations are specified in the form of AWS Region codes, such as us-west-2. If
+	// this parameter is not set, game sessions can be placed in any queue location. To
+	// remove an existing filter configuration, pass in an empty set.
+	FilterConfiguration *types.FilterConfiguration
+
+	// A set of policies that act as a sliding cap on player latency. FleetIQ works to
+	// deliver low latency for most players in a game session. These policies ensure
+	// that no individual player can be placed into a game with unreasonably high
+	// latency. Use multiple policies to gradually relax latency requirements a step at
+	// a time. Multiple policies are applied based on their maximum allowed latency,
+	// starting with the lowest value. When updating policies, provide a complete
+	// collection of policies.
 	PlayerLatencyPolicies []types.PlayerLatencyPolicy
+
+	// Custom settings to use when prioritizing destinations and locations for game
+	// session placements. This configuration replaces the FleetIQ default
+	// prioritization process. Priority types that are not explicitly named will be
+	// automatically applied at the end of the prioritization process. To remove an
+	// existing priority configuration, pass in an empty set.
+	PriorityConfiguration *types.PriorityConfiguration
 
 	// The maximum time, in seconds, that a new game session placement request remains
 	// in the queue. When a request exceeds this time, the game session placement
