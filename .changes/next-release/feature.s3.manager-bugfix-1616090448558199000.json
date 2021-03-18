@@ -1,0 +1,9 @@
+{
+ "ID": "feature.s3.manager-bugfix-1616090448558199000",
+ "SchemaVersion": 1,
+ "Module": "feature/s3/manager",
+ "Type": "bugfix",
+ "Description": "=",
+ "MinVersion": "",
+ "AffectedModules": null
+}
