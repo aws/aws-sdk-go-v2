@@ -1,9 +1,0 @@
-{
- "ID": "service.s3-bugfix-1615945295096775000",
- "SchemaVersion": 1,
- "Module": "service/s3",
- "Type": "bugfix",
- "Description": "Adds documentation to the PutObject and UploadPart operations Body member how to upload unseekable objects to an Amazon S3 Bucket.",
- "MinVersion": "",
- "AffectedModules": null
-}

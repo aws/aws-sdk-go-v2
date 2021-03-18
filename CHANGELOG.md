@@ -1,3 +1,23 @@
+# Release 2021-03-18
+## Service Client Highlights
+* Bug Fix: Updated presign URLs to no longer include the X-Amz-User-Agent header
+* Feature: Update API model
+* Add New supported API
+* `service/internal/s3shared` - v1.2.0
+  * Feature: Support for S3 Object Lambda
+* `service/s3` - v1.3.0
+  * Bug Fix: Adds documentation to the PutObject and UploadPart operations Body member how to upload unseekable objects to an Amazon S3 Bucket.
+  * Feature: S3 Object Lambda is a new S3 feature that enables users to apply their own custom code to process the output of a standard S3 GET request by automatically invoking a Lambda function with a GET request
+* `service/s3control` - v1.3.0
+  * Feature: S3 Object Lambda is a new S3 feature that enables users to apply their own custom code to process the output of a standard S3 GET request by automatically invoking a Lambda function with a GET request
+## Core SDK Highlights
+* Dependency Update: Updated SDK dependencies to their latest versions.
+* `aws` - v1.3.0
+  * Feature: Add helper to V4 signer package to swap compute payload hash middleware with unsigned payload middleware
+* `feature/s3/manager` - v1.1.0
+  * Bug Fix: Add support for Amazon S3 Object Lambda feature.
+  * Feature: Updates for S3 Object Lambda feature
+
 # Release 2021-03-12
 ## Service Client Highlights
 * Bug Fix: Fixed a bug that could union shape types to be deserialized incorrectly

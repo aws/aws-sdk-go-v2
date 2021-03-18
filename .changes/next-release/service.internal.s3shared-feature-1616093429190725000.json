@@ -1,9 +1,0 @@
-{
- "ID": "service.internal.s3shared-feature-1616093429190725000",
- "SchemaVersion": 1,
- "Module": "service/internal/s3shared",
- "Type": "feature",
- "Description": "Support for S3 Object Lambda",
- "MinVersion": "",
- "AffectedModules": null
-}
