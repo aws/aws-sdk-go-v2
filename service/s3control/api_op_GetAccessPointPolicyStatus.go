@@ -18,8 +18,8 @@ import (
 // Indicates whether the specified access point currently has a policy that allows
 // public access. For more information about public access through access points,
 // see Managing Data Access with Amazon S3 Access Points
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html) in the
-// Amazon Simple Storage Service Developer Guide.
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html) in
+// the Amazon Simple Storage Service Developer Guide.
 func (c *Client) GetAccessPointPolicyStatus(ctx context.Context, params *GetAccessPointPolicyStatusInput, optFns ...func(*Options)) (*GetAccessPointPolicyStatusOutput, error) {
 	if params == nil {
 		params = &GetAccessPointPolicyStatusInput{}

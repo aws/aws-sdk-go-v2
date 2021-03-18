@@ -1,10 +1,17 @@
 package arn
 
 import (
+	"fmt"
 	"strings"
 
 	awsarn "github.com/aws/aws-sdk-go-v2/aws/arn"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared/arn"
+)
+
+const (
+	s3Namespace              = "s3"
+	s3ObjectsLambdaNamespace = "s3-object-lambda"
+	s3OutpostsNamespace      = "s3-outposts"
 )
 
 // ParseEndpointARN parses a given generic aws ARN into a s3 arn resource.
@@ -14,15 +21,20 @@ func ParseEndpointARN(v awsarn.ARN) (arn.Resource, error) {
 
 func accessPointResourceParser(a awsarn.ARN) (arn.Resource, error) {
 	resParts := arn.SplitResource(a.Resource)
+
 	switch resParts[0] {
 	case "accesspoint":
-		if a.Service != "s3" {
-			return arn.AccessPointARN{}, arn.InvalidARNError{ARN: a, Reason: "service is not s3"}
+		switch a.Service {
+		case s3Namespace:
+			return arn.ParseAccessPointResource(a, resParts[1:])
+		case s3ObjectsLambdaNamespace:
+			return parseS3ObjectLambdaAccessPointResource(a, resParts)
+		default:
+			return arn.AccessPointARN{}, arn.InvalidARNError{ARN: a, Reason: fmt.Sprintf("service is not %s or %s", s3Namespace, s3ObjectsLambdaNamespace)}
 		}
-		return arn.ParseAccessPointResource(a, resParts[1:])
 	case "outpost":
-		if a.Service != "s3-outposts" {
-			return arn.OutpostAccessPointARN{}, arn.InvalidARNError{ARN: a, Reason: "service is not s3-outposts"}
+		if a.Service != s3OutpostsNamespace {
+			return arn.OutpostAccessPointARN{}, arn.InvalidARNError{ARN: a, Reason: "service is not %s"}
 		}
 		return parseOutpostAccessPointResource(a, resParts[1:])
 	default:
@@ -67,4 +79,23 @@ func parseOutpostAccessPointResource(a awsarn.ARN, resParts []string) (arn.Outpo
 	// set outpost id
 	outpostAccessPointARN.OutpostID = resID
 	return outpostAccessPointARN, nil
+}
+
+func parseS3ObjectLambdaAccessPointResource(a awsarn.ARN, resParts []string) (arn.S3ObjectLambdaAccessPointARN, error) {
+	if a.Service != s3ObjectsLambdaNamespace {
+		return arn.S3ObjectLambdaAccessPointARN{}, arn.InvalidARNError{ARN: a, Reason: fmt.Sprintf("service is not %s", s3ObjectsLambdaNamespace)}
+	}
+
+	accessPointARN, err := arn.ParseAccessPointResource(a, resParts[1:])
+	if err != nil {
+		return arn.S3ObjectLambdaAccessPointARN{}, err
+	}
+
+	if len(accessPointARN.Region) == 0 {
+		return arn.S3ObjectLambdaAccessPointARN{}, arn.InvalidARNError{ARN: a, Reason: fmt.Sprintf("%s region not set", s3ObjectsLambdaNamespace)}
+	}
+
+	return arn.S3ObjectLambdaAccessPointARN{
+		AccessPointARN: accessPointARN,
+	}, nil
 }

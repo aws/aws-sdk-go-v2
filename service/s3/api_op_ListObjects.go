@@ -16,7 +16,7 @@ import (
 // request parameters as selection criteria to return a subset of the objects in a
 // bucket. A 200 OK response can contain valid or invalid XML. Be sure to design
 // your application to parse the contents of the response and handle it
-// appropriately. This API has been revised. We recommend that you use the newer
+// appropriately. This action has been revised. We recommend that you use the newer
 // version, ListObjectsV2
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html), when
 // developing applications. For backward compatibility, Amazon S3 continues to
@@ -58,22 +58,22 @@ func (c *Client) ListObjects(ctx context.Context, params *ListObjectsInput, optF
 
 type ListObjectsInput struct {
 
-	// The name of the bucket containing the objects. When using this API with an
+	// The name of the bucket containing the objects. When using this action with an
 	// access point, you must direct requests to the access point hostname. The access
 	// point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation with an access point through the AWS SDKs, you provide the access
-	// point ARN in place of the bucket name. For more information about access point
-	// ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide. When using this API with
-	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
-	// The S3 on Outposts hostname takes the form
+	// action with an access point through the AWS SDKs, you provide the access point
+	// ARN in place of the bucket name. For more information about access point ARNs,
+	// see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide. When using this action
+	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
+	// hostname. The S3 on Outposts hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this operation using S3 on Outposts through the AWS SDKs, you provide the
-	// Outposts bucket ARN in place of the bucket name. For more information about S3
-	// on Outposts ARNs, see Using S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
+	// bucket ARN in place of the bucket name. For more information about S3 on
+	// Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
@@ -90,14 +90,14 @@ type ListObjectsInput struct {
 	// response.
 	EncodingType types.EncodingType
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 
 	// Specifies the key to start with when listing objects in a bucket.
 	Marker *string
 
-	// Sets the maximum number of keys returned in the response. By default the API
+	// Sets the maximum number of keys returned in the response. By default the action
 	// returns up to 1,000 key names. The response might contain fewer keys but will
 	// never contain more.
 	MaxKeys int32
@@ -113,15 +113,15 @@ type ListObjectsInput struct {
 
 type ListObjectsOutput struct {
 
-	// All of the keys rolled up in a common prefix count as a single return when
-	// calculating the number of returns. A response can contain CommonPrefixes only if
-	// you specify a delimiter. CommonPrefixes contains all (if there are any) keys
-	// between Prefix and the next occurrence of the string specified by the delimiter.
-	// CommonPrefixes lists keys that act like subdirectories in the directory
-	// specified by Prefix. For example, if the prefix is notes/ and the delimiter is a
-	// slash (/) as in notes/summer/july, the common prefix is notes/summer/. All of
-	// the keys that roll up into a common prefix count as a single return when
-	// calculating the number of returns.
+	// All of the keys (up to 1,000) rolled up in a common prefix count as a single
+	// return when calculating the number of returns. A response can contain
+	// CommonPrefixes only if you specify a delimiter. CommonPrefixes contains all (if
+	// there are any) keys between Prefix and the next occurrence of the string
+	// specified by the delimiter. CommonPrefixes lists keys that act like
+	// subdirectories in the directory specified by Prefix. For example, if the prefix
+	// is notes/ and the delimiter is a slash (/) as in notes/summer/july, the common
+	// prefix is notes/summer/. All of the keys that roll up into a common prefix count
+	// as a single return when calculating the number of returns.
 	CommonPrefixes []types.CommonPrefix
 
 	// Metadata about each object returned.
@@ -266,6 +266,7 @@ func addListObjectsUpdateEndpoint(stack *middleware.Stack, options Options) erro
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

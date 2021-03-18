@@ -2,6 +2,7 @@ package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.List;
 import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
+import software.amazon.smithy.aws.traits.auth.UnsignedPayloadTrait;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
@@ -26,8 +27,15 @@ public class S3ContentSHA256Header implements GoIntegration {
     public List<RuntimeClientPlugin> getClientPlugins() {
         return ListUtils.of(
                 RuntimeClientPlugin.builder()
-                        .servicePredicate((model, service) -> S3ModelUtils.isServiceS3(model, service)
-                                || S3ModelUtils.isServiceS3Control(model, service))
+                        // Only add the middleware if UnsignedPayloadTrait is not specified, as this middleware
+                        // will have already been added.
+                        .operationPredicate((model, service, operation) -> {
+                            if (!(S3ModelUtils.isServiceS3(model, service)
+                                    || S3ModelUtils.isServiceS3Control(model, service))) {
+                                return false;
+                            }
+                            return !operation.hasTrait(UnsignedPayloadTrait.class);
+                        })
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
                                         "AddContentSHA256HeaderMiddleware",

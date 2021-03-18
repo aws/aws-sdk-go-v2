@@ -228,6 +228,41 @@ func (NetworkOrigin) Values() []NetworkOrigin {
 	}
 }
 
+type ObjectLambdaAllowedFeature string
+
+// Enum values for ObjectLambdaAllowedFeature
+const (
+	ObjectLambdaAllowedFeatureGetObjectRange      ObjectLambdaAllowedFeature = "GetObject-Range"
+	ObjectLambdaAllowedFeatureGetObjectPartNumber ObjectLambdaAllowedFeature = "GetObject-PartNumber"
+)
+
+// Values returns all known values for ObjectLambdaAllowedFeature. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ObjectLambdaAllowedFeature) Values() []ObjectLambdaAllowedFeature {
+	return []ObjectLambdaAllowedFeature{
+		"GetObject-Range",
+		"GetObject-PartNumber",
+	}
+}
+
+type ObjectLambdaTransformationConfigurationAction string
+
+// Enum values for ObjectLambdaTransformationConfigurationAction
+const (
+	ObjectLambdaTransformationConfigurationActionGetObject ObjectLambdaTransformationConfigurationAction = "GetObject"
+)
+
+// Values returns all known values for
+// ObjectLambdaTransformationConfigurationAction. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ObjectLambdaTransformationConfigurationAction) Values() []ObjectLambdaTransformationConfigurationAction {
+	return []ObjectLambdaTransformationConfigurationAction{
+		"GetObject",
+	}
+}
+
 type OperationName string
 
 // Enum values for OperationName
@@ -236,6 +271,7 @@ const (
 	OperationNameS3PutObjectCopy         OperationName = "S3PutObjectCopy"
 	OperationNameS3PutObjectAcl          OperationName = "S3PutObjectAcl"
 	OperationNameS3PutObjectTagging      OperationName = "S3PutObjectTagging"
+	OperationNameS3DeleteObjectTagging   OperationName = "S3DeleteObjectTagging"
 	OperationNameS3InitiateRestoreObject OperationName = "S3InitiateRestoreObject"
 	OperationNameS3PutObjectLegalHold    OperationName = "S3PutObjectLegalHold"
 	OperationNameS3PutObjectRetention    OperationName = "S3PutObjectRetention"
@@ -250,6 +286,7 @@ func (OperationName) Values() []OperationName {
 		"S3PutObjectCopy",
 		"S3PutObjectAcl",
 		"S3PutObjectTagging",
+		"S3DeleteObjectTagging",
 		"S3InitiateRestoreObject",
 		"S3PutObjectLegalHold",
 		"S3PutObjectRetention",

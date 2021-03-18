@@ -200,6 +200,8 @@ public class S3UpdateEndpoint implements GoIntegration {
                 "ListBuckets", "CreateBucket", "DeleteBucket"
         );
 
+        private final Set<String> TARGET_OBJECT_LAMBDAS = SetUtils.of("WriteGetObjectResponse");
+
         private S3(ServiceShape service) {
             this.service = service;
         }
@@ -285,14 +287,17 @@ public class S3UpdateEndpoint implements GoIntegration {
                     addMiddlewareFuncName(symbolProvider.toSymbol(operationShape).getName(),
                             UPDATE_ENDPOINT_INTERNAL_ADDER), () -> {
                         writer.write("return $T(stack, $T{ \n"
-                                        + "Accessor : $T{\n "
-                                        + "GetBucketFromInput: $L,\n}, \n"
-                                        + "UsePathStyle: options.$L,\n "
-                                        + "UseAccelerate: options.$L,\n "
-                                        + "SupportsAccelerate: $L,\n "
-                                        + "EndpointResolver: options.EndpointResolver,\n "
+                                        + "Accessor : $T{\n"
+                                        + "GetBucketFromInput: $L,\n},\n"
+                                        + "UsePathStyle: options.$L,\n"
+                                        + "UseAccelerate: options.$L,\n"
+                                        + "SupportsAccelerate: $L,\n"
+                                        + "TargetS3ObjectLambda: $L,\n"
+                                        + "EndpointResolver: options.EndpointResolver,\n"
                                         + "EndpointResolverOptions: options.EndpointOptions,\n"
-                                        + "UseDualstack: options.$L, \n UseARNRegion: options.$L, \n })",
+                                        + "UseDualstack: options.$L,\n"
+                                        + "UseARNRegion: options.$L,\n"
+                                        + "})",
                                 SymbolUtils.createValueSymbolBuilder(UPDATE_ENDPOINT_INTERNAL_ADDER,
                                         AwsCustomGoDependency.S3_CUSTOMIZATION).build(),
                                 SymbolUtils.createValueSymbolBuilder(UPDATE_ENDPOINT_INTERNAL_OPTIONS,
@@ -304,6 +309,7 @@ public class S3UpdateEndpoint implements GoIntegration {
                                 USE_PATH_STYLE_OPTION,
                                 USE_ACCELERATE_OPTION,
                                 !NOT_SUPPORT_ACCELERATE.contains(operationName),
+                                TARGET_OBJECT_LAMBDAS.contains(operationName),
                                 USE_DUALSTACK_OPTION,
                                 USE_ARNREGION_OPTION
                         );

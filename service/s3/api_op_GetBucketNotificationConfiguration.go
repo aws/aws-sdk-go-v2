@@ -13,7 +13,7 @@ import (
 )
 
 // Returns the notification configuration of a bucket. If notifications are not
-// enabled on the bucket, the operation returns an empty NotificationConfiguration
+// enabled on the bucket, the action returns an empty NotificationConfiguration
 // element. By default, you must be the bucket owner to read the notification
 // configuration of a bucket. However, the bucket owner can use a bucket policy to
 // grant permission to other users to read this configuration with the
@@ -23,10 +23,9 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html). For
 // more information about bucket policies, see Using Bucket Policies
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html). The
-// following operation is related to GetBucketNotification:
+// following action is related to GetBucketNotification:
 //
-// *
-// PutBucketNotification
+// * PutBucketNotification
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketNotification.html)
 func (c *Client) GetBucketNotificationConfiguration(ctx context.Context, params *GetBucketNotificationConfigurationInput, optFns ...func(*Options)) (*GetBucketNotificationConfigurationOutput, error) {
 	if params == nil {
@@ -50,7 +49,7 @@ type GetBucketNotificationConfigurationInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -174,6 +173,7 @@ func addGetBucketNotificationConfigurationUpdateEndpoint(stack *middleware.Stack
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

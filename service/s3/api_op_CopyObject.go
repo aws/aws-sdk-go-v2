@@ -15,10 +15,9 @@ import (
 
 // Creates a copy of an object that is already stored in Amazon S3. You can store
 // individual objects of up to 5 TB in Amazon S3. You create a copy of your object
-// up to 5 GB in size in a single atomic operation using this API. However, to copy
-// an object greater than 5 GB, you must use the multipart upload Upload Part -
-// Copy API. For more information, see Copy Object Using the REST Multipart Upload
-// API
+// up to 5 GB in size in a single atomic action using this API. However, to copy an
+// object greater than 5 GB, you must use the multipart upload Upload Part - Copy
+// API. For more information, see Copy Object Using the REST Multipart Upload API
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjctsUsingRESTMPUapi.html).
 // All copy requests must be authenticated. Additionally, you must have read access
 // to the source object and write access to the destination bucket. For more
@@ -27,7 +26,7 @@ import (
 // the Region that you want to copy the object from and the Region that you want to
 // copy the object to must be enabled for your account. A copy request might return
 // an error when Amazon S3 receives the copy request or while Amazon S3 is copying
-// the files. If the error occurs before the copy operation starts, you receive a
+// the files. If the error occurs before the copy action starts, you receive a
 // standard Amazon S3 error. If the error occurs during the copy operation, the
 // error response is embedded in the 200 OK response. This means that a 200 OK
 // response can contain either a success or an error. Design your application to
@@ -37,7 +36,7 @@ import (
 // not, it would not contain the content-length, and you would need to read the
 // entire body. The copy request charge is based on the storage class and Region
 // that you specify for the destination object. For pricing information, see Amazon
-// S3 pricing (https://aws.amazon.com/s3/pricing/). Amazon S3 transfer acceleration
+// S3 pricing (http://aws.amazon.com/s3/pricing/). Amazon S3 transfer acceleration
 // does not support cross-Region copies. If you request a cross-Region copy using a
 // transfer acceleration endpoint, you get a 400 Bad Request error. For more
 // information, see Transfer Acceleration
@@ -104,17 +103,16 @@ import (
 // a target object uses SSE-KMS, you can enable an S3 Bucket Key for the object.
 // For more information, see Amazon S3 Bucket Keys
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the Amazon
-// Simple Storage Service Developer Guide. Access Control List (ACL)-Specific
-// Request Headers When copying an object, you can optionally use headers to grant
-// ACL-based permissions. By default, all objects are private. Only the owner has
-// full access control. When adding a new object, you can grant permissions to
-// individual AWS accounts or to predefined groups defined by Amazon S3. These
-// permissions are then added to the ACL on the object. For more information, see
-// Access Control List (ACL) Overview
+// S3 User Guide. Access Control List (ACL)-Specific Request Headers When copying
+// an object, you can optionally use headers to grant ACL-based permissions. By
+// default, all objects are private. Only the owner has full access control. When
+// adding a new object, you can grant permissions to individual AWS accounts or to
+// predefined groups defined by Amazon S3. These permissions are then added to the
+// ACL on the object. For more information, see Access Control List (ACL) Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) and Managing
 // ACLs Using the REST API
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html).
-// Storage Class Options You can use the CopyObject operation to change the storage
+// Storage Class Options You can use the CopyObject action to change the storage
 // class of an object that is already stored in Amazon S3 using the StorageClass
 // parameter. For more information, see Storage Classes
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) in
@@ -160,21 +158,21 @@ func (c *Client) CopyObject(ctx context.Context, params *CopyObjectInput, optFns
 
 type CopyObjectInput struct {
 
-	// The name of the destination bucket. When using this API with an access point,
+	// The name of the destination bucket. When using this action with an access point,
 	// you must direct requests to the access point hostname. The access point hostname
 	// takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com.
-	// When using this operation with an access point through the AWS SDKs, you provide
+	// When using this action with an access point through the AWS SDKs, you provide
 	// the access point ARN in place of the bucket name. For more information about
 	// access point ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide. When using this API with
-	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
-	// The S3 on Outposts hostname takes the form
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide. When using this action
+	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
+	// hostname. The S3 on Outposts hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this operation using S3 on Outposts through the AWS SDKs, you provide the
-	// Outposts bucket ARN in place of the bucket name. For more information about S3
-	// on Outposts ARNs, see Using S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
+	// bucket ARN in place of the bucket name. For more information about S3 on
+	// Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
@@ -183,10 +181,10 @@ type CopyObjectInput struct {
 	// Specifies the source object for the copy operation. You specify the value in one
 	// of two formats, depending on whether you want to access the source object
 	// through an access point
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html):
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html):
 	//
-	// * For
-	// objects not accessed through an access point, specify the name of the source
+	// *
+	// For objects not accessed through an access point, specify the name of the source
 	// bucket and the key of the source object, separated by a slash (/). For example,
 	// to copy the object reports/january.pdf from the bucket awsexamplebucket, use
 	// awsexamplebucket/reports/january.pdf. The value must be URL encoded.
@@ -229,8 +227,8 @@ type CopyObjectInput struct {
 	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption
 	// with server-side encryption using AWS KMS (SSE-KMS). Setting this header to true
 	// causes Amazon S3 to use an S3 Bucket Key for object encryption with SSE-KMS.
-	// Specifying this header with a COPY operation doesn’t affect bucket-level
-	// settings for S3 Bucket Key.
+	// Specifying this header with a COPY action doesn’t affect bucket-level settings
+	// for S3 Bucket Key.
 	BucketKeyEnabled bool
 
 	// Specifies caching behavior along the request/reply chain.
@@ -276,12 +274,12 @@ type CopyObjectInput struct {
 	// encryption key was transmitted without error.
 	CopySourceSSECustomerKeyMD5 *string
 
-	// The account id of the expected destination bucket owner. If the destination
+	// The account ID of the expected destination bucket owner. If the destination
 	// bucket is owned by a different account, the request will fail with an HTTP 403
 	// (Access Denied) error.
 	ExpectedBucketOwner *string
 
-	// The account id of the expected source bucket owner. If the source bucket is
+	// The account ID of the expected source bucket owner. If the source bucket is
 	// owned by a different account, the request will fail with an HTTP 403 (Access
 	// Denied) error.
 	ExpectedSourceBucketOwner *string
@@ -537,6 +535,7 @@ func addCopyObjectUpdateEndpoint(stack *middleware.Stack, options Options) error
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

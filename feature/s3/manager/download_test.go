@@ -720,6 +720,53 @@ func TestDownloadBufferStrategy_Errors(t *testing.T) {
 	}
 }
 
+func TestDownloaderValidARN(t *testing.T) {
+	cases := map[string]struct {
+		input   s3.GetObjectInput
+		wantErr bool
+	}{
+		"standard bucket": {
+			input: s3.GetObjectInput{
+				Bucket: aws.String("test-bucket"),
+				Key:    aws.String("test-key"),
+			},
+		},
+		"accesspoint": {
+			input: s3.GetObjectInput{
+				Bucket: aws.String("arn:aws:s3:us-west-2:123456789012:accesspoint/myap"),
+				Key:    aws.String("test-key"),
+			},
+		},
+		"outpost accesspoint": {
+			input: s3.GetObjectInput{
+				Bucket: aws.String("arn:aws:s3-outposts:us-west-2:012345678901:outpost/op-1234567890123456/accesspoint/myaccesspoint"),
+				Key:    aws.String("test-key"),
+			},
+		},
+		"s3-object-lambda accesspoint": {
+			input: s3.GetObjectInput{
+				Bucket: aws.String("arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint/myap"),
+			},
+			wantErr: true,
+		},
+	}
+
+	for name, tt := range cases {
+		t.Run(name, func(t *testing.T) {
+			client, _ := newDownloadNonRangeClient(buf2MB)
+
+			downloader := manager.NewDownloader(client, func(downloader *manager.Downloader) {
+				downloader.Concurrency = 1
+			})
+
+			_, err := downloader.Download(context.Background(), &awstesting.DiscardAt{}, &tt.input)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("err: %v, wantErr: %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
 type recordedWriterReadFromProvider struct {
 	callbacksVended   uint32
 	callbacksExecuted uint32

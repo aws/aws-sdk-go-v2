@@ -15,14 +15,13 @@ import (
 	"strings"
 )
 
-// Updates the status for the specified job. Use this operation to confirm that you
+// Updates the status for the specified job. Use this action to confirm that you
 // want to run a job or to cancel an existing job. For more information, see S3
 // Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html) in the
-// Amazon Simple Storage Service Developer Guide. Related actions include:
+// Amazon Simple Storage Service User Guide. Related actions include:
 //
-// *
-// CreateJob
+// * CreateJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
 //
 // *
@@ -53,7 +52,7 @@ func (c *Client) UpdateJobStatus(ctx context.Context, params *UpdateJobStatusInp
 
 type UpdateJobStatusInput struct {
 
-	//
+	// The AWS account ID associated with the S3 Batch Operations job.
 	//
 	// This member is required.
 	AccountId *string

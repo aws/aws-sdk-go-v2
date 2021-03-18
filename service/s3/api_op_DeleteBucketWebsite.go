@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation removes the website configuration for a bucket. Amazon S3 returns
-// a 200 OK response upon successfully deleting a website configuration on the
+// This action removes the website configuration for a bucket. Amazon S3 returns a
+// 200 OK response upon successfully deleting a website configuration on the
 // specified bucket. You will get a 200 OK response if the website configuration
 // you are trying to delete does not exist on the bucket. Amazon S3 returns a 404
 // response if the bucket specified in the request does not exist. This DELETE
-// operation requires the S3:DeleteBucketWebsite permission. By default, only the
+// action requires the S3:DeleteBucketWebsite permission. By default, only the
 // bucket owner can delete the website configuration attached to a bucket. However,
 // bucket owners can grant other users permission to delete the website
 // configuration by writing a bucket policy granting them the
@@ -53,7 +53,7 @@ type DeleteBucketWebsiteInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -162,6 +162,7 @@ func addDeleteBucketWebsiteUpdateEndpoint(stack *middleware.Stack, options Optio
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

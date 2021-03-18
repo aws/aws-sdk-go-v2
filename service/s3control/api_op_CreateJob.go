@@ -15,12 +15,12 @@ import (
 	"strings"
 )
 
-// S3 Batch Operations performs large-scale Batch Operations on Amazon S3 objects.
-// Batch Operations can run a single operation or action on lists of Amazon S3
+// You can use S3 Batch Operations to perform large-scale batch actions on Amazon
+// S3 objects. Batch Operations can run a single action on lists of Amazon S3
 // objects that you specify. For more information, see S3 Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html) in the
-// Amazon Simple Storage Service Developer Guide. This operation creates an S3
-// Batch Operations job. Related actions include:
+// Amazon Simple Storage Service User Guide. This action creates a S3 Batch
+// Operations job. Related actions include:
 //
 // * DescribeJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
@@ -36,6 +36,10 @@ import (
 // *
 // UpdateJobStatus
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
+//
+// *
+// JobOperation
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobOperation.html)
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}
@@ -69,10 +73,10 @@ type CreateJobInput struct {
 	// This member is required.
 	Manifest *types.JobManifest
 
-	// The operation that you want this job to perform on each object listed in the
-	// manifest. For more information about the available operations, see Operations
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// The action that you want this job to perform on every object listed in the
+	// manifest. For more information about the available actions, see Operations
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-actions.html) in the
+	// Amazon Simple Storage Service User Guide.
 	//
 	// This member is required.
 	Operation *types.JobOperation
@@ -88,8 +92,8 @@ type CreateJobInput struct {
 	Report *types.JobReport
 
 	// The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM)
-	// role that Batch Operations will use to run this job's operation on each object
-	// in the manifest.
+	// role that Batch Operations will use to run this job's action on every object in
+	// the manifest.
 	//
 	// This member is required.
 	RoleArn *string

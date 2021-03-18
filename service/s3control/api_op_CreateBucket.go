@@ -13,32 +13,31 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API operation creates an Amazon S3 on Outposts bucket. To create an S3
-// bucket, see Create Bucket
+// This action creates an Amazon S3 on Outposts bucket. To create an S3 bucket, see
+// Create Bucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html) in the
 // Amazon Simple Storage Service API. Creates a new Outposts bucket. By creating
 // the bucket, you become the bucket owner. To create an Outposts bucket, you must
 // have S3 on Outposts. For more information, see Using Amazon S3 on Outposts
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in Amazon
-// Simple Storage Service Developer Guide. Not every string is an acceptable bucket
-// name. For information on bucket naming restrictions, see Working with Amazon S3
-// Buckets
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules).
-// S3 on Outposts buckets do not support
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in
+// Amazon Simple Storage Service User Guide. Not every string is an acceptable
+// bucket name. For information on bucket naming restrictions, see Working with
+// Amazon S3 Buckets
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/BucketRestrictions.html#bucketnamingrules).
+// S3 on Outposts buckets support:
 //
-// * ACLs. Instead, configure access point
-// policies to manage access to buckets.
+// * Tags
 //
-// * Public access.
+// * LifecycleConfigurations for deleting
+// expired objects
 //
-// * Object Lock
-//
-// * Bucket
-// Location constraint
-//
-// For an example of the request syntax for Amazon S3 on
-// Outposts that uses the S3 on Outposts endpoint hostname prefix and
-// x-amz-outpost-id in your API request, see the Examples
+// For a complete list of restrictions and Amazon S3 feature
+// limitations on S3 on Outposts, see  Amazon S3 on Outposts Restrictions and
+// Limitations
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OnOutpostsRestrictionsLimitations.html).
+// For an example of the request syntax for Amazon S3 on Outposts that uses the S3
+// on Outposts endpoint hostname prefix and x-amz-outpost-id in your API request,
+// see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html#API_control_CreateBucket_Examples)
 // section. The following actions are related to CreateBucket for Amazon S3 on
 // Outposts:

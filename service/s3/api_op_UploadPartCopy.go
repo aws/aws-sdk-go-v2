@@ -18,38 +18,34 @@ import (
 // request and a byte range by adding the request header x-amz-copy-source-range in
 // your request. The minimum allowable part size for a multipart upload is 5 MB.
 // For more information about multipart upload limits, go to Quick Facts
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/qfacts.html) in the Amazon
-// Simple Storage Service Developer Guide. Instead of using an existing object as
-// part data, you might use the UploadPart
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html) operation
-// and provide data in your request. You must initiate a multipart upload before
-// you can upload any part. In response to your initiate request. Amazon S3 returns
-// a unique identifier, the upload ID, that you must include in your upload part
-// request. For more information about using the UploadPartCopy operation, see the
-// following:
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/qfacts.html) in the Amazon S3
+// User Guide. Instead of using an existing object as part data, you might use the
+// UploadPart (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
+// action and provide data in your request. You must initiate a multipart upload
+// before you can upload any part. In response to your initiate request. Amazon S3
+// returns a unique identifier, the upload ID, that you must include in your upload
+// part request. For more information about using the UploadPartCopy operation, see
+// the following:
 //
-// * For conceptual information about multipart uploads, see Uploading
-// Objects Using Multipart Upload
+// * For conceptual information about multipart uploads, see
+// Uploading Objects Using Multipart Upload
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html) in the
-// Amazon Simple Storage Service Developer Guide.
+// Amazon S3 User Guide.
 //
-// * For information about
-// permissions required to use the multipart upload API, see Multipart Upload API
-// and Permissions
+// * For information about permissions required to use the
+// multipart upload API, see Multipart Upload and Permissions
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html) in the
-// Amazon Simple Storage Service Developer Guide.
+// Amazon S3 User Guide.
 //
-// * For information about copying
-// objects using a single atomic operation vs. the multipart upload, see Operations
-// on Objects
+// * For information about copying objects using a single
+// atomic action vs. the multipart upload, see Operations on Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectOperations.html) in the
-// Amazon Simple Storage Service Developer Guide.
+// Amazon S3 User Guide.
 //
-// * For information about using
-// server-side encryption with customer-provided encryption keys with the
-// UploadPartCopy operation, see CopyObject
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html) and
-// UploadPart
+// * For information about using server-side encryption with
+// customer-provided encryption keys with the UploadPartCopy operation, see
+// CopyObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
+// and UploadPart
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html).
 //
 // Note the
@@ -141,21 +137,21 @@ func (c *Client) UploadPartCopy(ctx context.Context, params *UploadPartCopyInput
 
 type UploadPartCopyInput struct {
 
-	// The bucket name. When using this API with an access point, you must direct
+	// The bucket name. When using this action with an access point, you must direct
 	// requests to the access point hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation with an access point through the AWS SDKs, you provide the access
-	// point ARN in place of the bucket name. For more information about access point
-	// ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide. When using this API with
-	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
-	// The S3 on Outposts hostname takes the form
+	// action with an access point through the AWS SDKs, you provide the access point
+	// ARN in place of the bucket name. For more information about access point ARNs,
+	// see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide. When using this action
+	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
+	// hostname. The S3 on Outposts hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this operation using S3 on Outposts through the AWS SDKs, you provide the
-	// Outposts bucket ARN in place of the bucket name. For more information about S3
-	// on Outposts ARNs, see Using S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
+	// bucket ARN in place of the bucket name. For more information about S3 on
+	// Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
@@ -164,10 +160,10 @@ type UploadPartCopyInput struct {
 	// Specifies the source object for the copy operation. You specify the value in one
 	// of two formats, depending on whether you want to access the source object
 	// through an access point
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html):
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html):
 	//
-	// * For
-	// objects not accessed through an access point, specify the name of the source
+	// *
+	// For objects not accessed through an access point, specify the name of the source
 	// bucket and key of the source object, separated by a slash (/). For example, to
 	// copy the object reports/january.pdf from the bucket awsexamplebucket, use
 	// awsexamplebucket/reports/january.pdf. The value must be URL encoded.
@@ -247,12 +243,12 @@ type UploadPartCopyInput struct {
 	// encryption key was transmitted without error.
 	CopySourceSSECustomerKeyMD5 *string
 
-	// The account id of the expected destination bucket owner. If the destination
+	// The account ID of the expected destination bucket owner. If the destination
 	// bucket is owned by a different account, the request will fail with an HTTP 403
 	// (Access Denied) error.
 	ExpectedBucketOwner *string
 
-	// The account id of the expected source bucket owner. If the source bucket is
+	// The account ID of the expected source bucket owner. If the source bucket is
 	// owned by a different account, the request will fail with an HTTP 403 (Access
 	// Denied) error.
 	ExpectedSourceBucketOwner *string
@@ -424,6 +420,7 @@ func addUploadPartCopyUpdateEndpoint(stack *middleware.Stack, options Options) e
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

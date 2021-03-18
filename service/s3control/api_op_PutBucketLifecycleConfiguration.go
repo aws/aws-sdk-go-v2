@@ -20,11 +20,9 @@ import (
 // PutBucketLifecycleConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html)
 // in the Amazon Simple Storage Service API. Creates a new lifecycle configuration
-// for the Outposts bucket or replaces an existing lifecycle configuration.
+// for the S3 on Outposts bucket or replaces an existing lifecycle configuration.
 // Outposts buckets only support lifecycle configurations that delete/expire
 // objects after a certain period of time and abort incomplete multipart uploads.
-// For more information, see Managing Lifecycle Permissions for Amazon S3 on
-// Outposts (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html).
 // All Amazon S3 on Outposts REST API requests for this action require an
 // additional parameter of x-amz-outpost-id to be passed with the request and an S3
 // on Outposts endpoint hostname prefix instead of s3-control. For an example of

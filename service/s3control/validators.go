@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateAccessPointForObjectLambda struct {
+}
+
+func (*validateOpCreateAccessPointForObjectLambda) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAccessPointForObjectLambda) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAccessPointForObjectLambdaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAccessPointForObjectLambdaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAccessPoint struct {
 }
 
@@ -70,6 +90,26 @@ func (m *validateOpCreateJob) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAccessPointForObjectLambda struct {
+}
+
+func (*validateOpDeleteAccessPointForObjectLambda) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAccessPointForObjectLambda) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAccessPointForObjectLambdaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAccessPointForObjectLambdaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAccessPoint struct {
 }
 
@@ -85,6 +125,26 @@ func (m *validateOpDeleteAccessPoint) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAccessPointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAccessPointPolicyForObjectLambda struct {
+}
+
+func (*validateOpDeleteAccessPointPolicyForObjectLambda) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAccessPointPolicyForObjectLambda) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAccessPointPolicyForObjectLambdaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAccessPointPolicyForObjectLambdaInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -290,6 +350,46 @@ func (m *validateOpDescribeJob) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAccessPointConfigurationForObjectLambda struct {
+}
+
+func (*validateOpGetAccessPointConfigurationForObjectLambda) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccessPointConfigurationForObjectLambda) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccessPointConfigurationForObjectLambdaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccessPointConfigurationForObjectLambdaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAccessPointForObjectLambda struct {
+}
+
+func (*validateOpGetAccessPointForObjectLambda) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccessPointForObjectLambda) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccessPointForObjectLambdaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccessPointForObjectLambdaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAccessPoint struct {
 }
 
@@ -310,6 +410,26 @@ func (m *validateOpGetAccessPoint) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAccessPointPolicyForObjectLambda struct {
+}
+
+func (*validateOpGetAccessPointPolicyForObjectLambda) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccessPointPolicyForObjectLambda) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccessPointPolicyForObjectLambdaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccessPointPolicyForObjectLambdaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAccessPointPolicy struct {
 }
 
@@ -325,6 +445,26 @@ func (m *validateOpGetAccessPointPolicy) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAccessPointPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAccessPointPolicyStatusForObjectLambda struct {
+}
+
+func (*validateOpGetAccessPointPolicyStatusForObjectLambda) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccessPointPolicyStatusForObjectLambda) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccessPointPolicyStatusForObjectLambdaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccessPointPolicyStatusForObjectLambdaInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +650,26 @@ func (m *validateOpGetStorageLensConfigurationTagging) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAccessPointsForObjectLambda struct {
+}
+
+func (*validateOpListAccessPointsForObjectLambda) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAccessPointsForObjectLambda) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAccessPointsForObjectLambdaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAccessPointsForObjectLambdaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAccessPoints struct {
 }
 
@@ -585,6 +745,46 @@ func (m *validateOpListStorageLensConfigurations) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListStorageLensConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAccessPointConfigurationForObjectLambda struct {
+}
+
+func (*validateOpPutAccessPointConfigurationForObjectLambda) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccessPointConfigurationForObjectLambda) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccessPointConfigurationForObjectLambdaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccessPointConfigurationForObjectLambdaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAccessPointPolicyForObjectLambda struct {
+}
+
+func (*validateOpPutAccessPointPolicyForObjectLambda) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccessPointPolicyForObjectLambda) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccessPointPolicyForObjectLambdaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccessPointPolicyForObjectLambdaInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -790,6 +990,10 @@ func (m *validateOpUpdateJobStatus) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateAccessPointForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAccessPointForObjectLambda{}, middleware.After)
+}
+
 func addOpCreateAccessPointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAccessPoint{}, middleware.After)
 }
@@ -802,8 +1006,16 @@ func addOpCreateJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateJob{}, middleware.After)
 }
 
+func addOpDeleteAccessPointForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAccessPointForObjectLambda{}, middleware.After)
+}
+
 func addOpDeleteAccessPointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAccessPoint{}, middleware.After)
+}
+
+func addOpDeleteAccessPointPolicyForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAccessPointPolicyForObjectLambda{}, middleware.After)
 }
 
 func addOpDeleteAccessPointPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -846,12 +1058,28 @@ func addOpDescribeJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeJob{}, middleware.After)
 }
 
+func addOpGetAccessPointConfigurationForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccessPointConfigurationForObjectLambda{}, middleware.After)
+}
+
+func addOpGetAccessPointForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccessPointForObjectLambda{}, middleware.After)
+}
+
 func addOpGetAccessPointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAccessPoint{}, middleware.After)
 }
 
+func addOpGetAccessPointPolicyForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccessPointPolicyForObjectLambda{}, middleware.After)
+}
+
 func addOpGetAccessPointPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAccessPointPolicy{}, middleware.After)
+}
+
+func addOpGetAccessPointPolicyStatusForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccessPointPolicyStatusForObjectLambda{}, middleware.After)
 }
 
 func addOpGetAccessPointPolicyStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -890,6 +1118,10 @@ func addOpGetStorageLensConfigurationTaggingValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpGetStorageLensConfigurationTagging{}, middleware.After)
 }
 
+func addOpListAccessPointsForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAccessPointsForObjectLambda{}, middleware.After)
+}
+
 func addOpListAccessPointsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccessPoints{}, middleware.After)
 }
@@ -904,6 +1136,14 @@ func addOpListRegionalBucketsValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListStorageLensConfigurationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListStorageLensConfigurations{}, middleware.After)
+}
+
+func addOpPutAccessPointConfigurationForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccessPointConfigurationForObjectLambda{}, middleware.After)
+}
+
+func addOpPutAccessPointPolicyForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccessPointPolicyForObjectLambda{}, middleware.After)
 }
 
 func addOpPutAccessPointPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -957,6 +1197,21 @@ func validateAccountLevel(v *types.AccountLevel) error {
 		if err := validateBucketLevel(v.BucketLevel); err != nil {
 			invalidParams.AddNested("BucketLevel", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAwsLambdaTransformation(v *types.AwsLambdaTransformation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AwsLambdaTransformation"}
+	if v.FunctionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1173,6 +1428,86 @@ func validateLifecycleRules(v []types.LifecycleRule) error {
 	invalidParams := smithy.InvalidParamsError{Context: "LifecycleRules"}
 	for i := range v {
 		if err := validateLifecycleRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateObjectLambdaConfiguration(v *types.ObjectLambdaConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ObjectLambdaConfiguration"}
+	if v.SupportingAccessPoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SupportingAccessPoint"))
+	}
+	if v.TransformationConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransformationConfigurations"))
+	} else if v.TransformationConfigurations != nil {
+		if err := validateObjectLambdaTransformationConfigurationsList(v.TransformationConfigurations); err != nil {
+			invalidParams.AddNested("TransformationConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateObjectLambdaContentTransformation(v types.ObjectLambdaContentTransformation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ObjectLambdaContentTransformation"}
+	switch uv := v.(type) {
+	case *types.ObjectLambdaContentTransformationMemberAwsLambda:
+		if err := validateAwsLambdaTransformation(&uv.Value); err != nil {
+			invalidParams.AddNested("[AwsLambda]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateObjectLambdaTransformationConfiguration(v *types.ObjectLambdaTransformationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ObjectLambdaTransformationConfiguration"}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	}
+	if v.ContentTransformation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentTransformation"))
+	} else if v.ContentTransformation != nil {
+		if err := validateObjectLambdaContentTransformation(v.ContentTransformation); err != nil {
+			invalidParams.AddNested("ContentTransformation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateObjectLambdaTransformationConfigurationsList(v []types.ObjectLambdaTransformationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ObjectLambdaTransformationConfigurationsList"}
+	for i := range v {
+		if err := validateObjectLambdaTransformationConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1561,6 +1896,31 @@ func validateVpcConfiguration(v *types.VpcConfiguration) error {
 	}
 }
 
+func validateOpCreateAccessPointForObjectLambdaInput(v *CreateAccessPointForObjectLambdaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAccessPointForObjectLambdaInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateObjectLambdaConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAccessPointInput(v *CreateAccessPointInput) error {
 	if v == nil {
 		return nil
@@ -1649,11 +2009,47 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 	}
 }
 
+func validateOpDeleteAccessPointForObjectLambdaInput(v *DeleteAccessPointForObjectLambdaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccessPointForObjectLambdaInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAccessPointInput(v *DeleteAccessPointInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccessPointInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAccessPointPolicyForObjectLambdaInput(v *DeleteAccessPointPolicyForObjectLambdaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccessPointPolicyForObjectLambdaInput"}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
@@ -1844,6 +2240,42 @@ func validateOpDescribeJobInput(v *DescribeJobInput) error {
 	}
 }
 
+func validateOpGetAccessPointConfigurationForObjectLambdaInput(v *GetAccessPointConfigurationForObjectLambdaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccessPointConfigurationForObjectLambdaInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAccessPointForObjectLambdaInput(v *GetAccessPointForObjectLambdaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccessPointForObjectLambdaInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAccessPointInput(v *GetAccessPointInput) error {
 	if v == nil {
 		return nil
@@ -1862,11 +2294,47 @@ func validateOpGetAccessPointInput(v *GetAccessPointInput) error {
 	}
 }
 
+func validateOpGetAccessPointPolicyForObjectLambdaInput(v *GetAccessPointPolicyForObjectLambdaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccessPointPolicyForObjectLambdaInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAccessPointPolicyInput(v *GetAccessPointPolicyInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAccessPointPolicyInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAccessPointPolicyStatusForObjectLambdaInput(v *GetAccessPointPolicyStatusForObjectLambdaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccessPointPolicyStatusForObjectLambdaInput"}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
@@ -2039,6 +2507,21 @@ func validateOpGetStorageLensConfigurationTaggingInput(v *GetStorageLensConfigur
 	}
 }
 
+func validateOpListAccessPointsForObjectLambdaInput(v *ListAccessPointsForObjectLambdaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAccessPointsForObjectLambdaInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAccessPointsInput(v *ListAccessPointsInput) error {
 	if v == nil {
 		return nil
@@ -2091,6 +2574,52 @@ func validateOpListStorageLensConfigurationsInput(v *ListStorageLensConfiguratio
 	invalidParams := smithy.InvalidParamsError{Context: "ListStorageLensConfigurationsInput"}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccessPointConfigurationForObjectLambdaInput(v *PutAccessPointConfigurationForObjectLambdaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccessPointConfigurationForObjectLambdaInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateObjectLambdaConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccessPointPolicyForObjectLambdaInput(v *PutAccessPointPolicyForObjectLambdaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccessPointPolicyForObjectLambdaInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

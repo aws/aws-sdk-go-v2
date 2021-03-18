@@ -63,6 +63,20 @@ type ActivityMetrics struct {
 	IsEnabled bool
 }
 
+// AWS Lambda function used to transform objects through an Object Lambda Access
+// Point.
+type AwsLambdaTransformation struct {
+
+	// The Amazon Resource Name (ARN) of the AWS Lambda function.
+	//
+	// This member is required.
+	FunctionArn *string
+
+	// Additional JSON that provides supplemental data to the Lambda function used to
+	// transform objects.
+	FunctionPayload *string
+}
+
 // A container for the bucket-level configuration.
 type BucketLevel struct {
 
@@ -195,7 +209,7 @@ type JobListDescriptor struct {
 	// The ID for the specified job.
 	JobId *string
 
-	// The operation that the specified job is configured to run on each object listed
+	// The operation that the specified job is configured to run on every object listed
 	// in the manifest.
 	Operation OperationName
 
@@ -237,7 +251,11 @@ type JobManifestLocation struct {
 	// This member is required.
 	ETag *string
 
-	// The Amazon Resource Name (ARN) for a manifest object.
+	// The Amazon Resource Name (ARN) for a manifest object. Replacement must be made
+	// for object keys containing special characters (such as carriage returns) when
+	// using XML requests. For more information, see  XML related object key
+	// constraints
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 	//
 	// This member is required.
 	ObjectArn *string
@@ -260,46 +278,50 @@ type JobManifestSpec struct {
 	Fields []JobManifestFieldName
 }
 
-// The operation that you want this job to perform on each object listed in the
+// The operation that you want this job to perform on every object listed in the
 // manifest. For more information about the available operations, see Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html) in
-// the Amazon Simple Storage Service Developer Guide.
+// the Amazon Simple Storage Service User Guide.
 type JobOperation struct {
 
-	// Directs the specified job to invoke an AWS Lambda function on each object in the
-	// manifest.
+	// Directs the specified job to invoke an AWS Lambda function on every object in
+	// the manifest.
 	LambdaInvoke *LambdaInvokeOperation
 
-	// Directs the specified job to run an Initiate Glacier Restore call on each object
+	// Directs the specified job to execute a DELETE Object tagging call on every
+	// object in the manifest.
+	S3DeleteObjectTagging *S3DeleteObjectTaggingOperation
+
+	// Directs the specified job to initiate restore requests for every archived object
 	// in the manifest.
 	S3InitiateRestoreObject *S3InitiateRestoreObjectOperation
 
-	// Directs the specified job to run a PUT Object acl call on each object in the
+	// Directs the specified job to run a PUT Object acl call on every object in the
 	// manifest.
 	S3PutObjectAcl *S3SetObjectAclOperation
 
-	// Directs the specified job to run a PUT Copy object call on each object in the
+	// Directs the specified job to run a PUT Copy object call on every object in the
 	// manifest.
 	S3PutObjectCopy *S3CopyObjectOperation
 
 	// Contains the configuration for an S3 Object Lock legal hold operation that an S3
-	// Batch Operations job passes each object through to the underlying
-	// PutObjectLegalHold API. For more information, see Using S3 Object Lock legal
-	// hold with S3 Batch Operations
+	// Batch Operations job passes every object to the underlying PutObjectLegalHold
+	// API. For more information, see Using S3 Object Lock legal hold with S3 Batch
+	// Operations
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// the Amazon Simple Storage Service User Guide.
 	S3PutObjectLegalHold *S3SetObjectLegalHoldOperation
 
 	// Contains the configuration parameters for the Object Lock retention action for
-	// an S3 Batch Operations job. Batch Operations passes each value through to the
+	// an S3 Batch Operations job. Batch Operations passes every object to the
 	// underlying PutObjectRetention API. For more information, see Using S3 Object
 	// Lock retention with S3 Batch Operations
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-	// in the Amazon Simple Storage Service Developer Guide.
+	// in the Amazon Simple Storage Service User Guide.
 	S3PutObjectRetention *S3SetObjectRetentionOperation
 
-	// Directs the specified job to run a PUT Object tagging call on each object in the
-	// manifest.
+	// Directs the specified job to run a PUT Object tagging call on every object in
+	// the manifest.
 	S3PutObjectTagging *S3SetObjectTaggingOperation
 }
 
@@ -346,7 +368,7 @@ type JobReport struct {
 type LambdaInvokeOperation struct {
 
 	// The Amazon Resource Name (ARN) for the AWS Lambda function that the specified
-	// job will invoke for each object in the manifest.
+	// job will invoke on every object in the manifest.
 	FunctionArn *string
 }
 
@@ -436,7 +458,11 @@ type LifecycleRuleFilter struct {
 	// The container for the AND condition for the lifecycle rule.
 	And *LifecycleRuleAndOperator
 
-	// Prefix identifying one or more objects to which the rule applies.
+	// Prefix identifying one or more objects to which the rule applies. Replacement
+	// must be made for object keys containing special characters (such as carriage
+	// returns) when using XML requests. For more information, see  XML related object
+	// key constraints
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 	Prefix *string
 
 	//
@@ -495,11 +521,75 @@ type NoncurrentVersionTransition struct {
 	StorageClass TransitionStorageClass
 }
 
+// An access point with an attached AWS Lambda function used to access transformed
+// data from an Amazon S3 bucket.
+type ObjectLambdaAccessPoint struct {
+
+	// The name of the Object Lambda Access Point.
+	//
+	// This member is required.
+	Name *string
+
+	// Specifies the ARN for the Object Lambda Access Point.
+	ObjectLambdaAccessPointArn *string
+}
+
+// A configuration used when creating an Object Lambda Access Point.
+type ObjectLambdaConfiguration struct {
+
+	// Standard access point associated with the Object Lambda Access Point.
+	//
+	// This member is required.
+	SupportingAccessPoint *string
+
+	// A container for transformation configurations for an Object Lambda Access Point.
+	//
+	// This member is required.
+	TransformationConfigurations []ObjectLambdaTransformationConfiguration
+
+	// A container for allowed features. Valid inputs are GetObject-Range and
+	// GetObject-PartNumber.
+	AllowedFeatures []ObjectLambdaAllowedFeature
+
+	// A container for whether the CloudWatch metrics configuration is enabled.
+	CloudWatchMetricsEnabled bool
+}
+
+// A container for AwsLambdaTransformation.
+//
+// The following types satisfy this interface:
+//  ObjectLambdaContentTransformationMemberAwsLambda
+type ObjectLambdaContentTransformation interface {
+	isObjectLambdaContentTransformation()
+}
+
+// A container for an AWS Lambda function.
+type ObjectLambdaContentTransformationMemberAwsLambda struct {
+	Value AwsLambdaTransformation
+}
+
+func (*ObjectLambdaContentTransformationMemberAwsLambda) isObjectLambdaContentTransformation() {}
+
+// A configuration used when creating an Object Lambda Access Point transformation.
+type ObjectLambdaTransformationConfiguration struct {
+
+	// A container for the action of an Object Lambda Access Point configuration.
+	//
+	// This member is required.
+	Actions []ObjectLambdaTransformationConfigurationAction
+
+	// A container for the content transformation of an Object Lambda Access Point
+	// configuration.
+	//
+	// This member is required.
+	ContentTransformation ObjectLambdaContentTransformation
+}
+
 // Indicates whether this access point policy is public. For more information about
 // how Amazon S3 evaluates policies to determine whether they are public, see The
 // Meaning of "Public"
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-// in the Amazon Simple Storage Service Developer Guide.
+// in the Amazon Simple Storage Service User Guide.
 type PolicyStatus struct {
 
 	//
@@ -656,8 +746,8 @@ type S3BucketDestination struct {
 }
 
 // Contains the configuration parameters for a PUT Copy object operation. S3 Batch
-// Operations passes each value through to the underlying PUT Copy object API. For
-// more information about the parameters for this operation, see PUT Object - Copy
+// Operations passes every object to the underlying PUT Copy object API. For more
+// information about the parameters for this operation, see PUT Object - Copy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html).
 type S3CopyObjectOperation struct {
 
@@ -717,6 +807,12 @@ type S3CopyObjectOperation struct {
 	UnModifiedSinceConstraint *time.Time
 }
 
+// Contains no configuration parameters because the DELETE Object tagging API only
+// accepts the bucket name and key name as parameters, which are defined in the
+// job's manifest.
+type S3DeleteObjectTaggingOperation struct {
+}
+
 //
 type S3Grant struct {
 
@@ -740,17 +836,28 @@ type S3Grantee struct {
 	TypeIdentifier S3GranteeTypeIdentifier
 }
 
-// Contains the configuration parameters for an Initiate Glacier Restore job. S3
-// Batch Operations passes each value through to the underlying POST Object restore
-// API. For more information about the parameters for this operation, see
-// RestoreObject
+// Contains the configuration parameters for an S3 Initiate Restore Object job. S3
+// Batch Operations passes every object to the underlying POST Object restore API.
+// For more information about the parameters for this operation, see RestoreObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html#RESTObjectPOSTrestore-restore-request).
 type S3InitiateRestoreObjectOperation struct {
 
-	//
+	// This argument specifies how long the S3 Glacier or S3 Glacier Deep Archive
+	// object remains available in Amazon S3. S3 Initiate Restore Object jobs that
+	// target S3 Glacier and S3 Glacier Deep Archive objects require ExpirationInDays
+	// set to 1 or greater. Conversely, do not set ExpirationInDays when creating S3
+	// Initiate Restore Object jobs that target S3 Intelligent-Tiering Archive Access
+	// and Deep Archive Access tier objects. Objects in S3 Intelligent-Tiering archive
+	// access tiers are not subject to restore expiry, so specifying ExpirationInDays
+	// results in restore request failure. S3 Batch Operations jobs can operate either
+	// on S3 Glacier and S3 Glacier Deep Archive storage class objects or on S3
+	// Intelligent-Tiering Archive Access and Deep Archive Access storage tier objects,
+	// but not both types in the same job. If you need to restore objects of both types
+	// you must create separate Batch Operations jobs.
 	ExpirationInDays *int32
 
-	//
+	// S3 Batch Operations supports STANDARD and BULK retrieval tiers, but not the
+	// EXPEDITED retrieval tier.
 	GlacierJobTier S3GlacierJobTier
 }
 
@@ -817,7 +924,7 @@ type S3ObjectOwner struct {
 // types in your operation, you will remove the retention from your objects. For
 // more information, see Using S3 Object Lock retention with S3 Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-// in the Amazon Simple Storage Service Developer Guide.
+// in the Amazon Simple Storage Service User Guide.
 type S3Retention struct {
 
 	// The Object Lock retention mode to be applied to all objects in the Batch
@@ -830,8 +937,8 @@ type S3Retention struct {
 }
 
 // Contains the configuration parameters for a Set Object ACL operation. S3 Batch
-// Operations passes each value through to the underlying PUT Object acl API. For
-// more information about the parameters for this operation, see PUT Object acl
+// Operations passes every object to the underlying PUT Object acl API. For more
+// information about the parameters for this operation, see PUT Object acl
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html).
 type S3SetObjectAclOperation struct {
 
@@ -840,11 +947,11 @@ type S3SetObjectAclOperation struct {
 }
 
 // Contains the configuration for an S3 Object Lock legal hold operation that an S3
-// Batch Operations job passes each object through to the underlying
-// PutObjectLegalHold API. For more information, see Using S3 Object Lock legal
-// hold with S3 Batch Operations
+// Batch Operations job passes every object to the underlying PutObjectLegalHold
+// API. For more information, see Using S3 Object Lock legal hold with S3 Batch
+// Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html) in
-// the Amazon Simple Storage Service Developer Guide.
+// the Amazon Simple Storage Service User Guide.
 type S3SetObjectLegalHoldOperation struct {
 
 	// Contains the Object Lock legal hold status to be applied to all objects in the
@@ -855,18 +962,18 @@ type S3SetObjectLegalHoldOperation struct {
 }
 
 // Contains the configuration parameters for the Object Lock retention action for
-// an S3 Batch Operations job. Batch Operations passes each value through to the
+// an S3 Batch Operations job. Batch Operations passes every object to the
 // underlying PutObjectRetention API. For more information, see Using S3 Object
 // Lock retention with S3 Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-// in the Amazon Simple Storage Service Developer Guide.
+// in the Amazon Simple Storage Service User Guide.
 type S3SetObjectRetentionOperation struct {
 
 	// Contains the Object Lock retention mode to be applied to all objects in the
 	// Batch Operations job. For more information, see Using S3 Object Lock retention
 	// with S3 Batch Operations
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-	// in the Amazon Simple Storage Service Developer Guide.
+	// in the Amazon Simple Storage Service User Guide.
 	//
 	// This member is required.
 	Retention *S3Retention
@@ -877,9 +984,9 @@ type S3SetObjectRetentionOperation struct {
 }
 
 // Contains the configuration parameters for a Set Object Tagging operation. S3
-// Batch Operations passes each value through to the underlying PUT Object tagging
-// API. For more information about the parameters for this operation, see PUT
-// Object tagging
+// Batch Operations passes every object to the underlying PUT Object tagging API.
+// For more information about the parameters for this operation, see PUT Object
+// tagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html).
 type S3SetObjectTaggingOperation struct {
 
@@ -986,7 +1093,8 @@ type StorageLensConfiguration struct {
 type StorageLensDataExport struct {
 
 	// A container for the bucket where the S3 Storage Lens metrics export will be
-	// located.
+	// located. This bucket must be located in the same Region as the storage lens
+	// configuration.
 	//
 	// This member is required.
 	S3BucketDestination *S3BucketDestination
@@ -1029,7 +1137,7 @@ type Tagging struct {
 // information about Amazon S3 Lifecycle configuration rules, see  Transitioning
 // objects using Amazon S3 Lifecycle
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html)
-// in the Amazon Simple Storage Service Developer Guide.
+// in the Amazon Simple Storage Service User Guide.
 type Transition struct {
 
 	// Indicates when objects are transitioned to the specified storage class. The date
@@ -1053,3 +1161,12 @@ type VpcConfiguration struct {
 	// This member is required.
 	VpcId *string
 }
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+}
+
+func (*UnknownUnionMember) isObjectLambdaContentTransformation() {}

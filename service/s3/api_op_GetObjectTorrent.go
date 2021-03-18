@@ -20,7 +20,7 @@ import (
 // torrent only for objects that are less than 5 GB in size, and that are not
 // encrypted using server-side encryption with a customer-provided encryption key.
 // To use GET, you must have READ access to the object. This action is not
-// supported by Amazon S3 on Outposts. The following operation is related to
+// supported by Amazon S3 on Outposts. The following action is related to
 // GetObjectTorrent:
 //
 // * GetObject
@@ -52,7 +52,7 @@ type GetObjectTorrentInput struct {
 	// This member is required.
 	Key *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 
@@ -174,6 +174,7 @@ func addGetObjectTorrentUpdateEndpoint(stack *middleware.Stack, options Options)
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

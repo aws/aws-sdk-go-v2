@@ -344,6 +344,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                     writer.write("stack.Finalize.Clear()");
                     writer.write("stack.Deserialize.Clear()");
                     writer.write("stack.Build.Remove(($P)(nil).ID())", requestInvocationID);
+                    writer.write("stack.Build.Remove($S)", "UserAgent");
 
                     Symbol middlewareOptionsSymbol = SymbolUtils.createValueSymbolBuilder(
                             "PresignHTTPRequestMiddlewareOptions", AwsGoDependency.AWS_SIGNER_V4).build();

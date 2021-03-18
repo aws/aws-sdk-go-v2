@@ -16,16 +16,16 @@ import (
 // initiate the multipart upload and then upload all parts using the UploadPart
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html) operation.
 // After successfully uploading all relevant parts of an upload, you call this
-// operation to complete the upload. Upon receiving this request, Amazon S3
+// action to complete the upload. Upon receiving this request, Amazon S3
 // concatenates all the parts in ascending order by part number to create a new
 // object. In the Complete Multipart Upload request, you must provide the parts
-// list. You must ensure that the parts list is complete. This operation
-// concatenates the parts that you provide in the list. For each part in the list,
-// you must provide the part number and the ETag value, returned after that part
-// was uploaded. Processing of a Complete Multipart Upload request could take
-// several minutes to complete. After Amazon S3 begins processing the request, it
-// sends an HTTP response header that specifies a 200 OK response. While processing
-// is in progress, Amazon S3 periodically sends white space characters to keep the
+// list. You must ensure that the parts list is complete. This action concatenates
+// the parts that you provide in the list. For each part in the list, you must
+// provide the part number and the ETag value, returned after that part was
+// uploaded. Processing of a Complete Multipart Upload request could take several
+// minutes to complete. After Amazon S3 begins processing the request, it sends an
+// HTTP response header that specifies a 200 OK response. While processing is in
+// progress, Amazon S3 periodically sends white space characters to keep the
 // connection from timing out. Because a request could fail after the initial 200
 // OK response has been sent, it is important that you check the response body to
 // determine whether the request succeeded. Note that if CompleteMultipartUpload
@@ -35,7 +35,7 @@ import (
 // more information about multipart uploads, see Uploading Objects Using Multipart
 // Upload (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html).
 // For information about permissions required to use the multipart upload API, see
-// Multipart Upload API and Permissions
+// Multipart Upload and Permissions
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html).
 // CompleteMultipartUpload has the following special errors:
 //
@@ -127,7 +127,7 @@ type CompleteMultipartUploadInput struct {
 	// This member is required.
 	UploadId *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 
@@ -146,21 +146,21 @@ type CompleteMultipartUploadInput struct {
 type CompleteMultipartUploadOutput struct {
 
 	// The name of the bucket that contains the newly created object. When using this
-	// API with an access point, you must direct requests to the access point hostname.
-	// The access point hostname takes the form
+	// action with an access point, you must direct requests to the access point
+	// hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation with an access point through the AWS SDKs, you provide the access
-	// point ARN in place of the bucket name. For more information about access point
-	// ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide. When using this API with
-	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
-	// The S3 on Outposts hostname takes the form
+	// action with an access point through the AWS SDKs, you provide the access point
+	// ARN in place of the bucket name. For more information about access point ARNs,
+	// see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide. When using this action
+	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
+	// hostname. The S3 on Outposts hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this operation using S3 on Outposts through the AWS SDKs, you provide the
-	// Outposts bucket ARN in place of the bucket name. For more information about S3
-	// on Outposts ARNs, see Using S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
+	// bucket ARN in place of the bucket name. For more information about S3 on
+	// Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	Bucket *string
 
@@ -311,6 +311,7 @@ func addCompleteMultipartUploadUpdateEndpoint(stack *middleware.Stack, options O
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

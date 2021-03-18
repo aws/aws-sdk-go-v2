@@ -23,7 +23,7 @@ import (
 // the ability to perform this action. For more information about bucket policies,
 // see Using Bucket Policies and User Policies
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html). The
-// following operation is related to GetBucketPolicy:
+// following action is related to GetBucketPolicy:
 //
 // * GetObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
@@ -49,7 +49,7 @@ type GetBucketPolicyInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -162,6 +162,7 @@ func addGetBucketPolicyUpdateEndpoint(stack *middleware.Stack, options Options) 
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

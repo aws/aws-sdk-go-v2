@@ -12,27 +12,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation enables you to delete multiple objects from a bucket using a
-// single HTTP request. If you know the object keys that you want to delete, then
-// this operation provides a suitable alternative to sending individual delete
-// requests, reducing per-request overhead. The request contains a list of up to
-// 1000 keys that you want to delete. In the XML, you provide the object key names,
-// and optionally, version IDs if you want to delete a specific version of the
-// object from a versioning-enabled bucket. For each key, Amazon S3 performs a
-// delete operation and returns the result of that delete, success, or failure, in
-// the response. Note that if the object specified in the request is not found,
-// Amazon S3 returns the result as deleted. The operation supports two modes for
-// the response: verbose and quiet. By default, the operation uses verbose mode in
-// which the response includes the result of deletion of each key in your request.
-// In quiet mode the response includes only keys where the delete operation
-// encountered an error. For a successful deletion, the operation does not return
-// any information about the delete in the response body. When performing this
-// operation on an MFA Delete enabled bucket, that attempts to delete any versioned
-// objects, you must include an MFA token. If you do not provide one, the entire
-// request will fail, even if there are non-versioned objects you are trying to
-// delete. If you provide an invalid token, whether there are versioned keys in the
-// request or not, the entire Multi-Object Delete request will fail. For
-// information about MFA Delete, see  MFA Delete
+// This action enables you to delete multiple objects from a bucket using a single
+// HTTP request. If you know the object keys that you want to delete, then this
+// action provides a suitable alternative to sending individual delete requests,
+// reducing per-request overhead. The request contains a list of up to 1000 keys
+// that you want to delete. In the XML, you provide the object key names, and
+// optionally, version IDs if you want to delete a specific version of the object
+// from a versioning-enabled bucket. For each key, Amazon S3 performs a delete
+// action and returns the result of that delete, success, or failure, in the
+// response. Note that if the object specified in the request is not found, Amazon
+// S3 returns the result as deleted. The action supports two modes for the
+// response: verbose and quiet. By default, the action uses verbose mode in which
+// the response includes the result of deletion of each key in your request. In
+// quiet mode the response includes only keys where the delete action encountered
+// an error. For a successful deletion, the action does not return any information
+// about the delete in the response body. When performing this action on an MFA
+// Delete enabled bucket, that attempts to delete any versioned objects, you must
+// include an MFA token. If you do not provide one, the entire request will fail,
+// even if there are non-versioned objects you are trying to delete. If you provide
+// an invalid token, whether there are versioned keys in the request or not, the
+// entire Multi-Object Delete request will fail. For information about MFA Delete,
+// see  MFA Delete
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html#MultiFactorAuthenticationDelete).
 // Finally, the Content-MD5 header is required for all Multi-Object Delete
 // requests. Amazon S3 uses the header value to ensure that your request body has
@@ -74,22 +74,22 @@ func (c *Client) DeleteObjects(ctx context.Context, params *DeleteObjectsInput, 
 
 type DeleteObjectsInput struct {
 
-	// The bucket name containing the objects to delete. When using this API with an
+	// The bucket name containing the objects to delete. When using this action with an
 	// access point, you must direct requests to the access point hostname. The access
 	// point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation with an access point through the AWS SDKs, you provide the access
-	// point ARN in place of the bucket name. For more information about access point
-	// ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide. When using this API with
-	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
-	// The S3 on Outposts hostname takes the form
+	// action with an access point through the AWS SDKs, you provide the access point
+	// ARN in place of the bucket name. For more information about access point ARNs,
+	// see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide. When using this action
+	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
+	// hostname. The S3 on Outposts hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this operation using S3 on Outposts through the AWS SDKs, you provide the
-	// Outposts bucket ARN in place of the bucket name. For more information about S3
-	// on Outposts ARNs, see Using S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
+	// bucket ARN in place of the bucket name. For more information about S3 on
+	// Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
@@ -105,7 +105,7 @@ type DeleteObjectsInput struct {
 	// perform this operation.
 	BypassGovernanceRetention bool
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 
@@ -129,7 +129,7 @@ type DeleteObjectsOutput struct {
 	// successfully deleted.
 	Deleted []types.DeletedObject
 
-	// Container for a failed delete operation that describes the object that Amazon S3
+	// Container for a failed delete action that describes the object that Amazon S3
 	// attempted to delete and the error it encountered.
 	Errors []types.Error
 
@@ -243,6 +243,7 @@ func addDeleteObjectsUpdateEndpoint(stack *middleware.Stack, options Options) er
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

@@ -18,10 +18,9 @@ import (
 // Retrieves the configuration parameters and status for a Batch Operations job.
 // For more information, see S3 Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html) in the
-// Amazon Simple Storage Service Developer Guide. Related actions include:
+// Amazon Simple Storage Service User Guide. Related actions include:
 //
-// *
-// CreateJob
+// * CreateJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
 //
 // *
@@ -52,7 +51,7 @@ func (c *Client) DescribeJob(ctx context.Context, params *DescribeJobInput, optF
 
 type DescribeJobInput struct {
 
-	//
+	// The AWS account ID associated with the S3 Batch Operations job.
 	//
 	// This member is required.
 	AccountId *string

@@ -233,7 +233,10 @@ type Condition struct {
 	// /docs, which identifies all objects in the docs/ folder. Required when the
 	// parent element Condition is specified and sibling HttpErrorCodeReturnedEquals is
 	// not specified. If both conditions are specified, both must be true for the
-	// redirect to be applied.
+	// redirect to be applied. Replacement must be made for object keys containing
+	// special characters (such as carriage returns) when using XML requests. For more
+	// information, see  XML related object key constraints
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 	KeyPrefixEquals *string
 }
 
@@ -242,10 +245,10 @@ type CopyObjectResult struct {
 
 	// Returns the ETag of the new object. The ETag reflects only changes to the
 	// contents of an object, not its metadata. The source and destination ETag is
-	// identical for a successfully copied object.
+	// identical for a successfully copied non-multipart object.
 	ETag *string
 
-	// Returns the date that the object was last modified.
+	// Creation date of the object.
 	LastModified *time.Time
 }
 
@@ -294,6 +297,9 @@ type CORSRule struct {
 	// One or more headers in the response that you want customers to be able to access
 	// from their applications (for example, from a JavaScript XMLHttpRequest object).
 	ExposeHeaders []string
+
+	// Unique identifier for the rule. The value cannot be longer than 255 characters.
+	ID *string
 
 	// The time in seconds that your browser is to cache the preflight response for the
 	// specified resource.
@@ -579,8 +585,8 @@ type Error struct {
 	// Code: AccountProblem
 	//
 	// * Description: There is a problem with your AWS account
-	// that prevents the operation from completing successfully. Contact AWS Support
-	// for further assistance.
+	// that prevents the action from completing successfully. Contact AWS Support for
+	// further assistance.
 	//
 	// * HTTP Status Code: 403 Forbidden
 	//
@@ -855,71 +861,122 @@ type Error struct {
 	// * Code:
 	// InvalidObjectState
 	//
-	// * Description: The operation is not valid for the current
-	// state of the object.
+	// * Description: The action is not valid for the current state
+	// of the object.
 	//
 	// * HTTP Status Code: 403 Forbidden
-	//
-	// * SOAP Fault Code
-	// Prefix: Client
-	//
-	// * Code: InvalidPart
-	//
-	// * Description: One or more of the specified
-	// parts could not be found. The part might not have been uploaded, or the
-	// specified entity tag might not have matched the part's entity tag.
-	//
-	// * HTTP
-	// Status Code: 400 Bad Request
-	//
-	// * SOAP Fault Code Prefix: Client
-	//
-	// * Code:
-	// InvalidPartOrder
-	//
-	// * Description: The list of parts was not in ascending order.
-	// Parts list must be specified in order by part number.
-	//
-	// * HTTP Status Code: 400
-	// Bad Request
-	//
-	// * SOAP Fault Code Prefix: Client
-	//
-	// * Code: InvalidPayer
-	//
-	// *
-	// Description: All access to this object has been disabled. Please contact AWS
-	// Support for further assistance.
-	//
-	// * HTTP Status Code: 403 Forbidden
-	//
-	// * SOAP Fault
-	// Code Prefix: Client
-	//
-	// * Code: InvalidPolicyDocument
-	//
-	// * Description: The content
-	// of the form does not meet the conditions specified in the policy document.
-	//
-	// *
-	// HTTP Status Code: 400 Bad Request
-	//
-	// * SOAP Fault Code Prefix: Client
-	//
-	// * Code:
-	// InvalidRange
-	//
-	// * Description: The requested range cannot be satisfied.
-	//
-	// * HTTP
-	// Status Code: 416 Requested Range Not Satisfiable
 	//
 	// * SOAP Fault Code Prefix:
 	// Client
 	//
-	// * Code: InvalidRequest
+	// * Code: InvalidPart
+	//
+	// * Description: One or more of the specified parts
+	// could not be found. The part might not have been uploaded, or the specified
+	// entity tag might not have matched the part's entity tag.
+	//
+	// * HTTP Status Code:
+	// 400 Bad Request
+	//
+	// * SOAP Fault Code Prefix: Client
+	//
+	// * Code: InvalidPartOrder
+	//
+	// *
+	// Description: The list of parts was not in ascending order. Parts list must be
+	// specified in order by part number.
+	//
+	// * HTTP Status Code: 400 Bad Request
+	//
+	// * SOAP
+	// Fault Code Prefix: Client
+	//
+	// * Code: InvalidPayer
+	//
+	// * Description: All access to
+	// this object has been disabled. Please contact AWS Support for further
+	// assistance.
+	//
+	// * HTTP Status Code: 403 Forbidden
+	//
+	// * SOAP Fault Code Prefix:
+	// Client
+	//
+	// * Code: InvalidPolicyDocument
+	//
+	// * Description: The content of the form
+	// does not meet the conditions specified in the policy document.
+	//
+	// * HTTP Status
+	// Code: 400 Bad Request
+	//
+	// * SOAP Fault Code Prefix: Client
+	//
+	// * Code: InvalidRange
+	//
+	// *
+	// Description: The requested range cannot be satisfied.
+	//
+	// * HTTP Status Code: 416
+	// Requested Range Not Satisfiable
+	//
+	// * SOAP Fault Code Prefix: Client
+	//
+	// * Code:
+	// InvalidRequest
 	//
 	// * Description: Please use AWS4-HMAC-SHA256.
+	//
+	// * HTTP Status Code:
+	// 400 Bad Request
+	//
+	// * Code: N/A
+	//
+	// * Code: InvalidRequest
+	//
+	// * Description: SOAP
+	// requests must be made over an HTTPS connection.
+	//
+	// * HTTP Status Code: 400 Bad
+	// Request
+	//
+	// * SOAP Fault Code Prefix: Client
+	//
+	// * Code: InvalidRequest
+	//
+	// *
+	// Description: Amazon S3 Transfer Acceleration is not supported for buckets with
+	// non-DNS compliant names.
+	//
+	// * HTTP Status Code: 400 Bad Request
+	//
+	// * Code: N/A
+	//
+	// *
+	// Code: InvalidRequest
+	//
+	// * Description: Amazon S3 Transfer Acceleration is not
+	// supported for buckets with periods (.) in their names.
+	//
+	// * HTTP Status Code: 400
+	// Bad Request
+	//
+	// * Code: N/A
+	//
+	// * Code: InvalidRequest
+	//
+	// * Description: Amazon S3
+	// Transfer Accelerate endpoint only supports virtual style requests.
+	//
+	// * HTTP
+	// Status Code: 400 Bad Request
+	//
+	// * Code: N/A
+	//
+	// * Code: InvalidRequest
+	//
+	// *
+	// Description: Amazon S3 Transfer Accelerate is not configured on this bucket.
 	//
 	// *
 	// HTTP Status Code: 400 Bad Request
@@ -929,18 +986,18 @@ type Error struct {
 	// * Code: InvalidRequest
 	//
 	// *
-	// Description: SOAP requests must be made over an HTTPS connection.
+	// Description: Amazon S3 Transfer Accelerate is disabled on this bucket.
 	//
-	// * HTTP Status
-	// Code: 400 Bad Request
+	// * HTTP
+	// Status Code: 400 Bad Request
 	//
-	// * SOAP Fault Code Prefix: Client
+	// * Code: N/A
 	//
-	// * Code:
-	// InvalidRequest
+	// * Code: InvalidRequest
 	//
-	// * Description: Amazon S3 Transfer Acceleration is not supported
-	// for buckets with non-DNS compliant names.
+	// *
+	// Description: Amazon S3 Transfer Acceleration is not supported on this bucket.
+	// Contact AWS Support for more information.
 	//
 	// * HTTP Status Code: 400 Bad
 	// Request
@@ -950,59 +1007,8 @@ type Error struct {
 	// * Code: InvalidRequest
 	//
 	// * Description: Amazon S3 Transfer
-	// Acceleration is not supported for buckets with periods (.) in their names.
-	//
-	// *
-	// HTTP Status Code: 400 Bad Request
-	//
-	// * Code: N/A
-	//
-	// * Code: InvalidRequest
-	//
-	// *
-	// Description: Amazon S3 Transfer Accelerate endpoint only supports virtual style
-	// requests.
-	//
-	// * HTTP Status Code: 400 Bad Request
-	//
-	// * Code: N/A
-	//
-	// * Code:
-	// InvalidRequest
-	//
-	// * Description: Amazon S3 Transfer Accelerate is not configured
-	// on this bucket.
-	//
-	// * HTTP Status Code: 400 Bad Request
-	//
-	// * Code: N/A
-	//
-	// * Code:
-	// InvalidRequest
-	//
-	// * Description: Amazon S3 Transfer Accelerate is disabled on this
-	// bucket.
-	//
-	// * HTTP Status Code: 400 Bad Request
-	//
-	// * Code: N/A
-	//
-	// * Code:
-	// InvalidRequest
-	//
-	// * Description: Amazon S3 Transfer Acceleration is not supported
-	// on this bucket. Contact AWS Support for more information.
-	//
-	// * HTTP Status Code:
-	// 400 Bad Request
-	//
-	// * Code: N/A
-	//
-	// * Code: InvalidRequest
-	//
-	// * Description: Amazon S3
-	// Transfer Acceleration cannot be enabled on this bucket. Contact AWS Support for
-	// more information.
+	// Acceleration cannot be enabled on this bucket. Contact AWS Support for more
+	// information.
 	//
 	// * HTTP Status Code: 400 Bad Request
 	//
@@ -1303,32 +1309,32 @@ type Error struct {
 	// * Code: OperationAborted
 	//
 	// * Description: A
-	// conflicting conditional operation is currently in progress against this
-	// resource. Try again.
+	// conflicting conditional action is currently in progress against this resource.
+	// Try again.
 	//
 	// * HTTP Status Code: 409 Conflict
 	//
-	// * SOAP Fault Code
-	// Prefix: Client
+	// * SOAP Fault Code Prefix:
+	// Client
 	//
 	// * Code: PermanentRedirect
 	//
-	// * Description: The bucket you are
-	// attempting to access must be addressed using the specified endpoint. Send all
-	// future requests to this endpoint.
+	// * Description: The bucket you are attempting
+	// to access must be addressed using the specified endpoint. Send all future
+	// requests to this endpoint.
 	//
 	// * HTTP Status Code: 301 Moved Permanently
 	//
-	// *
-	// SOAP Fault Code Prefix: Client
+	// * SOAP
+	// Fault Code Prefix: Client
 	//
 	// * Code: PreconditionFailed
 	//
-	// * Description: At
-	// least one of the preconditions you specified did not hold.
+	// * Description: At least
+	// one of the preconditions you specified did not hold.
 	//
-	// * HTTP Status Code:
-	// 412 Precondition Failed
+	// * HTTP Status Code: 412
+	// Precondition Failed
 	//
 	// * SOAP Fault Code Prefix: Client
 	//
@@ -1510,7 +1516,11 @@ type Error struct {
 // The error information.
 type ErrorDocument struct {
 
-	// The object key name to use when a 4XX class error occurs.
+	// The object key name to use when a 4XX class error occurs. Replacement must be
+	// made for object keys containing special characters (such as carriage returns)
+	// when using XML requests. For more information, see  XML related object key
+	// constraints
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 	//
 	// This member is required.
 	Key *string
@@ -1616,7 +1626,10 @@ type IndexDocument struct {
 	// endpoint (for example,if the suffix is index.html and you make a request to
 	// samplebucket/images/ the data that is returned will be for the object with the
 	// key name images/index.html) The suffix must not be empty and must not include a
-	// slash character.
+	// slash character. Replacement must be made for object keys containing special
+	// characters (such as carriage returns) when using XML requests. For more
+	// information, see  XML related object key constraints
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 	//
 	// This member is required.
 	Suffix *string
@@ -1699,7 +1712,10 @@ type IntelligentTieringFilter struct {
 	And *IntelligentTieringAndOperator
 
 	// An object key name prefix that identifies the subset of objects to which the
-	// rule applies.
+	// rule applies. Replacement must be made for object keys containing special
+	// characters (such as carriage returns) when using XML requests. For more
+	// information, see  XML related object key constraints
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 	Prefix *string
 
 	// A container of a key value name pair.
@@ -1922,7 +1938,10 @@ type LifecycleRule struct {
 	NoncurrentVersionTransitions []NoncurrentVersionTransition
 
 	// Prefix identifying one or more objects to which the rule applies. This is No
-	// longer used; use Filter instead.
+	// longer used; use Filter instead. Replacement must be made for object keys
+	// containing special characters (such as carriage returns) when using XML
+	// requests. For more information, see  XML related object key constraints
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 	//
 	// Deprecated: This member has been deprecated.
 	Prefix *string
@@ -1955,7 +1974,11 @@ type LifecycleRuleFilter interface {
 	isLifecycleRuleFilter()
 }
 
-// Prefix identifying one or more objects to which the rule applies.
+// Prefix identifying one or more objects to which the rule applies. Replacement
+// must be made for object keys containing special characters (such as carriage
+// returns) when using XML requests. For more information, see  XML related object
+// key constraints
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 type LifecycleRuleFilterMemberPrefix struct {
 	Value string
 }
@@ -2207,7 +2230,7 @@ type Object struct {
 	// object.
 	Key *string
 
-	// The date the Object was Last Modified
+	// Creation date of the object.
 	LastModified *time.Time
 
 	// The owner of the object
@@ -2223,7 +2246,10 @@ type Object struct {
 // Object Identifier is unique value to identify objects.
 type ObjectIdentifier struct {
 
-	// Key name of the object to delete.
+	// Key name of the object. Replacement must be made for object keys containing
+	// special characters (such as carriage returns) when using XML requests. For more
+	// information, see  XML related object key constraints
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 	//
 	// This member is required.
 	Key *string
@@ -2379,7 +2405,7 @@ type PolicyStatus struct {
 // information about when Amazon S3 considers a bucket or object public, see The
 // Meaning of "Public"
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-// in the Amazon Simple Storage Service Developer Guide.
+// in the Amazon S3 User Guide.
 type PublicAccessBlockConfiguration struct {
 
 	// Specifies whether Amazon S3 should block public access control lists (ACLs) for
@@ -2466,11 +2492,19 @@ type Redirect struct {
 	// documents/, you can set a condition block with KeyPrefixEquals set to docs/ and
 	// in the Redirect set ReplaceKeyPrefixWith to /documents. Not required if one of
 	// the siblings is present. Can be present only if ReplaceKeyWith is not provided.
+	// Replacement must be made for object keys containing special characters (such as
+	// carriage returns) when using XML requests. For more information, see  XML
+	// related object key constraints
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 	ReplaceKeyPrefixWith *string
 
 	// The specific object key to use in the redirect request. For example, redirect
 	// request to error.html. Not required if one of the siblings is present. Can be
-	// present only if ReplaceKeyPrefixWith is not provided.
+	// present only if ReplaceKeyPrefixWith is not provided. Replacement must be made
+	// for object keys containing special characters (such as carriage returns) when
+	// using XML requests. For more information, see  XML related object key
+	// constraints
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 	ReplaceKeyWith *string
 }
 
@@ -2565,7 +2599,10 @@ type ReplicationRule struct {
 
 	// An object key name prefix that identifies the object or objects to which the
 	// rule applies. The maximum prefix length is 1,024 characters. To include all
-	// objects in a bucket, specify an empty string.
+	// objects in a bucket, specify an empty string. Replacement must be made for
+	// object keys containing special characters (such as carriage returns) when using
+	// XML requests. For more information, see  XML related object key constraints
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 	//
 	// Deprecated: This member has been deprecated.
 	Prefix *string
@@ -2596,7 +2633,7 @@ type ReplicationRule struct {
 // filter, wrap these filters in an And tag.
 //
 // * If you specify a filter based on
-// multiple tags, wrap the Tag elements in an And tag
+// multiple tags, wrap the Tag elements in an And tag.
 type ReplicationRuleAndOperator struct {
 
 	// An object key name prefix that identifies the subset of objects to which the
@@ -2619,7 +2656,10 @@ type ReplicationRuleFilter interface {
 }
 
 // An object key name prefix that identifies the subset of objects to which the
-// rule applies.
+// rule applies. Replacement must be made for object keys containing special
+// characters (such as carriage returns) when using XML requests. For more
+// information, see  XML related object key constraints
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 type ReplicationRuleFilterMemberPrefix struct {
 	Value string
 }
@@ -2714,7 +2754,7 @@ type RestoreRequest struct {
 // Specifies the redirect behavior and when a redirect is applied. For more
 // information about routing rules, see Configuring advanced conditional redirects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html#advanced-conditional-redirects)
-// in the Amazon Simple Storage Service Developer Guide.
+// in the Amazon S3 User Guide.
 type RoutingRule struct {
 
 	// Container for redirect information. You can redirect requests to another host,
@@ -2855,7 +2895,7 @@ type ServerSideEncryptionRule struct {
 	// to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled. For more
 	// information, see Amazon S3 Bucket Keys
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the Amazon
-	// Simple Storage Service Developer Guide.
+	// S3 User Guide.
 	BucketKeyEnabled bool
 }
 
@@ -2995,7 +3035,7 @@ type TopicConfiguration struct {
 	// The Amazon S3 bucket event about which to send notifications. For more
 	// information, see Supported Event Types
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the
-	// Amazon Simple Storage Service Developer Guide.
+	// Amazon S3 User Guide.
 	//
 	// This member is required.
 	Events []Event
@@ -3021,7 +3061,7 @@ type TopicConfiguration struct {
 // information about Amazon S3 lifecycle configuration rules, see Transitioning
 // Objects Using Amazon S3 Lifecycle
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html)
-// in the Amazon Simple Storage Service Developer Guide.
+// in the Amazon S3 User Guide.
 type Transition struct {
 
 	// Indicates when objects are transitioned to the specified storage class. The date

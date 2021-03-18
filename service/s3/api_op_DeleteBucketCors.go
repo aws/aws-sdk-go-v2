@@ -15,8 +15,8 @@ import (
 // operation, you must have permission to perform the s3:PutBucketCORS action. The
 // bucket owner has this permission by default and can grant this permission to
 // others. For information about cors, see Enabling Cross-Origin Resource Sharing
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon Simple
-// Storage Service Developer Guide. Related Resources:
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon S3
+// User Guide. Related Resources:
 //
 // * PutBucketCors
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketCors.html)
@@ -46,7 +46,7 @@ type DeleteBucketCorsInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -155,6 +155,7 @@ func addDeleteBucketCorsUpdateEndpoint(stack *middleware.Stack, options Options)
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

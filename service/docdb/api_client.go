@@ -327,6 +327,7 @@ func (c presignConverter) convertToPresignMiddleware(stack *middleware.Stack, op
 	stack.Finalize.Clear()
 	stack.Deserialize.Clear()
 	stack.Build.Remove((*awsmiddleware.ClientRequestID)(nil).ID())
+	stack.Build.Remove("UserAgent")
 	pmw := v4.NewPresignHTTPRequestMiddleware(v4.PresignHTTPRequestMiddlewareOptions{
 		CredentialsProvider: options.Credentials,
 		Presigner:           c.Presigner,

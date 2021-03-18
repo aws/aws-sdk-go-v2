@@ -13,22 +13,22 @@ import (
 )
 
 // Returns a list of inventory configurations for the bucket. You can have up to
-// 1,000 analytics configurations per bucket. This operation supports list
-// pagination and does not return more than 100 configurations at a time. Always
-// check the IsTruncated element in the response. If there are no more
-// configurations to list, IsTruncated is set to false. If there are more
-// configurations to list, IsTruncated is set to true, and there is a value in
-// NextContinuationToken. You use the NextContinuationToken value to continue the
-// pagination of the list by passing the value in continuation-token in the request
-// to GET the next page. To use this operation, you must have permissions to
-// perform the s3:GetInventoryConfiguration action. The bucket owner has this
-// permission by default. The bucket owner can grant this permission to others. For
-// more information about permissions, see Permissions Related to Bucket
-// Subresource Operations
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
+// 1,000 analytics configurations per bucket. This action supports list pagination
+// and does not return more than 100 configurations at a time. Always check the
+// IsTruncated element in the response. If there are no more configurations to
+// list, IsTruncated is set to false. If there are more configurations to list,
+// IsTruncated is set to true, and there is a value in NextContinuationToken. You
+// use the NextContinuationToken value to continue the pagination of the list by
+// passing the value in continuation-token in the request to GET the next page. To
+// use this operation, you must have permissions to perform the
+// s3:GetInventoryConfiguration action. The bucket owner has this permission by
+// default. The bucket owner can grant this permission to others. For more
+// information about permissions, see Permissions Related to Bucket Subresource
+// Operations
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html). For
-// information about the Amazon S3 inventory feature, see Amazon S3 Inventory
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+// For information about the Amazon S3 inventory feature, see Amazon S3 Inventory
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html) The
 // following operations are related to ListBucketInventoryConfigurations:
 //
@@ -71,7 +71,7 @@ type ListBucketInventoryConfigurationsInput struct {
 	// Amazon S3 understands.
 	ContinuationToken *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -198,6 +198,7 @@ func addListBucketInventoryConfigurationsUpdateEndpoint(stack *middleware.Stack,
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

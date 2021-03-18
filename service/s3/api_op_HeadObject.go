@@ -18,17 +18,19 @@ import (
 	"time"
 )
 
-// The HEAD operation retrieves metadata from an object without returning the
-// object itself. This operation is useful if you're only interested in an object's
-// metadata. To use HEAD, you must have READ access to the object. A HEAD request
-// has the same options as a GET operation on an object. The response is identical
-// to the GET response except that there is no response body. If you encrypt an
-// object by using server-side encryption with customer-provided encryption keys
-// (SSE-C) when you store the object in Amazon S3, then when you retrieve the
-// metadata from the object, you must use the following headers:
+// The HEAD action retrieves metadata from an object without returning the object
+// itself. This action is useful if you're only interested in an object's metadata.
+// To use HEAD, you must have READ access to the object. A HEAD request has the
+// same options as a GET action on an object. The response is identical to the GET
+// response except that there is no response body. Because of this, if the HEAD
+// request generates an error, it returns a generic 404 Not Found or 403 Forbidden
+// code. It is not possible to retrieve the exact exception beyond these error
+// codes. If you encrypt an object by using server-side encryption with
+// customer-provided encryption keys (SSE-C) when you store the object in Amazon
+// S3, then when you retrieve the metadata from the object, you must use the
+// following headers:
 //
-// *
-// x-amz-server-side-encryption-customer-algorithm
+// * x-amz-server-side-encryption-customer-algorithm
 //
 // *
 // x-amz-server-side-encryption-customer-key
@@ -39,11 +41,18 @@ import (
 // For more information about SSE-C,
 // see Server-Side Encryption (Using Customer-Provided Encryption Keys)
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html).
+//
+// *
 // Encryption request headers, like x-amz-server-side-encryption, should not be
 // sent for GET requests if your object uses server-side encryption with CMKs
 // stored in AWS KMS (SSE-KMS) or server-side encryption with Amazon S3–managed
 // encryption keys (SSE-S3). If your object does use these types of keys, you’ll
-// get an HTTP 400 BadRequest error. Request headers are limited to 8 KB in size.
+// get an HTTP 400 BadRequest error.
+//
+// * The last modified property in this case is
+// the creation date of the object.
+//
+// Request headers are limited to 8 KB in size.
 // For more information, see Common Request Headers
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html).
 // Consider the following when using request headers:
@@ -88,7 +97,7 @@ import (
 // Amazon S3 returns an HTTP status code 403 ("access denied") error.
 //
 // The
-// following operation is related to HeadObject:
+// following action is related to HeadObject:
 //
 // * GetObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
@@ -109,22 +118,22 @@ func (c *Client) HeadObject(ctx context.Context, params *HeadObjectInput, optFns
 
 type HeadObjectInput struct {
 
-	// The name of the bucket containing the object. When using this API with an access
-	// point, you must direct requests to the access point hostname. The access point
-	// hostname takes the form
+	// The name of the bucket containing the object. When using this action with an
+	// access point, you must direct requests to the access point hostname. The access
+	// point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation with an access point through the AWS SDKs, you provide the access
-	// point ARN in place of the bucket name. For more information about access point
-	// ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide. When using this API with
-	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
-	// The S3 on Outposts hostname takes the form
+	// action with an access point through the AWS SDKs, you provide the access point
+	// ARN in place of the bucket name. For more information about access point ARNs,
+	// see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// in the Amazon Simple Storage Service Developer Guide. When using this action
+	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
+	// hostname. The S3 on Outposts hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this operation using S3 on Outposts through the AWS SDKs, you provide the
-	// Outposts bucket ARN in place of the bucket name. For more information about S3
-	// on Outposts ARNs, see Using S3 on Outposts
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
+	// bucket ARN in place of the bucket name. For more information about S3 on
+	// Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
@@ -135,7 +144,7 @@ type HeadObjectInput struct {
 	// This member is required.
 	Key *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 
@@ -245,7 +254,7 @@ type HeadObjectOutput struct {
 	// The date and time at which the object is no longer cacheable.
 	Expires *time.Time
 
-	// Last modified date of the object
+	// Creation date of the object.
 	LastModified *time.Time
 
 	// A map of metadata to store with the object in S3.
@@ -770,6 +779,7 @@ func addHeadObjectUpdateEndpoint(stack *middleware.Stack, options Options) error
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

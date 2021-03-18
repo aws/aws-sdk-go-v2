@@ -52,14 +52,14 @@ type PutBucketRequestPaymentInput struct {
 	// This member is required.
 	RequestPaymentConfiguration *types.RequestPaymentConfiguration
 
-	// >The base64-encoded 128-bit MD5 digest of the data. You must use this header as
-	// a message integrity check to verify that the request body was not corrupted in
+	// The base64-encoded 128-bit MD5 digest of the data. You must use this header as a
+	// message integrity check to verify that the request body was not corrupted in
 	// transit. For more information, see RFC 1864
 	// (http://www.ietf.org/rfc/rfc1864.txt). For requests made using the AWS Command
 	// Line Interface (CLI) or AWS SDKs, this field is calculated automatically.
 	ContentMD5 *string
 
-	// The account id of the expected bucket owner. If the bucket is owned by a
+	// The account ID of the expected bucket owner. If the bucket is owned by a
 	// different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string
 }
@@ -171,6 +171,7 @@ func addPutBucketRequestPaymentUpdateEndpoint(stack *middleware.Stack, options O
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,
 		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
 		EndpointResolver:        options.EndpointResolver,
 		EndpointResolverOptions: options.EndpointOptions,
 		UseDualstack:            options.UseDualstack,

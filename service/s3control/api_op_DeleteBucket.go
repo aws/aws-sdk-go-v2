@@ -14,15 +14,15 @@ import (
 	"strings"
 )
 
-// This API operation deletes an Amazon S3 on Outposts bucket. To delete an S3
-// bucket, see DeleteBucket
+// This action deletes an Amazon S3 on Outposts bucket. To delete an S3 bucket, see
+// DeleteBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html) in the
 // Amazon Simple Storage Service API. Deletes the Amazon S3 on Outposts bucket. All
 // objects (including all object versions and delete markers) in the bucket must be
 // deleted before the bucket itself can be deleted. For more information, see Using
 // Amazon S3 on Outposts
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in Amazon
-// Simple Storage Service Developer Guide. All Amazon S3 on Outposts REST API
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in
+// Amazon Simple Storage Service User Guide. All Amazon S3 on Outposts REST API
 // requests for this action require an additional parameter of x-amz-outpost-id to
 // be passed with the request and an S3 on Outposts endpoint hostname prefix
 // instead of s3-control. For an example of the request syntax for Amazon S3 on

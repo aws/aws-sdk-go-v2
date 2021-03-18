@@ -15,14 +15,14 @@ import (
 	"strings"
 )
 
-// Gets the Amazon S3 Storage Lens configuration. For more information, see Working
-// with Amazon S3 Storage Lens
-// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html)
-// in the Amazon Simple Storage Service Developer Guide. To use this action, you
-// must have permission to perform the s3:GetStorageLensConfiguration action. For
-// more information, see Setting permissions to use Amazon S3 Storage Lens
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM)
-// in the Amazon Simple Storage Service Developer Guide.
+// Gets the Amazon S3 Storage Lens configuration. For more information, see
+// Assessing your storage activity and usage with Amazon S3 Storage Lens
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html) in the
+// Amazon Simple Storage Service User Guide. To use this action, you must have
+// permission to perform the s3:GetStorageLensConfiguration action. For more
+// information, see Setting permissions to use Amazon S3 Storage Lens
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html)
+// in the Amazon Simple Storage Service User Guide.
 func (c *Client) GetStorageLensConfiguration(ctx context.Context, params *GetStorageLensConfigurationInput, optFns ...func(*Options)) (*GetStorageLensConfigurationOutput, error) {
 	if params == nil {
 		params = &GetStorageLensConfigurationInput{}

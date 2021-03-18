@@ -26,12 +26,12 @@ import (
 // modified. For more information, see Controlling access and labeling jobs using
 // tags
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags)
-// in the Amazon Simple Storage Service Developer Guide.
+// in the Amazon Simple Storage Service User Guide.
 //
-// * If you send this
-// request with an empty tag set, Amazon S3 deletes the existing tag set on the
-// Batch Operations job. If you use this method, you are charged for a Tier 1
-// Request (PUT). For more information, see Amazon S3 pricing
+// * If you send this request
+// with an empty tag set, Amazon S3 deletes the existing tag set on the Batch
+// Operations job. If you use this method, you are charged for a Tier 1 Request
+// (PUT). For more information, see Amazon S3 pricing
 // (http://aws.amazon.com/s3/pricing/).
 //
 // * For deleting existing tags for your
@@ -60,8 +60,8 @@ import (
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
 // in the AWS Billing and Cost Management User Guide.
 //
-// To use this operation, you
-// must have permission to perform the s3:PutJobTagging action. Related actions
+// To use this action, you must
+// have permission to perform the s3:PutJobTagging action. Related actions
 // include:
 //
 // * CreatJob
